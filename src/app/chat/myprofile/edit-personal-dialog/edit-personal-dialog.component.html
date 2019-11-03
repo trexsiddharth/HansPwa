@@ -1,0 +1,73 @@
+<mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" #personalForm="ngForm" >
+      <div class="row" style="margin: 10px 10px 0px;">
+          <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-info"></i>
+          <h5 style="margin: auto 20px">PERSONAL DETAILS</h5>
+      </div>
+      
+      <div class="row" style="margin: 10px 10px;">
+        <div class="col-6">
+          <h6>Name:</h6>
+          <p style="font-size: 14px;">{{personalData.name}}</p>
+        </div>
+        <div class="col-6">
+            <h6>Age:</h6>
+            <p style="font-size: 14px;" [innerHtml]="setAge(personalData.birth_date)"></p>
+          </div>
+          <hr style="margin: 0px 10px;width: 100%">
+      </div>
+      <div class="row" style="margin: 10px 10px;">
+          <div class="col-6">
+            <h6>Marital Status:</h6>
+            <select name="maritalStatus" class="form-control"  [(ngModel)]="personalData.marital_status" required>
+              <option *ngFor="let item of maritalStaus" [value]="item">{{item}}</option>
+            </select>
+          </div>
+          <div class="col-6">
+              <h6>Religion:</h6>
+              <p style="font-size: 14px;">{{familyData.religion}}</p>
+            </div>
+            <hr style="margin: 0px 10px;width: 100%">
+        </div>
+        <div class="row" style="margin: 10px 10px;">
+            <div class="col-6">
+              <h6>Height:</h6>
+              <select type="text" class="form-control" name="personalHeight" [(ngModel)]="personal_height" required>
+                  <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
+                  </select> 
+            </div>
+            <div class="col-6">
+                <h6>Caste:</h6>
+                <p style="font-size: 14px;">{{familyData.caste}}</p>
+              </div>
+              <hr style="margin: 0px 10px;width: 100%">
+          </div>
+          <div class="row" style="margin: 10px 10px;">
+              <div class="col-6">
+                <h6>Weight:</h6>
+                <input type="text" class="form-control"  name="personalWeight" [(ngModel)]="personalData.weight" required>
+              </div>
+              <div class="col-6">
+                  <h6>Gotra:</h6>
+                  <p style="font-size: 14px;">{{familyData.gotra}}</p>
+                </div>
+                <hr style="margin: 0px 10px;width: 100%">
+            </div>
+    
+            <div class="row" style="margin: 10px 10px;">
+                <div class="col-6">
+                    <h6>Current Location:</h6>
+                      <input class="form-control" type="text" id="cityAutoComplete" name="currentCity" [(ngModel)]="familyData.city"  required> 
+                </div>
+                <div class="col-6">
+                    <h6>Food Choice:</h6>
+                    <select name="foodChoice"  class="form-control"   [(ngModel)]="personalData.food_choice" required>
+                      <option *ngFor="let item of foodpreferences" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+              </div>
+              <div style="text-align: center">
+                  <button  [disabled]="!personalForm.valid" class="btn" style="background-color: #34b7f1" >Save</button> 
+            </div>
+            </form>
+          </mat-dialog-content>

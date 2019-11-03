@@ -1,0 +1,253 @@
+<!-- Banner -->
+ 
+<mat-sidenav-container style="background-color: white;">
+    <mat-sidenav class="sideNavSet" #sidenav position="end" mode="over" [(opened)]="opened">
+      <img src="../../assets/logo_hans.png" class="banner-img1" alt="logo">
+      <ul class="navbar-nav" style="margin-left: 15px;">
+        <li style="display: inline-block">
+            <button style="margin-bottom:10px;color: black" class="btn" (click)="subscription()">Subscription</button>
+        </li>
+        <li class="nav-item">
+            <button  style="margin-bottom:10px;color: black" class="btn login" data-toggle="modal" (click)="register()" *ngIf=" isLogin=='false'"
+            data-target="#loginModal">Register</button>
+        </li>
+        <li>
+            <a href="https://hansmatrimony.com/matchmaker/"><button style="color: black;margin-bottom:10px" class="btn">Find a matchmaker</button></a>
+        </li>
+        <li>
+            <a href="#jumpVip"><button style="color: black;margin-bottom:10px" class="btn">Personalized VIP matchmaking</button></a>
+        </li>
+      </ul>   
+    </mat-sidenav>
+
+    <mat-sidenav-content style="overflow: hidden">
+      <header>
+        <nav id="navbar" class="navbar  fixed-top navBarTop " style="background-color:whitesmoke;padding:0px;">
+          <a class="navbar-brand" href="#" style="color:white;margin-right:0.1rem;padding-top:0;padding-bottom: 0">
+            <img src="../../assets/logo_hans.png" class="banner-img" style="object-fit: cover"></a>
+            <div class="ml-auto" style="padding-top: 10px;">
+            <a href="http://wa.me/918368090821?text=We%20are%20interested%20in%20Registering%20for%20Personalized%20Services"><i class="fa fa-whatsapp banner-shortcut" style="margin: 0px;background-color: #f7f7f7; color: green; font-size: 25px;margin-right: 20px;" aria-hidden="true"></i></a>
+            <a href="tel:9697989697">
+            <i class="fa fa-phone banner-shortcut" style="margin: 0px;background-color: #f7f7f7; color: #285fdd;font-size: 25px;" aria-hidden="true"></i><p style="margin-bottom: 10px;" class="invi">96-97-98-96-97</p>
+            </a>
+        </div>
+          <button class="navbar-toggler" type="button" (click)="sidenav.toggle()"
+             aria-controls="navbarTogglerDemo02" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="padding-top: 3px"><img src="../../assets/menu.png" alt="menu.png" style="width: 15px;"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+      
+              </li>
+              <li class="nav-item">
+      
+              </li>
+              <li class="nav-item">
+    
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              
+            </form>
+          </div>
+        </nav>
+      </header>
+      <div class="container-fluid" >
+        <div class="row" style="position: relative">
+                <img class="first-slide img-fluid sliding" src=" ../../assets/cover_hans_small.jpg" srcset="../../assets/cover_hans_small.jpg 600w, ../../assets/cover_hans.jpg 1000w" alt="First slide.png">
+            <div class="col-sm-12 headerSetting"  >
+                    <div style="text-align: center;position: absolue;">
+                     <p class="capt" >We bring families together..</p>
+                    <br>
+                    <button class="btn  registr" id="find" (click)="onboarding()">Chat with us</button>
+            </div>   
+        </div> 
+        </div>
+        </div>
+        <!-- Trust -->
+        <div style="background-image: url('../../assets/redback.jpg') ;border-top:4px white solid">
+        <br>
+        <h4  class=" bannerHead">Why Trust Us?</h4>
+        <br>
+        <div class="container-fluid">
+            <div class="row" style="text-align: center;">
+                <div class="col-md-3 col-6">
+                    <div class="text-center">
+                        <img src="../../assets/fingerprint_hans.svg" class="trust">
+                        <p style="margin-top: 10px" class="trust_text">Offline Verification<br>at Temples</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 col-center">
+                    <div class="text-center">
+                        <img src="../../assets/chat_hans.svg" class="trust">
+                        <p style="margin-top: 10px" class="trust_text">Find Matches On<br>Chat</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class=" text-center">
+                        <img src="../../assets/user_hans.svg" class="trust">
+                        <p style="margin-top: 10px" class="trust_text">100% Authentic<br>Profiles</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="text-center">
+                        <img src="../../assets/placeholder_hans.svg" class="trust">
+                        <p style="margin-top: 10px" class="trust_text">Largest Matchmaking <br> Network</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="whatsapp" >
+        <div class="container" style="padding-top:5%;padding-bottom:2%;">
+            <div class="row">
+                <div class="col-md-6 col-center">
+                    <img src="../../assets/whatsappImage.webp" class="img-fluid whats">
+                </div>
+                <div class="col-md-6">
+                    <div class="text col-center">
+                        <h3 style="font-weight:bolder; color: #285fdd" class="text-left center">Find Matches On Chat</h3>
+                        <p style="color: black;" class="text-justify textWhats">We are revolutionizing the way match making is done by utilizing our
+                            Chat Assistant. We send
+                            profiles directly on your Chat and help you focus on Finalizing your match faster. So come
+                            join the bandwagon and</p>
+                        <ul  style="padding-left:1.5rem" class="text-justify textWhats">
+                            <li style="color: black;">Say YES to easy to use Matchmaking Platform</li>
+                            <li style="color: black;">Receive INSTANT replies from your matches on Chat</li>
+                            <li style="color: black;">Only GENUINE Authentic Profiles</li>
+                        </ul>
+                        <br>
+                        <button class="btn reisterf-btn" id="find" (click)="register()">Register for free</button>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="card cards"></div>
+        </div>
+        <div class="map-banner">
+        <img src="../../assets/diya.webp" class="img-fluid diya">
+        <div style="margin-left:10%;background-color:rgb(236, 213, 186);margin-right:10%;" class="bot">
+            <div class="semi-circle"></div>
+            <div class="container s" style="padding-top:1%">
+                <div class="row">
+                    <div class="col-md-6 col-center">
+                        <img src="../../assets/locations.svg" class="img-fluid whats" style="margin-bottom:1rem">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text col-center">
+                            <h3 style="font-weight:bolder;color: #285fdd"  class="text-left center">Offline Presence</h3>
+                            <p style="color: black;" class="text-justify textWhats">
+                                With a network spanning across 25+ temples we have one of the most extensive databases and
+                                reach among all matrimony service providers. Our profiles are verified offline in major
+                                temples across the city. Listed below are the temples where our experienced matchmaking
+                                representatives are available for registration and verification purposes.
+                            </p>
+                            <ul id="jumpVip" style="padding-left:1rem" class="textWhats">
+                                <li style="color: black;">Largest Offline Network</li>
+                                <li style="color: black;">Centralized Database</li>
+                                <li style="color: black;">Mature and Experienced Matchmakers</li>
+                            </ul>
+                            <button class="btn reisterf-btn vcenter" id="find" routerLink="/viewCentres" >View Centres</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding-top:8%;padding-bottom:6%">
+            <div class="row" >
+                    <div class="col-md-6 col-center" >
+                            <img src="../../assets/matchmaking_got_personalized.webp"  srcset=" ../../assets/matchmaking_got_personalized.webp 320w, ../../assets/matchmaking_got_personalized600.webp 600w"
+                             class="img-fluid personalisedImage" alt="personalized.png">
+                        </div>
+                <div class="col-md-6 col-center">
+                    <div class="text">
+                        <h3 style="color:white;font-weight: bold" class="personalised-left center">Personalized Matchmaking</h3>
+                        <br>
+                        <p style="color:white; text-align: left" class="textWhats">Personalized VIP matchmaking refers to a service wherein our clients are assigned an exclusive Matchmaker who will work with them throughout the process and help them zero in on their perfect life partner.
+                             Some features about our personalized service include:
+                        </p>
+                        <ul style="padding-left:1rem;color: white;text-align: left" class=" textWhats">
+                            <li>Expert Matchmakers who understand your needs and provide only relevant suggestions</li>
+                            <li>Organize Regular meetings as per mutual consent and post meeting follow-up</li>
+                            <li>A friendly guide to consult while taking one of the most important decisions of your life</li>
+                        </ul>
+                    </div>
+                    <a href="http://wa.me/918368090821?text=We%20are%20interested%20in%20Registering%20for%20Personalized%20Services">
+                    <button class="btn reisterf-btn vcenter" id="find">Whatsapp us </button></a><br>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <div class="jumbotron" style="border-radius: 0;background: #fff url(../../assets/whatsbg.webp);margin-bottom: 0">
+        <div class="container" style="margin-bottom:1rem">
+            <h3 style="font-weight:bolder;color:#285fdd;font-size: 20px" class="text-center">Few Words From Our Clients</h3>
+            <br><br>
+            <div id="review" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators review-indicators" style="top:19rem">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active pink text-center">
+                        <img class="img-fluid client-image" src="../../assets/Review1.webp">
+                        <h6 style="color:#285fdd;font-weight: bold">Kaushik & Anushka</h6>
+                        <p style="color:black;font-size: 16px">I loved their events which are systematically organized and gives one time to meet a number of matches at the same time. We met at one such event and I recommend their services to everyone. </p>
+                    </div>
+                    <div class="carousel-item pink text-center">
+                        <div style="text-align:center !important"><img class="img-fluid" src="../../assets/Review2.webp"
+                                class="client-image"></div>
+                        <h6 style="color:#285fdd;font-weight: bold">Sahil & Salony </h6>
+                        <p style="color:black;font-size: 16px">I met the love of my Life through Hans Matrimony. I'm so happy and I could not thank them much. Its so unique concept like who would have thought they would find their life partner on Chat. </p>
+                    </div>
+                    <div class="carousel-item pink text-center" >
+                        <div style="text-align:center !important"><img class="img-fluid" src="../../assets/photography.webp"
+                                class="client-image"></div>
+                        <h6 style="color:#285fdd;font-weight: bold">Lakshay & Priya</h6>
+                        <p style="color:black;font-size: 16px">Hans Matrimony is by far the best matrimonial
+                            service.
+                            Aprajita and her team of matchmakers sieved through thousands of profiles to find me my perfect
+                            match.
+                            I wish them all the best and highly recommend their services. </p>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#review" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#review" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        </div>
+        <div style="text-align: center;background-color: white;margin-bottom: 20px;"><h3 style="color:#285fdd;background-color: white;margin-bottom: 0px;font-size: 20px;font-weight: bold">Find us</h3> </div>
+        <div><a target="_blank" href="https://goo.gl/maps/vTgmJHbex842"><img src="../../assets/address.webp" width="100%" height="380" class="mapImage" style="border:0"></a></div>
+        <div class="container-fluid" style="padding-left:0;padding-right:0">
+        <div class="purple">
+            <div class="container" style="background-color:white;">
+                <h3 class="textTalkToUs">Talk to us</h3>
+                
+                <div class="row col-center" id="request">
+                    
+                    <div class="col-md-12" style="text-align: center;margin-bottom: 10px;">
+
+                        <mat-form-field class="fieldFit" appearance="standard">
+                            <mat-label style="color: black;">Phone Number</mat-label>
+                            <input matInput type="number"  required autocomplete="off" #phone>
+                        </mat-form-field>
+                    </div>
+                        <button class="btn reisterf-btn " style="margin: auto;" id="find" (click)="callBack(phone)">Request a callback</button>
+                    
+                </div>
+                <br>
+            </div>
+        </div>
+        </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+

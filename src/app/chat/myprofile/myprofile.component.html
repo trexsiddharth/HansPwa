@@ -1,0 +1,341 @@
+<main id="main" *ngIf="personalProfileData">
+    <div style="margin: 0px 20px 0px;" class="card">
+      <div style="text-align: center">
+        <input style="display: none" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,3)"  />
+      <label for="backfile">
+      <img id="imgProfile" style="border-radius: 100px;width: 150px;background-color: lightblue;margin: 20px auto 0px;" [src]="getProfilesPhoto(personalProfileData.photo,personalProfileData.carousel,personalProfileData.gender)" alt="">
+    </label>                   
+    </div>
+      <div class="row" style="margin-bottom:20px">
+        <h5 style="margin: 0px auto;margin-top: 10px;">{{personalProfileData.name}}</h5>
+      </div>
+    </div>
+    <div style="margin: 20px 20px;" class="card">
+      <div class="row" style="margin: 10px 10px 0px;">
+          <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-info"></i>
+          <i (click)="openPersonalDialog()" style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+      </div>
+      <div class="row" style="margin: 10px 10px;">
+        <div class="col-6">
+          <h6>Name</h6>
+          <p style="font-size: 14px;">{{personalProfileData.name}}</p>
+        </div>
+        <div class="col-6">
+            <h6>Age</h6>
+            <p style="font-size: 14px;" [innerHtml]="setAge(personalProfileData.birth_date)"></p>
+          </div>
+          <hr style="margin: 0px 10px;width: 100%">
+      </div>
+      <div class="row" style="margin: 10px 10px;">
+          <div class="col-6">
+            <h6>Marital Status</h6>
+            <p style="font-size: 14px;">{{personalProfileData.marital_status}}</p>
+          </div>
+          <div class="col-6">
+              <h6>Religion</h6>
+              <p style="font-size: 14px;">{{familyProfileData.religion}}</p>
+            </div>
+            <hr style="margin: 0px 10px;width: 100%">
+        </div>
+        <div class="row" style="margin: 10px 10px;">
+            <div class="col-6">
+              <h6>Height</h6>
+              <p style="font-size: 14px;" [innerHtml]="getHeight(personalProfileData.height)" ></p>
+            </div>
+            <div class="col-6">
+                <h6>Caste</h6>
+                <p style="font-size: 14px;">{{familyProfileData.caste}}</p>
+              </div>
+              <hr style="margin: 0px 10px;width: 100%">
+          </div>
+          <div class="row" style="margin: 10px 10px;">
+              <div class="col-6">
+                <h6>Weight</h6>
+                <p style="font-size: 14px;">{{personalProfileData.weight}}</p>
+              </div>
+              <div class="col-6">
+                  <h6>Gotra</h6>
+                  <p style="font-size: 14px;">{{familyProfileData.gotra}}</p>
+                </div>
+                <hr style="margin: 0px 10px;width: 100%">
+            </div>
+    
+            <div class="row" style="margin: 10px 10px;">
+                <div class="col-6">
+                  <h6>Current City</h6>
+                  <p style="font-size: 14px;">{{familyProfileData.city}}</p>
+                </div>
+                <div class="col-6">
+                    <h6>Food Choice</h6>
+                    <p style="font-size: 14px;">{{personalProfileData.food_choice}}</p>
+                  </div>
+              </div>
+    </div>
+    
+    <div class="card" style="margin: 20px 20px;">
+        <div class="row" style="margin: 10px 10px 0px;">
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-comment"></i>
+            <h5 style="margin: auto 20px">ABOUT</h5>
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+        </div>
+        <div class="row" style="margin: 10px 20px">
+            <p>{{personalProfileData.about}}</p>
+        </div>
+    </div>
+    <div class="card" style="margin: 20px 20px;">
+        <div class="row" style="margin: 10px 10px 0px;">
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
+            <h5 style="margin: auto 20px">EDUCATION DETAILS</h5>
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+        </div>
+        <div class="row" style="margin: 10px 10px;">
+            <div class="col-12">
+              <h6 style="display: inline-block">Degree : </h6>
+              <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{personalProfileData.degree}}</p>
+            </div>
+            <hr style="margin: 0px 10px;width: 100%">
+            <div class="col-12" style="margin-top: 10px;">
+                <h6 style="display: inline-block">Course : </h6>
+                <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{personalProfileData.education}}</p>
+              </div>
+          </div>
+    </div>
+    
+    <div class="card" style="margin: 20px 20px;">
+        <div class="row" style="margin: 10px 10px 0px;">
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-briefcase"></i>
+            <h5 style="margin: auto 20px">CAREER DETAILS</h5>
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+        </div>
+        <div class="row" style="margin: 10px 10px;">
+            <div class="col-4">
+              <h6 >Occupation</h6>
+              <p style="font-size: 14px;">{{personalProfileData.occupation}}</p>
+            </div>
+            <div class="col-4">
+                <h6>Organisation</h6>
+                <p style="font-size: 14px;">{{personalProfileData.company}}</p>
+              </div>
+              <div class="col-4">
+                  <h6>City</h6>
+                  <p style="font-size: 14px;">{{personalProfileData.working_city}}</p>
+                </div>
+          </div>
+    </div>
+    
+    <div class="card" style="margin: 20px 20px;">
+        <div class="row" style="margin: 10px 10px 0px;">
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa fa-venus-mars"></i>
+            <h5 style="margin: auto 20px">HOROSCOPE DETAILS</h5>
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+        </div>
+        <div class="row" style="margin: 10px 10px;">
+            <div class="col-6">
+              <h6>Manglik Status</h6>
+              <p style="font-size: 14px;">{{personalProfileData.manglik}}</p>
+            </div>
+            <div class="col-6">
+                <h6>Date of Birth</h6>
+                <p style="font-size: 14px;">{{personalProfileData.birth_date}}</p>
+              </div>
+              <hr style="margin: 0px 10px;width: 100%">
+          </div>
+          <div class="row" style="margin: 10px 10px;">
+              <div class="col-6">
+                <h6>Birth Place</h6>
+                <p style="font-size: 14px;">{{personalProfileData.birth_place}}</p>
+              </div>
+              <div class="col-6">
+                  <h6>Time of Birth</h6>
+                  <p style="font-size: 14px;">{{personalProfileData.birth_time}}</p>
+                </div>
+            </div>
+    </div>
+    
+    <div class="card" style="margin: 20px 20px;">
+        <div class="row" style="margin: 10px 10px 0px;">
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa fa-venus-mars"></i>
+            <h5 style="margin: auto 20px">CONTACT DETAILS</h5>
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+        </div>
+        <div class="row" style="margin: 10px 10px;">
+            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px" class="fa fa-envelope"></i>
+              <div class="col-10">
+                  <p style="font-size: 14px;">{{familyProfileData.email}}</p>
+              </div>
+            </div>
+            <div class="row" style="margin: 10px 10px 0px;">
+              <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px;" class="fa fa-phone"></i>
+              <div class="col-5" style="margin: auto 0px;">
+              <h6 style="display: inline-block">Mobile</h6>
+                <p style="font-size: 14px;display: inline-block;margin-left: 10px;">{{familyProfileData.mobile}}</p>
+              </div>
+              <div class="col-5">
+                  <h6 style="display: inline-block;">Whatsapp</h6>
+                    <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.whats_app_no}}</p>
+                  </div>
+          </div>
+          </div>
+    
+          <div class="card" style="margin: 20px 20px;">
+              <div class="row" style="margin: 10px 10px 0px;">
+                  <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-comment"></i>
+                  <h5 style="margin: auto 20px">ABOUT FAMILY</h5>
+                  <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+              </div>
+              <div class="row" style="margin: 10px 20px">
+                  <p>{{familyProfileData.about}}</p>
+              </div>
+          </div>
+    
+          <div class="card" style="margin: 20px 20px;">
+              <div class="row" style="margin: 10px 10px 0px;">
+                  <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
+                  <h5 style="margin: auto 20px">FAMILY DETAILS</h5>
+                  <i (click)="openFamilyDialog()" style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+              </div>
+              <div class="row" style="margin: 10px 10px;">
+                  <div class="col-12">
+                    <h6 style="display: inline-block">Father's Occupation : </h6>
+                    <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.occupation}}</p>
+                  </div>
+                  <hr style="margin: 0px 10px;width: 100%">
+                  <div class="col-12">
+                      <h6 style="display: inline-block">Mother's Occupation : </h6>
+                      <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.occupation_mother}}</p>
+                    </div>
+                    <hr style="margin: 0px 10px;width: 100%">
+                    <div class="col-12">
+                        <h6 style="display: inline-block">Father Status : </h6>
+                        <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.father_status}}</p>
+                      </div>
+                      <hr style="margin: 0px 10px;width: 100%">
+                      <div class="col-12">
+                        <h6 style="display: inline-block">Mother Status : </h6>
+                        <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.mother_status}}</p>
+                      </div>
+                      <hr style="margin: 0px 10px;width: 100%">
+                      <div class="col-12">
+                          <h6 style="display: inline-block">Family Income : </h6>
+                          <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.family_income}}</p>
+                        </div>
+                        <hr style="margin: 0px 10px;width: 100%">
+                        <div class="col-12">
+                            <h6 style="display: inline-block">Family Based In : </h6>
+                            <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.locality}}</p>
+                          </div>
+                          <hr style="margin: 0px 10px;width: 100%">
+                          <div class="col-12">
+                              <h6 style="display: inline-block">Mother Tongue : </h6>
+                              <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.mother_tongue}}</p>
+                            </div>
+                            <hr style="margin: 0px 10px;width: 100%">
+                            <div class="col-12">
+                                <h6 style="display: inline-block">Family Type : </h6>
+                                <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.family_type}}</p>
+                              </div>
+                              <hr style="margin: 0px 10px;width: 100%">
+                              <div class="col-12">
+                                  <h6 style="display: inline-block">Sisters Married : </h6>
+                                  <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.married_daughters}}</p>
+                                </div>
+                                <hr style="margin: 0px 10px;width: 100%">
+                                <div class="col-12">
+                                    <h6 style="display: inline-block">Brothers Married : </h6>
+                                    <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.married_sons}}</p>
+                                  </div>
+                                  <hr style="margin: 0px 10px;width: 100%">
+                                  <div class="col-12">
+                                      <h6 style="display: inline-block">Sisters Unmarried : </h6>
+                                      <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.unmarried_daughters}}</p>
+                                    </div>
+                                    <hr style="margin: 0px 10px;width: 100%">
+                                    <div class="col-12">
+                                        <h6 style="display: inline-block">Brothers Unmarried : </h6>
+                                        <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.unmarried_sons}}</p>
+                                      </div>
+                                      <hr style="margin: 0px 10px;width: 100%">
+                                      <div class="col-12">
+                                          <h6 style="display: inline-block">Address : </h6>
+                                          <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.address}}</p>
+                                        </div>
+                                        <hr style="margin: 0px 10px;width: 100%">
+                                        <div class="col-12">
+                                            <h6 style="display: inline-block">House Type : </h6>
+                                            <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.house_type}}</p>
+                                          </div>
+                </div>
+          </div>
+        
+            
+              <div class="card" style="margin: 20px 20px;">
+                  <div class="row" style="margin: 10px 10px 0px;">
+                      <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
+                      <h5 style="margin: auto 20px">PREFERENCES</h5>
+                      <i (click)="openPreferenceDialog()" style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+                  </div>
+                  <div class="row" style="margin: 10px 10px;">
+                      <div class="col-12">
+                        <h6 style="display: inline-block">Age Min: </h6>
+                        <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.age_min}}</p>
+                      </div>
+                      <hr style="margin: 0px 10px;width: 100%">
+                      <div class="col-12">
+                          <h6 style="display: inline-block">Age Max : </h6>
+                          <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.age_max}}</p>
+                        </div>
+                        <hr style="margin: 0px 10px;width: 100%">
+                        <div class="col-12">
+                            <h6 style="display: inline-block">Height Min : </h6>
+                            <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{getHeight(preferenceProfileData.height_min)}}</p>
+                          </div>
+                          <hr style="margin: 0px 10px;width: 100%">
+                          <div class="col-12">
+                            <h6 style="display: inline-block">Height Max : </h6>
+                            <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{getHeight(preferenceProfileData.height_max)}}</p>
+                          </div>
+                          <hr style="margin: 0px 10px;width: 100%">
+    
+                          <div class="col-12">
+                            <h6 style="display: inline-block">Income Min : </h6>
+                            <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.income_min}}</p>
+                          </div>
+                          <hr style="margin: 0px 10px;width: 100%">
+                          <div class="col-12">
+                            <h6 style="display: inline-block">Income Max : </h6>
+                            <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.income_max}}</p>
+                          </div>
+                          <hr style="margin: 0px 10px;width: 100%">
+                          <div class="col-12">
+                            <h6 style="display: inline-block">Marital Status : </h6>
+                            <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{personalProfileData.marital_status}}</p>
+                          </div>
+                          <hr style="margin: 0px 10px;width: 100%">
+    
+                          <div class="col-12">
+                              <h6 style="display: inline-block">Caste : </h6>
+                              <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.caste}}</p>
+                            </div>
+                            <hr style="margin: 0px 10px;width: 100%">
+                            <div class="col-12">
+                                <h6 style="display: inline-block">Manglik : </h6>
+                                <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.manglik}}</p>
+                              </div>
+                              <hr style="margin: 0px 10px;width: 100%">
+                              <div class="col-12">
+                                  <h6 style="display: inline-block">Mother Tongue : </h6>
+                                  <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.mother_tongue}}</p>
+                                </div>
+                                <hr style="margin: 0px 10px;width: 100%">
+                                <div class="col-12">
+                                    <h6 style="display: inline-block">Food Preferences : </h6>
+                                    <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.food_choice}}</p>
+                                  </div>
+                                  <hr style="margin: 0px 10px;width: 100%">
+                                  <div class="col-12">
+                                      <h6 style="display: inline-block">Working Status: </h6>
+                                      <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.working}}</p>
+                                    </div>
+                    </div>
+              </div>
+    </main>

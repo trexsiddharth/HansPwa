@@ -1,0 +1,84 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+h6 {
+    font-weight: bold;
+    color: blue;
+}
+.mainCol1 {
+    border-right: 1px solid black
+}
+.buttonArea {
+    margin: 5rem 0px;
+    width: 100%
+}
+.formRow {
+    margin: 0px; padding: 0px
+}
+.proceedButton {
+    margin-left: auto; 
+}
+.cardStyle {
+    padding-left: 10px;
+    background-color: #f5f5f5;
+}
+.btn-text {
+    font-size: 16sp
+}
+.planText {
+    margin: 0px 10px; font-size: 20dp; font-weight: bolder;color: #285fdd;
+}
+.priceText {
+    margin: 0px 10px; font-size: 16dp; font-weight: bolder;color: #285fdd;
+}
+.planRow {
+    margin: 20px 0px 0px;
+}
+.otherText {
+    margin: 0px 10px; font-size: 16dp;color: black;
+}
+.callText {
+    margin-left: auto !important;font-size: 14px
+}
+@media only screen and (max-width: 1024px) {
+    .mainCol1 {
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+        border-right: 0px solid black;
+        padding: 0px
+        
+    }
+    .buttonArea {
+        margin: 10px 0px 
+    }
+    .formRow{
+        margin: 0px -15px;
+    }
+    .proceedButton {
+        margin: 30px auto;
+    }
+    .cardStyle {
+        padding-left: 10px;
+        padding-right: 0px;
+        margin: 10px 0px 10px;
+        background-color: #f5f5f5;
+    }
+    .btn-text {
+        font-size: 14sp
+    }
+    .planText {
+        margin: 0px auto; font-size: 18dp; font-weight: bolder;padding: 0px 20px 0px 10px
+    }
+    .priceText {
+        margin: 0px auto; font-size: 16dp; font-weight: bolder;padding: 0px 20px 0px 10px
+    }
+    .otherText {
+        margin: 0px auto; font-size: 14dp; text-align: center; padding: 0px 20px 0px 10px
+    }
+    .planRow {
+        margin: 20px auto 0px;
+    }
+    .callText {
+        margin: 0px auto !important;font-size: 16px
+    }
+}

@@ -1,0 +1,81 @@
+<main class='pwaSize fixed t-0 b-0  w-full HC overflowY' style="background: #f5f5f5;height: 100%;">
+    <div class="container t-c">
+        <div class="section">
+            <div class="container" style="margin-left:auto;margin-right:auto;text-align: center;"> 
+                <p> <img src="../../../assets/images/logo.png" style="width:25%"> &nbsp; &nbsp;Hans Matrimony</p>
+            </div>              
+        </div>
+    </div>
+    <div>
+    <div><h4 class="textProfilePic">Upload your profile picture</h4></div>
+    </div>
+    <div class="container" style="width:100%; text-align: center; margin-top: 20px; border-radius: 20px;padding-bottom: 20px; overflow-y: hidden;">
+      <div class="w-full card" style="margin-left:auto;margin-right:auto">
+        <form>
+          <div class="row" style="margin-top:20px">
+              <div class="col-md-12 text-center" style="margin: 0px auto">
+                <p>Multiple Pictures can be Uploaded</p>
+          </div>
+           </div>
+        <div class="row"  style="margin:20px auto">
+          <div class="col-12 text-center" style="margin: 0px auto">
+              <img [src]="imgURL"  height="100" width="170" *ngIf="imgURL" style="margin: 0px auto; border: 2px solid #285fdd;
+              border-radius: 100px;
+              padding: 10px;">
+              <br>
+            <div>
+                <input style="margin: 10px 25%" #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,0)"  />
+                                
+            </div>
+          </div>
+        </div>
+          
+          <div class="row" style="margin:20px auto">
+          <div class="col-12 text-center" style="margin: 0px auto">
+              <img [src]="frontfile" style="margin: 0px auto;border: 2px solid #285fdd;
+              border-radius: 100px;
+              padding: 10px;" height="100" width="170" *ngIf="frontfile">
+              <br>
+            <div>
+                <input style="margin: 10px 25%" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,1)"  />
+                               
+            </div>
+          </div>
+        </div>
+  
+        <div class="row" style="margin:20px auto">
+          <div class="col-12 text-center" style="margin: 0px auto">
+              <img [src]="BackimgURL" height="100" width="170" style="margin: 0px auto;border: 2px solid #285fdd;
+              border-radius: 100px;
+              padding: 10px;" *ngIf="BackimgURL">
+              <br>
+            <div>
+                <input style="margin: 10px 25%" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,2)"  />
+                              
+            </div>
+        </div>
+        </div>
+  
+        <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
+            <div class="col-md-12 text-center">
+              <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" (click)="checkForPhoto()">Please Click to Proceed</button>
+            </div>
+         </div> 
+      </form>
+      </div>
+      <ng-template #photoModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <button type="button" style="outline: none" class="close" aria-label="Close" (click)="Cross_click()">X
+            </button>
+          </div>
+          <div class="modal-body">
+              <p class="verifyHeader" style="font-size: 20px">You haven't uploaded any photo</p>
+            <button style="float:right" mat-raised-button color="warn" (click)="Cross_click()">Choose photo</button>
+          </div>
+      
+      </ng-template>
+          
+  </div>
+  </main>
+  
+  

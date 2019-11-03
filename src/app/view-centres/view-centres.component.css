@@ -1,0 +1,226 @@
+@media only screen and (max-width: 900px) {
+    .HeadText {
+        margin: auto;
+         font-size: 18px;
+        display: inline-block;
+        color:#285fdd;
+        font-weight: bolder;
+        text-align: center;
+    }
+    .headRow {
+        margin-top: -32px;
+         margin-left:10px
+    }
+    .sizeIt {
+        width: 100px;
+    }
+    .cardImg {
+        width: 100px;
+         background-color: white;
+    }
+    .cardText {
+        background-color: white;
+        padding-top: 0px;
+        
+    }
+    .cardBodyText {
+        width:100px;
+        padding: 10px 0px 0px 0px;
+        margin: 0px;
+        text-align: left;
+        background-color: white;
+    }
+    .cardBodyText1 {
+        width:100px;
+        padding: 15px 0px 0px 0px;
+        margin: 0px;
+        text-align: left;
+        background-color: white;
+    }
+    .card-header {
+        background-color: white;
+        padding: 0px;
+        margin: 10px 0px 0px 10px;
+    }
+    .nearByTemple{
+        width: 60%;
+        border: 1px solid grey;
+        border-radius: 4px;
+    }
+
+}
+
+.nearByTemple{
+    width: 60%;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+*{
+    background-color:white;
+
+}
+.HeadText {
+    margin: 10px auto auto;
+     font-size: 22px;
+    display: inline-block;
+    color:#285fdd;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.headRow {
+    margin-top: -45px;
+     margin-left:10px
+}
+.first-box{
+position: relative;
+height: auto;
+min-height: 25%;
+width: 48%;
+margin: 40px 0px;
+left: 25%;
+text-align: center;
+box-shadow: 7px 7px 10px #a46c6c;
+}
+.mobSizeText {
+display: block;
+}
+.second-box{
+position: relative;
+height: auto;
+min-height: 20%;
+width: 48%;
+margin: 40px 0px;
+left: 25%;
+box-shadow: 7px 7px 10px #a46c6c;
+}
+.mobSize {
+margin-bottom: 10px;
+text-align: center;
+padding: 5px
+}
+
+.breakIt {
+word-wrap: break-word;
+}
+
+p{
+text-align: center;
+padding-top:20px;
+}
+/* td{
+ min-width: 220px; 
+} */
+th{
+width: auto;
+max-width: 388px;}
+.sub{
+    margin-left: 16px;
+
+}
+.sizeIt {
+    width: 150px;
+}
+.cardImg {
+    width: 200px;
+     background-color: white;
+}
+
+.cardText {
+    background-color: white;
+    padding-top: 20px;
+    
+}
+.cardBodyText {
+    width:200px;
+    padding: 10px 0px 0px 0px;
+    margin: 0px;
+    text-align: left;
+    background-color: white;
+}
+.cardBodyText1 {
+    width:200px;
+    padding: 10px 0px 0px 0px;
+    margin: 0px;
+    text-align: left;
+    background-color: white;
+}
+.column-l{
+float: left;
+width: 40%;
+padding: 5px;
+}
+
+.column-r {
+float: right;
+width: 60%;
+padding: 5px; 
+max-height: 250px
+}
+.card-header {
+    background-color: white;
+    padding: 0px;
+    margin: 10px 0px 0px 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+*{
+    font-size: 10px;
+}
+td{
+    min-width: 74px;
+}
+.first-box{
+    width: 83%;
+    left: 9%;
+}
+.second-box{
+    width: 83%;
+    left: 9%;
+
+}
+.mobSize{
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    margin: 0px;
+}
+.mobSizeText {
+    display: block;
+    }
+    .cardImg {
+        width: 100px;
+         background-color: white;
+    }
+    .cardText {
+        background-color: white;
+        padding-top: 0px;
+    }
+    .sizeIt {
+        width: 100px;
+    }
+    .cardBodyText1 {
+        width:100px;
+        padding: 15px 0px 0px 0px;
+        margin: 0px;
+        text-align: left;
+        background-color: white;
+    }
+    .cardBodyText {
+        width: 150px;
+        padding: 10px 0px 0px 0px;
+        margin: 0px;
+        text-align: left;
+        background-color: white;
+    }
+    .nearByTemple{
+        width: 60%;
+        border: 1px solid grey;
+        border-radius: 4px;
+        
+    }
+    .colTemple {
+        border: 1px solid black;
+    }
+}

@@ -1,0 +1,236 @@
+
+.link-footer {
+    text-decoration: none;
+    color: white
+}
+
+.contact-details {
+    vertical-align: middle;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 1rem;
+    color:white;font-size:1rem;
+    font-family: 'semplicita';
+}
+.banner-img{
+    height : 3.5rem;
+    margin-left: 16px;
+}
+.navBarTop {
+    padding-bottom: 0.2rem;
+    padding-top: 0.2rem;
+}
+
+.login{
+    margin-right: 22px;
+}
+
+.footer {
+    background-color: #46132B;
+}
+.follow{
+    margin-left: 35%
+}
+.sizeIt {
+    font-size: 16px;
+    font-family: 'semplicita';
+    margin: 0px 0px;
+}
+#footer {
+    padding: 5% 5%;
+    bottom: 0px;
+    background-color: #46132B; 
+  }
+  .footerCol {
+    padding: 0%;
+  }
+  .footerHeadings {
+    color: white;
+     font-family: 'Titillium Web', sans-serif; 
+     font-weight: normal ; 
+     font-size: 22px; 
+     font-family: 'semplicita';
+     border-bottom: 2px solid #036cdb; 
+     display: inline;
+  }
+  .footerLink {
+    color: white;
+    margin-top: 5px;
+    font-size: 16px;
+    font-family: 'semplicita';
+    padding: 0%;
+  }
+  .footerLink:hover {
+    color: pink;
+  }
+  .footerContact {
+    display: inline-block;
+    line-height: 2rem;
+    font-size: 14px;
+    font-family: 'semplicita';
+    padding: 0%;
+  }
+  
+  .iconFooter {
+    background:#46132B; 
+    font-size: 20px !important;
+    font-family: 'semplicita';
+    margin: 0px auto;
+    height: 2rem;
+    width: 2rem !important;
+    padding: 0%;
+  
+  }
+  .spaceCol {
+    display: inline-block;
+}
+.bottomCol {
+margin-top: 0px;
+}
+.infoText {
+    color: white;
+     font-size:14px;
+     font-family: 'semplicita';
+     display:inline;
+     margin-left: 10px;
+}
+.footerLast {
+  text-align: center;
+}
+.infoHead {
+  color: white;
+   font-size: 16px;
+   font-family: 'semplicita';
+   width: 100%
+}
+@media only screen and (max-width: 900px) {
+    .footer {
+        background-color: #46132B;
+    }
+    #footer {
+        text-align: center;
+      }
+      .footerContact {
+        display: inline;
+        line-height: 2rem;
+        font-size: 14px;
+        font-family: 'semplicita';
+        padding: 0% ;
+        margin: 0px 0px 0px 10px;
+      }
+      .footerLink {
+        color: white;
+        font-size: 14px;
+        font-family: 'semplicita';
+        padding: 0%;
+        margin: 0%;
+      }
+      .footerCol {
+        padding: 0% 2%;
+        margin: 0px;
+      }
+    .fa {
+        padding: 0%;
+        height: 0px;
+        width: 2rem !important;
+    }
+    .navBarTop {
+        padding-bottom: 0.4rem;
+        padding-top: 0.4rem;
+    }
+
+    .banner-img{
+        height : 3rem;
+        margin-left: 16px;
+    }
+    .follow{
+        margin-left: 5%;
+        position: relative;
+        left: 14px;
+    
+    }
+    .match{
+        margin-top:1em
+    }
+    .btn-responsive {
+        padding:8px 4px;
+        font-size:80%;
+        font-family: 'semplicita';
+        line-height: 1;
+      }
+      .contact-details
+      {
+        margin-right: 1.3rem;
+        font-size:.6rem;
+        font-family: 'semplicita';
+      }
+      h4 {
+        font-size: 1rem;
+        font-family: 'semplicita';
+    }
+    .row{
+        font-size: 14px;
+        font-family: 'semplicita';
+    }
+    .navbar-brand{
+        position: relative;
+            top: 26px;
+    }
+    .sizeIt {
+        font-size: 12px;
+        font-family: 'semplicita';
+    }
+    .sizeFor {
+        margin-top: 1rem;
+    }
+    .spaceCol {
+        display: none;
+    }
+    .bottomCol{
+        margin-top: 20px;
+        padding: 0px 10px;
+    }
+    .infoText {
+      color: white;
+       font-size:14px;
+       font-family: 'semplicita';
+       display:block;
+       margin-bottom: 0px;
+       margin-left: 0px
+  }
+  .footerLast {
+    text-align: center;
+    margin-top: 10px;
+}
+.footerHeadings {
+  color: white;
+   font-weight: normal ; 
+   font-size: 16px; 
+   font-family: 'semplicita';
+   border-bottom: 2px solid #036cdb; 
+   display: inline;
+}
+.infoHead {
+  color: white;
+   font-size: 16px;
+   font-family: 'semplicita';
+   width: 100%
+}
+}
+
+@media only screen and (max-width: 1024px) {
+    .navbar-brand{
+        position: relative;
+            top: 0px;
+    }
+    .btn-responsive {
+        padding:8px 4px;
+        font-size:80%;
+        font-family: 'semplicita';
+        line-height: 1;
+        margin-top: 20px;
+
+      }
+    
+
+}

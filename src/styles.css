@@ -1,1 +1,119 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+html, body { height: 100%; }
+body {
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-image:url('assets/bgicon.png');
+    background-size: cover;
+  }
+  .pwaSize {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: hidden;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .btn-blue, .btn.btn-blue {
+    color: white;
+    background-color: #34b7f1;
+    font-size: 14px;
+    min-width: 120px;
+  }
+  .btn.btn-blue:hover, .btn-blue:hover, .btn-blue:focus, .btn-blue:active, .open .dropdown-toggle.btn-blue {
+    color: white;
+    background-color: #34b7f1;
+  }
+  .bg-lightblue {
+    background: #34b7f1;
+  }
+  .t-0 {
+    top: 0;
+  }
+  .fixed {
+    position: fixed;
+  }
+  .p-0-5 {
+    padding: 0 5px;
+  }
+  .z-10 {
+    z-index: 10;
+  }
+  .white {
+    color: #fff;
+  }
+  .w-full {
+    width: 100%;
+  }
+  .mainBody {
+    position: fixed;
+    overflow: auto;
+    height: calc(100% - 100px);
+    top: 50px;
+    bottom: 50px;
+  }
+  .bg-white {
+    background: #fff;
+  }
+  .flex-fs-vc, .flex-fs-c {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .w-40 {
+    width: 40px;
+  }
+  .f16 {
+    font-size: 16px;
+  }
+  .m-l-10 {
+    margin-left: 10px;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .dropdown-list ul li {
+    background-color: #775353 !important;
+    color: white !important;
+  }
+  .dropdown-menu li a {
+    padding: 2px 5px !important;
+    color: #222 !important;
+    font-size: 15px;
+  }
+  .dropdown-menu li a .fa {
+    font-size: inherit !important;
+    padding: 0 !important;
+    color: inherit !important;
+    width: 20px !important;
+    height: unset !important;
+  }
+  .fa {
+    padding: 10px;
+    font-size: 30px !important;
+    height: 50px;
+    width: 50px !important;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+  .fa:hover {
+    opacity: 0.7;
+  }
+  .t-l {
+    text-align: left;
+  }
+  .btn.btn-blue:hover, .btn-blue:hover, .btn-blue:focus, .btn-blue:active, .open .dropdown-toggle.btn-blue {
+  color: white;
+  background-color: #34b7f1;
+}
+.m-l-5 {
+  margin-left: 5px;
+}
+@font-face{
+  font-family: semplicita;
+  src: url("./assets/fonts/SemplicitaPro.otf") format("truetype")
+}

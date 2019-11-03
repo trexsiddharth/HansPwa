@@ -1,0 +1,185 @@
+<ng-container>
+    <main>
+        <div id="main">
+        <main id="second-main">
+            <div class="header">
+                <div class="back-ground">
+                  <div class="text-center">
+                      <h5 >We Provide Convenient packages to choose From!</h5>
+                  </div>
+                </div> 
+                <div class="back-ground">
+                    <div class="text-center"><br>
+                        <h6>What are Credits?</h6>
+                        <p>Each Credit will give you one contact detail from 100's of profiles shared on daily basis.</p>
+                    </div>
+                    <div class="text-center">
+                        <p style="color: #34b7f1;font-weight: bolder" *ngIf="points >= 0">Total Credits Left: {{points}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="plan-option" style="text-align: center;">
+               <div class="col-sm-6 col-md-6 col-lg-6" id="button-div" style="margin: 10px 0px;">
+                  <button type="button" class="btn btn-primary" (click)="toggleOnline()"  [id]="changeButtonOnline()">Online Plans</button>
+               </div>
+               <div class="col-sm-6 col-md-6 col-lg-6" id="button-div" style="margin: 10px 0px;">
+                  <button type="button"  class="btn btn-primary" (click)="togglePersonalized()"  [id]="changeButtonPersonalized()">Personalised Plans</button>
+               </div>
+            </div>
+          
+            <div class="card-wrapper" *ngIf="show1">
+                <div id="option" class="option">
+                    <div id="contain">
+                        <div class="row rowSet">
+                        <div class="col-xs-4  col-sm-3 col-md-3 colSet">
+                            <p class="feature">Limited</p>
+                            <p id="p"><s>{{ plans?.Limited?.PrevAmt }}</s></p>
+                            <p id="p">{{ plans?.Limited?.CurrentAmt }}</p> 
+                        </div>
+                        <div class="col-xs-4 col-sm-3  col-md-3 colSet">
+                            <p><span class="feature">Credits</span><br><span class="value" style="padding-top:10px">{{ plans?.Limited?.Credits}}</span></p>                 
+                        </div>
+                        <div class="col-xs-4 col-sm-3 col-md-3 colSet">
+                            <p><span class="feature">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.Limited?.Validity}}</span></p>      
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12 v-align btnSet">
+                           <button type="button" (click)="openDialog('Limited',plans?.Limited?.Credits+' Credits',plans?.Limited?.Validity,plans?.Limited?.CurrentAmt)" class="btn btn-primary buyNow">Buy now</button>
+                        </div>
+                    </div>
+                    </div>
+                 </div>
+
+                 <div id="option" class="option">
+                    <div id="contain">
+                        <div class="row rowSet">
+                        <div class="col-sm-3 col-md-3 col-lg-3 colSet">
+                            <p class="feature">Premium</p>
+                            <p id="p"><s>{{ plans?.Premium?.PrevAmt }}</s></p>
+                            <p id="p">{{ plans?.Premium?.CurrentAmt }}</p> 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
+                            <p><span class="feature">Credits</span><br><span class="value" style="padding-top:10px">{{ plans?.Premium?.Credits}}</span></p>                 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 colSet">
+                            <p><span class="feature">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.Premium?.Validity}}</span></p>      
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 v-align btnSet">
+                           <button type="button" (click)="openDialog('Premium',plans?.Premium?.Credits +' Credits',plans?.Premium?.Validity,plans?.Premium?.CurrentAmt)" class="btn btn-primary buyNow">Buy now</button>
+                        </div>
+                    </div>
+                </div>
+                 </div>
+
+                 <div id="option" class="option">
+                    <div id="contain">
+                        <div class="row rowSet">
+                        <div class="col-sm-3 col-md-3 col-lg-3 colSet">
+                            <p class="feature">Supreme</p>
+                            <p id="p"><s>{{ plans?.Supreme?.PrevAmt }}</s></p>
+                            <p id="p">{{ plans?.Supreme?.CurrentAmt }}</p> 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 colSet">
+                            <p><span class="feature">Credits</span><br><span class="value" style="padding-top:10px">{{ plans?.Supreme?.Credits}}</span></p>                 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 colSet">
+                            <p><span class="feature">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.Supreme?.Validity}}</span></p>      
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 v-align btnSet">
+                           <button type="button" (click)="openDialog('Supreme',plans?.Supreme?.Credits+' Credits',plans?.Supreme?.Validity,plans?.Supreme?.CurrentAmt)" class="btn btn-primary buyNow">Buy now</button>
+                        </div>
+                    </div>
+                </div>
+                 </div>
+            </div>
+
+            <div class="card-wrapper" *ngIf="show2">
+                <div id="option" class="option">
+                    <div id="contain">
+                        <div class="row rowSet">
+                        <div class="col-xs-4  col-sm-3 col-md-3 colSet">
+                            <p class="feature">Premium 6</p>
+                            <p id="p">{{ plans?.PersonalizedPremium6?.Charges }}</p> 
+                        </div>
+                        <div class="col-xs-4 col-sm-3  col-md-3 colSet">
+                            <p><span class="feature">Benefits</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium6?.Benefits}}</span></p>                 
+                        </div>
+                        <div class="col-xs-4 col-sm-3 col-md-3 colSet">
+                            <p><span class="feature">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium6?.Validity}}</span></p>      
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12 v-align btnSet">
+                           <button type="button" (click)="openDialog('PersonalizedPremium6',plans?.PersonalizedPremium6?.Benefits,plans?.PersonalizedPremium6?.Validity,'19000')" class="btn btn-primary buyNow">Buy now</button>
+                        </div>
+                    </div>
+                    </div>
+                 </div>
+
+                 <div id="option" class="option">
+                    <div id="contain">
+                        <div class="row rowSet">
+                        <div class="col-sm-3 col-md-3 col-lg-3 colSet">
+                            <p class="feature">Premium 12</p>
+                            <p id="p">{{ plans?.PersonalizedPremium12?.Charges }}</p> 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
+                            <p><span class="feature">Benefits</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium12?.Benefits}}</span></p>                 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
+                            <p><span class="feature">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium12?.Validity}}</span></p>      
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 v-align btnSet">
+                           <button type="button" (click)="openDialog('PersonalizedPremium12',plans?.PersonalizedPremium12?.Benefits,plans?.PersonalizedPremium12?.Validity,'25000')" class="btn btn-primary buyNow">Buy now</button>
+                        </div>
+                    </div>
+                </div>
+                 </div>
+
+                 <div id="option" class="option">
+                    <div id="contain">
+                        <div class="row rowSet">
+                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
+                            <p class="feature">Deluxe NRI</p>
+                            <p id="p">{{ plans?.PersonalizedDeluxeNRI?.Charges }}</p> 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
+                            <p><span class="feature">Benefits</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedDeluxeNRI?.Benefits}}</span></p>                 
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
+                            <p><span class="feature">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedDeluxeNRI?.Validity}}</span></p>      
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 v-align btnSet">
+                           <button type="button" (click)="openDialog('PersonalizedDeluxeNRI',plans?.PersonalizedDeluxeNRI?.Benefits,plans?.PersonalizedDeluxeNRI?.Validity,'31000')" class="btn btn-primary buyNow">Buy now</button>
+                        </div>
+                    </div>
+                </div>
+                 </div>
+            </div>
+          </main>
+        </div>
+    </main>
+
+    <!-- <footer style="background-color:#f1f1f1; width: 60%;margin-left: auto;margin-right: auto;margin-top:60px">
+        <div class="text-center" style="padding:10px">
+            <div class="text-center"> <h5>Contact</h5></div>
+            <div class="row" style="display:inline-flex">
+                <div class="text-center">
+                    <p><i class="fa fa-mobile" style="color:#007BFF"></i>&nbsp;&nbsp;&nbsp;+91-9697989697</p>
+                 </div>      
+               <div class="text-center">
+                  <p><i class="fa fa-envelope" style="color:#007BFF"></i>&nbsp;&nbsp;&nbsp;matches@hansmatrimony.com</p>
+               </div>
+                 
+            </div>
+        </div>
+
+    </footer> -->
+</ng-container>
+
+<!-- <div class="col-md-5 col-lg-4">
+    <div class="item" style="border:1px solid orange;border-radius: 5px">
+        <div class="ribbon">Best Value</div>
+        <div class="heading"></div>
+        <div class="features"><br> </div>
+          <div class="price"></div>
+          <button (click)="pay(data?.Supreme?.CurrentAmt,'live')"  class="btn btn-block btn-danger" type="submit">BUY NOW</button>
+      </div>
+</div> -->

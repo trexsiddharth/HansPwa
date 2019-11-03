@@ -1,0 +1,72 @@
+/*   footer   */
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+    background-color: #34b7f1;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  /* Change the color of links on hover */
+  .navbar a:hover {
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .navbar a.active {
+    color: white;
+  }
+  .prof {
+    margin: 0px 30px;
+    display: inline-block;
+  }
+  #main {
+    margin: 50% auto 0px;
+    padding-top: 20px
+  }
+  .imageSet {
+    margin:0px 5px 0px;
+    text-align: center;
+  }
+  @media (max-width: 1024px) {
+    .prof {
+      margin: 0px 20px;
+      display: inline-block;
+    }
+    #main {
+      margin: 0px auto 0px;
+      padding-top: 20px
+    }
+    .imageSet {
+      margin:0px 5px 0px 0px;
+      text-align: center;
+    }
+  }
+  @media (max-width: 576px) {
+    .prof {
+      margin: 0px 10px;
+      display: inline-block;
+    }
+    #main {
+      margin: 0px auto 0px;
+      padding-top: 20px
+    }
+    .imageSet {
+      margin:0px 5px 0px 0px;
+      text-align: center;
+    }
+  }

@@ -1,0 +1,13 @@
+.textCareer {
+    font-weight:bolder;
+    padding-top:1rem;
+    text-align: center;
+     color: #285fdd
+}
+::ng-deep .mat-select-value {
+    color: black !important;
+}
+.fieldFit{
+    height:60px;
+    border-bottom: 1px solid black;
+}

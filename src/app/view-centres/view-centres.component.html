@@ -1,0 +1,62 @@
+
+<main> 
+    <div class="row">
+        <h2 class="HeadText">Our Centers</h2>
+    </div>
+    <div class="row headRow" >
+      <a href="#">
+        <img class="sizeIt" src="../../assets/logo_hans.png" alt="logo">
+      </a>
+    </div>
+      <ng-container>
+             <h5 style="color:#285fdd;text-align:center; margin-left: auto;margin-right: auto;margin-bottom:0px;padding: 10px">Head Office</h5>
+          <div class="row" style="background-color:white;border-radius:20px;">
+                         <div class="col-md-4 col-sm-4 col-xs-4 mobSize" ><a target="_blank" href="https://goo.gl/maps/vTgmJHbex842"><i class="fa fa-map-marker" style="color: #285fdd" aria-hidden="true" ></i></a><p class="mobSizeText">&nbsp;&nbsp;H-18, Bali Nagar, New Delhi</p></div>
+                         <div class="col-md-4 col-sm-4 col-xs-4 mobSize" ><a href="tel:9697989697"><i class="fa fa-phone" style="color: #285fdd" aria-hidden="true" ></i></a><p class="mobSizeText">&nbsp;&nbsp;96-97-98-96-97</p></div>
+                         <div class="col-md-4 col-sm-4 col-xs-4 mobSize"><i class="fa fa-envelope" style="color: #285fdd" aria-hidden="true" ></i><p class="mobSizeText">&nbsp;&nbsp;matches@hansmatrimony.com</p></div>
+                </div>
+      </ng-container>
+      <!-- <div style="background: white;border-radius: 5px;width: 100%;border:1px solid #285fdd;">
+            <input style="width: 60%; background:white; height:2rem;" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+            <button type="submit" class="btn-user" style="outline: none" (click)="findLocation()"> Submit</button>
+        </div> -->
+      <ng-container>
+          <div class="row" style="margin-right:0px;margin-left:0px;text-align: center">
+            <div class="col-12 colTemple">
+                <!-- <mat-form-field class="full-width" appearance="standard" style="width: 60%">
+                    <mat-label>Search nearby temples</mat-label>
+                    <input type="text" id="cityAutoComplete" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+                    (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                             (onLocationSelected)="onLocationSelected($event)" formControlName="near-by-temples" required> 
+                </mat-form-field> -->
+            </div>
+            <div class="col-12" style="margin-top: 10px;">
+           <h5 style="color:#285fdd;margin-left: auto;margin-right: auto;margin-bottom:-15px;padding: 10px;">Subsidiary Offices</h5>
+            </div>
+          </div>
+          <div class="card-wrapper" id="centres" style="margin-top:0px;padding-bottom: 20px;">
+             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="centres-list" *ngFor = "let user of centres; let i = index" style="display:inline-flex;margin-top: 20px">                
+                   <div class="container">
+                     <div class="row">
+                        <div class="card flex-row flex-wrap"  style="background-color: white; width: 100%;">
+                            <div class="card-header border-0">
+                                <img class="cardImg" src="{{user.profile_photo}}" alt="">
+                            </div>
+                            <div class="card-block px-2 cardText">
+                                <div class="row" style="background-color: white; margin: 0px;">
+                                 <i class="fa fa-user" style="margin: 0px;background-color: white;color: #285fdd" aria-hidden="true"></i>
+                                 <p class="card-body cardBodyText1" >{{user.representatives}}</p>
+                          </div>
+                                <div class="row" style="background-color: white; margin: 0px;">
+                                       <i class="fa fa-map-marker" style="margin: 0px;background-color: white;color: #285fdd" aria-hidden="true"></i>
+                                       <p class="card-body cardBodyText" >{{user.name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     </div>
+                         
+                </div>
+             </div> 
+      </ng-container>
+    </main>
