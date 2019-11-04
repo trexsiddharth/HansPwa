@@ -3,6 +3,10 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import {
+  NgxNotificationService
+} from 'ngx-kc-notification';
 
 declare let BotUI: Function;
 
@@ -51,7 +55,9 @@ export class ChatComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private spinner: NgxSpinnerService,
+    private ngxNotificationService: NgxNotificationService,
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -61,10 +67,11 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.setItem('id', "");
+    this.botui =  BotUI('my-botui-app');
+    this.spinner.hide();
+    localStorage.setItem('id', '');
     this.currentUrl = this.router.url.substring(13);
     console.log(this.currentUrl);
-    this.botui =  BotUI('my-botui-app');
     if (localStorage.getItem('mobile_number')) {
       this.currentContact = localStorage.getItem('mobile_number');
       this.checkUrl(this.currentContact).subscribe(
@@ -117,56 +124,7 @@ export class ChatComponent implements OnInit {
     } else if (this.currentUrl) {
       this.currentContact = this.currentUrl;
       this.showHistoryMessages(this.currentUrl);
-      setTimeout(() => {
-        this.checkUrl(this.currentUrl).subscribe(
-          (data: any) => {
-
-            const text: String = data.apiwha_autoreply;
-            const id = data.id;
-            console.log(text);
-            console.log(id);
-            localStorage.setItem('id', id);
-            this.getCredits();
-            if (text.match('SHOW')) {
-                    if (this.langChanged === true) {
-                      this.changeLanguage(this.currentUrl, localStorage.getItem('language')).subscribe(
-                        (data: any) => {
-                          console.log(data);
-                        },
-                        (error: any) => {
-                          console.log(error);
-                        }
-                        );
-                      this.langChanged = false;
-                    }
-                    this.repeatMEssage('SHOW', this.currentUrl);
-          } else {
-                  this.botui.action.text({
-                    action: {
-                      sub_type: 'number',
-                      placeholder: 'कृपया अपना १० अंको का मोबाइल नंबर डालें'
-                    }
-                  }).then(res => {
-                    if (this.langChanged === true) {
-                      this.changeLanguage(res.value, localStorage.getItem('language')).subscribe(
-                        (data: any) => {
-                          console.log(data);
-                        },
-                        (error: any) => {
-                          console.log(error);
-                        }
-                        );
-                      this.langChanged = false;
-                    }
-
-                    this.repeatMEssage('SHOW', res.value);
-                  });
-                }
-          },
-          (error: any) => {
-            console.log(error);
-      });
-      }, 5000);
+      this.spinner.show();
   } else {
     this.botui.message.add({
       type: 'html',
@@ -204,7 +162,7 @@ export class ChatComponent implements OnInit {
           channel_name : 'app'
        };
 
-       var myJSON = JSON.stringify(this.Data);
+       const myJSON = JSON.stringify(this.Data);
        console.log(myJSON);
 
        const data1 = new FormData();
@@ -220,9 +178,10 @@ export class ChatComponent implements OnInit {
    repeatMEssage(ans: String, mob) {
          this.chatRequest(ans, mob).subscribe(
            (data: any) => {
-            this.getCredits();
-            console.log(data);
-            if (data.type === 'profile') {
+             this.spinner.hide();
+             this.getCredits();
+             console.log(data);
+             if (data.type === 'profile') {
                  const values = data.apiwha_autoreply;
                  console.log(values.photo);
                  this.botui.message.add({
@@ -252,7 +211,6 @@ export class ChatComponent implements OnInit {
                         +
                        '<b> &#9803 Horoscope Details</b> <br><br>' +
                        this.profileSet('Birth Date: ', values.birth_date) +
-                       this.profileSet('Birth Time: ', values.birth_time) +
                        this.profileSet('Bith Place: ', values.birth_place) +
                        this.profileSet('Manglik: ', values.manglik) + ' <br> <br>'
                        +
@@ -347,7 +305,6 @@ export class ChatComponent implements OnInit {
                         +
                        '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
                        this.profileSet('जन्म दिवस: ', values.birth_date) +
-                       this.profileSet('जन्म का समय: ', values.birth_time) +
                        this.profileSet('जन्म स्थान: ', values.birth_place) +
                        this.profileSet('मांगलिक: ', values.manglik) + ' <br> <br>'
                        +
@@ -592,20 +549,20 @@ export class ChatComponent implements OnInit {
  }
  }
 
- getProfilePhotoHistory(num: String, gen: number): String {
-  if (num === null) {
-    if (gen === 0) {
-      return '../../assets/male_pic.png';
-    } else {
-      return '../../assets/female_pic.png';
-    }
-  } else {
-    if (num.match('http')) {
+  getProfilePhotoHistory(num: string, num2: string , gen: string): String {
+    if (num != null && num !== '') {
       return num;
-    } else { return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num; }
-
-  }
-  }
+    } else if (num2 != null && num2 !== '') {
+      const carousel: any = JSON.parse(num2);
+      return carousel['3'];
+    } else {
+      if (gen === 'Male') {
+        return '../../assets/male_pic.png';
+      } else {
+        return '../../assets/female_pic.png';
+      }
+    }
+    }
 
  getSiblingCount(num: string): String {
  if (num === null) {
@@ -763,7 +720,7 @@ export class ChatComponent implements OnInit {
    profileSet(key: string, value: String): String {
     if (value != null) {
       return key + ': ' + value + '<br>';
-    } else {return ''}
+    } else {return ''; }
    }
 
    profileSetIncome(key: string, value: string): String {
@@ -774,7 +731,7 @@ export class ChatComponent implements OnInit {
         return key + ': ' + value + ' LPA <br>';
       }
 
-    } else {return ''}
+    } else {return ''; }
    }
 
    onSelect(feature: string) {
@@ -803,6 +760,8 @@ export class ChatComponent implements OnInit {
           console.log(error);
         }
       );
+     } else {
+       this.ngxNotificationService.error('No user found');
      }
    }
    changeToBot() {
@@ -836,6 +795,8 @@ export class ChatComponent implements OnInit {
          console.log(error);
        }
      );
+     } else {
+      this.ngxNotificationService.error('No user found');
      }
    }
 profileReAnswer(num: any, id: any, answer: any) {
@@ -865,13 +826,13 @@ profileReAnswer(num: any, id: any, answer: any) {
    getSelectedProfile(data: any) {
      this.history = 'chatbot';
      console.log(data);
-     let personal = data.profile;
-    const family = data.family;
+     const personal = data.profile;
+     const family = data.family;
      this.change();
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img src=' + this.getProfilePhoto('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + personal.photo, personal.gender) + ' width="300" >'
+      content: '<img src=' + this.getProfilePhotoHistory('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + personal.photo, personal.carousel, personal.gender) + ' width="300" >'
     });
      if (localStorage.getItem('language') === 'English') {
       this.botui.message.add({
@@ -892,7 +853,6 @@ profileReAnswer(num: any, id: any, answer: any) {
          +
         '<b> &#9803 Horoscope Details</b> <br><br>' +
         this.profileSet('Birth Date: ', personal.birth_date) +
-        this.profileSet('Birth Time: ', personal.birth_time) +
         this.profileSet('Bith Place: ', personal.birth_place) +
         this.profileSet('Manglik: ', personal.manglik) + ' <br> <br>'
         +
@@ -963,7 +923,6 @@ profileReAnswer(num: any, id: any, answer: any) {
          +
         '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
         this.profileSet('जन्म दिवस: ', personal.birth_date) +
-        this.profileSet('जन्म का समय: ', personal.birth_time) +
         this.profileSet('जन्म स्थान: ', personal.birth_place) +
         this.profileSet('मांगलिक: ', personal.manglik) + ' <br> <br>'
         +
@@ -1042,7 +1001,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.gender) + ' width="200" ><br>' +
+                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' width="200" ><br>' +
                     '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
                     'नाम: ' + valueInMessage.name + '<br>' +
                     // tslint:disable-next-line: max-line-length
@@ -1058,7 +1017,6 @@ profileReAnswer(num: any, id: any, answer: any) {
                      +
                     '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
                     this.profileSet('जन्म दिवस: ', valueInMessage.birth_date) +
-                    this.profileSet('जन्म का समय: ', valueInMessage.birth_time) +
                     this.profileSet('जन्म स्थान: ', valueInMessage.birth_place) +
                     this.profileSet('मांगलिक: ', valueInMessage.manglik) + ' <br> <br>'
                     +
@@ -1090,6 +1048,54 @@ profileReAnswer(num: any, id: any, answer: any) {
               }
             }
          });
+         this.checkUrl(this.currentUrl).subscribe(
+            (data: any) => {
+
+              const text: String = data.apiwha_autoreply;
+              const id = data.id;
+              console.log(text);
+              console.log(id);
+              localStorage.setItem('id', id);
+              this.getCredits();
+              if (text.match('SHOW')) {
+                      if (this.langChanged === true) {
+                        this.changeLanguage(this.currentUrl, localStorage.getItem('language')).subscribe(
+                          (data: any) => {
+                            console.log(data);
+                          },
+                          (error: any) => {
+                            console.log(error);
+                          }
+                          );
+                        this.langChanged = false;
+                      }
+                      this.repeatMEssage('SHOW', this.currentUrl);
+            } else {
+                    this.botui.action.text({
+                      action: {
+                        sub_type: 'number',
+                        placeholder: 'कृपया अपना १० अंको का मोबाइल नंबर डालें'
+                      }
+                    }).then(res => {
+                      if (this.langChanged === true) {
+                        this.changeLanguage(res.value, localStorage.getItem('language')).subscribe(
+                          (data: any) => {
+                            console.log(data);
+                          },
+                          (error: any) => {
+                            console.log(error);
+                          }
+                          );
+                        this.langChanged = false;
+                      }
+
+                      this.repeatMEssage('SHOW', res.value);
+                    });
+                  }
+            },
+            (error: any) => {
+              console.log(error);
+        });
        },
        (error: any) => {
          console.log(error);

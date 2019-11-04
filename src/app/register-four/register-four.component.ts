@@ -27,6 +27,7 @@ import {
   MatDialog
 } from '@angular/material/';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -91,7 +92,7 @@ export class RegisterFourComponent implements OnInit {
   citis: Observable < string[] > ;
   OccupatiinOptions: Observable < string[] > ;
   constructor(public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router, private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService) {
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
     this.FamilyDetails = this._formBuilder.group({
       FamilyType: [''],
@@ -152,6 +153,7 @@ export class RegisterFourComponent implements OnInit {
   }
 
   fourthStep() {
+    this.spinner.show();
     const fourthstepdata = new FormData();
     fourthstepdata.append('identity_number', localStorage.getItem('identity_number'));
     fourthstepdata.append('family_type', this.FamilyDetails.value.FamilyType);
@@ -175,14 +177,15 @@ export class RegisterFourComponent implements OnInit {
       this.suc = suc;
       console.log(this.suc);
       if (this.suc.fourth_page_status === 'Y') {
-      this.router.navigate(['/register-five']);
+        this.spinner.hide();
+        this.ngxNotificationService.success('Family Details Submitted Succesfully!', 'success');
+        this.router.navigate(['/register-five']);
       } else {
-        alert('Something went wrong !!');
+        this.spinner.hide();
+        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       }
-      this.ngxNotificationService.success('Family Details Submitted Succesfully!', 'success');
-
     }, err => {
-      this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+      this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       // console.log(err);
       console.log(err);
     });

@@ -29,6 +29,7 @@ import {
 } from '@angular/material/';
 
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface StateGroup {
   letter: string;
@@ -104,7 +105,7 @@ export class RegisterThreeComponent implements OnInit {
   HigherEducationOptions: Observable < hd[] > ;
 
   constructor(public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router, private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService) {
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
     this.EducationDetails = this._formBuilder.group({
       HighestDegree: ['', Validators.compose([Validators.required])],
@@ -134,6 +135,7 @@ export class RegisterThreeComponent implements OnInit {
   }
 
   thirdStep() {
+    this.spinner.show();
     const thirdstepdata = new FormData();
     thirdstepdata.append('identity_number', localStorage.getItem('identity_number'));
     thirdstepdata.append('degree', this.EducationDetails.value.HighestDegree);
@@ -149,17 +151,17 @@ export class RegisterThreeComponent implements OnInit {
     return this.http.post('https://partner.hansmatrimony.com/api/' + 'createThirdPageProfilePWA', thirdstepdata).subscribe(suc => {
       this.suc = suc;
       if (this.suc.third_page_status === 'Y') {
-      this.router.navigate(['/register-four']);
+        this.spinner.hide();
+        this.ngxNotificationService.success('Education Details Submitted Succesfully!', 'success');
+        this.router.navigate(['/register-four']);
       } else {
-        alert('Something went wrong !!');
+        this.spinner.hide();
+        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       }
-
-      this.ngxNotificationService.success('Education Details Submitted Succesfully!', 'success');
     }, err => {
-      this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+      this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
     });
   }
-
 
   ngOnInit() {
     this.HigherEducationOptions = this.EducationDetails.get('HighestDegree').valueChanges

@@ -3,6 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SubscriptionserviceService } from '../subscriptionservice.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import {
+  NgxNotificationService
+} from 'ngx-kc-notification';
 
 @Component({
   selector: 'app-subscription',
@@ -22,7 +26,8 @@ export class SubscriptionComponent implements OnInit {
 
 
   // tslint:disable-next-line: max-line-length
-  constructor(private http: HttpClient, private subscriptionService: SubscriptionserviceService, private matDialog: MatDialog) { }
+  constructor(private http: HttpClient, private subscriptionService: SubscriptionserviceService, private matDialog: MatDialog,
+              private spinner: NgxSpinnerService, private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
@@ -31,7 +36,11 @@ export class SubscriptionComponent implements OnInit {
     });
     this.http.get('https://partner.hansmatrimony.com/api/subscription', {headers}).subscribe((res: any) => {
       this.plans = res;
+      this.spinner.hide();
       console.log(this.plans);
+    }, (err: any) => {
+      this.spinner.hide();
+      this.ngxNotificationService.error('Something went wrong', 'danger');
     });
 
     if (localStorage.getItem('id')) {

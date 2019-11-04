@@ -18,6 +18,7 @@ import {
 } from '@angular/forms';
 
 import {MatChipInputEvent} from '@angular/material/chips';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import {
   Observable, Subject, ReplaySubject
@@ -199,7 +200,7 @@ private _onDestroy = new Subject<void>();
 
   // tslint:disable-next-line: max-line-length
   constructor(public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router, private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService) {
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
     this.PreferencesDetails = this._formBuilder.group({
       description: [''],
@@ -266,6 +267,7 @@ private _onDestroy = new Subject<void>();
       this.manglikValue = 'No';
     }
     const sixthstepdata = new FormData();
+    this.spinner.show();
 
     // for (let items of this.PreferencesDetails.value.caste) {
     //   this.selectedItems1.push(items.itemName);
@@ -303,11 +305,13 @@ private _onDestroy = new Subject<void>();
         this.suc = suc;
         console.log(this.suc);
         if (this.suc.sixth_page_status === 'Y') {
-           this.router.navigate(['/chat']);
+          this.spinner.hide();
+          this.ngxNotificationService.success('Preferences Submitted Succesfully!', 'success');
+          this.router.navigate(['/chat']);
         } else {
-          alert('Something went wrong !!');
+          this.spinner.hide();
+          this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
         }
-        this.ngxNotificationService.success('Preferences Submitted Succesfully!', 'success');
         localStorage.setItem('loggedIn', 'true');
       }, err => {
         this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');

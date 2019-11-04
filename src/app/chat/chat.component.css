@@ -30,7 +30,7 @@
   .navbar a.active {
     color: white;
   }
-  .ht-full {
+  .ht-full {                                  
     padding-bottom: 50px;
     margin: 0px 30%;
     width: auto;

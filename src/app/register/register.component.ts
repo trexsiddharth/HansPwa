@@ -17,6 +17,7 @@ import {
 } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import {
   MatDialog,
@@ -69,24 +70,15 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
-              private ngxNotificationService: NgxNotificationService) {
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required])],
       fullname: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       create: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
-      phone: ['', Validators.compose([Validators.pattern('[0-9]*'),
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10)
-      ])],
-      whatsapp: ['', Validators.compose([Validators.pattern('[0-9]*'),
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10)
-      ])],
-
+      phone: ['', Validators.compose([Validators.required])],
+      whatsapp: ['', Validators.compose([Validators.required])],
     });
   }
 
@@ -102,7 +94,6 @@ export class RegisterComponent implements OnInit {
     } else {
       this.changeNumber = false;
     }
-
     console.log(this.changeNumber);
   }
   numberChange(event: any) {
@@ -134,15 +125,6 @@ export class RegisterComponent implements OnInit {
       element.focus();
     } // focus if not null
     console.log('cngd');
-  }
-
-  openPhotoDialog(dialog): void {
-    const dialogConfig = new MatDialogConfig();
-    this.dialog.open(dialog, {
-      height: '50%',
-      width: '37%'
-      // panelClass: 'custom-modalbox'
-    });
   }
 
   openDialog(dialog): void {
@@ -178,12 +160,14 @@ export class RegisterComponent implements OnInit {
   }
 
   resendOtp() {
+    this.spinner.show();
     const mobileNumber = {
       mobile: this.PageOne.value.phone
     };
     return this.http.post<{otp: any}>('https://partner.hansmatrimony.com/api/resendOTP', mobileNumber).subscribe(
       res => {
           console.log(res);
+          this.spinner.hide();
       }
     );
   }
@@ -206,7 +190,7 @@ export class RegisterComponent implements OnInit {
         if (this.otpVerified === true) {
           console.log('verified', this.otpVerified);
           this.ngxNotificationService.success('Account Details Submitted Succesfully!', 'success');
-
+          this.spinner.show();
           this.firstStep();
           this.otpVerified = false;
         }
@@ -215,21 +199,29 @@ export class RegisterComponent implements OnInit {
   }
 
   checkExist() {
-    const data = {
-      email: this.PageOne.value.email,
-      mobile: this.PageOne.value.phone
-    };
-    // tslint:disable-next-line: max-line-length
-    return this.http.post<{ error_message: string , isUnique: string  }>('https://partner.hansmatrimony.com/api/checkExist', data).subscribe(res => {
+    this.spinner.show();
+    console.log(this.PageOne.value.phone);
+    if (this.PageOne.valid) {
+      const data = {
+        email: this.PageOne.value.email,
+        mobile: this.PageOne.value.phone
+      };
+      // tslint:disable-next-line: max-line-length
+      return this.http.post<{ error_message: string , isUnique: string }>('https://partner.hansmatrimony.com/api/checkExist', data).subscribe(res => {
       console.log(res);
-      this.ngxNotificationService.success(res.error_message, 'success');
       if (res.isUnique !== 'N') {
+        this.spinner.hide();
         this.openDialog(this.otpModal);
         console.log('vrfied', this.otpVerified);
       } else {
-        alert('number already exists !!');
+        this.ngxNotificationService.success(res.error_message);
+        this.spinner.hide();
       }
     });
+    } else {
+      this.ngxNotificationService.error('Fill the form details');
+      this.spinner.hide();
+    }
   }
 
   firstStep() {
@@ -250,12 +242,15 @@ export class RegisterComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     return this.http.post('https://partner.hansmatrimony.com/api/' + 'createZeroPageProfilePWA?' + firststepdata , null).subscribe((res: any) => {
       console.log('first', res);
-      this.ngxNotificationService.success(res.error_message, 'success');
-      localStorage.setItem('identity_number', res.identity_number);
+
       if (res.zeroth_page_status === 'Y') {
-       this.router.navigate(['/register-one']);
+        this.spinner.hide();
+        localStorage.setItem('identity_number', res.identity_number);
+        this.router.navigate(['/register-one']);
+        this.ngxNotificationService.success(res.error_message, 'success');
       } else {
-       alert('Email already exists!!');
+        this.spinner.hide();
+        this.ngxNotificationService.error(res.error_message, 'danger');
       }
 
     }, err => {
@@ -266,8 +261,9 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
+    this.spinner.hide();
     localStorage.setItem('mobile_number', '') ;
-    localStorage.setItem('selectedCaste', "");
+    localStorage.setItem('selectedCaste', '');
   }
 }
 

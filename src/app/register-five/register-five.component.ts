@@ -20,6 +20,7 @@ import {
   MatDialog
 } from '@angular/material/';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface StateGroup {
   letter: string;
@@ -65,12 +66,9 @@ export class RegisterFiveComponent implements OnInit {
 
   FamilyOptions: Observable < string[] > ;
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService) {
+              private ngxNotificationService: NgxNotificationService,  private spinner: NgxSpinnerService) {
 
   }
-
-
-
 
   Cross_click() {
     this.dialog.closeAll();
@@ -85,7 +83,7 @@ export class RegisterFiveComponent implements OnInit {
         this.message = 'Only images are supported.';
         return;
       }
-
+      this.spinner.show();
       const reader = new FileReader();
       this.imagePath = files[0];
       reader.readAsDataURL(files[0]);
@@ -106,7 +104,7 @@ export class RegisterFiveComponent implements OnInit {
         this.message = 'Only images are supported.';
         return;
       }
-
+      this.spinner.show();
       const reader = new FileReader();
       this.fullimagePath = files[0];
       // console.log(this.fullimagePath)
@@ -129,7 +127,7 @@ export class RegisterFiveComponent implements OnInit {
         this.message = 'Only images are supported.';
         return;
       }
-
+      this.spinner.show();
       const reader = new FileReader();
       this.frontimagePath = files[0];
       // console.log(this.frontimagePath);
@@ -152,6 +150,7 @@ export class RegisterFiveComponent implements OnInit {
         this.message = 'Only images are supported.';
         return;
       }
+      this.spinner.show();
       const reader = new FileReader();
       this.backimagePath = files[0];
       reader.readAsDataURL(files[0]);
@@ -179,9 +178,11 @@ export class RegisterFiveComponent implements OnInit {
     return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFifthPageProfile', fifthstepdata).subscribe(suc => {
       this.suc = suc;
       console.log('photos', suc);
+      this.spinner.hide();
       this.ngxNotificationService.success('Photo Uploaded Succesfully!', 'success');
       photoBtn.disabled = false;
     }, err => {
+      this.spinner.hide();
       this.ngxNotificationService.error('Photo could not be Uploaded!', 'success');
       console.log(err);
     });

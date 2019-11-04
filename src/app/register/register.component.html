@@ -1,4 +1,4 @@
-<main class='pwaSize fixed t-0 b-0 bg-white w-full HC overflowY' style="height: 100%;">
+<main class='pwaSize fixed t-0 b-0 bg-white w-full HC overflowY' >
     <div class="container t-c">
         <div class="section">
             <div class="container" style="margin-left:auto;margin-right:auto; text-align: center;"> 
@@ -10,7 +10,7 @@
     <div><h4 class="textRegister">Register with us</h4></div>
     </div>
     
-    <div class="container" style="width:80%;background: #f5f5f5;border-radius: 20px;margin-top: 20px;">
+    <div class="container" style="width:80%;background: #f5f5f5;border-radius: 20px;margin-top: 20px; margin-bottom: 20px;">
         <div class="w-full" style="margin-left:auto;margin-right:auto">
             <form  [formGroup]="PageOne">
                 <div class="row">
@@ -47,15 +47,30 @@
                     </div>
                     <div class="col-md-12">
                         <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
-                            <mat-label style="color: black;">Phone number (+91)</mat-label>
-                            <input matInput formControlName="phone" type="text" required autocomplete="off">
-                        
+                            <mat-label style="color: black;">Phone number</mat-label>
+                            <!-- <input matInput formControlName="phone" type="text" required autocomplete="off"> -->
+
+                            <ngx-mat-intl-tel-input matInput
+                            [preferredCountries]="['in', 'us']"
+                            [enablePlaceholder]="true"
+                            [enableSearch]="true"
+                            name="phone"
+                            type="tel"
+                            formControlName="phone"></ngx-mat-intl-tel-input>
+
                         </mat-form-field>
                     </div>
                     <div class="col-md-12">
                         <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
-                            <mat-label style="color: black;">Whatsapp number (+91)</mat-label>
-                            <input matInput formControlName="whatsapp" type="text" required autocomplete="off">
+                            <mat-label style="color: black;">Whatsapp number</mat-label>
+                            <!-- <input matInput formControlName="whatsapp" type="text" required autocomplete="off"> -->
+                            <ngx-mat-intl-tel-input matInput
+                            [preferredCountries]="['in', 'us']"
+                            [enablePlaceholder]="true"
+                            [enableSearch]="true"
+                            name="whatsapp"
+                            type="tel"
+                            formControlName="whatsapp"></ngx-mat-intl-tel-input>
                         </mat-form-field>
                     </div>
 
@@ -77,6 +92,7 @@
                 </div>
            </form> 
         </div> 
+
         <ng-template #otpModal let-c="close" let-d="dismiss">
                 <div class="modal-header">
                   <p class="verifyHeader">Verify Mobile Number</p>
@@ -91,24 +107,18 @@
                     <p style="text-align: center;color:rgb(153, 114, 114);font-size:16px">We sent you a code via sms to your mobile number.</p>
                     <p style="text-align: center;color:rgb(153, 114, 114);font-size:16px">Please enter the code to verify</p>
 
-                   <div style="text-align:center;margin-left:auto;margin-right:auto">
-                    <input max=1 *ngFor="let i of [1,2,3,4]" class="enterOtp" (keyup)="changePlaces($event)" [id]="'enterOTP'+i">
+                   <div class="row" style="margin: 0px;">
+                    <input style="width: 20%;margin: 0px auto;" max=1 *ngFor="let i of [1,2,3,4]" class="enterOtp" (keyup)="changePlaces($event)" [id]="'enterOTP'+i">
                     <br><br>
                    </div>
-              
-                    <p (click)="makeItTrue()" class="changeNumber"><u>Change Number</u></p><br>
-                    <div class="box">
-                      <button mat-raised-button style="font-size: 20px;    position: relative;left: 23%;margin-top: 12px; margin-bottom: 14px;"  color="warn" (click)="verifyOtp()">Verify</button>
+                   <div style="margin: 10px 0px;">
+                    <a (click)="resendOtp()">Resend Otp</a><br>
+                   </div>
+                    <div style="text-align: center;">
+                      <button mat-raised-button class="btn btn-blue" style="font-size: 20px;  position: relative;margin-top: 12px; margin-bottom: 14px;" (click)="verifyOtp()">Verify</button>
                       <br>
-                      <p class="didntgetCode" style="color:black;font-size: 16px">Didn't get code?</p>&nbsp;&nbsp;
-                      <button mat-raised-button style="font-size: 20px;    position: relative;margin-top: 12px; margin-bottom: 14px;color:white;background-color: #007BFF" color="success" (click)="resendOtp()">Resend</button>
                   </div>
                 </div>
-                  <div *ngIf="changeNumber">
-                    
-                    <input id="changeContact" [value]="this.PageOne.value.phone" (keyup)="numberChange($event)">
-                    <button class="resendOtp"  (click)="sendOtp()" style="margin-top:20px;text-align:center">Submit</button>
-                    </div>
                 </div>
               
               </ng-template>   

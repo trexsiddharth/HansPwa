@@ -29,6 +29,7 @@ import {
   MatDialog
 } from '@angular/material/';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -97,7 +98,7 @@ export class RegisterOneComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router, private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService) {
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageTwo = this._formBuilder.group({
       Religion: ['', Validators.compose([Validators.required])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
@@ -505,6 +506,7 @@ export class RegisterOneComponent implements OnInit {
 
 
   secondStep() {
+    this.spinner.show();
     const firststepdata = new FormData();
     firststepdata.append('identity_number', localStorage.getItem('identity_number'));
     firststepdata.append('religion', this.PageTwo.value.Religion);
@@ -538,14 +540,16 @@ export class RegisterOneComponent implements OnInit {
       res => {
         this.suc = res;
         console.log('suc', res);
-        this.ngxNotificationService.success('Profile Details Submitted Succesfully!', 'success');
         if (this.suc.first_page_status === 'Y') {
+          this.spinner.hide();
+          this.ngxNotificationService.success('Profile Details Submitted Succesfully!', 'success');
           this.router.navigate(['/register-two']);
         } else {
+          this.spinner.hide();
           alert('Something went wrong !!');
           }
       }, err => {
-        this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       });
   }
 

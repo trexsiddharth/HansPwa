@@ -32,9 +32,6 @@ body {
   .t-0 {
     top: 0;
   }
-  .fixed {
-    position: fixed;
-  }
   .p-0-5 {
     padding: 0 5px;
   }
@@ -51,7 +48,7 @@ body {
     position: fixed;
     overflow: auto;
     height: calc(100% - 100px);
-    top: 50px;
+    top: 60px;
     bottom: 50px;
   }
   .bg-white {

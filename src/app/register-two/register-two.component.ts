@@ -26,6 +26,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   MatDialog
 } from '@angular/material/';
+import { NgxSpinnerService } from 'ngx-spinner';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -138,7 +139,7 @@ export class RegisterTwoComponent implements OnInit {
   Pageextra: FormGroup;
 
   constructor(public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router, private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService) {
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
     this.Pageextra = this._formBuilder.group({
 
@@ -173,7 +174,7 @@ export class RegisterTwoComponent implements OnInit {
     localStorage.setItem('currentAge', this.currentAge.toString());
 
     function convert(str) {
-      let date = new Date(str),
+      const date = new Date(str),
         mnth = ('0' + (date.getMonth() + 1)).slice(-2),
         day = ('0' + date.getDate()).slice(-2);
       return [date.getFullYear(), mnth, day].join('/');
@@ -204,7 +205,7 @@ export class RegisterTwoComponent implements OnInit {
       localStorage.setItem('currentAge1', (Math.floor((timediffernce / (1000 * 3600 * 24)) / 365)).toString());
 
       function convert(str) {
-        let date = new Date(str),
+        const date = new Date(str),
             mnth = ('0' + (date.getMonth() + 1)).slice(-2),
             day  = ('0' + date.getDate()).slice(-2);
         return [ day, mnth, date.getFullYear()  ].join('/');
@@ -217,10 +218,10 @@ export class RegisterTwoComponent implements OnInit {
 
   addSlashes() {
     console.log('sv');
-    let newInput = document.getElementById('birthDate');
+    const newInput = document.getElementById('birthDate');
     newInput.addEventListener('keydown', function(e) {
       if (e.which !== 8) {
-        let numChars = ( e.target as HTMLInputElement).value.length;
+        const numChars = ( e.target as HTMLInputElement).value.length;
         if (numChars === 2 || numChars === 5) {
           let thisVal = ( e.target as HTMLInputElement).value;
           thisVal += '-';
@@ -231,6 +232,7 @@ export class RegisterTwoComponent implements OnInit {
   }
 
   extrastep() {
+    this.spinner.show();
     if (this.Pageextra.value.Mangalik === 'Non Manglik') {
       this.Pageextra.value.Mangalik = 'No';
     }
@@ -265,20 +267,22 @@ export class RegisterTwoComponent implements OnInit {
         this.suc = suc;
         console.log('suc', suc);
         if (this.suc.second_page_status === 'Y') {
+          this.spinner.hide();
+          this.ngxNotificationService.success('Profile Details Submitted Succesfully!', 'success');
           this.router.navigate(['/register-three']);
         } else {
-         alert('something went wrong !!!');
+          this.spinner.hide();
+          this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
         }
-        this.ngxNotificationService.success('Profile Details Submitted Succesfully!', 'success');
       }, err => {
-        this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       });
   }
 
 
   ngOnInit() {
     localStorage.setItem('motherTongue', '');
-  
+
 
     // tslint:disable-next-line:no-non-null-assertion
     this.stateGroupOptions = this.Pageextra.get('stateGroup').valueChanges
