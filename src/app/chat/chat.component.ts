@@ -34,6 +34,7 @@ export class ChatComponent implements OnInit {
   type_arr: any = [];
   previous_chats: any;
   user: any;
+  innerWidth: any;
   DoNotshowfull: boolean ;
   number: String;
   text: String;
@@ -67,6 +68,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.innerWidth = 100 % - 200 + 'px';
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
     localStorage.setItem('id', '');
@@ -188,7 +190,7 @@ export class ChatComponent implements OnInit {
                   loading: true,
                     delay: 1000,
                    type: 'html',
-                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' width="300" >'
+                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' width=this.innerWidth >'
                  }).then(() => {
                    if (values.language === 'English') {
                      this.botui.message.add({
@@ -832,7 +834,7 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img src=' + this.getProfilePhotoHistory('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + personal.photo, personal.carousel, personal.gender) + ' width="300" >'
+      content: '<img src=' + this.getProfilePhotoHistory('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + personal.photo, personal.carousel, personal.gender) + ' width=this.innerWidth >'
     });
      if (localStorage.getItem('language') === 'English') {
       this.botui.message.add({
@@ -1001,7 +1003,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' width="200" ><br>' +
+                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' width=this.innerWidth ><br>' +
                     '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
                     'नाम: ' + valueInMessage.name + '<br>' +
                     // tslint:disable-next-line: max-line-length

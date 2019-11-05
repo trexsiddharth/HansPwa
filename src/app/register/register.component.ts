@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
   otp2: any;
   otp3: any;
   otp4: any;
+  numberCheck: string;
   changeNumber = false;
   isCompleted1 = false;
   createProfile: string[] = ['Self', 'Son', 'Daughter', 'Brother', 'Sister', 'Other'];
@@ -225,6 +226,7 @@ export class RegisterComponent implements OnInit {
   }
 
   firstStep() {
+
     const firststepdata = new URLSearchParams();
     firststepdata.set('email', this.PageOne.value.email);
     firststepdata.set('password', this.PageOne.value.password);
@@ -254,6 +256,7 @@ export class RegisterComponent implements OnInit {
       }
 
     }, err => {
+      this.spinner.hide();
       this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       console.log(err);
     });

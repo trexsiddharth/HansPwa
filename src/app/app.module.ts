@@ -11,6 +11,7 @@ import {
 import { MatNativeDateModule } from '@angular/material';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { AppRoutingModule } from './app-routing.module';
@@ -73,7 +74,8 @@ import { ViewCentresComponent } from './view-centres/view-centres.component';
     MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule,
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
-    NgxMatIntlTelInputModule
+    NgxMatIntlTelInputModule,
+    NgbModule
   ],
   providers: [SubscriptionserviceService],
   bootstrap: [AppComponent],

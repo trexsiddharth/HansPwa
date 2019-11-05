@@ -114,3 +114,6 @@ body {
   font-family: semplicita;
   src: url("./assets/fonts/SemplicitaPro.otf") format("truetype")
 }
+* {
+  font-family:'semplicita';
+}

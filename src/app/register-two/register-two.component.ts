@@ -143,7 +143,6 @@ export class RegisterTwoComponent implements OnInit {
 
     this.Pageextra = this._formBuilder.group({
 
-      birth_date: ['', Validators.compose([Validators.required])],
       birth_time: ['', Validators.compose([Validators.required])],
       Mangalik: ['', Validators.compose([Validators.required])],
       stateGroup: ['', Validators.compose([Validators.required])],
@@ -164,9 +163,12 @@ export class RegisterTwoComponent implements OnInit {
     return this.stateGroups;
   }
 
+  onDate(event): void {
+    console.log(event);
+  }
 
-  // Calucalting age
-  calculateAge(event: any) {
+   // Calucalting age
+   calculateAge(event: any) {
     this.birthDate = convert(event);
     const timediffernce = Math.abs(Date.now() - event);
     this.currentAge = Math.floor((timediffernce / (1000 * 3600 * 24)) / 365);
@@ -174,10 +176,10 @@ export class RegisterTwoComponent implements OnInit {
     localStorage.setItem('currentAge', this.currentAge.toString());
 
     function convert(str) {
-      const date = new Date(str),
-        mnth = ('0' + (date.getMonth() + 1)).slice(-2),
-        day = ('0' + date.getDate()).slice(-2);
-      return [date.getFullYear(), mnth, day].join('/');
+      var date = new Date(str),
+        mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+        day = ("0" + date.getDate()).slice(-2);
+      return [date.getFullYear(), mnth, day].join("/");
 
     }
     this.addSlashes();
@@ -192,10 +194,6 @@ export class RegisterTwoComponent implements OnInit {
     console.log('event data', event);
     console.log(typeof event);
 
-  }
-
-  onDate(event): void {
-    console.log(event);
   }
 
   // Calucalting age
@@ -232,37 +230,37 @@ export class RegisterTwoComponent implements OnInit {
   }
 
   extrastep() {
-    this.spinner.show();
-    if (this.Pageextra.value.Mangalik === 'Non Manglik') {
+    if (this.Pageextra.valid) {
+      this.spinner.show();
+      if (this.Pageextra.value.Mangalik === 'Non Manglik') {
       this.Pageextra.value.Mangalik = 'No';
     }
-    const secondstepdata = new FormData();
-    secondstepdata.append('identity_number', localStorage.getItem('identity_number'));
-    secondstepdata.append('manglik', this.Pageextra.value.Mangalik);
-    secondstepdata.append('birth_time',  this.Pageextra.value.birth_time);
-    secondstepdata.append('birth_date', this.birthDate);
-    secondstepdata.append('mother_tongue', this.Pageextra.value.stateGroup);
-    secondstepdata.append('food_choice', this.Pageextra.value.food_choice);
-    this.calculateAge(this.Pageextra.value.birth_date);
+      const secondstepdata = new FormData();
+      secondstepdata.append('identity_number', localStorage.getItem('identity_number'));
+      secondstepdata.append('manglik', this.Pageextra.value.Mangalik);
+      secondstepdata.append('birth_time',  this.Pageextra.value.birth_time);
+      secondstepdata.append('birth_date', this.birthDate);
+      secondstepdata.append('mother_tongue', this.Pageextra.value.stateGroup);
+      secondstepdata.append('food_choice', this.Pageextra.value.food_choice);
 
-    if (localStorage.getItem('gender') === 'Male') {
+      if (localStorage.getItem('gender') === 'Male') {
       localStorage.setItem('minAge', (this.currentAge - 5).toString());
       localStorage.setItem('maxAge', (this.currentAge - 1).toString());
     } else {
       localStorage.setItem('minAge', (this.currentAge + 1).toString());
       localStorage.setItem('maxAge', (this.currentAge + 5).toString());
     }
-    console.log(secondstepdata);
-    console.log(this.Pageextra.value.Mangalik);
-    console.log(this.Pageextra.value.birth_time);
-    console.log(this.Pageextra.value.birth_date);
-    console.log(this.Pageextra.value.stateGroup);
-    console.log(this.Pageextra.value.food_choice);
-    console.log(this.Pageextra.value.birth_date);
-    console.log(this.Pageextra.value.stateGroup);
-    localStorage.setItem('motherTongue', this.Pageextra.value.stateGroup);
+      console.log(secondstepdata);
+      console.log(this.Pageextra.value.Mangalik);
+      console.log(this.Pageextra.value.birth_time);
+      console.log(this.Pageextra.value.birth_date);
+      console.log(this.Pageextra.value.stateGroup);
+      console.log(this.Pageextra.value.food_choice);
+      console.log(this.Pageextra.value.birth_date);
+      console.log(this.Pageextra.value.stateGroup);
+      localStorage.setItem('motherTongue', this.Pageextra.value.stateGroup);
 
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'createSecondPageProfilePWA', secondstepdata).subscribe(
+      return this.http.post('https://partner.hansmatrimony.com/api/' + 'createSecondPageProfilePWA', secondstepdata).subscribe(
       suc => {
         this.suc = suc;
         console.log('suc', suc);
@@ -272,11 +270,15 @@ export class RegisterTwoComponent implements OnInit {
           this.router.navigate(['/register-three']);
         } else {
           this.spinner.hide();
-          this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+          this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
         }
       }, err => {
-        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+        this.spinner.hide();
+        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
       });
+    } else {
+      this.ngxNotificationService.error('Please Fill all the details');
+    }
   }
 
 

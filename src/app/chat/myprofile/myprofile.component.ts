@@ -39,7 +39,6 @@ export class MyprofileComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
 onResize(event) {
   this.innerWidth = window.innerWidth;
-  console.log(this.innerWidth);
 }
   getHeight(num: string) {
 
@@ -91,12 +90,12 @@ onResize(event) {
       return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['3'];
     }
     }
-    getProfilesPhoto(num: string, num2: string , gen: string): String {
-      if (num != null && num !== '') {
-        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
-      } else if (num2 != null && num2 !== '') {
+    getProfilesPhoto(num: string, num2: string , gen: string, index: string): String {
+      if (num2 != null && num2 !== '') {
         const carousel: any = JSON.parse(num2);
-        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['3'];
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[index];
+      } else if (num != null && num !== '') {
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
       } else {
         if (gen === 'Male') {
           return '../../assets/male_pic.png';
@@ -170,14 +169,13 @@ onResize(event) {
         reader.onload = (_event) => {
           this.BackimgURL = reader.result;
           this.uploadPhoto(this.backimagePath, index);
-
         };
       }
     }
 
     uploadPhoto(data, index) {
       const fifthstepdata = new FormData();
-      fifthstepdata.append('identity_number', localStorage.getItem('identity_number'));
+      fifthstepdata.append('identity_number', localStorage.getItem('id'));
       fifthstepdata.append('url', data);
       fifthstepdata.append('index', index);
 

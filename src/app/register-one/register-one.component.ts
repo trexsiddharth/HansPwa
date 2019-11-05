@@ -506,37 +506,42 @@ export class RegisterOneComponent implements OnInit {
 
 
   secondStep() {
-    this.spinner.show();
-    const firststepdata = new FormData();
-    firststepdata.append('identity_number', localStorage.getItem('identity_number'));
-    firststepdata.append('religion', this.PageTwo.value.Religion);
-    firststepdata.append('caste', this.PageTwo.value.Castes);
-    firststepdata.append('marital_status', this.PageTwo.value.MaritalStatus);
-    firststepdata.append('height', this.Heights1[this.PageTwo.value.Height]);
-    firststepdata.append('weight', this.PageTwo.value.Weight);
-    firststepdata.append('gotra', this.PageTwo.value.gotra);
-    firststepdata.append('annual_income', this.PageTwo.value.AnnualIncome);
-    firststepdata.append('city', this.PageTwo.value.Currentcity);
+    if (this.PageTwo.valid) {
+      this.spinner.show();
+      const firststepdata = new FormData();
+      firststepdata.append('identity_number', localStorage.getItem('identity_number'));
+      firststepdata.append('religion', this.PageTwo.value.Religion);
+      firststepdata.append('caste', this.PageTwo.value.Castes);
+      firststepdata.append('marital_status', this.PageTwo.value.MaritalStatus);
+      firststepdata.append('height', this.Heights1[this.PageTwo.value.Height]);
+      firststepdata.append('weight', this.PageTwo.value.Weight);
+      firststepdata.append('gotra', this.PageTwo.value.gotra);
+      firststepdata.append('annual_income', this.PageTwo.value.AnnualIncome);
+      firststepdata.append('city', this.PageTwo.value.Currentcity);
 
 
-    console.log(this.PageTwo.value.Castes);
-    localStorage.setItem('selectedCaste', this.PageTwo.value.Castes);
+      console.log(this.PageTwo.value.Castes);
+      localStorage.setItem('selectedCaste', this.PageTwo.value.Castes);
 
-    if (localStorage.getItem('gender') === 'Male') {
-      localStorage.setItem('minHeight', '48');
-      localStorage.setItem('maxHeight', this.Heights1[this.PageTwo.value.Height - 1]);
-      console.log(this.Heights1[this.PageTwo.value.Height]);
+      if (localStorage.getItem('gender') === 'Male') {
+        if (Number(this.Heights1[this.PageTwo.value.Height]) > 51 ) {
+          localStorage.setItem('minHeight', this.Heights1[this.PageTwo.value.Height - 3] );
+        } else {
+          localStorage.setItem('minHeight', '48');
+        }
+        localStorage.setItem('maxHeight', this.Heights1[this.PageTwo.value.Height - 1]);
+        console.log(this.Heights1[this.PageTwo.value.Height]);
     } else {
       localStorage.setItem('minHeight', this.Heights1[this.PageTwo.value.Height]);
-      localStorage.setItem('maxHeight', '84');
+      localStorage.setItem('maxHeight', this.Heights1[this.PageTwo.value.Height + 5]);
       console.log(this.PageTwo.value.Height);
     }
 
-    localStorage.setItem('maritalStatus', this.PageTwo.value.MaritalStatus);
+      localStorage.setItem('maritalStatus', this.PageTwo.value.MaritalStatus);
 
-    console.log(firststepdata);
+      console.log(firststepdata);
 
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFirstPageProfilePWA', firststepdata).subscribe(
+      return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFirstPageProfilePWA', firststepdata).subscribe(
       res => {
         this.suc = res;
         console.log('suc', res);
@@ -546,11 +551,15 @@ export class RegisterOneComponent implements OnInit {
           this.router.navigate(['/register-two']);
         } else {
           this.spinner.hide();
-          alert('Something went wrong !!');
+          this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
           }
       }, err => {
+        this.spinner.hide();
         this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       });
+    } else {
+      this.ngxNotificationService.error('Please fill all the details');
+    }
   }
 
   onAutocompleteSelected(event) {

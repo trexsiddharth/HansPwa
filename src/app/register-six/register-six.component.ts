@@ -314,6 +314,7 @@ private _onDestroy = new Subject<void>();
         }
         localStorage.setItem('loggedIn', 'true');
       }, err => {
+        this.spinner.hide();
         this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
         console.log(err);
       });
@@ -375,8 +376,8 @@ private _onDestroy = new Subject<void>();
       age_max : [parseInt(localStorage.getItem('maxAge'), 10)],
       stateGroup : this.motherTongue,
       marital_status : this.maritalStatus,
-      working : 'Working',
-      food_choice : 'Vegetarian',
+      working : 'Doesn\'t matter',
+      food_choice : 'Doesn\'t matter',
       description : ''
 
     });

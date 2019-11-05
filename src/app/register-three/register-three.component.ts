@@ -135,20 +135,20 @@ export class RegisterThreeComponent implements OnInit {
   }
 
   thirdStep() {
-    this.spinner.show();
-    const thirdstepdata = new FormData();
-    thirdstepdata.append('identity_number', localStorage.getItem('identity_number'));
-    thirdstepdata.append('degree', this.EducationDetails.value.HighestDegree);
-    thirdstepdata.append('college', this.EducationDetails.value.UgCollege);
-    thirdstepdata.append('additional_qualification', this.EducationDetails.value.additional_qualification);
-    thirdstepdata.append('occupation', this.EducationDetails.value.Occupation);
-    thirdstepdata.append('profession', this.EducationDetails.value.profession);
-    thirdstepdata.append('company', this.EducationDetails.value.Company);
-    // thirdstepdata.append('annual_income', this.EducationDetails.value.AnnualIncome);
-    thirdstepdata.append('about', this.EducationDetails.value.Yourself);
-    this.isCompleted3 = true;
+    if (this.EducationDetails.valid) {
+      this.spinner.show();
+      const thirdstepdata = new FormData();
+      thirdstepdata.append('identity_number', localStorage.getItem('identity_number'));
+      thirdstepdata.append('degree', this.EducationDetails.value.HighestDegree);
+      thirdstepdata.append('college', this.EducationDetails.value.UgCollege);
+      thirdstepdata.append('additional_qualification', this.EducationDetails.value.additional_qualification);
+      thirdstepdata.append('occupation', this.EducationDetails.value.Occupation);
+      thirdstepdata.append('profession', this.EducationDetails.value.profession);
+      thirdstepdata.append('company', this.EducationDetails.value.Company);
+      thirdstepdata.append('about', this.EducationDetails.value.Yourself);
+      this.isCompleted3 = true;
 
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'createThirdPageProfilePWA', thirdstepdata).subscribe(suc => {
+      return this.http.post('https://partner.hansmatrimony.com/api/' + 'createThirdPageProfilePWA', thirdstepdata).subscribe(suc => {
       this.suc = suc;
       if (this.suc.third_page_status === 'Y') {
         this.spinner.hide();
@@ -156,11 +156,16 @@ export class RegisterThreeComponent implements OnInit {
         this.router.navigate(['/register-four']);
       } else {
         this.spinner.hide();
-        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
       }
     }, err => {
-      this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+      this.spinner.hide();
+      this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
     });
+    } else {
+      this.ngxNotificationService.error('Please fill all the details');
+    }
+
   }
 
   ngOnInit() {

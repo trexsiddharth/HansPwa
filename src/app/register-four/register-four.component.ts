@@ -153,27 +153,28 @@ export class RegisterFourComponent implements OnInit {
   }
 
   fourthStep() {
-    this.spinner.show();
-    const fourthstepdata = new FormData();
-    fourthstepdata.append('identity_number', localStorage.getItem('identity_number'));
-    fourthstepdata.append('family_type', this.FamilyDetails.value.FamilyType);
-    fourthstepdata.append('father_status', this.FamilyDetails.value.father_status);
-    fourthstepdata.append('mother_status', this.FamilyDetails.value.mother_status);
-    fourthstepdata.append('occupation_father', this.FamilyDetails.value.FatherOccupation);
-    fourthstepdata.append('occupation_mother', this.FamilyDetails.value.MotherOccupation);
-    fourthstepdata.append('family_income', this.FamilyDetails.value.family_income);
-    fourthstepdata.append('house_type', this.FamilyDetails.value.house_type);
-    fourthstepdata.append('married_sons', this.FamilyDetails.value.brother);
-    fourthstepdata.append('unmarried_sons', this.FamilyDetails.value.umbrother);
-    fourthstepdata.append('married_daughters', this.FamilyDetails.value.sister);
-    fourthstepdata.append('unmarried_daughters', this.FamilyDetails.value.umsister);
-    fourthstepdata.append('locality', this.FamilyDetails.value.state);
-    fourthstepdata.append('city', this.FamilyDetails.value.city);
-    fourthstepdata.append('address', this.FamilyDetails.value.address);
-    fourthstepdata.append('about', this.FamilyDetails.value.about);
+    if (this.FamilyDetails.valid) {
+      this.spinner.show();
+      const fourthstepdata = new FormData();
+      fourthstepdata.append('identity_number', localStorage.getItem('identity_number'));
+      fourthstepdata.append('family_type', this.FamilyDetails.value.FamilyType);
+      fourthstepdata.append('father_status', this.FamilyDetails.value.father_status);
+      fourthstepdata.append('mother_status', this.FamilyDetails.value.mother_status);
+      fourthstepdata.append('occupation_father', this.FamilyDetails.value.FatherOccupation);
+      fourthstepdata.append('occupation_mother', this.FamilyDetails.value.MotherOccupation);
+      fourthstepdata.append('family_income', this.FamilyDetails.value.family_income);
+      fourthstepdata.append('house_type', this.FamilyDetails.value.house_type);
+      fourthstepdata.append('married_sons', this.FamilyDetails.value.brother);
+      fourthstepdata.append('unmarried_sons', this.FamilyDetails.value.umbrother);
+      fourthstepdata.append('married_daughters', this.FamilyDetails.value.sister);
+      fourthstepdata.append('unmarried_daughters', this.FamilyDetails.value.umsister);
+      fourthstepdata.append('locality', this.FamilyDetails.value.state);
+      fourthstepdata.append('city', this.FamilyDetails.value.city);
+      fourthstepdata.append('address', this.FamilyDetails.value.address);
+      fourthstepdata.append('about', this.FamilyDetails.value.about);
     // this.isCompleted4 = true;
 
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFourthPageProfile', fourthstepdata).subscribe(suc => {
+      return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFourthPageProfile', fourthstepdata).subscribe(suc => {
       this.suc = suc;
       console.log(this.suc);
       if (this.suc.fourth_page_status === 'Y') {
@@ -182,13 +183,18 @@ export class RegisterFourComponent implements OnInit {
         this.router.navigate(['/register-five']);
       } else {
         this.spinner.hide();
-        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+        this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
       }
     }, err => {
-      this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+      this.spinner.hide();
+      this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
       // console.log(err);
       console.log(err);
     });
+    } else {
+      this.ngxNotificationService.error('Please fill all the details');
+    }
+
   }
 
 

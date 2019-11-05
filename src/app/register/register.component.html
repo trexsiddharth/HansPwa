@@ -42,19 +42,19 @@
                         <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
                             <mat-label style="color: black;">Name</mat-label>
                             <input matInput formControlName="fullname" type="text" required autocomplete="off">
-                        
+                    
                         </mat-form-field>
                     </div>
                     <div class="col-md-12">
                         <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
                             <mat-label style="color: black;">Phone number</mat-label>
-                            <!-- <input matInput formControlName="phone" type="text" required autocomplete="off"> -->
 
                             <ngx-mat-intl-tel-input matInput
                             [preferredCountries]="['in', 'us']"
                             [enablePlaceholder]="true"
                             [enableSearch]="true"
                             name="phone"
+                            [(ngModel)]="numberCheck"
                             type="tel"
                             formControlName="phone"></ngx-mat-intl-tel-input>
 
@@ -63,13 +63,12 @@
                     <div class="col-md-12">
                         <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
                             <mat-label style="color: black;">Whatsapp number</mat-label>
-                            <!-- <input matInput formControlName="whatsapp" type="text" required autocomplete="off"> -->
                             <ngx-mat-intl-tel-input matInput
-                            [preferredCountries]="['in', 'us']"
                             [enablePlaceholder]="true"
                             [enableSearch]="true"
                             name="whatsapp"
-                            type="tel"
+                            type="number"
+                            [ngModel]="numberCheck"
                             formControlName="whatsapp"></ngx-mat-intl-tel-input>
                         </mat-form-field>
                     </div>
@@ -108,7 +107,7 @@
                     <p style="text-align: center;color:rgb(153, 114, 114);font-size:16px">Please enter the code to verify</p>
 
                    <div class="row" style="margin: 0px;">
-                    <input style="width: 20%;margin: 0px auto;" max=1 *ngFor="let i of [1,2,3,4]" class="enterOtp" (keyup)="changePlaces($event)" [id]="'enterOTP'+i">
+                    <input type="tel" style="width: 20%;margin: 0px auto;" max=1 *ngFor="let i of [1,2,3,4]" class="enterOtp" (keyup)="changePlaces($event)" [id]="'enterOTP'+i">
                     <br><br>
                    </div>
                    <div style="margin: 10px 0px;">

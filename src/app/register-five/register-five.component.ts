@@ -88,7 +88,6 @@ export class RegisterFiveComponent implements OnInit {
       this.imagePath = files[0];
       reader.readAsDataURL(files[0]);
       reader.onload = (_event) => {
-        this.imgURL = reader.result;
         this.uploadPhoto(this.imagePath, index);
 
       };
@@ -133,7 +132,6 @@ export class RegisterFiveComponent implements OnInit {
       // console.log(this.frontimagePath);
       reader.readAsDataURL(files[0]);
       reader.onload = (_event) => {
-        this.frontfile = reader.result;
         this.uploadPhoto(this.frontimagePath, index);
 
       };
@@ -155,9 +153,8 @@ export class RegisterFiveComponent implements OnInit {
       this.backimagePath = files[0];
       reader.readAsDataURL(files[0]);
       reader.onload = (_event) => {
-        this.BackimgURL = reader.result;
         this.uploadPhoto(this.backimagePath, index);
-
+        
       };
     }
   }
@@ -181,6 +178,13 @@ export class RegisterFiveComponent implements OnInit {
       this.spinner.hide();
       this.ngxNotificationService.success('Photo Uploaded Succesfully!', 'success');
       photoBtn.disabled = false;
+      if (index === 0) {
+        this.imgURL = this.suc.url;
+      } else if (index === 1) {
+        this.frontfile = this.suc.url;
+      } else {
+        this.BackimgURL = this.suc.url;
+      }
     }, err => {
       this.spinner.hide();
       this.ngxNotificationService.error('Photo could not be Uploaded!', 'success');

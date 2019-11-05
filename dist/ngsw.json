@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1572865770875,
+  "timestamp": 1572955395773,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -10,14 +10,14 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-es2015.44f291f63b4870db7cf8.js",
-        "/main-es5.5f683dfe68840d4afecd.js",
+        "/main-es2015.2a3a2d3d0f282271e1b4.js",
+        "/main-es5.ec5f68b1f495249caa6a.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.00d63f1353d1c363651c.js",
         "/polyfills-es5.cecc31fb46099274e7eb.js",
         "/runtime-es2015.aa36e2789a7b6e5e7675.js",
         "/runtime-es5.d3647fbfa3de00cd0bdf.js",
-        "/styles.63f21eaf144422ec15c2.css"
+        "/styles.eb0e3de2ce57fba867e2.css"
       ],
       "patterns": []
     },
@@ -121,6 +121,7 @@
         "/assets/icons/whatsapp.webp",
         "/assets/images/bgicon.png",
         "/assets/images/logo.png",
+        "/assets/languagechange.png",
         "/assets/likethumb.svg",
         "/assets/locations.svg",
         "/assets/logo1.ico",
@@ -269,6 +270,7 @@
     "/assets/icons/whatsapp.webp": "70926cf951609aa63bb9d379b6541657e223a36f",
     "/assets/images/bgicon.png": "0ca8aa153feb31362f3ea5ca8f32cb3f4300485b",
     "/assets/images/logo.png": "a5f622d768f5498296f0b13b8ffa5244902d01b9",
+    "/assets/languagechange.png": "053ebc704f5ec2391cc1eb5d0b051129e0375c56",
     "/assets/likethumb.svg": "ddd4d3d02227d2d6fde1f64ff3c927545fa08fd9",
     "/assets/locations.svg": "65e1f5656c7539e67e94b6e33d2fcc83c57e03e5",
     "/assets/logo1.ico": "2e77870cf3e066e1061fd04d9ff3289857ed9577",
@@ -315,16 +317,16 @@
     "/assets/whatsbg.webp": "a0f05bc1171a03e6e2f17bb2f84f80dc6723db5d",
     "/bgicon.dedf2620d82776ed85a1.png": "0ca8aa153feb31362f3ea5ca8f32cb3f4300485b",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "732cbe14181046a0056c3de3bfcbbaf21dafb921",
-    "/main-es2015.44f291f63b4870db7cf8.js": "5498d694be299a326541aae286bf79c978095fa5",
-    "/main-es5.5f683dfe68840d4afecd.js": "1475cae2cf5f30ef554e04e8db6c05ca436cdd59",
+    "/index.html": "c2802e0973e9d48bbc3a045d6a86692abadba7a1",
+    "/main-es2015.2a3a2d3d0f282271e1b4.js": "c34a2c8fb84ec985a8fddc8e469f43633c10f994",
+    "/main-es5.ec5f68b1f495249caa6a.js": "38ab80b802987f66007fc22045e579dbbeb79346",
     "/manifest.webmanifest": "b8d914ddc48da357052299e347a6ce36501f5e67",
     "/polyfills-es2015.00d63f1353d1c363651c.js": "08c97940ba93ccc4121b85df6911d86011ef3fb8",
     "/polyfills-es5.cecc31fb46099274e7eb.js": "9d9b583788005b7e2dc51d2b965f7c09b9180c60",
     "/redback.093eeb320fb87fb9d11c.jpg": "f5d5e7f9827faa68365a9cb4ce9601ef1b6007d0",
     "/runtime-es2015.aa36e2789a7b6e5e7675.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/runtime-es5.d3647fbfa3de00cd0bdf.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "/styles.63f21eaf144422ec15c2.css": "9606ece9b33b97073803d33f5839c0b68b916970",
+    "/styles.eb0e3de2ce57fba867e2.css": "6b179c1fb6238c0687c4227406e09edd7912f2c5",
     "/whatsbg.f779980799b39548bb90.webp": "a0f05bc1171a03e6e2f17bb2f84f80dc6723db5d"
   },
   "navigationUrls": [

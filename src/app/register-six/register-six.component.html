@@ -69,15 +69,16 @@
                     <mat-form-field  class="full-width fieldFit" appearance="standard"  style="height:60px;">
                         <mat-label style="color: black;">Caste</mat-label>
                         <mat-chip-list #chipList>
-                          <mat-chip style="font-size: 12px" *ngFor="let caste of castess"
+                          <mat-chip style="font-size: 12px;" *ngFor="let caste of castess"
                           [selectable]="selectable"
                             [removable]="removable"
                             (removed)="remove(caste)">
                             {{caste}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                           </mat-chip>
-                        <input  matInput
+                        <input matInput
                                 placeholder="Caste *"
+                                id="casteBox"
                                 #casteInput
                                 [formControl]="casteCtrl"
                                 [matAutocomplete]="autoCaste"
