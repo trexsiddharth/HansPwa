@@ -9,6 +9,7 @@ export class InstallPromptService {
 savePrompt() {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
+    this.event = e;
   });
 }
 getPrompt() {

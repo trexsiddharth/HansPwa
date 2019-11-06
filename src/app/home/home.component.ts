@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
       }
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    this.eventA2HS = this.promptService.savePrompt();
+    this.promptService.savePrompt();
   }
 
   openPromptDialog() {
