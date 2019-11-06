@@ -14,11 +14,11 @@ import { ViewCentresComponent } from './view-centres/view-centres.component';
 
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', component: HomeComponent },
+  { path: 'home', redirectTo: '' },
   { path: 'register', component: RegisterComponent },
   { path: 'register-one', component: RegisterOneComponent},
   { path: 'register-two', component: RegisterTwoComponent},
-  { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'home', redirectTo: '' },
   { path: 'subscription', component: SubscriptionComponent },
   { path: 'register-three', component: RegisterThreeComponent},
   { path: 'register-four', component: RegisterFourComponent},
@@ -31,7 +31,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled'
+    scrollPositionRestoration: 'enabled', useHash: true
   })],
   exports: [RouterModule]
 })
