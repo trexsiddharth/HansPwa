@@ -4,7 +4,6 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { A2HSDialogComponent } from './a2-hsdialog/a2-hsdialog.component';
 import { InstallPromptService } from '../install-prompt.service';
 
 
@@ -47,23 +46,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.innerWidth = window.innerWidth;
     this.promptService.savePrompt();
-  }
-
-  openPromptDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.hasBackdrop = true;
-    if (this.innerWidth < 764) {
-      dialogConfig.minWidth = this.innerWidth - 50;
-    } else {
-      dialogConfig.minWidth = this.innerWidth - 400;
-    }
-    dialogConfig.data = {
-      promptData: this.eventA2HS,
-    };
-    let dialogRef = this.dialog.open(A2HSDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data => {
-      // this.eventA2HS = data;
-    });
   }
 
   subscription() {

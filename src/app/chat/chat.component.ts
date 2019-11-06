@@ -8,6 +8,8 @@ import {
   NgxNotificationService
 } from 'ngx-kc-notification';
 import { InstallPromptService } from '../install-prompt.service';
+import { A2HSDialogComponent } from '../chat/a2-hsdialog/a2-hsdialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 declare let BotUI: Function;
 
@@ -53,7 +55,6 @@ export class ChatComponent implements OnInit {
   icon2 = document.getElementById('hist');
   icon3 = document.getElementById('prof');
   promptData: any = null;
-  eventA2HS;
 
 
   constructor(
@@ -63,6 +64,7 @@ export class ChatComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ngxNotificationService: NgxNotificationService,
     private promptService: InstallPromptService,
+    public dialog: MatDialog
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -73,6 +75,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.promptService.getPrompt());
+    this.promptData = this.promptService.getPrompt();
     this.innerWidth = 100 % - 200 + 'px';
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
@@ -264,6 +267,9 @@ export class ChatComponent implements OnInit {
                             );
                           this.langChanged = false;
                         }
+                        if (this.promptData != null) {
+                          this.openPromptDialog();
+                        }
                         this.answer = res.value;
                         console.log('chose' + res.value);
                         this.repeatMEssage(res.value, mob);
@@ -358,6 +364,9 @@ export class ChatComponent implements OnInit {
                             );
                           this.langChanged = false;
                         }
+                        if (this.promptData != null) {
+                          this.openPromptDialog();
+                        }
                         this.answer = res.value;
                         console.log('chose' + res.value);
                         this.repeatMEssage(res.value, mob);
@@ -423,7 +432,10 @@ export class ChatComponent implements OnInit {
                        value: 'REGISTER'
                      }]
                    }).then(() => {
-                     this.router.navigateByUrl('register');
+                    if (this.promptData != null) {
+                      this.openPromptDialog();
+                    }
+                    this.router.navigateByUrl('register');
                    });
                  } else if (data.buttons.match('Show')) {
                   return this.botui.action.button({
@@ -452,7 +464,10 @@ export class ChatComponent implements OnInit {
                       { text: 'SUBSCRIBE NOW', value: 'BUY'},
                     ]
                   }).then(() => {
-                     this.router.navigateByUrl('subscription');
+                    if (this.promptData != null) {
+                      this.openPromptDialog();
+                    }
+                    this.router.navigateByUrl('subscription');
                   });
                 }
              });
@@ -1120,6 +1135,23 @@ getCredits() {
     console.log(error);
   }
  );
+}
+
+openPromptDialog() {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.hasBackdrop = true;
+  if (this.innerWidth < 764) {
+    dialogConfig.minWidth = this.innerWidth - 50;
+  } else {
+    dialogConfig.minWidth = this.innerWidth - 400;
+  }
+  dialogConfig.data = {
+    promptData: this.promptData,
+  };
+  const dialogRef = this.dialog.open(A2HSDialogComponent, dialogConfig);
+  dialogRef.afterClosed().subscribe(data => {
+    this.promptData = data;
+  });
 }
 
 }

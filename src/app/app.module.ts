@@ -40,7 +40,7 @@ import { EditFamilyDialogComponent } from './chat/myprofile/edit-family-dialog/e
 import { EditPersonalDialogComponent } from './chat/myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { EditPreferenceDialogComponent } from './chat/myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
-import { A2HSDialogComponent } from './home/a2-hsdialog/a2-hsdialog.component';
+import { A2HSDialogComponent } from './chat/a2-hsdialog/a2-hsdialog.component';
 
 @NgModule({
   declarations: [
