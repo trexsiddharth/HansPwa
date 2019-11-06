@@ -52,6 +52,7 @@ export class ChatComponent implements OnInit {
   icon2 = document.getElementById('hist');
   icon3 = document.getElementById('prof');
   promptData: any = null;
+  eventA2HS;
 
 
   constructor(
@@ -59,8 +60,7 @@ export class ChatComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private ngxNotificationService: NgxNotificationService,
-    private route: ActivatedRoute
+    private ngxNotificationService: NgxNotificationService
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -70,7 +70,13 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.promptData = this.route.snapshot.params['promptData'];
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      this.eventA2HS = e;
+      console.log('prompted', this.eventA2HS);
+    });
+
     console.log(this.promptData);
     this.innerWidth = 100 % - 200 + 'px';
     this.botui =  BotUI('my-botui-app');
@@ -731,7 +737,7 @@ export class ChatComponent implements OnInit {
 
    profileSetIncome(key: string, value: string): String {
     if (value != null) {
-      if (value.length >= 3) {
+      if (Number(value) > 1000) {
         return key + ': ' + String((Number(value) / 100000)) + ' LPA <br>';
       } else {
         return key + ': ' + value + ' LPA <br>';

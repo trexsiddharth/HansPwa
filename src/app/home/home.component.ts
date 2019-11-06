@@ -45,12 +45,7 @@ export class HomeComponent implements OnInit {
       }
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      this.eventA2HS = e;
-      console.log('prompted', this.eventA2HS);
-      this.openPromptDialog();
-    });
+    
   }
 
   openPromptDialog() {
@@ -69,7 +64,6 @@ export class HomeComponent implements OnInit {
       // this.eventA2HS = data;
     });
   }
-
 
   subscription() {
     this.spinner.show();
