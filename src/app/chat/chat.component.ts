@@ -76,7 +76,7 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
-    this.innerWidth = 100 % - 200 + 'px';
+    this.innerWidth = window.innerWidth;
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
     localStorage.setItem('id', '');
@@ -291,6 +291,9 @@ export class ChatComponent implements OnInit {
                             );
                           this.langChanged = false;
                         }
+                        if (this.promptData != null) {
+                          this.openPromptDialog();
+                        }
                         console.log('chose' + res.value);
                         this.answer = res.value;
                         this.repeatMEssage(res.value, mob);
@@ -388,6 +391,9 @@ export class ChatComponent implements OnInit {
                             );
                           this.langChanged = false;
                         }
+                        if (this.promptData != null) {
+                          this.openPromptDialog();
+                        }
                         console.log('chose' + res.value);
                         this.answer = res.value;
                         this.repeatMEssage(res.value, mob);
@@ -421,6 +427,9 @@ export class ChatComponent implements OnInit {
                       );
                     this.langChanged = false;
                   }
+                  if (this.promptData != null) {
+                    this.openPromptDialog();
+                  }
                   console.log('chose' + res.value);
                   this.answer = res.value;
                   this.repeatMEssage(res.value, mob);
@@ -453,6 +462,9 @@ export class ChatComponent implements OnInit {
                       }
                       );
                     this.langChanged = false;
+                  }
+                  if (this.promptData != null) {
+                    this.openPromptDialog();
                   }
                   console.log('chose' + res.value);
                   this.answer = res.value;
@@ -868,6 +880,7 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('Weight: ', personal.weight) +
         this.profileSet('Religion: ', family.religion) +
         this.profileSet('Caste: ', family.caste) +
+        this.profileSet('Mobile Number: ', family.mobile) +
         this.profileSet('Food Choice: ', personal.food_choice) +
         this.profileSet('Locality: ', personal.locality) +
         this.profileSet('Marital Status: ', personal.marital_status) +
@@ -938,6 +951,7 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('वजन: ', personal.weight) +
         this.profileSet('धर्म: ', personal.religion) +
         this.profileSet('जाती: ', personal.caste) +
+        this.profileSet('मोबाइल नंबर: ', family.mobile) +
         this.profileSet('खान-पान: ', personal.food_choice) +
         this.profileSet('पता: ', personal.locality) +
         this.profileSet('वैवाहिक स्तिथि: ', personal.marital_status) +

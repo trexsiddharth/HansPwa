@@ -41,6 +41,7 @@ import { EditPersonalDialogComponent } from './chat/myprofile/edit-personal-dial
 import { EditPreferenceDialogComponent } from './chat/myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
 import { A2HSDialogComponent } from './chat/a2-hsdialog/a2-hsdialog.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { A2HSDialogComponent } from './chat/a2-hsdialog/a2-hsdialog.component';
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
     NgxMatIntlTelInputModule,
-    NgbModule
+    NgbModule, RouterModule
   ],
   providers: [SubscriptionserviceService],
   bootstrap: [AppComponent],
