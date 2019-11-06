@@ -57,6 +57,8 @@ export class RegisterFourComponent implements OnInit {
   FamilyDetails: FormGroup;
   suc: any = [];
   public message: string;
+  locationFamily: Location = null;
+  locationNative: Location = null;
 
 
 
@@ -153,44 +155,50 @@ export class RegisterFourComponent implements OnInit {
   }
 
   fourthStep() {
-    if (this.FamilyDetails.valid) {
-      this.spinner.show();
-      const fourthstepdata = new FormData();
-      fourthstepdata.append('identity_number', localStorage.getItem('identity_number'));
-      fourthstepdata.append('family_type', this.FamilyDetails.value.FamilyType);
-      fourthstepdata.append('father_status', this.FamilyDetails.value.father_status);
-      fourthstepdata.append('mother_status', this.FamilyDetails.value.mother_status);
-      fourthstepdata.append('occupation_father', this.FamilyDetails.value.FatherOccupation);
-      fourthstepdata.append('occupation_mother', this.FamilyDetails.value.MotherOccupation);
-      fourthstepdata.append('family_income', this.FamilyDetails.value.family_income);
-      fourthstepdata.append('house_type', this.FamilyDetails.value.house_type);
-      fourthstepdata.append('married_sons', this.FamilyDetails.value.brother);
-      fourthstepdata.append('unmarried_sons', this.FamilyDetails.value.umbrother);
-      fourthstepdata.append('married_daughters', this.FamilyDetails.value.sister);
-      fourthstepdata.append('unmarried_daughters', this.FamilyDetails.value.umsister);
-      fourthstepdata.append('locality', this.FamilyDetails.value.state);
-      fourthstepdata.append('city', this.FamilyDetails.value.city);
-      fourthstepdata.append('address', this.FamilyDetails.value.address);
-      fourthstepdata.append('about', this.FamilyDetails.value.about);
-    // this.isCompleted4 = true;
-
-      return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFourthPageProfile', fourthstepdata).subscribe(suc => {
-      this.suc = suc;
-      console.log(this.suc);
-      if (this.suc.fourth_page_status === 'Y') {
-        this.spinner.hide();
-        this.ngxNotificationService.success('Family Details Submitted Succesfully!', 'success');
-        this.router.navigate(['/register-five']);
+    if (this.FamilyDetails.valid ) {
+      if (this.locationFamily === null ) {
+          this.ngxNotificationService.error('Please select a valid location of the family');
+      } else if ( this.locationNative === null) {
+        this.ngxNotificationService.error('Please select a valid native location of the family');
       } else {
+        this.spinner.show();
+        const fourthstepdata = new FormData();
+        fourthstepdata.append('identity_number', localStorage.getItem('identity_number'));
+        fourthstepdata.append('family_type', this.FamilyDetails.value.FamilyType);
+        fourthstepdata.append('father_status', this.FamilyDetails.value.father_status);
+        fourthstepdata.append('mother_status', this.FamilyDetails.value.mother_status);
+        fourthstepdata.append('occupation_father', this.FamilyDetails.value.FatherOccupation);
+        fourthstepdata.append('occupation_mother', this.FamilyDetails.value.MotherOccupation);
+        fourthstepdata.append('family_income', this.FamilyDetails.value.family_income);
+        fourthstepdata.append('house_type', this.FamilyDetails.value.house_type);
+        fourthstepdata.append('married_sons', this.FamilyDetails.value.brother);
+        fourthstepdata.append('unmarried_sons', this.FamilyDetails.value.umbrother);
+        fourthstepdata.append('married_daughters', this.FamilyDetails.value.sister);
+        fourthstepdata.append('unmarried_daughters', this.FamilyDetails.value.umsister);
+        fourthstepdata.append('locality', this.FamilyDetails.value.state);
+        fourthstepdata.append('city', this.FamilyDetails.value.city);
+        fourthstepdata.append('address', this.FamilyDetails.value.address);
+        fourthstepdata.append('about', this.FamilyDetails.value.about);
+      // this.isCompleted4 = true;
+  
+        return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFourthPageProfile', fourthstepdata).subscribe(suc => {
+        this.suc = suc;
+        console.log(this.suc);
+        if (this.suc.fourth_page_status === 'Y') {
+          this.spinner.hide();
+          this.ngxNotificationService.success('Family Details Submitted Succesfully!', 'success');
+          this.router.navigate(['/register-five']);
+        } else {
+          this.spinner.hide();
+          this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
+        }
+      }, err => {
         this.spinner.hide();
         this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
+        // console.log(err);
+        console.log(err);
+      });
       }
-    }, err => {
-      this.spinner.hide();
-      this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
-      // console.log(err);
-      console.log(err);
-    });
     } else {
       this.ngxNotificationService.error('Please fill all the details');
     }
@@ -228,12 +236,18 @@ export class RegisterFourComponent implements OnInit {
     );
 
   }
-  onAutocompleteSelected(event) {
+  onAutocompleteSelected(event, index) {
     console.log(event);
   }
 
-  onLocationSelected(e) {
-    console.log(e);
+  onLocationSelected(e, i) {
+    if (i === 1) {
+      this.locationFamily = e;
+      console.log('location of family', e);
+    } else if (i === 2) {
+      this.locationNative = e;
+      console.log('native location', e);
+    }
   }
 }
 

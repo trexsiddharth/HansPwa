@@ -103,8 +103,8 @@
             </div>
             <hr style="margin: 0px 10px;width: 100%">
             <div class="col-12" style="margin-top: 10px;">
-                <h6 style="display: inline-block">Course : </h6>
-                <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{personalProfileData.education}}</p>
+                <h6 style="display: inline-block">Additional information : </h6>
+                <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{personalProfileData.additional_qualification}}</p>
               </div>
           </div>
     </div>
@@ -116,19 +116,26 @@
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
         </div>
         <div class="row" style="margin: 10px 10px;">
-            <div class="col-4">
-              <h6 >Occupation</h6>
+            <div class="col-6">
+              <h6 >Occupation: </h6>
               <p style="font-size: 14px;">{{personalProfileData.occupation}}</p>
             </div>
-            <div class="col-4">
-                <h6>Organisation</h6>
+            <div class="col-6">
+                <h6>Organisation: </h6>
                 <p style="font-size: 14px;">{{personalProfileData.company}}</p>
               </div>
-              <div class="col-4">
-                  <h6>City</h6>
-                  <p style="font-size: 14px;">{{personalProfileData.working_city}}</p>
-                </div>
-          </div>
+              <hr style="margin: 0px 10px;width: 100%">
+            </div>
+            <div class="row" style="margin: 10px 10px;">
+                <div class="col-6">
+                    <h6>City: </h6>
+                    <p style="font-size: 14px;">{{familyProfileData.city}}</p>
+                  </div>
+                  <div class="col-6">
+                      <h6>Profession: </h6>
+                      <p style="font-size: 14px;">{{personalProfileData.profession}}</p>
+                    </div>
+            </div>
     </div>
     
     <div class="card" style="margin: 20px 20px;">

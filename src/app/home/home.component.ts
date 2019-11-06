@@ -37,7 +37,11 @@ export class HomeComponent implements OnInit {
 
   onboarding() {
     this.spinner.show();
-    this.router.navigateByUrl('chat');
+    if (this.eventA2HS) {
+      this.router.navigateByUrl('chat', this.eventA2HS);
+    } else {
+      this.router.navigateByUrl('chat');
+    }
       }
   ngOnInit() {
     this.innerWidth = window.innerWidth;

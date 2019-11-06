@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
@@ -51,6 +51,7 @@ export class ChatComponent implements OnInit {
   icon1 = document.getElementById('chat');
   icon2 = document.getElementById('hist');
   icon3 = document.getElementById('prof');
+  promptData: any = null;
 
 
   constructor(
@@ -59,6 +60,7 @@ export class ChatComponent implements OnInit {
     private http: HttpClient,
     private spinner: NgxSpinnerService,
     private ngxNotificationService: NgxNotificationService,
+    private route: ActivatedRoute
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -68,6 +70,8 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.promptData = this.route.snapshot.params['promptData'];
+    console.log(this.promptData);
     this.innerWidth = 100 % - 200 + 'px';
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();

@@ -142,7 +142,7 @@ export class RegisterTwoComponent implements OnInit {
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
     this.Pageextra = this._formBuilder.group({
-
+      birth_date: ['', Validators.compose([Validators.required])],
       birth_time: ['', Validators.compose([Validators.required])],
       Mangalik: ['', Validators.compose([Validators.required])],
       stateGroup: ['', Validators.compose([Validators.required])],
@@ -230,6 +230,8 @@ export class RegisterTwoComponent implements OnInit {
   }
 
   extrastep() {
+    console.log(this.Pageextra.value.birth_date);
+    console.log(this.birthDate);
     if (this.Pageextra.valid) {
       this.spinner.show();
       if (this.Pageextra.value.Mangalik === 'Non Manglik') {
@@ -242,6 +244,7 @@ export class RegisterTwoComponent implements OnInit {
       secondstepdata.append('birth_date', this.birthDate);
       secondstepdata.append('mother_tongue', this.Pageextra.value.stateGroup);
       secondstepdata.append('food_choice', this.Pageextra.value.food_choice);
+      this.calculateAge(this.Pageextra.value.birth_date);
 
       if (localStorage.getItem('gender') === 'Male') {
       localStorage.setItem('minAge', (this.currentAge - 5).toString());

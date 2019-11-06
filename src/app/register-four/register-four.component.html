@@ -128,8 +128,8 @@
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label style="color: black;">Family Living In</mat-label>
                   <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                  (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                           (onLocationSelected)="onLocationSelected($event)" formControlName="state">
+                  (onAutocompleteSelected)="onAutocompleteSelected($event,1)"
+                           (onLocationSelected)="onLocationSelected($event,1)" formControlName="state">
                 </mat-form-field>
               </div>
            
@@ -137,12 +137,11 @@
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label style="color: black;">Native City</mat-label>
                   <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                  (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                           (onLocationSelected)="onLocationSelected($event)" formControlName="city">
+                  (onAutocompleteSelected)="onAutocompleteSelected($event,2)"
+                           (onLocationSelected)="onLocationSelected($event,2)" formControlName="city">
                 </mat-form-field>
               </div>
-           
-           
+
               <div class="col-md-12">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label style="color: black;">Contact Address</mat-label>

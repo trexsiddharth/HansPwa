@@ -65,6 +65,7 @@ export class RegisterOneComponent implements OnInit {
   mapping_id: number;
   castePref: any;
   suc: any = [];
+  locationCity: Location = null;
 
   Caste = false;
   AllCastes = false;
@@ -507,6 +508,9 @@ export class RegisterOneComponent implements OnInit {
 
   secondStep() {
     if (this.PageTwo.valid) {
+      if (this.locationCity === null) {
+        this.ngxNotificationService.error('Select a valid current city');
+      } else {
       this.spinner.show();
       const firststepdata = new FormData();
       firststepdata.append('identity_number', localStorage.getItem('identity_number'));
@@ -557,6 +561,7 @@ export class RegisterOneComponent implements OnInit {
         this.spinner.hide();
         this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       });
+    }
     } else {
       this.ngxNotificationService.error('Please fill all the details');
     }
@@ -567,6 +572,7 @@ export class RegisterOneComponent implements OnInit {
   }
 
   onLocationSelected(e) {
+    this.locationCity = e;
     console.log(e);
   }
 
