@@ -20,7 +20,7 @@ data;
   }
   downloadIt() {
     this.dialogRef.close();
-    this.data.prompt();
+    this.data.promptData.prompt();
     this.data.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
           console.log('User accepted the A2HS prompt');

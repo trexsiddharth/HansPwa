@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
       console.log('prompted', this.eventA2HS);
       this.openPromptDialog();
     });
-    this.openPromptDialog();
   }
 
   openPromptDialog() {
@@ -55,7 +54,6 @@ export class HomeComponent implements OnInit {
       promptData: this.eventA2HS,
     };
     let dialogRef = this.dialog.open(A2HSDialogComponent, dialogConfig);
-    this.eventA2HS.prompt();
   }
 
 
