@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
     };
     let dialogRef = this.dialog.open(A2HSDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
-      this.eventA2HS = data;
+      // this.eventA2HS = data;
     });
   }
 
