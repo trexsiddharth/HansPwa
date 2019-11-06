@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
 } from 'ngx-kc-notification';
+import { InstallPromptService } from '../install-prompt.service';
 
 declare let BotUI: Function;
 
@@ -60,7 +61,8 @@ export class ChatComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private ngxNotificationService: NgxNotificationService
+    private ngxNotificationService: NgxNotificationService,
+    private promptService: InstallPromptService,
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -70,14 +72,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      this.eventA2HS = e;
-      console.log('prompted', this.eventA2HS);
-    });
-
-    console.log(this.promptData);
+    console.log(this.promptService.getPrompt());
     this.innerWidth = 100 % - 200 + 'px';
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();

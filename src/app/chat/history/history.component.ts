@@ -21,7 +21,6 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     console.log('is active');
-    console.log(this.profile);
   }
   shareData(id: any) {
   // tslint:disable-next-line: max-line-length

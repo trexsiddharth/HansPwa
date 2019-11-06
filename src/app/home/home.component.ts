@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { A2HSDialogComponent } from './a2-hsdialog/a2-hsdialog.component';
+import { InstallPromptService } from '../install-prompt.service';
 
 
 
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   innerWidth;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private http: HttpClient, public dialog: MatDialog,
+  constructor(private http: HttpClient, public dialog: MatDialog, private promptService: InstallPromptService,
               public router: Router, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
   }
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit {
       }
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    
+    this.eventA2HS = this.promptService.savePrompt();
   }
 
   openPromptDialog() {
