@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit {
       promptData: this.eventA2HS,
     };
     let dialogRef = this.dialog.open(A2HSDialogComponent, dialogConfig);
+    this.eventA2HS.prompt();
   }
 
 
