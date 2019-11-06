@@ -19,9 +19,8 @@ data;
     this.dialogRef.close();
   }
   downloadIt() {
-    this.dialogRef.close();
     this.data.promptData.prompt();
-    this.data.userChoice.then((choiceResult) => {
+    this.data.promptData.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
           console.log('User accepted the A2HS prompt');
         } else {
@@ -29,6 +28,7 @@ data;
         }
         this.data = null;
     });
+    this.dialogRef.close({'promptValue': null});
   }
 
 }

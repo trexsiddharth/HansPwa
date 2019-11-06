@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   opened: boolean;
   socialInfo: string;
   eventA2HS;
+  innerWidth;
 
   // tslint:disable-next-line: max-line-length
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('chat');
       }
   ngOnInit() {
+    this.innerWidth = window.innerWidth;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       this.eventA2HS = e;
@@ -50,10 +52,18 @@ export class HomeComponent implements OnInit {
   openPromptDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
+    if (this.innerWidth < 764) {
+      dialogConfig.minWidth = this.innerWidth - 50;
+    } else {
+      dialogConfig.minWidth = this.innerWidth - 400;
+    }
     dialogConfig.data = {
       promptData: this.eventA2HS,
     };
     let dialogRef = this.dialog.open(A2HSDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data => {
+      this.eventA2HS = data;
+    });
   }
 
 
