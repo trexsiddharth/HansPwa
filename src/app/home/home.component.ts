@@ -1,8 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { A2HSDialogComponent } from './a2-hsdialog/a2-hsdialog.component';
 
 
 
@@ -20,9 +22,11 @@ export class HomeComponent implements OnInit {
  events: string[] = [];
   opened: boolean;
   socialInfo: string;
+  eventA2HS;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private http: HttpClient, public router: Router, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
+  constructor(private http: HttpClient, public dialog: MatDialog,
+              public router: Router, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
   }
   register() {
@@ -35,7 +39,25 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('chat');
       }
   ngOnInit() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      this.eventA2HS = e;
+      console.log('prompted', this.eventA2HS);
+      this.openPromptDialog();
+    });
+    this.openPromptDialog();
   }
+
+  openPromptDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.data = {
+      promptData: this.eventA2HS,
+    };
+    let dialogRef = this.dialog.open(A2HSDialogComponent, dialogConfig);
+  }
+
+
   subscription() {
     this.spinner.show();
     this.router.navigateByUrl('/subscription');

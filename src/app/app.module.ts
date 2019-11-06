@@ -40,6 +40,7 @@ import { EditFamilyDialogComponent } from './chat/myprofile/edit-family-dialog/e
 import { EditPersonalDialogComponent } from './chat/myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { EditPreferenceDialogComponent } from './chat/myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
+import { A2HSDialogComponent } from './home/a2-hsdialog/a2-hsdialog.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ViewCentresComponent } from './view-centres/view-centres.component';
     EditFamilyDialogComponent,
     EditPersonalDialogComponent,
     EditPreferenceDialogComponent,
-    ViewCentresComponent
+    ViewCentresComponent,
+    A2HSDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,9 @@ import { ViewCentresComponent } from './view-centres/view-centres.component';
   ],
   providers: [SubscriptionserviceService],
   bootstrap: [AppComponent],
-  entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, EditFamilyDialogComponent],
+  // tslint:disable-next-line: max-line-length
+  entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, A2HSDialogComponent,
+    EditFamilyDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
