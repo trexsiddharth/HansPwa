@@ -15,7 +15,7 @@ import { ViewCentresComponent } from './view-centres/view-centres.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'home', redirectTo: '' },
+  { path: 'home', redirectTo: ''},
   { path: 'register', component: RegisterComponent },
   { path: 'register-one', component: RegisterOneComponent},
   { path: 'register-two', component: RegisterTwoComponent},
@@ -25,14 +25,13 @@ const routes: Routes = [
   { path: 'register-five', component: RegisterFiveComponent},
   { path: 'register-six', component: RegisterSixComponent},
   { path: 'chat', component: ChatComponent},
-  { path: 'chat/:promptData', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
+  { path: '**', redirectTo: '/'},
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled', useHash: true
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
