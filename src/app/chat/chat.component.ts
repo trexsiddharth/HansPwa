@@ -198,7 +198,7 @@ export class ChatComponent implements OnInit {
                   loading: true,
                     delay: 1000,
                    type: 'html',
-                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' width="400px" >'
+                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%" >'
                  }).then(() => {
                    if (values.language === 'English') {
                      this.botui.message.add({
@@ -223,7 +223,7 @@ export class ChatComponent implements OnInit {
                        '<b> &#9803 Horoscope Details</b> <br><br>' +
                        this.profileSet('Birth Date: ', values.birth_date) +
                        this.profileSet('Bith Place: ', values.birth_place) +
-                       this.profileSet('Bith Place: ', values.birth_time) +
+                       this.profileSet('Bith Time: ', values.birth_time) +
                        this.profileSet('Manglik: ', values.manglik) + ' <br> <br>'
                        +
                        '<b> &#128218 Education Details</b> <br><br>' +
@@ -276,7 +276,7 @@ export class ChatComponent implements OnInit {
                         console.log('chose' + res.value);
                         this.repeatMEssage(res.value, mob);
                        });
-                       } else if (data.buttons.match('SHOW')) {
+                       } else if (data.buttons.match('Show')) {
                          return this.botui.action.button({
                            action: [
                              { text: 'SHOW', value: 'SHOW'},
@@ -378,7 +378,7 @@ export class ChatComponent implements OnInit {
                         console.log('chose' + res.value);
                         this.repeatMEssage(res.value, mob);
                        });
-                       } else if (data.buttons.match('SHOW')) {
+                       } else if (data.buttons.match('Show')) {
                          return this.botui.action.button({
                            action: [
                              { text: 'SHOW', value: 'SHOW'},
@@ -568,9 +568,9 @@ export class ChatComponent implements OnInit {
  }
  }
 
- getProfilePhoto(num: String, gen: number): String {
- if (num === null && num === '') {
-   if (gen === 0) {
+ getProfilePhoto(num: String, gen: string): String {
+ if (num === null || num === '') {
+   if (gen === 'Male') {
      return '../../assets/male_pic.png';
    } else {
      return '../../assets/female_pic.png';
@@ -582,10 +582,10 @@ export class ChatComponent implements OnInit {
 
   getProfilePhotoHistory(num: string, num2: string , gen: string): String {
     if (num != null && num !== '') {
-      return num;
+      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
     } else if (num2 != null && num2 !== '') {
       const carousel: any = JSON.parse(num2);
-      return carousel['3'];
+      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['3'];
     } else {
       if (gen === 'Male') {
         return '../../assets/male_pic.png';
@@ -863,7 +863,7 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img src=' + this.getProfilePhotoHistory('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + personal.photo, personal.carousel, personal.gender) + ' width="400px" >'
+      content: '<img src=' + this.getProfilePhotoHistory( personal.photo, personal.carousel, personal.gender) + ' style="width: 100%" >'
     });
      if (localStorage.getItem('language') === 'English') {
       this.botui.message.add({
@@ -877,15 +877,14 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('Weight: ', personal.weight) +
         this.profileSet('Religion: ', family.religion) +
         this.profileSet('Caste: ', family.caste) +
-        this.profileSet('Mobile Number: ', family.mobile) +
         this.profileSet('Food Choice: ', personal.food_choice) +
-        this.profileSet('Locality: ', personal.locality) +
         this.profileSet('Marital Status: ', personal.marital_status) +
         this.profileSet('Disability: ', personal.disability) + ' <br> <br>'
          +
         '<b> &#9803 Horoscope Details</b> <br><br>' +
         this.profileSet('Birth Date: ', personal.birth_date) +
         this.profileSet('Bith Place: ', personal.birth_place) +
+        this.profileSet('Bith Time: ', personal.birth_time) +
         this.profileSet('Manglik: ', personal.manglik) + ' <br> <br>'
         +
         '<b> &#128218 Education Details</b> <br><br>' +
@@ -910,7 +909,12 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('Married Brothers: ', family.married_sons) +
         this.profileSet('Married Sisters: ', family.married_daughters) +
         this.profileSet('Unmarried Brothers: ', family.unmarried_sons) +
-        this.profileSet('UnMarried Sisters: ', family.unmarried_daughters)
+        this.profileSet('UnMarried Sisters: ', family.unmarried_daughters) + ' <br><br>'
+        +
+        '<b> &#9742 Contact Details</b> <br><br>' +
+        this.profileSet('Mobile Number: ', family.mobile) +
+        this.profileSet('Locality: ', family.locality)
+
     }).then(() => {
       if (family.mobile) {
         return this.botui.action.button({
@@ -969,15 +973,14 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('वजन: ', personal.weight) +
         this.profileSet('धर्म: ', personal.religion) +
         this.profileSet('जाती: ', personal.caste) +
-        this.profileSet('मोबाइल नंबर: ', family.mobile) +
         this.profileSet('खान-पान: ', personal.food_choice) +
-        this.profileSet('पता: ', personal.locality) +
         this.profileSet('वैवाहिक स्तिथि: ', personal.marital_status) +
         this.profileSet('विकलांगता: ', personal.disability) + ' <br> <br>'
          +
         '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
         this.profileSet('जन्म दिवस: ', personal.birth_date) +
         this.profileSet('जन्म स्थान: ', personal.birth_place) +
+        this.profileSet('जन्म समय: ', personal.birth_time) +
         this.profileSet('मांगलिक: ', personal.manglik) + ' <br> <br>'
         +
         '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
@@ -1002,7 +1005,11 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('मैरिड भाई: ', family.married_sons) +
         this.profileSet('मैरिड बेहेने : ', family.married_daughters) +
         this.profileSet('अव्यावाहित भाई: ', family.unmarried_sons) +
-        this.profileSet('अव्यावाहित बेहेने : ', family.unmarried_daughters)
+        this.profileSet('अव्यावाहित बेहेने : ', family.unmarried_daughters) + ' <br><br>'
+        +
+        '<b> &#9742 कांटेक्ट डिटेल्स </b> <br><br>' +
+        this.profileSet('मोबाइल नंबर: ', family.mobile) +
+        this.profileSet('पता: ', family.locality)
     }).then(() => {
       if (family.mobile) {
         return this.botui.action.button({
@@ -1076,7 +1083,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' width="400px" ><br>' +
+                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' style="width: 100%" >' +
                     '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
                     'नाम: ' + valueInMessage.name + '<br>' +
                     // tslint:disable-next-line: max-line-length

@@ -22,13 +22,14 @@
 ::ng-deep  .botui-message-content {
   padding: 7px 13px;
   border-radius: 15px;
-  max-width: 80%;
+  width: 100%;
   color: white;
   background-color: #34b7f1;
 }
 
 ::ng-deep .botui-message-content.human {
   color: #f7f8f8;
+  width: auto;
   background-color: #919292
 }
 
