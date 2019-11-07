@@ -22,9 +22,9 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     console.log('is active');
   }
-  shareData(id: any) {
+  shareData(id: any, contacted: any) {
   // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id='+ id , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + id + '&contacted=' + contacted , {params: { ['id'] : localStorage.getItem('id'), ['contacted']: contacted}}).subscribe(
        (data: any) => {
         console.log(data);
         this.share.emit(data);

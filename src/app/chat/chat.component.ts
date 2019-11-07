@@ -198,7 +198,7 @@ export class ChatComponent implements OnInit {
                   loading: true,
                     delay: 1000,
                    type: 'html',
-                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' width=this.innerWidth >'
+                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' width="400px" >'
                  }).then(() => {
                    if (values.language === 'English') {
                      this.botui.message.add({
@@ -214,6 +214,7 @@ export class ChatComponent implements OnInit {
                        this.profileSet('Weight: ', values.weight) +
                        this.profileSet('Religion: ', values.religion) +
                        this.profileSet('Caste: ', values.caste) +
+                       this.profileSet('Mobile Number: ', values.mobile) +
                        this.profileSet('Food Choice: ', values.food_choice) +
                        this.profileSet('Locality: ', values.locality) +
                        this.profileSet('Marital Status: ', values.marital_status) +
@@ -222,6 +223,7 @@ export class ChatComponent implements OnInit {
                        '<b> &#9803 Horoscope Details</b> <br><br>' +
                        this.profileSet('Birth Date: ', values.birth_date) +
                        this.profileSet('Bith Place: ', values.birth_place) +
+                       this.profileSet('Bith Place: ', values.birth_time) +
                        this.profileSet('Manglik: ', values.manglik) + ' <br> <br>'
                        +
                        '<b> &#128218 Education Details</b> <br><br>' +
@@ -314,6 +316,7 @@ export class ChatComponent implements OnInit {
                        this.profileSet('वजन: ', values.weight) +
                        this.profileSet('धर्म: ', values.religion) +
                        this.profileSet('जाती: ', values.caste) +
+                       this.profileSet('मोबाइल नंबर: ', values.mobile) +
                        this.profileSet('खान-पान: ', values.food_choice) +
                        this.profileSet('पता: ', values.locality) +
                        this.profileSet('वैवाहिक स्तिथि: ', values.marital_status) +
@@ -322,6 +325,7 @@ export class ChatComponent implements OnInit {
                        '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
                        this.profileSet('जन्म दिवस: ', values.birth_date) +
                        this.profileSet('जन्म स्थान: ', values.birth_place) +
+                       this.profileSet('जन्म समय: ', values.birth_time) +
                        this.profileSet('मांगलिक: ', values.manglik) + ' <br> <br>'
                        +
                        '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
@@ -565,20 +569,13 @@ export class ChatComponent implements OnInit {
  }
 
  getProfilePhoto(num: String, gen: number): String {
- if (num === null) {
+ if (num === null && num === '') {
    if (gen === 0) {
      return '../../assets/male_pic.png';
    } else {
      return '../../assets/female_pic.png';
    }
  } else {
-   if (num === '') {
-    if (gen === 0) {
-      return '../../assets/male_pic.png';
-    } else {
-      return '../../assets/female_pic.png';
-    }
-   }
    return num;
  }
  }
@@ -835,7 +832,7 @@ export class ChatComponent implements OnInit {
    }
 profileReAnswer(num: any, id: any, answer: any) {
   // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/reply?mobile=' + this.currentContact + '&id=' + id + '&text=' + answer  , {}).subscribe(
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/reply?mobile=' + this.currentContact + '&id=' + id + '&text=' + answer , {}).subscribe(
     (data: any) => {
       console.log(answer);
       console.log(num);
@@ -866,7 +863,7 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img src=' + this.getProfilePhotoHistory('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + personal.photo, personal.carousel, personal.gender) + ' width=this.innerWidth >'
+      content: '<img src=' + this.getProfilePhotoHistory('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + personal.photo, personal.carousel, personal.gender) + ' width="400px" >'
     });
      if (localStorage.getItem('language') === 'English') {
       this.botui.message.add({
@@ -915,29 +912,50 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('Unmarried Brothers: ', family.unmarried_sons) +
         this.profileSet('UnMarried Sisters: ', family.unmarried_daughters)
     }).then(() => {
-          return this.botui.action.button({
-            cssClass: 'styleButton',
-            action: [
-              { text: 'YES', value: 'Yes'},
-              {text: 'NO', value: 'No' }
-            ]
-        }).then(res => {
-         if (this.langChanged === true) {
-           this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
-             (data: any) => {
-               console.log(data);
-             },
-             (error: any) => {
-               console.log(error);
-             }
-             );
-           this.langChanged = false;
-         }
-         this.answer = res.value;
-         console.log('chose' + res.value);
-         console.log('Reanswered');
-         this.profileReAnswer(this.currentContact, personal.id, res.value);
-        });
+      if (family.mobile) {
+        return this.botui.action.button({
+          action: [
+            { text: 'Show', value: 'Show'}
+          ]
+      }).then(res => {
+        if (this.langChanged === true) {
+          this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error: any) => {
+              console.log(error);
+            }
+            );
+          this.langChanged = false;
+        }
+        console.log('chose' + res.value);
+        console.log('Reanswered');
+        this.repeatMEssage(res.value, this.currentContact);
+       });
+      } else {
+        return this.botui.action.button({
+          action: [
+            { text: 'Yes', value: 'Yes'},
+            { text: 'No', value: 'No'}
+          ]
+      }).then(res => {
+        if (this.langChanged === true) {
+          this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error: any) => {
+              console.log(error);
+            }
+            );
+          this.langChanged = false;
+        }
+        console.log('chose' + res.value);
+        console.log('Reanswered');
+        this.profileReAnswer(this.currentContact, personal.id, res.value);
+       });
+      }
     });
     } else {
       this.botui.message.add({
@@ -986,28 +1004,49 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.profileSet('अव्यावाहित भाई: ', family.unmarried_sons) +
         this.profileSet('अव्यावाहित बेहेने : ', family.unmarried_daughters)
     }).then(() => {
-          return this.botui.action.button({
-            cssClass: 'styleButton',
-            action: [
-              { text: 'YES', value: 'Yes'},
-              {text: 'NO', value: 'No' }
-            ]
-        }).then(res => {
-         if (this.langChanged === true) {
-           this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
-             (data: any) => {
-               console.log(data);
-             },
-             (error: any) => {
-               console.log(error);
-             }
-             );
-           this.langChanged = false;
-         }
-         console.log('chose' + res.value);
-         console.log('Reanswered');
-         this.profileReAnswer(this.currentContact, personal.id, res.value);
-        });
+      if (family.mobile) {
+        return this.botui.action.button({
+          action: [
+            { text: 'Show', value: 'Show'}
+          ]
+      }).then(res => {
+        if (this.langChanged === true) {
+          this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error: any) => {
+              console.log(error);
+            }
+            );
+          this.langChanged = false;
+        }
+        console.log('chose' + res.value);
+        this.repeatMEssage(res.value, this.currentContact);
+       });
+      } else {
+        return this.botui.action.button({
+          action: [
+            { text: 'Yes', value: 'Yes'},
+            { text: 'No', value: 'No'}
+          ]
+      }).then(res => {
+        if (this.langChanged === true) {
+          this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error: any) => {
+              console.log(error);
+            }
+            );
+          this.langChanged = false;
+        }
+        console.log('chose' + res.value);
+        console.log('Reanswered');
+        this.profileReAnswer(this.currentContact, personal.id, res.value);
+       });
+      }
     });
     }
    }
@@ -1037,7 +1076,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' width=this.innerWidth ><br>' +
+                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' width="400px" ><br>' +
                     '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
                     'नाम: ' + valueInMessage.name + '<br>' +
                     // tslint:disable-next-line: max-line-length

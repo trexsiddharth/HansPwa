@@ -3,7 +3,7 @@
     <div class="col-3 col-md-2" *ngFor="let item of profile.contacted" style="display: inline-flex;margin: 0px 0px 0px 10px;">
 
         <div class="imageSet">
-          <a (click)="shareData(item.id)">
+          <a (click)="shareData(item.id,'1')">
             <img style="width: 80px; height: 120px ;background-color: lightblue;margin: 20px auto 0px;border: 6px solid green;border-radius: 10px;" [src]=getProfilePhoto(item.photo,item.gender) alt=""><br>
           </a>
             <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px">{{item.name}} <i class="fa fa-check-circle" style="padding: 0px; margin:0px; width: 30px !important;color: green" aria-hidden="true"></i></p>
@@ -13,12 +13,10 @@
   <div class=" col-3 col-md-2" *ngFor="let item of profile.rejected" style="display: inline-flex;margin: 0px 0px 0px 10px;">
 
     <div class="imageSet">
-      <a (click)="shareData(item.id)">
+      <a (click)="shareData(item.id,'')">
         <img style="width: 80px; height: 120px;background-color: lightblue;margin: 20px auto 0px;border: 6px solid red;border-radius: 10px;" [src]=getProfilePhoto(item.photo,item.gender) alt=""><br>
       </a>
         <p style="text-align: center;font-size: 14px;display: inline-block;margin-top:10px">{{item.name}} <i class="fa fa-times-circle" style="padding: 0px; margin:0px; width: 30px !important;color: red" aria-hidden="true"></i></p>
       </div>
     </div>
-
-    
 </main>
