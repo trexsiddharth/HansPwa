@@ -201,8 +201,9 @@ export class ChatComponent implements OnInit {
                     delay: 1000,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
-                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" > <br>' +
-                   '<div style="text-align:center"><b>' + values.name + '</b></div> <br>'
+                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px"> <br>' +
+                   '<div style="text-align:center"><b>' + values.name + '</b></div> ' +
+                   '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>'
                  }).then(() => {
                    if (values.language === 'English') {
                      this.botui.message.add({
@@ -329,7 +330,7 @@ export class ChatComponent implements OnInit {
                             // tslint:disable-next-line: max-line-length
                           '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', values.mobile) + '</th>' +
                           // tslint:disable-next-line: max-line-length
-                          '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', values.locality) + '</th>' +
+                          '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', values.city) + '</th>' +
                             '</tr>' +
                             '</table>' +
                        // line -1
@@ -359,7 +360,7 @@ export class ChatComponent implements OnInit {
                         '<table style="width:100%">' +
                         '<tr>' +
                         // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/templeblue.svg">' + this.setValue(values.religion) + this.setValue(values.caste) + this.setValue(values.gotra) +  '</th>' +
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/templeblue.svg">' + this.setValue(values.religion) + '<br>' + this.setValue(values.caste) + this.setValue(values.gotra) + '<br>' +  '</th>' +
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top: 25%" src="../assets/heart.svg"></div><div>' +  this.setValue(values.marital_status) + '</div></th>' +
                         // tslint:disable-next-line: max-line-length
@@ -373,7 +374,7 @@ export class ChatComponent implements OnInit {
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/birthday.svg">' + this.setValue(values.birth_date) +  '</th>' +
                         // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' +  this.setValue(values.birth_place) + '</th>' +
+                        '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/birthplace.svg">' +  this.setValue(values.birth_place) + '</th>' +
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/clock.svg">' + this.setValue(values.birth_time) + '</th>' +
                           '</tr>' +
@@ -389,22 +390,21 @@ export class ChatComponent implements OnInit {
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
                           '</tr>' +
-                          '</table>'+
-
+                          '</table>' +
                              // line -6
                         '<table style="width:100%">' +
                         '<tr>' +
-                        // // tslint:disable-next-line: max-line-length
                         // tslint:disable-next-line: max-line-length
-                        // this.setMarriageSisters(String(Number(values.married_daughters) + Number(values.unmarried_daughters) ), values.married_daughters) +
-                        // // tslint:disable-next-line: max-line-length
+                        this.setMarriageSisters(String(Number(values.married_daughters) + Number(values.unmarried_daughters) ), values.married_daughters) +
                         // tslint:disable-next-line: max-line-length
-                        // this.setMarriageBrothers(String(Number(values.married_sons) + Number(values.unmarried_sons) ), values.married_sons)  +
-                        // tslint:disable-next-line: max-line-length
-                        this.setMarriageSisters('5', '3') +
-                        // tslint:disable-next-line: max-line-length
-                        this.setMarriageBrothers('5', '3')  +
+                        this.setMarriageBrothers(String(Number(values.married_sons) + Number(values.unmarried_sons) ), values.married_sons)  +
                           '</tr>' +
+                          '</table>' +
+
+                               // line -7
+                        '<table style="width:100%">' +
+                        // tslint:disable-next-line: max-line-length
+                        '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
                           '</table></div>'
 
                       // tslint:disable-next-line: max-line-length
@@ -679,10 +679,18 @@ export class ChatComponent implements OnInit {
 
   getProfilePhotoHistory(num: string, num2: string , gen: string): String {
     if (num != null && num !== '') {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+      const carousel: string = JSON.parse(num);
+      if (carousel['1'].match('http')) {
+        return carousel['1'];
+      } else {
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['1'];
+      }
     } else if (num2 != null && num2 !== '') {
-      const carousel: any = JSON.parse(num2);
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['3'];
+      if (num2.match('http')) {
+        return num2;
+      } else {
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
+      }
     } else {
       if (gen === 'Male') {
         return '../../assets/male_pic.png';
@@ -934,7 +942,7 @@ export class ChatComponent implements OnInit {
      document.getElementById('profileText').style.color = '#34b7f1';
      console.log(localStorage.getItem('id'));
      // tslint:disable-next-line: max-line-length
-     return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + localStorage.getItem('id') , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
+     return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + localStorage.getItem('id') + '&contacted=1'  , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
        (data: any) => {
         console.log(data);
         this.profileData = data.profile;
@@ -1274,7 +1282,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" >' +
+                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" >' +
                     '<div style="text-align:center"><b>' + valueInMessage.name + '</b></div><br>' +
 
                     // line -1
@@ -1439,11 +1447,13 @@ profileReAnswer(num: any, id: any, answer: any) {
      );
    }
 getCredits() {
+  this.spinner.show();
  // tslint:disable-next-line: max-line-length
- return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint?id=' + localStorage.getItem('id'), {}).subscribe(
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint?id=' + localStorage.getItem('id'), {}).subscribe(
    (data: any) => {
       this.points = data.whatsapp_points;
       console.log(this.points);
+      this.spinner.hide();
    },
   (error: any) => {
     console.log(error);
@@ -1485,10 +1495,10 @@ setHouseType(value: string) {
     if (value1 != null && value1 !== '' && value1 !== '0') {
       if (value2 != null && value2 !== '' && value2 !== '0' ) {
         // tslint:disable-next-line: max-line-length
-        return '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers -> ' + value2 + ' are married </th>';
+        return '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers -> ' + value2 + ' married </th>';
       } else {
           // tslint:disable-next-line: max-line-length
-        return '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers</th>';
+        return '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers</th>';
       }
     } else {
       return '';
@@ -1498,14 +1508,31 @@ setHouseType(value: string) {
       if (value1 != null && value1 !== '' && value1 !== '0') {
         if (value2 != null && value2 !== '' && value2 !== '0' ) {
           // tslint:disable-next-line: max-line-length
-          return '<th style="width:33.33%;padding: 5px 0px 5px 10px;"">' + '<img style="width:25px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters -> ' + value2 + ' are married </th>';
+          return '<th style="width:33.33%;padding: 5px 0px 5px 10px;"">' + '<img style="width:20px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters -> ' + value2 + ' married </th>';
         } else {
             // tslint:disable-next-line: max-line-length
-          return '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters</th>';
+          return '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters</th>';
         }
       } else {
         return '';
       }
+      }
+      LifeStatus(father: string, mother: string, fatho: string, mothero: string) {
+            if (father != null && father !== '' ) {
+              if (mother != null && mother !== '') {
+                // tslint:disable-next-line: max-line-length
+                return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + '  & Mother(Alive) -> ' + mothero + ' </th>';
+              } else {
+                // tslint:disable-next-line: max-line-length
+                return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + ', Mother(Dead)</th>';
+              }
+            } else if (mother != null && mother !== '') {
+              // tslint:disable-next-line: max-line-length
+              return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Mother(Alive) ->' + mothero + ', Father(Dead)</th>';
+            } else {
+              // tslint:disable-next-line: max-line-length
+              return '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father & Mother Both Not Alive</th>';
+            }
       }
 
 }
