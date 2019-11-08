@@ -7,15 +7,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  profiles = [{name: 'Sid', image: '../../../assets/profile.webp', date: '1 May 2019'},
-  {name: 'Sam', image: '../../../assets/profile.webp', date: '1 May 2019'},
-  {name: 'Sid', image: '../../../assets/profile.webp', date: '1 May 2019'},
-  {name: 'Sam', image: '../../../assets/profile.webp', date: '1 May 2019'},
-  {name: 'Sid', image: '../../../assets/profile.webp', date: '1 May 2019'},
-  {name: 'Sam', image: '../../../assets/profile.webp', date: '1 May 2019'}];
   @Input() profile: any;
   @Output() share = new EventEmitter<any>();
   @Output() stage = new EventEmitter<string>();
+  likeCount;
+  dislikeCount;
   constructor( private http: HttpClient) {
    }
 
@@ -42,5 +38,6 @@ export class HistoryComponent implements OnInit {
     return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/'+ num;
     }
     }
+   
 
 }

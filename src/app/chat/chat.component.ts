@@ -10,6 +10,8 @@ import {
 import { InstallPromptService } from '../install-prompt.service';
 import { A2HSDialogComponent } from '../chat/a2-hsdialog/a2-hsdialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { style } from '@angular/animations';
+import { when } from 'q';
 
 declare let BotUI: Function;
 
@@ -198,7 +200,9 @@ export class ChatComponent implements OnInit {
                   loading: true,
                     delay: 1000,
                    type: 'html',
-                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%" >'
+                   // tslint:disable-next-line: max-line-length
+                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" > <br>' +
+                   '<div style="text-align:center"><b>' + values.name + '</b></div> <br>'
                  }).then(() => {
                    if (values.language === 'English') {
                      this.botui.message.add({
@@ -208,6 +212,15 @@ export class ChatComponent implements OnInit {
                        // tslint:disable-next-line: max-line-length
                        content: '<b> &#128100 Personal Details</b> <br> <br>' +
                        'Name: ' + values.name + '<br>' +
+                       // tslint:disable-next-line: max-line-length
+                      '<table style="width:100%;background:#f5f5f5">' +
+                      '<tr>' +
+                      // tslint:disable-next-line: max-line-length
+                      '<th>' + this.setValue(values.profession) + '<br>' + values.education + '</th>' +
+                      '<th>' + this.setValue(values.monthly_income) + '<br> </th>' +
+                       '<th>Age</th>' +
+                        '</tr>' +
+                        '</table>' +
                        // tslint:disable-next-line: max-line-length
                        this.profileSet('Age: ' , String(Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) +
                        this.profileSet('Height: ', this.getHeight(Number(values.height))) +
@@ -308,49 +321,133 @@ export class ChatComponent implements OnInit {
                       delay: 500,
                        type: 'html',
                        // tslint:disable-next-line: max-line-length
-                       content: '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
-                       'नाम: ' + values.name + '<br>' +
+                       content:
+                      //  '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
+                      // line -0
+                         '<table style="width:100%;background:white;border-radius:7px;font-size:12px;margin-top: 10px;padding-left:5px">' +
+                          '<tr>' +
+                            // tslint:disable-next-line: max-line-length
+                          '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', values.mobile) + '</th>' +
+                          // tslint:disable-next-line: max-line-length
+                          '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', values.locality) + '</th>' +
+                            '</tr>' +
+                            '</table>' +
+                       // line -1
+                       '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
+                      '<tr>' +
+                      // tslint:disable-next-line: max-line-length
+                      '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Yrs</th>' +
+                      // tslint:disable-next-line: max-line-length
+                      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/scale.svg">' + this.getHeight(Number(values.height)) + '</th>' +
                        // tslint:disable-next-line: max-line-length
-                       this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
-                       this.profileSet('कद: ', this.getHeight(Number(values.height))) +
-                       this.profileSet('वजन: ', values.weight) +
-                       this.profileSet('धर्म: ', values.religion) +
-                       this.profileSet('जाती: ', values.caste) +
-                       this.profileSet('मोबाइल नंबर: ', values.mobile) +
-                       this.profileSet('खान-पान: ', values.food_choice) +
-                       this.profileSet('पता: ', values.locality) +
-                       this.profileSet('वैवाहिक स्तिथि: ', values.marital_status) +
-                       this.profileSet('विकलांगता: ', values.disability) + ' <br> <br>'
-                        +
-                       '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
-                       this.profileSet('जन्म दिवस: ', values.birth_date) +
-                       this.profileSet('जन्म स्थान: ', values.birth_place) +
-                       this.profileSet('जन्म समय: ', values.birth_time) +
-                       this.profileSet('मांगलिक: ', values.manglik) + ' <br> <br>'
-                       +
-                       '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
-                       this.profileSet('शिक्षा: ', values.education) +
-                       this.profileSet('डिग्री: ', values.degree) +
-                       this.profileSet('कॉलेज: ', values.college) + ' <br><br>'
-                       +
-                       '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
-                       this.profileSet('व्यसाय: ', values.occupation) +
-                       this.profileSetIncome('वार्षिक आय: ', String(values.monthly_income)) +
-                       this.profileSet('पेशा: ', values.profession) +
-                       this.profileSet('कार्य स्थान: ', values.working_city) + ' <br><br>'
-                       +
-                       '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
-                       this.profileSet('परिवार: ', values.family_type) +
-                       this.profileSet('घर: ', values.house_type) +
-                       this.profileSet('मदर स्टेटस: ', values.mother_status) +
-                       this.profileSet('फादर स्टेटस: ', values.father_status) +
-                       this.profileSet('माता का व्यसाय: ', values.mother_occupation) +
-                       this.profileSet('पिता का व्यसाय : ', values.father_occupation) +
-                       this.profileSetIncome('पारिवारिक आय: ', String(values.family_income)) +
-                       this.profileSet('मैरिड भाई: ', values.married_sons) +
-                       this.profileSet('मैरिड बेहेने : ', values.married_daughters) +
-                       this.profileSet('अव्यावाहित भाई: ', values.unmarried_sons) +
-                       this.profileSet('अव्यावाहित बेहेने : ', values.unmarried_daughters)
+                       '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/weight.svg">' + this.setValue(values.weight) + ' Kg</th>' +
+                        '</tr>' +
+                        '</table>' +
+                        // line -2
+                        '<table style="width:100%">' +
+                        '<tr>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(values.profession) + this.setValue(values.education) + '</div></th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.monthly_income) + ' LPA </th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' + this.setValue(values.locality) + '</th>' +
+                          '</tr>' +
+                          '</table>' +
+
+                          // line -3
+                        '<table style="width:100%">' +
+                        '<tr>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/templeblue.svg">' + this.setValue(values.religion) + this.setValue(values.caste) + this.setValue(values.gotra) +  '</th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top: 25%" src="../assets/heart.svg"></div><div>' +  this.setValue(values.marital_status) + '</div></th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/cutlery.svg">' + this.setValue(values.food_choice) + '</th>' +
+                          '</tr>' +
+                          '</table>' +
+
+                             // line -4
+                        '<table style="width:100%">' +
+                        '<tr>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/birthday.svg">' + this.setValue(values.birth_date) +  '</th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' +  this.setValue(values.birth_place) + '</th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/clock.svg">' + this.setValue(values.birth_time) + '</th>' +
+                          '</tr>' +
+                          '</table>' +
+
+                             // line -5
+                        '<table style="width:100%">' +
+                        '<tr>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/tarot.svg"></div><div>' + this.setManglik(values.manglik) +  '</div></th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(values.house_type) + '</th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
+                          '</tr>' +
+                          '</table>'+
+
+                             // line -6
+                        '<table style="width:100%">' +
+                        '<tr>' +
+                        // // tslint:disable-next-line: max-line-length
+                        // tslint:disable-next-line: max-line-length
+                        // this.setMarriageSisters(String(Number(values.married_daughters) + Number(values.unmarried_daughters) ), values.married_daughters) +
+                        // // tslint:disable-next-line: max-line-length
+                        // tslint:disable-next-line: max-line-length
+                        // this.setMarriageBrothers(String(Number(values.married_sons) + Number(values.unmarried_sons) ), values.married_sons)  +
+                        // tslint:disable-next-line: max-line-length
+                        this.setMarriageSisters('5', '3') +
+                        // tslint:disable-next-line: max-line-length
+                        this.setMarriageBrothers('5', '3')  +
+                          '</tr>' +
+                          '</table></div>'
+
+                      // tslint:disable-next-line: max-line-length
+                      //  this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
+                      //  this.profileSet('कद: ', this.getHeight(Number(values.height))) +
+                      //  this.profileSet('वजन: ', values.weight) +
+                      //  this.profileSet('धर्म: ', values.religion) +
+                      //  this.profileSet('जाती: ', values.caste) +
+                      //  this.profileSet('मोबाइल नंबर: ', values.mobile) +
+                      //  this.profileSet('खान-पान: ', values.food_choice) +
+                      //  this.profileSet('पता: ', values.locality) +
+                      //  this.profileSet('वैवाहिक स्तिथि: ', values.marital_status) +
+                      //  this.profileSet('विकलांगता: ', values.disability) + ' <br> <br>'
+                      //   +
+                      //  '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
+                      //  this.profileSet('जन्म दिवस: ', values.birth_date) +
+                      //  this.profileSet('जन्म स्थान: ', values.birth_place) +
+                      //  this.profileSet('जन्म समय: ', values.birth_time) +
+                      //  this.profileSet('मांगलिक: ', values.manglik) + ' <br> <br>'
+                      //  +
+                      //  '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
+                      //  this.profileSet('शिक्षा: ', values.education) +
+                      //  this.profileSet('डिग्री: ', values.degree) +
+                      //  this.profileSet('कॉलेज: ', values.college) + ' <br><br>'
+                      //  +
+                      //  '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
+                      //  this.profileSet('व्यसाय: ', values.occupation) +
+                      //  this.profileSetIncome('वार्षिक आय: ', String(values.monthly_income)) +
+                      //  this.profileSet('पेशा: ', values.profession) +
+                      //  this.profileSet('कार्य स्थान: ', values.working_city) + ' <br><br>'
+                      //  +
+                      //  '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
+                      //  this.profileSet('परिवार: ', values.family_type) +
+                      //  this.profileSet('घर: ', values.house_type) +
+                      //  this.profileSet('मदर स्टेटस: ', values.mother_status) +
+                      //  this.profileSet('फादर स्टेटस: ', values.father_status) +
+                      //  this.profileSet('माता का व्यसाय: ', values.mother_occupation) +
+                      //  this.profileSet('पिता का व्यसाय : ', values.father_occupation) +
+                      //  this.profileSetIncome('पारिवारिक आय: ', String(values.family_income)) +
+                      //  this.profileSet('मैरिड भाई: ', values.married_sons) +
+                      //  this.profileSet('मैरिड बेहेने : ', values.married_daughters) +
+                      //  this.profileSet('अव्यावाहित भाई: ', values.unmarried_sons) +
+                      //  this.profileSet('अव्यावाहित बेहेने : ', values.unmarried_daughters)
                    }).then(() => {
                        if (data.buttons.match('Yes' || 'No')) {
                          return this.botui.action.button({
@@ -753,6 +850,28 @@ export class ChatComponent implements OnInit {
       return key + ': ' + value + '<br>';
     } else {return ''; }
    }
+   setValue(value: String): String {
+    if (value != null) {
+      return value ;
+    } else {return ''; }
+   }
+
+   setHiddenValue(path: string , value: String): String {
+    if (value != null) {
+      return '<img style="width:25px" src="' + path + '">' +  value ;
+    } else {return ''; }
+   }
+
+   SetIncome(value: string): String {
+    if (value != null) {
+      if (Number(value) > 1000) {
+        return String((Number(value) / 100000));
+      } else {
+        return value;
+      }
+
+    } else {return ''; }
+   }
 
    profileSetIncome(key: string, value: string): String {
     if (value != null) {
@@ -855,7 +974,7 @@ profileReAnswer(num: any, id: any, answer: any) {
 }
 
    getSelectedProfile(data: any) {
-     this.history = 'chatbot';
+     this.changeToBot();
      console.log(data);
      const personal = data.profile;
      const family = data.family;
@@ -863,7 +982,8 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img src=' + this.getProfilePhotoHistory( personal.photo, personal.carousel, personal.gender) + ' style="width: 100%" >'
+      content: '<img src=' + this.getProfilePhotoHistory( personal.photo, personal.carousel, personal.gender) + ' style="width: 100%;border-radius: 10px" ><br>' +
+      '<div style="text-align:center"><b>' + personal.name  + '</b></div><br>'
     });
      if (localStorage.getItem('language') === 'English') {
       this.botui.message.add({
@@ -965,51 +1085,122 @@ profileReAnswer(num: any, id: any, answer: any) {
       this.botui.message.add({
         type: 'html',
         // tslint:disable-next-line: max-line-length
-        content: '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
-        'नाम: ' + personal.name + '<br>' +
+        content:
+        // line -0
+        '<table style="width:100%;background:white;border-radius:7px;font-size:16px;margin-top: 10px;padding-left:5px">' +
+        '<tr>' +
         // tslint:disable-next-line: max-line-length
-        this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(personal.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
-        this.profileSet('कद: ', this.getHeight(Number(personal.height))) +
-        this.profileSet('वजन: ', personal.weight) +
-        this.profileSet('धर्म: ', personal.religion) +
-        this.profileSet('जाती: ', personal.caste) +
-        this.profileSet('खान-पान: ', personal.food_choice) +
-        this.profileSet('वैवाहिक स्तिथि: ', personal.marital_status) +
-        this.profileSet('विकलांगता: ', personal.disability) + ' <br> <br>'
-         +
-        '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
-        this.profileSet('जन्म दिवस: ', personal.birth_date) +
-        this.profileSet('जन्म स्थान: ', personal.birth_place) +
-        this.profileSet('जन्म समय: ', personal.birth_time) +
-        this.profileSet('मांगलिक: ', personal.manglik) + ' <br> <br>'
-        +
-        '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
-        this.profileSet('शिक्षा: ', personal.education) +
-        this.profileSet('डिग्री: ', personal.degree) +
-        this.profileSet('कॉलेज: ', personal.college) + ' <br><br>'
-        +
-        '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
-        this.profileSet('व्यसाय: ', personal.occupation) +
-        this.profileSetIncome('वार्षिक आय: ', String(personal.monthly_income)) +
-        this.profileSet('पेशा: ', personal.profession) +
-        this.profileSet('कार्य स्थान: ', personal.working_city) + ' <br><br>'
-        +
-        '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
-        this.profileSet('परिवार: ', family.family_type) +
-        this.profileSet('घर: ', family.house_type) +
-        this.profileSet('मदर स्टेटस: ', family.mother_status) +
-        this.profileSet('फादर स्टेटस: ', family.father_status) +
-        this.profileSet('माता का व्यसाय: ', family.occupation_mother) +
-        this.profileSet('पिता का व्यसाय : ', family.occupation) +
-        this.profileSetIncome('पारिवारिक आय: ', String(family.family_income)) +
-        this.profileSet('मैरिड भाई: ', family.married_sons) +
-        this.profileSet('मैरिड बेहेने : ', family.married_daughters) +
-        this.profileSet('अव्यावाहित भाई: ', family.unmarried_sons) +
-        this.profileSet('अव्यावाहित बेहेने : ', family.unmarried_daughters) + ' <br><br>'
-        +
-        '<b> &#9742 कांटेक्ट डिटेल्स </b> <br><br>' +
-        this.profileSet('मोबाइल नंबर: ', family.mobile) +
-        this.profileSet('पता: ', family.locality)
+        '<th style="width:50%;padding: 20px 0px 20px 10px;">' + this.setHiddenValue('../assets/phone.svg', family.mobile) + '</th>' +
+        // tslint:disable-next-line: max-line-length
+        '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', family.locality) + '</th>' +
+          '</tr>' +
+          '</table>' +
+        // line -1
+        '<table style="width:100%;background:#f3f3f3;border-radius:7px;font-size:16px;margin-top: 10px;padding-left:5px">' +
+        '<tr>' +
+        // tslint:disable-next-line: max-line-length
+        '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:20px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(personal.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Years</th>' +
+        // tslint:disable-next-line: max-line-length
+        '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/scale.svg">' + this.getHeight(Number(personal.height)) + ' Height</th>' +
+         // tslint:disable-next-line: max-line-length
+         '<th style="width:33.34%">' + '<img style="width:20px" src="../assets/weight.svg">' + this.setValue(personal.weight) + ' Kg</th>' +
+          '</tr>' +
+          '</table>' +
+          // line -2
+          '<table style="width:100%;background:#f5f5f5;border-radius:10px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/graduation.svg">' + this.setValue(personal.profession) + this.setValue(personal.education) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/rupee.svg">' + this.SetIncome(personal.monthly_income) + ' LPA </th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' + this.setValue(family.locality) + '</th>' +
+            '</tr>' +
+            '</table>' +
+
+            // line -3
+          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/templeblue.svg">' + this.setValue(family.religion) + this.setValue(family.caste) + this.setValue(family.gotra) +  '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/heart.svg">' +  this.setValue(personal.marital_status) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/cutlery.svg">' + this.setValue(personal.food_choice) + '</th>' +
+            '</tr>' +
+            '</table>' +
+
+               // line -4
+          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/birthday.svg">' + this.setValue(personal.birth_date) +  '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' +  this.setValue(personal.birth_place) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/clock.svg">' + this.setValue(personal.birth_time) + '</th>' +
+            '</tr>' +
+            '</table>' +
+
+               // line -5
+          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/tarot.svg">Manglik: ' + this.setValue(personal.manglik) +  '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/house.svg">House type: ' +  this.setValue(family.house_type) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/rupee.svg">' + this.SetIncome(family.family_income) + ' LPA</th>' +
+            '</tr>' +
+            '</table>'
+
+
+
+        // '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
+        // 'नाम: ' + personal.name + '<br>' +
+        // tslint:disable-next-line: max-line-length
+        // this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(personal.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
+        // this.profileSet('कद: ', this.getHeight(Number(personal.height))) +
+        // this.profileSet('वजन: ', personal.weight) +
+        // this.profileSet('धर्म: ', personal.religion) +
+        // this.profileSet('जाती: ', personal.caste) +
+        // this.profileSet('खान-पान: ', personal.food_choice) +
+        // this.profileSet('वैवाहिक स्तिथि: ', personal.marital_status) +
+        // this.profileSet('विकलांगता: ', personal.disability) + ' <br> <br>'
+        //  +
+        // '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
+        // this.profileSet('जन्म दिवस: ', personal.birth_date) +
+        // this.profileSet('जन्म स्थान: ', personal.birth_place) +
+        // this.profileSet('जन्म समय: ', personal.birth_time) +
+        // this.profileSet('मांगलिक: ', personal.manglik) + ' <br> <br>'
+        // +
+        // '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
+        // this.profileSet('शिक्षा: ', personal.education) +
+        // this.profileSet('डिग्री: ', personal.degree) +
+        // this.profileSet('कॉलेज: ', personal.college) + ' <br><br>'
+        // +
+        // '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
+        // this.profileSet('व्यसाय: ', personal.occupation) +
+        // this.profileSetIncome('वार्षिक आय: ', String(personal.monthly_income)) +
+        // this.profileSet('पेशा: ', personal.profession) +
+        // this.profileSet('कार्य स्थान: ', personal.working_city) + ' <br><br>'
+        // +
+        // '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
+        // this.profileSet('परिवार: ', family.family_type) +
+        // this.profileSet('घर: ', family.house_type) +
+        // this.profileSet('मदर स्टेटस: ', family.mother_status) +
+        // this.profileSet('फादर स्टेटस: ', family.father_status) +
+        // this.profileSet('माता का व्यसाय: ', family.occupation_mother) +
+        // this.profileSet('पिता का व्यसाय : ', family.occupation) +
+        // this.profileSetIncome('पारिवारिक आय: ', String(family.family_income)) +
+        // this.profileSet('मैरिड भाई: ', family.married_sons) +
+        // this.profileSet('मैरिड बेहेने : ', family.married_daughters) +
+        // this.profileSet('अव्यावाहित भाई: ', family.unmarried_sons) +
+        // this.profileSet('अव्यावाहित बेहेने : ', family.unmarried_daughters) + ' <br><br>'
+        // +
+        // '<b> &#9742 कांटेक्ट डिटेल्स </b> <br><br>' +
+        // this.profileSet('मोबाइल नंबर: ', family.mobile) +
+        // this.profileSet('पता: ', family.locality)
     }).then(() => {
       if (family.mobile) {
         return this.botui.action.button({
@@ -1083,48 +1274,111 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' style="width: 100%" >' +
-                    '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
-                    'नाम: ' + valueInMessage.name + '<br>' +
+                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.photo, valueInMessage.carousel, valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" >' +
+                    '<div style="text-align:center"><b>' + valueInMessage.name + '</b></div><br>' +
+
+                    // line -1
+        '<table style="width:100%;background:#f3f3f3;border-radius:7px;font-size:16px;margin-top: 10px;padding-left:5px">' +
+        '<tr>' +
+        // tslint:disable-next-line: max-line-length
+        '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:20px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(valueInMessage.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Years</th>' +
+        // tslint:disable-next-line: max-line-length
+        '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/scale.svg">' + this.getHeight(Number(valueInMessage.height)) + ' Height</th>' +
+         // tslint:disable-next-line: max-line-length
+         '<th style="width:33.34%">' + '<img style="width:20px" src="../assets/weight.svg">' + this.setValue(valueInMessage.weight) + ' Kg</th>' +
+          '</tr>' +
+          '</table>' +
+          // line -2
+          '<table style="width:100%;background:#f5f5f5;border-radius:10px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/graduation.svg">' + this.setValue(valueInMessage.profession) + this.setValue(valueInMessage.education) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/rupee.svg">' + this.SetIncome(valueInMessage.monthly_income) + ' LPA </th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' + this.setValue(valueInMessage.locality) + '</th>' +
+            '</tr>' +
+            '</table>' +
+
+            // line -3
+          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/templeblue.svg">' + this.setValue(valueInMessage.religion) + this.setValue(valueInMessage.caste) + this.setValue(valueInMessage.gotra) +  '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/heart.svg">' +  this.setValue(valueInMessage.marital_status) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/cutlery.svg">' + this.setValue(valueInMessage.food_choice) + '</th>' +
+            '</tr>' +
+            '</table>' +
+
+               // line -4
+          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/birthday.svg">' + this.setValue(valueInMessage.birth_date) +  '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' +  this.setValue(valueInMessage.birth_place) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/clock.svg">' + this.setValue(valueInMessage.birth_time) + '</th>' +
+            '</tr>' +
+            '</table>' +
+
+               // line -5
+          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
+          '<tr>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/tarot.svg">Manglik: ' + this.setValue(valueInMessage.manglik) +  '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/house.svg">House type: ' +  this.setValue(valueInMessage.house_type) + '</th>' +
+          // tslint:disable-next-line: max-line-length
+          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/rupee.svg">' + this.SetIncome(valueInMessage.family_income) + ' LPA</th>' +
+            '</tr>' +
+            '</table>'
+
+
+                    // '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
+                    // 'नाम: ' + valueInMessage.name + '<br>' +
+                    // // tslint:disable-next-line: max-line-length
                     // tslint:disable-next-line: max-line-length
-                    this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(valueInMessage.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
-                    this.profileSet('कद: ', this.getHeight(Number(valueInMessage.height))) +
-                    this.profileSet('वजन: ', valueInMessage.weight) +
-                    this.profileSet('धर्म: ', valueInMessage.religion) +
-                    this.profileSet('जाती: ', valueInMessage.caste) +
-                    this.profileSet('खान-पान: ', valueInMessage.food_choice) +
-                    this.profileSet('पता: ', valueInMessage.locality) +
-                    this.profileSet('वैवाहिक स्तिथि: ', valueInMessage.marital_status) +
-                    this.profileSet('विकलांगता: ', valueInMessage.disability) + ' <br> <br>'
-                     +
-                    '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
-                    this.profileSet('जन्म दिवस: ', valueInMessage.birth_date) +
-                    this.profileSet('जन्म स्थान: ', valueInMessage.birth_place) +
-                    this.profileSet('मांगलिक: ', valueInMessage.manglik) + ' <br> <br>'
-                    +
-                    '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
-                    this.profileSet('शिक्षा: ', valueInMessage.education) +
-                    this.profileSet('डिग्री: ', valueInMessage.degree) +
-                    this.profileSet('कॉलेज: ', valueInMessage.college) + ' <br><br>'
-                    +
-                    '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
-                    this.profileSet('व्यसाय: ', valueInMessage.occupation) +
-                    this.profileSetIncome('वार्षिक आय: ', String(valueInMessage.monthly_income)) +
-                    this.profileSet('पेशा: ', valueInMessage.profession) +
-                    this.profileSet('कार्य स्थान: ', valueInMessage.working_city) + ' <br><br>'
-                    +
-                    '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
-                    this.profileSet('परिवार: ', valueInMessage.family_type) +
-                    this.profileSet('घर: ', valueInMessage.house_type) +
-                    this.profileSet('मदर स्टेटस: ', valueInMessage.mother_status) +
-                    this.profileSet('फादर स्टेटस: ', valueInMessage.father_status) +
-                    this.profileSet('माता का व्यसाय: ', valueInMessage.occupation_mother) +
-                    this.profileSet('पिता का व्यसाय : ', valueInMessage.occupation) +
-                    this.profileSetIncome('पारिवारिक आय: ', String(valueInMessage.family_income)) +
-                    this.profileSet('मैरिड भाई: ', valueInMessage.married_sons) +
-                    this.profileSet('मैरिड बेहेने : ', valueInMessage.married_daughters) +
-                    this.profileSet('अव्यावाहित भाई: ', valueInMessage.unmarried_sons) +
-                    this.profileSet('अव्यावाहित बेहेने : ', valueInMessage.unmarried_daughters)
+                    // this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(valueInMessage.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
+                    // this.profileSet('कद: ', this.getHeight(Number(valueInMessage.height))) +
+                    // this.profileSet('वजन: ', valueInMessage.weight) +
+                    // this.profileSet('धर्म: ', valueInMessage.religion) +
+                    // this.profileSet('जाती: ', valueInMessage.caste) +
+                    // this.profileSet('खान-पान: ', valueInMessage.food_choice) +
+                    // this.profileSet('पता: ', valueInMessage.locality) +
+                    // this.profileSet('वैवाहिक स्तिथि: ', valueInMessage.marital_status) +
+                    // this.profileSet('विकलांगता: ', valueInMessage.disability) + ' <br> <br>'
+                    //  +
+                    // '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
+                    // this.profileSet('जन्म दिवस: ', valueInMessage.birth_date) +
+                    // this.profileSet('जन्म स्थान: ', valueInMessage.birth_place) +
+                    // this.profileSet('मांगलिक: ', valueInMessage.manglik) + ' <br> <br>'
+                    // +
+                    // '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
+                    // this.profileSet('शिक्षा: ', valueInMessage.education) +
+                    // this.profileSet('डिग्री: ', valueInMessage.degree) +
+                    // this.profileSet('कॉलेज: ', valueInMessage.college) + ' <br><br>'
+                    // +
+                    // '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
+                    // this.profileSet('व्यसाय: ', valueInMessage.occupation) +
+                    // this.profileSetIncome('वार्षिक आय: ', String(valueInMessage.monthly_income)) +
+                    // this.profileSet('पेशा: ', valueInMessage.profession) +
+                    // this.profileSet('कार्य स्थान: ', valueInMessage.working_city) + ' <br><br>'
+                    // +
+                    // '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
+                    // this.profileSet('परिवार: ', valueInMessage.family_type) +
+                    // this.profileSet('घर: ', valueInMessage.house_type) +
+                    // this.profileSet('मदर स्टेटस: ', valueInMessage.mother_status) +
+                    // this.profileSet('फादर स्टेटस: ', valueInMessage.father_status) +
+                    // this.profileSet('माता का व्यसाय: ', valueInMessage.occupation_mother) +
+                    // this.profileSet('पिता का व्यसाय : ', valueInMessage.occupation) +
+                    // this.profileSetIncome('पारिवारिक आय: ', String(valueInMessage.family_income)) +
+                    // this.profileSet('मैरिड भाई: ', valueInMessage.married_sons) +
+                    // this.profileSet('मैरिड बेहेने : ', valueInMessage.married_daughters) +
+                    // this.profileSet('अव्यावाहित भाई: ', valueInMessage.unmarried_sons) +
+                    // this.profileSet('अव्यावाहित बेहेने : ', valueInMessage.unmarried_daughters)
                 });
                 }
               }
@@ -1213,5 +1467,45 @@ openPromptDialog() {
     this.promptData = data;
   });
 }
+setManglik(value: string) {
+if (value === 'No') {
+  return 'Non Manglik';
+} else {
+  return value;
+}
+}
+setHouseType(value: string) {
+  if (value === 'Owned') {
+    return 'Own House';
+  } else {
+    return 'Rented House';
+  }
+  }
+  setMarriageBrothers(value1: string, value2: string) {
+    if (value1 != null && value1 !== '' && value1 !== '0') {
+      if (value2 != null && value2 !== '' && value2 !== '0' ) {
+        // tslint:disable-next-line: max-line-length
+        return '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers -> ' + value2 + ' are married </th>';
+      } else {
+          // tslint:disable-next-line: max-line-length
+        return '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers</th>';
+      }
+    } else {
+      return '';
+    }
+    }
+    setMarriageSisters(value1: string, value2: string) {
+      if (value1 != null && value1 !== '' && value1 !== '0') {
+        if (value2 != null && value2 !== '' && value2 !== '0' ) {
+          // tslint:disable-next-line: max-line-length
+          return '<th style="width:33.33%;padding: 5px 0px 5px 10px;"">' + '<img style="width:25px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters -> ' + value2 + ' are married </th>';
+        } else {
+            // tslint:disable-next-line: max-line-length
+          return '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters</th>';
+        }
+      } else {
+        return '';
+      }
+      }
 
 }
