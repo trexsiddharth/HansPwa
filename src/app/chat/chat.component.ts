@@ -348,7 +348,7 @@ export class ChatComponent implements OnInit {
                         '<table style="width:100%">' +
                         '<tr>' +
                         // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(values.profession) + this.setValue(values.education) + '</div></th>' +
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(values.profession) + '<br>' + this.setValue(values.education) + '</div></th>' +
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.monthly_income) + ' LPA </th>' +
                         // tslint:disable-next-line: max-line-length
@@ -388,7 +388,7 @@ export class ChatComponent implements OnInit {
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(values.house_type) + '</th>' +
                         // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
                           '</tr>' +
                           '</table>' +
                              // line -6
@@ -587,6 +587,8 @@ export class ChatComponent implements OnInit {
            }
            },
            (error: any) => {
+             this.ngxNotificationService.error('Something Went Wrong, We are trying again');
+             this.repeatMEssage(ans, mob);
              console.log(error);
            }
          );
@@ -679,8 +681,8 @@ export class ChatComponent implements OnInit {
 
   getProfilePhotoHistory(num: string, num2: string , gen: string): String {
     if (num != null && num !== '') {
-      const carousel: string = JSON.parse(num);
-      if (carousel['1'].match('http')) {
+      const carousel: any = JSON.parse(num);
+      if (carousel['1'].toString().match('http')) {
         return carousel['1'];
       } else {
         return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['1'];
@@ -990,8 +992,9 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img src=' + this.getProfilePhotoHistory( personal.photo, personal.carousel, personal.gender) + ' style="width: 100%;border-radius: 10px" ><br>' +
-      '<div style="text-align:center"><b>' + personal.name  + '</b></div><br>'
+      content: '<img src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" ><br>' +
+      '<div style="text-align:center"><b>' + personal.name  + '</b></div><br>' +
+                   '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
     });
      if (localStorage.getItem('language') === 'English') {
       this.botui.message.add({
@@ -1095,72 +1098,87 @@ profileReAnswer(num: any, id: any, answer: any) {
         // tslint:disable-next-line: max-line-length
         content:
         // line -0
-        '<table style="width:100%;background:white;border-radius:7px;font-size:16px;margin-top: 10px;padding-left:5px">' +
+        '<table style="width:100%;background:white;border-radius:7px;font-size:12px;margin-top: 10px;padding-left:5px">' +
         '<tr>' +
+          // tslint:disable-next-line: max-line-length
+        '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', personal.mobile) + '</th>' +
         // tslint:disable-next-line: max-line-length
-        '<th style="width:50%;padding: 20px 0px 20px 10px;">' + this.setHiddenValue('../assets/phone.svg', family.mobile) + '</th>' +
-        // tslint:disable-next-line: max-line-length
-        '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', family.locality) + '</th>' +
+        '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', personal.city) + '</th>' +
           '</tr>' +
           '</table>' +
-        // line -1
-        '<table style="width:100%;background:#f3f3f3;border-radius:7px;font-size:16px;margin-top: 10px;padding-left:5px">' +
-        '<tr>' +
-        // tslint:disable-next-line: max-line-length
-        '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:20px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(personal.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Years</th>' +
-        // tslint:disable-next-line: max-line-length
-        '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/scale.svg">' + this.getHeight(Number(personal.height)) + ' Height</th>' +
-         // tslint:disable-next-line: max-line-length
-         '<th style="width:33.34%">' + '<img style="width:20px" src="../assets/weight.svg">' + this.setValue(personal.weight) + ' Kg</th>' +
-          '</tr>' +
-          '</table>' +
-          // line -2
-          '<table style="width:100%;background:#f5f5f5;border-radius:10px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/graduation.svg">' + this.setValue(personal.profession) + this.setValue(personal.education) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/rupee.svg">' + this.SetIncome(personal.monthly_income) + ' LPA </th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' + this.setValue(family.locality) + '</th>' +
-            '</tr>' +
-            '</table>' +
+     // line -1
+     '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
+    '<tr>' +
+    // tslint:disable-next-line: max-line-length
+    '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(personal.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Yrs</th>' +
+    // tslint:disable-next-line: max-line-length
+    '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/scale.svg">' + this.getHeight(Number(personal.height)) + '</th>' +
+     // tslint:disable-next-line: max-line-length
+     '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/weight.svg">' + this.setValue(personal.weight) + ' Kg</th>' +
+      '</tr>' +
+      '</table>' +
+      // line -2
+      '<table style="width:100%">' +
+      '<tr>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + '<br>'  + this.setValue(personal.profession) + this.setValue(personal.education) + '</div></th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(personal.monthly_income) + ' LPA </th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' + this.setValue(family.locality) + '</th>' +
+        '</tr>' +
+        '</table>' +
 
-            // line -3
-          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/templeblue.svg">' + this.setValue(family.religion) + this.setValue(family.caste) + this.setValue(family.gotra) +  '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/heart.svg">' +  this.setValue(personal.marital_status) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/cutlery.svg">' + this.setValue(personal.food_choice) + '</th>' +
-            '</tr>' +
-            '</table>' +
+        // line -3
+      '<table style="width:100%">' +
+      '<tr>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/templeblue.svg">' + this.setValue(family.religion) + '<br>' + this.setValue(family.caste) + this.setValue(family.gotra) + '<br>' +  '</th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top: 25%" src="../assets/heart.svg"></div><div>' +  this.setValue(personal.marital_status) + '</div></th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/cutlery.svg">' + this.setValue(personal.food_choice) + '</th>' +
+        '</tr>' +
+        '</table>' +
 
-               // line -4
-          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/birthday.svg">' + this.setValue(personal.birth_date) +  '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' +  this.setValue(personal.birth_place) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/clock.svg">' + this.setValue(personal.birth_time) + '</th>' +
-            '</tr>' +
-            '</table>' +
+           // line -4
+      '<table style="width:100%">' +
+      '<tr>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/birthday.svg">' + this.setValue(personal.birth_date) +  '</th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/birthplace.svg">' +  this.setValue(personal.birth_place) + '</th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/clock.svg">' + this.setValue(personal.birth_time) + '</th>' +
+        '</tr>' +
+        '</table>' +
 
-               // line -5
-          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/tarot.svg">Manglik: ' + this.setValue(personal.manglik) +  '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/house.svg">House type: ' +  this.setValue(family.house_type) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/rupee.svg">' + this.SetIncome(family.family_income) + ' LPA</th>' +
-            '</tr>' +
-            '</table>'
+           // line -5
+      '<table style="width:100%">' +
+      '<tr>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/tarot.svg"></div><div>' + this.setManglik(personal.manglik) +  '</div></th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(personal.house_type) + '</th>' +
+      // tslint:disable-next-line: max-line-length
+      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(family.family_income) + ' LPA</th>' +
+        '</tr>' +
+        '</table>' +
+           // line -6
+      '<table style="width:100%">' +
+      '<tr>' +
+      // tslint:disable-next-line: max-line-length
+      this.setMarriageSisters(String(Number(family.married_daughters) + Number(family.unmarried_daughters) ), family.married_daughters) +
+      // tslint:disable-next-line: max-line-length
+      this.setMarriageBrothers(String(Number(family.married_sons) + Number(family.unmarried_sons) ), family.married_sons)  +
+        '</tr>' +
+        '</table>' +
+
+             // line -7
+      '<table style="width:100%">' +
+      // tslint:disable-next-line: max-line-length
+      '<tr>' + this.LifeStatus(family.father_status, family.mother_status, family.father_occupation, family.occupation_mother) + '</tr>' +
+        '</table></div>'
 
 
 
@@ -1283,66 +1301,91 @@ profileReAnswer(num: any, id: any, answer: any) {
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
                     content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" >' +
-                    '<div style="text-align:center"><b>' + valueInMessage.name + '</b></div><br>' +
+                    '<div style="text-align:center"><b>' + valueInMessage.name + '</b></div>' +
+                    '<div style="text-align:center"><i>' + this.setValue(valueInMessage.about) + '</i></div><br>' +
 
-                    // line -1
-        '<table style="width:100%;background:#f3f3f3;border-radius:7px;font-size:16px;margin-top: 10px;padding-left:5px">' +
-        '<tr>' +
-        // tslint:disable-next-line: max-line-length
-        '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:20px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(valueInMessage.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Years</th>' +
-        // tslint:disable-next-line: max-line-length
-        '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/scale.svg">' + this.getHeight(Number(valueInMessage.height)) + ' Height</th>' +
-         // tslint:disable-next-line: max-line-length
-         '<th style="width:33.34%">' + '<img style="width:20px" src="../assets/weight.svg">' + this.setValue(valueInMessage.weight) + ' Kg</th>' +
-          '</tr>' +
-          '</table>' +
-          // line -2
-          '<table style="width:100%;background:#f5f5f5;border-radius:10px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/graduation.svg">' + this.setValue(valueInMessage.profession) + this.setValue(valueInMessage.education) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:20px" src="../assets/rupee.svg">' + this.SetIncome(valueInMessage.monthly_income) + ' LPA </th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' + this.setValue(valueInMessage.locality) + '</th>' +
-            '</tr>' +
-            '</table>' +
+                    // line -0
+                    '<table style="width:100%;background:white;border-radius:7px;font-size:12px;margin-top: 10px;padding-left:5px">' +
+                    '<tr>' +
+                      // tslint:disable-next-line: max-line-length
+                    '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', valueInMessage.mobile) + '</th>' +
+                    // tslint:disable-next-line: max-line-length
+                    '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', valueInMessage.city) + '</th>' +
+                      '</tr>' +
+                      '</table>' +
+                 // line -1
+                 '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
+                '<tr>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(valueInMessage.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Yrs</th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/scale.svg">' + this.getHeight(Number(valueInMessage.height)) + '</th>' +
+                 // tslint:disable-next-line: max-line-length
+                 '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/weight.svg">' + this.setValue(valueInMessage.weight) + ' Kg</th>' +
+                  '</tr>' +
+                  '</table>' +
+                  // line -2
+                  '<table style="width:100%">' +
+                  '<tr>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(valueInMessage.profession) + '<br>'  + this.setValue(valueInMessage.education) + '</div></th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(valueInMessage.monthly_income) + ' LPA </th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' + this.setValue(valueInMessage.locality) + '</th>' +
+                    '</tr>' +
+                    '</table>' +
 
-            // line -3
-          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/templeblue.svg">' + this.setValue(valueInMessage.religion) + this.setValue(valueInMessage.caste) + this.setValue(valueInMessage.gotra) +  '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/heart.svg">' +  this.setValue(valueInMessage.marital_status) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/cutlery.svg">' + this.setValue(valueInMessage.food_choice) + '</th>' +
-            '</tr>' +
-            '</table>' +
+                    // line -3
+                  '<table style="width:100%">' +
+                  '<tr>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/templeblue.svg">' + this.setValue(valueInMessage.religion) + '<br>' + this.setValue(valueInMessage.caste) + this.setValue(valueInMessage.gotra) + '<br>' +  '</th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top: 25%" src="../assets/heart.svg"></div><div>' +  this.setValue(valueInMessage.marital_status) + '</div></th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/cutlery.svg">' + this.setValue(valueInMessage.food_choice) + '</th>' +
+                    '</tr>' +
+                    '</table>' +
 
-               // line -4
-          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/birthday.svg">' + this.setValue(valueInMessage.birth_date) +  '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/locationblue.svg">' +  this.setValue(valueInMessage.birth_place) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/clock.svg">' + this.setValue(valueInMessage.birth_time) + '</th>' +
-            '</tr>' +
-            '</table>' +
+                       // line -4
+                  '<table style="width:100%">' +
+                  '<tr>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/birthday.svg">' + this.setValue(valueInMessage.birth_date) +  '</th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/birthplace.svg">' +  this.setValue(valueInMessage.birth_place) + '</th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/clock.svg">' + this.setValue(valueInMessage.birth_time) + '</th>' +
+                    '</tr>' +
+                    '</table>' +
 
-               // line -5
-          '<table style="width:100%;background:#f5f5f5;border-radius:7px; margin-top: 10px;font-size:16px">' +
-          '<tr>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%;padding: 20px 0px 20px 10px;">' + '<img style="width:25px" src="../assets/tarot.svg">Manglik: ' + this.setValue(valueInMessage.manglik) +  '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/house.svg">House type: ' +  this.setValue(valueInMessage.house_type) + '</th>' +
-          // tslint:disable-next-line: max-line-length
-          '<th style="width:33.33%">' + '<img style="width:25px" src="../assets/rupee.svg">' + this.SetIncome(valueInMessage.family_income) + ' LPA</th>' +
-            '</tr>' +
-            '</table>'
+                       // line -5
+                  '<table style="width:100%">' +
+                  '<tr>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/tarot.svg"></div><div>' + this.setManglik(valueInMessage.manglik) +  '</div></th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(valueInMessage.house_type) + '</th>' +
+                  // tslint:disable-next-line: max-line-length
+                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(valueInMessage.family_income) + ' LPA</th>' +
+                    '</tr>' +
+                    '</table>' +
+                       // line -6
+                  '<table style="width:100%">' +
+                  '<tr>' +
+                  // tslint:disable-next-line: max-line-length
+                  this.setMarriageSisters(String(Number(valueInMessage.married_daughters) + Number(valueInMessage.unmarried_daughters) ), valueInMessage.married_daughters) +
+                  // tslint:disable-next-line: max-line-length
+                  this.setMarriageBrothers(String(Number(valueInMessage.married_sons) + Number(valueInMessage.unmarried_sons) ), valueInMessage.married_sons)  +
+                    '</tr>' +
+                    '</table>' +
+
+                         // line -7
+                  '<table style="width:100%">' +
+                  // tslint:disable-next-line: max-line-length
+                  '<tr>' + this.LifeStatus(valueInMessage.father_status, valueInMessage.mother_status, valueInMessage.father_occupation, valueInMessage.occupation_mother) + '</tr>' +
+                    '</table></div>'
 
 
                     // '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
@@ -1495,10 +1538,10 @@ setHouseType(value: string) {
     if (value1 != null && value1 !== '' && value1 !== '0') {
       if (value2 != null && value2 !== '' && value2 !== '0' ) {
         // tslint:disable-next-line: max-line-length
-        return '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers -> ' + value2 + ' married </th>';
+        return '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers -> ' + value2 + ' married </th>';
       } else {
           // tslint:disable-next-line: max-line-length
-        return '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers</th>';
+        return '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/brothers.svg">' + value1 + ' Brothers</th>';
       }
     } else {
       return '';
@@ -1511,7 +1554,7 @@ setHouseType(value: string) {
           return '<th style="width:33.33%;padding: 5px 0px 5px 10px;"">' + '<img style="width:20px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters -> ' + value2 + ' married </th>';
         } else {
             // tslint:disable-next-line: max-line-length
-          return '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters</th>';
+          return '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/sisters.svg">' + value1 + ' Sisters</th>';
         }
       } else {
         return '';
