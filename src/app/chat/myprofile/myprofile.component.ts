@@ -190,5 +190,12 @@ onResize(event) {
        console.log(err);
       });
     }
+    getMotherTongue(value: string) {
+      if (!value) {
+        return 'Hindi-Delhi';
+      } else {
+        return value;
+      }
+    }
 
 }

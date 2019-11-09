@@ -27,6 +27,7 @@ export class ChatComponent implements OnInit {
   answer: FormGroup;
   show1 = true;
   sent: any = [];
+  loginStatus = true;
   profile: any;
   messageRecieved: string;
   personal: any;
@@ -76,6 +77,11 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('mobile_number')) {
+      this.loginStatus = true;
+    } else {
+      this.loginStatus = false;
+    }
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
     this.innerWidth = window.innerWidth;
@@ -511,7 +517,7 @@ export class ChatComponent implements OnInit {
                 type: 'html',
                  content: '<h6>' + data.apiwha_autoreply + '</h6>'
              }).then(() => {
-                 if (data.buttons.match('No')) {
+                 if (data.buttons.match('Yes')) {
                    return this.botui.action.button({
                      action: [
                        { text: 'YES', value: 'YES'},
@@ -579,12 +585,17 @@ export class ChatComponent implements OnInit {
                   return this.botui.action.button({
                     action: [
                       { text: 'BUY SUBSCRIPTION', value: 'BUY'},
+                      { text: 'NO', value: 'NO'}
                     ]
-                  }).then(() => {
+                  }).then(res => {
                     if (this.promptData != null) {
                       this.openPromptDialog();
                     }
-                    this.router.navigateByUrl('subscription');
+                    if (res.value === 'BUY') {
+                      this.router.navigateByUrl('subscription');
+                    }else {
+                      this.repeatMEssage(res.value, mob);
+                    }
                   });
                 }
              });
@@ -1609,6 +1620,11 @@ setHouseType(value: string) {
               } else {
                 return '<th></th>';
               }
+      }
+      logout() {
+        this.loginStatus = false;
+        localStorage.setItem('mobile_number', '');
+        this.router.navigateByUrl('/home');
       }
 
 }

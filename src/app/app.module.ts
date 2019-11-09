@@ -63,7 +63,7 @@ import { RouterModule } from '@angular/router';
     EditPersonalDialogComponent,
     EditPreferenceDialogComponent,
     ViewCentresComponent,
-    A2HSDialogComponent
+    A2HSDialogComponent,
   ],
   imports: [
     BrowserModule,

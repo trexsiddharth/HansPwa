@@ -129,7 +129,7 @@
             <div class="row" style="margin: 10px 10px;">
                 <div class="col-6">
                     <h6>City: </h6>
-                    <p style="font-size: 14px;">{{familyProfileData.city}}</p>
+                    <p style="font-size: 14px;">{{familyProfileData.office_address}}</p>
                   </div>
                   <div class="col-6">
                       <h6>Profession: </h6>
@@ -190,6 +190,12 @@
                     <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.whats_app_no}}</p>
                   </div>
           </div>
+          <div class="row" style="margin: 10px 10px;">
+              <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px" class="fa fa-map-marker"></i>
+                <div class="col-10">
+                    <p style="font-size: 14px;">{{familyProfileData.city}}</p>
+                </div>
+              </div>
           </div>
     
           <div class="card" style="margin: 20px 20px;">
@@ -242,7 +248,7 @@
                           <hr style="margin: 0px 10px 10px;width: 100%">
                           <div class="col-12" style="margin: 10px 10px 0px;">
                               <h6 style="display: inline-block">Mother Tongue : </h6>
-                              <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.mother_tongue}}</p>
+                              <p style="font-size: 14px;display: inline-block;margin-left: 10px" [innerHtml]="getMotherTongue(familyProfileData.mother_tongue)" ></p>
                             </div>
                             <hr style="margin: 0px 10px 10px;width: 100%">
                             <div class="col-12" style="margin: 10px 10px 0px;">
@@ -339,7 +345,7 @@
                               <hr style="margin: 0px 10px 10px;width: 100%">
                               <div class="col-12" style="margin: 10px 10px 0px;">
                                   <h6 style="display: inline-block">Mother Tongue : </h6>
-                                  <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.mother_tongue}}</p>
+                                  <p style="font-size: 14px;display: inline-block;margin-left: 10px" [innerHtml]="getMotherTongue(preferenceProfileData.mother_tongue)"></p>
                                 </div>
                                 <hr style="margin: 0px 10px 10px;width: 100%">
                                 <div class="col-12" style="margin: 10px 10px 0px;">
