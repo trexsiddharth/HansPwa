@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   socialInfo: string;
   eventA2HS;
   innerWidth;
+  loginStatus = true;
+  contactNumber;
 
   // tslint:disable-next-line: max-line-length
   constructor(private http: HttpClient, public dialog: MatDialog, private promptService: InstallPromptService,
@@ -44,6 +46,12 @@ export class HomeComponent implements OnInit {
     }
       }
   ngOnInit() {
+    this.contactNumber = localStorage.getItem('mobile_number');
+    if (this.contactNumber) {
+      this.loginStatus = true;
+    } else {
+      this.loginStatus = false;
+    }
     this.innerWidth = window.innerWidth;
     this.promptService.savePrompt();
   }
@@ -62,6 +70,12 @@ export class HomeComponent implements OnInit {
  }
   myFunction() {
     this.clickToggle = true;
+   }
+
+   logout() {
+     this.loginStatus = false;
+     localStorage.setItem('mobile_number', '');
+     this.opened = false;
    }
 
 }

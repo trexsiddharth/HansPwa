@@ -85,6 +85,7 @@ export class ChatComponent implements OnInit {
     this.currentUrl = this.router.url.substring(13);
     console.log(this.currentUrl);
     if (localStorage.getItem('mobile_number')) {
+      this.spinner.show();
       this.currentContact = localStorage.getItem('mobile_number');
       this.checkUrl(this.currentContact).subscribe(
         (data: any) => {
@@ -502,6 +503,7 @@ export class ChatComponent implements OnInit {
                    });
                    }
                  });
+                 localStorage.setItem('mobile_number', mob);
              } else {
              this.botui.message.add({
               loading: true,
@@ -532,6 +534,7 @@ export class ChatComponent implements OnInit {
                   }
                   console.log('chose' + res.value);
                   this.answer = res.value;
+                  localStorage.setItem('mobile_number', mob);
                   this.repeatMEssage(res.value, mob);
                  });
                  }  else if (data.buttons.match('Register')) {
@@ -568,9 +571,11 @@ export class ChatComponent implements OnInit {
                   }
                   console.log('chose' + res.value);
                   this.answer = res.value;
+                  localStorage.setItem('mobile_number', mob);
                   this.repeatMEssage(res.value, mob);
                 });
                 } else {
+                  localStorage.setItem('mobile_number', mob);
                   return this.botui.action.button({
                     action: [
                       { text: 'BUY SUBSCRIPTION', value: 'BUY'},
@@ -808,6 +813,7 @@ export class ChatComponent implements OnInit {
                       );
                     this.langChanged = false;
                   }
+                  localStorage.setItem('mobile_number', num);
                   this.repeatMEssage('SHOW', num);
         } else {
           this.spinner.hide();
