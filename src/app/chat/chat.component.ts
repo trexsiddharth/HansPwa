@@ -190,7 +190,6 @@ export class ChatComponent implements OnInit {
    repeatMEssage(ans: String, mob) {
          this.chatRequest(ans, mob).subscribe(
            (data: any) => {
-             this.spinner.hide();
              this.getCredits();
              console.log(data);
              if (data.type === 'profile') {
@@ -585,6 +584,7 @@ export class ChatComponent implements OnInit {
                 }
              });
            }
+             this.spinner.hide();
            },
            (error: any) => {
              this.ngxNotificationService.error('Something Went Wrong, We are trying again');
@@ -785,6 +785,7 @@ export class ChatComponent implements OnInit {
         const text: String = data.apiwha_autoreply;
         const id = data.id;
         localStorage.setItem('id', id);
+        this.spinner.show();
         this.getCredits();
         console.log(localStorage.getItem('id'));
         console.log(text);
@@ -1490,15 +1491,15 @@ profileReAnswer(num: any, id: any, answer: any) {
      );
    }
 getCredits() {
-  this.spinner.show();
  // tslint:disable-next-line: max-line-length
   return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint?id=' + localStorage.getItem('id'), {}).subscribe(
    (data: any) => {
       this.points = data.whatsapp_points;
       console.log(this.points);
-      this.spinner.hide();
    },
   (error: any) => {
+    this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+    this.getCredits();
     console.log(error);
   }
  );

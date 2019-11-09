@@ -160,6 +160,8 @@ THE SOFTWARE.
 
 @angular/material/sidenav
 
+@angular/material/tabs
+
 @angular/material/tooltip
 
 @angular/platform-browser

@@ -42,6 +42,10 @@ export class HistoryComponent implements OnInit {
     return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
     }
     }
-   
-
+    yesProfiles() {
+      return 'Yes(' + this.profile.contacted.length + ')';
+    }
+    noProfiles() {
+      return 'No(' + this.profile.rejected.length + ')';
+    }
 }
