@@ -925,8 +925,8 @@ export class ChatComponent implements OnInit {
      console.log(this.history);
    }
    changeToHistory() {
-     this.spinner.show();
      if (this.currentContact) {
+      this.spinner.show();
       this.history = 'history';
       document.getElementById('chat').setAttribute('src', '../../assets/chat.svg');
       document.getElementById('hist').setAttribute('src', '../../assets/thumbs-up-blue.svg');
@@ -965,18 +965,18 @@ export class ChatComponent implements OnInit {
     document.getElementById('profileText').style.color = '#000000';
    }
    changeToMyProfile() {
-     this.spinner.show();
      if (this.currentContact) {
-     this.history = 'myprofile';
-     document.getElementById('hist').setAttribute('src', '../../assets/thumbs-up.svg');
-     document.getElementById('prof').setAttribute('src', '../../assets/avatar-blue.svg');
-     document.getElementById('chat').setAttribute('src', '../../assets/chat.svg');
-     document.getElementById('chatText').style.color = '#000000';
-     document.getElementById('historyText').style.color = '#000000';
-     document.getElementById('profileText').style.color = '#34b7f1';
-     console.log(localStorage.getItem('id'));
+      this.spinner.show();
+      this.history = 'myprofile';
+      document.getElementById('hist').setAttribute('src', '../../assets/thumbs-up.svg');
+      document.getElementById('prof').setAttribute('src', '../../assets/avatar-blue.svg');
+      document.getElementById('chat').setAttribute('src', '../../assets/chat.svg');
+      document.getElementById('chatText').style.color = '#000000';
+      document.getElementById('historyText').style.color = '#000000';
+      document.getElementById('profileText').style.color = '#34b7f1';
+      console.log(localStorage.getItem('id'));
      // tslint:disable-next-line: max-line-length
-     return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + localStorage.getItem('id') + '&contacted=1'  , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
+      return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + localStorage.getItem('id') + '&contacted=1'  , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
        (data: any) => {
         console.log(data);
         this.profileData = data.profile;
