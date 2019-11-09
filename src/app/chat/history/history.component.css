@@ -9,6 +9,16 @@
     padding-top: 0px;
     padding-bottom: 0px;
   }
+  ::ng-deep .mat-tab-label {
+    background: white;
+  
+  }
+  ::ng-deep .mat-tab-label-active {
+    background: #34b7f1;
+    color: white;
+    border-radius: 10px; 
+    font-weight: bolder;
+  }
   
   
   /* Style the links inside the navigation bar */

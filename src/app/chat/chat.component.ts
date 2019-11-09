@@ -394,7 +394,7 @@ export class ChatComponent implements OnInit {
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(values.house_type) + '</th>' +
                         // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
+                        '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
                           '</tr>' +
                           '</table>' +
                              // line -6
@@ -963,7 +963,6 @@ export class ChatComponent implements OnInit {
         },
         (error: any) => {
           this.spinner.hide();
-          this.ngxNotificationService.error('Something went wrong with the history, trying again');
           this.changeToHistory();
           console.log(error);
         }
@@ -1004,7 +1003,6 @@ export class ChatComponent implements OnInit {
        (error: any) => {
         this.spinner.hide();
         console.log(error);
-        this.ngxNotificationService.error('Something went wrong with profile, trying again');
         this.changeToMyProfile();
        }
      );
@@ -1214,7 +1212,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       // tslint:disable-next-line: max-line-length
       '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(personal.house_type) + '</th>' +
       // tslint:disable-next-line: max-line-length
-      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(family.family_income) + ' LPA</th>' +
+      '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(family.family_income) + ' LPA</th>' +
         '</tr>' +
         '</table>' +
            // line -6
@@ -1421,7 +1419,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                   // tslint:disable-next-line: max-line-length
                   '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(valueInMessage.house_type) + '</th>' +
                   // tslint:disable-next-line: max-line-length
-                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(valueInMessage.family_income) + ' LPA</th>' +
+                  '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(valueInMessage.family_income) + ' LPA</th>' +
                     '</tr>' +
                     '</table>' +
                        // line -6
