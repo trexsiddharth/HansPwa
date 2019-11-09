@@ -1137,9 +1137,9 @@ profileReAnswer(num: any, id: any, answer: any) {
         '<table style="width:100%;background:white;border-radius:7px;font-size:12px;margin-top: 10px;padding-left:5px">' +
         '<tr>' +
           // tslint:disable-next-line: max-line-length
-        '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', personal.mobile) + '</th>' +
+        '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', family.mobile) + '</th>' +
         // tslint:disable-next-line: max-line-length
-        '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', personal.city) + '</th>' +
+        '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', family.city) + '</th>' +
           '</tr>' +
           '</table>' +
      // line -1
