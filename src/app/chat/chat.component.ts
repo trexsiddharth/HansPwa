@@ -900,6 +900,7 @@ export class ChatComponent implements OnInit {
      console.log(this.history);
    }
    changeToHistory() {
+     this.spinner.show();
      if (this.currentContact) {
       this.history = 'history';
       document.getElementById('chat').setAttribute('src', '../../assets/chat.svg');
@@ -916,8 +917,12 @@ export class ChatComponent implements OnInit {
         (data: any) => {
          console.log(data);
          this.historyData = data;
+         this.spinner.hide();
         },
         (error: any) => {
+          this.spinner.hide();
+          this.ngxNotificationService.error('Something went wrong with the history, trying again');
+          this.changeToHistory();
           console.log(error);
         }
       );
@@ -935,6 +940,7 @@ export class ChatComponent implements OnInit {
     document.getElementById('profileText').style.color = '#000000';
    }
    changeToMyProfile() {
+     this.spinner.show();
      if (this.currentContact) {
      this.history = 'myprofile';
      document.getElementById('hist').setAttribute('src', '../../assets/thumbs-up.svg');
@@ -951,9 +957,13 @@ export class ChatComponent implements OnInit {
         this.profileData = data.profile;
         this.familyData = data.family;
         this.preferenceData = data.preferences;
+        this.spinner.hide();
        },
        (error: any) => {
-         console.log(error);
+        this.spinner.hide();
+        console.log(error);
+        this.ngxNotificationService.error('Something went wrong with profile, trying again');
+        this.changeToMyProfile();
        }
      );
      } else {
