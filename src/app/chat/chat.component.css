@@ -239,6 +239,9 @@ text-align: center;
     width: 45px;
     margin-top: 10px;
   }
+  .setNavIcons {
+ width: 35px;
+  }
   @media (max-width: 576px) {
     .navbar {
       background-color: white;
@@ -302,6 +305,16 @@ text-align: center;
         left: 0px;
         right: 0px;
       }
+      .setNavIcons {
+        width: 25px;
+         }
+
+       .filterImage {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 35px;
+          margin-top: 15px;
+          margin-left: 10px;
+        }
     }
     @media (max-width: 1024px) {
       .navbar {
@@ -365,6 +378,15 @@ text-align: center;
         left: 0px;
         right: 0px;
       }
+      .setNavIcons {
+        width: 25px;
+         }
+         .filterImage {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 35px;
+          margin-top: 15px;
+          margin-left: 10px;
+        }
     }
   
     @media (min-width: 576px) {
@@ -415,6 +437,6 @@ text-align: center;
         color: white;
         padding: 10px;
         cursor: pointer;
-      }
+      } 
     }
     

@@ -1,8 +1,8 @@
 <main *ngIf="profile" style="margin: 0px ;padding-top: 10px;text-align: center">
 
     <mat-tab-group mat-align-tabs="center">
-        <mat-tab  [label]="yesProfiles()">
-            <div class="col-3 col-md-2" *ngFor="let item of profile.contacted" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
+        <mat-tab *ngIf="profile.contacted"  [label]="yesProfiles()">
+            <div class="col-3 col-md-2"  *ngFor="let item of profile.contacted" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
 
                 <div class="imageSet">
                       <a (click)="shareData(item.id,'1')">
@@ -13,7 +13,7 @@
                   </div>
                 </div>
         </mat-tab>
-        <mat-tab [label]="noProfiles()">
+        <mat-tab *ngIf="profile.rejected"  [label]="noProfiles()">
             <div class=" col-3 col-md-2" *ngFor="let item of profile.rejected" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
 
                 <div class="imageSet">

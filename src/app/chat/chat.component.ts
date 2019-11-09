@@ -573,7 +573,7 @@ export class ChatComponent implements OnInit {
                 } else {
                   return this.botui.action.button({
                     action: [
-                      { text: 'SUBSCRIBE NOW', value: 'BUY'},
+                      { text: 'BUY SUBSCRIPTION', value: 'BUY'},
                     ]
                   }).then(() => {
                     if (this.promptData != null) {
@@ -778,16 +778,19 @@ export class ChatComponent implements OnInit {
    this.botui.action.hide();
  }
  numberValidation(num: string) {
-  if (num.length === 10 && num.match('(0/91)?[6-9][0-9]{9}')) {
     this.currentContact = num;
     this.checkUrl(num).subscribe(
       (data: any) => {
         const text: String = data.apiwha_autoreply;
+        const registered: any = data.registered;
         const id = data.id;
+        if (data.id) {
         localStorage.setItem('id', id);
+        console.log(localStorage.getItem('id'));
+        }
+        if (registered === 1) {
         this.spinner.show();
         this.getCredits();
-        console.log(localStorage.getItem('id'));
         console.log(text);
         if (text.match('SHOW')) {
                   this.change();
@@ -795,15 +798,19 @@ export class ChatComponent implements OnInit {
                     this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
                       (data: any) => {
                         console.log(data);
+                        this.spinner.hide();
                       },
                       (error: any) => {
+                        this.ngxNotificationService.error('Something went wrong, please try agian');
                         console.log(error);
+                        this.spinner.hide();
                       }
                       );
                     this.langChanged = false;
                   }
                   this.repeatMEssage('SHOW', num);
         } else {
+          this.spinner.hide();
           this.botui.message.add({
             loading: true,
             delay: 500,
@@ -819,27 +826,45 @@ export class ChatComponent implements OnInit {
             });
           });
         }
+      } else {
+        if (text) {
+          this.spinner.hide();
+          this.botui.message.add({
+            loading: true,
+            delay: 500,
+            content: text
+          }).then(() => {
+            this.botui.action.button({
+              action: [{
+                text: 'REGISTER',
+                value: 'REGISTER'
+              }]
+            }).then(() => {
+              this.router.navigateByUrl('register');
+            });
+          });
+        } else {
+          this.botui.message.add({
+            loading: true,
+            delay: 500,
+            content: 'कृपया अपना १० अंको का मोबाइल नंबर डालें'
+          }).then(() => {
+          this.botui.action.text({
+            action: {
+              sub_type: 'number',
+              placeholder: 'Enter your mobile number'
+            }
+          }).then(res => {
+            this.numberValidation(res.value);
+          });
+        });
+      }
+    }
       },
       (error: any) => {
           console.log(error);
+          this.spinner.hide();
       });
-
-  } else {
-    this.botui.message.add({
-      loading: true,
-      delay: 500,
-      content: 'कृपया अपना १० अंको का मोबाइल नंबर डालें'
-    }).then(() => {
-    this.botui.action.text({
-      action: {
-        sub_type: 'number',
-        placeholder: 'Enter your mobile number'
-      }
-    }).then(res => {
-      this.numberValidation(res.value);
-    });
-  });
-  }
  }
  changeLanguage(phon: string, lang: string): Observable<any> {
    console.log('changing language');
@@ -1446,57 +1471,12 @@ profileReAnswer(num: any, id: any, answer: any) {
               }
             }
          });
-         this.checkUrl(this.currentUrl).subscribe(
-            (data: any) => {
-
-              const text: String = data.apiwha_autoreply;
-              const id = data.id;
-              console.log(text);
-              console.log(id);
-              localStorage.setItem('id', id);
-              this.getCredits();
-              if (text.match('SHOW')) {
-                      if (this.langChanged === true) {
-                        this.changeLanguage(this.currentUrl, localStorage.getItem('language')).subscribe(
-                          (data: any) => {
-                            console.log(data);
-                          },
-                          (error: any) => {
-                            console.log(error);
-                          }
-                          );
-                        this.langChanged = false;
-                      }
-                      this.repeatMEssage('SHOW', this.currentUrl);
-            } else {
-                    this.botui.action.text({
-                      action: {
-                        sub_type: 'number',
-                        placeholder: 'कृपया अपना १० अंको का मोबाइल नंबर डालें'
-                      }
-                    }).then(res => {
-                      if (this.langChanged === true) {
-                        this.changeLanguage(res.value, localStorage.getItem('language')).subscribe(
-                          (data: any) => {
-                            console.log(data);
-                          },
-                          (error: any) => {
-                            console.log(error);
-                          }
-                          );
-                        this.langChanged = false;
-                      }
-
-                      this.repeatMEssage('SHOW', res.value);
-                    });
-                  }
-            },
-            (error: any) => {
-              console.log(error);
-        });
+         this.numberValidation(mob);
+         this.spinner.hide();
        },
        (error: any) => {
          console.log(error);
+         this.spinner.hide();
        }
      );
    }
@@ -1573,20 +1553,56 @@ setHouseType(value: string) {
       }
       LifeStatus(father: string, mother: string, fatho: string, mothero: string) {
             if (father != null && father !== '' ) {
-              if (mother != null && mother !== '') {
-                // tslint:disable-next-line: max-line-length
-                return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + '  & Mother(Alive) -> ' + mothero + ' </th>';
+              if (father.match('Alive') ) {
+                if (fatho) {
+                  if (mother != null && mother !== '' ) {
+                    if (mother.match('Alive')) {
+                      // tslint:disable-next-line: max-line-length
+                    return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + '  & Mother(Alive) -> ' + mothero + ' </th>';
+                    } else {
+                        // tslint:disable-next-line: max-line-length
+                    return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + ', Mother(Dead)</th>';
+                    }
+                  } else {
+                     // tslint:disable-next-line: max-line-length
+                     return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + '</th>';
+                  }
+                } else {
+                  // tslint:disable-next-line: max-line-length
+                  return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) -> </th>';
+                }
+              } else if (mother != null && mother !== '') {
+                if (mother.match('Alive')) {
+                  if (mothero) {
+                    // tslint:disable-next-line: max-line-length
+                return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Mother(Alive) ->' + mothero + ', Father(Dead)</th>';
+                  } else {
+                    // tslint:disable-next-line: max-line-length
+                    return '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Mother(Alive) & Father(Dead)</th>';
+                  }
+                } else {
+                  // tslint:disable-next-line: max-line-length
+                  return '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father & Mother Both Not Alive</th>';
+                }
               } else {
-                // tslint:disable-next-line: max-line-length
-                return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + ', Mother(Dead)</th>';
+                return '<th></th>';
               }
-            } else if (mother != null && mother !== '') {
-              // tslint:disable-next-line: max-line-length
-              return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Mother(Alive) ->' + mothero + ', Father(Dead)</th>';
-            } else {
-              // tslint:disable-next-line: max-line-length
-              return '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father & Mother Both Not Alive</th>';
-            }
+              } else if (mother != null && mother !== '') {
+                if (mother.match('Alive')) {
+                  if (mothero) {
+                    // tslint:disable-next-line: max-line-length
+                return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Mother(Alive) ->' + mothero + ', Father(Dead)</th>';
+                  } else {
+                    // tslint:disable-next-line: max-line-length
+                    return '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Mother(Alive) & Father(Dead)</th>';
+                  }
+                } else {
+                  // tslint:disable-next-line: max-line-length
+                  return '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father & Mother Both Not Alive</th>';
+                }
+              } else {
+                return '<th></th>';
+              }
       }
 
 }
