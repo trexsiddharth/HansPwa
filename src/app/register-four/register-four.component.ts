@@ -58,6 +58,8 @@ export class RegisterFourComponent implements OnInit {
   suc: any = [];
   public message: string;
   locationFamily: Location = null;
+  addressFamily = null;
+  addressNative = null;
   locationNative: Location = null;
 
 
@@ -175,12 +177,19 @@ export class RegisterFourComponent implements OnInit {
         fourthstepdata.append('unmarried_sons', this.FamilyDetails.value.umbrother);
         fourthstepdata.append('married_daughters', this.FamilyDetails.value.sister);
         fourthstepdata.append('unmarried_daughters', this.FamilyDetails.value.umsister);
-        fourthstepdata.append('locality', this.FamilyDetails.value.state);
-        fourthstepdata.append('city', this.FamilyDetails.value.city);
+        fourthstepdata.append('locality', this.addressFamily);
+        fourthstepdata.append('city', this.addressNative);
         fourthstepdata.append('address', this.FamilyDetails.value.address);
         fourthstepdata.append('about', this.FamilyDetails.value.about);
       // this.isCompleted4 = true;
   
+
+        console.log('father_status', this.FamilyDetails.value.father_status);
+        console.log('mother_status', this.FamilyDetails.value.mother_status);
+
+
+
+
         return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFourthPageProfile', fourthstepdata).subscribe(suc => {
         this.suc = suc;
         console.log(this.suc);
@@ -237,7 +246,13 @@ export class RegisterFourComponent implements OnInit {
 
   }
   onAutocompleteSelected(event, index) {
-    console.log(event);
+    if (index === 1) {
+      this.addressFamily = event.formatted_address;
+      console.log('address of family', this.addressFamily );
+    } else if (index === 2) {
+      this.addressNative = event.formatted_address;
+      console.log('native address', this.addressNative);
+    }
   }
 
   onLocationSelected(e, i) {

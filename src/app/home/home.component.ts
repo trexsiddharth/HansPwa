@@ -62,10 +62,11 @@ export class HomeComponent implements OnInit {
   }
   callBack(phone) {
     console.log(phone.value);
-    return this.http.post('https://partner.hansmatrimony.com/api/callBack', {['phone']: phone.value}).subscribe(
+    // tslint:disable-next-line: max-line-length
+    return this.http.post('https://partner.hansmatrimony.com/api/callBack', {['email']: 'na', ['name']: 'na', ['phone']: phone.value}).subscribe(
      (data: any) => {
        console.log(data);
-       this.ngxNotificationService.success('Thank you for showing your interest, We will call you right back!', 'danger');
+       this.ngxNotificationService.success('Thank you for showing your interest, We will call you right back!');
      });
  }
   myFunction() {

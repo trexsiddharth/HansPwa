@@ -66,6 +66,7 @@ export class RegisterOneComponent implements OnInit {
   castePref: any;
   suc: any = [];
   locationCity: Location = null;
+  addressCity = null;
 
   Caste = false;
   AllCastes = false;
@@ -521,7 +522,8 @@ export class RegisterOneComponent implements OnInit {
       firststepdata.append('weight', this.PageTwo.value.Weight);
       firststepdata.append('gotra', this.PageTwo.value.gotra);
       firststepdata.append('annual_income', this.PageTwo.value.AnnualIncome);
-      firststepdata.append('city', this.PageTwo.value.Currentcity);
+      firststepdata.append('city', this.addressCity);
+
 
 
       console.log(this.PageTwo.value.Castes);
@@ -568,7 +570,8 @@ export class RegisterOneComponent implements OnInit {
   }
 
   onAutocompleteSelected(event) {
-    console.log(event);
+    this.addressCity = event.formatted_address;
+    console.log('Current City', this.addressCity);
   }
 
   onLocationSelected(e) {

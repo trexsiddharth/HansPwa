@@ -12,6 +12,7 @@ import { A2HSDialogComponent } from '../chat/a2-hsdialog/a2-hsdialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { style } from '@angular/animations';
 import { when } from 'q';
+import { count } from 'rxjs/operators';
 
 declare let BotUI: Function;
 
@@ -33,6 +34,7 @@ export class ChatComponent implements OnInit {
   personal: any;
   button: String;
   Data: any;
+  errorCount = 0;
   given: String;
   Data1: any;
   response_arr: any = [];
@@ -211,118 +213,6 @@ export class ChatComponent implements OnInit {
                    '<div style="text-align:center"><b>' + values.name + '</b></div> ' +
                    '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>'
                  }).then(() => {
-                   if (values.language === 'English') {
-                     this.botui.message.add({
-                       loading: true,
-                       delay: 1000,
-                       type: 'html',
-                       // tslint:disable-next-line: max-line-length
-                       content: '<b> &#128100 Personal Details</b> <br> <br>' +
-                       'Name: ' + values.name + '<br>' +
-                       // tslint:disable-next-line: max-line-length
-                      '<table style="width:100%;background:#f5f5f5">' +
-                      '<tr>' +
-                      // tslint:disable-next-line: max-line-length
-                      '<th>' + this.setValue(values.profession) + '<br>' + values.education + '</th>' +
-                      '<th>' + this.setValue(values.monthly_income) + '<br> </th>' +
-                       '<th>Age</th>' +
-                        '</tr>' +
-                        '</table>' +
-                       // tslint:disable-next-line: max-line-length
-                       this.profileSet('Age: ' , String(Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) +
-                       this.profileSet('Height: ', this.getHeight(Number(values.height))) +
-                       this.profileSet('Weight: ', values.weight) +
-                       this.profileSet('Religion: ', values.religion) +
-                       this.profileSet('Caste: ', values.caste) +
-                       this.profileSet('Mobile Number: ', values.mobile) +
-                       this.profileSet('Food Choice: ', values.food_choice) +
-                       this.profileSet('Locality: ', values.locality) +
-                       this.profileSet('Marital Status: ', values.marital_status) +
-                       this.profileSet('Disability: ', values.disability) + ' <br> <br>'
-                        +
-                       '<b> &#9803 Horoscope Details</b> <br><br>' +
-                       this.profileSet('Birth Date: ', values.birth_date) +
-                       this.profileSet('Bith Place: ', values.birth_place) +
-                       this.profileSet('Bith Time: ', values.birth_time) +
-                       this.profileSet('Manglik: ', values.manglik) + ' <br> <br>'
-                       +
-                       '<b> &#128218 Education Details</b> <br><br>' +
-                       this.profileSet('Education: ', values.education) +
-                       this.profileSet('Degree: ', values.degree) +
-                       this.profileSet('College: ', values.college) + ' <br><br>'
-                       +
-                       '<b> &#128188 Work Details</b> <br><br>' +
-                       this.profileSet('Occupation: ', values.occupation) + '<br>' +
-                       this.profileSetIncome('Annual Income: ', String(values.monthly_income)) +
-                       this.profileSet('Profession: ', values.profession) +
-                       this.profileSet('Working City: ', values.working_city) + ' <br><br>'
-                       +
-                       '<b> &#128106 Family Details</b> <br><br>' +
-                       this.profileSet('Family Type: ', values.family_type) +
-                       this.profileSet('House Type: ', values.house_type) +
-                       this.profileSet('Mother Status: ', values.mother_status) +
-                       this.profileSet('Father Status: ', values.father_status) +
-                       this.profileSet('Mothers Occupation: ', values.mother_occupation) +
-                       this.profileSet('Fathers Occupation: ', values.father_occupation) +
-                       this.profileSetIncome('Family Income: ', String(values.family_income)) +
-                       this.profileSet('Married Brothers: ', values.married_sons) +
-                       this.profileSet('Married Sisters: ', values.married_daughters) +
-                       this.profileSet('Unmarried Brothers: ', values.unmarried_sons) +
-                       this.profileSet('UnMarried Sisters: ', values.unmarried_daughters)
-                   }).then(() => {
-                       if (data.buttons.match('Yes' || 'No')) {
-                         return this.botui.action.button({
-                           cssClass: 'styleButton',
-                           action: [
-                             { text: 'YES', value: 'YES'},
-                             {text: 'NO', value: 'NO' }
-                           ]
-                       }).then(res => {
-                        if (this.langChanged === true) {
-                          this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
-                            (data: any) => {
-                              console.log(data);
-                            },
-                            (error: any) => {
-                              console.log(error);
-                            }
-                            );
-                          this.langChanged = false;
-                        }
-                        if (this.promptData != null) {
-                          this.openPromptDialog();
-                        }
-                        this.answer = res.value;
-                        console.log('chose' + res.value);
-                        this.repeatMEssage(res.value, mob);
-                       });
-                       } else if (data.buttons.match('Show')) {
-                         return this.botui.action.button({
-                           action: [
-                             { text: 'SHOW', value: 'SHOW'},
-                           ]
-                       }).then(res => {
-                        if (this.langChanged === true) {
-                          this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
-                            (data: any) => {
-                              console.log(data);
-                            },
-                            (error: any) => {
-                              console.log(error);
-                            }
-                            );
-                          this.langChanged = false;
-                        }
-                        if (this.promptData != null) {
-                          this.openPromptDialog();
-                        }
-                        console.log('chose' + res.value);
-                        this.answer = res.value;
-                        this.repeatMEssage(res.value, mob);
-                       });
-                       }
-                   });
-                   } else {
                      this.botui.message.add({
                       loading: true,
                       delay: 500,
@@ -412,48 +302,6 @@ export class ChatComponent implements OnInit {
                         // tslint:disable-next-line: max-line-length
                         '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
                           '</table></div>'
-
-                      // tslint:disable-next-line: max-line-length
-                      //  this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
-                      //  this.profileSet('कद: ', this.getHeight(Number(values.height))) +
-                      //  this.profileSet('वजन: ', values.weight) +
-                      //  this.profileSet('धर्म: ', values.religion) +
-                      //  this.profileSet('जाती: ', values.caste) +
-                      //  this.profileSet('मोबाइल नंबर: ', values.mobile) +
-                      //  this.profileSet('खान-पान: ', values.food_choice) +
-                      //  this.profileSet('पता: ', values.locality) +
-                      //  this.profileSet('वैवाहिक स्तिथि: ', values.marital_status) +
-                      //  this.profileSet('विकलांगता: ', values.disability) + ' <br> <br>'
-                      //   +
-                      //  '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
-                      //  this.profileSet('जन्म दिवस: ', values.birth_date) +
-                      //  this.profileSet('जन्म स्थान: ', values.birth_place) +
-                      //  this.profileSet('जन्म समय: ', values.birth_time) +
-                      //  this.profileSet('मांगलिक: ', values.manglik) + ' <br> <br>'
-                      //  +
-                      //  '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
-                      //  this.profileSet('शिक्षा: ', values.education) +
-                      //  this.profileSet('डिग्री: ', values.degree) +
-                      //  this.profileSet('कॉलेज: ', values.college) + ' <br><br>'
-                      //  +
-                      //  '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
-                      //  this.profileSet('व्यसाय: ', values.occupation) +
-                      //  this.profileSetIncome('वार्षिक आय: ', String(values.monthly_income)) +
-                      //  this.profileSet('पेशा: ', values.profession) +
-                      //  this.profileSet('कार्य स्थान: ', values.working_city) + ' <br><br>'
-                      //  +
-                      //  '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
-                      //  this.profileSet('परिवार: ', values.family_type) +
-                      //  this.profileSet('घर: ', values.house_type) +
-                      //  this.profileSet('मदर स्टेटस: ', values.mother_status) +
-                      //  this.profileSet('फादर स्टेटस: ', values.father_status) +
-                      //  this.profileSet('माता का व्यसाय: ', values.mother_occupation) +
-                      //  this.profileSet('पिता का व्यसाय : ', values.father_occupation) +
-                      //  this.profileSetIncome('पारिवारिक आय: ', String(values.family_income)) +
-                      //  this.profileSet('मैरिड भाई: ', values.married_sons) +
-                      //  this.profileSet('मैरिड बेहेने : ', values.married_daughters) +
-                      //  this.profileSet('अव्यावाहित भाई: ', values.unmarried_sons) +
-                      //  this.profileSet('अव्यावाहित बेहेने : ', values.unmarried_daughters)
                    }).then(() => {
                        if (data.buttons.match('Yes' || 'No')) {
                          return this.botui.action.button({
@@ -507,7 +355,6 @@ export class ChatComponent implements OnInit {
                        });
                        }
                    });
-                   }
                  });
                  localStorage.setItem('mobile_number', mob);
              } else {
@@ -603,9 +450,15 @@ export class ChatComponent implements OnInit {
              this.spinner.hide();
            },
            (error: any) => {
-             this.ngxNotificationService.error('Something Went Wrong, We are trying again');
-             this.repeatMEssage(ans, mob);
-             console.log(error);
+            this.ngxNotificationService.error('Something Went Wrong, We are trying again');
+            this.errorCount++;
+            if (this.errorCount <= 2) {
+                 this.repeatMEssage(ans, mob);
+             } else {
+              this.ngxNotificationService.error('Please refresh the page and try again');
+             }
+
+            console.log(error);
            }
          );
  }
@@ -1043,104 +896,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       '<div style="text-align:center"><b>' + personal.name  + '</b></div><br>' +
                    '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
     });
-     if (localStorage.getItem('language') === 'English') {
-      this.botui.message.add({
-        type: 'html',
-        // tslint:disable-next-line: max-line-length
-        content: '<b> &#128100 Personal Details</b> <br> <br>' +
-        'Name: ' + personal.name + '<br>' +
-        // tslint:disable-next-line: max-line-length
-        this.profileSet('Age: ' , String(Math.floor((Date.now() - new Date(personal.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) +
-        this.profileSet('Height: ', this.getHeight(Number(personal.height))) +
-        this.profileSet('Weight: ', personal.weight) +
-        this.profileSet('Religion: ', family.religion) +
-        this.profileSet('Caste: ', family.caste) +
-        this.profileSet('Food Choice: ', personal.food_choice) +
-        this.profileSet('Marital Status: ', personal.marital_status) +
-        this.profileSet('Disability: ', personal.disability) + ' <br> <br>'
-         +
-        '<b> &#9803 Horoscope Details</b> <br><br>' +
-        this.profileSet('Birth Date: ', personal.birth_date) +
-        this.profileSet('Bith Place: ', personal.birth_place) +
-        this.profileSet('Bith Time: ', personal.birth_time) +
-        this.profileSet('Manglik: ', personal.manglik) + ' <br> <br>'
-        +
-        '<b> &#128218 Education Details</b> <br><br>' +
-        this.profileSet('Education: ', personal.education) +
-        this.profileSet('Degree: ', personal.degree) +
-        this.profileSet('College: ', personal.college) + ' <br><br>'
-        +
-        '<b> &#128188 Work Details</b> <br><br>' +
-        this.profileSet('Occupation: ', personal.occupation) + '<br>' +
-        this.profileSetIncome('Annual Income: ', String(personal.monthly_income)) +
-        this.profileSet('Profession: ', personal.profession) +
-        this.profileSet('Working City: ', personal.working_city) + ' <br><br>'
-        +
-        '<b> &#128106 Family Details</b> <br><br>' +
-        this.profileSet('Family Type: ', family.family_type) +
-        this.profileSet('House Type: ', family.house_type) +
-        this.profileSet('Mother Status: ', family.mother_status) +
-        this.profileSet('Father Status: ', family.father_status) +
-        this.profileSet('Mothers Occupation: ', family.occupation_mother) +
-        this.profileSet('Fathers Occupation: ', family.occupation) +
-        this.profileSetIncome('Family Income: ', String(family.family_income)) +
-        this.profileSet('Married Brothers: ', family.married_sons) +
-        this.profileSet('Married Sisters: ', family.married_daughters) +
-        this.profileSet('Unmarried Brothers: ', family.unmarried_sons) +
-        this.profileSet('UnMarried Sisters: ', family.unmarried_daughters) + ' <br><br>'
-        +
-        '<b> &#9742 Contact Details</b> <br><br>' +
-        this.profileSet('Mobile Number: ', family.mobile) +
-        this.profileSet('Locality: ', family.locality)
-
-    }).then(() => {
-      if (family.mobile) {
-        return this.botui.action.button({
-          action: [
-            { text: 'Show', value: 'Show'}
-          ]
-      }).then(res => {
-        if (this.langChanged === true) {
-          this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
-            (data: any) => {
-              console.log(data);
-            },
-            (error: any) => {
-              console.log(error);
-            }
-            );
-          this.langChanged = false;
-        }
-        console.log('chose' + res.value);
-        console.log('Reanswered');
-        this.repeatMEssage(res.value, this.currentContact);
-       });
-      } else {
-        return this.botui.action.button({
-          action: [
-            { text: 'Yes', value: 'Yes'},
-            { text: 'No', value: 'No'}
-          ]
-      }).then(res => {
-        if (this.langChanged === true) {
-          this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
-            (data: any) => {
-              console.log(data);
-            },
-            (error: any) => {
-              console.log(error);
-            }
-            );
-          this.langChanged = false;
-        }
-        console.log('chose' + res.value);
-        console.log('Reanswered');
-        this.profileReAnswer(this.currentContact, personal.id, res.value);
-       });
-      }
-    });
-    } else {
-      this.botui.message.add({
+     this.botui.message.add({
         type: 'html',
         // tslint:disable-next-line: max-line-length
         content:
@@ -1227,53 +983,6 @@ profileReAnswer(num: any, id: any, answer: any) {
       '<tr>' + this.LifeStatus(family.father_status, family.mother_status, family.father_occupation, family.occupation_mother) + '</tr>' +
         '</table></div>'
 
-
-
-        // '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
-        // 'नाम: ' + personal.name + '<br>' +
-        // tslint:disable-next-line: max-line-length
-        // this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(personal.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
-        // this.profileSet('कद: ', this.getHeight(Number(personal.height))) +
-        // this.profileSet('वजन: ', personal.weight) +
-        // this.profileSet('धर्म: ', personal.religion) +
-        // this.profileSet('जाती: ', personal.caste) +
-        // this.profileSet('खान-पान: ', personal.food_choice) +
-        // this.profileSet('वैवाहिक स्तिथि: ', personal.marital_status) +
-        // this.profileSet('विकलांगता: ', personal.disability) + ' <br> <br>'
-        //  +
-        // '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
-        // this.profileSet('जन्म दिवस: ', personal.birth_date) +
-        // this.profileSet('जन्म स्थान: ', personal.birth_place) +
-        // this.profileSet('जन्म समय: ', personal.birth_time) +
-        // this.profileSet('मांगलिक: ', personal.manglik) + ' <br> <br>'
-        // +
-        // '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
-        // this.profileSet('शिक्षा: ', personal.education) +
-        // this.profileSet('डिग्री: ', personal.degree) +
-        // this.profileSet('कॉलेज: ', personal.college) + ' <br><br>'
-        // +
-        // '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
-        // this.profileSet('व्यसाय: ', personal.occupation) +
-        // this.profileSetIncome('वार्षिक आय: ', String(personal.monthly_income)) +
-        // this.profileSet('पेशा: ', personal.profession) +
-        // this.profileSet('कार्य स्थान: ', personal.working_city) + ' <br><br>'
-        // +
-        // '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
-        // this.profileSet('परिवार: ', family.family_type) +
-        // this.profileSet('घर: ', family.house_type) +
-        // this.profileSet('मदर स्टेटस: ', family.mother_status) +
-        // this.profileSet('फादर स्टेटस: ', family.father_status) +
-        // this.profileSet('माता का व्यसाय: ', family.occupation_mother) +
-        // this.profileSet('पिता का व्यसाय : ', family.occupation) +
-        // this.profileSetIncome('पारिवारिक आय: ', String(family.family_income)) +
-        // this.profileSet('मैरिड भाई: ', family.married_sons) +
-        // this.profileSet('मैरिड बेहेने : ', family.married_daughters) +
-        // this.profileSet('अव्यावाहित भाई: ', family.unmarried_sons) +
-        // this.profileSet('अव्यावाहित बेहेने : ', family.unmarried_daughters) + ' <br><br>'
-        // +
-        // '<b> &#9742 कांटेक्ट डिटेल्स </b> <br><br>' +
-        // this.profileSet('मोबाइल नंबर: ', family.mobile) +
-        // this.profileSet('पता: ', family.locality)
     }).then(() => {
       if (family.mobile) {
         return this.botui.action.button({
@@ -1319,7 +1028,6 @@ profileReAnswer(num: any, id: any, answer: any) {
        });
       }
     });
-    }
    }
    showHistoryMessages(mob: string) {
      return this.http.get('https://partner.hansmatrimony.com/api/getMessages?from=' + mob).subscribe(
@@ -1434,49 +1142,6 @@ profileReAnswer(num: any, id: any, answer: any) {
                   '<tr>' + this.LifeStatus(valueInMessage.father_status, valueInMessage.mother_status, valueInMessage.father_occupation, valueInMessage.occupation_mother) + '</tr>' +
                     '</table></div>'
 
-
-                    // '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
-                    // 'नाम: ' + valueInMessage.name + '<br>' +
-                    // // tslint:disable-next-line: max-line-length
-                    // tslint:disable-next-line: max-line-length
-                    // this.profileSet('उम्र: ', String((Math.floor((Date.now() - new Date(valueInMessage.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365))))) +
-                    // this.profileSet('कद: ', this.getHeight(Number(valueInMessage.height))) +
-                    // this.profileSet('वजन: ', valueInMessage.weight) +
-                    // this.profileSet('धर्म: ', valueInMessage.religion) +
-                    // this.profileSet('जाती: ', valueInMessage.caste) +
-                    // this.profileSet('खान-पान: ', valueInMessage.food_choice) +
-                    // this.profileSet('पता: ', valueInMessage.locality) +
-                    // this.profileSet('वैवाहिक स्तिथि: ', valueInMessage.marital_status) +
-                    // this.profileSet('विकलांगता: ', valueInMessage.disability) + ' <br> <br>'
-                    //  +
-                    // '<b> &#9803 होरोस्कोप डिटेल्स</b> <br><br>' +
-                    // this.profileSet('जन्म दिवस: ', valueInMessage.birth_date) +
-                    // this.profileSet('जन्म स्थान: ', valueInMessage.birth_place) +
-                    // this.profileSet('मांगलिक: ', valueInMessage.manglik) + ' <br> <br>'
-                    // +
-                    // '<b> &#128218 एजुकेशन डिटेल्स</b> <br><br>' +
-                    // this.profileSet('शिक्षा: ', valueInMessage.education) +
-                    // this.profileSet('डिग्री: ', valueInMessage.degree) +
-                    // this.profileSet('कॉलेज: ', valueInMessage.college) + ' <br><br>'
-                    // +
-                    // '<b> &#128188 वर्क डिटेल्स</b> <br><br>' +
-                    // this.profileSet('व्यसाय: ', valueInMessage.occupation) +
-                    // this.profileSetIncome('वार्षिक आय: ', String(valueInMessage.monthly_income)) +
-                    // this.profileSet('पेशा: ', valueInMessage.profession) +
-                    // this.profileSet('कार्य स्थान: ', valueInMessage.working_city) + ' <br><br>'
-                    // +
-                    // '<b> &#128106 फॅमिली डिटेल्स</b> <br><br>' +
-                    // this.profileSet('परिवार: ', valueInMessage.family_type) +
-                    // this.profileSet('घर: ', valueInMessage.house_type) +
-                    // this.profileSet('मदर स्टेटस: ', valueInMessage.mother_status) +
-                    // this.profileSet('फादर स्टेटस: ', valueInMessage.father_status) +
-                    // this.profileSet('माता का व्यसाय: ', valueInMessage.occupation_mother) +
-                    // this.profileSet('पिता का व्यसाय : ', valueInMessage.occupation) +
-                    // this.profileSetIncome('पारिवारिक आय: ', String(valueInMessage.family_income)) +
-                    // this.profileSet('मैरिड भाई: ', valueInMessage.married_sons) +
-                    // this.profileSet('मैरिड बेहेने : ', valueInMessage.married_daughters) +
-                    // this.profileSet('अव्यावाहित भाई: ', valueInMessage.unmarried_sons) +
-                    // this.profileSet('अव्यावाहित बेहेने : ', valueInMessage.unmarried_daughters)
                 });
                 }
               }
