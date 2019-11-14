@@ -67,6 +67,7 @@ export class RegisterComponent implements OnInit {
   numberCheck: string;
   changeNumber = false;
   isCompleted1 = false;
+  otpStatus = false;
   createProfile: string[] = ['Self', 'Son', 'Daughter', 'Brother', 'Sister', 'Other'];
 
 
@@ -129,6 +130,7 @@ export class RegisterComponent implements OnInit {
   }
 
   openDialog(dialog): void {
+    this.otpStatus = false;
     const dialogConfig = new MatDialogConfig();
     this.dialog.open(dialog, {
 
@@ -175,6 +177,7 @@ export class RegisterComponent implements OnInit {
 
   verifyOtp() {
     this.makeOtp();
+    this.otpStatus = true;
     console.log('otp', this.otp);
     const otp = {
       otp: this.otp,
