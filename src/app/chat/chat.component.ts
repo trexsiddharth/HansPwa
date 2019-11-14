@@ -1166,6 +1166,7 @@ getCredits() {
   (error: any) => {
     this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
     console.log(error);
+    this.spinner.hide();
   }
  );
 }
