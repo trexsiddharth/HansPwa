@@ -1233,8 +1233,13 @@ setHouseType(value: string) {
                 if (fatho) {
                   if (mother != null && mother !== '' ) {
                     if (mother.match('Alive')) {
-                      // tslint:disable-next-line: max-line-length
+                      if (mothero) {
+                        // tslint:disable-next-line: max-line-length
                     return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + '  & Mother(Alive) -> ' + mothero + ' </th>';
+                      } else {
+                        // tslint:disable-next-line: max-line-length
+                    return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + '  & Mother(Alive) </th>';
+                      }
                     } else {
                         // tslint:disable-next-line: max-line-length
                     return  '<th style="width:100%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/parents.svg">Father(Alive) ->' + fatho + ', Mother(Dead)</th>';
