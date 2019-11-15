@@ -6,6 +6,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "https://hansmatrimony.com",
+  "gcm_sender_id": "103953800507",
   "icons": [
     {
       "src": "assets/logo_72.png",

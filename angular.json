@@ -23,7 +23,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
-              "src/.well-known/assetlinks.json"
+              "src/.well-known/assetlinks.json",
+              "src/firebase-messaging-sw.js"
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/purple-green.css",
@@ -93,7 +94,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
-              "src/.well-known/assetlinks"
+              "src/.well-known/assetlinks",
+              "src/firebase-messaging-sw.js"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",

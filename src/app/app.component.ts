@@ -1,13 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { Router } from '@angular/router';
+import {firebase} from '@firebase/app';
+import {environment} from '../environments/environment';
+import {  NotificationsService } from '../../src/app/notifications.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  
   title = 'hansWebApp';
   footer = true;
 
@@ -21,10 +25,13 @@ export class AppComponent implements OnInit {
   clickEvent: any;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private swUpdate: SwUpdate, public router: Router) {
+  constructor(private swUpdate: SwUpdate, public router: Router, public notificationService: NotificationsService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    firebase.initializeApp(environment.firebase);
+    await this.notificationService.init();
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
@@ -34,6 +41,10 @@ export class AppComponent implements OnInit {
       });
     }
     this.changeOfRoutes();
+}
+
+async ngAfterViewInit() {
+    await this.notificationService.requestPermission();
 }
 
   changeOfRoutes() {
