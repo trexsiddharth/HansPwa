@@ -187,6 +187,9 @@ export class RegisterFourComponent implements OnInit {
         console.log('father_status', this.FamilyDetails.value.father_status);
         console.log('mother_status', this.FamilyDetails.value.mother_status);
 
+        console.log('occupation_father', this.FamilyDetails.value.FatherOccupation);
+        console.log('occupation_mother', this.FamilyDetails.value.MotherOccupation);
+
 
 
 
