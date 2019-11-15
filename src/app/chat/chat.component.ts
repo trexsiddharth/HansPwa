@@ -10,9 +10,8 @@ import {
 import { InstallPromptService } from '../install-prompt.service';
 import { A2HSDialogComponent } from '../chat/a2-hsdialog/a2-hsdialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { style } from '@angular/animations';
-import { when } from 'q';
-import { count } from 'rxjs/operators';
+
+import {  NotificationsService } from '../notifications.service';
 
 declare let BotUI: Function;
 
@@ -69,7 +68,8 @@ export class ChatComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private ngxNotificationService: NgxNotificationService,
     private promptService: InstallPromptService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public notification: NotificationsService
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -192,7 +192,8 @@ export class ChatComponent implements OnInit {
        return this.http.post<any>(' https://partner.hansmatrimony.com/api/sendMessages' , data1 );
    }
    checkUrl(num: string): Observable<any> {
-       return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : num}});
+       // tslint:disable-next-line: max-line-length
+       return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : num, ['fcm_id'] : this.notification.getCurrentToken()}});
        // tslint:disable-next-line: max-line-length
    }
 

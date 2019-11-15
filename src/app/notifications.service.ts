@@ -9,7 +9,7 @@ import {environment} from '../environments/environment';
   providedIn: 'root'
 })
 export class NotificationsService {
-
+token: string;
   constructor() { }
 
   init(): Promise<void> {
@@ -67,14 +67,18 @@ export class NotificationsService {
             const messaging = firebase.messaging();
             await messaging.requestPermission();
 
-            const token: string = await messaging.getToken();
-
-            console.log('User notifications token:', token);
+            this.token = await messaging.getToken();
+            console.log('User notifications token:', this.token);
         } catch (err) {
             // No notifications granted
         }
 
         resolve();
     });
+}
+getCurrentToken(): string {
+    if (this.token) {
+return this.token;
+    }
 }
 }
