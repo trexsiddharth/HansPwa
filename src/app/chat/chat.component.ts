@@ -1175,7 +1175,7 @@ getCredits() {
       if (this.currentLanguage === 'English') {
         document.getElementById('credit').innerText = 'Credits: ' + this.points;
       } else {
-        document.getElementById('credit').innerText = 'बचे हुए कांटेक्ट नंबर: ' + this.points;
+        document.getElementById('credit').innerText = 'कांटेक्ट नंबर: ' + this.points;
       }
    },
   (error: any) => {
@@ -1317,7 +1317,7 @@ setHouseType(value: string) {
             document.getElementById('chatText').innerText = 'रिश्ते देखें';
             document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
             document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
-            document.getElementById('credit').innerText = 'बचे हुए कांटेक्ट नंबर: ' + this.points;
+            document.getElementById('credit').innerText = 'कांटेक्ट नंबर: ' + this.points;
             return 'कांटेक्ट नंबर देखें';
           }
       }

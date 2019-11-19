@@ -322,8 +322,9 @@ text-align: center;
         right: 0px;
       }
       .setNavIcons {
-        margin-top: 10px;
+        margin-top: 7px;
         font-weight: bolder;
+        margin-right: 5px;
          }
 
        .filterImage {
@@ -409,8 +410,9 @@ text-align: center;
         right: 0px;
       }
       .setNavIcons {
-        margin-top: 10px;
+        margin-top: 7px;
         font-weight: bolder;
+        margin-right: 5px;
          }
          .filterImage {
           filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
