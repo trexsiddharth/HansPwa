@@ -245,6 +245,15 @@ text-align: center;
  font-weight: bolder;
  margin-right: 20px;
   }
+  #chat {
+    margin: 0px; font-size: 20px;color: #34b7f1;font-weight: bolder;
+  }
+  #hist {
+    margin: 0px; font-size: 20px;color: grey;font-weight: bolder;
+  }
+  #prof {
+    margin: 0px; font-size: 20px;color: grey;font-weight: bolder;
+  }
   @media (max-width: 576px) {
     .navbar {
       background-color: white;
@@ -319,6 +328,15 @@ text-align: center;
           margin-top: 15px;
           margin-left: 10px;
         }
+        #chat {
+          margin: 0px; font-size: 16pxpx;color: #34b7f1;font-weight: bolder;
+        }
+        #hist {
+          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
+        }
+        #prof {
+          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
+        }
     }
     @media (max-width: 1024px) {
       .navbar {
@@ -391,6 +409,15 @@ text-align: center;
           width: 35px;
           margin-top: 15px;
           margin-left: 10px;
+        }
+        #chat {
+          margin: 0px; font-size: 16px;color: #34b7f1;font-weight: bolder;
+        }
+        #hist {
+          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
+        }
+        #prof {
+          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
         }
     }
   
