@@ -245,14 +245,18 @@ text-align: center;
  font-weight: bolder;
  margin-right: 20px;
   }
-  #chat {
+  #chatText {
     margin: 0px; font-size: 20px;color: #34b7f1;font-weight: bolder;
   }
-  #hist {
+  #historyText {
     margin: 0px; font-size: 20px;color: grey;font-weight: bolder;
   }
-  #prof {
+  #profileText {
     margin: 0px; font-size: 20px;color: grey;font-weight: bolder;
+  }
+  .rowClass {
+   margin: 20px auto;
+   width: 100%
   }
   @media (max-width: 576px) {
     .navbar {
@@ -328,15 +332,19 @@ text-align: center;
           margin-top: 15px;
           margin-left: 10px;
         }
-        #chat {
+        #chatText {
           margin: 0px; font-size: 16pxpx;color: #34b7f1;font-weight: bolder;
         }
-        #hist {
+        #historyText {
           margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
         }
-        #prof {
+        #profileText {
           margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
         }
+        .rowClass {
+          margin: 8px auto;
+          width: 100%
+         }
     }
     @media (max-width: 1024px) {
       .navbar {
@@ -410,15 +418,19 @@ text-align: center;
           margin-top: 15px;
           margin-left: 10px;
         }
-        #chat {
+        #chatText {
           margin: 0px; font-size: 16px;color: #34b7f1;font-weight: bolder;
         }
-        #hist {
+        #historyText {
           margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
         }
-        #prof {
+        #profileText {
           margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
         }
+        .rowClass {
+          margin: 15px auto;
+          width: 100%
+         }
     }
   
     @media (min-width: 576px) {
@@ -470,5 +482,9 @@ text-align: center;
         padding: 10px;
         cursor: pointer;
       } 
+      .rowClass {
+        margin: 8px auto;
+        width: 100%
+       }
     }
     
