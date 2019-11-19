@@ -149,7 +149,7 @@ export class ChatComponent implements OnInit {
   } else {
     this.botui.message.add({
       type: 'html',
-      content: '<h6>कृपया अपना १० अंको का मोबाइल नंबर डालें</h6>'
+      content: '<div><p style="font-size:18px">कृपया अपना १० अंको का मोबाइल नंबर डालें</p></div>'
     }).then(() => {
     this.botui.action.text({
       action: {
@@ -308,8 +308,8 @@ export class ChatComponent implements OnInit {
                          return this.botui.action.button({
                            cssClass: 'styleButton',
                            action: [
-                             { text: 'YES', value: 'YES'},
-                             {text: 'NO', value: 'NO' }
+                             { text: 'फ़ोन नंबर देखें', value: 'YES'},
+                             {text: 'रिजेक्ट करें', value: 'NO' }
                            ]
                        }).then(res => {
                         if (this.langChanged === true) {
@@ -363,13 +363,13 @@ export class ChatComponent implements OnInit {
               loading: true,
               delay: 500,
                 type: 'html',
-                 content: '<h6>' + data.apiwha_autoreply + '</h6>'
+                 content: '<div><p style="font-size:18px">' + data.apiwha_autoreply + '</p></div>'
              }).then(() => {
                  if (data.buttons.match('Yes')) {
                    return this.botui.action.button({
                      action: [
-                       { text: 'YES', value: 'YES'},
-                       {text: 'NO', value: 'NO' }
+                       { text: 'फ़ोन नंबर देखें', value: 'YES'},
+                       {text: 'रिजेक्ट करें', value: 'NO' }
                      ]
                  }).then(res => {
                   if (this.langChanged === true) {
@@ -433,7 +433,7 @@ export class ChatComponent implements OnInit {
                   return this.botui.action.button({
                     action: [
                       { text: 'BUY SUBSCRIPTION', value: 'BUY'},
-                      { text: 'NO', value: 'NO'}
+                      { text: 'रिजेक्ट करें', value: 'NO'}
                     ]
                   }).then(res => {
                     if (this.promptData != null) {
@@ -681,7 +681,8 @@ export class ChatComponent implements OnInit {
           this.botui.message.add({
             loading: true,
             delay: 500,
-            content: text
+            type: 'html',
+            content: '<div><p style="font-size:18px">' + text + '</p></div>'
           }).then(() => {
             this.botui.action.button({
               action: [{
@@ -699,7 +700,8 @@ export class ChatComponent implements OnInit {
           this.botui.message.add({
             loading: true,
             delay: 500,
-            content: text
+            type: 'html',
+            content: '<div><p style="font-size:18px">' + text + '</p></div>'
           }).then(() => {
             this.botui.action.button({
               action: [{
@@ -714,7 +716,8 @@ export class ChatComponent implements OnInit {
           this.botui.message.add({
             loading: true,
             delay: 500,
-            content: 'कृपया अपना १० अंको का मोबाइल नंबर डालें'
+            type: 'html',
+            content: '<div><p style="font-size:18px">कृपया अपना १० अंको का मोबाइल नंबर डालें</p></div>'
           }).then(() => {
           this.botui.action.text({
             action: {
@@ -795,12 +798,9 @@ export class ChatComponent implements OnInit {
      if (this.currentContact) {
       this.spinner.show();
       this.history = 'history';
-      document.getElementById('chat').setAttribute('src', '../../assets/chat.svg');
-      document.getElementById('hist').setAttribute('src', '../../assets/thumbs-up-blue.svg');
-      document.getElementById('prof').setAttribute('src', '../../assets/avatar.svg');
 
-      document.getElementById('chatText').style.color = '#000000';
-      document.getElementById('profileText').style.color = '#000000';
+      document.getElementById('chatText').style.color = 'grey';
+      document.getElementById('profileText').style.color = 'grey';
       document.getElementById('historyText').style.color = '#34b7f1';
 
       console.log(localStorage.getItem('id'));
@@ -823,22 +823,16 @@ export class ChatComponent implements OnInit {
    }
    changeToBot() {
     this.history = 'chatbot';
-    document.getElementById('hist').setAttribute('src', '../../assets/thumbs-up.svg');
-    document.getElementById('chat').setAttribute('src', '../../assets/chat-blue.svg');
-    document.getElementById('prof').setAttribute('src', '../../assets/avatar.svg');
     document.getElementById('chatText').style.color = '#34b7f1';
-    document.getElementById('historyText').style.color = '#000000';
-    document.getElementById('profileText').style.color = '#000000';
+    document.getElementById('historyText').style.color = 'grey';
+    document.getElementById('profileText').style.color = 'grey';
    }
    changeToMyProfile() {
      if (this.currentContact) {
       this.spinner.show();
       this.history = 'myprofile';
-      document.getElementById('hist').setAttribute('src', '../../assets/thumbs-up.svg');
-      document.getElementById('prof').setAttribute('src', '../../assets/avatar-blue.svg');
-      document.getElementById('chat').setAttribute('src', '../../assets/chat.svg');
-      document.getElementById('chatText').style.color = '#000000';
-      document.getElementById('historyText').style.color = '#000000';
+      document.getElementById('chatText').style.color = 'grey';
+      document.getElementById('historyText').style.color = 'grey';
       document.getElementById('profileText').style.color = '#34b7f1';
       console.log(localStorage.getItem('id'));
      // tslint:disable-next-line: max-line-length
@@ -1008,8 +1002,8 @@ profileReAnswer(num: any, id: any, answer: any) {
       } else {
         return this.botui.action.button({
           action: [
-            { text: 'Yes', value: 'Yes'},
-            { text: 'No', value: 'No'}
+            { text: 'फ़ोन नंबर देखें', value: 'Yes'},
+            { text: 'रिजेक्ट करें', value: 'No'}
           ]
       }).then(res => {
         if (this.langChanged === true) {

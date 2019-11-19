@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { SwUpdate, SwPush } from '@angular/service-worker';
 import { Router } from '@angular/router';
 import {firebase} from '@firebase/app';
 import {environment} from '../environments/environment';
@@ -11,7 +11,6 @@ import {  NotificationsService } from '../../src/app/notifications.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  
   title = 'hansWebApp';
   footer = true;
 
@@ -50,10 +49,10 @@ async ngAfterViewInit() {
   changeOfRoutes() {
      // tslint:disable-next-line: max-line-length
      if (location.href.indexOf('chat') > - 1 || location.href.indexOf('register') > - 1 || location.href.indexOf('history') > - 1 || location.href.indexOf('myprofile') > - 1 ) { this.footer = false;
-      if (location.href.indexOf('chat') > - 1 ) {
+                                                                                                                                                                                  if (location.href.indexOf('chat') > - 1 ) {
         this.header = false;
       }
-      this.isLogin = 'true';
+                                                                                                                                                                                  this.isLogin = 'true';
     } else {
       this.footer = true;
      }

@@ -197,5 +197,14 @@ onResize(event) {
         return value;
       }
     }
+    getOfficeAddress(value1: string, value2: string) {
+      if (value1) {
+        return value1;
+      } else if (value2) {
+        return value2;
+      } else {
+        return 'N/A';
+      }
+    }
 
 }

@@ -20,7 +20,6 @@ token: string;
                    resolve();
                    return;
             }
-
             const messaging = firebase.messaging();
 
             // Register the Service Worker
@@ -65,14 +64,15 @@ token: string;
         }
         try {
             const messaging = firebase.messaging();
-            await messaging.requestPermission();
-
+            Notification.requestPermission(status => {
+                console.log(status);
+             });
             this.token = await messaging.getToken();
             console.log('User notifications token:', this.token);
+
         } catch (err) {
             // No notifications granted
         }
-
         resolve();
     });
 }

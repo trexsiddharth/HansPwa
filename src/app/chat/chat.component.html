@@ -182,23 +182,20 @@
   </footer> -->
   <footer>
       <div class="navbar" style="padding: 5px 0px">
-          <div class="row" style="margin: 0px auto;width: 100%">
-              <div class="col-4" style="text-align: center">
-                      <img (click)="changeToBot()" id="chat" src="../../assets/chat-blue.svg" style="width: 30px" alt="history.png"><br>
+          <div class="row" style="margin: 20px auto;width: 100%">
+              <div class="col-4" style="text-align: center;border-right: 1px solid black;">
                       <div class="row" style="margin: 0px auto; display: inline;">
-                          <p id="chatText" style="margin: 0px; font-size: 12px;color: #34b7f1">Rishtey</p>
+                          <p (click)="changeToBot()" id="chatText" style="margin: 0px; font-size: 20px;color: #34b7f1;font-weight: bolder;">रिश्ते देखें</p>
                       </div>
               </div>
-              <div class="col-4" style="text-align: center" >
-                      <img (click)="changeToHistory()" id="hist" src="../../assets/thumbs-up.svg" style="width: 30px" alt="history.png"><br>
+              <div class="col-4" style="text-align: center;border-right: 1px solid black;" >
                       <div class="row" style="margin: 0px auto; display: inline;">
-                              <p id="historyText" style="margin: 0px; font-size: 12px;color: black">History</p>
+                              <p (click)="changeToHistory()" id="historyText" style="margin: 0px; font-size: 20px;color: grey;font-weight: bolder;">देखे गए रिश्ते</p>
                           </div>
               </div>
               <div class="col-4" style="text-align: center">
-                      <img (click)="changeToMyProfile()" id="prof" src="../../assets/avatar.svg" style="width: 30px" alt="history.png"><br>
                       <div class="row" style="margin: 0px auto; display: inline;">
-                              <p id="profileText" style="margin: 0px; font-size: 12px;color: black">My Profile</p>
+                              <p (click)="changeToMyProfile()" id="profileText" style="margin: 0px; font-size: 20px;color: grey;font-weight: bolder;">मेरा प्रोफाइल</p>
                           </div>
               </div>
           </div>

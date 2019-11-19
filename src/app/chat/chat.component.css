@@ -79,6 +79,7 @@
 }
 ::ng-deep .botui-actions-buttons {
   text-align: center;
+  font-size: 16px;
   }
 ::ng-deep .botui-actions-buttons.styleButton {
 text-align: center;
