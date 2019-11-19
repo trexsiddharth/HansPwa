@@ -47,7 +47,7 @@ body {
   .mainBody {
     position: fixed;
     overflow: auto;
-    height: calc(100% - 100px);
+    height: 100%;
     top: 60px;
     bottom: 50px;
   }
