@@ -48,6 +48,7 @@ export class ChatComponent implements OnInit {
   currentUrl: string;
   botui: any;
   langChanged = false;
+  currentLanguage: string;
   historyData: any;
   currentContact: any;
   profileData: any;
@@ -83,6 +84,17 @@ export class ChatComponent implements OnInit {
       this.loginStatus = true;
     } else {
       this.loginStatus = false;
+    }
+    this.currentLanguage = localStorage.getItem('language');
+
+    if (this.currentLanguage === 'English') {
+      document.getElementById('chatText').innerText = 'See Profiles';
+      document.getElementById('historyText').innerText = 'History';
+      document.getElementById('profileText').innerText = 'My Profile';
+    } else {
+      document.getElementById('chatText').innerText = 'रिश्ते देखें';
+      document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
+      document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
     }
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
@@ -308,8 +320,8 @@ export class ChatComponent implements OnInit {
                          return this.botui.action.button({
                            cssClass: 'styleButton',
                            action: [
-                             { text: 'फ़ोन नंबर देखें', value: 'YES'},
-                             {text: 'रिजेक्ट करें', value: 'NO' }
+                             { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
+                             {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
                            ]
                        }).then(res => {
                         if (this.langChanged === true) {
@@ -333,7 +345,7 @@ export class ChatComponent implements OnInit {
                        } else if (data.buttons.match('Show')) {
                          return this.botui.action.button({
                            action: [
-                             { text: 'SHOW', value: 'SHOW'},
+                             { text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'},
                            ]
                        }).then(res => {
                         if (this.langChanged === true) {
@@ -368,8 +380,8 @@ export class ChatComponent implements OnInit {
                  if (data.buttons.match('Yes')) {
                    return this.botui.action.button({
                      action: [
-                       { text: 'फ़ोन नंबर देखें', value: 'YES'},
-                       {text: 'रिजेक्ट करें', value: 'NO' }
+                       { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
+                       {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
                      ]
                  }).then(res => {
                   if (this.langChanged === true) {
@@ -394,7 +406,7 @@ export class ChatComponent implements OnInit {
                  }  else if (data.buttons.match('Register')) {
                    this.botui.action.button({
                      action: [{
-                       text: 'REGISTER',
+                       text: this.changeRegisterButtonLanguage(this.currentLanguage),
                        value: 'REGISTER'
                      }]
                    }).then(() => {
@@ -406,7 +418,7 @@ export class ChatComponent implements OnInit {
                  } else if (data.buttons.match('Show')) {
                   return this.botui.action.button({
                     action: [
-                      { text: 'SHOW', value: 'SHOW'},
+                      { text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'},
                     ]
                 }).then(res => {
                   if (this.langChanged === true) {
@@ -686,7 +698,7 @@ export class ChatComponent implements OnInit {
           }).then(() => {
             this.botui.action.button({
               action: [{
-                text: 'REGISTER',
+                text: this.changeRegisterButtonLanguage(this.currentLanguage),
                 value: 'REGISTER'
               }]
             }).then(() => {
@@ -705,7 +717,7 @@ export class ChatComponent implements OnInit {
           }).then(() => {
             this.botui.action.button({
               action: [{
-                text: 'REGISTER',
+                text: this.changeRegisterButtonLanguage(this.currentLanguage),
                 value: 'REGISTER'
               }]
             }).then(() => {
@@ -738,16 +750,19 @@ export class ChatComponent implements OnInit {
  }
  changeLanguage(phon: string, lang: string): Observable<any> {
    console.log('changing language');
+   this.currentLanguage = lang;
    return this.http.get<any>(' https://partner.hansmatrimony.com/api/language', {params: { ['phone_number'] : phon, ['language'] : lang}});
  }
  languageEnglish() {
   localStorage.setItem('language', 'English');
   this.langChanged = true;
+  this.changeButtonLanguage('English');
   console.log('language changed to english');
  }
  languageHindi() {
   localStorage.setItem('language', 'Hindi');
   this.langChanged = true;
+  this.changeButtonLanguage('Hindi');
   console.log('language changed to hindi');
    }
 
@@ -867,7 +882,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       }).then(() => {
         this.botui.action.button({
           action: [{
-            text: 'SHOW', value: 'SHOW'
+            text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'
           }]
         }).then(res => {
           this.repeatMEssage(res.value, num);
@@ -982,7 +997,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       if (family.mobile) {
         return this.botui.action.button({
           action: [
-            { text: 'Show', value: 'Show'}
+            { text: this.changeShowButtonLanguage(this.currentLanguage), value: 'Show'}
           ]
       }).then(res => {
         if (this.langChanged === true) {
@@ -1002,8 +1017,8 @@ profileReAnswer(num: any, id: any, answer: any) {
       } else {
         return this.botui.action.button({
           action: [
-            { text: 'फ़ोन नंबर देखें', value: 'Yes'},
-            { text: 'रिजेक्ट करें', value: 'No'}
+            { text: this.changeButtonLanguage(this.currentLanguage), value: 'Yes'},
+            { text: this.changeNoButtonLanguage(this.currentLanguage), value: 'No'}
           ]
       }).then(res => {
         if (this.langChanged === true) {
@@ -1157,6 +1172,11 @@ getCredits() {
    (data: any) => {
       this.points = data.whatsapp_points;
       console.log(this.points);
+      if (this.currentLanguage === 'English') {
+        document.getElementById('credit').innerText = 'Credits: ' + this.points;
+      } else {
+        document.getElementById('credit').innerText = 'बचे हुए कांटेक्ट नंबर: ' + this.points;
+      }
    },
   (error: any) => {
     this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
@@ -1285,5 +1305,42 @@ setHouseType(value: string) {
         localStorage.setItem('mobile_number', '');
         this.router.navigateByUrl('/home');
       }
+
+      changeButtonLanguage(type: string) {
+          if (type === 'English') {
+            document.getElementById('chatText').innerText = 'See Profiles';
+            document.getElementById('historyText').innerText = 'History';
+            document.getElementById('profileText').innerText = 'My Profile';
+            document.getElementById('credit').innerText = 'Credits';
+            return 'See Contact Number';
+          } else {
+            document.getElementById('chatText').innerText = 'रिश्ते देखें';
+            document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
+            document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
+            document.getElementById('credit').innerText = 'बचे हुए कांटेक्ट नंबर: ' + this.points;
+            return 'कांटेक्ट नंबर देखें';
+          }
+      }
+      changeNoButtonLanguage(type: string) {
+        if (type === 'English') {
+          return 'Reject';
+        } else {
+          return 'रिजेक्ट';
+        }
+    }
+    changeShowButtonLanguage(type: string) {
+      if (type === 'English') {
+        return 'Show';
+      } else {
+        return 'दिखाएं';
+      }
+    }
+      changeRegisterButtonLanguage(type: string) {
+        if (type === 'English') {
+          return 'Register';
+        } else {
+          return 'रजिस्टर';
+        }
+  }
 
 }

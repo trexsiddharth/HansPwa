@@ -8,17 +8,7 @@
         <div style="display: flex">
           <div style="margin: auto">
               <div style="margin-bottom: 0px" [routerLink]="['/subscription']" routerLinkActive="router-link-active"  *ngIf="points >= 0">
-                  <img class="setNavIcons" style="position: relative;color: white " src="../../assets/coins.svg" alt="coins">
-                <p style="display: inherit;
-                position: absolute;
-                position: 0px;
-                background: #34b7f1;
-                border-radius: 100%;
-                border: 2px solid white;
-                padding-left: 5px;
-                padding-right: 5px;
-                font-size: 16px;
-                margin-top: -20px;">{{points}}</p>
+                <p class="setNavIcons" id="credit">Credits: {{points}}</p>
               </div>
           </div>
 

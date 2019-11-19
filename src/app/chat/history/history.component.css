@@ -19,6 +19,10 @@
     border-radius: 10px; 
     font-weight: bolder;
   }
+
+  ::ng-deep .mat-tab-label-content {
+    font-size: 18px;
+  }
   
   
   /* Style the links inside the navigation bar */

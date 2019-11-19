@@ -241,7 +241,9 @@ text-align: center;
     margin-top: 10px;
   }
   .setNavIcons {
- width: 35px;
+ margin-top: 15px;
+ font-weight: bolder;
+ margin-right: 20px;
   }
   @media (max-width: 576px) {
     .navbar {
@@ -307,7 +309,8 @@ text-align: center;
         right: 0px;
       }
       .setNavIcons {
-        width: 25px;
+        margin-top: 10px;
+        font-weight: bolder;
          }
 
        .filterImage {
@@ -380,7 +383,8 @@ text-align: center;
         right: 0px;
       }
       .setNavIcons {
-        width: 25px;
+        margin-top: 10px;
+        font-weight: bolder;
          }
          .filterImage {
           filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);

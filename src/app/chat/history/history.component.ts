@@ -43,9 +43,18 @@ export class HistoryComponent implements OnInit {
     }
     }
     yesProfiles() {
-      return 'Yes(' + this.profile.contacted.length + ')';
+      if (localStorage.getItem('language') === 'English') {
+        return 'Contacted(' + this.profile.contacted.length + ')';
+      } else {
+        return 'पसंद किये गए रिश्ते(' + this.profile.contacted.length + ')';
+      }
+      
     }
     noProfiles() {
-      return 'No(' + this.profile.rejected.length + ')';
+      if (localStorage.getItem('language') === 'English') {
+        return 'Rejected(' + this.profile.rejected.length + ')';
+      } else {
+        return 'रिजेक्टेड रिश्ते(' + this.profile.rejected.length + ')';
+      }
     }
 }
