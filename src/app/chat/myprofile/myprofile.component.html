@@ -21,7 +21,7 @@
     <div style="margin: 20px 20px;" class="card">
       <div class="row" style="margin: 10px 10px 0px;">
           <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-info"></i>
-          <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+          <i (click)="openPersonalDialog()" style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
       </div>
       <div class="row" style="margin: 10px 10px;">
         <div class="col-6">
@@ -84,7 +84,6 @@
         <div class="row" style="margin: 10px 10px 0px;">
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-comment"></i>
             <h5 style="margin: auto 20px">ABOUT</h5>
-            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
         </div>
         <div class="row" style="margin: 10px 20px">
             <p>{{personalProfileData.about}}</p>
@@ -94,7 +93,6 @@
         <div class="row" style="margin: 10px 10px 0px;">
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
             <h5 style="margin: auto 20px">EDUCATION DETAILS</h5>
-            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
         </div>
         <div class="row" style="margin: 10px 10px;">
             <div class="col-12">
@@ -113,7 +111,6 @@
         <div class="row" style="margin: 10px 10px 0px;">
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-briefcase"></i>
             <h5 style="margin: auto 20px">CAREER DETAILS</h5>
-            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
         </div>
         <div class="row" style="margin: 10px 10px;">
             <div class="col-6">
@@ -142,7 +139,6 @@
         <div class="row" style="margin: 10px 10px 0px;">
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa fa-venus-mars"></i>
             <h5 style="margin: auto 20px">HOROSCOPE DETAILS</h5>
-            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
         </div>
         <div class="row" style="margin: 10px 10px;">
             <div class="col-6">
@@ -171,7 +167,6 @@
         <div class="row" style="margin: 10px 10px 0px;">
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa fa-venus-mars"></i>
             <h5 style="margin: auto 20px">CONTACT DETAILS</h5>
-            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
         </div>
         <div class="row" style="margin: 10px 10px;">
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px" class="fa fa-envelope"></i>
@@ -202,7 +197,6 @@
               <div class="row" style="margin: 10px 10px 0px;">
                   <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-comment"></i>
                   <h5 style="margin: auto 20px">ABOUT FAMILY</h5>
-                  <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
               </div>
               <div class="row" style="margin: 10px 20px">
                   <p>{{familyProfileData.about}}</p>
@@ -213,7 +207,7 @@
               <div class="row" style="margin: 10px 10px 0px;">
                   <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
                   <h5 style="margin: auto 20px">FAMILY DETAILS</h5>
-                  <i  style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+                  <i (click)="openFamilyDialog()"  style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
               </div>
               <div class="row" style="margin: 10px 10px;">
                   <div class="col-12" style="margin: 10px 10px 0px;">
@@ -293,7 +287,7 @@
                   <div class="row" style="margin: 10px 10px 0px;">
                       <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
                       <h5 style="margin: auto 20px">PREFERENCES</h5>
-                      <i  style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
+                      <i (click)="openPreferenceDialog()" style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
                   </div>
                   <div class="row" style="margin: 10px 10px">
                       <div class="col-12" style="margin: 10px 10px 0px;">

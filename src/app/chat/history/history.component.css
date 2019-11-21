@@ -23,7 +23,9 @@
   ::ng-deep .mat-tab-label-content {
     font-size: 18px;
   }
-  
+  ::ng-deep .mat-tab-body {
+    padding-bottom: 100px;
+  }
   
   /* Style the links inside the navigation bar */
   .navbar a {
