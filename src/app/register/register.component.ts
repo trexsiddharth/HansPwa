@@ -192,6 +192,10 @@ export class RegisterComponent implements OnInit {
         this.otpVerified = true;
         localStorage.setItem('mobile_number', this.PageOne.value.phone) ;
         if (this.otpVerified === true) {
+          (window as any).ga('send', 'event', 'Register', 'registered', {
+            hitCallback: () => {
+              console.log('Tracking register successful');
+            }});
           console.log('verified', this.otpVerified);
           this.ngxNotificationService.success('Account Details Submitted Succesfully!', 'success');
           this.spinner.show();

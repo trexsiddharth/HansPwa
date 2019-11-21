@@ -126,6 +126,11 @@ onResize(event) {
         this.formData = this.dialogData.formData;
         this.price = this.dialogData.price;
         this.getRazorPay(this.price, 'live', 0, this.formData.name, this.formData.email, this.formData.mobile);
+
+        (window as any).ga('send', 'event', 'Subscription', 'Plan Opted' + this.price, {
+          hitCallback: () => {
+            console.log('Tracking Subscription successful');
+          }});
       }
   );
   }

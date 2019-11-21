@@ -151,6 +151,10 @@ export class RegisterThreeComponent implements OnInit {
       return this.http.post('https://partner.hansmatrimony.com/api/' + 'createThirdPageProfilePWA', thirdstepdata).subscribe(suc => {
       this.suc = suc;
       if (this.suc.third_page_status === 'Y') {
+        (window as any).ga('send', 'event', 'Career Details', 'Career Details Entered', {
+          hitCallback: () => {
+            console.log('Tracking Career Details Entered successful');
+          }});
         this.spinner.hide();
         this.ngxNotificationService.success('Education Details Submitted Succesfully!', 'success');
         this.router.navigate(['/register-four']);

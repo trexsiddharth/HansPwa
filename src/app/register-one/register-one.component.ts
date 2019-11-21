@@ -552,9 +552,13 @@ export class RegisterOneComponent implements OnInit {
         this.suc = res;
         console.log('suc', res);
         if (this.suc.first_page_status === 'Y') {
-          this.spinner.hide();
-          this.ngxNotificationService.success('Profile Details Submitted Succesfully!', 'success');
-          this.router.navigate(['/register-two']);
+            (window as any).ga('send', 'event', 'Personal Details', 'Personal Details Entered', {
+              hitCallback: () => {
+                console.log('Tracking personal details successful');
+              }});
+            this.spinner.hide();
+            this.ngxNotificationService.success('Profile Details Submitted Succesfully!', 'success');
+            this.router.navigate(['/register-two']);
         } else {
           this.spinner.hide();
           this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');

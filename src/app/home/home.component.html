@@ -5,7 +5,7 @@
       <img src="../../assets/logo_hans.png" class="banner-img1" alt="hans matrimony logo">
       <ul class="navbar-nav" style="margin-left: 15px;">
         <li style="display: inline-block">
-            <button style="margin-bottom:10px;color: black" class="btn" (click)="subscription()">Subscription</button>
+            <button style="margin-bottom:10px;color: black" class="btn" [eventTracker]='{"category":"Subscription","action":"Subscription Clicked"}'  (click)="subscription()">Subscription</button>
         </li>
         <li class="nav-item">
             <button  style="margin-bottom:10px;color: black" class="btn login" data-toggle="modal" (click)="register()" *ngIf=" isLogin=='false'"
@@ -65,7 +65,7 @@
                     <div style="text-align: center;position: absolue;">
                      <p class="capt" >We bring families together..</p>
                     <br>
-                    <button class="btn  registr" id="find" (click)="onboarding()">Rishtey Dekhe</button>
+                    <button class="btn  registr" id="find" [eventTracker]='{"category":"chat clicked","action":"click"}' (click)="onboarding()">Rishtey Dekhe</button>
             </div>   
         </div> 
         </div>

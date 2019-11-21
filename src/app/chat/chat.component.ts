@@ -116,7 +116,8 @@ export class ChatComponent implements OnInit {
           localStorage.setItem('id', id);
           this.getCredits();
           if (text.match('SHOW')) {
-                  if (this.langChanged === true) {
+            this.Analytics('login', 'login', 'logged In');
+            if (this.langChanged === true) {
                     this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
                       (data: any) => {
                         console.log(data);
@@ -127,7 +128,7 @@ export class ChatComponent implements OnInit {
                       );
                     this.langChanged = false;
                   }
-                  this.repeatMEssage('SHOW', this.currentContact);
+            this.repeatMEssage('SHOW', this.currentContact);
         } else {
                 this.botui.action.text({
                   action: {
@@ -155,6 +156,7 @@ export class ChatComponent implements OnInit {
     });
 
     } else if (this.currentUrl) {
+      this.Analytics('login', 'login', 'logged In');
       this.currentContact = this.currentUrl;
       this.showHistoryMessages(this.currentUrl);
       this.spinner.show();
@@ -324,6 +326,10 @@ export class ChatComponent implements OnInit {
                              {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
                            ]
                        }).then(res => {
+                        (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
+                          hitCallback: () => {
+                            console.log('Tracking preference details entered successful');
+                          }});
                         if (this.langChanged === true) {
                           this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
                             (data: any) => {
@@ -384,6 +390,10 @@ export class ChatComponent implements OnInit {
                        {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
                      ]
                  }).then(res => {
+                  (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
+                    hitCallback: () => {
+                      console.log('Tracking preference details entered successful');
+                    }});
                   if (this.langChanged === true) {
                     this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
                       (data: any) => {
@@ -413,6 +423,10 @@ export class ChatComponent implements OnInit {
                     if (this.promptData != null) {
                       this.openPromptDialog();
                     }
+                    (window as any).ga('send', 'event', 'Register', 'Register from chatbot', {
+                      hitCallback: () => {
+                        console.log('Tracking register from chatbot successful');
+                      }});
                     this.router.navigateByUrl('register');
                    });
                  } else if (data.buttons.match('Show')) {
@@ -452,6 +466,10 @@ export class ChatComponent implements OnInit {
                       this.openPromptDialog();
                     }
                     if (res.value === 'BUY') {
+                      (window as any).ga('send', 'event', 'Subscription', 'Subscription from chatbot', {
+                        hitCallback: () => {
+                          console.log('Tracking preference details entered successful');
+                        }});
                       this.router.navigateByUrl('subscription');
                     } else {
                       this.repeatMEssage(res.value, mob);
@@ -668,6 +686,7 @@ export class ChatComponent implements OnInit {
         }
         if (registered === 1) {
         this.spinner.show();
+        this.Analytics('login', 'login', 'logged In');
         this.getCredits();
         console.log(text);
         if (text.match('SHOW')) {
@@ -702,6 +721,10 @@ export class ChatComponent implements OnInit {
                 value: 'REGISTER'
               }]
             }).then(() => {
+              (window as any).ga('send', 'event', 'Register', 'Register from chatbot', {
+                hitCallback: () => {
+                  console.log('Tracking register from chatbot successful');
+                }});
               this.router.navigateByUrl('register');
             });
           });
@@ -721,6 +744,10 @@ export class ChatComponent implements OnInit {
                 value: 'REGISTER'
               }]
             }).then(() => {
+              (window as any).ga('send', 'event', 'Register', 'Register from chatbot', {
+                hitCallback: () => {
+                  console.log('Tracking  register from chatbot successful');
+                }});
               this.router.navigateByUrl('register');
             });
           });
@@ -811,6 +838,10 @@ export class ChatComponent implements OnInit {
    }
    changeToHistory() {
      if (this.currentContact) {
+      (window as any).ga('send', 'event', 'history', 'history clicked', {
+        hitCallback: () => {
+          console.log('Tracking history successful');
+        }});
       this.spinner.show();
       this.history = 'history';
 
@@ -1021,6 +1052,10 @@ profileReAnswer(num: any, id: any, answer: any) {
             { text: this.changeNoButtonLanguage(this.currentLanguage), value: 'No'}
           ]
       }).then(res => {
+        (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
+          hitCallback: () => {
+            console.log('Tracking preference details entered successful');
+          }});
         if (this.langChanged === true) {
           this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
             (data: any) => {
@@ -1341,6 +1376,17 @@ setHouseType(value: string) {
         } else {
           return 'रजिस्टर';
         }
+  }
+
+  Analytics(type: string, category: string, action: string) {
+    (window as any).ga('send', 'event', category, action, {
+      hitCallback: () => {
+
+        console.log('Tracking ' + type + ' successful');
+
+      }
+
+    });
   }
 
 }

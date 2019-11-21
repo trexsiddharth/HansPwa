@@ -305,6 +305,10 @@ private _onDestroy = new Subject<void>();
         this.suc = suc;
         console.log(this.suc);
         if (this.suc.sixth_page_status === 'Y') {
+          (window as any).ga('send', 'event', 'Preference Details', 'Preference Details Entered', {
+            hitCallback: () => {
+              console.log('Tracking preference details entered successful');
+            }});
           this.spinner.hide();
           this.ngxNotificationService.success('Preferences Submitted Succesfully!', 'success');
           this.router.navigate(['/chat']);

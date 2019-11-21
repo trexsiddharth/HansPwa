@@ -1,6 +1,5 @@
 importScripts('https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/5.7.3/firebase-messaging.js');
-importScripts('https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js');
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -17,4 +16,3 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig)
   const messaging = firebase.messaging();
-  const analytics = firebase.analytics();

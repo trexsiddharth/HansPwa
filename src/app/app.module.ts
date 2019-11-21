@@ -42,6 +42,7 @@ import { EditPreferenceDialogComponent } from './chat/myprofile/edit-preference-
 import { ViewCentresComponent } from './view-centres/view-centres.component';
 import { A2HSDialogComponent } from './chat/a2-hsdialog/a2-hsdialog.component';
 import { RouterModule } from '@angular/router';
+import { AnalyticsButtonDirective } from './analytics-button.directive';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { RouterModule } from '@angular/router';
     EditPreferenceDialogComponent,
     ViewCentresComponent,
     A2HSDialogComponent,
+    AnalyticsButtonDirective,
   ],
   imports: [
     BrowserModule,

@@ -268,6 +268,10 @@ export class RegisterTwoComponent implements OnInit {
         this.suc = suc;
         console.log('suc', suc);
         if (this.suc.second_page_status === 'Y') {
+          (window as any).ga('send', 'event', 'Birth Details', 'Birth Details Entered', {
+            hitCallback: () => {
+              console.log('Tracking birth details entered successful');
+            }});
           this.spinner.hide();
           this.ngxNotificationService.success('Profile Details Submitted Succesfully!', 'success');
           this.router.navigate(['/register-three']);

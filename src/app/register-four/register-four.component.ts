@@ -197,6 +197,10 @@ export class RegisterFourComponent implements OnInit {
         this.suc = suc;
         console.log(this.suc);
         if (this.suc.fourth_page_status === 'Y') {
+          (window as any).ga('send', 'event', 'Family Details', 'Family Details', {
+            hitCallback: () => {
+              console.log('Tracking Family Details Entered successful');
+            }});
           this.spinner.hide();
           this.ngxNotificationService.success('Family Details Submitted Succesfully!', 'success');
           this.router.navigate(['/register-five']);
