@@ -117,6 +117,7 @@ export class ChatComponent implements OnInit {
           this.getCredits();
           if (text.match('SHOW')) {
             this.Analytics('login', 'login', 'logged In');
+            this.loginStatus = true;
             if (this.langChanged === true) {
                     this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
                       (data: any) => {
@@ -688,6 +689,7 @@ export class ChatComponent implements OnInit {
         this.spinner.show();
         this.Analytics('login', 'login', 'logged In');
         this.getCredits();
+        this.loginStatus = true;
         console.log(text);
         if (text.match('SHOW')) {
                   this.change();
