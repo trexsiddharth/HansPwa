@@ -9,7 +9,7 @@
     <ngb-carousel>
       <ng-template ngbSlide *ngFor="let i of [1,2,3]">
           <div class="picsum-img-wrapper" style="text-align: center;">
-              <img id="imgProfile" style="border-radius: 20px; width: 80%; background-color: lightblue; margin: 20px auto 0px;" [src]="getProfilesPhoto(personalProfileData.photo,personalProfileData.carousel,personalProfileData.gender,i)" alt="slide 1">
+              <img id="imgProfile" style="border-radius: 20px; width: 80%; background-color: lightblue; margin: 20px auto 0px;" [src]="getProfilesPhoto(personalProfileData.carousel,personalProfileData.photo,personalProfileData.gender,i)" alt="slide 1">
           </div>
       </ng-template>
     </ngb-carousel>
@@ -132,7 +132,14 @@
                       <h6>Profession: </h6>
                       <p style="font-size: 14px;">{{personalProfileData.profession}}</p>
                     </div>
+                    <hr style="margin: 0px 10px;width: 100%">
             </div>
+            <div class="row" style="margin: 10px 10px;">
+                <div class="col-6">
+                  <h6 >Annual Income: </h6>
+                  <p style="font-size: 14px;">{{personalProfileData.monthly_income}}</p>
+                </div>
+                </div>
     </div>
     
     <div class="card" style="margin: 20px 20px;">

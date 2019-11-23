@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class EditFamilyDialogComponent implements OnInit {
   data: any;
   familyData: any;
-  Occupation: string[] = ['Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'];
+  Occupation: string[] = ['Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Homely'];
   Status: string[] = ['Alive', 'Not Alive'];
   FamilyType: string[] = ['JointFamily', 'Nuclear Family', 'Others'];
   Count: any[] = ['None', 0, 1, 2, 3, '3+'];

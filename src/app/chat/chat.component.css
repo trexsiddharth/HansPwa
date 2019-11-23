@@ -232,7 +232,7 @@ text-align: center;
     width: auto;
     left: 0px;
     right: 0px;
-    top: 60px;
+    top: 55px;
   }
   .setLogo {
     margin: 0px 30%;
@@ -240,6 +240,11 @@ text-align: center;
   .filterImage {
     filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
     width: 45px;
+    margin-top: 10px;
+  }
+  .filterLogout {
+    filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+    width: 35px;
     margin-top: 15px;
   }
   .setNavIcons {
@@ -322,7 +327,7 @@ text-align: center;
         width: auto;
         left: 0px;
         right: 0px;
-        top: 45px;
+        top: 41px;
       }
       .setNavIcons {
         margin-top: 7px;
@@ -332,7 +337,13 @@ text-align: center;
 
        .filterImage {
           filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
-          width: 35px;
+          width: 30px;
+          margin-top: 15px;
+          margin-left: 10px;
+        }
+        .filterLogout {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 25px;
           margin-top: 15px;
           margin-left: 10px;
         }
@@ -411,7 +422,7 @@ text-align: center;
         width: auto;
         left: 0px;
         right: 0px;
-        top: 45px;
+        top: 41px;
       }
       .setNavIcons {
         margin-top: 7px;
@@ -420,7 +431,13 @@ text-align: center;
          }
          .filterImage {
           filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
-          width: 35px;
+          width: 30px;
+          margin-top: 10px;
+          margin-left: 10px;
+        }
+        .filterLogout {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 25px;
           margin-top: 10px;
           margin-left: 10px;
         }

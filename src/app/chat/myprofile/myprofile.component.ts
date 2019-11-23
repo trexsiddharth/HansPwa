@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { EditPersonalDialogComponent } from './edit-personal-dialog/edit-personal-dialog.component';
 import { EditFamilyDialogComponent } from './edit-family-dialog/edit-family-dialog.component';
 import { EditPreferenceDialogComponent } from './edit-preference-dialog/edit-preference-dialog.component';
@@ -91,11 +91,11 @@ onResize(event) {
     }
     }
     getProfilesPhoto(num: string, num2: string , gen: string, index: string): String {
-      if (num2 != null && num2 !== '') {
-        const carousel: any = JSON.parse(num2);
+      if (num !== '[]' && num) {
+        const carousel: any = JSON.parse(num);
         return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[index];
-      } else if (num != null && num !== '') {
-        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+      } else if (num2) {
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
       } else {
         if (gen === 'Male') {
           return '../../assets/male_pic.png';

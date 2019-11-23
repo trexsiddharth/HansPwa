@@ -74,7 +74,7 @@ export class RegisterFourComponent implements OnInit {
   FatherOccupation: string[] = ['Buisness', 'Service', 'Army', 'Private Company',
   'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'
 ];
-  MotherOccupation: string[] = ['Housewife', 'Buisness', 'Service', 'Army', 'Private Company',
+  MotherOccupation: string[] = ['Homely', 'Buisness', 'Service', 'Army', 'Private Company',
     'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'
   ];
   Brother: any[] = ['None', 0, 1, 2, 3, '3+'];
