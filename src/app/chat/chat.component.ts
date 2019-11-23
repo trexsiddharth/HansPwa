@@ -1348,7 +1348,7 @@ setHouseType(value: string) {
             document.getElementById('chatText').innerText = 'See Profiles';
             document.getElementById('historyText').innerText = 'History';
             document.getElementById('profileText').innerText = 'My Profile';
-            document.getElementById('credit').innerText = 'Credits' + this.points;
+            document.getElementById('credit').innerText = 'Credits: ' + this.points;
             return 'See Contact Number';
           } else {
             document.getElementById('chatText').innerText = 'रिश्ते देखें';
