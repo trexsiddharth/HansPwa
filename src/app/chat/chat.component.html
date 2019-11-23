@@ -17,8 +17,8 @@
                       <div ngbDropdown >
                           <img src="../../assets/menu.png" class="filterLogout" data-toggle="dropdown" alt="language" ngbDropdownToggle>
                         <div ngbDropdownMenu>
-                          <button (click)="languageEnglish()" class="dropdown-item">Translate to English</button>
-                          <button (click)="languageHindi()" class="dropdown-item">हिंदी में देखें </button>
+                          <button *ngIf="currentLanguage=='Hindi'" (click)="languageEnglish()" class="dropdown-item">Translate to English</button>
+                          <button *ngIf="currentLanguage=='English'" (click)="languageHindi()" class="dropdown-item">हिंदी में देखें </button>
                           <button *ngIf="loginStatus" (click)="logout()" class="dropdown-item">Logout</button>
                         </div>
                       </div>
