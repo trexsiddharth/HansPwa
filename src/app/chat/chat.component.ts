@@ -262,7 +262,7 @@ export class ChatComponent implements OnInit {
                         '<table style="width:100%">' +
                         '<tr>' +
                         // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(values.profession) + '<br>' + this.setValue(values.education) + '</div></th>' +
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(values.occupation) + '<br>' + this.setValue(values.profession) + '<br>' + this.setValue(values.education) + '</div></th>' +
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.monthly_income) + ' LPA </th>' +
                         // tslint:disable-next-line: max-line-length
