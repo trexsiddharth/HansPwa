@@ -205,7 +205,7 @@ onResize(event) {
         this.carouselSize = Object.keys(carousel);
         return this.carouselSize;
       } else {
-        this.carouselSize = '1';
+        this.carouselSize = [1];
         return this.carouselSize;
       }
     }
