@@ -190,21 +190,23 @@ export class ChatComponent implements OnInit {
   }
 
    chatRequest(data, mobile): Observable<any> {
-       this.Data = {
-         from : mobile,
-          to : mobile,
-          event : 'INBOX',
-          text : data,
-          channel_name : 'app'
-       };
+     if (data && mobile && data !== '' && mobile !== '') {
+      this.Data = {
+        from : mobile,
+         to : mobile,
+         event : 'INBOX',
+         text : data,
+         channel_name : 'app'
+      };
 
-       const myJSON = JSON.stringify(this.Data);
-       console.log(myJSON);
+      const myJSON = JSON.stringify(this.Data);
+      console.log(myJSON);
 
-       const data1 = new FormData();
-       data1.append('data', myJSON);
+      const data1 = new FormData();
+      data1.append('data', myJSON);
 
-       return this.http.post<any>(' https://partner.hansmatrimony.com/api/sendMessages' , data1 );
+      return this.http.post<any>(' https://partner.hansmatrimony.com/api/sendMessages' , data1 );
+     }
    }
    checkUrl(num: string): Observable<any> {
        // tslint:disable-next-line: max-line-length

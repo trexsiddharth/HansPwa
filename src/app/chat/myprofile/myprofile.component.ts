@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, AfterViewInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { EditPersonalDialogComponent } from './edit-personal-dialog/edit-personal-dialog.component';
 import { EditFamilyDialogComponent } from './edit-family-dialog/edit-family-dialog.component';
@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./myprofile.component.css']
 })
 export class MyprofileComponent implements OnInit {
+
   @Input() personalProfileData: any;
   @Input() familyProfileData: any;
   @Input() preferenceProfileData: any;
@@ -23,12 +24,15 @@ export class MyprofileComponent implements OnInit {
   suc: any = [];
   minHeight;
   maxHeight;
+  carouselSize;
 
   constructor(private matDialog: MatDialog, private http: HttpClient, private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
   }
+
+
   setAge(dob: string) {
     if (dob != null) {
     return (Math.floor((Date.now() - new Date(dob).getTime()) / (1000 * 60 * 60 * 24 * 365)));
@@ -78,18 +82,6 @@ onResize(event) {
       default: return null;
   }
   }
-  getProfilePhoto(num: string, gen: string): String {
-    if (num === null) {
-      if (gen === 'Male') {
-        return '../../assets/male_pic.png';
-      } else {
-        return '../../assets/female_pic.png';
-      }
-    } else {
-      const carousel: any = JSON.parse(num);
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['3'];
-    }
-    }
     getProfilesPhoto(num: string, num2: string , gen: string, index: string): String {
       if (num !== '[]' && num) {
         const carousel: any = JSON.parse(num);
@@ -204,6 +196,17 @@ onResize(event) {
         return value2;
       } else {
         return 'N/A';
+      }
+    }
+
+    getImagesCount(num: string, num1: string) {
+      if (num !== '[]' && num) {
+        const carousel: object = JSON.parse(num);
+        this.carouselSize = Object.keys(carousel);
+        return this.carouselSize;
+      } else {
+        this.carouselSize = '1';
+        return this.carouselSize;
       }
     }
 
