@@ -1007,7 +1007,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       // tslint:disable-next-line: max-line-length
       '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/tarot.svg"></div><div>' + this.setManglik(personal.manglik) +  '</div></th>' +
       // tslint:disable-next-line: max-line-length
-      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(personal.house_type) + '</th>' +
+      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(family.house_type) + '</th>' +
       // tslint:disable-next-line: max-line-length
       '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(family.family_income) + ' LPA</th>' +
         '</tr>' +
