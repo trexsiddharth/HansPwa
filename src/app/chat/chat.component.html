@@ -8,7 +8,7 @@
         <div style="display: flex">
           <div style="margin: auto">
               <div style="margin-bottom: 0px" [routerLink]="['/subscription']" routerLinkActive="router-link-active"  *ngIf="points >= 0">
-                <p class="setNavIcons" id="credit">Credits: {{points}}</p>
+                <p class="setNavIcons" id="credit">कांटेक्ट नंबर: {{points}}</p>
               </div>
           </div>
 
@@ -20,6 +20,7 @@
                           <button *ngIf="currentLanguage=='Hindi'" (click)="languageEnglish()" class="dropdown-item">Translate to English</button>
                           <button *ngIf="currentLanguage=='English'" (click)="languageHindi()" class="dropdown-item">हिंदी में देखें </button>
                           <button *ngIf="loginStatus" (click)="logout()" class="dropdown-item">Logout</button>
+                          <a href="tel:8766217175"  class="dropdown-item">Contact Us</a>
                         </div>
                       </div>
                     </div>

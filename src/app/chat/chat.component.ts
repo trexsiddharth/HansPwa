@@ -1211,11 +1211,6 @@ getCredits() {
    (data: any) => {
       this.points = data.whatsapp_points;
       console.log(this.points);
-      if (this.currentLanguage === 'English') {
-        document.getElementById('credit').innerText = 'Credits: ' + this.points;
-      } else {
-        document.getElementById('credit').innerText = 'कांटेक्ट नंबर: ' + this.points;
-      }
    },
   (error: any) => {
     this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
