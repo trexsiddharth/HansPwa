@@ -167,17 +167,17 @@
   <footer>
       <div class="navbar" style="padding: 5px 0px">
           <div class="row rowClass" >
-              <div class="col-4" style="text-align: center;border-right: 1px solid black;">
+              <div class="col-4" id="chatButton" style="text-align: center">
                       <div class="row" style="margin: 0px auto; display: inline;">
                           <p (click)="changeToBot()" id="chatText">रिश्ते देखें</p>
                       </div>
               </div>
-              <div class="col-4" style="text-align: center;border-right: 1px solid black;" >
+              <div class="col-4" id="historyButton" style="text-align: center" >
                       <div class="row" style="margin: 0px auto; display: inline;">
                               <p (click)="changeToHistory()" id="historyText">देखे गए रिश्ते</p>
                           </div>
               </div>
-              <div class="col-4" style="text-align: center">
+              <div class="col-4" id="profileButton" style="text-align: center">
                       <div class="row" style="margin: 0px auto; display: inline;">
                               <p (click)="changeToMyProfile()" id="profileText">मेरा प्रोफाइल</p>
                           </div>

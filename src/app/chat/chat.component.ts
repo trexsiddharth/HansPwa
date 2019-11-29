@@ -228,7 +228,7 @@ export class ChatComponent implements OnInit {
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
                    content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px"> <br>' +
-                   '<div style="text-align:center"><b>' + values.name + '</b></div> ' +
+                   '<div style="text-align:center"><b>' + values.name + this.setCity(values.city) + '</b></div> ' +
                    '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>'
                  }).then(() => {
                      this.botui.message.add({
@@ -239,14 +239,7 @@ export class ChatComponent implements OnInit {
                        content:
                       //  '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
                       // line -0
-                         '<table style="width:100%;background:white;border-radius:7px;font-size:12px;margin-top: 10px;padding-left:5px">' +
-                          '<tr>' +
-                            // tslint:disable-next-line: max-line-length
-                          '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', values.mobile) + '</th>' +
-                          // tslint:disable-next-line: max-line-length
-                          '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', values.city) + '</th>' +
-                            '</tr>' +
-                            '</table>' +
+                         this.setHiddenTable(values.mobile, values.locality) +
                        // line -1
                        '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
                       '<tr>' +
@@ -262,11 +255,11 @@ export class ChatComponent implements OnInit {
                         '<table style="width:100%">' +
                         '<tr>' +
                         // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(values.occupation) + '<br>' + this.setValue(values.profession) + '<br>' + this.setValue(values.education) + '</div></th>' +
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/suitcase.svg"></div><div>' + this.setValue(values.occupation) + '</div></th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/graduation.svg">' + this.setValue(values.education) + '<br>' + this.setValue(values.profession) + '</th>' +
                         // tslint:disable-next-line: max-line-length
                         '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.monthly_income) + ' LPA </th>' +
-                        // tslint:disable-next-line: max-line-length
-                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' + this.setValue(values.locality) + '</th>' +
                           '</tr>' +
                           '</table>' +
 
@@ -807,11 +800,53 @@ export class ChatComponent implements OnInit {
       return value ;
     } else {return ''; }
    }
+   setCity(value: String): String {
+    if (value != null) {
+      return ',' + value ;
+    } else {return ''; }
+   }
 
+   setHiddenPhoneValue( value: String): String {
+    if (value != null) {
+      if (value.match('Visible')) {
+        return '<th style="width:50%;padding: 5px 0px 5px 10px;">  <img style="width:25px" src="../assets/phone_blue.svg">' +  value ;
+      } else {
+        // tslint:disable-next-line: max-line-length
+        return '<th style="width:50%;padding: 5px 0px 5px 10px;padding-right:30px">  <img style="width:25px;color:white" src="../assets/phone.svg">' +  value ;
+      }
+    } else {return ''; }
+   }
    setHiddenValue(path: string , value: String): String {
     if (value != null) {
-      return '<img style="width:25px" src="' + path + '">' +  value ;
+      if (value.match('Visible')) {
+        return '<img style="width:25px" src="' + path + '">' +  value ;
+      } else {
+        return '<img style="width:25px" src="' + path + '">' +  value ;
+      }
     } else {return ''; }
+   }
+   setHiddenTable(mob: string, locality: string) {
+    if (mob.match('Visible')) {
+     // tslint:disable-next-line: max-line-length
+     return '<table style="width:100%;border-radius:7px;background:white;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;">' +
+                          '<tr>' +
+                            // tslint:disable-next-line: max-line-length
+                          this.setHiddenPhoneValue(mob) + '</th>' +
+                          // tslint:disable-next-line: max-line-length
+                          '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', locality) + '</th>' +
+                            '</tr>' +
+                            '</table>';
+    } else {
+      // tslint:disable-next-line: max-line-length
+     return '<table style="width:100%;border-radius:7px;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;color:white;font-weight:bolder;background:#1ED761;border-radius:10px">' +
+     '<tr>' +
+       // tslint:disable-next-line: max-line-length
+     this.setHiddenPhoneValue(mob) + '</th>' +
+     // tslint:disable-next-line: max-line-length
+     '<th style="width:50%">' + this.setHiddenValue('../assets/locationwhite.svg', locality) + '</th>' +
+       '</tr>' +
+       '</table>';
+    }
    }
 
    SetIncome(value: string): String {
@@ -849,9 +884,12 @@ export class ChatComponent implements OnInit {
       this.spinner.show();
       this.history = 'history';
 
+      document.getElementById('chatButton').style.background = '#ebedf0';
       document.getElementById('chatText').style.color = 'grey';
       document.getElementById('profileText').style.color = 'grey';
-      document.getElementById('historyText').style.color = '#34b7f1';
+      document.getElementById('profileButton').style.background = '#ebedf0';
+      document.getElementById('historyText').style.color = '#FFFFFF';
+      document.getElementById('historyButton').style.background = '#34b7f1';
 
       console.log(localStorage.getItem('id'));
       // tslint:disable-next-line: max-line-length
@@ -873,17 +911,23 @@ export class ChatComponent implements OnInit {
    }
    changeToBot() {
     this.history = 'chatbot';
-    document.getElementById('chatText').style.color = '#34b7f1';
+    document.getElementById('chatButton').style.background = '#34b7f1';
+    document.getElementById('chatText').style.color = '#FFFFFF';
     document.getElementById('historyText').style.color = 'grey';
+    document.getElementById('historyButton').style.background = '#ebedf0';
     document.getElementById('profileText').style.color = 'grey';
+    document.getElementById('profileButton').style.background = '#ebedf0';
    }
    changeToMyProfile() {
      if (this.currentContact) {
       this.spinner.show();
       this.history = 'myprofile';
+      document.getElementById('profileButton').style.background = '#34b7f1';
       document.getElementById('chatText').style.color = 'grey';
+      document.getElementById('chatButton').style.background = '#ebedf0';
+      document.getElementById('historyButton').style.background = '#ebedf0';
       document.getElementById('historyText').style.color = 'grey';
-      document.getElementById('profileText').style.color = '#34b7f1';
+      document.getElementById('profileText').style.color = '#FFFFFF';
       console.log(localStorage.getItem('id'));
      // tslint:disable-next-line: max-line-length
       return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + localStorage.getItem('id') + '&contacted=1'  , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
@@ -938,7 +982,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       type: 'html',
       // tslint:disable-next-line: max-line-length
       content: '<img src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" ><br>' +
-      '<div style="text-align:center"><b>' + personal.name  + '</b></div><br>' +
+      '<div style="text-align:center"><b>' + personal.name  + this.setCity(family.city) +  '</b></div><br>' +
                    '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
     });
      this.botui.message.add({
@@ -946,14 +990,7 @@ profileReAnswer(num: any, id: any, answer: any) {
         // tslint:disable-next-line: max-line-length
         content:
         // line -0
-        '<table style="width:100%;background:white;border-radius:7px;font-size:12px;margin-top: 10px;padding-left:5px">' +
-        '<tr>' +
-          // tslint:disable-next-line: max-line-length
-        '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', family.mobile) + '</th>' +
-        // tslint:disable-next-line: max-line-length
-        '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', family.city) + '</th>' +
-          '</tr>' +
-          '</table>' +
+        this.setHiddenTable(family.mobile, family.locality) +
      // line -1
      '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
     '<tr>' +
@@ -967,15 +1004,15 @@ profileReAnswer(num: any, id: any, answer: any) {
       '</table>' +
       // line -2
       '<table style="width:100%">' +
-      '<tr>' +
-      // tslint:disable-next-line: max-line-length
-      '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + '<br>'  + this.setValue(personal.profession) + this.setValue(personal.education) + '</div></th>' +
-      // tslint:disable-next-line: max-line-length
-      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(personal.monthly_income) + ' LPA </th>' +
-      // tslint:disable-next-line: max-line-length
-      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' + this.setValue(family.locality) + '</th>' +
-        '</tr>' +
-        '</table>' +
+                        '<tr>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/suitcase.svg"></div><div>' + this.setValue(personal.occupation) + '</div></th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/graduation.svg">' + this.setValue(personal.education) + '<br>' + this.setValue(personal.profession) + '</th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(personal.monthly_income) + ' LPA </th>' +
+                          '</tr>' +
+                          '</table>' +
 
         // line -3
       '<table style="width:100%">' +
@@ -1105,18 +1142,11 @@ profileReAnswer(num: any, id: any, answer: any) {
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
                     content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" >' +
-                    '<div style="text-align:center"><b>' + valueInMessage.name + '</b></div>' +
+                    '<div style="text-align:center"><b>' + valueInMessage.name + this.setCity(valueInMessage.city) +  '</b></div>' +
                     '<div style="text-align:center"><i>' + this.setValue(valueInMessage.about) + '</i></div><br>' +
 
                     // line -0
-                    '<table style="width:100%;background:white;border-radius:7px;font-size:12px;margin-top: 10px;padding-left:5px">' +
-                    '<tr>' +
-                      // tslint:disable-next-line: max-line-length
-                    '<th style="width:50%;padding: 5px 0px 5px 10px;">' + this.setHiddenValue('../assets/phone.svg', valueInMessage.mobile) + '</th>' +
-                    // tslint:disable-next-line: max-line-length
-                    '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', valueInMessage.city) + '</th>' +
-                      '</tr>' +
-                      '</table>' +
+                    this.setHiddenTable(valueInMessage.mobile, valueInMessage.locality) +
                  // line -1
                  '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
                 '<tr>' +
@@ -1130,15 +1160,15 @@ profileReAnswer(num: any, id: any, answer: any) {
                   '</table>' +
                   // line -2
                   '<table style="width:100%">' +
-                  '<tr>' +
-                  // tslint:disable-next-line: max-line-length
-                  '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/graduation.svg"></div><div>' + this.setValue(valueInMessage.profession) + '<br>'  + this.setValue(valueInMessage.education) + '</div></th>' +
-                  // tslint:disable-next-line: max-line-length
-                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(valueInMessage.monthly_income) + ' LPA </th>' +
-                  // tslint:disable-next-line: max-line-length
-                  '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/locationblue.svg">' + this.setValue(valueInMessage.locality) + '</th>' +
-                    '</tr>' +
-                    '</table>' +
+                        '<tr>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/suitcase.svg"></div><div>' + this.setValue(valueInMessage.occupation) + '</div></th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/graduation.svg">' + this.setValue(valueInMessage.education) + '<br>' + this.setValue(valueInMessage.profession) + '</th>' +
+                        // tslint:disable-next-line: max-line-length
+                        '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(valueInMessage.monthly_income) + ' LPA </th>' +
+                          '</tr>' +
+                          '</table>' +
 
                     // line -3
                   '<table style="width:100%">' +

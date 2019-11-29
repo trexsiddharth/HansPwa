@@ -199,7 +199,7 @@ text-align: center;
 /*   footer   */
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
-    background-color: white;
+  background: #f3f3f3;
     overflow: hidden;
     position: fixed;
     border: 1px solid lightgrey;
@@ -253,13 +253,22 @@ text-align: center;
  margin-right: 20px;
   }
   #chatText {
-    margin: 0px; font-size: 20px;color: #34b7f1;font-weight: bolder;
+    margin: 0px; font-size: 20px;color: white;font-weight: bolder;
   }
   #historyText {
-    margin: 0px; font-size: 20px;color: grey;font-weight: bolder;
+    margin: 0px; font-size: 20px;font-weight: bolder;
   }
   #profileText {
-    margin: 0px; font-size: 20px;color: grey;font-weight: bolder;
+    margin: 0px; font-size: 20px;font-weight: bolder;
+  }
+  #chatButton {
+    padding: 10px 15px;background: #34b7f1;border-radius: 10px;
+  }
+  #historyButton {
+    padding: 10px 15px;background: #ebedf0;border-radius: 10px;
+  }
+  #profileButton{
+    padding: 10px 15px;background: #ebedf0;border-radius: 10px;
   }
   .rowClass {
    margin: 20px auto;
@@ -267,7 +276,7 @@ text-align: center;
   }
   @media (max-width: 576px) {
     .navbar {
-      background-color: white;
+      background: #f3f3f3;
       overflow: hidden;
       position: fixed;
       bottom: 0;
@@ -348,13 +357,13 @@ text-align: center;
           margin-left: 10px;
         }
         #chatText {
-          margin: 0px; font-size: 16pxpx;color: #34b7f1;font-weight: bolder;
+          margin: 0px; font-size: 16pxpx;font-weight: bolder;
         }
         #historyText {
-          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
+          margin: 0px; font-size: 16px;font-weight: bolder;
         }
         #profileText {
-          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
+          margin: 0px; font-size: 16px;font-weight: bolder;
         }
         .rowClass {
           margin: 8px auto;
@@ -363,7 +372,7 @@ text-align: center;
     }
     @media (max-width: 1024px) {
       .navbar {
-        background-color: white;
+        background: #f3f3f3;
         overflow: hidden;
         position: fixed;
         bottom: 0;
@@ -442,13 +451,13 @@ text-align: center;
           margin-left: 10px;
         }
         #chatText {
-          margin: 0px; font-size: 16px;color: #34b7f1;font-weight: bolder;
+          margin: 0px; font-size: 16px;font-weight: bolder;
         }
         #historyText {
-          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
+          margin: 0px; font-size: 16px;font-weight: bolder;
         }
         #profileText {
-          margin: 0px; font-size: 16px;color: grey;font-weight: bolder;
+          margin: 0px; font-size: 16px;font-weight: bolder;
         }
         .rowClass {
           margin: 15px auto;
