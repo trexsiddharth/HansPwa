@@ -87,9 +87,9 @@ export class SubscriptionComponent implements OnInit {
    }
 
    changeButtonOnline() {
-     this.container1();
      if (this.show2 === true) {
-       return 'buttonPersonalised';
+      this.container1();
+      return 'buttonPersonalised';
      } else {return 'buttonOnline'; }
    }
    changeButtonPersonalized() {
