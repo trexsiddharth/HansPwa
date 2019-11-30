@@ -40,6 +40,11 @@
       border-radius:0;
   
   }
+  .amnt {
+    bottom: 0px;
+  position: absolute;
+  margin-left: 30%;
+  }
 
   @media only screen and (max-width: 1024px) {
     #main {
@@ -83,6 +88,11 @@
     nav{
       padding: 0 45px;
     }
+    .amnt {
+      bottom: 0px;
+    position: absolute;
+    margin-left: 20%;
+    }
     
   }
   
@@ -124,6 +134,11 @@
       height: auto;
       /* background: url(https://wallpapercave.com/wp/2ujUKnj.jpg) no-repeat center; */
       background-size: 100% 100%;
+    }
+    .amnt {
+      bottom: 0px;
+    position: absolute;
+    margin-left: 20%;
     }
     
   }

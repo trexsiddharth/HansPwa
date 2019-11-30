@@ -53,12 +53,14 @@ export class SubscriptionComponent implements OnInit {
   togglePersonalized() {
     if (this.show1 === true) {
       this.show1 = false;
+      this.selectedContainer = 4;
       return this.show2 = true;
     }
   }
   toggleOnline() {
     if (this.show2 === true) {
       this.show2 = false;
+      this.selectedContainer = 1;
       return this.show1 = true;
     }
   }
@@ -88,8 +90,7 @@ export class SubscriptionComponent implements OnInit {
 
    changeButtonOnline() {
      if (this.show2 === true) {
-      this.container1();
-      return 'buttonPersonalised';
+       return 'buttonPersonalised';
      } else {return 'buttonOnline'; }
    }
    changeButtonPersonalized() {
@@ -181,6 +182,52 @@ onResize(event) {
     document.getElementById('container1').style.color = 'black';
     document.getElementById('button1').style.color = 'black';
     document.getElementById('button1').style.background = '#6ba8a9';
+  }
+
+  container4() {
+    this.selectedContainer = 4;
+    document.getElementById('container4').style.background = '#56a2f5';
+    document.getElementById('container4').style.color = 'white';
+    document.getElementById('button4').style.color = 'white';
+    document.getElementById('button4').style.background = '#56a2f5';
+    document.getElementById('container5').style.background = '#f3f3f3';
+    document.getElementById('container5').style.color = 'black';
+    document.getElementById('button5').style.color = 'black';
+    document.getElementById('button5').style.background = '#6ba8a9';
+    document.getElementById('container6').style.background = '#f3f3f3';
+    document.getElementById('container6').style.color = 'black';
+    document.getElementById('button6').style.color = 'black';
+    document.getElementById('button6').style.background = '#6ba8a9';
+  }
+  container5() {
+    this.selectedContainer = 5;
+    document.getElementById('container5').style.background = '#56a2f5';
+    document.getElementById('container5').style.color = 'white';
+    document.getElementById('button5').style.color = 'white';
+    document.getElementById('button5').style.background = '#56a2f5';
+    document.getElementById('container4').style.background = '#f3f3f3';
+    document.getElementById('container4').style.color = 'black';
+    document.getElementById('button4').style.color = 'black';
+    document.getElementById('button4').style.background = '#6ba8a9';
+    document.getElementById('container6').style.background = '#f3f3f3';
+    document.getElementById('container6').style.color = 'black';
+    document.getElementById('button6').style.color = 'black';
+    document.getElementById('button6').style.background = '#6ba8a9';
+  }
+  container6() {
+    this.selectedContainer = 6;
+    document.getElementById('container6').style.background = '#56a2f5';
+    document.getElementById('container6').style.color = 'white';
+    document.getElementById('button6').style.color = 'white';
+    document.getElementById('button6').style.background = '#56a2f5';
+    document.getElementById('container5').style.background = '#f3f3f3';
+    document.getElementById('container5').style.color = 'black';
+    document.getElementById('button5').style.color = 'black';
+    document.getElementById('button5').style.background = '#6ba8a9';
+    document.getElementById('container4').style.background = '#f3f3f3';
+    document.getElementById('container4').style.color = 'black';
+    document.getElementById('button4').style.color = 'black';
+    document.getElementById('button4').style.background = '#6ba8a9';
   }
 
 }

@@ -31,7 +31,7 @@
                                 <button id="button1" (click)="container1()" class="feature">LIMITED</button>
                                 <p>{{ plans?.Limited?.Credits}}<br> Credits</p>
                                 <p style="font-size: 12px;">{{ plans?.Limited?.Validity}} Validity</p>
-                               <p>₹{{ plans?.Limited?.CurrentAmt }}</p>
+                               <p class="amnt">₹{{ plans?.Limited?.CurrentAmt }}</p>
                         </div>
                      </div>
                      <div class="col-4" style="text-align: center;padding: 0px 15px;">
@@ -39,15 +39,15 @@
                                 <button id="button2" (click)="container2()" class="feature">SUPREME</button>
                                 <p>{{ plans?.Supreme?.Credits}}<br> Credits</p>
                                 <p style="font-size: 12px;">{{ plans?.Supreme?.Validity}} Validity</p>
-                                <p>₹{{ plans?.Supreme?.CurrentAmt }}</p>
+                                <p class="amnt">₹{{ plans?.Supreme?.CurrentAmt }}</p>
                         </div>
                         </div>
                         <div class="col-4" style="text-align: center;padding: 0px 15px;">
                             <div (click)="container3()" id="container3"  style="border-radius: 10px;height: 100%;border:1px solid #6ba8a9">
-                                    <button id="button3" (click)="container3()"  class="feature">PREMIUM</button>
+                                    <button id="button3" (click)="container3()"  class="feature">KUNDLI</button>
                                     <p>{{ plans?.Premium?.Credits}}<br> Credits</p>
-                                    <p style="font-size: 12px;">{{ plans?.Premium?.Validity}} Validity</p>
-                                    <p>₹{{ plans?.Premium?.CurrentAmt }}</p>
+                                    <p style="font-size: 12px; margin-bottom: 40px;">{{ plans?.Premium?.Validity}} Validity</p>
+                                    <p class="amnt">₹{{ plans?.Premium?.CurrentAmt }}</p>
                             </div>
                             </div>
                  </div>
@@ -65,65 +65,41 @@
             </div>
 
             <div class="card-wrapper" *ngIf="show2">
-                <div id="option" class="option">
-                    <div id="contain">
-                        <div class="row rowSet">
-                        <div class="col-xs-4  col-sm-3 col-md-3 colSet">
-                            <p class="featurePersonalised">Premium 6</p>
-                            <p id="p">{{ plans?.PersonalizedPremium6?.Charges }}</p> 
-                        </div>
-                        <div class="col-xs-4 col-sm-3  col-md-3 colSet">
-                            <p><span class="featurePersonalised">Benefits</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium6?.Benefits}}</span></p>                 
-                        </div>
-                        <div class="col-xs-4 col-sm-3 col-md-3 colSet">
-                            <p><span class="featurePersonalised">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium6?.Validity}}</span></p>      
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12 v-align btnSet">
-                           <button type="button" (click)="openDialog('PersonalizedPremium6',plans?.PersonalizedPremium6?.Benefits,plans?.PersonalizedPremium6?.Validity,'19000')" class="btn btn-primary buyNow">Buy now</button>
-                        </div>
-                    </div>
-                    </div>
-                 </div>
 
-                 <div id="option" class="option">
-                    <div id="contain">
-                        <div class="row rowSet">
-                        <div class="col-sm-3 col-md-3 col-lg-3 colSet">
-                            <p class="featurePersonalised">Premium 12</p>
-                            <p id="p">{{ plans?.PersonalizedPremium12?.Charges }}</p> 
+                    <div class="row" style="margin-top: 10px;padding: 0px 15px;margin-bottom: 20px;">
+                            <div class="col-4" style="text-align: center;padding: 0px 15px">
+                               <div (click)="container4()"  id="container4" style="border-radius: 10px;height: 100%;border:1px solid #6ba8a9">
+                                       <button (click)="container4()" id="button4"  class="feature">PREMIUM 6</button>
+                                       <p>{{ plans?.PersonalizedPremium6?.Validity}}<br> Validity</p>
+                                       <p style="font-size: 14px;">{{ plans?.PersonalizedPremium6?.Charges }}</p>
+                               </div>
+                            </div>
+                            <div class="col-4" style="text-align: center;padding: 0px 15px;">
+                               <div  (click)="container5()" id="container5"  style="border-radius: 10px;height: 100%;border:1px solid #6ba8a9">
+                                       <button (click)="container5()" id="button5" class="feature">PREMIUM 12</button>
+                                       <p>{{ plans?.PersonalizedPremium12?.Validity}}<br> Validity</p>
+                                       <p style="font-size: 14px;">{{ plans?.PersonalizedPremium12?.Charges }}</p>
+                               </div>
+                               </div>
+                               <div class="col-4" style="text-align: center;padding: 0px 15px;">
+                                   <div  (click)="container6()" id="container6"  style="border-radius: 10px;height: 100%;border:1px solid #6ba8a9">
+                                           <button (click)="container6()" id="button6" class="feature">DELUX NRI</button>
+                                           <p>{{ plans?.PersonalizedDeluxeNRI?.Validity}}<br> Validity</p>
+                                           <p style="font-size: 14px;">{{ plans?.PersonalizedDeluxeNRI?.Charges }}</p>
+                                   </div>
+                                   </div>
                         </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
-                            <p><span class="featurePersonalised">Benefits</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium12?.Benefits}}</span></p>                 
+                        <div class="row" style="padding: 0px 15px;margin-top: 10px;">
+                            <div class="col-4 btnSet">
+                                    <button type="button" *ngIf="selectedContainer==4" (click)="openDialog('PersonalizedPremium6',plans?.PersonalizedPremium6?.Benefits,plans?.PersonalizedPremium6?.Validity,'19000')" class="btn btn-primary buyNow">Buy now</button>
+                            </div>
+                            <div class="col-4 btnSet">
+                                    <button type="button" *ngIf="selectedContainer==5" (click)="openDialog('PersonalizedPremium12',plans?.PersonalizedPremium12?.Benefits,plans?.PersonalizedPremium12?.Validity,'25000')" class="btn btn-primary buyNow">Buy now</button>
+                               </div>
+                               <div class="col-4 btnSet">
+                                    <button type="button" *ngIf="selectedContainer==6" (click)="openDialog('PersonalizedDeluxeNRI',plans?.PersonalizedDeluxeNRI?.Benefits,plans?.PersonalizedDeluxeNRI?.Validity,'31000')" class="btn btn-primary buyNow">Buy now</button>
+                                   </div>
                         </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
-                            <p><span class="featurePersonalised">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedPremium12?.Validity}}</span></p>      
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 v-align btnSet">
-                           <button type="button" (click)="openDialog('PersonalizedPremium12',plans?.PersonalizedPremium12?.Benefits,plans?.PersonalizedPremium12?.Validity,'25000')" class="btn btn-primary buyNow">Buy now</button>
-                        </div>
-                    </div>
-                </div>
-                 </div>
-
-                 <div id="option" class="option">
-                    <div id="contain">
-                        <div class="row rowSet">
-                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
-                            <p class="featurePersonalised">Deluxe NRI</p>
-                            <p id="p">{{ plans?.PersonalizedDeluxeNRI?.Charges }}</p> 
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
-                            <p><span class="featurePersonalised">Benefits</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedDeluxeNRI?.Benefits}}</span></p>                 
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3  colSet">
-                            <p><span class="featurePersonalised">Validity</span><br><span class="value" style="padding-top:10px">{{ plans?.PersonalizedDeluxeNRI?.Validity}}</span></p>      
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 v-align btnSet">
-                           <button type="button" (click)="openDialog('PersonalizedDeluxeNRI',plans?.PersonalizedDeluxeNRI?.Benefits,plans?.PersonalizedDeluxeNRI?.Validity,'31000')" class="btn btn-primary buyNow">Buy now</button>
-                        </div>
-                    </div>
-                </div>
-                 </div>
             </div>
             <div class="text-center" style="padding-bottom: 20px;margin-top: 20px;"><br>
                 <h6>What are Credits?</h6>
