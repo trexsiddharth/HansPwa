@@ -227,9 +227,10 @@ export class ChatComponent implements OnInit {
                     delay: 1000,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
-                   content: '<a click="ProfilePhotoClicked()"><img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px"> <br></a>' +
+                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px"> <br>' +
                    '<div style="text-align:center"><b>' + values.name + this.setCity(values.city) + '</b></div> ' +
-                   '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>'
+                   // tslint:disable-next-line: max-line-length
+                   '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br> <script> function profilePhotoClicked() { console.log("PhotoClicked") } </script>'
                  }).then(() => {
                      this.botui.message.add({
                       loading: true,
@@ -564,7 +565,7 @@ export class ChatComponent implements OnInit {
  }
 
  getProfilePhoto(num: String, gen: string): String {
- if (num === null || num === '') {
+   if (num === null || num === '') {
    if (gen === 'Male') {
      return '../../assets/male_pic.png';
    } else {
@@ -576,10 +577,10 @@ export class ChatComponent implements OnInit {
  }
 
   getProfilePhotoHistory(num: string, num2: string , gen: string): String {
-    if (num != null && num !== '') {
+    if (num && num !== '[]') {
       const carousel: any = JSON.parse(num);              // removed condition to check whether url contains http or not.
       return carousel['1'];
-    } else if (num2 != null && num2 !== '') {
+    } else if (num2  && num2 !== '') {
       if (num2.match('http')) {
         return num2;
       } else {
@@ -1435,9 +1436,6 @@ setHouseType(value: string) {
       }
 
     });
-  }
-  ProfilePhotoClicked() {
-    console.log('Picture clicked');
   }
 
 }
