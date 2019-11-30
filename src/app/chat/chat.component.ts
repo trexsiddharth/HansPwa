@@ -227,7 +227,7 @@ export class ChatComponent implements OnInit {
                     delay: 1000,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
-                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px"> <br>' +
+                   content: '<a click="ProfilePhotoClicked()"><img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px"> <br></a>' +
                    '<div style="text-align:center"><b>' + values.name + this.setCity(values.city) + '</b></div> ' +
                    '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>'
                  }).then(() => {
@@ -1435,6 +1435,9 @@ setHouseType(value: string) {
       }
 
     });
+  }
+  ProfilePhotoClicked() {
+    console.log('Picture clicked');
   }
 
 }

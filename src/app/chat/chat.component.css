@@ -271,16 +271,16 @@ text-align: center;
     width: 100%;
   }
   #chatButton {
-    padding: 10px 15px;background: #34b7f1;border-radius: 10px;
+    padding: 10px 15px;background: #34b7f1;
   }
   #historyButton {
-    padding: 10px 15px;background: #f3f3f3;border-radius: 10px;
+    padding: 10px 15px;background: #f3f3f3;
   }
   #profileButton{
-    padding: 10px 15px;background: #f3f3f3;border-radius: 10px;
+    padding: 10px 15px;background: #f3f3f3;
   }
   .rowClass {
-   margin: 20px auto;
+   margin: 0px;
    width: 100%
   }
   @media (max-width: 576px) {
@@ -384,7 +384,7 @@ text-align: center;
           width: 100%;
         }
         .rowClass {
-          margin: 8px auto;
+          margin: 0px;
           width: 100%
          }
     }
@@ -487,7 +487,7 @@ text-align: center;
           width: 100%;
         }
         .rowClass {
-          margin: 15px auto;
+          margin: 0px;
           width: 100%
          }
     }
@@ -542,7 +542,7 @@ text-align: center;
         cursor: pointer;
       } 
       .rowClass {
-        margin: 8px auto;
+        margin: 0px;
         width: 100%
        }
     }
