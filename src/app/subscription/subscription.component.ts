@@ -23,6 +23,7 @@ export class SubscriptionComponent implements OnInit {
   dialogData: any;
   formData: any;
   price: any;
+  selectedContainer: number;
 
 
   // tslint:disable-next-line: max-line-length
@@ -37,6 +38,7 @@ export class SubscriptionComponent implements OnInit {
     this.http.get('https://partner.hansmatrimony.com/api/subscription', {headers}).subscribe((res: any) => {
       this.plans = res;
       this.spinner.hide();
+      this.container1();
       console.log(this.plans);
     }, (err: any) => {
       this.spinner.hide();
@@ -85,6 +87,7 @@ export class SubscriptionComponent implements OnInit {
    }
 
    changeButtonOnline() {
+     this.container1();
      if (this.show2 === true) {
        return 'buttonPersonalised';
      } else {return 'buttonOnline'; }
@@ -133,6 +136,51 @@ onResize(event) {
           }});
       }
   );
+  }
+  container1() {
+    this.selectedContainer = 1;
+    document.getElementById('container1').style.background = '#56a2f5';
+    document.getElementById('container1').style.color = 'white';
+    document.getElementById('button1').style.color = 'white';
+    document.getElementById('button1').style.background = '#56a2f5';
+    document.getElementById('container2').style.background = '#f3f3f3';
+    document.getElementById('container2').style.color = 'black';
+    document.getElementById('button2').style.color = 'black';
+    document.getElementById('button2').style.background = '#6ba8a9';
+    document.getElementById('container3').style.background = '#f3f3f3';
+    document.getElementById('container3').style.color = 'black';
+    document.getElementById('button3').style.color = 'black';
+    document.getElementById('button3').style.background = '#6ba8a9';
+  }
+  container2() {
+    this.selectedContainer = 2;
+    document.getElementById('container2').style.background = '#56a2f5';
+    document.getElementById('container2').style.color = 'white';
+    document.getElementById('button2').style.color = 'white';
+    document.getElementById('button2').style.background = '#56a2f5';
+    document.getElementById('container1').style.background = '#f3f3f3';
+    document.getElementById('container1').style.color = 'black';
+    document.getElementById('button1').style.color = 'black';
+    document.getElementById('button1').style.background = '#6ba8a9';
+    document.getElementById('container3').style.background = '#f3f3f3';
+    document.getElementById('container3').style.color = 'black';
+    document.getElementById('button3').style.color = 'black';
+    document.getElementById('button3').style.background = '#6ba8a9';
+  }
+  container3() {
+    this.selectedContainer = 3;
+    document.getElementById('container3').style.background = '#56a2f5';
+    document.getElementById('container3').style.color = 'white';
+    document.getElementById('button3').style.color = 'white';
+    document.getElementById('button3').style.background = '#56a2f5';
+    document.getElementById('container2').style.background = '#f3f3f3';
+    document.getElementById('container2').style.color = 'black';
+    document.getElementById('button2').style.color = 'black';
+    document.getElementById('button2').style.background = '#6ba8a9';
+    document.getElementById('container1').style.background = '#f3f3f3';
+    document.getElementById('container1').style.color = 'black';
+    document.getElementById('button1').style.color = 'black';
+    document.getElementById('button1').style.background = '#6ba8a9';
   }
 
 }

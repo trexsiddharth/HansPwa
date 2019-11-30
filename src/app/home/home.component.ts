@@ -76,6 +76,7 @@ export class HomeComponent implements OnInit {
    logout() {
      this.loginStatus = false;
      localStorage.setItem('mobile_number', '');
+     localStorage.setItem('id', '');
      this.opened = false;
    }
 

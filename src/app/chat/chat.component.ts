@@ -85,7 +85,11 @@ export class ChatComponent implements OnInit {
     } else {
       this.loginStatus = false;
     }
-    this.currentLanguage = localStorage.getItem('language');
+    if (localStorage.getItem('language')) {
+      this.currentLanguage = localStorage.getItem('language');
+    } else {
+      this.currentLanguage = 'Hindi';
+    }
 
     if (this.currentLanguage === 'English') {
       document.getElementById('chatText').innerText = 'See Profiles';
@@ -1387,6 +1391,7 @@ setHouseType(value: string) {
       logout() {
         this.loginStatus = false;
         localStorage.setItem('mobile_number', '');
+        localStorage.setItem('id', '');
         this.router.navigateByUrl('/home');
       }
 
