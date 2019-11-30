@@ -826,27 +826,35 @@ export class ChatComponent implements OnInit {
     } else {return ''; }
    }
    setHiddenTable(mob: string, locality: string) {
-    if (mob.match('Visible')) {
-     // tslint:disable-next-line: max-line-length
-     return '<table style="width:100%;border-radius:7px;background:white;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;">' +
-                          '<tr>' +
-                            // tslint:disable-next-line: max-line-length
-                          this.setHiddenPhoneValue(mob) + '</th>' +
-                          // tslint:disable-next-line: max-line-length
-                          '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', locality) + '</th>' +
-                            '</tr>' +
-                            '</table>';
-    } else {
-      // tslint:disable-next-line: max-line-length
-     return '<table style="width:100%;border-radius:7px;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;color:white;font-weight:bolder;background:#1ED761;border-radius:10px">' +
-     '<tr>' +
-       // tslint:disable-next-line: max-line-length
-     this.setHiddenPhoneValue(mob) + '</th>' +
-     // tslint:disable-next-line: max-line-length
-     '<th style="width:50%">' + this.setHiddenValue('../assets/locationwhite.svg', locality) + '</th>' +
-       '</tr>' +
-       '</table>';
-    }
+     if (mob) {
+      if (mob.match('Visible')) {
+        // tslint:disable-next-line: max-line-length
+        return '<table style="width:100%;border-radius:7px;background:white;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;">' +
+                             '<tr>' +
+                               // tslint:disable-next-line: max-line-length
+                             this.setHiddenPhoneValue(mob) + '</th>' +
+                             // tslint:disable-next-line: max-line-length
+                             '<th style="width:50%">' + this.setHiddenValue('../assets/locationblue.svg', locality) + '</th>' +
+                               '</tr>' +
+                               '</table>';
+       } else {
+         // tslint:disable-next-line: max-line-length
+        return '<table style="width:100%;border-radius:7px;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;color:white;font-weight:bolder;background:#1ED761;border-radius:10px">' +
+        '<tr>' +
+          // tslint:disable-next-line: max-line-length
+        this.setHiddenPhoneValue(mob) + '</th>' +
+        // tslint:disable-next-line: max-line-length
+        '<th style="width:50%">' + this.setHiddenValue('../assets/locationwhite.svg', locality) + '</th>' +
+          '</tr>' +
+          '</table>';
+       }
+     } else {
+        // tslint:disable-next-line: max-line-length
+        return '<table>' +
+        '<tr>' +
+          '</tr>' +
+          '</table>';
+     }
    }
 
    SetIncome(value: string): String {
@@ -884,11 +892,16 @@ export class ChatComponent implements OnInit {
       this.spinner.show();
       this.history = 'history';
 
-      document.getElementById('chatButton').style.background = '#ebedf0';
+      document.getElementById('chatButton').style.background = '#f3f3f3';
       document.getElementById('chatText').style.color = 'grey';
       document.getElementById('profileText').style.color = 'grey';
-      document.getElementById('profileButton').style.background = '#ebedf0';
+      document.getElementById('profileButton').style.background = '#f3f3f3';
       document.getElementById('historyText').style.color = '#FFFFFF';
+
+      document.getElementById('chatText').style.background = '#f3f3f3';
+      document.getElementById('profileText').style.background = '#f3f3f3';
+
+      document.getElementById('historyText').style.background = '#34b7f1';
       document.getElementById('historyButton').style.background = '#34b7f1';
 
       console.log(localStorage.getItem('id'));
@@ -913,10 +926,13 @@ export class ChatComponent implements OnInit {
     this.history = 'chatbot';
     document.getElementById('chatButton').style.background = '#34b7f1';
     document.getElementById('chatText').style.color = '#FFFFFF';
+    document.getElementById('chatText').style.background = '#34b7f1';
     document.getElementById('historyText').style.color = 'grey';
-    document.getElementById('historyButton').style.background = '#ebedf0';
+    document.getElementById('profileButton').style.background = '#f3f3f3';
+    document.getElementById('historyButton').style.background = '#f3f3f3';
+    document.getElementById('historyText').style.background = '#f3f3f3';
     document.getElementById('profileText').style.color = 'grey';
-    document.getElementById('profileButton').style.background = '#ebedf0';
+    document.getElementById('profileText').style.background = '#f3f3f3';
    }
    changeToMyProfile() {
      if (this.currentContact) {
@@ -924,10 +940,13 @@ export class ChatComponent implements OnInit {
       this.history = 'myprofile';
       document.getElementById('profileButton').style.background = '#34b7f1';
       document.getElementById('chatText').style.color = 'grey';
-      document.getElementById('chatButton').style.background = '#ebedf0';
-      document.getElementById('historyButton').style.background = '#ebedf0';
+      document.getElementById('chatButton').style.background = '#f3f3f3';
+      document.getElementById('historyButton').style.background = '#f3f3f3';
+      document.getElementById('chatText').style.background = '#f3f3f3';
+      document.getElementById('historyText').style.background = '#f3f3f3';
       document.getElementById('historyText').style.color = 'grey';
       document.getElementById('profileText').style.color = '#FFFFFF';
+      document.getElementById('profileText').style.background = '#34b7f1';
       console.log(localStorage.getItem('id'));
      // tslint:disable-next-line: max-line-length
       return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + localStorage.getItem('id') + '&contacted=1'  , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
@@ -1394,9 +1413,9 @@ setHouseType(value: string) {
     }
     changeShowButtonLanguage(type: string) {
       if (type === 'English') {
-        return 'Show';
+        return 'Show More';
       } else {
-        return 'दिखाएं';
+        return 'और दिखाएं';
       }
     }
       changeRegisterButtonLanguage(type: string) {
