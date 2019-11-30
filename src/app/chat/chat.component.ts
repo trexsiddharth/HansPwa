@@ -812,7 +812,7 @@ export class ChatComponent implements OnInit {
         return '<th style="width:50%;padding: 5px 0px 5px 10px;">  <img style="width:25px" src="../assets/phone_blue.svg">' +  value ;
       } else {
         // tslint:disable-next-line: max-line-length
-        return '<th style="width:50%;padding: 5px 0px 5px 10px;padding-right:30px">  <img style="width:25px;color:white" src="../assets/phone.svg">' +  value ;
+        return '<th style="width:50%;padding: 5px 0px 5px 10px;padding-right:30px">  <a style="color:white" href="tel:' + value + '"><img style="width:25px;color:white" src="../assets/phone.svg">' +  value + '</a>' ;
       }
     } else {return ''; }
    }
