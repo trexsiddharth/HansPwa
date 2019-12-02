@@ -96,7 +96,7 @@ export class ChatComponent implements OnInit {
       document.getElementById('historyText').innerText = 'History';
       document.getElementById('profileText').innerText = 'My Profile';
     } else {
-      document.getElementById('chatText').innerText = 'रिश्ते देखें';
+      document.getElementById('chatText').innerText = 'नए रिश्ते';
       document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
       document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
     }
@@ -231,7 +231,7 @@ export class ChatComponent implements OnInit {
                     delay: 1000,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
-                   content: '<img src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px"> <br>' +
+                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + values.name + '"> <br>' +
                    '<div style="text-align:center"><b>' + values.name + this.setCity(values.city) + '</b></div> ' +
                    // tslint:disable-next-line: max-line-length
                    '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br> <script> function profilePhotoClicked() { console.log("PhotoClicked") } </script>'
@@ -319,7 +319,8 @@ export class ChatComponent implements OnInit {
                         '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
                           '</table></div>'
                    }).then(() => {
-                       if (data.buttons.match('Yes' || 'No')) {
+                    this.openImageModal();
+                    if (data.buttons.match('Yes' || 'No')) {
                          return this.botui.action.button({
                            cssClass: 'styleButton',
                            action: [
@@ -1005,7 +1006,7 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" ><br>' +
+      content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + personal.name + '"><br>' +
       '<div style="text-align:center"><b>' + personal.name  + this.setCity(family.city) +  '</b></div><br>' +
                    '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
     });
@@ -1090,6 +1091,7 @@ profileReAnswer(num: any, id: any, answer: any) {
         '</table></div>'
 
     }).then(() => {
+      this.openImageModal();
       if (family.mobile) {
         return this.botui.action.button({
           action: [
@@ -1165,7 +1167,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" >' +
+                    content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" alt="' + valueInMessage.name + '" >' +
                     '<div style="text-align:center"><b>' + valueInMessage.name + this.setCity(valueInMessage.city) +  '</b></div>' +
                     '<div style="text-align:center"><i>' + this.setValue(valueInMessage.about) + '</i></div><br>' +
 
@@ -1245,6 +1247,8 @@ profileReAnswer(num: any, id: any, answer: any) {
                   '<tr>' + this.LifeStatus(valueInMessage.father_status, valueInMessage.mother_status, valueInMessage.father_occupation, valueInMessage.occupation_mother) + '</tr>' +
                     '</table></div>'
 
+                }).then(() => {
+                  this.openImageModal();
                 });
                 }
               }
@@ -1443,4 +1447,24 @@ setHouseType(value: string) {
     });
   }
 
+  openImageModal() {
+    document.querySelectorAll<HTMLElement>('.botui-message-content #selectedProfilePic').forEach(element => {
+      const htmlElement: HTMLElement = element;
+      const modal = document.getElementById('myModal');
+      const modalImg: HTMLElement = document.getElementById('img01');
+      const captionText = document.getElementById('caption');
+      htmlElement.onclick = () => {
+        modal.style.display = 'block';
+        modalImg.setAttribute('src', htmlElement.getAttribute('src'));
+        captionText.innerHTML = htmlElement.getAttribute('alt');
+       };
+       // Get the <span> element that closes the modal
+      let span = document.getElementById('closeModal');
+
+// When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+  modal.style.display = 'none';
+};
+    });
+  }
 }

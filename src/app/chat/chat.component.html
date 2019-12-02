@@ -32,7 +32,23 @@
             </div>
         </div>
     </div>
-    
+    <div>
+    </div>
+    <div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- The Close Button -->
+  <a id="closeModal">&times;</a>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <h4 id="caption"></h4>
+</div>
+    </div>
     <div [hidden]="history!='chatbot'">
     <div id="my-botui-app" class='mainBody  w-full ht-full'  >
           
@@ -152,18 +168,6 @@
             </div>
     </main>
   
-  
-    <!-- <footer class='pwaSize w-full p-0-5' style="position:fixed; bottom: 5px;">
-      <form [formGroup]="answer" style="display: flex">        
-          <input placeholder="Show me some profiles" formControlName="ans" id="text" class='t-l' style="width: calc(100% - 50px); margin: 0 !important; padding: 8px 15px !important; font-size: 14px !important;" disabled>
-          <div style="width: 3rem; margin-left: 10px;" id="send-button">
-              <div class="circle flex-c-c pointer flex-c-c" (click)="read('typed')" style="text-align: center"><i class="fa fa-paper-plane flex-c-c white" style="font-size: 25px !important; width: 2.5rem !important; height: 2.5rem !important; margin-left: -3px; margin-top: -1px"></i></div>
-          </div>
-      </form>
-  </footer> -->
-  <!-- <footer *ngIf="userObj.identity_number==''" style="position: fixed; bottom: 10px;" class='pwaSize w-full p-0-5 flex-c-c'>
-      <button class='btn btn-blue' routerLink="/login">Login</button>
-  </footer> -->
   <footer>
       <div class="navbar" style="padding: 0px">
           <div class="row rowClass" >
