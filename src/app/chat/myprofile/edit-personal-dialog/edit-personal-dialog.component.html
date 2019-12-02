@@ -66,6 +66,24 @@
                     </select>
                   </div>
               </div>
+              <div class="row" style="margin: 10px 10px;">
+                <div class="col-6">
+                  <h6>Education:</h6>
+                  <select name="education"  class="form-control"   [(ngModel)]="personalData.education" required>
+                    <option *ngFor="let item of HigherEducation" [value]="item">{{item}}</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                    <h6>Profession:</h6>
+                      <input class="form-control" type="text" name="profession" [(ngModel)]="personalData.profession"  required> 
+                </div>
+              </div>
+              <div class="row" style="margin: 10px 10px;">
+                <div class="col-12">
+                    <h6>About: (max 300 words)</h6>
+                      <input class="form-control" maxlength="300" type="text" name="about" [(ngModel)]="personalData.about"  required> 
+                </div>
+              </div>
               <div style="text-align: center">
                   <button  [disabled]="!personalForm.valid" class="btn" style="background-color: #34b7f1" >Save</button> 
             </div>

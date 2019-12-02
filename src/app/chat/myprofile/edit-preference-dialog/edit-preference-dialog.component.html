@@ -71,6 +71,10 @@
                                 <option *ngFor="let item of Working"[value]="item">{{item}}</option>
                                 </select> 
                           </div>
+                          <div class="col-12">
+                            <h6>Description: (max 300 words)</h6>
+                              <input class="form-control" maxlength="300" type="text" name="description" [(ngModel)]="preferenceData.description"  required> 
+                        </div>
                           <div style="text-align: center; margin: 10px auto">
                               <button  [disabled]="!preferencesForm.valid" class="btn" style="background-color: #34b7f1" >Save</button> 
                         </div>

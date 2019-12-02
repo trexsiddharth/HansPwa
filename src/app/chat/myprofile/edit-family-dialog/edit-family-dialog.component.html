@@ -86,7 +86,7 @@
                                 <hr style="margin: 0px 10px;width: 100%">
                                 <div class="col-12">
                                     <h6 style="display: inline-block">Address : </h6>
-                                    <input class="form-control" type="text"  name="address" [(ngModel)]="familyData.address">
+                                    <input class="form-control" type="text"  name="address" [(ngModel)]="familyData.locality">
                                   </div>
                                   <hr style="margin: 0px 10px;width: 100%">
                                   <div class="col-12">
@@ -95,6 +95,11 @@
                                           <option *ngFor="let item of HouseType" [value]="item">{{item}}</option>
                                           </select> 
                                     </div>
+                                    <hr style="margin: 0px 10px;width: 100%">
+                                        <div class="col-12">
+                                            <h6>About: (max 300 words)</h6>
+                                              <input class="form-control" maxlength="300" type="text" name="about" [(ngModel)]="familyData.about"  required> 
+                                        </div>
                                     <div style="text-align: center; margin: 10px auto">
                                         <button  [disabled]="!familyForm.valid" class="btn" style="background-color: #34b7f1" >Save</button> 
                                   </div>

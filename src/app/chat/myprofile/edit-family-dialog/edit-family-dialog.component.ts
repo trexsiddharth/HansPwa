@@ -13,7 +13,7 @@ export class EditFamilyDialogComponent implements OnInit {
   familyData: any;
   Occupation: string[] = ['Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Homely'];
   Status: string[] = ['Alive', 'Not Alive'];
-  FamilyType: string[] = ['JointFamily', 'Nuclear Family', 'Others'];
+  FamilyType: string[] = ['Joint', 'Nuclear', 'Others'];
   Count: any[] = ['None', 0, 1, 2, 3, '3+'];
   HouseType: string[] = ['Owned', 'Rented', 'Leased'];
   @ViewChild('familyForm', {static: false}) familyForm: NgForm;
@@ -43,6 +43,7 @@ export class EditFamilyDialogComponent implements OnInit {
     familyDataForm.append('locality', this.familyData.locality);
     familyDataForm.append('city', this.familyData.city);
     familyDataForm.append('address', this.familyData.address);
+    familyDataForm.append('about', this.familyData.about);
 
 
     this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyDataForm).subscribe(
