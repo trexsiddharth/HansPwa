@@ -146,7 +146,7 @@ onResize(event) {
     }
 
     previewBack(files, index) {
-
+      console.log(index);
       if (files.length === 0) {
         return;
       } else {
@@ -160,7 +160,7 @@ onResize(event) {
         reader.readAsDataURL(files[0]);
         reader.onload = (_event) => {
           this.BackimgURL = reader.result;
-          this.uploadPhoto(this.backimagePath, index);
+          // this.uploadPhoto(this.backimagePath, index);
         };
       }
     }
@@ -209,5 +209,9 @@ onResize(event) {
         return this.carouselSize;
       }
     }
-
+    changeProfileImage(index: string) {
+     const i = Number(index) + 1;
+     console.log('current index is ' + i);
+     document.querySelectorAll('#backfile')[index].click();
+    }
 }
