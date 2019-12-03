@@ -14,6 +14,7 @@ export class EditPreferenceDialogComponent implements OnInit {
   preferenceData: any;
   maxHeight: any;
   minHeight: any;
+  gender;
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
   // tslint:disable-next-line: max-line-length
@@ -27,6 +28,7 @@ export class EditPreferenceDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gender = localStorage.getItem('gender');
     console.log(this.data);
     this.preferenceData = this.data.preferencesDetails;
     console.log(this.preferenceData);
@@ -38,13 +40,15 @@ export class EditPreferenceDialogComponent implements OnInit {
 
     const preferenceFormData = new FormData();
     preferenceFormData.append('identity_number', this.preferenceData.identity_number);
-    preferenceFormData.append('temple_id',this.preferenceData.temple_id);
+    preferenceFormData.append('temple_id', this.preferenceData.temple_id);
     preferenceFormData.append('caste', this.preferenceData.caste);
     preferenceFormData.append('marital_status', this.preferenceData.marital_status);
     preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
     preferenceFormData.append('working', this.preferenceForm.value.working);
     preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice);
     preferenceFormData.append('description', this.preferenceData.description);
+    preferenceFormData.append('income_min', this.preferenceData.income_min);
+    preferenceFormData.append('income_max', this.preferenceData.income_max);
 
 
 

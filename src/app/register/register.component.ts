@@ -255,6 +255,7 @@ export class RegisterComponent implements OnInit {
       if (res.zeroth_page_status === 'Y') {
         this.spinner.hide();
         localStorage.setItem('identity_number', res.identity_number);
+        localStorage.setItem('gender', this.PageOne.value.gender);
         this.router.navigate(['/register-one']);
         this.ngxNotificationService.success(res.error_message, 'success');
       } else {
@@ -272,6 +273,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.hide();
+    localStorage.setItem('gender', '');
     localStorage.setItem('mobile_number', '') ;
     localStorage.setItem('selectedCaste', '');
   }

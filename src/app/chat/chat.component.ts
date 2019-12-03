@@ -961,6 +961,8 @@ export class ChatComponent implements OnInit {
         this.profileData = data.profile;
         this.familyData = data.family;
         this.preferenceData = data.preferences;
+        localStorage.setItem('gender', data.profile.gender );
+        console.log(data.profile.gender );
         this.spinner.hide();
        },
        (error: any) => {
@@ -1396,6 +1398,7 @@ setHouseType(value: string) {
         this.loginStatus = false;
         localStorage.setItem('mobile_number', '');
         localStorage.setItem('id', '');
+        localStorage.setItem('gender', '');
         this.router.navigateByUrl('/home');
       }
 

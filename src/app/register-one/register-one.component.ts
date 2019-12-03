@@ -123,6 +123,7 @@ export class RegisterOneComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('annualIncome', '');
     localStorage.setItem('selectedCaste', '');
     this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
       this.getcastes = res;
@@ -525,6 +526,7 @@ export class RegisterOneComponent implements OnInit {
       firststepdata.append('city', this.addressCity);
 
 
+      localStorage.setItem('annualIncome', this.PageTwo.value.AnnualIncome);
 
       console.log(this.PageTwo.value.Castes);
       localStorage.setItem('selectedCaste', this.PageTwo.value.Castes);

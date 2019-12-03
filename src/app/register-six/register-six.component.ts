@@ -92,6 +92,7 @@ export class RegisterSixComponent implements OnInit, OnDestroy, AfterViewInit {
   minAge;
   maxAge;
   workPref;
+  gender;
   birthDate: any;
   suc: any = [];
   indexForHeight: number;
@@ -285,6 +286,13 @@ private _onDestroy = new Subject<void>();
     sixthstepdata.append('food_choice', this.PreferencesDetails.value.food_choice);
     sixthstepdata.append('mother_tongue', this.PreferencesDetails.value.stateGroup);
     sixthstepdata.append('description', this.PreferencesDetails.value.description);
+    if (this.gender === 'Female') {
+      sixthstepdata.append('income_min', localStorage.getItem('annualIncome'));
+      sixthstepdata.append('income_max', this.PreferencesDetails.value.income_max);
+    } else {
+      sixthstepdata.append('income_min', this.PreferencesDetails.value.income_min);
+      sixthstepdata.append('income_max', localStorage.getItem('annualIncome'));
+    }
 
     console.log('age_min', this.PreferencesDetails.value.age_min);
     console.log('age_max', this.PreferencesDetails.value.age_max);
@@ -305,6 +313,7 @@ private _onDestroy = new Subject<void>();
         this.suc = suc;
         console.log(this.suc);
         if (this.suc.sixth_page_status === 'Y') {
+          localStorage.setItem('gender', '');
           (window as any).ga('send', 'event', 'Preference Details', 'Preference Details Entered', {
             hitCallback: () => {
               console.log('Tracking preference details entered successful');
@@ -325,6 +334,7 @@ private _onDestroy = new Subject<void>();
   }
 
   ngOnInit() {
+    this.gender = localStorage.getItem('gender');
     this.selectedCaste = localStorage.getItem('selectedCaste');
     this.maritalStatus = localStorage.getItem('maritalStatus');
     this.motherTongue = localStorage.getItem('motherTongue');

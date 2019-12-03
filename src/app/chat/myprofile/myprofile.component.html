@@ -319,16 +319,16 @@
                           </div>
                           <hr style="margin: 0px 10px 10px;width: 100%">
     
-                          <div class="col-12" style="margin: 10px 10px 0px;">
+                          <div class="col-12" style="margin: 10px 10px 0px;" *ngIf="personalProfileData.gender=='Male'">
                             <h6 style="display: inline-block">Income Min : </h6>
                             <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.income_min}} LPA</p>
                           </div>
-                          <hr style="margin: 0px 10px 10px;width: 100%">
-                          <div class="col-12" style="margin: 10px 10px 0px;">
+                          <hr style="margin: 0px 10px 10px;width: 100%" *ngIf="personalProfileData.gender=='Male'">
+                          <div class="col-12" style="margin: 10px 10px 0px;" *ngIf="personalProfileData.gender=='Female'">
                             <h6 style="display: inline-block">Income Max : </h6>
                             <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.income_max}} LPA</p>
                           </div>
-                          <hr style="margin: 0px 10px 10px;width: 100%">
+                          <hr style="margin: 0px 10px 10px;width: 100%" *ngIf="personalProfileData.gender=='Female'">
                           <div class="col-12" style="margin: 10px 10px 0px;">
                             <h6 style="display: inline-block">Marital Status : </h6>
                             <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{personalProfileData.marital_status}}</p>

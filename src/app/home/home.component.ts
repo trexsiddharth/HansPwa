@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit {
      this.loginStatus = false;
      localStorage.setItem('mobile_number', '');
      localStorage.setItem('id', '');
+     localStorage.setItem('gender', '');
      this.opened = false;
    }
 
