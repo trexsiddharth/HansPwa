@@ -49,8 +49,11 @@ export class EditPreferenceDialogComponent implements OnInit {
     preferenceFormData.append('description', this.preferenceData.description);
     preferenceFormData.append('income_min', this.preferenceData.income_min);
     preferenceFormData.append('income_max', this.preferenceData.income_max);
-
-
+    preferenceFormData.append('height_min', this.Heights1[this.Heights.indexOf(this.minHeight)]);
+    preferenceFormData.append('height_max', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
+    preferenceFormData.append('age_min', this.preferenceData.age_min);
+    preferenceFormData.append('age_max', this.preferenceData.age_max);
+    preferenceFormData.append('mother_tongue', this.preferenceData.mother_tongue);
 
 
     this.http.post('https://partner.hansmatrimony.com/api/updatePreferencesDetails', preferenceFormData).subscribe(
