@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1575457503133,
+  "timestamp": 1575458565667,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -18,7 +18,7 @@
         "/polyfills-es5.cecc31fb46099274e7eb.js",
         "/runtime-es2015.aa36e2789a7b6e5e7675.js",
         "/runtime-es5.d3647fbfa3de00cd0bdf.js",
-        "/styles.b779cbad059fb7dfa852.css"
+        "/styles.b83a8772c7e28408fd8c.css"
       ],
       "patterns": []
     },
@@ -377,7 +377,7 @@
     "/bgicon.dedf2620d82776ed85a1.png": "0ca8aa153feb31362f3ea5ca8f32cb3f4300485b",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "e58b226f3e283227dd7f2a4bd6ebfdf74ceede62",
+    "/index.html": "eb55056216d2f1773eb22b9edeb02eeae74a970c",
     "/main-es2015.7c943a67433db01d771f.js": "7bf5e33cb253560130c7e7e80beba91075052fca",
     "/main-es5.6d0968317b3cf928d2d1.js": "e972cf632c3336570dad0e9a58db734303a1ee6e",
     "/manifest.webmanifest": "8033deb84013c1b6a5c5f8da81f9b9c64e5828ca",
@@ -386,7 +386,7 @@
     "/redback.093eeb320fb87fb9d11c.jpg": "f5d5e7f9827faa68365a9cb4ce9601ef1b6007d0",
     "/runtime-es2015.aa36e2789a7b6e5e7675.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/runtime-es5.d3647fbfa3de00cd0bdf.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "/styles.b779cbad059fb7dfa852.css": "42b107c5d82dea3f0a1188716e41922dcefad8b7",
+    "/styles.b83a8772c7e28408fd8c.css": "94df0b331b33b8692e6d196aedc2f3b467ecb5b6",
     "/whatsbg.f779980799b39548bb90.webp": "a0f05bc1171a03e6e2f17bb2f84f80dc6723db5d"
   },
   "navigationUrls": [
