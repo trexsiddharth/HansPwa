@@ -592,7 +592,7 @@ export class ChatComponent implements OnInit {
   getProfilePhotoHistory(num: string, num2: string , gen: string): String {
     if (num && num !== '[]') {
       const carousel: any = JSON.parse(num);              // removed condition to check whether url contains http or not.
-      return carousel['1'];
+      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel['1'];
     } else if (num2  && num2 !== '') {
       if (num2.match('http')) {
         return num2;
