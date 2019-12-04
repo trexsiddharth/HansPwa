@@ -44,6 +44,8 @@ import { A2HSDialogComponent } from './chat/a2-hsdialog/a2-hsdialog.component';
 import { RouterModule } from '@angular/router';
 import { AnalyticsButtonDirective } from './analytics-button.directive';
 
+import { WalkthroughModule } from 'ngx-walkthrough';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +82,7 @@ import { AnalyticsButtonDirective } from './analytics-button.directive';
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
     NgxMatIntlTelInputModule,
-    NgbModule, RouterModule
+    NgbModule, RouterModule, WalkthroughModule
   ],
   providers: [SubscriptionserviceService],
   bootstrap: [AppComponent],

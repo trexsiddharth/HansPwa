@@ -36,6 +36,10 @@ export class ChatComponent implements OnInit {
   errorCount = 0;
   given: String;
   Data1: any;
+  walkthroughStatus = false;
+  walkthroughStatusTwo = false;
+  walkthroughStatusThree = false;
+  walkthroughNumber = 0;
   response_arr: any = [];
   show_arr: any = [];
   type_arr: any = [];
@@ -319,8 +323,12 @@ export class ChatComponent implements OnInit {
                         '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
                           '</table></div>'
                    }).then(() => {
-                    this.openImageModal();
-                    if (data.buttons.match('Yes' || 'No')) {
+                     this.openImageModal();
+                     console.log(localStorage.getItem('walkthrough'));
+                     if (localStorage.getItem('walkthrough') && localStorage.getItem('walkthrough') === 'start') {
+                      this.setWalkThrough();
+                     }
+                     if (data.buttons.match('Yes' || 'No')) {
                          return this.botui.action.button({
                            cssClass: 'styleButton',
                            action: [
@@ -328,11 +336,11 @@ export class ChatComponent implements OnInit {
                              {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
                            ]
                        }).then(res => {
-                        (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
+                         (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
                           hitCallback: () => {
                             console.log('Tracking preference details entered successful');
                           }});
-                        if (this.langChanged === true) {
+                         if (this.langChanged === true) {
                           this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
                             (data: any) => {
                               console.log(data);
@@ -343,12 +351,12 @@ export class ChatComponent implements OnInit {
                             );
                           this.langChanged = false;
                         }
-                        if (this.promptData != null) {
+                         if (this.promptData != null) {
                           this.openPromptDialog();
                         }
-                        this.answer = res.value;
-                        console.log('chose' + res.value);
-                        this.repeatMEssage(res.value, mob);
+                         this.answer = res.value;
+                         console.log('chose' + res.value);
+                         this.repeatMEssage(res.value, mob);
                        });
                        } else if (data.buttons.match('Show')) {
                          return this.botui.action.button({
@@ -1403,7 +1411,7 @@ setHouseType(value: string) {
       }
 
       changeButtonLanguage(type: string) {
-          if (type === 'English') {
+        if (type === 'English') {
             document.getElementById('chatText').innerText = 'See Profiles';
             document.getElementById('historyText').innerText = 'History';
             document.getElementById('profileText').innerText = 'My Profile';
@@ -1451,7 +1459,7 @@ setHouseType(value: string) {
   }
 
   openImageModal() {
-    document.querySelectorAll<HTMLElement>('.botui-message-content #selectedProfilePic').forEach(element => {
+    document.querySelectorAll<HTMLElement>('.botui-message-content #selectedProfilePic').forEach((element) => {
       const htmlElement: HTMLElement = element;
       const modal = document.getElementById('myModal');
       const modalImg: HTMLElement = document.getElementById('img01');
@@ -1461,8 +1469,9 @@ setHouseType(value: string) {
         modalImg.setAttribute('src', htmlElement.getAttribute('src'));
         captionText.innerHTML = htmlElement.getAttribute('alt');
        };
+     
        // Get the <span> element that closes the modal
-      let span = document.getElementById('closeModal');
+      const span = document.getElementById('closeModal');
 
 // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
@@ -1470,4 +1479,49 @@ setHouseType(value: string) {
 };
     });
   }
+  setWalkThrough() {
+    // tslint:disable-next-line: max-line-length
+    if (document.querySelectorAll('.botui-actions-buttons.styleButton').length === 1 || document.querySelectorAll('#selectedProfilePic').length === 1 ) {
+      this.walkthroughStatus = true;
+    } else {
+      this.walkthroughStatus = false;
+    }
+  }
+  getWalkthroughStatus() {
+    if (this.walkthroughStatus === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  myHideFunction() {
+    localStorage.setItem('walkthrough', 'done');
+    console.log(localStorage.getItem('walkthrough'));
+
+    setTimeout(() => {
+      this.walkthroughStatusTwo = true;
+    }, 500);
+  }
+  getWalkthroughStatusTwo() {
+   if (this.walkthroughStatusTwo === true) {
+     return true;
+   } else {
+     return false;
+   }
+  }
+  myHideFunctionTwo() {
+    setTimeout(() => {
+      this.walkthroughStatusThree = true;
+    }, 500);
+  }
+  getWalkthroughStatusThree() {
+    if (this.walkthroughStatusThree === true) {
+      return true;
+    } else {
+      return false;
+    }
+   }
+   getWalkthroughThreeText() {
+     return 'आप ' + this.points + ' कांटेक्ट नंबर और देख सकते है';
+   }
 }

@@ -193,6 +193,18 @@ text-align: center;
 
 
 
+/* walkthrough */
+::ng-deep .walkthrough-container-transparency .walkthrough-top{
+  font-size: 30px;
+}
+
+::ng-deep .walkthrough-element.walkthrough-text{
+  margin-top: 100%;
+}
+
+::ng-deep .walkthrough-container-transparency .walkthrough-bottom {
+  font-size: 30px;
+}
 
 
 

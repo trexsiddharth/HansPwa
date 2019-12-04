@@ -121,8 +121,12 @@ margin-top: 2em
 #find {
     color: white;
     width: 300px;
+    margin: 0px 10px;
     border-radius: 100px;
     background-image: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff);
+}
+.rowButton {
+    width: 100%;margin: 0px 27%;
 }
 .team {
     background-color: rgb(236, 213, 186);
@@ -370,11 +374,15 @@ margin-top: 0px;
     }
     #find {
         color: white;
-        width: 60%;
+        width: 40%;
+        margin: 0px 10px;
         font-size: 14px;
         font-family: 'semplicita';
         border-radius: 100px;
         background-image: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff);
+    }
+    .rowButton {
+        width: 100%;margin: 0px 5%;
     }
 
     .map-banner {

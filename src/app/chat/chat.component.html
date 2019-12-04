@@ -48,6 +48,7 @@
   <!-- Modal Caption (Image Text) -->
   <h4 id="caption"></h4>
 </div>
+
     </div>
     <div [hidden]="history!='chatbot'">
     <div id="my-botui-app" class='mainBody  w-full ht-full'  >
@@ -66,7 +67,43 @@
                 <app-myprofile [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-myprofile>
       </div>
   </div>
-  
+
+  <div>
+    <ngx-walkthrough 
+    [is-round]="true"
+    [is-round]="true"
+    [walkthrough-type]="'transparency'"
+    [focus-element-selector]="'.botui-actions-buttons.styleButton'"
+    [icon]="'single_tap'"
+    [main-caption]="'इस प्रोफाइल का रिस्पांस दे और अगली प्रोफाइल देखे'"
+    [is-active]="getWalkthroughStatus()"
+    [use-button]="false"
+    (on-walkthrough-hide)="myHideFunction()">    
+</ngx-walkthrough>
+
+<ngx-walkthrough 
+[is-round]="true"
+[is-round]="true"
+[walkthrough-type]="'transparency'"
+[focus-element-selector]="'#historyButton'"
+[icon]="'arrow'"
+[main-caption]="'रिस्पांस देने के बाद रिश्ते यहाँ से देख सकते है'"
+[is-active]="getWalkthroughStatusTwo()"
+[use-button]="false"
+(on-walkthrough-hide)="myHideFunctionTwo()">    
+</ngx-walkthrough>
+
+<ngx-walkthrough 
+[is-round]="true"
+[is-round]="true"
+[walkthrough-type]="'transparency'"
+[focus-element-selector]="'#credit'"
+[icon]="'arrow'"
+[main-caption]="getWalkthroughThreeText()"  
+[is-active]="getWalkthroughStatusThree()"
+[use-button]="false">    
+</ngx-walkthrough>
+  </div>
   
     <main *ngIf="1>2" class='mainBody pwaSize w-full bg-white'>
   

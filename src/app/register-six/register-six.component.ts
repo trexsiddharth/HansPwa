@@ -320,6 +320,7 @@ private _onDestroy = new Subject<void>();
             }});
           this.spinner.hide();
           this.ngxNotificationService.success('Preferences Submitted Succesfully!', 'success');
+          localStorage.setItem('walkthrough', 'start');
           this.router.navigate(['/chat']);
         } else {
           this.spinner.hide();
