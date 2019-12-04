@@ -1418,10 +1418,10 @@ setHouseType(value: string) {
             document.getElementById('credit').innerText = 'Credits: ' + this.points;
             return 'See Contact Number';
           } else {
-            document.getElementById('chatText').innerText = 'रिश्ते देखें';
+            document.getElementById('chatText').innerText = 'नए रिश्ते';
             document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
             document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
-            document.getElementById('credit').innerText = 'कांटेक्ट नंबर: ' + this.points;
+            document.getElementById('credit').innerText = 'शेष कॉन्टैक्ट नंबर: ' + this.points;
             return 'कांटेक्ट नंबर देखें';
           }
       }
@@ -1497,10 +1497,7 @@ setHouseType(value: string) {
   myHideFunction() {
     localStorage.setItem('walkthrough', 'done');
     console.log(localStorage.getItem('walkthrough'));
-
-    setTimeout(() => {
-      this.walkthroughStatusTwo = true;
-    }, 500);
+    this.walkthroughStatusTwo = true;
   }
   getWalkthroughStatusTwo() {
    if (this.walkthroughStatusTwo === true) {
@@ -1510,9 +1507,7 @@ setHouseType(value: string) {
    }
   }
   myHideFunctionTwo() {
-    setTimeout(() => {
       this.walkthroughStatusThree = true;
-    }, 500);
   }
   getWalkthroughStatusThree() {
     if (this.walkthroughStatusThree === true) {
@@ -1523,5 +1518,13 @@ setHouseType(value: string) {
    }
    getWalkthroughThreeText() {
      return 'आप ' + this.points + ' कांटेक्ट नंबर और देख सकते है';
+   }
+   howToUse() {
+    this.walkthroughStatus= true;
+    setTimeout(() => {
+      this.walkthroughStatus = false;
+      this.walkthroughStatusTwo = false;
+      this.walkthroughStatusThree = false;
+    }, 1000);
    }
 }
