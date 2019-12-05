@@ -290,7 +290,6 @@
                 </div>
           </div>
         
-            
               <div class="card" style="margin: 20px 20px;">
                   <div class="row" style="margin: 10px 10px 0px;">
                       <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
@@ -356,8 +355,10 @@
                                   </div>
                                   <hr style="margin: 0px 10px 10px;width: 100%">
                                   <div class="col-12" style="margin: 10px 10px 0px;">
-                                      <h6 style="display: inline-block">Working Status: </h6>
-                                      <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.working}}</p>
+                                      <h6 style="display: inline-block" *ngIf="personalProfileData.gender == 'Male'">Working Status: </h6>
+                                      <p style="font-size: 14px;display: inline-block;margin-left: 10px" *ngIf="personalProfileData.gender == 'Male'">{{preferenceProfileData.working}}</p>
+                                      <h6 style="display: inline-block" *ngIf="personalProfileData.gender == 'Female'">Occupation: </h6>
+                                      <p style="font-size: 14px;display: inline-block;margin-left: 10px" *ngIf="personalProfileData.gender == 'Female'">{{preferenceProfileData.occupation}}</p>
                                     </div>
                                     <hr style="margin: 0px 10px 10px;width: 100%">
                                     <div class="col-12" style="margin: 10px 10px 0px;">

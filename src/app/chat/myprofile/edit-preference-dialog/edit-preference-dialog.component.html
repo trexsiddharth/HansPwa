@@ -66,9 +66,14 @@
                         </div>
                         <hr style="margin: 0px 10px;width: 100%">
                         <div class="col-12">
-                            <h6 style="display: inline-block">Working Status: </h6>
-                            <select type="text" class="form-control" name="working" [(ngModel)]="preferenceData.working" required>
+                            <h6 style="display: inline-block" *ngIf="gender=='Male'">Working Status: </h6>
+                            <select type="text" class="form-control" name="working" [(ngModel)]="preferenceData.working" required *ngIf="gender=='Male'">
                                 <option *ngFor="let item of Working"[value]="item">{{item}}</option>
+                                </select> 
+
+                                <h6 style="display: inline-block" *ngIf="gender=='Female'">Occupation: </h6>
+                            <select type="text" class="form-control" name="occupation" [(ngModel)]="preferenceData.occupation" required *ngIf="gender=='Female'">
+                                <option *ngFor="let item of Occupation"[value]="item">{{item}}</option>
                                 </select> 
                           </div>
                           <div class="col-12">

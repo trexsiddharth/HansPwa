@@ -212,6 +212,7 @@ private _onDestroy = new Subject<void>();
       marital_status: [''],
       manglik: [''],
       working: [''],
+      occupation: [''],
       food_choice: [''],
       stateGroup: [''],
     });
@@ -289,9 +290,13 @@ private _onDestroy = new Subject<void>();
     if (this.gender === 'Female') {
       sixthstepdata.append('income_min', localStorage.getItem('annualIncome'));
       sixthstepdata.append('income_max', this.PreferencesDetails.value.income_max);
+      sixthstepdata.append('working', 'na');
+      sixthstepdata.append('occupation', this.PreferencesDetails.value.occupation);
     } else {
       sixthstepdata.append('income_min', this.PreferencesDetails.value.income_min);
       sixthstepdata.append('income_max', localStorage.getItem('annualIncome'));
+      sixthstepdata.append('working', this.PreferencesDetails.value.working);
+      sixthstepdata.append('occupation', 'na');
     }
 
     console.log('age_min', this.PreferencesDetails.value.age_min);

@@ -22,6 +22,7 @@ export class EditPreferenceDialogComponent implements OnInit {
   Mangalika = ['Manglik', 'Non-manglik', 'Anshik manglik'];
   Foodpreferences: string[] = ['Doesn\'t matter', 'Non-vegetarian', 'Vegetarian'];
   Working: string[] = ['Working', 'Not Working', 'Doesn\'t matter'];
+  Occupation: string[] = ['Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'];
   @ViewChild('preferencesForm', {static: false}) preferenceForm: NgForm;
   constructor(private http: HttpClient, public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
     this.data = data;
@@ -44,6 +45,13 @@ export class EditPreferenceDialogComponent implements OnInit {
     preferenceFormData.append('caste', this.preferenceData.caste);
     preferenceFormData.append('marital_status', this.preferenceData.marital_status);
     preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
+    if (this.gender === 'Male') {
+      preferenceFormData.append('working', this.preferenceForm.value.working);
+      preferenceFormData.append('occupation', 'na');
+    } else {
+      preferenceFormData.append('occupation', this.preferenceForm.value.occupation);
+      preferenceFormData.append('working', 'na');
+    }
     preferenceFormData.append('working', this.preferenceForm.value.working);
     preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice);
     preferenceFormData.append('description', this.preferenceData.description);

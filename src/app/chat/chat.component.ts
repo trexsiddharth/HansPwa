@@ -1483,6 +1483,7 @@ setHouseType(value: string) {
     // tslint:disable-next-line: max-line-length
     if (document.querySelectorAll('.botui-actions-buttons.styleButton').length === 1 || document.querySelectorAll('#selectedProfilePic').length === 1 ) {
       this.walkthroughStatus = true;
+      this.Analytics('tutorial', 'tutorial', 'first time');
     } else {
       this.walkthroughStatus = false;
     }
@@ -1520,11 +1521,12 @@ setHouseType(value: string) {
      return 'आप ' + this.points + ' कांटेक्ट नंबर और देख सकते है';
    }
    howToUse() {
-    this.walkthroughStatus= true;
+    this.Analytics('tutorial', 'tutorial', 'opted tutorial');
+    this.walkthroughStatus = true;
     setTimeout(() => {
       this.walkthroughStatus = false;
       this.walkthroughStatusTwo = false;
       this.walkthroughStatusThree = false;
-    }, 1000);
+    }, 2000);
    }
 }

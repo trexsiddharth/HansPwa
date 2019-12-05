@@ -45,6 +45,7 @@ import { RouterModule } from '@angular/router';
 import { AnalyticsButtonDirective } from './analytics-button.directive';
 
 import { WalkthroughModule } from 'ngx-walkthrough';
+import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { WalkthroughModule } from 'ngx-walkthrough';
     ViewCentresComponent,
     A2HSDialogComponent,
     AnalyticsButtonDirective,
+    TiktokAdsFormComponent,
   ],
   imports: [
     BrowserModule,
