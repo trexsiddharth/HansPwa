@@ -83,7 +83,7 @@ onResize(event) {
   }
   }
     getProfilesPhoto(num: string, num2: string , gen: string, index: string): String {
-      if (num !== '[]' && num) {
+      if (num !== '[]' && num && num !== 'null') {
         const carousel: any = JSON.parse(num);
         return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[index];
       } else if (num2) {
@@ -200,7 +200,7 @@ onResize(event) {
     }
 
     getImagesCount(num: string, num1: string) {
-      if (num !== '[]' && num) {
+      if (num !== '[]' && num && num !== 'null') {
         const carousel: object = JSON.parse(num);
         if (carousel) {
           this.carouselSize = Object.keys(carousel);
