@@ -71,22 +71,16 @@ export class TiktokAdsFormComponent implements OnInit {
 
   submitForm() {
 
-    const firststepdata = new URLSearchParams();
-    firststepdata.set('relation', this.PageOne.value.create);
-    firststepdata.set('mobile', this.PageOne.value.phone);
+    console.log('mobile', this.PageOne.value.phone);
+    console.log('looking_for', this.PageOne.value.create);
 
-    // tslint:disable-next-line: max-line-length
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'createZeroPageProfilePWA?' + firststepdata , null).subscribe((res: any) => {
-      console.log('first', res);
-
-      if (res.zeroth_page_status === 'Y') {
-        this.dialogRef.close({'success': res.zeroth_page_status});
-      }
-
-    }, err => {
-      this.spinner.hide();
-      this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
-      console.log(err);
+    const tiktokForm = new FormData();
+    tiktokForm.append('mobile', this.PageOne.value.phone);
+    tiktokForm.append('looking_for', this.PageOne.value.phone);
+    this.dialog.closeAll();
+    this.ngxNotificationService.success('आपके रिस्पांस के लिए धन्यवाद् हम आपको जल्द संपर्क करेंगे।');
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/tiktok' , tiktokForm ).subscribe(res => {
+      console.log(res);
     });
   }
 

@@ -202,8 +202,10 @@ onResize(event) {
     getImagesCount(num: string, num1: string) {
       if (num !== '[]' && num) {
         const carousel: object = JSON.parse(num);
-        this.carouselSize = Object.keys(carousel);
-        return this.carouselSize;
+        if (carousel) {
+          this.carouselSize = Object.keys(carousel);
+          return this.carouselSize;
+        }
       } else {
         this.carouselSize = [1];
         return this.carouselSize;

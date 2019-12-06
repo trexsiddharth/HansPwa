@@ -93,11 +93,6 @@ export class HomeComponent implements OnInit {
     dialogConfig.hasBackdrop = true;
     let dialogRef = this.dialog.open(TiktokAdsFormComponent, dialogConfig);
     document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
-    dialogRef.afterClosed().subscribe(data => {
-      if (data) {
-        this.ngxNotificationService.success('आपके रिस्पांस के लिए धन्यवाद् हम आपको जल्द संपर्क करेंगे।');
-      }
-    });
    }
 
 }
