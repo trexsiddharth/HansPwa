@@ -46,6 +46,7 @@ export class ChatComponent implements OnInit {
   previous_chats: any;
   user: any;
   innerWidth: any;
+  innerHeight: any;
   DoNotshowfull: boolean ;
   number: String;
   text: String;
@@ -107,6 +108,7 @@ export class ChatComponent implements OnInit {
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
     this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
     localStorage.setItem('id', '');
@@ -1522,11 +1524,21 @@ setHouseType(value: string) {
    }
    howToUse() {
     this.Analytics('tutorial', 'tutorial', 'opted tutorial');
-    this.walkthroughStatus = true;
+    if (this.history !== 'chatbot') {
+      this.changeToBot();
+    }
+    console.log(this.innerHeight);
+    this.botui.message.add({
+      type: 'html',
+      content: '<p>&#127916 Tutorial</p>'
+    });
+    setTimeout(() => {
+      this.walkthroughStatus = true;
+      }, 1000);
     setTimeout(() => {
       this.walkthroughStatus = false;
       this.walkthroughStatusTwo = false;
       this.walkthroughStatusThree = false;
-    }, 2000);
+    }, 3000);
    }
 }
