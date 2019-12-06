@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { InstallPromptService } from '../install-prompt.service';
+import { TiktokAdsFormComponent } from '../tiktok-ads-form/tiktok-ads-form.component';
 
 
 
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit {
   innerWidth;
   loginStatus = true;
   contactNumber;
+  tiktokDialog: string;
 
   // tslint:disable-next-line: max-line-length
   constructor(private http: HttpClient, public dialog: MatDialog, private promptService: InstallPromptService,
@@ -52,8 +54,13 @@ export class HomeComponent implements OnInit {
     } else {
       this.loginStatus = false;
     }
+    this.tiktokDialog = this.router.url;
+    console.log(this.tiktokDialog);
     this.innerWidth = window.innerWidth;
     this.promptService.savePrompt();
+    if (this.tiktokDialog.match('tiktokForm')) {
+      this.openFormDialog();
+    }
   }
 
   subscription() {
@@ -79,6 +86,18 @@ export class HomeComponent implements OnInit {
      localStorage.setItem('id', '');
      localStorage.setItem('gender', '');
      this.opened = false;
+   }
+   openFormDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.hasBackdrop = true;
+    let dialogRef = this.dialog.open(TiktokAdsFormComponent, dialogConfig);
+    document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.ngxNotificationService.success('आपके रिस्पांस के लिए धन्यवाद् हम आपको जल्द संपर्क करेंगे।');
+      }
+    });
    }
 
 }

@@ -11,7 +11,6 @@ import { RegisterFiveComponent } from './register-five/register-five.component';
 import { RegisterSixComponent } from './register-six/register-six.component';
 import { ChatComponent } from './chat/chat.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
-import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.component';
 
 
 const routes: Routes = [
@@ -27,7 +26,6 @@ const routes: Routes = [
   { path: 'register-six', component: RegisterSixComponent},
   { path: 'chat', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
-  { path: 'tiktokAds', component: TiktokAdsFormComponent}
 
 ];
 

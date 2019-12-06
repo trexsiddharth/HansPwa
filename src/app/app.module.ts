@@ -90,7 +90,7 @@ import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.compon
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, A2HSDialogComponent,
-    EditFamilyDialogComponent],
+    EditFamilyDialogComponent, TiktokAdsFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

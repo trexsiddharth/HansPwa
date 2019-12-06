@@ -110,6 +110,7 @@ body {
 .m-l-5 {
   margin-left: 5px;
 }
+
 @font-face{
   font-family: semplicita;
   src: url("./assets/fonts/SemplicitaPro.otf") format("truetype")
