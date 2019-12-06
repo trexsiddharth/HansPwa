@@ -237,8 +237,8 @@ export class ChatComponent implements OnInit {
                     delay: 1000,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
-                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + values.name + '"> <br>' +
-                   '<div style="text-align:center"><b>' + values.name + this.setCity(values.city) + '</b></div> ' +
+                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name)+ '"> <br>' +
+                   '<div style="text-align:center"><b>' + this.setName(values.name) + this.setCity(values.city) + '</b></div> ' +
                    // tslint:disable-next-line: max-line-length
                    '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br> <script> function profilePhotoClicked() { console.log("PhotoClicked") } </script>'
                  }).then(() => {
@@ -466,18 +466,42 @@ export class ChatComponent implements OnInit {
                   localStorage.setItem('mobile_number', mob);
                   this.repeatMEssage(res.value, mob);
                 });
+                } else if (data.buttons.match('History')) {
+                   return this.botui.action.button({
+                    action: [
+                      { text: this.changeHistoryButtonLanguage(this.currentLanguage), value: 'History'},
+                    ]
+                    }).then(() => {
+                      this.changeToHistory();
+                    });
+                } else if (data.buttons.match('Renew Plan')) {
+                  return this.botui.action.button({
+                    action: [
+                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Renew Plan'), value: 'Renew'},
+                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Call Hans Care'), value: 'Call'}
+                    ]
+                  }).then(res => {
+                      switch (res.value) {
+                        case 'Renew':
+                          this.router.navigateByUrl('subscription');
+                          break;
+                      case 'Call':
+                        window.open('tel:900300400');
+                        break;
+                      }
+                  });
                 } else {
                   localStorage.setItem('mobile_number', mob);
                   return this.botui.action.button({
                     action: [
-                      { text: 'BUY SUBSCRIPTION', value: 'BUY'},
-                      { text: 'रिजेक्ट करें', value: 'NO'}
+                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'See Plans'), value: 'Buy'},
+                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Next Match'), value: 'SHOW'}
                     ]
                   }).then(res => {
                     if (this.promptData != null) {
                       this.openPromptDialog();
                     }
-                    if (res.value === 'BUY') {
+                    if (res.value === 'Buy') {
                       (window as any).ga('send', 'event', 'Subscription', 'Subscription from chatbot', {
                         hitCallback: () => {
                           console.log('Tracking preference details entered successful');
@@ -822,6 +846,16 @@ export class ChatComponent implements OnInit {
     } else {return ''; }
    }
 
+
+   setName(value: String): String {
+    if (value != null) {
+      if (value.split(' ')) {
+        let name = value.split(' ');
+        return name[0] ;
+      } else {return value; }
+    } else {return ''; }
+   }
+
    setHiddenPhoneValue( value: String): String {
     if (value != null) {
       if (value.match('Visible')) {
@@ -1018,8 +1052,8 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + personal.name + '"><br>' +
-      '<div style="text-align:center"><b>' + personal.name  + this.setCity(family.city) +  '</b></div><br>' +
+      content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setName(personal.name) + '"><br>' +
+      '<div style="text-align:center"><b>' + this.setName(personal.name)  + this.setCity(family.city) +  '</b></div><br>' +
                    '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
     });
      this.botui.message.add({
@@ -1099,7 +1133,7 @@ profileReAnswer(num: any, id: any, answer: any) {
              // line -7
       '<table style="width:100%">' +
       // tslint:disable-next-line: max-line-length
-      '<tr>' + this.LifeStatus(family.father_status, family.mother_status, family.father_occupation, family.occupation_mother) + '</tr>' +
+      '<tr>' + this.LifeStatus(family.father_status, family.mother_status, family.occupation, family.occupation_mother) + '</tr>' +
         '</table></div>'
 
     }).then(() => {
@@ -1179,8 +1213,9 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" alt="' + valueInMessage.name + '" >' +
-                    '<div style="text-align:center"><b>' + valueInMessage.name + this.setCity(valueInMessage.city) +  '</b></div>' +
+                    content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setName(valueInMessage.name) + '" >' +
+                    // tslint:disable-next-line: max-line-length
+                    '<div style="text-align:center"><b>' + this.setName(valueInMessage.name) + this.setCity(valueInMessage.city) +  '</b></div>' +
                     '<div style="text-align:center"><i>' + this.setValue(valueInMessage.about) + '</i></div><br>' +
 
                     // line -0
@@ -1439,6 +1474,32 @@ setHouseType(value: string) {
         return 'Show More';
       } else {
         return 'और दिखाएं';
+      }
+    }
+    changeBtnTextLanguage(type: string, text: string) {
+      if (type === 'English') {
+          return text;
+      } else {
+        switch (text) {
+          case 'Renew Plan':
+            return 'प्लान देखें';
+            case 'Next Match':
+            return 'अगला रिश्ता देखें';
+            case 'Call Hans Care':
+            return 'कॉल हंस केयर';
+            case 'See Plans':
+              return 'प्लान देखें';
+              case 'Next Match':
+                return 'अगला रिश्ता देखें';
+      }
+    }
+  }
+
+    changeHistoryButtonLanguage(type: string) {
+      if (type === 'English') {
+        return 'History';
+      } else {
+        return 'देखे गए रिश्ते';
       }
     }
       changeRegisterButtonLanguage(type: string) {
