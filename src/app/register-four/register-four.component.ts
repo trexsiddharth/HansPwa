@@ -70,7 +70,7 @@ export class RegisterFourComponent implements OnInit {
   ];
   options: any = [];
   location: any = '';
-  FamilyType: string[] = ['JointFamily', 'Nuclear Family', 'Others'];
+  FamilyType: string[] = ['Joint Family', 'Nuclear Family', 'Others'];
   FatherOccupation: string[] = ['Buisness', 'Service', 'Army', 'Private Company',
   'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'
 ];

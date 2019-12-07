@@ -2,7 +2,8 @@
 
 import {
   Component,
-  OnInit
+  OnInit,
+  AfterViewInit
 } from '@angular/core';
 import {
   FormBuilder,
@@ -48,7 +49,8 @@ export const _filter = (opt: string[], value: string): string[] => {
   templateUrl: './register-two.component.html',
   styleUrls: ['./register-two.component.css']
 })
-export class RegisterTwoComponent implements OnInit {
+export class RegisterTwoComponent implements OnInit,AfterViewInit {
+ 
 
   time = {
     hour: 13,
@@ -308,6 +310,13 @@ export class RegisterTwoComponent implements OnInit {
       enableSearchFilter: true,
       classes: 'myclass custom-class'
     };
+  }
+
+  ngAfterViewInit(): void {
+    document.getElementsByTagName('svg')[0].style.fill = 'black';
+  }
+  datePickerClicked() {
+    document.querySelector<HTMLElement>('.mat-icon-button').click();
   }
 }
 

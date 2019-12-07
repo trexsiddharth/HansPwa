@@ -5,6 +5,8 @@ import { EditFamilyDialogComponent } from './edit-family-dialog/edit-family-dial
 import { EditPreferenceDialogComponent } from './edit-preference-dialog/edit-preference-dialog.component';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-myprofile',
@@ -27,7 +29,8 @@ export class MyprofileComponent implements OnInit {
   maxHeight;
   carouselSize;
 
-  constructor(private matDialog: MatDialog, private http: HttpClient, private ngxNotificationService: NgxNotificationService) { }
+  constructor(private spinner: NgxSpinnerService, private matDialog: MatDialog, private http: HttpClient, 
+              private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
@@ -86,7 +89,15 @@ onResize(event) {
     getProfilesPhoto(num: string, num2: string , gen: string, index: string): String {
       if (num !== '[]' && num && num !== 'null') {
         const carousel: any = JSON.parse(num);
-        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[index];
+        if (carousel[index]) {
+          return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[index];
+        } else {
+          if (gen === 'Male') {
+            return '../../assets/male_pic.png';
+          } else {
+            return '../../assets/female_pic.png';
+          }
+        }
       } else if (num2) {
         return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
       } else {
@@ -168,24 +179,31 @@ onResize(event) {
         reader.readAsDataURL(files[0]);
         reader.onload = (_event) => {
           this.BackimgURL = reader.result;
-          // this.uploadPhoto(this.backimagePath, index);
+          this.uploadPhoto(this.backimagePath, index);
         };
       }
     }
 
     uploadPhoto(data, index) {
-      const fifthstepdata = new FormData();
-      fifthstepdata.append('identity_number', localStorage.getItem('id'));
-      fifthstepdata.append('url', data);
-      fifthstepdata.append('index', index);
+      this.spinner.show();
+      const uploadData = new FormData();
+      uploadData.append('id', localStorage.getItem('id'));
+      uploadData.append('index', index);
+      uploadData.append('image', data);
 
-      return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFifthPageProfile', data).subscribe(suc => {
+      return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(suc => {
         this.suc = suc;
         console.log('photos', suc);
-        document.getElementById('imgProfile').setAttribute('src', this.BackimgURL);
-        this.ngxNotificationService.success('Photo Uploaded Succesfully!', 'success');
+        if (this.suc.pic_upload_status === 'Y') {
+          this.spinner.hide();
+          document.querySelectorAll('#imgProfile')[index - 1].setAttribute('src', this.BackimgURL);
+          this.ngxNotificationService.success('Photo Uploaded Succesfully!');
+        } else {
+          this.spinner.hide();
+          this.ngxNotificationService.error('Photo Upload Unsuccesful!');
+        }
      }, err => {
-       this.ngxNotificationService.error('Photo could not be Uploaded!', 'success');
+       this.ngxNotificationService.error('Photo could not be Uploaded!');
        // console.log(err);
        console.log(err);
       });
@@ -211,8 +229,7 @@ onResize(event) {
       if (num !== '[]' && num && num !== 'null') {
         const carousel: object = JSON.parse(num);
         if (carousel) {
-          this.carouselSize = Object.keys(carousel);
-          return this.carouselSize;
+          return [1, 2, 3];
         }
       } else {
         this.carouselSize = [1];
