@@ -233,7 +233,8 @@ export class RegisterComponent implements OnInit {
   }
 
   firstStep() {
-
+    if (this.PageOne.valid) {
+ 
     const firststepdata = new URLSearchParams();
     firststepdata.set('email', this.PageOne.value.email);
     firststepdata.set('password', this.PageOne.value.password);
@@ -268,6 +269,9 @@ export class RegisterComponent implements OnInit {
       this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
       console.log(err);
     });
+  } else {
+    this.ngxNotificationService.error('Fill the details');
+  }
   }
 
 

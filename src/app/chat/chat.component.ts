@@ -237,8 +237,9 @@ export class ChatComponent implements OnInit {
                     delay: 1000,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
-                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name)+ '"> <br>' +
-                   '<div style="text-align:center"><b>' + this.setName(values.name) + this.setCity(values.city) + '</b></div> ' +
+                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name, values.mobile)+ '"> <br>' +
+                   // tslint:disable-next-line: max-line-length
+                   '<div style="text-align:center"><b>' + this.setName(values.name, values.mobile) + this.setCity(values.city) + '</b></div> ' +
                    // tslint:disable-next-line: max-line-length
                    '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br> <script> function profilePhotoClicked() { console.log("PhotoClicked") } </script>'
                  }).then(() => {
@@ -326,8 +327,7 @@ export class ChatComponent implements OnInit {
                           '</table></div>'
                    }).then(() => {
                      this.openImageModal();
-                     console.log(localStorage.getItem('walkthrough'));
-                     if (localStorage.getItem('walkthrough') && localStorage.getItem('walkthrough') === 'start') {
+                     if (values.bot_status === '0') {
                       this.setWalkThrough();
                      }
                      if (data.buttons.match('Yes' || 'No')) {
@@ -847,13 +847,17 @@ export class ChatComponent implements OnInit {
    }
 
 
-   setName(value: String): String {
-    if (value != null) {
+   setName(value: string, mobile: string): String {
+     if (mobile.startsWith('Visible')) {
+     if (value != null) {
       if (value.split(' ')) {
         let name = value.split(' ');
         return name[0] ;
       } else {return value; }
     } else {return ''; }
+  } else {
+    return value;
+  }
    }
 
    setHiddenPhoneValue( value: String): String {
@@ -1052,8 +1056,8 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setName(personal.name) + '"><br>' +
-      '<div style="text-align:center"><b>' + this.setName(personal.name)  + this.setCity(family.city) +  '</b></div><br>' +
+      content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setName(personal.name, family.mobile) + '"><br>' +
+      '<div style="text-align:center"><b>' + this.setName(personal.name, family.mobile)  + this.setCity(family.city) +  '</b></div><br>' +
                    '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
     });
      this.botui.message.add({
@@ -1213,9 +1217,9 @@ profileReAnswer(num: any, id: any, answer: any) {
                   this.botui.message.add({
                     type: 'html',
                     // tslint:disable-next-line: max-line-length
-                    content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setName(valueInMessage.name) + '" >' +
+                    content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory(valueInMessage.carousel, valueInMessage.photo,  valueInMessage.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setName(valueInMessage.name, valueInMessage.mobile) + '" >' +
                     // tslint:disable-next-line: max-line-length
-                    '<div style="text-align:center"><b>' + this.setName(valueInMessage.name) + this.setCity(valueInMessage.city) +  '</b></div>' +
+                    '<div style="text-align:center"><b>' + this.setName(valueInMessage.name, valueInMessage.mobile) + this.setCity(valueInMessage.city) +  '</b></div>' +
                     '<div style="text-align:center"><i>' + this.setValue(valueInMessage.about) + '</i></div><br>' +
 
                     // line -0
@@ -1463,11 +1467,21 @@ setHouseType(value: string) {
           }
       }
       changeNoButtonLanguage(type: string) {
+        setTimeout(() => {
+          this.changeNoButtonColor();
+        }, 300);
         if (type === 'English') {
           return 'Reject';
         } else {
           return 'रिजेक्ट';
         }
+    }
+    changeNoButtonColor() {
+      document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+        if (element.innerText === 'No' || element.innerText === 'NO' || element.innerText === 'रिजेक्ट' ) {
+            element.style.background = 'red';
+        }
+      });
     }
     changeShowButtonLanguage(type: string) {
       if (type === 'English') {
@@ -1545,7 +1559,13 @@ setHouseType(value: string) {
   setWalkThrough() {
     // tslint:disable-next-line: max-line-length
     if (document.querySelectorAll('.botui-actions-buttons.styleButton').length === 1 || document.querySelectorAll('#selectedProfilePic').length === 1 ) {
-      this.walkthroughStatus = true;
+      this.botui.message.add({
+        type: 'html',
+        human: true,
+        content: '<p>&#127916 #</p>'
+      }).then(() => {
+        this.walkthroughStatus = true;
+      });
       this.Analytics('tutorial', 'tutorial', 'first time');
     } else {
       this.walkthroughStatus = false;
@@ -1583,6 +1603,20 @@ setHouseType(value: string) {
    getWalkthroughThreeText() {
      return 'आप ' + this.points + ' कांटेक्ट नंबर और देख सकते है';
    }
+   myHideFunctionThree() {
+    // id - profile id,
+    // status - tutorial status
+     const walkthroughStatusUpdate = new FormData();
+     walkthroughStatusUpdate.append('id', localStorage.getItem('id'));
+     walkthroughStatusUpdate.append('status', '1');
+     return this.http.post<any>('https://partner.hansmatrimony.com/api/updateStatus', walkthroughStatusUpdate).subscribe(
+       (data: any) => {
+         console.log(data);
+       }, err => {
+         console.log(err);
+       }
+     );
+   }
    howToUse() {
     this.Analytics('tutorial', 'tutorial', 'opted tutorial');
     if (this.history !== 'chatbot') {
@@ -1591,6 +1625,7 @@ setHouseType(value: string) {
     console.log(this.innerHeight);
     this.botui.message.add({
       type: 'html',
+      human: true,
       content: '<p>&#127916 Tutorial</p>'
     });
     setTimeout(() => {

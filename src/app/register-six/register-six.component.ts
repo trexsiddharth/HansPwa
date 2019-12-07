@@ -104,7 +104,7 @@ export class RegisterSixComponent implements OnInit, OnDestroy, AfterViewInit {
   PreferencesDetails: FormGroup;
   mapping_id: number;
   maritalStatus;
-  MaritalStaus = ['Never Married', 'Awaiting Divorce', 'Divorced', 'Widowed', 'Anulled'];
+  MaritalStaus = ['Never Married', 'Awaiting Divorce', 'Divorced', 'Widowed', 'Anulled', 'Doesn\'t Matter'];
   manglikValue = 'Non Manglik';
   manglikList = ['Non Manglik', 'Manglik', 'Anshik Manglik'];
   manglikPreference = ['Manglik', 'Anshik Manglik'];
@@ -203,19 +203,7 @@ private _onDestroy = new Subject<void>();
   constructor(public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router, private http: HttpClient,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
-    this.PreferencesDetails = this._formBuilder.group({
-      description: [''],
-      age_min: [''],
-      age_max: [''],
-      height_min: [''],
-      height_max: [''],
-      marital_status: [''],
-      manglik: [''],
-      working: [''],
-      occupation: [''],
-      food_choice: [''],
-      stateGroup: [''],
-    });
+ 
 
   }
 
@@ -265,6 +253,9 @@ private _onDestroy = new Subject<void>();
   }
 
   sixthStep() {
+    if (this.PreferencesDetails.valid) {
+      
+   
     if (this.manglikValue === 'Non Manglik') {
       this.manglikValue = 'No';
     }
@@ -299,18 +290,6 @@ private _onDestroy = new Subject<void>();
       sixthstepdata.append('occupation', 'na');
     }
 
-    console.log('age_min', this.PreferencesDetails.value.age_min);
-    console.log('age_max', this.PreferencesDetails.value.age_max);
-    console.log('height_min', this.Heights1[this.Heights.indexOf(this.minHeight)]);
-    console.log('height_max', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
-    console.log('caste', this.casteString);
-    console.log('marital_status', this.PreferencesDetails.value.marital_status);
-    console.log('manglik', this.manglikValue);
-    console.log('working', this.PreferencesDetails.value.working);
-    console.log('food_choice', this.PreferencesDetails.value.food_choice);
-    console.log('mother_tongue', this.PreferencesDetails.value.stateGroup);
-    console.log('description', this.PreferencesDetails.value.description);
-
 
     sixthstepdata.append('identity_number', localStorage.getItem('identity_number'));
     return this.http.post('https://partner.hansmatrimony.com/api/' + 'createSixthPageProfile', sixthstepdata).subscribe(
@@ -325,7 +304,6 @@ private _onDestroy = new Subject<void>();
             }});
           this.spinner.hide();
           this.ngxNotificationService.success('Preferences Submitted Succesfully!', 'success');
-          localStorage.setItem('walkthrough', 'start');
           this.router.navigate(['/chat']);
         } else {
           this.spinner.hide();
@@ -337,6 +315,9 @@ private _onDestroy = new Subject<void>();
         this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
         console.log(err);
       });
+    } else {
+      this.ngxNotificationService.error('Fill the details');
+    }
   }
 
   ngOnInit() {
@@ -356,7 +337,6 @@ private _onDestroy = new Subject<void>();
         map((caste: string | null) => caste ? this._filterCaste(caste) : this.filterCaste.slice()));
 
     // set initial selection
-      console.log(this.filterCaste[10]);
       this.casteMultiCtrl.setValue(this.filterCaste[10]);
 
     // load the initial bank list
@@ -394,6 +374,10 @@ private _onDestroy = new Subject<void>();
     this.PreferencesDetails = this._formBuilder.group({
       age_min : [parseInt(localStorage.getItem('minAge'), 10)],
       age_max : [parseInt(localStorage.getItem('maxAge'), 10)],
+      height_min : [this.minHeight],
+      height_max : [this.maxHeight],
+      income_min : [''],
+      income_max : [''],
       stateGroup : this.motherTongue,
       marital_status : this.maritalStatus,
       working : 'Doesn\'t matter',
@@ -429,17 +413,20 @@ private _onDestroy = new Subject<void>();
         console.log(localStorage.getItem('selectedCaste'));
         if (localStorage.getItem('selectedCaste')) {
           this.castePref.forEach(element => {
-            if (element.castes.match(localStorage.getItem('selectedCaste'))) {
-              this.casteMapped = element.castes.split(',');
-              console.log(this.casteMapped);
-              this.castess.push(element.castes.split(',')[0]);
-              this.castess.push(element.castes.split(',')[1]);
-              this.castess.push(element.castes.split(',')[2]);
-            }
-            });
-        }
+              element.castes.split(',').forEach(caste => {
+                if (caste.match(localStorage.getItem('selectedCaste')) && caste.length === localStorage.getItem('selectedCaste').length) {
+                  const desiredCasteMap = element.castes.split(',');
+                  this.castess.push(desiredCasteMap[0]);
+                  this.castess.push(desiredCasteMap[1]);
+                  this.castess.push(desiredCasteMap[2]);
+                  this.castess.push(caste);
+                }
+              });
+  });
+}
       });
-  }
+    }
+
   changeCaste(e) {
     console.log(e);
     this.mapping_id = e;

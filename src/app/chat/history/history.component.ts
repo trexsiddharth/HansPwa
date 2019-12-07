@@ -42,13 +42,17 @@ export class HistoryComponent implements OnInit {
     return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
     }
     }
-    setName(value: String): String {
+    setName(value: string, type: any): String {
+      if (type === 1) {
       if (value != null) {
         if (value.split(' ')) {
           let name = value.split(' ');
           return name[0] ;
         } else {return value; }
       } else {return ''; }
+    } else {
+      return value;
+    }
      }
     yesProfiles() {
       if (localStorage.getItem('language') === 'English') {
