@@ -40,6 +40,7 @@ export class ChatComponent implements OnInit {
   walkthroughStatusTwo = false;
   walkthroughStatusThree = false;
   walkthroughNumber = 0;
+  clientWalkThroughStatus;
   response_arr: any = [];
   show_arr: any = [];
   type_arr: any = [];
@@ -327,7 +328,7 @@ export class ChatComponent implements OnInit {
                           '</table></div>'
                    }).then(() => {
                      this.openImageModal();
-                     if (values.bot_status === '0') {
+                     if (this.clientWalkThroughStatus === '0') {
                       this.setWalkThrough();
                      }
                      if (data.buttons.match('Yes' || 'No')) {
@@ -713,6 +714,7 @@ export class ChatComponent implements OnInit {
     this.currentContact = num;
     this.checkUrl(num).subscribe(
       (data: any) => {
+        this.clientWalkThroughStatus = data.status;
         const text: String = data.apiwha_autoreply;
         const registered: any = data.registered;
         const id = data.id;
@@ -1490,6 +1492,7 @@ setHouseType(value: string) {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
         if (element.innerText === 'No' || element.innerText === 'NO' || element.innerText === 'रिजेक्ट' ) {
             element.style.background = 'red';
+            element.style.textShadow =  '0px 0px 2px black';
         }
       });
     }
@@ -1498,6 +1501,7 @@ setHouseType(value: string) {
         // tslint:disable-next-line: max-line-length
         if (element.innerText === 'Yes' || element.innerText === 'YES' || element.innerText === 'कांटेक्ट नंबर देखें' || element.innerText === 'See Contact Number' ) {
             element.style.background = '#1ED761';
+            element.style.textShadow =  '0px 0px 2px black';
         }
       });
     }
