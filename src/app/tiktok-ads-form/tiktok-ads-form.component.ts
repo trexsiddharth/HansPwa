@@ -77,10 +77,12 @@ export class TiktokAdsFormComponent implements OnInit {
     const tiktokForm = new FormData();
     tiktokForm.append('mobile', this.PageOne.value.phone);
     tiktokForm.append('looking_for', this.PageOne.value.phone);
-    this.dialog.closeAll();
-    this.ngxNotificationService.success('आपके रिस्पांस के लिए धन्यवाद् हम आपको जल्द संपर्क करेंगे।');
     return this.http.post<any>('https://partner.hansmatrimony.com/api/tiktok' , tiktokForm ).subscribe(res => {
       console.log(res);
+      if (res.success === 1) {
+        this.dialog.closeAll();
+        this.ngxNotificationService.success('आपके रिस्पांस के लिए धन्यवाद् हम आपको जल्द संपर्क करेंगे।');
+      }
     });
   }
 

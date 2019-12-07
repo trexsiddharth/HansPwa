@@ -859,6 +859,14 @@ export class ChatComponent implements OnInit {
     return value;
   }
    }
+   setNameSelectedProfile(value: string): String {
+    if (value != null) {
+     if (value.split(' ')) {
+       let name = value.split(' ');
+       return name[0] ;
+     } else {return value; }
+   } else {return ''; }
+  }
 
    setHiddenPhoneValue( value: String): String {
     if (value != null) {
@@ -1056,8 +1064,9 @@ profileReAnswer(num: any, id: any, answer: any) {
      this.botui.message.add({
       type: 'html',
       // tslint:disable-next-line: max-line-length
-      content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setName(personal.name, family.mobile) + '"><br>' +
-      '<div style="text-align:center"><b>' + this.setName(personal.name, family.mobile)  + this.setCity(family.city) +  '</b></div><br>' +
+      content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setNameSelectedProfile(personal.name) + '"><br>' +
+      // tslint:disable-next-line: max-line-length
+      '<div style="text-align:center"><b>' + this.setNameSelectedProfile(personal.name)  + this.setCity(family.city) +  '</b></div><br>' +
                    '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
     });
      this.botui.message.add({
@@ -1469,6 +1478,7 @@ setHouseType(value: string) {
       changeNoButtonLanguage(type: string) {
         setTimeout(() => {
           this.changeNoButtonColor();
+          this.changeYesButtonColor();
         }, 300);
         if (type === 'English') {
           return 'Reject';
@@ -1480,6 +1490,14 @@ setHouseType(value: string) {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
         if (element.innerText === 'No' || element.innerText === 'NO' || element.innerText === 'रिजेक्ट' ) {
             element.style.background = 'red';
+        }
+      });
+    }
+    changeYesButtonColor() {
+      document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+        // tslint:disable-next-line: max-line-length
+        if (element.innerText === 'Yes' || element.innerText === 'YES' || element.innerText === 'कांटेक्ट नंबर देखें' || element.innerText === 'See Contact Number' ) {
+            element.style.background = '#1ED761';
         }
       });
     }
@@ -1609,6 +1627,10 @@ setHouseType(value: string) {
      const walkthroughStatusUpdate = new FormData();
      walkthroughStatusUpdate.append('id', localStorage.getItem('id'));
      walkthroughStatusUpdate.append('status', '1');
+
+     console.log('id', localStorage.getItem('id'));
+     console.log('status', '1');
+
      return this.http.post<any>('https://partner.hansmatrimony.com/api/updateStatus', walkthroughStatusUpdate).subscribe(
        (data: any) => {
          console.log(data);
