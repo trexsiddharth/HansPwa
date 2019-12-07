@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, HostListener, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { EditPersonalDialogComponent } from './edit-personal-dialog/edit-personal-dialog.component';
 import { EditFamilyDialogComponent } from './edit-family-dialog/edit-family-dialog.component';
@@ -12,10 +12,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./myprofile.component.css']
 })
 export class MyprofileComponent implements OnInit {
-
+  @Output() preferenceChanged = new EventEmitter();
   @Input() personalProfileData: any;
   @Input() familyProfileData: any;
   @Input() preferenceProfileData: any;
+
   innerWidth: any;
   public message: string;
   backimagePath;
@@ -143,6 +144,13 @@ onResize(event) {
           preferencesDetails: this.preferenceProfileData
         };
       let dialogRef = this.matDialog.open(EditPreferenceDialogComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(
+        res => {
+          if (res) {
+            this.preferenceChanged.emit(res);
+          }
+        }
+      );
     }
 
     previewBack(files, index) {

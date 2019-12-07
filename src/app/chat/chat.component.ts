@@ -496,7 +496,7 @@ export class ChatComponent implements OnInit {
                   return this.botui.action.button({
                     action: [
                       { text: this.changeBtnTextLanguage(this.currentLanguage, 'See Plans'), value: 'Buy'},
-                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Next Match'), value: 'SHOW'}
+                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Next Match'), value: 'No'}
                     ]
                   }).then(res => {
                     if (this.promptData != null) {
@@ -1031,6 +1031,11 @@ export class ChatComponent implements OnInit {
      );
      } else {
       this.ngxNotificationService.error('No user found');
+     }
+   }
+   preferencesChanged(data: any) {
+     if (data) {
+      this.changeToMyProfile();
      }
    }
 profileReAnswer(num: any, id: any, answer: any) {

@@ -67,12 +67,12 @@ export class EditPreferenceDialogComponent implements OnInit {
     this.http.post('https://partner.hansmatrimony.com/api/updatePreferencesDetails', preferenceFormData).subscribe(
       (data: any) => {
         console.log(data);
+        this.dialogRef.close({success: 'success'});
       },
       (error: any) => {
         console.log(error);
       }
     );
-    this.dialogRef.close();
   }
 
   getHeight(ht: string) {

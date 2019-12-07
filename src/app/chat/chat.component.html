@@ -65,7 +65,7 @@
   
   <div>
        <div class='mainBody  w-full bg-white ht-full'  [hidden]="history!='myprofile'">
-                <app-myprofile [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-myprofile>
+                <app-myprofile (preferenceChanged)="preferencesChanged($event)" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-myprofile>
       </div>
   </div>
 
