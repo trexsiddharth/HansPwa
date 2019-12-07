@@ -903,7 +903,7 @@ export class ChatComponent implements OnInit {
                                '</table>';
        } else {
          // tslint:disable-next-line: max-line-length
-        return '<table style="width:100%;border-radius:7px;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;color:white;font-weight:bolder;background:#1ED761;border-radius:10px">' +
+        return '<table style="width:100%;border-radius:7px;font-size:12px;margin-top: 10px;margin-bottom:10px;padding-left:5px;color:white;font-weight:bolder;background:green;border-radius:10px">' +
         '<tr>' +
           // tslint:disable-next-line: max-line-length
         this.setHiddenPhoneValue(mob) + '</th>' +
@@ -1497,7 +1497,6 @@ setHouseType(value: string) {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
         if (element.innerText === 'No' || element.innerText === 'NO' || element.innerText === 'रिजेक्ट' ) {
             element.style.background = 'red';
-            element.style.textShadow =  '0px 0px 2px black';
         }
       });
     }
@@ -1505,8 +1504,7 @@ setHouseType(value: string) {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
         // tslint:disable-next-line: max-line-length
         if (element.innerText === 'Yes' || element.innerText === 'YES' || element.innerText === 'कांटेक्ट नंबर देखें' || element.innerText === 'See Contact Number' ) {
-            element.style.background = '#1ED761';
-            element.style.textShadow =  '0px 0px 2px black';
+            element.style.background = 'green';
         }
       });
     }
