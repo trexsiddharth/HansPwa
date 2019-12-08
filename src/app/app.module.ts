@@ -46,6 +46,8 @@ import { AnalyticsButtonDirective } from './analytics-button.directive';
 
 import { WalkthroughModule } from 'ngx-walkthrough';
 import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.component';
+import { TemporaryRegisterationComponent } from './temporary-registeration/temporary-registeration.component';
+import { CreditAwardComponent } from './credit-award/credit-award.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.compon
     A2HSDialogComponent,
     AnalyticsButtonDirective,
     TiktokAdsFormComponent,
+    TemporaryRegisterationComponent,
+    CreditAwardComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,7 @@ import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.compon
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, A2HSDialogComponent,
-    EditFamilyDialogComponent, TiktokAdsFormComponent],
+    EditFamilyDialogComponent, TiktokAdsFormComponent, CreditAwardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

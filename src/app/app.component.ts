@@ -48,7 +48,7 @@ async ngAfterViewInit() {
 
   changeOfRoutes() {
      // tslint:disable-next-line: max-line-length
-     if (location.href.indexOf('chat') > - 1 || location.href.indexOf('tiktokAds') > - 1 || location.href.indexOf('subscription') > - 1 || location.href.indexOf('register') > - 1 || location.href.indexOf('history') > - 1 || location.href.indexOf('myprofile') > - 1 ) { this.footer = false;
+     if (location.href.indexOf('temporaryRegister') > - 1 || location.href.indexOf('chat') > - 1 || location.href.indexOf('tiktokAds') > - 1 || location.href.indexOf('subscription') > - 1 || location.href.indexOf('register') > - 1 || location.href.indexOf('history') > - 1 || location.href.indexOf('myprofile') > - 1 ) { this.footer = false;
                                                                                                                                                                                   if (location.href.indexOf('chat') > - 1 ) {
         this.header = false;
       }

@@ -92,11 +92,7 @@ onResize(event) {
         if (carousel[index]) {
           return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[index];
         } else {
-          if (gen === 'Male') {
-            return '../../assets/male_pic.png';
-          } else {
-            return '../../assets/female_pic.png';
-          }
+            return '../../assets/empty_profile.jpeg';
         }
       } else if (num2) {
         return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;

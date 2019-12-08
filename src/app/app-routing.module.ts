@@ -11,6 +11,7 @@ import { RegisterFiveComponent } from './register-five/register-five.component';
 import { RegisterSixComponent } from './register-six/register-six.component';
 import { ChatComponent } from './chat/chat.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
+import { TemporaryRegisterationComponent } from './temporary-registeration/temporary-registeration.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'register-six', component: RegisterSixComponent},
   { path: 'chat', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
+  { path: 'temporaryRegister', component: TemporaryRegisterationComponent}
 
 ];
 

@@ -12,6 +12,7 @@ import { A2HSDialogComponent } from '../chat/a2-hsdialog/a2-hsdialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import {  NotificationsService } from '../notifications.service';
+import { CreditAwardComponent } from '../credit-award/credit-award.component';
 
 declare let BotUI: Function;
 
@@ -52,6 +53,7 @@ export class ChatComponent implements OnInit {
   number: String;
   text: String;
   currentUrl: string;
+  awardUrl: string;
   botui: any;
   langChanged = false;
   currentLanguage: string;
@@ -108,10 +110,17 @@ export class ChatComponent implements OnInit {
       document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
       document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
     }
+
+    this.awardUrl = this.router.url;
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
+    
+    if (this.awardUrl.match('creditsAwarded')) {
+      this.openAwardDialog();
+    }
+
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
     localStorage.setItem('id', '');
@@ -729,6 +738,7 @@ export class ChatComponent implements OnInit {
     this.currentContact = num;
     this.checkUrl(num).subscribe(
       (data: any) => {
+        console.log(data);
         this.clientWalkThroughStatus = data.status;
         const text: String = data.apiwha_autoreply;
         const registered: any = data.registered;
@@ -1592,10 +1602,9 @@ setHouseType(value: string) {
     this.pName.push(name);
 
     document.querySelectorAll<HTMLElement>('#whatsappBtn').forEach((element, index) => {
-        console.log(index, 'Button Clicked');
         element.onclick = () => {
           this.spinner.show();
-          console.log(index, 'WhatsApp Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
+          // console.log(index, 'WhatsApp Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
           let pdfData = new FormData();
           pdfData.append('id', loggedId);
           pdfData.append('profile_to_send_id', this.pId[index]);
@@ -1620,7 +1629,7 @@ setHouseType(value: string) {
     document.querySelectorAll<HTMLElement>('#downloadBtn').forEach((element, index) => {
       element.onclick = () => {
         this.spinner.show();
-        console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
+        // console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
         let pdfData = new FormData();
         pdfData.append('id', loggedId);
         pdfData.append('profile_to_send_id', this.pId[index]);
@@ -1750,5 +1759,12 @@ setHouseType(value: string) {
       this.walkthroughStatusTwo = false;
       this.walkthroughStatusThree = false;
     }, 3000);
+   }
+   openAwardDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.hasBackdrop = true;
+    let dialogRef = this.dialog.open(CreditAwardComponent, dialogConfig);
+    document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
    }
 }
