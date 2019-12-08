@@ -236,6 +236,7 @@ onResize(event) {
         return this.carouselSize;
       }
     }
+
     changeProfileImage(index: string) {
      const i = Number(index) + 1;
      console.log('current index is ' + i);

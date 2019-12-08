@@ -253,9 +253,9 @@ private _onDestroy = new Subject<void>();
   }
 
   sixthStep() {
+    console.log('castes', this.casteMapped);
     if (this.PreferencesDetails.valid) {
-      
-   
+
     if (this.manglikValue === 'Non Manglik') {
       this.manglikValue = 'No';
     }
@@ -266,7 +266,7 @@ private _onDestroy = new Subject<void>();
     //   this.selectedItems1.push(items.itemName);
     // }
     this.casteString = this.casteMapped.toString();
-
+   
     sixthstepdata.append('age_min', this.PreferencesDetails.value.age_min);
     sixthstepdata.append('age_max', this.PreferencesDetails.value.age_max);
     sixthstepdata.append('height_min', this.Heights1[this.Heights.indexOf(this.minHeight)]);
@@ -440,8 +440,12 @@ private _onDestroy = new Subject<void>();
 
       // Add our fruit
       if ((value || '').trim()) {
-        this.casteMapped.push(value.trim());
-        this.castess.push(value.trim());
+        this.castePref.forEach((element: string) => {
+          if (element.toString().toLowerCase().match(value)) {
+            this.casteMapped.push(value.trim());
+            this.castess.push(value.trim());
+          }
+        });
       }
 
       // Reset the input value

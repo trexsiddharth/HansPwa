@@ -66,6 +66,7 @@ export class ChatComponent implements OnInit {
   icon2 = document.getElementById('hist');
   icon3 = document.getElementById('prof');
   promptData: any = null;
+  pId: string[] = [];
 
 
   constructor(
@@ -238,7 +239,7 @@ export class ChatComponent implements OnInit {
                     delay: 1000,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
-                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name, values.mobile)+ '"> <br>' +
+                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name, values.mobile) + '"> <br>' +
                    // tslint:disable-next-line: max-line-length
                    '<div style="text-align:center"><b>' + this.setName(values.name, values.mobile) + this.setCity(values.city) + '</b></div> ' +
                    // tslint:disable-next-line: max-line-length
@@ -325,8 +326,21 @@ export class ChatComponent implements OnInit {
                         '<table style="width:100%">' +
                         // tslint:disable-next-line: max-line-length
                         '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
-                          '</table></div>'
+                          '</table>' +
+
+                                // line -8
+                             '<table style="width:100%;height:40px">' +
+                             '<tr>' +
+                             // tslint:disable-next-line: max-line-length
+                             '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Whatsapp</button></div><a id="whtLink"></a></th>' +
+                             // tslint:disable-next-line: max-line-length
+                             '<th style="width:50%;text-align:center;background:#34b7f1;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#34b7f1;border: none;"><img src="../../assets/download.svg" style="width:20px"> Download</button></div></th>' +
+                               '</tr>' +
+                               '</table></div>'
                    }).then(() => {
+                     setTimeout(() => {
+                      this.whatsappShare(localStorage.getItem('id'), values.id);
+                     }, 1000);
                      this.openImageModal();
                      if (this.clientWalkThroughStatus === '0') {
                       this.setWalkThrough();
@@ -853,7 +867,7 @@ export class ChatComponent implements OnInit {
      if (mobile.startsWith('Visible')) {
      if (value != null) {
       if (value.split(' ')) {
-        let name = value.split(' ');
+        const name = value.split(' ');
         return name[0] ;
       } else {return value; }
     } else {return ''; }
@@ -864,7 +878,7 @@ export class ChatComponent implements OnInit {
    setNameSelectedProfile(value: string): String {
     if (value != null) {
      if (value.split(' ')) {
-       let name = value.split(' ');
+       const name = value.split(' ');
        return name[0] ;
      } else {return value; }
    } else {return ''; }
@@ -1495,7 +1509,7 @@ setHouseType(value: string) {
     }
     changeNoButtonColor() {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
-        if (element.innerText === 'No' || element.innerText === 'NO' || element.innerText === 'रिजेक्ट' ) {
+        if (element.innerText === 'No' || element.innerText === 'NO' || element.innerText === 'रिजेक्ट' || element.innerText === 'Reject') {
             element.style.background = 'red';
         }
       });
@@ -1559,6 +1573,45 @@ setHouseType(value: string) {
 
     });
   }
+  whatsappShare(loggedId: string, profileId: string) {
+    
+    document.querySelectorAll<HTMLElement>('#whatsappBtn').forEach((element, index) => {
+      element.onclick = () => {
+        console.log(index, 'Button Clicked');
+        // let headers = new HttpHeaders();
+        // headers = headers.set('Accept', 'application/pdf');
+        //   // tslint:disable-next-line: max-line-length
+        // return this.http.get('https://s3.ap-south-1.amazonaws.com/hansmatrimony/pdf/226008_184928.pdf', { headers, responseType: 'blob' }).subscribe(data => {
+        //   console.log(data);
+        // });
+
+        document.querySelectorAll<HTMLElement>('#whtLink').forEach((item, index) => {
+                // tslint:disable-next-line: max-line-length
+                item.setAttribute('href', 'https://s3.ap-south-1.amazonaws.com/hansmatrimony/pdf/226008_184928.pdf');
+                item.click();
+        });
+       };
+    });
+    // document.querySelectorAll<HTMLElement>('#downloadBtn').forEach((element, index) => {
+    //   const lId = loggedId;
+    //   this.pId.push(profileId);
+    //   element.onclick = () => {
+    //     console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
+    //     let pdfData = new FormData();
+    //     pdfData.append('id', loggedId);
+    //     pdfData.append('profile_to_send_id', this.pId[index]);
+    //     return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
+    //     console.log(data);
+    //     if (data.status === 1) {
+    //       this.spinner.show();
+    //       this.ngxNotificationService.info('Downloading your file');
+    //     }
+    //     }, err => {
+    //       console.log(err);
+    //     });
+    //    };
+    // });
+  }
 
   openImageModal() {
     document.querySelectorAll<HTMLElement>('.botui-message-content #selectedProfilePic').forEach((element) => {
@@ -1571,7 +1624,7 @@ setHouseType(value: string) {
         modalImg.setAttribute('src', htmlElement.getAttribute('src'));
         captionText.innerHTML = htmlElement.getAttribute('alt');
        };
-     
+
        // Get the <span> element that closes the modal
       const span = document.getElementById('closeModal');
 
@@ -1581,6 +1634,7 @@ setHouseType(value: string) {
 };
     });
   }
+
   setWalkThrough() {
     // tslint:disable-next-line: max-line-length
     if (document.querySelectorAll('.botui-actions-buttons.styleButton').length === 1 || document.querySelectorAll('#selectedProfilePic').length === 1 ) {
