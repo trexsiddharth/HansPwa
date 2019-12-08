@@ -67,6 +67,7 @@ export class ChatComponent implements OnInit {
   icon3 = document.getElementById('prof');
   promptData: any = null;
   pId: string[] = [];
+  pName: string[] = [];
 
 
   constructor(
@@ -1588,6 +1589,7 @@ setHouseType(value: string) {
 
     const lId = loggedId;
     this.pId.push(profileId);
+    this.pName.push(name);
 
     document.querySelectorAll<HTMLElement>('#whatsappBtn').forEach((element, index) => {
         console.log(index, 'Button Clicked');
@@ -1605,7 +1607,7 @@ setHouseType(value: string) {
           this.ngxNotificationService.info('Sharing on Whatsapp');
           if (whatLink) {
               // tslint:disable-next-line: max-line-length
-              whatLink[index].setAttribute('href', 'whatsapp://send?text=' + name + '%20के%20लिए%20हंस%20मॅट्रिमोनी%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url );
+              whatLink[index].setAttribute('href', 'whatsapp://send?text=' + this.pName[index] + '%20के%20लिए%20हंस%20मॅट्रिमोनी%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url );
               whatLink[index].click();
           }
         }
