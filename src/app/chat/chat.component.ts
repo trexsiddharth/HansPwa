@@ -334,12 +334,12 @@ export class ChatComponent implements OnInit {
                              // tslint:disable-next-line: max-line-length
                              '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Whatsapp</button></div><a id="whtLink"></a></th>' +
                              // tslint:disable-next-line: max-line-length
-                             '<th style="width:50%;text-align:center;background:#34b7f1;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#34b7f1;border: none;"><img src="../../assets/download.svg" style="width:20px"> Download</button></div></th>' +
+                             '<th style="width:50%;text-align:center;background:#34b7f1;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#34b7f1;border: none;"><img src="../../assets/download.svg" style="width:20px"> Download</button></div><a  target="_blank" id="downLink"></a></th>' +
                                '</tr>' +
                                '</table></div>'
                    }).then(() => {
                      setTimeout(() => {
-                      this.whatsappShare(localStorage.getItem('id'), values.id);
+                      this.whatsappShare(this.setName(values.name, values.mobile), localStorage.getItem('id'), values.id);
                      }, 1000);
                      this.openImageModal();
                      if (this.clientWalkThroughStatus === '0') {
@@ -863,7 +863,7 @@ export class ChatComponent implements OnInit {
    }
 
 
-   setName(value: string, mobile: string): String {
+   setName(value: string, mobile: string): string {
      if (mobile.startsWith('Visible')) {
      if (value != null) {
       if (value.split(' ')) {
@@ -1573,44 +1573,62 @@ setHouseType(value: string) {
 
     });
   }
-  whatsappShare(loggedId: string, profileId: string) {
-    
-    document.querySelectorAll<HTMLElement>('#whatsappBtn').forEach((element, index) => {
-      element.onclick = () => {
-        console.log(index, 'Button Clicked');
-        // let headers = new HttpHeaders();
-        // headers = headers.set('Accept', 'application/pdf');
-        //   // tslint:disable-next-line: max-line-length
-        // return this.http.get('https://s3.ap-south-1.amazonaws.com/hansmatrimony/pdf/226008_184928.pdf', { headers, responseType: 'blob' }).subscribe(data => {
-        //   console.log(data);
-        // });
+  whatsappShare(name: string, loggedId: string, profileId: string) {
 
-        document.querySelectorAll<HTMLElement>('#whtLink').forEach((item, index) => {
-                // tslint:disable-next-line: max-line-length
-                item.setAttribute('href', 'https://s3.ap-south-1.amazonaws.com/hansmatrimony/pdf/226008_184928.pdf');
-                item.click();
+    const lId = loggedId;
+    this.pId.push(profileId);
+
+    document.querySelectorAll<HTMLElement>('#whatsappBtn').forEach((element, index) => {
+        console.log(index, 'Button Clicked');
+        element.onclick = () => {
+          this.spinner.show();
+          console.log(index, 'WhatsApp Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
+          let pdfData = new FormData();
+          pdfData.append('id', loggedId);
+          pdfData.append('profile_to_send_id', this.pId[index]);
+          return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
+        console.log(data);
+        if (data.status === 1) {
+          const whatLink = document.querySelectorAll<HTMLElement>('#whtLink');
+          this.spinner.hide();
+          this.ngxNotificationService.info('Sharing on Whatsapp');
+          if (whatLink) {
+              // tslint:disable-next-line: max-line-length
+              whatLink[index].setAttribute('href', 'whatsapp://send?text=' + name + '%20के%20लिए%20हंस%20मॅट्रिमोनी%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url );
+              whatLink[index].click();
+          }
+        }
+        }, err => {
+          console.log(err);
+          this.ngxNotificationService.error('Error Occured');
+        });
+       };
+      });
+    document.querySelectorAll<HTMLElement>('#downloadBtn').forEach((element, index) => {
+      element.onclick = () => {
+        this.spinner.show();
+        console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
+        let pdfData = new FormData();
+        pdfData.append('id', loggedId);
+        pdfData.append('profile_to_send_id', this.pId[index]);
+        return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
+        console.log(data);
+        if (data.status === 1) {
+          const downloadLink = document.querySelectorAll<HTMLElement>('#downLink');
+          this.spinner.hide();
+          this.ngxNotificationService.info('Downloading your file');
+          if (downloadLink) {
+            // tslint:disable-next-line: max-line-length
+            downloadLink[index].setAttribute('href', data.url);
+            downloadLink[index].click();
+        }
+        }
+        }, err => {
+          console.log(err);
+          this.ngxNotificationService.error('Error Occured');
         });
        };
     });
-    // document.querySelectorAll<HTMLElement>('#downloadBtn').forEach((element, index) => {
-    //   const lId = loggedId;
-    //   this.pId.push(profileId);
-    //   element.onclick = () => {
-    //     console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
-    //     let pdfData = new FormData();
-    //     pdfData.append('id', loggedId);
-    //     pdfData.append('profile_to_send_id', this.pId[index]);
-    //     return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
-    //     console.log(data);
-    //     if (data.status === 1) {
-    //       this.spinner.show();
-    //       this.ngxNotificationService.info('Downloading your file');
-    //     }
-    //     }, err => {
-    //       console.log(err);
-    //     });
-    //    };
-    // });
   }
 
   openImageModal() {
