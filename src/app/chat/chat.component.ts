@@ -875,7 +875,7 @@ export class ChatComponent implements OnInit {
     return value;
   }
    }
-   setNameSelectedProfile(value: string): String {
+   setNameSelectedProfile(value: string): string {
     if (value != null) {
      if (value.split(' ')) {
        const name = value.split(' ');
@@ -1168,10 +1168,21 @@ profileReAnswer(num: any, id: any, answer: any) {
       '<table style="width:100%">' +
       // tslint:disable-next-line: max-line-length
       '<tr>' + this.LifeStatus(family.father_status, family.mother_status, family.occupation, family.occupation_mother) + '</tr>' +
-        '</table></div>'
+        '</table>'+
+
+        // line -8
+     '<table style="width:100%;height:40px">' +
+     '<tr>' +
+     // tslint:disable-next-line: max-line-length
+     '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Whatsapp</button></div><a id="whtLink"></a></th>' +
+     // tslint:disable-next-line: max-line-length
+     '<th style="width:50%;text-align:center;background:#34b7f1;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#34b7f1;border: none;"><img src="../../assets/download.svg" style="width:20px"> Download</button></div><a  target="_blank" id="downLink"></a></th>' +
+       '</tr>' +
+       '</table></div>'
 
     }).then(() => {
       this.openImageModal();
+      this.whatsappShare(this.setNameSelectedProfile(personal.name), localStorage.getItem('id'), personal.id);
       if (family.mobile) {
         return this.botui.action.button({
           action: [
