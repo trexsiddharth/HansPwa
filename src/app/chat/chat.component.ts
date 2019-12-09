@@ -111,15 +111,12 @@ export class ChatComponent implements OnInit {
       document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
     }
 
-    this.awardUrl = this.router.url;
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
     
-    if (this.awardUrl.match('creditsAwarded')) {
-      this.openAwardDialog();
-    }
+   
 
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
@@ -131,6 +128,10 @@ export class ChatComponent implements OnInit {
       this.currentContact = localStorage.getItem('mobile_number');
       this.checkUrl(this.currentContact).subscribe(
         (data: any) => {
+          console.log(data);
+          if (data.show_ad === 1) {
+            this.openAwardDialog();
+          }
           const text: String = data.apiwha_autoreply;
           const id = data.id;
           console.log(text);
