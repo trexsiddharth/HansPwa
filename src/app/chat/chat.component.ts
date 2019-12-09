@@ -349,7 +349,7 @@ export class ChatComponent implements OnInit {
                                '</table></div>'
                    }).then(() => {
                      setTimeout(() => {
-                      this.whatsappShare(this.setName(values.name, values.mobile), localStorage.getItem('id'), values.id);
+                      this.whatsappShare(this.setName(values.name, values.mobile), localStorage.getItem('id'), values.id, values.mobile);
                      }, 1000);
                      this.openImageModal();
                      if (this.clientWalkThroughStatus === '0') {
@@ -1193,7 +1193,7 @@ profileReAnswer(num: any, id: any, answer: any) {
 
     }).then(() => {
       this.openImageModal();
-      this.whatsappShare(this.setNameSelectedProfile(personal.name), localStorage.getItem('id'), personal.id);
+      this.whatsappShare(this.setNameSelectedProfile(personal.name), localStorage.getItem('id'), personal.id, family.mobile);
       if (family.mobile) {
         return this.botui.action.button({
           action: [
@@ -1595,7 +1595,7 @@ setHouseType(value: string) {
 
     });
   }
-  whatsappShare(name: string, loggedId: string, profileId: string) {
+  whatsappShare(name: string, loggedId: string, profileId: string, mobile: string) {
 
     const lId = loggedId;
     this.pId.push(profileId);
@@ -1605,53 +1605,79 @@ setHouseType(value: string) {
         element.onclick = () => {
           this.spinner.show();
           // console.log(index, 'WhatsApp Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
-          let pdfData = new FormData();
-          pdfData.append('id', loggedId);
-          pdfData.append('profile_to_send_id', this.pId[index]);
-          return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
-        console.log(data);
-        if (data.status === 1) {
-          const whatLink = document.querySelectorAll<HTMLElement>('#whtLink');
-          this.spinner.hide();
-          this.ngxNotificationService.info('Sharing on Whatsapp');
-          if (whatLink) {
-              // tslint:disable-next-line: max-line-length
-              whatLink[index].setAttribute('href', 'whatsapp://send?text=*' + this.pName[index] + '*%20के%20लिए%20*हंस%20मॅट्रिमोनी*%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url );
-              whatLink[index].click();
+          if (mobile) {
+            if (mobile.match('Visible')) {
+              this.setWhatsAppLink(loggedId, this.pId[index], '0', index);
+            } else {
+              this.setWhatsAppLink(loggedId, this.pId[index], '1', index);
+            }
+          } else {
+            this.setWhatsAppLink(loggedId, this.pId[index], '0', index);
           }
-        }
-        }, err => {
-          console.log(err);
-          this.ngxNotificationService.error('Error Occured');
-        });
-       };
-      });
+      };
+    });
+
     document.querySelectorAll<HTMLElement>('#downloadBtn').forEach((element, index) => {
       element.onclick = () => {
         this.spinner.show();
         // console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
-        let pdfData = new FormData();
-        pdfData.append('id', loggedId);
-        pdfData.append('profile_to_send_id', this.pId[index]);
-        return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
-        console.log(data);
-        if (data.status === 1) {
-          const downloadLink = document.querySelectorAll<HTMLElement>('#downLink');
-          this.spinner.hide();
-          this.ngxNotificationService.info('Downloading your file');
-          if (downloadLink) {
-            // tslint:disable-next-line: max-line-length
-            downloadLink[index].setAttribute('href', data.url);
-            downloadLink[index].click();
+        if (mobile) {
+          if (mobile.match('Visible')) {
+            this.setDownloadLink(loggedId, this.pId[index], '0', index);
+          } else {
+            this.setDownloadLink(loggedId, this.pId[index], '1', index);
+          }
+        } else {
+          this.setDownloadLink(loggedId, this.pId[index], '0', index);
         }
-        }
-        }, err => {
-          console.log(err);
-          this.ngxNotificationService.error('Error Occured');
-        });
        };
     });
   }
+
+  setWhatsAppLink(loggedId: string, profileId: string, full: string, index: number) {
+    let pdfData = new FormData();
+    pdfData.append('id', loggedId);
+    pdfData.append('profile_to_send_id', profileId);
+    pdfData.append('full', full);
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
+  console.log(data);
+  if (data.status === 1) {
+    const whatLink = document.querySelectorAll<HTMLElement>('#whtLink');
+    this.spinner.hide();
+    this.ngxNotificationService.info('Sharing on Whatsapp');
+    if (whatLink) {
+        // tslint:disable-next-line: max-line-length
+        whatLink[index].setAttribute('href', 'whatsapp://send?text=*' + this.pName[index] + '*%20के%20लिए%20*हंस%20मॅट्रिमोनी*%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url );
+        whatLink[index].click();
+    }
+  }
+  }, err => {
+    console.log(err);
+    this.ngxNotificationService.error('Error Occured');
+  });
+ }
+ setDownloadLink(loggedId: string, profileId: string, full: string, index: number){
+  let pdfData = new FormData();
+  pdfData.append('id', loggedId);
+  pdfData.append('profile_to_send_id', profileId);
+  pdfData.append('full', full);
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
+  console.log(data);
+  if (data.status === 1) {
+    const downloadLink = document.querySelectorAll<HTMLElement>('#downLink');
+    this.spinner.hide();
+    this.ngxNotificationService.info('Downloading your file');
+    if (downloadLink) {
+      // tslint:disable-next-line: max-line-length
+      downloadLink[index].setAttribute('href', data.url);
+      downloadLink[index].click();
+  }
+  }
+  }, err => {
+    console.log(err);
+    this.ngxNotificationService.error('Error Occured');
+  });
+ }
 
   openImageModal() {
     document.querySelectorAll<HTMLElement>('.botui-message-content #selectedProfilePic').forEach((element) => {
