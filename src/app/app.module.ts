@@ -46,8 +46,10 @@ import { AnalyticsButtonDirective } from './analytics-button.directive';
 
 import { WalkthroughModule } from 'ngx-walkthrough';
 import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.component';
-import { TemporaryRegisterationComponent } from './temporary-registeration/temporary-registeration.component';
 import { CreditAwardComponent } from './credit-award/credit-award.component';
+import { PreferenceWideningComponent } from './preference-widening/preference-widening.component';
+import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
+import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
 
 @NgModule({
   declarations: [
@@ -72,8 +74,10 @@ import { CreditAwardComponent } from './credit-award/credit-award.component';
     A2HSDialogComponent,
     AnalyticsButtonDirective,
     TiktokAdsFormComponent,
-    TemporaryRegisterationComponent,
     CreditAwardComponent,
+    PreferenceWideningComponent,
+    CompatibilityFormComponent,
+    PhoneNumberScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +98,7 @@ import { CreditAwardComponent } from './credit-award/credit-award.component';
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, A2HSDialogComponent,
-    EditFamilyDialogComponent, TiktokAdsFormComponent, CreditAwardComponent],
+    EditFamilyDialogComponent, TiktokAdsFormComponent, CreditAwardComponent, PreferenceWideningComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -1,0 +1,30 @@
+
+<div class="container-fluid" style="height: 50%;">
+    <div class="containerOne" style="text-align: center;">
+            <img src="../../assets/logo_144.png" alt="">
+            <h2 style="color: white;font-weight: bolder;margin-top: 10px;">Hans Matrimony</h2>
+    </div>
+
+</div>
+<div class="container-fluid " style="height: 50%;background: white;">
+        <form  [formGroup]="phoneNumber">
+            <div class="row containerTwo full-width">
+                <div class="col-12" style="padding: 0px;" >
+                        <mat-form-field class="short-width" appearance="standard" style="height:60px;margin-right: 10px;
+                        margin-left: 10px;">
+                            <mat-label style="color: black;">Enter Mobile Number</mat-label>
+                            <ngx-mat-intl-tel-input matInput
+                            [preferredCountries]="['in', 'us']"
+                            [enablePlaceholder]="true"
+                            [enableSearch]="true"
+                            name="phone"
+                            [(ngModel)]="numberCheck"
+                            type="tel"
+                            formControlName="phone"></ngx-mat-intl-tel-input>
+                        </mat-form-field>
+                        <img (click)="submitPhone()" src="../../assets/next.svg" style="width: 50px;margin-top: 30px;" alt="submit">
+                    </div>
+                </div>
+                    </form>
+
+    </div>

@@ -1,0 +1,34 @@
+
+.containerOne{
+    padding: 5% 0px;
+}
+.containerTwo{
+    padding: 5% 0px;
+    text-align: center;
+    font-size: 20px;
+}
+::ng-deep .mat-form-field-ripple {
+    background-color: black;
+}
+::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline{
+    background-color: black;
+}
+.short-width{
+    width: 25%;
+    margin: auto auto;
+}
+
+@media (max-width: 900px) {
+    .containerOne{
+        padding: 25% 0px;
+    }
+    .containerTwo{
+        padding: 25% 0px;
+        font-size: 24px;
+        margin: 0px;
+    }
+    .short-width{
+        width: 80%;
+    }
+    
+}

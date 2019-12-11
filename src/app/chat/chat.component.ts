@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import {  NotificationsService } from '../notifications.service';
 import { CreditAwardComponent } from '../credit-award/credit-award.component';
+import { PreferenceWideningComponent } from '../preference-widening/preference-widening.component';
 
 declare let BotUI: Function;
 
@@ -64,6 +65,8 @@ export class ChatComponent implements OnInit {
   preferenceData: any;
   history = 'chatbot';
   points: any;
+  casteMap;
+  selectedMapName;
   icon1 = document.getElementById('chat');
   icon2 = document.getElementById('hist');
   icon3 = document.getElementById('prof');
@@ -90,6 +93,12 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url.match('logout')) {
+      this.loginStatus = false;
+      localStorage.setItem('mobile_number', '');
+      localStorage.setItem('id', '');
+      localStorage.setItem('gender', '');
+    }
     if (localStorage.getItem('mobile_number')) {
       this.loginStatus = true;
     } else {
@@ -115,12 +124,9 @@ export class ChatComponent implements OnInit {
     this.promptData = this.promptService.getPrompt();
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
-    
-   
 
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
-    localStorage.setItem('id', '');
     this.currentUrl = this.router.url.substring(13);
     console.log(this.currentUrl);
     if (localStorage.getItem('mobile_number')) {
@@ -130,9 +136,11 @@ export class ChatComponent implements OnInit {
         (data: any) => {
           console.log(data);
           if (data.show_ad === 1) {
-            this.openAwardDialog();
+            setTimeout(() => {
+              this.openAwardDialog();
+            }, 10000);
           }
-          const text: String = data.apiwha_autoreply;
+          const text: string = data.apiwha_autoreply;
           const id = data.id;
           console.log(text);
           console.log(id);
@@ -415,130 +423,135 @@ export class ChatComponent implements OnInit {
                  });
                  localStorage.setItem('mobile_number', mob);
              } else {
-             this.botui.message.add({
-              loading: true,
-              delay: 500,
-                type: 'html',
-                 content: '<div><p style="font-size:18px">' + data.apiwha_autoreply + '</p></div>'
-             }).then(() => {
-                 if (data.buttons.match('Yes')) {
-                   return this.botui.action.button({
-                     action: [
-                       { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
-                       {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
-                     ]
-                 }).then(res => {
-                  (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
-                    hitCallback: () => {
-                      console.log('Tracking preference details entered successful');
-                    }});
-                  if (this.langChanged === true) {
-                    this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
-                      (data: any) => {
-                        console.log(data);
-                      },
-                      (error: any) => {
-                        console.log(error);
-                      }
-                      );
-                    this.langChanged = false;
-                  }
-                  if (this.promptData != null) {
-                    this.openPromptDialog();
-                  }
-                  console.log('chose' + res.value);
-                  this.answer = res.value;
-                  localStorage.setItem('mobile_number', mob);
-                  this.repeatMEssage(res.value, mob);
-                 });
-                 }  else if (data.buttons.match('Register')) {
-                   this.botui.action.button({
-                     action: [{
-                       text: this.changeRegisterButtonLanguage(this.currentLanguage),
-                       value: 'REGISTER'
-                     }]
-                   }).then(() => {
-                    if (this.promptData != null) {
-                      this.openPromptDialog();
-                    }
-                    (window as any).ga('send', 'event', 'Register', 'Register from chatbot', {
-                      hitCallback: () => {
-                        console.log('Tracking register from chatbot successful');
-                      }});
-                    this.router.navigateByUrl('register');
-                   });
-                 } else if (data.buttons.match('Show')) {
-                  return this.botui.action.button({
-                    action: [
-                      { text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'},
-                    ]
-                }).then(res => {
-                  if (this.langChanged === true) {
-                    this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
-                      (data: any) => {
-                        console.log(data);
-                      },
-                      (error: any) => {
-                        console.log(error);
-                      }
-                      );
-                    this.langChanged = false;
-                  }
-                  if (this.promptData != null) {
-                    this.openPromptDialog();
-                  }
-                  console.log('chose' + res.value);
-                  this.answer = res.value;
-                  localStorage.setItem('mobile_number', mob);
-                  this.repeatMEssage(res.value, mob);
-                });
-                } else if (data.buttons.match('History')) {
-                   return this.botui.action.button({
-                    action: [
-                      { text: this.changeHistoryButtonLanguage(this.currentLanguage), value: 'History'},
-                    ]
-                    }).then(() => {
-                      this.changeToHistory();
-                    });
-                } else if (data.buttons.match('Renew Plan')) {
-                  return this.botui.action.button({
-                    action: [
-                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Renew Plan'), value: 'Renew'},
-                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Call Hans Care'), value: 'Call'}
-                    ]
-                  }).then(res => {
-                      switch (res.value) {
-                        case 'Renew':
-                          this.router.navigateByUrl('subscription');
-                          break;
-                      case 'Call':
-                        window.open('tel:900300400');
-                        break;
-                      }
-                  });
-                } else {
-                  localStorage.setItem('mobile_number', mob);
-                  return this.botui.action.button({
-                    action: [
-                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'See Plans'), value: 'Buy'},
-                      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Next Match'), value: 'No'}
-                    ]
-                  }).then(res => {
-                    if (this.promptData != null) {
-                      this.openPromptDialog();
-                    }
-                    if (res.value === 'Buy') {
-                      (window as any).ga('send', 'event', 'Subscription', 'Subscription from chatbot', {
+               if (data.buttons.match('History') && data.buttons.length === 7) {
+                this.openPreferenceWideningDialog();
+               } else {
+                this.botui.message.add({
+                  loading: true,
+                  delay: 500,
+                    type: 'html',
+                     content: '<div><p style="font-size:18px">' + data.apiwha_autoreply + '</p></div>'
+                 }).then(() => {
+                     if (data.buttons.match('Yes')) {
+                       return this.botui.action.button({
+                         action: [
+                           { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
+                           {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
+                         ]
+                     }).then(res => {
+                      (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
                         hitCallback: () => {
                           console.log('Tracking preference details entered successful');
                         }});
-                      this.router.navigateByUrl('subscription');
-                    } else {
+                      if (this.langChanged === true) {
+                        this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
+                          (data: any) => {
+                            console.log(data);
+                          },
+                          (error: any) => {
+                            console.log(error);
+                          }
+                          );
+                        this.langChanged = false;
+                      }
+                      if (this.promptData != null) {
+                        this.openPromptDialog();
+                      }
+                      console.log('chose' + res.value);
+                      this.answer = res.value;
+                      localStorage.setItem('mobile_number', mob);
                       this.repeatMEssage(res.value, mob);
+                     });
+                     }  else if (data.buttons.match('Register')) {
+                       this.botui.action.button({
+                         action: [{
+                           text: this.changeRegisterButtonLanguage(this.currentLanguage),
+                           value: 'REGISTER'
+                         }]
+                       }).then(() => {
+                        if (this.promptData != null) {
+                          this.openPromptDialog();
+                        }
+                        (window as any).ga('send', 'event', 'Register', 'Register from chatbot', {
+                          hitCallback: () => {
+                            console.log('Tracking register from chatbot successful');
+                          }});
+                        this.router.navigateByUrl('register');
+                       });
+                     } else if (data.buttons.match('Show')) {
+                      return this.botui.action.button({
+                        action: [
+                          { text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'},
+                        ]
+                    }).then(res => {
+                      if (this.langChanged === true) {
+                        this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
+                          (data: any) => {
+                            console.log(data);
+                          },
+                          (error: any) => {
+                            console.log(error);
+                          }
+                          );
+                        this.langChanged = false;
+                      }
+                      if (this.promptData != null) {
+                        this.openPromptDialog();
+                      }
+                      console.log('chose' + res.value);
+                      this.answer = res.value;
+                      localStorage.setItem('mobile_number', mob);
+                      this.repeatMEssage(res.value, mob);
+                    });
+                    } else if (data.buttons.match('History')) {
+                       return this.botui.action.button({
+                        action: [
+                          { text: this.changeHistoryButtonLanguage(this.currentLanguage), value: 'History'},
+                        ]
+                        }).then(() => {
+                          this.changeToHistory();
+                        });
+                    } else if (data.buttons.match('Renew Plan')) {
+                      return this.botui.action.button({
+                        action: [
+                          { text: this.changeBtnTextLanguage(this.currentLanguage, 'Renew Plan'), value: 'Renew'},
+                          { text: this.changeBtnTextLanguage(this.currentLanguage, 'Call Hans Care'), value: 'Call'}
+                        ]
+                      }).then(res => {
+                          switch (res.value) {
+                            case 'Renew':
+                              this.router.navigateByUrl('subscription');
+                              break;
+                          case 'Call':
+                            window.open('tel:9697989697');
+                            break;
+                          }
+                      });
+                    } else {
+                      localStorage.setItem('mobile_number', mob);
+                      return this.botui.action.button({
+                        action: [
+                          { text: this.changeBtnTextLanguage(this.currentLanguage, 'See Plans'), value: 'Buy'},
+                          { text: this.changeBtnTextLanguage(this.currentLanguage, 'Next Match'), value: 'No'}
+                        ]
+                      }).then(res => {
+                        if (this.promptData != null) {
+                          this.openPromptDialog();
+                        }
+                        if (res.value === 'Buy') {
+                          (window as any).ga('send', 'event', 'Subscription', 'Subscription from chatbot', {
+                            hitCallback: () => {
+                              console.log('Tracking preference details entered successful');
+                            }});
+                          this.router.navigateByUrl('subscription');
+                        } else {
+                          this.repeatMEssage(res.value, mob);
+                        }
+                      });
                     }
-                  });
-                }
-             });
+                 });
+               }
+             
            }
              this.spinner.hide();
            },
@@ -1180,7 +1193,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       '<table style="width:100%">' +
       // tslint:disable-next-line: max-line-length
       '<tr>' + this.LifeStatus(family.father_status, family.mother_status, family.occupation, family.occupation_mother) + '</tr>' +
-        '</table>'+
+        '</table>' +
 
         // line -8
      '<table style="width:100%;height:40px">' +
@@ -1372,7 +1385,7 @@ getCredits() {
   return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint?id=' + localStorage.getItem('id'), {}).subscribe(
    (data: any) => {
       this.points = data.whatsapp_points;
-      console.log(this.points);
+      console.log('credits', this.points);
    },
   (error: any) => {
     this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
@@ -1605,6 +1618,7 @@ setHouseType(value: string) {
     document.querySelectorAll<HTMLElement>('#whatsappBtn').forEach((element, index) => {
         element.onclick = () => {
           this.spinner.show();
+          this.Analytics('Whatsapp Share', 'Whatsapp Share', 'profile shared through whatsapp');
           // console.log(index, 'WhatsApp Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
           if (mobile) {
             if (mobile.match('Visible')) {
@@ -1621,6 +1635,7 @@ setHouseType(value: string) {
     document.querySelectorAll<HTMLElement>('#downloadBtn').forEach((element, index) => {
       element.onclick = () => {
         this.spinner.show();
+        this.Analytics('Profile Download', 'Profile Download', 'profile downloaded');
         // console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
         if (mobile) {
           if (mobile.match('Visible')) {
@@ -1636,7 +1651,7 @@ setHouseType(value: string) {
   }
 
   setWhatsAppLink(loggedId: string, profileId: string, full: string, index: number) {
-    let pdfData = new FormData();
+    const pdfData = new FormData();
     pdfData.append('id', loggedId);
     pdfData.append('profile_to_send_id', profileId);
     pdfData.append('full', full);
@@ -1657,8 +1672,8 @@ setHouseType(value: string) {
     this.ngxNotificationService.error('Error Occured');
   });
  }
- setDownloadLink(loggedId: string, profileId: string, full: string, index: number){
-  let pdfData = new FormData();
+ setDownloadLink(loggedId: string, profileId: string, full: string, index: number) {
+  const pdfData = new FormData();
   pdfData.append('id', loggedId);
   pdfData.append('profile_to_send_id', profileId);
   pdfData.append('full', full);
@@ -1791,7 +1806,73 @@ setHouseType(value: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
-    let dialogRef = this.dialog.open(CreditAwardComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CreditAwardComponent, dialogConfig);
     document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+   }
+
+   openPreferenceWideningDialog() {
+    this.spinner.show();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.hasBackdrop = true;
+     // tslint:disable-next-line: max-line-length
+    const getProfileData = new FormData();
+    getProfileData.append('id', localStorage.getItem('id'));
+    getProfileData.append('contacted', '1');
+
+    console.log('id', localStorage.getItem('id'));
+    console.log('contacted', '1');
+
+    this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', getProfileData).subscribe(
+       (data: any) => {
+        console.log(data);
+
+        this.http.get<{ mapping_id: number, castes: any }>('https://partner.hansmatrimony.com/api/caste_mapping').subscribe(
+          res => {
+            this.casteMap = res;
+            console.log(this.casteMap);
+            this.casteMap.forEach(element => {
+                element.castes.split(',').forEach(caste => {
+                    if (caste.toLowerCase().match(data.family.caste) && caste.length === data.family.caste.length) {
+                      const mapId = element.mapping_id;
+                      if (mapId === 1) {
+                         return this.selectedMapName = 'Punjabi';
+                      } else if (mapId === 2) {
+                        return this.selectedMapName = 'Brahmin';
+                      } else {
+                        console.log(this.selectedMapName, mapId);
+                        return this.selectedMapName = 'Agarwal';
+                      }
+                    }
+                  });
+      });
+          });
+
+        if (data) {
+          if (this.selectedMapName && this.selectedMapName !== '') {
+            dialogConfig.data = {
+              Caste: this.selectedMapName,
+              PreferenceTable: data.preferences,
+              ProfileTable: data.profile,
+              Gender: data.profile.gender
+            };
+           } else {
+            dialogConfig.data = {
+              Caste: 'All',
+              PreferenceTable: data.preferences,
+              ProfileTable: data.profile,
+              Gender: data.profile.gender
+           };
+          }
+          this.spinner.hide();
+          const dialogRef = this.dialog.open(PreferenceWideningComponent, dialogConfig);
+          document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+        }
+       },
+       (error: any) => {
+        this.spinner.hide();
+        console.log(error);
+       }
+     );
    }
 }

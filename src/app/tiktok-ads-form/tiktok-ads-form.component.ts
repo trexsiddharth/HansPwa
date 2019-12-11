@@ -70,22 +70,29 @@ export class TiktokAdsFormComponent implements OnInit {
   }
 
   submitForm() {
-
-    console.log('mobile', this.PageOne.value.phone);
-    console.log('looking_for', this.PageOne.value.create);
-
     const tiktokForm = new FormData();
     tiktokForm.append('mobile', this.PageOne.value.phone);
-    tiktokForm.append('looking_for', this.PageOne.value.phone);
+    tiktokForm.append('looking_for', '');
     return this.http.post<any>('https://partner.hansmatrimony.com/api/tiktok' , tiktokForm ).subscribe(res => {
       console.log(res);
       if (res.success === 1) {
+        this.Analytics('TikTok Submit', 'TikTok FormSubmit', 'TikTok Form Submitted');
         this.dialog.closeAll();
         this.ngxNotificationService.success('आपके रिस्पांस के लिए धन्यवाद् हम आपको जल्द संपर्क करेंगे।');
       }
     });
   }
 
+  Analytics(type: string, category: string, action: string) {
+    (window as any).ga('send', 'event', category, action, {
+      hitCallback: () => {
+
+        console.log('Tracking ' + type + ' successful');
+
+      }
+
+    });
+  }
 
   ngOnInit() {
   }

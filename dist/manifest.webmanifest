@@ -5,7 +5,7 @@
     "theme_color": "#34b7f1",
   "display": "standalone",
   "scope": "/",
-  "start_url": "https://hansmatrimony.com",
+  "start_url": "https://hansmatrimony.com/?isPWA",
   "gcm_sender_id": "103953800507",
   "icons": [
     {

@@ -48,6 +48,9 @@ export class HomeComponent implements OnInit {
     }
       }
   ngOnInit() {
+    if (this.router.url.match('isPWA')) {
+      this.Analytics('PWA', 'PWA', 'PWA User');
+    }
     this.contactNumber = localStorage.getItem('mobile_number');
     if (this.contactNumber) {
       this.loginStatus = true;
@@ -94,5 +97,15 @@ export class HomeComponent implements OnInit {
     let dialogRef = this.dialog.open(TiktokAdsFormComponent, dialogConfig);
     document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
    }
+   Analytics(type: string, category: string, action: string) {
+    (window as any).ga('send', 'event', category, action, {
+      hitCallback: () => {
+
+        console.log('Tracking ' + type + ' successful');
+
+      }
+
+    });
+  }
 
 }
