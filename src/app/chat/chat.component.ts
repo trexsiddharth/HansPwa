@@ -251,7 +251,6 @@ export class ChatComponent implements OnInit {
              this.getCredits();
              console.log(data);
              if (data.type === 'profile') {
-              this.openPreferenceWideningDialog();
               const values = data.apiwha_autoreply;
               console.log(values.photo);
               this.botui.message.add({
