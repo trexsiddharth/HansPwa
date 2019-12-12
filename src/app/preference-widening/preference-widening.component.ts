@@ -44,7 +44,7 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
     switch (this.selectedCaste) {
           case 'All':
             document.getElementById('inlineCheckbox1').setAttribute('checked', 'true');
-            this.wideningCaste.push('Caste No-Bar');
+            this.wideningCaste.push('All');
             break;
             case 'Punjabi':
             document.getElementById('inlineCheckbox2').setAttribute('checked', 'true');
@@ -106,9 +106,18 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
     countData.append('age_max', this.preferenceWideningData.age_max);
     countData.append('min_height', this.preferenceWideningData.height_min);
     countData.append('max_height', this.preferenceWideningData.height_max);
-    countData.append('caste', this.wideningCaste.join(','));
     countData.append('min_income', this.preferenceWideningData.income_min );
     countData.append('max_income', this.preferenceWideningData.income_max);
+    countData.append('caste', this.wideningCaste.join(','));
+
+    console.log('id', localStorage.getItem('id'));
+    console.log('age_min', this.preferenceWideningData.age_min);
+    console.log('age_max', this.preferenceWideningData.age_max);
+    console.log('min_height', this.preferenceWideningData.height_min);
+    console.log('max_height', this.preferenceWideningData.height_max);
+    console.log('min_income', this.preferenceWideningData.income_min );
+    console.log('max_income', this.preferenceWideningData.income_max);
+    console.log('caste', this.wideningCaste.join(','));
 
     return this.http.post<any>('https://partner.hansmatrimony.com/api/checkCount', countData).subscribe(data => {
         console.log(data);
@@ -147,10 +156,12 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
   }
   setPreferenceWidening() {
     const preferenceWideningFormData = new FormData();
+    preferenceWideningFormData.append('identity_number', this.preferenceWideningData.identity_number);
+    preferenceWideningFormData.append('temple_id', this.preferenceWideningData.temple_id);
     preferenceWideningFormData.append('age_min', this.preferenceWideningData.age_min);
     preferenceWideningFormData.append('age_max', this.preferenceWideningData.age_max);
-    preferenceWideningFormData.append('min_height', this.minHeight);
-    preferenceWideningFormData.append('max_height', this.maxHeight);
+    preferenceWideningFormData.append('min_height', this.Heights1[this.Heights.indexOf(this.minHeight)]);
+    preferenceWideningFormData.append('max_height', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
     preferenceWideningFormData.append('income_min', this.preferenceWideningData.income_min);
     preferenceWideningFormData.append('income_max', this.preferenceWideningData.income_max);
     preferenceWideningFormData.append('caste', this.wideningCaste.join(','));

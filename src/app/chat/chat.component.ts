@@ -251,9 +251,10 @@ export class ChatComponent implements OnInit {
              this.getCredits();
              console.log(data);
              if (data.type === 'profile') {
-                 const values = data.apiwha_autoreply;
-                 console.log(values.photo);
-                 this.botui.message.add({
+              this.openPreferenceWideningDialog();
+              const values = data.apiwha_autoreply;
+              console.log(values.photo);
+              this.botui.message.add({
                   loading: true,
                     delay: 1000,
                    type: 'html',
@@ -421,7 +422,7 @@ export class ChatComponent implements OnInit {
                        }
                    });
                  });
-                 localStorage.setItem('mobile_number', mob);
+              localStorage.setItem('mobile_number', mob);
              } else {
                if (data.buttons.match('History') && data.buttons.length === 7) {
                 this.openPreferenceWideningDialog();
@@ -1846,28 +1847,34 @@ setHouseType(value: string) {
                     }
                   });
       });
-          });
-
-        if (data) {
-          if (this.selectedMapName && this.selectedMapName !== '') {
-            dialogConfig.data = {
-              Caste: this.selectedMapName,
-              PreferenceTable: data.preferences,
-              ProfileTable: data.profile,
-              Gender: data.profile.gender
-            };
-           } else {
-            dialogConfig.data = {
-              Caste: 'All',
-              PreferenceTable: data.preferences,
-              ProfileTable: data.profile,
-              Gender: data.profile.gender
-           };
-          }
-          this.spinner.hide();
-          const dialogRef = this.dialog.open(PreferenceWideningComponent, dialogConfig);
-          document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+            if (data) {
+        if (this.selectedMapName && this.selectedMapName !== '') {
+          dialogConfig.data = {
+            Caste: this.selectedMapName,
+            PreferenceTable: data.preferences,
+            ProfileTable: data.profile,
+            Gender: data.profile.gender
+          };
+         } else {
+          dialogConfig.data = {
+            Caste: 'All',
+            PreferenceTable: data.preferences,
+            ProfileTable: data.profile,
+            Gender: data.profile.gender
+         };
         }
+        this.spinner.hide();
+        const dialogRef = this.dialog.open(PreferenceWideningComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe( data => {
+          if (data) {
+            if (data.success === 'success') {
+              this.repeatMEssage('SHOW', this.currentContact);
+              }
+          }
+        });
+        document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+      }
+          });
        },
        (error: any) => {
         this.spinner.hide();
