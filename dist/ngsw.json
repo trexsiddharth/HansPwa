@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1576243391347,
+  "timestamp": 1576245873811,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,8 +11,8 @@
         "/favicon.ico",
         "/firebase-messaging-sw.js",
         "/index.html",
-        "/main-es2015.f825e83411c75e95589f.js",
-        "/main-es5.e4b5e751d6ad501f3f9b.js",
+        "/main-es2015.e6430b2eb946a6b7c2bc.js",
+        "/main-es5.e74a181d72d27602d372.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.00d63f1353d1c363651c.js",
         "/polyfills-es5.cecc31fb46099274e7eb.js",
@@ -207,7 +207,18 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "blog",
+      "patterns": [
+        "\\/blog"
+      ],
+      "strategy": "freshness",
+      "maxSize": 0,
+      "maxAge": 0,
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/SemplicitaPro.96554f62871e20bd3d80.otf": "18e2fd90bcfce6db53d3a17b22a7836d4e5f50d8",
     "/address.57026215113752dcecff.webp": "0b15e56c18817b8265e5ea96a073cc3ea2acc480",
@@ -385,9 +396,9 @@
     "/bgicon.dedf2620d82776ed85a1.png": "0ca8aa153feb31362f3ea5ca8f32cb3f4300485b",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "2216b6039025f26aed092ec057b97cf38322ac7c",
-    "/main-es2015.f825e83411c75e95589f.js": "85877edd867f769ed6d6e8d026ed9c8b9370177d",
-    "/main-es5.e4b5e751d6ad501f3f9b.js": "ce11b0c9f4b50d7474ac326ce2c18a87b3f05e85",
+    "/index.html": "a0a07de05a72047b41a7b878e122d55d21b5c788",
+    "/main-es2015.e6430b2eb946a6b7c2bc.js": "b17ad388b20ed35335a1934f5d75993413bdfd38",
+    "/main-es5.e74a181d72d27602d372.js": "b75563bad6b85790cf463bb09e9a2c2aa8f75f56",
     "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
     "/polyfills-es2015.00d63f1353d1c363651c.js": "08c97940ba93ccc4121b85df6911d86011ef3fb8",
     "/polyfills-es5.cecc31fb46099274e7eb.js": "9d9b583788005b7e2dc51d2b965f7c09b9180c60",

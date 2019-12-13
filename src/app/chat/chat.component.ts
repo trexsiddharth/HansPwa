@@ -1541,6 +1541,13 @@ setHouseType(value: string) {
             return 'कांटेक्ट नंबर देखें';
           }
       }
+      tutorialText() {
+        if (localStorage.getItem('language') === 'English') {
+          return '#Click on HOW TO USE option above to play the tutorial again ';
+        } else {
+          return '#App चलाना सीखने के लिए ऊपर HOW TO USE पर क्लिक करें ';
+        }
+      }
       changeNoButtonLanguage(type: string) {
         setTimeout(() => {
           this.changeNoButtonColor();
@@ -1732,7 +1739,7 @@ setHouseType(value: string) {
       this.botui.message.add({
         type: 'html',
         human: true,
-        content: '<p>&#127916 #</p>'
+        content: '<p>&#127916 ' + this.tutorialText() + '</p>'
       }).then(() => {
         this.walkthroughStatus = true;
       });
