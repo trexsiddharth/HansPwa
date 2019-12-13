@@ -155,13 +155,17 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
     this.getCount();
   }
   setPreferenceWidening() {
+
+    console.log('height_min', this.Heights1[this.Heights.indexOf(this.minHeight)]);
+    console.log('height_max', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
+
     const preferenceWideningFormData = new FormData();
     preferenceWideningFormData.append('identity_number', this.preferenceWideningData.identity_number);
     preferenceWideningFormData.append('temple_id', this.preferenceWideningData.temple_id);
     preferenceWideningFormData.append('age_min', this.preferenceWideningData.age_min);
     preferenceWideningFormData.append('age_max', this.preferenceWideningData.age_max);
-    preferenceWideningFormData.append('min_height', this.Heights1[this.Heights.indexOf(this.minHeight)]);
-    preferenceWideningFormData.append('max_height', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
+    preferenceWideningFormData.append('height_min', this.Heights1[this.Heights.indexOf(this.minHeight)]);
+    preferenceWideningFormData.append('height_max', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
     preferenceWideningFormData.append('income_min', this.preferenceWideningData.income_min);
     preferenceWideningFormData.append('income_max', this.preferenceWideningData.income_max);
     preferenceWideningFormData.append('caste', this.wideningCaste.join(','));
