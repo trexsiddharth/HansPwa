@@ -58,7 +58,6 @@ export class TiktokAdsFormComponent implements OnInit {
               public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
-      create: ['', Validators.compose([Validators.required])],
       phone: ['', Validators.compose([Validators.required])]
     });
   }
@@ -70,10 +69,11 @@ export class TiktokAdsFormComponent implements OnInit {
   }
 
   submitForm() {
-    const tiktokForm = new FormData();
-    tiktokForm.append('mobile', this.PageOne.value.phone);
-    tiktokForm.append('looking_for', '');
-    return this.http.post<any>('https://partner.hansmatrimony.com/api/tiktok' , tiktokForm ).subscribe(res => {
+    if (this.PageOne.valid) {
+      const tiktokForm = new FormData();
+      tiktokForm.append('mobile', this.PageOne.value.phone);
+      tiktokForm.append('looking_for', '');
+      return this.http.post<any>('https://partner.hansmatrimony.com/api/tiktok' , tiktokForm ).subscribe(res => {
       console.log(res);
       if (res.success === 1) {
         this.Analytics('TikTok Submit', 'TikTok FormSubmit', 'TikTok Form Submitted');
@@ -81,6 +81,9 @@ export class TiktokAdsFormComponent implements OnInit {
         this.ngxNotificationService.success('आपके रिस्पांस के लिए धन्यवाद् हम आपको जल्द संपर्क करेंगे।');
       }
     });
+    } else {
+      this.ngxNotificationService.warning('Please Enter mobile number');
+    }
   }
 
   Analytics(type: string, category: string, action: string) {

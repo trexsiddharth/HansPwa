@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
-  { path: 'compatibility-form', component: CompatibilityFormComponent}
+  { path: 'reg', component: CompatibilityFormComponent}
 
 ];
 

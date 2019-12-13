@@ -1817,6 +1817,9 @@ setHouseType(value: string) {
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     const dialogRef = this.dialog.open(CreditAwardComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data => {
+          this.getCredits();
+    });
     document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
    }
 
