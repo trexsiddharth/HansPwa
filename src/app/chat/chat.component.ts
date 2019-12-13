@@ -256,7 +256,7 @@ export class ChatComponent implements OnInit {
               console.log(values.photo);
               this.botui.message.add({
                   loading: true,
-                    delay: 1000,
+                    delay: 500,
                    type: 'html',
                    // tslint:disable-next-line: max-line-length
                    content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name, values.mobile) + '"> <br>' +

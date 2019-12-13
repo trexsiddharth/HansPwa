@@ -27,8 +27,16 @@ export class PhoneNumberScreenComponent implements OnInit {
    }
 
   ngOnInit() {
-    document.querySelector('body').style.backgroundImage = 'none';
-    document.querySelector('body').style.background = '#34b7f1';
+    if (localStorage.getItem('mobile_number')) {
+      this.router.navigateByUrl('home');
+    } else {
+      document.querySelector('body').style.backgroundImage = 'none';
+      document.querySelector('body').style.background = '#34b7f1';
+      localStorage.setItem('id', '');
+      localStorage.setItem('gender', '');
+      localStorage.setItem('mobile_number', '');
+    }
+    this.spinner.hide();
   }
   submitPhone() {
     this.spinner.show();
@@ -53,7 +61,7 @@ export class PhoneNumberScreenComponent implements OnInit {
   });
   }
   registerClicked() {
-    this.router.navigateByUrl('compatibility-form');
+    this.router.navigateByUrl('reg');
   }
 
 }

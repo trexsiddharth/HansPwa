@@ -9,7 +9,14 @@
 }
 .fieldFit{
     height:60px;
-    border-bottom: 1px solid black;
+}
+::ng-deep .mat-form-field-ripple {
+    background-color:#34b7f1;
+    height: 1px;
+}
+::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline{
+    background-color: #34b7f1;
+    height: 1px;
 }
 mat-label {
     color: black;

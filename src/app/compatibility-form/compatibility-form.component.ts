@@ -56,7 +56,7 @@ export class CompatibilityFormComponent implements OnInit {
     minute: 30
   };
   gender;
-  MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorced', 'Widowed', 'Anulled', 'Doesn\'t Matter'];
+  MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorced', 'Widowed', 'Anulled'];
   PageOne: FormGroup;
 
   // birth date
@@ -94,9 +94,8 @@ export class CompatibilityFormComponent implements OnInit {
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
-      gender: ['', Validators.compose([Validators.required])],
       phone: ['', Validators.compose([Validators.required])],
-      whatsapp: ['', Validators.compose([Validators.required])],
+      gender: ['', Validators.compose([Validators.required])],
       birth_date: ['', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
@@ -252,38 +251,56 @@ export class CompatibilityFormComponent implements OnInit {
 
   firstStep() {
     if (this.PageOne.valid) {
+      this.spinner.show();
+      const firststepdata = new FormData();
+      firststepdata.append('mobile', this.PageOne.value.phone);
+      firststepdata.append('birth_date', this.birthDate);
+      firststepdata.append('gender', this.PageOne.value.gender);
+      firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
+      firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
+      if (this.PageOne.value.Mangalik === 'Non-manglik') {
+      firststepdata.append('manglik', 'No');
+    } else {
+      firststepdata.append('manglik', this.PageOne.value.Mangalik);
+    }
+      firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
+      firststepdata.append('religion', this.PageOne.value.Religion);
+      firststepdata.append('caste', this.PageOne.value.Castes);
 
-    const firststepdata = new URLSearchParams();
-    firststepdata.set('email', this.PageOne.value.email);
-    firststepdata.set('password', this.PageOne.value.password);
-    firststepdata.set('relation', this.PageOne.value.create);
-    firststepdata.set('gender', this.PageOne.value.gender);
-    firststepdata.set('name', this.PageOne.value.fullname);
-    localStorage.setItem('gender', this.PageOne.value.gender);
+      console.log('mobile', this.PageOne.value.phone);
+      console.log('birth_date', this.birthDate);
+      console.log('gender', this.PageOne.value.gender);
+      console.log('height', this.Heights1[this.PageOne.value.Height]);
+      console.log('marital_status', this.PageOne.value.MaritalStatus);
+      if (this.PageOne.value.Mangalik === 'Non-manglik') {
+      console.log('manglik', 'No');
+    } else {
+      console.log('manglik', this.PageOne.value.Mangalik);
+    }
+      console.log('annual_income', this.PageOne.value.AnnualIncome);
+      console.log('religion', this.PageOne.value.Religion);
+      console.log('caste', this.PageOne.value.Castes);
 
-    firststepdata.set('whatsapp', this.PageOne.value.whatsapp);
-    firststepdata.set('mobile', this.PageOne.value.phone);
-    this.gender = this.PageOne.value.gender;
-    console.log(this.gender);
 
     // tslint:disable-next-line: max-line-length
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'createZeroPageProfilePWA?' + firststepdata , null).subscribe((res: any) => {
+      return this.http.post('https://partner.hansmatrimony.com/api/createBasic', firststepdata ).subscribe((res: any) => {
       console.log('first', res);
 
-      if (res.zeroth_page_status === 'Y') {
+      if (res.status === 1) {
         this.spinner.hide();
-        localStorage.setItem('identity_number', res.identity_number);
+        localStorage.setItem('id', res.id);
         localStorage.setItem('gender', this.PageOne.value.gender);
-        this.router.navigate(['/register-one']);
-        this.ngxNotificationService.success(res.error_message, 'success');
+        localStorage.setItem('mobile_number', this.PageOne.value.phone);
+        this.router.navigate(['/chat']);
+        this.ngxNotificationService.success('Registered Successfully');
       } else {
         this.spinner.hide();
-        this.ngxNotificationService.error(res.error_message, 'danger');
+        this.ngxNotificationService.error(res.message);
       }
 
     }, err => {
       this.spinner.hide();
-      this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!', 'danger');
+      this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
       console.log(err);
     });
   } else {

@@ -127,6 +127,7 @@ margin-top: 2em
 }
 .rowButton {
     width: 100%;margin: 0px 27%;
+    text-align: center;
 }
 .team {
     background-color: rgb(236, 213, 186);
@@ -384,6 +385,7 @@ margin-top: 0px;
     }
     .rowButton {
         width: 100%;margin: 0px 5%;
+        text-align: center;
     }
 
     .map-banner {

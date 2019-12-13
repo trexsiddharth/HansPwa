@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
  events: string[] = [];
   opened: boolean;
   socialInfo: string;
-  eventA2HS;
   innerWidth;
   loginStatus = true;
   contactNumber;
@@ -36,15 +35,15 @@ export class HomeComponent implements OnInit {
   }
   register() {
     this.spinner.show();
-    this.router.navigateByUrl('register');
+    this.router.navigateByUrl('phone-number');
   }
 
   onboarding() {
     this.spinner.show();
-    if (this.eventA2HS) {
-      this.router.navigateByUrl('chat', this.eventA2HS);
-    } else {
+    if (localStorage.getItem('mobile_number')) {
       this.router.navigateByUrl('chat');
+    } else {
+      this.router.navigateByUrl('phone-number');
     }
       }
   ngOnInit() {

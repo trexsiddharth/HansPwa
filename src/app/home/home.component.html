@@ -65,11 +65,12 @@
                     <div style="text-align: center;position: absolue;">
                      <p class="capt" >We bring families together..</p>
                     <br>
-                    <div class="row rowButton">
-                            <button class="btn  registr" id="find" [eventTracker]='{"category":"chat clicked","action":"click"}' (click)="register()">Register for free</button>
-                        <button class="btn  registr" id="find" [eventTracker]='{"category":"chat clicked","action":"click"}' (click)="onboarding()">Rishtey Dekhe</button>
+                    <div class="row">
+                        <div style="width: 100%;">
+                                <button *ngIf="loginStatus === false"  class="btn  registr" id="find" [eventTracker]='{"category":"chat clicked","action":"click"}' (click)="register()">Register for free</button>
+                                <button class="btn  registr" id="find" [eventTracker]='{"category":"chat clicked","action":"click"}' (click)="onboarding()">Rishtey Dekhe</button>
+                        </div>
                     </div>
-                    
             </div>   
         </div> 
         </div>
