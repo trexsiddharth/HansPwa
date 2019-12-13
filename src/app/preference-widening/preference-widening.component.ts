@@ -136,7 +136,13 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
        }
        console.log(element, 'added to array');
      } else {
-      this.wideningCaste.splice(this.wideningCaste.indexOf(input.getAttribute('value')));
+      if (input.getAttribute('value') === 'Caste No-Bar') {
+        this.wideningCaste.splice(this.wideningCaste.indexOf('All'), 1);
+        console.log(element, 'removed from array');
+       } else {
+        this.wideningCaste.splice(this.wideningCaste.indexOf(input.getAttribute('value')), 1);
+        console.log(element, 'removed from array');
+       }
       console.log(element, 'removed from array');
      }
      console.log(this.wideningCaste.join(','));
