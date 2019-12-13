@@ -127,8 +127,9 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
       console.log(err);
       });
   } ticked(element: HTMLInputElement) {
-     const input =  document.getElementById(element.id) as HTMLInputElement;
-     if (input.checked === true) {
+    this.spinner.show();
+    const input =  document.getElementById(element.id) as HTMLInputElement;
+    if (input.checked === true) {
        if (input.getAttribute('value') === 'Caste No-Bar') {
         this.wideningCaste.push('All');
        } else {
@@ -145,8 +146,8 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
        }
       console.log(element, 'removed from array');
      }
-     console.log(this.wideningCaste.join(','));
-     this.getCount();
+    console.log(this.wideningCaste.join(','));
+    this.getCount();
   }
   changed(element: HTMLElement) {
     this.spinner.show();
