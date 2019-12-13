@@ -43,6 +43,7 @@ export class PhoneNumberScreenComponent implements OnInit {
       this.router.navigateByUrl('chat');
       this.loginRegister = 'Login';
     } else {
+      this.ngxNotificationService.info('You are not registered with us');
       this.loginRegister = 'Register';
     }
     this.spinner.hide();
