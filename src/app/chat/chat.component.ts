@@ -429,7 +429,7 @@ export class ChatComponent implements OnInit {
                  });
               localStorage.setItem('mobile_number', mob);
              } else {
-               if (data.buttons.match('History') && data.buttons.length === 7) {
+               if (data.buttons.match('History') && data.buttons.length === 7 && !data.apiwha_autoreply.match('6')) {
                 this.openPreferenceWideningDialog();
                } else {
                 this.botui.message.add({
