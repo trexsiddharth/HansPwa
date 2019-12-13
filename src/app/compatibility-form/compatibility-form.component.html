@@ -5,9 +5,9 @@
                     <img src="../../../assets/images/logo.png" style="width:30%">
                 </div>              
             </div>
-            <div class="row" style="margin:0px;text-align: center;padding: 0px 15%;">
+            <div class="row" style="margin:0px;text-align: center;padding: 0px 10%;">
                     <img src="../../assets/avatar.svg" style="width: 30%;border-right: 4px solid #34b7f1;" alt="register">
-                    <h4 style="display: inline-block;margin: auto auto auto 10px;">Registration</h4>
+                    <h4 style="display: inline-block;margin: auto auto auto 10px;">Free Registration</h4>
             </div>
         </div>
        
@@ -15,8 +15,17 @@
             <div class="w-full" style="margin-left:auto;margin-right:auto">
                 <form  [formGroup]="PageOne">
                     <div class="row">
+
                         <div class="col-md-12">
-                            <mat-form-field class="full-width" appearance="standard" style="height:60px;">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
+                                <mat-label style="color: black;">Name</mat-label>
+                                <input matInput formControlName="fullname" type="text" required autocomplete="off">
+                        
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
                                 <mat-label style="color: black;">Select your relation*</mat-label>
                                 <mat-select  formControlName="create" required >
                                         <mat-option *ngFor="let  option of createProfile" [value]="option">
@@ -26,7 +35,7 @@
                             </mat-form-field> 
                         </div>
                         <div class="col-md-12">
-                            <mat-form-field class="full-width" appearance="standard" style="height:60px;">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
                                 <mat-label style="color: black;">Mobile number*</mat-label>
     
                                 <ngx-mat-intl-tel-input matInput
@@ -42,7 +51,7 @@
                         </div>
     
                         <div class="col-md-12">
-                            <mat-form-field class="full-width" appearance="standard" style="height:60px;">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
                                 <mat-label style="color: black;">Gender*</mat-label>
                                 <mat-select  formControlName="gender" required >
                                     <mat-option value="Male">Male</mat-option>

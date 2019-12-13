@@ -43,6 +43,7 @@ export class ChatComponent implements OnInit {
   walkthroughStatusThree = false;
   walkthroughNumber = 0;
   clientWalkThroughStatus;
+  showWalkthrough;
   response_arr: any = [];
   show_arr: any = [];
   type_arr: any = [];
@@ -363,6 +364,11 @@ export class ChatComponent implements OnInit {
                      this.openImageModal();
                      if (this.clientWalkThroughStatus === '0') {
                       this.setWalkThrough();
+                      if (data.show_ad === 1) {
+                        this.showWalkthrough = true;
+                      } else {
+                        this.showWalkthrough = false;
+                      }
                      }
                      if (data.buttons.match('Yes' || 'No')) {
                          return this.botui.action.button({
@@ -784,6 +790,7 @@ export class ChatComponent implements OnInit {
                     this.langChanged = false;
                   }
                   localStorage.setItem('mobile_number', num);
+                  this.openAwardDialog();
                   this.repeatMEssage('SHOW', num);
         } else {
           this.spinner.hide();
@@ -1777,6 +1784,9 @@ setHouseType(value: string) {
      return this.http.post<any>('https://partner.hansmatrimony.com/api/updateStatus', walkthroughStatusUpdate).subscribe(
        (data: any) => {
          console.log(data);
+         if (this.showWalkthrough === true) {
+           this.openAwardDialog();
+         }
        }, err => {
          console.log(err);
        }
