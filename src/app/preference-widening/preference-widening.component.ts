@@ -76,17 +76,17 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
     if (gen === 'Male') {
         this.preferenceWideningData.age_min = this.getAge(this.profileData.birth_date) - 7;
         this.preferenceWideningData.age_max = this.getAge(this.profileData.birth_date);
-        this.preferenceWideningData.height_min = (Number(this.profileData.height) - 9).toString();
+        this.preferenceWideningData.height_min = (Number(this.profileData.height) - 10).toString();
         this.preferenceWideningData.height_max = this.profileData.height;
-        this.preferenceWideningData.income_min = this.profileData.monthly_income * 0.1;
-        this.preferenceWideningData.income_max = this.profileData.monthly_income * 0.95;
+        this.preferenceWideningData.income_min = Math.floor(this.profileData.monthly_income * 0.1);
+        this.preferenceWideningData.income_max = Math.ceil(this.profileData.monthly_income * 0.95);
     } else {
         this.preferenceWideningData.age_min = this.getAge(this.profileData.birth_date);
-        this.preferenceWideningData.age_max = this.getAge(this.profileData.birth_date) + 5;
+        this.preferenceWideningData.age_max = this.getAge(this.profileData.birth_date) + 7;
         this.preferenceWideningData.height_min = this.profileData.height;
-        this.preferenceWideningData.height_max = (Number(this.profileData.height) + 9).toString();
-        this.preferenceWideningData.income_min = this.profileData.monthly_income + 0.1;
-        this.preferenceWideningData.income_max = this.profileData.monthly_income + 50;
+        this.preferenceWideningData.height_max = (Number(this.profileData.height) + 10).toString();
+        this.preferenceWideningData.income_min = Math.floor(this.profileData.monthly_income + 0.1);
+        this.preferenceWideningData.income_max = Math.ceil(this.profileData.monthly_income + 50);
     }
     this.minHeight = this.getHeight(this.preferenceWideningData.height_min);
     this.maxHeight = this.getHeight(this.preferenceWideningData.height_max);
