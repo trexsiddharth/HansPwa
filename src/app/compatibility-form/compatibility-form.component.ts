@@ -23,6 +23,8 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -56,6 +58,20 @@ export class CompatibilityFormComponent implements OnInit {
   gender;
   MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorced', 'Widowed', 'Anulled', 'Doesn\'t Matter'];
   PageOne: FormGroup;
+
+  // birth date
+  birthDate: any;
+  currentAge: number;
+  birthdayValid;
+  startDate = new Date(1985, 0, 1);
+
+  // Religion and Caste
+  Religions: string[] = ['Hindu', 'Muslim', 'Sikh', 'Christian', 'Buddhist', 'Jain', 'Parsi', 'Jewish', 'Bahai'];
+  casteo: Observable<string[]>;
+  getcastes: any = [];
+  Caste = false;
+  AllCastes = false;
+
   otpForm: FormGroup;
   otp = '';
   otpVerified = false;
@@ -66,21 +82,23 @@ export class CompatibilityFormComponent implements OnInit {
   numberCheck: string;
   changeNumber = false;
   otpStatus = false;
-  createProfile: string[] = ['Self', 'Son', 'Daughter', 'Brother', 'Sister', 'Other'];
-  allCastes: any = [];
+  createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother' , 'Sister' , 'Other'];
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
       fullname: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       create: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       phone: ['', Validators.compose([Validators.required])],
       whatsapp: ['', Validators.compose([Validators.required])],
+      birth_date: ['', Validators.compose([Validators.required])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
+      AnnualIncome: ['', Validators.compose([Validators.required])],
+      Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
+      Mangalik: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -268,16 +286,112 @@ export class CompatibilityFormComponent implements OnInit {
   }
   }
 
+  private _Castefilter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
   ngOnInit() {
+    document.querySelector('body').style.background = 'white';
+    document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
+    document.querySelector('body').style.backgroundSize = 'cover';
     this.spinner.hide();
     localStorage.setItem('gender', '');
     localStorage.setItem('mobile_number', '') ;
     localStorage.setItem('selectedCaste', '');
     this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
-      this.allCastes = res;
-      console.log(this.allCastes);
+      this.getcastes = res;
     });
+    this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
+      startWith(''),
+      map(value => this._Castefilter(value))
+    );
+  }
+
+  onDate(event): void {
+    console.log(event);
+  }
+
+   // Calucalting age
+   calculateAge(event: any) {
+    this.birthDate = convert(event);
+    const timediffernce = Math.abs(Date.now() - event);
+    this.currentAge = Math.floor((timediffernce / (1000 * 3600 * 24)) / 365);
+
+    localStorage.setItem('currentAge', this.currentAge.toString());
+
+    function convert(str) {
+      // tslint:disable-next-line: one-variable-per-declaration
+      const date = new Date(str),
+        mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+        day = ("0" + date.getDate()).slice(-2);
+      return [date.getFullYear(), mnth, day].join("/");
+
+    }
+    this.addSlashes();
+
+    if (this.currentAge < 18) {
+      this.birthdayValid = false;
+    } else {
+      this.birthdayValid = true;
+    }
+
+    console.log('birth data', this.birthDate);
+    console.log('event data', event);
+    console.log(typeof event);
+
+  }
+
+  addSlashes() {
+    console.log('sv');
+    const newInput = document.getElementById('birthDate');
+    newInput.addEventListener('keydown', function(e) {
+      if (e.which !== 8) {
+        const numChars = ( e.target as HTMLInputElement).value.length;
+        if (numChars === 2 || numChars === 5) {
+          let thisVal = ( e.target as HTMLInputElement).value;
+          thisVal += '-';
+          ( e.target as HTMLInputElement).value = thisVal;
+        }
+      }
+    });
+  }
+  datePickerClicked() {
+    document.querySelector<HTMLElement>('.mat-icon-button').click();
+  }
+
+  // Religion
+  Religion(event) {
+    console.log(event.currentTarget.value);
+    if (event.currentTarget.value === 'Hindu') {
+      // console.log
+      this.Caste = true;
+      this.AllCastes = true;
+    } else if (event.currentTarget.value === 'Muslim') {
+      this.Caste = true;
+      this.AllCastes = false;
+    } else if (event.currentTarget.value === 'Sikh') {
+      this.Caste = true;
+      this.AllCastes = true;
+    } else if (event.currentTarget.value === 'Christian') {
+      this.Caste = false;
+      this.AllCastes = false;
+    } else if (event.currentTarget.value === 'Buddhist') {
+      this.Caste = false;
+      this.AllCastes = false;
+    } else if (event.currentTarget.value === 'Jain') {
+      this.Caste = true;
+      this.AllCastes = true;
+    } else if (event.currentTarget.value === 'Parsi') {
+      this.Caste = false;
+      this.AllCastes = false;
+    } else if (event.currentTarget.value === 'Jewish') {
+      this.Caste = false;
+      this.AllCastes = false;
+    } else if (event.currentTarget.value === 'Bahai') {
+      this.Caste = false;
+      this.AllCastes = false;
+    }
   }
 }
 

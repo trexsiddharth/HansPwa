@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'register-six', component: RegisterSixComponent},
   { path: 'chat', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
-  { path: 'phoneNumber', component: PhoneNumberScreenComponent},
+  { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'compatibility-form', component: CompatibilityFormComponent}
 
 ];

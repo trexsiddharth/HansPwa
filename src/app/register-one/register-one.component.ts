@@ -148,60 +148,9 @@ export class RegisterOneComponent implements OnInit {
       this.Caste = true;
       this.AllCastes = true;
     } else if (event.currentTarget.value === 'Muslim') {
-      this.Castes = [{
-        group: 'S',
-        mapping_id: 4,
-        names: ['Shia', 'Sunni']
-      }];
       this.Caste = true;
       this.AllCastes = false;
     } else if (event.currentTarget.value === 'Sikh') {
-      this.Castes = [{
-          group: 'A',
-          mapping_id: 4,
-          names: ['Arora']
-        },
-        {
-          group: 'B',
-          mapping_id: 4,
-          names: ['Bhatia']
-        },
-        {
-          group: 'G',
-          mapping_id: 4,
-          names: ['Gurkish']
-        },
-        {
-          group: 'j',
-          mapping_id: 4,
-          names: ['jat']
-        },
-        {
-          group: 'l',
-          mapping_id: 4,
-          names: ['Labana']
-        },
-        {
-          group: 'M',
-          mapping_id: 4,
-          names: ['Mazbhi']
-        },
-        {
-          group: 'O',
-          mapping_id: 4,
-          names: ['Others']
-        },
-        {
-          group: 'R',
-          mapping_id: 4,
-          names: ['Rajput', 'Rmadasia', 'Ramagharia']
-        },
-        {
-          group: 'S',
-          mapping_id: 4,
-          names: ['Saini']
-        },
-      ];
       this.Caste = true;
       this.AllCastes = true;
     } else if (event.currentTarget.value === 'Christian') {
@@ -211,22 +160,6 @@ export class RegisterOneComponent implements OnInit {
       this.Caste = false;
       this.AllCastes = false;
     } else if (event.currentTarget.value === 'Jain') {
-      this.Castes = [{
-          group: 'D',
-          mapping_id: 4,
-          names: ['Digamber']
-        },
-        {
-          group: 'O',
-          mapping_id: 4,
-          names: ['Others']
-        },
-        {
-          group: 'S',
-          mapping_id: 4,
-          names: ['Shwetamber']
-        },
-      ];
       this.Caste = true;
       this.AllCastes = true;
     } else if (event.currentTarget.value === 'Parsi') {

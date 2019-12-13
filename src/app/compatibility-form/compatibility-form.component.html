@@ -16,14 +16,8 @@
                 <form  [formGroup]="PageOne">
                     <div class="row">
                         <div class="col-md-12">
-                            <mat-form-field class="full-width fieldFit" appearance="standard">
-                                <mat-label style="color: black;">Email*</mat-label>
-                                <input matInput type="email" formControlName="email" required autocomplete="off">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-12">
                             <mat-form-field class="full-width" appearance="standard" style="height:60px;">
-                                <mat-label style="color: black;">Create Profile For*</mat-label>
+                                <mat-label style="color: black;">Select your relation*</mat-label>
                                 <mat-select  formControlName="create" required >
                                         <mat-option *ngFor="let  option of createProfile" [value]="option">
                                                 {{option}}
@@ -33,14 +27,7 @@
                         </div>
                         <div class="col-md-12">
                             <mat-form-field class="full-width" appearance="standard" style="height:60px;">
-                                <mat-label style="color: black;">Name*</mat-label>
-                                <input matInput formControlName="fullname" type="text" required autocomplete="off">
-                        
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-12">
-                            <mat-form-field class="full-width" appearance="standard" style="height:60px;">
-                                <mat-label style="color: black;">Phone number*</mat-label>
+                                <mat-label style="color: black;">Mobile number*</mat-label>
     
                                 <ngx-mat-intl-tel-input matInput
                                 [preferredCountries]="['in', 'us']"
@@ -51,18 +38,6 @@
                                 type="tel"
                                 formControlName="phone"></ngx-mat-intl-tel-input>
     
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-12">
-                            <mat-form-field class="full-width" appearance="standard" style="height:60px;">
-                                <mat-label style="color: black;">Whatsapp number*</mat-label>
-                                <ngx-mat-intl-tel-input matInput
-                                [enablePlaceholder]="true"
-                                [enableSearch]="true"
-                                name="whatsapp"
-                                type="number"
-                                [ngModel]="numberCheck"
-                                formControlName="whatsapp"></ngx-mat-intl-tel-input>
                             </mat-form-field>
                         </div>
     
@@ -76,6 +51,16 @@
                             
                             </mat-form-field>
                         </div>
+                        
+                        <div class="col-md-12">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
+                                <mat-label style="color: black;">Date of Birth*</mat-label>
+                              <input (click)="datePickerClicked()" id="birthDate" max="10" placeholder="Choose a day"  matInput [matDatepicker]="picker1" (ngModelChange)="calculateAge($event)" formControlName="birth_date" readonly>
+                              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                              <mat-datepicker #picker1 startView="year" [startAt]="startDate" disabled="false"></mat-datepicker>
+                            </mat-form-field>
+                           
+                          </div>
 
                         <div class="col-md-12">
                      
@@ -90,9 +75,55 @@
                                 </mat-form-field>
                               </div>
                        
+                              <div class="col-md-12">
+                                <mat-form-field class="full-width fieldFit" appearance="standard" >
+                                  <mat-label style="color: black;">Annual Income In Lakhs*</mat-label>
+                                  <input type="number" matInput formControlName="AnnualIncome" required name="AnnualIncome">
+                                  
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-md-12">
+                                <mat-form-field class="full-width fieldFit" appearance="standard" >
+                                 <mat-label style="color: black;">Religion*</mat-label>
+                                 <select matNativeControl  formControlName="Religion" required name="Religion" (change)="Religion($event)">
+                                     <option *ngFor="let  option of Religions" [value]="option">
+                                       {{option}}
+                                     </option>
+                                   </select>
+                            
+                               </mat-form-field> 
+                          </div>
+                          <div class="col-md-12">
+                              
+                               <mat-form-field class="full-width fieldFit" *ngIf="Caste" appearance="standard">
+                                 <mat-label style="color: black;">Caste*</mat-label>
+                                 <input type="text" matInput formControlName="Castes" required [matAutocomplete]="caste" required  >
+                                 <mat-autocomplete autoActiveFirstOption #caste="matAutocomplete">
+                                    
+                                         <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
+                                           {{name}}
+                                         </mat-option>
+                                 </mat-autocomplete>
+                               </mat-form-field>
+                         </div>
+
+                         <div class="col-md-12">
+                   
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
+                                <mat-label style="color: black;">Manglik*</mat-label>
+                                <mat-select  formControlName="Mangalik" required >
+                                  <mat-option value="Manglik">Manglik</mat-option>
+                                  <mat-option value="Non-manglik">Non-manglik</mat-option>
+                                  <mat-option value="Anshik Manglik">Anshik Manglik</mat-option>
+                                </mat-select>
+                            
+                            </mat-form-field>
+                        
+                        </div>
                         
                         <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-                            <button type="button" class="btn btn-blue" (click)="checkExist()">Next</button>
+                            <button type="button" class="btn btn-blue" (click)="checkExist()">View Profiles/रिश्ते देखें</button>
                         </div>
                     </div>
                </form> 

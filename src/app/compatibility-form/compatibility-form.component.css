@@ -18,3 +18,9 @@
     background-color: #34b7f1;
     height: 1px;
 }
+
+@media (max-width: 900px) {
+main {
+    height: 100%;
+    }
+}
