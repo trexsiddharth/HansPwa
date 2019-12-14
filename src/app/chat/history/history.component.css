@@ -26,6 +26,12 @@
   ::ng-deep .mat-tab-body {
     padding-bottom: 100px;
   }
+  ::ng-deep .mat-tab-header-pagination-chevron {
+    border-color: black;
+  }
+  ::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+    border-color: #34b7f1;
+  }
   
   /* Style the links inside the navigation bar */
   .navbar a {
@@ -59,6 +65,9 @@
     margin:0px 5px 0px;
     text-align: center;
   }
+  ::ng-deep .mat-tab-label-content {
+    font-size: 18px;
+  }
   @media (max-width: 1024px) {
     .prof {
       margin: 0px 20px;
@@ -86,4 +95,8 @@
       margin:0px 5px 0px 0px;
       text-align: center;
     }
+    ::ng-deep .mat-tab-label-content {
+      font-size: 14px;
+    }
+    
   }

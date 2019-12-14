@@ -263,7 +263,15 @@ export class ChatComponent implements OnInit {
                    // tslint:disable-next-line: max-line-length
                    '<div style="text-align:center"><b>' + this.setName(values.name, values.mobile) + this.setCity(values.city) + '</b></div> ' +
                    // tslint:disable-next-line: max-line-length
-                   '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br> <script> function profilePhotoClicked() { console.log("PhotoClicked") } </script>'
+                   '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>' +
+                   '<table style="width:100%;height:40px">' +
+                   '<tr>' +
+                   // tslint:disable-next-line: max-line-length
+                   '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Share Profile</button></div><a id="whtLink"></a></th>' +
+                   // tslint:disable-next-line: max-line-length
+                   '<th style="width:50%;text-align:center;background:#222831;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#222831;border: none;"><img src="../../assets/download.svg" style="width:20px"> Save Profile</button></div><a  target="_blank" id="downLink"></a></th>' +
+                     '</tr>' +
+                     '</table></div>'
                  }).then(() => {
                      this.botui.message.add({
                       loading: true,
@@ -346,18 +354,11 @@ export class ChatComponent implements OnInit {
                         '<table style="width:100%">' +
                         // tslint:disable-next-line: max-line-length
                         '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
-                          '</table>' +
-
-                                // line -8
-                             '<table style="width:100%;height:40px">' +
-                             '<tr>' +
-                             // tslint:disable-next-line: max-line-length
-                             '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Whatsapp</button></div><a id="whtLink"></a></th>' +
-                             // tslint:disable-next-line: max-line-length
-                             '<th style="width:50%;text-align:center;background:#34b7f1;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#34b7f1;border: none;"><img src="../../assets/download.svg" style="width:20px"> Download</button></div><a  target="_blank" id="downLink"></a></th>' +
-                               '</tr>' +
-                               '</table></div>'
+                          '</table>'
                    }).then(() => {
+                     if (values.profiles_left === 0) {
+                       this.Analytics('Daily Quota Reached', 'Daily Quota Reached', 'Daily Quota Completed' );
+                     }
                      setTimeout(() => {
                       this.whatsappShare(this.setName(values.name, values.mobile), localStorage.getItem('id'), values.id, values.mobile);
                      }, 1000);
@@ -375,6 +376,7 @@ export class ChatComponent implements OnInit {
                            cssClass: 'styleButton',
                            action: [
                              { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
+                             { text: this.changeBtnTextLanguage(this.currentLanguage, 'Shortlist'), value: 'shortlist'},
                              {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
                            ]
                        }).then(res => {
@@ -442,6 +444,7 @@ export class ChatComponent implements OnInit {
                        return this.botui.action.button({
                          action: [
                            { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
+                           { text: this.changeBtnTextLanguage(this.currentLanguage, 'Shortlist'), value: 'shortlist'},
                            {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
                          ]
                      }).then(res => {
@@ -1122,7 +1125,15 @@ profileReAnswer(num: any, id: any, answer: any) {
       content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setNameSelectedProfile(personal.name) + '"><br>' +
       // tslint:disable-next-line: max-line-length
       '<div style="text-align:center"><b>' + this.setNameSelectedProfile(personal.name)  + this.setCity(family.city) +  '</b></div><br>' +
-                   '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'
+                   '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'+
+                   '<table style="width:100%;height:40px">' +
+                   '<tr>' +
+                   // tslint:disable-next-line: max-line-length
+                   '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Share Profile</button></div><a id="whtLink"></a></th>' +
+                   // tslint:disable-next-line: max-line-length
+                   '<th style="width:50%;text-align:center;background:#222831;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#222831;border: none;"><img src="../../assets/download.svg" style="width:20px"> Save Profile</button></div><a  target="_blank" id="downLink"></a></th>' +
+                     '</tr>' +
+                     '</table></div>'
     });
      this.botui.message.add({
         type: 'html',
@@ -1202,17 +1213,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       '<table style="width:100%">' +
       // tslint:disable-next-line: max-line-length
       '<tr>' + this.LifeStatus(family.father_status, family.mother_status, family.occupation, family.occupation_mother) + '</tr>' +
-        '</table>' +
-
-        // line -8
-     '<table style="width:100%;height:40px">' +
-     '<tr>' +
-     // tslint:disable-next-line: max-line-length
-     '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Whatsapp</button></div><a id="whtLink"></a></th>' +
-     // tslint:disable-next-line: max-line-length
-     '<th style="width:50%;text-align:center;background:#34b7f1;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#34b7f1;border: none;"><img src="../../assets/download.svg" style="width:20px"> Download</button></div><a  target="_blank" id="downLink"></a></th>' +
-       '</tr>' +
-       '</table></div>'
+        '</table>'
 
     }).then(() => {
       this.openImageModal();
@@ -1240,8 +1241,9 @@ profileReAnswer(num: any, id: any, answer: any) {
       } else {
         return this.botui.action.button({
           action: [
-            { text: this.changeButtonLanguage(this.currentLanguage), value: 'Yes'},
-            { text: this.changeNoButtonLanguage(this.currentLanguage), value: 'No'}
+            { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
+            { text: this.changeBtnTextLanguage(this.currentLanguage, 'Shortlist'), value: 'shortlist'},
+            { text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO'}
           ]
       }).then(res => {
         (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
@@ -1531,13 +1533,17 @@ setHouseType(value: string) {
             document.getElementById('chatText').innerText = 'See Profiles';
             document.getElementById('historyText').innerText = 'History';
             document.getElementById('profileText').innerText = 'My Profile';
-            document.getElementById('credit').innerText = 'Credits: ' + this.points;
+            if (this.points && document.getElementById('credit') ) {
+              document.getElementById('credit').innerText = 'Credits: ' + this.points;
+            }
             return 'See Contact Number';
           } else {
             document.getElementById('chatText').innerText = 'नए रिश्ते';
             document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
             document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
+            if (this.points && document.getElementById('credit') ) {
             document.getElementById('credit').innerText = 'शेष कॉन्टैक्ट नंबर: ' + this.points;
+            }
             return 'कांटेक्ट नंबर देखें';
           }
       }
@@ -1552,6 +1558,7 @@ setHouseType(value: string) {
         setTimeout(() => {
           this.changeNoButtonColor();
           this.changeYesButtonColor();
+          this.changeShortButtonColor();
         }, 300);
         if (type === 'English') {
           return 'Reject';
@@ -1571,6 +1578,14 @@ setHouseType(value: string) {
         // tslint:disable-next-line: max-line-length
         if (element.innerText === 'Yes' || element.innerText === 'YES' || element.innerText === 'कांटेक्ट नंबर देखें' || element.innerText === 'See Contact Number' ) {
             element.style.background = 'green';
+        }
+      });
+    }
+    changeShortButtonColor() {
+      document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+        // tslint:disable-next-line: max-line-length
+        if (element.innerText === 'Shortlist' || element.innerText === 'शॉर्टलिस्ट करें' ) {
+            element.style.background = '#771144';
         }
       });
     }
@@ -1596,6 +1611,8 @@ setHouseType(value: string) {
               return 'प्लान देखें';
               case 'Next Match':
                 return 'अगला रिश्ता देखें';
+                case 'Shortlist':
+                return 'शॉर्टलिस्ट करें';
       }
     }
   }

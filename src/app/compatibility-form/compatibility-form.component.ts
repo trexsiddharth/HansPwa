@@ -291,6 +291,7 @@ export class CompatibilityFormComponent implements OnInit {
         localStorage.setItem('id', res.id);
         localStorage.setItem('gender', this.PageOne.value.gender);
         localStorage.setItem('mobile_number', this.PageOne.value.phone);
+        this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
         this.router.navigate(['/chat']);
         this.ngxNotificationService.success('Registered Successfully');
       } else {
@@ -312,7 +313,16 @@ export class CompatibilityFormComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
   }
+  Analytics(type: string, category: string, action: string) {
+    (window as any).ga('send', 'event', category, action, {
+      hitCallback: () => {
 
+        console.log('Tracking ' + type + ' successful');
+
+      }
+
+    });
+  }
   ngOnInit() {
     document.querySelector('body').style.background = 'white';
     document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
