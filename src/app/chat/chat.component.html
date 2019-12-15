@@ -17,10 +17,10 @@
                       <div ngbDropdown >
                           <img src="../../assets/menu.png" class="filterLogout" data-toggle="dropdown" alt="language" ngbDropdownToggle>
                         <div ngbDropdownMenu>
+                            <a style="margin: 0px;padding: 0px;" href="tel:8766217175"  class="dropdown-item"><img src="../../assets/phone_blue.svg" style="width: 20px;" alt="call">Contact Us</a>
                           <button *ngIf="currentLanguage=='Hindi'" (click)="languageEnglish()" class="dropdown-item">Translate to English</button>
                           <button *ngIf="currentLanguage=='English'" (click)="languageHindi()" class="dropdown-item">हिंदी में देखें </button>
                           <button *ngIf="loginStatus" (click)="logout()" class="dropdown-item">Logout</button>
-                          <a href="tel:8766217175"  class="dropdown-item">Contact Us</a>
                          <button (click)="howToUse()" class="dropdown-item">How to use</button>
                         </div>
                       </div>
