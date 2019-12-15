@@ -14,13 +14,13 @@
                         margin-left: 10px;">
                             <mat-label style="color: black;">Enter Mobile Number</mat-label>
                             <ngx-mat-intl-tel-input matInput
-                            [preferredCountries]="['in', 'us']"
+                            [preferredCountries]="['in']"
                             [enablePlaceholder]="true"
                             [enableSearch]="true"
                             name="phone"
                             [(ngModel)]="numberCheck"
                             type="tel"
-                            formControlName="phone"></ngx-mat-intl-tel-input>
+                            formControlName="phone" #phone></ngx-mat-intl-tel-input>
                         </mat-form-field>
                         <img (click)="submitPhone()" src="../../assets/next.svg" style="width: 50px;margin-top: 30px;" alt="submit">
                     </div>

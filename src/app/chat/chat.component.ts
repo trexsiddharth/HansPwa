@@ -191,7 +191,8 @@ export class ChatComponent implements OnInit {
     } else if (this.currentUrl) {
       this.Analytics('login', 'login', 'logged In');
       this.currentContact = this.currentUrl;
-      this.showHistoryMessages(this.currentUrl);
+      // this.showHistoryMessages(this.currentUrl);
+      this.numberValidation( this.currentContact);
       this.spinner.show();
   } else {
     this.botui.message.add({

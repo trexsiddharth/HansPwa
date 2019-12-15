@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,7 @@ import {  NotificationsService } from '../notifications.service';
   styleUrls: ['./phone-number-screen.component.css']
 })
 export class PhoneNumberScreenComponent implements OnInit {
+  
   numberCheck: string;
   phoneNumber;
   loginRegister;
@@ -38,6 +39,7 @@ export class PhoneNumberScreenComponent implements OnInit {
     }
     this.spinner.hide();
   }
+
   submitPhone() {
     this.spinner.show();
   // tslint:disable-next-line: max-line-length
