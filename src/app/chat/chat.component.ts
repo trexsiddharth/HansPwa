@@ -93,7 +93,26 @@ export class ChatComponent implements OnInit {
     this.history = 'chatbot';
   }
 
+  // setTimeStamp() {
+  //   let timeStamp = new Date().getTime();
+  //   let date = new Date(timeStamp);
+  //   localStorage.setItem('currentTimeStamp', date.toString());
+  // }
+  // getTimeStampDifference() {
+  //   let currentStamp = localStorage.getItem('currentTimeStamp');
+  //   if (currentStamp) {
+  //     return this.getDifference(new Date(currentStamp), new Date(new Date().getTime()));
+  //   }
+  // }
+  // getDifference(date1: Date, date2: Date) {
+  //   var Difference_In_Time = date2.getTime() - date1.getTime();
+  //   var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+  //   console.log(Difference_In_Days);
+  //   return Difference_In_Days;
+  // }
+
   ngOnInit() {
+
     if (this.router.url.match('logout')) {
       this.loginStatus = false;
       localStorage.setItem('mobile_number', '');

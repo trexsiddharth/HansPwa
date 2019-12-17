@@ -73,6 +73,7 @@ export class TiktokAdsFormComponent implements OnInit {
       const tiktokForm = new FormData();
       tiktokForm.append('mobile', this.PageOne.value.phone);
       tiktokForm.append('looking_for', '');
+      console.log('mobile', this.PageOne.value.phone);
       return this.http.post<any>('https://partner.hansmatrimony.com/api/tiktok' , tiktokForm ).subscribe(res => {
       console.log(res);
       if (res.success === 1) {
