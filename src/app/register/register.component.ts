@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
   changeNumber = false;
   isCompleted1 = false;
   otpStatus = false;
-  createProfile: string[] = ['Self', 'Son', 'Daughter', 'Brother', 'Sister', 'Other'];
+  createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother', 'Sister', 'Other'];
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,

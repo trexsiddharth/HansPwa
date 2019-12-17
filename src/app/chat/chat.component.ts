@@ -147,7 +147,9 @@ export class ChatComponent implements OnInit {
 
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
-    this.currentUrl = this.router.url.substring(13);
+    if (this.router.url.match('mobile=')) {
+      this.currentUrl = this.router.url.substring(13);
+    }
     console.log(this.currentUrl);
     if (localStorage.getItem('mobile_number')) {
       this.spinner.show();

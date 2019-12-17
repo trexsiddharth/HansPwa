@@ -70,13 +70,11 @@ export class RegisterFourComponent implements OnInit {
   ];
   options: any = [];
   location: any = '';
-  FamilyType: string[] = ['Joint Family', 'Nuclear Family', 'Others'];
-  FatherOccupation: string[] = ['Buisness', 'Service', 'Army', 'Private Company',
-  'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'
-];
-  MotherOccupation: string[] = ['Homely', 'Buisness', 'Service', 'Army', 'Private Company',
-    'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'
-  ];
+  FamilyType: string[] = ['Joint', 'Nuclear', 'Others'];
+  FatherOccupation: string[] = ['Not Working', 'Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher',
+   'Retired'];
+  MotherOccupation: string[] = ['Homely', 'Not Working', 'Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher',
+  'Retired'];
   Brother: any[] = ['None', 0, 1, 2, 3, '3+'];
   Sister: any[] = ['None', 0, 1, 2, 3, '3+'];
   state: string[] = ['Andaman & Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh',

@@ -26,7 +26,7 @@
             
               <div class="col-md-12">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label style="color: black;">Father Status</mat-label>
+                  <mat-label style="color: black;">Father's Status</mat-label>
                   <select #fStatus matNativeControl formControlName="father_status"  name="father_status">
                       <option value="Alive">
                         Alive
@@ -37,27 +37,27 @@
                     </select> 
                 </mat-form-field>
               </div>
-            
-              <div class="col-md-12">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label style="color: black;">Mother Status</mat-label>
-                  <select #mStatus matNativeControl formControlName="mother_status"  name="mother_status">
-                      <option value="Alive">
-                        Alive
-                      </option>
-                      <option value="Not Alive">
-                        Not Alive
-                      </option>
-                    </select> 
-                </mat-form-field>
-              </div>
-          
+
               <div class="col-md-12" *ngIf="fStatus.value=='Alive'">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label style="color: black;">Father's Occupation</mat-label>
                   <select matNativeControl  formControlName="FatherOccupation"  name="FatherOccupation">
                       <option *ngFor="let  option of FatherOccupation" [value]="option">
                         {{option}}
+                      </option>
+                    </select> 
+                </mat-form-field>
+              </div>
+            
+              <div class="col-md-12">
+                <mat-form-field class="full-width fieldFit" appearance="standard">
+                  <mat-label style="color: black;">Mother's Status</mat-label>
+                  <select #mStatus matNativeControl formControlName="mother_status"  name="mother_status">
+                      <option value="Alive">
+                        Alive
+                      </option>
+                      <option value="Not Alive">
+                        Not Alive
                       </option>
                     </select> 
                 </mat-form-field>
@@ -76,13 +76,13 @@
             
               <div class="col-md-12">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label style="color: black;">Family's Income</mat-label>
+                  <mat-label style="color: black;">Total Annual Family Income (In Lakhs) </mat-label>
                   <input type="text" matInput placeholder="eg : 24(in lpa)" formControlName="family_income">
                 </mat-form-field>
               </div>
               <div class="col-md-12">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label style="color: black;">Married Brothers</mat-label>
+                  <mat-label style="color: black;">Candidate's Married Brothers</mat-label>
                   <select matNativeControl  formControlName="brother"  name="brother">
                       <option *ngFor="let  option of Brother" [value]="option">
                         {{option}}
@@ -93,7 +93,7 @@
             
                 <div class="col-md-12">
                   <mat-form-field class="full-width fieldFit" appearance="standard">
-                    <mat-label style="color: black;">UnMarried Brothers</mat-label>
+                    <mat-label style="color: black;">Candidate's UnMarried Brothers</mat-label>
                     <select matNativeControl  formControlName="umbrother"  name="umbrother">
                         <option *ngFor="let  option of Sister" [value]="option">
                           {{option}}
@@ -104,7 +104,7 @@
              
               <div class="col-md-12">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label style="color: black;">Married Sisters</mat-label>
+                  <mat-label style="color: black;">Candidate's Married Sisters</mat-label>
                   <select matNativeControl  formControlName="sister"  name="sister">
                       <option *ngFor="let  option of Sister" [value]="option">
                         {{option}}
@@ -115,7 +115,7 @@
            
               <div class="col-md-12">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label style="color: black;">UnMarried Sisters</mat-label>
+                  <mat-label style="color: black;">Candidate's UnMarried Sisters</mat-label>
                   <select matNativeControl  formControlName="umsister" required name="umsister">
                       <option *ngFor="let  option of Sister" [value]="option">
                         {{option}}
@@ -126,7 +126,7 @@
            
               <div class="col-md-12">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label style="color: black;">Family Living In</mat-label>
+                  <mat-label style="color: black;">Family's Current City</mat-label>
                   <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                   (onAutocompleteSelected)="onAutocompleteSelected($event,1)"
                            (onLocationSelected)="onLocationSelected($event,1)" formControlName="state">
@@ -168,7 +168,7 @@
            
               <div class="col-md-12">
                 <mat-form-field appearance="standard" class="full-width fieldFit">
-                  <mat-label style="color: black;">About My Family</mat-label>
+                  <mat-label style="color: black;">About Family</mat-label>
                   <input matInput placeholder="Write about your parents and brothers or sisters,Where do they live?What they are doing?"
                     formControlName="about">
                 </mat-form-field>

@@ -106,7 +106,7 @@ export class RegisterSixComponent implements OnInit, OnDestroy, AfterViewInit {
   maritalStatus;
   MaritalStaus = ['Never Married', 'Awaiting Divorce', 'Divorced', 'Widowed', 'Anulled', 'Doesn\'t Matter'];
   manglikValue = 'Non Manglik';
-  manglikList = ['Non Manglik', 'Manglik', 'Anshik Manglik'];
+  manglikList = ['Non Manglik', 'Manglik', 'Anshik Manglik', 'Doesn\'t Matter'];
   manglikPreference = ['Manglik', 'Anshik Manglik'];
   nonManglikPreference = ['Non-Manglik', 'Anshik Manglik'];
   castePref: any;
@@ -136,7 +136,11 @@ export class RegisterSixComponent implements OnInit, OnDestroy, AfterViewInit {
 /** Subject that emits when the component has been destroyed. */
 private _onDestroy = new Subject<void>();
 
-  stateGroups: StateGroup[] = [{
+  stateGroups: StateGroup[] = [ {
+    letter: 'Doesn\'t Matter',
+    names: ['Doesn\'t Matter']
+  },
+  {
     letter: 'North',
     names: ['Hindi-Delhi',
       'Hindi-MP',
@@ -177,7 +181,8 @@ private _onDestroy = new Subject<void>();
   Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0"', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
   // tslint:disable-next-line: max-line-length
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
-  Occupation: string[] = ['Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'];
+  Occupation: string[] = ['Doesn\'t Matter', 'Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher',
+   'Not Working'];
   Working: string[] = ['Working', 'Not Working', 'Doesn\'t matter'];
   AnnualIncome: any[] = ['No Income', 'Rs 0-1 Lakh', 'Rs 1-2 Lakh', 'Rs 2-3 Lakh', 'Rs 3-4 Lakh', 'Rs 4-5 Lakh', 'Rs 5-7.5 Lakh',
     'Rs 7.5-12 Lakh',
@@ -253,7 +258,6 @@ private _onDestroy = new Subject<void>();
   }
 
   sixthStep() {
-    console.log('castes', this.casteMapped);
     if (this.PreferencesDetails.valid) {
 
     if (this.manglikValue === 'Non Manglik') {
@@ -276,7 +280,11 @@ private _onDestroy = new Subject<void>();
     sixthstepdata.append('manglik', this.manglikValue);
     sixthstepdata.append('working', this.PreferencesDetails.value.working);
     sixthstepdata.append('food_choice', this.PreferencesDetails.value.food_choice);
-    sixthstepdata.append('mother_tongue', this.PreferencesDetails.value.stateGroup);
+    if (this.PreferencesDetails.value.stateGroup === 'Doesn\'t Matter') {
+      sixthstepdata.append('mother_tongue', 'Hindi-Delhi');
+    } else {
+      sixthstepdata.append('mother_tongue', this.PreferencesDetails.value.stateGroup);
+    }
     sixthstepdata.append('description', this.PreferencesDetails.value.description);
     if (this.gender === 'Female') {
       sixthstepdata.append('income_min', localStorage.getItem('annualIncome'));
