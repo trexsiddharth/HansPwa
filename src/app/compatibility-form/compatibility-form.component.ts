@@ -91,6 +91,9 @@ export class CompatibilityFormComponent implements OnInit {
   createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother' , 'Sister' , 'Other'];
   // tslint:disable-next-line: max-line-length
   date: string[] = ['1', '2' , '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+  // tslint:disable-next-line: max-line-length
+  month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  years: string[] = [];
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
@@ -98,7 +101,9 @@ export class CompatibilityFormComponent implements OnInit {
     this.PageOne = this._formBuilder.group({
       phone: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
-      birth_date: ['', Validators.compose([Validators.required])],
+      birth_date: ['1', Validators.compose([Validators.required])],
+      birth_month: ['January', Validators.compose([Validators.required])],
+      birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
       AnnualIncome: ['', Validators.compose([Validators.required])],
@@ -252,11 +257,18 @@ export class CompatibilityFormComponent implements OnInit {
   }
 
   firstStep() {
+
+    
+
     if (this.PageOne.valid) {
       this.spinner.show();
+      let date = this.PageOne.value.birth_date;
+      let month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
+      let year = this.PageOne.value.birth_year;
+      console.log(date + '/' + month + '/' + year);
       const firststepdata = new FormData();
       firststepdata.append('mobile', this.PageOne.value.phone);
-      firststepdata.append('birth_date', this.birthDate);
+      firststepdata.append('birth_date', date + '/' + month + '/' + year);
       firststepdata.append('gender', this.PageOne.value.gender);
       firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
       firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
@@ -325,6 +337,11 @@ export class CompatibilityFormComponent implements OnInit {
     });
   }
   ngOnInit() {
+    var yrs = new Date().getFullYear();
+    var min = yrs - 80;
+    for (let index = min; index < yrs; index++) {
+      this.years.push(index.toString());
+    }
     document.querySelector('body').style.background = 'white';
     document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
     document.querySelector('body').style.backgroundSize = 'cover';

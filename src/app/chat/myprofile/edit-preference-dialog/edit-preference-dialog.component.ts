@@ -37,34 +37,36 @@ export class EditPreferenceDialogComponent implements OnInit {
     this.minHeight = this.getHeight(this.preferenceData.height_min);
   }
   onSubmit() {
-    console.log(this.preferenceForm);
+    console.log('marital_status', this.preferenceData.marital_status);
 
-    const preferenceFormData = new FormData();
-    preferenceFormData.append('identity_number', this.preferenceData.identity_number);
-    preferenceFormData.append('temple_id', this.preferenceData.temple_id);
-    preferenceFormData.append('caste', this.preferenceData.caste);
-    preferenceFormData.append('marital_status', this.preferenceData.marital_status);
-    preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
-    if (this.gender === 'Male') {
+    if (this.preferenceForm.valid) {
+      const preferenceFormData = new FormData();
+      preferenceFormData.append('identity_number', this.preferenceData.identity_number);
+      preferenceFormData.append('temple_id', this.preferenceData.temple_id);
+      preferenceFormData.append('caste', this.preferenceData.caste);
+      preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
+      if (this.gender === 'Male') {
       preferenceFormData.append('working', this.preferenceForm.value.working);
       preferenceFormData.append('occupation', 'na');
     } else {
       preferenceFormData.append('occupation', this.preferenceForm.value.occupation);
       preferenceFormData.append('working', 'na');
     }
-    preferenceFormData.append('working', this.preferenceForm.value.working);
-    preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice);
-    preferenceFormData.append('description', this.preferenceData.description);
-    preferenceFormData.append('income_min', this.preferenceData.income_min);
-    preferenceFormData.append('income_max', this.preferenceData.income_max);
-    preferenceFormData.append('height_min', this.Heights1[this.Heights.indexOf(this.minHeight)]);
-    preferenceFormData.append('height_max', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
-    preferenceFormData.append('age_min', this.preferenceData.age_min);
-    preferenceFormData.append('age_max', this.preferenceData.age_max);
-    preferenceFormData.append('mother_tongue', this.preferenceData.mother_tongue);
+      preferenceFormData.append('working', this.preferenceForm.value.working);
+      preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice);
+      preferenceFormData.append('description', this.preferenceData.description);
+      preferenceFormData.append('income_min', this.preferenceData.income_min);
+      preferenceFormData.append('income_max', this.preferenceData.income_max);
+      preferenceFormData.append('height_min', this.Heights1[this.Heights.indexOf(this.minHeight)]);
+      preferenceFormData.append('height_max', this.Heights1[this.Heights.indexOf(this.maxHeight)]);
+      preferenceFormData.append('age_min', this.preferenceData.age_min);
+      preferenceFormData.append('age_max', this.preferenceData.age_max);
+      preferenceFormData.append('mother_tongue', this.preferenceData.mother_tongue);
+
+      console.log('marital_status', this.preferenceData.marital_status);
 
 
-    this.http.post('https://partner.hansmatrimony.com/api/updatePreferencesDetails', preferenceFormData).subscribe(
+      this.http.post('https://partner.hansmatrimony.com/api/updatePreferencesDetails', preferenceFormData).subscribe(
       (data: any) => {
         console.log(data);
         this.dialogRef.close({success: 'success'});
@@ -73,6 +75,7 @@ export class EditPreferenceDialogComponent implements OnInit {
         console.log(error);
       }
     );
+    }
   }
 
   getHeight(ht: string) {
