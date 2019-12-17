@@ -132,8 +132,24 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
     if (input.checked === true) {
        if (input.getAttribute('value') === 'Caste No-Bar') {
         this.wideningCaste.push('All');
+        (document.getElementById('inlineCheckbox2') as HTMLInputElement ).checked = false;
+        (document.getElementById('inlineCheckbox3') as HTMLInputElement ).checked = false;
+        (document.getElementById('inlineCheckbox4') as HTMLInputElement ).checked = false;
+        if (this.wideningCaste.includes('Brahmin')) {
+        this.wideningCaste.splice(this.wideningCaste.indexOf('Brahmin'), 1);
+        }
+        if (this.wideningCaste.includes('Punjabi')) {
+          this.wideningCaste.splice(this.wideningCaste.indexOf('Punjabi'), 1);
+          }
+        if (this.wideningCaste.includes('Agarwal')) {
+            this.wideningCaste.splice(this.wideningCaste.indexOf('Agarwal'), 1);
+            }
        } else {
         this.wideningCaste.push(input.getAttribute('value'));
+        (document.getElementById('inlineCheckbox1') as HTMLInputElement ).checked = false;
+        if (this.wideningCaste.includes('All')) {
+       this.wideningCaste.splice(this.wideningCaste.indexOf('All'), 1);
+        }
        }
        console.log(element, 'added to array');
      } else {
