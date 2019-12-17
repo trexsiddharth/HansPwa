@@ -47,19 +47,19 @@
                          
                               <label style="color: black; margin-top: 8px;">Date of Birth</label>
                               <div class="row" style="margin: 0px;">
-                                <select class="classic" formControlName="birth_date" style="border: 1px solid black;"  required name="birth_date" (change)="dob($event)">
+                                <select class="classic" formControlName="birth_date" style="border: 1px solid black;"  required name="birth_date">
                                     <option *ngFor="let  option of date" [value]="option">
                                       {{option}}
                                     </option>
                                   </select> 
 
-                                  <select class="classic" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;"  required name="birth_month" (change)="dob($event)">
+                                  <select class="classic" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;"  required name="birth_month">
                                     <option *ngFor="let  option of month" [value]="option">
                                       {{option}}
                                     </option>
                                   </select> 
                                   
-                                  <select class="classic" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;"  required name="birth_year" (change)="dob($event)">
+                                  <select class="classic" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;"  required name="birth_year">
                                     <option *ngFor="let  option of years" [value]="option">
                                       {{option}}
                                     </option>

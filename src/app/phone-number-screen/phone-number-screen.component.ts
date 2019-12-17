@@ -55,6 +55,7 @@ export class PhoneNumberScreenComponent implements OnInit {
     } else {
       this.ngxNotificationService.info('You are not registered with us');
       this.loginRegister = 'Register';
+      localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
     }
     this.spinner.hide();
   }, err => {

@@ -99,7 +99,7 @@ export class CompatibilityFormComponent implements OnInit {
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
-      phone: ['', Validators.compose([Validators.required])],
+      phone: [localStorage.getItem('RegisterNumber'), Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       birth_date: ['1', Validators.compose([Validators.required])],
       birth_month: ['January', Validators.compose([Validators.required])],
@@ -258,8 +258,6 @@ export class CompatibilityFormComponent implements OnInit {
 
   firstStep() {
 
-    
-
     if (this.PageOne.valid) {
       this.spinner.show();
       let date = this.PageOne.value.birth_date;
@@ -306,6 +304,7 @@ export class CompatibilityFormComponent implements OnInit {
         localStorage.setItem('gender', this.PageOne.value.gender);
         localStorage.setItem('mobile_number', this.PageOne.value.phone);
         this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
+        localStorage.setItem('RegisterNumber', '');
         this.router.navigate(['/chat']);
         this.ngxNotificationService.success('Registered Successfully');
       } else {
@@ -442,9 +441,6 @@ export class CompatibilityFormComponent implements OnInit {
       this.Caste = false;
       this.AllCastes = false;
     }
-  }
-  dob(event) {
-    
   }
 }
 
