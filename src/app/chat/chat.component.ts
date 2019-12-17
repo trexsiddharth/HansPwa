@@ -112,7 +112,6 @@ export class ChatComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.openPreferenceWideningDialog();
     if (this.router.url.match('logout')) {
       this.loginStatus = false;
       localStorage.setItem('mobile_number', '');
