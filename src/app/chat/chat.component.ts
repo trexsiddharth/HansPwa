@@ -50,6 +50,7 @@ export class ChatComponent implements OnInit {
   previous_chats: any;
   user: any;
   innerWidth: any;
+  currentIndex;
   innerHeight: any;
   DoNotshowfull: boolean ;
   number: String;
@@ -393,35 +394,38 @@ export class ChatComponent implements OnInit {
                       }
                      }
                      if (data.buttons.match('Yes' || 'No')) {
-                         return this.botui.action.button({
-                           cssClass: 'styleButton',
-                           action: [
-                             { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
-                             { text: this.changeBtnTextLanguage(this.currentLanguage, 'Shortlist'), value: 'shortlist'},
-                             {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
-                           ]
-                       }).then(res => {
-                         (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
-                          hitCallback: () => {
-                            console.log('Tracking preference details entered successful');
-                          }});
-                         if (this.langChanged === true) {
-                          this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
-                            (data: any) => {
-                              console.log(data);
-                            },
-                            (error: any) => {
-                              console.log(error);
+                       this.botui.message.add({
+                        type: 'html',
+                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'YES', 'none') +
+                        this.setButton('star.svg', 'SHORTLIST', 'none') +
+                        this.setButton('cancel.svg', 'NO', 'none') + '</div>'
+                      }).then((index) => {
+                        this.currentIndex = index;
+                        document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
+                          element.onclick = () => {
+                            this.updateBotValue(index, element);
+                            (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
+                              hitCallback: () => {
+                                console.log('Tracking Bot Response entered successful');
+                              }});
+                            if (this.langChanged === true) {
+                              this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
+                                (data: any) => {
+                                  console.log(data);
+                                },
+                                (error: any) => {
+                                  console.log(error);
+                                }
+                                );
+                              this.langChanged = false;
                             }
-                            );
-                          this.langChanged = false;
-                        }
-                         if (this.promptData != null) {
-                          this.openPromptDialog();
-                        }
-                         this.answer = res.value;
-                         console.log('chose' + res.value);
-                         this.repeatMEssage(res.value, mob);
+                            if (this.promptData != null) {
+                              this.openPromptDialog();
+                            }
+                            console.log('chose' + element.id);
+                            this.repeatMEssage(element.id, mob);
+                          };
+                        });
                        });
                        } else if (data.buttons.match('Show')) {
                          return this.botui.action.button({
@@ -444,7 +448,6 @@ export class ChatComponent implements OnInit {
                           this.openPromptDialog();
                         }
                         console.log('chose' + res.value);
-                        this.answer = res.value;
                         this.repeatMEssage(res.value, mob);
                        });
                        }
@@ -462,36 +465,40 @@ export class ChatComponent implements OnInit {
                      content: '<div><p style="font-size:18px">' + data.apiwha_autoreply + '</p></div>'
                  }).then(() => {
                      if (data.buttons.match('Yes')) {
-                       return this.botui.action.button({
-                         action: [
-                           { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
-                           { text: this.changeBtnTextLanguage(this.currentLanguage, 'Shortlist'), value: 'shortlist'},
-                           {text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO' }
-                         ]
-                     }).then(res => {
-                      (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
-                        hitCallback: () => {
-                          console.log('Tracking preference details entered successful');
-                        }});
-                      if (this.langChanged === true) {
-                        this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
-                          (data: any) => {
-                            console.log(data);
-                          },
-                          (error: any) => {
-                            console.log(error);
-                          }
-                          );
-                        this.langChanged = false;
-                      }
-                      if (this.promptData != null) {
-                        this.openPromptDialog();
-                      }
-                      console.log('chose' + res.value);
-                      this.answer = res.value;
-                      localStorage.setItem('mobile_number', mob);
-                      this.repeatMEssage(res.value, mob);
-                     });
+                      this.botui.message.add({
+                        type: 'html',
+                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'YES', 'none') +
+                        this.setButton('star.svg', 'SHORTLIST', 'none') +
+                        this.setButton('cancel.svg', 'NO', 'none') + '</div>'
+                      }).then((index) => {
+                        this.currentIndex = index;
+                        document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
+                          element.onclick = () => {
+                            console.log('Clicked');
+                            this.updateBotValue(index, element);
+                            (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
+                              hitCallback: () => {
+                                console.log('Tracking Bot Response entered successful');
+                              }});
+                            if (this.langChanged === true) {
+                              this.changeLanguage(mob, localStorage.getItem('language')).subscribe(
+                                (data: any) => {
+                                  console.log(data);
+                                },
+                                (error: any) => {
+                                  console.log(error);
+                                }
+                                );
+                              this.langChanged = false;
+                            }
+                            if (this.promptData != null) {
+                              this.openPromptDialog();
+                            }
+                            console.log('chose' + element.id);
+                            this.repeatMEssage(element.id, mob);
+                          };
+                        });
+                       });
                      }  else if (data.buttons.match('Register')) {
                        this.botui.action.button({
                          action: [{
@@ -581,7 +588,6 @@ export class ChatComponent implements OnInit {
                     }
                  });
                }
-             
            }
              this.spinner.hide();
            },
@@ -777,6 +783,7 @@ export class ChatComponent implements OnInit {
  }
  change() {
    this.botui.action.hide();
+   this.updateBotValue(this.currentIndex, '');
  }
  numberValidation(num: string) {
     this.currentContact = num;
@@ -908,6 +915,16 @@ export class ChatComponent implements OnInit {
     if (value != null) {
       return key + ': ' + value + '<br>';
     } else {return ''; }
+   }
+   setButton(imageName, text, background) {
+     // tslint:disable-next-line: max-line-length
+     return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:60px" src="../../assets/' + imageName + '">';
+   }
+   updateBotValue(index, element) {
+    this.botui.message.update(index, {
+      human: true,
+      content: element.id
+  });
    }
    setValue(value: String): String {
     if (value != null) {
@@ -1260,32 +1277,42 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.repeatMEssage(res.value, this.currentContact);
        });
       } else {
-        return this.botui.action.button({
-          action: [
-            { text: this.changeButtonLanguage(this.currentLanguage), value: 'YES'},
-            { text: this.changeBtnTextLanguage(this.currentLanguage, 'Shortlist'), value: 'shortlist'},
-            { text: this.changeNoButtonLanguage(this.currentLanguage), value: 'NO'}
-          ]
-      }).then(res => {
-        (window as any).ga('send', 'event', 'ChatBot Response', res.value, {
-          hitCallback: () => {
-            console.log('Tracking preference details entered successful');
-          }});
-        if (this.langChanged === true) {
-          this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
-            (data: any) => {
-              console.log(data);
-            },
-            (error: any) => {
-              console.log(error);
-            }
-            );
-          this.langChanged = false;
-        }
-        console.log('chose' + res.value);
-        console.log('Reanswered');
-        this.profileReAnswer(this.currentContact, personal.id, res.value);
-       });
+
+        this.botui.message.add({
+          type: 'html',
+          content: '<div style="text-align:center">' + this.setButton('checked.svg', 'YES', 'none') +
+          this.setButton('star.svg', 'SHORTLIST', 'none') +
+          this.setButton('cancel.svg', 'NO', 'none') + '</div>'
+        }).then((index) => {
+          this.currentIndex = index;
+          document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
+            element.onclick = () => {
+              console.log('Clicked');
+              this.updateBotValue(index, element);
+              (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
+                hitCallback: () => {
+                  console.log('Tracking Bot Response entered successful');
+                }});
+              if (this.langChanged === true) {
+                this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
+                  (data: any) => {
+                    console.log(data);
+                  },
+                  (error: any) => {
+                    console.log(error);
+                  }
+                  );
+                this.langChanged = false;
+              }
+              if (this.promptData != null) {
+                this.openPromptDialog();
+              }
+              console.log('chose' + element.id);
+              console.log('Reanswered');
+              this.profileReAnswer(this.currentContact, personal.id, element.id);
+            };
+          });
+         });
       }
     });
    }
