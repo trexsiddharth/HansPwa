@@ -29,7 +29,7 @@ export class MyprofileComponent implements OnInit {
   maxHeight;
   carouselSize;
 
-  constructor(private spinner: NgxSpinnerService, private matDialog: MatDialog, private http: HttpClient, 
+  constructor(private spinner: NgxSpinnerService, private matDialog: MatDialog, private http: HttpClient,
               private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {

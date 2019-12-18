@@ -40,9 +40,13 @@
             <h6>Marital Status</h6>
             <p style="font-size: 14px;">{{personalProfileData.marital_status}}</p>
           </div>
-          <div class="col-6">
+          <div class="col-6" *ngIf="familyProfileData">
               <h6>Religion</h6>
               <p style="font-size: 14px;">{{familyProfileData.religion}}</p>
+            </div>
+            <div class="col-6" *ngIf="personalProfileData.religion">
+              <h6>Religion</h6>
+              <p style="font-size: 14px;">{{personalProfileData.religion}}</p>
             </div>
             <hr style="margin: 0px 10px;width: 100%">
         </div>
@@ -51,9 +55,13 @@
               <h6>Height</h6>
               <p style="font-size: 14px;" [innerHtml]="getHeight(personalProfileData.height)" ></p>
             </div>
-            <div class="col-6">
+            <div class="col-6" *ngIf="familyProfileData">
                 <h6>Caste</h6>
                 <p style="font-size: 14px;">{{familyProfileData.caste}}</p>
+              </div>
+              <div class="col-6" *ngIf="personalProfileData.caste">
+                <h6>Caste</h6>
+                <p style="font-size: 14px;">{{personalProfileData.caste}}</p>
               </div>
               <hr style="margin: 0px 10px;width: 100%">
           </div>
@@ -62,17 +70,25 @@
                 <h6>Weight</h6>
                 <p style="font-size: 14px;">{{personalProfileData.weight}}</p>
               </div>
-              <div class="col-6">
+              <div class="col-6" *ngIf="familyProfileData">
                   <h6>Gotra</h6>
                   <p style="font-size: 14px;">{{familyProfileData.gotra}}</p>
+                </div>
+                <div class="col-6" *ngIf="personalProfileData.gotra">
+                  <h6>Gotra</h6>
+                  <p style="font-size: 14px;">{{personalProfileData.gotra}}</p>
                 </div>
                 <hr style="margin: 0px 10px;width: 100%">
             </div>
     
             <div class="row" style="margin: 10px 10px;">
-                <div class="col-6">
+                <div class="col-6" *ngIf="familyProfileData">
                   <h6>Current City</h6>
                   <p style="font-size: 14px;">{{familyProfileData.city}}</p>
+                </div>
+                <div class="col-6" *ngIf="personalProfileData.city">
+                  <h6>Current City</h6>
+                  <p style="font-size: 14px;">{{personalProfileData.city}}</p>
                 </div>
                 <div class="col-6">
                     <h6>Food Choice</h6>
@@ -178,24 +194,28 @@
         </div>
         <div class="row" style="margin: 10px 10px;">
             <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px" class="fa fa-envelope"></i>
-              <div class="col-10">
+              <div class="col-10" *ngIf="familyProfileData">
                   <p style="font-size: 14px;">{{familyProfileData.email}}</p>
               </div>
             </div>
             <div class="row" style="margin: 10px 10px 0px;">
               <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px;" class="fa fa-phone"></i>
-              <div class="col-5" style="margin: auto 0px;">
+              <div class="col-5" style="margin: auto 0px;" *ngIf="familyProfileData">
               <h6 style="display: inline-block">Mobile</h6>
                 <p style="font-size: 14px;display: inline-block;margin-left: 10px;">{{familyProfileData.mobile}}</p>
               </div>
-              <div class="col-5">
+              <div class="col-5" style="margin: auto 0px;" *ngIf="personalProfileData.mobile">
+                <h6 style="display: inline-block">Mobile</h6>
+                  <p style="font-size: 14px;display: inline-block;margin-left: 10px;">{{personalProfileData.mobile}}</p>
+                </div>
+              <div class="col-5" *ngIf="familyProfileData">
                   <h6 style="display: inline-block;">Whatsapp</h6>
                     <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.whats_app_no}}</p>
                   </div>
           </div>
           <div class="row" style="margin: 10px 10px;">
               <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px" class="fa fa-map-marker"></i>
-                <div class="col-10">
+                <div class="col-10" *ngIf="familyProfileData">
                     <p style="font-size: 14px;">{{familyProfileData.city}}</p>
                 </div>
               </div>
@@ -206,7 +226,7 @@
                   <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-comment"></i>
                   <h5 style="margin: auto 20px">ABOUT FAMILY</h5>
               </div>
-              <div class="row" style="margin: 10px 20px">
+              <div class="row" style="margin: 10px 20px" *ngIf="familyProfileData">
                   <p style="width: -webkit-fill-available;">{{familyProfileData.about}}</p>
               </div>
           </div>
@@ -217,7 +237,7 @@
                   <h5 style="margin: auto 20px">FAMILY DETAILS</h5>
                   <i (click)="openFamilyDialog()"  style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
               </div>
-              <div class="row" style="margin: 10px 10px;">
+              <div class="row" style="margin: 10px 10px;" *ngIf="familyProfileData">
                   <div class="col-12" style="margin: 10px 10px 0px;">
                     <h6 style="display: inline-block">Father's Occupation : </h6>
                     <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{familyProfileData.occupation}}</p>
@@ -296,7 +316,7 @@
                       <h5 style="margin: auto 20px">PREFERENCES</h5>
                       <i (click)="openPreferenceDialog()" style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-pencil ml-auto"></i>
                   </div>
-                  <div class="row" style="margin: 10px 10px">
+                  <div class="row" style="margin: 10px 10px" *ngIf="preferenceProfileData">
                       <div class="col-12" style="margin: 10px 10px 0px;">
                         <h6 style="display: inline-block">Age Min: </h6>
                         <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceProfileData.age_min}}</p>

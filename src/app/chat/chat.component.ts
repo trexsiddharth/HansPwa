@@ -921,7 +921,7 @@ export class ChatComponent implements OnInit {
    }
    setButton(imageName, text, background) {
      // tslint:disable-next-line: max-line-length
-     return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:60px" src="../../assets/' + imageName + '">';
+     return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:50px" src="../../assets/' + imageName + '">';
    }
    changeButtonBackground() {
      // tslint:disable-next-line: max-line-length
@@ -1126,10 +1126,14 @@ export class ChatComponent implements OnInit {
       return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).subscribe(
        (data: any) => {
         console.log(data);
-        this.profileData = data.profile;
-        this.familyData = data.family;
-        this.preferenceData = data.preferences;
+        if (data.family) {
+          this.familyData = data.family;
+        }
+        if (data.preferences) {
+          this.preferenceData = data.preferences;
+        }
         if (data.profile) {
+          this.profileData = data.profile;
           if (data.profile.gender) {
           localStorage.setItem('gender', data.profile.gender );
           console.log(data.profile.gender );

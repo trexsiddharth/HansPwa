@@ -24,7 +24,7 @@ export class HistoryComponent implements OnInit {
     const profileData = new FormData();
     profileData.append('id', id);
     profileData.append('contacted', contacted);
-    profileData.append('is_lead', localStorage.getItem('is_lead'));
+    profileData.append('is_lead', '0');
 
     console.log('id', id);
     console.log('contacted', contacted);
