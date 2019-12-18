@@ -71,21 +71,21 @@ export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked
       if (localStorage.getItem('language') === 'English') {
         return 'Contacted(' + this.profile.contacted.length + ')';
       } else {
-        return 'पसंद किये गए रिश्ते(' + this.profile.contacted.length + ')';
+        return 'पसंद(' + this.profile.contacted.length + ')';
       }
     }
     noProfiles() {
       if (localStorage.getItem('language') === 'English') {
         return 'Rejected(' + this.profile.rejected.length + ')';
       } else {
-        return 'रिजेक्टेड रिश्ते(' + this.profile.rejected.length + ')';
+        return 'रिजेक्टेड(' + this.profile.rejected.length + ')';
       }
     }
     shortProfiles() {
       if (localStorage.getItem('language') === 'English') {
         return 'Shortlisted(' + this.profile.shortlisted.length + ')';
       } else {
-        return 'शॉर्टलिस्ट किये रिश्ते(' + this.profile.shortlisted.length + ')';
+        return 'शॉर्टलिस्ट(' + this.profile.shortlisted.length + ')';
       }
     }
 }
