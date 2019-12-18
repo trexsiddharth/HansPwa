@@ -928,15 +928,17 @@ export class ChatComponent implements OnInit {
      document.querySelectorAll<HTMLElement>('.botui-message-content')[document.querySelectorAll<HTMLElement>('.botui-message-content').length - 1].style.backgroundColor = '#f3f3f3';
    }
    updateBotValue(index, element) {
-    this.botui.message.update(index, {
-      human: true,
-      content: ''
-  }).then(() => {
-this.botui.message.add({
-  human: true,
-  content: element.id
-});
+     if (index) {
+      this.botui.message.update(index, {
+        human: true,
+        content: ''
+    }).then(() => {
+  this.botui.message.add({
+    human: true,
+    content: element.id
   });
+    });
+     }
    }
    setValue(value: string): string {
     if (value != null) {
