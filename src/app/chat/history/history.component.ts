@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, AfterViewChecked, AfterContentInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit,
+   AfterViewChecked } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

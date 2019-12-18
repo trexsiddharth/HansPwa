@@ -1056,7 +1056,6 @@ export class ChatComponent implements OnInit {
         hitCallback: () => {
           console.log('Tracking history successful');
         }});
-      this.spinner.show();
       this.history = 'history';
 
       document.getElementById('chatButton').style.background = '#f3f3f3';
@@ -1080,7 +1079,6 @@ export class ChatComponent implements OnInit {
         (data: any) => {
          console.log(data);
          this.historyData = data;
-         this.spinner.hide();
         },
         (error: any) => {
           this.spinner.hide();

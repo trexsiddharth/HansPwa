@@ -6,7 +6,7 @@
 
                 <div class="imageSet">
                       <a (click)="shareData(item.id,'1')">
-                          <img style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
+                          <img id="contactedImage" style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
                           <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/checked.svg" alt="like">
                         </a>
                     <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px" [innerHTML]="setName(item.name,0)"></p>
