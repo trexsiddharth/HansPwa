@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, AfterViewChecked, AfterContentInit, AfterContentChecked } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked {
- 
+
   @Input() profile: any;
   @Output() share = new EventEmitter<any>();
   @Output() stage = new EventEmitter<string>();
@@ -21,18 +21,16 @@ export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked
   ngAfterViewInit(): void {
   }
   ngAfterViewChecked(): void {
-    setTimeout(() => {
+    if (this.profile) {
+      console.log('profile loaded');
       if (document.querySelector<HTMLElement>('.mat-tab-label-active')) {
         document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-0').style.background = 'green';
-      }
-      if (document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-1')) {
         document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-1').style.background = '#FFD700';
-      }
-      if (document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-2')) {
         document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-2').style.background = 'red';
       }
-    }, 1000);
+    }
   }
+
   shareData(id: any, contacted: any) {
     const profileData = new FormData();
     profileData.append('id', id);
