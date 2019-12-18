@@ -23,8 +23,8 @@ export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked
   ngAfterViewChecked(): void {
     if (document.querySelector<HTMLElement>('.mat-tab-label-active')) {
       document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-0').style.background = 'green';
-      document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-1').style.background = '#FFD700';
-      document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-2').style.background = 'red';
+      document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-1').style.background = '#FFD700';
+      document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-2').style.background = 'red';
     }
   }
   shareData(id: any, contacted: any) {

@@ -1127,8 +1127,12 @@ this.botui.message.add({
         this.profileData = data.profile;
         this.familyData = data.family;
         this.preferenceData = data.preferences;
-        localStorage.setItem('gender', data.profile.gender );
-        console.log(data.profile.gender );
+        if (data.profile) {
+          if (data.profile.gender) {
+          localStorage.setItem('gender', data.profile.gender );
+          console.log(data.profile.gender );
+          }
+        }
         this.spinner.hide();
        },
        (error: any) => {
