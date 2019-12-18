@@ -50,6 +50,7 @@ export class PhoneNumberScreenComponent implements OnInit {
       document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
       document.querySelector('body').style.backgroundSize = 'cover';
       localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
+      localStorage.setItem('is_lead', res.is_lead);
       this.router.navigateByUrl('chat');
       this.loginRegister = 'Login';
     } else {

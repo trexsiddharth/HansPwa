@@ -17,6 +17,7 @@ export class CreditAwardComponent implements OnInit {
     this.Analytics('rating', 'rating clicked', 'sent to playstore');
     const rating = new FormData();
     rating.append('id', localStorage.getItem('id'));
+    rating.append('is_lead', localStorage.getItem('is_lead'));
     this.http.post<any>('https://partner.hansmatrimony.com/api/addFreeCredits', rating).subscribe(data => {
       console.log(data);
       this.dialogRef.close();

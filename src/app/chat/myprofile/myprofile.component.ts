@@ -186,6 +186,7 @@ onResize(event) {
       uploadData.append('id', localStorage.getItem('id'));
       uploadData.append('index', index);
       uploadData.append('image', data);
+      uploadData.append('is_lead', localStorage.getItem('is_lead'));
 
       return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(suc => {
         this.suc = suc;

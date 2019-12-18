@@ -109,6 +109,7 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
     countData.append('min_income', this.preferenceWideningData.income_min );
     countData.append('max_income', this.preferenceWideningData.income_max);
     countData.append('caste', this.wideningCaste.join(','));
+    countData.append('is_lead', localStorage.getItem('is_lead'));
 
     console.log('id', localStorage.getItem('id'));
     console.log('age_min', this.preferenceWideningData.age_min);

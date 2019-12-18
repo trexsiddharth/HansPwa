@@ -62,6 +62,7 @@ export class EditPreferenceDialogComponent implements OnInit {
       preferenceFormData.append('age_min', this.preferenceData.age_min);
       preferenceFormData.append('age_max', this.preferenceData.age_max);
       preferenceFormData.append('mother_tongue', this.preferenceData.mother_tongue);
+      preferenceFormData.append('is_lead', localStorage.getItem('is_lead'));
 
       console.log('marital_status', this.preferenceData.marital_status);
 

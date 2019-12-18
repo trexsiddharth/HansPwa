@@ -28,8 +28,12 @@ export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
   }
   shareData(id: any, contacted: any) {
+    const profileData = new FormData();
+    profileData.append('id', id);
+    profileData.append('contacted', contacted);
+    profileData.append('is_lead', localStorage.getItem('is_lead'));
   // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + id + '&contacted=' + contacted , {params: { ['id'] : localStorage.getItem('id'), ['contacted']: contacted}}).subscribe(
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', profileData).subscribe(
        (data: any) => {
         console.log(data);
         this.share.emit(data);

@@ -111,6 +111,7 @@ export class EditPersonalDialogComponent implements OnInit {
     personalDataForm.append('profession', this.personalData.profession);
     personalDataForm.append('education', this.personalData.education);
     personalDataForm.append('about', this.personalData.about);
+    personalDataForm.append('is_lead', localStorage.getItem('is_lead'));
 
 
 

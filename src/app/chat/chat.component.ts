@@ -1058,8 +1058,11 @@ export class ChatComponent implements OnInit {
       document.getElementById('historyButton').style.background = '#34b7f1';
 
       console.log(localStorage.getItem('id'));
+      const historyData = new FormData();
+      historyData.append('id', localStorage.getItem('id'));
+      historyData.append('is_lead', localStorage.getItem('is_lead'));
       // tslint:disable-next-line: max-line-length
-      return this.http.post<any>('https://partner.hansmatrimony.com/api/history?id=' + localStorage.getItem('id') , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
+      return this.http.post<any>('https://partner.hansmatrimony.com/api/history', historyData).subscribe(
         (data: any) => {
          console.log(data);
          this.historyData = data;
@@ -1101,8 +1104,12 @@ export class ChatComponent implements OnInit {
       document.getElementById('profileText').style.color = '#FFFFFF';
       document.getElementById('profileText').style.background = '#34b7f1';
       console.log(localStorage.getItem('id'));
+      const myprofileData = new FormData();
+      myprofileData.append('id', localStorage.getItem('id'));
+      myprofileData.append('contacted', '1');
+      myprofileData.append('is_lead', localStorage.getItem('is_lead'));
      // tslint:disable-next-line: max-line-length
-      return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile?id=' + localStorage.getItem('id') + '&contacted=1'  , {params: { ['id'] : localStorage.getItem('id')}}).subscribe(
+      return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).subscribe(
        (data: any) => {
         console.log(data);
         this.profileData = data.profile;
@@ -1128,8 +1135,13 @@ export class ChatComponent implements OnInit {
      }
    }
 profileReAnswer(num: any, id: any, answer: any) {
+  const reAnswerData = new FormData();
+  reAnswerData.append('mobile', this.currentContact);
+  reAnswerData.append('id', id);
+  reAnswerData.append('answer', answer);
+  reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
   // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/reply?mobile=' + this.currentContact + '&id=' + id + '&text=' + answer , {}).subscribe(
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
     (data: any) => {
       console.log(answer);
       console.log(num);
@@ -1440,8 +1452,11 @@ profileReAnswer(num: any, id: any, answer: any) {
      );
    }
 getCredits() {
+  const creditsData = new FormData();
+  creditsData.append('id', localStorage.getItem('id'));
+  creditsData.append('is_lead', localStorage.getItem('is_lead'));
  // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint?id=' + localStorage.getItem('id'), {}).subscribe(
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
    (data: any) => {
       this.points = data.whatsapp_points;
       console.log('credits', this.points);
@@ -1736,6 +1751,7 @@ setHouseType(value: string) {
     pdfData.append('id', loggedId);
     pdfData.append('profile_to_send_id', profileId);
     pdfData.append('full', full);
+    pdfData.append('is_lead', localStorage.getItem('is_lead'));
     return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
   console.log(data);
   if (data.status === 1) {
@@ -1758,6 +1774,7 @@ setHouseType(value: string) {
   pdfData.append('id', loggedId);
   pdfData.append('profile_to_send_id', profileId);
   pdfData.append('full', full);
+  pdfData.append('is_lead', localStorage.getItem('is_lead'));
   return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
   console.log(data);
   if (data.status === 1) {
@@ -1851,6 +1868,7 @@ setHouseType(value: string) {
      const walkthroughStatusUpdate = new FormData();
      walkthroughStatusUpdate.append('id', localStorage.getItem('id'));
      walkthroughStatusUpdate.append('status', '1');
+     walkthroughStatusUpdate.append('is_lead', localStorage.getItem('is_lead'));
 
      console.log('id', localStorage.getItem('id'));
      console.log('status', '1');
@@ -1906,6 +1924,7 @@ setHouseType(value: string) {
     const getProfileData = new FormData();
     getProfileData.append('id', localStorage.getItem('id'));
     getProfileData.append('contacted', '1');
+    getProfileData.append('is_lead', localStorage.getItem('is_lead'));
 
     console.log('id', localStorage.getItem('id'));
     console.log('contacted', '1');
