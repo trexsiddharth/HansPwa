@@ -400,6 +400,7 @@ export class ChatComponent implements OnInit {
                         this.setButton('star.svg', 'SHORTLIST', 'none') +
                         this.setButton('cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
+                        this.changeButtonBackground();
                         this.currentIndex = index;
                         document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
                           element.onclick = () => {
@@ -471,6 +472,7 @@ export class ChatComponent implements OnInit {
                         this.setButton('star.svg', 'SHORTLIST', 'none') +
                         this.setButton('cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
+                        this.changeButtonBackground();
                         this.currentIndex = index;
                         document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
                           element.onclick = () => {
@@ -804,6 +806,7 @@ export class ChatComponent implements OnInit {
         this.getCredits();
         this.loginStatus = true;
         console.log(text);
+        localStorage.setItem('is_lead', data.is_lead);
         if (text.match('SHOW')) {
                   this.change();
                   if (this.langChanged === true) {
@@ -920,18 +923,27 @@ export class ChatComponent implements OnInit {
      // tslint:disable-next-line: max-line-length
      return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:60px" src="../../assets/' + imageName + '">';
    }
+   changeButtonBackground() {
+     // tslint:disable-next-line: max-line-length
+     document.querySelectorAll<HTMLElement>('.botui-message-content')[document.querySelectorAll<HTMLElement>('.botui-message-content').length - 1].style.backgroundColor = '#f3f3f3';
+   }
    updateBotValue(index, element) {
     this.botui.message.update(index, {
       human: true,
-      content: element.id
+      content: ''
+  }).then(() => {
+this.botui.message.add({
+  human: true,
+  content: element.id
+});
   });
    }
-   setValue(value: String): String {
+   setValue(value: string): string {
     if (value != null) {
       return value ;
     } else {return ''; }
    }
-   setCity(value: String): String {
+   setCity(value: string): string {
     if (value != null) {
       return ',' + value ;
     } else {return ''; }
@@ -1296,6 +1308,7 @@ profileReAnswer(num: any, id: any, answer: any) {
           this.setButton('star.svg', 'SHORTLIST', 'none') +
           this.setButton('cancel.svg', 'NO', 'none') + '</div>'
         }).then((index) => {
+          this.changeButtonBackground();
           this.currentIndex = index;
           document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
             element.onclick = () => {
@@ -1588,6 +1601,8 @@ setHouseType(value: string) {
         localStorage.setItem('mobile_number', '');
         localStorage.setItem('id', '');
         localStorage.setItem('gender', '');
+        localStorage.setItem('is_lead', '');
+
         this.router.navigateByUrl('/home');
       }
 

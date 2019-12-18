@@ -87,6 +87,7 @@ export class HomeComponent implements OnInit {
      localStorage.setItem('mobile_number', '');
      localStorage.setItem('id', '');
      localStorage.setItem('gender', '');
+     localStorage.setItem('is_lead', '');
      this.opened = false;
    }
    openFormDialog() {
