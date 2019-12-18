@@ -1163,7 +1163,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       content: '<img id="selectedProfilePic" src=' + this.getProfilePhotoHistory( personal.carousel, personal.photo, personal.gender) + ' style="width: 100%;border-radius: 10px" alt="' + this.setNameSelectedProfile(personal.name) + '"><br>' +
       // tslint:disable-next-line: max-line-length
       '<div style="text-align:center"><b>' + this.setNameSelectedProfile(personal.name)  + this.setCity(family.city) +  '</b></div><br>' +
-                   '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>'+
+                   '<div style="text-align:center"><i>' + this.setValue(personal.about) + '</i></div> <br>' +
                    '<table style="width:100%;height:40px">' +
                    '<tr>' +
                    // tslint:disable-next-line: max-line-length
