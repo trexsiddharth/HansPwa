@@ -14,7 +14,6 @@
   
   }
   ::ng-deep .mat-tab-label-active {
-    background: #34b7f1;
     color: white;
     border-radius: 10px; 
     font-weight: bolder;
@@ -67,6 +66,15 @@
   }
   ::ng-deep .mat-tab-label-content {
     font-size: 18px;
+  }
+  ::ng-deep #mat-tab-label-0-0 {
+    background: green ;
+  }
+  ::ng-deep #mat-tab-label-0-1 {
+    background: #FFD700;
+  }
+  ::ng-deep #mat-tab-label-0-2 {
+    background: red;
   }
   @media (max-width: 1024px) {
     .prof {

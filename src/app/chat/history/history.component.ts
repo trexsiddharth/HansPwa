@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css']
 })
-export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class HistoryComponent implements OnInit {
 
   @Input() profile: any;
   @Output() share = new EventEmitter<any>();
@@ -19,24 +19,17 @@ export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   ngOnInit() {
   }
-  ngAfterViewInit(): void {
-  }
-  ngAfterViewChecked(): void {
-    if (this.profile) {
-      console.log('profile loaded');
-      if (document.querySelector<HTMLElement>('.mat-tab-label-active')) {
-        document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-0').style.background = 'green';
-        document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-1').style.background = '#FFD700';
-        document.querySelector<HTMLElement>('.mat-tab-label' && '#mat-tab-label-0-2').style.background = 'red';
-      }
-    }
-  }
 
   shareData(id: any, contacted: any) {
     const profileData = new FormData();
     profileData.append('id', id);
     profileData.append('contacted', contacted);
     profileData.append('is_lead', localStorage.getItem('is_lead'));
+
+    console.log('id', id);
+    console.log('contacted', contacted);
+    console.log('is_lead', localStorage.getItem('is_lead'));
+    
   // tslint:disable-next-line: max-line-length
     return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', profileData).subscribe(
        (data: any) => {
