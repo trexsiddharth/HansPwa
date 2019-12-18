@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, AfterViewInit, AfterViewChecked {
+ 
   @Input() profile: any;
   @Output() share = new EventEmitter<any>();
   @Output() stage = new EventEmitter<string>();
@@ -16,6 +17,15 @@ export class HistoryComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+  ngAfterViewInit(): void {
+  }
+  ngAfterViewChecked(): void {
+    if (document.querySelector<HTMLElement>('.mat-tab-label-active')) {
+      document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-0').style.background = 'green';
+      document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-1').style.background = '#FFD700';
+      document.querySelector<HTMLElement>('.mat-tab-label-active' && '#mat-tab-label-0-2').style.background = 'red';
+    }
   }
   shareData(id: any, contacted: any) {
   // tslint:disable-next-line: max-line-length
