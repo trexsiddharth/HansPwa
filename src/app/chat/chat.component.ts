@@ -17,6 +17,8 @@ import { PreferenceWideningComponent } from '../preference-widening/preference-w
 
 declare let BotUI: Function;
 
+ 
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -24,6 +26,86 @@ declare let BotUI: Function;
 })
 
 export class ChatComponent implements OnInit {
+
+
+  familyTable =  {
+    id: '',
+  temple_id: '',
+  identity_number: '',
+  name: '',
+  relation: '',
+  locality: '',
+  landline: '',
+  family_photo: '',
+  city: '',
+  native: '',
+  mobile: '',
+  email: '',
+  unmarried_sons: '',
+  married_sons: '',
+  unmarried_daughters: '',
+  married_daughters: '',
+  family_type: '',
+  house_type: '',
+  religion: '',
+  caste: '',
+  gotra: '',
+  occupation: '',
+  family_income: '',
+  budget: '',
+  office_address: '',
+  father_status: '',
+  mother_status: '',
+  created_at: '',
+  updated_at: '',
+  whats_app_no: '',
+  marriage_budget_not_applicable: '',
+  email_not_available: '',
+  mother_tongue: '',
+  sub_caste: '',
+  country: '',
+  state: '',
+  occupation_mother: '',
+  address: '',
+  about: '',
+  caste_id: '',
+  zodiac: '',
+  father_off_addr: ''
+  }
+
+  preferenceTable = {
+    id: '',
+identity_number: '',
+temple_id: '',
+age_min: '',
+age_max: '',
+height_min: '',
+height_max: '',
+caste: '',
+marital_status: '',
+manglik: '',
+food_choice: '',
+working: '',
+occupation: '',
+sub_occupation: '',
+income_min: '',
+income_max: '',
+citizenship: '',
+description: '',
+membership: '',
+caste_no_bar: '',
+created_at: '',
+updated_at: '',
+source: '',
+amount_collected: '',
+insentive: '',
+validity: '',
+payment_method: '',
+receipt_url: '',
+status: '',
+mother_tongue: '',
+temple_name: ''
+  }
 
   user_profile: any = [];
   answer: FormGroup;
@@ -1128,9 +1210,13 @@ export class ChatComponent implements OnInit {
         console.log(data);
         if (data.family) {
           this.familyData = data.family;
+        } else {
+          this.familyData = this.familyTable;
         }
         if (data.preferences) {
           this.preferenceData = data.preferences;
+        } else {
+          this.preferenceData = this.preferenceTable;
         }
         if (data.profile) {
           this.profileData = data.profile;
