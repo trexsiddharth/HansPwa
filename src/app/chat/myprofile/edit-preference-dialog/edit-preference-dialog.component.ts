@@ -41,12 +41,11 @@ export class EditPreferenceDialogComponent implements OnInit {
 
     if (this.preferenceForm.valid) {
       const preferenceFormData = new FormData();
-      if (this.preferenceData.identity_number !== '' && this.preferenceData.identity_number) {
+      if (this.preferenceData.identity_number && this.preferenceData.identity_number !== '') {
         preferenceFormData.append('identity_number', this.preferenceData.identity_number);
         preferenceFormData.append('temple_id', this.preferenceData.temple_id);
       } else {
         preferenceFormData.append('id', localStorage.getItem('id'));
-        preferenceFormData.append('temple_id', 'online');
       }
       preferenceFormData.append('caste', this.preferenceData.caste);
       preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
