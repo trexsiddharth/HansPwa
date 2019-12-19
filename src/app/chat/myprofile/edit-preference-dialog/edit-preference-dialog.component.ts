@@ -81,6 +81,8 @@ export class EditPreferenceDialogComponent implements OnInit {
         console.log(error);
       }
     );
+    } else {
+      alert('enter valid details');
     }
   }
 
