@@ -1213,8 +1213,8 @@ temple_name: ''
         } else {
           this.familyData = this.familyTable;
         }
-        if (data.preferences) {
-          this.preferenceData = data.preferences;
+        if (data.preference) {
+          this.preferenceData = data.preference;
         } else {
           this.preferenceData = this.preferenceTable;
         }
