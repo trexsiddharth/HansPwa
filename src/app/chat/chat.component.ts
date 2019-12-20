@@ -471,9 +471,9 @@ temple_name: ''
                      }, 1000);
                      this.openImageModal();
                      if (this.clientWalkThroughStatus === '0') {
-                      this.setWalkThrough();
+                      // this.setWalkThrough();
                       if (data.show_ad === 1) {
-                        this.showWalkthrough = true;
+                        // this.showWalkthrough = true;
                       } else {
                         this.showWalkthrough = false;
                       }
