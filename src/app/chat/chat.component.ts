@@ -201,6 +201,9 @@ temple_name: ''
       localStorage.setItem('id', '');
       localStorage.setItem('gender', '');
     }
+    if (this.router.url.match('push')) {
+      this.Analytics('Push Web', 'Push Web', 'Notification Clicked');
+    }
     if (localStorage.getItem('mobile_number')) {
       this.loginStatus = true;
     } else {
