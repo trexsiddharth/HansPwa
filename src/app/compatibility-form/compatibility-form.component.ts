@@ -25,6 +25,7 @@ import {
 } from '@angular/material/';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { element } from 'protractor';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -258,6 +259,7 @@ export class CompatibilityFormComponent implements OnInit {
 
   firstStep() {
 
+    console.log('caste', this.PageOne.value.Castes);
     if (this.PageOne.valid) {
       this.spinner.show();
       let date = this.PageOne.value.birth_date;
@@ -441,6 +443,23 @@ export class CompatibilityFormComponent implements OnInit {
       this.Caste = false;
       this.AllCastes = false;
     }
+  }
+  casteValidation(value) {
+    console.log('caste changed', value.srcElement.value);
+    let status = 1;
+    this.casteo.forEach(element => {
+      if (element !== value.srcElement.value && value.srcElement.value !== '' ) {
+        status = 0;
+      } else {
+        status = 1;
+      }
+    });
+
+    if (status === 0) {
+      this.ngxNotificationService.warning('Please choose a caste from the dropdown');
+      this.PageOne.get('Castes').setValue('');
+    }
+
   }
 }
 

@@ -12,10 +12,7 @@
             data-target="#loginModal">Register</button>
         </li>
         <li>
-            <a href="https://hansmatrimony.com/matchmaker/"><button style="color: black;margin-bottom:10px" class="btn">Find a matchmaker</button></a>
-        </li>
-        <li>
-            <a href="#jumpVip"><button style="color: black;margin-bottom:10px" class="btn">Personalized VIP matchmaking</button></a>
+            <a (click)="sidenav.toggle()" href="#jumpVip"><button style="color: black;margin-bottom:10px" class="btn">Personalized VIP matchmaking</button></a>
         </li>
         <li *ngIf="loginStatus" class="nav-item">
                 <a href="#"><button  style="margin-bottom:10px;color: black" class="btn login" data-toggle="modal" (click)="logout()" 

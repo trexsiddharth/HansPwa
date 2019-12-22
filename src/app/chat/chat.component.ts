@@ -150,6 +150,7 @@ temple_name: ''
   history = 'chatbot';
   points: any;
   casteMap;
+  show_ad;
   selectedMapName;
   icon1 = document.getElementById('chat');
   icon2 = document.getElementById('hist');
@@ -242,15 +243,11 @@ temple_name: ''
       this.checkUrl(this.currentContact).subscribe(
         (data: any) => {
           console.log(data);
-          if (data.show_ad === 1) {
-            setTimeout(() => {
-              this.openAwardDialog();
-            }, 10000);
-          }
           const text: string = data.apiwha_autoreply;
           const id = data.id;
           console.log(text);
           console.log(id);
+          this.show_ad = data.show_ad;
           localStorage.setItem('id', id);
           this.getCredits();
           if (text.match('SHOW')) {
@@ -489,6 +486,13 @@ temple_name: ''
                         this.currentIndex = index;
                         document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
                           element.onclick = () => {
+                            if (element.id === 'YES') {
+                              if (this.show_ad === 1) {
+                                setTimeout(() => {
+                                  this.openAwardDialog();
+                                }, 2000);
+                              }
+                            }
                             this.updateBotValue(index, element);
                             (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
                               hitCallback: () => {
@@ -2025,6 +2029,7 @@ setHouseType(value: string) {
     const dialogRef = this.dialog.open(CreditAwardComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
           this.getCredits();
+          this.show_ad = 0;
     });
     document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
    }
