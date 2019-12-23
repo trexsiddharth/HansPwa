@@ -14,10 +14,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import {  NotificationsService } from '../notifications.service';
 import { CreditAwardComponent } from '../credit-award/credit-award.component';
 import { PreferenceWideningComponent } from '../preference-widening/preference-widening.component';
+import { resolve } from 'url';
 
 declare let BotUI: Function;
 
- 
+
 
 @Component({
   selector: 'app-chat',
@@ -362,8 +363,9 @@ temple_name: ''
                   loading: true,
                     delay: 500,
                    type: 'html',
+                   content:
                    // tslint:disable-next-line: max-line-length
-                   content: '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name, values.mobile) + '"> <br>' +
+                  '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name, values.mobile) + '"> <br>' +
                    // tslint:disable-next-line: max-line-length
                    '<div style="text-align:center"><b>' + this.setName(values.name, values.mobile) + this.setCity(values.city) + '</b></div> ' +
                    // tslint:disable-next-line: max-line-length
@@ -769,7 +771,7 @@ temple_name: ''
  }
  }
 
- getProfilePhoto(num: String, gen: string): String {
+ getProfilePhoto(num: string, gen: string): string {
    if (num === null || num === '') {
    if (gen === 'Male') {
      return '../../assets/male_pic.png';
@@ -780,6 +782,83 @@ temple_name: ''
    return num;
  }
  }
+ getCarouselProfilePhoto(num: string, num2: string, gen: string): string {
+
+if (num && num !== '' && num !== '[]' ) {
+  const carousel: object = JSON.parse(num);
+  console.log(carousel[1]);
+  let count;
+  if (carousel) {
+    count = Object.keys(carousel).length;
+    if (count > 2) {
+      return '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">' +
+  '<div class="carousel-inner">' +
+    '<div class="carousel-item">' +
+      '<img  src="http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[1] + '" alt="First slide">' +
+    '</div>' +
+    '<div class="carousel-item">' +
+      '<img class="d-block w-100" src="..." alt="Second slide">' +
+    '</div>' +
+    '<div class="carousel-item">' +
+      '<img class="d-block w-100" src="..." alt="Third slide">' +
+    '</div>' +
+  '</div>' +
+  '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
+    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+    '<span class="sr-only">Previous</span>' +
+  '</a>' +
+  '<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
+    '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+    '<span class="sr-only">Next</span>' +
+  '</a>' +
+'</div>';
+    } else if (count > 1) {
+      return '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">' +
+  '<div class="carousel-inner">' +
+    '<div class="carousel-item">' +
+      '<img class="d-block w-100" src="..." alt="First slide">' +
+    '</div>' +
+    '<div class="carousel-item">' +
+      '<img class="d-block w-100" src="..." alt="Second slide">' +
+    '</div>' +
+  '</div>' +
+  '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
+    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+    '<span class="sr-only">Previous</span>' +
+  '</a>' +
+  '<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
+    '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+    '<span class="sr-only">Next</span>' +
+  '</a>' +
+'</div>';
+    } else {
+      return '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">' +
+  '<div class="carousel-inner">' +
+    '<div class="carousel-item">' +
+    '<img  src="http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[1] + '" alt="First slide">' +
+    '</div>' +
+  '</div>' +
+  '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
+    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+    '<span class="sr-only">Previous</span>' +
+  '</a>' +
+  '<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
+    '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+    '<span class="sr-only">Next</span>' +
+  '</a>' +
+'</div>';
+    }
+}
+} else if (num2 === null || num2 === '') {
+  if (gen === 'Male') {
+    return '../../assets/male_pic.png';
+  } else {
+    return '../../assets/female_pic.png';
+  }
+} else {
+  return num;
+}
+}
 
   getProfilePhotoHistory(num: string, num2: string , gen: string): String {
     if (num && num !== '[]') {
@@ -1258,14 +1337,144 @@ profileReAnswer(num: any, id: any, answer: any) {
   // tslint:disable-next-line: max-line-length
   return this.http.post<any>('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
     (data: any) => {
+      this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer );
       console.log(answer);
       console.log(num);
       console.log(id);
       console.log(data);
-      this.botui.message.add({
-        content: data.message
+      this.showProfileOrMessage(data, num);
+    }, (error: any) => {
+      console.log(error);
+    });
+}
+     showProfileOrMessage(data, num) {
+        if (data.message.type === 'profile') {
+          const values = data.message.apiwha_autoreply;
+          console.log(values.photo);
+          this.showProfile(values, num);
+    } else {
+      this.botui.action.button({
+        action: [{
+          text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'
+        }]
+      }).then(res => {
+        this.repeatMEssage(res.value, num);
+      });
+    }
+    }
+
+    showProfile(values,num) {
+      return new Promise(() => {
+        this.botui.message.add({
+          loading: true,
+            delay: 500,
+           type: 'html',
+           content:
+           // tslint:disable-next-line: max-line-length
+          '<img id="selectedProfilePic" src=' + this.getProfilePhoto(values.photo, values.gender) + ' style="width: 100%;border-radius:10px" alt="' + this.setName(values.name, values.mobile) + '"> <br>' +
+           // tslint:disable-next-line: max-line-length
+           '<div style="text-align:center"><b>' + this.setName(values.name, values.mobile) + this.setCity(values.city) + '</b></div> ' +
+           // tslint:disable-next-line: max-line-length
+           '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>' +
+           '<table style="width:100%;height:40px">' +
+           '<tr>' +
+           // tslint:disable-next-line: max-line-length
+           '<th style="width:50%;text-align:center;background:#25d366;border-bottom-left-radius:10px">' + '<div><button id="whatsappBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#25d366;border: none;"><img src="../../assets/whatsapp.webp" style="width:30px"> Share Profile</button></div><a id="whtLink"></a></th>' +
+           // tslint:disable-next-line: max-line-length
+           '<th style="width:50%;text-align:center;background:#222831;border-bottom-right-radius:10px">' + '<div><button id="downloadBtn" style="width:100%;font-weight: bolder;font-size:16px;color:white;background:#222831;border: none;"><img src="../../assets/download.svg" style="width:20px"> Save Profile</button></div><a  target="_blank" id="downLink"></a></th>' +
+             '</tr>' +
+             '</table></div>'
+         }).then(() => {
+             this.botui.message.add({
+              loading: true,
+              delay: 500,
+               type: 'html',
+               // tslint:disable-next-line: max-line-length
+               content:
+              //  '<b> &#128100 पर्सनल डिटेल्स</b> <br> <br>' +
+              // line -0
+                 this.setHiddenTable(values.mobile, values.locality) +
+               // line -1
+               '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
+              '<tr>' +
+              // tslint:disable-next-line: max-line-length
+              '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Yrs</th>' +
+              // tslint:disable-next-line: max-line-length
+              '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/scale.svg">' + this.getHeight(Number(values.height)) + '</th>' +
+               // tslint:disable-next-line: max-line-length
+               '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/weight.svg">' + this.setValue(values.weight) + ' Kg</th>' +
+                '</tr>' +
+                '</table>' +
+                // line -2
+                '<table style="width:100%">' +
+                '<tr>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/suitcase.svg"></div><div>' + this.setValue(values.occupation) + '</div></th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/graduation.svg">' + this.setValue(values.education) + '<br>' + this.setValue(values.profession) + '</th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.monthly_income) + ' LPA </th>' +
+                  '</tr>' +
+                  '</table>' +
+  
+                  // line -3
+                '<table style="width:100%">' +
+                '<tr>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/templeblue.svg">' + this.setValue(values.religion) + '<br>' + this.setValue(values.caste) + this.setValue(values.gotra) + '<br>' +  '</th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top: 25%" src="../assets/heart.svg"></div><div>' +  this.setValue(values.marital_status) + '</div></th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/cutlery.svg">' + this.setValue(values.food_choice) + '</th>' +
+                  '</tr>' +
+                  '</table>' +
+  
+                     // line -4
+                '<table style="width:100%">' +
+                '<tr>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/birthday.svg">' + this.setValue(values.birth_date) +  '</th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/birthplace.svg">' +  this.setValue(values.birth_place) + '</th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/clock.svg">' + this.setValue(values.birth_time) + '</th>' +
+                  '</tr>' +
+                  '</table>' +
+  
+                     // line -5
+                '<table style="width:100%">' +
+                '<tr>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/tarot.svg"></div><div>' + this.setManglik(values.manglik) +  '</div></th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(values.house_type) + '</th>' +
+                // tslint:disable-next-line: max-line-length
+                '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
+                  '</tr>' +
+                  '</table>' +
+                     // line -6
+                '<table style="width:100%">' +
+                '<tr>' +
+                // tslint:disable-next-line: max-line-length
+                this.setMarriageSisters(String(Number(values.married_daughters) + Number(values.unmarried_daughters) ), values.married_daughters) +
+                // tslint:disable-next-line: max-line-length
+                this.setMarriageBrothers(String(Number(values.married_sons) + Number(values.unmarried_sons) ), values.married_sons)  +
+                  '</tr>' +
+                  '</table>' +
+  
+                       // line -7
+                '<table style="width:100%">' +
+                // tslint:disable-next-line: max-line-length
+                '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
+                  '</table>'
+  });
       }).then(() => {
-        this.botui.action.button({
+        setTimeout(() => {
+          this.openImageModal();
+          this.whatsappShare(this.setName(values.name, values.mobile), localStorage.getItem('id'), values.id, values.mobile);
+         }, 1000);
+      }).then(() => {
+        return this.botui.action.button({
           action: [{
             text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'
           }]
@@ -1273,10 +1482,8 @@ profileReAnswer(num: any, id: any, answer: any) {
           this.repeatMEssage(res.value, num);
         });
       });
-    }, (error: any) => {
-      console.log(error);
-    });
-}
+      });
+  }
 
    getSelectedProfile(data: any) {
      this.changeToBot();
@@ -1590,7 +1797,7 @@ openPromptDialog() {
   dialogConfig.hasBackdrop = true;
   if (this.innerWidth < 764) {
     dialogConfig.minWidth = this.innerWidth - 50;
-  } else {
+  } else  {
     dialogConfig.minWidth = this.innerWidth - 400;
   }
   dialogConfig.data = {
@@ -1601,21 +1808,21 @@ openPromptDialog() {
     this.promptData = data;
   });
 }
-setManglik(value: string) {
+        setManglik(value: string) {
 if (value === 'No') {
   return 'Non Manglik';
 } else {
   return value;
 }
 }
-setHouseType(value: string) {
+        setHouseType(value: string) {
   if (value === 'Owned') {
     return 'Own House';
   } else {
     return 'Rented House';
   }
   }
-  setMarriageBrothers(value1: string, value2: string) {
+        setMarriageBrothers(value1: string, value2: string) {
     if (value1 != null && value1 !== '' && value1 !== '0') {
       if (value2 != null && value2 !== '' && value2 !== '0' ) {
         // tslint:disable-next-line: max-line-length
@@ -1628,7 +1835,7 @@ setHouseType(value: string) {
       return '';
     }
     }
-    setMarriageSisters(value1: string, value2: string) {
+        setMarriageSisters(value1: string, value2: string) {
       if (value1 != null && value1 !== '' && value1 !== '0') {
         if (value2 != null && value2 !== '' && value2 !== '0' ) {
           // tslint:disable-next-line: max-line-length
@@ -1641,7 +1848,7 @@ setHouseType(value: string) {
         return '';
       }
       }
-      LifeStatus(father: string, mother: string, fatho: string, mothero: string) {
+        LifeStatus(father: string, mother: string, fatho: string, mothero: string) {
             if (father != null && father !== '' ) {
               if (father.match('Alive') ) {
                 if (fatho) {
@@ -1699,7 +1906,7 @@ setHouseType(value: string) {
                 return '<th></th>';
               }
       }
-      logout() {
+        logout() {
         this.loginStatus = false;
         localStorage.setItem('mobile_number', '');
         localStorage.setItem('id', '');
@@ -1709,7 +1916,7 @@ setHouseType(value: string) {
         this.router.navigateByUrl('/home');
       }
 
-      changeButtonLanguage(type: string) {
+        changeButtonLanguage(type: string) {
         if (type === 'English') {
             document.getElementById('chatText').innerText = 'See Profiles';
             document.getElementById('historyText').innerText = 'History';
@@ -1728,14 +1935,14 @@ setHouseType(value: string) {
             return 'कांटेक्ट नंबर देखें';
           }
       }
-      tutorialText() {
+        tutorialText() {
         if (localStorage.getItem('language') === 'English') {
           return '#Click on HOW TO USE option above to play the tutorial again ';
         } else {
           return '#App चलाना सीखने के लिए ऊपर HOW TO USE पर क्लिक करें ';
         }
       }
-      changeNoButtonLanguage(type: string) {
+        changeNoButtonLanguage(type: string) {
         setTimeout(() => {
           this.changeNoButtonColor();
           this.changeYesButtonColor();
@@ -1747,14 +1954,14 @@ setHouseType(value: string) {
           return 'रिजेक्ट';
         }
     }
-    changeNoButtonColor() {
+        changeNoButtonColor() {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
         if (element.innerText === 'No' || element.innerText === 'NO' || element.innerText === 'रिजेक्ट' || element.innerText === 'Reject') {
             element.style.background = 'red';
         }
       });
     }
-    changeYesButtonColor() {
+        changeYesButtonColor() {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
         // tslint:disable-next-line: max-line-length
         if (element.innerText === 'Yes' || element.innerText === 'YES' || element.innerText === 'कांटेक्ट नंबर देखें' || element.innerText === 'See Contact Number' ) {
@@ -1762,7 +1969,7 @@ setHouseType(value: string) {
         }
       });
     }
-    changeShortButtonColor() {
+        changeShortButtonColor() {
       document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
         // tslint:disable-next-line: max-line-length
         if (element.innerText === 'Shortlist' || element.innerText === 'शॉर्टलिस्ट करें' ) {
@@ -1770,14 +1977,14 @@ setHouseType(value: string) {
         }
       });
     }
-    changeShowButtonLanguage(type: string) {
+        changeShowButtonLanguage(type: string) {
       if (type === 'English') {
         return 'Show More';
       } else {
         return 'और दिखाएं';
       }
     }
-    changeBtnTextLanguage(type: string, text: string) {
+        changeBtnTextLanguage(type: string, text: string) {
       if (type === 'English') {
           return text;
       } else {
@@ -1798,14 +2005,14 @@ setHouseType(value: string) {
     }
   }
 
-    changeHistoryButtonLanguage(type: string) {
+        changeHistoryButtonLanguage(type: string) {
       if (type === 'English') {
         return 'History';
       } else {
         return 'देखे गए रिश्ते';
       }
     }
-      changeRegisterButtonLanguage(type: string) {
+        changeRegisterButtonLanguage(type: string) {
         if (type === 'English') {
           return 'Register';
         } else {
@@ -1813,7 +2020,7 @@ setHouseType(value: string) {
         }
   }
 
-  Analytics(type: string, category: string, action: string) {
+        Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {
 
@@ -1823,7 +2030,7 @@ setHouseType(value: string) {
 
     });
   }
-  whatsappShare(name: string, loggedId: string, profileId: string, mobile: string) {
+        whatsappShare(name: string, loggedId: string, profileId: string, mobile: string) {
 
     const lId = loggedId;
     this.pId.push(profileId);
@@ -1864,7 +2071,7 @@ setHouseType(value: string) {
     });
   }
 
-  setWhatsAppLink(loggedId: string, profileId: string, full: string, index: number) {
+        setWhatsAppLink(loggedId: string, profileId: string, full: string, index: number) {
     const pdfData = new FormData();
     pdfData.append('id', loggedId);
     pdfData.append('profile_to_send_id', profileId);
@@ -1887,7 +2094,7 @@ setHouseType(value: string) {
     this.ngxNotificationService.error('Error Occured');
   });
  }
- setDownloadLink(loggedId: string, profileId: string, full: string, index: number) {
+        setDownloadLink(loggedId: string, profileId: string, full: string, index: number) {
   const pdfData = new FormData();
   pdfData.append('id', loggedId);
   pdfData.append('profile_to_send_id', profileId);
@@ -1911,7 +2118,7 @@ setHouseType(value: string) {
   });
  }
 
-  openImageModal() {
+        openImageModal() {
     document.querySelectorAll<HTMLElement>('.botui-message-content #selectedProfilePic').forEach((element) => {
       const htmlElement: HTMLElement = element;
       const modal = document.getElementById('myModal');
@@ -1933,7 +2140,7 @@ setHouseType(value: string) {
     });
   }
 
-  setWalkThrough() {
+        setWalkThrough() {
     // tslint:disable-next-line: max-line-length
     if (document.querySelectorAll('.botui-actions-buttons.styleButton').length === 1 || document.querySelectorAll('#selectedProfilePic').length === 1 ) {
       this.botui.message.add({
@@ -1948,39 +2155,39 @@ setHouseType(value: string) {
       this.walkthroughStatus = false;
     }
   }
-  getWalkthroughStatus() {
+        getWalkthroughStatus() {
     if (this.walkthroughStatus === true) {
       return true;
     } else {
       return false;
     }
   }
-  myHideFunction() {
+        myHideFunction() {
     localStorage.setItem('walkthrough', 'done');
     console.log(localStorage.getItem('walkthrough'));
     this.walkthroughStatusTwo = true;
   }
-  getWalkthroughStatusTwo() {
+        getWalkthroughStatusTwo() {
    if (this.walkthroughStatusTwo === true) {
      return true;
    } else {
      return false;
    }
   }
-  myHideFunctionTwo() {
+        myHideFunctionTwo() {
       this.walkthroughStatusThree = true;
   }
-  getWalkthroughStatusThree() {
+        getWalkthroughStatusThree() {
     if (this.walkthroughStatusThree === true) {
       return true;
     } else {
       return false;
     }
    }
-   getWalkthroughThreeText() {
+        getWalkthroughThreeText() {
      return 'आप ' + this.points + ' कांटेक्ट नंबर और देख सकते है';
    }
-   myHideFunctionThree() {
+        myHideFunctionThree() {
     // id - profile id,
     // status - tutorial status
      const walkthroughStatusUpdate = new FormData();
@@ -2002,7 +2209,7 @@ setHouseType(value: string) {
        }
      );
    }
-   howToUse() {
+        howToUse() {
     this.Analytics('tutorial', 'tutorial', 'opted tutorial');
     if (this.history !== 'chatbot') {
       this.changeToBot();
@@ -2022,7 +2229,7 @@ setHouseType(value: string) {
       this.walkthroughStatusThree = false;
     }, 3000);
    }
-   openAwardDialog() {
+        openAwardDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
@@ -2034,7 +2241,7 @@ setHouseType(value: string) {
     document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
    }
 
-   openPreferenceWideningDialog() {
+        openPreferenceWideningDialog() {
     this.spinner.show();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
