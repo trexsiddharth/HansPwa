@@ -33,7 +33,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     await this.notificationService.init();
 
     if (environment.production) {
-      enableProdMode();
       if (window) {
         window.console.log = () => {};
       }
