@@ -306,6 +306,7 @@ export class CompatibilityFormComponent implements OnInit {
         localStorage.setItem('gender', this.PageOne.value.gender);
         localStorage.setItem('mobile_number', this.PageOne.value.phone);
         this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
+        (window as any).gtag_report_conversion('https://hansmatrimony.com/reg');
         localStorage.setItem('RegisterNumber', '');
         this.router.navigate(['/chat']);
         this.ngxNotificationService.success('Registered Successfully');
