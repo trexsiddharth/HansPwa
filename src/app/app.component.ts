@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, enableProdMode } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
 import { Router } from '@angular/router';
 import {firebase} from '@firebase/app';
@@ -31,6 +31,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     firebase.initializeApp(environment.firebase);
     await this.notificationService.init();
+
+    if (environment.production) {
+      enableProdMode();
+      if (window) {
+        window.console.log = () => {};
+      }
+    }
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {

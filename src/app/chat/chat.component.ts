@@ -14,7 +14,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import {  NotificationsService } from '../notifications.service';
 import { CreditAwardComponent } from '../credit-award/credit-award.component';
 import { PreferenceWideningComponent } from '../preference-widening/preference-widening.component';
-import { resolve } from 'url';
+
+
 
 declare let BotUI: Function;
 
@@ -356,6 +357,10 @@ temple_name: ''
            (data: any) => {
              this.getCredits();
              console.log(data);
+            //  this.botui.message.add({
+            //   type: 'embed', // this is 'text' by default
+            //   content: 'https://www.youtube.com/embed/of3vGNfY070'  ////'https://www.youtube.com/watch?v=of3vGNfY070'
+            // });
              if (data.type === 'profile') {
               const values = data.apiwha_autoreply;
               console.log(values.photo);
