@@ -992,9 +992,6 @@ if (num && num !== '' && num !== '[]' ) {
                     this.langChanged = false;
                   }
                   localStorage.setItem('mobile_number', num);
-                  if (data.show_ad === 1) {
-                  this.openAwardDialog();
-                  }
                   this.repeatMEssage('SHOW', num);
         } else {
           this.spinner.hide();
@@ -2198,16 +2195,16 @@ if (value === 'No') {
      console.log('id', localStorage.getItem('id'));
      console.log('status', '1');
 
-     return this.http.post<any>('https://partner.hansmatrimony.com/api/updateStatus', walkthroughStatusUpdate).subscribe(
-       (data: any) => {
-         console.log(data);
-         if (this.showWalkthrough === true) {
-           this.openAwardDialog();
-         }
-       }, err => {
-         console.log(err);
-       }
-     );
+    //  return this.http.post<any>('https://partner.hansmatrimony.com/api/updateStatus', walkthroughStatusUpdate).subscribe(
+    //    (data: any) => {
+    //      console.log(data);
+    //      if (this.showWalkthrough === true) {
+    //       //  this.openAwardDialog();
+    //      }
+    //    }, err => {
+    //      console.log(err);
+    //    }
+    //  );
    }
         howToUse() {
     this.Analytics('tutorial', 'tutorial', 'opted tutorial');
