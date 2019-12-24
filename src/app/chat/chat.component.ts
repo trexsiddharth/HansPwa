@@ -1299,8 +1299,8 @@ if (num && num !== '' && num !== '[]' ) {
         } else {
           this.familyData = this.familyTable;
         }
-        if (data.preference) {
-          this.preferenceData = data.preference;
+        if (data.preferences) {
+          this.preferenceData = data.preferences;
         } else {
           this.preferenceData = this.preferenceTable;
         }
