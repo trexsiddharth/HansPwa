@@ -2252,7 +2252,11 @@ if (value === 'No') {
     const getProfileData = new FormData();
     getProfileData.append('id', localStorage.getItem('id'));
     getProfileData.append('contacted', '1');
+    if (localStorage.getItem('is_lead')) {
     getProfileData.append('is_lead', localStorage.getItem('is_lead'));
+    } else {
+      getProfileData.append('is_lead', '1');
+    }
 
     console.log('id', localStorage.getItem('id'));
     console.log('contacted', '1');

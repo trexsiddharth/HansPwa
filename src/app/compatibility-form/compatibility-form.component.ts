@@ -260,69 +260,72 @@ export class CompatibilityFormComponent implements OnInit {
   firstStep() {
 
     console.log('caste', this.PageOne.value.Castes);
-    if (this.PageOne.valid) {
-      this.spinner.show();
-      let date = this.PageOne.value.birth_date;
-      let month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
-      let year = this.PageOne.value.birth_year;
-      console.log(date + '/' + month + '/' + year);
-      const firststepdata = new FormData();
-      firststepdata.append('mobile', this.PageOne.value.phone);
-      firststepdata.append('birth_date', date + '/' + month + '/' + year);
-      firststepdata.append('gender', this.PageOne.value.gender);
-      firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
-      firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
-      if (this.PageOne.value.Mangalik === 'Non-manglik') {
-      firststepdata.append('manglik', 'No');
-    } else {
-      firststepdata.append('manglik', this.PageOne.value.Mangalik);
-    }
-      firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
-      firststepdata.append('religion', this.PageOne.value.Religion);
-      firststepdata.append('caste', this.PageOne.value.Castes);
-
-      console.log('mobile', this.PageOne.value.phone);
-      console.log('birth_date', this.birthDate);
-      console.log('gender', this.PageOne.value.gender);
-      console.log('height', this.Heights1[this.PageOne.value.Height]);
-      console.log('marital_status', this.PageOne.value.MaritalStatus);
-      if (this.PageOne.value.Mangalik === 'Non-manglik') {
-      console.log('manglik', 'No');
-    } else {
-      console.log('manglik', this.PageOne.value.Mangalik);
-    }
-      console.log('annual_income', this.PageOne.value.AnnualIncome);
-      console.log('religion', this.PageOne.value.Religion);
-      console.log('caste', this.PageOne.value.Castes);
-
-
-    // tslint:disable-next-line: max-line-length
-      return this.http.post('https://partner.hansmatrimony.com/api/createBasic', firststepdata ).subscribe((res: any) => {
-      console.log('first', res);
-
-      if (res.status === 1) {
-        this.spinner.hide();
-        localStorage.setItem('id', res.id);
-        localStorage.setItem('gender', this.PageOne.value.gender);
-        localStorage.setItem('mobile_number', this.PageOne.value.phone);
-        this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
-        // (window as any).gtag_report_conversion('https://hansmatrimony.com/reg');
-        localStorage.setItem('RegisterNumber', '');
-        this.router.navigate(['/chat']);
-        this.ngxNotificationService.success('Registered Successfully');
-      } else {
-        this.spinner.hide();
-        this.ngxNotificationService.error(res.message);
-      }
-
-    }, err => {
-      this.spinner.hide();
-      this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
-      console.log(err);
-    });
-  } else {
-    this.ngxNotificationService.error('Fill the details');
-  }
+    this.casteValidation(this.PageOne.value.Castes).then(res => {
+          if (res === true) {
+            if (this.PageOne.valid) {
+              this.spinner.show();
+              const date = this.PageOne.value.birth_date;
+              const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
+              const year = this.PageOne.value.birth_year;
+              console.log(date + '/' + month + '/' + year);
+              const firststepdata = new FormData();
+              firststepdata.append('mobile', this.PageOne.value.phone);
+              firststepdata.append('birth_date', date + '/' + month + '/' + year);
+              firststepdata.append('gender', this.PageOne.value.gender);
+              firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
+              firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
+              if (this.PageOne.value.Mangalik === 'Non-manglik') {
+              firststepdata.append('manglik', 'No');
+            } else {
+              firststepdata.append('manglik', this.PageOne.value.Mangalik);
+            }
+              firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
+              firststepdata.append('religion', this.PageOne.value.Religion);
+              firststepdata.append('caste', this.PageOne.value.Castes);
+        
+              console.log('mobile', this.PageOne.value.phone);
+              console.log('birth_date', this.birthDate);
+              console.log('gender', this.PageOne.value.gender);
+              console.log('height', this.Heights1[this.PageOne.value.Height]);
+              console.log('marital_status', this.PageOne.value.MaritalStatus);
+              if (this.PageOne.value.Mangalik === 'Non-manglik') {
+              console.log('manglik', 'No');
+            } else {
+              console.log('manglik', this.PageOne.value.Mangalik);
+            }
+              console.log('annual_income', this.PageOne.value.AnnualIncome);
+              console.log('religion', this.PageOne.value.Religion);
+              console.log('caste', this.PageOne.value.Castes);
+        
+        
+            // tslint:disable-next-line: max-line-length
+              return this.http.post('https://partner.hansmatrimony.com/api/createBasic', firststepdata ).subscribe((res: any) => {
+              console.log('first', res);
+        
+              if (res.status === 1) {
+                this.spinner.hide();
+                localStorage.setItem('id', res.id);
+                localStorage.setItem('gender', this.PageOne.value.gender);
+                localStorage.setItem('mobile_number', this.PageOne.value.phone);
+                this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
+                this.gtag_report_conversion('https://hansmatrimony.com/reg');
+                localStorage.setItem('RegisterNumber', '');
+                this.router.navigate(['/chat']);
+                this.ngxNotificationService.success('Registered Successfully');
+              } else {
+                this.spinner.hide();
+                this.ngxNotificationService.error(res.message);
+              }
+            }, err => {
+              this.spinner.hide();
+              this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+              console.log(err);
+            });
+          } else {
+            this.ngxNotificationService.error('Fill the details');
+          }
+          }
+    }) ;
   }
 
   private _Castefilter(value: string): string[] {
@@ -338,9 +341,14 @@ export class CompatibilityFormComponent implements OnInit {
       }
     });
   }
-  ngOnInit() {
-    var yrs = new Date().getFullYear();
-    var min = yrs - 80;
+gtag_report_conversion(url) {
+    (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
+    return false;
+  }
+
+ngOnInit() {
+    let yrs = new Date().getFullYear();
+    let min = yrs - 80;
     for (let index = min; index < yrs; index++) {
       this.years.push(index.toString());
     }
@@ -360,12 +368,12 @@ export class CompatibilityFormComponent implements OnInit {
     );
   }
 
-  onDate(event): void {
+onDate(event): void {
     console.log(event);
   }
 
    // Calucalting age
-   calculateAge(event: any) {
+calculateAge(event: any) {
     this.birthDate = convert(event);
     const timediffernce = Math.abs(Date.now() - event);
     this.currentAge = Math.floor((timediffernce / (1000 * 3600 * 24)) / 365);
@@ -376,8 +384,8 @@ export class CompatibilityFormComponent implements OnInit {
       // tslint:disable-next-line: one-variable-per-declaration
       const date = new Date(str),
         mnth = ('0' + (date.getMonth() + 1)).slice(-2),
-        day = ("0" + date.getDate()).slice(-2);
-      return [date.getFullYear(), mnth, day].join("/");
+        day = ('0' + date.getDate()).slice(-2);
+      return [date.getFullYear(), mnth, day].join('/');
 
     }
     this.addSlashes();
@@ -394,7 +402,7 @@ export class CompatibilityFormComponent implements OnInit {
 
   }
 
-  addSlashes() {
+addSlashes() {
     console.log('sv');
     const newInput = document.getElementById('birthDate');
     newInput.addEventListener('keydown', function(e) {
@@ -408,12 +416,12 @@ export class CompatibilityFormComponent implements OnInit {
       }
     });
   }
-  datePickerClicked() {
+datePickerClicked() {
     document.querySelector<HTMLElement>('.mat-icon-button').click();
   }
 
   // Religion
-  Religion(event) {
+Religion(event) {
     console.log(event.currentTarget.value);
     if (event.currentTarget.value === 'Hindu') {
       // console.log
@@ -445,22 +453,40 @@ export class CompatibilityFormComponent implements OnInit {
       this.AllCastes = false;
     }
   }
-  casteValidation(value) {
-    console.log('caste changed', value.srcElement.value);
-    let status = 1;
-    this.casteo.forEach(element => {
-      if (element !== value.srcElement.value && value.srcElement.value !== '' ) {
-        status = 0;
-      } else {
-        status = 1;
-      }
-    });
+async casteValidation(value) {
+  console.log('caste changed', value );
+  let status = 1;
+  let statusConfirmed;
+  await this.checkCaste(value).then((res: boolean) => {
+       statusConfirmed = res;
+     });
+  console.log('caste changed', statusConfirmed );
 
-    if (status === 0) {
+  if (statusConfirmed === false) {
       this.ngxNotificationService.warning('Please choose a caste from the dropdown');
       this.PageOne.get('Castes').setValue('');
+      return false;
     }
+  return true;
 
+  }
+
+  checkCaste(value) {
+    let status = 1;
+    let statusConfirmed = false;
+    this.casteo.forEach(element => {
+      element.forEach(item => {
+        if (value !== '' && item.includes(value) && item.length === value.length ) {
+          console.log('confirmed');
+          statusConfirmed = true;
+        } else {
+          status = 0;
+        }
+      });
+    });
+    return new Promise((resolve) => {
+resolve(statusConfirmed);
+    });
   }
 }
 
