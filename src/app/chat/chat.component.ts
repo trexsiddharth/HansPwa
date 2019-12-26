@@ -352,15 +352,15 @@ temple_name: ''
        // tslint:disable-next-line: max-line-length
    }
 
+
+
    repeatMEssage(ans: String, mob) {
          this.chatRequest(ans, mob).subscribe(
            (data: any) => {
              this.getCredits();
              console.log(data);
-            //  this.botui.message.add({
-            //   type: 'embed', // this is 'text' by default
-            //   content: 'https://www.youtube.com/embed/of3vGNfY070'  ////'https://www.youtube.com/watch?v=of3vGNfY070'
-            // });
+
+
              if (data.type === 'profile') {
               const values = data.apiwha_autoreply;
               console.log(values.photo);
