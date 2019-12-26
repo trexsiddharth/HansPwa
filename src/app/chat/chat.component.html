@@ -70,6 +70,12 @@
   </div>
 
   <div>
+    <div class='mainBody  w-full bg-white ht-full'  [hidden]="history!='connection_error'">
+             <app-connection-error></app-connection-error>
+   </div>
+</div>
+
+  <div>
     <ngx-walkthrough 
     [is-round]="true"
     [is-round]="true"
@@ -207,7 +213,7 @@
             </div>
     </main>
   
-  <footer>
+  <footer id="footerVisibility">
       <div class="navbar" style="padding: 0px">
           <div class="row rowClass" >
               <div class="col-4" id="chatButton" style="text-align: center">

@@ -14,6 +14,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import {  NotificationsService } from '../notifications.service';
 import { CreditAwardComponent } from '../credit-award/credit-award.component';
 import { PreferenceWideningComponent } from '../preference-widening/preference-widening.component';
+import { timeout, retry, catchError } from 'rxjs/operators';
 
 
 
@@ -160,6 +161,7 @@ temple_name: ''
   promptData: any = null;
   pId: string[] = [];
   pName: string[] = [];
+  connectionStatus;
 
 
   constructor(
@@ -204,6 +206,20 @@ temple_name: ''
       localStorage.setItem('id', '');
       localStorage.setItem('gender', '');
     }
+    window.addEventListener('offline',
+  () => {
+    console.log('No Internet');
+    this.connectionStatus = 'offline';
+    this.showError();
+  });
+
+    window.addEventListener('online',
+  () => {
+    console.log('Connected Internet');
+    this.connectionStatus = 'online';
+}
+);
+
     if (this.router.url.match('push')) {
       this.Analytics('Push Web', 'Push Web', 'Notification Clicked');
     }
@@ -343,7 +359,10 @@ temple_name: ''
       const data1 = new FormData();
       data1.append('data', myJSON);
 
-      return this.http.post<any>(' https://partner.hansmatrimony.com/api/sendMessages' , data1 );
+      // tslint:disable-next-line: max-line-length
+      return this.http.post<any>(' https://partner.hansmatrimony.com/api/sendMessages' , data1 ).pipe(timeout(7000), retry(2), catchError(e => {
+          throw new Error('Server Timeout ' +  e);
+      }));
      }
    }
    checkUrl(num: string): Observable<any> {
@@ -359,7 +378,6 @@ temple_name: ''
            (data: any) => {
              this.getCredits();
              console.log(data);
-
 
              if (data.type === 'profile') {
               const values = data.apiwha_autoreply;
@@ -690,17 +708,16 @@ temple_name: ''
              this.spinner.hide();
            },
            (error: any) => {
-            this.ngxNotificationService.error('Something Went Wrong, We are trying again');
-            this.errorCount++;
-            if (this.errorCount <= 2) {
-                 this.repeatMEssage(ans, mob);
-             } else {
               this.ngxNotificationService.error('Please refresh the page and try again');
-             }
+              console.log(error);
+              this.showError();
 
-            console.log(error);
            }
          );
+ }
+ showError() {
+    this.history = 'connection_error';
+    document.getElementById('footerVisibility').style.display = 'none';
  }
  getFoodChoiceString(num: string): String {
  if (num === null) {
@@ -1246,7 +1263,9 @@ if (num && num !== '' && num !== '[]' ) {
       historyData.append('id', localStorage.getItem('id'));
       historyData.append('is_lead', localStorage.getItem('is_lead'));
       // tslint:disable-next-line: max-line-length
-      return this.http.post<any>('https://partner.hansmatrimony.com/api/history', historyData).subscribe(
+      return this.http.post<any>('https://partner.hansmatrimony.com/api/history', historyData).pipe(timeout(7000), retry(2), catchError(e => {
+        throw new Error('Server Timeout ' +  e);
+    })).subscribe(
         (data: any) => {
          console.log(data);
          this.historyData = data;
@@ -1254,7 +1273,8 @@ if (num && num !== '' && num !== '[]' ) {
         },
         (error: any) => {
           this.spinner.hide();
-          this.changeToHistory();
+          this.ngxNotificationService.error('Something Went Wrong');
+          this.showError();
           console.log(error);
         }
       );
@@ -1293,7 +1313,9 @@ if (num && num !== '' && num !== '[]' ) {
       myprofileData.append('contacted', '1');
       myprofileData.append('is_lead', localStorage.getItem('is_lead'));
      // tslint:disable-next-line: max-line-length
-      return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).subscribe(
+      return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
+        throw new Error('Server Timeout ' +  e);
+    })).subscribe(
        (data: any) => {
         console.log(data);
         if (data.family) {
@@ -1318,7 +1340,8 @@ if (num && num !== '' && num !== '[]' ) {
        (error: any) => {
         this.spinner.hide();
         console.log(error);
-        this.changeToMyProfile();
+        this.ngxNotificationService.error('Something Went Wrong');
+        this.showError();
        }
      );
      } else {

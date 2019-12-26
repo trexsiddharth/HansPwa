@@ -258,7 +258,6 @@ export class CompatibilityFormComponent implements OnInit {
   }
 
   firstStep() {
-
     console.log('caste', this.PageOne.value.Castes);
     this.casteValidation(this.PageOne.value.Castes).then(res => {
           if (res === true) {
@@ -282,7 +281,7 @@ export class CompatibilityFormComponent implements OnInit {
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
-        
+
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
               console.log('gender', this.PageOne.value.gender);
@@ -296,12 +295,12 @@ export class CompatibilityFormComponent implements OnInit {
               console.log('annual_income', this.PageOne.value.AnnualIncome);
               console.log('religion', this.PageOne.value.Religion);
               console.log('caste', this.PageOne.value.Castes);
-        
-        
+
+
             // tslint:disable-next-line: max-line-length
               return this.http.post('https://partner.hansmatrimony.com/api/createBasic', firststepdata ).subscribe((res: any) => {
               console.log('first', res);
-        
+
               if (res.status === 1) {
                 this.spinner.hide();
                 localStorage.setItem('id', res.id);
@@ -310,6 +309,10 @@ export class CompatibilityFormComponent implements OnInit {
                 this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
                 this.gtag_report_conversion('https://hansmatrimony.com/reg');
                 localStorage.setItem('RegisterNumber', '');
+                (window as any).fbq('track', 'SinglePageRegistration', {
+                  value: 15,
+                  currency: 'INR',
+                });
                 this.router.navigate(['/chat']);
                 this.ngxNotificationService.success('Registered Successfully');
               } else {
@@ -347,8 +350,8 @@ gtag_report_conversion(url) {
   }
 
 ngOnInit() {
-    let yrs = new Date().getFullYear();
-    let min = yrs - 80;
+    const yrs = new Date().getFullYear();
+    const min = yrs - 80;
     for (let index = min; index < yrs; index++) {
       this.years.push(index.toString());
     }
@@ -455,7 +458,7 @@ Religion(event) {
   }
 async casteValidation(value) {
   console.log('caste changed', value );
-  let status = 1;
+  const status = 1;
   let statusConfirmed;
   await this.checkCaste(value).then((res: boolean) => {
        statusConfirmed = res;

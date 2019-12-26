@@ -50,6 +50,7 @@ import { CreditAwardComponent } from './credit-award/credit-award.component';
 import { PreferenceWideningComponent } from './preference-widening/preference-widening.component';
 import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
 import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
+import { ConnectionErrorComponent } from './chat/connection-error/connection-error.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-s
     PreferenceWideningComponent,
     CompatibilityFormComponent,
     PhoneNumberScreenComponent,
+    ConnectionErrorComponent,
   ],
   imports: [
     BrowserModule,
