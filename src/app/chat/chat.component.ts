@@ -629,7 +629,7 @@ temple_name: ''
                           hitCallback: () => {
                             console.log('Tracking register from chatbot successful');
                           }});
-                        this.router.navigateByUrl('register');
+                        this.router.navigateByUrl('reg');
                        });
                      } else if (data.buttons.match('Show')) {
                       return this.botui.action.button({
@@ -1033,7 +1033,7 @@ if (num && num !== '' && num !== '[]' ) {
                 hitCallback: () => {
                   console.log('Tracking register from chatbot successful');
                 }});
-              this.router.navigateByUrl('register');
+              this.router.navigateByUrl('reg');
             });
           });
         }
@@ -1056,7 +1056,7 @@ if (num && num !== '' && num !== '[]' ) {
                 hitCallback: () => {
                   console.log('Tracking  register from chatbot successful');
                 }});
-              this.router.navigateByUrl('register');
+              this.router.navigateByUrl('reg');
             });
           });
         } else {

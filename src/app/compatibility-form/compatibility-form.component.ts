@@ -86,7 +86,7 @@ export class CompatibilityFormComponent implements OnInit {
   otp2: any;
   otp3: any;
   otp4: any;
-  numberCheck: string;
+  numberCheck: string = localStorage.getItem('RegisterNumber');
   changeNumber = false;
   otpStatus = false;
   createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother' , 'Sister' , 'Other'];
@@ -100,7 +100,8 @@ export class CompatibilityFormComponent implements OnInit {
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
-      phone: [localStorage.getItem('RegisterNumber'), Validators.compose([Validators.required])],
+      // tslint:disable-next-line: max-line-length
+      phone: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       birth_date: ['1', Validators.compose([Validators.required])],
       birth_month: ['January', Validators.compose([Validators.required])],
@@ -350,22 +351,24 @@ gtag_report_conversion(url) {
   }
 
 ngOnInit() {
-    const yrs = new Date().getFullYear();
-    const min = yrs - 80;
-    for (let index = min; index < yrs; index++) {
+  this.numberCheck = localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length);
+  console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
+  const yrs = new Date().getFullYear();
+  const min = yrs - 80;
+  for (let index = min; index < yrs; index++) {
       this.years.push(index.toString());
     }
-    document.querySelector('body').style.background = 'white';
-    document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
-    document.querySelector('body').style.backgroundSize = 'cover';
-    this.spinner.hide();
-    localStorage.setItem('gender', '');
-    localStorage.setItem('mobile_number', '') ;
-    localStorage.setItem('selectedCaste', '');
-    this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+  document.querySelector('body').style.background = 'white';
+  document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
+  document.querySelector('body').style.backgroundSize = 'cover';
+  this.spinner.hide();
+  localStorage.setItem('gender', '');
+  localStorage.setItem('mobile_number', '') ;
+  localStorage.setItem('selectedCaste', '');
+  this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
       this.getcastes = res;
     });
-    this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
+  this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
       startWith(''),
       map(value => this._Castefilter(value))
     );
