@@ -50,7 +50,13 @@
 
 ::ng-deep .botui-message-content.embed {
   padding: 5px;
-  border-radius: 5px
+  border-radius: 5px;
+  height: 50%;
+}
+
+::ng-deep .botui-message-content iframe{
+  width: 100%;
+  height: -webkit-fill-available;
 }
 
 ::ng-deep .botui-message-content-link {

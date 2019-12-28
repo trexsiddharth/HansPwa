@@ -162,6 +162,8 @@ temple_name: ''
   pId: string[] = [];
   pName: string[] = [];
   connectionStatus;
+  player;
+  done = false;
 
 
   constructor(
@@ -343,6 +345,21 @@ temple_name: ''
   }
   }
 
+  showVideo() {
+    this.botui.message.add({
+      type: 'embed',
+      content: 'https://www.youtube.com/embed/GatneWlhZ3g'
+    }).then(() => {
+      return this.botui.action.button({
+        action: [{
+          text: this.changeShowButtonLanguage(this.currentLanguage),
+          value: 'SHOW'
+        }]
+    }).then(res => {
+          this.repeatMEssage(res.value, this.currentContact);
+    });
+  });
+}
    chatRequest(data, mobile): Observable<any> {
      if (data && mobile && data !== '' && mobile !== '') {
       this.Data = {
@@ -616,7 +633,7 @@ temple_name: ''
                         });
                        });
                      }  else if (data.buttons.match('Register')) {
-                       this.botui.action.button({
+                       return this.botui.action.button({
                          action: [{
                            text: this.changeRegisterButtonLanguage(this.currentLanguage),
                            value: 'REGISTER'
