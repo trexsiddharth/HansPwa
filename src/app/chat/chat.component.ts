@@ -1328,7 +1328,11 @@ if (num && num !== '' && num !== '[]' ) {
       const myprofileData = new FormData();
       myprofileData.append('id', localStorage.getItem('id'));
       myprofileData.append('contacted', '1');
-      myprofileData.append('is_lead', localStorage.getItem('is_lead'));
+      if (localStorage.getItem('is_lead')) {
+        myprofileData.append('is_lead', localStorage.getItem('is_lead'));
+      } else {
+        myprofileData.append('is_lead', '1');
+      }
      // tslint:disable-next-line: max-line-length
       return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
         throw new Error('Server Timeout ' +  e);
