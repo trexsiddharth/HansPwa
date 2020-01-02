@@ -348,7 +348,7 @@ temple_name: ''
   showVideo() {
     this.botui.message.add({
       type: 'embed',
-      content: 'https://www.youtube.com/embed/GatneWlhZ3g'
+      content: 'https://www.youtube.com/embed/-sYMBcox2Bs'
     }).then(() => {
       return this.botui.action.button({
         action: [{
