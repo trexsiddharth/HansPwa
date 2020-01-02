@@ -29,7 +29,8 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
-  { path: 'reg', component: CompatibilityFormComponent}
+  { path: 'reg', component: CompatibilityFormComponent},
+  { path: '**', pathMatch: 'full', redirectTo: '/'}
 
 ];
 

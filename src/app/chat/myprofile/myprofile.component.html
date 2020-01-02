@@ -41,7 +41,7 @@
             <h6>Marital Status</h6>
             <p style="font-size: 14px;">{{personalProfileData.marital_status}}</p>
           </div>
-          <div class="col-6" *ngIf="familyProfileData">
+          <div class="col-6" *ngIf="familyProfileData && !personalProfileData.religion ">
               <h6>Religion</h6>
               <p style="font-size: 14px;">{{familyProfileData.religion}}</p>
             </div>
@@ -56,7 +56,7 @@
               <h6>Height</h6>
               <p style="font-size: 14px;" [innerHtml]="getHeight(personalProfileData.height)" ></p>
             </div>
-            <div class="col-6" *ngIf="familyProfileData">
+            <div class="col-6" *ngIf="familyProfileData && !personalProfileData.caste">
                 <h6>Caste</h6>
                 <p style="font-size: 14px;">{{familyProfileData.caste}}</p>
               </div>
@@ -71,7 +71,7 @@
                 <h6>Weight</h6>
                 <p style="font-size: 14px;">{{personalProfileData.weight}}</p>
               </div>
-              <div class="col-6" *ngIf="familyProfileData">
+              <div class="col-6" *ngIf="familyProfileData && !personalProfileData.gotra">
                   <h6>Gotra</h6>
                   <p style="font-size: 14px;">{{familyProfileData.gotra}}</p>
                 </div>
@@ -83,7 +83,7 @@
             </div>
     
             <div class="row" style="margin: 10px 10px;">
-                <div class="col-6" *ngIf="familyProfileData">
+                <div class="col-6" *ngIf="familyProfileData && !personalProfileData.city">
                   <h6>Current City</h6>
                   <p style="font-size: 14px;">{{familyProfileData.city}}</p>
                 </div>
@@ -201,7 +201,7 @@
             </div>
             <div class="row" style="margin: 10px 10px 0px;">
               <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px;" class="fa fa-phone"></i>
-              <div class="col-5" style="margin: auto 0px;" *ngIf="familyProfileData">
+              <div class="col-5" style="margin: auto 0px;" *ngIf="familyProfileData && !personalProfileData.mobile">
               <h6 style="display: inline-block">Mobile</h6>
                 <p style="font-size: 14px;display: inline-block;margin-left: 10px;">{{familyProfileData.mobile}}</p>
               </div>
