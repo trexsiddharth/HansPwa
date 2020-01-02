@@ -95,6 +95,7 @@ export class CompatibilityFormComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
   month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   years: string[] = [];
+  errors: string[] = [];
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
@@ -259,8 +260,10 @@ export class CompatibilityFormComponent implements OnInit {
   }
 
   firstStep() {
-    console.log('caste', this.PageOne.value.Castes);
-    this.casteValidation(this.PageOne.value.Castes).then(res => {
+    this.errors = [];
+    if (this.PageOne.valid) {
+      console.log('caste', this.PageOne.value.Castes);
+      this.casteValidation(this.PageOne.value.Castes).then(res => {
           if (res === true) {
             if (this.PageOne.valid) {
               this.spinner.show();
@@ -329,7 +332,16 @@ export class CompatibilityFormComponent implements OnInit {
             this.ngxNotificationService.error('Fill the details');
           }
           }
-    }) ;
+    });
+    } else {
+      // tslint:disable-next-line: forin
+      for (const control in this.PageOne.controls) {
+          if (this.PageOne.controls[control].value === '') {
+            this.errors.push(control);
+          }
+      }
+      this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+    }
   }
 
   private _Castefilter(value: string): string[] {

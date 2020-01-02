@@ -39,7 +39,7 @@ export class PhoneNumberScreenComponent implements OnInit {
     }
     this.spinner.hide();
   }
-  
+
 
   submitPhone() {
     this.spinner.show();
@@ -53,20 +53,16 @@ export class PhoneNumberScreenComponent implements OnInit {
       localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
       localStorage.setItem('is_lead', res.is_lead);
       this.router.navigateByUrl('chat');
-      this.loginRegister = 'Login';
     } else {
-      this.ngxNotificationService.info('You are not registered with us');
-      this.loginRegister = 'Register';
+      this.ngxNotificationService.info('You are not registered with us, Kindly register');
       localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
+      this.router.navigateByUrl('reg');
     }
     this.spinner.hide();
   }, err => {
     this.spinner.hide();
     console.log(err);
   });
-  }
-  registerClicked() {
-    this.router.navigateByUrl('reg');
   }
 
 }
