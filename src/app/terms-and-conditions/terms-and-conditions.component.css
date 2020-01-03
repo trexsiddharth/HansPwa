@@ -1,0 +1,25 @@
+li {
+    line-height: 2;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    text-align: justify;
+}
+img {
+    width: 20%;
+}
+
+@media (max-width: 1024px) {
+
+    img {
+       
+        width: 50%;
+    }
+    li {
+        line-height: 2;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: justify;
+    }
+}

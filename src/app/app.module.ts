@@ -51,6 +51,7 @@ import { PreferenceWideningComponent } from './preference-widening/preference-wi
 import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
 import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
 import { ConnectionErrorComponent } from './chat/connection-error/connection-error.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { ConnectionErrorComponent } from './chat/connection-error/connection-err
     CompatibilityFormComponent,
     PhoneNumberScreenComponent,
     ConnectionErrorComponent,
+    TermsAndConditionsComponent,
   ],
   imports: [
     BrowserModule,

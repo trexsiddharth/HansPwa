@@ -13,6 +13,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
 import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
 import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'reg', component: CompatibilityFormComponent},
+  { path: 'termsCondition', component: TermsAndConditionsComponent},
   { path: '**', pathMatch: 'full', redirectTo: '/'}
 
 ];
