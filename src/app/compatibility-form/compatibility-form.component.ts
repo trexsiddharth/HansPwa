@@ -302,7 +302,7 @@ export class CompatibilityFormComponent implements OnInit {
 
 
             // tslint:disable-next-line: max-line-length
-              return this.http.post('https://partner.hansmatrimony.com/api/createBasic', firststepdata ).subscribe((res: any) => {
+              return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata ).subscribe((res: any) => {
               console.log('first', res);
 
               if (res.status === 1) {

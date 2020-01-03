@@ -14,7 +14,7 @@ import {  NotificationsService } from '../notifications.service';
   styleUrls: ['./phone-number-screen.component.css']
 })
 export class PhoneNumberScreenComponent implements OnInit {
-  numberCheck: string = '1231231231';
+  numberCheck = '1231231231';
   phoneNumber;
   loginRegister;
 
@@ -43,7 +43,8 @@ export class PhoneNumberScreenComponent implements OnInit {
 
   submitPhone() {
     this.spinner.show();
-  // tslint:disable-next-line: max-line-length
+    if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') {
+      // tslint:disable-next-line: max-line-length
     this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
     console.log(res);
     if (res.registered === 1) {
@@ -63,6 +64,10 @@ export class PhoneNumberScreenComponent implements OnInit {
     this.spinner.hide();
     console.log(err);
   });
+  } else {
+    this.ngxNotificationService.info('Enter a valid number');
+    this.spinner.hide();
+  }
   }
 
 }

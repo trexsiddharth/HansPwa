@@ -1278,7 +1278,11 @@ if (num && num !== '' && num !== '[]' ) {
       console.log(localStorage.getItem('id'));
       const historyData = new FormData();
       historyData.append('id', localStorage.getItem('id'));
-      historyData.append('is_lead', localStorage.getItem('is_lead'));
+      if (localStorage.getItem('is_lead')) {
+        historyData.append('is_lead', localStorage.getItem('is_lead'));
+      } else {
+        historyData.append('is_lead', '1');
+      }
       // tslint:disable-next-line: max-line-length
       return this.http.post<any>('https://partner.hansmatrimony.com/api/history', historyData).pipe(timeout(7000), retry(2), catchError(e => {
         throw new Error('Server Timeout ' +  e);
@@ -2309,6 +2313,7 @@ if (value === 'No') {
        (data: any) => {
         console.log(data);
 
+        if (data.family.caste) {
         this.http.get<{ mapping_id: number, castes: any }>('https://partner.hansmatrimony.com/api/caste_mapping').subscribe(
           res => {
             this.casteMap = res;
@@ -2356,6 +2361,7 @@ if (value === 'No') {
         document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
       }
           });
+        }
        },
        (error: any) => {
         this.spinner.hide();
