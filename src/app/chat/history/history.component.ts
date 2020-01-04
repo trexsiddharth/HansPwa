@@ -20,7 +20,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  shareData(id: any, contacted: any) {
+  shareData(id: any, contacted: any, status) {
     const profileData = new FormData();
     profileData.append('id', id);
     profileData.append('contacted', contacted);
@@ -34,6 +34,7 @@ export class HistoryComponent implements OnInit {
     return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', profileData).subscribe(
        (data: any) => {
         console.log(data);
+        data.profile.comments = status;
         this.share.emit(data);
         this.stage.emit('chatbot');
        },

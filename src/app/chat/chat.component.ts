@@ -164,6 +164,7 @@ temple_name: ''
   connectionStatus;
   player;
   done = false;
+  dailyQuotaReached = false;
 
 
   constructor(
@@ -504,19 +505,14 @@ temple_name: ''
                    }).then(() => {
                      if (values.profiles_left === 0) {
                        this.Analytics('Daily Quota Reached', 'Daily Quota Reached', 'Daily Quota Completed' );
+                       this.dailyQuotaReached = true;
+                     } else {
+                      this.dailyQuotaReached = false;
                      }
                      setTimeout(() => {
                       this.whatsappShare(this.setName(values.name, values.mobile), localStorage.getItem('id'), values.id, values.mobile);
                      }, 1000);
                      this.openImageModal();
-                     if (this.clientWalkThroughStatus === '0') {
-                      // this.setWalkThrough();
-                      if (data.show_ad === 1) {
-                        // this.showWalkthrough = true;
-                      } else {
-                        this.showWalkthrough = false;
-                      }
-                     }
                      if (data.buttons.match('Yes' || 'No')) {
                        this.botui.message.add({
                         type: 'html',
@@ -590,7 +586,12 @@ temple_name: ''
                if (data.buttons.match('History') && data.buttons.length === 7 && !data.apiwha_autoreply.match('6')) {
                 this.openPreferenceWideningDialog();
                } else {
-                this.botui.message.add({
+                 if (data.buttons.match('History') && data.apiwha_autoreply.match('6')) {
+                   this.dailyQuotaReached = true;
+                 } else {
+                   this.dailyQuotaReached = false;
+                 }
+                 this.botui.message.add({
                   loading: true,
                   delay: 500,
                     type: 'html',
@@ -682,21 +683,7 @@ temple_name: ''
                           this.changeToHistory();
                         });
                     } else if (data.buttons.match('Renew Plan')) {
-                      return this.botui.action.button({
-                        action: [
-                          { text: this.changeBtnTextLanguage(this.currentLanguage, 'Renew Plan'), value: 'Renew'},
-                          { text: this.changeBtnTextLanguage(this.currentLanguage, 'Call Hans Care'), value: 'Call'}
-                        ]
-                      }).then(res => {
-                          switch (res.value) {
-                            case 'Renew':
-                              this.router.navigateByUrl('subscription');
-                              break;
-                          case 'Call':
-                            window.open('tel:9697989697');
-                            break;
-                          }
-                      });
+                      this.renewProfile();
                     } else {
                       localStorage.setItem('mobile_number', mob);
                       return this.botui.action.button({
@@ -787,6 +774,24 @@ temple_name: ''
  default:
  return 'N/A';
  }
+ }
+ renewProfile() {
+  return this.botui.action.button({
+    action: [
+      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Renew Plan'), value: 'Renew'},
+      { text: this.changeBtnTextLanguage(this.currentLanguage, 'Call Hans Care'), value: 'Call'}
+    ]
+  }).then(res => {
+      switch (res.value) {
+        case 'Renew':
+          this.router.navigateByUrl('subscription');
+          break;
+      case 'Call':
+        window.open('tel:9697989697');
+        break;
+      }
+      this.renewProfile();
+  });
  }
 
  getHouseTypeString(num: Number): String {
@@ -1664,8 +1669,19 @@ profileReAnswer(num: any, id: any, answer: any) {
         this.repeatMEssage(res.value, this.currentContact);
        });
       } else {
-
-        this.botui.message.add({
+          console.log(this.dailyQuotaReached);
+          if (this.dailyQuotaReached) {
+          this.botui.action.button({
+            action: [{
+              text: this.changeShowButtonLanguage(this.currentLanguage), value: 'SHOW'
+            }]
+        }).then(res => {
+            if (res) {
+              this.repeatMEssage(res.value, this.currentContact);
+            }
+        });
+      }
+          this.botui.message.add({
           type: 'html',
           content: '<div style="text-align:center">' + this.setButton('checked.svg', 'YES', 'none') +
           this.setButton('star.svg', 'SHORTLIST', 'none') +
@@ -2087,7 +2103,7 @@ if (value === 'No') {
         element.onclick = () => {
           this.spinner.show();
           this.Analytics('Whatsapp Share', 'Whatsapp Share', 'profile shared through whatsapp');
-          // console.log(index, 'WhatsApp Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
+          console.log(index, 'WhatsApp Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
           if (mobile) {
             if (mobile.match('Visible')) {
               this.setWhatsAppLink(loggedId, this.pId[index], '0', index);
@@ -2104,7 +2120,7 @@ if (value === 'No') {
       element.onclick = () => {
         this.spinner.show();
         this.Analytics('Profile Download', 'Profile Download', 'profile downloaded');
-        // console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
+        console.log(index, 'Download Clicked' + 'lId:' + lId + 'pId:' + this.pId[index]);
         if (mobile) {
           if (mobile.match('Visible')) {
             this.setDownloadLink(loggedId, this.pId[index], '0', index);
@@ -2132,7 +2148,7 @@ if (value === 'No') {
     this.ngxNotificationService.info('Sharing on Whatsapp');
     if (whatLink) {
         // tslint:disable-next-line: max-line-length
-        whatLink[index].setAttribute('href', 'whatsapp://send?text=*' + this.pName[index] + '*%20के%20लिए%20*हंस%20मॅट्रिमोनी*%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url );
+        whatLink[index].setAttribute('href', 'whatsapp://send?text=*हंस%20मॅट्रिमोनी*%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url );
         whatLink[index].click();
     }
   }
