@@ -90,12 +90,18 @@ export class SubscriptionComponent implements OnInit {
 
    changeButtonOnline() {
      if (this.show2 === true) {
+       this.container1();
+       document.getElementById('callBtn').style.background = 'rgb(86, 162, 245)';
        return 'buttonPersonalised';
-     } else {return 'buttonOnline'; }
+     } else {
+      document.getElementById('callBtn').style.background = 'rgb(86, 162, 245)';
+      return 'buttonOnline'; }
    }
    changeButtonPersonalized() {
     if (this.show2 === true) {
-      return 'buttonOnline';
+      this.container4();
+      document.getElementById('callBtn').style.background = 'linear-gradient(to right, #ad5389, #3c1053)';
+      return 'buttonPersonalisedClicked';
     } else {return 'buttonPersonalised'; }
    }
 
@@ -186,10 +192,10 @@ onResize(event) {
 
   container4() {
     this.selectedContainer = 4;
-    document.getElementById('container4').style.background = '#56a2f5';
+    document.getElementById('container4').style.background = 'linear-gradient(to right, #ad5389, #3c1053)';
     document.getElementById('container4').style.color = 'white';
-    document.getElementById('button4').style.color = 'white';
-    document.getElementById('button4').style.background = '#56a2f5';
+    document.getElementById('button4').style.color = 'black';
+    document.getElementById('button4').style.background = 'rgb(107, 168, 169)';
     document.getElementById('container5').style.background = '#f3f3f3';
     document.getElementById('container5').style.color = 'black';
     document.getElementById('button5').style.color = 'black';
@@ -201,10 +207,10 @@ onResize(event) {
   }
   container5() {
     this.selectedContainer = 5;
-    document.getElementById('container5').style.background = '#56a2f5';
+    document.getElementById('container5').style.background = 'linear-gradient(to right, #ad5389, #3c1053)';
     document.getElementById('container5').style.color = 'white';
-    document.getElementById('button5').style.color = 'white';
-    document.getElementById('button5').style.background = '#56a2f5';
+    document.getElementById('button5').style.color = 'black';
+    document.getElementById('button5').style.background = 'rgb(107, 168, 169)';
     document.getElementById('container4').style.background = '#f3f3f3';
     document.getElementById('container4').style.color = 'black';
     document.getElementById('button4').style.color = 'black';
@@ -216,10 +222,10 @@ onResize(event) {
   }
   container6() {
     this.selectedContainer = 6;
-    document.getElementById('container6').style.background = '#56a2f5';
+    document.getElementById('container6').style.background = 'linear-gradient(to right, #ad5389, #3c1053)';
     document.getElementById('container6').style.color = 'white';
-    document.getElementById('button6').style.color = 'white';
-    document.getElementById('button6').style.background = '#56a2f5';
+    document.getElementById('button6').style.color = 'black';
+    document.getElementById('button6').style.background = 'rgb(107, 168, 169)';
     document.getElementById('container5').style.background = '#f3f3f3';
     document.getElementById('container5').style.color = 'black';
     document.getElementById('button5').style.color = 'black';

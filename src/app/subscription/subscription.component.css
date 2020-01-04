@@ -28,9 +28,22 @@
     border-radius: 10px;
     font-size: 14px;
   }
+
+  #buttonPersonalisedClicked {
+    background: linear-gradient(to right, #ad5389, #3c1053);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
   .buyNow {
     background-color: #56a2f5;
     border-radius: 10px;
+  }
+  .buyNowPersonalized {
+    background-color: rgb(107, 168, 169);
+    border-radius: 10px;
+    color: black;
   }
   
   nav > .nav.nav-tabs{
@@ -44,6 +57,10 @@
     bottom: 0px;
   position: absolute;
   margin-left: 30%;
+  }
+
+  .personalizedOfferImage{
+    width: 150px;height: 100px;border: 1px solid black; border-radius: 10px; margin: 10px 5px;
   }
 
   @media only screen and (max-width: 1024px) {

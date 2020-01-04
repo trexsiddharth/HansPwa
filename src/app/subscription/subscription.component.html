@@ -67,8 +67,53 @@
                  </div>
             </div>
 
-            <div class="card-wrapper" *ngIf="show2">
+            <div *ngIf="show2" style="background: linear-gradient(to right, #ad5389, #3c1053);padding-top: 20px;padding-bottom: 20px;">
+            
+            <div>
+                    <div class="card" style="margin: 10px 10px;">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-6">
+                                <img class="personalizedOfferImage" src="../../assets/personalmatchmaking.svg" alt="VIP Benefits1">
+                            </div>
+                            <div class="col-6" style="height: 100%;">
+                                <div  style="margin-top: 10%; text-align: center;">
+                                    <h6 style="display: inline-block;background: linear-gradient(to right, #ad5389, #3c1053); border-radius: 100px;color: white;padding: 10px 17px;">1</h6><br>
+                                    <p style="font-size: 18px;">पर्सनल मैचमेकर पाएं</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card" style="margin: 10px 10px;">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-6">
+                                <img class="personalizedOfferImage" src="../../assets/vipRishte.svg" alt="VIP Benefits1">
+                            </div>
+                            <div class="col-6" style="height: 100%;">
+                                <div  style="margin-top: 10%;text-align: center;">
+                                    <h6 style="display: inline-block;background: linear-gradient(to right, #ad5389, #3c1053); border-radius: 100px;color: white;padding: 10px 15px;">2</h6><br>
+                                    <p style="font-size: 18px;">पाएं सारे VIP रिश्ते</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin: 10px 10px;">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-6">
+                                <img class="personalizedOfferImage" src="../../assets/familyMeeting.svg" alt="VIP Benefits1">
+                            </div>
+                            <div class="col-6" style="height: 100%;">
+                                <div  style="margin-top: 10%;text-align: center;">
+                                    <h6 style="display: inline-block;background: linear-gradient(to right, #ad5389, #3c1053); border-radius: 100px;color: white;padding: 10px 15px;">3</h6><br>
+                                    <p style="font-size: 18px;">फैमिली मुलाकात हमारे हॉल में FREE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="card-wrapper" *ngIf="show2">
                     <div class="row" style="margin-top: 10px;padding: 0px 15px;margin-bottom: 20px;">
                             <div class="col-4" style="text-align: center;padding: 0px 15px">
                                <div (click)="container4()"  id="container4" style="border-radius: 10px;height: 100%;border:1px solid #6ba8a9">
@@ -94,21 +139,24 @@
                         </div>
                         <div class="row" style="padding: 0px 15px;margin-top: 10px;">
                             <div class="col-4 btnSet">
-                                    <button type="button" *ngIf="selectedContainer==4" (click)="openDialog('PersonalizedPremium6',plans?.PersonalizedPremium6?.Benefits,plans?.PersonalizedPremium6?.Validity,'19000')" class="btn btn-primary buyNow">Buy now</button>
+                                    <button type="button" *ngIf="selectedContainer==4" (click)="openDialog('PersonalizedPremium6',plans?.PersonalizedPremium6?.Benefits,plans?.PersonalizedPremium6?.Validity,'19000')" class="btn btn-primary buyNowPersonalized">प्लान खरीदें</button>
                             </div>
                             <div class="col-4 btnSet">
-                                    <button type="button" *ngIf="selectedContainer==5" (click)="openDialog('PersonalizedPremium12',plans?.PersonalizedPremium12?.Benefits,plans?.PersonalizedPremium12?.Validity,'25000')" class="btn btn-primary buyNow">Buy now</button>
+                                    <button type="button" *ngIf="selectedContainer==5" (click)="openDialog('PersonalizedPremium12',plans?.PersonalizedPremium12?.Benefits,plans?.PersonalizedPremium12?.Validity,'25000')" class="btn btn-primary buyNowPersonalized">प्लान खरीदें</button>
                                </div>
                                <div class="col-4 btnSet">
-                                    <button type="button" *ngIf="selectedContainer==6" (click)="openDialog('PersonalizedDeluxeNRI',plans?.PersonalizedDeluxeNRI?.Benefits,plans?.PersonalizedDeluxeNRI?.Validity,'31000')" class="btn btn-primary buyNow">Buy now</button>
+                                    <button type="button" *ngIf="selectedContainer==6" (click)="openDialog('PersonalizedDeluxeNRI',plans?.PersonalizedDeluxeNRI?.Benefits,plans?.PersonalizedDeluxeNRI?.Validity,'31000')" class="btn btn-primary buyNowPersonalized">प्लान खरीदें</button>
                                    </div>
                         </div>
             </div>
+        </div>
+
             <div class="text-center" style="padding-bottom: 20px;margin-top: 20px;"><br>
-                <a class="btn" style="background: rgb(86, 162, 245); color: white;" href=tel:9697989697>Call Hans Care</a>
+                <a id="callBtn" class="btn" style="background: rgb(86, 162, 245); color: white;" href=tel:9697989697>Call For Details</a>
                 <h6 style="margin-top: 20px;">What are Credits?</h6>
                 <p>Each Credit will give you one contact detail from 6 profiles shared on daily basis.</p>
             </div>
+
           </main>
         </div>
     </main>
