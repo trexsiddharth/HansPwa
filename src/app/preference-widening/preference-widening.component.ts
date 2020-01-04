@@ -30,11 +30,14 @@ export class PreferenceWideningComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient, public dialogRef: MatDialogRef<PreferenceWideningComponent>, @Inject(MAT_DIALOG_DATA) data,
               private spinner: NgxSpinnerService) {
     this.dataa = data;
-    this.selectedCaste = this.dataa.Caste;
-    this.preferenceData = this.dataa.PreferenceTable;
-    this.preferenceWideningData = this.dataa.PreferenceTable;
-    this.profileData = this.dataa.ProfileTable;
-    this.gender = this.dataa.Gender;
+    console.log(this.dataa);
+    if (this.dataa) {
+      this.selectedCaste = this.dataa.Caste;
+      this.preferenceData = this.dataa.PreferenceTable;
+      this.preferenceWideningData = this.dataa.PreferenceTable;
+      this.profileData = this.dataa.ProfileTable;
+      this.gender = this.dataa.Gender;
+    }
 
   }
 

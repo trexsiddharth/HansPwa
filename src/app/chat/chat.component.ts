@@ -1003,6 +1003,9 @@ if (num && num !== '' && num !== '[]' ) {
         const text: String = data.apiwha_autoreply;
         const registered: any = data.registered;
         const id = data.id;
+        if (data.status === 1) {
+          
+        }
         if (data.id) {
         localStorage.setItem('id', id);
         console.log(localStorage.getItem('id'));
@@ -1985,13 +1988,7 @@ if (value === 'No') {
             return 'कांटेक्ट नंबर देखें';
           }
       }
-        tutorialText() {
-        if (localStorage.getItem('language') === 'English') {
-          return '#Click on HOW TO USE option above to play the tutorial again ';
-        } else {
-          return '#App चलाना सीखने के लिए ऊपर HOW TO USE पर क्लिक करें ';
-        }
-      }
+       
         changeNoButtonLanguage(type: string) {
         setTimeout(() => {
           this.changeNoButtonColor();
@@ -2190,53 +2187,6 @@ if (value === 'No') {
     });
   }
 
-        setWalkThrough() {
-    // tslint:disable-next-line: max-line-length
-    if (document.querySelectorAll('.botui-actions-buttons.styleButton').length === 1 || document.querySelectorAll('#selectedProfilePic').length === 1 ) {
-      this.botui.message.add({
-        type: 'html',
-        human: true,
-        content: '<p>&#127916 ' + this.tutorialText() + '</p>'
-      }).then(() => {
-        this.walkthroughStatus = true;
-      });
-      this.Analytics('tutorial', 'tutorial', 'first time');
-    } else {
-      this.walkthroughStatus = false;
-    }
-  }
-        getWalkthroughStatus() {
-    if (this.walkthroughStatus === true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-        myHideFunction() {
-    localStorage.setItem('walkthrough', 'done');
-    console.log(localStorage.getItem('walkthrough'));
-    this.walkthroughStatusTwo = true;
-  }
-        getWalkthroughStatusTwo() {
-   if (this.walkthroughStatusTwo === true) {
-     return true;
-   } else {
-     return false;
-   }
-  }
-        myHideFunctionTwo() {
-      this.walkthroughStatusThree = true;
-  }
-        getWalkthroughStatusThree() {
-    if (this.walkthroughStatusThree === true) {
-      return true;
-    } else {
-      return false;
-    }
-   }
-        getWalkthroughThreeText() {
-     return 'आप ' + this.points + ' कांटेक्ट नंबर और देख सकते है';
-   }
         myHideFunctionThree() {
     // id - profile id,
     // status - tutorial status
@@ -2313,7 +2263,7 @@ if (value === 'No') {
        (data: any) => {
         console.log(data);
 
-        if (data.family.caste) {
+        if (data && data.family && data.family.caste) {
         this.http.get<{ mapping_id: number, castes: any }>('https://partner.hansmatrimony.com/api/caste_mapping').subscribe(
           res => {
             this.casteMap = res;
@@ -2348,17 +2298,65 @@ if (value === 'No') {
             ProfileTable: data.profile,
             Gender: data.profile.gender
          };
-        }
-        this.spinner.hide();
-        const dialogRef = this.dialog.open(PreferenceWideningComponent, dialogConfig);
-        dialogRef.afterClosed().subscribe( data => {
+          this.spinner.hide();
+          const dialogRef = this.dialog.open(PreferenceWideningComponent, dialogConfig);
+          dialogRef.afterClosed().subscribe( data => {
           if (data) {
             if (data.success === 'success') {
               this.repeatMEssage('SHOW', this.currentContact);
               }
           }
         });
-        document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+          document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+        }
+      }
+          });
+        } else {
+          this.http.get<{ mapping_id: number, castes: any }>('https://partner.hansmatrimony.com/api/caste_mapping').subscribe(
+          res => {
+            this.casteMap = res;
+            console.log(this.casteMap);
+            this.casteMap.forEach(element => {
+                element.castes.split(',').forEach(caste => {
+                    if (caste.toLowerCase().match(data.profile.caste) && caste.length === data.profile.caste.length) {
+                      const mapId = element.mapping_id;
+                      if (mapId === 1) {
+                         return this.selectedMapName = 'Punjabi';
+                      } else if (mapId === 2) {
+                        return this.selectedMapName = 'Brahmin';
+                      } else {
+                        console.log(this.selectedMapName, mapId);
+                        return this.selectedMapName = 'Agarwal';
+                      }
+                    }
+                  });
+      });
+            if (data) {
+        if (this.selectedMapName && this.selectedMapName !== '') {
+          dialogConfig.data = {
+            Caste: this.selectedMapName,
+            PreferenceTable: this.preferenceTable,
+            ProfileTable: data.profile,
+            Gender: data.profile.gender
+          };
+         } else {
+          dialogConfig.data = {
+            Caste: 'All',
+            PreferenceTable: this.preferenceTable,
+            ProfileTable: data.profile,
+            Gender: data.profile.gender
+         };
+          this.spinner.hide();
+          const dialogRef = this.dialog.open(PreferenceWideningComponent, dialogConfig);
+          dialogRef.afterClosed().subscribe( data => {
+          if (data) {
+            if (data.success === 'success') {
+              this.repeatMEssage('SHOW', this.currentContact);
+              }
+          }
+        });
+          document.querySelector('.mat-dialog-container').setAttribute('style', 'padding:0px');
+        }
       }
           });
         }
