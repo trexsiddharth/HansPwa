@@ -316,15 +316,12 @@ export class CompatibilityFormComponent implements OnInit {
                 (window as any).fbq('track', 'SinglePageRegistration', {
                   value: 15,
                   currency: 'INR',
+                  content_name: this.PageOne.value.phone,
                 });
                 (window as any).fbqa('track', 'SinglePageRegistration', {
                   value: 15,
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
-                });
-                (window as any).fbqa('track', 'SinglePageRegistrationTest', {
-                  value: 15,
-                  currency: 'INR',
                 });
                 this.router.navigate(['/chat']);
                 this.ngxNotificationService.success('Registered Successfully');
