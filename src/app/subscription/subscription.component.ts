@@ -91,6 +91,7 @@ export class SubscriptionComponent implements OnInit {
    changeButtonOnline() {
      if (this.show2 === true) {
        this.container1();
+       this.selectedContainer = 1;
        document.getElementById('callBtn').style.background = 'rgb(86, 162, 245)';
        return 'buttonPersonalised';
      } else {
@@ -100,6 +101,7 @@ export class SubscriptionComponent implements OnInit {
    changeButtonPersonalized() {
     if (this.show2 === true) {
       this.container4();
+      this.selectedContainer = 4;
       document.getElementById('callBtn').style.background = 'linear-gradient(to right, #ad5389, #3c1053)';
       return 'buttonPersonalisedClicked';
     } else {return 'buttonPersonalised'; }
