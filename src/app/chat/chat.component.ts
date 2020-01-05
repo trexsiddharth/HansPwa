@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit {
   caste_id: '',
   zodiac: '',
   father_off_addr: ''
-  }
+  };
 
   preferenceTable = {
     id: '',
@@ -108,7 +108,7 @@ receipt_url: '',
 status: '',
 mother_tongue: '',
 temple_name: ''
-  }
+  };
 
   user_profile: any = [];
   answer: FormGroup;
@@ -392,7 +392,7 @@ temple_name: ''
 
 
    repeatMEssage(ans: String, mob) {
-         this.chatRequest(ans, mob).subscribe(
+        this.chatRequest(ans, mob).subscribe(
            (data: any) => {
              this.getCredits();
              console.log(data);
@@ -1009,7 +1009,7 @@ if (num && num !== '' && num !== '[]' ) {
         const registered: any = data.registered;
         const id = data.id;
         if (data.status === 1) {
-          
+
         }
         if (data.id) {
         localStorage.setItem('id', id);
@@ -1165,16 +1165,20 @@ if (num && num !== '' && num !== '[]' ) {
 
 
    setName(value: string, mobile: string): string {
-     if (mobile.startsWith('Visible')) {
-     if (value != null) {
-      if (value.split(' ')) {
-        const name = value.split(' ');
-        return name[0] ;
-      } else {return value; }
-    } else {return ''; }
-  } else {
-    return value;
-  }
+     if (mobile) {
+      if (mobile.startsWith('Visible')) {
+        if (value != null) {
+         if (value.split(' ')) {
+           const name = value.split(' ');
+           return name[0] ;
+         } else {return value; }
+       } else {return ''; }
+     } else {
+       return value;
+     }
+     } else {
+        return '';
+     }
    }
    setNameSelectedProfile(value: string): string {
     if (value != null) {
@@ -1421,7 +1425,7 @@ profileReAnswer(num: any, id: any, answer: any) {
     }
     }
 
-    showProfile(values,num) {
+    showProfile(values, num) {
       return new Promise(() => {
         this.botui.message.add({
           loading: true,
@@ -1474,7 +1478,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                 '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.monthly_income) + ' LPA </th>' +
                   '</tr>' +
                   '</table>' +
-  
+
                   // line -3
                 '<table style="width:100%">' +
                 '<tr>' +
@@ -1486,7 +1490,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                 '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/cutlery.svg">' + this.setValue(values.food_choice) + '</th>' +
                   '</tr>' +
                   '</table>' +
-  
+
                      // line -4
                 '<table style="width:100%">' +
                 '<tr>' +
@@ -1498,7 +1502,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                 '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/clock.svg">' + this.setValue(values.birth_time) + '</th>' +
                   '</tr>' +
                   '</table>' +
-  
+
                      // line -5
                 '<table style="width:100%">' +
                 '<tr>' +
@@ -1519,7 +1523,7 @@ profileReAnswer(num: any, id: any, answer: any) {
                 this.setMarriageBrothers(String(Number(values.married_sons) + Number(values.unmarried_sons) ), values.married_sons)  +
                   '</tr>' +
                   '</table>' +
-  
+
                        // line -7
                 '<table style="width:100%">' +
                 // tslint:disable-next-line: max-line-length
@@ -2004,7 +2008,7 @@ if (value === 'No') {
             return 'कांटेक्ट नंबर देखें';
           }
       }
-       
+
         changeNoButtonLanguage(type: string) {
         setTimeout(() => {
           this.changeNoButtonColor();
@@ -2383,4 +2387,149 @@ if (value === 'No') {
        }
      );
    }
+   showVipRishte() {
+    this.botui.message.add({
+      type: 'html',
+      content: '<div><h3>मुबारक हो ! आज आपको तीन VIP रिश्ते FREE 👇🏻</h3><div>'
+    });
+    let values;
+    const myprofileData = new FormData();
+    myprofileData.append('id', '211537');
+    myprofileData.append('contacted', '1');
+    myprofileData.append('is_lead', '0');
+
+    this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).subscribe(res => {
+    values = res.profile;
+    console.log(values);
+    for (let index = 0; index < 3; index++) {
+    this.botui.message.add({
+      loading: true,
+        delay: 500,
+       type: 'html',
+       content: '<div id="vip">' +
+       // tslint:disable-next-line: max-line-length
+      '<div style="position: relative"><img id="selectedProfilePic" src=' + this.getProfilePhoto('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + values.photo, values.gender) + ' style="width: 100%;border-radius:10px;" alt="' + this.setName(values.name, values.mobile) + '"><img style="position: absolute; width: 70px;top: 10px;right: 10px;" src="../../assets/vipTag.svg"> </div><br>' +
+       // tslint:disable-next-line: max-line-length
+       '<div style="text-align:center;color: white"><b>' + this.setName(values.name, '9910395820') + this.setCity(values.city) + '</b></div> ' +
+       // tslint:disable-next-line: max-line-length
+       '<div style="text-align:center"><i>' + this.setValue(values.about) + '</i></div> <br>' +
+                      // line -1
+                      '<div style="width:100%;background:#f5f5f5;border-radius:7px;font-size:12px"><table style="width:100%">' +
+                     '<tr>' +
+                     // tslint:disable-next-line: max-line-length
+                     '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/calendar.svg">' +  this.setValue(String(Math.floor((Date.now() - new Date(values.birth_date).getTime()) / (1000 * 60 * 60 * 24 * 365)))) + ' Yrs</th>' +
+                     // tslint:disable-next-line: max-line-length
+                     '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/scale.svg">' + this.getHeight(Number(values.height)) + '</th>' +
+                      // tslint:disable-next-line: max-line-length
+                      '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/weight.svg">' + this.setValue(values.weight) + ' Kg</th>' +
+                       '</tr>' +
+                       '</table>' +
+                       // line -2
+                       '<table style="width:100%">' +
+                       '<tr>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/suitcase.svg"></div><div>' + this.setValue(values.occupation) + '</div></th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/graduation.svg">' + this.setValue(values.education) + '<br>' + this.setValue(values.profession) + '</th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/rupee.svg">' + this.SetIncome(values.monthly_income) + ' LPA </th>' +
+                         '</tr>' +
+                         '</table>' +
+
+                         // line -3
+                       '<table style="width:100%">' +
+                       '<tr>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/templeblue.svg">' + this.setValue(values.religion) + '<br>' + this.setValue(values.caste) + this.setValue(values.gotra) + '<br>' +  '</th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top: 25%" src="../assets/heart.svg"></div><div>' +  this.setValue(values.marital_status) + '</div></th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/cutlery.svg">' + this.setValue(values.food_choice) + '</th>' +
+                         '</tr>' +
+                         '</table>' +
+
+                            // line -4
+                       '<table style="width:100%">' +
+                       '<tr>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%;padding: 5px 0px 5px 10px;">' + '<img style="width:20px;margin-right:5px" src="../assets/birthday.svg">' + this.setValue(values.birth_date) +  '</th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/birthplace.svg">' +  this.setValue(values.birth_place) + '</th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/clock.svg">' + this.setValue(values.birth_time) + '</th>' +
+                         '</tr>' +
+                         '</table>' +
+
+                            // line -5
+                       '<table style="width:100%">' +
+                       '<tr>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%;padding: 5px 0px 5px 10px;display:flex">' + '<div><img style="width:20px;margin-right:5px;margin-top:25%" src="../assets/tarot.svg"></div><div>' + this.setManglik(values.manglik) +  '</div></th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%">' + '<img style="width:20px;margin-right:5px" src="../assets/house.svg">' +  this.setHouseType(values.house_type) + '</th>' +
+                       // tslint:disable-next-line: max-line-length
+                       '<th style="width:33.33%">' + '<img style="width:25px;margin-right:5px" src="../assets/moneybag.svg">' + this.SetIncome(values.family_income) + ' LPA</th>' +
+                         '</tr>' +
+                         '</table>' +
+                            // line -6
+                       '<table style="width:100%">' +
+                       '<tr>' +
+                       // tslint:disable-next-line: max-line-length
+                       this.setMarriageSisters(String(Number(values.married_daughters) + Number(values.unmarried_daughters) ), values.married_daughters) +
+                       // tslint:disable-next-line: max-line-length
+                       this.setMarriageBrothers(String(Number(values.married_sons) + Number(values.unmarried_sons) ), values.married_sons)  +
+                         '</tr>' +
+                         '</table>' +
+
+                              // line -7
+                       '<table style="width:100%">' +
+                       // tslint:disable-next-line: max-line-length
+                       '<tr>' + this.LifeStatus(values.father_status, values.mother_status, values.father_occupation, values.occupation_mother) + '</tr>' +
+                         '</table> </div>'
+     }).then(() => {
+       setTimeout(() => {
+        // tslint:disable-next-line: max-line-length
+        document.querySelectorAll<HTMLElement>('.botui-message-content' && '.html' && '#vip')[index].parentElement.parentElement.style.background = '#FF1493';
+       }, 500);
+     });
+    setTimeout(() => {
+      this.changeButtonColor();
+     }, 500);
+    this.botui.action.button({
+      action: [{
+        text: 'डिटेल्स के लिए कॉल हंस केयर',
+        value: 'CALL'
+      },
+      {
+        text: 'VIP प्लान देखें',
+        value: 'PLAN'
+      },
+    ]
+  }).then(res => {
+    switch (res.value) {
+      case 'CALL':
+        window.open('tel:9697989697');
+        break;
+
+        case 'PLAN':
+        this.router.navigateByUrl('subscription');
+        break;
+
+      default:
+        break;
+    }
+    });
+    }
+    }, err => {
+        console.log(err);
+    });
+   }
+   changeButtonColor() {
+    document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+      if (element.innerText.match('VIP')) {
+          element.style.background = '#FF1493';
+      }
+    });
+  }
+
 }

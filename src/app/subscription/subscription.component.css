@@ -30,7 +30,7 @@
   }
 
   #buttonPersonalisedClicked {
-    background: linear-gradient(to right, #ad5389, #3c1053);
+    background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff);
     color: white;
     padding: 5px 10px;
     border-radius: 10px;
@@ -86,7 +86,7 @@
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       width: 100%;
-      background: #6ba8a9;
+      background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff);
       padding: 5px 0px;
       margin-bottom: 10px;
   }
@@ -135,7 +135,7 @@
       border: 1px solid #56a2f5;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      background: #6ba8a9;
+      background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff);
       width: 100%;
       padding: 5px 0px;
       margin-bottom: 10px;
@@ -202,7 +202,7 @@
         border: 1px solid #56a2f5;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      background: #6ba8a9;
+      background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff);
       width: 100%;
       padding: 5px 0px;
       margin-bottom: 10px;
