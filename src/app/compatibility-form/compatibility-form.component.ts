@@ -317,6 +317,11 @@ export class CompatibilityFormComponent implements OnInit {
                   value: 15,
                   currency: 'INR',
                 });
+                (window as any).fbqa('track', 'SinglePageRegistration', {
+                  value: 15,
+                  currency: 'INR',
+                  name: 'test'
+                });
                 this.router.navigate(['/chat']);
                 this.ngxNotificationService.success('Registered Successfully');
               } else {
