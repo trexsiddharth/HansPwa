@@ -168,7 +168,9 @@ temple_name: ''
   done = false;
   dailyQuotaReached = false;
   noCount = 0;
+  exhaustCount = 0;
   paidStatus;
+  exhaustedStatus;
 
 
   constructor(
@@ -1158,25 +1160,38 @@ if (num && num !== '' && num !== '[]' ) {
   });
     });
      }
-    setTimeout(() => {
-      if (element.id === 'NO') {
-        if (this.paidStatus === 'Unpaid') {
-          this.noCount++;
-          if (this.noCount > 2) {
-              this.noCount = 0;
-              this.After3no();
-            } else {
-              this.repeatMEssage(element.id, this.currentContact);
-            }
-          } else {
-            this.repeatMEssage(element.id, this.currentContact);
-          }
-      } else {
-        this.repeatMEssage(element.id, this.currentContact);
-      }
-     }, 1000);
 
+    setTimeout(() => {
+      if (this.paidStatus === 'Unpaid') {
+        if (element.id === 'NO') {
+         this.noCount++;
+         if (this.noCount > 2) {
+               this.noCount = 0;
+               this.After3no();
+             } else {
+               this.repeatMEssage(element.id, this.currentContact);
+             }
+      } else {
+       this.repeatMEssage(element.id, this.currentContact);
+      }
+     } else if (this.paidStatus === 'Paid') {
+       if (element.id === 'NO' || element.id === 'SHORTLIST') {
+         this.exhaustCount++;
+         if (this.exhaustCount > 1) {
+             this.exhaustCount = 0;
+             this.exhaustedProfile();
+           } else {
+             this.repeatMEssage(element.id, this.currentContact);
+           }
+       } else {
+        this.exhaustedProfile();
+       }
+     } else {
+       this.repeatMEssage(element.id, this.currentContact);
+     }
+     }, 1000);
    }
+
    setValue(value: string): string {
     if (value != null) {
       return value ;
@@ -1881,6 +1896,10 @@ getCredits() {
    (data: any) => {
       this.points = data.whatsapp_points;
       console.log('credits', this.points);
+      if (this.paidStatus === 'Paid' && this.points === '0') {
+        console.log('this is a exhausted profile');
+        this.exhaustedStatus = true;
+      }
    },
   (error: any) => {
     this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
