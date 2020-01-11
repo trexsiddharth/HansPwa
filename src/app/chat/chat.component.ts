@@ -1171,8 +1171,8 @@ if (num && num !== '' && num !== '[]' ) {
              } else {
                this.repeatMEssage(element.id, this.currentContact);
              }
-      } else {
-       this.repeatMEssage(element.id, this.currentContact);
+      } else if (element.id === 'YES') {
+        this.NoCreditsYes();
       }
      } else if (this.paidStatus === 'Paid') {
        if (element.id === 'NO' || element.id === 'SHORTLIST') {
@@ -2661,6 +2661,60 @@ if (value === 'No') {
     });
     });
   }
+
+  NoCreditsYes() {
+    this.botui.message.add({
+      loading: true,
+        delay: 500,
+       type: 'html',
+       content: '<div id="3no">' +
+
+       '<div><img style="width: 100%" src="../../assets/templeblue.svg" alt="no credits">' +
+      '<ul style="margin-top:20px;font-size:18px"> <li> पर्सनल + VIP प्लान </li>' +
+      '<li> 35 ,000 रिश्ते </li>' +
+      '<li> कुंडली वाले रिश्ते </li>' +
+      '<li> मोबाइल नंबर + पूरा पता </li> </ul>' +
+      '</div> </div>'
+    }).then(() => {
+      setTimeout(() => {
+        this.changeButtonColor('PLAN');
+        this.changeButtonColor('अगला रिश्ता देखें');
+       }, 500);
+      this.botui.action.button({
+        action: [
+          {
+            text: 'PLAN देखें',
+            value: 'PLAN'
+          },
+          {
+          text: 'कॉल हंस केयर',
+          value: 'CALL'
+        },
+        {
+          text: 'अगला रिश्ता देखें',
+          value: 'SHOW'
+        },
+      ]
+    }).then(res => {
+          switch (res.value) {
+            case 'PLAN':
+              this.router.navigateByUrl('subscription');
+              break;
+              case 'CALL':
+                window.open('tel:9697989697');
+                this.repeatButton();
+                break;
+                case 'SHOW':
+                this.repeatMEssage('SHOW', this.currentContact);
+                break;
+
+            default:
+              break;
+          }
+    });
+    });
+  }
+
   repeatButton() {
     setTimeout(() => {
       this.changeButtonColor('PLAN');
