@@ -118,7 +118,7 @@ onResize(event) {
           personalDetails: this.personalProfileData,
           familyDetails: this.familyProfileData,
         };
-      let dialogRef = this.matDialog.open(EditPersonalDialogComponent, dialogConfig);
+      const dialogRef = this.matDialog.open(EditPersonalDialogComponent, dialogConfig);
     }
 
     openFamilyDialog() {
@@ -134,7 +134,7 @@ onResize(event) {
       dialogConfig.data = {
           familyDetails: this.familyProfileData
         };
-      let dialogRef = this.matDialog.open(EditFamilyDialogComponent, dialogConfig);
+      const dialogRef = this.matDialog.open(EditFamilyDialogComponent, dialogConfig);
     }
 
     openPreferenceDialog() {
@@ -150,7 +150,7 @@ onResize(event) {
       dialogConfig.data = {
           preferencesDetails: this.preferenceProfileData
         };
-      let dialogRef = this.matDialog.open(EditPreferenceDialogComponent, dialogConfig);
+      const dialogRef = this.matDialog.open(EditPreferenceDialogComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(
         res => {
           if (res) {
@@ -238,5 +238,17 @@ onResize(event) {
      const i = Number(index) + 1;
      console.log('current index is ' + i);
      document.querySelectorAll('#backfile')[index].click();
+    }
+    getIncome(value: number) {
+      console.log(value.toString().length);
+      if (value != null) {
+        if (value.toString().length >= 6) {
+          return String((Number(value) / 100000));
+          } else if (value.toString().length >= 5) {
+            return String((Number(value) / 10000) * 12);
+          } else {
+            return value;
+          }
+        } else {return ''; }
     }
 }

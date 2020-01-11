@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input }
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
@@ -14,7 +14,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import {  NotificationsService } from '../notifications.service';
 import { CreditAwardComponent } from '../credit-award/credit-award.component';
 import { PreferenceWideningComponent } from '../preference-widening/preference-widening.component';
-import { timeout, retry, catchError } from 'rxjs/operators';
+import { timeout, retry, catchError, min } from 'rxjs/operators';
+import { SubscriptionserviceService } from '../subscriptionservice.service';
+
 
 
 
@@ -175,7 +177,8 @@ temple_name: ''
     private ngxNotificationService: NgxNotificationService,
     private promptService: InstallPromptService,
     public dialog: MatDialog,
-    public notification: NotificationsService
+    public notification: NotificationsService,
+    private subscriptionService: SubscriptionserviceService
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -392,7 +395,8 @@ temple_name: ''
 
 
    repeatMEssage(ans: String, mob) {
-        this.chatRequest(ans, mob).subscribe(
+
+      this.chatRequest(ans, mob).subscribe(
            (data: any) => {
              this.getCredits();
              console.log(data);
@@ -1328,7 +1332,7 @@ if (num && num !== '' && num !== '[]' ) {
     document.getElementById('profileText').style.background = '#f3f3f3';
    }
    changeToMyProfile() {
-     if (this.currentContact) {
+    if (this.currentContact) {
       this.spinner.show();
       this.history = 'myprofile';
       document.getElementById('profileButton').style.background = '#34b7f1';
@@ -2390,7 +2394,7 @@ if (value === 'No') {
    showVipRishte() {
     this.botui.message.add({
       type: 'html',
-      content: '<div><h3>मुबारक हो ! आज आपको तीन VIP रिश्ते FREE 👇🏻</h3><div>'
+      content: '<div><p style="font-size: 18px">मुबारक हो ! आज आपको तीन VIP रिश्ते FREE 👇🏻</p><div>'
     });
     let values;
     const myprofileData = new FormData();
@@ -2493,7 +2497,7 @@ if (value === 'No') {
        }, 500);
      });
     setTimeout(() => {
-      this.changeButtonColor();
+      this.changeButtonColor('VIP');
      }, 500);
     this.botui.action.button({
       action: [{
@@ -2524,12 +2528,216 @@ if (value === 'No') {
         console.log(err);
     });
    }
-   changeButtonColor() {
-    document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
-      if (element.innerText.match('VIP')) {
-          element.style.background = '#FF1493';
-      }
+   changeButtonColor( text) {
+     switch (text) {
+       case 'VIP':
+        document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+          if (element.innerText.match('VIP')) {
+              element.style.background = '#FF1493';
+          }
+        });
+        break;
+
+        case 'PLAN':
+        document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+          if (element.innerText.match('PLAN')) {
+              element.style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
+          }
+        });
+        break;
+
+        case '₹':
+          document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+            if (element.innerText.includes('₹')) {
+                element.style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
+                element.style.fontSize = '25px';
+            }
+          });
+          break;
+
+        case 'अगला रिश्ता देखें':
+          document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
+            if (element.innerText.includes('अगला रिश्ता देखें')) {
+                element.style.background = 'green';
+            }
+          });
+          break;
+
+       default:
+         break;
+     }
+
+  }
+
+  After3no() {
+    this.botui.message.add({
+      loading: true,
+        delay: 500,
+       type: 'html',
+       content: '<div id="3no">' +
+
+       '<div><img style="width: 100%" src="../../assets/threenopic.png" alt="three no">' +
+      '<ul style="margin-top:20px;font-size:18px"> <li> पर्सनल + VIP प्लान </li>' +
+      '<li> 35 ,000 रिश्ते </li>' +
+      '<li> कुंडली वाले रिश्ते </li>' +
+      '<li> मोबाइल नंबर + पूरा पता </li> </ul>' +
+      '</div> </div>'
+    }).then(() => {
+      setTimeout(() => {
+        this.changeButtonColor('PLAN');
+        this.changeButtonColor('अगला रिश्ता देखें');
+       }, 500);
+      this.botui.action.button({
+        action: [
+          {
+            text: 'PLAN देखें',
+            value: 'PLAN'
+          },
+          {
+          text: 'कॉल हंस केयर',
+          value: 'CALL'
+        },
+        {
+          text: 'अगला रिश्ता देखें',
+          value: 'SHOW'
+        },
+      ]
+    }).then(res => {
+          switch (res.value) {
+            case 'PLAN':
+              this.router.navigateByUrl('subscription');
+              break;
+              case 'CALL':
+                window.open('tel:9697989697');
+                this.repeatButton();
+                break;
+                case 'SHOW':
+                this.repeatMEssage('SHOW', this.currentContact);
+                break;
+
+            default:
+              break;
+          }
+    });
     });
   }
+  repeatButton() {
+    setTimeout(() => {
+      this.changeButtonColor('PLAN');
+      this.changeButtonColor('अगला रिश्ता देखें');
+     }, 500);
+    this.botui.action.button({
+      action: [
+        {
+          text: 'PLAN देखें',
+          value: 'PLAN'
+        },
+      {
+        text: 'अगला रिश्ता देखें',
+        value: 'SHOW'
+      },
+    ]
+  }).then(res => {
+    switch (res.value) {
+      case 'PLAN':
+        this.router.navigateByUrl('subscription');
+        break;
+          case 'SHOW':
+          this.repeatMEssage('SHOW', this.currentContact);
+          this.repeatButton();
+          break;
+      default:
+        break;
+    }
+});
+  }
+
+exhaustedProfile() {
+  let timerMax = Math.floor(15 * 60 * 1000);
+  let timerMaxSeconds = Math.floor(60 * 1000);
+  let timerCurrent;
+  let timerCurrentSecond;
+  this.botui.message.add({
+    loading: true,
+      delay: 500,
+     type: 'html',
+     content: '<div id="3no">' +
+
+     '<div><img style="width: 100%" src="../../assets/exhaustedpic.png" alt="exhausted profile">' +
+    '<ul style="margin-top:20px;font-size:18px">' +
+    '<li> कुंडली वाले रिश्ते </li>' +
+    '<li> Fresh नए रिश्ते </li>' +
+    '<li> पसंदीदा रिश्ते खुद कॉल करेंगे </li> </ul>' +
+    '</div>' +
+    // tslint:disable-next-line: max-line-length
+    '<div style="text-align: center;"><p style="display: inline-block;border: 2px solid red;border-radius:10px;padding-left:20px;padding-right:20px;font-size:18px" id="timer"></p></div>' +
+     '</div>'
+  }).then(() => {
+    setTimeout(() => {
+      this.changeButtonColor('₹');
+      this.changeButtonColor('अगला रिश्ता देखें');
+     }, 500);
+    const time = setInterval( () => {
+      timerMax = timerMax - 1000;
+      timerMaxSeconds = timerMaxSeconds - 1000;
+      timerCurrent = Math.floor(timerMax / ( 60 * 1000));
+      timerCurrentSecond = Math.floor(timerMaxSeconds / 1000);
+      document.getElementById('timer').innerText = (timerCurrent).toString() + 'm: ' + timerCurrentSecond.toString() + 's';
+      if (Math.floor(timerCurrentSecond) === 0) {
+        timerMaxSeconds = Math.floor(60 * 1000);
+      }
+
+      if (Math.floor(timerCurrent) === 0 && Math.floor(timerCurrentSecond) === 0) {
+        clearInterval(time);
+        document.getElementById('timer').innerText = 'Offer Finished';
+      }
+    }, 1000);
+    this.botui.action.button({
+      action: [
+        {
+          text: '₹3500 - 30 कांटेक्ट नंबर',
+          value: 'PLAN3500'
+        },
+        {
+          text: '₹5500 - 60 कांटेक्ट नंबर',
+          value: 'PLAN5500'
+        },
+        {
+        text: 'कॉल हंस केयर',
+        value: 'CALL'
+      },
+      {
+        text: 'अगला रिश्ता देखें',
+        value: 'SHOW'
+      },
+    ]
+  }).then(res => {
+        switch (res.value) {
+          case 'PLAN':
+            this.router.navigateByUrl('subscription');
+            break;
+            case 'CALL':
+              window.open('tel:9697989697');
+              this.repeatButton();
+              break;
+              case 'SHOW':
+              this.repeatMEssage('SHOW', this.currentContact);
+              break;
+              case 'PLAN3500':
+              this.subscriptionService.payNowT(3500, 'live', 0, '', '', this.currentContact);
+              this.repeatButton();
+              break;
+              case 'PLAN5500':
+                this.subscriptionService.payNowT(5500, 'live', 0, '', '', this.currentContact);
+                this.repeatButton();
+                break;
+
+          default:
+            break;
+        }
+  });
+  });
+}
+
 
 }

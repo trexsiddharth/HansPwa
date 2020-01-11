@@ -132,22 +132,26 @@ onResize(event) {
         value,
         price
       };
-    const dialogRef = this.matDialog.open(SubscriptionDialogComponent, dialogConfig);
+    // const dialogRef = this.matDialog.open(SubscriptionDialogComponent, dialogConfig);
+    if (localStorage.getItem('mobile_number')) {
+    this.getRazorPay(price, 'live', 0, '', '', localStorage.getItem('mobile_number'));
+    } else {
+      this.getRazorPay(price, 'live', 0, '', '', '');
+    }
+  //   dialogRef.afterClosed().subscribe(
+  //     data => {
+  //       console.log(data);
+  //       this.dialogData = data;
+  //       this.formData = this.dialogData.formData;
+  //       this.price = this.dialogData.price;
+  //       this.getRazorPay(this.price, 'live', 0, this.formData.name, this.formData.email, this.formData.mobile);
 
-    dialogRef.afterClosed().subscribe(
-      data => {
-        console.log(data);
-        this.dialogData = data;
-        this.formData = this.dialogData.formData;
-        this.price = this.dialogData.price;
-        this.getRazorPay(this.price, 'live', 0, this.formData.name, this.formData.email, this.formData.mobile);
-
-        (window as any).ga('send', 'event', 'Subscription', 'Plan Opted' + this.price, {
-          hitCallback: () => {
-            console.log('Tracking Subscription successful');
-          }});
-      }
-  );
+  //       (window as any).ga('send', 'event', 'Subscription', 'Plan Opted' + this.price, {
+  //         hitCallback: () => {
+  //           console.log('Tracking Subscription successful');
+  //         }});
+  //     }
+  // );
   }
   container1() {
     this.selectedContainer = 1;
