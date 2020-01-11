@@ -167,6 +167,8 @@ temple_name: ''
   player;
   done = false;
   dailyQuotaReached = false;
+  noCount = 0;
+  paidStatus;
 
 
   constructor(
@@ -273,6 +275,8 @@ temple_name: ''
           console.log(id);
           this.show_ad = data.show_ad;
           localStorage.setItem('id', id);
+          this.paidStatus = data.paid_status;
+          console.log(this.paidStatus);
           this.getCredits();
           if (text.match('SHOW')) {
             this.Analytics('login', 'login', 'logged In');
@@ -555,7 +559,6 @@ temple_name: ''
                               this.openPromptDialog();
                             }
                             console.log('chose' + element.id);
-                            this.repeatMEssage(element.id, mob);
                           };
                         });
                        });
@@ -633,7 +636,6 @@ temple_name: ''
                               this.openPromptDialog();
                             }
                             console.log('chose' + element.id);
-                            this.repeatMEssage(element.id, mob);
                           };
                         });
                        });
@@ -1144,7 +1146,8 @@ if (num && num !== '' && num !== '[]' ) {
      document.querySelectorAll<HTMLElement>('.botui-message-content')[document.querySelectorAll<HTMLElement>('.botui-message-content').length - 1].style.backgroundColor = '#f3f3f3';
    }
    updateBotValue(index, element) {
-     if (index) {
+
+    if (index) {
       this.botui.message.update(index, {
         human: true,
         content: ''
@@ -1155,6 +1158,24 @@ if (num && num !== '' && num !== '[]' ) {
   });
     });
      }
+    setTimeout(() => {
+      if (element.id === 'NO') {
+        if (this.paidStatus === 'Unpaid') {
+          this.noCount++;
+          if (this.noCount > 2) {
+              this.noCount = 0;
+              this.After3no();
+            } else {
+              this.repeatMEssage(element.id, this.currentContact);
+            }
+          } else {
+            this.repeatMEssage(element.id, this.currentContact);
+          }
+      } else {
+        this.repeatMEssage(element.id, this.currentContact);
+      }
+     }, 1000);
+
    }
    setValue(value: string): string {
     if (value != null) {
@@ -1868,7 +1889,7 @@ getCredits() {
   }
  );
 }
-
+// add to home screen dialogue
 openPromptDialog() {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.hasBackdrop = true;
