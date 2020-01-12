@@ -526,9 +526,9 @@ temple_name: ''
                      if (data.buttons.match('Yes' || 'No')) {
                        this.botui.message.add({
                         type: 'html',
-                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'YES', 'none') +
-                        this.setButton('star.svg', 'SHORTLIST', 'none') +
-                        this.setButton('cancel.svg', 'NO', 'none') + '</div>'
+                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
+                        this.setButton('star.svg','hearts.svg', 'SHORTLIST', 'none') +
+                        this.setButton('cancel.svg','cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
                         this.changeButtonBackground();
                         this.currentIndex = index;
@@ -609,9 +609,9 @@ temple_name: ''
                      if (data.buttons.match('Yes')) {
                       this.botui.message.add({
                         type: 'html',
-                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'YES', 'none') +
-                        this.setButton('star.svg', 'SHORTLIST', 'none') +
-                        this.setButton('cancel.svg', 'NO', 'none') + '</div>'
+                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
+                        this.setButton('star.svg','hearts.svg' ,'SHORTLIST', 'none') +
+                        this.setButton('cancel.svg','cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
                         this.changeButtonBackground();
                         this.currentIndex = index;
@@ -1016,6 +1016,8 @@ if (num && num !== '' && num !== '[]' ) {
         const text: String = data.apiwha_autoreply;
         const registered: any = data.registered;
         const id = data.id;
+        this.paidStatus = data.paid_status;
+        console.log(this.paidStatus);
         if (data.status === 1) {
 
         }
@@ -1139,9 +1141,14 @@ if (num && num !== '' && num !== '[]' ) {
       return key + ': ' + value + '<br>';
     } else {return ''; }
    }
-   setButton(imageName, text, background) {
-     // tslint:disable-next-line: max-line-length
-     return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:50px" src="../../assets/' + imageName + '">';
+   setButton(imageNamePaid,imageNameUnpaid, text, background) {
+     if (this.paidStatus === 'Paid') {
+       // tslint:disable-next-line: max-line-length
+     return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:50px" src="../../assets/' + imageNamePaid + '">';
+     } else {
+// tslint:disable-next-line: max-line-length
+return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:50px" src="../../assets/' + imageNameUnpaid + '">';
+     }
    }
    changeButtonBackground() {
      // tslint:disable-next-line: max-line-length
@@ -1727,9 +1734,9 @@ profileReAnswer(num: any, id: any, answer: any) {
       }
           this.botui.message.add({
           type: 'html',
-          content: '<div style="text-align:center">' + this.setButton('checked.svg', 'YES', 'none') +
-          this.setButton('star.svg', 'SHORTLIST', 'none') +
-          this.setButton('cancel.svg', 'NO', 'none') + '</div>'
+          content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
+          this.setButton('star.svg', 'hearts.svg', 'SHORTLIST', 'none') +
+          this.setButton('cancel.svg', 'cancel.svg', 'NO', 'none') + '</div>'
         }).then((index) => {
           this.changeButtonBackground();
           this.currentIndex = index;
@@ -2669,10 +2676,11 @@ if (value === 'No') {
        type: 'html',
        content: '<div id="3no">' +
 
-       '<div><img style="width: 100%" src="../../assets/templeblue.svg" alt="no credits">' +
+       '<div><img style="width: 100%" src="../../assets/unpaidYes.jpg" alt="no credits">' +
       '<ul style="margin-top:20px;font-size:18px"> <li> पर्सनल + VIP प्लान </li>' +
       '<li> 35 ,000 रिश्ते </li>' +
       '<li> कुंडली वाले रिश्ते </li>' +
+      '<li> 25+ मंदिरों के रिश्ते </li>' +
       '<li> मोबाइल नंबर + पूरा पता </li> </ul>' +
       '</div> </div>'
     }).then(() => {
