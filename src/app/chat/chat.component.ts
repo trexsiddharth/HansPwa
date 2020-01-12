@@ -2036,6 +2036,7 @@ if (value === 'No') {
         localStorage.setItem('id', '');
         localStorage.setItem('gender', '');
         localStorage.setItem('is_lead', '');
+        localStorage.setItem('RegisterNumber', '');
 
         this.router.navigateByUrl('/home');
       }

@@ -160,6 +160,43 @@ export class CompatibilityFormComponent implements OnInit {
             } else if (res.registered === 2) {
                 this.ngxNotificationService.info('Please complete the form and update');
                 // set the partiall data
+                if (res.partial_data) {
+                  const data = res.partial_data;
+                  let birthDate: Date;
+                  if (data.manglik && data.manglik !== '' && data.manglik === 'No'){
+                      data.manglik = 'Non-manglik';
+                  }
+                  if (data.birth_date && data.birth_date !== '') {
+                    birthDate = new Date(data.birth_date);
+                    this.PageOne.setValue({
+                      phone: number,
+                      gender: data.gender,
+                      birth_date: birthDate.getDate(),
+                      birth_month: birthDate.getMonth(),
+                      birth_year: birthDate.getFullYear(),
+                      Height: data.height,
+                      MaritalStatus: data.marital_status,
+                      AnnualIncome: data.annual_income,
+                      Religion: data.religion,
+                      Castes: data.caste,
+                      Mangalik: data.manglik
+                    });
+                  } else {
+                    this.PageOne.setValue({
+                      phone: number,
+                      gender: data.gender,
+                      birth_date: '',
+                      birth_month: '',
+                      birth_year: '',
+                      Height: this.Heights.indexOf(this.Heights[this.Heights1.indexOf(data.height)]),
+                      MaritalStatus: data.marital_status,
+                      AnnualIncome: data.annual_income,
+                      Religion: data.religion,
+                      Castes: data.caste,
+                      Mangalik: data.manglik
+                    });
+                  }
+                }
 
             } else {
               console.log('New User');

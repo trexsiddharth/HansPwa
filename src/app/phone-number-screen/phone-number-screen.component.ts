@@ -36,6 +36,7 @@ export class PhoneNumberScreenComponent implements OnInit {
       localStorage.setItem('gender', '');
       localStorage.setItem('mobile_number', '');
       localStorage.setItem('is_lead', '');
+      localStorage.setItem('RegisterNumber', '');
     }
     this.spinner.hide();
   }
