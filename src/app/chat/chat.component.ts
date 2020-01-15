@@ -1172,9 +1172,9 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
       if (this.paidStatus === 'Unpaid') {
         if (element.id === 'NO') {
          this.noCount++;
-         if (this.noCount > 2) {
+         if (this.noCount > 1) {
                this.noCount = 0;
-               this.After3no();
+               this.After2no();
              } else {
                this.repeatMEssage(element.id, this.currentContact);
              }
@@ -2619,7 +2619,7 @@ if (value === 'No') {
 
   }
 
-  After3no() {
+  After2no() {
     this.botui.message.add({
       loading: true,
         delay: 500,
