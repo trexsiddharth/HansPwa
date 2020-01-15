@@ -2680,11 +2680,6 @@ if (value === 'No') {
        content: '<div id="3no">' +
 
        '<div><img style="width: 100%" src="../../assets/unpaidYes.jpg" alt="no credits">' +
-      '<ul style="margin-top:20px;font-size:18px"> <li> पर्सनल + VIP प्लान </li>' +
-      '<li> 35 ,000 रिश्ते </li>' +
-      '<li> कुंडली वाले रिश्ते </li>' +
-      '<li> 25+ मंदिरों के रिश्ते </li>' +
-      '<li> मोबाइल नंबर + पूरा पता </li> </ul>' +
       '</div> </div>'
     }).then(() => {
       setTimeout(() => {
