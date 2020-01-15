@@ -1194,7 +1194,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
                 this.repeatMEssage(element.id, this.currentContact);
               }
         }
-       } else if (this.paidStatus === 'Paid') {
+       } else if (this.paidStatus === 'Paid' && this.exhaustedStatus) {
          if (element.id === 'NO' || element.id === 'SHORTLIST') {
            this.exhaustCount++;
            if (this.exhaustCount > 1) {
