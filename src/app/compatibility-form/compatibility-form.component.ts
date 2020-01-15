@@ -357,6 +357,10 @@ export class CompatibilityFormComponent implements OnInit {
 
   firstStep() {
     this.errors = [];
+    console.log('date', this.PageOne.value.birth_date);
+    console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
+    console.log('year', this.PageOne.value.birth_year);
+
     if (this.PageOne.valid) {
       console.log('caste', this.PageOne.value.Castes);
       this.casteValidation(this.PageOne.value.Castes).then(res => {

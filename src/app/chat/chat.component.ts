@@ -168,6 +168,7 @@ temple_name: ''
   done = false;
   dailyQuotaReached = false;
   noCount = 0;
+  shortCount = 0;
   exhaustCount = 0;
   paidStatus;
   exhaustedStatus;
@@ -527,8 +528,8 @@ temple_name: ''
                        this.botui.message.add({
                         type: 'html',
                         content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
-                        this.setButton('star.svg','hearts.svg', 'SHORTLIST', 'none') +
-                        this.setButton('cancel.svg','cancel.svg', 'NO', 'none') + '</div>'
+                        this.setButton('star.svg', 'hearts.svg', 'SHORTLIST', 'none') +
+                        this.setButton('cancel.svg', 'cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
                         this.changeButtonBackground();
                         this.currentIndex = index;
@@ -541,7 +542,7 @@ temple_name: ''
                                 }, 2000);
                               }
                             }
-                            this.updateBotValue(index, element);
+                            this.updateBotValue(index, element,'response');
                             (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
                               hitCallback: () => {
                                 console.log('Tracking Bot Response entered successful');
@@ -610,15 +611,15 @@ temple_name: ''
                       this.botui.message.add({
                         type: 'html',
                         content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
-                        this.setButton('star.svg','hearts.svg' ,'SHORTLIST', 'none') +
-                        this.setButton('cancel.svg','cancel.svg', 'NO', 'none') + '</div>'
+                        this.setButton('star.svg', 'hearts.svg' , 'SHORTLIST', 'none') +
+                        this.setButton('cancel.svg', 'cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
                         this.changeButtonBackground();
                         this.currentIndex = index;
                         document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
                           element.onclick = () => {
                             console.log('Clicked');
-                            this.updateBotValue(index, element);
+                            this.updateBotValue(index, element,'response');
                             (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
                               hitCallback: () => {
                                 console.log('Tracking Bot Response entered successful');
@@ -1005,7 +1006,7 @@ if (num && num !== '' && num !== '[]' ) {
  }
  change() {
    this.botui.action.hide();
-   this.updateBotValue(this.currentIndex, '');
+   this.updateBotValue(this.currentIndex, '', 'historyProfile');
  }
  numberValidation(num: string) {
     this.currentContact = num;
@@ -1141,7 +1142,7 @@ if (num && num !== '' && num !== '[]' ) {
       return key + ': ' + value + '<br>';
     } else {return ''; }
    }
-   setButton(imageNamePaid,imageNameUnpaid, text, background) {
+   setButton(imageNamePaid, imageNameUnpaid, text, background) {
      if (this.paidStatus === 'Paid') {
        // tslint:disable-next-line: max-line-length
      return '<button id="' + text + '" class="btn customBotButton" style="background:' + background + ';color:white;padding:5px 20px"><img style="width:50px" src="../../assets/' + imageNamePaid + '">';
@@ -1154,7 +1155,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
      // tslint:disable-next-line: max-line-length
      document.querySelectorAll<HTMLElement>('.botui-message-content')[document.querySelectorAll<HTMLElement>('.botui-message-content').length - 1].style.backgroundColor = '#f3f3f3';
    }
-   updateBotValue(index, element) {
+   updateBotValue(index, element, type) {
 
     if (index) {
       this.botui.message.update(index, {
@@ -1167,38 +1168,51 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
   });
     });
      }
-
-    setTimeout(() => {
-      if (this.paidStatus === 'Unpaid') {
-        if (element.id === 'NO') {
-         this.noCount++;
-         if (this.noCount > 1) {
-               this.noCount = 0;
-               this.After2no();
+    if (type === 'response') {
+      setTimeout(() => {
+        if (this.paidStatus === 'Unpaid') {
+          if (element.id === 'NO') {
+           this.noCount++;
+           if (this.noCount > 1) {
+                 this.noCount = 0;
+                 this.shortCount = 0;
+                 this.After2no();
+               } else {
+                 this.repeatMEssage(element.id, this.currentContact);
+               }
+        } else if (element.id === 'YES') {
+          this.noCount = 0;
+          this.shortCount = 0;
+          this.NoCreditsYesOrShortlist('unpaidYes.jpg');
+        } else {
+          this.shortCount++;
+          if (this.shortCount > 1) {
+                this.shortCount = 0;
+                this.noCount = 0;
+                this.NoCreditsYesOrShortlist('unpaidshort.png');
+              } else {
+                this.repeatMEssage(element.id, this.currentContact);
+              }
+        }
+       } else if (this.paidStatus === 'Paid') {
+         if (element.id === 'NO' || element.id === 'SHORTLIST') {
+           this.exhaustCount++;
+           if (this.exhaustCount > 1) {
+               this.exhaustCount = 0;
+               this.exhaustedProfile();
              } else {
                this.repeatMEssage(element.id, this.currentContact);
              }
-      } else if (element.id === 'YES') {
-        this.NoCreditsYes();
-      } else {
-        this.repeatMEssage(element.id, this.currentContact);
-      }
-     } else if (this.paidStatus === 'Paid') {
-       if (element.id === 'NO' || element.id === 'SHORTLIST') {
-         this.exhaustCount++;
-         if (this.exhaustCount > 1) {
-             this.exhaustCount = 0;
-             this.exhaustedProfile();
-           } else {
-             this.repeatMEssage(element.id, this.currentContact);
-           }
+         } else {
+          this.exhaustedProfile();
+         }
        } else {
-        this.exhaustedProfile();
+         this.repeatMEssage(element.id, this.currentContact);
        }
-     } else {
-       this.repeatMEssage(element.id, this.currentContact);
+       }, 1000);
      }
-     }, 1000);
+
+
    }
 
    setValue(value: string): string {
@@ -1745,7 +1759,7 @@ profileReAnswer(num: any, id: any, answer: any) {
           document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
             element.onclick = () => {
               console.log('Clicked');
-              this.updateBotValue(index, element);
+              this.updateBotValue(index, element, 'response');
               (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
                 hitCallback: () => {
                   console.log('Tracking Bot Response entered successful');
@@ -2600,14 +2614,14 @@ if (value === 'No') {
           document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
             if (element.innerText.includes('₹')) {
                 element.style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-                element.style.fontSize = '25px';
+                element.style.fontSize = '16px';
             }
           });
           break;
 
-        case 'अगला रिश्ता देखें':
+        case 'Call Us':
           document.querySelectorAll<HTMLElement>('.botui-actions-buttons-button').forEach(element => {
-            if (element.innerText.includes('अगला रिश्ता देखें')) {
+            if (element.innerText.includes('Call Us')) {
                 element.style.background = 'green';
             }
           });
@@ -2635,7 +2649,7 @@ if (value === 'No') {
     }).then(() => {
       setTimeout(() => {
         this.changeButtonColor('PLAN');
-        this.changeButtonColor('अगला रिश्ता देखें');
+        this.changeButtonColor('Call Us');
        }, 500);
       this.botui.action.button({
         action: [
@@ -2644,7 +2658,7 @@ if (value === 'No') {
             value: 'PLAN'
           },
           {
-          text: 'कॉल हंस केयर',
+          text: '📞Call Us',
           value: 'CALL'
         },
         {
@@ -2653,6 +2667,7 @@ if (value === 'No') {
         },
       ]
     }).then(res => {
+          this.Analytics('Three No Response', 'Three No Response', res.value);
           switch (res.value) {
             case 'PLAN':
               this.router.navigateByUrl('subscription');
@@ -2672,19 +2687,19 @@ if (value === 'No') {
     });
   }
 
-  NoCreditsYes() {
+  NoCreditsYesOrShortlist(image) {
     this.botui.message.add({
       loading: true,
         delay: 500,
        type: 'html',
        content: '<div id="3no">' +
 
-       '<div><img style="width: 100%" src="../../assets/unpaidYes.jpg" alt="no credits">' +
+       '<div><img style="width: 100%" src="../../assets/' + image +  '" alt="no credits">' +
       '</div> </div>'
     }).then(() => {
       setTimeout(() => {
         this.changeButtonColor('₹');
-        this.changeButtonColor('अगला रिश्ता देखें');
+        this.changeButtonColor('Call Us');
        }, 500);
       this.botui.action.button({
         action: [
@@ -2697,7 +2712,7 @@ if (value === 'No') {
             value: 'PLAN5500'
           },
           {
-          text: 'कॉल हंस केयर',
+          text: '📞Call Us',
           value: 'CALL'
         },
         {
@@ -2706,6 +2721,7 @@ if (value === 'No') {
         },
       ]
     }).then(res => {
+      this.Analytics('No Credits Yes Or Shortlist', 'No Credits Yes Or Shortlist', res.value);
       switch (res.value) {
         case 'PLAN':
           this.router.navigateByUrl('subscription');
@@ -2736,7 +2752,7 @@ if (value === 'No') {
   repeatButton() {
     setTimeout(() => {
       this.changeButtonColor('PLAN');
-      this.changeButtonColor('अगला रिश्ता देखें');
+      this.changeButtonColor('SHOW');
      }, 500);
     this.botui.action.button({
       action: [
@@ -2787,7 +2803,7 @@ exhaustedProfile() {
   }).then(() => {
     setTimeout(() => {
       this.changeButtonColor('₹');
-      this.changeButtonColor('अगला रिश्ता देखें');
+      this.changeButtonColor('Call Us');
      }, 500);
     const time = setInterval( () => {
       timerMax = timerMax - 1000;
@@ -2815,7 +2831,7 @@ exhaustedProfile() {
           value: 'PLAN5500'
         },
         {
-        text: 'कॉल हंस केयर',
+        text: '📞Call Us',
         value: 'CALL'
       },
       {
@@ -2824,7 +2840,8 @@ exhaustedProfile() {
       },
     ]
   }).then(res => {
-        switch (res.value) {
+    this.Analytics('Exhausted Profiles Response', 'Exhausted Profiles Response', res.value);
+    switch (res.value) {
           case 'PLAN':
             this.router.navigateByUrl('subscription');
             break;
