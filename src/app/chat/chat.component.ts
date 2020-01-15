@@ -2683,14 +2683,18 @@ if (value === 'No') {
       '</div> </div>'
     }).then(() => {
       setTimeout(() => {
-        this.changeButtonColor('PLAN');
+        this.changeButtonColor('₹');
         this.changeButtonColor('अगला रिश्ता देखें');
        }, 500);
       this.botui.action.button({
         action: [
           {
-            text: 'PLAN देखें',
-            value: 'PLAN'
+            text: '₹3500 - 30 कांटेक्ट नंबर',
+            value: 'PLAN3500'
+          },
+          {
+            text: '₹5500 - 60 कांटेक्ट नंबर',
+            value: 'PLAN5500'
           },
           {
           text: 'कॉल हंस केयर',
@@ -2702,21 +2706,29 @@ if (value === 'No') {
         },
       ]
     }).then(res => {
-          switch (res.value) {
-            case 'PLAN':
-              this.router.navigateByUrl('subscription');
+      switch (res.value) {
+        case 'PLAN':
+          this.router.navigateByUrl('subscription');
+          break;
+          case 'CALL':
+            window.open('tel:9697989697');
+            this.repeatButton();
+            break;
+            case 'SHOW':
+            this.repeatMEssage('SHOW', this.currentContact);
+            break;
+            case 'PLAN3500':
+            this.subscriptionService.payNowT(3500, 'live', 0, '', '', this.currentContact);
+            this.repeatButton();
+            break;
+            case 'PLAN5500':
+              this.subscriptionService.payNowT(5500, 'live', 0, '', '', this.currentContact);
+              this.repeatButton();
               break;
-              case 'CALL':
-                window.open('tel:9697989697');
-                this.repeatButton();
-                break;
-                case 'SHOW':
-                this.repeatMEssage('SHOW', this.currentContact);
-                break;
 
-            default:
-              break;
-          }
+        default:
+          break;
+      }
     });
     });
   }
