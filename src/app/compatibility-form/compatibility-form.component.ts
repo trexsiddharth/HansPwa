@@ -370,10 +370,10 @@ export class CompatibilityFormComponent implements OnInit {
               const date = this.PageOne.value.birth_date;
               const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
               const year = this.PageOne.value.birth_year;
-              console.log(date + '/' + month + '/' + year);
+              console.log(date + '-' + month + '-' + year);
               const firststepdata = new FormData();
               firststepdata.append('mobile', this.PageOne.value.phone);
-              firststepdata.append('birth_date', date + '/' + month + '/' + year);
+              firststepdata.append('birth_date', date + '-' + month + '-' + year);
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
