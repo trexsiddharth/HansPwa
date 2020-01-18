@@ -1176,20 +1176,44 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
            if (this.noCount > 1) {
                  this.noCount = 0;
                  this.shortCount = 0;
-                 this.After2no();
+                 this.chatRequest(element.id,this.currentContact).subscribe(
+                  res => {
+                    console.log(res);
+                    this.After2no();
+                  },
+                  err => {
+                    console.log(err);
+                  }
+                );
                } else {
                  this.repeatMEssage(element.id, this.currentContact);
                }
         } else if (element.id === 'YES') {
           this.noCount = 0;
           this.shortCount = 0;
-          this.NoCreditsYesOrShortlist('unpaidYes.jpg');
+          this.chatRequest(element.id,this.currentContact).subscribe(
+            res => {
+              console.log(res);
+              this.NoCreditsYesOrShortlist('unpaidYes.jpg');
+            },
+            err => {
+              console.log(err);
+            }
+          );
         } else {
           this.shortCount++;
           if (this.shortCount > 1) {
                 this.shortCount = 0;
                 this.noCount = 0;
-                this.NoCreditsYesOrShortlist('unpaidshort.png');
+                this.chatRequest(element.id,this.currentContact).subscribe(
+                  res => {
+                    console.log(res);
+                    this.NoCreditsYesOrShortlist('unpaidshort.png');
+                  },
+                  err => {
+                    console.log(err);
+                  }
+                );
               } else {
                 this.repeatMEssage(element.id, this.currentContact);
               }
@@ -1199,12 +1223,28 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
            this.exhaustCount++;
            if (this.exhaustCount > 1) {
                this.exhaustCount = 0;
-               this.exhaustedProfile();
+               this.chatRequest(element.id,this.currentContact).subscribe(
+                res => {
+                  console.log(res);
+                  this.exhaustedProfile();
+                },
+                err => {
+                  console.log(err);
+                }
+              );
              } else {
                this.repeatMEssage(element.id, this.currentContact);
              }
          } else {
-          this.exhaustedProfile();
+          this.chatRequest(element.id,this.currentContact).subscribe(
+            res => {
+              console.log(res);
+              this.exhaustedProfile();
+            },
+            err => {
+              console.log(err);
+            }
+          );
          }
        } else {
          this.repeatMEssage(element.id, this.currentContact);
