@@ -64,6 +64,9 @@ export class HomeComponent implements OnInit {
       this.openFormDialog();
     }
   }
+  hiring(){
+    window.open('https://jobkitten.com/apply/hans-matrimony');
+  }
 
   subscription() {
     this.spinner.show();
