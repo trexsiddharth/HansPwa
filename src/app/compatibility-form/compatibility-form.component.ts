@@ -413,12 +413,13 @@ export class CompatibilityFormComponent implements OnInit {
                 this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
                 this.gtag_report_conversion('https://hansmatrimony.com/reg');
                 localStorage.setItem('RegisterNumber', '');
+
                 (window as any).fbq('track', 'SinglePageRegistration', {
                   value: 15,
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
                 });
-                (window as any).fbqa('track', 'SinglePageRegistration', {
+                (window as any).fbq('track', '692972151223870' , 'SinglePageRegistration', {
                   value: 15,
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
