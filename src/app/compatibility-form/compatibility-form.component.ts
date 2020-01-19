@@ -419,7 +419,7 @@ export class CompatibilityFormComponent implements OnInit {
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
                 });
-                (window as any).fbq('track', '692972151223870' , 'SinglePageRegistration', {
+                (window as any).fbq('track', 'SinglePageRegistration', {
                   value: 15,
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
