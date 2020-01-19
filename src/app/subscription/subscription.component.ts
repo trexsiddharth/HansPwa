@@ -92,6 +92,7 @@ export class SubscriptionComponent implements OnInit {
           return this.subscriptionService.payNowT(amt, type, 1, name, email, phone);
      }
    }
+  
 
    changeButtonOnline() {
     this.currentPersonalizedStatus = 'buttonPersonalised';

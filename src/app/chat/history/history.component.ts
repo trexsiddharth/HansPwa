@@ -29,7 +29,6 @@ export class HistoryComponent implements OnInit {
     console.log('id', id);
     console.log('contacted', contacted);
     console.log('is_lead', localStorage.getItem('is_lead'));
-    
   // tslint:disable-next-line: max-line-length
     return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', profileData).subscribe(
        (data: any) => {
@@ -67,24 +66,48 @@ export class HistoryComponent implements OnInit {
     }
      }
     yesProfiles() {
+      if (this.profile.contacted){
       if (localStorage.getItem('language') === 'English') {
         return 'Contacted(' + this.profile.contacted.length + ')';
       } else {
         return 'पसंद(' + this.profile.contacted.length + ')';
       }
+    } else {
+      if (localStorage.getItem('language') === 'English') {
+        return 'Contacted(' + 0 + ')';
+      } else {
+        return 'पसंद(' + 0 + ')';
+      }
+    }
     }
     noProfiles() {
+      if (this.profile.rejected) {
       if (localStorage.getItem('language') === 'English') {
         return 'Rejected(' + this.profile.rejected.length + ')';
       } else {
         return 'रिजेक्टेड(' + this.profile.rejected.length + ')';
       }
+    } else {
+      if (localStorage.getItem('language') === 'English') {
+        return 'Rejected(' + 0 + ')';
+      } else {
+        return 'रिजेक्टेड(' + 0 + ')';
+      }
+    }
     }
     shortProfiles() {
+      if(this.profile.shortlisted){
       if (localStorage.getItem('language') === 'English') {
         return 'Shortlisted(' + this.profile.shortlisted.length + ')';
       } else {
         return 'शॉर्टलिस्ट(' + this.profile.shortlisted.length + ')';
       }
+    } else {
+      if (localStorage.getItem('language') === 'English') {
+        return 'Shortlisted(' + 0 + ')';
+      } else {
+        return 'शॉर्टलिस्ट(' + 0 + ')';
+      }
+    }
     }
 }

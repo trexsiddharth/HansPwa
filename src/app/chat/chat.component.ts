@@ -542,7 +542,7 @@ temple_name: ''
                                 }, 2000);
                               }
                             }
-                            this.updateBotValue(index, element,'response');
+                            this.updateBotValue(index, element, 'response');
                             (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
                               hitCallback: () => {
                                 console.log('Tracking Bot Response entered successful');
@@ -619,7 +619,7 @@ temple_name: ''
                         document.querySelectorAll<HTMLElement>('.customBotButton').forEach( element => {
                           element.onclick = () => {
                             console.log('Clicked');
-                            this.updateBotValue(index, element,'response');
+                            this.updateBotValue(index, element, 'response');
                             (window as any).ga('send', 'event', 'ChatBot Response', element.id, {
                               hitCallback: () => {
                                 console.log('Tracking Bot Response entered successful');
@@ -1176,7 +1176,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
            if (this.noCount > 1) {
                  this.noCount = 0;
                  this.shortCount = 0;
-                 this.chatRequest(element.id,this.currentContact).subscribe(
+                 this.chatRequest(element.id, this.currentContact).subscribe(
                   res => {
                     console.log(res);
                     this.After2no();
@@ -1191,7 +1191,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
         } else if (element.id === 'YES') {
           this.noCount = 0;
           this.shortCount = 0;
-          this.chatRequest(element.id,this.currentContact).subscribe(
+          this.chatRequest(element.id, this.currentContact).subscribe(
             res => {
               console.log(res);
               this.NoCreditsYesOrShortlist('unpaidYes.jpg');
@@ -1205,7 +1205,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
           if (this.shortCount > 1) {
                 this.shortCount = 0;
                 this.noCount = 0;
-                this.chatRequest(element.id,this.currentContact).subscribe(
+                this.chatRequest(element.id, this.currentContact).subscribe(
                   res => {
                     console.log(res);
                     this.NoCreditsYesOrShortlist('unpaidshort.png');
@@ -1223,7 +1223,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
            this.exhaustCount++;
            if (this.exhaustCount > 1) {
                this.exhaustCount = 0;
-               this.chatRequest(element.id,this.currentContact).subscribe(
+               this.chatRequest(element.id, this.currentContact).subscribe(
                 res => {
                   console.log(res);
                   this.exhaustedProfile();
@@ -1236,7 +1236,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
                this.repeatMEssage(element.id, this.currentContact);
              }
          } else {
-          this.chatRequest(element.id,this.currentContact).subscribe(
+          this.chatRequest(element.id, this.currentContact).subscribe(
             res => {
               console.log(res);
               this.exhaustedProfile();
@@ -1396,7 +1396,14 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
       if (localStorage.getItem('is_lead')) {
         historyData.append('is_lead', localStorage.getItem('is_lead'));
       } else {
-        historyData.append('is_lead', '1');
+          this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+              console.log(res);
+              historyData.append('is_lead', res.is_lead);
+              localStorage.setItem('is_lead', res.is_lead);
+          },
+          err => {
+              console.log(err);
+          });
       }
       // tslint:disable-next-line: max-line-length
       return this.http.post<any>('https://partner.hansmatrimony.com/api/history', historyData).pipe(timeout(7000), retry(2), catchError(e => {
@@ -1450,7 +1457,14 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
       if (localStorage.getItem('is_lead')) {
         myprofileData.append('is_lead', localStorage.getItem('is_lead'));
       } else {
-        myprofileData.append('is_lead', '1');
+        this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+          console.log(res);
+          myprofileData.append('is_lead', res.is_lead);
+          localStorage.setItem('is_lead', res.is_lead);
+      },
+      err => {
+          console.log(err);
+      });
       }
      // tslint:disable-next-line: max-line-length
       return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
@@ -1498,7 +1512,18 @@ profileReAnswer(num: any, id: any, answer: any) {
   reAnswerData.append('mobile', this.currentContact);
   reAnswerData.append('id', id);
   reAnswerData.append('answer', answer);
+  if (localStorage.getItem('is_lead')) {
   reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
+  } else {
+    this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+      console.log(res);
+      reAnswerData.append('is_lead', res.is_lead);
+      localStorage.setItem('is_lead', res.is_lead);
+  },
+  err => {
+      console.log(err);
+  });
+  }
   // tslint:disable-next-line: max-line-length
   return this.http.post<any>('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
     (data: any) => {
@@ -1953,7 +1978,18 @@ profileReAnswer(num: any, id: any, answer: any) {
 getCredits() {
   const creditsData = new FormData();
   creditsData.append('id', localStorage.getItem('id'));
+  if (localStorage.getItem('is_lead')) {
   creditsData.append('is_lead', localStorage.getItem('is_lead'));
+  } else {
+    this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+      console.log(res);
+      creditsData.append('is_lead', res.is_lead);
+      localStorage.setItem('is_lead', res.is_lead);
+  },
+  err => {
+      console.log(err);
+  });
+  }
  // tslint:disable-next-line: max-line-length
   return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
    (data: any) => {
@@ -2251,7 +2287,18 @@ if (value === 'No') {
     pdfData.append('id', loggedId);
     pdfData.append('profile_to_send_id', profileId);
     pdfData.append('full', full);
-    pdfData.append('is_lead', localStorage.getItem('is_lead'));
+    if (localStorage.getItem('is_lead')) {
+      pdfData.append('is_lead', localStorage.getItem('is_lead'));
+    } else {
+      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+        console.log(res);
+        pdfData.append('is_lead', res.is_lead);
+        localStorage.setItem('is_lead', res.is_lead);
+    },
+    err => {
+        console.log(err);
+    });
+    }
     return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
   console.log(data);
   if (data.status === 1) {
@@ -2274,7 +2321,19 @@ if (value === 'No') {
   pdfData.append('id', loggedId);
   pdfData.append('profile_to_send_id', profileId);
   pdfData.append('full', full);
+  if (localStorage.getItem('is_lead')) {
   pdfData.append('is_lead', localStorage.getItem('is_lead'));
+  }
+  else {
+    this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+      console.log(res);
+      pdfData.append('is_lead', res.is_lead);
+      localStorage.setItem('is_lead', res.is_lead);
+  },
+  err => {
+      console.log(err);
+  });
+  }
   return this.http.post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
   console.log(data);
   if (data.status === 1) {
@@ -2381,7 +2440,14 @@ if (value === 'No') {
     if (localStorage.getItem('is_lead')) {
     getProfileData.append('is_lead', localStorage.getItem('is_lead'));
     } else {
-      getProfileData.append('is_lead', '1');
+      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+        console.log(res);
+        getProfileData.append('is_lead', res.is_lead);
+        localStorage.setItem('is_lead', res.is_lead);
+    },
+    err => {
+        console.log(err);
+    });
     }
 
     console.log('id', localStorage.getItem('id'));
