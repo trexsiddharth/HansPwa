@@ -9,6 +9,7 @@
 }
 .fieldFit{
     height:60px;
+    margin-top: 10px;
 }
 ::ng-deep .mat-form-field-ripple {
     background-color:#34b7f1;

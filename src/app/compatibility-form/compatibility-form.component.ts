@@ -112,7 +112,7 @@ export class CompatibilityFormComponent implements OnInit {
       birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
-      AnnualIncome: ['', Validators.compose([Validators.required])],
+      AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
       Mangalik: ['', Validators.compose([Validators.required])]

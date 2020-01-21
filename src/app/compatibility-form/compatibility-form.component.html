@@ -89,7 +89,7 @@
                                 <mat-form-field class="full-width fieldFit" appearance="standard" >
                                   <mat-label style="color: black;">Annual Income In Lakhs</mat-label>
                                   <input type="number" matInput formControlName="AnnualIncome" required name="AnnualIncome">
-                                  
+                                  <mat-error style="margin-bottom: 10px;" *ngIf="PageOne.get('AnnualIncome').invalid"> Please Enter a valid income. Ex. 4 (for 4 lacs) </mat-error>
                                 </mat-form-field>
                               </div>
 
