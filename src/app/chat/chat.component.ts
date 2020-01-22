@@ -537,9 +537,9 @@ temple_name: ''
                           element.onclick = () => {
                             if (element.id === 'YES') {
                               if (this.show_ad === 1) {
-                                setTimeout(() => {
-                                  this.openAwardDialog();
-                                }, 2000);
+                                // setTimeout(() => {
+                                //   this.openAwardDialog();
+                                // }, 2000);
                               }
                             }
                             this.updateBotValue(index, element, 'response');

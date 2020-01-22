@@ -14,6 +14,7 @@ import { ViewCentresComponent } from './view-centres/view-centres.component';
 import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
 import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'reg', component: CompatibilityFormComponent},
   { path: 'termsCondition', component: TermsAndConditionsComponent},
+  { path: 'checkout', component: CustomCheckoutComponent},
   { path: '**', pathMatch: 'full', redirectTo: '/'}
 
 ];

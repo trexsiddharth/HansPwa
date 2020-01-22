@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
 import {
   MatFormFieldModule, MatDatepickerModule, MatIconModule, MatInputModule, MatButtonToggleModule,
-  MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule
+  MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule, MatCardModule
 } from '@angular/material';
 
 import { MatNativeDateModule } from '@angular/material';
@@ -52,6 +52,7 @@ import { CompatibilityFormComponent } from './compatibility-form/compatibility-f
 import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
 import { ConnectionErrorComponent } from './chat/connection-error/connection-error.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
     PhoneNumberScreenComponent,
     ConnectionErrorComponent,
     TermsAndConditionsComponent,
+    CustomCheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +98,7 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
     NgxMatIntlTelInputModule,
-    NgbModule, RouterModule, WalkthroughModule
+    NgbModule, RouterModule, WalkthroughModule,MatCardModule
   ],
   providers: [SubscriptionserviceService],
   bootstrap: [AppComponent],

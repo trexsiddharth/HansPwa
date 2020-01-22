@@ -1,0 +1,10 @@
+::ng-deep body{
+    background-image:none;
+    background-color: white;
+}
+mat-card {
+    background: white;
+    color: black;
+    width: 80%;
+    margin: 20px auto;
+}
