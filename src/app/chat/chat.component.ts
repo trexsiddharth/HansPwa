@@ -2810,11 +2810,11 @@ if (value === 'No') {
       this.botui.action.button({
         action: [
           {
-            text: '₹3500 - 30 कांटेक्ट नंबर',
+            text: '₹3500 - 45 कांटेक्ट नंबर',
             value: 'PLAN3500'
           },
           {
-            text: '₹5500 - 60 कांटेक्ट नंबर',
+            text: '₹5500 - 90 कांटेक्ट नंबर',
             value: 'PLAN5500'
           },
           {
