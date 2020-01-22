@@ -58,7 +58,7 @@ export class CompatibilityFormComponent implements OnInit {
     minute: 30
   };
   gender;
-  MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorced', 'Widowed', 'Anulled'];
+  MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
   PageOne: FormGroup;
 
   // birth date

@@ -22,3 +22,25 @@ mat-card-title {
 mat-label{
     color: black;
 }
+.btnHover:hover{
+    background: #34b7f1;
+    color: white;
+}
+.btnPaymentType{
+    text-align: start;
+width: 100%
+}
+.btnPaymentType:hover{
+    background: #34b7f1;
+    color: white;
+}
+.paymentImage{
+    width: 40px
+}
+.paytype{
+    margin-left: 10px;
+    font-weight: bolder;
+}
+hr{
+    margin: 0px;
+}
