@@ -8,22 +8,29 @@
         <mat-form-field appearance="standard">
             <mat-label>Name</mat-label>
             <input formControlName="name" type="text" matInput>
+            <mat-error *ngIf="checkOutForm.get('name').invalid">Please Enter A Valid Name</mat-error>
+          </mat-form-field> <br>
+
+          <mat-form-field appearance="standard">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" type="email" matInput>
+            
+            <mat-error *ngIf="checkOutForm.get('email').invalid">Please Enter A Valid Email</mat-error>
           </mat-form-field>
 
-          <div class="container-fluid" style="border: 1px solid#f5f5f5;">
+          <div class="container-fluid" style="border: 1px solid#f5f5f5;margin-top: 20px;">
 
-            <button class="btn btnPaymentType">
+            <button class="btn btnPaymentType" (click)="createSubscription('card')">
                 <img class="paymentImage" src="../../assets/card.svg" alt="card payment"><span class="paytype">Cards</span> 
             </button>
             <hr>
-            <button class="btn btnPaymentType">
+            <button class="btn btnPaymentType" (click)="createSubscription('netbanking')">
                 <img class="paymentImage" src="../../assets/bank.svg"  alt="netbanking payment"> <span class="paytype">Netbanking</span> 
             </button>
             <hr>
-            <button class="btn btnPaymentType"> 
+            <button class="btn btnPaymentType" (click)="customClickButton('wallet')"> 
                 <img class="paymentImage" src="../../assets/wallet.svg"  alt="wallet payment"> <span class="paytype">Wallets</span> 
             </button>
-
           </div>
         </form>
     </mat-card-content>
