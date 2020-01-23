@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {
+  NgxNotificationService
+} from 'ngx-kc-notification';
+
+
 declare var Razorpay: any;
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionserviceService {
-  constructor( private http: HttpClient ) {
+  constructor( private http: HttpClient, private ngxNotificationService: NgxNotificationService ) {
    }
   payNowT(amt, type, plan, name, email, phone) {
     let notes = {service: ''};
@@ -34,10 +39,10 @@ export class SubscriptionserviceService {
       'name': ' Hans Matrimony',
       'description': 'Order #',
 
-      'handler': function(response) {
+      'handler': (response) => {
           console.log(response);
           if (plan === 0) {
-            alert('Payment Successfull \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
+            this.captureStandardPayment(response, amt);
           } else {
             alert('Payment Successfull \n' + ' We will get back to you shortly \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
           }
@@ -88,11 +93,11 @@ payNowCustom(amt, type, plan, name, email, phone,mode,orderId,cust_id) {
     'order_id': orderId,
     'recurring': 1,
 
-    'handler': function(response) {
+    'handler': (response) =>  {
         console.log(response);
         if (plan === 0) {
           alert('Payment Successfull \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
-          this.authorizeFirstPayment(response);
+          this.authorizeFirstPaymentCustom(response);
         } else {
           alert('Payment Successfull \n' + ' We will get back to you shortly \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
         }
@@ -113,7 +118,7 @@ payNowCustom(amt, type, plan, name, email, phone,mode,orderId,cust_id) {
 const rzp = new Razorpay(options);
   rzp.open();
 }
-authorizeFirstPayment(response){
+authorizeFirstPaymentCustom(response){
   let formData = new FormData();
   formData.append('id', localStorage.getItem('id'));
   formData.append('payment_id', response.razorpay_payment_id);
@@ -123,6 +128,27 @@ authorizeFirstPayment(response){
     },
     err => {
       console.log(err);
+    }
+  );
+}
+captureStandardPayment(response, amount) {
+  let formData = new FormData();
+  formData.append('mobile', localStorage.getItem('mobile_number'));
+  formData.append('payment_id', response.razorpay_payment_id);
+  formData.append('amount', amount);
+  formData.append('currency', 'INR');
+  this.http.post('http://partner.hansmatrimony.com/api/paymentCapture', formData).subscribe(
+    (data: any) => {
+        console.log(data);
+        if (data.status === 1) {
+          this.ngxNotificationService.success('Payment Successful, Credits has been added to your account.');
+        } else {
+          this.ngxNotificationService.error('Something went wrong. Please try again later.');
+        }
+    },
+    err => {
+      console.log(err);
+      this.ngxNotificationService.error('Something went wrong. Please try again later.');
     }
   );
 }

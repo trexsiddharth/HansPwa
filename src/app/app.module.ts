@@ -5,7 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
 import {
   MatFormFieldModule, MatDatepickerModule, MatIconModule, MatInputModule, MatButtonToggleModule,
-  MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule, MatCardModule
+  MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule, MatCardModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import { MatNativeDateModule } from '@angular/material';
@@ -97,7 +98,7 @@ import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.compo
     MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule,
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
-    NgxMatIntlTelInputModule,
+    NgxMatIntlTelInputModule, MatSnackBarModule,
     NgbModule, RouterModule, WalkthroughModule,MatCardModule
   ],
   providers: [SubscriptionserviceService],
