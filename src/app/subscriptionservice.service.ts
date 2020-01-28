@@ -122,7 +122,7 @@ authorizeFirstPaymentCustom(response){
   let formData = new FormData();
   formData.append('id', localStorage.getItem('id'));
   formData.append('payment_id', response.razorpay_payment_id);
-  this.http.post('http://partner.hansmatrimony.com/api/authorizeFirstPayment', formData).subscribe(
+  this.http.post('https://partner.hansmatrimony.com/api/authorizeFirstPayment', formData).subscribe(
     data => {
         console.log(data);
     },
@@ -137,13 +137,13 @@ captureStandardPayment(response, amount) {
   formData.append('payment_id', response.razorpay_payment_id);
   formData.append('amount', amount);
   formData.append('currency', 'INR');
-  this.http.post('http://partner.hansmatrimony.com/api/paymentCapture', formData).subscribe(
+  this.http.post('https://partner.hansmatrimony.com/api/paymentCapture', formData).subscribe(
     (data: any) => {
         console.log(data);
         if (data.status === 1) {
-          this.ngxNotificationService.success('Payment Successful, Credits has been added to your account.');
+          alert('Payment Successful, Credits has been added to your account.');
         } else {
-          this.ngxNotificationService.error('Something went wrong. Please try again later.');
+          alert('Something went wrong. Please try again later.');
         }
     },
     err => {

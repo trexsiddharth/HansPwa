@@ -114,7 +114,6 @@ export class SubscriptionComponent implements OnInit {
    @HostListener('window:resize', ['$event'])
 onResize(event) {
   this.innerWidth = window.innerWidth;
-  console.log(this.innerWidth);
 }
 
    openDialog(plan: String, benefits: String, value: String , price: String) {
