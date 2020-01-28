@@ -214,9 +214,7 @@ temple_name: ''
   ngOnInit() {
     if (this.router.url.match('logout')) {
       this.loginStatus = false;
-      localStorage.setItem('mobile_number', '');
-      localStorage.setItem('id', '');
-      localStorage.setItem('gender', '');
+      this.logout('permanent');
     }
     window.addEventListener('offline',
   () => {
@@ -235,7 +233,7 @@ temple_name: ''
     if (this.router.url.match('push')) {
       this.Analytics('Push Web', 'Push Web', 'Notification Clicked');
     }
-  
+
 
 
     if (localStorage.getItem('mobile_number')) {
@@ -271,7 +269,7 @@ temple_name: ''
       this.route.paramMap.subscribe(
         (data: any) => {
           console.log(data.params.mobile);
-          this.logout();
+          this.logout('temporary');
           this.currentUrl = data.params.mobile;
           this.Analytics('Android App', 'Android App', 'Logged In through App');
         }
@@ -2140,15 +2138,16 @@ if (value === 'No') {
                 return '<th></th>';
               }
       }
-        logout() {
+        logout( type: string) {
         this.loginStatus = false;
         localStorage.setItem('mobile_number', '');
         localStorage.setItem('id', '');
         localStorage.setItem('gender', '');
         localStorage.setItem('is_lead', '');
         localStorage.setItem('RegisterNumber', '');
-
+        if (type === 'permanent') {
         this.router.navigateByUrl('/home');
+          }
       }
 
         changeButtonLanguage(type: string) {
@@ -2341,8 +2340,7 @@ if (value === 'No') {
   pdfData.append('full', full);
   if (localStorage.getItem('is_lead')) {
   pdfData.append('is_lead', localStorage.getItem('is_lead'));
-  }
-  else {
+  } else {
     this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
       console.log(res);
       pdfData.append('is_lead', res.is_lead);
