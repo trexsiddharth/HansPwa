@@ -235,7 +235,7 @@ temple_name: ''
     if (this.router.url.match('push')) {
       this.Analytics('Push Web', 'Push Web', 'Notification Clicked');
     }
-  
+
 
 
     if (localStorage.getItem('mobile_number')) {
@@ -267,15 +267,16 @@ temple_name: ''
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
 
-    if (this.route.paramMap) {
-      this.route.paramMap.subscribe(
+    this.route.paramMap.subscribe(
         (data: any) => {
           console.log(data.params.mobile);
           this.currentUrl = data.params.mobile;
-          this.Analytics('Android App', 'Android App', 'Logged In through App');
+          if (this.currentUrl) {
+            localStorage.setItem('mobile_number', this.currentUrl);
+            this.Analytics('Android App', 'Android App', 'Logged In through App');
+          }
         }
       );
-    }
 
     if (this.router.url.match('mobile=')) {
       this.currentUrl = this.router.url.substring(13);
@@ -2340,8 +2341,7 @@ if (value === 'No') {
   pdfData.append('full', full);
   if (localStorage.getItem('is_lead')) {
   pdfData.append('is_lead', localStorage.getItem('is_lead'));
-  }
-  else {
+  } else {
     this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
       console.log(res);
       pdfData.append('is_lead', res.is_lead);
