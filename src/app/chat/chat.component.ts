@@ -271,6 +271,7 @@ temple_name: ''
       this.route.paramMap.subscribe(
         (data: any) => {
           console.log(data.params.mobile);
+          this.logout();
           this.currentUrl = data.params.mobile;
           this.Analytics('Android App', 'Android App', 'Logged In through App');
         }
