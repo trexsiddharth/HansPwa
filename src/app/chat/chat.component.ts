@@ -183,7 +183,8 @@ temple_name: ''
     private promptService: InstallPromptService,
     public dialog: MatDialog,
     public notification: NotificationsService,
-    private subscriptionService: SubscriptionserviceService
+    private subscriptionService: SubscriptionserviceService,
+    private route: ActivatedRoute
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -234,6 +235,9 @@ temple_name: ''
     if (this.router.url.match('push')) {
       this.Analytics('Push Web', 'Push Web', 'Notification Clicked');
     }
+  
+
+
     if (localStorage.getItem('mobile_number')) {
       this.loginStatus = true;
     } else {
@@ -262,10 +266,23 @@ temple_name: ''
 
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
+
+    if (this.route.paramMap) {
+      this.route.paramMap.subscribe(
+        (data: any) => {
+          console.log(data.params.mobile);
+          this.currentUrl = data.params.mobile;
+          this.Analytics('Android App', 'Android App', 'Logged In through App');
+        }
+      );
+    }
+
     if (this.router.url.match('mobile=')) {
       this.currentUrl = this.router.url.substring(13);
+      console.log(this.currentUrl);
     }
-    console.log(this.currentUrl);
+
+
     if (localStorage.getItem('mobile_number')) {
       this.spinner.show();
       this.currentContact = localStorage.getItem('mobile_number');

@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'register-five', component: RegisterFiveComponent},
   { path: 'register-six', component: RegisterSixComponent},
   { path: 'chat', component: ChatComponent},
+  { path: 'chat/app/:mobile', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'reg', component: CompatibilityFormComponent},
