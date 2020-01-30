@@ -6,7 +6,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {
   MatFormFieldModule, MatDatepickerModule, MatIconModule, MatInputModule, MatButtonToggleModule, MatButtonModule,
   MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule, MatCardModule,
-  MatSnackBarModule
+  MatSnackBarModule, MatExpansionModule
 } from '@angular/material';
 
 import { MatNativeDateModule } from '@angular/material';
@@ -55,6 +55,8 @@ import { ConnectionErrorComponent } from './chat/connection-error/connection-err
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 
+import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,8 +100,11 @@ import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.compo
     MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule,
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
-    NgxMatIntlTelInputModule, MatSnackBarModule, MatButtonModule,
-    NgbModule, RouterModule, WalkthroughModule,MatCardModule
+    NgxMatIntlTelInputModule, MatSnackBarModule, MatButtonModule, MatExpansionModule,
+    NgbModule, RouterModule, WalkthroughModule,MatCardModule,
+    LazyLoadImageModule.forRoot({
+      preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
+    })
   ],
   providers: [SubscriptionserviceService],
   bootstrap: [AppComponent],

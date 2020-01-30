@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit,
    AfterViewChecked } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Event } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -8,9 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit, AfterViewInit {
-  ngAfterViewInit(): void {
-    console.log(this.type);
-  }
+
 
   @Input() profile: any;
   @Input() type: any;
@@ -18,10 +17,17 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   @Output() stage = new EventEmitter<string>();
   likeCount;
   dislikeCount;
+  panelOpenState;
+
+
+
   constructor( private http: HttpClient) {
    }
 
   ngOnInit() {
+  }
+  ngAfterViewInit(): void {
+    console.log(this.type);
   }
 
   shareData(id: any, contacted: any, status) {
@@ -61,7 +67,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       if (type === 1) {
       if (value != null) {
         if (value.split(' ')) {
-          let name = value.split(' ');
+          const name = value.split(' ');
           return name[0] ;
         } else {return value; }
       } else {return ''; }
@@ -100,7 +106,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }
     }
     shortProfiles() {
-      if(this.profile.shortlisted){
+      if (this.profile.shortlisted) {
       if (localStorage.getItem('language') === 'English') {
         return 'Shortlisted(' + this.profile.shortlisted.length + ')';
       } else {
@@ -113,5 +119,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         return 'शॉर्टलिस्ट(' + 0 + ')';
       }
     }
+    }
+    setPanelOpenState(index: any) {
+      this.panelOpenState = index;
+      console.log(this.panelOpenState);
     }
 }

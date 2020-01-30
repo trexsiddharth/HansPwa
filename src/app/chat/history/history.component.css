@@ -49,15 +49,27 @@
   mat-card{
     background: white;
     color: black ;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
   }
   mat-card-subtitle{
     color: black;
   }
+  .mat-expansion-panel{
+    background: white;
+    color: black;
+  }
+  mat-expansion-panel-header{
+    background: white !important;
+    padding: 0px;
+    margin-bottom: 10px;
+  
+  }
   .setButtons{
-    margin-right: 10px;
+    margin-left: 10px;
+  }
+  mat-card-actions{
+    margin-bottom: 0px;
   }
   @media (max-width: 1024px) {
     .prof {

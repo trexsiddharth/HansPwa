@@ -65,29 +65,74 @@
             </div> -->
             <div style="padding-top: 10px;padding-bottom: 200px;">
 
-          <mat-card *ngFor="let item of profile">
-            <mat-card-title-group>
-              <mat-card-title>
-                {{item.name}}
-              </mat-card-title>
-              <mat-card-subtitle>
-                {{item.id}}
-              </mat-card-subtitle>
-              <img mat-card-lg-image [src]=getProfilePhoto(item.photo,profile.gender)>
-            </mat-card-title-group>
-            <mat-card-actions align="end" >
-              <button class="setButtons" mat-mini-fab style="color: green;background: white;" aria-label="Example icon-button with a heart icon">
-                <mat-icon>check</mat-icon>
-              </button>
-              <button class="setButtons" mat-mini-fab style="color: red;background: white;" aria-label="Example icon-button with a heart icon">
-                <mat-icon>favorite</mat-icon>
-              </button>
-              <button class="setButtons" mat-mini-fab style="color: grey;background: white;" aria-label="Example icon-button with a heart icon">
-                <mat-icon>close</mat-icon>
-              </button>
-             
-            </mat-card-actions>
-          </mat-card>
+
+              <mat-accordion>
+                <mat-expansion-panel *ngFor="let item of profile;let i = index" [togglePosition]="'end'" multi="true" [expanded]="panelOpenState === i" (opened)="setPanelOpenState(i)">
+                <mat-expansion-panel-header [collapsedHeight]="'100%'" [expandedHeight]="'100%'" >
+                  <!-- <mat-card>
+                    <mat-card-title-group>
+                      <mat-card-title>
+                        {{item.name}}
+                      </mat-card-title>
+                      <mat-card-subtitle>
+                        {{item.id}}
+                      </mat-card-subtitle>
+                      <img mat-card-image [src]=getProfilePhoto(item.photo,profile.gender)>
+                    </mat-card-title-group>
+                    <mat-card-actions style="margin-bottom: 0px;" align="end" >
+                      <button class="setButtons" mat-fab style="color: green;background: white;" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>check</mat-icon>
+                      </button>
+                      <button class="setButtons" mat-fab style="color: red;background: white;" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>favorite</mat-icon>
+                      </button>
+                      <button class="setButtons" mat-fab style="color: grey;background: white;" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                     
+                    </mat-card-actions>
+                  </mat-card> -->
+
+                  <mat-card class="example-card">
+
+
+                    <mat-card-title-group *ngIf="panelOpenState != i">
+                      <mat-card-title>
+                        {{item.name}}
+                      </mat-card-title>
+                      <mat-card-subtitle>
+                        {{item.id}}
+                      </mat-card-subtitle>
+                      <img mat-card-lg-image [src]=getProfilePhoto(item.photo,profile.gender)>
+                    </mat-card-title-group>
+
+
+                    <mat-card-header *ngIf="panelOpenState===i"> 
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{item.name}}</mat-card-title>
+                      <mat-card-subtitle>{{item.id}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image [src]=getProfilePhoto(item.photo,profile.gender) alt="Photo of a Shiba Inu" *ngIf="panelOpenState===i">
+
+                    
+
+                    <mat-card-actions style="margin-bottom: 0px;" align="end" >
+                      <button class="setButtons" mat-fab style="color: green;background: white;" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>check</mat-icon>
+                      </button>
+                      <button class="setButtons" mat-fab style="color: red;background: white;" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>favorite</mat-icon>
+                      </button>
+                      <button class="setButtons" mat-fab style="color: grey;background: white;" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-card-actions>
+                  </mat-card>
+
+                </mat-expansion-panel-header>
+                Check
+                </mat-expansion-panel>
+              </mat-accordion>
 
               
         </div>
