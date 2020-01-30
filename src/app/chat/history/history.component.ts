@@ -7,9 +7,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+    console.log(this.type);
+  }
 
   @Input() profile: any;
+  @Input() type: any;
   @Output() share = new EventEmitter<any>();
   @Output() stage = new EventEmitter<string>();
   likeCount;
@@ -66,7 +70,7 @@ export class HistoryComponent implements OnInit {
     }
      }
     yesProfiles() {
-      if (this.profile.contacted){
+      if (this.profile.contacted) {
       if (localStorage.getItem('language') === 'English') {
         return 'Contacted(' + this.profile.contacted.length + ')';
       } else {

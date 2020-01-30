@@ -49,6 +49,7 @@ body {
     position: fixed;
     overflow: auto;
     height: 100%;
+    z-index: -1;
     top: 60px;
     bottom: 50px;
   }

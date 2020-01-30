@@ -240,7 +240,6 @@ onResize(event) {
      document.querySelectorAll('#backfile')[index].click();
     }
     getIncome(value: number) {
-      console.log(value.toString().length);
       if (value != null) {
         if (value.toString().length >= 6) {
           return String((Number(value) / 100000));

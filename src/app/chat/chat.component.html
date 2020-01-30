@@ -1,11 +1,10 @@
 
 <main class='fixed t-0 b-0 w-full HC' style="background-image:url('../../assets/bgicon.png');background-size: cover;">
-    <div class='bg-lightblue t-0 w-full  p-0-5 z-10 white hide' style="display: flex;justify-content:space-between">
-        <div class='flex-fs-c setLogo' >
+        <!-- <div class='flex-fs-c setLogo' >
             <img  src='../../assets/logo_short.png' class='w-40' style="border-radius: 100%; object-fit: cover; height: 2.5rem; width: 2.5rem; background-color: white">
             <div class='f16 white m-l-10 pointer'>Hans Matrimony</div>
-        </div > 
-        <div style="display: flex">
+        </div >  -->
+        <!-- <div style="display: flex">
           <div style="margin: auto">
               <div style="margin-bottom: 0px" [routerLink]="['/subscription']" routerLinkActive="router-link-active"  *ngIf="points >= 0">
                 <p class="setNavIcons" id="credit">कांटेक्ट नंबर: {{points}}</p>
@@ -32,10 +31,52 @@
                     <div class="col" style="margin:0px;padding: 0px;">
                     </div>
             </div>
-        </div>
-    </div>
-    <div>
-    </div>
+        </div> -->
+
+        <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)" [hidden]="history=='myprofile'" >
+            <mat-tab label="Today's Profile">
+                <ng-template matTabContent>
+                    <div id="my-botui-app" class="mainBody w-full ht-full"  style="margin-top: 50px;" >
+                          
+                              <bot-ui></bot-ui>
+                  </div>
+                </ng-template>
+                </mat-tab>
+                <mat-tab label="Contacted">
+                    <ng-template matTabContent>
+                        <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
+                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyContacted" ></app-history>
+                   </div>
+                </ng-template>
+                </mat-tab>
+                <mat-tab label="Interest Shown">
+                    <ng-template matTabContent>
+                    <div>
+                        <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
+                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyInterestShown" ></app-history>
+                       </div>
+                   </div>
+                </ng-template>
+                </mat-tab>
+                <mat-tab label="Interest Recieved">
+                    <ng-template matTabContent>
+                    <div>
+                        <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
+                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyInterestRecieved" ></app-history>
+                       </div>
+                   </div>
+                </ng-template>
+                </mat-tab>
+                <mat-tab label="Rejected">
+                    <ng-template matTabContent>
+                    <div>
+                        <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
+                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyRejected" ></app-history>
+                       </div>
+                   </div>
+                </ng-template>
+                </mat-tab>
+                </mat-tab-group>
     <div>
 
 <!-- The Modal -->
@@ -52,20 +93,9 @@
 </div>
 
     </div>
-    <div [hidden]="history!='chatbot'">
-    <div id="my-botui-app" class='mainBody  w-full ht-full'  >
-          
-              <bot-ui></bot-ui>
-    </div>
-  </div>
-  <div>
-          <div class='mainBody  w-full bg-white ht-full'  [hidden]="history!='history'">
-                   <app-history (share)="getSelectedProfile($event)" [profile]="historyData" ></app-history>
-         </div>
-     </div>
   
   <div>
-       <div class='mainBody  w-full bg-white ht-full'  [hidden]="history!='myprofile'">
+       <div class="w-full bg-white ht-full" style="background-size: cover;" [hidden]="history!='myprofile'">
                 <app-myprofile (preferenceChanged)="preferencesChanged($event)" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-myprofile>
       </div>
   </div>
@@ -75,121 +105,21 @@
              <app-connection-error></app-connection-error>
    </div>
 </div>
- 
-    <main *ngIf="1>2" class='mainBody pwaSize w-full bg-white'>
-  
-        <div style="margin-top:20px;" class="section" id="body">
-            <div class="section" *ngFor ="let i of show_arr" style="margin-top:20px">
-                <div class="section" *ngIf="i.sent===1" style="margin-top:20px;display:block" >
-                    <div class="pull-right" style="display: block;border-radius:10px;text-align:center;padding: 8px;margin-right: 10px;background-color: #34b7f1;display:block;margin-left:15%" id="color1">
-                        <p style="color:white;margin-top:auto;margin-bottom:auto"><span id="display1" style="font-size : 20px">{{i.data}}</span></p>
-                    </div> 
-                </div>
-        
-                <div class="section" *ngIf="i.message===1" style="margin-top:20px;display: block" >
-                    <div class="pull-left" style="display: block;border-radius:10px;text-align:center;padding: 8px;margin-left: 10px;margin-top: 20px;margin-bottom : 20px;background-color: #34b7f1;display:block;margin-right:15%" id="color2">
-                        <p style="color:white;margin-top:auto;margin-bottom:auto"><span id="display2" style="font-size : 20px">{{i.data}}</span></p>
-                    </div>                                
-                </div>
-                <div class="section" *ngIf = "i.profile===1" style="margin-top:20px;display: block;" >
-                    <div class="section"  style="margin-top:20px"> 
-                        <div class="section">
-                            <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__340.png" style="width : 100%;height : 16rem;background-color : white;margin-top:30px">
-                        </div>
-                    </div>
-                
-                    <!-- carousel done -->
-                    
-                    <div class="container"  style="background-color : white;;padding:10px;width: 100%">
-                        <div class="row" style="text-align:left">
-                            <p>{{i.data.name}}</p>
-                        </div>
-                            
-                    </div> 
-                    <div class="container" style="background-color:white;padding:10px;width: 100%">     
-                        <div class="section" style="display:flex">
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:left ;display : flex">
-                                <img src="../../../assets/color_icons/calendar-alt_gradient.svg">
-                        
-                                <p>{{i.data.birth_date}}</p>
-                            </div>
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:center; display : flex">
-                                <img src="../../../assets/color_icons/ruler.svg">
-                        
-                                <p>{{i.data.height}} inches</p>
-                            </div>
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:right;display : flex">
-                                <img src="../../../assets/color_icons/weight.svg">
-                        
-                                <p>{{i.data.weight}} kg</p>
-                            </div>
-                        </div>
-                        
-                
-                    
-                    </div>
-                
-                    <div class="container" style="background-color:white;;padding:10px;width: 100%">     
-                        <div class="section" style="display:flex">
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:left ;display : flex">
-                                <img src="../../../assets/color_icons/graduation-hat.svg">
-                        
-                                <p>{{i.data.degree}}</p>
-                            </div>
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:center; display : flex">
-                                <img src="../../../assets/color_icons/Rupee.svg">
-                        
-                                <p>{{i.data.monthly_income}}</p>
-                            </div>
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:right;display : flex">
-                                <img src="../../../assets/color_icons/map-marker_blue.svg">
-                        
-                                <p>{{i.data.locality}}</p>
-                            </div>
-                        </div>
-                        
-                
-                    
-                    </div>
-                
-                    <div class="container" style="background-color:white;;padding:10px;width: 100%">     
-                        <div class="section" style="display:flex">
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:left ;display : flex">
-                                <img src="../../../assets/color_icons/church.svg">
-                        
-                                <p>{{i.data.religion}}</p>
-                            </div>
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:center; display : flex">
-                                <img src="../../../assets/color_icons/heart.svg">
-                        
-                                <p>{{i.data.marital_status}}</p>
-                            </div>
-                            <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:right;display : flex">
-                                <img src="../../../assets/color_icons/crockery.svg">
-                        
-                                <p>{{i.data.food_choice}}</p>
-                            </div>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-            </div>
-    </main>
   
   <footer id="footerVisibility">
-      <div class="navbar" style="padding: 0px">
+      <div class="navbar" style="padding: 0px;z-index: 1;">
           <div class="row rowClass" >
-              <div class="col-4" id="chatButton" style="text-align: center">
+              <div class="col-6" id="chatButton" style="text-align: center">
                       <div class="row" style="margin: 0px auto; display: inline;">
-                          <button class="btn" (click)="changeToBot()" id="chatText">नए रिश्ते</button>
+                          <button class="btn" (click)="setSelectedTab(0)" id="chatText">नए रिश्ते</button>
                       </div>
               </div>
-              <div class="col-4" id="historyButton" style="text-align: center" >
+              <!-- <div class="col-4" id="historyButton" style="text-align: center" >
                       <div class="row" style="margin: 0px auto; display: inline;">
                               <button class="btn" (click)="changeToHistory()" id="historyText">देखे गए रिश्ते</button>
                           </div>
-              </div>
-              <div class="col-4" id="profileButton" style="text-align: center">
+              </div> -->
+              <div class="col-6" id="profileButton" style="text-align: center">
                       <div class="row" style="margin: 0px auto; display: inline;position: relative;">
                         <!-- <div style="background: red; top: -10px;right: -15px;padding:5px;position: absolute;border-radius: 100px;"><span style="font-size: 10px;color: white;">New</span></div> -->
                               <button class="btn" (click)="changeToMyProfile()" id="profileText">मेरा प्रोफाइल</button>

@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Event } from '@angular/router';
 import { Observable, timer } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
@@ -30,7 +30,7 @@ declare let BotUI: Function;
   styleUrls: ['./chat.component.css']
 })
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewInit {
 
 
   familyTable =  {
@@ -147,7 +147,10 @@ temple_name: ''
   botui: any;
   langChanged = false;
   currentLanguage: string;
-  historyData: any;
+  historyContacted: any;
+  historyInterestShown: any;
+  historyInterestRecieved: any;
+  historyRejected: any;
   currentContact: any;
   profileData: any;
   familyData: any;
@@ -172,6 +175,8 @@ temple_name: ''
   exhaustCount = 0;
   paidStatus;
   exhaustedStatus;
+  selectedTab;
+  tabType;
 
 
   constructor(
@@ -249,39 +254,44 @@ temple_name: ''
       this.currentLanguage = 'Hindi';
     }
 
-    if (this.currentLanguage === 'English') {
-      document.getElementById('chatText').innerText = 'See Profiles';
-      document.getElementById('historyText').innerText = 'History';
-      document.getElementById('profileText').innerText = 'My Profile';
-    } else {
-      document.getElementById('chatText').innerText = 'नए रिश्ते';
-      document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
-      document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
-    }
+    // if (this.currentLanguage === 'English') {
+    //   document.getElementById('chatText').innerText = 'See Profiles';
+    //   document.getElementById('historyText').innerText = 'History';
+    //   document.getElementById('profileText').innerText = 'My Profile';
+    // } else {
+    //   document.getElementById('chatText').innerText = 'नए रिश्ते';
+    //   document.getElementById('historyText').innerText = 'देखे गए रिश्ते';
+    //   document.getElementById('profileText').innerText = 'मेरा प्रोफाइल';
+    // }
 
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
 
+    this.route.paramMap.subscribe(
+      (data: any) => {
+        console.log(data.params.fcm_app);
+        if (data) {
+          if (data.params.fcm_app) {
+          localStorage.setItem('fcm_app', data.params.fcm_app);
+          this.Analytics('Android App', 'Android App', 'Logged In through App');
+          }
+        }
+      }
+    );
+
+    if (this.router.url.match('mobile=')) {
+    this.currentUrl = this.router.url.substring(13);
+    console.log(this.currentUrl);
+  }
+  }
+
+  ngAfterViewInit() {
+
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
 
-    this.route.paramMap.subscribe(
-        (data: any) => {
-          console.log(data.params.mobile);
-          this.currentUrl = data.params.mobile;
-          if (this.currentUrl) {
-            localStorage.setItem('mobile_number', this.currentUrl);
-            this.Analytics('Android App', 'Android App', 'Logged In through App');
-          }
-        }
-      );
-
-    if (this.router.url.match('mobile=')) {
-      this.currentUrl = this.router.url.substring(13);
-      console.log(this.currentUrl);
-    }
 
 
     if (localStorage.getItem('mobile_number')) {
@@ -412,9 +422,13 @@ temple_name: ''
      }
    }
    checkUrl(num: string): Observable<any> {
+     if (localStorage.getItem('fcm_app')) {
        // tslint:disable-next-line: max-line-length
-       return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : num, ['fcm_id'] : this.notification.getCurrentToken()}});
-       // tslint:disable-next-line: max-line-length
+       return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : num, ['fcm_id'] : this.notification.getCurrentToken(), ['fcm_app']: localStorage.getItem('fcm_app')}});
+     } else {
+// tslint:disable-next-line: max-line-length
+return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : num, ['fcm_id'] : this.notification.getCurrentToken()}});
+     }
    }
 
 
@@ -1400,13 +1414,13 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
       document.getElementById('chatText').style.color = 'grey';
       document.getElementById('profileText').style.color = 'grey';
       document.getElementById('profileButton').style.background = '#f3f3f3';
-      document.getElementById('historyText').style.color = '#FFFFFF';
+      // document.getElementById('historyText').style.color = '#FFFFFF';
 
       document.getElementById('chatText').style.background = '#f3f3f3';
       document.getElementById('profileText').style.background = '#f3f3f3';
 
-      document.getElementById('historyText').style.background = '#34b7f1';
-      document.getElementById('historyButton').style.background = '#34b7f1';
+      // document.getElementById('historyText').style.background = '#34b7f1';
+      // document.getElementById('historyButton').style.background = '#34b7f1';
 
       console.log(localStorage.getItem('id'));
       const historyData = new FormData();
@@ -1429,7 +1443,10 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
     })).subscribe(
         (data: any) => {
          console.log(data);
-         this.historyData = data;
+         this.historyContacted = data.contacted;
+         this.historyInterestShown = data.shortlisted;
+         this.historyInterestRecieved = data.shortlisted;
+         this.historyRejected = data.rejected;
          this.spinner.hide();
         },
         (error: any) => {
@@ -1444,16 +1461,16 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
      }
    }
    changeToBot() {
-    this.history = 'chatbot';
-    document.getElementById('chatButton').style.background = '#34b7f1';
-    document.getElementById('chatText').style.color = '#FFFFFF';
-    document.getElementById('chatText').style.background = '#34b7f1';
-    document.getElementById('historyText').style.color = 'grey';
-    document.getElementById('profileButton').style.background = '#f3f3f3';
-    document.getElementById('historyButton').style.background = '#f3f3f3';
-    document.getElementById('historyText').style.background = '#f3f3f3';
-    document.getElementById('profileText').style.color = 'grey';
-    document.getElementById('profileText').style.background = '#f3f3f3';
+     this.history = 'chatbot';
+     document.getElementById('chatButton').style.background = '#34b7f1';
+     document.getElementById('chatText').style.color = '#FFFFFF';
+     document.getElementById('chatText').style.background = '#34b7f1';
+    // document.getElementById('historyText').style.color = 'grey';
+     document.getElementById('profileButton').style.background = '#f3f3f3';
+    // document.getElementById('historyButton').style.background = '#f3f3f3';
+    // document.getElementById('historyText').style.background = '#f3f3f3';
+     document.getElementById('profileText').style.color = 'grey';
+     document.getElementById('profileText').style.background = '#f3f3f3';
    }
    changeToMyProfile() {
     if (this.currentContact) {
@@ -1462,10 +1479,10 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
       document.getElementById('profileButton').style.background = '#34b7f1';
       document.getElementById('chatText').style.color = 'grey';
       document.getElementById('chatButton').style.background = '#f3f3f3';
-      document.getElementById('historyButton').style.background = '#f3f3f3';
+      // document.getElementById('historyButton').style.background = '#f3f3f3';
       document.getElementById('chatText').style.background = '#f3f3f3';
-      document.getElementById('historyText').style.background = '#f3f3f3';
-      document.getElementById('historyText').style.color = 'grey';
+      // document.getElementById('historyText').style.background = '#f3f3f3';
+      // document.getElementById('historyText').style.color = 'grey';
       document.getElementById('profileText').style.color = '#FFFFFF';
       document.getElementById('profileText').style.background = '#34b7f1';
       console.log(localStorage.getItem('id'));
@@ -1694,6 +1711,7 @@ profileReAnswer(num: any, id: any, answer: any) {
   }
 
    getSelectedProfile(data: any) {
+     this.setSelectedTab(0);
      this.changeToBot();
      console.log(data);
      const personal = data.profile;
@@ -2989,6 +3007,46 @@ exhaustedProfile() {
         }
   });
   });
+}
+changeSelectedTab(event: any) {
+  console.log(event);
+
+  switch (event) {
+    case 0:
+  this.changeToBot();
+  break;
+    case 1:
+      this.tabType = 'contacted';
+      this.changeToHistory();
+      break;
+  case 2:
+    this.tabType = 'shortlisted';
+    this.changeToHistory();
+    break;
+  case 3:
+    this.tabType = 'shortlisted';
+    this.changeToHistory();
+    break;
+  case 4:
+    this.tabType = 'rejected';
+    this.changeToHistory();
+    break;
+
+    default:
+      break;
+  }
+
+}
+setSelectedTab(index: any) {
+  console.log('selected tab', index);
+  if (this.history !== 'myprofile') {
+  this.selectedTab = index ;
+  } else {
+    this.selectedTab = 0 ;
+    this.changeToBot();
+  }
+
+  console.log('selectedTabValue', this.selectedTab);
 }
 
 

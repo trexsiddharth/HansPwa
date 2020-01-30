@@ -9,27 +9,6 @@
     padding-top: 0px;
     padding-bottom: 0px;
   }
-  ::ng-deep .mat-tab-label {
-    background: white;
-  
-  }
-  ::ng-deep .mat-tab-label-active {
-    color: white;
-    font-weight: bolder;
-  }
-
-  ::ng-deep .mat-tab-label-content {
-    font-size: 18px;
-  }
-  ::ng-deep .mat-tab-body {
-    padding-bottom: 100px;
-  }
-  ::ng-deep .mat-tab-header-pagination-chevron {
-    border-color: black;
-  }
-  ::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
-    border-color: #34b7f1;
-  }
   
   /* Style the links inside the navigation bar */
   .navbar a {
@@ -66,14 +45,19 @@
   ::ng-deep .mat-tab-label-content {
     font-size: 18px;
   }
-  ::ng-deep #mat-tab-label-0-0 {
-    background: green ;
+
+  mat-card{
+    background: white;
+    color: black ;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
-  ::ng-deep #mat-tab-label-0-1 {
-    background: #FFD700;
+  mat-card-subtitle{
+    color: black;
   }
-  ::ng-deep #mat-tab-label-0-2 {
-    background: red;
+  .setButtons{
+    margin-right: 10px;
   }
   @media (max-width: 1024px) {
     .prof {

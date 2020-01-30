@@ -4,7 +4,7 @@ import { NgxNotificationModule } from 'ngx-kc-notification';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
 import {
-  MatFormFieldModule, MatDatepickerModule, MatIconModule, MatInputModule, MatButtonToggleModule,
+  MatFormFieldModule, MatDatepickerModule, MatIconModule, MatInputModule, MatButtonToggleModule, MatButtonModule,
   MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule, MatCardModule,
   MatSnackBarModule
 } from '@angular/material';
@@ -98,7 +98,7 @@ import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.compo
     MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule,
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
-    NgxMatIntlTelInputModule, MatSnackBarModule,
+    NgxMatIntlTelInputModule, MatSnackBarModule, MatButtonModule,
     NgbModule, RouterModule, WalkthroughModule,MatCardModule
   ],
   providers: [SubscriptionserviceService],

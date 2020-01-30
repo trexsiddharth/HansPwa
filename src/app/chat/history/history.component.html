@@ -1,20 +1,11 @@
-<main *ngIf="profile" style="margin: 0px ;padding-top: 10px;text-align: center">
+<main *ngIf="profile" >
     
-    <mat-tab-group mat-align-tabs="center">
+    <!-- <mat-tab-group mat-align-tabs="center">
         <mat-tab style="background: green;" class="textSize"  [label]="yesProfiles()">
-            <div class="col-3 col-md-2"   *ngFor="let item of profile.contacted" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
+            
+        </mat-tab> -->
 
-                <div *ngIf="profile.contacted" class="imageSet">
-                      <a (click)="shareData(item.id,'1','contacted')">
-                          <img id="contactedImage" style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
-                          <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/checked.svg" alt="like">
-                        </a>
-                    <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px" [innerHTML]="setName(item.name,0)"></p>
-                  </div>
-                </div>
-        </mat-tab>
-
-        <mat-tab class="textSize"  [label]="shortProfiles()">
+        <!-- <mat-tab class="textSize"  [label]="shortProfiles()">
             <div class="col-3 col-md-2"  *ngFor="let item of profile.shortlisted" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
 
                 <div *ngIf="profile.shortlisted" class="imageSet">
@@ -38,7 +29,67 @@
                     <p style="text-align: center;font-size: 14px;display: inline-block;margin-top:10px" [innerHTML]="setName(item.name,1)"></p>
                   </div>
                 </div>
-        </mat-tab>
-      </mat-tab-group>
+        </mat-tab> -->
+      <!-- </mat-tab-group> -->
+          
+      <!-- <div class="col-3 col-md-2"   *ngFor="let item of profile" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
+
+        <div *ngIf="type == contacted" class="imageSet" >
+              <a (click)="shareData(item.id,'1','contacted')">
+                  <img id="contactedImage" style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
+                  <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/checked.svg" alt="like">
+                </a>
+            <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px" [innerHTML]="setName(item.name,0)"></p>
+          </div>
+        </div>
+
+        <div class=" col-3 col-md-2" *ngFor="let item of profile" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
+
+          <div *ngIf="type == rejected"  class="imageSet">
+            <a (click)="shareData(item.id,'','rejected')">
+              <img style="width: 100%; height: 120px;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
+              <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/cancel.svg" alt="like">
+            </a>
+              <p style="text-align: center;font-size: 14px;display: inline-block;margin-top:10px" [innerHTML]="setName(item.name,1)"></p>
+            </div>
+          </div>
+
+          <div  class="imageSet"  >
+            <div class="col-3 col-md-2"  *ngFor="let item of profile" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;" >
+                  <a (click)="shareData(item.id,'','shortlisted')">
+                      <img style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
+                      <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/star.svg" alt="like">
+                    </a>
+                <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px" [innerHTML]="setName(item.name,1)"></p>
+              </div>
+            </div> -->
+            <div style="padding-top: 10px;padding-bottom: 200px;">
+
+          <mat-card *ngFor="let item of profile">
+            <mat-card-title-group>
+              <mat-card-title>
+                {{item.name}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{item.id}}
+              </mat-card-subtitle>
+              <img mat-card-lg-image [src]=getProfilePhoto(item.photo,profile.gender)>
+            </mat-card-title-group>
+            <mat-card-actions align="end" >
+              <button class="setButtons" mat-mini-fab style="color: green;background: white;" aria-label="Example icon-button with a heart icon">
+                <mat-icon>check</mat-icon>
+              </button>
+              <button class="setButtons" mat-mini-fab style="color: red;background: white;" aria-label="Example icon-button with a heart icon">
+                <mat-icon>favorite</mat-icon>
+              </button>
+              <button class="setButtons" mat-mini-fab style="color: grey;background: white;" aria-label="Example icon-button with a heart icon">
+                <mat-icon>close</mat-icon>
+              </button>
+             
+            </mat-card-actions>
+          </mat-card>
+
+              
+        </div>
   
 </main>
