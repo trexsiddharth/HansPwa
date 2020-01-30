@@ -61,7 +61,7 @@
       </header>
       <div class="container-fluid" >
         <div class="row" style="position: relative">
-                <img class="first-slide img-fluid sliding" [lazyLoad]="'../../assets/cover_hans_small.jpg 600w, ../../assets/cover_hans.jpg 1000w'" [useSrcset]="true" alt="hans matrimony cover">
+                <img class="first-slide img-fluid sliding" [defaultImage]="'../../assets/cover_hans_small.jpg'" [lazyLoad]="'../../assets/cover_hans_small.jpg 600w, ../../assets/cover_hans.jpg 1000w'" [useSrcset]="true" alt="hans matrimony cover">
             <div class="col-sm-12 headerSetting"  >
                     <div style="text-align: center;position: absolue;">
                      <p class="capt" >We bring families together..</p>
@@ -114,7 +114,7 @@
         <div class="container" style="padding-top:5%;padding-bottom:2%;">
             <div class="row">
                 <div class="col-md-6 col-center">
-                    <img [lazyLoad]="'../../assets/whatsappImage.webp'" class="img-fluid whats">
+                    <img src="../../assets/whatsappImage.webp" class="img-fluid whats">
                 </div>
                 <div class="col-md-6">
                     <div class="text col-center">
@@ -143,7 +143,7 @@
             <div class="container s" style="padding-top:1%">
                 <div class="row">
                     <div class="col-md-6 col-center">
-                        <img [lazyLoad]="'../../assets/locations.svg'" class="img-fluid whats" style="margin-bottom:1rem" alt="offline matchmaking">
+                        <img src="../../assets/locations.svg" class="img-fluid whats" style="margin-bottom:1rem" alt="offline matchmaking">
                     </div>
                     <div class="col-md-6">
                         <div class="text col-center">
@@ -168,7 +168,7 @@
         <div class="container" style="padding-top:8%;padding-bottom:6%">
             <div class="row" >
                     <div class="col-md-6 col-center" >
-                            <img  [lazyLoad]="' ../../assets/matchmaking_got_personalized.webp 320w, ../../assets/matchmaking_got_personalized600.webp 600w'"
+                            <img [defaultImage]="'../../assets/matchmaking_got_personalized.webp'" [lazyLoad]="' ../../assets/matchmaking_got_personalized.webp 320w, ../../assets/matchmaking_got_personalized600.webp 600w'"
                             [useSrcset]="true" class="img-fluid personalisedImage" alt="personalized matchmaking">
                         </div>
                 <div class="col-md-6 col-center">
