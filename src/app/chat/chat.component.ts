@@ -147,10 +147,7 @@ temple_name: ''
   botui: any;
   langChanged = false;
   currentLanguage: string;
-  historyContacted: any;
-  historyInterestShown: any;
-  historyInterestRecieved: any;
-  historyRejected: any;
+  historyData: any;
   currentContact: any;
   profileData: any;
   familyData: any;
@@ -721,7 +718,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
                           { text: this.changeHistoryButtonLanguage(this.currentLanguage), value: 'History'},
                         ]
                         }).then(() => {
-                          this.changeToHistory();
+                          // this.changeToHistory();
                         });
                     } else if (data.buttons.match('Renew Plan')) {
                       this.renewProfile();
@@ -1401,13 +1398,12 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
      this.history = feature;
      console.log(this.history);
    }
-   changeToHistory() {
+   changeToHistory(link: string) {
      if (this.currentContact) {
       (window as any).ga('send', 'event', 'history', 'history clicked', {
         hitCallback: () => {
           console.log('Tracking history successful');
         }});
-      this.spinner.show();
       this.history = 'history';
 
       document.getElementById('chatButton').style.background = '#f3f3f3';
@@ -1423,41 +1419,6 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
       // document.getElementById('historyButton').style.background = '#34b7f1';
 
       console.log(localStorage.getItem('id'));
-      const historyData = new FormData();
-      historyData.append('id', localStorage.getItem('id'));
-      if (localStorage.getItem('is_lead')) {
-        historyData.append('is_lead', localStorage.getItem('is_lead'));
-      } else {
-          this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-              console.log(res);
-              historyData.append('is_lead', res.is_lead);
-              localStorage.setItem('is_lead', res.is_lead);
-          },
-          err => {
-              console.log(err);
-          });
-      }
-      // tslint:disable-next-line: max-line-length
-      return this.http.post<any>('https://partner.hansmatrimony.com/api/history', historyData).pipe(timeout(7000), retry(2), catchError(e => {
-        throw new Error('Server Timeout ' +  e);
-    })).subscribe(
-        (data: any) => {
-         console.log(data);
-         this.historyContacted = data.contacted;
-         this.historyInterestShown = data.shortlisted;
-         this.historyInterestRecieved = data.shortlisted;
-         this.historyRejected = data.rejected;
-         this.spinner.hide();
-        },
-        (error: any) => {
-          this.spinner.hide();
-          this.ngxNotificationService.error('Something Went Wrong');
-          this.showError();
-          console.log(error);
-        }
-      );
-     } else {
-       this.ngxNotificationService.error('No user found');
      }
    }
    changeToBot() {
@@ -3017,19 +2978,19 @@ changeSelectedTab(event: any) {
   break;
     case 1:
       this.tabType = 'contacted';
-      this.changeToHistory();
+      this.changeToHistory('contactedProfiles');
       break;
   case 2:
-    this.tabType = 'shortlisted';
-    this.changeToHistory();
+    this.tabType = 'interestShown';
+    this.changeToHistory('sortListProfiles');
     break;
   case 3:
-    this.tabType = 'shortlisted';
-    this.changeToHistory();
+    this.tabType = 'interestReceived';
+    this.changeToHistory('interestReceived');
     break;
   case 4:
     this.tabType = 'rejected';
-    this.changeToHistory();
+    this.changeToHistory('rejectedProfiles');
     break;
 
     default:

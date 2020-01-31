@@ -45,7 +45,7 @@
                 <mat-tab label="Contacted">
                     <ng-template matTabContent>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
-                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyContacted" ></app-history>
+                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                    </div>
                 </ng-template>
                 </mat-tab>
@@ -53,7 +53,7 @@
                     <ng-template matTabContent>
                     <div>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
-                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyInterestShown" ></app-history>
+                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType"  ></app-history>
                        </div>
                    </div>
                 </ng-template>
@@ -62,7 +62,7 @@
                     <ng-template matTabContent>
                     <div>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
-                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyInterestRecieved" ></app-history>
+                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                        </div>
                    </div>
                 </ng-template>
@@ -71,7 +71,7 @@
                     <ng-template matTabContent>
                     <div>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
-                                 <app-history (share)="getSelectedProfile($event)" [type]="tabType" [profile]="historyRejected" ></app-history>
+                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                        </div>
                    </div>
                 </ng-template>
