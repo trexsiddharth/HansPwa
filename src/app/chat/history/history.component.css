@@ -71,6 +71,19 @@
   mat-card-actions{
     margin-bottom: 0px;
   }
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 10px 16px !important;
+}
+h5{
+  text-align: center;
+}
+.container{
+  padding: 0px;
+}
+  .col-3 {
+    padding: 0px;
+  }
   @media (max-width: 1024px) {
     .prof {
       margin: 0px 20px;
