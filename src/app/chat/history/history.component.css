@@ -109,6 +109,10 @@ h5{
       text-align: center;
     }
   }
+  .avatarImage{
+      background-image: url('../../../assets/logo_192.png');
+      background-size: cover;
+  }
   @media (max-width: 576px) {
     .prof {
       margin: 0px 10px;
@@ -125,5 +129,6 @@ h5{
     ::ng-deep .mat-tab-label-content {
       font-size: 14px;
     }
+  
     
   }
