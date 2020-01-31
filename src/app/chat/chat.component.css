@@ -232,6 +232,22 @@ text-align: center;
   border-color: #34b7f1;
 }
 
+::ng-deep .mat-tab-header-pagination {
+  display: none !important;
+} 
+
+::ng-deep .mat-tab-header {
+overflow-x: scroll !important;
+}
+
+::ng-deep .mat-tab-label-container {
+overflow: visible !important;
+}
+
+::ng-deep .mat-tab-header::-webkit-scrollbar {
+display: none;
+}
+
 
 
 /*   footer   */

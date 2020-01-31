@@ -1,68 +1,4 @@
 <main *ngIf="profile">
-
-  <!-- <mat-tab-group mat-align-tabs="center">
-        <mat-tab style="background: green;" class="textSize"  [label]="yesProfiles()">
-            
-        </mat-tab> -->
-
-  <!-- <mat-tab class="textSize"  [label]="shortProfiles()">
-            <div class="col-3 col-md-2"  *ngFor="let item of profile.shortlisted" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
-
-                <div *ngIf="profile.shortlisted" class="imageSet">
-                      <a (click)="shareData(item.id,'','shortlisted')">
-                          <img style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
-                          <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/star.svg" alt="like">
-                        </a>
-                    <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px" [innerHTML]="setName(item.name,1)"></p>
-                  </div>
-                </div>
-        </mat-tab>
-
-        <mat-tab class="textSize" [label]="noProfiles()">
-            <div class=" col-3 col-md-2" *ngFor="let item of profile.rejected" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
-
-                <div *ngIf="profile.rejected"  class="imageSet">
-                  <a (click)="shareData(item.id,'','rejected')">
-                    <img style="width: 100%; height: 120px;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
-                    <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/cancel.svg" alt="like">
-                  </a>
-                    <p style="text-align: center;font-size: 14px;display: inline-block;margin-top:10px" [innerHTML]="setName(item.name,1)"></p>
-                  </div>
-                </div>
-        </mat-tab> -->
-  <!-- </mat-tab-group> -->
-
-  <!-- <div class="col-3 col-md-2"   *ngFor="let item of profile" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
-
-        <div *ngIf="type == contacted" class="imageSet" >
-              <a (click)="shareData(item.id,'1','contacted')">
-                  <img id="contactedImage" style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
-                  <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/checked.svg" alt="like">
-                </a>
-            <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px" [innerHTML]="setName(item.name,0)"></p>
-          </div>
-        </div>
-
-        <div class=" col-3 col-md-2" *ngFor="let item of profile" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;">
-
-          <div *ngIf="type == rejected"  class="imageSet">
-            <a (click)="shareData(item.id,'','rejected')">
-              <img style="width: 100%; height: 120px;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
-              <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/cancel.svg" alt="like">
-            </a>
-              <p style="text-align: center;font-size: 14px;display: inline-block;margin-top:10px" [innerHTML]="setName(item.name,1)"></p>
-            </div>
-          </div>
-
-          <div  class="imageSet"  >
-            <div class="col-3 col-md-2"  *ngFor="let item of profile" style="display: inline-flex;margin: 20px 0px 0px 10px; padding-left: 0px;padding-right: 0px;" >
-                  <a (click)="shareData(item.id,'','shortlisted')">
-                      <img style="width: 100%; height: 120px ;background-color: lightblue;margin-top: 20px;border: 5px solid #34b7f1;border-radius: 10px;position: relative;" [src]=getProfilePhoto(item.photo,item.gender) alt="profile"><br>
-                      <img style="width: 30px;position: absolute;right: -7px;margin-top: -30px;" src="../../../assets/star.svg" alt="like">
-                    </a>
-                <p style="text-align: center; display: inline-block;font-size: 14px;margin-top:10px" [innerHTML]="setName(item.name,1)"></p>
-              </div>
-            </div> -->
   <div style="padding-top: 10px;padding-bottom: 200px;">
 
 
@@ -79,9 +15,12 @@
                 {{item.profile.name}}
               </mat-card-title>
               <mat-card-subtitle>
+                {{setAge(item.profile.birth_date)}}, {{setHeight(item.profile.height)}} , {{item.profile.education}}, 
+                {{item.profile.occupation}}, {{item.profile.monthly_income}} LPA, {{item.family.caste}}, {{item.family.city}} <br>
                 {{item.profile.about}}
               </mat-card-subtitle>
               <img mat-card-lg-image [src]=getProfilePhoto(item.profile.photo,item.profile.gender) alt="item.profile.name">
+              
             </mat-card-title-group>
 
 
@@ -137,6 +76,7 @@
             </ng-container>
           </mat-card>
         </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
         <h5 class="contentHeader">PERSONAL DETAILS</h5>
         <div class="container" style="margin-top: 20px;">
           <div class="row">
@@ -153,16 +93,16 @@
               Marital Status
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/calendar.svg" alt="Age"> 25
+              <img class="setIcons" src="../assets/calendar.svg" alt="Age"> {{setAge(item.profile.birth_date)}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/scale.svg" alt="Height">  5'8"
+              <img class="setIcons" src="../assets/scale.svg" alt="Height">  {{setHeight(item.profile.height)}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/weight.svg" alt="Weight">  {{item.profile.weight}}
+              <img class="setIcons" src="../assets/weight.svg" alt="Weight">  {{item.profile.weight}} Kg
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/heart.svg" alt="Marital Status">  {{item.profile.marital_status}}
+              <img class="setIcons" src="../assets/heart.svg" alt="Marital Status">  {{item.profile.marital_status}}
             </div>
   
           </div>
@@ -184,16 +124,16 @@
               Income
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/suitcase.svg" alt="Age">  {{item.profile.occupation}}
+              <img class="setIcons" src="../assets/suitcase.svg" alt="Age">  {{item.profile.occupation}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/graduation.svg" alt="Height">  {{item.profile.education}}
+              <img class="setIcons" src="../assets/graduation.svg" alt="Height">  {{item.profile.education}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/graduation.svg" alt="Weight">  {{item.profile.profession}}
+              <img class="setIcons" src="../assets/graduation.svg" alt="Weight">  {{item.profile.profession}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/rupee.svg" alt="Marital Status">  {{item.profile.monthly_income}} LPA
+              <img class="setIcons" src="../assets/rupee.svg" alt="Marital Status">  {{item.profile.monthly_income}} LPA
             </div>
   
           </div>
@@ -215,16 +155,16 @@
               Manglik Status
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/birthday.svg" alt="D.O.B">  {{item.profile.birth_date}}
+              <img class="setIcons" src="../assets/birthday.svg" alt="D.O.B">  {{setDate(item.profile.birth_date)}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/birthplace.svg" alt="Birth Place">  {{item.profile.birth_place}}
+              <img class="setIcons" src="../assets/birthplace.svg" alt="Birth Place">  {{item.profile.birth_place}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/clock.svg" alt="Birth Time"> {{item.profile.birth_time}}
+              <img class="setIcons" src="../assets/clock.svg" alt="Birth Time"> {{item.profile.birth_time}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/tarot.svg" alt="Manglik Status">  {{item.profile.manglik}}
+              <img class="setIcons" src="../assets/tarot.svg" alt="Manglik Status">  {{item.profile.manglik}}
             </div>
   
           </div>
@@ -246,20 +186,21 @@
               Father
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/sisters.svg" alt="Sisters">  {{setMarriageSisters(item.family.unmarried_daughters,item.family.married_daughters)}}
+              <img class="setIcons" src="../assets/sisters.svg" alt="Sisters">  {{setMarriageSisters(item.family.unmarried_daughters,item.family.married_daughters)}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/brothers.svg" alt="Brothers">  {{setMarriageBrothers( item.family.unmarried_sons,item.family.married_sons)}}
+              <img class="setIcons" src="../assets/brothers.svg" alt="Brothers">  {{setMarriageBrothers( item.family.unmarried_sons,item.family.married_sons)}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/parents.svg" alt="Mother">   {{LifeStatus(item.family.mother_status,item.family.occupation_mother)}}
+              <img class="setIcons" src="../assets/parents.svg" alt="Mother">   {{LifeStatus(item.family.mother_status,item.family.occupation_mother)}}
             </div>
             <div class="col-3">
-              <img width="20px" src="../assets/parents.svg" alt="Father">  {{LifeStatus(item.family.father_status,item.family.occupation)}}
+              <img class="setIcons" src="../assets/parents.svg" alt="Father">  {{LifeStatus(item.family.father_status,item.family.occupation)}}
             </div>
   
           </div>
         </div>
+      </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
 

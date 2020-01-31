@@ -45,14 +45,20 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   @Input() type: any;
   @Output() share = new EventEmitter < any > ();
   @Output() stage = new EventEmitter < string > ();
-  @Output() setTab = new EventEmitter < any >();
+  @Output() setTab = new EventEmitter < any > ();
   likeCount;
   dislikeCount;
   panelOpenState;
 
+  // Height
+  // tslint:disable-next-line: max-line-length
+  Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
+  // tslint:disable-next-line: max-line-length
+  Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
+
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-              public notification: NotificationsService, ) {}
+    public notification: NotificationsService, ) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -125,9 +131,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setValue(value: string): string {
-    if (value != null) {
-      return value;
+  setAge(birthDate: string) {
+    if (birthDate != null) {
+      return String(Math.floor((Date.now() - new Date(birthDate).getTime()) / (1000 * 60 * 60 * 24 * 365))) + ' Yrs';
     } else {
       return '';
     }
@@ -280,49 +286,60 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     });
   }
   updateProfileList(ans: any, num: any, index: any) {
-      switch (this.type) {
-        case 'interestShown':
-            switch (ans) {
-              case 'YES':
-                this.panelOpenState = null;
-                this.profile.splice(index, 1);
-                this.setTab.emit(1);
-                break;
-                case 'SHORTLIST':
-                this.panelOpenState = null;
-                this.ngxNotificationService.success('Profile Shortlisted Successfully');
-                break;
-                case 'NO':
-                this.profile.splice(index, 1);
-                this.panelOpenState = null;
-                this.ngxNotificationService.success('Profile Rejected Successfully');
-                break;
-              default:
-                break;
-            }
+    switch (this.type) {
+      case 'interestShown':
+        switch (ans) {
+          case 'YES':
+            this.panelOpenState = null;
+            this.profile.splice(index, 1);
+            this.setTab.emit(1);
             break;
-            case 'rejected':
-            switch (ans) {
-              case 'YES':
-                this.panelOpenState = null;
-                this.profile.splice(index, 1);
-                this.setTab.emit(1);
-                break;
-                case 'SHORTLIST':
-                  this.panelOpenState = null;
-                  this.profile.splice(index, 1);
-                  this.ngxNotificationService.success('Profile Shortlisted Successfully');
-                  break;
-              default:
-                break;
-            }
+          case 'SHORTLIST':
+            this.panelOpenState = null;
+            this.ngxNotificationService.success('Profile Shortlisted Successfully');
             break;
-        default:
-          break;
-      }
+          case 'NO':
+            this.profile.splice(index, 1);
+            this.panelOpenState = null;
+            this.ngxNotificationService.success('Profile Rejected Successfully');
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'rejected':
+        switch (ans) {
+          case 'YES':
+            this.panelOpenState = null;
+            this.profile.splice(index, 1);
+            this.setTab.emit(1);
+            break;
+          case 'SHORTLIST':
+            this.panelOpenState = null;
+            this.profile.splice(index, 1);
+            this.ngxNotificationService.success('Profile Shortlisted Successfully');
+            break;
+          default:
+            break;
+        }
+        break;
+      default:
+        break;
+    }
   }
   call(num: any) {
     window.open('tel:' + num);
     this.panelOpenState = null;
+  }
+  setDate(date: string) {
+    let newDate = new Date(date);
+    return new Intl.DateTimeFormat('en-AU').format(newDate);
+  }
+  setHeight(height: any) {
+    if (height && height !== '') {
+        return this.Heights[this.Heights1.indexOf(height)];
+    } else {
+      return '';
+    }
   }
 }

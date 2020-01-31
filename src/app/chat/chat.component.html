@@ -33,7 +33,7 @@
             </div>
         </div> -->
 
-        <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)" *ngIf="history!='myprofile'" >
+        <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)" [hidden]="history=='myprofile'" >
             <mat-tab label="Today's Profile">
                 <ng-template matTabContent>
                     <div id="my-botui-app" class="mainBody w-full ht-full"  style="margin-top: 50px;" >

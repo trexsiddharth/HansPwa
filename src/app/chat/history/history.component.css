@@ -86,6 +86,7 @@ h5{
 }
   .col-3 {
     padding: 0px;
+    word-break: break-all
   }
   .contentHeader{
     margin-top: 20px;
@@ -94,6 +95,26 @@ h5{
   }
   .contentPara{
     color: grey;
+  }
+  .setIcons{
+    width: 20px;
+  }
+  .mat-card-lg-image {
+    border-radius: 20px;
+  }
+  .mat-card-image{
+    border-radius: 20px;
+    margin: 0px;
+    width: 100%;
+  }
+  mat-card-subtitle{
+    padding: 0px 5px;
+  }
+  mat-icon{
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    font-weight: bolder;
   }
   @media (max-width: 1024px) {
     .prof {
@@ -113,6 +134,8 @@ h5{
       background-image: url('../../../assets/logo_192.png');
       background-size: cover;
   }
+
+
   @media (max-width: 576px) {
     .prof {
       margin: 0px 10px;
