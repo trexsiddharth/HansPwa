@@ -6,6 +6,7 @@ import { EditPreferenceDialogComponent } from './edit-preference-dialog/edit-pre
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router} from '@angular/router';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class MyprofileComponent implements OnInit {
   carouselSize;
 
   constructor(private spinner: NgxSpinnerService, private matDialog: MatDialog, private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService) { }
+              private ngxNotificationService: NgxNotificationService, private router: Router) { }
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
@@ -249,5 +250,15 @@ onResize(event) {
             return value;
           }
         } else {return ''; }
+    }
+    logout() {
+      // this.loginStatus = false;
+      localStorage.setItem('mobile_number', '');
+      localStorage.setItem('id', '');
+      localStorage.setItem('gender', '');
+      localStorage.setItem('is_lead', '');
+      localStorage.setItem('RegisterNumber', '');
+
+      this.router.navigateByUrl('/home');
     }
 }
