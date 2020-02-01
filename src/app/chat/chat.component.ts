@@ -3009,6 +3009,9 @@ setSelectedTab(index: any) {
 
   console.log('selectedTabValue', this.selectedTab);
 }
+goToSubs() {
+  this.router.navigateByUrl('subscription');
+}
 
 
 }
