@@ -337,6 +337,13 @@ display: none;
    margin: 0px;
    width: 100%
   }
+  #creditButton{
+    position: fixed;
+    right: 5px;
+    z-index: 1;
+    color: white;
+    background-color: #10e096e9;
+  }
   @media (max-width: 576px) {
     .navbar {
       background: #f3f3f3;

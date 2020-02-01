@@ -34,16 +34,21 @@
         </div> -->
 
         <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)" [hidden]="history=='myprofile'" >
-            <mat-tab label="Today's Profile">
+          <mat-tab label="Today's Profile">
                 <ng-template matTabContent>
+                  <button id="creditButton" mat-raised-button>
+                    12 Credits Left
+                </button>
                     <div id="my-botui-app" class="mainBody w-full ht-full"  style="margin-top: 50px;" >
-                          
                               <bot-ui></bot-ui>
                   </div>
                 </ng-template>
                 </mat-tab>
                 <mat-tab label="Contacted">
                     <ng-template matTabContent>
+                      <button id="creditButton" mat-raised-button>
+                        12 Credits Left
+                    </button>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
                                  <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                    </div>
@@ -52,6 +57,9 @@
                 <mat-tab label="Interest Shown">
                     <ng-template matTabContent>
                     <div>
+                      <button id="creditButton" mat-raised-button>
+                        12 Credits Left
+                    </button>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
                                  <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType"  ></app-history>
                        </div>
@@ -61,6 +69,9 @@
                 <mat-tab label="Interest Recieved">
                     <ng-template matTabContent>
                     <div>
+                      <button id="creditButton" mat-raised-button>
+                        12 Credits Left
+                    </button>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
                                  <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                        </div>
@@ -70,6 +81,9 @@
                 <mat-tab label="Rejected">
                     <ng-template matTabContent>
                     <div>
+                      <button id="creditButton" mat-raised-button>
+                        12 Credits Left
+                    </button>
                         <div class='mainBody  w-full bg-white ht-full' style="margin-top: 50px;">
                                  <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                        </div>

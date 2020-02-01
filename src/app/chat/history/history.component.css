@@ -86,7 +86,8 @@ h5{
 }
   .col-3 {
     padding: 0px;
-    word-break: break-all
+    /* word-break: keep-all; */
+    /* word-wrap:break-word; */
   }
   .contentHeader{
     margin-top: 20px;
@@ -101,6 +102,8 @@ h5{
   }
   .mat-card-lg-image {
     border-radius: 20px;
+    width: 50%;
+    height: 200px;
   }
   .mat-card-image{
     border-radius: 20px;
