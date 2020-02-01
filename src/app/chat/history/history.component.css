@@ -66,10 +66,11 @@
   
   }
   .setButtons{
-    margin-left: 10px;
+    margin-left: 20px;
   }
   mat-card-actions{
     margin-bottom: 0px;
+    margin-right: 5px;
   }
 
 ::ng-deep .mat-expansion-panel-body {
