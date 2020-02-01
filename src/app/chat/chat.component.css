@@ -342,7 +342,8 @@ display: none;
     right: 5px;
     z-index: 1;
     color: white;
-    background-color: #10e096e9;
+    font-size: 16px;
+    background-color: #10e096;
   }
   @media (max-width: 576px) {
     .navbar {
