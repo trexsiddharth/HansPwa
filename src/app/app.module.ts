@@ -6,7 +6,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {
   MatFormFieldModule, MatDatepickerModule, MatIconModule, MatInputModule, MatButtonToggleModule, MatButtonModule,
   MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule, MatCardModule,
-  MatSnackBarModule, MatExpansionModule
+  MatSnackBarModule, MatExpansionModule, MatMenuModule
 } from '@angular/material';
 
 import { MatNativeDateModule } from '@angular/material';
@@ -101,7 +101,7 @@ import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
     NgxMatIntlTelInputModule, MatSnackBarModule, MatButtonModule, MatExpansionModule,
-    NgbModule, RouterModule, WalkthroughModule,MatCardModule,
+    NgbModule, RouterModule, WalkthroughModule,MatCardModule, MatMenuModule,
     LazyLoadImageModule.forRoot({
       preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     })

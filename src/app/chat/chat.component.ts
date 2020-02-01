@@ -1406,17 +1406,15 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
         }});
       this.history = 'history';
 
-      document.getElementById('chatButton').style.background = '#f3f3f3';
-      document.getElementById('chatText').style.color = 'grey';
-      document.getElementById('profileText').style.color = 'grey';
+      document.getElementById('chatButton').style.background = '#34b7f1';
+      document.getElementById('chatText').style.color = '#FFFFFF';
+      document.getElementById('chatText').style.background = '#34b7f1';
+    // document.getElementById('historyText').style.color = 'grey';
       document.getElementById('profileButton').style.background = '#f3f3f3';
-      // document.getElementById('historyText').style.color = '#FFFFFF';
-
-      document.getElementById('chatText').style.background = '#f3f3f3';
+    // document.getElementById('historyButton').style.background = '#f3f3f3';
+    // document.getElementById('historyText').style.background = '#f3f3f3';
+      document.getElementById('profileText').style.color = 'grey';
       document.getElementById('profileText').style.background = '#f3f3f3';
-
-      // document.getElementById('historyText').style.background = '#34b7f1';
-      // document.getElementById('historyButton').style.background = '#34b7f1';
 
       console.log(localStorage.getItem('id'));
      }
