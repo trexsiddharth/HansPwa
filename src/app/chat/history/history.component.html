@@ -3,7 +3,7 @@
 
 
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let item of profile;let i = index" [togglePosition]="'end'" multi="true"
+      <mat-expansion-panel [disabled]="disableForAWhile()" *ngFor="let item of profile;let i = index" [hideToggle]="true" multi="true"
         [expanded]="panelOpenState === i" (opened)="setPanelOpenState(i)">
         <mat-expansion-panel-header [collapsedHeight]="'100%'" [expandedHeight]="'100%'">
 
@@ -55,7 +55,7 @@
 
 
             <ng-container *ngIf="panelOpenState != i">
-              <mat-card-actions style="margin-bottom: 0px;" align="end">
+              <mat-card-actions style="margin-bottom: 0px;margin: 0px 5px 0px 50%;" align="center">
                 <button (click)="call(item.family.mobile)" class="setButtons" mat-mini-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted'">
                   <mat-icon>call</mat-icon>

@@ -4,8 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  AfterViewInit,
-  AfterViewChecked
+  AfterViewInit
 } from '@angular/core';
 import {
   HttpClient
@@ -14,7 +13,7 @@ import {
   Event
 } from '@angular/router';
 import {
-  NgxNotificationService
+  NgxNotificationService, NgxNotificationModule,
 } from 'ngx-kc-notification';
 import {
   NgxSpinnerService
@@ -30,6 +29,7 @@ import {
 import {
   NotificationsService
 } from '../../notifications.service';
+import { NotificationButton } from 'ngx-kc-notification/lib/notification.model';
 
 
 
@@ -49,6 +49,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   likeCount;
   dislikeCount;
   panelOpenState;
+  button1: NotificationButton;
 
   // Height
   // tslint:disable-next-line: max-line-length
@@ -58,7 +59,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-    public notification: NotificationsService, ) {}
+              public notification: NotificationsService, ) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -249,6 +250,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   profileReAnswer(id: any, answer: any, index: any) {
+    this.panelOpenState = null;
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
     reAnswerData.append('id', id);
@@ -290,18 +292,15 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       case 'interestShown':
         switch (ans) {
           case 'YES':
-            this.panelOpenState = null;
             this.profile.splice(index, 1);
             this.setTab.emit(1);
             break;
           case 'SHORTLIST':
-            this.panelOpenState = null;
             this.ngxNotificationService.success('Profile Shortlisted Successfully');
             break;
           case 'NO':
             this.profile.splice(index, 1);
-            this.panelOpenState = null;
-            this.ngxNotificationService.success('Profile Rejected Successfully');
+            this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {duration: 4000});
             break;
           default:
             break;
@@ -310,12 +309,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       case 'rejected':
         switch (ans) {
           case 'YES':
-            this.panelOpenState = null;
             this.profile.splice(index, 1);
             this.setTab.emit(1);
             break;
           case 'SHORTLIST':
-            this.panelOpenState = null;
             this.profile.splice(index, 1);
             this.ngxNotificationService.success('Profile Shortlisted Successfully');
             break;
@@ -340,6 +337,16 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         return this.Heights[this.Heights1.indexOf(height)];
     } else {
       return '';
+    }
+  }
+  disableForAWhile() {
+    if (this.panelOpenState === null) {
+      setTimeout(() => {
+        this.panelOpenState = -1;
+      }, 100);
+      return true;
+    } else {
+      return false;
     }
   }
 }
