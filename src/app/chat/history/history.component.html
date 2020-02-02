@@ -52,6 +52,11 @@
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-card-actions>
+              <div style="text-align: end;" *ngIf="type === 'contacted'">
+                <div style="right: 0px;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
+                  {{item.family.locality}}
+                </div>
+              </div>
             </ng-container>
 
 
@@ -74,6 +79,12 @@
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-card-actions>
+              <div style="text-align: end;" *ngIf="type === 'contacted'">
+                <div style="right: 0px;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
+                  {{item.family.locality}}
+                </div>
+              </div>
+              
             </ng-container>
           </mat-card>
         </mat-expansion-panel-header>
@@ -199,6 +210,33 @@
               <img class="setIcons" src="../assets/parents.svg" alt="Father">  {{LifeStatus(item.family.father_status,item.family.occupation)}}
             </div>
   
+          </div>
+
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-3 contentPara" style="padding: 0dp !important;">
+             Family Inc.
+            </div>
+            <div class="col-3 contentPara" style="padding: 0dp !important;">
+              Gotra
+             </div>
+             <div class="col-3 contentPara" style="padding: 0dp !important;">
+              Family Type
+             </div>
+             <div class="col-3 contentPara" style="padding: 0dp !important;">
+              House Type
+             </div>
+            <div class="col-3" style="padding: 0dp !important;">
+              <img class="setIcons" src="../assets/moneybag.svg" alt="family_income">  {{item.family.family_income}}
+            </div>
+            <div class="col-3" style="padding: 0dp !important;">
+              <img class="setIcons" src="../assets/meditation.svg" alt="gotra">  {{item.family.gotra}}
+            </div>
+            <div class="col-3" style="padding: 0dp !important;">
+              <img class="setIcons" src="../assets/family.svg" alt="family_type">  {{item.family.family_type}}
+            </div>
+            <div class="col-3" style="padding: 0dp !important;">
+              <img class="setIcons" src="../assets/house.svg" alt="house_type">  {{item.family.house_type}}
+            </div>
           </div>
         </div>
       </ng-template>
