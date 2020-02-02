@@ -24,12 +24,13 @@ import {
   catchError
 } from 'rxjs/operators';
 import {
-  Observable
+  Observable, from
 } from 'rxjs';
 import {
   NotificationsService
 } from '../../notifications.service';
 import { NotificationButton } from 'ngx-kc-notification/lib/notification.model';
+import { FindOpenHistoryProfileService } from '../../find-open-history-profile.service';
 
 
 
@@ -59,7 +60,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-              public notification: NotificationsService, ) {}
+              public notification: NotificationsService, private itemService: FindOpenHistoryProfileService ) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -145,7 +146,11 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     console.log(this.panelOpenState);
   }
 
-  getHistorydata(link: string) {
+  setId(index: any) {
+    return '#' + index;
+  }
+
+  async getHistorydata(link: string) {
     this.spinner.show();
     const historyData = new FormData();
     historyData.append('id', localStorage.getItem('id'));
@@ -174,6 +179,17 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         console.log(data);
         this.profile = data;
         this.spinner.hide();
+        if (this.itemService.getItem()) {
+          let prof: any = this.itemService.getItem();
+          this.panelOpenState = this.profile.findIndex((item) => {
+            return item.profile.name === prof.profile.name;
+          });
+          // scroll to the profile
+          setTimeout(() => {
+          document.querySelectorAll('mat-expansion-panel')[this.panelOpenState].scrollIntoView({behavior: 'smooth'});
+          }, 1000);
+          this.itemService.setItem(null);
+         }
       },
       (error: any) => {
         this.spinner.hide();
@@ -292,11 +308,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       case 'interestShown':
         switch (ans) {
           case 'YES':
-            this.profile.splice(index, 1);
-            this.setTab.emit(1);
+            this.slideAndOpenProfile(this.profile[index], 1);
             break;
           case 'SHORTLIST':
-            this.ngxNotificationService.success('Profile Shortlisted Successfully');
+            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {duration: 4000});
             break;
           case 'NO':
             this.profile.splice(index, 1);
@@ -309,12 +324,11 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       case 'rejected':
         switch (ans) {
           case 'YES':
-            this.profile.splice(index, 1);
-            this.setTab.emit(1);
+            this.slideAndOpenProfile(this.profile[index], 1);
             break;
           case 'SHORTLIST':
-            this.profile.splice(index, 1);
-            this.ngxNotificationService.success('Profile Shortlisted Successfully');
+            this.slideAndOpenProfile(this.profile[index], 2);
+            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {duration: 4000});
             break;
           default:
             break;
@@ -327,6 +341,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   call(num: any) {
     window.open('tel:' + num);
     this.panelOpenState = null;
+  }
+  slideAndOpenProfile(item: any, slide: any) {
+    this.itemService.setItem(item);
+    this.setTab.emit(slide);
   }
   setDate(date: string) {
     let newDate = new Date(date);

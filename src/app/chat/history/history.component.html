@@ -4,7 +4,7 @@
 
     <mat-accordion>
       <mat-expansion-panel [disabled]="disableForAWhile()" *ngFor="let item of profile;let i = index" [hideToggle]="true" multi="true"
-        [expanded]="panelOpenState === i" (opened)="setPanelOpenState(i)">
+        [expanded]="panelOpenState === i" (opened)="setPanelOpenState(i)" [id]="setId(i)">
         <mat-expansion-panel-header [collapsedHeight]="'100%'" [expandedHeight]="'100%'">
 
           <mat-card class="example-card">
