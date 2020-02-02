@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input, 
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, Event } from '@angular/router';
-import { Observable, timer } from 'rxjs';
+import { Observable, timer, from } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
@@ -16,7 +16,7 @@ import { CreditAwardComponent } from '../credit-award/credit-award.component';
 import { PreferenceWideningComponent } from '../preference-widening/preference-widening.component';
 import { timeout, retry, catchError, min } from 'rxjs/operators';
 import { SubscriptionserviceService } from '../subscriptionservice.service';
-
+import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
 
 
 
@@ -186,7 +186,8 @@ temple_name: ''
     public dialog: MatDialog,
     public notification: NotificationsService,
     private subscriptionService: SubscriptionserviceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private itemService: FindOpenHistoryProfileService
   ) {
     this.answer = this._formBuilder.group({
       ans: [''],
@@ -1990,6 +1991,7 @@ getCredits() {
   return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
    (data: any) => {
       this.points = data.whatsapp_points;
+      this.itemService.setCredits(data.whatsapp_points);
       console.log('credits', this.points);
       if (this.paidStatus === 'Paid' && this.points === '0') {
         console.log('this is a exhausted profile');

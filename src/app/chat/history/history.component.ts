@@ -13,7 +13,7 @@ import {
   Event
 } from '@angular/router';
 import {
-  NgxNotificationService, NgxNotificationModule,
+  NgxNotificationService
 } from 'ngx-kc-notification';
 import {
   NgxSpinnerService
@@ -31,6 +31,7 @@ import {
 } from '../../notifications.service';
 import { NotificationButton } from 'ngx-kc-notification/lib/notification.model';
 import { FindOpenHistoryProfileService } from '../../find-open-history-profile.service';
+import { Router } from '@angular/router';
 
 
 
@@ -60,7 +61,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-              public notification: NotificationsService, private itemService: FindOpenHistoryProfileService ) {}
+              public notification: NotificationsService, private itemService: FindOpenHistoryProfileService , private router: Router) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -266,7 +267,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   profileReAnswer(id: any, answer: any, index: any) {
-    this.panelOpenState = null;
+    if (answer !== 'YES' && this.itemService.getCredits && this.itemService.getCredits() !== '0') {
+      this.panelOpenState = null;
+    }
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
     reAnswerData.append('id', id);
@@ -308,7 +311,12 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       case 'interestShown':
         switch (ans) {
           case 'YES':
-            this.slideAndOpenProfile(this.profile[index], 1);
+            if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+              this.slideAndOpenProfile(this.profile[index], 1);
+              } else {
+                this.ngxNotificationService.error('You Dont have Enough Credits', '',
+              null, {duration: 4000, closeButton: true});
+              }
             break;
           case 'SHORTLIST':
             this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {duration: 4000});
@@ -324,7 +332,12 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       case 'rejected':
         switch (ans) {
           case 'YES':
-            this.slideAndOpenProfile(this.profile[index], 1);
+            if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+              this.slideAndOpenProfile(this.profile[index], 1);
+              } else {
+                this.ngxNotificationService.error('You Dont have Enough Credits', '',
+              null, {duration: 4000, closeButton: true});
+              }
             break;
           case 'SHORTLIST':
             this.slideAndOpenProfile(this.profile[index], 2);
@@ -337,6 +350,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+  }
+  goToSubscription(){
+    this.router.navigateByUrl('subscription');
   }
   call(num: any) {
     window.open('tel:' + num);
