@@ -2,7 +2,7 @@
   <div style="padding-top: 30px;padding-bottom: 200px;">
 
 
-    <mat-accordion>
+    <mat-accordion *ngIf="this.profile.length > 0">
       <mat-expansion-panel [disabled]="disableForAWhile()" *ngFor="let item of profile;let i = index" [hideToggle]="true" multi="true"
         [expanded]="panelOpenState === i" (opened)="setPanelOpenState(i)" [id]="setId(i)">
         <mat-expansion-panel-header [collapsedHeight]="'100%'" [expandedHeight]="'100%'">
@@ -34,9 +34,9 @@
 
             <ng-container *ngIf="panelOpenState === i">
               <mat-card-actions style="margin-bottom: 0px;" align="center">
-                <button (click)="call(item.family.mobile)" class="setButtons" mat-fab style="color: green;background: white;"
+                <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted'">
-                  <mat-icon>call</mat-icon>
+                  <mat-icon>call</mat-icon> {{item.family.mobile}}
                 </button>
                 <button (click)="profileReAnswer(item.profile.id,'YES',i)" class="setButtons" mat-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
@@ -56,13 +56,13 @@
 
             <ng-container *ngIf="panelOpenState != i">
               <mat-card-actions style="margin-bottom: 0px;margin: 0px 5px 0px 50%;" align="center">
-                <button (click)="call(item.family.mobile)" class="setButtons" mat-mini-fab style="color: green;background: white;"
+                <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted'">
-                  <mat-icon>call</mat-icon>
+                  <mat-icon>call</mat-icon> {{item.family.mobile}}
                 </button>
                 <button (click)="profileReAnswer(item.profile.id,'YES',i)" class="setButtons" mat-mini-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
-                  <mat-icon>check</mat-icon>
+                  <mat-icon>call</mat-icon>
                 </button>
                 <button (click)="profileReAnswer(item.profile.id,'SHORTLIST',i)" class="setButtons" mat-mini-fab style="color: red;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
@@ -203,6 +203,13 @@
       </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
+
+ <div style="text-align:center">
+  <h5  *ngIf="this.profile.length < 1" [innerHTML]="noData">
+    ☹️ No data found
+  </h5>
+ </div>
+    
 
 
   </div>

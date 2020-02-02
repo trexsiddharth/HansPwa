@@ -602,7 +602,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
                      if (data.buttons.match('Yes' || 'No')) {
                        this.botui.message.add({
                         type: 'html',
-                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
+                        content: '<div style="text-align:center">' + this.setButton('call.svg', 'call.svg', 'YES', 'none') +
                         this.setButton('hearts.svg', 'hearts.svg', 'SHORTLIST', 'none') +
                         this.setButton('cancel.svg', 'cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
@@ -685,7 +685,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
                      if (data.buttons.match('Yes')) {
                       this.botui.message.add({
                         type: 'html',
-                        content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
+                        content: '<div style="text-align:center">' + this.setButton('call.svg', 'call.svg', 'YES', 'none') +
                         this.setButton('hearts.svg', 'hearts.svg' , 'SHORTLIST', 'none') +
                         this.setButton('cancel.svg', 'cancel.svg', 'NO', 'none') + '</div>'
                       }).then((index) => {
@@ -1859,7 +1859,7 @@ profileReAnswer(num: any, id: any, answer: any) {
       }
           this.botui.message.add({
           type: 'html',
-          content: '<div style="text-align:center">' + this.setButton('checked.svg', 'call.svg', 'YES', 'none') +
+          content: '<div style="text-align:center">' + this.setButton('call.svg', 'call.svg', 'YES', 'none') +
           this.setButton('hearts.svg', 'hearts.svg', 'SHORTLIST', 'none') +
           this.setButton('cancel.svg', 'cancel.svg', 'NO', 'none') + '</div>'
         }).then((index) => {

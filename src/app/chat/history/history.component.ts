@@ -52,6 +52,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   dislikeCount;
   panelOpenState;
   button1: NotificationButton;
+  noData;
 
   // Height
   // tslint:disable-next-line: max-line-length
@@ -82,6 +83,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+
     
   }
 
@@ -181,6 +183,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         console.log(data);
         this.profile = data;
         this.spinner.hide();
+        if (this.profile.length < 1) {
+          this.getNoDataText(link);
+        }
         if (this.itemService.getItem()) {
           let prof: any = this.itemService.getItem();
           this.panelOpenState = this.profile.findIndex((item) => {
@@ -428,6 +433,24 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   setAllTabNames() {
     for (let index = 0; index < 5; index++) {
     this.setTabNames(index);
+    }
+  }
+  getNoDataText(type:any) {
+    switch (type) {
+      case 'contactedProfiles':
+         this.noData =  '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
+         break;
+        case 'sortListProfiles':
+          this.noData =  '☹️ अभी आपने कोई रिश्ता पसंद नहीं किया है ';
+          break;
+        case 'interestReceived':
+          this.noData =  '☹️ अभी किसी रिश्ते ने आपको पसंद नहीं किया है';
+          break;
+        case 'rejectedProfiles':
+          this.noData =  '☹️ अभी आपने कोई रिश्ता नापसंद नहीं किया है';
+          break;
+      default:
+        break;
     }
   }
 }

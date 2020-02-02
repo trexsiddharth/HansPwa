@@ -34,7 +34,7 @@
         </div> -->
 
         <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)" [hidden]="history=='myprofile'" >
-          <mat-tab label="आज के रिश्ते" id="today">
+          <mat-tab label="🗓आज के रिश्ते" id="today">
                 <ng-template matTabContent>
                   <button (click)="goToSubs()" id="creditButton" mat-raised-button>
                     कांटेक्ट नंबर: {{points}}
@@ -44,7 +44,7 @@
                   </div>
                 </ng-template>
                 </mat-tab>
-                <mat-tab label="कॉंटैक्टेड" id="contacted">
+                <mat-tab label="☎️कॉंटैक्टेड" id="contacted">
                     <ng-template matTabContent>
                       <button (click)="goToSubs()" id="creditButton" mat-raised-button>
                         कांटेक्ट नंबर: {{points}}
@@ -54,7 +54,7 @@
                    </div>
                 </ng-template>
                 </mat-tab>
-                <mat-tab label="मेरी पसंद" id="melike">
+                <mat-tab label="❤️मेरी पसंद" id="melike">
                     <ng-template matTabContent>
                     <div>
                       <button (click)="goToSubs()" id="creditButton" mat-raised-button>
@@ -66,7 +66,7 @@
                    </div>
                 </ng-template>
                 </mat-tab>
-                <mat-tab label="मै किसे पसंद हूँ?" id="likeme">
+                <mat-tab label="💓मै किसे पसंद हूँ?" id="likeme">
                     <ng-template matTabContent>
                     <div>
                       <button (click)="goToSubs()" id="creditButton" mat-raised-button>
@@ -78,7 +78,7 @@
                    </div>
                 </ng-template>
                 </mat-tab>
-                <mat-tab label="नापसंद" id="rejected">
+                <mat-tab label="❌नापसंद" id="rejected">
                     <ng-template matTabContent>
                     <div>
                       <button (click)="goToSubs()" id="creditButton" mat-raised-button>
