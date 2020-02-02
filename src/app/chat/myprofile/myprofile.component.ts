@@ -7,6 +7,7 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router} from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -29,12 +30,14 @@ export class MyprofileComponent implements OnInit {
   minHeight;
   maxHeight;
   carouselSize;
+  currentLanguage;
 
   constructor(private spinner: NgxSpinnerService, private matDialog: MatDialog, private http: HttpClient,
               private ngxNotificationService: NgxNotificationService, private router: Router) { }
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
+    this.currentLanguage = localStorage.getItem('language');
   }
 
 
@@ -260,5 +263,20 @@ onResize(event) {
       localStorage.setItem('RegisterNumber', '');
 
       this.router.navigateByUrl('/home');
+    }
+    changeLanguage(lang: string) {
+      console.log('changing language');
+      // tslint:disable-next-line: max-line-length
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/language', {params: { ['phone_number'] : localStorage.getItem('mobile_number'), ['language'] : lang}}).subscribe(
+        data => {
+          console.log(data);
+          this.ngxNotificationService.success('Language Changed Successfully');
+          this.currentLanguage = lang;
+          localStorage.setItem('language', this.currentLanguage);
+        }, err => {
+          console.log(err);
+          this.ngxNotificationService.error('something went wrong, Try again later');
+        }
+      );
     }
 }

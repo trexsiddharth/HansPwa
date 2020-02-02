@@ -15,8 +15,8 @@
                 {{item.profile.name}}
               </mat-card-title>
               <mat-card-subtitle>
-                {{setAge(item.profile.birth_date)}}, {{setHeight(item.profile.height)}} , {{item.profile.education}}, 
-                {{item.profile.occupation}}, {{item.profile.monthly_income}} LPA, {{item.family.caste}}, {{item.family.city}} <br>
+                {{setAge(item.profile.birth_date)}} <b class="partition">|</b> {{setHeight(item.profile.height)}} <b class="partition">|</b> {{item.profile.education}} <b class="partition">|</b> 
+                {{item.profile.occupation}} <b class="partition">|</b> {{item.profile.monthly_income}} LPA <b class="partition">|</b> {{item.family.caste}} <b class="partition">|</b> {{item.family.city}} <br>
                 {{item.profile.about}}
               </mat-card-subtitle>
               <img mat-card-lg-image [src]=getProfilePhoto(item.profile.photo,item.profile.gender) alt="item.profile.name">

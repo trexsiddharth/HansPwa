@@ -82,6 +82,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+    
   }
 
   shareData(id: any, contacted: any, status) {
@@ -381,6 +382,52 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       return true;
     } else {
       return false;
+    }
+  }
+  setTabNames(tab: any) {
+    if (localStorage.getItem('language') === null) {
+      localStorage.setItem('language', 'Hindi');
+    }
+    switch (localStorage.getItem('language')) {
+     case 'English':
+       switch (tab) {
+         case 0:
+           return 'Today\'s Matches';
+           case 1:
+           return 'Contacted';
+           case 2:
+             return 'Liked By You';
+             case 3:
+           return 'Liked You';
+           case 4:
+           return 'Rejected';
+         default:
+           break;
+       }
+       break;
+       case 'Hindi':
+         switch (tab) {
+           case 0:
+             return 'आज के रिश्ते';
+             case 1:
+             return 'कोन्टक्टेड';
+             case 2:
+               return 'मेरी पसंद';
+               case 3:
+             return 'मै किसे पसंद हूँ';
+             case 4:
+             return 'नापसंद ';
+           default:
+             break;
+         }
+         break;
+     default:
+       break;
+   }
+  }
+  setAllTabNames() {
+    for (let index = 0; index < 5; index++) {
+    this.setTabNames(index);
     }
   }
 }

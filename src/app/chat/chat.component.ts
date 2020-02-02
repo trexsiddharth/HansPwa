@@ -174,6 +174,9 @@ temple_name: ''
   exhaustedStatus;
   selectedTab;
   tabType;
+  currentTab;
+  profilesCompletedStatus = false;
+  timerMain;
 
 
   constructor(
@@ -250,6 +253,7 @@ temple_name: ''
       this.currentLanguage = localStorage.getItem('language');
     } else {
       this.currentLanguage = 'Hindi';
+      localStorage.setItem('language', 'Hindi');
     }
 
     // if (this.currentLanguage === 'English') {
@@ -286,7 +290,6 @@ temple_name: ''
   }
 
   ngAfterViewInit() {
-
     this.botui =  BotUI('my-botui-app');
     this.spinner.hide();
 
@@ -427,6 +430,48 @@ temple_name: ''
 // tslint:disable-next-line: max-line-length
 return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : num, ['fcm_id'] : this.notification.getCurrentToken()}});
      }
+   }
+
+   setTabNames(tab: any) {
+     if (localStorage.getItem('language') === null) {
+       localStorage.setItem('language','Hindi');
+     }
+     switch (localStorage.getItem('language')) {
+      case 'English':
+        switch (tab) {
+          case 0:
+            return 'Today\'s Matches';
+            case 1:
+            return 'Contacted';
+            case 2:
+              return 'Liked By You';
+              case 3:
+            return 'Liked You';
+            case 4:
+            return 'Rejected';
+          default:
+            break;
+        }
+        break;
+        case 'Hindi':
+          switch (tab) {
+            case 0:
+              return 'आज के रिश्ते';
+              case 1:
+              return 'कोन्टक्टेड';
+              case 2:
+                return 'मेरी पसंद';
+                case 3:
+              return 'मै किसे पसंद हूँ';
+              case 4:
+              return 'नापसंद ';
+            default:
+              break;
+          }
+          break;
+      default:
+        break;
+    }
    }
 
 
@@ -714,14 +759,15 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
                       this.repeatMEssage(res.value, mob);
                     });
                     } else if (data.buttons.match('History')) {
-                       return this.botui.action.button({
-                        action: [
-                          { text: this.changeHistoryButtonLanguage(this.currentLanguage), value: 'History'},
-                        ]
-                        }).then(() => {
-                          // this.changeToHistory();
-                          this.setSelectedTab(2);
-                        });
+                      this.chatTimer();
+                      //  return this.botui.action.button({
+                      //   action: [
+                      //     { text: this.changeHistoryButtonLanguage(this.currentLanguage), value: 'History'},
+                      //   ]
+                      //   }).then(() => {
+                      //     // this.changeToHistory();
+                      //     this.setSelectedTab(2);
+                      //   });
                     } else if (data.buttons.match('Renew Plan')) {
                       this.renewProfile();
                     } else {
@@ -1419,6 +1465,7 @@ return '<button id="' + text + '" class="btn customBotButton" style="background:
       document.getElementById('profileText').style.background = '#f3f3f3';
 
       console.log(localStorage.getItem('id'));
+      this.scrollHorizontal(this.currentTab);
      }
    }
    changeToBot() {
@@ -2972,6 +3019,12 @@ exhaustedProfile() {
 }
 changeSelectedTab(event: any) {
   console.log(event);
+  this.currentTab = event;
+  if (this.profilesCompletedStatus && this.currentTab === 0 ) {
+    this.startTimer(Math.floor(7 * 1000), '');
+  } else {
+    clearInterval(this.timerMain);
+  }
 
   switch (event) {
     case 0:
@@ -2998,6 +3051,7 @@ changeSelectedTab(event: any) {
       break;
   }
 
+
 }
 setSelectedTab(index: any) {
   console.log('selected tab', index);
@@ -3012,6 +3066,42 @@ setSelectedTab(index: any) {
 }
 goToSubs() {
   this.router.navigateByUrl('subscription');
+}
+scrollHorizontal(index: any) {
+  document.querySelectorAll('.mat-tab-label')[index].scrollIntoView();
+}
+chatTimer() {
+  this.profilesCompletedStatus = true;
+  let timerMaxSeconds = Math.floor(7 * 1000);
+  let timerCurrentSecond;
+  this.botui.message.add({
+    loading: true,
+      delay: 500,
+     type: 'html',
+     content: '<div id="3no">' +
+
+     '<div style="text-align:center"><img style="width: 100%" src="../../assets/trip.jpeg" alt="exhausted profile">' +
+     '<h5>Moving To मेरी पसंद in</h5>' +
+    '</div>' +
+    // tslint:disable-next-line: max-line-length
+    '<div style="text-align: center;"><p style="display: inline-block;border: 2px solid red;border-radius:10px;padding-left:20px;padding-right:20px;font-size:18px" id="timer"></p></div>' +
+     '</div>'
+  }).then(() => {
+    this.startTimer(timerMaxSeconds, timerCurrentSecond);
+  });
+}
+
+startTimer( timerMaxSeconds: any, timerCurrentSecond: any) {
+   this.timerMain = setInterval( () => {
+    timerMaxSeconds = timerMaxSeconds - 1000;
+    timerCurrentSecond = Math.floor(timerMaxSeconds / 1000);
+    document.getElementById('timer').innerText =  timerCurrentSecond.toString() + 's';
+
+    if (Math.floor(timerCurrentSecond) === 0) {
+      this.setSelectedTab(2);
+      clearInterval(this.timerMain);
+    }
+  }, 1000);
 }
 
 

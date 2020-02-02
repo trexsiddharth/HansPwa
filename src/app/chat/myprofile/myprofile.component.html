@@ -9,6 +9,14 @@
       <mat-icon>exit_to_app</mat-icon>
       <span>Logout</span>
     </button>
+    <button (click)="changeLanguage('English')" mat-menu-item *ngIf="currentLanguage === 'Hindi'">
+      <mat-icon>language</mat-icon>
+      <span>English</span>
+    </button>
+    <button (click)="changeLanguage('Hindi')" mat-menu-item *ngIf="currentLanguage === 'English'">
+      <mat-icon>language</mat-icon>
+      <span>Hindi</span>
+    </button>
   </mat-menu>
 </div>
 

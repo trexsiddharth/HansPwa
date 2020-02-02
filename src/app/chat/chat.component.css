@@ -229,7 +229,9 @@ text-align: center;
   border-color: black;
 }
 ::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
-  border-color: #34b7f1;
+  border-color: white;
+  height: 10px;
+  width: 10px;
 }
 ::ng-deep mat-ink-bar {
   display: none;
@@ -351,6 +353,7 @@ display: none !important;
   .setBotUi{
     margin-top: 50px;
   }
+
   @media (max-width: 576px) {
     .navbar {
       background: #f3f3f3;
