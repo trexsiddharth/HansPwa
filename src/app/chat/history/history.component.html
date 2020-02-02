@@ -1,8 +1,9 @@
 <main *ngIf="profile">
+  
   <div style="padding-top: 30px;padding-bottom: 200px;">
+    <div [@listAnimation]="profile.length">
 
-
-    <mat-accordion *ngIf="this.profile.length > 0">
+    <mat-accordion *ngIf="profile.length > 0">
       <mat-expansion-panel [disabled]="disableForAWhile()" *ngFor="let item of profile;let i = index" [hideToggle]="true" multi="true"
         [expanded]="panelOpenState === i" (opened)="setPanelOpenState(i)" [id]="setId(i)">
         <mat-expansion-panel-header [collapsedHeight]="'100%'" [expandedHeight]="'100%'">
@@ -203,6 +204,7 @@
       </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
+  </div>
 
  <div style="text-align:center">
   <h5  *ngIf="this.profile.length < 1" [innerHTML]="noData">

@@ -3020,7 +3020,7 @@ exhaustedProfile() {
 changeSelectedTab(event: any) {
   console.log(event);
   this.currentTab = event;
-  if (this.profilesCompletedStatus && this.currentTab === 0 ) {
+  if (this.profilesCompletedStatus === true && this.currentTab === 0 ) {
     this.startTimer(Math.floor(7 * 1000), '');
   } else {
     clearInterval(this.timerMain);
@@ -3080,7 +3080,7 @@ chatTimer() {
      type: 'html',
      content: '<div id="3no">' +
 
-     '<div style="text-align:center"><img style="width: 100%" src="../../assets/trip.jpeg" alt="exhausted profile">' +
+     '<div style="text-align:center">' +
      '<h5>Moving To मेरी पसंद in</h5>' +
     '</div>' +
     // tslint:disable-next-line: max-line-length

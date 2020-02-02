@@ -4,7 +4,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  AfterViewInit
+  AfterViewInit,
+  Optional
 } from '@angular/core';
 import {
   HttpClient
@@ -24,20 +25,43 @@ import {
   catchError
 } from 'rxjs/operators';
 import {
-  Observable, from
+  Observable,
+  from
 } from 'rxjs';
 import {
   NotificationsService
 } from '../../notifications.service';
-import { NotificationButton } from 'ngx-kc-notification/lib/notification.model';
-import { FindOpenHistoryProfileService } from '../../find-open-history-profile.service';
-import { Router } from '@angular/router';
+import {
+  NotificationButton
+} from 'ngx-kc-notification/lib/notification.model';
+import {
+  FindOpenHistoryProfileService
+} from '../../find-open-history-profile.service';
+import {
+  Router
+} from '@angular/router';
+import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 
 
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
+  animations: [trigger('listAnimation', [
+    transition('* => *', [ // each time the binding value changes
+      query(':leave', [
+        stagger(100, [
+          animate('0.5s', style({ opacity: 0 }))
+        ])
+      ], {optional: true}),
+      query(':enter', [
+        style({ opacity: 0 }),
+        stagger(100, [
+          animate('0.5s', style({ opacity: 1 }))
+        ]),
+      ], {optional: true})
+    ])
+  ])],
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit, AfterViewInit {
@@ -62,7 +86,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-              public notification: NotificationsService, private itemService: FindOpenHistoryProfileService , private router: Router) {}
+    public notification: NotificationsService, private itemService: FindOpenHistoryProfileService, private router: Router) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -84,7 +108,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         break;
     }
 
-    
+
   }
 
   shareData(id: any, contacted: any, status) {
@@ -192,11 +216,13 @@ export class HistoryComponent implements OnInit, AfterViewInit {
             return item.profile.name === prof.profile.name;
           });
           // scroll to the profile
-          setTimeout(() => {
-          document.querySelectorAll('mat-expansion-panel')[this.panelOpenState].scrollIntoView({behavior: 'smooth'});
-          }, 1000);
+          // setTimeout(() => {
+          //   document.querySelectorAll('mat-expansion-panel')[this.panelOpenState].scrollIntoView({
+          //     behavior: 'smooth'
+          //   });
+          // }, 1000);
           this.itemService.setItem(null);
-         }
+        }
       },
       (error: any) => {
         this.spinner.hide();
@@ -273,9 +299,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   profileReAnswer(id: any, answer: any, index: any) {
-    if (answer !== 'YES' && this.itemService.getCredits && this.itemService.getCredits() !== '0') {
-      this.panelOpenState = null;
-    }
+    this.panelOpenState = null;
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
     reAnswerData.append('id', id);
@@ -318,18 +342,27 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              this.slideAndOpenProfile(this.profile[index], 1);
-              } else {
-                this.ngxNotificationService.error('You Dont have Enough Credits', '',
-              null, {duration: 4000, closeButton: true});
-              }
+              // this.slideAndOpenProfile(this.profile[index], 1);
+              this.profile.splice(index, 1);
+              // this.setTab.emit(1);
+            } else {
+              this.ngxNotificationService.error('You Dont have Enough Credits', '',
+                null, {
+                  duration: 4000,
+                  closeButton: true
+                });
+            }
             break;
           case 'SHORTLIST':
-            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {duration: 4000});
+            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+              duration: 4000
+            });
             break;
           case 'NO':
             this.profile.splice(index, 1);
-            this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {duration: 4000});
+            this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
+              duration: 4000
+            });
             break;
           default:
             break;
@@ -339,15 +372,25 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              this.slideAndOpenProfile(this.profile[index], 1);
-              } else {
-                this.ngxNotificationService.error('You Dont have Enough Credits', '',
-              null, {duration: 4000, closeButton: true});
-              }
+              // this.slideAndOpenProfile(this.profile[index], 1);
+              // this.profile.splice(this.profile[index], 1);
+              // this.setTab.emit(1);
+              this.profile.splice(index, 1);
+            } else {
+              this.ngxNotificationService.error('You Dont have Enough Credits', '',
+                null, {
+                  duration: 4000,
+                  closeButton: true
+                });
+            }
             break;
           case 'SHORTLIST':
-            this.slideAndOpenProfile(this.profile[index], 2);
-            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {duration: 4000});
+            // this.slideAndOpenProfile(this.profile[index], 2);
+            this.profile.splice(index, 1);
+            // document.querySelectorAll('mat-expansion-panel')[0].scrollIntoView({behavior: 'smooth'});
+            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+              duration: 4000
+            });
             break;
           default:
             break;
@@ -357,7 +400,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         break;
     }
   }
-  goToSubscription(){
+  goToSubscription() {
     this.router.navigateByUrl('subscription');
   }
   call(num: any) {
@@ -374,7 +417,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
   setHeight(height: any) {
     if (height && height !== '') {
-        return this.Heights[this.Heights1.indexOf(height)];
+      return this.Heights[this.Heights1.indexOf(height)];
     } else {
       return '';
     }
@@ -394,61 +437,61 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       localStorage.setItem('language', 'Hindi');
     }
     switch (localStorage.getItem('language')) {
-     case 'English':
-       switch (tab) {
-         case 0:
-           return 'Today\'s Matches';
-           case 1:
-           return 'Contacted';
-           case 2:
-             return 'Liked By You';
-             case 3:
-           return 'Liked You';
-           case 4:
-           return 'Rejected';
-         default:
-           break;
-       }
-       break;
-       case 'Hindi':
-         switch (tab) {
-           case 0:
-             return 'आज के रिश्ते';
-             case 1:
-             return 'कोन्टक्टेड';
-             case 2:
-               return 'मेरी पसंद';
-               case 3:
-             return 'मै किसे पसंद हूँ';
-             case 4:
-             return 'नापसंद ';
-           default:
-             break;
-         }
-         break;
-     default:
-       break;
-   }
+      case 'English':
+        switch (tab) {
+          case 0:
+            return 'Today\'s Matches';
+          case 1:
+            return 'Contacted';
+          case 2:
+            return 'Liked By You';
+          case 3:
+            return 'Liked You';
+          case 4:
+            return 'Rejected';
+          default:
+            break;
+        }
+        break;
+      case 'Hindi':
+        switch (tab) {
+          case 0:
+            return 'आज के रिश्ते';
+          case 1:
+            return 'कोन्टक्टेड';
+          case 2:
+            return 'मेरी पसंद';
+          case 3:
+            return 'मै किसे पसंद हूँ';
+          case 4:
+            return 'नापसंद ';
+          default:
+            break;
+        }
+        break;
+      default:
+        break;
+    }
   }
   setAllTabNames() {
     for (let index = 0; index < 5; index++) {
-    this.setTabNames(index);
+      this.setTabNames(index);
     }
   }
-  getNoDataText(type:any) {
+  getNoDataText(type: any) {
     switch (type) {
       case 'contactedProfiles':
-         this.noData =  '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
-         break;
-        case 'sortListProfiles':
-          this.noData =  '☹️ अभी आपने कोई रिश्ता पसंद नहीं किया है ';
-          break;
-        case 'interestReceived':
-          this.noData =  '☹️ अभी किसी रिश्ते ने आपको पसंद नहीं किया है';
-          break;
-        case 'rejectedProfiles':
-          this.noData =  '☹️ अभी आपने कोई रिश्ता नापसंद नहीं किया है';
-          break;
+        this.noData = '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
+        break;
+      case 'sortListProfiles':
+        this.noData = '☹️ अभी आपने कोई रिश्ता पसंद नहीं किया है ';
+        break;
+      case 'interestReceived':
+        this.noData = '☹️ अभी किसी रिश्ते ने आपको पसंद नहीं किया है';
+        break;
+      case 'rejectedProfiles':
+        this.noData = '☹️ अभी आपने कोई रिश्ता नापसंद नहीं किया है';
+        break;
       default:
         break;
     }
@@ -461,6 +504,8 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         return value;
       }
 
-    } else {return ''; }
-   }
+    } else {
+      return '';
+    }
+  }
 }
