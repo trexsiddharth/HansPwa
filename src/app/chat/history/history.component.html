@@ -40,7 +40,7 @@
                 </button>
                 <button (click)="profileReAnswer(item.profile.id,'YES',i)" class="setButtons" mat-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
-                  <mat-icon>check</mat-icon>
+                  <mat-icon>call</mat-icon>
                 </button>
                 <button (click)="profileReAnswer(item.profile.id,'SHORTLIST',i)" class="setButtons" mat-fab style="color: red;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
@@ -133,7 +133,7 @@
               <img class="setIcons" src="../assets/graduation.svg" alt="Weight">  {{item.profile.profession}}
             </div>
             <div class="col-3">
-              <img class="setIcons" src="../assets/rupee.svg" alt="Marital Status">  {{item.profile.monthly_income}} LPA
+              <img class="setIcons" src="../assets/rupee.svg" alt="Marital Status">  {{setIncome(item.profile.monthly_income)}} LPA
             </div>
   
           </div>

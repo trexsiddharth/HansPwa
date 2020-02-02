@@ -453,4 +453,14 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         break;
     }
   }
+  setIncome(value: string): String {
+    if (value != null) {
+      if (Number(value) > 1000) {
+        return String((Number(value) / 100000));
+      } else {
+        return value;
+      }
+
+    } else {return ''; }
+   }
 }
