@@ -18,17 +18,21 @@
               <mat-card-subtitle>
                 {{setAge(item.profile.birth_date)}} <b class="partition">|</b> {{setHeight(item.profile.height)}} <b class="partition">|</b> {{item.profile.education}} <b class="partition">|</b> 
                 {{item.profile.occupation}} <b class="partition">|</b> {{item.profile.monthly_income}} LPA <b class="partition">|</b> {{item.family.caste}} <b class="partition">|</b> {{item.family.city}} <br>
-                {{item.profile.about}}
+                {{toTitleCase(item.profile.about)}} <br>
+                <div  style="margin-top: 10px;" *ngIf="type === 'contacted'">
+                  <div style="right: 0px;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
+                    <img style="width: 20px;" src="../../../assets/locationwhite.svg" alt="locality">{{toTitleCase(item.family.locality)}}
+                  </div>
+                </div>
               </mat-card-subtitle>
               <img mat-card-lg-image [src]=getProfilePhoto(item.profile.photo,item.profile.gender) alt="item.profile.name">
-              
             </mat-card-title-group>
 
 
             <mat-card-header [hidden]="panelOpenState!=i">
               <div mat-card-avatar class="avatarImage"></div>
               <mat-card-title>{{item.profile.name}}</mat-card-title>
-              <mat-card-subtitle>{{item.profile.about}}</mat-card-subtitle>
+              <mat-card-subtitle>{{toTitleCase(item.profile.about)}}</mat-card-subtitle>
             </mat-card-header>
             <img mat-card-image [src]=getProfilePhoto(item.profile.photo,item.profile.gender) alt="item.profile.name"
               [hidden]="panelOpenState!=i">
@@ -52,9 +56,9 @@
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-card-actions>
-              <div style="text-align: end;" *ngIf="type === 'contacted'">
-                <div style="right: 0px;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
-                  {{item.family.locality}}
+              <div style="text-align: center; margin-top: 10px;"  *ngIf="type === 'contacted'">
+                <div style="text-align: center;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
+                  <img style="width: 20px;" src="../../../assets/locationwhite.svg" alt="locality"> {{toTitleCase(item.family.locality)}}
                 </div>
               </div>
             </ng-container>
@@ -79,11 +83,7 @@
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-card-actions>
-              <div style="text-align: end;" *ngIf="type === 'contacted'">
-                <div style="right: 0px;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
-                  {{item.family.locality}}
-                </div>
-              </div>
+              
               
             </ng-container>
           </mat-card>

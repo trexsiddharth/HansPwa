@@ -86,7 +86,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-    public notification: NotificationsService, private itemService: FindOpenHistoryProfileService, private router: Router) {}
+              public notification: NotificationsService, private itemService: FindOpenHistoryProfileService, private router: Router) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -508,4 +508,16 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       return '';
     }
   }
+  toTitleCase(str) {
+    if (str) {
+      return str.replace(
+        /\w\S*/g,
+        (txt) => {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+    } else {
+      return '';
+    }
+}
 }
