@@ -460,7 +460,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   setProfileImage(image) {
+    if (image) {
     this.photo = image;
+    } else {
+      this.photo = '../../assets/avatar.svg';
+    }
   }
 
   setTabNames(tab: any) {
