@@ -20,6 +20,7 @@ export class MyprofileComponent implements OnInit {
   @Input() personalProfileData: any;
   @Input() familyProfileData: any;
   @Input() preferenceProfileData: any;
+  @Output() backToProfiles = new EventEmitter();
 
   innerWidth: any;
   public message: string;
@@ -278,5 +279,8 @@ onResize(event) {
           this.ngxNotificationService.error('something went wrong, Try again later');
         }
       );
+    }
+    backToChat() {
+      this.backToProfiles.emit('chatbot');
     }
 }

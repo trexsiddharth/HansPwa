@@ -32,65 +32,70 @@
                     </div>
             </div>
         </div> -->
-
-        <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)" [hidden]="history=='myprofile'" >
-          <mat-tab label="🗓आज के रिश्ते" id="today">
-                <ng-template matTabContent>
-                  <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                    कांटेक्ट नंबर: {{points}}
-                </button>
-                    <div id="my-botui-app" class="mainBody w-full ht-full setBotUi" >
-                              <bot-ui></bot-ui>
-                  </div>
-                </ng-template>
-                </mat-tab>
-                <mat-tab label="📞कॉंटैक्टेड" id="contacted">
-                    <ng-template matTabContent>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        कांटेक्ट नंबर: {{points}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
-                   </div>
-                </ng-template>
-                </mat-tab>
-                <mat-tab label="❤️मेरी पसंद" id="melike">
-                    <ng-template matTabContent>
-                    <div>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        कांटेक्ट नंबर: {{points}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType"  ></app-history>
-                       </div>
-                   </div>
-                </ng-template>
-                </mat-tab>
-                <mat-tab label="💓मै किसे पसंद हूँ?" id="likeme">
-                    <ng-template matTabContent>
-                    <div>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        कांटेक्ट नंबर: {{points}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
-                       </div>
-                   </div>
-                </ng-template>
-                </mat-tab>
-                <mat-tab label="❌नापसंद" id="rejected">
-                    <ng-template matTabContent>
-                    <div>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        कांटेक्ट नंबर: {{points}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                 <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
-                       </div>
-                   </div>
-                </ng-template>
-                </mat-tab>
-                </mat-tab-group>
+        <div class="groupContainer" [hidden]="history=='myprofile'">
+          <img (click)="changeToMyProfile()" style="width:50px;margin: 10px 5px;border-radius: 50%;" [src]="photo" alt="profile pic">
+          <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
+            <mat-tab label="🗓आज के रिश्ते" id="today">
+                  <ng-template matTabContent>
+                    <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                      कांटेक्ट नंबर: {{points}}
+                  </button>
+                      <!-- <div id="my-botui-app" class="mainBody w-full ht-full setBotUi" >
+                                <bot-ui></bot-ui>
+                    </div> -->
+                    <div class="mainBody  w-full bg-white ht-full setBotUi">
+                        <app-profile-card (setProfileImage)="setProfileImage($event)" (changeTab)="setSelectedTab($event)"></app-profile-card>
+                    </div>
+                  </ng-template>
+                  </mat-tab>
+                  <mat-tab label="📞कॉंटैक्टेड" id="contacted">
+                      <ng-template matTabContent>
+                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                          कांटेक्ट नंबर: {{points}}
+                      </button>
+                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
+                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
+                     </div>
+                  </ng-template>
+                  </mat-tab>
+                  <mat-tab label="❤️मेरी पसंद" id="melike">
+                      <ng-template matTabContent>
+                      <div>
+                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                          कांटेक्ट नंबर: {{points}}
+                      </button>
+                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
+                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType"  ></app-history>
+                         </div>
+                     </div>
+                  </ng-template>
+                  </mat-tab>
+                  <mat-tab label="💓मै किसे पसंद हूँ?" id="likeme">
+                      <ng-template matTabContent>
+                      <div>
+                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                          कांटेक्ट नंबर: {{points}}
+                      </button>
+                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
+                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
+                         </div>
+                     </div>
+                  </ng-template>
+                  </mat-tab>
+                  <mat-tab label="❌नापसंद" id="rejected">
+                      <ng-template matTabContent>
+                      <div>
+                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                          कांटेक्ट नंबर: {{points}}
+                      </button>
+                          <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
+                         </div>
+                     </div>
+                  </ng-template>
+                  </mat-tab>
+                  </mat-tab-group>
+        </div>
     <div>
 
 <!-- The Modal -->
@@ -110,7 +115,7 @@
   
   <div>
        <div class="w-full bg-white ht-full" style="background-size: cover;" *ngIf="history=='myprofile'">
-                <app-myprofile (preferenceChanged)="preferencesChanged($event)" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-myprofile>
+                <app-myprofile (backToProfiles)="changeToBot()" (preferenceChanged)="preferencesChanged($event)" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-myprofile>
       </div>
   </div>
 
@@ -120,27 +125,27 @@
    </div>
 </div>
   
-  <footer id="footerVisibility">
+  <!-- <footer id="footerVisibility">
       <div class="navbar" style="padding: 0px;z-index: 1;">
           <div class="row rowClass" >
               <div class="col-6" id="chatButton" style="text-align: center">
                       <div class="row" style="margin: 0px auto; display: inline;">
                           <button class="btn" (click)="setSelectedTab(0)" id="chatText">रिश्ते देखें</button>
                       </div>
-              </div>
+              </div> -->
               <!-- <div class="col-4" id="historyButton" style="text-align: center" >
                       <div class="row" style="margin: 0px auto; display: inline;">
                               <button class="btn" (click)="changeToHistory()" id="historyText">देखे गए रिश्ते</button>
                           </div>
               </div> -->
-              <div class="col-6" id="profileButton" style="text-align: center">
-                      <div class="row" style="margin: 0px auto; display: inline;position: relative;">
+              <!-- <div class="col-6" id="profileButton" style="text-align: center">
+                      <div class="row" style="margin: 0px auto; display: inline;position: relative;"> -->
                         <!-- <div style="background: red; top: -10px;right: -15px;padding:5px;position: absolute;border-radius: 100px;"><span style="font-size: 10px;color: white;">New</span></div> -->
-                              <button class="btn" (click)="changeToMyProfile()" id="profileText">मेरा प्रोफाइल</button>
+                              <!-- <button class="btn" (click)="changeToMyProfile()" id="profileText">मेरा प्रोफाइल</button>
                           </div>
               </div>
           </div>
         </div>
-  </footer>
+  </footer> -->
   </main>
   

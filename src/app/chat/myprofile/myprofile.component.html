@@ -1,8 +1,12 @@
 <main id="main" *ngIf="personalProfileData">
 
-<div style="text-align: end;">
-  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-    <mat-icon>more_vert</mat-icon>
+<div class="container" >
+    <mat-icon (click)="backToChat()" style="vertical-align: middle;font-size: 40px;color: #34b7f1;">
+      home
+      </mat-icon>
+  <div style="text-align: end;display: inline-block;position: absolute;right: 0px;">
+  <button mat-icon-button style="margin-right: 20px;" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon style="font-size: 40px;color: #34b7f1;">more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button (click)="logout()" mat-menu-item>
@@ -19,8 +23,9 @@
     </button>
   </mat-menu>
 </div>
+</div>
 
-    <div style="margin: 10px 20px 0px;" class="card">
+    <div style="margin: 20px 20px 0px;" class="card">
       <!-- <div style="text-align: center">
         <input style="display: none" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,3)"  />
       <label for="backfile">

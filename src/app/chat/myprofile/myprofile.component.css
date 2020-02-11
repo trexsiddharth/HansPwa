@@ -39,11 +39,15 @@ border-radius: 30px;
     padding-bottom: 100px;
     padding-top: 20px;
   }
-::ng-deep .carousel-control-next {
+/* ::ng-deep .carousel-control-next {
   background: black;
 }
 ::ng-deep .carousel-control-prev {
   background: black;
+} */
+
+.spaceOut {
+  flex: 1 1 auto;
 }
 
   @media (max-width: 1024px) {

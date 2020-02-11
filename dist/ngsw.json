@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1580818667327,
+  "timestamp": 1581430213444,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,8 +11,8 @@
         "/favicon.ico",
         "/firebase-messaging-sw.js",
         "/index.html",
-        "/main-es2015.e4e03a966c0a41449bc2.js",
-        "/main-es5.e4e03a966c0a41449bc2.js",
+        "/main-es2015.68c8eda243550a0ad9f0.js",
+        "/main-es5.68c8eda243550a0ad9f0.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.2987770fde9daa1d8a2e.js",
         "/polyfills-es5.3504ece4da5e4c1fb5b5.js",
@@ -224,6 +224,7 @@
         "/assets/whatsbg.webp",
         "/bgicon.dedf2620d82776ed85a1.png",
         "/logo_192.5f7f254ba38018213cfd.png",
+        "/logo_384.9c06b71ef1ff8943abf5.png",
         "/redback.093eeb320fb87fb9d11c.jpg",
         "/whatsbg.f779980799b39548bb90.webp"
       ],
@@ -440,10 +441,11 @@
     "/bgicon.dedf2620d82776ed85a1.png": "0ca8aa153feb31362f3ea5ca8f32cb3f4300485b",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "bf7b47f2b52a34a7d857d2b06a62a5a93a281ff0",
+    "/index.html": "aa6da163ac15316c17f743551a53c1aebefd1d93",
     "/logo_192.5f7f254ba38018213cfd.png": "85f05cc7f4b71b477f0a84763c133326e9adb1ef",
-    "/main-es2015.e4e03a966c0a41449bc2.js": "875d1cebade5e75888d21752a2910c6438508225",
-    "/main-es5.e4e03a966c0a41449bc2.js": "4263d40568a6948938607a43f388abaf6c305011",
+    "/logo_384.9c06b71ef1ff8943abf5.png": "fe5a6980894a3142b5cf5cdf4c69ca9b91f1cb76",
+    "/main-es2015.68c8eda243550a0ad9f0.js": "f07258720b7b2424e5a7ace4dd635f4ada62d0da",
+    "/main-es5.68c8eda243550a0ad9f0.js": "78c750a214867fe18ad8b72a0ecae6d5082a3cfc",
     "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
     "/polyfills-es2015.2987770fde9daa1d8a2e.js": "cf5cbfa9134716054fb479ab21362146cdf1f2ff",
     "/polyfills-es5.3504ece4da5e4c1fb5b5.js": "ac501f29a146d28dbc5bc0687a5301c3fd577d5d",
