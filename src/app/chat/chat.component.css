@@ -1,6 +1,10 @@
 
 /* Bot Ui */
 
+body{
+  background-image: none !important; 
+}
+
 .botui-container {
   font-size: 14px;
   background-color:#f3f3f3;
