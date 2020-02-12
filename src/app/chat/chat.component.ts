@@ -304,10 +304,17 @@ export class ChatComponent implements OnInit, AfterViewInit {
       localStorage.setItem('language', 'Hindi');
     }
 
+    if (this.router.url.match('mobile=')) {
+      this.currentUrl = this.router.url.substring(13);
+      console.log(this.currentUrl);
+    }
+
     if (localStorage.getItem('mobile_number')) {
+      setTimeout(() => {
+      this.getCredits();
+      }, 2000);
       this.chatServivce.setContactNumber(localStorage.getItem('mobile_number'));
       this.currentContact = localStorage.getItem('mobile_number');
-      this.getCredits();
       // this.checkUrl(this.currentContact).subscribe(
       //   (data: any) => {
       //     console.log(data);
@@ -363,12 +370,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
       //   });
 
     } else if (this.currentUrl) {
+      this.getCredits();
       this.chatServivce.setContactNumber(this.currentUrl);
       this.Analytics('login', 'login', 'logged In');
       this.currentContact = this.currentUrl;
       // this.showHistoryMessages(this.currentUrl);
       // this.numberValidation(this.currentContact);
-      this.getCredits();
     } else {
       this.router.navigateByUrl('phone-number');
     }
@@ -389,11 +396,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
         }
       }
     );
-
-    if (this.router.url.match('mobile=')) {
-      this.currentUrl = this.router.url.substring(13);
-      console.log(this.currentUrl);
-    }
   }
 
   ngAfterViewInit() {

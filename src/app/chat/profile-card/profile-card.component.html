@@ -14,14 +14,14 @@
   </div>
 
     <mat-card style="margin-bottom: 200px;" *ngIf="type=='profile'">
-        <img mat-card-image (click)="openImageModal(item.photo,item.name)" [src]="getProfilePhoto(item.photo,item.gender)" alt="item.name">
+        <img mat-card-image id="profileImage" (click)="openImageModal(item.photo,item.name)" [src]="getProfilePhoto(item.photo,item.gender)" alt="item.name">
 
           <mat-card-actions id="buttonSet" style="margin-bottom: 20px;" align="center">
             <!-- <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>call</mat-icon> {{item.family.mobile}}
             </button> -->
-            <button  (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;background: white;"
+            <button  matTooltip="Info about the action" (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;background: white;"
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>call</mat-icon>
             </button>
@@ -239,13 +239,16 @@
             <button (click)="showPlan()"  *ngIf="button==='2'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;">
                 👁प्लान देखें
             </button> 
-            <button (click)="showLikedProfile()" *ngIf="button==='1'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #10e096e9;">
+            <button (click)="showLikedProfile()"  *ngIf="button == '1'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #10e096e9;">
                ❤️ मेरी पसंद
             </button> 
+            <button (click)="showProfilesLikedMe()" *ngIf="button == '1'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #10e096e9;">
+              💓मै किसे पसंद हूँ?
+           </button> 
             <button (click)="callHans()" *ngIf="button==='2' || button=== '4'" color="primary" class="setButtons" mat-raised-button style="color: white;background: green;">
                📞कॉल हंस
             </button> 
-            <button (click)="getNextMessageOrProfile('SHOW')" *ngIf="button==='2' || button=== '3' || button=== '5'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #05dfd7;">
+            <button  (click)="getNextMessageOrProfile('NO')" *ngIf="button==='2' || button=== '3' || button=== '5'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #05dfd7;">
                 👩‍❤️‍👨 और दिखाएं
             </button> 
             <button (click)="buyPlan(3500)" *ngIf="button==='3'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;;">

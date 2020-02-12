@@ -7,6 +7,7 @@ export class ChatServiceService {
   profileItem;
   contactNumber;
   loginStatus;
+  credits;
   constructor() { }
 
   setContactNumber(contact: any) {
@@ -37,5 +38,12 @@ export class ChatServiceService {
   }
   getLoginStatus() {
     return this.loginStatus;
+  }
+
+  setCredits(credits: string) {
+    this.credits = credits;
+  }
+  getCredits() {
+    return this.credits;
   }
 }

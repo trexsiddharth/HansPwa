@@ -50,6 +50,11 @@ border-radius: 30px;
   flex: 1 1 auto;
 }
 
+.row{
+padding: 0px;
+margin: 0px;
+}
+
   @media (max-width: 1024px) {
     #main{
       background-color:#ebedf0;

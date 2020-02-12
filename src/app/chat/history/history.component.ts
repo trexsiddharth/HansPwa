@@ -133,7 +133,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  getProfilePhoto(num: any, gen: string): String {
+  getProfilePhoto(num: any, gen: string): string {
     if (num === null) {
       if (gen === 'Male') {
         return '../../assets/male_pic.png';
@@ -144,7 +144,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
     }
   }
-  setName(value: string, type: any): String {
+  setName(value: string, type: any): string {
     if (type === 1) {
       if (value != null) {
         if (value.split(' ')) {
@@ -342,9 +342,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              // this.slideAndOpenProfile(this.profile[index], 1);
+              this.slideAndOpenProfile(this.profile[index], 1);
               this.profile.splice(index, 1);
-              // this.setTab.emit(1);
+              this.setTab.emit(1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
@@ -372,9 +372,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              // this.slideAndOpenProfile(this.profile[index], 1);
-              // this.profile.splice(this.profile[index], 1);
-              // this.setTab.emit(1);
+              this.slideAndOpenProfile(this.profile[index], 1);
+              this.profile.splice(this.profile[index], 1);
+              this.setTab.emit(1);
               this.profile.splice(index, 1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',

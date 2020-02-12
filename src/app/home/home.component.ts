@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
   }
 
   onboarding() {
-    this.spinner.show();
     if (localStorage.getItem('mobile_number')) {
       this.router.navigateByUrl('chat');
     } else {

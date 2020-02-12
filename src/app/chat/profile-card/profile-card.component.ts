@@ -125,9 +125,6 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
-        if (reply === 'YES') {
-          this.changeTab.emit('1');
-        }
         if (data.type === 'profile') {
           this.type = 'profile';
           this.item = data.apiwha_autoreply;
@@ -136,6 +133,15 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           this.item = data.apiwha_autoreply;
           this.setMessageText(this.item);
           }
+
+        if (this.points > 0 && reply === 'YES') {
+            this.changeTab.emit('1');
+          } else {
+            if (document.getElementById('profileImage')) {
+              document.getElementById('profileImage').scrollIntoView({behavior: 'smooth'});
+            }
+          }
+        this.getCredits();
         this.spinner.hide();
       }, err => {
         console.log(err);
@@ -307,16 +313,16 @@ setManglik(value: string) {
     // button-4 -> show more
   setMessageText(text: string) {
     switch (text) {
-          case 'We have already shared 6 profiles with you.\n \n Please come back tomorrow to see more profiles':
+          case '👉 We have already shared 6 profiles with you. \n\n👉Please come back tomorrow to see more profiles':
           this.button = '1';
           break;
-          case 'हम आपको आज 6 रिश्ते दिखा चुके हैं। \n\n👉कृपया और रिश्ते देखने के लिए कल पुनः यहाँ पधारें।':
+          case '👉 हम आपको आज 6 रिश्ते दिखा चुके हैं। \n\n👉कृपया और रिश्ते देखने के लिए कल पुनः यहाँ पधारें।':
           this.button = '1';
           break;
-          case 'Sorry! Your plan has expired.\n \n 👉Please renew your plan or contact our customer care for help.':
+          case 'Sorry! Your plan has expired. \n\n👉Please renew your plan or contact our customer care for help.':
           this.button = '2';
           break;
-          case `माफ़ कीजिये! आपके प्रोफाइल की समय सीमा समाप्त हो गयी है।\n\n 👉सुविधाएँ जारी रखने के लिए कृपया पुनः \'प्लान खरीदें\'
+          case `माफ़ कीजिये! आपके प्रोफाइल की समय सीमा समाप्त हो गयी है। \n\n👉सुविधाएँ जारी रखने के लिए कृपया पुनः \'प्लान खरीदें\'
            या हमारे कस्टमर केयर पर संपर्क करें।`:
           this.button = '2';
           break;
@@ -350,6 +356,9 @@ setManglik(value: string) {
   }
   showLikedProfile() {
     this.changeTab.emit('2');
+  }
+  showProfilesLikedMe() {
+    this.changeTab.emit('3');
   }
   buyPlan(plan: any) {
     this.subscriptionService.payNowT(plan, 'live', 0, '', '', this.contactNumber);
