@@ -122,6 +122,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     if (modal.style.display !== 'none') {
       modal.style.display = 'none';
     }
+    const previousItem = this.item;
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
@@ -134,8 +135,23 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           this.setMessageText(this.item);
           }
 
+        switch (reply) {
+          case 'YES':
+            this.ngxNotificationService.success('Profile Contacted Successfully');
+            break;
+            case 'SHORTLIST':
+              this.ngxNotificationService.success('Profile Shortlisted Successfully');
+              break;
+            case 'NO':
+              this.ngxNotificationService.success('Profile Rejected Successfully');
+              break;
+        
+          default:
+            break;
+        }
         if (this.points > 0 && reply === 'YES') {
-            this.changeTab.emit('1');
+          this.itemService.setItem(previousItem);
+          this.changeTab.emit('1');
           } else {
             if (document.getElementById('profileImage')) {
               document.getElementById('profileImage').scrollIntoView({behavior: 'smooth'});
