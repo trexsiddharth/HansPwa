@@ -33,7 +33,7 @@
             </div>
         </div> -->
         <div class="groupContainer" [hidden]="history=='myprofile'">
-          <img (click)="changeToMyProfile()" style="width:50px;margin: 10px 5px;border-radius: 50%;" [src]="photo" alt="profile pic">
+          <img (click)="changeToMyProfile()" style="width:50px;height: 50px;margin: 10px 5px;border-radius: 50%;" [src]="photo" alt="profile pic">
           <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
             <mat-tab label="🗓आज के रिश्ते" id="today">
                   <ng-template matTabContent>

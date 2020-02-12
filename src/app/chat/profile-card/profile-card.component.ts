@@ -125,6 +125,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
+        if (reply === 'YES') {
+          this.changeTab.emit('1');
+        }
         if (data.type === 'profile') {
           this.type = 'profile';
           this.item = data.apiwha_autoreply;

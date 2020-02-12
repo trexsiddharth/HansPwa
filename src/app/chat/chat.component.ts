@@ -305,9 +305,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
 
     if (localStorage.getItem('mobile_number')) {
-      this.spinner.show();
       this.chatServivce.setContactNumber(localStorage.getItem('mobile_number'));
       this.currentContact = localStorage.getItem('mobile_number');
+      this.getCredits();
       // this.checkUrl(this.currentContact).subscribe(
       //   (data: any) => {
       //     console.log(data);
@@ -368,7 +368,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.currentContact = this.currentUrl;
       // this.showHistoryMessages(this.currentUrl);
       // this.numberValidation(this.currentContact);
-      this.spinner.show();
+      this.getCredits();
     } else {
       this.router.navigateByUrl('phone-number');
     }
@@ -1569,15 +1569,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
       });
       this.history = 'history';
 
-      document.getElementById('chatButton').style.background = '#34b7f1';
-      document.getElementById('chatText').style.color = '#FFFFFF';
-      document.getElementById('chatText').style.background = '#34b7f1';
+      // document.getElementById('chatButton').style.background = '#34b7f1';
+      // document.getElementById('chatText').style.color = '#FFFFFF';
+      // document.getElementById('chatText').style.background = '#34b7f1';
       // document.getElementById('historyText').style.color = 'grey';
-      document.getElementById('profileButton').style.background = '#f3f3f3';
+      // document.getElementById('profileButton').style.background = '#f3f3f3';
       // document.getElementById('historyButton').style.background = '#f3f3f3';
       // document.getElementById('historyText').style.background = '#f3f3f3';
-      document.getElementById('profileText').style.color = 'grey';
-      document.getElementById('profileText').style.background = '#f3f3f3';
+      // document.getElementById('profileText').style.color = 'grey';
+      // document.getElementById('profileText').style.background = '#f3f3f3';
 
       console.log(localStorage.getItem('id'));
       this.scrollHorizontal(this.currentTab);
@@ -1585,15 +1585,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
   changeToBot() {
     this.history = 'chatbot';
-    document.getElementById('chatButton').style.background = '#34b7f1';
-    document.getElementById('chatText').style.color = '#FFFFFF';
-    document.getElementById('chatText').style.background = '#34b7f1';
+    // document.getElementById('chatButton').style.background = '#34b7f1';
+    // document.getElementById('chatText').style.color = '#FFFFFF';
+    // document.getElementById('chatText').style.background = '#34b7f1';
     // document.getElementById('historyText').style.color = 'grey';
-    document.getElementById('profileButton').style.background = '#f3f3f3';
+    // document.getElementById('profileButton').style.background = '#f3f3f3';
     // document.getElementById('historyButton').style.background = '#f3f3f3';
     // document.getElementById('historyText').style.background = '#f3f3f3';
-    document.getElementById('profileText').style.color = 'grey';
-    document.getElementById('profileText').style.background = '#f3f3f3';
+    // document.getElementById('profileText').style.color = 'grey';
+    // document.getElementById('profileText').style.background = '#f3f3f3';
   }
   changeToMyProfile() {
     if (this.currentContact) {

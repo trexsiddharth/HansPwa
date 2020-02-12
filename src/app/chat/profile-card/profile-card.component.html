@@ -16,7 +16,7 @@
     <mat-card style="margin-bottom: 200px;" *ngIf="type=='profile'">
         <img mat-card-image (click)="openImageModal(item.photo,item.name)" [src]="getProfilePhoto(item.photo,item.gender)" alt="item.name">
 
-          <mat-card-actions id="buttonSet" style="margin-bottom: 0px;" align="center">
+          <mat-card-actions id="buttonSet" style="margin-bottom: 20px;" align="center">
             <!-- <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>call</mat-icon> {{item.family.mobile}}
