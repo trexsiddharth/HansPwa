@@ -1,5 +1,5 @@
 
-<main class='fixed t-0 b-0 w-full HC' style="background-image:url('../../assets/bgicon.png');background-size: cover;">
+<main class='fixed t-0 b-0 w-full HC'>
         <!-- <div class='flex-fs-c setLogo' >
             <img  src='../../assets/logo_short.png' class='w-40' style="border-radius: 100%; object-fit: cover; height: 2.5rem; width: 2.5rem; background-color: white">
             <div class='f16 white m-l-10 pointer'>Hans Matrimony</div>
@@ -33,8 +33,8 @@
             </div>
         </div> -->
         <div class="groupContainer" [hidden]="history=='myprofile'">
-          <img (click)="changeToMyProfile()" style="width:50px;height: 50px;margin: 10px 5px;border-radius: 50%;" [src]="photo" alt="profile pic">
-          <mat-tab-group mat-align-tabs="center" class="matGroup" dynamicHeight  [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
+          <img (click)="changeToMyProfile()" style="width:50px;height: 50px;margin: 10px 5px;border-radius: 50%;z-index: 99999999;" [src]="photo" alt="profile pic">
+          <mat-tab-group mat-align-tabs="center" class="matGroup"   [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
             <mat-tab label="🗓आज के रिश्ते" id="today">
                   <ng-template matTabContent>
                       <!-- <div id="my-botui-app" class="mainBody w-full ht-full setBotUi" >
