@@ -21,18 +21,33 @@
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>call</mat-icon> {{item.family.mobile}}
             </button> -->
-            <button  matTooltip="Info about the action" (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;background: white;"
+
+            <button 
+            ngbTooltip="कॉन्टैक्ट करें"
+            #t1="ngbTooltip"
+            tooltipClass="tooltipCustom"
+            (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;background: white;"
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>call</mat-icon>
             </button>
-            <button (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="color: red;background: white;"
+
+            <button 
+            ngbTooltip="पसंद करें"
+            #t2="ngbTooltip"
+            tooltipClass="tooltipCustom"
+            (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="color: red;background: white;"
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>favorite</mat-icon>
             </button>
-            <button (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;background: white;"
-              aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted' && type != 'rejected'">
+
+            <button 
+            ngbTooltip="नापसंद करें"
+            #t3="ngbTooltip"
+            tooltipClass="tooltipCustom"
+            (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;background: white;">
               <mat-icon>close</mat-icon>
             </button>
+
           </mat-card-actions>
           <!-- <div style="text-align: center; margin-top: 10px;" >
             <div style="text-align: center;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
@@ -47,7 +62,7 @@
                 {{toTitleCase(item.about)}}
             </div>
         </div>
-            <h5 class="contentHeader">PERSONAL DETAILS</h5>
+            <h5 id="heading" (click)="showTooltips(t1,t2,t3)" class="contentHeader">PERSONAL DETAILS</h5>
             <div class="container" style="margin-top: 20px;">
               <div class="row">
                 <div class="col-6 contentPara">

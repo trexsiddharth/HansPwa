@@ -16,7 +16,16 @@ h5{
 }
 
 button:focus{outline:none !important;}
-    
+
+/* tooltip */
+::ng-deep .tooltipCustom {
+   font-size: 16px !important;
+}
+
+::ng-deep .tooltip-inner{
+  padding: 10px !important;
+}
+
 mat-card{
     background: white;
     color: black ;

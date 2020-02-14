@@ -11,6 +11,8 @@ import { ChatServiceService } from '../../chat-service.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { Router } from '@angular/router';
 import { SubscriptionserviceService } from '../../subscriptionservice.service';
+import { MatTooltip } from '@angular/material';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class ProfileCardComponent implements OnInit {
   type;
   button;
   photo;
+  count = 1;
   @Output() changeTab = new EventEmitter < any > ();
   @Output() setProfileImage = new EventEmitter <any> ();
    // Height
@@ -129,6 +132,16 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         if (data.type === 'profile') {
           this.type = 'profile';
           this.item = data.apiwha_autoreply;
+          setTimeout(() => {
+            if ( localStorage.getItem('cancelTT') !== 'cancel' && this.count < 4 && document.getElementById('heading')) {
+              document.getElementById('heading').click();
+              this.count++;
+            } else {
+              if (localStorage.getItem('cancelTT') !== 'cancel') {
+              localStorage.setItem('cancelTT', 'cancel');
+              }
+            }
+          }, 1000);
           } else {
           this.type = 'message';
           this.item = data.apiwha_autoreply;
@@ -145,7 +158,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
             case 'NO':
               this.ngxNotificationService.success('Profile Rejected Successfully');
               break;
-        
+
           default:
             break;
         }
@@ -378,6 +391,12 @@ setManglik(value: string) {
   }
   buyPlan(plan: any) {
     this.subscriptionService.payNowT(plan, 'live', 0, '', '', this.contactNumber);
+  }
+
+  showTooltips(tooltip: NgbTooltip, tooltip2: NgbTooltip, tooltip3: NgbTooltip) {
+      tooltip.open();
+      tooltip2.open();
+      tooltip3.open();
   }
 
 }
