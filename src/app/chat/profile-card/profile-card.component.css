@@ -79,6 +79,13 @@ mat-card{
     background-size: cover;
 }
 
+.templeSet{
+  text-align: center;
+              background: #f5f5f5;
+              border-radius: 50px;
+              color: black;
+}
+
    /* modal */
 
     /* Style the Image Used to Trigger the Modal */
