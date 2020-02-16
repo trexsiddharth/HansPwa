@@ -17,6 +17,14 @@ h5{
 
 button:focus{outline:none !important;}
 
+::ng-deep .walkthrough-text-container{
+  font-size: 30px;
+    margin-top: 150px;
+}
+::ng-deep .walkthrough-icon{
+  height: 100px !important;
+} 
+
 /* tooltip */
 ::ng-deep .tooltipCustom {
    font-size: 16px !important;
@@ -169,6 +177,9 @@ mat-card{
           width: 100%;
         }
       }
+
+      
+
       
 
 

@@ -86,7 +86,7 @@ export class ProfileCardComponent implements OnInit {
         console.log(err);
       }
     );
-  }
+    }
 
   checkUrl(): Observable<any> {
     if (localStorage.getItem('fcm_app')) {

@@ -13,9 +13,23 @@
     <h4 id="caption"></h4>
   </div>
 
-    <mat-card style="margin-bottom: 200px;" *ngIf="type=='profile'">
-        <img mat-card-image id="profileImage" (click)="openImageModal(item.photo,item.name)" [src]="getProfilePhoto(item.photo,item.gender)" alt="item.name">
+  <!-- walkthrough -->
+  <!-- <ngx-walkthrough
+  style="height:50px"
+  [is-round]="true"
+  [walkthrough-type]="'transparency'"
+  [focus-element-selector]="'.tooltipCustom'"
+  [icon]="'single_tap'"
+  [main-caption]="'अगला रिश्ता देखने के लिए अपनी प्रतिक्रिया दे'"
+  [is-active]="true"
+  [use-button]="false">
+</ngx-walkthrough> -->
+  
 
+    <mat-card style="margin-bottom: 200px;" *ngIf="type=='profile'">
+      
+      
+        <img mat-card-image id="profileImage" (click)="openImageModal(item.photo,item.name)" [src]="getProfilePhoto(item.photo,item.gender)" alt="item.name">
           <mat-card-actions id="buttonSet" style="margin-bottom: 20px;" align="center">
             <!-- <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
               aria-label="Example icon-button with a heart icon" >
@@ -26,7 +40,7 @@
             ngbTooltip="कॉन्टैक्ट करें"
             #t1="ngbTooltip"
             tooltipClass="tooltipCustom"
-            (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;background: white;"
+            (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="color: green;background: white;"
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>call</mat-icon>
             </button>
@@ -34,7 +48,7 @@
             <button 
             ngbTooltip="पसंद करें"
             #t2="ngbTooltip"
-            tooltipClass="tooltipCustom"
+            tooltipClass="tooltipCustom1"
             (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="color: red;background: white;"
               aria-label="Example icon-button with a heart icon" >
               <mat-icon>favorite</mat-icon>
@@ -43,7 +57,7 @@
             <button 
             ngbTooltip="नापसंद करें"
             #t3="ngbTooltip"
-            tooltipClass="tooltipCustom"
+            tooltipClass="tooltipCustom1"
             (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;background: white;">
               <mat-icon>close</mat-icon>
             </button>
@@ -202,13 +216,13 @@
                     <img class="setIcons" src="../assets/moneybag.svg" alt="family_income"> Family Inc.
                 </div>
                 <div class="col-6 contentPara" style="padding: 0dp !important;">
-                    <img class="setIcons" src="../assets/meditation.svg" alt="gotra">  Gotra
+                    <img class="setIcons" src="../assets/meditation.svg" alt="gotra"> Caste | Gotra
                  </div>
                  <div class="col-6" style="padding: 0dp !important;">
                       {{setIncome(item.family_income)}} LPA
                   </div>
                   <div class="col-6" style="padding: 0dp !important;">
-                     {{item.gotra}}
+                     {{item.caste}} | {{item.gotra}}
                   </div>
                 </div>
                 <div class="row">
