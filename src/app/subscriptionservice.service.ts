@@ -29,7 +29,8 @@ export class SubscriptionserviceService {
       // key secret = ldssg0DvQNi6AXA0iJZ7Inzj;
     } else
     if (type === 'live') {
-      keyId = 'rzp_live_e6JpOKoIUEouZT';
+      keyId = 'rzp_live_AkjH8AZSSZBdRn';
+      // secretkey -> 9jDuywER4AX1aGoiFeYDziIV
     }
     const key = keyId;
 
@@ -79,7 +80,8 @@ payNowCustom(amt, type, plan, name, email, phone,mode,orderId,cust_id) {
     // key secret = WoNRYehcPCDC5s4w6J8MUjqn;
   } else
   if (type === 'live') {
-    keyId = 'rzp_live_e6JpOKoIUEouZT';
+    keyId = 'rzp_live_AkjH8AZSSZBdRn';
+    // secretkey -> 9jDuywER4AX1aGoiFeYDziIV
   }
   const key = keyId;
 
