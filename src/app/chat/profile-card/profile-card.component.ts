@@ -150,7 +150,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 
         switch (reply) {
           case 'YES':
+            if (this.points > 0) {
             this.ngxNotificationService.success('Profile Contacted Successfully');
+            }
             break;
             case 'SHORTLIST':
               this.ngxNotificationService.success('Profile Shortlisted Successfully');

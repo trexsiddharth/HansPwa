@@ -178,16 +178,10 @@ mat-card{
         }
       }
 
-      
-
-      
-
-
-
       .containerMessage{
           height: 100% !important;
           position: relative;
-          padding: 0px;
+          padding: 0px 0px 100px;
           margin: 0px;
       }
 
@@ -228,4 +222,12 @@ mat-card{
   margin-top: 40%;
   width: 100%;
 }
+}
+@media (max-width: 575px){
+  .messageHeader{
+    text-align: center;
+    position: absolute;
+    margin-top: 10%;
+    width: 100%;
+  }
 }
