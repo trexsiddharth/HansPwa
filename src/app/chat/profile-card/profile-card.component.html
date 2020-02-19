@@ -28,8 +28,22 @@
 
     <mat-card style="margin-bottom: 200px;" *ngIf="type=='profile'">
       
-      
-        <img mat-card-image id="profileImage" (click)="openImageModal(item.photo,item.name)" [src]="getProfilePhoto(item.photo,item.gender)" alt="item.name">
+        <div style="position: relative;">
+
+        <ngb-carousel>
+          <ng-template ngbSlide *ngFor="let i of getImagesCount(item.carousel); let index = index">
+                  <img mat-card-image id="profileImage" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" alt="item.name">
+          </ng-template>
+        </ngb-carousel>
+
+        <button
+              mat-fab style="color: green;background: white;position: absolute;
+              bottom: 30px;
+              right: 20px;"
+              aria-label="Example icon-button with a heart icon" >
+              {{getProfilesLeft(item.profiles_left)}}
+            </button>
+        </div>
           <mat-card-actions id="buttonSet" style="margin-bottom: 20px;" align="center">
             <!-- <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
               aria-label="Example icon-button with a heart icon" >
@@ -74,7 +88,7 @@
             </h4>
             <div class="templeSet">
                 <img style="width: 30px;" src="../../../assets/templeblue.svg" alt="temple">
-              <span style="vertical-align: middle">Registered at {{item.facebook}}</span>
+              <span style="vertical-align: middle;font-size: 14px;">Verified at Hans Center: {{item.facebook}}</span>
             </div>
             <div style="text-align: justify;">
                 {{toTitleCase(item.about)}}
@@ -110,6 +124,33 @@
                    {{item.marital_status}}
                 </div>
             </div>
+
+            <div class="row">
+              <div class="col-6 contentPara" >
+                  <img class="setIcons" src="../assets/tarot.svg" alt="Caste">  Caste
+              </div>
+              <div class="col-6 contentPara">
+                  <img class="setIcons" src="../assets/cutlery.svg" alt="Food Choice">  Food Choice
+              </div>
+              <div class="col-6">
+                 {{item.caste}}
+              </div>
+              <div class="col-6">
+                 {{item.food_choice}}
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 contentPara" >
+                <img class="setIcons" src="../assets/house.svg" alt="Working City">  Working City
+            </div>
+            <div class="col-6 contentPara" >
+              <img class="setIcons" src="../assets/templeblue.svg" alt="Religion">  Religion
+          </div>
+            <div class="col-6">
+               {{item.religion}}
+            </div>
+        </div>
             </div>
     
             <h5 class="contentHeader">CAREER DETAILS</h5>
@@ -216,13 +257,13 @@
                     <img class="setIcons" src="../assets/moneybag.svg" alt="family_income"> Family Inc.
                 </div>
                 <div class="col-6 contentPara" style="padding: 0dp !important;">
-                    <img class="setIcons" src="../assets/meditation.svg" alt="gotra"> Caste | Gotra
+                    <img class="setIcons" src="../assets/meditation.svg" alt="gotra"> Gotra
                  </div>
                  <div class="col-6" style="padding: 0dp !important;">
                       {{setIncome(item.family_income)}} LPA
                   </div>
                   <div class="col-6" style="padding: 0dp !important;">
-                     {{item.caste}} | {{item.gotra}}
+                     {{item.gotra}}
                   </div>
                 </div>
                 <div class="row">

@@ -34,8 +34,15 @@
               <mat-card-title>{{item.profile.name}}</mat-card-title>
               <mat-card-subtitle>{{toTitleCase(item.profile.about)}}</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image [src]=getProfilePhoto(item.profile.photo,item.profile.gender) alt="item.profile.name"
-              [hidden]="panelOpenState!=i">
+            
+            <ngb-carousel *ngIf="panelOpenState==i">
+              <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index" >
+                      <img mat-card-image id="profileImage" [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)" alt="item.profile.name">
+              </ng-template>
+            </ngb-carousel>
+
+            <!-- <img mat-card-image [src]=getProfilePhoto(item.profile.photo,item.profile.gender) alt="item.profile.name"
+              [hidden]="panelOpenState!=i"> -->
 
             <ng-container *ngIf="panelOpenState === i">
               <mat-card-actions style="margin-bottom: 0px;" align="center">
@@ -116,7 +123,30 @@
             <div class="col-3">
               <img class="setIcons" src="../assets/heart.svg" alt="Marital Status">  {{item.profile.marital_status}}
             </div>
-  
+            <div class="col-3 contentPara">
+              Caste
+            </div>
+            <div class="col-3 contentPara">
+              Food Choice
+            </div>
+            <div class="col-3 contentPara" >
+              Working City
+            </div>
+            <div class="col-3 contentPara">
+              Religion
+            </div>
+            <div class="col-3">
+              <img class="setIcons" src="../assets/tarot.svg" alt="Age"> {{item.family.caste}}
+            </div>
+            <div class="col-3">
+              <img class="setIcons" src="../assets/cutlery.svg" alt="Height">  {{item.profile.food_choice}}
+            </div>
+            <div class="col-3">
+              <img class="setIcons" src="../assets/house.svg" alt="Weight">  {{item.profile.working_city}}
+            </div>
+            <div class="col-3">
+              <img class="setIcons" src="../assets/templeblue.svg" alt="Marital Status">  {{item.family.religion}}
+            </div>
           </div>
         </div>
 
@@ -217,7 +247,7 @@
              Family Inc.
             </div>
             <div class="col-3 contentPara" style="padding: 0dp !important;">
-              Caste | Gotra
+              Gotra
              </div>
              <div class="col-3 contentPara" style="padding: 0dp !important;">
               Family Type
@@ -229,7 +259,7 @@
               <img class="setIcons" src="../assets/moneybag.svg" alt="family_income">  {{setIncome(item.family.family_income)}} LPA
             </div>
             <div class="col-3" style="padding: 0dp !important;">
-              <img class="setIcons" src="../assets/meditation.svg" alt="gotra">{{item.family.caste}} | {{item.family.gotra}}
+              <img class="setIcons" src="../assets/meditation.svg" alt="gotra">{{item.family.gotra}}
             </div>
             <div class="col-3" style="padding: 0dp !important;">
               <img class="setIcons" src="../assets/family.svg" alt="family_type">  {{item.family.family_type}}

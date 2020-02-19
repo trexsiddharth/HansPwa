@@ -77,7 +77,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   panelOpenState;
   button1: NotificationButton;
   noData;
-
+  carouselSize;
   // Height
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
@@ -142,6 +142,41 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       }
     } else {
       return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+    }
+  }
+  getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
+    console.log(index);
+    if (carous === null) {
+      if (photo === null) {
+      if (gen === 'Male') {
+        return '../../assets/male_pic.png';
+      } else {
+        return '../../assets/female_pic.png';
+      }
+    } else {
+      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
+    }
+    } else {
+      const carousel: object = JSON.parse(carous);
+      const keys = Object.keys(carousel);
+      // console.log(carousel[index]);
+      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+    }
+  }
+  getImagesCount(num: string) {
+    if (num !== '[]' && num && num !== 'null') {
+       const carouselObject: object = JSON.parse(num);
+       if (carouselObject) {
+          const size = Object.keys(carouselObject).length;
+          const arr: any[]  = [];
+          for (let index = 0; index < size; index++) {
+            arr.push(index);
+          }
+          return  arr;
+      }
+    } else {
+      this.carouselSize = [1];
+      return this.carouselSize;
     }
   }
   setName(value: string, type: any): string {
@@ -527,4 +562,5 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       return '';
     }
 }
+
 }

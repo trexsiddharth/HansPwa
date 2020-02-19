@@ -30,6 +30,8 @@ export class ProfileCardComponent implements OnInit {
   type;
   button;
   photo;
+  carousel;
+  carouselSize;
   count = 1;
   @Output() changeTab = new EventEmitter < any > ();
   @Output() setProfileImage = new EventEmitter <any> ();
@@ -256,16 +258,68 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     }
 }
 
-getProfilePhoto(num: any, gen: string): string {
-  if (num === null) {
+getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
+  console.log(index);
+  if (carous === null) {
+    if (photo === null) {
     if (gen === 'Male') {
       return '../../assets/male_pic.png';
     } else {
       return '../../assets/female_pic.png';
     }
   } else {
-    return num;
+    return photo;
   }
+  } else {
+    const carousel: object = JSON.parse(carous);
+    const keys = Object.keys(carousel);
+    // console.log(carousel[index]);
+    return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+  }
+}
+getImagesCount(num: string) {
+  if (num !== '[]' && num && num !== 'null') {
+     const carouselObject: object = JSON.parse(num);
+     if (carouselObject) {
+        const size = Object.keys(carouselObject).length;
+        const arr: any[]  = [];
+        for (let index = 0; index < size; index++) {
+          arr.push(index);
+        }
+        return  arr;
+    }
+  } else {
+    this.carouselSize = [1];
+    return this.carouselSize;
+  }
+}
+openImageModal(carous: string, src: string, name: string, index: any) {
+  if (carous && carous !== '') {
+    const carousel: object = JSON.parse(carous);
+    const keys = Object.keys(carousel);
+    // console.log(carousel[index]);
+    this.setModal('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]]);
+  } else if ( src && src !== '') {
+    this.setModal(src);
+  }
+}
+
+setModal(image) {
+ const modal = document.getElementById('myModal');
+ const modalImg: HTMLElement = document.getElementById('img01');
+ const captionText = document.getElementById('caption');
+
+ modal.style.display = 'block';
+ modalImg.setAttribute('src', image);
+ captionText.innerHTML = name;
+
+  // Get the <span> element that closes the modal
+ const span = document.getElementById('closeModal');
+
+// When the user clicks on <span> (x), close the modal
+ span.onclick = () => {
+modal.style.display = 'none';
+};
 }
 setDate(date: string) {
   const newDate = new Date(date);
@@ -323,28 +377,12 @@ setManglik(value: string) {
       }
     }
   }
-  openImageModal(src: string, name: string) {
-      const modal = document.getElementById('myModal');
-      const modalImg: HTMLElement = document.getElementById('img01');
-      const captionText = document.getElementById('caption');
 
-      modal.style.display = 'block';
-      modalImg.setAttribute('src', src);
-      captionText.innerHTML = name;
-
-       // Get the <span> element that closes the modal
-      const span = document.getElementById('closeModal');
-
-// When the user clicks on <span> (x), close the modal
-      span.onclick = () => {
-  modal.style.display = 'none';
-};
-  }
     // button 1-> Meri pasand, button-2 -> plan expired, button-3 -> no credits, button-4-> No Compatibilty
     // button-4 -> show more
   setMessageText(text: string) {
     switch (text) {
-          case '👉 We have already shared 6 profiles with you. \n\n👉Please come back tomorrow to see more profiles':
+          case '👉We have already shared 6 profiles with you.\n \n Please come back tomorrow to see more profiles':
           this.button = '1';
           break;
           case '👉 हम आपको आज 6 रिश्ते दिखा चुके हैं। \n\n👉कृपया और रिश्ते देखने के लिए कल पुनः यहाँ पधारें।':
@@ -400,6 +438,17 @@ setManglik(value: string) {
       tooltip2.open();
       tooltip3.open();
   }
+  getProfilesLeft(left: any) {
+    console.log(left);
+    if (this.points) {
+      console.log(this.points);
+      if (this.points > 0) {
+      return (6 - Number(left)).toString() + '/ 6';
+    } else if (this.points < 1) {
+      return (10 - Number(left)).toString() + '/ 10';
+    }
+  }
+}
 
 }
 

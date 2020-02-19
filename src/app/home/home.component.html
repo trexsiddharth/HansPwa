@@ -7,7 +7,7 @@
         <li style="display: inline-block">
             <button style="margin-bottom:10px;color: black" class="btn" [eventTracker]='{"category":"Subscription","action":"Subscription Clicked"}'  (click)="subscription()">Subscription</button>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!loginStatus" class="nav-item">
             <button  style="margin-bottom:10px;color: black" class="btn login" data-toggle="modal" (click)="register()" *ngIf=" isLogin=='false'"
             data-target="#loginModal">Register</button>
         </li>
