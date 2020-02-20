@@ -36,19 +36,9 @@
           </ng-template>
         </ngb-carousel>
 
-        <!-- <button
-              mat-fab style="color: green;background: white;position: absolute;
-              bottom: 30px;
-              right: 20px;"
-              aria-label="Example icon-button with a heart icon" >
-              {{getProfilesLeft(item.profiles_left)}}
-            </button> -->
         </div>
           <mat-card-actions id="buttonSet" style="margin-bottom: 20px;" align="center">
-            <!-- <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
-              aria-label="Example icon-button with a heart icon" >
-              <mat-icon>call</mat-icon> {{item.family.mobile}}
-            </button> -->
+          
 
             <button 
             ngbTooltip="कॉन्टैक्ट करें"
@@ -148,8 +138,11 @@
               <img class="setIcons" src="../assets/templeblue.svg" alt="Religion">  Religion
           </div>
             <div class="col-6">
-               {{item.religion}}
+               {{item.working_city}}
             </div>
+            <div class="col-6">
+              {{item.religion}}
+           </div>
         </div>
             </div>
     
