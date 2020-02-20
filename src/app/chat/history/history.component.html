@@ -41,9 +41,6 @@
               </ng-template>
             </ngb-carousel>
 
-            <!-- <img mat-card-image [src]=getProfilePhoto(item.profile.photo,item.profile.gender) alt="item.profile.name"
-              [hidden]="panelOpenState!=i"> -->
-
             <ng-container *ngIf="panelOpenState === i">
               <mat-card-actions style="margin-bottom: 0px;" align="center">
                 <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"

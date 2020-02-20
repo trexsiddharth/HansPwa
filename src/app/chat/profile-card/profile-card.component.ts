@@ -259,7 +259,6 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 }
 
 getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
-  console.log(index);
   if (carous === null) {
     if (photo === null) {
     if (gen === 'Male') {
@@ -444,10 +443,10 @@ setManglik(value: string) {
       console.log(this.points);
       if (this.points > 0) {
       return (6 - Number(left)).toString() + '/ 6';
-    } else if (this.points < 1) {
+    } else {
       return (10 - Number(left)).toString() + '/ 10';
     }
-  }
+  } 
 }
 
 }
