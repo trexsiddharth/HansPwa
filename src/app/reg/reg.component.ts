@@ -109,20 +109,26 @@ export class RegComponent implements OnInit {
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               public notification: NotificationsService,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
-    this.PageOne = this._formBuilder.group({
-      // tslint:disable-next-line: max-line-length
-      phone: ['', Validators.compose([Validators.required])],
-      gender: ['', Validators.compose([Validators.required])],
-      birth_date: ['1', Validators.compose([Validators.required])],
-      birth_month: ['January', Validators.compose([Validators.required])],
-      birth_year: ['1980', Validators.compose([Validators.required])],
-      Height: ['', Validators.compose([Validators.required])],
-      MaritalStatus: ['', Validators.compose([Validators.required])],
-      AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
-      Religion: ['', Validators.compose([Validators.required])],
-      Castes: ['', Validators.compose([Validators.required])],
-      Mangalik: ['', Validators.compose([Validators.required])]
-    });
+                this.PageOne = this._formBuilder.group({
+                  // tslint:disable-next-line: max-line-length
+                  firstName: ['', Validators.compose([Validators.required])],
+                  lastName: [''],
+                  phone: ['', Validators.compose([Validators.required])],
+                  email: ['', Validators.compose([Validators.required, Validators.email])],
+                  Relation: ['', Validators.compose([Validators.required])],
+                  gender: ['', Validators.compose([Validators.required])],
+                  birth_date: ['1', Validators.compose([Validators.required])],
+                  birth_month: ['January', Validators.compose([Validators.required])],
+                  birth_year: ['1980', Validators.compose([Validators.required])],
+                  Height: ['', Validators.compose([Validators.required])],
+                  Weight: ['', Validators.compose([Validators.required])],
+                  MaritalStatus: ['', Validators.compose([Validators.required])],
+                  AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
+                  Religion: ['', Validators.compose([Validators.required])],
+                  Castes: ['', Validators.compose([Validators.required])],
+                  Mangalik: ['', Validators.compose([Validators.required])],
+                  locality: ['', Validators.compose([Validators.required])]
+                });
   }
 
   ngOnInit() {

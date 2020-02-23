@@ -161,7 +161,16 @@ export class CompatibilityPhotoComponent implements OnInit {
 
 
   checkForPhoto() {
-    this.router.navigate(['/register-six']);
+    (window as any).fbq('track', 'FourPageRegistration', {
+      value: 15,
+      currency: 'INR',
+      content_name: localStorage.getItem('RegisterNumber'),
+    });
+    (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', { 
+      value: 15,
+      currency: 'INR',
+      content_name: localStorage.getItem('RegisterNumber'),
+    });
   }
 
   uploadPhoto(data, index) {

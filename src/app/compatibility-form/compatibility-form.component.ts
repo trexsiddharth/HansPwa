@@ -155,9 +155,10 @@ export class CompatibilityFormComponent implements OnInit {
               localStorage.setItem('is_lead', res.is_lead);
               this.router.navigateByUrl('chat');
             } else if (res.registered === 2) {
-                this.ngxNotificationService.info('Please complete the form and update');
+              localStorage.setItem('RegisterNumber', number);
+              this.ngxNotificationService.info('Please complete the form and update');
                 // set the partiall data
-                if (res.partial_data) {
+              if (res.partial_data) {
                   const data = res.partial_data;
                   let birthDate: Date;
                   if (data.manglik && data.manglik !== '' && data.manglik === 'No') {
@@ -196,6 +197,7 @@ export class CompatibilityFormComponent implements OnInit {
                 }
 
             } else {
+              localStorage.setItem('RegisterNumber', number);
               console.log('New User');
             }
             this.spinner.hide();
@@ -262,16 +264,6 @@ export class CompatibilityFormComponent implements OnInit {
                 this.gtag_report_conversion('https://hansmatrimony.com/reg');
                 localStorage.setItem('RegisterNumber', '');
 
-                (window as any).fbq('track', 'FourPageRegistration', {
-                  value: 15,
-                  currency: 'INR',
-                  content_name: this.PageOne.value.phone,
-                });
-                (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', {
-                  value: 15,
-                  currency: 'INR',
-                  content_name: this.PageOne.value.phone,
-                });
                 // this.router.navigate(['/chat']);
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {

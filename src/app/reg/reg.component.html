@@ -16,10 +16,33 @@
             <form  [formGroup]="PageOne">
                 <div class="row">
 
+                    <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                          <mat-label style="color: black;">First Name</mat-label>
+                          <input  type="text"  matInput formControlName="firstName" required name="firstName">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard" >
+                          <mat-label style="color: black;">Last Name</mat-label>
+                          <input type="text"  matInput formControlName="lastName" name="lastName">
+                        </mat-form-field>
+                      </div>
+
+
                     <div class="col-md-12">
                         <mat-form-field  class="full-width fieldFit" appearance="standard">
                             <mat-label style="color: black;">Mobile number</mat-label>
                             <input type="number" id="phone" matInput formControlName="phone" (change)="mobileNumberChanged(numberCheck)" [(ngModel)]="numberCheck" required name="phone">
+
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-12">
+                        <mat-form-field  class="full-width fieldFit" appearance="standard">
+                            <mat-label style="color: black;">Email</mat-label>
+                            <input type="email" id="email" matInput formControlName="email" [(ngModel)]="PageOne.value.email" required name="email">
 
                         </mat-form-field>
                     </div>
@@ -33,6 +56,17 @@
                             </mat-select>
                         
                         </mat-form-field>
+                    </div>
+
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
+                            <mat-label style="color: black;">Looking Rishta For?</mat-label>
+                            <mat-select  formControlName="Relation" required >
+                                    <mat-option *ngFor="let  option of createProfile" [value]="option">
+                                            {{option}}
+                                    </mat-option>
+                            </mat-select>
+                        </mat-form-field> 
                     </div>
                     
                     <div class="col-md-12">
@@ -133,6 +167,14 @@
                     
                     </div>
                     
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard" >
+                          <mat-label style="color: black;">Locality / Area</mat-label>
+                          <input type="text"  matInput formControlName="locality" required name="locality">
+                          <mat-hint>eg. Patel Nagar</mat-hint>
+                        </mat-form-field>
+                      </div>
+
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                         <button type="button" id="viewButton" class="btn" (click)="firstStep()">View Profiles/रिश्ते देखें</button>
                     </div>
