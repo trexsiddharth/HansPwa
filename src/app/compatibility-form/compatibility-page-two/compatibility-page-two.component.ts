@@ -101,6 +101,7 @@ export class CompatibilityPageTwoComponent implements OnInit {
   ];
     errors: string[] = [];
     authMobileNumberStatus = false;
+    workingCity;
 
     // Educational Qualification
 
@@ -147,7 +148,7 @@ export class CompatibilityPageTwoComponent implements OnInit {
       names: ['Diploma', 'High School', '12th', 'Trade School', 'Other']
     }
   ];
-  Occupation: string[] = ['Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher', 'Not Working'];
+  Occupation: string[] = ['Private Company', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
 
 constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
             public notification: NotificationsService,
@@ -187,6 +188,11 @@ firstStep() {
     console.log('date', this.PageTwo.value.birth_date);
     console.log('month', this.month.indexOf(this.PageTwo.value.birth_month) + 1);
     console.log('year', this.PageTwo.value.birth_year);
+
+    if (this.workingCity == null || this.workingCity === '') {
+      this.ngxNotificationService.error('Select A Valid Working City');
+      return;
+    }
 
     if (this.PageTwo.valid) {
       console.log('caste', this.PageTwo.value.Castes);
@@ -393,16 +399,17 @@ checkCaste(value) {
 resolve(statusConfirmed);
     });
   }
-  onAutocompleteSelected(event, index) {
+  onAutocompleteSelected(event) {
       this.PageTwo.value.Working = event.formatted_address;
       console.log('address of family', this.PageTwo.value.Working);
 
   }
+  onLocationSelected(e) {
+    this.workingCity = e;
+    console.log('location of family', e);
+}
 
-  // onLocationSelected(e) {
-  //     this.PageTwo.value.Working = e;
-  //     console.log('location of family', this.PageTwo.value.Working);
-  // }
+
 }
 
 

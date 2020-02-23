@@ -58,11 +58,6 @@ export class CompatibilityPageThreeComponent implements OnInit {
     MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
     PageThree: FormGroup;
 
-    FatherOccupation: string[] = ['Not Working', 'Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher',
-   'Retired'];
-  MotherOccupation: string[] = ['Homely', 'Not Working', 'Private Company', 'Business/Self Employed', 'Government Job', 'Doctor', 'Teacher',
-  'Retired'];
-
     // birth date
     birthDate: any;
     currentAge: number;
@@ -107,12 +102,10 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
     this.PageThree = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       BirthPlace: ['', Validators.compose([Validators.required])],
-      BirthTime: ['', Validators.compose([Validators.required])],
+      BirthTime: [''],
       Gotra: ['', Validators.compose([Validators.required])],
       FoodChoice: ['', Validators.compose([Validators.required])],
       FatherStatus: ['', Validators.compose([Validators.required])],
-      FatherOccupation: ['', Validators.compose([Validators.required])],
-      MotherOccupation: ['', Validators.compose([Validators.required])],
       MotherStatus: ['', Validators.compose([Validators.required])],
       AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
     });

@@ -59,7 +59,7 @@ export class CompatibilityFormComponent implements OnInit {
   };
   gender;
   MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
-  createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother', 'Sister', 'Other'];
+  createProfile: string[] = ['Myself', 'Brother', 'Sister', 'Other'];
   PageOne: FormGroup;
 
   // birth date
@@ -96,6 +96,7 @@ export class CompatibilityFormComponent implements OnInit {
 ];
   errors: string[] = [];
   authMobileNumberStatus = false;
+  locationFamily;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
@@ -106,7 +107,7 @@ export class CompatibilityFormComponent implements OnInit {
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
       phone: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       birth_date: ['1', Validators.compose([Validators.required])],
@@ -214,6 +215,11 @@ export class CompatibilityFormComponent implements OnInit {
     console.log('date', this.PageOne.value.birth_date);
     console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
     console.log('year', this.PageOne.value.birth_year);
+
+    if (this.locationFamily == null || this.locationFamily === '') {
+      this.ngxNotificationService.error('Select A Valid Location');
+      return;
+    }
 
     if (this.PageOne.valid) {
       console.log('caste', this.PageOne.value.Castes);
@@ -429,6 +435,16 @@ async casteValidation(value) {
 resolve(statusConfirmed);
     });
   }
+
+  onAutocompleteSelected(event) {
+    this.PageOne.value.locality = event.formatted_address;
+    console.log('address of family', this.PageOne.value.locality);
+
+}
+onLocationSelected(e) {
+    this.locationFamily = e;
+    console.log('location of family', e);
+}
 }
 
 

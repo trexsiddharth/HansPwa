@@ -42,7 +42,7 @@
                     <div class="col-md-12">
                         <mat-form-field  class="full-width fieldFit" appearance="standard">
                             <mat-label style="color: black;">Email</mat-label>
-                            <input type="email" id="email" matInput formControlName="email" [(ngModel)]="PageOne.value.email" required name="email">
+                            <input type="email" id="email" matInput formControlName="email" name="email">
 
                         </mat-form-field>
                     </div>
@@ -60,7 +60,7 @@
 
                     <div class="col-md-12">
                         <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
-                            <mat-label style="color: black;">Looking Rishta For?</mat-label>
+                            <mat-label style="color: black;">Looking Rishta For</mat-label>
                             <mat-select  formControlName="Relation" required >
                                     <mat-option *ngFor="let  option of createProfile" [value]="option">
                                             {{option}}
@@ -95,7 +95,7 @@
                        
                       </div>
 
-                      <div class="col-md-12">
+                      <div class="col-6">
                           <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label style="color: black;">Height</mat-label>
                             <select matNativeControl #height formControlName="Height" required name="Height">
@@ -103,6 +103,14 @@
                                   {{option}}
                                 </option>
                               </select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-6">
+                          <mat-form-field class="full-width fieldFit" appearance="standard" >
+                            <mat-label style="color: black;">Weight</mat-label>
+                            <input style="padding-bottom: 6px" type="text" pattern="\d*" maxlength="3" matInput formControlName="Weight" required name="Weight">
+                            <span matSuffix>Kg &nbsp;</span>
                           </mat-form-field>
                         </div>
 
@@ -166,14 +174,17 @@
                         </mat-form-field>
                     
                     </div>
-                    
-                    <div class="col-md-12">
-                        <mat-form-field class="full-width fieldFit" appearance="standard" >
+
+                      <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label style="color: black;">Locality / Area</mat-label>
-                          <input type="text"  matInput formControlName="locality" required name="locality">
+                          <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+                          (onAutocompleteSelected)="onAutocompleteSelected($event)" 
+                          (onLocationSelected)="onLocationSelected($event)"
+                          required formControlName="locality">
                           <mat-hint>eg. Patel Nagar</mat-hint>
                         </mat-form-field>
-                      </div>
+                      </div> 
 
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                         <button type="button" id="viewButton" class="btn" (click)="firstStep()">View Profiles/रिश्ते देखें</button>

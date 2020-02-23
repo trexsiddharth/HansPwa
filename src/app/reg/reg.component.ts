@@ -90,7 +90,7 @@ export class RegComponent implements OnInit {
   numberCheck: string = localStorage.getItem('RegisterNumber');
   changeNumber = false;
   otpStatus = false;
-  createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother' , 'Sister' , 'Other'];
+  createProfile: string[] = ['Myself', 'Brother' , 'Sister' , 'Other'];
   // tslint:disable-next-line: max-line-length
   date: string[] = ['1', '2' , '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
   // tslint:disable-next-line: max-line-length
@@ -104,6 +104,7 @@ export class RegComponent implements OnInit {
 ];
   errors: string[] = [];
   authMobileNumberStatus = false;
+  locationFamily;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
@@ -114,7 +115,7 @@ export class RegComponent implements OnInit {
                   firstName: ['', Validators.compose([Validators.required])],
                   lastName: [''],
                   phone: ['', Validators.compose([Validators.required])],
-                  email: ['', Validators.compose([Validators.required, Validators.email])],
+                  email: [''],
                   Relation: ['', Validators.compose([Validators.required])],
                   gender: ['', Validators.compose([Validators.required])],
                   birth_date: ['1', Validators.compose([Validators.required])],
@@ -370,6 +371,11 @@ export class RegComponent implements OnInit {
     console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
     console.log('year', this.PageOne.value.birth_year);
 
+    if (this.locationFamily == null || this.locationFamily === '') {
+      this.ngxNotificationService.error('Select A Valid Location');
+      return;
+    }
+
     if (this.PageOne.valid) {
       console.log('caste', this.PageOne.value.Castes);
       this.casteValidation(this.PageOne.value.Castes).then(res => {
@@ -383,6 +389,8 @@ export class RegComponent implements OnInit {
               const firststepdata = new FormData();
               firststepdata.append('mobile', this.PageOne.value.phone);
               firststepdata.append('birth_date', date + '-' + month + '-' + year);
+              firststepdata.append('name', this.PageOne.value.firstName + this.PageOne.value.lastName);
+              firststepdata.append('email', this.PageOne.value.email);
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
@@ -600,6 +608,14 @@ async casteValidation(value) {
 resolve(statusConfirmed);
     });
   }
+  onAutocompleteSelected(event) {
+    this.PageOne.value.locality = event.formatted_address;
+    console.log('address of family', this.PageOne.value.locality);
+}
+onLocationSelected(e) {
+    this.locationFamily = e;
+    console.log('location of family', e);
+}
 }
 
 
