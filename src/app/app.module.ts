@@ -6,7 +6,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {
   MatFormFieldModule, MatDatepickerModule, MatIconModule, MatInputModule, MatButtonToggleModule, MatButtonModule,
   MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatSidenavModule, MatCardModule,
-  MatSnackBarModule, MatExpansionModule, MatMenuModule, MatBadgeModule
+  MatSnackBarModule, MatExpansionModule, MatMenuModule, MatBadgeModule, MatStepperModule
 } from '@angular/material';
 
 import { MatNativeDateModule } from '@angular/material';
@@ -57,6 +57,10 @@ import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.compo
 
 import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
 import { ProfileCardComponent } from './chat/profile-card/profile-card.component';
+import { CompatibilityPageTwoComponent } from './compatibility-form/compatibility-page-two/compatibility-page-two.component';
+import { CompatibilityPageThreeComponent } from './compatibility-form/compatibility-page-three/compatibility-page-three.component';
+import { CompatibilityPhotoComponent } from './compatibility-form/compatibility-photo/compatibility-photo.component';
+import { RegComponent } from './reg/reg.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +93,10 @@ import { ProfileCardComponent } from './chat/profile-card/profile-card.component
     TermsAndConditionsComponent,
     CustomCheckoutComponent,
     ProfileCardComponent,
+    CompatibilityPageTwoComponent,
+    CompatibilityPageThreeComponent,
+    CompatibilityPhotoComponent,
+    RegComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +111,7 @@ import { ProfileCardComponent } from './chat/profile-card/profile-card.component
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
     NgxMatIntlTelInputModule, MatSnackBarModule, MatButtonModule, MatExpansionModule,
-    NgbModule, RouterModule, WalkthroughModule,MatCardModule, MatMenuModule, MatBadgeModule,
+    NgbModule, RouterModule, WalkthroughModule,MatCardModule, MatMenuModule, MatBadgeModule, MatStepperModule,
     LazyLoadImageModule.forRoot({
       preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     })

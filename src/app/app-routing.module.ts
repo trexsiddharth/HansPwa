@@ -15,6 +15,7 @@ import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-s
 import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
+import { RegComponent } from './reg/reg.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'chat/app/:fcm_app', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
-  { path: 'reg', component: CompatibilityFormComponent},
+  { path: 'reg', component: RegComponent},
+  { path: 'fourReg', component: CompatibilityFormComponent },
   { path: 'termsCondition', component: TermsAndConditionsComponent},
   { path: 'checkout', component: CustomCheckoutComponent},
   { path: '**', pathMatch: 'full', redirectTo: '/'}

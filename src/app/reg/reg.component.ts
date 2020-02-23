@@ -44,13 +44,13 @@ export const _filter = (opt: string[], value: string): string[] => {
 };
 
 @Component({
-  selector: 'app-compatibility-form',
-  templateUrl: './compatibility-form.component.html',
-  styleUrls: ['./compatibility-form.component.css']
+  selector: 'app-reg',
+  templateUrl: './reg.component.html',
+  styleUrls: ['./reg.component.css']
 })
 
 
-export class CompatibilityFormComponent implements OnInit {
+export class RegComponent implements OnInit {
   @ViewChild('otpModal', {static: false}) private otpModal: any;
 
   time = {
@@ -59,7 +59,6 @@ export class CompatibilityFormComponent implements OnInit {
   };
   gender;
   MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
-  createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother', 'Sister', 'Other'];
   PageOne: FormGroup;
 
   // birth date
@@ -77,12 +76,21 @@ export class CompatibilityFormComponent implements OnInit {
 
   // Height
     // tslint:disable-next-line: max-line-length
-    Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
+    Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
     // tslint:disable-next-line: max-line-length
     Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
+  otpForm: FormGroup;
+  otp = '';
+  otpVerified = false;
+  otp1: any;
+  otp2: any;
+  otp3: any;
+  otp4: any;
   numberCheck: string = localStorage.getItem('RegisterNumber');
   changeNumber = false;
+  otpStatus = false;
+  createProfile: string[] = ['Myself', 'Father', 'Mother', 'Brother' , 'Sister' , 'Other'];
   // tslint:disable-next-line: max-line-length
   date: string[] = ['1', '2' , '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
   // tslint:disable-next-line: max-line-length
@@ -103,23 +111,17 @@ export class CompatibilityFormComponent implements OnInit {
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      firstName: ['', Validators.compose([Validators.required])],
-      lastName: [''],
       phone: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       birth_date: ['1', Validators.compose([Validators.required])],
       birth_month: ['January', Validators.compose([Validators.required])],
       birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
-      Weight: ['', Validators.compose([Validators.required])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
       AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
-      Mangalik: ['', Validators.compose([Validators.required])],
-      locality: ['', Validators.compose([Validators.required])]
+      Mangalik: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -128,6 +130,9 @@ export class CompatibilityFormComponent implements OnInit {
     this.numberCheck = localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length);
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
+    if (this.router.url.match('singleRegistration')) {
+        this.authMobileNumberStatus = true;
+      }
     document.querySelector('body').style.background = 'white';
     document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
     document.querySelector('body').style.backgroundSize = 'cover';
@@ -147,8 +152,9 @@ export class CompatibilityFormComponent implements OnInit {
     mobileNumberChanged(number) {
         console.log(number);
         console.log(this.authMobileNumberStatus);
+        if (this.authMobileNumberStatus) {
           // tslint:disable-next-line: max-line-length
-        this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : number, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
+          this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : number, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
             console.log(res);
             if (res.registered === 1) {
               localStorage.setItem('mobile_number', number);
@@ -203,11 +209,156 @@ export class CompatibilityFormComponent implements OnInit {
             this.spinner.hide();
             console.log(err);
           });
+        }
     }
 
 
+
+
+  // OTP
+  makeItTrue() {
+    if (this.changeNumber === false) {
+      this.changeNumber = true;
+    } else {
+      this.changeNumber = false;
+    }
+    console.log(this.changeNumber);
+  }
+  numberChange(event: any) {
+    console.log('asd', event);
+    this.PageOne.value.phone = event.target.value();
+
+  }
+
+  makeOtp() {
+    this.otp1 = document.getElementById('enterOTP1') as HTMLInputElement;
+    this.otp += this.otp1.value;
+
+    this.otp2 = document.getElementById('enterOTP2') as HTMLInputElement;
+    this.otp += this.otp2.value;
+
+    this.otp3 = document.getElementById('enterOTP3') as HTMLInputElement;
+    this.otp += this.otp3.value;
+
+    this.otp4 = document.getElementById('enterOTP4') as HTMLInputElement;
+    this.otp += this.otp4.value;
+  }
+
+  changePlaces(event) {
+    const element = event.srcElement.nextElementSibling; // get the sibling element
+
+    if (element == null) { // check if its null
+      return;
+    } else {
+      element.focus();
+    } // focus if not null
+    console.log('cngd');
+  }
+
+  openDialog(dialog): void {
+    this.otpStatus = false;
+    const dialogConfig = new MatDialogConfig();
+    this.dialog.open(dialog, {
+
+      // panelClass: 'custom-modalbox'
+    });
+    this.sendOtp();
+  }
+
+  Cross_click() {
+    this.dialog.closeAll();
+  }
+
+  sendOtp() {
+    console.log('changenumber', this.changeNumber);
+    if (this.changeNumber === true) {
+      const changeContact = document.getElementById('changeContact') as HTMLInputElement;
+      console.log(changeContact);
+      this.PageOne.value.phoneNumber = changeContact.value;
+      console.log(changeContact);
+    }
+    const mobileNumber = {
+      mobile: this.PageOne.value.phone
+    };
+
+    return this.http.post<{otp: any}>('https://partner.hansmatrimony.com/api/sendOTP', mobileNumber).subscribe(
+      res => {
+          console.log(res);
+      }
+    );
+  }
+
+  resendOtp() {
+    this.spinner.show();
+    const mobileNumber = {
+      mobile: this.PageOne.value.phone
+    };
+    return this.http.post<{otp: any}>('https://partner.hansmatrimony.com/api/resendOTP', mobileNumber).subscribe(
+      res => {
+          console.log(res);
+          this.spinner.hide();
+      }
+    );
+  }
+
+  verifyOtp() {
+    this.makeOtp();
+    this.otpStatus = true;
+    console.log('otp', this.otp);
+    const otp = {
+      otp: this.otp,
+      mobile: this.PageOne.value.phone
+    };
+    return this.http.post<{type: any, message: any}>('https://partner.hansmatrimony.com/api/verifyOTP', otp).subscribe(res => {
+      console.log('verify res', res);
+      this.otp = '';
+      this.ngxNotificationService.success(res.message, 'success');
+      if (res.type === 'success') {
+        this.Cross_click();
+        this.otpVerified = true;
+        localStorage.setItem('mobile_number', this.PageOne.value.phone) ;
+        if (this.otpVerified === true) {
+          (window as any).ga('send', 'event', 'Register', 'registered', {
+            hitCallback: () => {
+              console.log('Tracking register successful');
+            }});
+          console.log('verified', this.otpVerified);
+          this.ngxNotificationService.success('Account Details Submitted Succesfully!', 'success');
+          this.spinner.show();
+          this.firstStep();
+          this.otpVerified = false;
+        }
+      }
+    });
+  }
+
+  checkExist() {
+    this.spinner.show();
+    console.log(this.PageOne.value.phone);
+    if (this.PageOne.valid) {
+      const data = {
+        email: this.PageOne.value.email,
+        mobile: this.PageOne.value.phone
+      };
+      // tslint:disable-next-line: max-line-length
+      return this.http.post<{ error_message: string , isUnique: string }>('https://partner.hansmatrimony.com/api/checkExist', data).subscribe(res => {
+      console.log(res);
+      if (res.isUnique !== 'N') {
+        this.spinner.hide();
+        this.openDialog(this.otpModal);
+        console.log('vrfied', this.otpVerified);
+      } else {
+        this.ngxNotificationService.success(res.error_message);
+        this.spinner.hide();
+      }
+    });
+    } else {
+      this.ngxNotificationService.error('Fill the form details');
+      this.spinner.hide();
+    }
+  }
+
   firstStep() {
-    console.log(this.PageOne.value.email);
     this.errors = [];
     console.log('date', this.PageOne.value.birth_date);
     console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
@@ -229,7 +380,11 @@ export class CompatibilityFormComponent implements OnInit {
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
+              if (this.PageOne.value.Mangalik === 'Non-manglik') {
+              firststepdata.append('manglik', 'No');
+            } else {
               firststepdata.append('manglik', this.PageOne.value.Mangalik);
+            }
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
@@ -258,22 +413,22 @@ export class CompatibilityFormComponent implements OnInit {
                 localStorage.setItem('id', res.id);
                 localStorage.setItem('gender', this.PageOne.value.gender);
                 localStorage.setItem('mobile_number', this.PageOne.value.phone);
-                this.Analytics('Four Page Registration', 'Four Page Registration', 'Registered through Four Page Registration');
+                this.Analytics('Single Page Registration', 'Single Page Registration', 'Registered through Single Page Registration');
                 this.gtag_report_conversion('https://hansmatrimony.com/reg');
                 localStorage.setItem('RegisterNumber', '');
 
-                (window as any).fbq('track', 'FourPageRegistration', {
+                (window as any).fbq('track', 'SinglePageRegistration', {
                   value: 15,
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
                 });
-                (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', {
+                (window as any).fbq('track', '692972151223870' , 'SinglePageRegistration', {
                   value: 15,
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
                 });
-                // this.router.navigate(['/chat']);
-                // this.ngxNotificationService.success('Registered Successfully');
+                this.router.navigate(['/chat']);
+                this.ngxNotificationService.success('Registered Successfully');
               } else {
                 this.spinner.hide();
                 this.ngxNotificationService.error(res.message);
@@ -306,7 +461,9 @@ export class CompatibilityFormComponent implements OnInit {
   Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {
+
         console.log('Tracking ' + type + ' successful');
+
       }
     });
   }

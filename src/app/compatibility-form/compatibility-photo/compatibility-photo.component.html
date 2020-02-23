@@ -1,0 +1,51 @@
+<form>
+    <div class="row" style="margin-top:20px">
+        <div class="col-md-12 text-center" style="margin: 0px auto">
+          <p>Multiple Pictures can be Uploaded</p>
+    </div>
+     </div>
+  <div class="row"  style="margin:20px auto">
+    <div class="col-12 text-center" style="margin: 0px auto">
+        <img [src]="imgURL"  height="100" width="170" *ngIf="imgURL" style="margin: 0px auto; border: 2px solid #285fdd;
+        border-radius: 100px;
+        padding: 10px;">
+        <br>
+      <div>
+          <input style="margin: 10px 25%" #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,0)"  />
+                          
+      </div>
+    </div>
+  </div>
+    
+    <div class="row" style="margin:20px auto">
+    <div class="col-12 text-center" style="margin: 0px auto">
+        <img [src]="frontfile" style="margin: 0px auto;border: 2px solid #285fdd;
+        border-radius: 100px;
+        padding: 10px;" height="100" width="170" *ngIf="frontfile">
+        <br>
+      <div>
+          <input style="margin: 10px 25%" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,1)"  />
+                         
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin:20px auto">
+    <div class="col-12 text-center" style="margin: 0px auto">
+        <img [src]="BackimgURL" height="100" width="170" style="margin: 0px auto;border: 2px solid #285fdd;
+        border-radius: 100px;
+        padding: 10px;" *ngIf="BackimgURL">
+        <br>
+      <div>
+          <input style="margin: 10px 25%" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,2)"  />
+                        
+      </div>
+  </div>
+  </div>
+
+  <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" [eventTracker]='{"category":"Profile Picture","action":"Profile Picture Uploaded"}' (click)="checkForPhoto()">Please Click to Proceed</button>
+      </div>
+   </div> 
+</form>
