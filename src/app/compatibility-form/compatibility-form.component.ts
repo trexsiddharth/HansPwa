@@ -466,6 +466,27 @@ onLocationSelected(e) {
     this.locationFamily = e;
     console.log('location of family', e);
 }
+setGender(value){
+console.log(value);
+switch (value) {
+  case 'Brother':
+    this.PageOne.patchValue(
+      {
+        gender: 'Male'
+    });
+    break;
+
+    case 'Sister':
+    this.PageOne.patchValue(
+      {
+        gender: 'Female'
+    });
+    break;
+
+  default:
+    break;
+}
+}
 }
 
 

@@ -45,6 +45,7 @@
 
   <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
       <div class="col-md-12 text-center">
+        <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" [eventTracker]='{"category":"Profile Picture","action":"Profile Picture Uploaded"}' (click)="checkForPhoto()">Skip</button>
         <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" [eventTracker]='{"category":"Profile Picture","action":"Profile Picture Uploaded"}' (click)="checkForPhoto()">Please Click to Proceed</button>
       </div>
    </div> 

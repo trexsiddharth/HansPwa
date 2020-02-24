@@ -190,9 +190,10 @@ export class CompatibilityPhotoComponent implements OnInit {
 
     return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(suc => {
       this.suc = suc;
+      if (this.suc.pic_upload_status === 'Y') {
       console.log('photos', suc);
       this.spinner.hide();
-      this.ngxNotificationService.success('Photo Uploaded Succesfully!', 'success');
+      this.ngxNotificationService.success('Photo Uploaded Succesfully!');
       photoBtn.disabled = false;
       if (index === 1) {
         this.imgURL = this.suc.profile_pic_url;
@@ -201,9 +202,13 @@ export class CompatibilityPhotoComponent implements OnInit {
       } else {
         this.BackimgURL = this.suc.profile_pic_url;
       }
+    } else {
+      this.spinner.hide();
+      this.ngxNotificationService.error('Photo could not be Uploaded!');
+    }
     }, err => {
       this.spinner.hide();
-      this.ngxNotificationService.error('Photo could not be Uploaded!', 'success');
+      this.ngxNotificationService.error('Photo could not be Uploaded!');
       console.log(err);
     });
   }
