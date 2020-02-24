@@ -158,6 +158,10 @@ export class CompatibilityPhotoComponent implements OnInit {
       };
     }
   }
+  gtag_report_conversion(url) {
+    (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
+    return false;
+  }
 
 
   checkForPhoto() {
@@ -166,33 +170,36 @@ export class CompatibilityPhotoComponent implements OnInit {
       currency: 'INR',
       content_name: localStorage.getItem('RegisterNumber'),
     });
-    (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', { 
+    (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', {
       value: 15,
       currency: 'INR',
       content_name: localStorage.getItem('RegisterNumber'),
     });
+    this.gtag_report_conversion('https://hansmatrimony.com/fourReg');
+    this.router.navigateByUrl('/chat');
   }
 
   uploadPhoto(data, index) {
     const photoBtn = document.getElementById('photoBtn') as HTMLButtonElement;
     photoBtn.disabled = true;
-    const fifthstepdata = new FormData();
-    fifthstepdata.append('identity_number', localStorage.getItem('identity_number'));
-    fifthstepdata.append('url', data);
-    fifthstepdata.append('index', index);
+    const uploadData = new FormData();
+    uploadData.append('id', localStorage.getItem('id'));
+    uploadData.append('index', index);
+    uploadData.append('image', data);
+    uploadData.append('is_lead', localStorage.getItem('is_lead'));
 
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'createFifthPageProfile', fifthstepdata).subscribe(suc => {
+    return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(suc => {
       this.suc = suc;
       console.log('photos', suc);
       this.spinner.hide();
       this.ngxNotificationService.success('Photo Uploaded Succesfully!', 'success');
       photoBtn.disabled = false;
-      if (index === 0) {
-        this.imgURL = this.suc.url;
-      } else if (index === 1) {
-        this.frontfile = this.suc.url;
+      if (index === 1) {
+        this.imgURL = this.suc.profile_pic_url;
+      } else if (index === 2) {
+        this.frontfile = this.suc.profile_pic_url;
       } else {
-        this.BackimgURL = this.suc.url;
+        this.BackimgURL = this.suc.profile_pic_url;
       }
     }, err => {
       this.spinner.hide();

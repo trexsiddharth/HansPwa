@@ -5,7 +5,7 @@
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label style="color: black;">Qualification</mat-label>
-                          <input type="text" matInput [matAutocomplete]="hcd" required formControlName="Qualification" required>
+                          <input type="text" (change)="changedQualification()" matInput [matAutocomplete]="hcd" required formControlName="Qualification" required>
                           <mat-autocomplete autoActiveFirstOption #hcd="matAutocomplete">
                             <mat-optgroup *ngFor="let group of HigherEducation" [label]="group.group">
                               <mat-option *ngFor="let name of group.names" [value]="name">
@@ -20,7 +20,7 @@
                       <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label style="color: black;">Occupation</mat-label>
-                          <select matNativeControl  formControlName="Occupation" required name="Occupation">
+                          <select matNativeControl style="margin-bottom:-20px" (change)="changedOccupation()"  formControlName="Occupation" required name="Occupation">
                               <option *ngFor="let  option of Occupation" [value]="option">
                                 {{option}}
                               </option>
@@ -32,7 +32,7 @@
                       <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard" >
                           <mat-label style="color: black;">Designation</mat-label>
-                          <input type="text"  matInput formControlName="Designation" required name="Designation">
+                          <input type="text" (change)="changedDesignation()"  matInput formControlName="Designation" required name="Designation">
                         </mat-form-field>
                       </div>
 
@@ -42,6 +42,7 @@
                           <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                           (onAutocompleteSelected)="onAutocompleteSelected($event)" 
                           (onLocationSelected)="onLocationSelected($event)"
+                          required
                           formControlName="Working">
                         </mat-form-field>
                       </div>  
@@ -49,13 +50,13 @@
                           <div class="col-md-12">
                             <mat-form-field class="full-width fieldFit" appearance="standard" >
                               <mat-label style="color: black;">About</mat-label>
-                              <input type="text"  matInput formControlName="About" required name="About">
+                              <input type="text"  matInput formControlName="About" name="About">
                             </mat-form-field>
                           </div>
 
                     
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-                        <button type="button" id="viewButton" mat-raised-button matStepperNext class="btn">Next</button>
+                        <button type="button" id="viewButton" mat-raised-button matStepperNext class="btn" (click)="firstStep()">Next</button>
                     </div>
                 </div>
            </form> 

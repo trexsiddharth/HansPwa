@@ -44,6 +44,7 @@ export class PhoneNumberScreenComponent implements OnInit {
 
   submitPhone() {
     this.spinner.show();
+    localStorage.setItem('is_lead', '');
     if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') {
       // tslint:disable-next-line: max-line-length
     this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {

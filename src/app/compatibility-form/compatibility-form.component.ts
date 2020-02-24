@@ -27,6 +27,7 @@ import {
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { element } from 'protractor';
+import { FourPageService } from './four-page.service';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -97,16 +98,19 @@ export class CompatibilityFormComponent implements OnInit {
   errors: string[] = [];
   authMobileNumberStatus = false;
   locationFamily;
+  formTwo = false;
+  formThree = false;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               public notification: NotificationsService,
+              private fourPageService: FourPageService,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
-      lastName: [''],
-      phone: ['', Validators.compose([Validators.required])],
+      lastName: ['', Validators.compose([Validators.required])],
+      phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(13)])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
@@ -132,6 +136,22 @@ export class CompatibilityFormComponent implements OnInit {
     document.querySelector('body').style.background = 'white';
     document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
     document.querySelector('body').style.backgroundSize = 'cover';
+
+    this.fourPageService.formCompleted.subscribe(
+      (complete: boolean) => {
+        if (complete === true) {
+          this.formTwo = true;
+         }
+      }
+    );
+    this.fourPageService.form3Completed.subscribe(
+      (complete: boolean) => {
+        if (complete === true) {
+          this.formThree = true;
+         }
+      }
+    );
+
     this.spinner.hide();
     localStorage.setItem('gender', '');
     localStorage.setItem('mobile_number', '') ;
@@ -234,13 +254,19 @@ export class CompatibilityFormComponent implements OnInit {
               const firststepdata = new FormData();
               firststepdata.append('mobile', this.PageOne.value.phone);
               firststepdata.append('birth_date', date + '-' + month + '-' + year);
+              firststepdata.append('name', this.PageOne.value.firstName + this.PageOne.value.lastName);
+              firststepdata.append('email', this.PageOne.value.email);
+              firststepdata.append('relation', this.PageOne.value.Relation);
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
+              firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
               firststepdata.append('manglik', this.PageOne.value.Mangalik);
+          
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
+              firststepdata.append('locality', this.PageOne.value.locality);
 
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
@@ -266,10 +292,8 @@ export class CompatibilityFormComponent implements OnInit {
                 localStorage.setItem('id', res.id);
                 localStorage.setItem('gender', this.PageOne.value.gender);
                 localStorage.setItem('mobile_number', this.PageOne.value.phone);
-                this.Analytics('Four Page Registration', 'Four Page Registration', 'Registered through Four Page Registration');
-                this.gtag_report_conversion('https://hansmatrimony.com/reg');
-                localStorage.setItem('RegisterNumber', '');
-
+                this.Analytics('Four Page Registration', 'Four Page Registration Page One',
+                'Registered through Four Page Registration Page One');
                 // this.router.navigate(['/chat']);
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {
@@ -308,10 +332,7 @@ export class CompatibilityFormComponent implements OnInit {
       }
     });
   }
-gtag_report_conversion(url) {
-    (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
-    return false;
-  }
+
 
 
 

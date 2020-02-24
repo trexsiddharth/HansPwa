@@ -195,13 +195,13 @@
                       </div>
                   </form>
                 </mat-step>
-                <mat-step>
+                <mat-step [completed]="formTwo">
                   <ng-template matStepLabel>
                     Page II
                 </ng-template>
                       <app-compatibility-page-two></app-compatibility-page-two>
                 </mat-step>
-                <mat-step>
+                <mat-step [completed]="formThree">
                   <ng-template matStepLabel>
                       Page III
                   </ng-template>

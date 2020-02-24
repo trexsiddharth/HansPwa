@@ -6,7 +6,9 @@
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label style="color: black;">Birth Place</mat-label>
                           <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                          (onAutocompleteSelected)="onAutocompleteSelected($event,1)" formControlName="BirthPlace">
+                          (onAutocompleteSelected)="onAutocompleteSelected($event)" 
+                          (onLocationSelected)="onLocationSelected($event)"
+                          formControlName="BirthPlace">
                         </mat-form-field>
                       </div>
 
@@ -29,7 +31,7 @@
                    
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label style="color: black;">Food Choice</mat-label>
-                            <mat-select  formControlName="FoodChoice" required >
+                            <mat-select (selectionChange)="changed('food')" formControlName="FoodChoice" required >
                               <mat-option value="Vegetarian">Vegetarian</mat-option>
                               <mat-option value="Non-Vegetarian">Non-Vegetarian</mat-option>
                               <mat-option value="Doesn't matter">Doesn't matter</mat-option>
@@ -42,7 +44,7 @@
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label style="color: black;">Father's Status</mat-label>
-                          <select style="margin-bottom: -20px;" #fStatus matNativeControl formControlName="FatherStatus"  name="FatherStatus">
+                          <select style="margin-bottom: -20px;" (change)="changed('fstatus')" #fStatus matNativeControl formControlName="FatherStatus"  name="FatherStatus">
                               <option value="Alive">
                                 Alive
                               </option>
@@ -56,7 +58,7 @@
                       <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label style="color: black;">Mother's Status</mat-label>
-                          <select style="margin-bottom: -20px;" #mStatus matNativeControl formControlName="MotherStatus"  name="MotherStatus">
+                          <select style="margin-bottom: -20px;" (change)="changed('mstatus')" #mStatus matNativeControl formControlName="MotherStatus"  name="MotherStatus">
                               <option value="Alive">
                                 Alive
                               </option>
@@ -70,14 +72,14 @@
                           <div class="col-md-12">
                             <mat-form-field class="full-width fieldFit" appearance="standard" >
                               <mat-label style="color: black;">Family's Annual Income (In LPA)</mat-label>
-                              <input type="text" pattern="\d*" maxlength="3" matInput formControlName="AnnualIncome" required name="AnnualIncome">
+                              <input type="text" pattern="\d*" maxlength="3" (change)="changed('Fincome')" matInput formControlName="FamilyIncome" required name="FamilyIncome">
                               <span matSuffix>LPA &nbsp;</span>
-                              <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageThree.get('AnnualIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
+                              <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageThree.get('FamilyIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
                             </mat-form-field>
                           </div>
      
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-                        <button mat-raised-button matStepperNext type="button" id="viewButton" class="btn" >Next</button>
+                        <button mat-raised-button matStepperNext type="button" id="viewButton" (click)="firstStep()" class="btn" >Next</button>
                     </div>
                 </div>
            </form> 

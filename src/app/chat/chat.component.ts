@@ -441,6 +441,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
   }
   checkUrl(num: string): Observable < any > {
+    localStorage.setItem('is_lead', '');
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
       return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {

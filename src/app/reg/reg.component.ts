@@ -160,6 +160,7 @@ export class RegComponent implements OnInit {
         console.log(number);
         console.log(this.authMobileNumberStatus);
         if (this.authMobileNumberStatus) {
+          localStorage.setItem('is_lead', '');
           // tslint:disable-next-line: max-line-length
           this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : number, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
             console.log(res);
@@ -394,11 +395,8 @@ export class RegComponent implements OnInit {
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
-              if (this.PageOne.value.Mangalik === 'Non-manglik') {
-              firststepdata.append('manglik', 'No');
-            } else {
               firststepdata.append('manglik', this.PageOne.value.Mangalik);
-            }
+          
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
