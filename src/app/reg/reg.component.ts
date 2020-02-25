@@ -105,6 +105,7 @@ export class RegComponent implements OnInit {
   errors: string[] = [];
   authMobileNumberStatus = false;
   locationFamily;
+  locality;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
@@ -372,6 +373,12 @@ export class RegComponent implements OnInit {
     console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
     console.log('year', this.PageOne.value.birth_year);
 
+    if (this.PageOne.value.phone.toString().length < 10 || this.PageOne.value.phone.toString().length > 13
+     && this.PageOne.value.phone.invalid) {
+      this.ngxNotificationService.error('Enter A Valid Mobile Number');
+      return;
+    }
+
     if (this.locationFamily == null || this.locationFamily === '') {
       this.ngxNotificationService.error('Select A Valid Location');
       return;
@@ -458,11 +465,14 @@ export class RegComponent implements OnInit {
     } else {
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
-          if (this.PageOne.controls[control].value === '') {
+        console.log(control);
+        if (this.PageOne.controls[control].value === '') {
             this.errors.push(control);
           }
       }
-      this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+      if (this.errors[0]) {
+        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+   } else { this.ngxNotificationService.error('Enter Valid Mobile Number'); }
     }
   }
 
@@ -608,6 +618,7 @@ resolve(statusConfirmed);
   }
   onAutocompleteSelected(event) {
     this.PageOne.value.locality = event.formatted_address;
+    this.locality = event.formatted_address;
     console.log('address of family', this.PageOne.value.locality);
 }
 onLocationSelected(e) {

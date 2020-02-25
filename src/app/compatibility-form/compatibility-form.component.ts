@@ -75,6 +75,7 @@ export class CompatibilityFormComponent implements OnInit {
   getcastes: any = [];
   Caste = false;
   AllCastes = false;
+  locality;
 
   // Height
     // tslint:disable-next-line: max-line-length
@@ -110,7 +111,7 @@ export class CompatibilityFormComponent implements OnInit {
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
       lastName: ['', Validators.compose([Validators.required])],
-      phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(13)])],
+      phone: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
@@ -236,6 +237,13 @@ export class CompatibilityFormComponent implements OnInit {
     console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
     console.log('year', this.PageOne.value.birth_year);
 
+
+    if (this.PageOne.value.phone.toString().length < 10 || this.PageOne.value.phone.toString().length > 13
+     && this.PageOne.value.phone.invalid) {
+      this.ngxNotificationService.error('Enter A Valid Mobile Number');
+      return;
+    }
+
     if (this.locationFamily == null || this.locationFamily === '') {
       this.ngxNotificationService.error('Select A Valid Location');
       return;
@@ -266,7 +274,7 @@ export class CompatibilityFormComponent implements OnInit {
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
-              firststepdata.append('locality', this.PageOne.value.locality);
+              firststepdata.append('locality', this.locality);
 
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
@@ -313,11 +321,14 @@ export class CompatibilityFormComponent implements OnInit {
     } else {
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
-          if (this.PageOne.controls[control].value === '') {
+        console.log(control);
+        if (this.PageOne.controls[control].value === '') {
             this.errors.push(control);
           }
       }
-      this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+      if (this.errors[0]) {
+        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+   } else { this.ngxNotificationService.error('Enter Valid Mobile Number'); }
     }
   }
 
@@ -459,6 +470,7 @@ resolve(statusConfirmed);
 
   onAutocompleteSelected(event) {
     this.PageOne.value.locality = event.formatted_address;
+    this.locality = event.formatted_address;
     console.log('address of family', this.PageOne.value.locality);
 
 }

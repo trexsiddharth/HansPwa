@@ -121,6 +121,14 @@ h5{
     width: 30px;
     font-weight: bolder;
   }
+
+  .feedBackText{
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    padding: 3px 10px;
+    font-size: 18px;
+  }
   @media (max-width: 1024px) {
     .prof {
       margin: 0px 20px;
@@ -133,6 +141,9 @@ h5{
     .imageSet {
       margin:0px 5px 0px 0px;
       text-align: center;
+    }
+    .feedBackText{
+      font-size: 14px;
     }
   }
   .avatarImage{
@@ -159,6 +170,9 @@ h5{
     }
     .partition{
       color: grey;
+    }
+    .feedBackText{
+      font-size: 14px;
     }
   
     
