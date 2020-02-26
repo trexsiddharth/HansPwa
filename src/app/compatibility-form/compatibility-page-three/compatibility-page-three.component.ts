@@ -78,7 +78,7 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
       FoodChoice: ['', Validators.compose([Validators.required])],
       FatherStatus: ['', Validators.compose([Validators.required])],
       MotherStatus: ['', Validators.compose([Validators.required])],
-      FamilyIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
+      FamilyIncome: ['', Validators.compose([Validators.max(999)])],
     });
   }
 
