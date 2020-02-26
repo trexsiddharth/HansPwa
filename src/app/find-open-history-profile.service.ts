@@ -31,7 +31,7 @@ export class FindOpenHistoryProfileService {
     }
   }
   setIsPersonalized(status: boolean) {
-    this.isPersonalized = true;
+    this.isPersonalized = status;
   }
   getPersonalized() {
     return this.isPersonalized;
