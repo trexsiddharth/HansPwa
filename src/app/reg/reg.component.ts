@@ -397,7 +397,7 @@ export class RegComponent implements OnInit {
               const firststepdata = new FormData();
               firststepdata.append('mobile', this.PageOne.value.phone);
               firststepdata.append('birth_date', date + '-' + month + '-' + year);
-              firststepdata.append('name', this.PageOne.value.firstName + this.PageOne.value.lastName);
+              firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName);
               firststepdata.append('email', this.PageOne.value.email);
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);

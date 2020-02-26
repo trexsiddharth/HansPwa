@@ -262,7 +262,7 @@ export class CompatibilityFormComponent implements OnInit {
               const firststepdata = new FormData();
               firststepdata.append('mobile', this.PageOne.value.phone);
               firststepdata.append('birth_date', date + '-' + month + '-' + year);
-              firststepdata.append('name', this.PageOne.value.firstName + this.PageOne.value.lastName);
+              firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName);
               firststepdata.append('email', this.PageOne.value.email);
               firststepdata.append('relation', this.PageOne.value.Relation);
               firststepdata.append('gender', this.PageOne.value.gender);

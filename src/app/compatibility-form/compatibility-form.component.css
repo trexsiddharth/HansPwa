@@ -11,7 +11,7 @@
   color: black !important;
 }
 ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{
-  background-color: blue !important;
+  background-color: #34b7f1 !important;
   }
   ::ng-deep .mat-stepper-horizontal-line {
     border-top-color:black !important;
