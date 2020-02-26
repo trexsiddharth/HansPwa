@@ -276,6 +276,14 @@ getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
     return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
   }
 }
+ onErrorProfilePhoto(gender, index) {
+   const imageSrc = document.querySelectorAll('#profileImage')[index];
+   if (gender === 'Male') {
+    imageSrc.setAttribute('src', '../../assets/male_pic.png');
+  } else {
+    imageSrc.setAttribute('src', '../../assets/female_pic.png');
+  }
+}
 getImagesCount(num: string) {
   if (num !== '[]' && num && num !== 'null') {
      const carouselObject: object = JSON.parse(num);
@@ -446,7 +454,7 @@ setManglik(value: string) {
     } else {
       return (10 - Number(left)).toString() + '/ 10';
     }
-  } 
+  }
 }
 
 }

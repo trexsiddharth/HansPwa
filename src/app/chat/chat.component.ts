@@ -393,6 +393,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
             localStorage.setItem('fcm_app', data.params.fcm_app);
             this.Analytics('Android App', 'Android App', 'Logged In through App');
           }
+          if (data.params.stage) {
+            setTimeout(() => {
+              this.setSelectedTab(data.params.stage);
+            }, 500);
+          }
         }
       }
     );
