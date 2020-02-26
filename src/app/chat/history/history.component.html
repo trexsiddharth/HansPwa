@@ -40,11 +40,14 @@
                       <img mat-card-image id="profileImage" [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)" alt="item.profile.name">
               </ng-template>
             </ngb-carousel>
-            <!-- <ng-container >
-              <div class="feedBackText">
-                <p style="margin-bottom: 0px;">Text Here!!</p>
+            <ng-container *ngIf="itemService.getPersonalized()">
+              <div class="feedBackTextGreen" *ngIf="item.profile.bNS == '1'">
+                <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
               </div>
-            </ng-container> -->
+              <div class="feedBackTextRed" *ngIf="item.profile.bNS == '0'">
+                <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
+              </div>
+            </ng-container>
             <ng-container *ngIf="panelOpenState === i">
               <mat-card-actions style="margin-bottom: 0px;" align="center">
                 <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"

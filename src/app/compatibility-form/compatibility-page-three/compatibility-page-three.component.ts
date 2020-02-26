@@ -25,9 +25,6 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { element } from 'protractor';
 import { FourPageService } from '../four-page.service';
 export interface StateGroup {
   letter: string;

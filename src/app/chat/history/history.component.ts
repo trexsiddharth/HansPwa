@@ -86,7 +86,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-              public notification: NotificationsService, private itemService: FindOpenHistoryProfileService, private router: Router) {}
+              public notification: NotificationsService, public itemService: FindOpenHistoryProfileService, private router: Router) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {

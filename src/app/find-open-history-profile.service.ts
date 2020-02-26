@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class FindOpenHistoryProfileService {
   openItem;
   credits;
+  isPersonalized = false;
   constructor() { }
 
   setItem(item: any) {
@@ -28,5 +29,11 @@ export class FindOpenHistoryProfileService {
     } else {
       return null;
     }
+  }
+  setIsPersonalized(status: boolean) {
+    this.isPersonalized = true;
+  }
+  getPersonalized() {
+    return this.isPersonalized;
   }
 }

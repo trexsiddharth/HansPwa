@@ -46,4 +46,5 @@ export class ChatServiceService {
   getCredits() {
     return this.credits;
   }
+
 }

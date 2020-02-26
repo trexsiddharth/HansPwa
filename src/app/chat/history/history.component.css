@@ -122,10 +122,19 @@ h5{
     font-weight: bolder;
   }
 
-  .feedBackText{
+  .feedBackTextGreen{
     background-color: green;
     color: white;
     border-radius: 10px;
+    margin-top: 10px;
+    padding: 3px 10px;
+    font-size: 18px;
+  }
+  .feedBackTextRed{
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
     padding: 3px 10px;
     font-size: 18px;
   }
@@ -142,7 +151,10 @@ h5{
       margin:0px 5px 0px 0px;
       text-align: center;
     }
-    .feedBackText{
+    .feedBackTextGreen{
+      font-size: 14px;
+    }
+    .feedBackTextRed{
       font-size: 14px;
     }
   }
@@ -172,6 +184,9 @@ h5{
       color: grey;
     }
     .feedBackText{
+      font-size: 14px;
+    }
+    .feedBackTextRed{
       font-size: 14px;
     }
   

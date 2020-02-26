@@ -60,6 +60,11 @@ export class ProfileCardComponent implements OnInit {
         console.log(data);
         const text: string = data.apiwha_autoreply;
         const id = data.id;
+        if (data && data.is_premium && data.is_premium === '1') {
+          this.itemService.setIsPersonalized(true);
+        } else {
+          this.itemService.setIsPersonalized(false);
+        }
         this.setProfileImage.emit(data.photo);
         console.log(text);
         console.log(id);
