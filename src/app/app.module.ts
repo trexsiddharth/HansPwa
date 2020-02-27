@@ -61,6 +61,7 @@ import { CompatibilityPageTwoComponent } from './compatibility-form/compatibilit
 import { CompatibilityPageThreeComponent } from './compatibility-form/compatibility-page-three/compatibility-page-three.component';
 import { CompatibilityPhotoComponent } from './compatibility-form/compatibility-photo/compatibility-photo.component';
 import { RegComponent } from './reg/reg.component';
+import { MessageDialogComponent } from './chat/message-dialog/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { RegComponent } from './reg/reg.component';
     CompatibilityPageThreeComponent,
     CompatibilityPhotoComponent,
     RegComponent,
+    MessageDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,7 @@ import { RegComponent } from './reg/reg.component';
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, A2HSDialogComponent,
-    EditFamilyDialogComponent, TiktokAdsFormComponent, CreditAwardComponent, PreferenceWideningComponent],
+    EditFamilyDialogComponent, TiktokAdsFormComponent, CreditAwardComponent, PreferenceWideningComponent, MessageDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

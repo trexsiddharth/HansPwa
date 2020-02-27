@@ -11,8 +11,10 @@ import { ChatServiceService } from '../../chat-service.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { Router } from '@angular/router';
 import { SubscriptionserviceService } from '../../subscriptionservice.service';
-import { MatTooltip } from '@angular/material';
+import { MatTooltip, MatDialogConfig, MatDialog } from '@angular/material';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { A2HSDialogComponent } from '../a2-hsdialog/a2-hsdialog.component';
+import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class ProfileCardComponent implements OnInit {
   item;
   Data;
   contactNumber;
-  points;
+  points = 0;
   paidStatus;
   exhaustedStatus;
   type;
@@ -48,6 +50,7 @@ export class ProfileCardComponent implements OnInit {
               public chatService: ChatServiceService,
               public itemService: FindOpenHistoryProfileService,
               public router: Router,
+              private dialog: MatDialog,
               public subscriptionService: SubscriptionserviceService ) { }
 
 
@@ -65,7 +68,9 @@ export class ProfileCardComponent implements OnInit {
         } else {
           this.itemService.setIsPersonalized(false);
         }
+        // set profile image (circular in top bar)
         this.setProfileImage.emit(data.photo);
+        
         console.log(text);
         console.log(id);
         localStorage.setItem('id', id);
@@ -132,6 +137,17 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     if (modal.style.display !== 'none') {
       modal.style.display = 'none';
     }
+
+    if (this.points === 0 && reply.toLowerCase() !== 'yes') {
+      this.getData(reply);
+    } else if (this.points > 0) {
+      this.getData(reply);
+    } else {
+      this.openMessageDialog(this.item);
+    }
+  }
+
+  getData(reply) {
     const previousItem = this.item;
     this.chatRequest(reply).subscribe(
       data => {
@@ -140,7 +156,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           this.type = 'profile';
           this.item = data.apiwha_autoreply;
           setTimeout(() => {
-            if ( localStorage.getItem('cancelTT') !== 'cancel' && this.count < 4 && document.getElementById('heading')) {
+            // TT -> ToolTip
+          if ( localStorage.getItem('cancelTT') !== 'cancel' && this.count < 4 && document.getElementById('heading')) {
               document.getElementById('heading').click();
               this.count++;
             } else {
@@ -150,9 +167,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
             }
           }, 1000);
           } else {
-          this.type = 'message';
-          this.item = data.apiwha_autoreply;
-          this.setMessageText(this.item);
+            this.type = 'message';
+            this.item = data.apiwha_autoreply;
           }
 
         switch (reply) {
@@ -209,7 +225,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
        this.points = data.whatsapp_points;
        this.itemService.setCredits(data.whatsapp_points);
        console.log('credits', this.points);
-       if (this.paidStatus === 'Paid' && this.points === '0') {
+
+       // for exhausted profile status
+       if (this.paidStatus === 'Paid' && this.points === 0) {
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
           this.spinner.hide();
@@ -264,7 +282,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 }
 
 getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
-  if (carous === null) {
+  if (carous === null || carous === 'null') {
     if (photo === null) {
     if (gen === 'Male') {
       return '../../assets/male_pic.png';
@@ -460,6 +478,23 @@ setManglik(value: string) {
       return (10 - Number(left)).toString() + '/ 10';
     }
   }
+}
+
+openMessageDialog(shareItem) {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.hasBackdrop = true;
+  dialogConfig.height = '600px';
+  dialogConfig.width = '700px';
+  dialogConfig.disableClose = true;
+  dialogConfig.data = {
+    profile: shareItem
+  };
+  const dialogRef = this.dialog.open(MessageDialogComponent, dialogConfig);
+  dialogRef.afterClosed().subscribe(data => {
+    if (data && data.response === 'NO') {
+    this.getNextMessageOrProfile('NO');
+    }
+  });
 }
 
 }

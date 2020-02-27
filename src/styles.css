@@ -111,6 +111,7 @@ body {
 .m-l-5 {
   margin-left: 5px;
 }
+button:focus{outline:none !important;}
 
 @font-face{
   font-family: semplicita;

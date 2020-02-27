@@ -1,0 +1,46 @@
+<main>
+    <div id="cancel">
+        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg" alt="cancel">
+    </div>
+    <div id="lockImage">
+        <img style="width: 40px;" src="../../../assets/padlock.svg" alt="lock">
+    </div>
+    <div id="heading">
+        <p style="margin-bottom: 20px;font-size: 18px;" class="textAlign">इन्हे कांटेक्ट करने के लिए अभी प्लान देखें</p>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <img class="profilePic" [src]="getProfilePhoto()" alt="profile.name">
+        </div>
+        <div class="col-9" style="margin: auto 0px;">
+            <p style="font-weight: bold;font-size: 16px;">{{profile.name}}</p>
+            <p>कांटेक्ट नंबर: +91-XXXXXXXXXX</p>
+            <p>पूरा पता: XXXXXXXXXX</p>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-12" style="padding:0px 0px 0px 30px">
+            <img style="width: 40px;border: 1px solid darkgrey;border-radius: 50%;" src="../../../assets/logo_192.png" alt="hans logo"><span style="font-size: 18px;margin-left: 10px;"> प्लान के फायदे </span>
+            <ul>
+                <li>
+                    <strong>25+</strong> सेंटर्स के <strong>50,000+</strong> रिश्ते
+                </li>
+                <li>
+                    <strong>6</strong> रिश्ते हर रोज़
+                </li>
+                <li>
+                    <strong>VIP</strong> मेंबर्स से फ्री कांटेक्ट
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="textAlign">
+        <button (click)="goToSub()" mat-raised-button style="background: #34b7f1;padding: 2px 40px;font-size: 20px;
+        font-weight: bolder;
+        margin-top: 20px;">
+            प्लान देखें
+        </button>
+    </div>
+</main>

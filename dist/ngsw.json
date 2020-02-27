@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1582789651294,
+  "timestamp": 1582832017402,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,15 +11,15 @@
         "/favicon.ico",
         "/firebase-messaging-sw.js",
         "/index.html",
-        "/main-es2015.1925a1e1976c9b263feb.js",
-        "/main-es5.1925a1e1976c9b263feb.js",
+        "/main-es2015.9780c09bccdb8bf4ce2d.js",
+        "/main-es5.9780c09bccdb8bf4ce2d.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.2987770fde9daa1d8a2e.js",
         "/polyfills-es5.3504ece4da5e4c1fb5b5.js",
         "/runtime-es2015.edb2fcf2778e7bf1d426.js",
         "/runtime-es5.edb2fcf2778e7bf1d426.js",
         "/scripts.06e020159d183ba8b2a3.js",
-        "/styles.3bf509c1484ae436dd79.css"
+        "/styles.c8adb7b467b9e9839ba8.css"
       ],
       "patterns": []
     },
@@ -50,6 +50,7 @@
         "/assets/calendar.svg",
         "/assets/call.svg",
         "/assets/cancel.svg",
+        "/assets/cancelblue.svg",
         "/assets/card.svg",
         "/assets/chat-blue.svg",
         "/assets/chat.svg",
@@ -171,6 +172,7 @@
         "/assets/moneybag.svg",
         "/assets/next.svg",
         "/assets/om.webp",
+        "/assets/padlock.svg",
         "/assets/parents.svg",
         "/assets/personalmatchmaking.svg",
         "/assets/phone.svg",
@@ -196,6 +198,7 @@
         "/assets/sisters.svg",
         "/assets/small4.jpeg",
         "/assets/small6.jpg",
+        "/assets/star.png",
         "/assets/star.svg",
         "/assets/suitcase.svg",
         "/assets/tarot.svg",
@@ -225,6 +228,7 @@
         "/logo_192.5f7f254ba38018213cfd.png",
         "/logo_384.9c06b71ef1ff8943abf5.png",
         "/redback.093eeb320fb87fb9d11c.jpg",
+        "/star.ab1ebaef802c15a69469.png",
         "/whatsbg.f779980799b39548bb90.webp"
       ],
       "patterns": []
@@ -265,6 +269,7 @@
     "/assets/calendar.svg": "9953fec37d220eccc64afd6418feaa7197328a4b",
     "/assets/call.svg": "1fee5f96292f0d3412bca741a508b9fa68aff46b",
     "/assets/cancel.svg": "e26ec46165c6e95cebafbcab309d825f3e7af5ac",
+    "/assets/cancelblue.svg": "642badd7be13d268372f62273de35e6a92364d70",
     "/assets/card.svg": "83d48b589e37d27f57a27f7381da3101fcfa1e9f",
     "/assets/chat-blue.svg": "776cc1bfc13b0dc88a3d6b73fd7ea9d324d6dfd8",
     "/assets/chat.svg": "80006493a7e87eb81b51a634e32ee8c46129b8ff",
@@ -386,6 +391,7 @@
     "/assets/moneybag.svg": "e35c5db8d2b1e89126acb60c3e3419471bd43719",
     "/assets/next.svg": "5cb89cd41ef7cf9ce649c01169907f9b82b2aedf",
     "/assets/om.webp": "2571b556cb9e9d56289d8d6f3b723535099034d8",
+    "/assets/padlock.svg": "cab369e6425d197379d5ff73aee19b522418bbad",
     "/assets/parents.svg": "14ebb8b1e9ea2f6a29b7fae6619e5e58ae8cd8da",
     "/assets/personalmatchmaking.svg": "707f89c5e3266a031babc9ce320dfea14a207cce",
     "/assets/phone.svg": "6b6f3713249a5c9f60a63ee0e923fe05f504b5c1",
@@ -411,6 +417,7 @@
     "/assets/sisters.svg": "cbb00d92c596306be00f96df821410ea74990ad3",
     "/assets/small4.jpeg": "91125ec5e782784f96d7501434bba435cb236214",
     "/assets/small6.jpg": "0b3a125ef5d016f009cc276737103f17d62ac3e1",
+    "/assets/star.png": "fec3e42924af891e36529a54084144ed187bf35a",
     "/assets/star.svg": "931bba7e736a821e6a82d2ac63bd683ed697ab20",
     "/assets/suitcase.svg": "f21b34d30e949cb4c81af9aae60ef4f8399d2c1f",
     "/assets/tarot.svg": "44651e76010eebd8db935d7afd36486bdc30f102",
@@ -439,11 +446,11 @@
     "/assets/whatsbg.webp": "a0f05bc1171a03e6e2f17bb2f84f80dc6723db5d",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "fcbd8e3b7f87e00eaf44baa513c1018ff13f6455",
+    "/index.html": "ae653353b49786f68a4f7f576ce91f2633e3d07f",
     "/logo_192.5f7f254ba38018213cfd.png": "85f05cc7f4b71b477f0a84763c133326e9adb1ef",
     "/logo_384.9c06b71ef1ff8943abf5.png": "fe5a6980894a3142b5cf5cdf4c69ca9b91f1cb76",
-    "/main-es2015.1925a1e1976c9b263feb.js": "7f6171e48f5508d93e0456e5a609ab4686741883",
-    "/main-es5.1925a1e1976c9b263feb.js": "22cc148bf474904e06e7b4eaff157fdf3f72db82",
+    "/main-es2015.9780c09bccdb8bf4ce2d.js": "61dc65afb1e6caecfd191f04c1e5ebdd02215cd6",
+    "/main-es5.9780c09bccdb8bf4ce2d.js": "021ad60c1ae73b2b03f7a3641dae47c270bc8a67",
     "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
     "/polyfills-es2015.2987770fde9daa1d8a2e.js": "cf5cbfa9134716054fb479ab21362146cdf1f2ff",
     "/polyfills-es5.3504ece4da5e4c1fb5b5.js": "ac501f29a146d28dbc5bc0687a5301c3fd577d5d",
@@ -451,7 +458,8 @@
     "/runtime-es2015.edb2fcf2778e7bf1d426.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/runtime-es5.edb2fcf2778e7bf1d426.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/scripts.06e020159d183ba8b2a3.js": "dac2ee398ded62269aabc62c8c050317299ff501",
-    "/styles.3bf509c1484ae436dd79.css": "a86d4625d870bc3d3e3132712172bde5cdf91889",
+    "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
+    "/styles.c8adb7b467b9e9839ba8.css": "985f48ba33f70b1cc719c2e8d2c09554836b1a24",
     "/whatsbg.f779980799b39548bb90.webp": "a0f05bc1171a03e6e2f17bb2f84f80dc6723db5d"
   },
   "navigationUrls": [
