@@ -60,7 +60,7 @@ export class CompatibilityFormComponent implements OnInit {
   };
   gender;
   MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
-  createProfile: string[] = ['Myself', 'Brother', 'Sister', 'Other'];
+  createProfile: string[] = ['Myself', 'Son', 'Daughter', 'Brother', 'Sister', 'Other'];
   PageOne: FormGroup;
 
   // birth date
@@ -489,6 +489,20 @@ switch (value) {
     break;
 
     case 'Sister':
+    this.PageOne.patchValue(
+      {
+        gender: 'Female'
+    });
+    break;
+
+    case 'Son':
+    this.PageOne.patchValue(
+      {
+        gender: 'Male'
+    });
+    break;
+
+    case 'Daughter':
     this.PageOne.patchValue(
       {
         gender: 'Female'

@@ -283,4 +283,12 @@ onResize(event) {
     backToChat() {
       this.backToProfiles.emit('chatbot');
     }
+    setLocality(locality, city) {
+      if (locality && locality !== '') {
+        return locality;
+      } else {
+        return city;
+      }
+
+    }
 }

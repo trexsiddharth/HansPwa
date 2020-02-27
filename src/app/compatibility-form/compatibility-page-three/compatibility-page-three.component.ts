@@ -100,7 +100,7 @@ firstStep() {
               if (this.PageThree.value.BirthTime) {
               firststepdata.append('birth_time', this.PageThree.value.BirthTime);
               }
-
+              firststepdata.append('food_choice', this.PageThree.value.FoodChoice);
               firststepdata.append('gotra', this.PageThree.value.Gotra);
               firststepdata.append('father_status', this.PageThree.value.FatherStatus);
               firststepdata.append('mother_status', this.PageThree.value.MotherStatus);

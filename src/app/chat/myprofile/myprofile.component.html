@@ -115,11 +115,11 @@
             <div class="row" style="margin: 10px 10px;">
                 <div class="col-6" *ngIf="familyProfileData && !personalProfileData.city">
                   <h6>Current City</h6>
-                  <p style="font-size: 14px;">{{familyProfileData.city}}</p>
+                  <p style="font-size: 14px;">{{setLocality(personalProfileData.locality,familyProfileData.city)}}</p>
                 </div>
                 <div class="col-6" *ngIf="personalProfileData.city">
                   <h6>Current City</h6>
-                  <p style="font-size: 14px;">{{personalProfileData.city}}</p>
+                  <p style="font-size: 14px;">{{setLocality(personalProfileData.locality,familyProfileData.city)}}</p>
                 </div>
                 <div class="col-6">
                     <h6>Food Choice</h6>
@@ -247,7 +247,7 @@
           <div class="row" style="margin: 10px 10px;">
               <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;margin-top: 0px" class="fa fa-map-marker"></i>
                 <div class="col-10" *ngIf="familyProfileData">
-                    <p style="font-size: 14px;">{{familyProfileData.city}}</p>
+                    <p style="font-size: 14px;">{{setLocality(personalProfileData.locality,familyProfileData.city)}}</p>
                 </div>
               </div>
           </div>
