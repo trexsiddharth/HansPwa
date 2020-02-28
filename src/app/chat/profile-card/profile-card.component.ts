@@ -483,7 +483,7 @@ setManglik(value: string) {
 openMessageDialog(shareItem) {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.hasBackdrop = true;
-  dialogConfig.height = '600px';
+  dialogConfig.height = '550px';
   dialogConfig.width = '700px';
   dialogConfig.disableClose = true;
   dialogConfig.data = {
