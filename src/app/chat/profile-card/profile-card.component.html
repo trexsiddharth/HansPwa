@@ -63,12 +63,12 @@
             <h4 style="text-align: center;">
                 {{toTitleCase(item.name)}}
             </h4>
-            <div class="templeSet">
+            <div class="templeSet" *ngIf="item.facebook">
                 <img style="width: 30px;" src="../../../assets/templeblue.svg" alt="temple">
               <span style="vertical-align: middle;font-size: 14px;">Verified at Hans Center: {{item.facebook}}</span>
             </div>
-            <div class="templeSet">
-              <img style="width: 30px;" src="../../../assets/templeblue.svg" alt="temple">
+            <div class="templeSet" style="margin-top:10px" *ngIf="item.relation">
+              <img style="width: 30px;" src="../../../assets/avatar-blue.svg" alt="created by">
             <span style="vertical-align: middle;font-size: 14px;">Profile Created By: {{item.relation}}</span>
           </div>
             <div style="text-align: justify;">

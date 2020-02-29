@@ -631,10 +631,10 @@ getProfile() {
     this.fourPageService.getListData.emit(true);
     this.setFormOneData();
   }
-  
+
   setFormOneData() {
       this.PageOne.patchValue({
-        firstName: this.userProfile.name,
+        firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
       lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] : '',
       phone: this.userProfile.mobile,
       email: this.userProfile.email,
