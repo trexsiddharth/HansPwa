@@ -101,6 +101,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       case 'interestReceived':
         this.getHistorydata('interestReceived');
         break;
+        case 'personalized':
+        this.getHistorydata('rejectedProfiles');
+        break;
       case 'rejected':
         this.getHistorydata('rejectedProfiles');
         break;

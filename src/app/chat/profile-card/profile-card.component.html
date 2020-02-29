@@ -27,7 +27,6 @@
         </div>
           <mat-card-actions id="buttonSet" style="margin-bottom: 20px;" align="center">
           
-
             <button 
             ngbTooltip="कॉन्टैक्ट करें"
             #t1="ngbTooltip"
@@ -68,6 +67,10 @@
                 <img style="width: 30px;" src="../../../assets/templeblue.svg" alt="temple">
               <span style="vertical-align: middle;font-size: 14px;">Verified at Hans Center: {{item.facebook}}</span>
             </div>
+            <div class="templeSet">
+              <img style="width: 30px;" src="../../../assets/templeblue.svg" alt="temple">
+            <span style="vertical-align: middle;font-size: 14px;">Profile Created By: {{item.relation}}</span>
+          </div>
             <div style="text-align: justify;">
                 {{toTitleCase(item.about)}}
             </div>

@@ -226,7 +226,7 @@ export class CompatibilityFormComponent implements OnInit {
       );
     } else {
       this.PageOne.patchValue({
-        Castes: 'Arora'
+        Castes: ''
       });
       this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
         startWith(''),
@@ -417,33 +417,33 @@ datePickerClicked() {
 
   // Religion
 Religion(event) {
-    console.log(event.currentTarget.value);
-    if (event.currentTarget.value === 'Hindu') {
+    console.log(event.value);
+    if (event.value === 'Hindu') {
       // console.log
       this.Caste = true;
       this.AllCastes = true;
-    } else if (event.currentTarget.value === 'Muslim') {
+    } else if (event.value === 'Muslim') {
       this.Caste = true;
       this.AllCastes = false;
-    } else if (event.currentTarget.value === 'Sikh') {
-      this.Caste = true;
-      this.AllCastes = true;
-    } else if (event.currentTarget.value === 'Christian') {
-      this.Caste = false;
-      this.AllCastes = false;
-    } else if (event.currentTarget.value === 'Buddhist') {
-      this.Caste = false;
-      this.AllCastes = false;
-    } else if (event.currentTarget.value === 'Jain') {
+    } else if (event.value === 'Sikh') {
       this.Caste = true;
       this.AllCastes = true;
-    } else if (event.currentTarget.value === 'Parsi') {
+    } else if (event.value === 'Christian') {
       this.Caste = false;
       this.AllCastes = false;
-    } else if (event.currentTarget.value === 'Jewish') {
+    } else if (event.value === 'Buddhist') {
       this.Caste = false;
       this.AllCastes = false;
-    } else if (event.currentTarget.value === 'Bahai') {
+    } else if (event.value === 'Jain') {
+      this.Caste = true;
+      this.AllCastes = true;
+    } else if (event.value === 'Parsi') {
+      this.Caste = false;
+      this.AllCastes = false;
+    } else if (event.value === 'Jewish') {
+      this.Caste = false;
+      this.AllCastes = false;
+    } else if (event.value === 'Bahai') {
       this.Caste = false;
       this.AllCastes = false;
     }

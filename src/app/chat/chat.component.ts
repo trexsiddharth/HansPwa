@@ -247,23 +247,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.history = 'chatbot';
   }
 
-  // setTimeStamp() {
-  //   let timeStamp = new Date().getTime();
-  //   let date = new Date(timeStamp);
-  //   localStorage.setItem('currentTimeStamp', date.toString());
-  // }
-  // getTimeStampDifference() {
-  //   let currentStamp = localStorage.getItem('currentTimeStamp');
-  //   if (currentStamp) {
-  //     return this.getDifference(new Date(currentStamp), new Date(new Date().getTime()));
-  //   }
-  // }
-  // getDifference(date1: Date, date2: Date) {
-  //   var Difference_In_Time = date2.getTime() - date1.getTime();
-  //   var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
-  //   console.log(Difference_In_Days);
-  //   return Difference_In_Days;
-  // }
 
   ngOnInit() {
     if (this.router.url.match('logout')) {
@@ -1577,45 +1560,17 @@ export class ChatComponent implements OnInit, AfterViewInit {
       });
       this.history = 'history';
 
-      // document.getElementById('chatButton').style.background = '#34b7f1';
-      // document.getElementById('chatText').style.color = '#FFFFFF';
-      // document.getElementById('chatText').style.background = '#34b7f1';
-      // document.getElementById('historyText').style.color = 'grey';
-      // document.getElementById('profileButton').style.background = '#f3f3f3';
-      // document.getElementById('historyButton').style.background = '#f3f3f3';
-      // document.getElementById('historyText').style.background = '#f3f3f3';
-      // document.getElementById('profileText').style.color = 'grey';
-      // document.getElementById('profileText').style.background = '#f3f3f3';
-
       console.log(localStorage.getItem('id'));
       this.scrollHorizontal(this.currentTab);
     }
   }
   changeToBot() {
     this.history = 'chatbot';
-    // document.getElementById('chatButton').style.background = '#34b7f1';
-    // document.getElementById('chatText').style.color = '#FFFFFF';
-    // document.getElementById('chatText').style.background = '#34b7f1';
-    // document.getElementById('historyText').style.color = 'grey';
-    // document.getElementById('profileButton').style.background = '#f3f3f3';
-    // document.getElementById('historyButton').style.background = '#f3f3f3';
-    // document.getElementById('historyText').style.background = '#f3f3f3';
-    // document.getElementById('profileText').style.color = 'grey';
-    // document.getElementById('profileText').style.background = '#f3f3f3';
   }
   changeToMyProfile() {
     if (this.currentContact) {
       this.spinner.show();
       this.history = 'myprofile';
-      // document.getElementById('profileButton').style.background = '#34b7f1';
-      // document.getElementById('chatText').style.color = 'grey';
-      // document.getElementById('chatButton').style.background = '#f3f3f3';
-      // document.getElementById('historyButton').style.background = '#f3f3f3';
-      // document.getElementById('chatText').style.background = '#f3f3f3';
-      // document.getElementById('historyText').style.background = '#f3f3f3';
-      // document.getElementById('historyText').style.color = 'grey';
-      // document.getElementById('profileText').style.color = '#FFFFFF';
-      // document.getElementById('profileText').style.background = '#34b7f1';
       console.log(localStorage.getItem('id'));
       const myprofileData = new FormData();
       myprofileData.append('id', localStorage.getItem('id'));
@@ -3173,9 +3128,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.changeToHistory('interestReceived');
         break;
       case 4:
-        this.tabType = 'rejected';
-        this.changeToHistory('rejectedProfiles');
+        this.tabType = 'personalized';
+        this.changeToHistory('personalisedProfiles');
         break;
+      case 5:
+      this.tabType = 'rejected';
+      this.changeToHistory('rejectedProfiles');
+      break;
 
       default:
         break;

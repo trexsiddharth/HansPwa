@@ -494,8 +494,6 @@ gtag_report_conversion(url) {
     return false;
   }
 
-
-
 onDate(event): void {
     console.log(event);
   }

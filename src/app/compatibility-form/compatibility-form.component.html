@@ -119,12 +119,13 @@
                           <div class="col-md-12">
                        
                                   <mat-form-field class="full-width fieldFit" appearance="standard">
-                                    <mat-label style="color: black;">Marital Status</mat-label>
-                                    <select matNativeControl  formControlName="MaritalStatus" required name="MaritalStatus">
-                                        <option *ngFor="let  option of MaritalStatus" [value]="option">
-                                          {{option}}
-                                        </option>
-                                      </select> 
+                        
+                                      <mat-label style="color: black;">Marital Status</mat-label>
+                                      <mat-select  #relation formControlName="MaritalStatus" required >
+                                              <mat-option *ngFor="let  option of MaritalStatus" [value]="option">
+                                                      {{option}}
+                                              </mat-option>
+                                      </mat-select>
                                     
                                   </mat-form-field>
                                 </div>
@@ -140,12 +141,12 @@
   
                                 <div class="col-md-12">
                                   <mat-form-field class="full-width fieldFit" appearance="standard" >
-                                   <mat-label style="color: black;">Religion</mat-label>
-                                   <select matNativeControl  formControlName="Religion" required name="Religion" (change)="Religion($event)">
-                                       <option *ngFor="let  option of Religions" [value]="option">
-                                         {{option}}
-                                       </option>
-                                     </select>
+                                     <mat-label style="color: black;">Religion</mat-label>
+                                      <mat-select  #relation formControlName="Religion" (selectionChange)="Religion($event)" required >
+                                              <mat-option *ngFor="let  option of Religions" [value]="option">
+                                                      {{option}}
+                                              </mat-option>
+                                      </mat-select>
                               
                                  </mat-form-field> 
                             </div>
