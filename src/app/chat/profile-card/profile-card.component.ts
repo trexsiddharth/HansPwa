@@ -169,6 +169,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           } else {
             this.type = 'message';
             this.item = data.apiwha_autoreply;
+            this.setMessageText(this.item);
           }
 
         switch (reply) {
@@ -411,6 +412,7 @@ setManglik(value: string) {
     // button 1-> Meri pasand, button-2 -> plan expired, button-3 -> no credits, button-4-> No Compatibilty
     // button-4 -> show more
   setMessageText(text: string) {
+    console.log(text);
     switch (text) {
           case '👉We have already shared 6 profiles with you.\n \n Please come back tomorrow to see more profiles':
           this.button = '1';
@@ -440,7 +442,7 @@ setManglik(value: string) {
             case 'I am sorry I dont understand.\n \n👉 Please buy a plan or click to see more profiles.':
               this.button = '5';
               break;
-              case 'माफ़ कीजिये। मुझे समझ नहीं आया।\n\n👉कृपया \'प्लान खरीदें\' या अगला रिश्ता देखें।':
+              case 'माफ़ कीजिये। मुझे समझ नहीं आया। \n\n👉कृपया \'प्लान खरीदें\' या अगला रिश्ता देखें।':
               this.button = '5';
               break;
       default:
