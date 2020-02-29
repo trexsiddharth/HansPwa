@@ -103,6 +103,7 @@ export class CompatibilityFormComponent implements OnInit {
   formTwo = false;
   formThree = false;
   userProfile: Profile = new Profile();
+  isLinear = true;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
@@ -174,7 +175,8 @@ export class CompatibilityFormComponent implements OnInit {
             localStorage.setItem('getListLeadId', '');
           }
         if (this.fourPageService.userThroughGetList) {
-        this.getProfile();
+          this.isLinear = false;
+          this.getProfile();
           }
         }
       }
