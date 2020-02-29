@@ -36,6 +36,7 @@ const routes: Routes = [
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'reg', component: RegComponent},
   { path: 'fourReg', component: CompatibilityFormComponent },
+  { path: 'fourReg/:id/:leadId', component: CompatibilityFormComponent },
   { path: 'termsCondition', component: TermsAndConditionsComponent},
   { path: 'checkout', component: CustomCheckoutComponent},
   { path: '**', pathMatch: 'full', redirectTo: '/'}

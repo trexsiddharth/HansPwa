@@ -26,6 +26,7 @@ import {
   MatDialogConfig,
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
+import { Profile } from '../profile';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -80,13 +81,19 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
   }
 
 ngOnInit() {
-
+        if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
+          this.fourPageService.getListData.subscribe(
+            () => {
+                this.setFormThreeData(this.fourPageService.getProfile());
+            }
+          );
+        }
     }
 
 
 firstStep() {
       console.log(this.PageThree.value.BirthPlace);
-      if (this.birthPlace == null || this.birthPlace === '') {
+      if (!this.fourPageService.getUserThrough() && this.birthPlace == null || this.birthPlace === '') {
       this.ngxNotificationService.error('Select A Valid Birth Place');
       return;
     }
@@ -113,6 +120,9 @@ firstStep() {
 
               if (res.status === 1) {
                 this.spinner.hide();
+                if (this.fourPageService.getUserThrough()) {
+                this.updateFormThreeData(firststepdata);
+                }
                 this.Analytics('Four Page Registration', 'Four Page Registration Page Three',
                 'Registered through Four Page Registration Page Three');
                 // this.ngxNotificationService.success('Registered Successfully');
@@ -167,6 +177,29 @@ onLocationSelected(e) {
     if (this.PageThree.valid) {
       this.fourPageService.form3Completed.emit(true);
      }
+  }
+  updateFormThreeData(profileData: FormData) {
+    this.fourPageService.profile.birthPlace = profileData.get('birth_place');
+    this.fourPageService.profile.birthTime = profileData.get('birth_time');
+    this.fourPageService.profile.gotra = profileData.get('gotra');
+    this.fourPageService.profile.foodChoice = profileData.get('food_choice');
+    this.fourPageService.profile.fatherStatus = profileData.get('father_status');
+    this.fourPageService.profile.motherStatus = profileData.get('mother_status');
+    this.fourPageService.profile.familyIncome = profileData.get('family_income');
+    console.log(this.fourPageService.getProfile());
+  }
+
+  setFormThreeData(userProfile: Profile) {
+    this.birthPlaceText = userProfile.birthPlace ? userProfile.birthPlace : '';
+    this.PageThree.patchValue({
+      BirthPlace: userProfile.birthPlace,
+      BirthTime: userProfile.birthTime,
+      Gotra: userProfile.gotra,
+      FoodChoice: userProfile.foodChoice,
+      FatherStatus: userProfile.fatherStatus,
+      MotherStatus: userProfile.motherStatus,
+      FamilyIncome: userProfile.familyIncome
+    });
   }
 }
 

@@ -13,19 +13,20 @@ import {
   NgxNotificationService
 } from 'ngx-kc-notification';
 import {
-  Router
+  Router, ActivatedRoute
 } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {  NotificationsService } from '../notifications.service';
+import { Profile } from './profile';
 
 import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, timeout, retry, catchError } from 'rxjs/operators';
 import { element } from 'protractor';
 import { FourPageService } from './four-page.service';
 export interface StateGroup {
@@ -101,11 +102,13 @@ export class CompatibilityFormComponent implements OnInit {
   locationFamily;
   formTwo = false;
   formThree = false;
+  userProfile: Profile = new Profile();
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
               public notification: NotificationsService,
               private fourPageService: FourPageService,
+              private route: ActivatedRoute,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -152,21 +155,41 @@ export class CompatibilityFormComponent implements OnInit {
          }
       }
     );
+    this.route.paramMap.subscribe(
+      (route: any) => {
+        console.log(route);
+        if (route) {
+        if (route.params.id) {
+          this.fourPageService.setUserThrough(true);
+          localStorage.setItem('getListId', route.params.id);
+          } else {
+            this.fourPageService.setUserThrough(false);
+            localStorage.setItem('getListId', '');
+          }
+        if (route.params.leadId) {
+          this.fourPageService.setUserThrough(true);
+          localStorage.setItem('getListLeadId', route.params.leadId);
+          } else {
+            this.fourPageService.setUserThrough(false);
+            localStorage.setItem('getListLeadId', '');
+          }
+        if (this.fourPageService.userThroughGetList) {
+        this.getProfile();
+          }
+        }
+      }
+    );
 
     this.spinner.hide();
     localStorage.setItem('gender', '');
     localStorage.setItem('mobile_number', '') ;
     localStorage.setItem('selectedCaste', '');
-    this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
-        this.getcastes = res;
-      });
-    this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
-        startWith(''),
-        map(value => this._Castefilter(value))
-      );
+    this.getAllCaste();
+
     }
-      // 0 -> new User/not registered, 1-> Registered user , 2-> Partially Registered User
+      // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
     mobileNumberChanged(number) {
+      if (localStorage.getItem('getListId') === null || localStorage.getItem('getListId') === '' ) {
         console.log(number);
         console.log(this.authMobileNumberStatus);
           // tslint:disable-next-line: max-line-length
@@ -179,44 +202,6 @@ export class CompatibilityFormComponent implements OnInit {
             } else if (res.registered === 2) {
               localStorage.setItem('RegisterNumber', number);
               this.ngxNotificationService.info('Please complete the form and update');
-                // set the partiall data
-              if (res.partial_data) {
-                  const data = res.partial_data;
-                  let birthDate: Date;
-                  if (data.manglik && data.manglik !== '' && data.manglik === 'No') {
-                      data.manglik = 'Non-manglik';
-                  }
-                  if (data.birth_date && data.birth_date !== '') {
-                    birthDate = new Date(data.birth_date);
-                    this.PageOne.setValue({
-                      phone: number,
-                      gender: data.gender,
-                      birth_date: birthDate.getDate(),
-                      birth_month: birthDate.getMonth(),
-                      birth_year: birthDate.getFullYear(),
-                      Height: data.height,
-                      MaritalStatus: data.marital_status,
-                      AnnualIncome: data.annual_income,
-                      Religion: data.religion,
-                      Castes: data.caste,
-                      Mangalik: data.manglik
-                    });
-                  } else {
-                    this.PageOne.setValue({
-                      phone: number,
-                      gender: data.gender,
-                      birth_date: '',
-                      birth_month: '',
-                      birth_year: '',
-                      Height: this.Heights.indexOf(this.Heights[this.Heights1.indexOf(data.height)]),
-                      MaritalStatus: data.marital_status,
-                      AnnualIncome: data.annual_income,
-                      Religion: data.religion,
-                      Castes: data.caste,
-                      Mangalik: data.manglik
-                    });
-                  }
-                }
 
             } else {
               localStorage.setItem('RegisterNumber', number);
@@ -227,6 +212,27 @@ export class CompatibilityFormComponent implements OnInit {
             this.spinner.hide();
             console.log(err);
           });
+        }
+    }
+
+    getAllCaste() {
+      this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+        this.getcastes = res;
+      });
+      if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== ''){
+      this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value))
+      );
+    } else {
+      this.PageOne.patchValue({
+        Castes: 'Arora'
+      });
+      this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value))
+      );
+    }
     }
 
 
@@ -239,16 +245,17 @@ export class CompatibilityFormComponent implements OnInit {
 
 
     if (this.PageOne.value.phone.toString().length < 10 || this.PageOne.value.phone.toString().length > 13
-     && this.PageOne.value.phone.invalid) {
-      this.ngxNotificationService.error('Enter A Valid Mobile Number');
-      return;
+     || this.PageOne.value.phone.invalid) {
+       console.log(this.PageOne.value.phone);
+       this.ngxNotificationService.error('Enter A Valid Mobile Number');
+       return;
     }
 
-    if (this.locationFamily == null || this.locationFamily === '') {
+    if (!this.fourPageService.getUserThrough() && this.locationFamily == null || this.locationFamily === '') {
       this.ngxNotificationService.error('Select A Valid Location');
       return;
     }
-
+    console.log(this.PageOne.value);
     if (this.PageOne.valid) {
       console.log('caste', this.PageOne.value.Castes);
       this.casteValidation(this.PageOne.value.Castes).then(res => {
@@ -270,7 +277,7 @@ export class CompatibilityFormComponent implements OnInit {
               firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
               firststepdata.append('manglik', this.PageOne.value.Mangalik);
-          
+
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
@@ -300,6 +307,10 @@ export class CompatibilityFormComponent implements OnInit {
                 localStorage.setItem('id', res.id);
                 localStorage.setItem('gender', this.PageOne.value.gender);
                 localStorage.setItem('mobile_number', this.PageOne.value.phone);
+                if (this.fourPageService.getUserThrough()) {
+                  this.fourPageService.updateFormOneData(firststepdata);
+                  this.locality = firststepdata.get('locality');
+                }
                 this.Analytics('Four Page Registration', 'Four Page Registration Page One',
                 'Registered through Four Page Registration Page One');
                 // this.router.navigate(['/chat']);
@@ -328,13 +339,18 @@ export class CompatibilityFormComponent implements OnInit {
       }
       if (this.errors[0]) {
         this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
-   } else { this.ngxNotificationService.error('Enter Valid Mobile Number'); }
+   }
     }
   }
 
   private _Castefilter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+    if (value != null) {
+      const filterValue = value.toLowerCase();
+      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+    } else {
+      const filterValue = 'arora';
+      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+    }
   }
   Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
@@ -478,7 +494,7 @@ onLocationSelected(e) {
     this.locationFamily = e;
     console.log('location of family', e);
 }
-setGender(value){
+setGender(value) {
 console.log(value);
 switch (value) {
   case 'Brother':
@@ -513,6 +529,158 @@ switch (value) {
     break;
 }
 }
+checkUrl(num: string): Observable < any > {
+  localStorage.setItem('is_lead', '');
+  if (localStorage.getItem('fcm_app')) {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      params: {
+        ['phone_number']: num,
+        ['fcm_id']: this.notification.getCurrentToken(),
+        ['fcm_app']: localStorage.getItem('fcm_app')
+      }
+    });
+  } else {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      params: {
+        ['phone_number']: num,
+        ['fcm_id']: this.notification.getCurrentToken()
+      }
+    });
+  }
+}
+
+getProfile() {
+    this.spinner.show();
+    const leadId = localStorage.getItem('getListLeadId');
+    const id = localStorage.getItem('getListId');
+    console.log(id, leadId);
+    const myprofileData = new FormData();
+    myprofileData.append('id', id);
+    myprofileData.append('contacted', '1');
+    myprofileData.append('is_lead', leadId);
+
+    // tslint:disable-next-line: max-line-length
+    return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
+      throw new Error('Server Timeout ' + e);
+    })).subscribe(
+      (data: any) => {
+        console.log(data);
+        if (this.fourPageService.userThroughGetList) {
+        this.setProfileValues(data);
+        }
+        this.spinner.hide();
+      },
+      (error: any) => {
+        this.spinner.hide();
+        console.log(error);
+        this.ngxNotificationService.error('Something Went Wrong');
+      }
+    );
+  }
+  getProfilePhoto(carous: any, index: string): string {
+    if (carous && carous !== '')  {
+      const carousel: object = JSON.parse(carous);
+      const keys = Object.keys(carousel);
+      // console.log(carousel[index]);
+      if (carousel[keys[index]]) {
+      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+      }
+    }
+  }
+  setProfileValues(profileData) {
+    this.userProfile.name = profileData.profile.name;
+    this.userProfile.mobile = profileData.family.mobile;
+    this.userProfile.email = profileData.family.email;
+    this.userProfile.relation = profileData.family.relation;
+    this.userProfile.gender = profileData.profile.gender;
+    this.userProfile.dob = profileData.profile.birth_date;
+    this.userProfile.height = profileData.profile.height;
+    this.userProfile.weight = profileData.profile.weight;
+    this.userProfile.martialStatus = profileData.profile.marital_status;
+    this.userProfile.annualIncome = profileData.profile.monthly_income;
+    if (profileData.family.religion) {
+      this.Caste = true;
+    }
+    this.userProfile.religion = profileData.family.religion;
+    this.userProfile.caste = profileData.family.caste;
+    this.userProfile.manglik = profileData.profile.manglik;
+    this.locality = profileData.family.locality;
+    this.userProfile.locality = profileData.family.locality;
+    this.userProfile.qualification = profileData.profile.degree;
+    this.userProfile.occupation = profileData.profile.occupation;
+    this.userProfile.designation = profileData.profile.profession;
+    this.userProfile.workingCity = profileData.profile.working_city;
+    this.userProfile.about = profileData.profile.about;
+    this.userProfile.birthPlace = profileData.profile.birth_place;
+    this.userProfile.birthTime = profileData.profile.birth_time;
+    this.userProfile.gotra = profileData.family.gotra;
+    this.userProfile.foodChoice = profileData.profile.food_choice;
+    this.userProfile.fatherStatus = profileData.family.father_status;
+    this.userProfile.motherStatus = profileData.family.mother_status;
+    this.userProfile.familyIncome = profileData.family.family_income;
+    this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
+    this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
+    this.userProfile.image3 = this.getProfilePhoto(profileData.profile.carousel, '2');
+
+    console.log(this.userProfile);
+    this.fourPageService.setProfile(this.userProfile);
+    this.fourPageService.getListData.emit(true);
+    this.setFormOneData();
+  }
+  
+  setFormOneData() {
+      this.PageOne.patchValue({
+        firstName: this.userProfile.name,
+      lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] : '',
+      phone: this.userProfile.mobile,
+      email: this.userProfile.email,
+      Relation: this.userProfile.relation,
+      gender: this.userProfile.gender,
+      birth_date: this.userProfile.dob ? this.userProfile.dob.toString().split('-')[2].split('')[1] : '',
+      birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1].split('')[1]) : '',
+      birth_year: this.userProfile.dob ? this.years[this.years.indexOf(this.userProfile.dob.toString().split('-')[0])] : '',
+      Height: this.userProfile.height ? this.Heights1.indexOf(this.userProfile.height) : '',
+      Weight: this.userProfile.weight,
+      MaritalStatus: this.userProfile.martialStatus,
+      AnnualIncome: this.userProfile.annualIncome,
+      Religion: this.userProfile.religion,
+      Castes: this.userProfile.caste,
+      Mangalik: this.userProfile.manglik,
+      locality: this.userProfile.locality,
+      });
+  }
+  getMonthString(month: string) {
+    switch (month) {
+      case '1':
+        return 'January';
+        case '2':
+          return 'Feburary';
+        case '3':
+          return 'March';
+        case '4':
+          return 'April';
+        case '5':
+          return 'May';
+        case '6':
+          return 'June';
+        case '7':
+          return 'July';
+        case '8':
+          return 'August';
+        case '9':
+          return 'September';
+        case '10':
+          return 'October';
+          case '11':
+            return 'November';
+        case '12':
+          return 'December';
+      default:
+        break;
+    }
+  }
 }
 
 

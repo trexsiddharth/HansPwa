@@ -472,9 +472,9 @@ export class RegComponent implements OnInit {
       }
       if (this.errors[0]) {
         this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
-   } else { this.ngxNotificationService.error('Enter Valid Mobile Number'); }
-    }
+   }
   }
+}
 
   private _Castefilter(value: string): string[] {
     const filterValue = value.toLowerCase();

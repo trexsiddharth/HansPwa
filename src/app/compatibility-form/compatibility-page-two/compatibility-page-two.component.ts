@@ -9,6 +9,7 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  Form,
 } from '@angular/forms';
 import {
   NgxNotificationService
@@ -26,6 +27,8 @@ import {
   MatDialogConfig,
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
+import { Profile } from '../profile';
+import { element } from 'protractor';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -49,7 +52,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class CompatibilityPageTwoComponent implements OnInit {
     @ViewChild('otpModal', {static: false}) private otpModal: any;
-  
+
     PageTwo: FormGroup;
     errors: string[] = [];
     authMobileNumberStatus = false;
@@ -119,12 +122,20 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
   }
 
 ngOnInit() {
+    if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
+      this.fourPageService.getListData.subscribe(
+        () => {
+          console.log(this.fourPageService.getProfile());
+          this.setFormOneData(this.fourPageService.getProfile());
+        }
+      );
+  }
     }
 
 firstStep() {
     this.errors = [];
     console.log(this.PageTwo.value.Working);
-    if (this.workingCity == null || this.workingCity === '') {
+    if (!this.fourPageService.getUserThrough() && this.workingCity == null || this.workingCity === '') {
       this.ngxNotificationService.error('Select A Valid Working City');
       return;
     }
@@ -148,6 +159,9 @@ firstStep() {
 
               if (res.status === 1) {
                 this.spinner.hide();
+                if (this.fourPageService.getUserThrough()) {
+                this.updateFormTwoData(firststepdata);
+                }
                 this.Analytics('Four Page Registration', 'Four Page Registration Page Two',
                  'Registered through Four Page Registration Page Two');
                 // this.ngxNotificationService.success('Registered Successfully');
@@ -212,6 +226,38 @@ changedDesignation() {
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
    }
+}
+getQualification(text) {
+  const groupIndex = this.HigherEducation.findIndex(
+    element => {
+      return element.names.includes(text);
+    }
+  );
+  const valueIndex = this.HigherEducation[groupIndex].names.findIndex(
+    element => {
+      return element.match(text);
+    }
+  );
+  return this.HigherEducation[groupIndex].names[valueIndex];
+}
+updateFormTwoData(profileData: FormData) {
+  this.fourPageService.profile.qualification = profileData.get('degree');
+  this.fourPageService.profile.occupation = profileData.get('occupation');
+  this.fourPageService.profile.designation = profileData.get('profession');
+  this.fourPageService.profile.workingCity = profileData.get('working_city');
+  this.fourPageService.profile.about = profileData.get('about');
+
+  console.log(this.fourPageService.getProfile());
+}
+setFormOneData(userProfile: Profile) {
+this.workplace = userProfile.workingCity ? userProfile.workingCity : '';
+this.PageTwo.patchValue({
+    Qualification: userProfile.qualification ? this.getQualification(userProfile.qualification) : '',
+    Occupation: userProfile.occupation,
+      Designation: userProfile.designation,
+      Working: userProfile.workingCity,
+      About: userProfile.about
+  });
 }
 
 }
