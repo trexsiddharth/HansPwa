@@ -138,12 +138,12 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
       modal.style.display = 'none';
     }
 
-    if (this.points === 0 && reply.toLowerCase() !== 'yes') {
-      this.getData(reply);
-    } else if (this.points > 0) {
-      this.getData(reply);
-    } else {
+    console.log(this.itemService.getCredits(), reply.toLowerCase());
+
+    if (this.itemService.getCredits() && this.itemService.getCredits() === 0 && reply.toLowerCase() === 'yes' && this.type === 'profile') {
       this.openMessageDialog(this.item);
+    } else {
+        this.getData(reply);
     }
   }
 
