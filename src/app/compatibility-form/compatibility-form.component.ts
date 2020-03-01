@@ -87,7 +87,7 @@ export class CompatibilityFormComponent implements OnInit {
   numberCheck: string = localStorage.getItem('RegisterNumber');
   changeNumber = false;
   // tslint:disable-next-line: max-line-length
-  date: string[] = ['1', '2' , '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+  date: string[] = ['01', '02' , '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
   // tslint:disable-next-line: max-line-length
   month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   years: string[] = [
@@ -640,8 +640,8 @@ getProfile() {
       email: this.userProfile.email,
       Relation: this.userProfile.relation,
       gender: this.userProfile.gender,
-      birth_date: this.userProfile.dob ? this.userProfile.dob.toString().split('-')[2].split('')[1] : '',
-      birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1].split('')[1]) : '',
+      birth_date: this.userProfile.dob ? this.userProfile.dob.toString().split('-')[2] : '',
+      birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1]) : '',
       birth_year: this.userProfile.dob ? this.years[this.years.indexOf(this.userProfile.dob.toString().split('-')[0])] : '',
       Height: this.userProfile.height ? this.Heights1.indexOf(this.userProfile.height) : '',
       Weight: this.userProfile.weight,
@@ -655,23 +655,23 @@ getProfile() {
   }
   getMonthString(month: string) {
     switch (month) {
-      case '1':
+      case '01':
         return 'January';
-        case '2':
+        case '02':
           return 'Feburary';
-        case '3':
+        case '03':
           return 'March';
-        case '4':
+        case '04':
           return 'April';
-        case '5':
+        case '05':
           return 'May';
-        case '6':
+        case '06':
           return 'June';
-        case '7':
+        case '07':
           return 'July';
-        case '8':
+        case '08':
           return 'August';
-        case '9':
+        case '09':
           return 'September';
         case '10':
           return 'October';
