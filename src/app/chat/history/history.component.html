@@ -56,7 +56,7 @@
                 </button>
                 <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized()" >
-                  <mat-icon>call</mat-icon> Mathchmaker: {{item.family.mobile}}
+                  <mat-icon>call</mat-icon> Matchmaker: {{item.family.mobile}}
                 </button>
                 <button (click)="profileReAnswer(item.profile.id,'YES',i)" class="setButtons" mat-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">

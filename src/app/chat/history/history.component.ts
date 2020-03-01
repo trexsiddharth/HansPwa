@@ -366,6 +366,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         console.log(localStorage.getItem('mobile_number'));
         console.log(id);
         console.log(data);
+        this.getCredits();
         this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
       }, (error: any) => {
         console.log(error);
@@ -561,6 +562,24 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     } else {
       return '';
     }
+}
+getCredits() {
+  const creditsData = new FormData();
+  creditsData.append('id', localStorage.getItem('id'));
+  creditsData.append('is_lead', localStorage.getItem('is_lead'));
+ // tslint:disable-next-line: max-line-length
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
+   (data: any) => {
+     const points = data.whatsapp_points;
+     this.itemService.setCredits(data.whatsapp_points);
+     console.log('credits', points);
+   },
+  (error: any) => {
+    this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+    console.log(error);
+    this.spinner.hide();
+  }
+ );
 }
 
 }
