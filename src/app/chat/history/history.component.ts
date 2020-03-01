@@ -146,7 +146,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
     console.log(index);
-    if (carous === null) {
+    if (carous === null || carous === 'null') {
       if (photo === null) {
       if (gen === 'Male') {
         return '../../assets/male_pic.png';
