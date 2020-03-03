@@ -7,6 +7,7 @@ export class FindOpenHistoryProfileService {
   openItem;
   credits;
   isPersonalized = false;
+  hasPhoto = false;
   constructor() { }
 
   setItem(item: any) {
@@ -15,6 +16,7 @@ export class FindOpenHistoryProfileService {
   }
   setCredits(credits: any) {
     this.credits = credits;
+    console.log(this.credits);
   }
   getItem() {
     if (this.openItem) {
@@ -24,16 +26,19 @@ export class FindOpenHistoryProfileService {
     }
   }
   getCredits() {
-    if (this.credits) {
+    console.log(this.credits);
     return this.credits;
-    } else {
-      return null;
-    }
   }
   setIsPersonalized(status: boolean) {
     this.isPersonalized = status;
   }
   getPersonalized() {
     return this.isPersonalized;
+  }
+  setPhotoStatus(status: boolean){
+    this.hasPhoto = status;
+  }
+  getPhotoStatus() {
+    return this.hasPhoto;
   }
 }

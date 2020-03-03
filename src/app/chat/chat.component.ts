@@ -2121,7 +2121,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
       (data: any) => {
         this.points = data.whatsapp_points;
-        this.itemService.setCredits(data.whatsapp_points);
+        this.itemService.setCredits(this.points);
         console.log('credits', this.points);
         if (this.paidStatus === 'Paid' && this.points === '0') {
           console.log('this is a exhausted profile');

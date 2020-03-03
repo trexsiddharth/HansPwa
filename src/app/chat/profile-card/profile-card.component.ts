@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 import { SubscriptionserviceService } from '../../subscriptionservice.service';
 import { MatTooltip, MatDialogConfig, MatDialog } from '@angular/material';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
-import { A2HSDialogComponent } from '../a2-hsdialog/a2-hsdialog.component';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 
@@ -35,6 +34,9 @@ export class ProfileCardComponent implements OnInit {
   carousel;
   carouselSize;
   count = 1;
+  selfImage;
+  selfName;
+  shortListCount = 0;
   @Output() changeTab = new EventEmitter < any > ();
   @Output() setProfileImage = new EventEmitter <any> ();
    // Height
@@ -63,6 +65,12 @@ export class ProfileCardComponent implements OnInit {
         console.log(data);
         const text: string = data.apiwha_autoreply;
         const id = data.id;
+        if (data.hasPhoto === '1') {
+        this.itemService.setPhotoStatus(true);
+        } else {
+          this.itemService.setPhotoStatus(false);
+        }
+        // for personalized users
         if (data && data.is_premium && data.is_premium === '1') {
           this.itemService.setIsPersonalized(true);
         } else {
@@ -70,28 +78,26 @@ export class ProfileCardComponent implements OnInit {
         }
         // set profile image (circular in top bar)
         this.setProfileImage.emit(data.photo);
-        
+        if (data && data.photo) {
+        this.selfImage = data.photo;
+        } else {
+          this.selfImage = '../../assets/avatar.svg';
+        }
+
+        if (data && data.name) {
+          this.selfName = data.name;
+        } else {
+          this.selfName = 'You';
+        }
+
         console.log(text);
         console.log(id);
         localStorage.setItem('id', id);
         this.paidStatus = data.paid_status;
         console.log(this.paidStatus);
-        this.getCredits();
         if (text.match('SHOW')) {
             this.chatService.Analytics('login', 'login', 'logged In');
             this.chatService.setLoginStatus(true);
-            // if (this.langChanged === true) {
-            //         this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
-            //           (data: any) => {
-            //             console.log(data);
-            //           },
-            //           (error: any) => {
-            //             console.log(error);
-            //           }
-            //           );
-            //         this.langChanged = false;
-            //       }
-            // this.repeatMEssage('SHOW', this.currentContact);
             this.getNextMessageOrProfile('SHOW');
       }
     }, err => {
@@ -133,21 +139,27 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
   }
 
   getNextMessageOrProfile(reply: string) {
+    console.log('shortlist count', this.shortListCount);
     const modal = document.getElementById('myModal');
     if (modal.style.display !== 'none') {
       modal.style.display = 'none';
     }
-
     console.log(this.itemService.getCredits(), reply.toLowerCase());
 
-    if (this.itemService.getCredits() && this.itemService.getCredits() === 0 && reply.toLowerCase() === 'yes' && this.type === 'profile') {
-      this.openMessageDialog(this.item);
+    if (this.itemService.getCredits() != null && this.itemService.getCredits() === 0 &&
+    reply.toLowerCase() === 'yes' && this.type === 'profile') {
+      this.openMessageDialog(this.item, reply);
+    }  else if (this.itemService.getCredits() != null && this.itemService.getCredits() === 0 &&
+    reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus() === false
+     && (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
+      this.openMessageDialog(this.item, reply);
     } else {
         this.getData(reply);
     }
   }
 
   getData(reply) {
+    this.setCount(reply);
     const previousItem = this.item;
     this.chatRequest(reply).subscribe(
       data => {
@@ -212,7 +224,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     } else {
       this.checkUrl().subscribe(res => {
         console.log(res);
-
+        this.itemService
         creditsData.append('is_lead', res.is_lead);
         localStorage.setItem('is_lead', res.is_lead);
     },
@@ -224,7 +236,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
      (data: any) => {
        this.points = data.whatsapp_points;
-       this.itemService.setCredits(data.whatsapp_points);
+       this.itemService.setCredits(this.points);
        console.log('credits', this.points);
 
        // for exhausted profile status
@@ -482,21 +494,52 @@ setManglik(value: string) {
   }
 }
 
-openMessageDialog(shareItem) {
+openMessageDialog(shareItem, reply: string) {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.hasBackdrop = true;
-  dialogConfig.height = '550px';
   dialogConfig.width = '700px';
   dialogConfig.disableClose = true;
-  dialogConfig.data = {
-    profile: shareItem
-  };
-  const dialogRef = this.dialog.open(MessageDialogComponent, dialogConfig);
-  dialogRef.afterClosed().subscribe(data => {
-    if (data && data.response === 'NO') {
-    this.getNextMessageOrProfile('NO');
-    }
-  });
+  switch (reply.toLowerCase()) {
+    case 'yes':
+      dialogConfig.data = {
+        profile: shareItem,
+        type: reply.toLowerCase()
+      };
+      const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+      break;
+
+      case 'shortlist':
+        this.shortListCount++;
+        dialogConfig.data = {
+        profile: shareItem,
+        selfImage: this.selfImage,
+        selfName: this.selfName,
+        type: reply.toLowerCase()
+      };
+        const dialogRefShort = this.dialog.open(MessageDialogComponent, dialogConfig);
+        dialogRefShort.afterClosed().subscribe(data => {
+      console.log(data);
+      if ( data && data.uploadStatus === 'Y') {
+        this.ngxNotificationService.success('फोटो अपलोड करदी गयी है');
+      } else {
+        this.ngxNotificationService.success('फोटो अपलोड नहीं हो पायी बाद मे दुबारा प्रयास करें');
+      }
+      });
+        break;
+
+    default:
+      break;
+  }
+}
+setCount(reply) {
+  switch (reply.toLowerCase()) {
+    case 'shortlist':
+      this.shortListCount++;
+      break;
+
+    default:
+      break;
+  }
 }
 
 }

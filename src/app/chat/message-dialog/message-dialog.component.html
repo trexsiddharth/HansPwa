@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="type=='yes'">
     <div id="cancel">
         <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg" alt="cancel">
     </div>
@@ -37,10 +37,48 @@
     </div>
 
     <div class="textAlign">
-        <button (click)="goToSub()" mat-raised-button style="background: #34b7f1;padding: 2px 40px;font-size: 20px;
-        font-weight: bolder;
+        <button (click)="goToSub()" mat-raised-button style="background: #34b7f1;font-size: 20px;
+        font-weight: bolder; width: 90%;
         margin-top: 20px;">
             प्लान देखें
         </button>
     </div>
+</main>
+
+
+<!-- when user chooses shortlist and he doesnt hv his profile pic uploaded -->
+
+<main *ngIf="type=='shortlist'">
+    <div id="cancel" style="text-align: end;">
+        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelred.svg" alt="cancel">
+    </div>
+    <div class="textAlign">
+        <span style="color: rgba(0,0,0,.6);font-size: 18px;">
+            {{profile.name}}
+        </span>
+    </div>
+    <div id="heading">
+        <p style="margin-bottom: 20px;font-size: 20px;" class="textAlign">बिना देखे <span style="font-weight:normal;font-family: sans-serif;">आपको कैसे पसंद करेंगी ?</span></p>
+    </div>
+    <div style="display: flex;justify-content: space-evenly;">
+        <div class="textAlign">
+            <img class="profilePic" [src]="getProfilePhoto()" alt="profile.name"><br>
+            <span>{{profile.name}}</span>
+        </div>
+            <span style="font-size: 40px;">❓</span>
+            <div class="textAlign">
+                <img class="profilePic" src="{{selfImage}}" alt="profile.name"><br>
+                <span style="display: block;
+                width: 100px;">{{selfName}}</span>
+            </div>
+    </div>
+    <div class="textAlign">
+        <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*' (change)="chooseFileForUpload(backfile.files)"/> 
+        <button (click)="changeProfileImage()" mat-raised-button style="background: #e4105cb8;font-size: 20px;
+        font-weight: bolder; width: 90%; 
+        margin-top: 20px;">
+            <span style="font-size: 22px;margin-right: 5px;">👆🏻</span>अभी फोटो अपलोड करें
+        </button>
+    </div>
+
 </main>

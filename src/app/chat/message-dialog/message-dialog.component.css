@@ -3,6 +3,9 @@
     background-color: white;
     color: black;
 }
+main{
+    padding-bottom: 20px;
+}
 .row{
     margin: 0px;
     padding: 0px;

@@ -399,6 +399,16 @@ export class RegComponent implements OnInit {
               firststepdata.append('birth_date', date + '-' + month + '-' + year);
               firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName);
               firststepdata.append('email', this.PageOne.value.email);
+
+               // son -> mother and daughter -> father rest -> same
+              if (this.PageOne.value.Relation === 'Son') {
+                firststepdata.append('relation', 'Mother');
+                } else if (this.PageOne.value.Relation === 'Daughter') {
+                  firststepdata.append('relation', 'Father');
+                } else {
+                  firststepdata.append('relation', this.PageOne.value.Relation);
+                }
+
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
