@@ -291,4 +291,26 @@ onResize(event) {
       }
 
     }
+    downloadMyProfile() {
+        const pdfData = new FormData();
+        pdfData.append('id', localStorage.getItem('id'));
+        pdfData.append('profile_to_send_id', localStorage.getItem('id'));
+        pdfData.append('full', '1');
+        pdfData.append('is_lead', localStorage.getItem('is_lead'));
+
+        return this.http.post < any > ('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
+          console.log(data);
+          if (data.status === 1) {
+            const downloadLink = document.querySelectorAll < HTMLElement > ('#downLink');
+            this.spinner.hide();
+            this.ngxNotificationService.info('Downloading your file');
+            if (data.url) {
+              window.open(data.url);
+            }
+          }
+        }, err => {
+          console.log(err);
+          this.ngxNotificationService.error('Error Occured');
+        });
+    }
 }
