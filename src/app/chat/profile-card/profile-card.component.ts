@@ -179,6 +179,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
               }
             }
           }, 1000);
+          if (this.item.photo === null) {
+              this.spinner.hide();
+          }
           } else {
             this.type = 'message';
             this.item = data.apiwha_autoreply;
@@ -315,13 +318,13 @@ getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
   }
 }
  onErrorProfilePhoto(gender, index) {
+   this.spinner.hide();
    const imageSrc = document.querySelectorAll('#profileImage')[index];
    if (gender === 'Male') {
     imageSrc.setAttribute('src', '../../assets/male_pic.png');
   } else {
     imageSrc.setAttribute('src', '../../assets/female_pic.png');
   }
-   this.spinner.hide();
 }
 getImagesCount(num: string) {
   if (num !== '[]' && num && num !== 'null') {
