@@ -20,7 +20,7 @@
 
         <ngb-carousel>
           <ng-template ngbSlide *ngFor="let i of getImagesCount(item.carousel); let index = index">
-                  <img mat-card-image id="profileImage" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
+                  <img mat-card-image id="profileImage" (load)="imageSetSuccess()" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
           </ng-template>
         </ngb-carousel>
 

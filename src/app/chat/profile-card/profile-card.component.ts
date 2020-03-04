@@ -161,6 +161,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
   getData(reply) {
     this.setCount(reply);
     const previousItem = this.item;
+    this.spinner.show();
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
@@ -209,7 +210,6 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
             }
           }
         this.getCredits();
-        this.spinner.hide();
       }, err => {
         console.log(err);
       }
@@ -224,7 +224,6 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     } else {
       this.checkUrl().subscribe(res => {
         console.log(res);
-        this.itemService
         creditsData.append('is_lead', res.is_lead);
         localStorage.setItem('is_lead', res.is_lead);
     },
@@ -243,7 +242,6 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
        if (this.paidStatus === 'Paid' && this.points === 0) {
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
-          this.spinner.hide();
         }
      },
     (error: any) => {
@@ -252,6 +250,10 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
       this.spinner.hide();
     }
    );
+  }
+
+  imageSetSuccess() {
+    this.spinner.hide();
   }
 
   setAge(birthDate: string) {
@@ -319,6 +321,7 @@ getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
   } else {
     imageSrc.setAttribute('src', '../../assets/female_pic.png');
   }
+   this.spinner.hide();
 }
 getImagesCount(num: string) {
   if (num !== '[]' && num && num !== 'null') {
@@ -460,6 +463,7 @@ setManglik(value: string) {
       default:
         break;
     }
+    this.spinner.hide();
   }
   callHans() {
     window.open('tel:9697989697');
