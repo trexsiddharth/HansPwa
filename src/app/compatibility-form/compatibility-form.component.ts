@@ -298,11 +298,6 @@ export class CompatibilityFormComponent implements OnInit {
               console.log('gender', this.PageOne.value.gender);
               console.log('height', this.Heights1[this.PageOne.value.Height]);
               console.log('marital_status', this.PageOne.value.MaritalStatus);
-              if (this.PageOne.value.Mangalik === 'Non-manglik') {
-              console.log('manglik', 'No');
-            } else {
-              console.log('manglik', this.PageOne.value.Mangalik);
-            }
               console.log('annual_income', this.PageOne.value.AnnualIncome);
               console.log('religion', this.PageOne.value.Religion);
               console.log('caste', this.PageOne.value.Castes);
