@@ -1,37 +1,6 @@
 
 <main class='fixed t-0 b-0 w-full HC'>
-        <!-- <div class='flex-fs-c setLogo' >
-            <img  src='../../assets/logo_short.png' class='w-40' style="border-radius: 100%; object-fit: cover; height: 2.5rem; width: 2.5rem; background-color: white">
-            <div class='f16 white m-l-10 pointer'>Hans Matrimony</div>
-        </div >  -->
-        <!-- <div style="display: flex">
-          <div style="margin: auto">
-              <div style="margin-bottom: 0px" [routerLink]="['/subscription']" routerLinkActive="router-link-active"  *ngIf="points >= 0">
-                <p class="setNavIcons" id="credit">कांटेक्ट नंबर: {{points}}</p>
-              </div>
-          </div>
-
-            <div class="row" style="margin:0px;padding: 0px;">
-                    <div class="col" style="margin:0px;padding: 0px;">
-                      <div ngbDropdown >
-                          <img src="../../assets/menu.png" class="filterLogout" data-toggle="dropdown" alt="language" ngbDropdownToggle>
-                        <div ngbDropdownMenu>
-                            <a style="margin: 0px;padding: 0px;" href="tel:8766217175"  class="dropdown-item"><img src="../../assets/phone_blue.svg" style="width: 20px;" alt="call">Contact Us</a>
-                          <button *ngIf="currentLanguage=='Hindi'" (click)="languageEnglish()" class="dropdown-item">Translate to English</button>
-                          <button *ngIf="currentLanguage=='English'" (click)="languageHindi()" class="dropdown-item">हिंदी में देखें </button>
-                          <button *ngIf="loginStatus" (click)="logout()" class="dropdown-item">Logout</button>
-                          <button (click)="showVideo()" class="dropdown-item">APP चलाना सीखें</button>
-                         <a href="https://hansmatrimony.com/blog/?ngsw-bypass=true"><button class="dropdown-item">Blog</button></a>
-                        </div>
-                      </div>
-                    </div>
-            </div>
-
-             <div class="row" style="margin:0px;padding: 0px;">
-               <div class="col" style="margin:0px;padding: 0px;">
-              </div>
-            </div>
-                </div> -->
+       
         <div class="groupContainer" [hidden]="history=='myprofile'">
           <img (click)="changeToMyProfile()" style="width:50px;height: 50px;margin: 10px 5px;border-radius: 50%;z-index: 99999999;" [src]="photo" alt="profile pic">
           <mat-tab-group mat-align-tabs="center" class="matGroup"   [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
@@ -48,7 +17,7 @@
                     </div>
                   </ng-template>
                   </mat-tab>
-                  <mat-tab label="📞कॉंटैक्टेड" id="contacted">
+                  <mat-tab [label]="itemService.getContactedCount()" id="contacted">
                       <ng-template matTabContent>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
                           कांटेक्ट नंबर: {{points}}
@@ -58,7 +27,7 @@
                      </div>
                   </ng-template>
                   </mat-tab>
-                  <mat-tab label="❤️मेरी पसंद" id="melike">
+                  <mat-tab [label]="itemService.getShortlistedCount()" id="melike">
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
@@ -70,7 +39,7 @@
                      </div>
                   </ng-template>
                   </mat-tab>
-                  <mat-tab label="💓मै किसे पसंद हूँ?" id="likeme">
+                  <mat-tab [label]="itemService.getShortedCount()" id="likeme">
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
@@ -82,7 +51,7 @@
                      </div>
                   </ng-template>
                   </mat-tab>
-                  <mat-tab label="❌नापसंद" id="rejected">
+                  <mat-tab [label]="itemService.getRejectedCount()" id="rejected">
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>

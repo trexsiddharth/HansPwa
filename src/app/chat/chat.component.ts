@@ -237,7 +237,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     public notification: NotificationsService,
     private subscriptionService: SubscriptionserviceService,
     private route: ActivatedRoute,
-    private itemService: FindOpenHistoryProfileService,
+    public itemService: FindOpenHistoryProfileService,
     private chatServivce: ChatServiceService
   ) {
     this.answer = this._formBuilder.group({

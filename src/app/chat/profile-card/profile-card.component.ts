@@ -65,6 +65,9 @@ export class ProfileCardComponent implements OnInit {
         console.log(data);
         const text: string = data.apiwha_autoreply;
         const id = data.id;
+        if (data && data.get_status_count) {
+          this.itemService.saveCount(data.get_status_count);
+        }
         if (data.hasPhoto === '1') {
         this.itemService.setPhotoStatus(true);
         } else {
@@ -166,6 +169,10 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
+
+        if (data && data.get_status_count) {
+          this.itemService.saveCount(data.get_status_count);
+        }
         if (data.type === 'profile') {
           this.type = 'profile';
           this.item = data.apiwha_autoreply;
@@ -180,6 +187,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
               }
             }
           }, 1000);
+
+          // if photo is null
           if (this.item.photo === null) {
               this.spinner.hide();
           }
