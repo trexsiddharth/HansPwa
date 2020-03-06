@@ -193,6 +193,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           if (this.item.photo === null) {
               this.spinner.hide();
           }
+
+
           } else {
             this.type = 'message';
             this.item = data.apiwha_autoreply;
@@ -257,6 +259,10 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
         }
+
+        // update profile left count
+       data ? this.getProfilesLeft(this.item.profiles_left)
+            : this.ngxNotificationService.error('Profiles Left Not Found');
      },
     (error: any) => {
       this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
@@ -502,12 +508,15 @@ setManglik(value: string) {
   }
   getProfilesLeft(left: any) {
     console.log(left);
-    if (this.points) {
-      console.log(this.points);
-      if (this.points > 0) {
-      return (6 - Number(left)).toString() + '/ 6';
+    let value;
+    if (this.itemService.getCredits() != null) {
+      console.log(this.itemService.getCredits());
+      if (Number(this.itemService.getCredits()) > 0) {
+       value = (6 - Number(left)).toString() + '/ 6';
+       return document.querySelector('#profileLeft').innerHTML = value;
     } else {
-      return (10 - Number(left)).toString() + '/ 10';
+      value = (10 - Number(left)).toString() + '/ 10';
+      return document.querySelector('#profileLeft').innerHTML = value;
     }
   }
 }
