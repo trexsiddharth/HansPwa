@@ -172,6 +172,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 
         if (data && data.get_status_count) {
           this.itemService.saveCount(data.get_status_count);
+          this.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
         }
         if (data.type === 'profile') {
           this.type = 'profile';
@@ -324,7 +325,7 @@ getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
     const carousel: object = JSON.parse(carous);
     const keys = Object.keys(carousel);
     // console.log(carousel[index]);
-    return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+    return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
   }
 }
  onErrorProfilePhoto(gender, index) {
@@ -357,7 +358,7 @@ openImageModal(carous: string, src: string, name: string, index: any) {
     const carousel: object = JSON.parse(carous);
     const keys = Object.keys(carousel);
     // console.log(carousel[index]);
-    this.setModal('http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]]);
+    this.setModal('https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]]);
   } else if ( src && src !== '') {
     this.setModal(src);
   }

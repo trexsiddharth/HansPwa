@@ -23,6 +23,15 @@
                   <img mat-card-image id="profileImage" (load)="imageSetSuccess()" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
           </ng-template>
         </ngb-carousel>
+        
+        <button  class="setButtons" mat-fab style="color: green;
+        background: white;
+        position: absolute;
+        margin-top: -70px;
+        right: 0px;"
+          aria-label="Example icon-button with a heart icon" >
+          {{getProfilesLeft(item.profiles_left)}}
+        </button>
 
         </div>
           <mat-card-actions id="buttonSet" style="margin-bottom: 20px;" align="center">

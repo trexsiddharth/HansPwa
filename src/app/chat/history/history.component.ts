@@ -11,9 +11,6 @@ import {
   HttpClient
 } from '@angular/common/http';
 import {
-  Event
-} from '@angular/router';
-import {
   NgxNotificationService
 } from 'ngx-kc-notification';
 import {
@@ -141,7 +138,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         return '../../assets/female_pic.png';
       }
     } else {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
     }
   }
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
@@ -154,7 +151,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         return '../../assets/female_pic.png';
       }
     } else {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
+      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
     }
     } else {
       const carousel: object = JSON.parse(carous);

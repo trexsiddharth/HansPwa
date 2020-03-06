@@ -1616,11 +1616,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
           this.spinner.hide();
           console.log(error);
           this.ngxNotificationService.error('Something Went Wrong');
+          this.logout();
           this.showError();
         }
       );
     } else {
       this.ngxNotificationService.error('No user found');
+      this.logout();
     }
   }
   preferencesChanged(data: any) {

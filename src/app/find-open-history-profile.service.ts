@@ -11,7 +11,7 @@ export class FindOpenHistoryProfileService {
   hasPhoto = false;
   profileCount = new ProfileCount();
   countUpdated = new EventEmitter();
-  
+
   constructor() { }
 
   setItem(item: any) {
@@ -51,16 +51,22 @@ export class FindOpenHistoryProfileService {
     this.profileCount.shortedCount = count.S;
     this.profileCount.rejectedCount = count.R;
   }
+  saveDailyCount(count: any) {
+    this.profileCount.dailyCount = count;
+  }
+  getDailyCount() {
+    return '🗓आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )';
+  }
   getContactedCount() {
-    return '📞कॉंटैक्टेड(' + this.profileCount.contactedCount + ')';
+    return '📞कॉंटैक्टेड ( ' + this.profileCount.contactedCount + ' )';
   }
   getShortlistedCount() {
-    return '❤️मेरी पसंद(' + this.profileCount.shortlistCount + ')';
+    return '❤️मेरी पसंद ( ' + this.profileCount.shortlistCount + ' )';
   }
   getShortedCount() {
-    return '💓मै किसे पसंद हूँ?(' + this.profileCount.shortedCount + ')';
+    return '💓मै किसे पसंद हूँ? ( ' + this.profileCount.shortedCount + ' )';
   }
   getRejectedCount() {
-    return '❌नापसंद(' + this.profileCount.rejectedCount + ')';
+    return '❌नापसंद ( ' + this.profileCount.rejectedCount + ' )';
   }
 }
