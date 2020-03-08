@@ -55,7 +55,7 @@ export class FindOpenHistoryProfileService {
     this.profileCount.dailyCount = count;
   }
   getDailyCount() {
-    return '🗓आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )';
+    return this.profileCount.dailyCount ? '🗓आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )' : '🗓आज के रिश्ते';
   }
   getContactedCount() {
     return '📞कॉंटैक्टेड ( ' + this.profileCount.contactedCount + ' )';

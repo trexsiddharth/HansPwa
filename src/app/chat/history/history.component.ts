@@ -38,6 +38,8 @@ import {
   Router
 } from '@angular/router';
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 
 
@@ -82,7 +84,9 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
 
-  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
+  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, 
+              private spinner: NgxSpinnerService,
+              private dialog: MatDialog,
               public notification: NotificationsService, public itemService: FindOpenHistoryProfileService, private router: Router) {}
 
   ngOnInit() {}
@@ -337,7 +341,16 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }
   }
 
-  profileReAnswer(id: any, answer: any, index: any) {
+  profileReAnswer(item: any, id: any, answer: any, index: any) {
+    console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+     this.openMessageDialog(item, answer);
+   } else {
+     this.getData(id, answer, index);
+   }
+  }
+
+  getData(id: any, answer: any, index: any) {
     this.panelOpenState = null;
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
@@ -577,6 +590,25 @@ getCredits() {
     this.spinner.hide();
   }
  );
+}
+
+openMessageDialog(shareItem, reply: string) {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.hasBackdrop = true;
+  dialogConfig.width = '700px';
+  dialogConfig.disableClose = true;
+  switch (reply.toLowerCase()) {
+    case 'yes':
+      dialogConfig.data = {
+        profile: shareItem,
+        type: reply.toLowerCase()
+      };
+      const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+      break;
+
+    default:
+      break;
+  }
 }
 
 }

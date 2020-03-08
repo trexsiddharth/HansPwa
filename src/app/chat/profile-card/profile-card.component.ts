@@ -150,10 +150,10 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     console.log(this.itemService.getCredits(), reply.toLowerCase());
     console.log(this.type, this.itemService.getPhotoStatus());
 
-    if (this.itemService.getCredits() != null && this.itemService.getCredits() === '0' &&
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     reply.toLowerCase() === 'yes' && this.type === 'profile') {
       this.openMessageDialog(this.item, reply);
-    }  else if (this.itemService.getCredits() != null && this.itemService.getCredits() === '0' &&
+    }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus() === false
     && (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
       this.openMessageDialog(this.item, reply);

@@ -28,14 +28,24 @@ export class MessageDialogComponent implements OnInit {
   }
 
   getProfilePhoto(): string {
-      if (this.profile.photo === null) {
+    if (this.profile.profile) {
+      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + this.profile.profile.photo;
+    } else if (this.profile.photo) {
+      return this.profile.photo;
+    } else {
       if (this.profile.gender === 'Male') {
         return '../../assets/male_pic.png';
       } else {
         return '../../assets/female_pic.png';
       }
+    }
+  }
+
+  getName(item: any) {
+    if (item.profile) {
+      return item.profile.name;
     } else {
-      return this.profile.photo;
+      return item.name;
     }
   }
   goToSub() {

@@ -13,7 +13,7 @@
             <img class="profilePic" [src]="getProfilePhoto()" alt="profile.name">
         </div>
         <div class="col-9" style="margin: auto 0px;">
-            <p style="font-weight: bold;font-size: 16px;">{{profile.name}}</p>
+            <p style="font-weight: bold;font-size: 16px;">{{getName(profile)}}</p>
             <p>कांटेक्ट नंबर: +91-XXXXXXXXXX</p>
             <p>पूरा पता: XXXXXXXXXX</p>
         </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="textAlign">
         <span style="color: rgba(0,0,0,.6);font-size: 18px;">
-            {{profile.name}}
+            {{getName(profile)}}
         </span>
     </div>
     <div id="heading">

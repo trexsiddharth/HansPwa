@@ -58,15 +58,15 @@
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized()" >
                   <mat-icon>call</mat-icon> Matchmaker: {{item.family.mobile}}
                 </button>
-                <button (click)="profileReAnswer(item.profile.id,'YES',i)" class="setButtons" mat-fab style="color: green;background: white;"
+                <button (click)="profileReAnswer(item,item.profile.id,'YES',i)" class="setButtons" mat-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
                   <mat-icon>call</mat-icon>
                 </button>
-                <button (click)="profileReAnswer(item.profile.id,'SHORTLIST',i)" class="setButtons" mat-fab style="color: red;background: white;"
+                <button (click)="profileReAnswer(item,item.profile.id,'SHORTLIST',i)" class="setButtons" mat-fab style="color: red;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
                   <mat-icon>favorite</mat-icon>
                 </button>
-                <button (click)="profileReAnswer(item.profile.id,'NO',i)" class="setButtons" mat-fab style="color: grey;background: white;"
+                <button (click)="profileReAnswer(item,item.profile.id,'NO',i)" class="setButtons" mat-fab style="color: grey;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted' && type != 'rejected'">
                   <mat-icon>close</mat-icon>
                 </button>
@@ -89,15 +89,15 @@
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized() === true">
                   <mat-icon>call</mat-icon>Matchmaker: {{item.family.mobile}}
                 </button>
-                <button (click)="profileReAnswer(item.profile.id,'YES',i)" class="setButtons" mat-mini-fab style="color: green;background: white;"
+                <button (click)="profileReAnswer(item,item.profile.id,'YES',i)" class="setButtons" mat-mini-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
                   <mat-icon>call</mat-icon>
                 </button>
-                <button (click)="profileReAnswer(item.profile.id,'SHORTLIST',i)" class="setButtons" mat-mini-fab style="color: red;background: white;"
+                <button (click)="profileReAnswer(item,item.profile.id,'SHORTLIST',i)" class="setButtons" mat-mini-fab style="color: red;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
                   <mat-icon>favorite</mat-icon>
                 </button>
-                <button (click)="profileReAnswer(item.profile.id,'NO',i)" class="setButtons" mat-mini-fab style="color: grey;background: white;"
+                <button (click)="profileReAnswer(item,item.profile.id,'NO',i)" class="setButtons" mat-mini-fab style="color: grey;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted' && type != 'rejected'">
                   <mat-icon>close</mat-icon>
                 </button>
