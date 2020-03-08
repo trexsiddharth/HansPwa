@@ -13,11 +13,11 @@
   
               <mat-card-title-group [hidden]="panelOpenState == i">
                 <mat-card-title>
-                  {{item.profile.name}}
+                  {{item.name}}
                 </mat-card-title>
                 <mat-card-subtitle>
-                  {{setAge(item.profile.birth_date)}} <b class="partition">|</b> {{setHeight(item.profile.height)}} <b class="partition">|</b> {{item.profile.education}} <b class="partition">|</b> 
-                  {{item.profile.occupation}} <b class="partition">|</b> {{item.profile.monthly_income}} LPA <b class="partition">|</b> {{item.family.caste}} <b class="partition">|</b> {{item.family.city}} <br>
+                  {{setAge(item.birth_date)}} <b class="partition">|</b> {{setHeight(item.profile.height)}} <b class="partition">|</b> {{item.profile.education}} <b class="partition">|</b> 
+                  {{item.dpoccupate}} <b class="partition">|</b> {{item.profile.monthly_income}} LPA <b class="partition">|</b> {{item.family.caste}} <b class="partition">|</b> {{item.family.city}} <br>
                   {{toTitleCase(item.profile.about)}} <br>
                   <div  style="margin-top: 10px;" *ngIf="type === 'contacted'">
                     <div style="right: 0px;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">

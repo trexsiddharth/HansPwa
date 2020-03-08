@@ -52,7 +52,7 @@ export class FindOpenHistoryProfileService {
     this.profileCount.rejectedCount = count.R;
   }
   saveDailyCount(count: any) {
-    this.profileCount.dailyCount = count;
+    this.profileCount.dailyCount = count + 1;
   }
   getDailyCount() {
     return this.profileCount.dailyCount ? '🗓आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )' : '🗓आज के रिश्ते';
