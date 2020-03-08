@@ -41,14 +41,11 @@ import { EditFamilyDialogComponent } from './chat/myprofile/edit-family-dialog/e
 import { EditPersonalDialogComponent } from './chat/myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { EditPreferenceDialogComponent } from './chat/myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
-import { A2HSDialogComponent } from './chat/a2-hsdialog/a2-hsdialog.component';
 import { RouterModule } from '@angular/router';
 import { AnalyticsButtonDirective } from './analytics-button.directive';
 
 import { WalkthroughModule } from 'ngx-walkthrough';
 import { TiktokAdsFormComponent } from './tiktok-ads-form/tiktok-ads-form.component';
-import { CreditAwardComponent } from './credit-award/credit-award.component';
-import { PreferenceWideningComponent } from './preference-widening/preference-widening.component';
 import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
 import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
 import { ConnectionErrorComponent } from './chat/connection-error/connection-error.component';
@@ -83,11 +80,8 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
     EditPersonalDialogComponent,
     EditPreferenceDialogComponent,
     ViewCentresComponent,
-    A2HSDialogComponent,
     AnalyticsButtonDirective,
     TiktokAdsFormComponent,
-    CreditAwardComponent,
-    PreferenceWideningComponent,
     CompatibilityFormComponent,
     PhoneNumberScreenComponent,
     ConnectionErrorComponent,
@@ -121,8 +115,8 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
   providers: [SubscriptionserviceService],
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
-  entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, A2HSDialogComponent,
-    EditFamilyDialogComponent, TiktokAdsFormComponent, CreditAwardComponent, PreferenceWideningComponent, MessageDialogComponent],
+  entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, MessageDialogComponent,
+    EditFamilyDialogComponent, TiktokAdsFormComponent, MessageDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -523,7 +523,7 @@ setManglik(value: string) {
   getProfilesLeft(left: any) {
     console.log(left);
     let value;
-    if (this.itemService.getCredits() != null) {
+    if (this.itemService.getCredits() != null && document.querySelector('#profileLeft')) {
       console.log(this.itemService.getCredits());
       if (Number(this.itemService.getCredits()) > 0) {
        value = (6 - Number(left)).toString() + '/ 6';
