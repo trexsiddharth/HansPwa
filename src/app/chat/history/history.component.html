@@ -181,7 +181,8 @@
               <img class="setIcons" src="../assets/suitcase.svg" alt="Age">  {{item.profile.occupation}}
             </div>
             <div class="col-3">
-              <img class="setIcons" src="../assets/graduation.svg" alt="Height">  {{item.profile.education}}
+              <img class="setIcons" src="../assets/graduation.svg" alt="Height" *ngIf="item.profile.education">  {{item.profile.education}}
+              <img class="setIcons" src="../assets/graduation.svg" alt="Height" *ngIf="item.profile.degree">  {{item.profile.degree}}
             </div>
             <div class="col-3">
               <img class="setIcons" src="../assets/graduation.svg" alt="Weight">  {{item.profile.profession}}

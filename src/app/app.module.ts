@@ -59,6 +59,7 @@ import { CompatibilityPageThreeComponent } from './compatibility-form/compatibil
 import { CompatibilityPhotoComponent } from './compatibility-form/compatibility-photo/compatibility-photo.component';
 import { RegComponent } from './reg/reg.component';
 import { MessageDialogComponent } from './chat/message-dialog/message-dialog.component';
+import { PersonalizedProfilesComponent } from './chat/personalized-profiles/personalized-profiles.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
     CompatibilityPhotoComponent,
     RegComponent,
     MessageDialogComponent,
+    PersonalizedProfilesComponent,
   ],
   imports: [
     BrowserModule,
