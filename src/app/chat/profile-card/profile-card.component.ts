@@ -273,7 +273,21 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
   }
 
   imageSetSuccess() {
-    this.spinner.hide();
+    console.log('called for stopping spinner');
+    if (document.querySelectorAll('#profileImage').length > 1) {
+      console.log('trying to stop spinner');
+      if (document.querySelectorAll<HTMLImageElement>('#profileImage')[document.querySelectorAll('#profileImage').length - 1].complete) {
+        this.spinner.hide();
+        console.log('spinner stopped');
+      } else {
+        this.spinner.show();
+      }
+    } else {
+      if (document.querySelector<HTMLImageElement>('#profileImage').complete) {
+      this.spinner.hide();
+      console.log('spinner stopped');
+      }
+    }
   }
 
   setAge(birthDate: string) {
