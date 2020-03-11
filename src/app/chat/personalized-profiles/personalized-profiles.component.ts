@@ -10,10 +10,25 @@ import { Router } from '@angular/router';
 import { timeout, retry, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
+import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-personalized-profiles',
-  templateUrl: './personalized-profiles.component.html',
+  templateUrl: './personalized-profiles.component.html', animations: [trigger('listAnimation', [
+    transition('* => *', [ // each time the binding value changes
+      query(':leave', [
+        stagger(100, [
+          animate('0.5s', style({ opacity: 0 }))
+        ])
+      ], {optional: true}),
+      query(':enter', [
+        style({ opacity: 0 }),
+        stagger(100, [
+          animate('0.5s', style({ opacity: 1 }))
+        ]),
+      ], {optional: true})
+    ])
+  ])],
   styleUrls: ['./personalized-profiles.component.css']
 })
 export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
@@ -76,7 +91,10 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
         return '../../assets/female_pic.png';
       }
     } else {
-      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+      const carousel: object = JSON.parse(num);
+      const keys = Object.keys(carousel);
+      // console.log(carousel[index]);
+      return carousel[keys[0]];
     }
   }
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
@@ -95,7 +113,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+      return carousel[keys[index]];
     }
   }
   getImagesCount(num: string) {
@@ -488,7 +506,7 @@ getPersonalizedProfiles() {
   this.spinner.show();
   const creditsData = new FormData();
   creditsData.append('TEXT', 'SHOW');
-  creditsData.append('mobile', '919555226371');
+  creditsData.append('mobile', localStorage.getItem('mobile_number'));
 
  // tslint:disable-next-line: max-line-length
   return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumPro', creditsData).pipe(timeout(7000), retry(2), catchError(e => {

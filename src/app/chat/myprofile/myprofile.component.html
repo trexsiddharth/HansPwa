@@ -149,8 +149,7 @@
         <div class="row" style="margin: 10px 10px;">
             <div class="col-12">
               <h6 style="display: inline-block">Degree : </h6>
-              <p style="font-size: 14px;display: inline-block;margin-left: 10px" *ngIf="personalProfileData.degree">{{personalProfileData.degree}}</p>
-              <p style="font-size: 14px;display: inline-block;margin-left: 10px" *ngIf="personalProfileData.education">{{personalProfileData.education}}</p>
+              <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{getQualification(personalProfileData.degree,personalProfileData.education)}}</p>
             </div>
             <hr style="margin: 0px 10px;width: 100%">
             <div class="col-12" style="margin-top: 10px;">

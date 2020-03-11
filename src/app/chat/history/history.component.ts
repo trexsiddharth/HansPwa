@@ -610,5 +610,8 @@ openMessageDialog(shareItem, reply: string) {
       break;
   }
 }
+getQualification(degree, education) {
+  return education != null && education !== '' ? education : degree;
+  }
 
 }

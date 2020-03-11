@@ -583,5 +583,9 @@ setCount(reply) {
   }
 }
 
+getQualification(degree, education) {
+return education != null && education !== '' ? education : degree;
+}
+
 }
 

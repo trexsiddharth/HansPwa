@@ -13,7 +13,7 @@
 
             <mat-card-title-group [hidden]="panelOpenState == i">
               <mat-card-title>
-                {{item.profile.name}}
+                {{toTitleCase(item.profile.name)}}
               </mat-card-title>
               <mat-card-subtitle>
                 {{setAge(item.profile.birth_date)}} <b class="partition">|</b> {{setHeight(item.profile.height)}} <b class="partition">|</b> {{item.profile.education}} <b class="partition">|</b> 
@@ -31,7 +31,7 @@
 
             <mat-card-header [hidden]="panelOpenState!=i">
               <div mat-card-avatar class="avatarImage"></div>
-              <mat-card-title>{{item.profile.name}}</mat-card-title>
+              <mat-card-title>{{toTitleCase(item.profile.name)}}</mat-card-title>
               <mat-card-subtitle>{{toTitleCase(item.profile.about)}}</mat-card-subtitle>
             </mat-card-header>
             
@@ -181,8 +181,7 @@
               <img class="setIcons" src="../assets/suitcase.svg" alt="Age">  {{item.profile.occupation}}
             </div>
             <div class="col-3">
-              <img class="setIcons" src="../assets/graduation.svg" alt="Height" *ngIf="item.profile.education">  {{item.profile.education}}
-              <img class="setIcons" src="../assets/graduation.svg" alt="Height" *ngIf="item.profile.degree">  {{item.profile.degree}}
+              <img class="setIcons" src="../assets/graduation.svg" alt="Height">  {{getQualification(item.profile.degree,item.profile.education)}}
             </div>
             <div class="col-3">
               <img class="setIcons" src="../assets/graduation.svg" alt="Weight">  {{item.profile.profession}}

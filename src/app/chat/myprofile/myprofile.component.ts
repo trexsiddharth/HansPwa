@@ -313,4 +313,7 @@ onResize(event) {
           this.ngxNotificationService.error('Error Occured');
         });
     }
+    getQualification(degree, education) {
+      return education != null && education !== '' ? education : degree;
+      }
 }

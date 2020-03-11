@@ -157,12 +157,8 @@
                 <div class="col-6">
                      {{item.occupation}}
                   </div>
-                  <div class="col-6" *ngIf="item.education"> 
-                     {{item.education}}
+                  <div class="col-6" *ngIf="item.education" [innerHTML]="getQualification(item.degree,item.education)"> 
                   </div>
-                  <div class="col-6" *ngIf="item.degree">
-                    {{item.degree}}
-                 </div>
                 </div>
                 <div class="row">
                 <div class="col-6 contentPara">
