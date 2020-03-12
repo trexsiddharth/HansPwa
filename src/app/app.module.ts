@@ -105,7 +105,7 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [SubscriptionDialogComponent, EditPersonalDialogComponent, EditPreferenceDialogComponent, MessageDialogComponent,
-    EditFamilyDialogComponent, TiktokAdsFormComponent, MessageDialogComponent],
+    EditFamilyDialogComponent, TiktokAdsFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
