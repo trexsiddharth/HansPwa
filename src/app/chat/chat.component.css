@@ -201,6 +201,7 @@ text-align: center;
   display: flex;
   overflow-x: auto;
   padding-right: 50px;
+  padding-bottom: 10px;
   background-image: linear-gradient(90deg, rgba(50,149,230,1) 10%, rgba(52,183,241,1) 50%, rgba(52,213,241,0.9878326330532213) 70%);
 }
 .matGroup{
@@ -646,6 +647,7 @@ display: none !important;
          width: 100%;
         display: flex;
         overflow-x: auto;
+        padding-bottom: 5px;
         padding-right: 50px;
         background-image: linear-gradient(90deg, rgba(50,149,230,1) 10%, rgba(52,183,241,1) 50%, rgba(52,213,241,0.9878326330532213) 70%);
        }

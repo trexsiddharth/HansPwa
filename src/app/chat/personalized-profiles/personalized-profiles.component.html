@@ -50,14 +50,14 @@
               </ng-container> -->
               <ng-container *ngIf="panelOpenState === i">
                 <mat-card-actions style="margin-bottom: 0px;" align="center">
-                  <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
+                  <!-- <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                     aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized() === false">
                     <mat-icon>call</mat-icon> {{item.mobile}}
-                  </button>
-                  <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
+                  </button> -->
+                  <!-- <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                     aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized()" >
                     <mat-icon>call</mat-icon> Matchmaker: {{item.mobile}}
-                  </button>
+                  </button> -->
                   <button (click)="profileReAnswer(item,item.profile.id,'YES',i)" class="setButtons" mat-fab style="color: green;background: white;"
                     aria-label="Example icon-button with a heart icon">
                     <mat-icon>call</mat-icon>
@@ -81,14 +81,14 @@
   
               <ng-container *ngIf="panelOpenState != i">
                 <mat-card-actions style="margin-bottom: 0px;float: right;margin-right: 5px;" align="center">
-                  <button (click)="call(item.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
+                  <!-- <button (click)="call(item.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                     aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized() === false">
                     <mat-icon>call</mat-icon> {{item.mobile}}
                   </button>
                   <button (click)="call(item.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                     aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized() === true">
                     <mat-icon>call</mat-icon>Matchmaker: {{item.mobile}}
-                  </button>
+                  </button> -->
                   <button (click)="profileReAnswer(item,item.id,'YES',i)" class="setButtons" mat-mini-fab style="color: green;background: white;"
                     aria-label="Example icon-button with a heart icon" >
                     <mat-icon>call</mat-icon>
@@ -148,16 +148,16 @@
                 Religion
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/tarot.svg" alt="Age"> {{item.caste}}
+                <img class="setIcons" src="../assets/tarot.svg" alt="caste"> {{item.caste}}
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/cutlery.svg" alt="Height">  {{item.food_choice}}
+                <img class="setIcons" src="../assets/cutlery.svg" alt="food choice">  {{item.food_choice}}
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/house.svg" alt="Weight">  {{item.working_city}}
+                <img class="setIcons" src="../assets/house.svg" alt="city">  {{item.city}}
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/templeblue.svg" alt="Marital Status">  {{item.religion}}
+                <img class="setIcons" src="../assets/templeblue.svg" alt="religion">  {{item.religion}}
               </div>
             </div>
           </div>
@@ -178,16 +178,16 @@
                 Income
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/suitcase.svg" alt="Age">  {{item.occupation}}
+                <img class="setIcons" src="../assets/suitcase.svg" alt="occupation">  {{item.occupation}}
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/graduation.svg" alt="Height">  {{item.education}}
+                <img class="setIcons" src="../assets/graduation.svg" alt="education">  {{item.education}}
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/graduation.svg" alt="Weight">  {{item.profession}}
+                <img class="setIcons" src="../assets/graduation.svg" alt="profession">  {{item.profession}}
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/rupee.svg" alt="Marital Status">  {{setIncome(item.monthly_income)}} LPA
+                <img class="setIcons" src="../assets/rupee.svg" alt="income">  {{setIncome(item.monthly_income)}} LPA
               </div>
     
             </div>
@@ -240,16 +240,16 @@
                 Father
               </div>
               <div class="col-3">
-                <img class="setIcons" src="../assets/sisters.svg" alt="Sisters">  {{setMarriageSisters(item.unmarried_daughters,item.married_daughters)}}
+                <img class="setIcons" src="../assets/sisters.svg" alt="Sisters">  {{setMarriageSisters(item.unmarried_daughter,item.married_daughter)}}
               </div>
               <div class="col-3">
                 <img class="setIcons" src="../assets/brothers.svg" alt="Brothers">  {{setMarriageBrothers( item.unmarried_sons,item.married_sons)}}
               </div>
-              <div class="col-3">
-                <img class="setIcons" src="../assets/parents.svg" alt="Mother">   {{LifeStatus(item.mother_status,item.occupation_mother)}}
+              <div class="col-3" style="word-break: break-word">
+                <img class="setIcons" src="../assets/parents.svg" alt="Mother">   {{LifeStatus(item.mother_occupation)}}
               </div>
-              <div class="col-3">
-                <img class="setIcons" src="../assets/parents.svg" alt="Father">  {{LifeStatus(item.father_status,item.occupation)}}
+              <div class="col-3" style="word-break: break-word">
+                <img class="setIcons" src="../assets/parents.svg" alt="Father">  {{LifeStatus(item.father_occupation)}}
               </div>
     
             </div>
@@ -277,7 +277,7 @@
                 <img class="setIcons" src="../assets/family.svg" alt="family_type">  {{item.family_type}}
               </div>
               <div class="col-3" style="padding: 0dp !important;">
-                <img class="setIcons" src="../assets/house.svg" alt="house_type">  {{item.house_type}}
+                <img class="setIcons" src="../assets/house.svg" alt="house_type">  {{setHouseType(item.house)}}
               </div>
             </div>
           </div>

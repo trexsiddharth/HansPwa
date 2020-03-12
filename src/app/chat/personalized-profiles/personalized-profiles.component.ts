@@ -98,7 +98,6 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     }
   }
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
-    console.log(index);
     if (carous === null || carous === 'null') {
       if (photo === null) {
       if (gen === 'Male') {
@@ -218,19 +217,28 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  LifeStatus(person: string, work: string) {
-    if (person != null && person !== '') {
-      if (person.match('Alive')) {
-        if (work) {
-          return 'Alive | ' + work;
-        } else {
-          return 'Alive';
-        }
-      } else {
-        return 'Dead';
+  setHouseType(type) {
+    if (type) {
+      switch (type) {
+        case 'Y':
+          return 'Owned';
+          case 'N':
+            return 'Rented';
+        default:
+          break;
       }
+    } else {
+      return '';
     }
   }
+
+  LifeStatus( work: string) {
+        if (work) {
+          return work;
+        } else {
+          return '';
+        }
+}
 
   profileReAnswer(item: any, id: any, answer: any, index: any) {
     console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
@@ -361,7 +369,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   }
   setHeight(height: any) {
     if (height && height !== '') {
-      return this.Heights[this.Heights1.indexOf(height)];
+      return this.Heights[this.Heights1.indexOf(height.toString())];
     } else {
       return '';
     }
