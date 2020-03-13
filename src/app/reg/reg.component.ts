@@ -411,18 +411,21 @@ export class RegComponent implements OnInit {
 
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
+              firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
               firststepdata.append('manglik', this.PageOne.value.Mangalik);
 
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
+              firststepdata.append('locality', this.locality);
 
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
               console.log('gender', this.PageOne.value.gender);
               console.log('height', this.Heights1[this.PageOne.value.Height]);
               console.log('marital_status', this.PageOne.value.MaritalStatus);
+              console.log('manglik', this.PageOne.value.Mangalik);
               console.log('annual_income', this.PageOne.value.AnnualIncome);
               console.log('religion', this.PageOne.value.Religion);
               console.log('caste', this.PageOne.value.Castes);

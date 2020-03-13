@@ -622,7 +622,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.tabType = 'interestReceived';
         this.changeToHistory('interestReceived');
         break;
-      case 5:
+      case 4:
         this.tabType = 'rejected';
         this.changeToHistory('rejectedProfiles');
         break;
