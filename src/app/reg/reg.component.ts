@@ -90,7 +90,7 @@ export class RegComponent implements OnInit {
   numberCheck: string = localStorage.getItem('RegisterNumber');
   changeNumber = false;
   otpStatus = false;
-  createProfile: string[] = ['Myself', 'Brother' , 'Sister' , 'Other'];
+  createProfile: string[] = ['Myself', 'Son', 'Daughter', 'Brother', 'Sister', 'Other'];
   // tslint:disable-next-line: max-line-length
   date: string[] = ['1', '2' , '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
   // tslint:disable-next-line: max-line-length
@@ -631,6 +631,42 @@ onLocationSelected(e) {
     this.locationFamily = e;
     console.log('location of family', e);
 }
+
+setGender(value) {
+  console.log(value);
+  switch (value) {
+    case 'Brother':
+      this.PageOne.patchValue(
+        {
+          gender: 'Male'
+      });
+      break;
+  
+      case 'Sister':
+      this.PageOne.patchValue(
+        {
+          gender: 'Female'
+      });
+      break;
+  
+      case 'Son':
+      this.PageOne.patchValue(
+        {
+          gender: 'Male'
+      });
+      break;
+  
+      case 'Daughter':
+      this.PageOne.patchValue(
+        {
+          gender: 'Female'
+      });
+      break;
+  
+    default:
+      break;
+  }
+  }
 }
 
 
