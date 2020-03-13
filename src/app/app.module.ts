@@ -6,7 +6,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {
   MatFormFieldModule, MatDatepickerModule, MatInputModule, MatButtonToggleModule,
   MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatSidenavModule,
-  MatSnackBarModule, MatBadgeModule,
+  MatSnackBarModule, MatBadgeModule, MatStepperModule
 } from '@angular/material';
 
 import { MatNativeDateModule } from '@angular/material';
@@ -95,7 +95,7 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
     MatAutocompleteModule, MatCheckboxModule, MatSelectModule,
     ReactiveFormsModule, MatGoogleMapsAutocompleteModule.forRoot(), MatGoogleMapsAutocompleteModule, AgmCoreModule.forRoot(),
     MatNativeDateModule, MatChipsModule, NgxSpinnerModule,
-    NgxMatIntlTelInputModule, MatSnackBarModule
+    NgxMatIntlTelInputModule, MatSnackBarModule, MatStepperModule
     , RouterModule, WalkthroughModule, MatBadgeModule,
     LazyLoadImageModule.forRoot({
       preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset

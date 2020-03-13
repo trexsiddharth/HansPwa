@@ -7,7 +7,7 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { PersonalizedProfilesComponent } from './personalized-profiles/personalized-profiles.component';
 import { ConnectionErrorComponent } from './connection-error/connection-error.component';
-import { MatStepperModule, MatTabsModule, MatExpansionModule, MatCardModule, MatIconModule, MatMenuModule,
+import { MatTabsModule, MatExpansionModule, MatCardModule, MatIconModule, MatMenuModule,
      MatButtonModule, MatTooltipModule} from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,7 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     ChatRoutingModule,
     MatTabsModule,
-    MatStepperModule,
     MatExpansionModule,
     MatCardModule,
     MatIconModule,
