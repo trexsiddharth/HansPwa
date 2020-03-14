@@ -6,7 +6,9 @@ import { ChatComponent } from './chat.component';
 
 const routes: Routes = [
   {
-    path: '',
+   path: 'app/:fcm_app', component: ChatComponent},
+    { path: ':stage', component: ChatComponent},
+    {path: '',
     component: ChatComponent
   }
 ];

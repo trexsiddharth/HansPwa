@@ -18,8 +18,6 @@ const routes: Routes = [
   redirectTo: '',
   pathMatch: 'full', component: HomeComponent },
   { path: 'home', redirectTo: ''},
-  // { path: 'chat/app/:fcm_app', component: ChatComponent},
-  // { path: 'chat/:stage', component: ChatComponent},
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'reg', component: RegComponent},
