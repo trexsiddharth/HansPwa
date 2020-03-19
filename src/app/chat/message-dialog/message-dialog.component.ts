@@ -32,6 +32,11 @@ export class MessageDialogComponent implements OnInit {
       return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + this.profile.profile.photo;
     } else if (this.profile.photo) {
       return this.profile.photo;
+    } else if (this.profile.carousel) {
+      const carousel: object = JSON.parse(this.profile.carousel);
+      const keys = Object.keys(carousel);
+      // console.log(carousel[index]);
+      return carousel[keys[0]];
     } else {
       if (this.profile.gender === 'Male') {
         return '../../assets/male_pic.png';

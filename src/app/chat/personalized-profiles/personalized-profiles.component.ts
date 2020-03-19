@@ -242,7 +242,8 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
 
   profileReAnswer(item: any, id: any, answer: any, index: any) {
     console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+     (answer === 'SHORTLIST' || answer === 'YES')) {
      this.openMessageDialog(item, answer);
    } else {
      this.getData(id, answer, index);
@@ -254,29 +255,19 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
     reAnswerData.append('id', id);
-    reAnswerData.append('answer', answer);
-    if (localStorage.getItem('is_lead')) {
-      reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
-    } else {
-      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-          console.log(res);
-          reAnswerData.append('is_lead', res.is_lead);
-          localStorage.setItem('is_lead', res.is_lead);
-        },
-        err => {
-          console.log(err);
-        });
-    }
+    reAnswerData.append('TEXT', answer);
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
+    return this.http.post < any > ('https://partner.hansmatrimony.com/api/premiumPro', reAnswerData).subscribe(
       (data: any) => {
-        this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer);
-        console.log(answer);
-        console.log(localStorage.getItem('mobile_number'));
-        console.log(id);
         console.log(data);
-        this.getCredits();
-        this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
+        if (data.status === 1) {
+          this.Analytics('Profile Answered From Personalized', 'Profile Answered From Personalized', answer);
+          console.log(answer);
+          this.getCredits();
+          this.updateProfileList(answer, index);
+        } else {
+          this.ngxNotificationService.error(data.message);
+        }
       }, (error: any) => {
         console.log(error);
       });
@@ -288,11 +279,9 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  updateProfileList(ans: any, num: any, index: any) {
-    switch (this.type) {
-      case 'interestShown':
-        switch (ans) {
-          case 'YES':
+  updateProfileList(ans: any, index: any) {
+           switch (ans) {
+          case 'CONTACTED':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
               this.slideAndOpenProfile(this.profile[index], 1);
               this.profile.splice(index, 1);
@@ -310,7 +299,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
               duration: 4000
             });
             break;
-          case 'NO':
+          case 'REJECTED':
             this.profile.splice(index, 1);
             this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
               duration: 4000
@@ -319,62 +308,30 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
           default:
             break;
         }
-        break;
-      case 'rejected':
-        switch (ans) {
-          case 'YES':
-            if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              this.slideAndOpenProfile(this.profile[index], 1);
-              this.profile.splice(this.profile[index], 1);
-              this.setTab.emit(1);
-              this.profile.splice(index, 1);
-            } else {
-              this.ngxNotificationService.error('You Dont have Enough Credits', '',
-                null, {
-                  duration: 4000,
-                  closeButton: true
-                });
-            }
-            break;
-          case 'SHORTLIST':
-            // this.slideAndOpenProfile(this.profile[index], 2);
-            this.profile.splice(index, 1);
-            // document.querySelectorAll('mat-expansion-panel')[0].scrollIntoView({behavior: 'smooth'});
-            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
-              duration: 4000
-            });
-            break;
-          default:
-            break;
-        }
-        break;
-      default:
-        break;
-    }
   }
-  goToSubscription() {
+goToSubscription() {
     this.router.navigateByUrl('subscription');
   }
-  call(num: any) {
+call(num: any) {
     window.open('tel:' + num);
     this.panelOpenState = null;
   }
-  slideAndOpenProfile(item: any, slide: any) {
+slideAndOpenProfile(item: any, slide: any) {
     this.itemService.setItem(item);
     this.setTab.emit(slide);
   }
-  setDate(date: string) {
+setDate(date: string) {
     let newDate = new Date(date);
     return new Intl.DateTimeFormat('en-AU').format(newDate);
   }
-  setHeight(height: any) {
+setHeight(height: any) {
     if (height && height !== '') {
       return this.Heights[this.Heights1.indexOf(height.toString())];
     } else {
       return '';
     }
   }
-  disableForAWhile() {
+disableForAWhile() {
     if (this.panelOpenState === null) {
       setTimeout(() => {
         this.panelOpenState = -1;
@@ -384,7 +341,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       return false;
     }
   }
-  setTabNames(tab: any) {
+setTabNames(tab: any) {
     if (localStorage.getItem('language') === null) {
       localStorage.setItem('language', 'Hindi');
     }
@@ -425,12 +382,12 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
         break;
     }
   }
-  setAllTabNames() {
+setAllTabNames() {
     for (let index = 0; index < 5; index++) {
       this.setTabNames(index);
     }
   }
-  getNoDataText(type: any) {
+getNoDataText(type: any) {
     switch (type) {
       case 'contactedProfiles':
         this.noData = '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
@@ -448,7 +405,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
         break;
     }
   }
-  setIncome(value: string): String {
+setIncome(value: string): String {
     if (value != null) {
       if (Number(value) > 1000) {
         return String((Number(value) / 100000));
@@ -460,7 +417,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       return '';
     }
   }
-  toTitleCase(str) {
+toTitleCase(str) {
     if (str) {
       return str.replace(
         /\w\S*/g,

@@ -134,16 +134,23 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  getProfilePhoto(num: any, gen: string): string {
-    if (num === null) {
-      if (gen === 'Male') {
-        return '../../assets/male_pic.png';
+  getProfilePhoto(item: any, num: any, gen: string): string {
+    if (item.family) {
+      if (num === null) {
+        if (gen === 'Male') {
+          return '../../assets/male_pic.png';
+        } else {
+          return '../../assets/female_pic.png';
+        }
       } else {
-        return '../../assets/female_pic.png';
+        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
       }
     } else {
-      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+      const carousel: object = JSON.parse(item.profile.carousel);
+      const keys = Object.keys(carousel);
+      return carousel[keys[0]];
     }
+
   }
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
     console.log(index);
@@ -161,7 +168,11 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
+      if (carousel[keys[index]].toString().match('jeevansathi')) {
+        return carousel[keys[index]];
+      } else {
       return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+      }
     }
   }
   getImagesCount(num: string) {
@@ -343,7 +354,8 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   profileReAnswer(item: any, id: any, answer: any, index: any) {
     console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    (answer === 'SHORTLIST' || answer === 'YES')) {
      this.openMessageDialog(item, answer);
    } else {
      this.getData(id, answer, index);
@@ -612,6 +624,21 @@ openMessageDialog(shareItem, reply: string) {
 }
 getQualification(degree, education) {
   return education != null && education !== '' ? education : degree;
+  }
+
+  setHouseType(type) {
+    if (type) {
+      switch (type) {
+        case 'Y':
+          return 'Owned';
+          case 'N':
+            return 'Rented';
+        default:
+          break;
+      }
+    } else {
+      return '';
+    }
   }
 
 }
