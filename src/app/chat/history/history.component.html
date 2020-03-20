@@ -73,7 +73,7 @@
               </mat-card-actions>
               <div style="text-align: center; margin-top: 10px;"  *ngIf="type === 'contacted'">
                 <div style="text-align: center;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
-                  <img style="width: 20px;" src="../../../assets/locationwhite.svg" alt="locality"> {{toTitleCase(item.family.locality)}}
+                  <img style="width: 20px;" src="../../../assets/locationwhite.svg" alt="locality"> {{toTitleCase(item.family? item.family.locality : item.profile.locality)}}
                 </div>
               </div>
             </ng-container>
@@ -83,11 +83,11 @@
               <mat-card-actions style="margin-bottom: 0px;float: right;margin-right: 5px;" align="center">
                 <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized() === false">
-                  <mat-icon>call</mat-icon> {{item.family.mobile}}
+                  <mat-icon>call</mat-icon> {{item.family ? item.family.mobile: item.profile.mobile}}
                 </button>
                 <button (click)="call(item.family.mobile)" class="setButtons" mat-raised-button style="color: white;background: green;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type === 'contacted' && itemService.getPersonalized() === true">
-                  <mat-icon>call</mat-icon>Matchmaker: {{item.family.mobile}}
+                  <mat-icon>call</mat-icon>Matchmaker: {{item.family ? item.family.mobile: item.profile.mobile}}
                 </button>
                 <button (click)="profileReAnswer(item,item.profile.id,'YES',i)" class="setButtons" mat-mini-fab style="color: green;background: white;"
                   aria-label="Example icon-button with a heart icon" *ngIf="type != 'contacted'">
