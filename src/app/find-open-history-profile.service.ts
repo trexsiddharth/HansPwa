@@ -54,6 +54,14 @@ export class FindOpenHistoryProfileService {
   saveDailyCount(count: any) {
     this.profileCount.dailyCount = count + 1;
   }
+  
+  getOtherProfiles() {
+    if (this.isPersonalized) {
+    return '💁🏻‍♂️अन्य रिश्ते';
+  } else {
+    return '💁🏻‍♂️VIP रिश्ते';
+  }
+  }
   getDailyCount() {
     return this.profileCount.dailyCount ? '🗓आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )' : '🗓आज के रिश्ते';
   }

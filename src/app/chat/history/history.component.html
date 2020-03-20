@@ -25,9 +25,14 @@
                   </div>
                 </div>
               </mat-card-subtitle>
-              <img mat-card-lg-image [src]=getProfilePhoto(item,item.profile.photo,item.profile.gender) alt="item.profile.name">
+              <div mat-card-lg-image style="position: relative;">
+                <img mat-card-lg-image  [src]=getProfilePhoto(item,item.profile.photo,item.profile.gender) alt="item.profile.name">
+                <p class="premiumTag" *ngIf="item.family == null && itemService.getPersonalized()">💁🏻‍♂️अन्य रिश्ते</p>
+                <div mat-card-lg-image style="position: absolute;top: 0px;left: 10px;" *ngIf="item.family == null && itemService.getPersonalized()==false">
+                    <img style="width: 40px;" src="../../../assets/crown.svg" alt="VIP Rishte">
+                </div>
+              </div>
             </mat-card-title-group>
-
 
             <mat-card-header [hidden]="panelOpenState!=i">
               <div mat-card-avatar class="avatarImage"></div>

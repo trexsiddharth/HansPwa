@@ -268,7 +268,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
               return item.profile.name === prof.name;
             });
           }
-         
           // scroll to the profile
           // setTimeout(() => {
           //   document.querySelectorAll('mat-expansion-panel')[this.panelOpenState].scrollIntoView({
