@@ -62,7 +62,7 @@ export class CustomCheckoutComponent implements OnInit {
       if (this.checkOutForm.invalid) { return; }
       if (this.custId && this.orderId && this.custId !== null && this.orderId !== null) {
         // tslint:disable-next-line: max-line-length
-      this.subscriptionService.payNowCustom(3100, 'test', 0, this.checkOutForm.value.name, this.checkOutForm.value.email, localStorage.getItem('mobile_number'),payMode ,this.orderId,this.custId);
+      this.subscriptionService.payNowCustom(3100, 'live', 0, this.checkOutForm.value.name, this.checkOutForm.value.email, localStorage.getItem('mobile_number'),payMode ,this.orderId,this.custId);
       } else {
         this.ngxNotificationService.error('Something went wrong, Please try again later');
       }

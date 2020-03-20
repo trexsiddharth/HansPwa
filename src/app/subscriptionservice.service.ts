@@ -80,8 +80,8 @@ payNowCustom(amt, type, plan, name, email, phone,mode,orderId,cust_id) {
     // key secret = WoNRYehcPCDC5s4w6J8MUjqn;
   } else
   if (type === 'live') {
-    keyId = 'rzp_live_AkjH8AZSSZBdRn';
-    // secretkey -> 9jDuywER4AX1aGoiFeYDziIV
+    keyId = 'rzp_live_LUlMqhHJCUOuRY';
+    // secretkey -> in1Tc9W8vzyUS08JuP82aJvU
   }
   const key = keyId;
 
