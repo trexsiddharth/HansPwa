@@ -295,6 +295,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
             }
             break;
           case 'SHORTLIST':
+            this.profile.splice(index, 1);
             this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
               duration: 4000
             });
