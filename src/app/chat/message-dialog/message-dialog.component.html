@@ -82,3 +82,33 @@
     </div>
 
 </main>
+
+<!-- when user chooses shortlist and he doesnt hv his profile pic uploaded -->
+
+<main *ngIf="type=='contacted'">
+    <div id="cancel" style="text-align: end;">
+        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg" alt="cancel">
+    </div>
+    <div class="textAlign">
+        <img class="profilePicContacted" [src]="getProfilePhoto()" alt="profile.name"><br>
+    </div>
+    <div class="textAlign" style="color: rgba(0,0,0,.6);;">
+        <p style="margin-top: 15px;">
+            <img style="width: 30px;padding-bottom: 8px;margin-right: 8px;" src="../../../assets/crown.svg" alt="Crown"><strong>{{profile.name}}</strong> हमारे <strong>VIP</strong> सदस्य है |
+        </p>
+        <p style="margin-top: 15px;">
+            इनके रिलेशनशिप मैनेजर से बात करने के लिए
+        </p>
+        <p style="margin-top: 15px;">
+            अभी <strong>VIP</strong> प्लान में रजिस्टर कराएं |
+        </p>
+        <p style="margin-top: 15px;margin-bottom: 0px;font-size: 12sp;">
+            <strong>VIP</strong> सदस्यता की जानकारी के लिए
+        </p>
+        <button (click)="goToSub()" mat-raised-button style="background: #34b7f1;font-size: 20px;
+        color: white;
+    font-weight: bolder; width: 90%;">
+        <img width="30px" src="../../../assets/phone_white.svg" alt="call hans"> कॉल बैक रिक्वेस्ट करें 
+    </button>
+    </div>
+</main>

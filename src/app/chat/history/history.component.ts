@@ -353,9 +353,13 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   profileReAnswer(item: any, id: any, answer: any, index: any) {
     console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-    (answer === 'SHORTLIST' || answer === 'YES')) {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && 
+    this.itemService.getPhotoStatus() === false &&
+    answer === 'SHORTLIST') {
      this.openMessageDialog(item, answer);
+   } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+   && answer === 'YES') {
+    this.openMessageDialog(item, answer);
    } else {
      this.getData(id, answer, index);
    }

@@ -41,6 +41,12 @@ strong{
     border-radius: 50%;
     border: 1px solid darkgrey;
 }
+.profilePicContacted{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 1px solid darkgrey;
+}
 
 li {
     color: rgba(0,0,0,.6);
@@ -54,6 +60,12 @@ li {
         .profilePic{
             width: 70px;
             height: 70px;
+            border-radius: 50%;
+            border: 1px solid darkgrey;
+        }
+        .profilePicContacted{
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             border: 1px solid darkgrey;
         }

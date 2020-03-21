@@ -43,6 +43,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   button1: NotificationButton;
   noData;
   carouselSize;
+  shortListCount = 0;
   // Height
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
@@ -242,8 +243,11 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
 
   profileReAnswer(item: any, id: any, answer: any, index: any) {
     console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-     (answer === 'SHORTLIST' || answer === 'YES')) {
+    if (answer === 'CONTACTED') {
+      this.openMessageDialog(item, answer);
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+     this.itemService.getPhotoStatus() === false &&  answer === 'SHORTLIST' &&
+     (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
      this.openMessageDialog(item, answer);
    } else {
      this.getData(id, answer, index);
@@ -455,7 +459,8 @@ openMessageDialog(shareItem, reply: string) {
   dialogConfig.width = '700px';
   dialogConfig.disableClose = true;
   switch (reply.toLowerCase()) {
-    case 'yes':
+    case 'contacted':
+      this.shortListCount++;
       dialogConfig.data = {
         profile: shareItem,
         type: reply.toLowerCase()
