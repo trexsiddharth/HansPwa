@@ -110,4 +110,27 @@ export class MessageDialogComponent implements OnInit {
     });
   }
 
+  premiumInterest() {
+    this.spinner.show();
+    let interestForm = new FormData();
+    interestForm.append('id', localStorage.getItem('id'));
+    interestForm.append('is_lead', localStorage.getItem('is_lead'));
+    interestForm.append('interest_profile', this.profile.identity_number);
+    console.log(localStorage.getItem('id'));
+    console.log(localStorage.getItem('is_lead'));
+    console.log(this.profile.identity_number);
+    this.http.post<any>('https://partner.hansmatrimony.com/api/insertPremiumInterest', interestForm).subscribe(
+      data => {
+        console.log(data);
+        this.dialogRef.close();
+        this.spinner.hide();
+      },
+      err => {
+        console.log(err);
+        this.dialogRef.close();
+        this.spinner.hide();
+      }
+    );
+  }
+
 }
