@@ -18,7 +18,7 @@
                 <mat-card-subtitle>
                   {{setAge(item.birth_date)}} <b class="partition">|</b> {{setHeight(item.height)}} <b class="partition">|</b> {{item.education}} <b class="partition">|</b> 
                   {{item.occupation}} <b class="partition">|</b> {{item.monthly_income}} LPA <b class="partition">|</b> {{item.caste}} <b class="partition">|</b> {{item.city}} <br>
-                  {{toTitleCase(item.about)}} <br>
+                  {{removeBr(item.about)}} <br>
                   <div  style="margin-top: 10px;" *ngIf="type === 'contacted'">
                     <div style="right: 0px;color: white;background: green;display: inline-block;margin-right: 10px;font-size: 16px;padding: 10px;border-radius: 10px;word-break: keep-all">
                       <img style="width: 20px;" src="../../../assets/locationwhite.svg" alt="locality">{{toTitleCase(item.locality)}}
@@ -32,7 +32,7 @@
               <mat-card-header [hidden]="panelOpenState!=i">
                 <div mat-card-avatar class="avatarImage"></div>
                 <mat-card-title>{{toTitleCase(item.name)}}</mat-card-title>
-                <mat-card-subtitle>{{toTitleCase(item.about)}}</mat-card-subtitle>
+                <mat-card-subtitle>{{removeBr(item.about)}}</mat-card-subtitle>
               </mat-card-header>
               
               <ngb-carousel *ngIf="panelOpenState==i">

@@ -51,7 +51,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
 
-  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, 
+  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
               private dialog: MatDialog,
               public notification: NotificationsService, public itemService: FindOpenHistoryProfileService, private router: Router) {}
@@ -326,7 +326,7 @@ slideAndOpenProfile(item: any, slide: any) {
     this.setTab.emit(slide);
   }
 setDate(date: string) {
-    let newDate = new Date(date);
+    const newDate = new Date(date);
     return new Intl.DateTimeFormat('en-AU').format(newDate);
   }
 setHeight(height: any) {
@@ -434,6 +434,19 @@ toTitleCase(str) {
       return '';
     }
 }
+removeBr(str) {
+  let text: string;
+  if (str) {
+    text = this.toTitleCase(str);
+    text = text.replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, ' ');
+    text =  text.replace(/(<|&lt;)Br\s*\/*(>|&gt;)/g, ' ');
+    text =  text.replace('&#039', '\'');
+    return  text.replace('&Amp', '&');
+  } else {
+    return '';
+  }
+}
+
 getCredits() {
   const creditsData = new FormData();
   creditsData.append('id', localStorage.getItem('id'));
@@ -492,7 +505,7 @@ getPersonalizedProfiles() {
     //   this.getNoDataText(link);
     // }
     if (this.itemService.getItem()) {
-      let prof: any = this.itemService.getItem();
+      const prof: any = this.itemService.getItem();
       if (prof.profile) {
         this.panelOpenState = this.profile.findIndex((item) => {
           return item.profile.name === prof.profile.name;
