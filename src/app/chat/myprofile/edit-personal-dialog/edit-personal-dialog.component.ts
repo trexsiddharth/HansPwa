@@ -95,6 +95,7 @@ export class EditPersonalDialogComponent implements OnInit {
     personalDataForm.append('name', this.personalData.name);
     personalDataForm.append('birth_date', this.personalData.birth_date);
     personalDataForm.append('marital_status', this.personalForm.value.maritalStatus);
+    personalDataForm.append('manglik', this.personalForm.value.manglik);
     personalDataForm.append('religion', this.familyData.religion);
     personalDataForm.append('height', this.Heights1[this.Heights.indexOf(this.personal_height)]);
     personalDataForm.append('weight', this.personalForm.value.personalWeight);

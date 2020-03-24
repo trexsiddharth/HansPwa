@@ -104,7 +104,7 @@ export class CompatibilityPageTwoComponent implements OnInit {
       names: ['Diploma', 'High School', '12th', 'Trade School', 'Other']
     }
   ];
-  Occupation: string[] = ['Private Company', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
+  Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
 
 
 constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,

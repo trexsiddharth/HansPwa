@@ -106,6 +106,8 @@ export class RegComponent implements OnInit {
   authMobileNumberStatus = false;
   locationFamily;
   locality;
+  lat;
+  long;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
@@ -420,6 +422,12 @@ export class RegComponent implements OnInit {
               firststepdata.append('caste', this.PageOne.value.Castes);
               firststepdata.append('locality', this.locality);
 
+              this.lat ? firststepdata.append('lat', this.lat)
+              : firststepdata.append('lat', '');
+
+              this.long ? firststepdata.append('long', this.long)
+              : firststepdata.append('long', '');
+
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
               console.log('gender', this.PageOne.value.gender);
@@ -629,6 +637,8 @@ resolve(statusConfirmed);
 }
 onLocationSelected(e) {
     this.locationFamily = e;
+    this.lat = e.latitude;
+    this.long = e.longitude;
     console.log('location of family', e);
 }
 

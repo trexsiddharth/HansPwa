@@ -608,7 +608,15 @@ getProfile() {
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
     this.userProfile.email = profileData.family.email;
-    this.userProfile.relation = profileData.family.relation;
+
+    if (profileData.family.relation === 'Mother') {
+      this.userProfile.relation = 'Son';
+    } else if (profileData.family.relation === 'Father') {
+      this.userProfile.relation = 'Daughter';
+    } else {
+      this.userProfile.relation = profileData.family.relation;
+    }
+
     this.userProfile.gender = profileData.profile.gender;
     this.userProfile.dob = profileData.profile.birth_date;
     this.userProfile.height = profileData.profile.height;
@@ -623,6 +631,8 @@ getProfile() {
     this.userProfile.manglik = profileData.profile.manglik;
     this.locality = profileData.family.locality;
     this.userProfile.locality = profileData.family.locality;
+    this.lat = profileData.profile.lat_locality;
+    this.long = profileData.profile.long_locality;
     this.userProfile.qualification = profileData.profile.degree;
     this.userProfile.occupation = profileData.profile.occupation;
     this.userProfile.designation = profileData.profile.profession;

@@ -13,6 +13,8 @@ religion: string;
 caste: string;
 manglik: string;
 locality: string;
+lat_locality: string;
+long_locality: string;
 qualification: string;
 occupation: string;
 designation: string;
