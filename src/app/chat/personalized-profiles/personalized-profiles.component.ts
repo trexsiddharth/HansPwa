@@ -479,6 +479,11 @@ openMessageDialog(shareItem, reply: string) {
         type: reply.toLowerCase()
       };
       const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+      dialogRefYes.afterClosed().subscribe(
+        data => {
+          this.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call you');
+        }
+      );
       break;
 
     default:
