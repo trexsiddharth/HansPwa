@@ -136,6 +136,17 @@
     background-image: linear-gradient(0deg, #A2C2E8,white)
 }
 
+footer{
+    background-color: #06033D;
+    padding: 30px 20px;
+}
+
+ul{
+    list-style-type: none;
+    line-height: 2;
+    padding-left: 20px;
+}
+
 @media (max-width: 1024px){
     .featureCard2{
         width: 100%;
