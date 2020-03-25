@@ -104,6 +104,9 @@ body {
   .t-l {
     text-align: left;
   }
+  .t-c {
+    text-align: center;
+  }
   .btn.btn-blue:hover, .btn-blue:hover, .btn-blue:focus, .btn-blue:active, .open .dropdown-toggle.btn-blue {
   color: white;
   background-color: #34b7f1;

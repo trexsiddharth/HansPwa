@@ -7,30 +7,37 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { PersonalizedProfilesComponent } from './personalized-profiles/personalized-profiles.component';
 import { ConnectionErrorComponent } from './connection-error/connection-error.component';
-import { MatTabsModule, MatExpansionModule, MatCardModule, MatIconModule, MatMenuModule,
-     MatButtonModule, MatTooltipModule} from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { EditFamilyDialogComponent } from './myprofile/edit-family-dialog/edit-family-dialog.component';
+import { EditPersonalDialogComponent } from './myprofile/edit-personal-dialog/edit-personal-dialog.component';
+import { EditPreferenceDialogComponent } from './myprofile/edit-preference-dialog/edit-preference-dialog.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     ChatRoutingModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatCardModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
     NgbModule,
-    MatTooltipModule
+    AngularMaterialModule
   ],
   declarations: [ChatComponent,
     HistoryComponent,
     ProfileCardComponent,
     MyprofileComponent,
     PersonalizedProfilesComponent,
-    ConnectionErrorComponent
+    ConnectionErrorComponent,
+    MessageDialogComponent,
+    EditFamilyDialogComponent,
+    EditPersonalDialogComponent,
+    EditPreferenceDialogComponent,
+],
+entryComponents: [
+  MessageDialogComponent,
+  EditFamilyDialogComponent,
+  EditPersonalDialogComponent,
+  EditPreferenceDialogComponent,
 ]
 })
 export class ChatModule { }

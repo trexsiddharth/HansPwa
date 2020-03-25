@@ -7,6 +7,7 @@ import { CompatibilityFormComponent } from './compatibility-form/compatibility-f
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 import { RegComponent } from './reg/reg.component';
+import { NewHomeComponent } from './new-home/new-home.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,7 @@ const routes: Routes = [
 },
   { path: '',
   redirectTo: '',
-  pathMatch: 'full', component: HomeComponent },
+  pathMatch: 'full', component: NewHomeComponent },
   { path: 'home', redirectTo: ''},
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
