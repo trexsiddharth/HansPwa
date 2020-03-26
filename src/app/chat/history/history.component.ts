@@ -361,15 +361,19 @@ export class HistoryComponent implements OnInit, AfterViewInit {
    && answer === 'YES') {
     this.openMessageDialog(item, answer);
    } else {
-     this.getData(id, answer, index);
+     this.getData(item, id, answer, index);
    }
   }
 
-  getData(id: any, answer: any, index: any) {
+  getData(item: any, id: any, answer: any, index: any) {
     this.panelOpenState = null;
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
+    if (item.family) {
     reAnswerData.append('id', id);
+    } else {
+      reAnswerData.append('id', item.profile.identity_number);
+    }
     reAnswerData.append('answer', answer);
     if (localStorage.getItem('is_lead')) {
       reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
