@@ -1,4 +1,7 @@
 
+::ng-deep .mat-drawer{
+    background-color: white;
+}
 main{
     background-color: white;
     height: 100%;
