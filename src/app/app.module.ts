@@ -35,6 +35,8 @@ import { CompatibilityPhotoComponent } from './compatibility-form/compatibility-
 import { RegComponent } from './reg/reg.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { NewHomeComponent } from './new-home/new-home.component';
+import { HomeMainComponent } from './new-home/home-main/home-main.component';
+import { HomeDrawerComponent } from './new-home/home-drawer/home-drawer.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { NewHomeComponent } from './new-home/new-home.component';
     CompatibilityPhotoComponent,
     RegComponent,
     NewHomeComponent,
+    HomeMainComponent,
+    HomeDrawerComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+
+main{
+    background-color: white;
+    height: 100%;
+}
+.profilePicSection{
+    background-color: #E5F3F8;
+    position: relative;
+    color: white;
+}
+.profileImage{
+    width: 100%;
+    height: 200px;
+    border-radius: 50%;
+}
+.imageName{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    background-image: linear-gradient(0deg, #95ADB7,transparent);
+}

@@ -1,18 +1,16 @@
-
-.row{
-    padding: 0px;
-    margin: 0px;
-}
-#container1{
-    width: 100%;height: 100%;
-    position: relative;
-    margin-top: 50px;
-}
-
 .mainContainer{
     width: 100%;
     height: 100%;
     border: 1px solid #555;
+}
+
+.drawerSettings{
+width: 70%;
+}
+
+.row{
+    padding: 0px;
+    margin: 0px;
 }
 .fixToolBar{
     width: 100% ;
@@ -31,140 +29,4 @@
 }
 .b-r{
     border-right: 1px solid white;
-}
-.jumbotron{
-    padding: 0px;
-    margin: 0px;
-}
-.imageOneGradient{
-    width: 100%;
-    height: 30%;
-    position: absolute;
-    background-image: linear-gradient(0deg,transparent , #CA58FD);
-}
-.imageOne{
-    position: relative;
-}
-.imageOneGradient2{
-    width: 100%;
-    height: 30%;
-    position: absolute;
-    background-image: linear-gradient(180deg,transparent , #0C9BF2);
-}
-.registerBtn{
-    padding: 10px 50px;
-     border-radius: 100px;
-     font-size: 16px;
-     font-weight: bold;
-     background-color: #D313AE;
-}
-.imageTwoGradient{
-    width: 100%;
-    height: 60%;
-    position: relative;
-    display: -webkit-box;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    flex-direction: row;
-    padding-left: 30px;
-    -webkit-box-align: center;
-    align-items: center;
-    scroll-behavior: smooth;
-    overflow-x: auto;
-    background-image: linear-gradient(0deg,#5A2090 , #0090E6);
-    flex-flow: row;
-}
-.featureCard{
-    width: 70%;
-    height: 50%;
-    margin-left: 20px;
-    border-radius: 10px;
-    overflow: auto;
-}
-.imageThreeGradient{
-    width: 100%;
-    height: auto;
-    padding-bottom: 20px;
-    position: relative;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    background-image: linear-gradient(0deg,#AD018C , #5C1F90);
-
-}
-.innerHoriz{
-    width: 100%;
-    height: 270px;
-    padding-left: 20px;
-    position: relative;
-    display: -webkit-box;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    flex-direction: row;
-    overflow: auto;
-    scroll-behavior: smooth;
-    flex-flow: row;
-}
-.innerThree{
-    width: 50%;
-    height: 100%;
-    margin-left: 20px;
-    overflow: hidden;
-}
-.featureCard2{
-    width: 100%;
-    height: 60%;
-    border-radius: 10px;
-    overflow: auto;
-    background-color: #FDF4DB;
-}
-.button3{
-    width: 100%;
-    text-align: center;
-}
-#container4{
-    width: 100%;
-    text-align: center;
-    padding: 30px 20px 20px;
-    background-image: linear-gradient(0deg, #390572,#860271)
-}
-#container5{
-    width: 100%;
-    text-align: center;
-    padding: 30px 50px 20px;
-    background-image: linear-gradient(0deg, #A2C2E8,white)
-}
-
-footer{
-    background-color: #06033D;
-    padding: 30px 20px;
-}
-
-ul{
-    list-style-type: none;
-    line-height: 2;
-    padding-left: 20px;
-}
-li{
-    font-size: 14px;
-}
-
-
-
-@media (max-width: 1024px){
-    .featureCard2{
-        width: 100%;
-        height: 60%;
-        border-radius: 10px;
-        overflow: auto;
-        background-color: #FDF4DB;
-    }
-}
-@media (max-width: 350px){
-    #container1{
-        width: 100%;height: 100%;
-        position: relative;
-        margin-top: 70px;
-    }
 }
