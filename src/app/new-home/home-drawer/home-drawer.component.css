@@ -20,3 +20,33 @@ main{
     bottom: 0px;
     background-image: linear-gradient(0deg, #95ADB7,transparent);
 }
+
+.drawerButtonSection{
+    width: 100%;
+     position: absolute;
+     bottom: 0px;
+     padding: 0px 20px 30px;
+     background-color: white;
+}
+
+.btnImage{
+    float: left;
+    margin-left: 20px;
+    width: 35px;
+    margin-right: 5px;
+}
+
+@media screen and (max-height: 720px){
+
+    .drawerButtonSection{
+        width: 100%; 
+        position: relative;
+        padding: 0px 20px 30px;
+        background-color: white;
+    }
+    .btnImage{
+        float: left;
+        width: 35px;
+        margin-right: 5px;
+    }
+}
