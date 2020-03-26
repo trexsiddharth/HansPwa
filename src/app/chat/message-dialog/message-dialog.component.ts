@@ -123,7 +123,9 @@ export class MessageDialogComponent implements OnInit {
     this.http.post<any>('https://partner.hansmatrimony.com/api/insertPremiumInterest', interestForm).subscribe(
       data => {
         console.log(data);
-        this.dialogRef.close();
+        this.dialogRef.close({
+          request: true
+        });
         this.spinner.hide();
       },
       err => {

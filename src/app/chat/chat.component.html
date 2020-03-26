@@ -51,7 +51,7 @@
                      </div>
                   </ng-template>
                   </mat-tab>
-                  <mat-tab [label]="itemService.getOtherProfiles()">
+                  <mat-tab [label]="itemService.getOtherProfiles()" *ngIf="itemService.getPersonalized()">
                     <ng-template matTabContent>
                     <div>
                       <button (click)="goToSubs()" id="creditButton" mat-raised-button>

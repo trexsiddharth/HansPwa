@@ -595,8 +595,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
   //   });
   // }
 
-
-
   changeSelectedTab(event: any) {
     console.log(event);
     this.currentTab = event;
@@ -606,6 +604,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       clearInterval(this.timerMain);
     }
 
+    if (this.itemService.getPersonalized()) {
     switch (event) {
       case 0:
         this.changeToBot();
@@ -630,7 +629,32 @@ export class ChatComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+  } else {
+    switch (event) {
+      case 0:
+        this.changeToBot();
+        break;
+      case 1:
+        this.tabType = 'contacted';
+        this.changeToHistory('contactedProfiles');
+        break;
+      case 2:
+        this.tabType = 'interestShown';
+        this.changeToHistory('sortListProfiles');
+        break;
+      case 3:
+        this.tabType = 'interestReceived';
+        this.changeToHistory('interestReceived');
+        break;
+      case 4:
+        this.tabType = 'rejected';
+        this.changeToHistory('rejectedProfiles');
+        break;
 
+      default:
+        break;
+    }
+  }
 
   }
   setSelectedTab(index: any) {
