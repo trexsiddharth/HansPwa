@@ -33,6 +33,7 @@ import { trigger, transition, query, stagger, animate, style } from '@angular/an
 })
 export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   profile: any[];
+  message: string;
   @Input() type: any;
   @Output() share = new EventEmitter < any > ();
   @Output() stage = new EventEmitter < string > ();
@@ -505,9 +506,15 @@ getPersonalizedProfiles() {
   })).subscribe(
    (data: any) => {
     console.log(data);
+    if (data.status === 1) {
     this.profile = JSON.parse(data.message);
     console.log(this.profile);
     this.spinner.hide();
+    } else {
+      this.profile = null;
+      this.message = data.message;
+      this.spinner.hide();
+    }
     // if (this.profile.length < 1) {
     //   this.getNoDataText(link);
     // }

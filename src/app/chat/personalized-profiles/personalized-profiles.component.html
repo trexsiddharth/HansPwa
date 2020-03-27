@@ -287,13 +287,10 @@
     </div>
   
    <div style="text-align:center">
-    <h5  *ngIf="this.profile.length < 1" [innerHTML]="noData">
-      ☹️ No data found
+    <h5  *ngIf="this.profile==null" [innerHTML]="noData">
+      {{message}}
     </h5>
    </div>
-      
-  
-  
     </div>
   
   </main>
