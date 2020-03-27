@@ -247,9 +247,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         });
     }
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).pipe(timeout(7000), retry(2), catchError(e => {
-      throw new Error('Server Timeout ' + e);
-    })).subscribe(
+    return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
       (data: any) => {
         console.log(data);
         this.profile = data;
