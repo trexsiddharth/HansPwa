@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ProfileCount } from './chat/countModel';
+import { stat } from 'fs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { ProfileCount } from './chat/countModel';
 export class FindOpenHistoryProfileService {
   openItem;
   credits;
+  is_lead;
   isPersonalized = false;
   hasPhoto = false;
   profileCount = new ProfileCount();
@@ -39,6 +41,13 @@ export class FindOpenHistoryProfileService {
   getPersonalized() {
     return this.isPersonalized;
   }
+  setIsLead(status) {
+    this.is_lead = status;
+  }
+  getIsLead() {
+    return this.is_lead;
+  }
+
   setPhotoStatus(status: boolean) {
     this.hasPhoto = status;
   }

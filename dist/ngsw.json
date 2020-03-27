@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1585220708972,
+  "timestamp": 1585307591248,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -8,8 +8,8 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/5-es2015.2268f993dd34a8b630b9.js",
-        "/5-es5.2268f993dd34a8b630b9.js",
+        "/5-es2015.d7a7f84900c00fbf05e1.js",
+        "/5-es5.d7a7f84900c00fbf05e1.js",
         "/favicon.ico",
         "/firebase-messaging-sw.js",
         "/index.html",
@@ -18,8 +18,8 @@
         "/manifest.webmanifest",
         "/polyfills-es2015.2987770fde9daa1d8a2e.js",
         "/polyfills-es5.3504ece4da5e4c1fb5b5.js",
-        "/runtime-es2015.cf25c7a07e7ac6b6de78.js",
-        "/runtime-es5.cf25c7a07e7ac6b6de78.js",
+        "/runtime-es2015.6733528af3e6c07b9bc9.js",
+        "/runtime-es5.6733528af3e6c07b9bc9.js",
         "/scripts.06e020159d183ba8b2a3.js",
         "/styles.f73ebf4929d32ae8bd04.css"
       ],
@@ -259,8 +259,8 @@
     }
   ],
   "hashTable": {
-    "/5-es2015.2268f993dd34a8b630b9.js": "48d8c8df00090614c5b63704583876b711394558",
-    "/5-es5.2268f993dd34a8b630b9.js": "89cc34c547e8e335c95067f6d5bce6e43f63b741",
+    "/5-es2015.d7a7f84900c00fbf05e1.js": "73efe2d8aaa56c4248165e297a3feff4d57ee8b3",
+    "/5-es5.d7a7f84900c00fbf05e1.js": "d92d3eb53071c7cd396a187fdd5ffad3bd300875",
     "/SemplicitaPro.96554f62871e20bd3d80.otf": "18e2fd90bcfce6db53d3a17b22a7836d4e5f50d8",
     "/address.57026215113752dcecff.webp": "0b15e56c18817b8265e5ea96a073cc3ea2acc480",
     "/assets/Aprajita.webp": "6c66fe588e1d66e8754584544b901a2c740ce7ca",
@@ -470,7 +470,7 @@
     "/assets/whatsbg.webp": "a0f05bc1171a03e6e2f17bb2f84f80dc6723db5d",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "fe0f561fca3829cf795da1691a3e3e7adeb32a81",
+    "/index.html": "e631ab0ec58a65a1c2b8ff55b3b196160fd92aad",
     "/logo_192.5f7f254ba38018213cfd.png": "85f05cc7f4b71b477f0a84763c133326e9adb1ef",
     "/logo_384.9c06b71ef1ff8943abf5.png": "fe5a6980894a3142b5cf5cdf4c69ca9b91f1cb76",
     "/main-es2015.21e7391e497918cceaec.js": "dd52a7b94df40fec020b3b12a85e8d0ac4b1850f",
@@ -479,8 +479,8 @@
     "/polyfills-es2015.2987770fde9daa1d8a2e.js": "cf5cbfa9134716054fb479ab21362146cdf1f2ff",
     "/polyfills-es5.3504ece4da5e4c1fb5b5.js": "ac501f29a146d28dbc5bc0687a5301c3fd577d5d",
     "/redback.093eeb320fb87fb9d11c.jpg": "f5d5e7f9827faa68365a9cb4ce9601ef1b6007d0",
-    "/runtime-es2015.cf25c7a07e7ac6b6de78.js": "4ba7206812cc1e18a2456b7212ceb8c1ca524486",
-    "/runtime-es5.cf25c7a07e7ac6b6de78.js": "c1036d8232866302f0683d6e412d2a2786e5a6fd",
+    "/runtime-es2015.6733528af3e6c07b9bc9.js": "f08fdf63e7ff94ffd46b32d08684e57d8bf4c4fc",
+    "/runtime-es5.6733528af3e6c07b9bc9.js": "42b26b4053508e4c7e3de9fbb61ea93356492213",
     "/scripts.06e020159d183ba8b2a3.js": "dac2ee398ded62269aabc62c8c050317299ff501",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
     "/styles.f73ebf4929d32ae8bd04.css": "16c16710847dea95c5a0b9f62da447a7670e64db",

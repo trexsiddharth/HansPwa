@@ -604,7 +604,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       clearInterval(this.timerMain);
     }
 
-    if (this.itemService.getPersonalized()) {
+    if (this.itemService.getIsLead() === 0) {
     switch (event) {
       case 0:
         this.changeToBot();

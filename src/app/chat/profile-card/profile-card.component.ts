@@ -79,6 +79,14 @@ export class ProfileCardComponent implements OnInit {
         } else {
           this.itemService.setIsPersonalized(false);
         }
+        //for is_lead
+        if (data && data.is_lead != null) {
+            this.itemService.setIsLead(data.is_lead);
+        } else {
+          this.itemService.setIsLead(1);
+        }
+
+
         // set profile image (circular in top bar)
         this.setProfileImage.emit(data.photo);
         if (data && data.photo) {
