@@ -6,11 +6,8 @@
           <mat-tab-group mat-align-tabs="center" class="matGroup"   [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
             <mat-tab [label]="itemService.getDailyCount()" id="today">
                   <ng-template matTabContent>
-                      <!-- <div id="my-botui-app" class="mainBody w-full ht-full setBotUi" >
-                                <bot-ui></bot-ui>
-                    </div> -->
                     <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                      कांटेक्ट नंबर: {{points}}
+                      कांटेक्ट नंबर: {{itemService.getCredits()}}
                   </button>
                     <div class="mainBody  w-full bg-white ht-full setBotUi">
                         <app-profile-card (setProfileImage)="setProfileImage($event)" (changeTab)="setSelectedTab($event)"></app-profile-card>
@@ -20,10 +17,10 @@
                   <mat-tab [label]="itemService.getContactedCount()" id="contacted">
                       <ng-template matTabContent>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{points}}
+                          कांटेक्ट नंबर: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
+                                   <app-history  (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                      </div>
                   </ng-template>
                   </mat-tab>
@@ -31,10 +28,10 @@
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{points}}
+                          कांटेक्ट नंबर: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType"  ></app-history>
+                                   <app-history  (setTab)="setSelectedTab($event)" [type]="tabType"  ></app-history>
                          </div>
                      </div>
                   </ng-template>
@@ -43,10 +40,10 @@
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{points}}
+                          कांटेक्ट नंबर: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
+                                   <app-history  (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                          </div>
                      </div>
                   </ng-template>
@@ -55,10 +52,10 @@
                     <ng-template matTabContent>
                     <div>
                       <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        कांटेक्ट नंबर: {{points}}
+                        कांटेक्ट नंबर: {{itemService.getCredits()}}
                     </button>
                         <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                 <app-personalized-profiles (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-personalized-profiles>
+                                 <app-personalized-profiles  (setTab)="setSelectedTab($event)" [type]="tabType" ></app-personalized-profiles>
                        </div>
                    </div>
                 </ng-template>
@@ -67,10 +64,10 @@
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{points}}
+                          कांटेक्ट नंबर: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                   <app-history (share)="getSelectedProfile($event)" (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
+                                   <app-history  (setTab)="setSelectedTab($event)" [type]="tabType" ></app-history>
                          </div>
                      </div>
                   </ng-template>

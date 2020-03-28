@@ -68,7 +68,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   profile: any[];
   @Input() type: any;
-  @Output() share = new EventEmitter < any > ();
   @Output() stage = new EventEmitter < string > ();
   @Output() setTab = new EventEmitter < any > ();
   likeCount;
@@ -110,29 +109,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }
 
 
-  }
-
-  shareData(id: any, contacted: any, status) {
-    const profileData = new FormData();
-    profileData.append('id', id);
-    profileData.append('contacted', contacted);
-    profileData.append('is_lead', '0');
-
-    console.log('id', id);
-    console.log('contacted', contacted);
-    console.log('is_lead', localStorage.getItem('is_lead'));
-    // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', profileData).subscribe(
-      (data: any) => {
-        console.log(data);
-        data.profile.comments = status;
-        this.share.emit(data);
-        this.stage.emit('chatbot');
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
   }
   getProfilePhoto(item: any, num: any, gen: string): string {
     if (item.family) {

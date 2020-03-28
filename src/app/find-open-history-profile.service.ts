@@ -32,7 +32,6 @@ export class FindOpenHistoryProfileService {
     }
   }
   getCredits() {
-    console.log(this.credits);
     return this.credits;
   }
   setIsPersonalized(status: boolean) {

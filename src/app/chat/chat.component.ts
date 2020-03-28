@@ -7,10 +7,6 @@ import {
   HttpClient
 } from '@angular/common/http';
 import {
-  FormBuilder,
-  FormGroup
-} from '@angular/forms';
-import {
   Router,
   ActivatedRoute,
   Event
@@ -198,9 +194,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     public itemService: FindOpenHistoryProfileService,
     private chatServivce: ChatServiceService
   ) {
-    
-    console.log(this.history);
-    this.history = 'chatbot';
   }
 
   ngOnInit() {
@@ -248,76 +241,18 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
 
     if (localStorage.getItem('mobile_number')) {
-      setTimeout(() => {
-      this.getCredits();
-      }, 2000);
       this.chatServivce.setContactNumber(localStorage.getItem('mobile_number'));
       this.currentContact = localStorage.getItem('mobile_number');
-      // this.checkUrl(this.currentContact).subscribe(
-      //   (data: any) => {
-      //     console.log(data);
-      //     const text: string = data.apiwha_autoreply;
-      //     const id = data.id;
-      //     this.photo = data.photo;
-      //     console.log(text);
-      //     console.log(id);
-      //     this.show_ad = data.show_ad;
-      //     localStorage.setItem('id', id);
-      //     this.paidStatus = data.paid_status;
-      //     console.log(this.paidStatus);
-      //     this.getCredits();
-      //     if (text.match('SHOW')) {
-      //       this.Analytics('login', 'login', 'logged In');
-      //       this.loginStatus = true;
-      //       if (this.langChanged === true) {
-      //         this.changeLanguage(this.currentContact, localStorage.getItem('language')).subscribe(
-      //           (data: any) => {
-      //             console.log(data);
-      //           },
-      //           (error: any) => {
-      //             console.log(error);
-      //           }
-      //         );
-      //         this.langChanged = false;
-      //       }
-      //       // this.repeatMEssage('SHOW', this.currentContact);
-      //     } else {
-      //       this.botui.action.text({
-      //         action: {
-      //           sub_type: 'number',
-      //           placeholder: 'कृपया अपना १० अंको का मोबाइल नंबर डालें'
-      //         }
-      //       }).then(res => {
-      //         if (this.langChanged === true) {
-      //           this.changeLanguage(res.value, localStorage.getItem('language')).subscribe(
-      //             (data: any) => {
-      //               console.log(data);
-      //             },
-      //             (error: any) => {
-      //               console.log(error);
-      //             }
-      //           );
-      //           this.langChanged = false;
-      //         }
-      //         // this.repeatMEssage('SHOW', res.value);
-      //       });
-      //     }
-      //   },
-      //   (error: any) => {
-      //     console.log(error);
-      //   });
 
     } else if (this.currentUrl) {
-      this.getCredits();
       this.chatServivce.setContactNumber(this.currentUrl);
       this.Analytics('login', 'login', 'logged In');
       this.currentContact = this.currentUrl;
-      // this.showHistoryMessages(this.currentUrl);
-      // this.numberValidation(this.currentContact);
     } else {
       this.router.navigateByUrl('phone-number');
     }
 
+    // add to home screen prompt
     console.log(this.promptService.getPrompt());
     this.promptData = this.promptService.getPrompt();
     this.innerWidth = window.innerWidth;
@@ -457,11 +392,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     document.getElementById('footerVisibility').style.display = 'none';
   }
   
-  getSelectedProfile(data: any) {
-    this.setSelectedTab(0);
-    this.changeToBot();
-  }
-  
   changeToHistory(link: string) {
     if (this.currentContact) {
       (window as any).ga('send', 'event', 'history', 'history clicked', {
@@ -472,6 +402,17 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.history = 'history';
 
       console.log(localStorage.getItem('id'));
+      this.scrollHorizontal(this.currentTab);
+    }
+  }
+  changeToPersonalized() {
+    if (this.currentContact) {
+      (window as any).ga('send', 'event', 'personalized section', 'personalized clicked', {
+        hitCallback: () => {
+          console.log('Tracking personalized successful');
+        }
+      });
+      this.history = 'personalized';
       this.scrollHorizontal(this.currentTab);
     }
   }
@@ -560,41 +501,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // setWhatsAppLink(loggedId: string, profileId: string, full: string, index: number) {
-  //   const pdfData = new FormData();
-  //   pdfData.append('id', loggedId);
-  //   pdfData.append('profile_to_send_id', profileId);
-  //   pdfData.append('full', full);
-  //   if (localStorage.getItem('is_lead')) {
-  //     pdfData.append('is_lead', localStorage.getItem('is_lead'));
-  //   } else {
-  //     this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-  //         console.log(res);
-  //         pdfData.append('is_lead', res.is_lead);
-  //         localStorage.setItem('is_lead', res.is_lead);
-  //       },
-  //       err => {
-  //         console.log(err);
-  //       });
-  //   }
-  //   return this.http.post < any > ('https://partner.hansmatrimony.com/api/downloadPdf', pdfData).subscribe(data => {
-  //     console.log(data);
-  //     if (data.status === 1) {
-  //       const whatLink = document.querySelectorAll < HTMLElement > ('#whtLink');
-  //       this.spinner.hide();
-  //       this.ngxNotificationService.info('Sharing on Whatsapp');
-  //       if (whatLink) {
-  //         // tslint:disable-next-line: max-line-length
-  //         whatLink[index].setAttribute('href', 'whatsapp://send?text=*हंस%20मॅट्रिमोनी*%20पर%20मुझे%20ये%20रिश्ता%20पसंद%20आया%20है।%20आपकी%20क्या%20राय%20है?%20' + data.url);
-  //         whatLink[index].click();
-  //       }
-  //     }
-  //   }, err => {
-  //     console.log(err);
-  //     this.ngxNotificationService.error('Error Occured');
-  //   });
-  // }
-
   changeSelectedTab(event: any) {
     console.log(event);
     this.currentTab = event;
@@ -620,6 +526,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
       case 3:
         this.tabType = 'interestReceived';
         this.changeToHistory('interestReceived');
+        break;
+      case 4:
+        this.tabType = 'personalized';
+        this.changeToPersonalized();
         break;
       case 5:
         this.tabType = 'rejected';
@@ -661,6 +571,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     console.log('selected tab', index);
     if (this.history !== 'myprofile') {
       this.selectedTab = index;
+      this.changeSelectedTab(this.selectedTab);
     } else {
       this.selectedTab = 0;
       this.changeToBot();
