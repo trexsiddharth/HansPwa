@@ -244,7 +244,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
 
   profileReAnswer(item: any, id: any, answer: any, index: any) {
     console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
-    if (answer === 'CONTACTED') {
+    if (answer === 'CONTACTED' && this.itemService.getPersonalized() === false) {
       this.openMessageDialog(item, answer);
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
      this.itemService.getPhotoStatus() === false &&  answer === 'SHORTLIST' &&
