@@ -320,7 +320,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   profileReAnswer(item: any, id: any, answer: any, index: any) {
-    console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && 
     this.itemService.getPhotoStatus() === false &&
     answer === 'SHORTLIST') {
@@ -358,13 +357,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line: max-line-length
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
       (data: any) => {
-        this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer);
-        console.log(answer);
-        console.log(localStorage.getItem('mobile_number'));
-        console.log(id);
         console.log(data);
-        this.getCredits();
+        this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer);
         this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
+        this.getCredits();
       }, (error: any) => {
         console.log(error);
       });

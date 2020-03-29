@@ -222,7 +222,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
 
 
-
     if (localStorage.getItem('mobile_number')) {
       this.loginStatus = true;
     } else {
@@ -237,6 +236,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     if (this.router.url.match('mobile=')) {
       this.currentUrl = this.router.url.substring(13);
+      localStorage.setItem('mobile_number', this.currentUrl);
       console.log(this.currentUrl);
     }
 
