@@ -1,0 +1,400 @@
+<main *ngIf="item">
+    <div id="profileImageDiv">
+        <ngb-carousel>
+            <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
+                    <img mat-card-image id="profilePic" (load)="imageSetSuccess()" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
+            </ng-template>
+          </ngb-carousel>
+
+          <div id="imageContent">
+          <div>
+            <span style="font-weight: bold;font-size: 18px;">
+                {{toTitleCase(item.name)}} | {{setAge(item.birth_date)}}
+            </span><br>
+            <span style="font-size: 14px;">
+                {{item.working_city}} | {{setHeight(item.height)}}
+            </span>
+          </div>
+            
+            <button id="profileLeft" mat-fab style="color: #0F9CF2;
+                background: white;
+                float: right;"
+          aria-label="Example icon-button with a heart icon" >
+        </button>
+        </div>
+
+    </div>
+
+    <div id="answerButtons">
+        <div class="t-c">
+            <button 
+            (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="width: 70px;
+            height: 70px;color: grey;background: #C8C8C8;margin-bottom: 10px;">
+              <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+            </button><br>
+            <span style="color: #C8C8C8;font-weight: bold;font-size: 18px;">
+                नापसंद है
+            </span>
+        </div>
+        <div class="t-c">
+            <button 
+            (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="width: 70px;
+            height: 70px;color: green;background: #58D1FD;margin-bottom: 10px;"
+              aria-label="Example icon-button with a heart icon" >
+              <img class="buttonImage" src="../../../assets/userwhite.svg" alt="कांटेक्ट करें">
+            </button><br>
+            <span style="color: #58D1FD;font-weight: bold;font-size: 18px;">
+                कांटेक्ट करें
+            </span>
+        </div>
+        <div class="t-c">
+            <button 
+            (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="width: 70px;
+            height: 70px;color: red;background: #D313AE;margin-bottom: 10px;"
+              aria-label="Example icon-button with a heart icon" >
+              <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
+            </button><br>
+            <span style="color: #D313AE;font-weight: bold;font-size: 18px;">
+                पसंद है
+            </span>
+        </div>
+            
+    </div>
+
+    <section style="padding: 0px 20px;">
+
+        <div  style="margin-top: 20px;">
+            <div class="row" id="verified">
+                <div class="col-2">
+                    <img style="width: 40px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
+                </div>
+                <div class="col-10">
+                        <span style="font-size: 16px;font-weight: bold;">वेरिफ़िएड एट:</span><br>
+                        <span>{{item.facebook}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <div class="row" id="controlledBy">
+                <div class="col-2">
+                    <img style="width: 40px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
+                </div>
+                <div class="col-10" style="align-self: center;">
+                        <span style="font-size: 16px;font-weight: bold;align-self: center;">प्रोफाइल मैनेज्ड बय: {{item.relation}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="aboutSection" *ngIf="item.about && item.about.length > 6">
+            <p>
+                <span style="color: #D313AE;font-size: 30px;font-weight: bold;">हेलो,</span> माइसेल्फ {{item.name}}, {{item.about}}
+            </p>
+        </div>
+
+<!-- // personal details  -->
+
+        <div id="personalSection">
+            <div style="display: flex;justify-content: space-between;">
+                <span style="color: #0C9BF2;font-size: 18px; font-weight: bold;align-self: center;">
+                    पर्सनल डिटेल्स
+                </span>
+                <div style="background-color: #0C9BF2;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
+                    <img width="40px" style="margin-top: 20px;" src="../../../assets/userwhite.svg" alt="personal details">
+                </div>
+            </div>
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/weight.svg" alt="weight">
+                    <span class="title">वेट</span>
+                </div>
+                <div class="col-6">
+                    {{item.weight}} Kg
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/heart.svg" alt="marital status">
+                    <span class="title">मैरिटल स्टेटस</span>
+                </div>
+                <div class="col-6">
+                    {{item.marital_status}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/cutlery.svg" alt="marital status">
+                    <span class="title">फ़ूड चॉइस</span>
+                </div>
+                <div class="col-6">
+                    {{item.food_choice}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/tarot.svg" alt="marital status">
+                    <span class="title">रिलिजन</span>
+                </div>
+                <div class="col-6">
+                    {{item.religion}},{{item.caste}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/locationblue.svg" alt="marital status">
+                    <span class="title">वर्किंग सिटी</span>
+                </div>
+                <div class="col-6">
+                    {{item.working_city}}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- // career details  -->
+
+        <div id="careerSection">
+            <div style="display: flex;justify-content: space-between;">
+                <span style="color: #CA58FD;font-size: 18px; font-weight: bold;align-self: center;">
+                    करियर डिटेल्स
+                </span>
+                <div style="background-color: #CA58FD;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
+                    <img width="40px" style="margin-top: 20px;" src="../../../assets/suitcasewhite.svg" alt="career details">
+                </div>
+            </div>
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/suitcase.svg" alt="occupation">
+                    <span class="title">ऑक्यूपेशन</span>
+                </div>
+                <div class="col-6">
+                    {{item.occupation}} Kg
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/graduation.svg" alt="designation">
+                    <span class="title">देसिग्नेशन</span>
+                </div>
+                <div class="col-6">
+                    {{item.profession}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/rupee.svg" alt="income">
+                    <span class="title">आय</span>
+                </div>
+                <div class="col-6">
+                    {{setIncome(item.monthly_income)}} LPA
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/graduation.svg" alt="graduation">
+                    <span class="title">ग्रेजुएशन</span>
+                </div>
+                <div class="col-6">
+                    {{item.degree}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/house.svg" alt="college">
+                    <span class="title">कॉलेज</span>
+                </div>
+                <div class="col-6">
+                    {{item.college}}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- //horoscope details  -->
+
+        <div id="horoscopeSection">
+            <div style="display: flex;justify-content: space-between;">
+                <span style="color: #070973;font-size: 18px; font-weight: bold;align-self: center;">
+                    होरोस्कोप
+                </span>
+                <div style="background-color: #070973;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
+                    <img width="40px" style="margin-top: 20px;" src="../../../assets/sunwhite.svg" alt="horoscope details">
+                </div>
+            </div>
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/birthday.svg" alt="birth date">
+                    <span class="title">D.O.B</span>
+                </div>
+                <div class="col-6">
+                    {{item.birth_date}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/clock.svg" alt="birth time">
+                    <span class="title">बर्थ टाइम</span>
+                </div>
+                <div class="col-6">
+                    {{item.birth_time}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/locationblue.svg" alt="birth place">
+                    <span class="title">बर्थ प्लेस</span>
+                </div>
+                <div class="col-6">
+                    {{item.birth_place}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/tarot.svg" alt="manglik">
+                    <span class="title">मांगलिक</span>
+                </div>
+                <div class="col-6">
+                    {{setManglik(item.manglik)}}
+                </div>
+            </div>
+        </div>
+
+        <!-- //family details  -->
+
+        <div id="familySection">
+            <div style="display: flex;justify-content: space-between;">
+                <span style="color: #58D1FD;font-size: 18px; font-weight: bold;align-self: center;">
+                    फॅमिली डिटेल्स
+                </span>
+                <div style="background-color: #58D1FD;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
+                    <img width="40px" style="margin-top: 20px;" src="../../../assets/familyblue.svg" alt="family details">
+                </div>
+            </div>
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/sisters.svg" alt="sister">
+                    <span class="title">सिस्टर्स</span>
+                </div>
+                <div class="col-6">
+                    {{setMarriageSisters(item.unmarried_daughters,item.married_daughters)}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/brothers.svg" alt="brothers">
+                    <span class="title">ब्रोठेर्स</span>
+                </div>
+                <div class="col-6">
+                    {{setMarriageBrothers( item.unmarried_sons,item.married_sons)}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/parents.svg" alt="mother">
+                    <span class="title">मदर</span>
+                </div>
+                <div class="col-6">
+                    {{LifeStatus(item.mother_status,item.occupation_mother)}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/parents.svg" alt="father">
+                    <span class="title">फादर</span>
+                </div>
+                <div class="col-6">
+                    {{LifeStatus(item.father_status,item.occupation)}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/meditation.svg" alt="gotra">
+                    <span class="title">गोत्र</span>
+                </div>
+                <div class="col-6">
+                    {{item.gotra}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/family.svg" alt="family type">
+                    <span class="title">फॅमिली टाइप</span>
+                </div>
+                <div class="col-6">
+                    {{item.family_type}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/house.svg" alt="house type">
+                    <span class="title">हाउस टाइप</span>
+                </div>
+                <div class="col-6">
+                    {{item.house_type}}
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img width="30px" src="../../../assets/moneybag.svg" alt="house type">
+                    <span class="title">फॅमिली इनकम</span>
+                </div>
+                <div class="col-6">
+                    {{setIncome(item.family_income)}} LPA
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<div class="container" id="containerMessage" *ngIf="type=='message'">
+    <div class="messageHeader">
+      <h3>Message</h3>
+      <img src="../../../assets/logo_192.png" alt="message">
+      <p>
+          {{item}}
+      </p>
+    </div>
+    <div class="messageFooter">
+      <button (click)="showPlan()"  *ngIf="button==='2'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;">
+          👁प्लान देखें
+      </button> 
+      <button (click)="showLikedProfile()"  *ngIf="button == '1'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #10e096e9;">
+         ❤️ मेरी पसंद
+      </button> 
+      <button (click)="showProfilesLikedMe()" *ngIf="button == '1'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #10e096e9;">
+        💓मै किसे पसंद हूँ?
+     </button> 
+      <button (click)="callHans()" *ngIf="button==='2' || button=== '4'" color="primary" class="setButtons" mat-raised-button style="color: white;background: green;">
+         📞कॉल हंस
+      </button> 
+      <button  (click)="getNextMessageOrProfile('NO')" *ngIf="button==='2' || button=== '3' || button=== '5'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #05dfd7;">
+          👩‍❤️‍👨 और दिखाएं
+      </button> 
+      <button (click)="buyPlan(3500)" *ngIf="button==='3'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;;">
+          👁प्लान 3500
+       </button> 
+       <button (click)="buyPlan(5500)" *ngIf="button==='3'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;;">
+          👁प्लान 5500
+       </button> 
+    </div>
+    
+</div>

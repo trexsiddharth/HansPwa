@@ -1,0 +1,95 @@
+main{
+    padding-bottom: 200px;
+}
+#profileImageDiv{
+    padding: 20px 10px;
+    position: relative;
+}
+#profilePic{
+    width: 100%;
+    height: 40rem;
+    border-radius: 5px;
+}
+::ng-deep .carousel-indicators{
+    bottom: 50px !important;
+}
+
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+
+#imageContent{
+    width: 95%;position: absolute;bottom: 20px;padding: 10px;
+          color: white;background-image: linear-gradient(0deg,#787878,transparent);
+          display: flex;justify-content: space-between;
+}
+#answerButtons{
+    display: flex;
+    justify-content: space-evenly;
+}
+.buttonImage{
+    width: 40px;
+}
+#verified{
+    background-color: #47C337;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+}
+#controlledBy{
+    background-color: #ACDFFF;
+    display: flex;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+    justify-content: space-evenly;
+}
+
+#aboutSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #FAC8F1; color: #707070;
+        border-radius: 5px;
+}
+
+#personalSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #FAC8F1;
+        border-radius: 5px;
+}
+.field{
+    margin-top: 10px;
+}
+.title{
+    width: 100%;
+    color: #C6C6C6;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+}
+
+#careerSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #CA58FD;
+        border-radius: 5px;
+}
+
+#horoscopeSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #070973;
+        border-radius: 5px;
+}
+
+#familySection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #58D1FD;
+        border-radius: 5px;
+}
+#containerMessage{
+    height: 100% !important;
+    position: relative;
+    padding: 0px 0px 100px;
+    margin: 0px;
+}
