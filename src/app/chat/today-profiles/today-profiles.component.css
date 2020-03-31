@@ -7,7 +7,7 @@ main{
 }
 #profilePic{
     width: 100%;
-    height: 40rem;
+    height: 100%;
     border-radius: 5px;
 }
 ::ng-deep .carousel-indicators{
@@ -63,7 +63,7 @@ main{
 .title{
     width: 100%;
     color: #C6C6C6;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     font-size: 1rem;
 }
 
@@ -92,4 +92,13 @@ main{
     position: relative;
     padding: 0px 0px 100px;
     margin: 0px;
+}
+
+@media (max-width: 350px){
+    .title{
+        width: 100%;
+        color: #C6C6C6;
+        margin-left: 10px;
+        font-size: 1rem;
+    }
 }
