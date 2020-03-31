@@ -25,43 +25,45 @@
 
     </div>
 
-    <div id="answerButtons">
-        <div class="t-c">
-            <button 
-            (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="width: 70px;
-            height: 70px;color: grey;background: #C8C8C8;margin-bottom: 10px;">
-              <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
-            </button><br>
-            <span style="color: #C8C8C8;font-weight: bold;font-size: 18px;">
-                नापसंद है
-            </span>
-        </div>
-        <div class="t-c">
-            <button 
-            (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="width: 70px;
-            height: 70px;color: green;background: #58D1FD;margin-bottom: 10px;"
-              aria-label="Example icon-button with a heart icon" >
-              <img class="buttonImage" src="../../../assets/userwhite.svg" alt="कांटेक्ट करें">
-            </button><br>
-            <span style="color: #58D1FD;font-weight: bold;font-size: 18px;">
-                कांटेक्ट करें
-            </span>
-        </div>
-        <div class="t-c">
-            <button 
-            (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="width: 70px;
-            height: 70px;color: red;background: #D313AE;margin-bottom: 10px;"
-              aria-label="Example icon-button with a heart icon" >
-              <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
-            </button><br>
-            <span style="color: #D313AE;font-weight: bold;font-size: 18px;">
-                पसंद है
-            </span>
-        </div>
-            
-    </div>
+    <section style="padding: 0px 20px;position: relative;">
 
-    <section style="padding: 0px 20px;">
+        <!-- // buttons -->
+
+        <div id="answerButtons">
+            <div class="t-c blur">
+                <button 
+                (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="width: 70px;
+                height: 70px;color: grey;background: #C8C8C8;margin-bottom: 10px;">
+                  <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                </button><br>
+                <span style="color: #C8C8C8;font-weight: bold;font-size: 18px;">
+                    नापसंद है
+                </span>
+            </div>
+            <div class="t-c">
+                <button 
+                (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="width: 70px;
+                height: 70px;color: green;background: #58D1FD;margin-bottom: 10px;"
+                  aria-label="Example icon-button with a heart icon" >
+                  <img class="buttonImage" src="../../../assets/userwhite.svg" alt="कांटेक्ट करें">
+                </button><br>
+                <span style="color: #58D1FD;font-weight: bold;font-size: 18px;">
+                    कांटेक्ट करें
+                </span>
+            </div>
+            <div class="t-c">
+                <button 
+                (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="width: 70px;
+                height: 70px;color: red;background: #D313AE;margin-bottom: 10px;"
+                  aria-label="Example icon-button with a heart icon" >
+                  <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
+                </button><br>
+                <span style="color: #D313AE;font-weight: bold;font-size: 18px;">
+                    पसंद है
+                </span>
+            </div>
+                
+        </div>
 
         <div  style="margin-top: 20px;">
             <div class="row" id="verified">
