@@ -24,12 +24,13 @@ import { ApiwhaAutoreply } from './profile-today-model';
 })
 export class TodayProfilesComponent implements OnInit {
   item = new ApiwhaAutoreply();
+  itemMessage: string = 'Hans Matrimony';
   Data;
   contactNumber;
   points = 0;
   paidStatus;
   exhaustedStatus;
-  type;
+  type = 'message';
   button;
   photo;
   carousel;
@@ -80,7 +81,7 @@ export class TodayProfilesComponent implements OnInit {
         } else {
           this.itemService.setIsPersonalized(false);
         }
-        //for is_lead
+        // for is_lead
         if (data && data.is_lead != null) {
             this.itemService.setIsLead(data.is_lead);
         } else {
@@ -203,11 +204,10 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
               this.spinner.hide();
           }
 
-
           } else {
             this.type = 'message';
-            let message = data.apiwha_autoreply;
-            this.setMessageText(message);
+            this.itemMessage = data.apiwha_autoreply;
+            this.setMessageText(data.apiwha_autoreply);
           }
 
         switch (reply) {
@@ -476,6 +476,12 @@ setManglik(value: string) {
           this.button = '1';
           break;
           case '👉 हम आपको आज 6 रिश्ते दिखा चुके हैं। \n\n👉कृपया और रिश्ते देखने के लिए कल पुनः यहाँ पधारें।':
+          this.button = '1';
+          break;
+          case '👉We have already shared 10 profiles with you.\n \n Please come back tomorrow to see more profiles':
+          this.button = '1';
+          break;
+          case 'हम आपको आज के रिश्ते दिखा चुके हैं । कृपया कल यहाँ पुनः पधारे । धन्यवाद्।🙏':
           this.button = '1';
           break;
           case 'Sorry! Your plan has expired. \n\n👉Please renew your plan or contact our customer care for help.':

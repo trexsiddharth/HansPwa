@@ -9,11 +9,16 @@ import {
   MatIconModule,
   MatMenuModule,
   MatButtonModule,
-  MatTooltipModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
+  imports: [
+    MatGoogleMapsAutocompleteModule.forRoot(),
+    AgmCoreModule.forRoot()
+  ],
 exports: [
   MatFormFieldModule, MatDatepickerModule, MatInputModule, MatButtonToggleModule,
   MatAutocompleteModule, MatCheckboxModule, MatSelectModule, MatSidenavModule,
@@ -26,6 +31,8 @@ exports: [
   MatButtonModule,
   FormsModule,
   ReactiveFormsModule,
+  MatGoogleMapsAutocompleteModule,
+  AgmCoreModule
 ]
 })
 export class AngularMaterialModule { }

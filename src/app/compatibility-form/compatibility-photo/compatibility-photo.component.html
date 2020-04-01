@@ -49,10 +49,10 @@
 
   <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
       <div class="col-md-12 text-center">
-        <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" [eventTracker]='{"category":"Profile Picture","action":"Profile Picture Uploaded"}' *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Skip</button>
-        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" [eventTracker]='{"category":"Profile Picture","action":"Profile Picture Uploaded"}' *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Please Click to Proceed</button>
-        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" [eventTracker]='{"category":"Profile Picture","action":"Profile Picture Uploaded"}' *ngIf="fourPageService.getUserThrough()" (click)="submit()">Save</button>
-        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" [eventTracker]='{"category":"Profile Picture","action":"Profile Picture Uploaded"}' *ngIf="fourPageService.getUserThrough()" (click)="checkForPhoto()">Approve</button>
+        <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Skip</button>
+        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Please Click to Proceed</button>
+        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="submit()">Save</button>
+        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="checkForPhoto()">Approve</button>
       </div>
    </div> 
 </form>

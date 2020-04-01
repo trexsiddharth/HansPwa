@@ -100,6 +100,25 @@ main{
     margin: 0px;
 }
 
+.messageHeader{
+    text-align: center;
+    position: absolute;
+    margin-top: 30%;
+    width: 100%;
+  }
+
+  .messageFooter{
+    width: 100%;
+    bottom: 150px;
+    position: absolute;
+    text-align: center;
+}
+
+.setButtons{
+    margin: 0px 10px;
+    font-size: 18px;
+  }
+
 @media (max-width: 350px){
     .title{
         width: 100%;
@@ -120,4 +139,5 @@ main{
         bottom: 0px;
         background-image: linear-gradient(0deg, white,transparent);
     }
+
 }

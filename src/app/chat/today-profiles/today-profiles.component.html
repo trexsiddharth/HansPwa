@@ -1,4 +1,4 @@
-<main *ngIf="item">
+<main *ngIf="item && type == 'profile'">
     <div id="profileImageDiv">
         <ngb-carousel>
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
@@ -372,7 +372,7 @@
       <h3>Message</h3>
       <img src="../../../assets/logo_192.png" alt="message">
       <p>
-          {{item}}
+          {{itemMessage}}
       </p>
     </div>
     <div class="messageFooter">

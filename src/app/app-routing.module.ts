@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ViewCentresComponent } from './view-centres/view-centres.component';
 import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-screen.component';
-import { CompatibilityFormComponent } from './compatibility-form/compatibility-form.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 import { RegComponent } from './reg/reg.component';
@@ -15,6 +14,10 @@ const routes: Routes = [
   loadChildren: () => import('./chat/chat.module').
   then(m => m.ChatModule)
 },
+{ path: 'fourReg',
+  loadChildren: () => import('./compatibility-form/compatibility-form.module').
+  then(m => m.CompatibilityFormModule)
+},
   { path: '',
   redirectTo: '',
   pathMatch: 'full', component: HomeComponent },
@@ -23,8 +26,6 @@ const routes: Routes = [
   { path: 'newHome', component: NewHomeComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'reg', component: RegComponent},
-  { path: 'fourReg', component: CompatibilityFormComponent },
-  { path: 'fourReg/:id/:leadId', component: CompatibilityFormComponent },
   { path: 'termsCondition', component: TermsAndConditionsComponent},
   { path: 'checkout', component: CustomCheckoutComponent},
   { path: '**', pathMatch: 'full', redirectTo: '/'}
