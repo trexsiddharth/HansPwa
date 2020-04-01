@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1585772854642,
+  "timestamp": 1585773072456,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -8,8 +8,8 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/6-es2015.8e39bd768b7f5c03c742.js",
-        "/6-es5.8e39bd768b7f5c03c742.js",
+        "/6-es2015.441d3d093449553530e0.js",
+        "/6-es5.441d3d093449553530e0.js",
         "/7-es2015.c63856b004c724b7cd72.js",
         "/7-es5.c63856b004c724b7cd72.js",
         "/common-es2015.a212e6fef1f6d5408d8e.js",
@@ -22,8 +22,8 @@
         "/manifest.webmanifest",
         "/polyfills-es2015.79b5019f4dff069483c4.js",
         "/polyfills-es5.9c6b64672d2ceaf9fff8.js",
-        "/runtime-es2015.0c90154622966f180f68.js",
-        "/runtime-es5.0c90154622966f180f68.js",
+        "/runtime-es2015.55fa8f1053ee82eb870c.js",
+        "/runtime-es5.55fa8f1053ee82eb870c.js",
         "/scripts.06e020159d183ba8b2a3.js",
         "/styles.f73ebf4929d32ae8bd04.css"
       ],
@@ -276,8 +276,8 @@
     }
   ],
   "hashTable": {
-    "/6-es2015.8e39bd768b7f5c03c742.js": "f8b5a79a7492b890e208339ef7b0b3a2bcd9aead",
-    "/6-es5.8e39bd768b7f5c03c742.js": "b2f3730b8ba12b83cf648b94e2ba8a22a3ee67ca",
+    "/6-es2015.441d3d093449553530e0.js": "f4d449b445af3a3a27e13aaf183026480bcbf0cd",
+    "/6-es5.441d3d093449553530e0.js": "5f3087c3e579b4b5037bcc636a5578ad9cedb9b2",
     "/7-es2015.c63856b004c724b7cd72.js": "6f84455ca0056fcb49fe4c73981735c5d67fcdb7",
     "/7-es5.c63856b004c724b7cd72.js": "29dd4e9a162855c10a6ff066f6e170aa5940f640",
     "/SemplicitaPro.96554f62871e20bd3d80.otf": "18e2fd90bcfce6db53d3a17b22a7836d4e5f50d8",
@@ -505,7 +505,7 @@
     "/common-es5.a212e6fef1f6d5408d8e.js": "8c7b64117939aec8625b7d46d1f934d781fa2053",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "cbb9533046d73d656672b0c71e7f2b826d1c7efb",
+    "/index.html": "54cde9d951af78941469693e506bd7ef7a36d267",
     "/logo_192.5f7f254ba38018213cfd.png": "85f05cc7f4b71b477f0a84763c133326e9adb1ef",
     "/main-es2015.a3b29f3af87934627cfa.js": "8ec64aca6226be5924ddb42f5351ceb1be5572fd",
     "/main-es5.a3b29f3af87934627cfa.js": "3eda46788f57aa005113b1e91706e95a6aa2ca42",
@@ -513,8 +513,8 @@
     "/polyfills-es2015.79b5019f4dff069483c4.js": "4475b4672a9d4d6d52c5f786ab4d627e9cabb16f",
     "/polyfills-es5.9c6b64672d2ceaf9fff8.js": "89cddf0f746a91a3518785e6372639b311acb756",
     "/redback.093eeb320fb87fb9d11c.jpg": "f5d5e7f9827faa68365a9cb4ce9601ef1b6007d0",
-    "/runtime-es2015.0c90154622966f180f68.js": "65bc753e3788323bfd8d51acd9bc803d54945d4a",
-    "/runtime-es5.0c90154622966f180f68.js": "282aafdb8b7c157f3491c4573388fa5be1e0892f",
+    "/runtime-es2015.55fa8f1053ee82eb870c.js": "a271db94a868966030b31971fc4582f039997715",
+    "/runtime-es5.55fa8f1053ee82eb870c.js": "86cf0f5a366915ce8e580132e6cac45e09f31149",
     "/scripts.06e020159d183ba8b2a3.js": "dac2ee398ded62269aabc62c8c050317299ff501",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
     "/styles.f73ebf4929d32ae8bd04.css": "16c16710847dea95c5a0b9f62da447a7670e64db",
