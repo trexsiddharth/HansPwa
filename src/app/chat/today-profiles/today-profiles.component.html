@@ -13,6 +13,9 @@
             </span><br>
             <span style="font-size: 14px;">
                 {{item.working_city}} | {{setHeight(item.height)}}
+            </span> <br>
+            <span style="font-size: 14px;">
+                {{setIncome(item.monthly_income? item.monthly_income : item.family_income)}} LPA
             </span>
           </div>
             
@@ -45,7 +48,7 @@
                 (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="width: 70px;
                 height: 70px;color: green;background: #58D1FD;margin-bottom: 10px;"
                   aria-label="Example icon-button with a heart icon" >
-                  <img class="buttonImage" src="../../../assets/userwhite.svg" alt="कांटेक्ट करें">
+                  <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
                 </button><br>
                 <span style="color: #58D1FD;font-weight: bold;font-size: 18px;">
                     कांटेक्ट करें
@@ -83,14 +86,15 @@
                     <img style="width: 40px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
                 </div>
                 <div class="col-10" style="align-self: center;">
-                        <span style="font-size: 16px;font-weight: bold;align-self: center;">प्रोफाइल मैनेज्ड बय: {{item.relation}}</span>
+                        <span style="font-size: 16px;font-weight: bold;align-self: center;
+                            text-shadow: 1px 1px darkgrey;">प्रोफाइल मैनेज्ड बय: {{item.relation}}</span>
                 </div>
             </div>
         </div>
 
         <div id="aboutSection" *ngIf="item.about && item.about.length > 6">
             <p>
-                <span style="color: #D313AE;font-size: 30px;font-weight: bold;">हेलो,</span> माइसेल्फ {{item.name}}, {{item.about}}
+                <span style="color: #D313AE;font-size: 30px;font-weight: bold;">हेलो,</span> Myself {{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
             </p>
         </div>
 
@@ -214,7 +218,7 @@
                     <span class="title">कॉलेज</span>
                 </div>
                 <div class="col-6">
-                    {{item.college}}
+                    {{toTitleCase(item.college)}}
                 </div>
             </div>
 

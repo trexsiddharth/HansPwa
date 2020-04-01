@@ -11,7 +11,7 @@ main{
     border-radius: 5px;
 }
 ::ng-deep .carousel-indicators{
-    bottom: 50px !important;
+    bottom: 0px !important;
 }
 
 .row{
@@ -68,9 +68,10 @@ main{
 }
 .title{
     width: 100%;
-    color: #C6C6C6;
+    color: #C8C8C8;
     margin-left: 1rem;
     font-size: 1rem;
+    font-weight: bold;
 }
 
 #careerSection{

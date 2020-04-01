@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1585739234978,
+  "timestamp": 1585741372288,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -8,8 +8,8 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/6-es2015.826c66849104c834df57.js",
-        "/6-es5.826c66849104c834df57.js",
+        "/6-es2015.4c29614f4d406c12e5d1.js",
+        "/6-es5.4c29614f4d406c12e5d1.js",
         "/7-es2015.c63856b004c724b7cd72.js",
         "/7-es5.c63856b004c724b7cd72.js",
         "/common-es2015.a212e6fef1f6d5408d8e.js",
@@ -22,8 +22,8 @@
         "/manifest.webmanifest",
         "/polyfills-es2015.79b5019f4dff069483c4.js",
         "/polyfills-es5.9c6b64672d2ceaf9fff8.js",
-        "/runtime-es2015.7ed2c4483603165ad1e2.js",
-        "/runtime-es5.7ed2c4483603165ad1e2.js",
+        "/runtime-es2015.c0fca9193ca9f5cb2e65.js",
+        "/runtime-es5.c0fca9193ca9f5cb2e65.js",
         "/scripts.06e020159d183ba8b2a3.js",
         "/styles.f73ebf4929d32ae8bd04.css"
       ],
@@ -194,6 +194,7 @@
         "/assets/phone.svg",
         "/assets/phone_blue.svg",
         "/assets/phone_white.svg",
+        "/assets/phonewhite.svg",
         "/assets/photography.webp",
         "/assets/placeholder_hans.svg",
         "/assets/placeholderwhite.png",
@@ -270,8 +271,8 @@
     }
   ],
   "hashTable": {
-    "/6-es2015.826c66849104c834df57.js": "1ef61fb541064720aa65e3358670349d7937da5b",
-    "/6-es5.826c66849104c834df57.js": "3133f1ba423bd2d74f1f76aeac67d9b6c83930cf",
+    "/6-es2015.4c29614f4d406c12e5d1.js": "42d9b63a9dffbe3fdabd64c1c5843c173c733e36",
+    "/6-es5.4c29614f4d406c12e5d1.js": "cfc866a58cd1fb240b229dc4aa18a8f96c197928",
     "/7-es2015.c63856b004c724b7cd72.js": "6f84455ca0056fcb49fe4c73981735c5d67fcdb7",
     "/7-es5.c63856b004c724b7cd72.js": "29dd4e9a162855c10a6ff066f6e170aa5940f640",
     "/SemplicitaPro.96554f62871e20bd3d80.otf": "18e2fd90bcfce6db53d3a17b22a7836d4e5f50d8",
@@ -434,6 +435,7 @@
     "/assets/phone.svg": "6b6f3713249a5c9f60a63ee0e923fe05f504b5c1",
     "/assets/phone_blue.svg": "43879997ad64554c2722ceb209f54e636539f24c",
     "/assets/phone_white.svg": "8959ae528204438eb257e4a02f617cab76309c01",
+    "/assets/phonewhite.svg": "37ecac71c77042a5848958539e05ba6b87a88269",
     "/assets/photography.webp": "8e448faab4e4e6dd8a2769e5b1326b387104112d",
     "/assets/placeholder_hans.svg": "5b4e3692bb831182bc4ca633998324069cbccabe",
     "/assets/placeholderwhite.png": "9926cdca7381fa03af8456b3216b99c281295eb5",
@@ -493,7 +495,7 @@
     "/common-es5.a212e6fef1f6d5408d8e.js": "8c7b64117939aec8625b7d46d1f934d781fa2053",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "3756851e072e652f2078ddd60d966276801c3475",
+    "/index.html": "0248a0dc83e7cf03627ea08abe07cbb3b31ce3f7",
     "/logo_192.5f7f254ba38018213cfd.png": "85f05cc7f4b71b477f0a84763c133326e9adb1ef",
     "/main-es2015.2dd06a2cf619ecab32f4.js": "42a310aa0e485c1424e98aeb3c9acdbb64b3e181",
     "/main-es5.2dd06a2cf619ecab32f4.js": "77daee08d87c53cde9b93576aaebd16911ac111d",
@@ -501,8 +503,8 @@
     "/polyfills-es2015.79b5019f4dff069483c4.js": "4475b4672a9d4d6d52c5f786ab4d627e9cabb16f",
     "/polyfills-es5.9c6b64672d2ceaf9fff8.js": "89cddf0f746a91a3518785e6372639b311acb756",
     "/redback.093eeb320fb87fb9d11c.jpg": "f5d5e7f9827faa68365a9cb4ce9601ef1b6007d0",
-    "/runtime-es2015.7ed2c4483603165ad1e2.js": "a282b9209f9103ce857754bbea0e8d1254e36eb0",
-    "/runtime-es5.7ed2c4483603165ad1e2.js": "175bcb293741aea918e2be186cdc1d2defac53a1",
+    "/runtime-es2015.c0fca9193ca9f5cb2e65.js": "cbab227fa12118631132052f219c952793d170f6",
+    "/runtime-es5.c0fca9193ca9f5cb2e65.js": "02b6a6c0f70380498ba2d55632b86a94f13e809f",
     "/scripts.06e020159d183ba8b2a3.js": "dac2ee398ded62269aabc62c8c050317299ff501",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
     "/styles.f73ebf4929d32ae8bd04.css": "16c16710847dea95c5a0b9f62da447a7670e64db",
