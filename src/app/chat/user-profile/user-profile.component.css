@@ -1,0 +1,44 @@
+::ng-deep .carousel-indicators{
+    bottom: 60px !important;
+}
+.sections{
+    padding: 20px 20px;
+}
+.sectionTitle{
+    color: #0C9BF2;
+    font-size: 18px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.editPencil{
+    float: right;
+    width: 30px;
+}
+.row{
+    padding: 0px;
+}
+.col-6, .col-12{
+    margin: 10px 0px 0px ;
+}
+.iconSize{
+    width: 30px;
+}
+
+.boxText{
+font-size: 18px;
+}
+.boxBtn {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@media (max-width: 350px){
+    .boxText{
+        font-size: 14px;
+        }
+
+        .boxBtn{
+            font-size: 14px;
+            font-weight: bold;
+        }
+}

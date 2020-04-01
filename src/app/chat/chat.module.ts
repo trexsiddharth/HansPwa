@@ -13,6 +13,7 @@ import { EditFamilyDialogComponent } from './myprofile/edit-family-dialog/edit-f
 import { EditPersonalDialogComponent } from './myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { EditPreferenceDialogComponent } from './myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { TodayProfilesComponent } from './today-profiles/today-profiles.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { TodayProfilesComponent } from './today-profiles/today-profiles.componen
     EditPersonalDialogComponent,
     EditPreferenceDialogComponent,
     TodayProfilesComponent,
+    UserProfileComponent,
 ],
 entryComponents: [
   MessageDialogComponent,
