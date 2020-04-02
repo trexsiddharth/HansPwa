@@ -358,4 +358,9 @@ onResize(event) {
           }
         }
       }
+
+      navigateTo(id: string) {
+        console.log(id);
+        document.getElementById(id).scrollIntoView({behavior: 'smooth'});
+      }
 }
