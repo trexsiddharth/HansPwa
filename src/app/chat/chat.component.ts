@@ -274,6 +274,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
         }
       }
     );
+
+    this.itemService.setTab.subscribe(
+      data => {
+        this.setSelectedTab(data);
+      }
+    );
   }
 
   ngAfterViewInit() {
@@ -569,7 +575,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
   setSelectedTab(index: any) {
     console.log('selected tab', index);
-    if (this.history !== 'myprofile') {
+    if (index !== '') {
       this.selectedTab = index;
       this.changeSelectedTab(this.selectedTab);
     } else {

@@ -35,9 +35,6 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   profile: any[];
   message: string;
   @Input() type: any;
-  @Output() share = new EventEmitter < any > ();
-  @Output() stage = new EventEmitter < string > ();
-  @Output() setTab = new EventEmitter < any > ();
   likeCount;
   dislikeCount;
   panelOpenState;
@@ -63,28 +60,6 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-  shareData(id: any, contacted: any, status) {
-    const profileData = new FormData();
-    profileData.append('id', id);
-    profileData.append('contacted', contacted);
-    profileData.append('is_lead', '0');
-
-    console.log('id', id);
-    console.log('contacted', contacted);
-    console.log('is_lead', localStorage.getItem('is_lead'));
-    // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', profileData).subscribe(
-      (data: any) => {
-        console.log(data);
-        data.profile.comments = status;
-        this.share.emit(data);
-        this.stage.emit('chatbot');
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
   getProfilePhoto(num: any, gen: string): string {
     if (num === null) {
       if (gen === 'Male') {
@@ -290,7 +265,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
               this.slideAndOpenProfile(this.profile[index], 1);
               this.profile.splice(index, 1);
-              this.setTab.emit(1);
+              this.itemService.changeTab(1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
@@ -324,7 +299,7 @@ call(num: any) {
   }
 slideAndOpenProfile(item: any, slide: any) {
     this.itemService.setItem(item);
-    this.setTab.emit(slide);
+    this.itemService.changeTab(slide);
   }
 setDate(date: string) {
     const newDate = new Date(date);

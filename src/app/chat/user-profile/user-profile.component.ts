@@ -4,6 +4,7 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router} from '@angular/router';
+import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class UserProfileComponent implements OnInit {
   carouselSize;
   currentLanguage;
 
-  constructor(private spinner: NgxSpinnerService, private matDialog: MatDialog, private http: HttpClient,
+  constructor(private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService,
+              private matDialog: MatDialog, private http: HttpClient,
               private ngxNotificationService: NgxNotificationService, private router: Router) { }
 
   ngOnInit() {

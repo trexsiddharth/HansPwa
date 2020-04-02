@@ -13,6 +13,7 @@ export class FindOpenHistoryProfileService {
   hasPhoto = false;
   profileCount = new ProfileCount();
   countUpdated = new EventEmitter();
+  setTab = new EventEmitter();
 
   constructor() { }
 
@@ -53,6 +54,11 @@ export class FindOpenHistoryProfileService {
   getPhotoStatus() {
     return this.hasPhoto;
   }
+
+  changeTab(position: number){
+    this.setTab.emit(position);
+  }
+
   saveCount(count: any) {
     this.profileCount.contactedCount = count.C;
     this.profileCount.shortlistCount = count.SL;
@@ -84,5 +90,11 @@ export class FindOpenHistoryProfileService {
   }
   getRejectedCount() {
     return '❌नापसंद ( ' + this.profileCount.rejectedCount + ' )';
+  }
+  getCountOnlyShortlist() {
+    return this.profileCount.shortlistCount;
+  }
+  getCountOnlyShorted() {
+    return this.profileCount.shortedCount;
   }
 }

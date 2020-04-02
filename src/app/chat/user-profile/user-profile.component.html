@@ -1,6 +1,6 @@
 <main>
     <div class="t-c" style="color: white;padding: 10px 10px;background-color: #83C9F4;">
-        <img style="float: left;width: 20px;" src="../../../assets/backbtn.svg" alt="back button">
+        <img (click)="backToChat()" style="float: left;width: 20px;" src="../../../assets/backbtn.svg" alt="back button">
         <h5 style="font-weight: bold;margin: 0px;">
             मेरी प्रोफाइल
         </h5>
@@ -461,31 +461,18 @@
 
             <div style="border: 1.5px solid #FCDEF6;border-radius: 10px;margin: 20px 20px;padding: 10px 10px;">
                 <div class="row">
-                    <div class="col-5" style="text-align: end;
-                    margin: 0px;
-                    position: relative;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: flex-start;
-                    justify-content: flex-end;">
+                    <div class="col-5" id="pinkSide">
                         <img style="width: 20px;margin-right: 10px;" src="../../../assets/heartsblue.svg" alt="hearts">
-                        <p style="font-size: 30px;color: #D313AE;font-weight: bold;margin: 0px;">1</p>
+                        <p style="font-size: 30px;color: #D313AE;font-weight: bold;margin: 0px;">{{itemService.getCountOnlyShorted()}}</p>
                     </div>
 
                     <div class="col-2">
 
                     </div>
 
-                    <div class="col-5" style="text-align: start;
-                    color: #0C9BF2;
-                    font-weight: bold;
-                    margin: 0px;
-                    display: flex;
-                    flex-direction: row-reverse;
-                    align-items: end;
-                    justify-content: flex-end;">
+                    <div class="col-5" id="blueSide">
                         <img style="width: 20px;margin-left: 10px;" src="../../../assets/heartspink.svg" alt="hearts">
-                        <p style="font-size: 30px;margin: 0px;">12</p>
+                        <p style="font-size: 30px;margin: 0px;">{{itemService.getCountOnlyShortlist()}}</p>
                     </div>
                     <div class="col-5" style="text-align: end;margin: 0px;">
                         <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">लोगो को</p>
@@ -509,13 +496,13 @@
                 
                 <div class="row">
                     <div class="col-6">
-                        <button class="boxBtn" mat-raised-button style="background-color: #FAC8F1;
+                        <button class="boxBtn" (click)="itemService.changeTab(3)" mat-raised-button style="background-color: #FAC8F1;
                         width: 100%;color: #D313AE;">
                             मैं किसे पसंद हूँ ?
                         </button>
                     </div>
                     <div class="col-6">
-                        <button class="boxBtn" mat-raised-button style="background-color: #CDEBFF; 
+                        <button class="boxBtn" (click)="itemService.changeTab(2)" mat-raised-button style="background-color: #CDEBFF; 
                         width: 100%;color: #0C9BF2;">
                             मेरी पसंद
                         </button>

@@ -68,8 +68,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   profile: any[];
   @Input() type: any;
-  @Output() stage = new EventEmitter < string > ();
-  @Output() setTab = new EventEmitter < any > ();
   likeCount;
   dislikeCount;
   panelOpenState;
@@ -380,7 +378,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
               this.slideAndOpenProfile(this.profile[index], 1);
               this.profile.splice(index, 1);
-              this.setTab.emit(1);
+              this.itemService.changeTab(1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
@@ -410,7 +408,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
               this.slideAndOpenProfile(this.profile[index], 1);
               this.profile.splice(this.profile[index], 1);
-              this.setTab.emit(1);
+              this.itemService.changeTab(1);
               this.profile.splice(index, 1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
@@ -445,7 +443,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
   slideAndOpenProfile(item: any, slide: any) {
     this.itemService.setItem(item);
-    this.setTab.emit(slide);
+    this.itemService.changeTab(slide);
   }
   setDate(date: string) {
     let newDate = new Date(date);
