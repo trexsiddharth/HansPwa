@@ -42,6 +42,9 @@ font-size: 18px;
         box-shadow: 0px -3px 1px lightgrey;
         padding: 5px 0px;
 }
+.navigationIcons{
+    width: 30px;
+}
 
 @media (max-width: 350px){
     .boxText{
@@ -51,6 +54,10 @@ font-size: 18px;
         .boxBtn{
             font-size: 14px;
             font-weight: bold;
+        }
+
+        .navigationIcons{
+            width: 20px;
         }
 }
 
