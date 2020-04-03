@@ -11,7 +11,7 @@
   <meta name="google" content="notranslate">
 
   <!-- google analytics and firebase tag -->
-  <script>
+  <script async>
     
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -30,13 +30,13 @@
       gtag('js', new Date()); gtag('config', 'AW-682592773'); </script>
 
       <!-- Event snippet for New User Signup conversion page In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. --> 
-      <script> function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; 
+      <script async> function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; 
       gtag('event', 'conversion', { 'send_to': 'AW-682592773/Zon_CJGftrgBEIWUvsUC', 'event_callback': callback }); 
       return false; }
       </script>
 
         <!-- // tikok pixel -->
-    <script>
+    <script async>
         (function() {
           var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
           ta.src = document.location.protocol + '//' + 'static.bytedance.com/pixel/sdk.js?sdkid=BNKH8DC0M0F93BI73F8G';
@@ -51,7 +51,7 @@
 
 
 <!-- Facebook Pixel Code -->
-<script>
+<script async>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
