@@ -20,7 +20,7 @@ const routes: Routes = [
 },
   { path: '',
   redirectTo: '',
-  pathMatch: 'full', component: HomeComponent },
+  pathMatch: 'full', component: NewHomeComponent },
   { path: 'home', redirectTo: ''},
   { path: 'viewCentres', component: ViewCentresComponent},
   { path: 'newHome', component: NewHomeComponent},
