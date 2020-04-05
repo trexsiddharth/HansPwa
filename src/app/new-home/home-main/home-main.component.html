@@ -141,7 +141,9 @@
         </span>
         <div class="feature4">
             <div class="testimonial">
-                <img class="testimonialImage" src="../../assets/Review1.webp" alt="Reviews">
+                <img class="testimonialImage" [defaultImage]="'../../assets/reviews/Review1_300.jpg'" 
+                [lazyLoad]="'../../assets/reviews/Review1_600.jpg 600w, ../../assets/reviews/Review1_1000.jpg 1000w'" 
+                [useSrcset]="true" alt="Reviews">
                 <div class="testimonialGradient">
                     <span>
                         Kaushik & Anushka
@@ -150,7 +152,9 @@
             </div>
 
             <div class="testimonial">
-                <img class="testimonialImage" src="../../assets/Review2.webp" alt="Reviews">
+                <img class="testimonialImage" [defaultImage]="'../../assets/reviews/Review2_300.jpg'" 
+                [lazyLoad]="'../../assets/reviews/Review2_600.jpg 600w, ../../assets/reviews/Review2_1000.jpg 1000w'" 
+                [useSrcset]="true" alt="Reviews">
                 <div class="testimonialGradient">
                     <span>
                         Sahil & Salony
@@ -159,7 +163,9 @@
             </div>
 
             <div class="testimonial">
-                <img class="testimonialImage" src="../../assets/photography.webp" alt="Reviews">
+                <img class="testimonialImage" [defaultImage]="'../../assets/reviews/photography_300.jpg'" 
+                [lazyLoad]="'../../assets/reviews/photography_600.jpg 600w, ../../assets/reviews/photography_1000.jpg 1000w'" 
+                [useSrcset]="true" alt="Reviews">
                 <div class="testimonialGradient">
                     <span>
                         Lakshay & Priya
