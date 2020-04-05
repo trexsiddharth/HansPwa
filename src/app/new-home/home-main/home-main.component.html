@@ -11,12 +11,18 @@
             justify-content: space-evenly;
             flex-direction: column;
              align-items: center;">
-                <button mat-raised-button class="registerBtn">
+             <span style="font-size: 18px;font-weight: bold;">
+                हम परिवारों को मिलाते है...
+             </span>
+                <button mat-raised-button class="registerBtn"  
+                [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
+                *ngIf="homeService.getLoginStatus()==false">
                 रजिस्टर करें नि: शुल्क
                 </button>
-                <span class="material-icons">
-                    keyboard_arrow_down
-                    </span>
+                <button mat-raised-button class="rishteBtn" [routerLink]="['/chat']" routerLinkActive="router-link-active" *ngIf="homeService.getLoginStatus()">
+                    रिश्ते देखें
+                    </button>
+                <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
             </div>
         </div>
         <img style="height: 100%;width: 100%;object-fit:cover;" [defaultImage]="'../../assets/cover_hans_small.jpg'" 
@@ -32,30 +38,30 @@
         <mat-card class="featureCard" style="background-image: linear-gradient(0deg,#F5A513 , #F7CB67);
         color: #070973; text-align: center;">
             <mat-card-title style="font-weight: bold;">
-                    50 हज़ार से अधिक
+                    50,000+ से अधिक
                     </mat-card-title>
                     <mat-card-subtitle style="color: #070973;font-size: 16px;">
-                    रिश्तो में से चुनिए मनपसंद
+                    रिश्तों में से चुनिए अपनी पसंद
                     </mat-card-subtitle>
         </mat-card>
 
         <mat-card class="featureCard" style="background-image: linear-gradient(0deg, #3708A1,#8860E3);
         color: #C1FA25;text-align: center;">
             <mat-card-title style="font-weight: bold;">
-                50 हज़ार से अधिक
+                1000+ मैचमेकर्स
                 </mat-card-title>
                 <mat-card-subtitle style="color: #C1FA25;font-size: 16px;">
-                रिश्तो में से चुनिए मनपसंद
+                जो आपको रिश्ते चुनने मई मदद करेंगी
                 </mat-card-subtitle>
         </mat-card>
 
         <mat-card class="featureCard" style="background-image: linear-gradient(0deg,#F5A513 , #F7CB67);
         color: #070973; text-align: center;">
             <mat-card-title style="font-weight: bold;">
-                    50 हज़ार से अधिक
+                    30+ मंदिर
                     </mat-card-title>
                     <mat-card-subtitle style="color: #070973;font-size: 16px;">
-                    रिश्तो में से चुनिए मनपसंद
+                    में वेरिफिकेशन सेंटर्स
                     </mat-card-subtitle>
         </mat-card>
 </div>
@@ -83,30 +89,39 @@
         
     <div class="innerHoriz">
         <div class="innerThree">
-        <mat-card class="featureCard2"> 
+        <mat-card class="featureCard2">
+            <img class="feature2Img" src="../../../assets/shiv_sai_dham.webp" alt="Shiv Sai Dham Mandir"> 
         </mat-card>
-        <span style="color: white;font-size: 16px;height: 30%;">आर्य समाज,<br>सफदरजंग</span>
+        <span style="color: white;font-size: 16px;height: 30%;">श्री शिव साई धाम मंदिर</span>
     </div>
 
     <div class="innerThree">
         <mat-card class="featureCard2"> 
+            <img class="feature2Img" src="../../../assets/sanathan_dharam.webp" alt="Sanathan Dharam Mandir"> 
         </mat-card>
-        <span style="color: white;font-size: 16px;">आर्य समाज,<br>सफदरजंग</span>
+        <span style="color: white;font-size: 16px;">श्री सनातन धर्म मंदिर</span>
     </div>
 
     <div class="innerThree">
         <mat-card class="featureCard2"> 
+            <img class="feature2Img" src="../../../assets/lakshmi_narayan.webp" alt="Lakshmi Narayan Mandir"> 
         </mat-card>
-        <span style="color: white;font-size: 16px;">आर्य समाज,<br>सफदरजंग</span>
+        <span style="color: white;font-size: 16px;">श्री लक्ष्मी नारायण मंदिर</span>
     </div>
 </div>
     <div class="button3">
-        <button class="registerBtn" style="background-color: #0C9BF2;" mat-raised-button>
+        <button class="registerBtn" style="background-color: #0C9BF2;"
+        [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
+         mat-raised-button *ngIf="homeService.getLoginStatus()==false">
             रजिस्टर करें नि: शुल्क
-        </button><br>
-        <span class="material-icons">
-            keyboard_arrow_down
-            </span>
+        </button>
+        <button class="rishteBtn" style="background-color: #0C9BF2;"
+        [routerLink]="['/chat']" routerLinkActive="router-link-active"
+         mat-raised-button *ngIf="homeService.getLoginStatus()">
+            रिश्ते देखें
+        </button>
+        <br>
+        <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
     </div>
 </div>
 </ng-container>
@@ -115,22 +130,37 @@
 
 <ng-container>
     <div id="container4">
-        <span style="font-weight: bold;font-size: 20px;">
-            क्रिएटिंग बांड थत लास्ट फॉरएवर
+        <span style="font-weight: bold;font-size: 20px;;">
+            रिश्ते ही नहीं जोड़ें दिलों को भी।
         </span>
-        <div style="position: relative; margin-top: 10px;">
-            <img style="width: 100%;height: 400px;
-            object-fit: cover;border-radius: 10px;" src="../../assets/Review1.webp" alt="Reviews">
-            <div style="position: absolute;bottom: 0px; width: 100%;
-            height: 30%; border-radius: 10px;
-            background-image: linear-gradient(0deg,#248CC6 ,transparent) ;
-            font-weight: bold;">
-                <span style="position: absolute;
-                bottom: 10px;
-                left: 10px;">
-                    Kaushik & Anushka
-                </span>
+        <div class="feature4">
+            <div class="testimonial">
+                <img class="testimonialImage" src="../../assets/Review1.webp" alt="Reviews">
+                <div class="testimonialGradient">
+                    <span>
+                        Kaushik & Anushka
+                    </span>
+                </div>
             </div>
+
+            <div class="testimonial">
+                <img class="testimonialImage" src="../../assets/Review2.webp" alt="Reviews">
+                <div class="testimonialGradient">
+                    <span>
+                        Sahil & Salony
+                    </span>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img class="testimonialImage" src="../../assets/photography.webp" alt="Reviews">
+                <div class="testimonialGradient">
+                    <span>
+                        Lakshay & Priya
+                    </span>
+                </div>
+            </div>
+
         </div>
     </div>
 </ng-container>
@@ -166,17 +196,25 @@
             <span style="color: white;
             align-self: center;
             font-weight: bold;
-            padding-right: 20px;">
+            padding-right: 20px;" 
+            [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
+            *ngIf="homeService.getLoginStatus()==false">
                 रजिस्टर करें नि: शुल्क
+            </span>
+            <span style="color: white;
+            align-self: center;
+            font-weight: bold;
+            padding-right: 20px;" 
+            [routerLink]="['/chat']" routerLinkActive="router-link-active"
+            *ngIf="homeService.getLoginStatus()">
+                रिश्ते देखें
             </span>
         </div>
     </div>
 
     <div style="background-color: #070673;text-align: center;
     height: 40px;padding-top: 8px;">
-        <span class="material-icons">
-            keyboard_arrow_down
-            </span>
+        <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
     </div>
 </ng-container>
 

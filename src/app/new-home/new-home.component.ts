@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
+import { NewHomeService } from './new-home.service';
+import {  MatSidenavModule } from '@angular/material';
 
 @Component({
   selector: 'app-new-home',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public homeService: NewHomeService) { }
 
   ngOnInit() {
+  }
+
+  sendWhatsAppLink() {
+    window.open('whatsapp://send?text=*हंस%20मॅट्रिमोनी%20ऐप:*%20' + 'https://play.google.com/store/apps/details?id=com.twango.me');
   }
 
 }

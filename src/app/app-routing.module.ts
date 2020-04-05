@@ -7,6 +7,7 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 import { RegComponent } from './reg/reg.component';
 import { NewHomeComponent } from './new-home/new-home.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 
 const routes: Routes = [
@@ -20,10 +21,10 @@ const routes: Routes = [
 },
   { path: '',
   redirectTo: '',
-  pathMatch: 'full', component: HomeComponent },
+  pathMatch: 'full', component: NewHomeComponent },
   { path: 'home', redirectTo: ''},
   { path: 'viewCentres', component: ViewCentresComponent},
-  { path: 'newHome', component: NewHomeComponent},
+  { path: 'subscription', component: SubscriptionComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'reg', component: RegComponent},
   { path: 'termsCondition', component: TermsAndConditionsComponent},

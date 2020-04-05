@@ -40,6 +40,14 @@
      font-weight: bold;
      background-color: #D313AE;
 }
+.rishteBtn{
+    color: white;
+    padding: 10px 80px;
+     border-radius: 100px;
+     font-size: 16px;
+     font-weight: bold;
+     background-color: #D313AE;
+}
 .imageTwoGradient{
     width: 100%;
     height: 60%;
@@ -100,6 +108,11 @@
     border-radius: 10px;
     overflow: auto;
     background-color: #FDF4DB;
+    padding: 0px;
+}
+.feature2Img{
+    width: 100%;
+    height: 100%;
 }
 .button3{
     width: 100%;
@@ -109,8 +122,46 @@
     color: white;
     width: 100%;
     text-align: center;
-    padding: 30px 20px 20px;
+    padding: 20px 0px;
     background-image: linear-gradient(0deg, #390572,#860271)
+}
+.feature4{
+    width: 100%;
+    height:22rem;
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    flex-flow: row;
+    margin-left: 20px;
+}
+.testimonial{
+    position: relative;
+     margin-top: 10px;
+     width: 70%;
+     margin: 0px 20px;
+}
+.testimonialImage{
+    width:100%;
+    height: 20rem;
+     object-fit: cover;
+     border-radius: 10px;
+}
+.testimonialGradient{
+    position: absolute;
+    bottom: 0px; 
+    width: 100%;
+    padding: 10px 0px 20px 10px;
+    border-radius: 10px;
+    text-align: start;
+    background-image: linear-gradient(0deg,#248CC6 ,transparent) ;
+    font-weight: bold;
+    word-break: break-word
 }
 #container5{
     width: 100%;
@@ -143,6 +194,7 @@ li{
         border-radius: 10px;
         overflow: auto;
         background-color: #FDF4DB;
+        padding: 0px;
     }
 }
 @media (max-width: 350px){

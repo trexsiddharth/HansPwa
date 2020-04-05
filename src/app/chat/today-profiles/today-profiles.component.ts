@@ -91,6 +91,7 @@ export class TodayProfilesComponent implements OnInit {
 
         // set profile image (circular in top bar)
         this.setProfileImage.emit(data.photo);
+        localStorage.setItem('profile_photo', data.photo);
         if (data && data.photo) {
         this.selfImage = data.photo;
         } else {

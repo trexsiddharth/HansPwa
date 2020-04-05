@@ -13,6 +13,9 @@ main{
 ::ng-deep .carousel-indicators{
     bottom: 0px !important;
 }
+::ng-deep .mat-card-image{
+    margin: 0px;
+}
 
 .row{
     padding: 0px;

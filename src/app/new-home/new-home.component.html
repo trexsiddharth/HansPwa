@@ -1,5 +1,5 @@
   <mat-sidenav-container class="mainContainer">
-    <mat-sidenav class="drawerSettings" mode="over" position="end" #sidenav>
+    <mat-sidenav id="sidenav" class="drawerSettings" mode="over" position="end" (opened)="homeService.saveDrawerInstance(sidenav)" #sidenav>
         <app-home-drawer></app-home-drawer>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -8,7 +8,9 @@
             <mat-toolbar-row>
                 <div class="mainDivToolbar">
                     <div>
-                        <img style="width: 40px;" src="../../assets/logo_192.png" alt="Hans Matrimony"> 
+                        <img width="40px" [defaultImage]="'../../assets/logo_72.png'" 
+                            [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_384.png 1000w'" 
+                             [useSrcset]="true" alt="Hans Matrimony">
                         <span style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;"><strong>Hans Matrimony</strong></span>
                     </div>
                     <div style="margin-right: 15px;padding-top: 4px;">
@@ -21,13 +23,14 @@
                   <div class="row toolBarRow2">
                  
                 <div class="col-4 t-c b-r">
-                    <span style="color: white;">डाउनलोड करें</span>
+                    <span style="color: white;"><a style="color: white;text-decoration: none;" href="https://play.google.com/store/apps/details?id=com.twango.me"> डाउनलोड करें</a></span>
                 </div>
                 <div class="col-4 t-c b-r">
-                    <img style="width: 25px;" src="../../assets/whatsapp-white.svg" alt="whatsapp share">
+                    <img style="width: 25px;" (click)="sendWhatsAppLink()" src="../../assets/whatsapp-white.svg" alt="whatsapp share">
                 </div>
                 <div class="col-4 t-c">
-                    <span style="color: white;">लॉगिन करें</span>
+                    <span style="color: white;" *ngIf="homeService.getLoginStatus()==false"><a style="color: white;text-decoration: none;" [routerLink]="['/phone-number']" routerLinkActive="router-link-active">लॉगिन करें</a></span>
+                    <span style="color: white;" *ngIf="homeService.getLoginStatus()"><a style="color: white;text-decoration: none;" [routerLink]="['/chat']" routerLinkActive="router-link-active">रिश्ते देखें</a></span>
                 </div>
             </div>
               </mat-toolbar-row>

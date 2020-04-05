@@ -8,56 +8,44 @@
             </div>
             <div style="
             padding: 10px 30px;">
-            <img class="profileImage" 
-            src="../../../assets/Sagar Dewan.jpg" alt="profile picture">
-            </div>
-            <div class="imageName">
-                <div style="width: 100%;">
-                    <p style="font-weight: bold;font-size: 18px;margin: 0px;">
-                        सागर देवान,&nbsp;30
-                    </p>
-                    <p>
-                        दिल्ली &nbsp;|&nbsp; 5'10"
-                    </p>
-                </div>
-                <div style="position: absolute;bottom: 20px;right: 10px;">
-                    <img width="35px" src="../../../assets/pencil.svg" alt="edit profile">
-                </div>
+            <img width="40px" class="profileImage" [defaultImage]="'../../assets/logo_192.png'" 
+                            [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_384.png 1000w'" 
+                             [useSrcset]="true" alt="profile picture" *ngIf="homeService.getProfilePic() == null">
+
+                             <img class="profileImage" [src]="homeService.getProfilePic()" alt="profile picture" *ngIf="homeService.getProfilePic()" >
             </div>
             </div>
             </ng-container>
 
             <ng-container>
                 <div style="padding: 20px 40px; font-size: 16px;font-weight: bold;">
-                    <p>
+                    
+                    <button class="btn drawerBtn" [routerLink]="['/fourReg']" routerLinkActive="router-link-active" 
+                    *ngIf="homeService.getLoginStatus() == false">
                         <img src="../../../assets/settings.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 20px;">&nbsp;&nbsp; रजिस्टर फ्री</span>
-                    </p>
+                    </button>
 
-                    <p>
+                    <button class="btn drawerBtn" [routerLink]="['/phone-number']" routerLinkActive="router-link-active" 
+                    *ngIf="homeService.getLoginStatus() == false">
                         <img src="../../../assets/settings.svg" alt="settings icon">  
-                        <span style="padding-top: 4.5px;color: #070973;
+                        <span style="padding-top: 4.5px; color: #070973;
+                        margin-left: 20px;">&nbsp;&nbsp; लॉगिन करें</span>
+                    </button>
+
+                    <button class="btn drawerBtn" [routerLink]="['/subscription']" routerLinkActive="router-link-active" >
+                        <img src="../../../assets/settings.svg" alt="settings icon">  
+                        <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 20px;">&nbsp;&nbsp; सब्सक्रिप्शन</span>
-                    </p>
+                    </button>
 
-                    <p>
+                    <button class="btn drawerBtn" (click)="logout()"
+                    *ngIf="homeService.getLoginStatus()">
                         <img src="../../../assets/settings.svg" alt="settings icon">  
-                        <span style="padding-top: 4.5px;color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; भाषा चुनें</span>
-                    </p>
-
-                    <p>
-                        <img src="../../../assets/settings.svg" alt="settings icon">  
-                        <span style="padding-top: 4.5px;color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; सेटिंग्स</span>
-                    </p>
-
-                    <p>
-                        <img src="../../../assets/settings.svg" alt="settings icon">  
-                        <span style="padding-top: 4.5px;color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; परेफरेंस</span>
-                    </p>
+                        <span style="padding-top: 4.5px; color: #070973;
+                        margin-left: 20px;">&nbsp;&nbsp; लॉगआउट</span>
+                    </button>
                 </div>
             </ng-container>
 
@@ -70,7 +58,8 @@
                         padding: 10px 0px;
                         font-size: 16px;
                         font-weight: bold;
-                        color: #070973;">
+                        color: #070973;"
+                        (click)="openBlog()">
                            <img class="btnImage" src="../../../assets/settings.svg" alt="settings icon">  हमारा ब्लॉग पढ़ें
                         </button>
 
