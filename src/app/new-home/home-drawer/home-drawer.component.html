@@ -22,27 +22,27 @@
                     
                     <button class="btn drawerBtn" [routerLink]="['/fourReg']" routerLinkActive="router-link-active" 
                     *ngIf="homeService.getLoginStatus() == false">
-                        <img src="../../../assets/settings.svg" alt="settings icon">  
+                        <img width="40px" src="../../../assets/note.svg" alt="register">  
                         <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 20px;">&nbsp;&nbsp; रजिस्टर फ्री</span>
                     </button>
 
                     <button class="btn drawerBtn" [routerLink]="['/phone-number']" routerLinkActive="router-link-active" 
                     *ngIf="homeService.getLoginStatus() == false">
-                        <img src="../../../assets/settings.svg" alt="settings icon">  
+                        <img width="40px" src="../../../assets/password.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 20px;">&nbsp;&nbsp; लॉगिन करें</span>
                     </button>
 
                     <button class="btn drawerBtn" [routerLink]="['/subscription']" routerLinkActive="router-link-active" >
-                        <img src="../../../assets/settings.svg" alt="settings icon">  
+                        <img width="40px" src="../../../assets/contract.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 20px;">&nbsp;&nbsp; सब्सक्रिप्शन</span>
                     </button>
 
                     <button class="btn drawerBtn" (click)="logout()"
                     *ngIf="homeService.getLoginStatus()">
-                        <img src="../../../assets/settings.svg" alt="settings icon">  
+                        <img width="40px" src="../../../assets/log_out.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 20px;">&nbsp;&nbsp; लॉगआउट</span>
                     </button>
