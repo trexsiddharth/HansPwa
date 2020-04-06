@@ -15,7 +15,7 @@ export class NewHomeComponent implements OnInit {
   }
 
   sendWhatsAppLink() {
-    window.open('whatsapp://send?text=*हंस%20मॅट्रिमोनी%20ऐप:*%20' + 'https://play.google.com/store/apps/details?id=com.twango.me');
+    window.open('http://wa.me/918368090821?text=We%20are%20interested%20in%20Registering%20for%20Personalized%20Services');
   }
 
 }
