@@ -70,6 +70,10 @@
     margin-left: 20px;
     border-radius: 10px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
 .imageThreeGradient{
     width: 100%;
@@ -162,7 +166,8 @@
     text-align: start;
     background-image: linear-gradient(0deg,#248CC6 ,transparent) ;
     font-weight: bold;
-    word-break: break-word
+    word-break: break-word;
+    text-shadow: 1px 1px black;
 }
 #container5{
     width: 100%;

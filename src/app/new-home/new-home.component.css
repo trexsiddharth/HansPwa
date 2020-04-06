@@ -17,6 +17,10 @@ width: 70%;
     position: fixed; 
     z-index:1;
 }
+.toolText{
+    color: white;
+    font-size: 20px;
+}
 .mainDivToolbar{
     display: flex;
     justify-content: space-between;
@@ -29,4 +33,18 @@ width: 70%;
 }
 .b-r{
     border-right: 1px solid white;
+}
+
+@media (max-width: 576px) {
+    .toolText{
+        color: white;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 350px) {
+    .toolText{
+        color: white;
+        font-size: 16px;
+    }
 }
