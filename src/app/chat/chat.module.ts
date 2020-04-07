@@ -14,6 +14,8 @@ import { EditPersonalDialogComponent } from './myprofile/edit-personal-dialog/ed
 import { EditPreferenceDialogComponent } from './myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { TodayProfilesComponent } from './today-profiles/today-profiles.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
+import { ChatServiceService } from '../chat-service.service';
 
 
 @NgModule({
@@ -40,6 +42,10 @@ entryComponents: [
   EditFamilyDialogComponent,
   EditPersonalDialogComponent,
   EditPreferenceDialogComponent,
+],
+providers: [
+  FindOpenHistoryProfileService,
+  ChatServiceService
 ]
 })
 export class ChatModule { }

@@ -28,11 +28,11 @@ import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.compo
 
 import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
 
-import { RegComponent } from './reg/reg.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { NewHomeComponent } from './new-home/new-home.component';
 import { HomeMainComponent } from './new-home/home-main/home-main.component';
 import { HomeDrawerComponent } from './new-home/home-drawer/home-drawer.component';
+import { NewHomeService } from './new-home/new-home.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,6 @@ import { HomeDrawerComponent } from './new-home/home-drawer/home-drawer.componen
     PhoneNumberScreenComponent,
     TermsAndConditionsComponent,
     CustomCheckoutComponent,
-    RegComponent,
     NewHomeComponent,
     HomeMainComponent,
     HomeDrawerComponent,
@@ -65,7 +64,7 @@ import { HomeDrawerComponent } from './new-home/home-drawer/home-drawer.componen
       preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     })
   ],
-  providers: [SubscriptionserviceService],
+  providers: [SubscriptionserviceService, NewHomeService],
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [SubscriptionDialogComponent, TiktokAdsFormComponent],
