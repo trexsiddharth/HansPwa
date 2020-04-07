@@ -1,0 +1,51 @@
+<main>
+    <section>
+        <div class="historyProfile" *ngFor="let item of profile;let i = index">
+            <img class="historyImage" #profilePic
+            [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)" 
+            (error) = "onLoadProfileError(item.profile.gender,profilePic)"
+            alt="profile picture">
+
+            <div class="historyDetails" >
+                <span>
+                    {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
+                </span><br>
+                <span>
+                    {{item.profile.working_city}} | {{setHeight(item.profile.height)}} 
+                    | {{item.family? item.family.religion : item.profile.religion}}, {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
+                    | {{setIncome(item.profile.monthly_income)}} LPA
+                </span>
+            </div>
+
+            <div class="historyButtons">
+
+                <button mat-raised-button class="btn" 
+                (click)="profileReAnswer(item,'NO',i)"
+                style="background-color: #C8C8C8;
+                    padding: 20px;
+                     border-radius: 10px;"  *ngIf="type !== 'rejected'">
+                    <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
+                </button>
+
+                <button mat-raised-button  class="btn" 
+                (click)="profileReAnswer(item,'YES',i)"
+                style="background-color: green;
+                margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;"  *ngIf="type !== 'contacted'">
+                <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+            </button>
+
+                <button mat-raised-button  class="btn"
+                (click)="profileReAnswer(item,'SHORTLIST',i)"
+                 style="background-color: #D313AE;margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;" *ngIf="type !== 'interestShown'">
+                    <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
+                </button>
+
+            </div>
+            <hr>
+        </div>
+    </section>
+</main>

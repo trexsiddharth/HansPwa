@@ -16,6 +16,7 @@ import { TodayProfilesComponent } from './today-profiles/today-profiles.componen
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
 import { ChatServiceService } from '../chat-service.service';
+import { HistoryProfilesComponent } from './history-profiles/history-profiles.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ChatServiceService } from '../chat-service.service';
     EditPreferenceDialogComponent,
     TodayProfilesComponent,
     UserProfileComponent,
+    HistoryProfilesComponent,
 ],
 entryComponents: [
   MessageDialogComponent,

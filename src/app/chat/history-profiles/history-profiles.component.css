@@ -1,0 +1,64 @@
+section{
+    padding: 20px 30px;
+}
+
+.historyProfile{
+    width: 100%;
+    height: 70%;
+    border-radius: 20px;
+    position: relative;
+}
+.historyImage{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: fill;
+}
+.historyDetails{
+position: absolute;
+bottom: 20px;
+background-image: linear-gradient(0deg,black,transparent);
+word-break: break-word;
+color: white;
+font-size: 1rem;
+font-weight: bold;
+padding: 18px 25px;
+border-radius: 10px;
+}
+.historyButtons{
+    display: flex;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    bottom: 35px;
+    right: -20px;
+}
+
+@media (max-width: 350px) {
+    .historyDetails{
+        position: absolute;
+        bottom: 20px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 25px;
+        border-radius: 10px;
+        }
+}
+
+@media (max-width: 575px) {
+    .historyDetails{
+        position: absolute;
+        bottom: 20px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 20px;
+        border-radius: 10px;
+        }
+}
