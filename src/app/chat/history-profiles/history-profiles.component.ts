@@ -193,7 +193,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   setPanelOpenState(index: any) {
-    this.panelOpenState = index;
+    if (this.panelOpenState === index) {
+      this.panelOpenState = -1;
+    } else {
+      this.panelOpenState = index;
+    }
     console.log(this.panelOpenState);
   }
 
@@ -316,6 +320,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       } else {
         return 'Dead';
       }
+    } else {
+      return work;
     }
   }
 

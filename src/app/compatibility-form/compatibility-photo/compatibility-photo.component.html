@@ -51,8 +51,6 @@
       <div class="col-md-12 text-center">
         <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Skip</button>
         <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Please Click to Proceed</button>
-        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="submit()">Save</button>
-        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="checkForPhoto()">Approve</button>
       </div>
    </div> 
 </form>

@@ -7,6 +7,7 @@ import { CompatibilityPageThreeComponent } from './compatibility-page-three/comp
 import { CompatibilityPhotoComponent } from './compatibility-photo/compatibility-photo.component';
 import { CompatibilityFormRoutingModule } from './compatibility-form-routing.module';
 import { FourPageService } from './four-page.service';
+import { CompatibilityPageFiveComponent } from './compatibility-page-five/compatibility-page-five.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FourPageService } from './four-page.service';
     CompatibilityFormComponent,
     CompatibilityPageTwoComponent,
     CompatibilityPageThreeComponent,
-    CompatibilityPhotoComponent
+    CompatibilityPhotoComponent,
+    CompatibilityPageFiveComponent
   ],
   imports: [
     CommonModule,
