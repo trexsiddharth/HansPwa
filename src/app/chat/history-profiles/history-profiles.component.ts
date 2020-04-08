@@ -118,6 +118,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
 
   }
+
   onLoadProfileError(gender: string, id: any) {
    if (gender === 'Male') {
     id.setAttribute('src', '../../assets/male_pic.png');
@@ -129,7 +130,6 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     id.setAttribute('src', '../../assets/male_pic.png');
   }
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
-    console.log(index);
     if (carous === null || carous === 'null') {
       if (photo === null) {
       if (gen === 'Male') {

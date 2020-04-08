@@ -5,7 +5,15 @@
             [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)" 
             (click)="setPanelOpenState(i)"
             (error) = "onLoadProfileError(item.profile.gender,profilePic)"
-            alt="profile picture">
+            alt="profile picture"
+            [hidden]="panelOpenState==i"
+            >
+
+              <ngb-carousel *ngIf="panelOpenState==i">
+                <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index" >
+                        <img mat-card-image id="profileImage" [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)" alt="item.profile.name">
+                </ng-template>
+              </ngb-carousel>
 
             <div class="historyDetails" [hidden]="panelOpenState==i">
                 <span>
