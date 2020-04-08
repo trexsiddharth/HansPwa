@@ -23,7 +23,7 @@
                     {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
                 </span><br>
                 <span>
-                    {{item.profile.working_city}} | {{setHeight(item.profile.height)}} 
+                    {{item.family ? item.family.city : item.profile.working_city}} | {{setHeight(item.profile.height)}} 
                     | {{item.family? item.family.religion : item.profile.religion}}, {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
                     | {{setIncome(item.profile.monthly_income)}} LPA
                 </span>
