@@ -4,6 +4,8 @@
 }
 ::ng-deep .mat-dialog-content{
     max-height: 99vh;
+    margin: 0px;
+    padding: 0px;
 }
 
 #cancel{
