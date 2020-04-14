@@ -17,6 +17,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
 import { ChatServiceService } from '../chat-service.service';
 import { HistoryProfilesComponent } from './history-profiles/history-profiles.component';
+import { HistoryProfilesDialogComponent } from './history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 
 
 @NgModule({
@@ -38,12 +39,14 @@ import { HistoryProfilesComponent } from './history-profiles/history-profiles.co
     TodayProfilesComponent,
     UserProfileComponent,
     HistoryProfilesComponent,
+    HistoryProfilesDialogComponent,
 ],
 entryComponents: [
   MessageDialogComponent,
   EditFamilyDialogComponent,
   EditPersonalDialogComponent,
   EditPreferenceDialogComponent,
+  HistoryProfilesDialogComponent
 ],
 providers: [
   FindOpenHistoryProfileService,

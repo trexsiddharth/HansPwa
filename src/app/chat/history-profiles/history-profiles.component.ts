@@ -3,6 +3,7 @@ import {
   OnInit,
   Input,
   AfterViewInit,
+  ElementRef,
 } from '@angular/core';
 import {
   HttpClient
@@ -32,6 +33,7 @@ import {
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
+import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 
 
 
@@ -73,10 +75,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
 
-  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService, 
+  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
               private dialog: MatDialog,
-              public notification: NotificationsService, public itemService: FindOpenHistoryProfileService, private router: Router) {}
+              public notification: NotificationsService, 
+              public itemService: FindOpenHistoryProfileService, 
+              private router: Router) {}
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -116,7 +120,6 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       const keys = Object.keys(carousel);
       return carousel[keys[0]];
     }
-
   }
 
   onLoadProfileError(gender: string, id: any) {
@@ -126,7 +129,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     id.setAttribute('src', '../../assets/female_pic.png');
   }
   }
-  onLoadComplete(id: any){
+  onLoadComplete(id: any) {
     id.setAttribute('src', '../../assets/male_pic.png');
   }
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
@@ -192,13 +195,17 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setPanelOpenState(index: any) {
-    if (this.panelOpenState === index) {
-      this.panelOpenState = -1;
-    } else {
-      this.panelOpenState = index;
+  setPanelOpenState(item: any, ind: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.minWidth = '90vw';
+    dialogConfig.minHeight = '95vh';
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      profile : item,
+      index : ind
     }
-    console.log(this.panelOpenState);
+    const dialogRefYes = this.dialog.open(HistoryProfilesDialogComponent, dialogConfig);
   }
 
   setId(index: any) {
@@ -236,7 +243,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           this.getNoDataText(link);
         }
         if (this.itemService.getItem()) {
-          let prof: any = this.itemService.getItem();
+          const prof: any = this.itemService.getItem();
           if (prof.profile) {
             this.panelOpenState = this.profile.findIndex((item) => {
               return item.profile.name === prof.profile.name;
@@ -326,7 +333,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   profileReAnswer(item: any, answer: any, index: any) {
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && 
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     this.itemService.getPhotoStatus() === false &&
     answer === 'SHORTLIST') {
      this.openMessageDialog(item, answer);
@@ -454,7 +461,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.itemService.changeTab(slide);
   }
   setDate(date: string) {
-    let newDate = new Date(date);
+    const newDate = new Date(date);
     return new Intl.DateTimeFormat('en-AU').format(newDate);
   }
   setHeight(height: any) {
