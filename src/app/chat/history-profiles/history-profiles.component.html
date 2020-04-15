@@ -3,7 +3,7 @@
         <div class="historyProfile"  *ngFor="let item of profile;let i = index">
             <img class="historyImage" #profilePic
             [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)" 
-            (click)="setPanelOpenState(item,i)"
+            (click)="openProfileDialog(item,i)"
             (error) = "onLoadProfileError(item.profile.gender,profilePic)"
             alt="profile picture">
 

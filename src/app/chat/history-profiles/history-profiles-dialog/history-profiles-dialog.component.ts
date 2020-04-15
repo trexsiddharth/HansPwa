@@ -21,6 +21,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
   item;
   index;
+  type;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
@@ -30,6 +31,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data) {
                 this.item = data.profile;
                 this.index = data.index;
+                this.type = data.type;
               }
 
   ngOnInit() {
@@ -38,8 +40,12 @@ export class HistoryProfilesDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
-  profileReAnswer(item: any, answer: string){
-    this.dialogRef.close();
+  profileReAnswer(item: any, answer: string) {
+    this.dialogRef.close({
+      profile: item,
+      ans: answer,
+      index: this.index
+    });
 
   }
   getQualification(degree, education) {

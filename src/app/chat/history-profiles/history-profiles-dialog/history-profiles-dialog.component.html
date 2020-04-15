@@ -6,7 +6,7 @@
 
 <ngb-carousel>
     <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index" >
-            <img mat-card-image id="profileImage" 
+            <img  id="profileImage" 
             [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)" 
             alt="item.profile.name">
     </ng-template>
@@ -46,7 +46,7 @@
                  <!-- // buttons -->
         
                  <div id="answerButtons">
-                    <div class="t-c blur">
+                    <div class="t-c blur" *ngIf="type != 'rejected'">
                         <button 
                         (click)="profileReAnswer(item,'NO')" id="setRejectBtn" mat-fab>
                           <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
@@ -55,7 +55,7 @@
                             नापसंद है
                         </span>
                     </div>
-                    <div class="t-c">
+                    <div class="t-c" *ngIf="type != 'contacted'">
                         <button 
                         (click)="profileReAnswer(item,'YES')"   id="setCallBtn" mat-fab
                           aria-label="Example icon-button with a heart icon" >
@@ -65,7 +65,7 @@
                             कांटेक्ट करें
                         </span>
                     </div>
-                    <div class="t-c">
+                    <div class="t-c" *ngIf="type != 'interestShown'">
                         <button 
                         (click)="profileReAnswer(item,'SHORTLIST')" id="setShortlistBtn" mat-fab
                           aria-label="Example icon-button with a heart icon" >

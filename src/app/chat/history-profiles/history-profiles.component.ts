@@ -195,7 +195,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setPanelOpenState(item: any, ind: any) {
+  openProfileDialog(item: any, ind: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     dialogConfig.minWidth = '90vw';
@@ -203,9 +203,17 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     dialogConfig.disableClose = true;
     dialogConfig.data = {
       profile : item,
-      index : ind
+      index : ind,
+      type: this.type
     }
-    const dialogRefYes = this.dialog.open(HistoryProfilesDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(HistoryProfilesDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (data: any) => {
+        if (data) {
+          this.profileReAnswer(data.profile, data.ans, data.index);
+        }
+      }
+    );
   }
 
   setId(index: any) {

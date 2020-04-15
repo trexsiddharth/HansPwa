@@ -398,7 +398,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     document.getElementById('footerVisibility').style.display = 'none';
   }
   
-  changeToHistory(link: string) {
+  changeToHistory() {
     if (this.currentContact) {
       (window as any).ga('send', 'event', 'history', 'history clicked', {
         hitCallback: () => {
@@ -523,15 +523,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
         break;
       case 1:
         this.tabType = 'contacted';
-        this.changeToHistory('contactedProfiles');
+        this.changeToHistory();
         break;
       case 2:
         this.tabType = 'interestShown';
-        this.changeToHistory('sortListProfiles');
+        this.changeToHistory();
         break;
       case 3:
         this.tabType = 'interestReceived';
-        this.changeToHistory('interestReceived');
+        this.changeToHistory();
         break;
       case 4:
         this.tabType = 'personalized';
@@ -539,7 +539,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         break;
       case 5:
         this.tabType = 'rejected';
-        this.changeToHistory('rejectedProfiles');
+        this.changeToHistory();
         break;
 
       default:
@@ -552,19 +552,19 @@ export class ChatComponent implements OnInit, AfterViewInit {
         break;
       case 1:
         this.tabType = 'contacted';
-        this.changeToHistory('contactedProfiles');
+        this.changeToHistory();
         break;
       case 2:
         this.tabType = 'interestShown';
-        this.changeToHistory('sortListProfiles');
+        this.changeToHistory();
         break;
       case 3:
         this.tabType = 'interestReceived';
-        this.changeToHistory('interestReceived');
+        this.changeToHistory();
         break;
       case 4:
         this.tabType = 'rejected';
-        this.changeToHistory('rejectedProfiles');
+        this.changeToHistory();
         break;
 
       default:
