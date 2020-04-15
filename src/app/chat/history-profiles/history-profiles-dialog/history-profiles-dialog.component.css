@@ -1,9 +1,10 @@
 ::ng-deep .mat-dialog-container{
     background-color: white;
-    padding: 10px;
+    padding: 0px;
+    border-radius: 10px;
 }
 ::ng-deep .mat-dialog-content{
-    max-height: 99vh;
+    max-height: 79vh;
     margin: 0px;
     padding: 0px;
 }
@@ -24,13 +25,35 @@
 #answerButtons{
     display: flex;
     justify-content: space-evenly;
-    position: fixed;
-    width: 85vw;
-    background-color: transparent;
+    position: sticky;
+    top: 54vh;
+    margin-top: 20px;
+    bottom: 10px;
     z-index: 99999;
-    bottom: 0px;
     background-image: linear-gradient(0deg, white,transparent);
 }
+#setRejectBtn{
+    width: 70px;
+    height: 70px;
+    color: grey;
+    background: #C8C8C8;
+    margin-bottom: 10px;
+}
+#setCallBtn{
+    width: 70px;
+    height: 70px;
+    color: green;
+    background: #58D1FD;
+    margin-bottom: 10px;
+}
+#setShortlistBtn{
+    width: 70px;
+    height: 70px;
+    color: red;
+    background: #D313AE;
+    margin-bottom: 10px;
+}
+
 .buttonImage{
     width: 40px;
 }
@@ -88,7 +111,7 @@
 
 #familySection{
     margin-top: 20px; 
-        padding: 15px 15px;
+        padding: 15px 15px 150px;
         border: 1px solid #58D1FD;
         border-radius: 5px;
 }
@@ -105,6 +128,21 @@
         padding: 15px 25px;
         border-radius: 10px;
         }
+        #answerButtons{
+            display: flex;
+            justify-content: space-evenly;
+            position: sticky;
+            top: 59vh !important;
+            margin-top: 20px;
+            bottom: 10px;
+            z-index: 99999;
+            background-image: linear-gradient(0deg, white,transparent);
+        }
+        #profileImage{
+            width: 100%;
+            height: 50vh !important;
+            border-radius: 5px;
+        }
 }
 
 @media (max-width: 575px) {
@@ -118,6 +156,21 @@
         font-weight: bold;
         padding: 15px 35px 15px 10px;
         border-radius: 10px;
+        }
+        #answerButtons{
+            display: flex;
+            justify-content: space-evenly;
+            position: sticky;
+            top: 65vh;
+            margin-top: 20px;
+            bottom: 10px;
+            z-index: 99999;
+            background-image: linear-gradient(0deg, white,transparent);
+        }
+        #profileImage{
+            width: 100%;
+            height: 55vh !important;
+            border-radius: 5px;
         }
 }
 @media (min-width: 1024px){

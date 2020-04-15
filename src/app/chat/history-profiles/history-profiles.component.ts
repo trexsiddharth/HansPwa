@@ -199,7 +199,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     dialogConfig.minWidth = '90vw';
-    dialogConfig.minHeight = '95vh';
+    dialogConfig.minHeight = '80vh';
     dialogConfig.disableClose = true;
     dialogConfig.data = {
       profile : item,

@@ -16,45 +16,8 @@
 
           <div>
 
-            <section style="padding: 0px 0px 150px;position: relative;color: black;">
+            <section style="padding: 0px 0px;position: relative;color: black;">
 
-                <!-- // buttons -->
-        
-                <div id="answerButtons">
-                    <div class="t-c blur">
-                        <button 
-                        (click)="profileReAnswer(item,'NO')" class="setButtons" mat-fab style="width: 70px;
-                        height: 70px;color: grey;background: #C8C8C8;margin-bottom: 10px;">
-                          <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
-                        </button><br>
-                        <span style="color: #C8C8C8;font-weight: bold;font-size: 18px;">
-                            नापसंद है
-                        </span>
-                    </div>
-                    <div class="t-c">
-                        <button 
-                        (click)="profileReAnswer(item,'YES')"   class="setButtons" mat-fab style="width: 70px;
-                        height: 70px;color: green;background: #58D1FD;margin-bottom: 10px;"
-                          aria-label="Example icon-button with a heart icon" >
-                          <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
-                        </button><br>
-                        <span style="color: #58D1FD;font-weight: bold;font-size: 18px;">
-                            कांटेक्ट करें
-                        </span>
-                    </div>
-                    <div class="t-c">
-                        <button 
-                        (click)="profileReAnswer(item,'SHORTLIST')" class="setButtons" mat-fab style="width: 70px;
-                        height: 70px;color: red;background: #D313AE;margin-bottom: 10px;"
-                          aria-label="Example icon-button with a heart icon" >
-                          <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
-                        </button><br>
-                        <span style="color: #D313AE;font-weight: bold;font-size: 18px;">
-                            पसंद है
-                        </span>
-                    </div>
-                        
-                </div>
         
                 <div  style="margin-top: 20px;" *ngIf="item.profile.facebook">
                     <div class="row" id="verified">
@@ -78,6 +41,41 @@
                                     text-shadow: 1px 1px darkgrey;">प्रोफाइल मैनेज्ड बय: {{item.family ? item.family.relation : item.profile.relation}}</span>
                         </div>
                     </div>
+                </div>
+
+                 <!-- // buttons -->
+        
+                 <div id="answerButtons">
+                    <div class="t-c blur">
+                        <button 
+                        (click)="profileReAnswer(item,'NO')" id="setRejectBtn" mat-fab>
+                          <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                        </button><br>
+                        <span style="color: #C8C8C8;font-weight: bold;font-size: 18px;">
+                            नापसंद है
+                        </span>
+                    </div>
+                    <div class="t-c">
+                        <button 
+                        (click)="profileReAnswer(item,'YES')"   id="setCallBtn" mat-fab
+                          aria-label="Example icon-button with a heart icon" >
+                          <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
+                        </button><br>
+                        <span style="color: #58D1FD;font-weight: bold;font-size: 18px;">
+                            कांटेक्ट करें
+                        </span>
+                    </div>
+                    <div class="t-c">
+                        <button 
+                        (click)="profileReAnswer(item,'SHORTLIST')" id="setShortlistBtn" mat-fab
+                          aria-label="Example icon-button with a heart icon" >
+                          <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
+                        </button><br>
+                        <span style="color: #D313AE;font-weight: bold;font-size: 18px;">
+                            पसंद है
+                        </span>
+                    </div>
+                        
                 </div>
         
                 <div id="aboutSection" *ngIf="item.profile.about && item.profile.about.length > 6">
