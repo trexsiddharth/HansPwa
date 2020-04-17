@@ -1,6 +1,8 @@
 <main>
     <div class="t-c" style="color: white;padding: 10px 10px;background-color: #83C9F4;">
-        <img (click)="backToChat()" style="float: left;width: 20px;" src="../../../assets/backbtn.svg" alt="back button">
+        <img (click)="backToChat()" style="float: left;width: 20px;
+        position: absolute;
+            left: 20px;" src="../../../assets/backbtn.svg" alt="back button">
         <h5 style="font-weight: bold;margin: 0px;">
             मेरी प्रोफाइल
         </h5>
@@ -20,12 +22,12 @@
           padding: 10px 10px;
           width: 100%; text-align: center;
           background-image: linear-gradient(0deg, black, transparent);">
-            <img width="30px" style="float: right;" src="../../../assets/pencil.svg" alt="edit">
-            <span style="font-weight:bold;font-size: 18px;">
-            {{personalProfileData.name}}, {{setAge(personalProfileData.birth_date)}} Yrs
+            <img width="25px" style="float: right;" src="../../../assets/pencil.svg" alt="edit">
+            <span style="font-weight:bold;font-size: 18px;text-transform: capitalize;">
+            {{personalProfileData.name}}, {{setAge(personalProfileData.birth_date)}}
             </span><br>
             <span>
-                {{setLocality(personalProfileData.locality,familyProfileData.city)}}
+                {{setLocality(personalProfileData.locality,familyProfileData.city)}} &nbsp;|&nbsp; {{getHeight(personalProfileData.height)}}
             </span>
           </div>
     </div>
@@ -59,14 +61,13 @@
         <div class="sections">
             <div>
                 <span class="sectionTitle">
-                    अबाउट में
+                    अबाउट मी 
                 </span>
                 <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit about me">
             </div>
-            <p style="margin-top: 10px;">
+            <p style="margin-top: 10px;text-transform: capitalize;">
                 हेलो, Myself {{personalProfileData.name}}, {{personalProfileData.about}}
             </p>
-
         </div>
 
         <hr>
@@ -85,49 +86,49 @@
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/avatar-blue.svg" alt="avatar"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.name}}
+                      <span class="labelText">नाम:</span> {{personalProfileData.name}}
                     </span>
                 </div>
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/calendar.svg" alt="age"> 
                     <span style="margin-left: 5px;">
-                        {{setAge(personalProfileData.birth_date)}} Yrs
+                        <span class="labelText">उम्र:</span>  {{setAge(personalProfileData.birth_date)}} Yrs
                     </span>
                 </div>
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/weight.svg" alt="weight"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.weight}} Kg
+                        <span class="labelText">वेट:</span> {{personalProfileData.weight}} Kg
                     </span>
                 </div>
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/scale.svg" alt="height"> 
                     <span style="margin-left: 5px;">
-                        {{getHeight(personalProfileData.height)}}
+                        <span class="labelText">उचाई:</span> {{getHeight(personalProfileData.height)}}
                     </span>
                 </div>
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/heart.svg" alt="marital status"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.marital_status}}
+                        <span class="labelText">मैरिटल स्टेटस:</span>  {{personalProfileData.marital_status}}
                     </span>
                 </div>
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/tarot.svg" alt="caste"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.religion}}, {{familyProfileData.caste}}
+                        <span class="labelText">रिलिजन:</span> {{familyProfileData.religion}}, {{familyProfileData.caste}}
                     </span>
                 </div>
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/cutlery.svg" alt="food choice"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.food_choice}}
+                        <span class="labelText">फ़ूड चॉइस:</span>  {{personalProfileData.food_choice}}
                     </span>
                 </div>
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/house.svg" alt="working city"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.working_city}}
+                        <span class="labelText">वर्किंग सिटी:</span> {{personalProfileData.working_city}}
                     </span>
                 </div>
             </div>
@@ -150,19 +151,19 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/graduation.svg" alt="degree"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.education}}
+                        <span class="labelText">ग्रेजुएशन:</span>  {{personalProfileData.education}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/graduation.svg" alt="college"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.college}}
+                        <span class="labelText">कॉलेज:</span>   {{personalProfileData.college}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/graduation.svg" alt="additional"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.additional_qualification}}
+                        <span class="labelText">एडिशनल:</span> {{personalProfileData.additional_qualification}}
                     </span>
                 </div>
             </div>
@@ -185,31 +186,31 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/suitcase.svg" alt="occupation"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.occupation}}
+                        <span class="labelText">ऑक्यूपेशन:</span>  {{personalProfileData.occupation}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/suitcase.svg" alt="profession"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.profession}}
+                        <span class="labelText">देसिग्नेशन:</span>  {{personalProfileData.profession}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/house.svg" alt="company"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.company}}
+                        <span class="labelText">कंपनी:</span> {{personalProfileData.company}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/house.svg" alt="working_city"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.working_city}}
+                        <span class="labelText">वर्किंग सिटी:</span> {{personalProfileData.working_city}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/rupee.svg" alt="income"> 
                     <span style="margin-left: 5px;">
-                        {{getIncome(personalProfileData.monthly_income)}} LPA
+                        <span class="labelText">आय:</span> {{getIncome(personalProfileData.monthly_income)}} LPA
                     </span>
                 </div>
             </div>
@@ -232,25 +233,25 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/tarot.svg" alt="manglik status"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.manglik}}
+                        <span class="labelText">मांगलिक:</span> {{personalProfileData.manglik}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/birthday.svg" alt="brith date"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.birth_date}}
+                        <span class="labelText">जनम तिथि:</span> {{personalProfileData.birth_date}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/birthplace.svg" alt="birth place"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.birth_place}}
+                        <span class="labelText">बर्थ प्लेस:</span> {{personalProfileData.birth_place}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/clock.svg" alt="birth time"> 
                     <span style="margin-left: 5px;">
-                        {{personalProfileData.birth_time}}
+                        <span class="labelText">बर्थ टाइम:</span>  {{personalProfileData.birth_time}}
                     </span>
                 </div>
             </div>
@@ -272,25 +273,25 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/phone_blue.svg" alt="email"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.email}}
+                        <span class="labelText">ईमेल:</span>  {{familyProfileData.email}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/phone_blue.svg" alt="phone"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.mobile}}
+                        <span class="labelText">मोबाइल:</span> {{familyProfileData.mobile}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/phone_blue.svg" alt="whatsapp"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.whatsapp ? familyProfileData.whatsapp : familyProfileData.mobile}}
+                        <span class="labelText">व्हाट्सप्प:</span>  {{familyProfileData.whatsapp ? familyProfileData.whatsapp : familyProfileData.mobile}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/clock.svg" alt="city"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.city}}
+                        <span class="labelText">सिटी:</span>  {{familyProfileData.city}}
                     </span>
                 </div>
             </div>
@@ -307,7 +308,7 @@
                 </span>
                 <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit about me">
             </div>
-            <p style="margin-top: 10px;">
+            <p style="margin-top: 10px;text-transform: capitalize;">
                 {{familyProfileData.about}}
             </p>
 
@@ -329,49 +330,49 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/parents.svg" alt="mother"> 
                     <span style="margin-left: 5px;">
-                        {{LifeStatus(familyProfileData.mother_status, familyProfileData.occupation_mother)}}
+                        <span class="labelText">मदर:</span> {{LifeStatus(familyProfileData.mother_status, familyProfileData.occupation_mother)}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/parents.svg" alt="father"> 
                     <span style="margin-left: 5px;">
-                        {{LifeStatus(familyProfileData.father_status, familyProfileData.occupation)}}
+                        <span class="labelText">फादर:</span> {{LifeStatus(familyProfileData.father_status, familyProfileData.occupation)}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/sisters.svg" alt="sisters"> 
                     <span style="margin-left: 5px;">
-                        {{setMarriageSisters(familyProfileData.unmarried_daughters,familyProfileData.married_daughters)}}
+                        <span class="labelText">बेहेने:</span> {{setMarriageSisters(familyProfileData.unmarried_daughters,familyProfileData.married_daughters)}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/brothers.svg" alt="brothers"> 
                     <span style="margin-left: 5px;">
-                        {{setMarriageBrothers(familyProfileData.unmarried_sons,familyProfileData.married_sons)}}
+                        <span class="labelText">भाई:</span> {{setMarriageBrothers(familyProfileData.unmarried_sons,familyProfileData.married_sons)}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/moneybag.svg" alt="family income"> 
                     <span style="margin-left: 5px;">
-                        {{getIncome(familyProfileData.family_income)}} LPA
+                        <span class="labelText">फॅमिली इनकम:</span>  {{getIncome(familyProfileData.family_income)}} LPA
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/meditation.svg" alt="gotra"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.gotra}}
+                        <span class="labelText">गोत्र:</span>  {{familyProfileData.gotra}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/family.svg" alt="family type"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.family_type}}
+                        <span class="labelText">फॅमिली टाइप:</span>  {{familyProfileData.family_type}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/house.svg" alt="house type"> 
                     <span style="margin-left: 5px;">
-                        {{familyProfileData.house_type}}
+                        <span class="labelText">हाउस टाइप:</span>  {{familyProfileData.house_type}}
                     </span>
                 </div>
             </div>
@@ -423,31 +424,31 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/tarot.svg" alt="pref caste"> 
                     <span style="margin-left: 5px;">
-                        {{preferenceProfileData.caste}}
+                        <span class="labelText">जाती प्रेफरेंस:</span> {{preferenceProfileData.caste}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/tarot.svg" alt="pref manglik"> 
                     <span style="margin-left: 5px;">
-                        {{preferenceProfileData.manglik}}
+                        <span class="labelText">मांगलिक प्रेफरेंस:</span>  {{preferenceProfileData.manglik}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/templeblue.svg" alt="mother tongue"> 
                     <span style="margin-left: 5px;">
-                        {{preferenceProfileData.mother_tongue ? preferenceProfileData.mother_tongue : 'Hindi-Delhi'}}
+                        <span class="labelText">मात्र भाषा प्रेफरेंस:</span>  {{preferenceProfileData.mother_tongue ? preferenceProfileData.mother_tongue : 'Hindi-Delhi'}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/cutlery.svg" alt="food choice"> 
                     <span style="margin-left: 5px;">
-                        {{preferenceProfileData.food_choice}}
+                        <span class="labelText">फ़ूड चॉइस प्रेफरेंस:</span>  {{preferenceProfileData.food_choice}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/suitcase.svg" alt="pref occupation"> 
                     <span style="margin-left: 5px;">
-                        {{preferenceProfileData.occupation}}
+                        <span class="labelText">ऑक्यूपेशन प्रेफरेंस:</span>  {{preferenceProfileData.occupation}}
                     </span>
                 </div>
                 <div class="col-12">
@@ -459,7 +460,7 @@
         </div>
             <hr>
 
-            <div style="border: 1.5px solid #FCDEF6;border-radius: 10px;margin: 20px 20px;padding: 10px 10px;">
+            <div style="border: 1.5px solid #FCDEF6;border-radius: 10px;margin: 20px 30px;padding: 20px 10px 10px;">
                 <div class="row">
                     <div class="col-5" id="pinkSide">
                         <img style="width: 20px;margin-right: 10px;" src="../../../assets/heartsblue.svg" alt="hearts">
@@ -483,18 +484,18 @@
                     <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px;">
                         <p class="boxText" style="margin: 0px;">रिश्ते है</p>
                     </div>
-                    <div class="col-5" style="text-align: end;margin: 0px;">
+                    <div class="col-5" style="text-align: end;margin: 0px;line-height: 0.5;">
                         <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">आप पसंद आये</p>
                     </div>
                     <div class="col-2">
 
                     </div>
-                    <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px;">
+                    <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px; line-height: 0.5;">
                         <p class="boxText" style="margin: 0px;">आपको पसंद</p>
                     </div>
                 </div>
                 
-                <div class="row">
+                <div class="row" style="margin-top: 25px;">
                     <div class="col-6">
                         <button class="boxBtn" (click)="itemService.changeTab(3)" mat-raised-button style="background-color: #FAC8F1;
                         width: 100%;color: #D313AE;">

@@ -3,22 +3,31 @@
 }
 .sections{
     padding: 5px 20px;
+    color: #6f6f6f;
 }
 .sectionTitle{
-    color: #0C9BF2;
+    /* color: #0C9BF2; */
+    color: #58d1fd;
     font-size: 18px;
     font-weight: bold;
     font-size: 20px;
 }
+.labelText{
+    font-weight: bold;
+    font-size: 16px;
+    color: #C8C8C8;
+    margin-right: 0.5rem;
+}
 .editPencil{
     float: right;
-    width: 30px;
+    width: 25px;
 }
 .row{
     padding: 0px;
 }
 .col-6, .col-12{
     margin: 10px 0px 0px ;
+    text-transform: capitalize;
 }
 .iconSize{
     width: 30px;
