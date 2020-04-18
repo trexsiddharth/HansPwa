@@ -11,6 +11,7 @@ import { timeout, retry, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
+import { PersonalizedDialogComponent } from './personalized-dialog/personalized-dialog.component';
 
 @Component({
   selector: 'app-personalized-profiles',
@@ -217,7 +218,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
         }
 }
 
-  profileReAnswer(item: any, id: any, answer: any, index: any) {
+  profileReAnswer(item: any, answer: any, index: any) {
     console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
     if (answer === 'CONTACTED' && this.itemService.getPersonalized() === false) {
       this.openMessageDialog(item, answer);
@@ -226,7 +227,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
      (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
      this.openMessageDialog(item, answer);
    } else {
-     this.getData(id, answer, index);
+     this.getData(item.identity_number,answer, index);
    }
   }
 
@@ -252,6 +253,36 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
         console.log(error);
       });
   }
+
+  openProfileDialog(item: any, ind: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.minWidth = '90vw';
+    dialogConfig.minHeight = '80vh';
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      profile : item,
+      index : ind,
+      type: this.type
+    }
+    const dialogRef = this.dialog.open(PersonalizedDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (data: any) => {
+        if (data) {
+          this.profileReAnswer(data.profile, data.ans, data.index);
+        }
+      }
+    );
+  }
+
+  onLoadProfileError(gender: string, id: any) {
+    if (gender === 'Male') {
+     id.setAttribute('src', '../../assets/male_pic.png');
+   } else {
+     id.setAttribute('src', '../../assets/female_pic.png');
+   }
+   }
+
   Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {

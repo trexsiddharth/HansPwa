@@ -7,11 +7,11 @@ import { NotificationsService } from 'src/app/notifications.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 
 @Component({
-  selector: 'app-history-profiles-dialog',
-  templateUrl: './history-profiles-dialog.component.html',
-  styleUrls: ['./history-profiles-dialog.component.css']
+  selector: 'app-personalized-dialog',
+  templateUrl: './personalized-dialog.component.html',
+  styleUrls: ['./personalized-dialog.component.css']
 })
-export class HistoryProfilesDialogComponent implements OnInit {
+export class PersonalizedDialogComponent implements OnInit {
 
   carouselSize;
   // Height
@@ -27,7 +27,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
               private spinner: NgxSpinnerService,
               public notification: NotificationsService,
               public itemService: FindOpenHistoryProfileService,
-              public dialogRef: MatDialogRef<HistoryProfilesDialogComponent>,
+              public dialogRef: MatDialogRef<PersonalizedDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {
                 this.item = data.profile;
                 this.index = data.index;
@@ -146,11 +146,11 @@ export class HistoryProfilesDialogComponent implements OnInit {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
       } else {
-        return String(Number(value1) + Number(value2)) + 'Sisters';
+        return String(Number(value1) + Number(value2)) + ' Sisters';
       }
     } else {
       if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + 'Sisters';
+        return String(Number(value1) + Number(value2)) + ' Sisters';
       } else {
         return '0 Sisters';
       }
@@ -247,3 +247,4 @@ export class HistoryProfilesDialogComponent implements OnInit {
    }
 
 }
+
