@@ -487,12 +487,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
  
   logout() {
     this.loginStatus = false;
-    localStorage.setItem('mobile_number', '');
-    localStorage.setItem('id', '');
-    localStorage.setItem('gender', '');
-    localStorage.setItem('is_lead', '');
-    localStorage.setItem('RegisterNumber', '');
-
+    localStorage.clear();
     this.router.navigateByUrl('/home');
   }
 
