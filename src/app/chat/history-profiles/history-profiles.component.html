@@ -19,7 +19,7 @@
                 </span>
             </div>
 
-            <div class="historyButtons">
+            <div class="historyButtons" *ngIf="type != 'contacted'">
 
                 <button mat-raised-button class="btn" 
                 (click)="profileReAnswer(item,'NO',i)"
@@ -49,12 +49,12 @@
             </div>
         </div>
         <div style="position: relative;text-align: center;" *ngIf="item.family != null && type == 'contacted'">
-            <button mat-raised-button class="btn" style="background: green;margin: 10px 5px;">
+            <button mat-raised-button class="btn" style="background: green;margin: 5px 5px;">
                 <img width="20px" src="../../../assets/phonewhite.svg" 
                 alt="call profile">
                 <span style="color: white;">&nbsp;{{item.family.mobile}}</span>
             </button>
-            <button mat-raised-button class="btn" style="background: blue;margin: 10px 5px;">
+            <button mat-raised-button class="btn" style="background: blue;margin: 5px 5px;">
                 <img width="20px" src="../../../assets/placeholderwhite.png" 
                 alt="profile location">
                 <span style="color: white;">&nbsp;{{item.family.city}}</span>

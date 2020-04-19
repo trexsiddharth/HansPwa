@@ -45,7 +45,7 @@
 
                  <!-- // buttons -->
         
-                 <div id="answerButtons">
+                 <div id="answerButtons" *ngIf="type != 'contacted'">
                     <div class="t-c blur" *ngIf="type != 'rejected'">
                         <button 
                         (click)="profileReAnswer(item,'NO')" id="setRejectBtn" mat-fab>
@@ -77,6 +77,19 @@
                     </div>
                         
                 </div>
+
+                <!-- // profile status if premium user  -->
+
+                <ng-container *ngIf="itemService.getPersonalized()">
+                    <div id="feedBackTextGreen" *ngIf="item.profile.bNS == '1'">
+                      <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
+                    </div>
+                    <div id="feedBackTextRed" *ngIf="item.profile.bNS == '0'">
+                      <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
+                    </div>
+                  </ng-container>
+
+                <!-- // about user -->
         
                 <div id="aboutSection" *ngIf="item.profile.about && item.profile.about.length > 6">
                     <p>
