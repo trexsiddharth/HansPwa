@@ -31,7 +31,7 @@
 
                 <button mat-raised-button  class="btn" 
                 (click)="profileReAnswer(item,'YES',i)"
-                style="background-color: green;
+                style="background-color: #58D1FD;
                 margin-top: 20px;
                 padding: 20px;
                  border-radius: 10px;"  *ngIf="type !== 'contacted'">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div style="position: relative;text-align: center;" *ngIf="item.family != null && type == 'contacted'">
-            <button mat-raised-button class="btn" style="background: green;margin: 5px 5px;">
+            <button mat-raised-button class="btn" style="background: #58D1FD;margin: 5px 5px;">
                 <img width="20px" src="../../../assets/phonewhite.svg" 
                 alt="call profile">
                 <span style="color: white;">&nbsp;{{item.family.mobile}}</span>
