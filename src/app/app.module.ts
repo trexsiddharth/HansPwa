@@ -13,8 +13,6 @@ import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SubscriptionComponent } from './subscription/subscription.component';
-import { SubscriptionDialogComponent } from './subscription/subscription-dialog/subscription-dialog.component';
 import { SubscriptionserviceService } from './subscriptionservice.service';
 
 import { ViewCentresComponent } from './view-centres/view-centres.component';
@@ -38,8 +36,6 @@ import { NewHomeService } from './new-home/new-home.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    SubscriptionComponent,
-    SubscriptionDialogComponent,
     ViewCentresComponent,
     AnalyticsButtonDirective,
     TiktokAdsFormComponent,
@@ -67,7 +63,7 @@ import { NewHomeService } from './new-home/new-home.service';
   providers: [SubscriptionserviceService, NewHomeService],
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
-  entryComponents: [SubscriptionDialogComponent, TiktokAdsFormComponent],
+  entryComponents: [TiktokAdsFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

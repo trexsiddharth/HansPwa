@@ -1,8 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SubscriptionserviceService } from '../subscriptionservice.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
+import {  MatDialogConfig } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
@@ -28,10 +27,11 @@ export class SubscriptionComponent implements OnInit {
   currentPersonalizedStatus;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private http: HttpClient, private subscriptionService: SubscriptionserviceService, private matDialog: MatDialog,
+  constructor(private http: HttpClient, private subscriptionService: SubscriptionserviceService,
               private spinner: NgxSpinnerService, private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
+    this.loadRazorPayScript();
     this.innerWidth = window.innerWidth;
     this.currentPersonalizedStatus = 'buttonPersonalised';
     this.currentOnlineStatus = 'buttonOnline';
@@ -50,6 +50,18 @@ export class SubscriptionComponent implements OnInit {
 
     if (localStorage.getItem('id')) {
       this.getCredits();
+    }
+  }
+
+  loadRazorPayScript() {
+    const razor = document.getElementById('razorPay');
+    if (!razor) {
+      const fileName = document.createElement('script');
+      fileName.async = true;
+      fileName.setAttribute('type', 'text/javascript');
+      fileName.setAttribute('src', 'https://checkout.razorpay.com/v1/checkout.js');
+      fileName.id = 'razorPay';
+      document.body.appendChild(fileName);
     }
   }
 
@@ -92,7 +104,7 @@ export class SubscriptionComponent implements OnInit {
           return this.subscriptionService.payNowT(amt, type, 1, name, email, phone);
      }
    }
-  
+
 
    changeButtonOnline() {
     this.currentPersonalizedStatus = 'buttonPersonalised';

@@ -21,12 +21,15 @@ const routes: Routes = [
   loadChildren: () => import('./reg/reg.module').
   then(m => m.RegModule)
 },
+{ path: 'subscription',
+  loadChildren: () => import('./subscription/subscription.module').
+  then(m => m.SubscriptionModule)
+},
   { path: '',
   redirectTo: '',
   pathMatch: 'full', component: NewHomeComponent },
   { path: 'home', redirectTo: ''},
   { path: 'viewCentres', component: ViewCentresComponent},
-  { path: 'subscription', component: SubscriptionComponent},
   { path: 'phone-number', component: PhoneNumberScreenComponent},
   { path: 'termsCondition', component: TermsAndConditionsComponent},
   { path: 'checkout', component: CustomCheckoutComponent},
