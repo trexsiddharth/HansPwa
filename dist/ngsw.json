@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1587282770014,
+  "timestamp": 1587283866096,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -31,7 +31,7 @@
         "/runtime-es2015.390fe4c55fa8db228c8b.js",
         "/runtime-es5.390fe4c55fa8db228c8b.js",
         "/scripts.06e020159d183ba8b2a3.js",
-        "/styles.f73ebf4929d32ae8bd04.css"
+        "/styles.744346c15f967b6cb192.css"
       ],
       "patterns": []
     },
@@ -40,7 +40,6 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [
-        "/SemplicitaPro.96554f62871e20bd3d80.otf",
         "/address.57026215113752dcecff.webp",
         "/assets/Aprajita.webp",
         "/assets/Deepak.webp",
@@ -144,7 +143,6 @@
         "/assets/female_pic.png",
         "/assets/fingerprint_hans.svg",
         "/assets/fingerprintwhite.png",
-        "/assets/fonts/SemplicitaPro.otf",
         "/assets/gift.png",
         "/assets/graduation.svg",
         "/assets/heart.svg",
@@ -313,7 +311,6 @@
     "/8-es5.c339237d9e143c9a0385.js": "3a1582f35c303574afaa8d4db81bb0548c5f7a61",
     "/9-es2015.487201f054fbec864b03.js": "7d7548ab9ed7ff847dd68cc6da18060437881b8b",
     "/9-es5.487201f054fbec864b03.js": "fa50b24d7177a6d5d751b71b7084a3d8d000f748",
-    "/SemplicitaPro.96554f62871e20bd3d80.otf": "18e2fd90bcfce6db53d3a17b22a7836d4e5f50d8",
     "/address.57026215113752dcecff.webp": "0b15e56c18817b8265e5ea96a073cc3ea2acc480",
     "/assets/Aprajita.webp": "6c66fe588e1d66e8754584544b901a2c740ce7ca",
     "/assets/Deepak.webp": "cc18c749c46f5a67388fa65751cc5380a1065461",
@@ -417,7 +414,6 @@
     "/assets/female_pic.png": "0ff0221be15f67ed621ae34209bb32125dba0a68",
     "/assets/fingerprint_hans.svg": "029373f99c7035f8415600ef3cc538ab06426351",
     "/assets/fingerprintwhite.png": "9e084ce6419aa05cf1c6eb92067b1e1626a9fdc0",
-    "/assets/fonts/SemplicitaPro.otf": "18e2fd90bcfce6db53d3a17b22a7836d4e5f50d8",
     "/assets/gift.png": "568274ad502790a03e8fbd3b1054965d5a2b3d2c",
     "/assets/graduation.svg": "d85120bc4d8d37b8e9c47c1c66e077afbab79319",
     "/assets/heart.svg": "4da4a4f16ded6e76a40fef5601b7876010b64da7",
@@ -559,7 +555,7 @@
     "/common-es5.944ea1c9cc3f81da3fb1.js": "d38dc7647c84cea140c9df8ce57feb5e9fff7966",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "baecd30d7467fe53b040caad7b11d7e677b119fb",
+    "/index.html": "865d414dd99293d13e449c4d755d91dca5d18564",
     "/logo_192.5f7f254ba38018213cfd.png": "85f05cc7f4b71b477f0a84763c133326e9adb1ef",
     "/main-es2015.31bd398de83323e83cd1.js": "bec3e0054821362ff0d6d9d85e34144d065f958c",
     "/main-es5.31bd398de83323e83cd1.js": "d51c573a4c227faa327d08a693e18385b54b52e4",
@@ -571,7 +567,7 @@
     "/runtime-es5.390fe4c55fa8db228c8b.js": "21fafcbc30a8a664b6fed3bb83a1ef343d636ddb",
     "/scripts.06e020159d183ba8b2a3.js": "dac2ee398ded62269aabc62c8c050317299ff501",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
-    "/styles.f73ebf4929d32ae8bd04.css": "16c16710847dea95c5a0b9f62da447a7670e64db",
+    "/styles.744346c15f967b6cb192.css": "83d918ee72797d41f9510dbf46dec01f3a75299f",
     "/whatsbg.f779980799b39548bb90.webp": "a0f05bc1171a03e6e2f17bb2f84f80dc6723db5d"
   },
   "navigationUrls": [

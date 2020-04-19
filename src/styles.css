@@ -116,11 +116,5 @@ body {
 }
 button:focus{outline:none !important;}
 
-@font-face{
-  font-family: semplicita;
-  src: url("./assets/fonts/SemplicitaPro.otf") format("truetype")
-}
-* {
-  font-family:'semplicita';
-}
+
 
