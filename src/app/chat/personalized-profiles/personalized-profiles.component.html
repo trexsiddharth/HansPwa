@@ -1,6 +1,6 @@
 <main *ngIf="profile">
   
-    <div style="padding-top: 30px;padding-bottom: 200px;">
+    <div style="padding-top: 30px;">
       <div [@listAnimation]="profile.length">
 
 
@@ -28,7 +28,7 @@
               <div class="historyButtons">
   
                   <button mat-raised-button class="btn" 
-                  (click)="profileReAnswer(item,'NO',i)"
+                  (click)="profileReAnswer(item,'REJECTED',i)"
                   style="background-color: #C8C8C8;
                       padding: 20px;
                        border-radius: 10px;"  *ngIf="type !== 'rejected'">
@@ -36,7 +36,7 @@
                   </button>
   
                   <button mat-raised-button  class="btn" 
-                  (click)="profileReAnswer(item,'YES',i)"
+                  (click)="profileReAnswer(item,'CONTACTED',i)"
                   style="background-color: green;
                   margin-top: 20px;
                   padding: 20px;
@@ -67,7 +67,7 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: center;">
+    justify-content: center;" *ngIf="profile==null">
     <h5  *ngIf="message != null">
       {{message}}
     </h5>

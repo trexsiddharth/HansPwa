@@ -15,8 +15,9 @@ section{
     object-fit: fill;
 }
 .historyDetails{
+width: 100%;
 position: absolute;
-bottom: 20px;
+bottom: 0px;
 background-image: linear-gradient(0deg,black,transparent);
 word-break: break-word;
 color: white;
@@ -115,8 +116,9 @@ border-radius: 10px;
 
 @media (max-width: 350px) {
     .historyDetails{
+        width: 100%;
         position: absolute;
-        bottom: 20px;
+        bottom: 0px;
         background-image: linear-gradient(0deg,black,transparent);
         word-break: break-word;
         color: white;
@@ -129,8 +131,9 @@ border-radius: 10px;
 
 @media (max-width: 575px) {
     .historyDetails{
+        width: 100%;
         position: absolute;
-        bottom: 20px;
+        bottom: 0px;
         background-image: linear-gradient(0deg,black,transparent);
         word-break: break-word;
         color: white;

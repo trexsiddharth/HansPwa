@@ -241,13 +241,13 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/premiumPro', reAnswerData).subscribe(
       (data: any) => {
         console.log(data);
-        if (data.status === 1) {
+        if (data && data.status === 1) {
           this.Analytics('Profile Answered From Personalized', 'Profile Answered From Personalized', answer);
           console.log(answer);
           this.getCredits();
           this.updateProfileList(answer, index);
         } else {
-          this.ngxNotificationService.error(data.message);
+          this.ngxNotificationService.error('Something went wrong');
         }
       }, (error: any) => {
         console.log(error);

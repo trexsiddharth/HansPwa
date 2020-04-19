@@ -1,6 +1,7 @@
 <main>
     <section>
-        <div class="historyProfile"  *ngFor="let item of profile;let i = index">
+        <div  *ngFor="let item of profile;let i = index">
+        <div class="historyProfile"  >
             <img class="historyImage" #profilePic
             [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)" 
             (click)="openProfileDialog(item,i)"
@@ -13,7 +14,7 @@
                 </span><br>
                 <span>
                     {{item.family ? item.family.city : item.profile.working_city}} | {{setHeight(item.profile.height)}} 
-                    | {{item.family? item.family.religion : item.profile.religion}}, {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
+                    | {{item.family ? item.family.religion : item.profile.religion}}, {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
                     | {{setIncome(item.profile.monthly_income)}} LPA
                 </span>
             </div>
@@ -46,7 +47,22 @@
                 </button>
 
             </div>
-            <hr>
         </div>
+        <div style="position: relative;text-align: center;" *ngIf="item.family != null && type == 'contacted'">
+            <button mat-raised-button class="btn" style="background: green;margin: 10px 5px;">
+                <img width="20px" src="../../../assets/phonewhite.svg" 
+                alt="call profile">
+                <span style="color: white;">&nbsp;{{item.family.mobile}}</span>
+            </button>
+            <button mat-raised-button class="btn" style="background: blue;margin: 10px 5px;">
+                <img width="20px" src="../../../assets/placeholderwhite.png" 
+                alt="profile location">
+                <span style="color: white;">&nbsp;{{item.family.city}}</span>
+            </button>
+        </div>
+        <hr>
+        </div>
+
     </section>
+
 </main>

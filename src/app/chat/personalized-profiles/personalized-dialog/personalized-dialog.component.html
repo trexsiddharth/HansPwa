@@ -48,7 +48,7 @@
                  <div id="answerButtons">
                     <div class="t-c blur" *ngIf="type != 'rejected'">
                         <button 
-                        (click)="profileReAnswer(item,'NO')" id="setRejectBtn" mat-fab>
+                        (click)="profileReAnswer(item,'REJECTED')" id="setRejectBtn" mat-fab>
                           <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
                         </button><br>
                         <span style="color: #C8C8C8;font-weight: bold;font-size: 18px;">
@@ -57,7 +57,7 @@
                     </div>
                     <div class="t-c" *ngIf="type != 'contacted'">
                         <button 
-                        (click)="profileReAnswer(item,'YES')"   id="setCallBtn" mat-fab
+                        (click)="profileReAnswer(item,'CONTACTED')"   id="setCallBtn" mat-fab
                           aria-label="Example icon-button with a heart icon" >
                           <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
                         </button><br>
