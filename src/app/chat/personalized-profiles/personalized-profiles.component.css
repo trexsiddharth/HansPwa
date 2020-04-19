@@ -5,6 +5,10 @@
     padding: 20px 30px 150px;
 }
 
+span{
+    text-transform: capitalize;
+}
+
 .historyProfile{
     width: 100%;
     height: 70%;
