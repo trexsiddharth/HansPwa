@@ -60,7 +60,7 @@ import { HistoryProfilesDialogComponent } from './history-profiles-dialog/histor
 export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
 
-  profile: any[];
+  profile: any[] = [];
   @Input() type: any;
   likeCount;
   dislikeCount;
@@ -78,13 +78,42 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
               private dialog: MatDialog,
-              public notification: NotificationsService, 
-              public itemService: FindOpenHistoryProfileService, 
+              public notification: NotificationsService,
+              public itemService: FindOpenHistoryProfileService,
               private router: Router) {}
 
-  ngOnInit() {}
-  ngAfterViewInit(): void {
+  ngOnInit() {
     console.log(this.type);
+    switch (this.type) {
+      case 'contacted':
+        if (localStorage.getItem('contactedProfiles')) {
+          this.profile = JSON.parse(localStorage.getItem('contactedProfiles'));
+          console.log(this.profile);
+          }
+        break;
+      case 'interestShown':
+        if (localStorage.getItem('sortListProfiles')) {
+          this.profile = JSON.parse(localStorage.getItem('sortListProfiles'));
+          console.log(this.profile);
+          }
+        break;
+      case 'interestReceived':
+        if (localStorage.getItem('interestReceived')) {
+          this.profile = JSON.parse(localStorage.getItem('interestReceived'));
+          console.log(this.profile);
+          }
+        break;
+      case 'rejected':
+        if (localStorage.getItem('rejectedProfiles')) {
+          this.profile = JSON.parse(localStorage.getItem('rejectedProfiles'));
+          console.log(this.profile);
+          }
+        break;
+      default:
+        break;
+    }
+  }
+  ngAfterViewInit(): void {
     switch (this.type) {
       case 'contacted':
         this.getHistorydata('contactedProfiles');
@@ -205,7 +234,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       profile : item,
       index : ind,
       type: this.type
-    }
+    };
     const dialogRef = this.dialog.open(HistoryProfilesDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (data: any) => {
@@ -221,7 +250,9 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   async getHistorydata(link: string) {
-    this.spinner.show();
+    if (!localStorage.getItem(link)) {
+      this.spinner.show();
+    }
     const historyData = new FormData();
     historyData.append('id', localStorage.getItem('id'));
     if (link.match('contacted')) {
@@ -245,22 +276,29 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
       (data: any) => {
         console.log(data);
+        localStorage.setItem(link, JSON.stringify(data));
+        if (localStorage.getItem(link)) {
+        // update new data only
+        if (JSON.stringify(this.profile) !== JSON.stringify(data)) {
+          this.updateLocalData(data);
+      }
+      } else {
         this.profile = data;
+      }
+
+        console.log(this.profile);
         this.spinner.hide();
         if (this.profile.length < 1) {
           this.getNoDataText(link);
         }
         if (this.itemService.getItem()) {
           const prof: any = this.itemService.getItem();
-          if (prof.profile) {
-            this.panelOpenState = this.profile.findIndex((item) => {
-              return item.profile.name === prof.profile.name;
-            });
-          } else {
-            this.panelOpenState = this.profile.findIndex((item) => {
-              return item.profile.name === prof.name;
-            });
-          }
+          console.log(prof);
+          this.panelOpenState = this.profile.findIndex((item) => {
+            return item.profile.name === prof.name || item.profile.name === prof.profile.name;
+          });
+          console.log(this.panelOpenState);
+          this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
           this.itemService.setItem(null);
         }
       },
@@ -271,7 +309,41 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  checkUrl(num: string): Observable < any > {
+
+  // updates the new data to locally stored data
+  updateLocalData(data: any) {
+       // finding and adding the new element to the locally stored list
+       (data as any[]).forEach(
+        element => {
+         let newProfiles =  this.profile.find(
+           item => {
+              return item.profile.id === element.profile.id;
+           });
+         if (!newProfiles) {
+            //  this.profile.push(element);
+             this.profile = [element, ...this.profile];
+           }
+        }
+      );
+
+      // finding and removing the old element from the locally stored list
+
+       this.profile.forEach(
+       (item, index) => {
+        let removeProfile =  (data as any[]).find(
+           element => {
+            return item.profile.id === element.profile.id;
+           }
+         );
+        if (!removeProfile) {
+          this.profile.splice(index, 1);
+        }
+       }
+      );
+       console.log(this.profile);
+  }
+
+checkUrl(num: string): Observable < any > {
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
       return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
@@ -292,7 +364,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setMarriageBrothers(value1: any, value2: any) {
+setMarriageBrothers(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
@@ -308,7 +380,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setMarriageSisters(value1: any, value2: any) {
+setMarriageSisters(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
@@ -324,7 +396,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  LifeStatus(person: string, work: string) {
+LifeStatus(person: string, work: string) {
     if (person != null && person !== '') {
       if (person.match('Alive')) {
         if (work) {
@@ -340,7 +412,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  profileReAnswer(item: any, answer: any, index: any) {
+profileReAnswer(item: any, answer: any, index: any) {
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     this.itemService.getPhotoStatus() === false &&
     answer === 'SHORTLIST') {
@@ -353,7 +425,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
    }
   }
 
-  getData(item: any, answer: any, index: any) {
+getData(item: any, answer: any, index: any) {
     this.panelOpenState = null;
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
@@ -386,14 +458,14 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         console.log(error);
       });
   }
-  Analytics(type: string, category: string, action: string) {
+Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {
         console.log('Tracking ' + type + ' successful');
       }
     });
   }
-  updateProfileList(ans: any, num: any, index: any) {
+updateProfileList(ans: any, num: any, index: any) {
     switch (this.type) {
       case 'interestShown':
         switch (ans) {
@@ -457,29 +529,29 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         break;
     }
   }
-  goToSubscription() {
+goToSubscription() {
     this.router.navigateByUrl('subscription');
   }
-  call(num: any) {
+call(num: any) {
     window.open('tel:' + num);
     this.panelOpenState = null;
   }
-  slideAndOpenProfile(item: any, slide: any) {
+slideAndOpenProfile(item: any, slide: any) {
     this.itemService.setItem(item);
     this.itemService.changeTab(slide);
   }
-  setDate(date: string) {
+setDate(date: string) {
     const newDate = new Date(date);
     return new Intl.DateTimeFormat('en-AU').format(newDate);
   }
-  setHeight(height: any) {
+setHeight(height: any) {
     if (height && height !== '') {
       return this.Heights[this.Heights1.indexOf(height)];
     } else {
       return '';
     }
   }
-  disableForAWhile() {
+disableForAWhile() {
     if (this.panelOpenState === null) {
       setTimeout(() => {
         this.panelOpenState = -1;
@@ -489,7 +561,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       return false;
     }
   }
-  setTabNames(tab: any) {
+setTabNames(tab: any) {
     if (localStorage.getItem('language') === null) {
       localStorage.setItem('language', 'Hindi');
     }
@@ -530,12 +602,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         break;
     }
   }
-  setAllTabNames() {
+setAllTabNames() {
     for (let index = 0; index < 5; index++) {
       this.setTabNames(index);
     }
   }
-  getNoDataText(type: any) {
+getNoDataText(type: any) {
     switch (type) {
       case 'contactedProfiles':
         this.noData = '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
@@ -553,7 +625,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         break;
     }
   }
-  setIncome(value: string): String {
+setIncome(value: string): String {
     if (value != null) {
       if (Number(value) > 1000) {
         return String((Number(value) / 100000));
@@ -565,7 +637,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       return '';
     }
   }
-  toTitleCase(str) {
+toTitleCase(str) {
     if (str) {
       return str.replace(
         /\w\S*/g,
@@ -618,7 +690,7 @@ getQualification(degree, education) {
   return education != null && education !== '' ? education : degree;
   }
 
-  setHouseType(type) {
+setHouseType(type) {
     if (type) {
       switch (type) {
         case 'Y':
