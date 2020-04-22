@@ -8,9 +8,10 @@
             (error) = "onLoadProfileError(item.profile.gender,profilePic)"
             alt="profile picture">
 
-            <div>
-                <button mat-fab>
-
+            <div style="position: absolute;top: -15px;
+            right: -20px;" *ngIf="item.family == null">
+                <button mat-fab id="premiumProfIcon">
+                        <img width="30px" src="../../../assets/king.svg" alt="premium profile">
                 </button>
             </div>
 
