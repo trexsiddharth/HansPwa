@@ -19,26 +19,26 @@
             <section style="padding: 0px 0px;position: relative;color: black;">
 
         
-                <div  style="margin-top: 20px;" *ngIf="item.facebook">
+                <div  style="margin-top: 20px;">
                     <div class="row" id="verified">
                         <div class="col-2">
                             <img style="width: 40px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
                         </div>
                         <div class="col-10">
                                 <span style="font-size: 16px;font-weight: bold;">वेरिफ़िएड एट:</span><br>
-                                <span>{{item.facebook}}</span>
+                                <span>{{item.facebook ? item.facebook : ""}}</span>
                         </div>
                     </div>
                 </div>
         
-                <div style="margin-top: 20px;" *ngIf="item.relation">
+                <div style="margin-top: 20px;">
                     <div class="row" id="controlledBy">
                         <div class="col-2">
                             <img style="width: 40px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
                         </div>
                         <div class="col-10" style="align-self: center;">
                                 <span style="font-size: 16px;font-weight: bold;align-self: center;
-                                    text-shadow: 1px 1px darkgrey;">प्रोफाइल मैनेज्ड बय: {{item.family ? item.family.relation : item.profile.relation}}</span>
+                                color: #8c978b;">प्रोफाइल मैनेज्ड बय: {{item.relation ? item.relation : ""}}</span>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         (click)="profileReAnswer(item,'REJECTED')" id="setRejectBtn" mat-fab>
                           <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
                         </button><br>
-                        <span style="color: #C8C8C8;font-weight: bold;font-size: 18px;">
+                        <span style="color: #737373;font-weight:600;font-size: 18px;">
                             नापसंद है
                         </span>
                     </div>
@@ -61,7 +61,7 @@
                           aria-label="Example icon-button with a heart icon" >
                           <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
                         </button><br>
-                        <span style="color: #58D1FD;font-weight: bold;font-size: 18px;">
+                        <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
                             कांटेक्ट करें
                         </span>
                     </div>
@@ -71,14 +71,14 @@
                           aria-label="Example icon-button with a heart icon" >
                           <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
                         </button><br>
-                        <span style="color: #D313AE;font-weight: bold;font-size: 18px;">
+                        <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
                             पसंद है
                         </span>
                     </div>
                         
                 </div>
         
-                <div id="aboutSection" *ngIf="item.about && item.about.length > 6">
+                <div id="aboutSection">
                     <p>
                         <span style="color: #D313AE;font-size: 30px;font-weight: bold;">हेलो,</span> Myself {{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
                     </p>
@@ -91,13 +91,12 @@
                         <span style="color: #0C9BF2;font-size: 18px; font-weight: bold;align-self: center;">
                             पर्सनल डिटेल्स
                         </span>
-                        <div style="background-color: #0C9BF2;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
-                            <img width="40px" style="margin-top: 20px;" src="../../../assets/userwhite.svg" alt="personal details">
-                        </div>
+                        <img width="80px" height="80px" src="../../../assets/new icons/Personal Details.svg" alt="personal details">
+
                     </div>
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/weight.svg" alt="weight">
+                            <img width="30px" src="../../../assets/new icons/Weight.svg" alt="weight">
                             <span class="title">वेट</span>
                         </div>
                         <div class="col-6">
@@ -107,7 +106,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/heart.svg" alt="marital status">
+                            <img width="30px" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
                             <span class="title">मैरिटल स्टेटस</span>
                         </div>
                         <div class="col-6">
@@ -117,7 +116,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/cutlery.svg" alt="marital status">
+                            <img width="30px" src="../../../assets/new icons/Food Choice.svg" alt="Food Choice">
                             <span class="title">फ़ूड चॉइस</span>
                         </div>
                         <div class="col-6">
@@ -127,7 +126,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/tarot.svg" alt="marital status">
+                            <img width="30px" src="../../../assets/new icons/Religion.svg" alt="Religion">
                             <span class="title">रिलिजन</span>
                         </div>
                         <div class="col-6">
@@ -137,7 +136,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/locationblue.svg" alt="marital status">
+                            <img width="30px" src="../../../assets/new icons/Working City.svg" alt="Working City">
                             <span class="title">वर्किंग सिटी</span>
                         </div>
                         <div class="col-6">
@@ -154,13 +153,11 @@
                         <span style="color: #CA58FD;font-size: 18px; font-weight: bold;align-self: center;">
                             करियर डिटेल्स
                         </span>
-                        <div style="background-color: #CA58FD;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
-                            <img width="40px" style="margin-top: 20px;" src="../../../assets/suitcasewhite.svg" alt="career details">
-                        </div>
+                        <img height="80px" width="80px"  src="../../../assets/new icons/Career Details.svg" alt="career details">
                     </div>
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/suitcase.svg" alt="occupation">
+                            <img width="30px" src="../../../assets/new icons/Occupation.svg" alt="occupation">
                             <span class="title">ऑक्यूपेशन</span>
                         </div>
                         <div class="col-6">
@@ -170,7 +167,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/graduation.svg" alt="designation">
+                            <img width="30px" src="../../../assets/new icons/Designation.svg" alt="designation">
                             <span class="title">देसिग्नेशन</span>
                         </div>
                         <div class="col-6">
@@ -180,7 +177,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/rupee.svg" alt="income">
+                            <img width="30px" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
                             <span class="title">आय</span>
                         </div>
                         <div class="col-6">
@@ -190,7 +187,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/graduation.svg" alt="graduation">
+                            <img width="30px" src="../../../assets/new icons/Graduation.svg" alt="graduation">
                             <span class="title">ग्रेजुएशन</span>
                         </div>
                         <div class="col-6">
@@ -200,7 +197,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/house.svg" alt="college">
+                            <img width="30px" src="../../../assets/new icons/Schooling.svg" alt="college">
                             <span class="title">कॉलेज</span>
                         </div>
                         <div class="col-6">
@@ -217,13 +214,11 @@
                         <span style="color: #070973;font-size: 18px; font-weight: bold;align-self: center;">
                             होरोस्कोप
                         </span>
-                        <div style="background-color: #070973;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
-                            <img width="40px" style="margin-top: 20px;" src="../../../assets/sunwhite.svg" alt="horoscope details">
-                        </div>
+                        <img width="80px" height="80px"  src="../../../assets/new icons/Horoscope.svg" alt="horoscope details">
                     </div>
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/birthday.svg" alt="birth date">
+                            <img width="30px" src="../../../assets/new icons/DOB.svg" alt="birth date">
                             <span class="title">D.O.B</span>
                         </div>
                         <div class="col-6">
@@ -233,7 +228,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/clock.svg" alt="birth time">
+                            <img width="30px" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
                             <span class="title">बर्थ टाइम</span>
                         </div>
                         <div class="col-6">
@@ -243,7 +238,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/locationblue.svg" alt="birth place">
+                            <img width="30px" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
                             <span class="title">बर्थ प्लेस</span>
                         </div>
                         <div class="col-6">
@@ -253,7 +248,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/tarot.svg" alt="manglik">
+                            <img width="30px" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
                             <span class="title">मांगलिक</span>
                         </div>
                         <div class="col-6">
@@ -269,14 +264,12 @@
                         <span style="color: #58D1FD;font-size: 18px; font-weight: bold;align-self: center;">
                             फॅमिली डिटेल्स
                         </span>
-                        <div style="background-color: #58D1FD;border-radius: 50%;width: 80px; height: 80px; text-align: center;">
-                            <img width="40px" style="margin-top: 20px;" src="../../../assets/familyblue.svg" alt="family details">
-                        </div>
+                        <img width="80px" height="80px" style="margin-top: 20px;" src="../../../assets/new icons/Family Details.svg" alt="family details">
                     </div>
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/sisters.svg" alt="sister">
-                            <span class="title">सिस्टर्स</span>
+                            <img width="30px" src="../../../assets/new icons/Sister.svg" alt="sister">
+                            <span class="title">बहनें</span>
                         </div>
                         <div class="col-6">
                             {{setMarriageSisters(item.unmarried_daughter
@@ -286,8 +279,8 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/brothers.svg" alt="brothers">
-                            <span class="title">ब्रोठेर्स</span>
+                            <img width="30px" src="../../../assets/new icons/Brother.svg" alt="brothers">
+                            <span class="title">भाई</span>
                         </div>
                         <div class="col-6">
                             {{setMarriageBrothers(item.unmarried_sons
@@ -297,8 +290,8 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/parents.svg" alt="mother">
-                            <span class="title">मदर</span>
+                            <img width="30px" src="../../../assets/new icons/Mother.svg" alt="mother">
+                            <span class="title">माता</span>
                         </div>
                         <div class="col-6">
                             {{LifeStatus(item.mother_status
@@ -308,8 +301,8 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/parents.svg" alt="father">
-                            <span class="title">फादर</span>
+                            <img width="30px" src="../../../assets/new icons/Father.svg" alt="father">
+                            <span class="title">पिता</span>
                         </div>
                         <div class="col-6">
                             {{LifeStatus(item.father_status
@@ -319,7 +312,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/meditation.svg" alt="gotra">
+                            <img width="30px" src="../../../assets/new icons/Gotra.svg" alt="gotra">
                             <span class="title">गोत्र</span>
                         </div>
                         <div class="col-6">
@@ -329,7 +322,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/family.svg" alt="family type">
+                            <img width="30px" src="../../../assets/new icons/Family Type.svg" alt="family type">
                             <span class="title">फॅमिली टाइप</span>
                         </div>
                         <div class="col-6">
@@ -339,7 +332,7 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/house.svg" alt="house type">
+                            <img width="30px" src="../../../assets/new icons/House Type.svg" alt="house type">
                             <span class="title">हाउस टाइप</span>
                         </div>
                         <div class="col-6">

@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="personalProfileData">
     <div class="t-c" style="color: white;padding: 10px 10px;background-color: #83C9F4;">
         <img (click)="backToChat()" style="float: left;width: 20px;
         position: absolute;
@@ -10,7 +10,7 @@
 
     <div style="position: relative;">
         <ngb-carousel>
-            <ng-template ngbSlide *ngFor="let i of getImagesCount(personalProfileData.carousel,personalProfileData.photo); let index = index">
+            <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
                 <div class="picsum-img-wrapper" style="text-align: center;">
                   <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,index+1)"/> 
                     <img (click)="changeProfileImage(index)" id="imgProfile" style="width: 100%; background-color: lightblue;" [src]="getProfilesPhoto(personalProfileData.carousel,personalProfileData.photo,personalProfileData.gender,i)" alt="slide 1">
@@ -161,7 +161,7 @@
                     </span>
                 </div>
                 <div class="col-12">
-                    <img class="iconSize" src="../../../assets/graduation.svg" alt="additional"> 
+                    <!-- <img class="iconSize" src="../../../assets/graduation.svg" alt="additional">  -->
                     <span style="margin-left: 5px;">
                         <span class="labelText">एडिशनल:</span> {{personalProfileData.additional_qualification}}
                     </span>
@@ -196,7 +196,7 @@
                     </span>
                 </div>
                 <div class="col-12">
-                    <img class="iconSize" src="../../../assets/house.svg" alt="company"> 
+                    <img class="iconSize" src="../../../assets/company.svg" alt="company"> 
                     <span style="margin-left: 5px;">
                         <span class="labelText">कंपनी:</span> {{personalProfileData.company}}
                     </span>
@@ -352,7 +352,7 @@
                     </span>
                 </div>
                 <div class="col-12">
-                    <img class="iconSize" src="../../../assets/moneybag.svg" alt="family income"> 
+                    <img class="iconSize" src="../../../assets/moneybag copy.svg" alt="family income"> 
                     <span style="margin-left: 5px;">
                         <span class="labelText">फॅमिली इनकम:</span>  {{getIncome(familyProfileData.family_income)}} LPA
                     </span>
@@ -434,7 +434,7 @@
                     </span>
                 </div>
                 <div class="col-12">
-                    <img class="iconSize" src="../../../assets/templeblue.svg" alt="mother tongue"> 
+                    <img class="iconSize" src="../../../assets/templegrey.svg" alt="mother tongue"> 
                     <span style="margin-left: 5px;">
                         <span class="labelText">मात्र भाषा प्रेफरेंस:</span>  {{preferenceProfileData.mother_tongue ? preferenceProfileData.mother_tongue : 'Hindi-Delhi'}}
                     </span>
@@ -484,13 +484,13 @@
                     <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px;">
                         <p class="boxText" style="margin: 0px;">रिश्ते है</p>
                     </div>
-                    <div class="col-5" style="text-align: end;margin: 0px;line-height: 0.5;">
+                    <div class="col-5" style="text-align: end;margin: 0px;line-height: 1;">
                         <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">आप पसंद आये</p>
                     </div>
                     <div class="col-2">
 
                     </div>
-                    <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px; line-height: 0.5;">
+                    <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px; line-height: 1;">
                         <p class="boxText" style="margin: 0px;">आपको पसंद</p>
                     </div>
                 </div>

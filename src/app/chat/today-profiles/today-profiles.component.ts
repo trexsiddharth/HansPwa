@@ -24,7 +24,7 @@ import { ApiwhaAutoreply } from './profile-today-model';
 })
 export class TodayProfilesComponent implements OnInit {
   item = new ApiwhaAutoreply();
-  itemMessage = 'Hans Matrimony';
+  itemMessage = 'Welcome To Hans Matrimony';
   Data;
   contactNumber;
   points = 0;

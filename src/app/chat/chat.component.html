@@ -1,7 +1,7 @@
 
 <main class='fixed t-0 b-0 w-full HC'>
        
-        <div class="groupContainer" [hidden]="history=='myprofile'">
+        <div class="groupContainer" *ngIf="history!='myprofile'">
           <img id="myProfImage" (click)="changeToMyProfile()" [src]="photo" alt="profile pic">
           <mat-tab-group mat-align-tabs="center" class="matGroup"   [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
             <mat-tab [label]="itemService.getDailyCount()" id="today">
@@ -99,7 +99,6 @@
   
   <div>
        <div class="w-full bg-white ht-full" style="background-size: cover;" *ngIf="history=='myprofile'">
-                <!-- <app-myprofile (backToProfiles)="changeToBot()" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-myprofile> -->
                 <app-user-profile (backToProfiles)="changeToBot()" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-user-profile>
       </div>
   </div>

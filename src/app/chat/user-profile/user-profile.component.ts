@@ -225,7 +225,8 @@ onResize(event) {
       }
     }
 
-    getImagesCount(num: string, num1: string) {
+    getImagesCount() {
+      let num = this.personalProfileData.carousel;
       if (num !== '[]' && num && num !== 'null') {
         const carousel: object = JSON.parse(num);
         if (carousel) {

@@ -5,7 +5,7 @@
   margin: 10px 5px;
   border-radius: 50%;
   z-index: 999;
-  border: 2px solid #C8C8C8;
+  border: 2px solid #58D1FD;
 }
 /* tabs */
 
@@ -21,6 +21,7 @@
   width: 100%;
   position: fixed;
   padding-top: 10px;
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
   
 }
 
@@ -176,7 +177,7 @@ display: none !important;
     z-index: 1;
     color: white;
     font-size: 16px;
-    background-color: #10e096;
+    background-color: #50ed9d;
   }
   .setBotUi{
     margin-top: 50px;
