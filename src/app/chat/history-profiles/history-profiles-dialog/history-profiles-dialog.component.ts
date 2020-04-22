@@ -109,6 +109,10 @@ export class HistoryProfilesDialogComponent implements OnInit {
    );
   }
 
+  call(num: any) {
+    window.open('tel:' + num);
+  }
+
   slideAndOpenProfile(item: any, slide: any) {
     this.itemService.setItem(item);
     this.itemService.changeTab(slide);
