@@ -71,25 +71,25 @@ export class FindOpenHistoryProfileService {
   
   getOtherProfiles() {
     if (this.isPersonalized) {
-    return '💁🏻‍♂️अन्य रिश्ते';
+    return 'अन्य रिश्ते';
   } else {
-    return '💁🏻‍♂️VIP रिश्ते';
+    return 'VIP रिश्ते';
   }
   }
   getDailyCount() {
-    return this.profileCount.dailyCount ? '🗓आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )' : '🗓आज के रिश्ते';
+    return this.profileCount.dailyCount ? 'आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )' : 'आज के रिश्ते';
   }
   getContactedCount() {
-    return '📞कॉंटैक्टेड ( ' + this.profileCount.contactedCount + ' )';
+    return 'कॉंटैक्टेड ( ' + this.profileCount.contactedCount + ' )';
   }
   getShortlistedCount() {
-    return '❤️मेरी पसंद ( ' + this.profileCount.shortlistCount + ' )';
+    return 'मेरी पसंद ( ' + this.profileCount.shortlistCount + ' )';
   }
   getShortedCount() {
-    return '💓मै किसे पसंद हूँ? ( ' + this.profileCount.shortedCount + ' )';
+    return 'मै किसे पसंद हूँ? ( ' + this.profileCount.shortedCount + ' )';
   }
   getRejectedCount() {
-    return '❌नापसंद ( ' + this.profileCount.rejectedCount + ' )';
+    return 'नापसंद ( ' + this.profileCount.rejectedCount + ' )';
   }
   getCountOnlyShortlist() {
     return this.profileCount.shortlistCount;
