@@ -56,6 +56,9 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
               public notification: NotificationsService, public itemService: FindOpenHistoryProfileService, private router: Router) {}
 
   ngOnInit() {
+    if (localStorage.getItem('premiumProf')) {
+      this.profile = JSON.parse(localStorage.getItem('premiumProf'));
+    }
     this.getPersonalizedProfiles();
   }
   ngAfterViewInit(): void {
@@ -227,7 +230,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
      (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
      this.openMessageDialog(item, answer);
    } else {
-     this.getData(item.identity_number,answer, index);
+     this.getData(item.identity_number, answer, index);
    }
   }
 
@@ -254,6 +257,39 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       });
   }
 
+   // updates the new data to locally stored data
+   addRemoveNewData(data: any) {
+    // finding and adding the new element to the locally stored list
+    (data as any[]).forEach(
+     element => {
+      const newProfiles =  this.profile.find(
+        item => {
+           return item.identity_number === element.identity_number;
+        });
+      if (!newProfiles) {
+         //  this.profile.push(element);
+          this.profile = [element, ...this.profile];
+        }
+     }
+   );
+
+   // finding and removing the old element from the locally stored list
+
+    this.profile.forEach(
+    (item, index) => {
+     const removeProfile =  (data as any[]).find(
+        element => {
+         return item.identity_number === element.identity_number;
+        }
+      );
+     if (!removeProfile) {
+       this.profile.splice(index, 1);
+     }
+    }
+   );
+    console.log(this.profile);
+}
+
   openProfileDialog(item: any, ind: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
@@ -264,7 +300,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       profile : item,
       index : ind,
       type: this.type
-    }
+    };
     const dialogRef = this.dialog.open(PersonalizedDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (data: any) => {
@@ -320,6 +356,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
           default:
             break;
         }
+           localStorage.setItem('premiumProf', JSON.stringify(this.profile));
   }
 goToSubscription() {
     this.router.navigateByUrl('subscription');
@@ -501,7 +538,9 @@ openMessageDialog(shareItem, reply: string) {
 }
 
 getPersonalizedProfiles() {
+  if (!localStorage.getItem('premiumProf')) {
   this.spinner.show();
+  }
   const creditsData = new FormData();
   creditsData.append('TEXT', 'SHOW');
   creditsData.append('mobile', localStorage.getItem('mobile_number'));
@@ -513,7 +552,12 @@ getPersonalizedProfiles() {
    (data: any) => {
     console.log(data);
     if (data.status === 1) {
-    this.profile = JSON.parse(data.message);
+    if (!localStorage.getItem('premiumProf')) {
+      this.profile = JSON.parse(data.message);
+    } else {
+      this.addRemoveNewData(JSON.parse(data.message));
+    }
+    localStorage.setItem('premiumProf', data.message);
     console.log(this.profile);
     this.spinner.hide();
     } else {

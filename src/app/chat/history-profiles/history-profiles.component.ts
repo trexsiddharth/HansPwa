@@ -280,7 +280,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem(link)) {
         // update new data only
         if (JSON.stringify(this.profile) !== JSON.stringify(data)) {
-          this.updateLocalData(data);
+          this.addRemoveNewData(data);
       }
       } else {
         this.profile = data;
@@ -319,11 +319,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   // updates the new data to locally stored data
-  updateLocalData(data: any) {
+  addRemoveNewData(data: any) {
        // finding and adding the new element to the locally stored list
        (data as any[]).forEach(
         element => {
-         let newProfiles =  this.profile.find(
+         const newProfiles =  this.profile.find(
            item => {
               return item.profile.id === element.profile.id;
            });
@@ -338,7 +338,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
        this.profile.forEach(
        (item, index) => {
-        let removeProfile =  (data as any[]).find(
+        const removeProfile =  (data as any[]).find(
            element => {
             return item.profile.id === element.profile.id;
            }
@@ -349,6 +349,25 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
        }
       );
        console.log(this.profile);
+  }
+
+  updateLocalList() {
+    switch (this.type) {
+      case 'contacted':
+          localStorage.setItem('contactedProfiles', JSON.stringify(this.profile));
+          break;
+      case 'interestShown':
+          localStorage.setItem('sortListProfiles', JSON.stringify(this.profile));
+          break;
+      case 'interestReceived':
+          localStorage.setItem('interestReceived', JSON.stringify(this.profile));
+          break;
+      case 'rejected':
+        localStorage.setItem('rejectedProfiles', JSON.stringify(this.profile));
+        break;
+      default:
+        break;
+    }
   }
 
 checkUrl(num: string): Observable < any > {
@@ -536,6 +555,7 @@ updateProfileList(ans: any, num: any, index: any) {
       default:
         break;
     }
+    this.updateLocalList();
   }
 goToSubscription() {
     this.router.navigateByUrl('subscription');
