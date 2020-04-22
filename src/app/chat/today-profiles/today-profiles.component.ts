@@ -126,7 +126,12 @@ export class TodayProfilesComponent implements OnInit {
 
     private setProfileLocally() {
       this.type = 'profile';
-      this.item = JSON.parse(localStorage.getItem('todayProfile'));
+      const data = JSON.parse(localStorage.getItem('todayProfile'));
+      this.item = data.apiwha_autoreply;
+      if (data && data.get_status_count) {
+        this.itemService.saveCount(data.get_status_count);
+        this.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
+      }
       this.getCredits();
       console.log(this.item);
     }
@@ -203,7 +208,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           this.item = data.apiwha_autoreply;
 
           // locally storing the new profile
-          localStorage.setItem('todayProfile', JSON.stringify(this.item));
+          localStorage.setItem('todayProfile', JSON.stringify(data));
           // setting the profile seen status to false
           localStorage.setItem('todayStatus', 'false');
 
