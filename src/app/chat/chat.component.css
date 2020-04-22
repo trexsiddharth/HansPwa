@@ -37,7 +37,7 @@
 
 ::ng-deep .mat-tab-label {
   border: 1px solid #C8C8C8;
-  color: #707070;
+  color: #9ba9b6;
   padding-top: 30px !important;
   padding-bottom: 30px !important;
   border-radius: 10px;
@@ -395,7 +395,7 @@ display: none !important;
       
          ::ng-deep .mat-tab-label {
           border: 1px solid #C8C8C8;
-          color: #707070;
+          color: #9ba9b6;;
           height: 50px !important;
           padding: 0px 20px !important;
           border-radius: 10px;
