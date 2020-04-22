@@ -14,9 +14,10 @@ import {  NotificationsService } from '../notifications.service';
   styleUrls: ['./phone-number-screen.component.css']
 })
 export class PhoneNumberScreenComponent implements OnInit {
-  numberCheck = '1231231231';
+  numberCheck;
   phoneNumber;
   loginRegister;
+  
 
 
   constructor(private _formBuilder: FormBuilder, private http: HttpClient, public notification: NotificationsService,
@@ -27,11 +28,10 @@ export class PhoneNumberScreenComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.numberCheck = null;
     if (localStorage.getItem('mobile_number')) {
       this.router.navigateByUrl('home');
     } else {
-      document.querySelector('body').style.backgroundImage = 'none';
-      document.querySelector('body').style.background = '#34b7f1';
       localStorage.setItem('id', '');
       localStorage.setItem('gender', '');
       localStorage.setItem('mobile_number', '');
@@ -50,9 +50,6 @@ export class PhoneNumberScreenComponent implements OnInit {
     this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
     console.log(res);
     if (res.registered === 1) {
-      document.querySelector('body').style.background = 'white';
-      document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
-      document.querySelector('body').style.backgroundSize = 'cover';
       localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
       localStorage.setItem('is_lead', res.is_lead);
       this.router.navigateByUrl('chat');
