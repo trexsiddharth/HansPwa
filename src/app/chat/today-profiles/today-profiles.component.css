@@ -64,7 +64,7 @@ main{
 #personalSection{
     margin-top: 20px; 
         padding: 15px 15px;
-        border: 1px solid #FAC8F1;
+        border: 1px solid #9533B5E5;
         border-radius: 5px;
 }
 .field{
@@ -97,6 +97,11 @@ main{
         padding: 15px 15px;
         border: 1px solid #58D1FD;
         border-radius: 5px;
+}
+.highlightedValue{
+    background-color: #C4E9F8;
+    border-radius: 10px;
+    padding: 10px;
 }
 #containerMessage{
     height: 100% !important;

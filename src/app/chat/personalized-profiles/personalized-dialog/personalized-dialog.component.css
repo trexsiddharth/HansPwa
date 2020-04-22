@@ -110,7 +110,7 @@
 #personalSection{
     margin-top: 20px; 
         padding: 15px 15px;
-        border: 1px solid #FAC8F1;
+        border: 1px solid #9533B5E5;
         border-radius: 5px;
 }
 .field{
@@ -145,6 +145,12 @@
         border-radius: 5px;
 }
 
+.highlightedValue{
+    background-color: #C4E9F8;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 @media (max-width: 350px) {
     .historyDetails{
         position: absolute;
@@ -152,7 +158,7 @@
         background-image: linear-gradient(0deg,black,transparent);
         word-break: break-word;
         color: white;
-        font-size: 14px;
+        font-size: 1rem;
         font-weight: bold;
         padding: 15px 25px;
         border-radius: 10px;
@@ -181,7 +187,7 @@
         background-image: linear-gradient(0deg,black,transparent);
         word-break: break-word;
         color: white;
-        font-size: 14px;
+        font-size: 1rem;
         font-weight: bold;
         padding: 15px 35px 15px 10px;
         border-radius: 10px;

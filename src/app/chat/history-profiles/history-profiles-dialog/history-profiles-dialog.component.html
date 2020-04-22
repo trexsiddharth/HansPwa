@@ -387,7 +387,10 @@
                             <span class="title">हाउस टाइप</span>
                         </div>
                         <div class="col-6">
-                            {{item.family ? item.family.house_type : setHouseType(item.profile.house)}}
+                            <span class="highlightedValue">
+                                {{item.family ? item.family.house_type : setHouseType(item.profile.house)}}
+                            </span>
+                            
                         </div>
                     </div>
         
@@ -397,7 +400,10 @@
                             <span class="title">फॅमिली इनकम</span>
                         </div>
                         <div class="col-6">
-                            {{setIncome(item.family ? item.family.family_income : item.profile.family_income)}} LPA
+                            <span class="highlightedValue">
+                                {{setIncome(item.family ? item.family.family_income : item.profile.family_income)}} LPA
+                            </span>
+                            
                         </div>
                     </div>
                 </div>
