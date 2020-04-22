@@ -76,9 +76,7 @@ token: string;
         resolve();
     });
 }
-getCurrentToken(): string {
-    if (this.token) {
-return this.token;
-    }
+getCurrentToken() {
+    return this.token ? this.token : '';
 }
 }

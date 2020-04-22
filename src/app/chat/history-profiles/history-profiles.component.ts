@@ -250,7 +250,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   async getHistorydata(link: string) {
-    if (!localStorage.getItem(link)) {
+    if (!localStorage.getItem(link) || this.itemService.getItem()) {
       this.spinner.show();
     }
     const historyData = new FormData();
@@ -294,11 +294,19 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (this.itemService.getItem()) {
           const prof: any = this.itemService.getItem();
           console.log(prof);
-          this.panelOpenState = this.profile.findIndex((item) => {
-            return item.profile.name === prof.name || item.profile.name === prof.profile.name;
-          });
-          console.log(this.panelOpenState);
-          this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
+          if (prof.profile) {
+            this.panelOpenState = this.profile.findIndex((item) => {
+              return item.profile.name === prof.profile.name;
+            });
+            console.log(this.panelOpenState);
+            this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
+          } else {
+            this.panelOpenState = this.profile.findIndex((item) => {
+              return item.profile.name === prof.name;
+            });
+            console.log(this.panelOpenState);
+            this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
+          }
           this.itemService.setItem(null);
         }
       },
@@ -537,6 +545,7 @@ call(num: any) {
     this.panelOpenState = null;
   }
 slideAndOpenProfile(item: any, slide: any) {
+    this.spinner.show();
     this.itemService.setItem(item);
     this.itemService.changeTab(slide);
   }

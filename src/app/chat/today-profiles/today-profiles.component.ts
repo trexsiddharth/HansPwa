@@ -24,7 +24,7 @@ import { ApiwhaAutoreply } from './profile-today-model';
 })
 export class TodayProfilesComponent implements OnInit {
   item = new ApiwhaAutoreply();
-  itemMessage: string = 'Hans Matrimony';
+  itemMessage = 'Hans Matrimony';
   Data;
   contactNumber;
   points = 0;
@@ -63,61 +63,72 @@ export class TodayProfilesComponent implements OnInit {
     console.log(this.contactNumber);
 
     this.checkUrl().subscribe(
-      data => {
-        console.log(data);
-        const text: string = data.apiwha_autoreply;
-        const id = data.id;
-        if (data && data.get_status_count) {
-          this.itemService.saveCount(data.get_status_count);
-        }
-        if (data.hasPhoto === '1') {
-        this.itemService.setPhotoStatus(true);
-        } else {
-          this.itemService.setPhotoStatus(false);
-        }
-        // for personalized users
-        if (data && data.is_premium && data.is_premium === '1') {
-          this.itemService.setIsPersonalized(true);
-        } else {
-          this.itemService.setIsPersonalized(false);
-        }
-        // for is_lead
-        if (data && data.is_lead != null) {
-            this.itemService.setIsLead(data.is_lead);
-        } else {
-          this.itemService.setIsLead(1);
-        }
+          data => {
+            console.log(data);
+            const text: string = data.apiwha_autoreply;
+            const id = data.id;
+            if (data && data.get_status_count) {
+              this.itemService.saveCount(data.get_status_count);
+            }
+            if (data.hasPhoto === '1') {
+            this.itemService.setPhotoStatus(true);
+            } else {
+              this.itemService.setPhotoStatus(false);
+            }
+            // for personalized users
+            if (data && data.is_premium && data.is_premium === '1') {
+              this.itemService.setIsPersonalized(true);
+            } else {
+              this.itemService.setIsPersonalized(false);
+            }
+            // for is_lead
+            if (data && data.is_lead != null) {
+                this.itemService.setIsLead(data.is_lead);
+            } else {
+              this.itemService.setIsLead(1);
+            }
 
 
-        // set profile image (circular in top bar)
-        this.setProfileImage.emit(data.photo);
-        localStorage.setItem('profile_photo', data.photo);
-        if (data && data.photo) {
-        this.selfImage = data.photo;
-        } else {
-          this.selfImage = '../../assets/avatar.svg';
-        }
+            // set profile image (circular in top bar)
+            this.setProfileImage.emit(data.photo);
+            localStorage.setItem('profile_photo', data.photo);
+            if (data && data.photo) {
+            this.selfImage = data.photo;
+            } else {
+              this.selfImage = '../../assets/avatar.svg';
+            }
 
-        if (data && data.name) {
-          this.selfName = data.name;
-        } else {
-          this.selfName = 'You';
-        }
+            if (data && data.name) {
+              this.selfName = data.name;
+            } else {
+              this.selfName = 'You';
+            }
 
-        console.log(text);
-        console.log(id);
-        localStorage.setItem('id', id);
-        this.paidStatus = data.paid_status;
-        console.log(this.paidStatus);
-        if (text.match('SHOW')) {
-            this.chatService.Analytics('login', 'login', 'logged In');
-            this.chatService.setLoginStatus(true);
-            this.getNextMessageOrProfile('SHOW');
-      }
-    }, err => {
-        console.log(err);
-      }
-    );
+            console.log(text);
+            console.log(id);
+            localStorage.setItem('id', id);
+            this.paidStatus = data.paid_status;
+            console.log(this.paidStatus);
+            if (text.match('SHOW')) {
+                this.chatService.Analytics('login', 'login', 'logged In');
+                this.chatService.setLoginStatus(true);
+                if (localStorage.getItem('todayStatus') === 'false') {
+                  this.setProfileLocally();
+                } else {
+                  this.getNextMessageOrProfile('SHOW');
+                }
+          }
+        }, err => {
+            console.log(err);
+          }
+        );
+    }
+
+    private setProfileLocally() {
+      this.type = 'profile';
+      this.item = JSON.parse(localStorage.getItem('todayProfile'));
+      this.getCredits();
+      console.log(this.item);
     }
 
   checkUrl(): Observable<any> {
@@ -180,6 +191,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
+        localStorage.setItem('todayStatus', 'true');
 
         if (data && data.get_status_count) {
           this.itemService.saveCount(data.get_status_count);
@@ -188,17 +200,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         if (data.type === 'profile') {
           this.type = 'profile';
           this.item = data.apiwha_autoreply;
-          setTimeout(() => {
-            // TT -> ToolTip
-          if ( localStorage.getItem('cancelTT') !== 'cancel' && this.count < 4 && document.getElementById('heading')) {
-              document.getElementById('heading').click();
-              this.count++;
-            } else {
-              if (localStorage.getItem('cancelTT') !== 'cancel') {
-              localStorage.setItem('cancelTT', 'cancel');
-              }
-            }
-          }, 1000);
+
+          localStorage.setItem('todayProfile', JSON.stringify(this.item));
+          localStorage.setItem('todayStatus', 'false');
 
           // if photo is null
           if (this.item.photo === null) {

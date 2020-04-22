@@ -328,7 +328,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
       return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
-          ['fcm_id']: this.notification.getCurrentToken(),
           ['fcm_app']: localStorage.getItem('fcm_app')
         }
       });
@@ -337,7 +336,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
       return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
-          ['fcm_id']: this.notification.getCurrentToken()
         }
       });
     }
