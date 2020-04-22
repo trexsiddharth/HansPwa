@@ -191,6 +191,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
+        // setting profile seen true for locally stored profile
         localStorage.setItem('todayStatus', 'true');
 
         if (data && data.get_status_count) {
@@ -201,7 +202,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           this.type = 'profile';
           this.item = data.apiwha_autoreply;
 
+          // locally storing the new profile
           localStorage.setItem('todayProfile', JSON.stringify(this.item));
+          // setting the profile seen status to false
           localStorage.setItem('todayStatus', 'false');
 
           // if photo is null

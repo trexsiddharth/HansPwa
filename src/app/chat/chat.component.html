@@ -2,7 +2,7 @@
 <main class='fixed t-0 b-0 w-full HC'>
        
         <div class="groupContainer" [hidden]="history=='myprofile'">
-          <img (click)="changeToMyProfile()" style="width:50px;height: 50px;margin: 10px 5px;border-radius: 50%;z-index: 999;" [src]="photo" alt="profile pic">
+          <img id="myProfImage" (click)="changeToMyProfile()" [src]="photo" alt="profile pic">
           <mat-tab-group mat-align-tabs="center" class="matGroup"   [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
             <mat-tab [label]="itemService.getDailyCount()" id="today">
                   <ng-template matTabContent>
@@ -73,7 +73,13 @@
                   </ng-template>
                   </mat-tab>
                   </mat-tab-group>
+
         </div>
+
+        <hr style="margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid #707070;
+        margin-top: -16px;">
     <div>
 
 <!-- The Modal -->
