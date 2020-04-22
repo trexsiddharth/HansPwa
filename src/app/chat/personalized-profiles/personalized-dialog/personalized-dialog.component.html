@@ -3,7 +3,7 @@
     <div id="cancel">
         <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg" alt="cancel">
     </div>
-
+    <div class="historyProfile">
 <ngb-carousel>
     <ng-template ngbSlide *ngFor="let i of getImagesCount(item.carousel); let index = index" >
             <img  id="profileImage" 
@@ -11,6 +11,19 @@
             alt="item.name">
     </ng-template>
   </ngb-carousel>
+
+  <div class="historyDetails">
+    <span>
+        {{item.name}} | {{setAge(item.birth_date)}}
+    </span><br>
+    <span>
+        {{item.working_city}} | {{setHeight(item.height)}} 
+        | {{item.religion}}, {{item.caste}} | {{item.occupation}}
+        | {{setIncome(item.monthly_income)}} LPA
+    </span>
+</div>
+
+</div>
 
           <!-- panel details  -->
 

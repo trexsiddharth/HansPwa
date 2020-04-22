@@ -11,7 +11,7 @@ main{
     border-radius: 10px;
 }
 ::ng-deep .carousel-indicators{
-    bottom: 0px !important;
+    bottom: 80px !important;
 }
 ::ng-deep .mat-card-image{
     margin: 0px;
