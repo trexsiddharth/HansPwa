@@ -1,3 +1,12 @@
+::ng-deep .mat-dialog-container {
+    padding: 0px;
+    background: white;
+    color: black;
+}
+.row {
+    padding: 0px;
+    margin: 0px;
+}
 option{
     font-size: 14px;
 }

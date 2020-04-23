@@ -6,6 +6,27 @@
         <h5 style="font-weight: bold;margin: 0px;">
             मेरी प्रोफाइल
         </h5>
+
+        <button mat-icon-button 
+        style="position: absolute;
+        right: 10px;
+        top: 0px;"
+        [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon style="font-size: 30px !important;">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+              <ng-template matMenuContent>
+            <button mat-menu-item
+            (click)="logout()">
+            <img width="30px" src="../../../assets/log_out.svg" alt="log out">
+              <span class="menuItems">Logout</span>
+            </button>
+            <button mat-menu-item>
+              <img width="30px" src="../../../assets/contract.svg" alt="subscription">
+              <span class="menuItems">Subscriptions</span>
+            </button>
+        </ng-template>
+          </mat-menu>
     </div>
 
     <div style="position: relative;">
@@ -79,7 +100,7 @@
                 <span class="sectionTitle">
                     पर्सनल डिटेल्स
                 </span>
-                <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit personal">
+                <img (click)="openPersonalDialog()" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit personal">
             </div>
             
             <div class="row">

@@ -13,4 +13,8 @@ export class HomeMainComponent implements OnInit {
   ngOnInit() {
   }
 
+  openPlaystore() {
+    window.open('https://play.google.com/store/apps/details?id=com.twango.me');
+  }
+
 }

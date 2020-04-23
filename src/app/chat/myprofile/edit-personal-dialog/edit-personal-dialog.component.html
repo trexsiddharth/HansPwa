@@ -1,9 +1,10 @@
 <mat-dialog-content>
     <form (ngSubmit)="onSubmit()" #personalForm="ngForm" >
-      <div class="row" style="margin: 10px 10px 0px;">
-          <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-info"></i>
+      <div class="row" class="t-c" style="margin-top: 1rem;">
           <h5 style="margin: auto 20px">PERSONAL DETAILS</h5>
       </div>
+
+      <hr>
       
       <div class="row" style="margin: 10px 10px;">
         <div class="col-6">
@@ -14,9 +15,9 @@
             <h6>Age:</h6>
             <p style="font-size: 14px;" [innerHtml]="setAge(personalData.birth_date)"></p>
           </div>
-          <hr style="margin: 0px 10px;width: 100%">
-      </div>
-      <div class="row" style="margin: 10px 10px;">
+          
+          <hr style="width: 100%">
+      
           <div class="col-6">
             <h6>Marital Status:</h6>
             <select name="maritalStatus" class="form-control"  [(ngModel)]="personalData.marital_status" required>
@@ -27,9 +28,7 @@
               <h6>Religion:</h6>
               <p style="font-size: 14px;">{{familyData.religion}}</p>
             </div>
-            <hr style="margin: 0px 10px;width: 100%">
-        </div>
-        <div class="row" style="margin: 10px 10px;">
+            <hr style="width: 100%">
             <div class="col-6">
               <h6>Height:</h6>
               <select type="text" class="form-control" name="personalHeight" [(ngModel)]="personal_height" required>
@@ -40,9 +39,7 @@
                 <h6>Caste:</h6>
                 <p style="font-size: 14px;">{{familyData.caste}}</p>
               </div>
-              <hr style="margin: 0px 10px;width: 100%">
-          </div>
-          <div class="row" style="margin: 10px 10px;">
+              <hr style="width: 100%">
               <div class="col-6">
                 <h6>Weight:</h6>
                 <input type="text" class="form-control"  name="personalWeight" [(ngModel)]="personalData.weight" required>
@@ -51,10 +48,8 @@
                   <h6>Gotra:</h6>
                   <p style="font-size: 14px;">{{familyData.gotra}}</p>
                 </div>
-                <hr style="margin: 0px 10px;width: 100%">
-            </div>
+                <hr style="width: 100%">
     
-            <div class="row" style="margin: 10px 10px;">
                 <div class="col-6">
                     <h6>Current Location:</h6>
                       <input class="form-control" type="text" id="cityAutoComplete" name="currentCity" [(ngModel)]="familyData.city"  required> 
@@ -65,8 +60,7 @@
                       <option *ngFor="let item of foodpreferences" [value]="item">{{item}}</option>
                     </select>
                   </div>
-              </div>
-              <div class="row" style="margin: 10px 10px;">
+                  <hr style="width: 100%">
                 <div class="col-6">
                   <h6>Education:</h6>
                   <select name="degree"  class="form-control"   [(ngModel)]="personalData.degree" required>
@@ -77,13 +71,12 @@
                     <h6>Profession:</h6>
                       <input class="form-control" type="text" name="profession" [(ngModel)]="personalData.profession"  required> 
                 </div>
-              </div>
-              <div class="row" style="margin: 10px 10px;">
+                <hr style="width: 100%">
                 <div class="col-12">
                     <h6>About: (max 300 words)</h6>
                       <input class="form-control" maxlength="300" type="text" name="about" [(ngModel)]="personalData.about"  required> 
                 </div>
-              </div>
+      </div>
               <div style="text-align: center">
                   <button  [disabled]="!personalForm.valid" class="btn" style="background-color: #34b7f1" >Save</button> 
             </div>

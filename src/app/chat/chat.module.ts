@@ -19,6 +19,7 @@ import { ChatServiceService } from '../chat-service.service';
 import { HistoryProfilesComponent } from './history-profiles/history-profiles.component';
 import { HistoryProfilesDialogComponent } from './history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 import { PersonalizedDialogComponent } from './personalized-profiles/personalized-dialog/personalized-dialog.component';
+import { MyProfileService } from './myprofile/my-profile.service';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ entryComponents: [
 ],
 providers: [
   FindOpenHistoryProfileService,
-  ChatServiceService
+  ChatServiceService,
+  MyProfileService
 ]
 })
 export class ChatModule { }

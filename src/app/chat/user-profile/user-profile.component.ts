@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router} from '@angular/router';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { EditPersonalDialogComponent } from '../myprofile/edit-personal-dialog/edit-personal-dialog.component';
 
 
 @Component({
@@ -107,22 +108,22 @@ onResize(event) {
         }
       }
       }
-    // openPersonalDialog() {
-    //   const dialogConfig = new MatDialogConfig();
-    //   if (this.innerWidth >= 1024) {
-    //     dialogConfig.minWidth = this.innerWidth - 200;
-    //     dialogConfig.minHeight = 600;
-    //   } else {
-    //   dialogConfig.minWidth = this.innerWidth - 50;
-    //   }
-    //   dialogConfig.disableClose = false;
-    //   dialogConfig.hasBackdrop = true;
-    //   dialogConfig.data = {
-    //       personalDetails: this.personalProfileData,
-    //       familyDetails: this.familyProfileData,
-    //     };
-    //   const dialogRef = this.matDialog.open(EditPersonalDialogComponent, dialogConfig);
-    // }
+    openPersonalDialog() {
+      const dialogConfig = new MatDialogConfig();
+      if (this.innerWidth >= 1024) {
+        dialogConfig.minWidth = this.innerWidth - 200;
+        dialogConfig.minHeight = 600;
+      } else {
+      dialogConfig.minWidth = this.innerWidth - 50;
+      }
+      dialogConfig.disableClose = false;
+      dialogConfig.hasBackdrop = true;
+      dialogConfig.data = {
+          personalDetails: this.personalProfileData,
+          familyDetails: this.familyProfileData,
+        };
+      const dialogRef = this.matDialog.open(EditPersonalDialogComponent, dialogConfig);
+    }
 
     // openFamilyDialog() {
     //   const dialogConfig = new MatDialogConfig();

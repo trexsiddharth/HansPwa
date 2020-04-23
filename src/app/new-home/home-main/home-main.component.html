@@ -12,7 +12,7 @@
             flex-direction: column;
              align-items: center;">
              <span style="font-size: 18px;font-weight: bold;">
-                हम परिवारों को मिलाते है...
+                हम परिवारों को जोड़ते है...
              </span>
                 <button mat-raised-button class="registerBtn"  
                 [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
@@ -51,14 +51,14 @@
                 1000+ मैचमेकर्स
                 </mat-card-title>
                 <mat-card-subtitle style="color: #C1FA25;font-size: 16px;">
-                जो आपको रिश्ते चुनने मई मदद करेंगी
+                जो आपको रिश्ते चुनने में मदद करेंगी
                 </mat-card-subtitle>
         </mat-card>
 
         <mat-card class="featureCard" style="background-image: linear-gradient(0deg,#F5A513 , #F7CB67);
         color: #070973; text-align: center;">
             <mat-card-title style="font-weight: bold;">
-                    30+ मंदिर
+                    25+ मंदिर
                     </mat-card-title>
                     <mat-card-subtitle style="color: #070973;font-size: 16px;">
                     में वेरिफिकेशन सेंटर्स
@@ -76,7 +76,7 @@
     justify-content: space-between;">
         <div>
             <span style="font-weight: bold;color: white;font-size: 20px;">
-                ऑफलाइन केंद्रों नेटवर्क
+                ऑफलाइन केन्द्र नेटवर्क
             </span>
         </div>
         <div>
@@ -202,7 +202,9 @@
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        height: 40px; ">
+        height: 40px; "
+        (click)="openPlaystore()"
+        >
             <span style="color: #D313AE;border-right: 1px solid #D313AE;
             align-self: center;
             font-weight: bold;
@@ -328,7 +330,7 @@
         <hr style="background-color: white;">
 
        <p style="font-size: 12px;margin-left: 5px;margin-right: 5px;">
-           <a style="color: white;" href="#">About Us &nbsp;| &nbsp;  </a> <a style="color: white;" href="#">Success Stories &nbsp;| &nbsp;</a> 
+            <a style="color: white;" href="#">Success Stories &nbsp;| &nbsp;</a> 
            <a style="color: white;" href="#">Careers &nbsp;| &nbsp;</a> <a style="color: white;" href="#">Payment Options &nbsp;| &nbsp;</a>
            <a style="color: white;" href="#">Terms & Conditions &nbsp;| &nbsp;</a> <a style="color: white;" href="#">Privacy Policy</a>
        </p>

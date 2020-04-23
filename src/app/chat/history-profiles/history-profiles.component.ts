@@ -276,38 +276,22 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
       (data: any) => {
         console.log(data);
-        localStorage.setItem(link, JSON.stringify(data));
+        this.openContactedProfile();
+
         if (localStorage.getItem(link)) {
         // update new data only
-        if (JSON.stringify(this.profile) !== JSON.stringify(data)) {
+          if (JSON.stringify(this.profile) !== JSON.stringify(data)) {
           this.addRemoveNewData(data);
       }
       } else {
         this.profile = data;
+        localStorage.setItem(link, JSON.stringify(data));
       }
 
         console.log(this.profile);
         this.spinner.hide();
         if (this.profile.length < 1) {
           this.getNoDataText(link);
-        }
-        if (this.itemService.getItem()) {
-          const prof: any = this.itemService.getItem();
-          console.log(prof);
-          if (prof.profile) {
-            this.panelOpenState = this.profile.findIndex((item) => {
-              return item.profile.name === prof.profile.name;
-            });
-            console.log(this.panelOpenState);
-            this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
-          } else {
-            this.panelOpenState = this.profile.findIndex((item) => {
-              return item.profile.name === prof.name;
-            });
-            console.log(this.panelOpenState);
-            this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
-          }
-          this.itemService.setItem(null);
         }
       },
       (error: any) => {
@@ -325,7 +309,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         element => {
          const newProfiles =  this.profile.find(
            item => {
+             if (item.family) {
               return item.profile.id === element.profile.id;
+             } else {
+              return item.profile.identity_number === element.profile.identity_number;
+             }
            });
          if (!newProfiles) {
             //  this.profile.push(element);
@@ -340,7 +328,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
        (item, index) => {
         const removeProfile =  (data as any[]).find(
            element => {
-            return item.profile.id === element.profile.id;
+            if (item.family) {
+              return item.profile.id === element.profile.id;
+             } else {
+              return item.profile.identity_number === element.profile.identity_number;
+             }
            }
          );
         if (!removeProfile) {
@@ -349,6 +341,28 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
        }
       );
        console.log(this.profile);
+       this.updateLocalList();
+  }
+
+  openContactedProfile() {
+    if (this.itemService.getItem()) {
+      const prof: any = this.itemService.getItem();
+      console.log(prof);
+      if (prof.profile) {
+        this.panelOpenState = this.profile.findIndex((item) => {
+          return item.profile.name === prof.profile.name;
+        });
+        console.log(this.panelOpenState);
+        this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
+      } else {
+        this.panelOpenState = this.profile.findIndex((item) => {
+          return item.profile.name === prof.name;
+        });
+        console.log(this.panelOpenState);
+        this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
+      }
+      this.itemService.setItem(null);
+    }
   }
 
   updateLocalList() {
@@ -560,9 +574,12 @@ updateProfileList(ans: any, num: any, index: any) {
 goToSubscription() {
     this.router.navigateByUrl('subscription');
   }
-call(num: any) {
-    window.open('tel:' + num);
-    this.panelOpenState = null;
+call(index: any) {
+  if (this.profile[index].family) {
+    window.open('tel:' + this.profile[index].family.mobile);
+  } else {
+    this.ngxNotificationService.error('Mobile Number Not Found');
+  }
   }
 slideAndOpenProfile(item: any, slide: any) {
     this.spinner.show();

@@ -26,13 +26,13 @@
                 </span>
             </div>
 
-            <div class="historyButtons" *ngIf="type != 'contacted'">
+            <div class="historyButtons">
 
                 <button mat-raised-button class="btn" 
                 (click)="profileReAnswer(item,'NO',i)"
                 style="background-color: #C8C8C8;
                     padding: 20px;
-                     border-radius: 10px;"  *ngIf="type !== 'rejected'">
+                     border-radius: 10px;"  *ngIf="type !== 'rejected' && type !== 'contacted'">
                     <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
                 </button>
 
@@ -45,38 +45,24 @@
                 <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
             </button>
 
+            <button mat-raised-button  class="btn" 
+                (click)="call(i)"
+                style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;"  *ngIf="type == 'contacted'">
+                <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+            </button>
+
                 <button mat-raised-button  class="btn"
                 (click)="profileReAnswer(item,'SHORTLIST',i)"
                  style="background-color: #D313AE;margin-top: 20px;
                 padding: 20px;
-                 border-radius: 10px;" *ngIf="type !== 'interestShown'">
+                 border-radius: 10px;" *ngIf="type !== 'interestShown'  && type !== 'contacted'">
                     <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
                 </button>
 
             </div>
-        </div>
-        <div style="position: relative;text-align: center;" *ngIf="item.family != null && type == 'contacted'">
-            <button mat-raised-button class="btn" 
-            (click)="call(item.family.mobile)"
-            style="background: #58D1FD;margin: 5px 5px;"
-            *ngIf="type === 'contacted' && itemService.getPersonalized() === false">
-                <img width="20px" src="../../../assets/phonewhite.svg" 
-                alt="call profile">
-                <span style="color: white;">&nbsp;{{item.family.mobile}}</span>
-            </button>
-            <button mat-raised-button class="btn" 
-            (click)="call(item.family.mobile)"
-            style="background: #58D1FD;margin: 5px 5px;"
-            *ngIf="type === 'contacted' && itemService.getPersonalized()">
-                <img width="20px" src="../../../assets/phonewhite.svg" 
-                alt="call profile">
-                <span style="color: white;">Matchmaker:&nbsp;{{item.family.mobile}}</span>
-            </button>
-            <button mat-raised-button class="btn" style="background: #1098f5;margin: 5px 5px;">
-                <img width="20px" src="../../../assets/placeholderwhite.png" 
-                alt="profile location">
-                <span style="color: white;">&nbsp;{{item.family.city}}</span>
-            </button>
         </div>
         <hr>
         </div>
