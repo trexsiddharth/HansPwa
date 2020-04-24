@@ -2,7 +2,7 @@
     padding: 0px;
     background: white;
     color: black;
-    height: 79vh;
+    max-height: 79vh;
 }
 ::ng-deep .mat-dialog-content{
     max-height: 100%;

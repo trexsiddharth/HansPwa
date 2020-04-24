@@ -22,10 +22,13 @@ export class EditPersonalDialogComponent implements OnInit {
   currentCity: any;
   locality;
   locationFamily;
+  locationWorking;
+  locationBirth;
   casteo: Observable<string[]>;
   getcastes: any = [];
   personalForm: FormGroup;
   errors = [];
+  index;
 
   foodpreferences: string[] = ['Doesn\'t Matter', 'Non-Vegetarian', 'Vegetarian'];
   // tslint:disable-next-line: max-line-length
@@ -90,6 +93,7 @@ export class EditPersonalDialogComponent implements OnInit {
       Company: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
       WorkingCity: ['', Validators.compose([Validators.required])],
+      Locality: ['', Validators.compose([Validators.required])],
       About: ['', Validators.compose([Validators.required, Validators.maxLength(300)])]
     });
    }
@@ -98,8 +102,10 @@ export class EditPersonalDialogComponent implements OnInit {
     console.log(this.data);
     this.personalData = this.data.personalDetails;
     this.familyData = this.data.familyDetails;
+    this.index = this.data.index;
     this.personal_height = this.getHeight(this.personalData.height);
     console.log(this.personalData.name);
+    console.log(this.index);
     this.getAllCaste();
     if (this.personalData && this.familyData) {
       this.setCurrentValue();
@@ -204,15 +210,27 @@ export class EditPersonalDialogComponent implements OnInit {
     }
   }
 
-  onAutocompleteSelected(event) {
-    this.personalForm.value.locality = event.formatted_address;
+  onAutocompleteSelected(event, type: string) {
+    if (type === 'Locality') {
+      this.personalForm.value.Locality = event.formatted_address;
+    } else if (type === 'Working') {
+      this.personalForm.value.working_city = event.formatted_address;
+    } else {
+      this.personalForm.value.BirthTime = event.formatted_address;
+    }
     this.locality = event.formatted_address;
     console.log('address of family', this.personalForm.value.locality);
 
 }
-onLocationSelected(e) {
+onLocationSelected(e, type: string) {
+  if (type === 'Locality') {
     this.locationFamily = e;
-    console.log('location of family', e);
+  } else if (type === 'Working') {
+    this.locationWorking = e;
+  } else {
+    this.locationBirth = e;
+  }
+  console.log('location of family', e);
 }
   close() {
     this.dialogRef.close();
@@ -238,6 +256,7 @@ onLocationSelected(e) {
       Gotra: this.familyData.gotra,
       Food: this.personalData.food_choice,
       WorkingCity: this.personalData.working_city,
+      Locality: this.familyData.city,
       Degree: this.personalData.degree ? this.personalData.degree : this.personalData.education,
       Profession: this.personalData.profession,
       College: this.personalData.college,

@@ -84,7 +84,7 @@
                 <span class="sectionTitle">
                     अबाउट मी 
                 </span>
-                <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit about me">
+                <img (click)="openPersonalDialog(0, 'अबाउट मी')" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit about me">
             </div>
             <p style="margin-top: 10px;text-transform: capitalize;">
                 हेलो, Myself {{personalProfileData.name}}, {{personalProfileData.about}}
@@ -100,7 +100,7 @@
                 <span class="sectionTitle">
                     पर्सनल डिटेल्स
                 </span>
-                <img (click)="openPersonalDialog()" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit personal">
+                <img (click)="openPersonalDialog(1, 'पर्सनल डिटेल्स')" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit personal">
             </div>
             
             <div class="row">
@@ -165,7 +165,7 @@
                 <span class="sectionTitle">
                     शिक्षा
                 </span>
-                <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit education">
+                <img (click)="openPersonalDialog(2, 'शिक्षा')" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit education">
             </div>
             
             <div class="row">
@@ -200,7 +200,7 @@
                 <span class="sectionTitle">
                     करियर
                 </span>
-                <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit career">
+                <img (click)="openPersonalDialog(3, 'करियर')" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit career">
             </div>
             
             <div class="row">
@@ -247,7 +247,7 @@
                 <span class="sectionTitle">
                     होरोस्कोप
                 </span>
-                <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit horoscope">
+                <img (click)="openPersonalDialog(4, 'होरोस्कोप')" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit horoscope">
             </div>
             
             <div class="row">
@@ -287,7 +287,7 @@
                 <span class="sectionTitle">
                     कांटेक्ट
                 </span>
-                <img class="editPencil" src="../../../assets/pencilblack.svg" alt="edit contact">
+                <img (click)="openPersonalDialog(5, 'कांटेक्ट')" class="editPencil" src="../../../assets/pencilblack.svg" alt="edit contact">
             </div>
             
             <div class="row">

@@ -108,20 +108,22 @@ onResize(event) {
         }
       }
       }
-    openPersonalDialog() {
+    openPersonalDialog(i: number, titleText: string) {
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
         dialogConfig.minWidth = '100vw';
         dialogConfig.minHeight = '100vh';
       } else {
       dialogConfig.minWidth = '80vw';
-      dialogConfig.minHeight = '80vh';
+      dialogConfig.maxHeight = '80vh';
       }
       dialogConfig.disableClose = false;
       dialogConfig.hasBackdrop = true;
       dialogConfig.data = {
           personalDetails: this.personalProfileData,
           familyDetails: this.familyProfileData,
+          index: i,
+          title: titleText
         };
       const dialogRef = this.matDialog.open(EditPersonalDialogComponent, dialogConfig);
     }
