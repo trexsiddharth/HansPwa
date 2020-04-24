@@ -503,11 +503,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
   changeSelectedTab(event: any) {
     console.log(event);
     this.currentTab = event;
-    if (this.profilesCompletedStatus === true && this.currentTab === 0) {
-      this.startTimer(Math.floor(7 * 1000), '');
-    } else {
-      clearInterval(this.timerMain);
-    }
+    // if (this.profilesCompletedStatus === true && this.currentTab === 0) {
+    //   this.startTimer(Math.floor(7 * 1000), '');
+    // } else {
+    //   clearInterval(this.timerMain);
+    // }
 
     if (this.itemService.getIsLead() === 0) {
     switch (event) {

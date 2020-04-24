@@ -1,7 +1,10 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { NgForm, FormGroup } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { NgxNotificationService } from 'ngx-kc-notification';
 
 
 @Component({
@@ -13,11 +16,17 @@ export class EditPersonalDialogComponent implements OnInit {
   data: any;
   personalData: any;
   familyData: any;
-  @ViewChild('personalForm', {static: false}) personalForm: NgForm;
   maritalStaus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
   personal_height: any;
   personalDialogData: FormGroup;
   currentCity: any;
+  locality;
+  locationFamily;
+  casteo: Observable<string[]>;
+  getcastes: any = [];
+  personalForm: FormGroup;
+  errors = [];
+
   foodpreferences: string[] = ['Doesn\'t Matter', 'Non-Vegetarian', 'Vegetarian'];
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
@@ -30,8 +39,36 @@ export class EditPersonalDialogComponent implements OnInit {
    // tslint:disable-next-line: max-line-length
    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other']
 
-  constructor(private http: HttpClient, public dialogRef: MatDialogRef<EditPersonalDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
+  constructor(private http: HttpClient, 
+              public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) data,
+              private _formBuilder: FormBuilder,
+              private ngxNotificationService: NgxNotificationService
+     ) {
     this.data = data;
+
+    this.personalForm = this._formBuilder.group({
+      // tslint:disable-next-line: max-line-length
+      name: ['', Validators.compose([Validators.required])],
+      phone: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+      email: [''],
+      Relation: ['', Validators.compose([Validators.required])],
+      gender: ['', Validators.compose([Validators.required])],
+      birth_day: ['', Validators.compose([Validators.required])],
+      Height: ['', Validators.compose([Validators.required])],
+      Weight: ['', Validators.compose([Validators.required])],
+      MaritalStatus: ['', Validators.compose([Validators.required])],
+      AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
+      Religion: ['', Validators.compose([Validators.required])],
+      Gotra: ['', Validators.compose([Validators.required])],
+      Food: ['', Validators.compose([Validators.required])],
+      Degree: ['', Validators.compose([Validators.required])],
+      Profession: ['', Validators.compose([Validators.required])],
+      Castes: ['', Validators.compose([Validators.required])],
+      Mangalik: ['', Validators.compose([Validators.required])],
+      locality: ['', Validators.compose([Validators.required])],
+      About: ['', Validators.compose([Validators.required, Validators.maxLength(300)])]
+    });
    }
 
   ngOnInit() {
@@ -40,6 +77,10 @@ export class EditPersonalDialogComponent implements OnInit {
     this.familyData = this.data.familyDetails;
     this.personal_height = this.getHeight(this.personalData.height);
     console.log(this.personalData.name);
+    this.getAllCaste();
+    if (this.personalData && this.familyData) {
+      this.setCurrentValue();
+    }
   }
   setAge(dob: string) {
     if (dob != null) {
@@ -87,6 +128,7 @@ export class EditPersonalDialogComponent implements OnInit {
   }
   }
   onSubmit() {
+    if (this.personalForm.valid) {
     console.log(this.personalForm);
     const personalDataForm = new FormData();
     personalDataForm.append('identity_number', this.personalData.identity_number);
@@ -125,16 +167,118 @@ export class EditPersonalDialogComponent implements OnInit {
       }
     );
     this.dialogRef.close();
-  }
-  onAutocompleteSelected(event) {
-    console.log(event);
+    } else {
+      // tslint:disable-next-line: forin
+      for (const control in this.personalForm.controls) {
+        console.log(control);
+        if (this.personalForm.controls[control].value === '') {
+            this.errors.push(control);
+          }
+      }
+      if (this.errors[0]) {
+        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+   }
+    }
   }
 
-  onLocationSelected(e) {
-    console.log(e);
-  }
+  onAutocompleteSelected(event) {
+    this.personalForm.value.locality = event.formatted_address;
+    this.locality = event.formatted_address;
+    console.log('address of family', this.personalForm.value.locality);
+
+}
+onLocationSelected(e) {
+    this.locationFamily = e;
+    console.log('location of family', e);
+}
   close() {
     this.dialogRef.close();
   }
+
+  setCurrentValue() {
+    this.personalForm.patchValue({
+      name: this.personalData.name,
+      Weight: this.personalData.weight,
+      Height: this.Heights[this.Heights1.indexOf(this.personalData.height)],
+      MaritalStatus: this.personalData.marital_status,
+      Religion: this.familyData.religion,
+      Castes: this.familyData.caste,
+      Gotra: this.familyData.gotra,
+      Food: this.personalData.food_choice,
+      locality: this.personalData.working_city,
+      Degree: this.personalData.degree,
+      Profession: this.personalData.profession,
+      About: this.personalData.about
+
+    });
+  }
+
+  // Caste Selection
+
+  getAllCaste() {
+    this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+      this.getcastes = res;
+    });
+    if (this.personalForm.get('Castes').value && this.personalForm.get('Castes').value !== '') {
+    this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
+      startWith(''),
+      map(value => this._Castefilter(value))
+    );
+  } else {
+    this.personalForm.patchValue({
+      Castes: ''
+    });
+    this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
+      startWith(''),
+      map(value => this._Castefilter(value))
+    );
+  }
+  }
+
+  private _Castefilter(value: string): string[] {
+    if (value != null) {
+      const filterValue = value.toLowerCase();
+      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+    } else {
+      const filterValue = 'arora';
+      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+    }
+  }
+
+  async casteValidation(value) {
+    console.log('caste changed', value );
+    const status = 1;
+    let statusConfirmed;
+    await this.checkCaste(value).then((res: boolean) => {
+         statusConfirmed = res;
+       });
+    console.log('caste changed', statusConfirmed );
+  
+    if (statusConfirmed === false) {
+        this.ngxNotificationService.warning('Please choose a caste from the dropdown');
+        this.personalForm.get('Castes').setValue('');
+        return false;
+      }
+    return true;
+  
+    }
+
+    checkCaste(value) {
+      let status = 1;
+      let statusConfirmed = false;
+      this.casteo.forEach(element => {
+        element.forEach(item => {
+          if (value !== '' && item.includes(value) && item.length === value.length ) {
+            console.log('confirmed');
+            statusConfirmed = true;
+          } else {
+            status = 0;
+          }
+        });
+      });
+      return new Promise((resolve) => {
+  resolve(statusConfirmed);
+      });
+    }
 
 }

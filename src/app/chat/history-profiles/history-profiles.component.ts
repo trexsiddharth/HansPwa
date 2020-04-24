@@ -276,7 +276,9 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
       (data: any) => {
         console.log(data);
-        this.openContactedProfile();
+        if (this.itemService.getItem()) {
+        this.openContactedProfile(data);
+        }
 
         if (localStorage.getItem(link)) {
         // update new data only
@@ -344,22 +346,22 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
        this.updateLocalList();
   }
 
-  openContactedProfile() {
+  openContactedProfile(data: any) {
     if (this.itemService.getItem()) {
       const prof: any = this.itemService.getItem();
       console.log(prof);
       if (prof.profile) {
-        this.panelOpenState = this.profile.findIndex((item) => {
-          return item.profile.name === prof.profile.name;
+        this.panelOpenState = data.findIndex((item) => {
+          return item.profile.id === prof.profile.id;
         });
         console.log(this.panelOpenState);
-        this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
+        this.openProfileDialog(data[this.panelOpenState], this.panelOpenState);
       } else {
-        this.panelOpenState = this.profile.findIndex((item) => {
+        this.panelOpenState = data.findIndex((item) => {
           return item.profile.name === prof.name;
         });
         console.log(this.panelOpenState);
-        this.openProfileDialog(this.profile[this.panelOpenState], this.panelOpenState);
+        this.openProfileDialog(data[this.panelOpenState], this.panelOpenState);
       }
       this.itemService.setItem(null);
     }

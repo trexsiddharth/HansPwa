@@ -12,5 +12,6 @@ export class MyProfileService {
    }
 
    submitPersonalDetails() {
+    
    }
 }

@@ -3,9 +3,19 @@
     background: white;
     color: black;
 }
+::ng-deep .cdk-overlay-dark-backdrop{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+}
+
+::ng-deep .mat-form-field-label{
+    color: black;
+}
 .row {
     padding: 0px;
     margin: 0px;
+}
+.col-12 {
+    margin-top: 1rem;
 }
 option{
     font-size: 14px;
