@@ -21,7 +21,7 @@ export class ChatServiceService {
     return this.profileItem;
   }
   getContactNumber() {
-    return this.contactNumber;
+    return this.contactNumber ? this.contactNumber : localStorage.getItem('mobile_number');
   }
   Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
