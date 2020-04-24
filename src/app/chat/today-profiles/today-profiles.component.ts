@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
@@ -22,7 +22,7 @@ import { ApiwhaAutoreply } from './profile-today-model';
   templateUrl: './today-profiles.component.html',
   styleUrls: ['./today-profiles.component.css']
 })
-export class TodayProfilesComponent implements OnInit {
+export class TodayProfilesComponent implements OnInit, AfterViewInit {
   item = new ApiwhaAutoreply();
   itemMessage = 'Welcome To Hans Matrimony';
   Data;
@@ -56,6 +56,8 @@ export class TodayProfilesComponent implements OnInit {
               public router: Router,
               private dialog: MatDialog,
               public subscriptionService: SubscriptionserviceService ) { }
+  ngAfterViewInit(): void {
+  }
 
 
   ngOnInit() {
@@ -124,27 +126,27 @@ export class TodayProfilesComponent implements OnInit {
         }
       );
     } else {
-      let data = JSON.parse(localStorage.getItem('authData'));
-      console.log(data);
-      localStorage.setItem('authData', JSON.stringify(data));
-      const text: string = data.apiwha_autoreply;
-      const id = data.id;
-      if (data && data.get_status_count) {
+      setTimeout(() => {
+        let data = JSON.parse(localStorage.getItem('authData'));
+        console.log(data);
+        const text: string = data.apiwha_autoreply;
+        const id = data.id;
+        if (data && data.get_status_count) {
         this.itemService.saveCount(data.get_status_count);
       }
-      if (data.hasPhoto === '1') {
+        if (data.hasPhoto === '1') {
       this.itemService.setPhotoStatus(true);
       } else {
         this.itemService.setPhotoStatus(false);
       }
       // for personalized users
-      if (data && data.is_premium && data.is_premium === '1') {
+        if (data && data.is_premium && data.is_premium === '1') {
         this.itemService.setIsPersonalized(true);
       } else {
         this.itemService.setIsPersonalized(false);
       }
       // for is_lead
-      if (data && data.is_lead != null) {
+        if (data && data.is_lead != null) {
           this.itemService.setIsLead(data.is_lead);
       } else {
         this.itemService.setIsLead(1);
@@ -152,26 +154,26 @@ export class TodayProfilesComponent implements OnInit {
 
 
       // set profile image (circular in top bar)
-      this.setProfileImage.emit(data.photo);
-      localStorage.setItem('profile_photo', data.photo);
-      if (data && data.photo) {
+        this.setProfileImage.emit(data.photo);
+        localStorage.setItem('profile_photo', data.photo);
+        if (data && data.photo) {
       this.selfImage = data.photo;
       } else {
         this.selfImage = '../../assets/avatar.svg';
       }
 
-      if (data && data.name) {
+        if (data && data.name) {
         this.selfName = data.name;
       } else {
         this.selfName = 'You';
       }
 
-      console.log(text);
-      console.log(id);
-      localStorage.setItem('id', id);
-      this.paidStatus = data.paid_status;
-      console.log(this.paidStatus);
-      if (text.match('SHOW')) {
+        console.log(text);
+        console.log(id);
+        localStorage.setItem('id', id);
+        this.paidStatus = data.paid_status;
+        console.log(this.paidStatus);
+        if (text.match('SHOW')) {
           this.chatService.Analytics('login', 'login', 'logged In');
           this.chatService.setLoginStatus(true);
           if (localStorage.getItem('todayProfile')) {
@@ -179,6 +181,7 @@ export class TodayProfilesComponent implements OnInit {
           }
           this.getNextMessageOrProfile('SHOW');
     }
+      }, 100);
   }
     }
 
@@ -207,8 +210,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
        // setting profile seen true for locally stored profile
      localStorage.setItem('todayStatus', 'true');
      this.Data = {
-       from : this.contactNumber,
-        to : this.contactNumber,
+       from : localStorage.getItem('mobile_number'),
+        to : localStorage.getItem('mobile_number'),
         event : 'INBOX',
         text : data,
         channel_name : 'app'

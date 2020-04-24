@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class EditFamilyDialogComponent implements OnInit {
   data: any;
   familyData: any;
-  Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Homely'];
+  Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Homely', 'Not Employed'];
   Status: string[] = ['Alive', 'Not Alive'];
   FamilyType: string[] = ['Joint', 'Nuclear'];
   Count: any[] = ['None', 0, 1, 2, 3, '3+'];
@@ -31,7 +31,7 @@ export class EditFamilyDialogComponent implements OnInit {
     console.log(this.familyForm);
     const familyDataForm = new FormData();
     familyDataForm.append('identity_number', this.familyData.identity_number);
-    familyDataForm.append('temple_id',this.familyData.temple_id);
+    familyDataForm.append('temple_id', this.familyData.temple_id);
     familyDataForm.append('family_type', this.familyForm.value.family_type);
     familyDataForm.append('about', this.familyData.about);
     familyDataForm.append('occupation_father', this.familyForm.value.father_occupation);
@@ -40,10 +40,7 @@ export class EditFamilyDialogComponent implements OnInit {
     familyDataForm.append('unmarried_sons', this.familyForm.value.unmarried_sons);
     familyDataForm.append('married_daughters', this.familyForm.value.married_daughters);
     familyDataForm.append('unmarried_daughters', this.familyForm.value.unmarried_daughters);
-    familyDataForm.append('locality', this.familyData.locality);
-    familyDataForm.append('city', this.familyData.city);
-    familyDataForm.append('address', this.familyData.address);
-    familyDataForm.append('about', this.familyData.about);
+    familyDataForm.append('gotra', this.familyForm.value.gotra);
     familyDataForm.append('is_lead', localStorage.getItem('is_lead'));
 
 

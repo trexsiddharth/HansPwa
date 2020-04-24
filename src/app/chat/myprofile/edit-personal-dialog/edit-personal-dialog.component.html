@@ -64,11 +64,6 @@
           </div>
 
           <div class="col-12">
-            <h6>Gotra:</h6>
-            <input type="text" class="form-control"  formControlName="Gotra" required>
-          </div>
-
-          <div class="col-12">
             <h6>Food Choice:</h6>
             <select class="form-control" formControlName="Food" required>
               <option *ngFor="let item of foodpreferences" [value]="item">{{item}}</option>
@@ -128,7 +123,7 @@
 </div>
 <div class="col-12">
   <h6>Company:</h6>
-  <input type="text" class="form-control"  formControlName="Company" required>
+  <input type="text" class="form-control"  formControlName="Company">
 </div>
 
 <div class="col-12">
@@ -209,7 +204,7 @@
 
 <div class="col-12">
 <h6>Whatsapp number</h6>
-<input style="display: inline;" type="number" id="whatsapp" class="form-control" formControlName="Whatsapp" required>
+<input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp" >
 </div>
 
 <div class="col-12">

@@ -1,3 +1,28 @@
+::ng-deep .mat-dialog-container {
+    padding: 0px;
+    background: white;
+    color: black;
+    max-height: 79vh;
+}
+::ng-deep .mat-dialog-content{
+    max-height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+::ng-deep .cdk-overlay-dark-backdrop{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+}
+
+::ng-deep .mat-form-field-label{
+    color: black;
+}
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+.col-12{
+    margin-top: 1rem;
+}
 option{
     font-size: 14px;
 }
