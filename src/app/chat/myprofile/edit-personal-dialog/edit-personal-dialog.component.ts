@@ -39,6 +39,19 @@ export class EditPersonalDialogComponent implements OnInit {
    // tslint:disable-next-line: max-line-length
    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other']
 
+   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
+
+     // tslint:disable-next-line: max-line-length
+  date: string[] = ['01', '02' , '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+  // tslint:disable-next-line: max-line-length
+  month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  years: string[] = [
+  '1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980',
+  '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990',
+  '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000',
+  '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010',
+  '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'
+];
   constructor(private http: HttpClient, 
               public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
               @Inject(MAT_DIALOG_DATA) data,
@@ -51,22 +64,32 @@ export class EditPersonalDialogComponent implements OnInit {
       // tslint:disable-next-line: max-line-length
       name: ['', Validators.compose([Validators.required])],
       phone: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+      Whatsapp: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       birth_day: ['', Validators.compose([Validators.required])],
+      birth_date: ['01', Validators.compose([Validators.required])],
+      birth_month: ['January', Validators.compose([Validators.required])],
+      birth_year: ['1980', Validators.compose([Validators.required])],
+      BirthPlace: ['', Validators.compose([Validators.required])],
+      BirthTime: ['', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
       Weight: ['', Validators.compose([Validators.required])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
       AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Religion: ['', Validators.compose([Validators.required])],
+      Manglik: ['', Validators.compose([Validators.required])],
       Gotra: ['', Validators.compose([Validators.required])],
       Food: ['', Validators.compose([Validators.required])],
       Degree: ['', Validators.compose([Validators.required])],
       Profession: ['', Validators.compose([Validators.required])],
+      College: ['', Validators.compose([Validators.required])],
+      Additional: ['', Validators.compose([Validators.required])],
+      Occupation: ['', Validators.compose([Validators.required])],
+      Company: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
-      Mangalik: ['', Validators.compose([Validators.required])],
-      locality: ['', Validators.compose([Validators.required])],
+      WorkingCity: ['', Validators.compose([Validators.required])],
       About: ['', Validators.compose([Validators.required, Validators.maxLength(300)])]
     });
    }
@@ -202,15 +225,72 @@ onLocationSelected(e) {
       Height: this.Heights[this.Heights1.indexOf(this.personalData.height)],
       MaritalStatus: this.personalData.marital_status,
       Religion: this.familyData.religion,
+      Manglik: this.personalData.manglik,
+      birth_date: this.personalData.birth_date ? this.personalData.birth_date.toString().split('-')[2] : '',
+      birth_month: this.personalData.birth_date ? this.getMonthString(this.personalData.birth_date.toString().split('-')[1]) : '',
+      birth_year: this.personalData.birth_date ? this.years[this.years.indexOf(this.personalData.birth_date.toString().split('-')[0])] : '',
+      BirthPlace: this.personalData.birth_place,
+      BirthTime: this.personalData.birth_time,
+      email: this.familyData.email,
+      phone: this.familyData.mobile,
+      Whatsapp: this.personalData.whatsapp,
       Castes: this.familyData.caste,
       Gotra: this.familyData.gotra,
       Food: this.personalData.food_choice,
-      locality: this.personalData.working_city,
-      Degree: this.personalData.degree,
+      WorkingCity: this.personalData.working_city,
+      Degree: this.personalData.degree ? this.personalData.degree : this.personalData.education,
       Profession: this.personalData.profession,
+      College: this.personalData.college,
+      Additional: this.personalData.additional_qualification,
+      Occupation: this.personalData.occupation === 'Private Company' ? 'Private Job' : this.personalData.occupation ,
+      Company: this.personalData.company,
+      AnnualIncome: this.getIncome(this.personalData.monthly_income),
       About: this.personalData.about
 
     });
+  }
+
+  getIncome(value: number) {
+    if (value != null) {
+      if (value.toString().length >= 6) {
+        return String((Number(value) / 100000));
+        } else if (value.toString().length >= 5) {
+          return String((Number(value) / 10000) * 12);
+        } else {
+          return value;
+        }
+      } else {return ''; }
+  }
+
+  getMonthString(month: string) {
+    switch (month) {
+      case '01':
+        return 'January';
+        case '02':
+          return 'Feburary';
+        case '03':
+          return 'March';
+        case '04':
+          return 'April';
+        case '05':
+          return 'May';
+        case '06':
+          return 'June';
+        case '07':
+          return 'July';
+        case '08':
+          return 'August';
+        case '09':
+          return 'September';
+        case '10':
+          return 'October';
+          case '11':
+            return 'November';
+        case '12':
+          return 'December';
+      default:
+        break;
+    }
   }
 
   // Caste Selection

@@ -111,10 +111,11 @@ onResize(event) {
     openPersonalDialog() {
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
-        dialogConfig.minWidth = this.innerWidth - 200;
-        dialogConfig.minHeight = 600;
+        dialogConfig.minWidth = '100vw';
+        dialogConfig.minHeight = '100vh';
       } else {
-      dialogConfig.minWidth = this.innerWidth - 50;
+      dialogConfig.minWidth = '80vw';
+      dialogConfig.minHeight = '80vh';
       }
       dialogConfig.disableClose = false;
       dialogConfig.hasBackdrop = true;

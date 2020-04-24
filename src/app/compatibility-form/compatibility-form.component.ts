@@ -121,7 +121,7 @@ export class CompatibilityFormComponent implements OnInit {
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
-      birth_date: ['1', Validators.compose([Validators.required])],
+      birth_date: ['01', Validators.compose([Validators.required])],
       birth_month: ['January', Validators.compose([Validators.required])],
       birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
