@@ -8,10 +8,10 @@
 
       <section>
           <div class="historyProfile"  *ngFor="let item of profile;let i = index">
-              <img class="historyImage" #profilePic
-              [src]="getProfilePhoto(item.carousel,item.gender)" 
+              <img class="historyImage" #profilePic id="profilePic"
+              [src]="getProfilePhoto(item.carousel,item.gender ? item.gender : '')" 
               (click)="openProfileDialog(item,i)"
-              (error) = "onLoadProfileError(item.profile.gender,profilePic)"
+              (error) = "onLoadProfileError(item.gender ? item.gender : '' ,profilePic)"
               alt="profile picture">
   
               <div class="historyDetails">

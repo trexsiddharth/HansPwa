@@ -73,13 +73,14 @@
 
 
 
-    <div class="container containerMessage" *ngIf="button != '1'">
+    <div class="container" style="padding: 0px;
+    margin: 0px;" *ngIf="button != '1'">
         <div class="messageHeader">
           <h3>Message</h3>
-          <img src="../../../assets/logo_192.png" alt="message">
-          <p>
+          <img src="../../../assets/logo_192.png" alt="message"><br>
+          <span>
               {{messageData}}
-          </p>
+          </span>
         </div>
         <div class="messageFooter">
           <button (click)="showPlan()"  *ngIf="button==='2'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;">

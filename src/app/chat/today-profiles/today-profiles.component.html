@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-10">
                         <span style="font-size: 16px;font-weight: bold;">वेरिफ़िएड एट:</span><br>
-                        <span>{{item.facebook}}</span>
+                        <span>{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-10" style="align-self: center;">
                         <span style="font-size: 16px;font-weight: bold;align-self: center;
-                        color: #8c978b;">प्रोफाइल मैनेज्ड बय: {{item.relation}}</span>
+                        color: #8c978b;">प्रोफाइल मैनेज्ड बय: {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}</span>
                 </div>
             </div>
         </div>

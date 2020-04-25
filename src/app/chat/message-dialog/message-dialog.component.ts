@@ -28,6 +28,15 @@ export class MessageDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  onLoadProfileError(gender: string, id: any) {
+    if (gender && gender === 'Male') {
+
+     document.getElementById(id).setAttribute('src', '../../assets/male_pic.png');
+   } else {
+    document.getElementById(id).setAttribute('src', '../../assets/female_pic.png');
+   }
+   }
+
   getProfilePhoto(): string {
     if (this.profile.profile) {
       return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + this.profile.profile.photo;

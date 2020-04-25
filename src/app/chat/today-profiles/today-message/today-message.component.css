@@ -1,6 +1,11 @@
 main{
     height: 100vh;
     overflow: auto;
+    width: 100vw;
+}
+.row{
+    margin: 0px;
+    padding: 0px;
 }
 #quotaOverText{
     color: #58D1FD;
@@ -44,7 +49,7 @@ main{
     text-align: center;
     position: absolute;
     margin-top: 30%;
-    width: 100%;
+    width: 100vw;
   }
 
   .messageFooter{

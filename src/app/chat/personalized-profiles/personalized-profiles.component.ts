@@ -66,7 +66,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
 
   getProfilePhoto(num: any, gen: string): string {
     if (num === null) {
-      if (gen === 'Male') {
+      if (gen &&  gen === 'Male') {
         return '../../assets/male_pic.png';
       } else {
         return '../../assets/female_pic.png';
@@ -546,7 +546,7 @@ getPersonalizedProfiles() {
   creditsData.append('mobile', localStorage.getItem('mobile_number'));
 
  // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumPro', creditsData).pipe(timeout(10000), retry(2), catchError(e => {
+  return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumPro', creditsData).pipe(timeout(12000), retry(2), catchError(e => {
     throw new Error('Server Timeout ' + e);
   })).subscribe(
    (data: any) => {
