@@ -190,7 +190,7 @@ export class EditPersonalDialogComponent implements OnInit {
        ? this.personalForm.value.Food : this.personalData.food_choice);
       personalDataForm.append('caste', this.personalForm.value.Castes
        ? this.personalForm.value.Castes : this.familyData.caste);
-      personalDataForm.append('city', this.personalForm.value.Locality
+      personalDataForm.append('working_city', this.personalForm.value.WorkingCity
        ? this.personalForm.value.Locality : this.familyData.city);
       personalDataForm.append('degree', this.personalForm.value.Degree
        ? this.personalForm.value.Degree : this.personalData.degree);
@@ -227,6 +227,7 @@ export class EditPersonalDialogComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
+        this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
       }
     );
       this.dialogRef.close();

@@ -1,9 +1,11 @@
 <mat-dialog-content>
     <form (ngSubmit)="onSubmit()" #preferencesForm="ngForm">
-        <div class="row" style="margin: 10px 10px 0px;">
-            <i style="background-color: #34b7f1;color: white;font-size: 15px !important;padding: 8px;height: 30px;width: 30px !important;" class="fa fa-graduation-cap"></i>
-            <h5 style="margin: auto 20px">PREFERENCES</h5>
-        </div>
+      <div class="row" class="t-c" style="margin-top: 1rem;">
+        <h5 style="margin: auto 20px;
+         color: #58d1fd;
+        font-weight: bold;
+         font-size: 1.5rem;">{{'प्रैफरेंसेज'}}</h5>
+    </div>
         <div class="row" style="margin: 10px 10px;">
             <div class="col-12">
               <h6 style="display: inline-block">Age Min: </h6>
@@ -80,9 +82,18 @@
                             <h6>Description: (max 300 words)</h6>
                               <input class="form-control" maxlength="300" type="text" name="description" [(ngModel)]="preferenceData.description"  required> 
                         </div>
-                          <div style="text-align: center; margin: 10px auto">
-                              <button  [disabled]="!preferencesForm.valid" class="btn" style="background-color: #34b7f1" >Save</button> 
-                        </div>
+
+                        <div style="text-align: center; width: 100%;">
+                          <button type="submit"  class="btn"
+                          mat-raised-button style="background-color: #34b7f1;
+                          color: white;
+                          padding: 5px 40px;
+                          margin-bottom: 20px;
+                          margin-top: 20px;
+                          font-size: 1rem;
+                          font-weight: bold;
+                          " >EDIT AND SAVE</button> 
+                    </div>
           </div>
         </form>
       </mat-dialog-content>

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { NgxNotificationService } from 'ngx-kc-notification';
 
 @Component({
   selector: 'app-edit-family-dialog',
@@ -19,7 +20,9 @@ export class EditFamilyDialogComponent implements OnInit {
   @ViewChild('familyForm', {static: false}) familyForm: NgForm;
 
 
-  constructor(private http: HttpClient, public dialogRef: MatDialogRef<EditFamilyDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
+  constructor(private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
+              public dialogRef: MatDialogRef<EditFamilyDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
     this.data = data;
   }
 
@@ -51,6 +54,7 @@ export class EditFamilyDialogComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
+        this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
       }
     );
     this.dialogRef.close();

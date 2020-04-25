@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { NgxNotificationService } from 'ngx-kc-notification';
 
 
 @Component({
@@ -25,7 +26,9 @@ export class EditPreferenceDialogComponent implements OnInit {
   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Doesn\'t Matter',
   'Defence', 'Civil Services'];
   @ViewChild('preferencesForm', {static: false}) preferenceForm: NgForm;
-  constructor(private http: HttpClient, public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
+  constructor(private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
+              public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
     this.data = data;
   }
 
@@ -79,6 +82,7 @@ export class EditPreferenceDialogComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
+        this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
       }
     );
     } else {
