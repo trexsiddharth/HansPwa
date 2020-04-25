@@ -8,6 +8,8 @@ import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile
 import { EditPersonalDialogComponent } from '../myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { EditFamilyDialogComponent } from '../myprofile/edit-family-dialog/edit-family-dialog.component';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
+import { timeout, retry, catchError } from 'rxjs/operators';
+import { Profile } from 'src/app/compatibility-form/profile';
 
 
 @Component({
@@ -128,6 +130,11 @@ onResize(event) {
           title: titleText
         };
       const dialogRef = this.matDialog.open(EditPersonalDialogComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(
+        data => {
+          this.getUserProfileData();
+        }
+      );
     }
 
     openFamilyDialog() {
@@ -145,6 +152,11 @@ onResize(event) {
           familyDetails: this.familyProfileData
         };
       const dialogRef = this.matDialog.open(EditFamilyDialogComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(
+        data => {
+          this.getUserProfileData();
+        }
+      );
     }
 
     openPreferenceDialog() {
@@ -164,6 +176,7 @@ onResize(event) {
       const dialogRef = this.matDialog.open(EditPreferenceDialogComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(
         res => {
+          this.getUserProfileData();
           if (res) {
             this.preferenceChanged.emit(res);
           }
@@ -188,6 +201,36 @@ onResize(event) {
           this.BackimgURL = reader.result;
           this.uploadPhoto(this.backimagePath, index);
         };
+      }
+    }
+
+    getUserProfileData() {
+      if (localStorage.getItem('mobile_number')) {
+        this.spinner.show();
+        console.log(localStorage.getItem('id'));
+        const myprofileData = new FormData();
+        myprofileData.append('id', localStorage.getItem('id'));
+        myprofileData.append('contacted', '1');
+        myprofileData.append('is_lead', localStorage.getItem('is_lead'));
+        // tslint:disable-next-line: max-line-length
+        return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
+          throw new Error('Server Timeout ' + e);
+        })).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.personalProfileData = data.profile ? data.profile : null;
+            this.familyProfileData = data.family ? data.family : null;
+            this.preferenceProfileData = data.preferences ? data.preferences : null;
+            this.spinner.hide();
+          },
+          (error: any) => {
+            this.spinner.hide();
+            console.log(error);
+            this.ngxNotificationService.error('Something Went Wrong');
+          }
+        );
+      } else {
+        this.ngxNotificationService.error('No user found');
       }
     }
 
