@@ -15,7 +15,7 @@ export class EditFamilyDialogComponent implements OnInit {
   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Homely', 'Not Employed'];
   Status: string[] = ['Alive', 'Not Alive'];
   FamilyType: string[] = ['Joint', 'Nuclear'];
-  Count: any[] = ['None', 0, 1, 2, 3, '3+'];
+  Count: any[] = ['None', 0, 1, 2, 3, 4, 5, 6, 7, 8];
   HouseType: string[] = ['Owned', 'Rented', 'Leased'];
   @ViewChild('familyForm', {static: false}) familyForm: NgForm;
 
