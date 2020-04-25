@@ -65,7 +65,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   }
 
   getProfilePhoto(num: any, gen: string): string {
-    if (num === null) {
+    if (num === null || num === '{}') {
       if (gen &&  gen === 'Male') {
         return '../../assets/male_pic.png';
       } else {
@@ -76,24 +76,6 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
       return carousel[keys[0]];
-    }
-  }
-  getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
-    if (carous === null || carous === 'null') {
-      if (photo === null) {
-      if (gen === 'Male') {
-        return '../../assets/male_pic.png';
-      } else {
-        return '../../assets/female_pic.png';
-      }
-    } else {
-      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
-    }
-    } else {
-      const carousel: object = JSON.parse(carous);
-      const keys = Object.keys(carousel);
-      // console.log(carousel[index]);
-      return carousel[keys[index]];
     }
   }
   getImagesCount(num: string) {
@@ -312,10 +294,10 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   }
 
   onLoadProfileError(gender: string, id: any) {
-    if (gender === 'Male') {
-     id.setAttribute('src', '../../assets/male_pic.png');
+    if (gender.toLocaleLowerCase() === 'male') {
+     document.getElementById(id).setAttribute('src', '../../assets/male_pic.png');
    } else {
-     id.setAttribute('src', '../../assets/female_pic.png');
+    document.getElementById(id).setAttribute('src', '../../assets/female_pic.png');
    }
    }
 
