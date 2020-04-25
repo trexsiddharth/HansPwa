@@ -49,19 +49,23 @@
           </div>
 
           <div class="col-12">
-            <h6>Religion:</h6>
-            <input type="text" class="form-control"  formControlName="Religion" required>
-          </div>
+               <h6>Religion:</h6>
+                <select  class="form-control"  formControlName="Religion"  required >
+                        <option *ngFor="let  option of Religions" [value]="option">
+                                {{option}}
+                        </option>
+                </select>
+      </div>
 
           <div class="col-12">
-            <h6>Caste:</h6>
-              <input type="text"  class="form-control" formControlName="Castes" required [matAutocomplete]="caste" required  >
+              <h6>Caste</h6>
+              <input type="text" class="form-control" formControlName="Castes" required [matAutocomplete]="caste"  >
               <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
-                      <option *ngFor="let name of casteo | async" [value]="name"  required>
+                      <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
                         {{name}}
-                      </option>
+                      </mat-option>
               </mat-autocomplete>
-          </div>
+      </div>
 
           <div class="col-12">
             <h6>Food Choice:</h6>

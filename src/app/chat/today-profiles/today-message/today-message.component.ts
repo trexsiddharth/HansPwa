@@ -13,7 +13,6 @@ export class TodayMessageComponent implements OnInit {
 @Input() messageData;
 @Input() button = '0';
   constructor(public router: Router,
-              private spinner: NgxSpinnerService,
               public itemService: FindOpenHistoryProfileService,
               public subscriptionService: SubscriptionserviceService ) { }
 

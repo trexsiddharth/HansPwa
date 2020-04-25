@@ -15,7 +15,7 @@
             <span id="vipBoxText">अपनी पसंद के और रिश्ते देखें</span>
             <button (click)="goToVip()" class="btn" mat-raised-button id="vipBoxBtn">
                 <img id="vipBoxImg" src="../../../../assets/king.svg" alt="icon">
-                <strong>VIP</strong> रिश्ते
+                <strong>{{itemService.getOtherName()}}</strong> रिश्ते
             </button>
         </div>
 

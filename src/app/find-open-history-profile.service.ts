@@ -76,6 +76,13 @@ export class FindOpenHistoryProfileService {
     return 'VIP रिश्ते';
   }
   }
+  getOtherName() {
+    if (this.isPersonalized) {
+    return 'अन्य';
+  } else {
+    return 'VIP';
+  }
+  }
   getDailyCount() {
     return this.profileCount.dailyCount ? 'आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )' : 'आज के रिश्ते';
   }
