@@ -19,10 +19,11 @@ export class MessageDialogComponent implements OnInit {
               private spinner: NgxSpinnerService,
               private http: HttpClient,
               @Inject(MAT_DIALOG_DATA) public data) {
-    this.profile = data.profile;
-    this.selfImage = data.selfImage;
-    this.selfName = data.selfName;
-    this.type = data.type;
+                console.log(data);
+                this.profile = data.profile;
+                this.selfImage = data.selfImage;
+                this.selfName = data.selfName;
+                this.type = data.type;
   }
 
   ngOnInit() {
@@ -38,12 +39,17 @@ export class MessageDialogComponent implements OnInit {
    }
 
   getProfilePhoto(): string {
-    if (this.profile.profile) {
+    if (this.profile.profile && this.profile.family) {
       return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + this.profile.profile.photo;
     } else if (this.profile.photo) {
       return this.profile.photo;
     } else if (this.profile.carousel) {
       const carousel: object = JSON.parse(this.profile.carousel);
+      const keys = Object.keys(carousel);
+      // console.log(carousel[index]);
+      return carousel[keys[0]];
+    } else if (this.profile.profile.carousel) {
+      const carousel: object = JSON.parse(this.profile.profile.carousel);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
       return carousel[keys[0]];

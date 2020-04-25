@@ -460,7 +460,10 @@ profileReAnswer(item: any, answer: any, index: any) {
     this.itemService.getPhotoStatus() === false &&
     answer === 'SHORTLIST') {
      this.openMessageDialog(item, answer);
-   } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+   } else if (this.itemService.getPersonalized() === false &&
+    answer === 'YES' && !item.family ) {
+    this.openMessageDialog(item, 'contacted');
+   }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
    && answer === 'YES') {
     this.openMessageDialog(item, answer);
    } else {
@@ -717,6 +720,7 @@ getCredits() {
 }
 
 openMessageDialog(shareItem, reply: string) {
+  console.log(shareItem);
   const dialogConfig = new MatDialogConfig();
   dialogConfig.hasBackdrop = true;
   dialogConfig.width = '700px';
@@ -727,12 +731,26 @@ openMessageDialog(shareItem, reply: string) {
         profile: shareItem,
         type: reply.toLowerCase()
       };
-      const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+      break;
+      case 'contacted':
+      dialogConfig.data = {
+        profile: shareItem,
+        type: reply.toLowerCase()
+      };
       break;
 
     default:
       break;
+
   }
+  const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+  dialogRefYes.afterClosed().subscribe(
+        data => {
+          if (data && data.request) {
+          this.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
+          }
+        }
+      );
 }
 getQualification(degree, education) {
   return education != null && education !== '' ? education : degree;

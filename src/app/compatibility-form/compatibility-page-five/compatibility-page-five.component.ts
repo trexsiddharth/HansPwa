@@ -23,7 +23,9 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
   constructor(private http: HttpClient, public fourPageService: FourPageService,
               private ngxNotificationService: NgxNotificationService,
-              private router: Router) { }
+              private router: Router) { 
+                
+              }
 
   ngOnInit() {
     this.getAssignToList();
