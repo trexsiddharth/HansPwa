@@ -42,7 +42,7 @@ export class EditPersonalDialogComponent implements OnInit {
   HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
   'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
    // tslint:disable-next-line: max-line-length
-   'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other']
+   'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other'];
 
    Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
 
@@ -57,7 +57,7 @@ export class EditPersonalDialogComponent implements OnInit {
   '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010',
   '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'
 ];
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
               public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
               @Inject(MAT_DIALOG_DATA) data,
               private _formBuilder: FormBuilder,
@@ -200,6 +200,10 @@ export class EditPersonalDialogComponent implements OnInit {
        ? this.personalForm.value.Occupation : this.personalData.occupation);
       personalDataForm.append('annual_income', this.personalForm.value.AnnualIncome
        ? this.personalForm.value.AnnualIncome : this.personalData.monthly_income );
+
+      personalDataForm.append('additional_qualification', this.personalForm.value.Additional
+       ? this.personalForm.value.Additional : this.personalData.additional_qualification );
+
       personalDataForm.append('company', this.personalForm.value.Company ? this.personalForm.value.Company : this.personalData.company);
       personalDataForm.append('address', this.personalForm.value.WorkingCity
        ? this.personalForm.value.WorkingCity : this.personalData.working_city);
@@ -381,14 +385,14 @@ onLocationSelected(e, type: string) {
          statusConfirmed = res;
        });
     console.log('caste changed', statusConfirmed );
-  
+
     if (statusConfirmed === false) {
         this.ngxNotificationService.warning('Please choose a caste from the dropdown');
         this.personalForm.get('Castes').setValue('');
         return false;
       }
     return true;
-  
+
     }
 
     checkCaste(value) {
