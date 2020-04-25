@@ -366,36 +366,4 @@
     </section>
 </main>
 
-<div class="container" id="containerMessage" *ngIf="type=='message'">
-    <div class="messageHeader">
-      <h3>Message</h3>
-      <img src="../../../assets/logo_192.png" alt="message">
-      <p>
-          {{itemMessage}}
-      </p>
-    </div>
-    <div class="messageFooter">
-      <button (click)="showPlan()"  *ngIf="button==='2'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;">
-          👁प्लान देखें
-      </button> 
-      <button (click)="showLikedProfile()"  *ngIf="button == '1'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #10e096e9;">
-         ❤️ मेरी पसंद
-      </button> 
-      <button (click)="showProfilesLikedMe()" *ngIf="button == '1'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #10e096e9;">
-        💓मै किसे पसंद हूँ?
-     </button> 
-      <button (click)="callHans()" *ngIf="button==='2' || button=== '4'" color="primary" class="setButtons" mat-raised-button style="color: white;background: green;">
-         📞कॉल हंस
-      </button> 
-      <button  (click)="getNextMessageOrProfile('NO')" *ngIf="button==='2' || button=== '3' || button=== '5'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #05dfd7;">
-          👩‍❤️‍👨 और दिखाएं
-      </button> 
-      <button (click)="buyPlan(3500)" *ngIf="button==='3'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;;">
-          👁प्लान 3500
-       </button> 
-       <button (click)="buyPlan(5500)" *ngIf="button==='3'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;;">
-          👁प्लान 5500
-       </button> 
-    </div>
-    
-</div>
+<app-today-message [messageData]="itemMessage" *ngIf="type == 'message'"></app-today-message>

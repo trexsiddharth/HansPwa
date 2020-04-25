@@ -1,0 +1,100 @@
+<main>
+
+    <div class="container containerMessage" *ngIf="button == '1'">
+        <div style="margin-top: 15%;display: flex;flex-direction: row;
+        align-items: center;
+         justify-content: space-evenly;">
+            <img id="quotaOverImg" 
+               src="../../../../assets/tick.svg" alt="tick">
+            <span id="quotaOverText">
+                आप आज के रिश्ते देख चुके है
+            </span>
+        </div>
+
+        <div id="vipBox" *ngIf="this.itemService.getIsLead() == 0">
+            <span id="vipBoxText">अपनी पसंद के और रिश्ते देखें</span>
+            <button (click)="goToVip()" class="btn" mat-raised-button id="vipBoxBtn">
+                <img id="vipBoxImg" src="../../../../assets/king.svg" alt="icon">
+                <strong>VIP</strong> रिश्ते
+            </button>
+        </div>
+
+        <div style="border: 1.5px solid #FCDEF6;border-radius: 10px;margin: 10% 10px;padding: 20px 10px 10px;">
+            <div class="row">
+                <div class="col-5" id="pinkSide">
+                    <img style="width: 20px;margin-right: 10px;" src="../../../assets/heartsblue.svg" alt="hearts">
+                    <p style="font-size: 30px;color: #D313AE;font-weight: bold;margin: 0px;">{{itemService.getCountOnlyShorted()}}</p>
+                </div>
+
+                <div class="col-2">
+
+                </div>
+
+                <div class="col-5" id="blueSide">
+                    <img style="width: 20px;margin-left: 10px;" src="../../../assets/heartspink.svg" alt="hearts">
+                    <p style="font-size: 30px;margin: 0px;">{{itemService.getCountOnlyShortlist()}}</p>
+                </div>
+                <div class="col-5" style="text-align: end;margin: 0px;">
+                    <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">लोगो को</p>
+                </div>
+                <div class="col-2" style="text-align: center;">
+                    <img style="width: 100%;" src="../../../assets/heartpink.svg" alt="heart">
+                </div>
+                <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px;">
+                    <p class="boxText" style="margin: 0px;">रिश्ते है</p>
+                </div>
+                <div class="col-5" style="text-align: end;margin: 0px;line-height: 1;">
+                    <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">आप पसंद आये</p>
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px; line-height: 1;">
+                    <p class="boxText" style="margin: 0px;">आपको पसंद</p>
+                </div>
+            </div>
+            
+            <div class="row" style="margin-top: 25px;">
+                <div class="col-6">
+                    <button class="boxBtn" (click)="showProfilesLikedMe" mat-raised-button style="background-color: #FAC8F1;
+                    width: 100%;color: #D313AE;">
+                        मैं किसे पसंद हूँ ?
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button class="boxBtn" (click)="showLikedProfile()" mat-raised-button style="background-color: #CDEBFF; 
+                    width: 100%;color: #0C9BF2;">
+                        मेरी पसंद
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container containerMessage" *ngIf="button != '1'">
+        <div class="messageHeader">
+          <h3>Message</h3>
+          <img src="../../../assets/logo_192.png" alt="message">
+          <p>
+              {{messageData}}
+          </p>
+        </div>
+        <div class="messageFooter">
+          <button (click)="showPlan()"  *ngIf="button==='2'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;">
+              👁प्लान देखें
+          </button> 
+          <button (click)="callHans()" *ngIf="button==='2' || button=== '4'" color="primary" class="setButtons" mat-raised-button style="color: white;background: green;">
+             📞कॉल हंस
+          </button> 
+          <button (click)="buyPlan(3500)" *ngIf="button==='3'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;;">
+              👁प्लान 3500
+           </button> 
+           <button (click)="buyPlan(5500)" *ngIf="button==='3'" color="primary" class="setButtons" mat-raised-button style="color: white;background: #fa697c;;">
+              👁प्लान 5500
+           </button> 
+        </div>
+        
+    </div>
+</main>

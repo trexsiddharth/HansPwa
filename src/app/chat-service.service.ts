@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,6 @@ export class ChatServiceService {
 
   setContactNumber(contact: any) {
     this.contactNumber = contact;
-
   }
   setSharedProfile(profile: any)  {
     this.profileItem = profile;

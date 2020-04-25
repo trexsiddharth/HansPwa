@@ -55,7 +55,7 @@ export class FindOpenHistoryProfileService {
     return this.hasPhoto;
   }
 
-  changeTab(position: number){
+  changeTab(position: number) {
     this.setTab.emit(position);
   }
 
@@ -68,7 +68,7 @@ export class FindOpenHistoryProfileService {
   saveDailyCount(count: any) {
     this.profileCount.dailyCount = count + 1;
   }
-  
+
   getOtherProfiles() {
     if (this.isPersonalized) {
     return 'अन्य रिश्ते';

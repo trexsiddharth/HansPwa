@@ -20,6 +20,7 @@ import { HistoryProfilesComponent } from './history-profiles/history-profiles.co
 import { HistoryProfilesDialogComponent } from './history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 import { PersonalizedDialogComponent } from './personalized-profiles/personalized-dialog/personalized-dialog.component';
 import { MyProfileService } from './myprofile/my-profile.service';
+import { TodayMessageComponent } from './today-profiles/today-message/today-message.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { MyProfileService } from './myprofile/my-profile.service';
     HistoryProfilesComponent,
     HistoryProfilesDialogComponent,
     PersonalizedDialogComponent,
+    TodayMessageComponent,
 ],
 entryComponents: [
   MessageDialogComponent,
