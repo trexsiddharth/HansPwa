@@ -41,6 +41,7 @@ export class EditFamilyDialogComponent implements OnInit {
     familyDataForm.append('married_daughters', this.familyForm.value.married_daughters);
     familyDataForm.append('unmarried_daughters', this.familyForm.value.unmarried_daughters);
     familyDataForm.append('gotra', this.familyForm.value.gotra);
+    familyDataForm.append('family_income', this.familyForm.value.family_income);
     familyDataForm.append('is_lead', localStorage.getItem('is_lead'));
 
 
