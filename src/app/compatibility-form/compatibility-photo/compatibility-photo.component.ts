@@ -217,6 +217,27 @@ export class CompatibilityPhotoComponent implements OnInit {
         this.frontfile = userProfile.image2 ? userProfile.image2 : '';
         this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
   }
+ 
+
+  checkForPhoto() {
+    if (this.fourPageService.getUserThrough()) {
+      this.fourPageService.profile.photoScore = this.photoScore;
+      let userProfile = this.fourPageService.profile;
+      if (userProfile.image1 === null  || userProfile.image1 === '') {
+        return this.ngxNotificationService.error('Select Image 1');
+      } else if (userProfile.image2 === null  || userProfile.image2 === '') {
+        return this.ngxNotificationService.error('Select Image 2');
+      } else if (userProfile.image3 === null  || userProfile.image3 === '') {
+        return this.ngxNotificationService.error('Select Image 3');
+      } else if (userProfile.photoScore < 1) {
+        return this.ngxNotificationService.error('Give a score');
+      } else {
+        this.fourPageService.form4Completed.emit(true);
+      }
+    } else {
+      this.skip();
+    }
+  }
 
   skip() {
     (window as any).fbq('track', 'FourPageRegistration', {
@@ -230,15 +251,12 @@ export class CompatibilityPhotoComponent implements OnInit {
       content_name: localStorage.getItem('RegisterNumber'),
     });
     this.gtag_report_conversion('https://hansmatrimony.com/fourReg');
-    this.router.navigateByUrl('/chat');
   }
 
   gtag_report_conversion(url) {
     (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
     return false;
   }
-
-  
 }
 
 

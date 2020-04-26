@@ -102,6 +102,7 @@ export class CompatibilityFormComponent implements OnInit {
   locationFamily;
   formTwo = false;
   formThree = false;
+  formFour = false;
   userProfile: Profile = new Profile();
   isLinear = true;
   lat;
@@ -158,6 +159,14 @@ export class CompatibilityFormComponent implements OnInit {
          }
       }
     );
+    this.fourPageService.form4Completed.subscribe(
+      (complete: boolean) => {
+        if (complete === true) {
+          this.formFour = true;
+          console.log('formFour', this.formFour);
+         }
+      }
+    );
     this.route.paramMap.subscribe(
       (route: any) => {
         console.log(route);
@@ -176,6 +185,10 @@ export class CompatibilityFormComponent implements OnInit {
             this.fourPageService.setUserThrough(false);
             localStorage.setItem('getListLeadId', '');
           }
+        if (route.params.templeId) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('getListTempleId', route.params.templeId);
+            }
         if (this.fourPageService.userThroughGetList) {
           this.isLinear = false;
           this.getProfile();
@@ -223,7 +236,7 @@ export class CompatibilityFormComponent implements OnInit {
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
         this.getcastes = res;
       });
-      if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== ''){
+      if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== '') {
       this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
         startWith(''),
         map(value => this._Castefilter(value))

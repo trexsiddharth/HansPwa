@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { FourPageService } from '../four-page.service';
 import { NgxNotificationService } from 'ngx-kc-notification';
@@ -19,12 +19,23 @@ export class CompatibilityPageFiveComponent implements OnInit {
   interestLevel: string[] = ['Very High', 'High', 'Medium', 'Less'];
   allTemples: any[] = [];
   photoScore = 0;
+  checkStatus = false;
 
 
   constructor(private http: HttpClient, public fourPageService: FourPageService,
               private ngxNotificationService: NgxNotificationService,
-              private router: Router) { 
-                
+              private formBuilder: FormBuilder,
+              private router: Router) {
+                this.pageFive = this.formBuilder.group({
+                  phone: ['', Validators.compose([Validators.required,
+                    Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+                  enq_date: ['', Validators.compose([Validators.required])],
+                  follow_date: ['', Validators.compose([Validators.required])],
+                  source: ['', Validators.compose([Validators.required])],
+                  assign_to: ['', Validators.compose([Validators.required])],
+                  interest: ['', Validators.compose([Validators.required])],
+                  comments: ['', Validators.compose([Validators.required])],
+                });
               }
 
   ngOnInit() {
@@ -50,12 +61,17 @@ export class CompatibilityPageFiveComponent implements OnInit {
         localStorage.setItem('id', '');
       }
 
-      checkForPhoto() {
+      checkForPhoto(status: any) {
         if (this.fourPageService.getUserThrough()) {
-          this.validate(this.fourPageService.profile);
+          this.validate(this.fourPageService.profile,status);
         } else {
           this.skip();
         }
+      }
+
+      checkStat(event: any){
+        console.log(event.checked);
+        this.checkStatus = event.checked;
       }
 
       skip() {
@@ -78,8 +94,9 @@ export class CompatibilityPageFiveComponent implements OnInit {
         return false;
       }
 
-      validate(userProfile: Profile) {
+      validate(userProfile: Profile, status: any) {
         console.log(userProfile);
+        console.log(this.pageFive.value, status);
         if (userProfile.name === null || userProfile.name === '') {
           return this.ngxNotificationService.error('Enter Name');
         } else if (userProfile.mobile === null || userProfile.mobile === '') {
@@ -138,18 +155,43 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Select Image 2');
         } else if (userProfile.image3 === null  || userProfile.image3 === '') {
           return this.ngxNotificationService.error('Select Image 3');
-        } else if (this.photoScore < 1) {
+        } else if (userProfile.photoScore < 1) {
           return this.ngxNotificationService.error('Give a score');
-        } else {
-          this.approveUser();
+        } else if (!this.pageFive.controls.phone.valid) {
+          return this.ngxNotificationService.error('Enter a valid Alternate Number');
+        }  else if (!this.pageFive.controls.enq_date.valid) {
+          return this.ngxNotificationService.error('Enter a valid Enq Date');
+        }  else if (!this.pageFive.controls.follow_date.valid) {
+          return this.ngxNotificationService.error('Enter a valid Follow Up Date');
+        } else if (!this.pageFive.controls.source.valid) {
+          return this.ngxNotificationService.error('Select a source');
+        } else if (!this.pageFive.controls.interest.valid) {
+          return this.ngxNotificationService.error('Select interest level');
+        }  else if (!this.pageFive.controls.comments.valid) {
+          return this.ngxNotificationService.error('Enter a comment');
+        }   else {
+          console.log('test');
+          this.approveUser(status);
         }
       }
-      approveUser() {
-        let approveData = new FormData();
+      approveUser(status: any) {
+        if (!localStorage.getItem('getListId') || !localStorage.getItem('getListTempleId')) {
+          this.ngxNotificationService.error('Assign By or LeadId Not Found');
+          return;
+        }
+        const approveData = new FormData();
         approveData.append('id', localStorage.getItem('getListId'));
-        approveData.append('is_approved', '1');
         approveData.append('photo_score', this.photoScore.toString());
-    
+        approveData.append('assign_by', localStorage.getItem('getListTempleId'));
+        approveData.append('assign_to', this.pageFive.value.assign_to);
+        approveData.append('comments', this.pageFive.value.comments);
+        approveData.append('speed', this.pageFive.value.interest);
+        approveData.append('source', this.pageFive.value.source);
+        approveData.append('followup_call_on', this.pageFive.value.follow_date);
+        approveData.append('alt_mobile', this.pageFive.value.phone);
+        approveData.append('premium_lead', this.checkStatus === true ? '1' : '0');
+        approveData.append('completeAprroveStatus', status);
+
         this.http.post('https://partner.hansmatrimony.com/api/ApproveProfile', approveData).subscribe(
           (data: any) => {
               console.log(data);

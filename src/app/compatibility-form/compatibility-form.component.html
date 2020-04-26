@@ -207,14 +207,14 @@
                   </ng-template>
                   <app-compatibility-page-three></app-compatibility-page-three>
                 </mat-step>
-                <mat-step>
+                <mat-step [completed]="formFour">
                   <ng-template matStepLabel>
                     Page IV
                   </ng-template>
                   <app-compatibility-photo></app-compatibility-photo>
                 </mat-step>
                 <!-- <mat-step>
-                  <ng-template matStepLabel>
+                  <ng-template matStepLabel >
                     Page V
                   </ng-template>
                   <app-compatibility-page-five></app-compatibility-page-five>

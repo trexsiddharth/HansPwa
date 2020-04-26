@@ -7,6 +7,7 @@ import { Profile } from './profile';
 export class FourPageService {
  formCompleted = new EventEmitter<boolean>();
  form3Completed = new EventEmitter<boolean>();
+ form4Completed = new EventEmitter<boolean>();
  getListData = new EventEmitter<boolean>();
  profile;
  userThroughGetList = false;

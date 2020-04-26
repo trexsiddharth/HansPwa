@@ -350,15 +350,21 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     if (this.itemService.getItem()) {
       const prof: any = this.itemService.getItem();
       console.log(prof);
-      if (prof.profile) {
+      if (prof.family) {
         this.panelOpenState = data.findIndex((item) => {
           return item.profile.id === prof.profile.id;
         });
         console.log(this.panelOpenState);
         this.openProfileDialog(data[this.panelOpenState], this.panelOpenState);
+      } else if (prof.profile) {
+        this.panelOpenState = data.findIndex((item) => {
+          return item.profile.identity_number === prof.profile.identity_number;
+        });
+        console.log(this.panelOpenState);
+        this.openProfileDialog(data[this.panelOpenState], this.panelOpenState);
       } else {
         this.panelOpenState = data.findIndex((item) => {
-          return item.profile.name === prof.name;
+          return item.profile.identity_number === prof.identity_number;
         });
         console.log(this.panelOpenState);
         this.openProfileDialog(data[this.panelOpenState], this.panelOpenState);

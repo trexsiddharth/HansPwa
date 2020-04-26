@@ -8,6 +8,7 @@ const routes: Routes = [
     component: CompatibilityFormComponent
   },
   { path: ':id/:leadId', component: CompatibilityFormComponent },
+  { path: ':id/:leadId/:templeId', component: CompatibilityFormComponent },
 ];
 
 @NgModule({

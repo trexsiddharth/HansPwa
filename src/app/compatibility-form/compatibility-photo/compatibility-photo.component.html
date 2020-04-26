@@ -43,14 +43,16 @@
   </div>
   <div style="width: 100%;" *ngIf="fourPageService.getUserThrough()">
     <label for="photoScore">Photo Score:</label>
-    <input style="border:1px solid darkgrey;margin-left: 10px;" class="form-control" name="photoScore" type="number" [(ngModel)]="photoScore" />
+    <input style="border:1px solid darkgrey;margin-left: 10px;"
+     class="form-control"
+     name="photoScore" type="number" [(ngModel)]="photoScore" />
   </div>
   </div>
 
   <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
       <div class="col-md-12 text-center">
         <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Skip</button>
-        <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Please Click to Proceed</button>
+        <button type="button" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"   (click)="checkForPhoto()">Please Click to Proceed</button>
       </div>
    </div> 
 </form>
