@@ -534,9 +534,9 @@ onLocationSelected(e) {
     this.long = e.longitude;
     console.log('location of family', e);
 }
-setGender(value) {
-console.log(value);
-switch (value) {
+setGender() {
+console.log(this.PageOne.value.Relation);
+switch (this.PageOne.value.Relation) {
   case 'Brother':
     this.PageOne.patchValue(
       {

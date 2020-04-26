@@ -232,6 +232,10 @@ export class CompatibilityPhotoComponent implements OnInit {
         return this.ngxNotificationService.error('Select Image 3');
       } else if (userProfile.photoScore < 1) {
         return this.ngxNotificationService.error('Give a score');
+      } else if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
+        console.log(this.fourPageService.getProfile().mobile);
+        localStorage.setItem('mobile_number', this.fourPageService.getProfile().mobile);
+        this.skip();
       }
     } else {
       this.skip();
@@ -250,6 +254,8 @@ export class CompatibilityPhotoComponent implements OnInit {
       content_name: localStorage.getItem('RegisterNumber'),
     });
     this.gtag_report_conversion('https://hansmatrimony.com/fourReg');
+
+    this.router.navigateByUrl('chat');
   }
 
   gtag_report_conversion(url) {
