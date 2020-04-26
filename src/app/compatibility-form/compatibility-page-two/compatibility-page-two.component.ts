@@ -241,11 +241,11 @@ getQualification(text) {
   return this.HigherEducation[groupIndex].names[valueIndex];
 }
 updateFormTwoData(profileData: FormData) {
-  this.fourPageService.profile.qualification = profileData.get('degree');
-  this.fourPageService.profile.occupation = profileData.get('occupation');
-  this.fourPageService.profile.designation = profileData.get('profession');
-  this.fourPageService.profile.workingCity = profileData.get('working_city');
-  this.fourPageService.profile.about = profileData.get('about');
+  this.fourPageService.profile.qualification = profileData.get('degree').toString();
+  this.fourPageService.profile.occupation = profileData.get('occupation').toString();
+  this.fourPageService.profile.designation = profileData.get('profession').toString();
+  this.fourPageService.profile.workingCity = profileData.get('working_city').toString();
+  this.fourPageService.profile.about = profileData.get('about').toString();
 
   console.log(this.fourPageService.getProfile());
 }

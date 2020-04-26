@@ -228,11 +228,10 @@ export class CompatibilityPhotoComponent implements OnInit {
       } else if (userProfile.image2 === null  || userProfile.image2 === '') {
         return this.ngxNotificationService.error('Select Image 2');
       } else if (userProfile.image3 === null  || userProfile.image3 === '') {
+        this.fourPageService.form4Completed.emit(true);
         return this.ngxNotificationService.error('Select Image 3');
       } else if (userProfile.photoScore < 1) {
         return this.ngxNotificationService.error('Give a score');
-      } else {
-        this.fourPageService.form4Completed.emit(true);
       }
     } else {
       this.skip();

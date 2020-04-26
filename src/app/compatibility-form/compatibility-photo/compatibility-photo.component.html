@@ -51,8 +51,8 @@
 
   <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
       <div class="col-md-12 text-center">
-        <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" *ngIf="fourPageService.getUserThrough() == false" (click)="skip()">Skip</button>
-        <button type="button" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"   (click)="checkForPhoto()">Please Click to Proceed</button>
+        <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" *ngIf="fourPageService.getUserThrough() == false" matStepperNext (click)="skip()">Skip</button>
+        <button type="button" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Please Click to Proceed</button>
       </div>
    </div> 
 </form>

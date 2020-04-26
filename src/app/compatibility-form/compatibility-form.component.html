@@ -213,12 +213,12 @@
                   </ng-template>
                   <app-compatibility-photo></app-compatibility-photo>
                 </mat-step>
-                <!-- <mat-step>
-                  <ng-template matStepLabel >
+                <mat-step *ngIf="!isLinear">
+                  <ng-template matStepLabel  >
                     Page V
                   </ng-template>
                   <app-compatibility-page-five></app-compatibility-page-five>
-                </mat-step> -->
+                </mat-step>
               </div> 
             </div>
               </mat-horizontal-stepper>

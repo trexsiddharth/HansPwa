@@ -16,8 +16,12 @@ import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
-    MatGoogleMapsAutocompleteModule.forRoot(),
-    AgmCoreModule.forRoot()
+     // important !!! AIzaSyCU-ZHkKEBJgfbcotGjEqrsU6C2aB9tDj4 // old api
+  AgmCoreModule.forRoot({
+    apiKey: 'AIzaSyDxD0PlzfG7pAEDY0-p8vPbXKDgjCKFj1o',
+    libraries: ['places']
+  }),
+  MatGoogleMapsAutocompleteModule
   ],
 exports: [
   MatFormFieldModule, MatDatepickerModule, MatInputModule, MatButtonToggleModule,
@@ -31,8 +35,8 @@ exports: [
   MatButtonModule,
   FormsModule,
   ReactiveFormsModule,
-  MatGoogleMapsAutocompleteModule,
-  AgmCoreModule
+  AgmCoreModule,
+  MatGoogleMapsAutocompleteModule
 ]
 })
 export class AngularMaterialModule { }

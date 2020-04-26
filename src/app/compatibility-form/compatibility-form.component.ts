@@ -137,6 +137,7 @@ export class CompatibilityFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.clear();
     if (localStorage.getItem('RegisterNumber')) {
     this.numberCheck = localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length);
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
@@ -167,16 +168,23 @@ export class CompatibilityFormComponent implements OnInit {
          }
       }
     );
+
     this.route.paramMap.subscribe(
       (route: any) => {
-        console.log(route);
+        console.log(route.params);
         if (route) {
         if (route.params.id) {
           this.fourPageService.setUserThrough(true);
           localStorage.setItem('getListId', route.params.id);
-          } else {
+          } else if (route.params.mobile) {
+            this.numberCheck = route.params.mobile;
+            this.fourPageService.setUserThrough(false);
+            this.isLinear = false;
+            localStorage.setItem('getListMobile', route.params.mobile);
+            } else {
             this.fourPageService.setUserThrough(false);
             localStorage.setItem('getListId', '');
+            localStorage.setItem('getListMobile', '');
           }
         if (route.params.leadId) {
           this.fourPageService.setUserThrough(true);
@@ -189,7 +197,11 @@ export class CompatibilityFormComponent implements OnInit {
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListTempleId', route.params.templeId);
             }
-        if (this.fourPageService.userThroughGetList) {
+        if (route.params.enqDate) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('enqDate', route.params.enqDate);
+            }
+        if (route.params.id) {
           this.isLinear = false;
           this.getProfile();
           }
@@ -359,7 +371,7 @@ export class CompatibilityFormComponent implements OnInit {
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
         console.log(control);
-        if (this.PageOne.controls[control].value === '') {
+        if (!this.PageOne.controls[control].valid) {
             this.errors.push(control);
           }
       }
@@ -618,6 +630,7 @@ getProfile() {
     }
   }
   setProfileValues(profileData) {
+    localStorage.setItem('getListTempleId', profileData.profile.temple_id);
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
     this.userProfile.email = profileData.family.email;

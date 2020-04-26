@@ -9,7 +9,7 @@ export class FourPageService {
  form3Completed = new EventEmitter<boolean>();
  form4Completed = new EventEmitter<boolean>();
  getListData = new EventEmitter<boolean>();
- profile;
+ profile = new Profile();
  userThroughGetList = false;
 
   constructor() { }
@@ -30,6 +30,7 @@ export class FourPageService {
   }
 
   updateFormOneData(userData: FormData) {
+    console.log(userData);
     this.profile.name = userData.get('name').toString();
     this.profile.mobile = userData.get('mobile').toString();
     this.profile.email = userData.get('email').toString();

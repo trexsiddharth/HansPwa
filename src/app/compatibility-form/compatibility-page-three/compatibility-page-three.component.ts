@@ -179,13 +179,13 @@ onLocationSelected(e) {
      }
   }
   updateFormThreeData(profileData: FormData) {
-    this.fourPageService.profile.birthPlace = profileData.get('birth_place');
-    this.fourPageService.profile.birthTime = profileData.get('birth_time');
-    this.fourPageService.profile.gotra = profileData.get('gotra');
-    this.fourPageService.profile.foodChoice = profileData.get('food_choice');
-    this.fourPageService.profile.fatherStatus = profileData.get('father_status');
-    this.fourPageService.profile.motherStatus = profileData.get('mother_status');
-    this.fourPageService.profile.familyIncome = profileData.get('family_income');
+    this.fourPageService.profile.birthPlace = profileData.get('birth_place').toString();
+    this.fourPageService.profile.birthTime = profileData.get('birth_time').toString();
+    this.fourPageService.profile.gotra = profileData.get('gotra').toString();
+    this.fourPageService.profile.foodChoice = profileData.get('food_choice').toString();
+    this.fourPageService.profile.fatherStatus = profileData.get('father_status').toString();
+    this.fourPageService.profile.motherStatus = profileData.get('mother_status').toString();
+    this.fourPageService.profile.familyIncome = profileData.get('family_income').toString();
     console.log(this.fourPageService.getProfile());
   }
 
