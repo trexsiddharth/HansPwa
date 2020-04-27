@@ -19,7 +19,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
 'Justdial', 'Online', 'website', 'gnb home'];
   interestLevel: string[] = ['Very High', 'High', 'Medium', 'Less'];
   allTemples: any[] = [];
-  photoScore = 0;
   checkStatus = false;
 
 
@@ -286,7 +285,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
         const approveData = new FormData();
         approveData.append('id', localStorage.getItem('getListId'));
         approveData.append('temple_id', localStorage.getItem('getListTempleId'));
-        approveData.append('photo_score', this.photoScore.toString());
+        approveData.append('photo_score', this.fourPageService.getProfile().photoScore.toString());
         approveData.append('is_approve', '1');
 
         this.http.post('https://partner.hansmatrimony.com/api/ApproveProfile', approveData).subscribe(
