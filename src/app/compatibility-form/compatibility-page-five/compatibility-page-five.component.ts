@@ -6,8 +6,6 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { Profile } from '../profile';
 import { Observable } from 'rxjs';
-import { resolve } from 'url';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-compatibility-page-five',
@@ -21,6 +19,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
 'Justdial', 'Online', 'website', 'gnb home'];
   interestLevel: string[] = ['Very High', 'High', 'Medium', 'Less'];
   allTemples: any[] = [];
+  fullList = [];
+  templeList = [];
+  templeChecked = false;
+  moderatorList = [];
+  moderatorChecked = false;
   checkStatus = false;
 
 
@@ -52,12 +55,19 @@ export class CompatibilityPageFiveComponent implements OnInit {
         {
           console.log(value);
           if (value.status === '1') {
-         
+
           const assignToName = this.allTemples.find(
             element => {
               return element.temple_id === value.data.assign_to;
             }
           );
+          if (assignToName) {
+            if (assignToName.role === 0) {
+              this.templeChecked = true;
+            } else if (assignToName.role === 5) {
+              this.moderatorChecked = true;
+            }
+          }
           const assignByName = this.allTemples.find(
             element => {
               return element.temple_id === value.data.assign_by;
@@ -68,7 +78,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
             console.log(assignByName);
             localStorage.setItem('valueTempleId', assignByName.temple_id);
           }
-          
+
           this.pageFive.patchValue({
             phone: value.data.alt_mobile,
             assign_to: assignToName.name,
@@ -97,6 +107,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
       this.http.get('https://partner.hansmatrimony.com/api/leads/getAllTemples').subscribe(
         (data: any) => {
           this.allTemples = data.all_temples;
+          this.fullList = data.all_temples;
           resolve(data);
         }
       );
@@ -124,6 +135,40 @@ export class CompatibilityPageFiveComponent implements OnInit {
             }
         } else {
           this.skip();
+        }
+      }
+      assignToTemple(event: any) {
+        console.log(event.checked);
+        if (event.checked) {
+          this.templeChecked = true;
+          this.moderatorChecked = false;
+          this.fullList = [];
+          this.allTemples.forEach(
+            temples => {
+                if (temples.role === 0) {
+                  this.fullList.push(temples);
+                }
+            }
+          );
+        } else if (event.checked === false && this.moderatorChecked === false) {
+          this.fullList = [...this.allTemples];
+        }
+      }
+      assignToModerator(event: any) {
+        console.log(event.checked);
+        if (event.checked) {
+          this.moderatorChecked = true;
+          this.templeChecked = false;
+          this.fullList = [];
+          this.allTemples.forEach(
+            temples => {
+                if (temples.role === 5) {
+                  this.fullList.push(temples);
+                }
+            }
+          );
+        } else if (event.checked === false && this.templeChecked === false) {
+          this.fullList = [...this.allTemples];
         }
       }
 
@@ -159,8 +204,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter Name');
         } else if (userProfile.mobile === null || userProfile.mobile === '') {
           return this.ngxNotificationService.error('Enter Mobile Number');
-        } else if (userProfile.email === null  || userProfile.email === '') {
-          return this.ngxNotificationService.error('Enter Email');
         } else if (userProfile.relation === null  || userProfile.relation === '') {
           return this.ngxNotificationService.error('Select Relation');
         } else if (userProfile.gender === null  || userProfile.gender === '') {
@@ -169,8 +212,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter D.O.B');
         } else if (userProfile.height === null  || userProfile.height === '') {
           return this.ngxNotificationService.error('Select Height');
-        } else if (userProfile.weight === null  || userProfile.weight === '') {
-          return this.ngxNotificationService.error('Enter Weight');
         } else if (userProfile.martialStatus === null  || userProfile.martialStatus === '') {
           return this.ngxNotificationService.error('Select Marital Status');
         } else if (userProfile.annualIncome === null  || userProfile.annualIncome === '') {
@@ -197,8 +238,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter Birth Place');
         } else if (userProfile.birthTime === null  || userProfile.birthTime === '') {
           return this.ngxNotificationService.error('Enter Birth Time');
-        } else if (userProfile.gotra === null  || userProfile.gotra === '') {
-          return this.ngxNotificationService.error('Enter Gotra');
         } else if (userProfile.foodChoice  === null || userProfile.foodChoice === '') {
           return this.ngxNotificationService.error('Select Food Choice');
         } else if (userProfile.fatherStatus === null  || userProfile.fatherStatus === '') {
@@ -215,8 +254,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Select Image 3');
         } else if (userProfile.photoScore < 1) {
           return this.ngxNotificationService.error('Give a score');
-        } else if (!this.pageFive.controls.phone.valid) {
-          return this.ngxNotificationService.error('Enter a valid Alternate Number');
         }  else if (!this.pageFive.controls.enq_date.valid) {
           return this.ngxNotificationService.error('Enter a valid Enq Date');
         }  else if (!this.pageFive.controls.follow_date.valid) {

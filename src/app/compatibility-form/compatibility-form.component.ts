@@ -29,6 +29,7 @@ import { Observable } from 'rxjs';
 import { startWith, map, timeout, retry, catchError } from 'rxjs/operators';
 import { element } from 'protractor';
 import { FourPageService } from './four-page.service';
+import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -109,9 +110,11 @@ export class CompatibilityFormComponent implements OnInit {
   long;
 
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
+  constructor(private http: HttpClient, public dialog: MatDialog, 
+    private _formBuilder: FormBuilder, private router: Router,
               public notification: NotificationsService,
-              private fourPageService: FourPageService,
+              public fourPageService: FourPageService,
+              private matDialog: MatDialog,
               private route: ActivatedRoute,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageOne = this._formBuilder.group({
@@ -138,6 +141,7 @@ export class CompatibilityFormComponent implements OnInit {
 
   ngOnInit() {
     localStorage.clear();
+    this.openMessageDialog();
     if (localStorage.getItem('RegisterNumber')) {
     this.numberCheck = localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length);
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
@@ -178,7 +182,7 @@ export class CompatibilityFormComponent implements OnInit {
           localStorage.setItem('getListId', route.params.id);
           } else if (route.params.mobile) {
             this.numberCheck = route.params.mobile;
-            this.fourPageService.setUserThrough(false);
+            this.fourPageService.setUserThrough(true);
             this.isLinear = false;
             localStorage.setItem('getListMobile', route.params.mobile);
             } else {
@@ -738,6 +742,16 @@ getProfile() {
       default:
         break;
     }
+  }
+
+  openMessageDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.minWidth = '80vw';
+    dialogConfig.maxHeight = '80vh';
+
+    dialogConfig.disableClose = false;
+    dialogConfig.hasBackdrop = true;
+    const dialogRef = this.matDialog.open(FormsMessageDialogComponent, dialogConfig);
   }
 }
 

@@ -109,7 +109,7 @@ export class CompatibilityPageTwoComponent implements OnInit {
 
 constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
             public notification: NotificationsService,
-            private fourPageService: FourPageService,
+            public fourPageService: FourPageService,
             private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageTwo = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length

@@ -41,18 +41,30 @@
                         
       </div>
   </div>
-  <div style="width: 100%;" *ngIf="fourPageService.getUserThrough()">
+
+  
+  <div style="width: 100%;
+  padding-right: 15px;
+  margin-top: 10px;
+  padding-left: 15px;" *ngIf="fourPageService.getUserThrough()">
     <label for="photoScore">Photo Score:</label>
     <input style="border:1px solid darkgrey;margin-left: 10px;"
      class="form-control"
      name="photoScore" type="number" [(ngModel)]="photoScore" />
   </div>
-  </div>
+  <p class="impNote">
+    कस्टमर की फोटो देखकर उसे 5 से लेकर 10 के बीच एक स्कोर दीजिये - अगर बहुत देखने में बहुत अच्छा है तो 10,9 ya 8 etc  और बहुत ही काम  अच्छा है  तो 5
+  </p>
 
+  </div>
+  
   <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
       <div class="col-md-12 text-center">
         <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn" *ngIf="fourPageService.getUserThrough() == false" matStepperNext (click)="skip()">Skip</button>
         <button type="button" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Please Click to Proceed</button>
       </div>
    </div> 
+   <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+    डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
+  </p>
 </form>

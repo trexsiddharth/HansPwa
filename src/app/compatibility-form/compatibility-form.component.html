@@ -33,6 +33,10 @@
                             <input type="text"  matInput formControlName="lastName" name="lastName">
                           </mat-form-field>
                         </div>
+
+                        <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                          यहाँ पर कैंडिडेट यानि जिसके लिए रिश्ता देखा जा रहा है उसका नाम लिखे (लड़का या लड़की जो भी है )
+                        </p>
   
                           <div class="col-md-12">
                               <mat-form-field  class="full-width fieldFit" appearance="standard">
@@ -49,6 +53,11 @@
                             </mat-form-field>
                         </div>
 
+                        <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                          ईमेल optional है पर Customer से ईमेल लेने की जरूर कोशिश करे। घर में किसी का भी ईमेल मांग ले जो भी यूज़ करता हो 
+                        </p>
+
+
                         <div class="col-md-12">
                           <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
                               <mat-label style="color: black;">Looking Rishta For</mat-label>
@@ -59,6 +68,10 @@
                               </mat-select>
                           </mat-form-field> 
                       </div>
+
+                      <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                        आप जिस कस्टमर से फ़ोन पर बात कर रहे हैं वो किसके लिए रिश्ता देख रहे हैं ये भरे ।
+                      </p>
       
                           <div class="col-md-12">
                               <mat-form-field class="full-width fieldFit" appearance="standard">
@@ -128,6 +141,7 @@
                                       </mat-select>
                                   </mat-form-field>
                                 </div>
+
                          
                                 <div class="col-md-12">
                                   <mat-form-field class="full-width fieldFit" appearance="standard" >
@@ -137,6 +151,11 @@
                                     <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageOne.get('AnnualIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
                                   </mat-form-field>
                                 </div>
+
+
+                                <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                                  अगर लड़का /लड़की की सालाना इनकम 10 लाख है तोह यहाँ सिर्फ 10 भरे । 
+                                </p>
   
                                 <div class="col-md-12">
                                   <mat-form-field class="full-width fieldFit" appearance="standard" >
@@ -177,6 +196,7 @@
                           
                           </div>
 
+
                           <div class="col-md-12">
                             <mat-form-field class="full-width fieldFit" appearance="standard">
                               <mat-label style="color: black;">Locality / Area</mat-label>
@@ -184,14 +204,20 @@
                               (onAutocompleteSelected)="onAutocompleteSelected($event)" 
                               (onLocationSelected)="onLocationSelected($event)"
                               required formControlName="locality">
-                              <mat-hint>eg. Patel Nagar</mat-hint>
-                              <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageOne.get('locality').invalid"> Enter Valid Location</mat-error>
                             </mat-form-field>
                           </div>  
+
+                          <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                            यहाँ कस्टमर कहाँ रहता  है वो भरे जैसे की करोल बाघ , शादी पुर , बुरारी रोहिणी आदि |
+                          </p>
+
                           
                           <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                               <button mat-raised-button type="button" id="viewButton" matStepperNext class="btn" (click)="firstStep()">Next</button>
                           </div>
+                          <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                            डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
+                          </p>
                       </div>
                   </form>
                 </mat-step>

@@ -8,6 +8,7 @@ import { CompatibilityPhotoComponent } from './compatibility-photo/compatibility
 import { CompatibilityFormRoutingModule } from './compatibility-form-routing.module';
 import { FourPageService } from './four-page.service';
 import { CompatibilityPageFiveComponent } from './compatibility-page-five/compatibility-page-five.component';
+import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CompatibilityPageFiveComponent } from './compatibility-page-five/compat
     CompatibilityPageTwoComponent,
     CompatibilityPageThreeComponent,
     CompatibilityPhotoComponent,
-    CompatibilityPageFiveComponent
+    CompatibilityPageFiveComponent,
+    FormsMessageDialogComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,9 @@ import { CompatibilityPageFiveComponent } from './compatibility-page-five/compat
   ],
   providers: [
     FourPageService
+  ],
+  entryComponents: [
+    FormsMessageDialogComponent
   ]
 })
 export class CompatibilityFormModule { }

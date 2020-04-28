@@ -30,12 +30,16 @@
                         </mat-form-field>
                       </div>
 
+
                       <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard" >
                           <mat-label style="color: black;">Designation</mat-label>
                           <input type="text" (change)="changedDesignation()"  matInput formControlName="Designation" required name="Designation">
                         </mat-form-field>
                       </div>
+                      <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                        जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |
+                      </p>
 
                       <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
@@ -55,10 +59,13 @@
                             </mat-form-field>
                           </div>
 
-                    
+
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                         <button type="button" id="viewButton" mat-raised-button matStepperNext class="btn" (click)="firstStep()">Next</button>
                     </div>
+                    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                      डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
+                    </p>
                 </div>
            </form> 
        

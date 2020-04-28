@@ -35,19 +35,28 @@
                         </mat-form-field>
                       </div>
 
+                      <div class="col-6" style="margin-top:20px">
+                        <h6>
+                          Assign to:
+                        </h6>
+                        <mat-checkbox (change)="assignToTemple($event)" [checked]="templeChecked">Temple</mat-checkbox>
+
+                          <mat-checkbox (change)="assignToModerator($event)" [checked]="moderatorChecked">Moderator</mat-checkbox>
+                          </div>
+
                       <div class="col-6">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                         
-                            <mat-label style="color: black;">Assign To</mat-label>
+                            <mat-label style="color: black;">Select</mat-label>
                             <mat-select  #assignTo formControlName="assign_to">
-                                    <mat-option *ngFor="let  option of allTemples" [value]="option.name">
+                                    <mat-option *ngFor="let  option of fullList" [value]="option.name">
                                             {{option.name}}
                                     </mat-option>
                             </mat-select>
                         </mat-form-field>
                       </div>
 
-                      <div class="col-6">
+                      <div class="col-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                         
                             <mat-label style="color: black;">Interest Level Of Lead</mat-label>
@@ -74,6 +83,11 @@
                       <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="checkForPhoto('0')">Complete</button>
                       <button style="margin-left: 10px;" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="checkForPhoto('1')">Complete and Approve</button>
                       </div>  
+
+                    <p class="impNote">
+                      अगर सभी डिटेल्स नहीं भरी है तो <strong>Complete</strong> बटन पर क्लिक कर लीजिये।
+                      अगर सभी डिटेल्स भर ली  हैं तो <strong>Complete and Approve</strong>> पर क्लिक कीजिये  ।
+                    </p>
                 </div>
            </form> 
        

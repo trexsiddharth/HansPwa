@@ -41,6 +41,14 @@ background-color: rgba(0,0,0,.6) !important;
   padding-bottom: 5px;
 }
 
+.impNote {
+  margin: 5px 0px;
+  padding-right: 15px;
+  padding-left: 15px;
+  color: #737373;
+  font-size: 0.85rem;
+}
+
 #viewButton{
   background: #34b7f1;
   color: white;

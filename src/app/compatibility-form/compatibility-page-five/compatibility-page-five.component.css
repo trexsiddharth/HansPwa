@@ -24,6 +24,18 @@
   border: 1px solid black;
 }
 
+.impNote {
+  margin: 5px 0px;
+  padding-right: 15px;
+  padding-left: 15px;
+  color: #737373;
+  font-size: 0.85rem;
+}
+
+strong {
+  font-family: sans-serif;
+}
+
 #viewButton{
   background: #34b7f1;
   color: white;
