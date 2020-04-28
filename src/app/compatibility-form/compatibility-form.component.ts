@@ -635,7 +635,9 @@ getProfile() {
     }
   }
   setProfileValues(profileData) {
+    if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
     localStorage.setItem('getListTempleId', profileData.profile.temple_id);
+    }
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
     this.userProfile.email = profileData.family.email;

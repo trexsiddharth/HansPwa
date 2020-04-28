@@ -22,7 +22,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
   interestLevel: string[] = ['Very High', 'High', 'Medium', 'Less'];
   allTemples: any[] = [];
   checkStatus = false;
-  templeId;
 
 
   constructor(private http: HttpClient, public fourPageService: FourPageService,
@@ -53,30 +52,32 @@ export class CompatibilityPageFiveComponent implements OnInit {
         {
           console.log(value);
           if (value.status === '1') {
-          if (value.assign_by) {
-            this.templeId = value.assign_by;
-          }
+         
           const assignToName = this.allTemples.find(
             element => {
-              return element.temple_id === value.assign_to;
+              return element.temple_id === value.data.assign_to;
             }
           );
           const assignByName = this.allTemples.find(
             element => {
-              return element.temple_id === value.assign_by;
+              return element.temple_id === value.data.assign_by;
             }
           );
-          if (assignByName && assignByName !== 'online') {
-          localStorage.setItem('valueTempleId', assignByName);
+          console.log('assign by', assignByName);
+          if (assignByName && assignByName.temple_id !== 'online') {
+            console.log(assignByName);
+            localStorage.setItem('valueTempleId', assignByName.temple_id);
           }
+          
           this.pageFive.patchValue({
-            assign_to: assignToName,
-            interest: value.speed,
-            source: value.source,
-            phone: value.alt_mobile,
-            follow_date: value.followup_call_on,
-            enq_date: value.enquiry_date
+            phone: value.data.alt_mobile,
+            assign_to: assignToName.name,
+            interest: value.data.speed,
+            source: value.data.source,
+            follow_date: value.data.follow_call_date,
+            enq_date: value.data.enquiry_date
           });
+          console.log(this.pageFive.value);
         } else {
           this.ngxNotificationService.error(value.message);
         }
