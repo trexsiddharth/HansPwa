@@ -66,7 +66,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
               return element.temple_id === value.assign_by;
             }
           );
-          if (assignByName) {
+          if (assignByName && assignByName !== 'online') {
           localStorage.setItem('valueTempleId', assignByName);
           }
           this.pageFive.patchValue({
