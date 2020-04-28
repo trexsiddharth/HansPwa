@@ -141,7 +141,9 @@ export class CompatibilityFormComponent implements OnInit {
 
   ngOnInit() {
     localStorage.clear();
+    if (this.fourPageService.getUserThrough()) {
     this.openMessageDialog();
+    }
     if (localStorage.getItem('RegisterNumber')) {
     this.numberCheck = localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length);
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
