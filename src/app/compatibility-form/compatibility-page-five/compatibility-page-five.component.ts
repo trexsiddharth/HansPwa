@@ -6,6 +6,8 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { Profile } from '../profile';
 import { Observable } from 'rxjs';
+import { resolve } from 'url';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-compatibility-page-five',
@@ -20,6 +22,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
   interestLevel: string[] = ['Very High', 'High', 'Medium', 'Less'];
   allTemples: any[] = [];
   checkStatus = false;
+  templeId;
 
 
   constructor(private http: HttpClient, public fourPageService: FourPageService,
@@ -38,12 +41,47 @@ export class CompatibilityPageFiveComponent implements OnInit {
                 });
               }
 
-  ngOnInit() {
-    this.getAssignToList();
+  async ngOnInit() {
+    await this.getAssignToList();
     if (localStorage.getItem('getListTempleId') && localStorage.getItem('enqDate')) {
         this.pageFive.patchValue({
           enq_date : localStorage.getItem('enqDate')
         });
+    } else if (localStorage.getItem('getListTempleId') && localStorage.getItem('getListId')) {
+      this.getLeadData().subscribe(
+        value =>
+        {
+          console.log(value);
+          if (value.status === '1') {
+          if (value.assign_by) {
+            this.templeId = value.assign_by;
+          }
+          const assignToName = this.allTemples.find(
+            element => {
+              return element.temple_id === value.assign_to;
+            }
+          );
+          const assignByName = this.allTemples.find(
+            element => {
+              return element.temple_id === value.assign_by;
+            }
+          );
+          if (assignByName) {
+          localStorage.setItem('valueTempleId', assignByName);
+          }
+          this.pageFive.patchValue({
+            assign_to: assignToName,
+            interest: value.speed,
+            source: value.source,
+            phone: value.alt_mobile,
+            follow_date: value.followup_call_on,
+            enq_date: value.enquiry_date
+          });
+        } else {
+          this.ngxNotificationService.error(value.message);
+        }
+        }
+      );
     }
   }
 
@@ -54,11 +92,15 @@ export class CompatibilityPageFiveComponent implements OnInit {
   }
 
   getAssignToList() {
+    return new Promise((resolve) => {
       this.http.get('https://partner.hansmatrimony.com/api/leads/getAllTemples').subscribe(
         (data: any) => {
           this.allTemples = data.all_temples;
+          resolve(data);
         }
       );
+    });
+
       }
       submit() {
         this.clearHistory();
@@ -324,16 +366,28 @@ export class CompatibilityPageFiveComponent implements OnInit {
       completeProfileApi(): Observable<any> {
         const approveData = new FormData();
         approveData.append('id', localStorage.getItem('getListId'));
-        approveData.append('assign_by', localStorage.getItem('getListTempleId'));
+        approveData.append('assign_by', localStorage.getItem('valueTempleId') ? localStorage.getItem('valueTempleId')
+        :  localStorage.getItem('getListTempleId'));
+
+        approveData.append('logged_in', localStorage.getItem('getListTempleId'));
         approveData.append('assign_to', this.pageFive.value.assign_to);
         approveData.append('comments', this.pageFive.value.comments);
         approveData.append('speed', this.pageFive.value.interest);
         approveData.append('source', this.pageFive.value.source);
         approveData.append('followup_call_on', this.pageFive.value.follow_date);
         approveData.append('alt_mobile', this.pageFive.value.phone);
+        // if url with enqData : mode -> 3 , if with id: mode -> 2 if only with fourReg : mode -> 1
+        approveData.append('mode', localStorage.getItem('enqDate') ? '3'
+        : localStorage.getItem('getListId') ? '2' : '1');
         approveData.append('premium_lead', this.checkStatus === true ? '1' : '0');
 
         return this.http.post('https://partner.hansmatrimony.com/api/completeLead', approveData);
+      }
+
+      getLeadData(): Observable<any>{
+        const formData = new FormData();
+        formData.append('id', localStorage.getItem('getListId'));
+        return this.http.post('https://partner.hansmatrimony.com/api/getLeadDetails', formData);
       }
   }
 

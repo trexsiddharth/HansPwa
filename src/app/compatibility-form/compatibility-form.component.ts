@@ -326,6 +326,10 @@ export class CompatibilityFormComponent implements OnInit {
               this.long ? firststepdata.append('long', this.long)
               : firststepdata.append('long', '');
 
+              // if url with enqData : mode -> 3 , if with id: mode -> 2 if only with fourReg : mode -> 1
+              firststepdata.append('mode', localStorage.getItem('enqDate') ? '3'
+        : localStorage.getItem('getListId') ? '2' : '1');
+
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
               console.log('gender', this.PageOne.value.gender);
@@ -334,6 +338,7 @@ export class CompatibilityFormComponent implements OnInit {
               console.log('annual_income', this.PageOne.value.AnnualIncome);
               console.log('religion', this.PageOne.value.Religion);
               console.log('caste', this.PageOne.value.Castes);
+              
 
 
             // tslint:disable-next-line: max-line-length
