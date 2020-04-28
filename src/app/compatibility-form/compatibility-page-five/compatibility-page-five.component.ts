@@ -40,7 +40,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
   ngOnInit() {
     this.getAssignToList();
-    if (localStorage.getItem('getListTempleId') && localStorage.getItem('enqDate')){
+    if (localStorage.getItem('getListTempleId') && localStorage.getItem('enqDate')) {
         this.pageFive.patchValue({
           enq_date : localStorage.getItem('enqDate')
         });
@@ -48,7 +48,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
   }
 
   getProfileId(): Observable<any> {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('mobile', localStorage.getItem('getListMobile'));
     return this.http.post('https://partner.hansmatrimony.com/api/getLeadId', formData);
   }
@@ -74,13 +74,17 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
       checkForPhoto(status: any) {
         if (this.fourPageService.getUserThrough()) {
-          this.validate(this.fourPageService.profile, status);
+            if (status === '1') {
+              this.validate(this.fourPageService.profile, status);
+            } else {
+              this.validateComplete(this.fourPageService.profile, status);
+            }
         } else {
           this.skip();
         }
       }
 
-      checkStat(event: any){
+      checkStat(event: any) {
         console.log(event.checked);
         this.checkStatus = event.checked;
       }
@@ -181,12 +185,25 @@ export class CompatibilityPageFiveComponent implements OnInit {
         }  else if (!this.pageFive.controls.comments.valid) {
           return this.ngxNotificationService.error('Enter a comment');
         }   else {
-          console.log('test');
-          if (status === '1') {
           this.approveUser();
-          } else {
+        }
+      }
+
+      validateComplete(userProfile: Profile, status: any) {
+        console.log(userProfile);
+        console.log(this.pageFive.value, status);
+        if (!this.pageFive.controls.enq_date.valid) {
+          return this.ngxNotificationService.error('Enter a valid Enq Date');
+        }  else if (!this.pageFive.controls.follow_date.valid) {
+          return this.ngxNotificationService.error('Enter a valid Follow Up Date');
+        } else if (!this.pageFive.controls.source.valid) {
+          return this.ngxNotificationService.error('Select a source');
+        } else if (!this.pageFive.controls.interest.valid) {
+          return this.ngxNotificationService.error('Select interest level');
+        }  else if (!this.pageFive.controls.comments.valid) {
+          return this.ngxNotificationService.error('Enter a comment');
+        }   else {
             this.completeUser();
-          }
         }
       }
       approveUser() {
