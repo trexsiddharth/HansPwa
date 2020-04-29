@@ -141,9 +141,6 @@ export class CompatibilityFormComponent implements OnInit {
 
   ngOnInit() {
     localStorage.clear();
-    if (this.fourPageService.getUserThrough()) {
-    this.openMessageDialog();
-    }
     if (localStorage.getItem('RegisterNumber')) {
     this.numberCheck = localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length);
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
@@ -220,6 +217,10 @@ export class CompatibilityFormComponent implements OnInit {
     localStorage.setItem('mobile_number', '') ;
     localStorage.setItem('selectedCaste', '');
     this.getAllCaste();
+
+    if (this.fourPageService.getUserThrough()) {
+      this.openMessageDialog();
+      }
 
     }
       // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
