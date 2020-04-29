@@ -122,7 +122,7 @@ export class CompatibilityFormComponent implements OnInit {
       firstName: ['', Validators.compose([Validators.required])],
       lastName: ['', Validators.compose([Validators.required])],
       phone: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
-      email: ['', Validators.compose([Validators.pattern('^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$')])],
+      email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       birth_date: ['01', Validators.compose([Validators.required])],
