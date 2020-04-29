@@ -204,6 +204,10 @@ export class CompatibilityFormComponent implements OnInit {
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('enqDate', route.params.enqDate);
             }
+        if (route.params.source) {
+          this.fourPageService.setUserThrough(true);
+          localStorage.setItem('getListSource', route.params.source);
+        }
         if (route.params.id) {
           this.isLinear = false;
           this.getProfile();
