@@ -15,8 +15,8 @@ import { Observable } from 'rxjs';
 export class CompatibilityPageFiveComponent implements OnInit {
   pageFive: FormGroup;
   errors: string[] = [];
-  sources: string[] = ['Facebook', 'Board', 'Sms', 'Walk-In', 'Referral', 'Tiktok', 'Google',
-'Justdial', 'Online', 'website', 'gnb home'];
+  sources: string[] = ['Facebook', 'Board/Sunpac/Banner', 'Sms', 'Walk-In', 'Referral', 'Tiktok', 'Google',
+'Justdial', 'Instagram', 'Newspaper', 'Temple Branding', 'Renewal', 'Upgrade', 'Data Account', 'Word of Mouth'];
   interestLevel: string[] = ['Very High', 'High', 'Medium', 'Less'];
   allTemples: any[] = [];
   fullList = [];

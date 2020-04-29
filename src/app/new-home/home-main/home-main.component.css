@@ -181,14 +181,42 @@
 #container5{
     width: 100%;
     text-align: center;
-    padding: 30px 50px 20px;
+    padding: 30px 30% 20px;
     background-image: linear-gradient(0deg, #A2C2E8,white)
+}
+
+#playBtn {
+    position: relative; margin-top: 10px;
+    border-radius: 10px;border: 1px solid #D313AE;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        height: 40px;
 }
 
 footer{
     color: white;
     background-color: #06033D;
     padding: 30px 20px;
+}
+
+#footerDiv1{
+    display: flex;
+     flex-direction: row;
+     margin-top: 30px;
+     justify-content: space-between;
+}
+#footerDiv2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+#iconSet{
+    display: flex; 
+    flex-direction: row;
+    width: 30%;
+    align-items: center;
 }
 
 ul{
@@ -199,7 +227,10 @@ ul{
 li{
     font-size: 14px;
 }
-
+#bottomText {
+    font-size: 12px;
+    text-align: center;
+}
 
 
 @media (max-width: 1024px){
@@ -265,6 +296,28 @@ li{
         overflow-x: auto;
         flex-flow: row;
         margin-left: 20px;
+    }
+    #container5{
+        width: 100%;
+        text-align: center;
+        padding: 30px 50px 20px;
+        background-image: linear-gradient(0deg, #A2C2E8,white)
+    }
+    #footerDiv1{
+        display: flex; flex-direction: row;margin-top: 30px;
+    }
+    #footerDiv2{
+        display: flex;flex-direction: column;
+    }
+
+    #iconSet{
+        display: flex; 
+        flex-direction: column;
+    }
+    #bottomText {
+        font-size: 12px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
     
 }
@@ -361,6 +414,28 @@ li{
     overflow-x: auto;
     flex-flow: row;
     margin-left: 20px;
+}
+#container5{
+    width: 100%;
+    text-align: center;
+    padding: 30px 50px 20px;
+    background-image: linear-gradient(0deg, #A2C2E8,white)
+}
+
+#footerDiv1{
+    display: flex; flex-direction: row;margin-top: 30px;
+}
+#footerDiv2{
+    display: flex;flex-direction: column;
+}
+#iconSet{
+    display: flex; 
+    flex-direction: column;
+}
+#bottomText {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 }
