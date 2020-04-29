@@ -63,9 +63,10 @@
     overflow-x: auto;
     background-image: linear-gradient(0deg,#5A2090 , #0090E6);
     flex-flow: row;
+    justify-content: center;
 }
 .featureCard{
-    width: 70%;
+    width: 30%;
     height: 50%;
     margin-left: 20px;
     border-radius: 10px;
@@ -74,6 +75,13 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
+}
+.headingThree {
+    background-color: #5C1F90 !important;display: flex;
+    flex-direction: row;   
+    padding: 20px 20%;
+    background-color: transparent;
+    justify-content: space-between;
 }
 .imageThreeGradient{
     width: 100%;
@@ -99,9 +107,10 @@
     overflow: auto;
     scroll-behavior: smooth;
     flex-flow: row;
+    justify-content: center;
 }
 .innerThree{
-    width: 50%;
+    width: 20%;
     height: 100%;
     margin-left: 20px;
     overflow: hidden;
@@ -113,20 +122,7 @@
     overflow: auto;
     padding: 0px;
 }
-.featureCard21{
-    width: 100%;
-    height: 60%;
-    border-radius: 10px;
-    overflow: auto;
-    padding: 0px;
-}
-.featureCard22{
-    width: 100%;
-    height: 60%;
-    border-radius: 10px;
-    overflow: auto;
-    padding: 0px;
-}
+
 .feature2Img{
     width: 100%;
     height: 100%;
@@ -141,7 +137,7 @@
     text-align: center;
     padding: 20px 0px;
     background-image: linear-gradient(0deg, #390572,#860271);
-    overflow: auto;
+    overflow: hidden;
 }
 .feature4{
     width: 100%;
@@ -153,15 +149,15 @@
     flex-direction: row;
     -webkit-box-align: center;
     align-items: center;
-    scroll-behavior: smooth;
-    overflow-x: auto;
+    overflow-x: hidden;
     flex-flow: row;
     margin-left: 20px;
+    justify-content: center;
 }
 .testimonial{
     position: relative;
      margin-top: 10px;
-     width: 70%;
+     width: 27%;
      margin: 0px 20px;
 }
 .testimonialImage{
@@ -207,6 +203,69 @@ li{
 
 
 @media (max-width: 1024px){
+    .featureCard{
+        width: 70%;
+        height: 50%;
+        margin-left: 20px;
+        border-radius: 10px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+    .imageTwoGradient{
+        width: 100%;
+        height: 60%;
+        position: relative;
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        padding-left: 30px;
+        -webkit-box-align: center;
+        align-items: center;
+        scroll-behavior: smooth;
+        overflow-x: auto;
+        background-image: linear-gradient(0deg,#5A2090 , #0090E6);
+        flex-flow: row;
+    }
+
+    .headingThree {
+        background-color: #5C1F90 !important;display: flex;
+        flex-direction: row;padding: 20px 40px;
+        background-color: transparent;
+        justify-content: space-between;
+    }
+
+    .innerThree{
+        width: 50%;
+        height: 100%;
+        margin-left: 20px;
+        overflow: hidden;
+    }
+    .featureCard2{
+        width: 100%;
+        height: 60%;
+        border-radius: 10px;
+        overflow: auto;
+        padding: 0px;
+    }
+    .feature4{
+        width: 100%;
+        height:22rem;
+        position: relative;
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        -webkit-box-align: center;
+        align-items: center;
+        scroll-behavior: smooth;
+        overflow-x: auto;
+        flex-flow: row;
+        margin-left: 20px;
+    }
     
 }
 @media (max-width: 350px){
@@ -215,4 +274,93 @@ li{
         position: relative;
         margin-top: 70px;
     }
+    .featureCard{
+        width: 70%;
+        height: 50%;
+        margin-left: 20px;
+        border-radius: 10px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+    .testimonial{
+        position: relative;
+         margin-top: 10px;
+         width: 70%;
+         margin: 0px 20px;
+    }
+}
+
+@media (max-width: 575px){
+    .featureCard{
+        width: 70%;
+        height: 50%;
+        margin-left: 20px;
+        border-radius: 10px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+    .imageTwoGradient{
+    width: 100%;
+    height: 60%;
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    padding-left: 30px;
+    -webkit-box-align: center;
+    align-items: center;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    background-image: linear-gradient(0deg,#5A2090 , #0090E6);
+    flex-flow: row;
+}
+.headingThree {
+    background-color: #5C1F90 !important;display: flex;
+    flex-direction: row;padding: 20px 40px;
+    background-color: transparent;
+    justify-content: space-between;
+}
+.innerThree{
+    width: 50%;
+    height: 100%;
+    margin-left: 20px;
+    overflow: hidden;
+}
+.featureCard2{
+    width: 100%;
+    height: 60%;
+    border-radius: 10px;
+    overflow: auto;
+    padding: 0px;
+}
+
+.testimonial{
+    position: relative;
+     margin-top: 10px;
+     width: 70%;
+     margin: 0px 20px;
+}
+.feature4{
+    width: 100%;
+    height:22rem;
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    flex-flow: row;
+    margin-left: 20px;
+}
+
 }
