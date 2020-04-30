@@ -34,7 +34,7 @@ import { trigger, transition, query, stagger, animate, style } from '@angular/an
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
-
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 
 @Component({
@@ -80,7 +80,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               private dialog: MatDialog,
               public notification: NotificationsService,
               public itemService: FindOpenHistoryProfileService,
-              private router: Router) {}
+              private router: Router,
+              private breakPointObserver: BreakpointObserver) {}
 
   ngOnInit() {
     console.log(this.type);
@@ -227,8 +228,22 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   openProfileDialog(item: any, ind: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
-    dialogConfig.minWidth = '90vw';
-    dialogConfig.minHeight = '80vh';
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.minHeight = '80vh';
+        }
+      }
+    );
+
     dialogConfig.disableClose = true;
     dialogConfig.data = {
       profile : item,

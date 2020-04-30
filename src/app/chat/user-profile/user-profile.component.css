@@ -4,6 +4,9 @@
 ::ng-deep .mat-menu-panel {
     background: white;
 }
+main {
+    position: relative;
+}
 .sections{
     padding: 5px 20px;
     color: #6f6f6f;

@@ -1,7 +1,7 @@
 
 #myProfImage{
-  width:55px;
-  height: 55px;
+  width:65px;
+  height: 65px;
   margin: 10px 5px;
   border-radius: 50%;
   z-index: 999;
@@ -23,6 +23,13 @@
   padding-top: 10px;
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
   
+}
+
+.tabLine {
+  margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid #c8c8c8;
+        margin-top: -2px;
 }
 
 ::ng-deep .mat-tab-label-active {
@@ -407,6 +414,22 @@ display: none !important;
           box-shadow:  4px 4px 1px rgba(0,0,0,0.1);
           opacity: 1 !important;
         }
+
+        #myProfImage{
+          width:55px;
+          height: 55px;
+          margin: 10px 5px;
+          border-radius: 50%;
+          z-index: 999;
+          border: 2px solid #58D1FD;
+        }
+
+        .tabLine {
+          margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid #c8c8c8;
+        margin-top: -16px;
+        }
         .setBotUi{
           margin-top: 30px;
         }
@@ -472,7 +495,7 @@ display: none !important;
         overflow-x: auto;
         padding-bottom: 5px;
         padding-right: 50px;
-        background-image: linear-gradient(90deg, rgba(50,149,230,1) 10%, rgba(52,183,241,1) 50%, rgba(52,213,241,0.9878326330532213) 70%);
+        background-image: white
        }
        .matGroup{
         width: 100%;

@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 import { PersonalizedDialogComponent } from './personalized-dialog/personalized-dialog.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-personalized-profiles',
@@ -53,7 +54,10 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
               private dialog: MatDialog,
-              public notification: NotificationsService, public itemService: FindOpenHistoryProfileService, private router: Router) {}
+              public notification: NotificationsService, 
+              public itemService: FindOpenHistoryProfileService,
+              private breakPointObserver: BreakpointObserver,
+              private router: Router) {}
 
   ngOnInit() {
     if (localStorage.getItem('premiumProf')) {
@@ -275,8 +279,22 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   openProfileDialog(item: any, ind: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
-    dialogConfig.minWidth = '90vw';
-    dialogConfig.minHeight = '80vh';
+
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.minHeight = '80vh';
+        }
+      }
+    );
     dialogConfig.disableClose = true;
     dialogConfig.data = {
       profile : item,
