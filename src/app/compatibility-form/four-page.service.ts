@@ -11,8 +11,17 @@ export class FourPageService {
  getListData = new EventEmitter<boolean>();
  profile = new Profile();
  userThroughGetList = false;
+ skippable = false;
 
   constructor() { }
+
+  setSkippable(status) {
+    this.skippable = status;
+  }
+  getSkippable() {
+    return this.skippable;
+  }
+
 
   setUserThrough(status) {
     this.userThroughGetList = status;

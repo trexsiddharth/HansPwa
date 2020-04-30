@@ -173,6 +173,14 @@ export class CompatibilityFormComponent implements OnInit {
       }
     );
 
+    this.route.url.subscribe(
+        link => {
+         if (link && link[0]  &&  link[0].path) {
+           console.log(link[0].path);
+           this.fourPageService.setSkippable(true);
+         }
+        }
+      );
     this.route.paramMap.subscribe(
       (route: any) => {
         console.log(route.params);
