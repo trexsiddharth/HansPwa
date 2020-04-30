@@ -132,6 +132,13 @@ ngOnInit() {
   }
     }
 
+    skip() {
+      this.fourPageService.formCompleted.emit(true);
+      setTimeout(() => {
+        document.getElementById('skipBtn').click();
+      }, 100);
+    }
+
 firstStep() {
     this.errors = [];
     console.log(this.PageTwo.value.Working);

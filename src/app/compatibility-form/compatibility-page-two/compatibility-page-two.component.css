@@ -36,6 +36,15 @@
 box-shadow: -12px -12px 12px 0 rgba(255, 255, 255, 1),
 12px 12px 12px rgba(0, 0, 0, 0.2);
 }
+#skipBtn{
+  background: #34b7f1;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-right: 20px;
+box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
+12px 12px 14px rgba(0, 0, 0, 0.2);
+}
 .customBackground{
   border-radius: 10px;
   padding: 5px;

@@ -90,6 +90,13 @@ ngOnInit() {
         }
     }
 
+    skip() {
+      this.fourPageService.form3Completed.emit(true);
+      setTimeout(() => {
+        document.getElementById('skipBtn').click();
+      }, 100);
+    }
+
 
 firstStep() {
       console.log(this.PageThree.value.BirthPlace);
