@@ -151,7 +151,7 @@ firstStep() {
       this.spinner.show();
 
       const firststepdata = new FormData();
-      firststepdata.append('id', localStorage.getItem('id'));
+      firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
       firststepdata.append('mobile', localStorage.getItem('mobile_number'));
       firststepdata.append('degree', this.PageTwo.value.Qualification);
       firststepdata.append('occupation', this.PageTwo.value.Occupation);
