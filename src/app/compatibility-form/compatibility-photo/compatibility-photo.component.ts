@@ -168,7 +168,7 @@ export class CompatibilityPhotoComponent implements OnInit {
     const photoBtn = document.getElementById('photoBtn') as HTMLButtonElement;
     photoBtn.disabled = true;
     const uploadData = new FormData();
-    uploadData.append('id', localStorage.getItem('id'));
+    uploadData.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
     uploadData.append('index', index);
     uploadData.append('image', data);
     uploadData.append('is_lead', '1');
