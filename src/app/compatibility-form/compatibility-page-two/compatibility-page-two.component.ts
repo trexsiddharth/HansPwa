@@ -117,7 +117,8 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
       Occupation: ['', Validators.compose([Validators.required])],
       Designation: ['', Validators.compose([Validators.required])],
       Working: ['', Validators.compose([Validators.required])],
-      About: ['']
+      About: [''],
+      abroad: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -158,6 +159,7 @@ firstStep() {
       firststepdata.append('profession', this.PageTwo.value.Designation);
       firststepdata.append('working_city', this.workplace);
       firststepdata.append('about', this.PageTwo.value.About);
+      firststepdata.append('abroad', this.PageTwo.value.abroad);
 
 
             // tslint:disable-next-line: max-line-length
@@ -253,6 +255,7 @@ updateFormTwoData(profileData: FormData) {
   this.fourPageService.profile.designation = profileData.get('profession').toString();
   this.fourPageService.profile.workingCity = profileData.get('working_city').toString();
   this.fourPageService.profile.about = profileData.get('about').toString();
+  this.fourPageService.profile.abroad = profileData.get('abroad').toString();
 
   console.log(this.fourPageService.getProfile());
 }

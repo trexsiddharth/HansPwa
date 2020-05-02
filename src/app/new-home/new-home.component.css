@@ -29,7 +29,8 @@ width: 25%;
 }
 .toolBarRow2{
     background-color: #0C9BF2;
-    padding: 10px 0px;
+    padding: 0px 0px 10px;
+    margin-top: -10px;
 }
 .b-r{
     border-right: 1px solid white;
@@ -38,6 +39,10 @@ width: 25%;
 @media (max-width: 1024px) {
     .drawerSettings{
         width: 35%;
+        }
+    .toolBarRow2{
+            background-color: #0C9BF2;
+            padding: 10px 0px;
         }
 }
 

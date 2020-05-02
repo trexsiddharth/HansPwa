@@ -52,8 +52,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
         });
     } else if (localStorage.getItem('getListTempleId') && localStorage.getItem('getListId')) {
       this.getLeadData().subscribe(
-        value =>
-        {
+        value => {
           console.log(value);
           if (value.status === '1') {
 
@@ -114,10 +113,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
       );
     });
 
-      }
-      submit() {
-        this.clearHistory();
-        window.open('https://partner.hansmatrimony.com/getList', '_top', null, true);
       }
 
       clearHistory() {
@@ -235,6 +230,8 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter Working City');
         } else if (userProfile.about === null  || userProfile.about === '') {
           return this.ngxNotificationService.error('Enter About');
+        } else if (userProfile.abroad === null  || userProfile.abroad === '') {
+          return this.ngxNotificationService.error('Enter Wish to go abroad detail');
         } else if (userProfile.birthPlace === null  || userProfile.birthPlace === '') {
           return this.ngxNotificationService.error('Enter Birth Place');
         } else if (userProfile.birthTime === null  || userProfile.birthTime === '') {
@@ -345,7 +342,14 @@ export class CompatibilityPageFiveComponent implements OnInit {
                       console.log(data);
                       if (data.status === '1') {
                   this.clearHistory();
-                  window.open('https://partner.hansmatrimony.com/getList', '_top', null, true);
+
+                  if (localStorage.getItem('getListMobile')) { // mode 3
+                          window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
+                        } else if (localStorage.getItem('getListId')) { // mode 2
+                          window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+                        }
+
+
                       } else {
                         this.ngxNotificationService.error(data.message, 'Not Approved');
                       }
@@ -367,7 +371,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
                 console.log(data);
                 if (data.status === '1') {
             this.clearHistory();
-            window.open('https://partner.hansmatrimony.com/getList', '_top', null, true);
+            if (localStorage.getItem('getListMobile')) { // mode 3
+              window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
+            } else if (localStorage.getItem('getListId')) { // mode 2
+              window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+            }
                 } else {
                   this.ngxNotificationService.error(data.message, 'Not Approved');
                 }
@@ -391,7 +399,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
               console.log(data);
               if (data.status === '1') {
           this.clearHistory();
-          window.open('https://partner.hansmatrimony.com/getList', '_top', null, true);
+          if (localStorage.getItem('getListMobile')) { // mode 3
+            window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
+          } else if (localStorage.getItem('getListId')) { // mode 2
+            window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+          }
               } else {
                 this.ngxNotificationService.error(data.message, 'Not Approved');
               }
@@ -423,7 +435,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
         return this.http.post('https://partner.hansmatrimony.com/api/completeLead', approveData);
       }
 
-      getLeadData(): Observable<any>{
+      getLeadData(): Observable<any> {
         const formData = new FormData();
         formData.append('id', localStorage.getItem('getListId'));
         return this.http.post('https://partner.hansmatrimony.com/api/getLeadDetails', formData);

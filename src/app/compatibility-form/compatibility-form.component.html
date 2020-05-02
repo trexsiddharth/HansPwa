@@ -211,10 +211,19 @@
                             यहाँ कस्टमर कहाँ रहता  है वो भरे जैसे की करोल बाघ , शादी पुर , बुरारी रोहिणी आदि |
                           </p>
 
-                          <!-- <mat-checkbox>
+                          <div class="col-12" style="margin-top: 20px;">
+                            <mat-checkbox (change)="checkDisable($event)">
                             Physical Disability
-                          </mat-checkbox> -->
+                          </mat-checkbox>
 
+                          </div>
+
+                          <div class="col-12" *ngIf="isDisable">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
+                              <mat-label style="color: black;">Disabled Part</mat-label>
+                              <input  type="text"  matInput formControlName="disabledPart">
+                            </mat-form-field>
+                          </div>
                           
                           <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                               <button mat-raised-button type="button" id="viewButton" matStepperNext class="btn" (click)="firstStep()">Next</button>

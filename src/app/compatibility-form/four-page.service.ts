@@ -54,6 +54,7 @@ export class FourPageService {
     this.profile.caste = userData.get('caste').toString();
     this.profile.manglik = userData.get('manglik').toString();
     this.profile.locality = userData.get('locality').toString();
+    this.profile.disabledPart = userData.get('disabled_part').toString();
     console.log(this.profile);
   }
 

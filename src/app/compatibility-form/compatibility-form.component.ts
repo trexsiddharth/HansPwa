@@ -109,6 +109,7 @@ export class CompatibilityFormComponent implements OnInit {
   isLinear = true;
   lat;
   long;
+  isDisable = false;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, 
@@ -117,7 +118,9 @@ export class CompatibilityFormComponent implements OnInit {
               public fourPageService: FourPageService,
               private matDialog: MatDialog,
               private route: ActivatedRoute,
-              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
+              private ngxNotificationService: NgxNotificationService, 
+              private spinner: NgxSpinnerService) {
+
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
@@ -136,7 +139,8 @@ export class CompatibilityFormComponent implements OnInit {
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
       Mangalik: ['', Validators.compose([Validators.required])],
-      locality: ['', Validators.compose([Validators.required])]
+      locality: ['', Validators.compose([Validators.required])],
+      disabledPart: ['']
     });
   }
 
@@ -339,6 +343,9 @@ export class CompatibilityFormComponent implements OnInit {
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
               firststepdata.append('locality', this.locality);
+              firststepdata.append('disability', this.isDisable ? 'yes' : null);
+              firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
+
 
               this.lat ? firststepdata.append('lat', this.lat)
               : firststepdata.append('lat', '');
@@ -766,6 +773,11 @@ getProfile() {
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     const dialogRef = this.matDialog.open(FormsMessageDialogComponent, dialogConfig);
+  }
+
+  checkDisable(event) {
+    console.log(event.checked);
+    this.isDisable = event.checked;
   }
 }
 

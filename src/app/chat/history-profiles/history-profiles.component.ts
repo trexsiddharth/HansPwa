@@ -35,6 +35,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
 
 
 @Component({
@@ -225,6 +226,40 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
+  openPersonalizedMessageDialog(item) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        }
+      }
+    );
+    dialogConfig.data = {
+      profile : item,
+      type: this.type
+    };
+    const dialogRef = this.dialog.open(PersonalizedMessageDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (data: any) => {
+        if (data) {
+          this.profileReAnswer(data.profile, data.ans, data.index);
+        }
+      }
+    );
+  }
+
   openProfileDialog(item: any, ind: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
@@ -236,15 +271,17 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           console.log('screen is greater than  1024px');
           dialogConfig.maxWidth = '30vw';
           dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
         } else {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '90vw';
           dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = true;
         }
       }
     );
 
-    dialogConfig.disableClose = true;
+    
     dialogConfig.data = {
       profile : item,
       index : ind,

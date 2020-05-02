@@ -1,0 +1,16 @@
+<main style="padding: 20px;">
+    <h3 style="color: #58d1fd;text-align: center;">
+        {{profile.name}} Response Status
+    </h3>
+    <hr>
+    <h5 style="color: black;">
+        Status: <h6 style="display: inline-block;" 
+        [ngStyle]="{color: profile.bNS === 1 ? 'green' : 'red'}">{{profile.bNS === 1 ? 'Positive' : 'Negative' }}</h6> 
+    </h5>
+   <h5 style="color: black;">
+    Message:
+       <h6 style="margin-top: 10px;">
+        {{profile.bEW}}
+       </h6>
+   </h5>
+</main>
