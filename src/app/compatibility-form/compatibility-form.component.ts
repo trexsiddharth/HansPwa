@@ -377,8 +377,8 @@ export class CompatibilityFormComponent implements OnInit {
                 localStorage.setItem('id', res.id);
                 localStorage.setItem('gender', this.PageOne.value.gender);
                 localStorage.setItem('mobile_number', this.PageOne.value.phone);
+                this.fourPageService.updateFormOneData(firststepdata);
                 if (this.fourPageService.getUserThrough()) {
-                  this.fourPageService.updateFormOneData(firststepdata);
                   this.locality = firststepdata.get('locality');
                 }
                 this.Analytics('Four Page Registration', 'Four Page Registration Page One',

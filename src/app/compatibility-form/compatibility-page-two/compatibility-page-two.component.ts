@@ -208,6 +208,7 @@ Analytics(type: string, category: string, action: string) {
 
 onAutocompleteSelected(event) {
       this.PageTwo.value.Working = event.formatted_address;
+      this.setAbout();
       this.workplace = event.formatted_address;
       console.log('address of family', this.PageTwo.value.Working);
   }
@@ -236,6 +237,12 @@ changedDesignation() {
     this.fourPageService.formCompleted.emit(true);
    }
 }
+changedAbroad() {
+  console.log('changed Abroad');
+  if (this.PageTwo.valid) {
+    this.fourPageService.formCompleted.emit(true);
+   }
+}
 getQualification(text) {
   const groupIndex = this.HigherEducation.findIndex(
     element => {
@@ -258,6 +265,34 @@ updateFormTwoData(profileData: FormData) {
   this.fourPageService.profile.abroad = profileData.get('abroad').toString();
 
   console.log(this.fourPageService.getProfile());
+}
+setAge(dob: string) {
+  if (dob != null) {
+  return (Math.floor((Date.now() - new Date(dob).getTime()) / (1000 * 60 * 60 * 24 * 365)));
+  } else {
+    return null;
+  }
+}
+setAbout() {
+  console.log(this.fourPageService.getProfile());
+  if (this.fourPageService.getProfile().caste
+    && this.fourPageService.getProfile().manglik
+    && this.fourPageService.getProfile().gender
+    && this.fourPageService.getProfile().locality
+    && this.PageTwo.value.Qualification
+    && this.PageTwo.value.Occupation
+    && this.PageTwo.value.Working) {
+    console.log('Setting About');
+    this.PageTwo.patchValue({
+      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)}
+       yr old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik}
+      ${this.fourPageService.getProfile().gender} residing in ${this.fourPageService.getProfile().locality}.
+      I've completed my ${this.PageTwo.value.Qualification} and
+        ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Occupation
+      : 'Currently not working' }
+      ${this.PageTwo.value.Working !== 'Not Working' ? 'in ' + this.PageTwo.value.Working : '' }.`
+    });
+  }
 }
 setFormOneData(userProfile: Profile) {
 this.workplace = userProfile.workingCity ? userProfile.workingCity : '';
