@@ -31,7 +31,7 @@
                    
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label style="color: black;">Food Choice</mat-label>
-                            <mat-select (selectionChange)="changed('food')" formControlName="FoodChoice" required >
+                            <mat-select (selectionChange)="changed('food')" formControlName="FoodChoice"  >
                               <mat-option value="Vegetarian">Vegetarian</mat-option>
                               <mat-option value="Non-Vegetarian">Non-Vegetarian</mat-option>
                             </mat-select>
@@ -71,7 +71,7 @@
                           <div class="col-md-12">
                             <mat-form-field class="full-width fieldFit" appearance="standard" >
                               <mat-label style="color: black;">Family's Annual Income (In LPA)<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
-                              <input type="text" pattern="\d*" maxlength="3" (change)="changed('Fincome')" matInput formControlName="FamilyIncome" required name="FamilyIncome">
+                              <input type="text" pattern="\d*" maxlength="3" (change)="changed('Fincome')" matInput formControlName="FamilyIncome"  name="FamilyIncome">
                               <span matSuffix>LPA &nbsp;</span>
                               <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageThree.get('FamilyIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
                             </mat-form-field>
@@ -81,7 +81,7 @@
 
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                       <button mat-raised-button type="button" id="skipBtn" matStepperNext class="btn" (click)="skip()" *ngIf="fourPageService.getSkippable()">Skip</button>
-                        <button mat-raised-button matStepperNext type="button" id="viewButton" (click)="firstStep()" class="btn" >Next</button>
+                        <button mat-raised-button matStepperNext type="button" id="viewButtonThree" (click)="firstStep()" class="btn" >Next</button>
                     </div>
                     <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                       डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |

@@ -70,12 +70,12 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
             private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageThree = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      BirthPlace: ['', Validators.compose([Validators.required])],
+      BirthPlace: [''],
       BirthTime: [''],
       Gotra: [''],
-      FoodChoice: ['', Validators.compose([Validators.required])],
-      FatherStatus: ['', Validators.compose([Validators.required])],
-      MotherStatus: ['', Validators.compose([Validators.required])],
+      FoodChoice: [''],
+      FatherStatus: [''],
+      MotherStatus: [''],
       FamilyIncome: ['', Validators.compose([Validators.max(999)])],
     });
   }
@@ -97,36 +97,71 @@ ngOnInit() {
       }, 100);
     }
 
+    isValid(notificationStatus): boolean { // notification status -> whether to show error notification
+      if (this.birthPlace == null || this.birthPlace === '') {
+        if (notificationStatus === 1) {
+          this.ngxNotificationService.error('Select A Valid Birth Place');
+        }
+        return false;
+    } else if (!this.PageThree.value.FoodChoice) {
+      if (notificationStatus === 1) {
+      this.ngxNotificationService.error('Select A Valid Food Choice');
+      }
+      return false;
+    } else if (!this.PageThree.value.FatherStatus) {
+      if (notificationStatus === 1) {
+      this.ngxNotificationService.error('Select A Valid Father Status');
+      }
+      return false;
+    } else if (!this.PageThree.value.MotherStatus) {
+      if (notificationStatus === 1) {
+      this.ngxNotificationService.error('Select A Valid Mother Status');
+      }
+      return false;
+    } else if (!this.PageThree.value.FamilyIncome && !this.PageThree.controls.FamilyIncome.valid) {
+      if (notificationStatus === 1) {
+      this.ngxNotificationService.error('Enter A Valid Family Income');
+      }
+      return false;
+    } else {
+      return true;
+    }
+    }
+
 
 firstStep() {
       console.log(this.PageThree.value.BirthPlace);
-      if (!this.fourPageService.getUserThrough() && this.birthPlace == null || this.birthPlace === '') {
-      this.ngxNotificationService.error('Select A Valid Birth Place');
-      return;
-    }
+      if (!this.fourPageService.getUserThrough() && this.isValid(1) === false ) {
+        this.fourPageService.form3Completed.emit(false);
+        return;
+    } else {
+      this.spinner.show();
+      const firststepdata = new FormData();
+      firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
+      firststepdata.append('birth_place', this.birthPlaceText);
 
-      if (this.PageThree.valid) {
-              this.spinner.show();
-              const firststepdata = new FormData();
-              firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
-              firststepdata.append('birth_place', this.birthPlaceText);
-
-              if (this.PageThree.value.BirthTime) {
+      if (this.PageThree.value.BirthTime) {
               firststepdata.append('birth_time', this.PageThree.value.BirthTime);
               }
-              firststepdata.append('food_choice', this.PageThree.value.FoodChoice);
-              firststepdata.append('gotra', this.PageThree.value.Gotra);
-              firststepdata.append('father_status', this.PageThree.value.FatherStatus);
-              firststepdata.append('mother_status', this.PageThree.value.MotherStatus);
-              firststepdata.append('family_income', this.PageThree.value.FamilyIncome);
+      firststepdata.append('food_choice', this.PageThree.value.FoodChoice);
+      firststepdata.append('gotra', this.PageThree.value.Gotra);
+      firststepdata.append('father_status', this.PageThree.value.FatherStatus);
+      firststepdata.append('mother_status', this.PageThree.value.MotherStatus);
+      firststepdata.append('family_income', this.PageThree.value.FamilyIncome);
 
 
             // tslint:disable-next-line: max-line-length
-              return this.http.post('https://partner.hansmatrimony.com/api/formThreeProfile', firststepdata ).subscribe((res: any) => {
+      return this.http.post('https://partner.hansmatrimony.com/api/formThreeProfile', firststepdata ).subscribe((res: any) => {
               console.log('first', res);
 
               if (res.status === 1) {
                 this.spinner.hide();
+
+                this.fourPageService.form3Completed.emit(true);
+                setTimeout(() => {
+                  document.getElementById('viewButtonThree').click();
+                }, 100);
+
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormThreeData(firststepdata);
                 }
@@ -144,15 +179,8 @@ firstStep() {
               this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
               console.log(err);
             });
-          } else {
-            // tslint:disable-next-line: forin
-            for (const control in this.PageThree.controls) {
-                if (this.PageThree.controls[control].value === '') {
-                  this.errors.push(control);
-                }
-            }
-            this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
-          }
+    }
+
   }
 
 Analytics(type: string, category: string, action: string) {
@@ -172,18 +200,12 @@ onAutocompleteSelected(event) {
 }
 onLocationSelected(e) {
   this.birthPlace = e;
-  if (this.PageThree.valid) {
-    this.fourPageService.form3Completed.emit(true);
-   }
   console.log('location of family', e);
 }
 
   // tslint:disable-next-line: no-shadowed-variable
   changed(element: any) {
     console.log(element);
-    if (this.PageThree.valid) {
-      this.fourPageService.form3Completed.emit(true);
-     }
   }
   updateFormThreeData(profileData: FormData) {
     this.fourPageService.profile.birthPlace = profileData.get('birth_place').toString();
