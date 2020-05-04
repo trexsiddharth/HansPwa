@@ -36,6 +36,7 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
+import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -326,7 +327,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
     // tslint:disable-next-line: max-line-length
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
-      (data: any) => {
+     async (data: any) => {
         console.log(data);
         if (this.itemService.getItem()) {
         this.openContactedProfile(data);
@@ -335,7 +336,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem(link)) {
         // update new data only
           if (JSON.stringify(this.profile) !== JSON.stringify(data)) {
-          this.addRemoveNewData(data);
+          await this.addRemoveNewData(data);
       }
       } else {
         this.profile = data;
@@ -347,6 +348,25 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (this.profile.length < 1) {
           this.getNoDataText(link);
         }
+
+        // event: when user visits mein kisse pasand hu for first tym when profile count is more than 1
+        if (link === 'interestReceived') {
+          this.getInterestReceivedEventStatus(0).subscribe(
+            res => {
+              console.log(res);
+              if (res.si_status && res.si_status === 0 && this.profile.length > 1) {
+                this.Analytics('Mein Kisse Pasand Hu',
+                 'Mein Kisse Pasand Hu Section Visited',
+                  'Mein Kisse Pasand Hu Section Visited');
+                this.getInterestReceivedEventStatus(1).subscribe(
+                    data => {
+                        console.log(data);
+                    }
+                  );
+              }
+            }
+          );
+        }
       },
       (error: any) => {
         this.spinner.hide();
@@ -356,8 +376,17 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     );
   }
 
+  getInterestReceivedEventStatus(status): Observable<any> {
+    const formData = new FormData();
+    formData.append('id', localStorage.getItem('id'));
+    formData.append('is_lead', localStorage.getItem('is_lead'));
+    formData.append('event_check', status);
+    return this.http.post('https://partner.hansmatrimony.com/api/updateSiEvent', formData);
+  }
+
   // updates the new data to locally stored data
   addRemoveNewData(data: any) {
+    return  new Promise((res) => {
        // finding and adding the new element to the locally stored list
        (data as any[]).forEach(
         element => {
@@ -394,8 +423,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         }
        }
       );
+       
        console.log(this.profile);
        this.updateLocalList();
+       res(this.profile);
+      });
   }
 
   openContactedProfile(data: any) {

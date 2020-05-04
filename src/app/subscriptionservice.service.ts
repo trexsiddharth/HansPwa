@@ -46,6 +46,7 @@ export class SubscriptionserviceService {
             this.captureStandardPayment(response, amt);
           } else {
             alert('Payment Successfull \n' + ' We will get back to you shortly \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
+            this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amt);
           }
 
          },
@@ -133,6 +134,18 @@ authorizeFirstPaymentCustom(response){
     }
   );
 }
+
+Analytics(type: string, category: string, action: string) {
+  (window as any).ga('send', 'event', category, action, {
+    hitCallback: () => {
+
+      console.log('Tracking ' + type + ' successful');
+
+    }
+
+  });
+}
+
 captureStandardPayment(response, amount) {
   let formData = new FormData();
   formData.append('mobile', localStorage.getItem('mobile_number'));
@@ -144,6 +157,7 @@ captureStandardPayment(response, amount) {
         console.log(data);
         if (data.status === 1) {
           alert('Payment Successful, Credits has been added to your account.');
+          this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amount);
         } else {
           alert('Something went wrong. Please try again later.');
         }

@@ -128,6 +128,17 @@ onResize(event) {
   this.innerWidth = window.innerWidth;
 }
 
+Analytics(type: string, category: string, action: string) {
+  (window as any).ga('send', 'event', category, action, {
+    hitCallback: () => {
+
+      console.log('Tracking ' + type + ' successful');
+
+    }
+
+  });
+}
+
    openDialog(plan: String, benefits: String, value: String , price: String) {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
@@ -150,6 +161,9 @@ onResize(event) {
     } else {
       this.getRazorPay(price, 'live', 0, '', '', '');
     }
+
+    this.Analytics('RazorPay Payement Gateway', 'RazorPay Payement Gateway Opened',
+     'Payement Gateway Opened For ' + price );
   //   dialogRef.afterClosed().subscribe(
   //     data => {
   //       console.log(data);

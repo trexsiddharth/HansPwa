@@ -183,6 +183,8 @@ export class CompatibilityPhotoComponent implements OnInit {
       if (index === 1) {
         this.imgURL = this.suc.profile_pic_url;
         this.fourPageService.profile.image1 = this.suc.profile_pic_url;
+        this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
+                 'Image One Uploaded on Four Page Registration Page Four');
       } else if (index === 2) {
         this.frontfile = this.suc.profile_pic_url;
         this.fourPageService.profile.image2 = this.suc.profile_pic_url;
@@ -242,6 +244,16 @@ export class CompatibilityPhotoComponent implements OnInit {
     }
   }
 
+  Analytics(type: string, category: string, action: string) {
+    (window as any).ga('send', 'event', category, action, {
+      hitCallback: () => {
+
+        console.log('Tracking ' + type + ' successful');
+
+      }
+    });
+  }
+
   skip() {
     (window as any).fbq('track', 'FourPageRegistration', {
       value: 15,
@@ -253,12 +265,16 @@ export class CompatibilityPhotoComponent implements OnInit {
       currency: 'INR',
       content_name: localStorage.getItem('RegisterNumber'),
     });
-    this.gtag_report_conversion('https://hansmatrimony.com/fourReg');
+    this.gtag_report_conversion();
 
-    this.router.navigateByUrl('chat');
+
+    this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
+                 'Registered through Four Page Registration Page Four');
+
+    this.router.navigateByUrl('chat?first');
   }
 
-  gtag_report_conversion(url) {
+  gtag_report_conversion() {
     (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
     return false;
   }

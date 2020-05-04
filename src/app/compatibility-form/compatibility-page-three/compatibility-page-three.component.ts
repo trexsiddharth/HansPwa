@@ -94,6 +94,8 @@ ngOnInit() {
       this.fourPageService.form3Completed.emit(true);
       setTimeout(() => {
         document.getElementById('skipBtn').click();
+        this.Analytics('Four Page Registration', 'Four Page Registration Page Three',
+        'Skipped through Four Page Registration Page Three');
       }, 100);
     }
 
@@ -158,9 +160,6 @@ firstStep() {
                 this.spinner.hide();
 
                 this.fourPageService.form3Completed.emit(true);
-                setTimeout(() => {
-                  document.getElementById('viewButtonThree').click();
-                }, 100);
 
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormThreeData(firststepdata);

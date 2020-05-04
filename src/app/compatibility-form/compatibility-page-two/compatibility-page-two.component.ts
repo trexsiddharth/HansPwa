@@ -137,6 +137,8 @@ ngOnInit() {
       this.fourPageService.formCompleted.emit(true);
       setTimeout(() => {
         document.getElementById('skipBtn').click();
+        this.Analytics('Four Page Registration', 'Four Page Registration Page Two',
+                 'Skipped through Four Page Registration Page Two');
       }, 100);
     }
 

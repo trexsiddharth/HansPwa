@@ -228,6 +228,17 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     }
   }
 
+  Analytics(type: string, category: string, action: string) {
+    (window as any).ga('send', 'event', category, action, {
+      hitCallback: () => {
+
+        console.log('Tracking ' + type + ' successful');
+
+      }
+
+    });
+  }
+
   getNextMessageOrProfile(reply: string) {
     console.log('shortlist count', this.shortListCount);
     const modal = document.getElementById('myModal');
@@ -277,6 +288,16 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
               this.spinner.hide();
           }
 
+          // if first time seen profile
+          if (this.router.url.match('first') && reply === 'SHOW') {
+            this.Analytics('Four Page Registration', 'Four Page Registration Chat Page',
+              'First Profiles Shown on  Chat Page');
+          } else if (this.router.url.match('first')) {
+            this.Analytics('Four Page Registration', 'Four Page Registration Chat Page',
+              'First Response ' +  reply + ' on First Profile Shown');
+            this.router.navigateByUrl('chat');
+          }
+
           } else {
             this.type = 'message';
             this.itemMessage = data.apiwha_autoreply;
@@ -312,6 +333,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         this.getCredits();
       }, err => {
         console.log(err);
+        this.spinner.hide();
+        this.ngxNotificationService.error('Something Went Wrong');
       }
     );
   }
