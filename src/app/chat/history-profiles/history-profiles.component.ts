@@ -364,6 +364,9 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               }
             }
           );
+
+          // show lockdown offer
+          this.itemService.openLockdownAd();
         }
       },
       (error: any) => {

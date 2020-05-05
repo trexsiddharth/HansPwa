@@ -330,7 +330,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
               document.getElementById('profilePic').scrollIntoView({behavior: 'smooth'});
             }
           }
-        this.getCredits();
+        this.getCredits(reply);
       }, err => {
         console.log(err);
         this.spinner.hide();
@@ -388,7 +388,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
       this.spinner.hide();
     }
 
-  getCredits() {
+  getCredits(reply) {
     const creditsData = new FormData();
     creditsData.append('id', localStorage.getItem('id'));
     if (localStorage.getItem('is_lead')) {
@@ -414,6 +414,10 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
        if (this.paidStatus === 'Paid' && this.points === 0) {
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
+        }
+          // show lockdown offer 
+       if (reply === 'SHOW' && this.itemService.getCredits()  && this.itemService.getCredits().toString() === '0') {
+          this.itemService.openLockdownAd();
         }
 
         // update profile left count

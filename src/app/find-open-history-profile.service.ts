@@ -1,6 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ProfileCount } from './chat/countModel';
-import { stat } from 'fs';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,9 @@ export class FindOpenHistoryProfileService {
   countUpdated = new EventEmitter();
   setTab = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+    private breakPointObserver: BreakpointObserver) { }
 
   setItem(item: any) {
     console.log(item);
@@ -103,5 +108,28 @@ export class FindOpenHistoryProfileService {
   }
   getCountOnlyShorted() {
     return this.profileCount.shortedCount;
+  }
+
+  openLockdownAd() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
   }
 }
