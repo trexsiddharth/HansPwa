@@ -93,7 +93,6 @@ ngOnInit() {
     skip() {
       this.fourPageService.form3Completed.emit(true);
       setTimeout(() => {
-        document.getElementById('skipBtn').click();
         this.Analytics('Four Page Registration', 'Four Page Registration Page Three',
         'Skipped through Four Page Registration Page Three');
       }, 100);
