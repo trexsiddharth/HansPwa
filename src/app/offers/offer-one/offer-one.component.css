@@ -18,3 +18,9 @@
     width: 125px;
     border-radius: 50%;
 }
+
+.contentText {
+    color: #797979;
+    margin-top: 15px;
+    font-size: 1.3rem;
+}

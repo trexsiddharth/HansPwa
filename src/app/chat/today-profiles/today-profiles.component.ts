@@ -415,10 +415,10 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
         }
-          // show lockdown offer 
-       if (reply === 'SHOW' && this.itemService.getCredits()  && this.itemService.getCredits().toString() === '0') {
-          this.itemService.openLockdownAd();
-        }
+          // show lockdown offer
+      //  if (reply === 'SHOW' && this.itemService.getCredits()  && this.itemService.getCredits().toString() === '0') {
+      //     this.itemService.openLockdownAd();
+      //   }
 
         // update profile left count
        data ? this.getProfilesLeft(this.item.profiles_left)

@@ -1,6 +1,42 @@
 <main>
     <div class="t-c">
         <img id="profileImage" src="../../../assets/avatar-blue.svg" alt="profle image">
-        
+        <p class="contentText">
+            Name
+        </p>
+    </div>
+
+    <div class="t-c">
+        <p class="contentText">
+            देर किस बात की ? इन्हे अभी कॉल करे
+        </p>
+    </div>
+
+    <div class="t-c" style="margin-top: 25px;">
+        <p class="contentText">
+            <mat-icon style="color: #58d1fd;
+            vertical-align: middle;
+            height: 40px;
+            font-size: 40px;">call</mat-icon> &nbsp; +91-9910XXXXXX
+        </p>
+    </div>
+
+    <div>
+        <div class="t-c">
+            <button [routerLink]="['/subscription']" routerLinkActive="router-link-active"
+             (click)="closeDialog()"  class="btn" style="background: #D313AE;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 10px 50px;
+            border-radius: 10px;
+            margin: 20px 0px" mat-raised-button>
+                मेम्बरशिप चुनें   
+            </button>
+        </div>
+    </div>
+
+    <div class="t-c">
+
     </div>
 </main>
