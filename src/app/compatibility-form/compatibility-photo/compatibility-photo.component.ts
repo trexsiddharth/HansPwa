@@ -237,10 +237,10 @@ export class CompatibilityPhotoComponent implements OnInit {
       } else if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
         console.log(this.fourPageService.getProfile().mobile);
         localStorage.setItem('mobile_number', this.fourPageService.getProfile().mobile);
-        this.skip();
+        this.skip(1);
       }
     } else {
-      this.skip();
+      this.skip(0);
     }
   }
 
@@ -254,7 +254,7 @@ export class CompatibilityPhotoComponent implements OnInit {
     });
   }
 
-  skip() {
+  skip(type) {
     (window as any).fbq('track', 'FourPageRegistration', {
       value: 15,
       currency: 'INR',
@@ -271,7 +271,10 @@ export class CompatibilityPhotoComponent implements OnInit {
     this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
                  'Registered through Four Page Registration Page Four');
 
-    this.router.navigateByUrl('chat?first');
+                 // 0 -> got to chat  1-> got to fifth page
+    if (type === 0) {
+      this.router.navigateByUrl('chat?first');
+    }
   }
 
   gtag_report_conversion() {

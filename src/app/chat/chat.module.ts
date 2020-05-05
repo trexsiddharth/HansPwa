@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './chat.component';
-import { HistoryComponent } from './history/history.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
 import { PersonalizedProfilesComponent } from './personalized-profiles/personalized-profiles.component';
 import { ConnectionErrorComponent } from './connection-error/connection-error.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -32,8 +30,6 @@ import { PersonalizedMessageDialogComponent } from './history-profiles/personali
     AngularMaterialModule
   ],
   declarations: [ChatComponent,
-    HistoryComponent,
-    MyprofileComponent,
     PersonalizedProfilesComponent,
     ConnectionErrorComponent,
     MessageDialogComponent,

@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SubscriptionserviceService } from './subscriptionservice.service';
@@ -31,11 +30,11 @@ import { NewHomeComponent } from './new-home/new-home.component';
 import { HomeMainComponent } from './new-home/home-main/home-main.component';
 import { HomeDrawerComponent } from './new-home/home-drawer/home-drawer.component';
 import { NewHomeService } from './new-home/new-home.service';
+import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     ViewCentresComponent,
     AnalyticsButtonDirective,
     TiktokAdsFormComponent,
@@ -45,6 +44,7 @@ import { NewHomeService } from './new-home/new-home.service';
     NewHomeComponent,
     HomeMainComponent,
     HomeDrawerComponent,
+    LockdownOffComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +63,8 @@ import { NewHomeService } from './new-home/new-home.service';
   providers: [SubscriptionserviceService, NewHomeService],
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
-  entryComponents: [TiktokAdsFormComponent],
+  entryComponents: [TiktokAdsFormComponent,
+  LockdownOffComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

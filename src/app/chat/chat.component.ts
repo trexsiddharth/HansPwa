@@ -490,7 +490,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   Analytics(type: string, category: string, action: string) {
-    (window as any).ga('send', 'event', category, action, {
+    (window as any).gtag('send', 'event', category, action, {
       hitCallback: () => {
 
         console.log('Tracking ' + type + ' successful');

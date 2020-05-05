@@ -129,8 +129,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
             } else {
               this.validateComplete(this.fourPageService.profile, status);
             }
-        } else {
-          this.skip();
         }
       }
       assignToTemple(event: any) {
@@ -171,26 +169,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
       checkStat(event: any) {
         console.log(event.checked);
         this.checkStatus = event.checked;
-      }
-
-      skip() {
-        (window as any).fbq('track', 'FourPageRegistration', {
-          value: 15,
-          currency: 'INR',
-          content_name: localStorage.getItem('RegisterNumber'),
-        });
-        (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', {
-          value: 15,
-          currency: 'INR',
-          content_name: localStorage.getItem('RegisterNumber'),
-        });
-        this.gtag_report_conversion('https://hansmatrimony.com/fourReg');
-        this.router.navigateByUrl('/chat');
-      }
-
-      gtag_report_conversion(url) {
-        (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
-        return false;
       }
 
       validate(userProfile: Profile, status: any) {

@@ -288,7 +288,7 @@ setAbout() {
     this.PageTwo.patchValue({
       About: `I am ${this.setAge(this.fourPageService.getProfile().dob)}
        yr old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik}
-      ${this.fourPageService.getProfile().gender} residing in ${this.fourPageService.getProfile().locality}.
+      ${this.fourPageService.getProfile().gender === 'Male' ?  'Boy' : 'Girl'} residing in ${this.fourPageService.getProfile().locality}.
       I've completed my ${this.PageTwo.value.Qualification} and
         ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Occupation
       : 'Currently not working' }

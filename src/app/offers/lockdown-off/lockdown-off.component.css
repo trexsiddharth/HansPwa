@@ -1,0 +1,99 @@
+
+::ng-deep .mat-dialog-container{
+    background-image: url('https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/320+grey.jpg');
+    background-size: contain;
+    padding: 0px;
+    border-radius: 10px;
+}
+::ng-deep .mat-dialog-content{
+    max-height: 79vh;
+    margin: 0px;
+    padding: 0px;
+}
+
+::ng-deep .cdk-overlay-dark-backdrop{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+}
+
+#cancel{
+    position: absolute;
+    z-index: 99999999;
+    right: 0;
+    top: -5px;
+}
+
+#topBanner{
+    width: 100%;
+    text-align: center;
+}
+
+#bannerDiv{
+    width: 90%;
+    object-fit: cover;
+    height: 80px;
+    position: relative;
+    margin: 10px auto;
+}
+
+#bannerImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#bannerText {
+    position: absolute;
+    font-size: 2rem;
+    color: white;
+    top: 5px;
+    left: 25%;
+    font-weight: 500;
+}
+
+#offerHeadLine{
+    color: #737373;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+.subHeading{
+    font-size: 1.4rem;
+    color: #797979;
+    margin-top: 20px;
+
+}
+
+
+@media (max-width: 575px) {
+    #bannerText {
+        position: absolute;
+        font-size: 2rem;
+        color: white;
+        top: 5px;
+        left: 20%;
+        font-weight: 500;
+    }
+
+}
+@media (max-width: 350px) {
+    #bannerText {
+        position: absolute;
+        font-size: 1.6rem;
+        color: white;
+        top: 10px;
+        left: 20%;
+        font-weight: 500;
+    }
+    #offerHeadLine{
+        color: #737373;
+        font-weight: bold;
+        margin-top: 50px;
+        font-size: 1.4rem;
+    }
+    .subHeading{
+        font-size: 1.1rem;
+        color: #797979;
+        margin-top: 20px;
+    
+    }
+}

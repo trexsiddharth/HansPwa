@@ -36,7 +36,6 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
-import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -282,7 +281,6 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
     );
 
-    
     dialogConfig.data = {
       profile : item,
       index : ind,
