@@ -98,7 +98,8 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
   getProfileId(): Observable<any> {
     const formData = new FormData();
-    formData.append('mobile', localStorage.getItem('getListMobile'));
+    formData.append('mobile', localStorage.getItem('getListMobile') ? localStorage.getItem('getListMobile')
+    : localStorage.getItem('mobile_number'));
     return this.http.post('https://partner.hansmatrimony.com/api/getLeadId', formData);
   }
 
@@ -348,7 +349,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
             (data: any) => {
                 console.log(data);
                 if (data.status === '1') {
-            this.clearHistory();
             if (localStorage.getItem('getListMobile')) { // mode 3
               window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
             } else if (localStorage.getItem('getListId')) { // mode 2
@@ -357,6 +357,8 @@ export class CompatibilityPageFiveComponent implements OnInit {
                 } else {
                   this.ngxNotificationService.error(data.message, 'Not Approved');
                 }
+
+                this.clearHistory();
             }, err => {
                 console.log(err);
                 this.ngxNotificationService.error(err.message, 'Not Approved');
