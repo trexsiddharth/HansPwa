@@ -118,7 +118,7 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
       Designation: ['', Validators.compose([Validators.required])],
       Working: ['', Validators.compose([Validators.required])],
       About: [''],
-      abroad: ['', Validators.compose([Validators.required])]
+      abroad: ['']
     });
   }
 
