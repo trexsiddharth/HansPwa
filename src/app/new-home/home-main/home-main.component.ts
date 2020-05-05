@@ -17,7 +17,7 @@ export class HomeMainComponent implements OnInit {
               private breakPointObserver: BreakpointObserver) { }
 
   ngOnInit() {
-    this.openOfferOne();
+    // this.openOfferOne();
   }
 
   openPlaystore() {
