@@ -168,7 +168,7 @@ Analytics(type: string, category: string, action: string) {
     this.selectedContainer = 7;
   }
   container8() {
-    this.price = '31000';
+    this.price = '11000';
     this.selectedContainer = 8;
   }
 
