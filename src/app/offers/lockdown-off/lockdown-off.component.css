@@ -1,7 +1,5 @@
 
 ::ng-deep .mat-dialog-container{
-    background-image: url('https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/320+grey.jpg');
-    background-size: contain;
     padding: 0px;
     border-radius: 10px;
 }
@@ -13,6 +11,12 @@
 
 ::ng-deep .cdk-overlay-dark-backdrop{
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+}
+
+
+main{
+    background-image: url('https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/320+grey.jpg');
+    background-size: contain;
 }
 
 #cancel{

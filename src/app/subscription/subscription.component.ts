@@ -25,6 +25,12 @@ export class SubscriptionComponent implements OnInit {
   selectedContainer: number;
   currentOnlineStatus;
   currentPersonalizedStatus;
+  active = 'online';
+
+  plan;
+  benefit;
+  value;
+  amount;
 
   // tslint:disable-next-line: max-line-length
   constructor(private http: HttpClient, private subscriptionService: SubscriptionserviceService,
@@ -33,8 +39,6 @@ export class SubscriptionComponent implements OnInit {
   ngOnInit() {
     this.loadRazorPayScript();
     this.innerWidth = window.innerWidth;
-    this.currentPersonalizedStatus = 'buttonPersonalised';
-    this.currentOnlineStatus = 'buttonOnline';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -66,20 +70,12 @@ export class SubscriptionComponent implements OnInit {
   }
 
   togglePersonalized() {
-    if (this.show1 === true) {
-      this.show1 = false;
-      this.changeButtonPersonalized();
-      this.selectedContainer = 4;
-      return this.show2 = true;
-    }
+    this.active = 'personalized';
+    this.selectedContainer = 4;
   }
   toggleOnline() {
-    if (this.show2 === true) {
-      this.show2 = false;
-      this.changeButtonOnline();
-      this.selectedContainer = 1;
-      return this.show1 = true;
-    }
+    this.active = 'online';
+    this.selectedContainer = 1;
   }
 
   getCredits() {
@@ -105,24 +101,6 @@ export class SubscriptionComponent implements OnInit {
      }
    }
 
-
-   changeButtonOnline() {
-    this.currentPersonalizedStatus = 'buttonPersonalised';
-    this.currentOnlineStatus = 'buttonOnline';
-    document.getElementById('callBtn').style.background = 'rgb(86, 162, 245)';
-    setTimeout(() => {
-      this.container1();
-    }, 500);
-   }
-   changeButtonPersonalized() {
-      this.currentPersonalizedStatus = 'buttonPersonalisedClicked';
-      this.currentOnlineStatus = 'buttonPersonalised';
-      document.getElementById('callBtn').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-      setTimeout(() => {
-        this.container4();
-      }, 500);
-   }
-
    @HostListener('window:resize', ['$event'])
 onResize(event) {
   this.innerWidth = window.innerWidth;
@@ -139,136 +117,59 @@ Analytics(type: string, category: string, action: string) {
   });
 }
 
-   openDialog(plan: String, benefits: String, value: String , price: String) {
-    const dialogConfig = new MatDialogConfig();
-    if (this.innerWidth >= 1024) {
-      dialogConfig.minWidth = this.innerWidth - 200;
-      dialogConfig.minHeight = 600;
-    } else {
-    dialogConfig.minWidth = this.innerWidth - 50;
-    }
-    dialogConfig.disableClose = false;
-    dialogConfig.hasBackdrop = true;
-    dialogConfig.data = {
-        plan,
-        benefit: benefits,
-        value,
-        price
-      };
-    // const dialogRef = this.matDialog.open(SubscriptionDialogComponent, dialogConfig);
+   openDialog() {
+     if (this.price) {
     if (localStorage.getItem('mobile_number')) {
-    this.getRazorPay(price, 'live', 0, '', '', localStorage.getItem('mobile_number'));
-    } else {
-      this.getRazorPay(price, 'live', 0, '', '', '');
-    }
-
+      this.getRazorPay(this.price, 'live', 0, '', '', localStorage.getItem('mobile_number'));
+      } else {
+        this.getRazorPay(this.price, 'live', 0, '', '', '');
+      }
     this.Analytics('RazorPay Payement Gateway', 'RazorPay Payement Gateway Opened',
-     'Payement Gateway Opened For ' + price );
-  //   dialogRef.afterClosed().subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.dialogData = data;
-  //       this.formData = this.dialogData.formData;
-  //       this.price = this.dialogData.price;
-  //       this.getRazorPay(this.price, 'live', 0, this.formData.name, this.formData.email, this.formData.mobile);
-
-  //       (window as any).ga('send', 'event', 'Subscription', 'Plan Opted' + this.price, {
-  //         hitCallback: () => {
-  //           console.log('Tracking Subscription successful');
-  //         }});
-  //     }
-  // );
+     'Payement Gateway Opened For ' + this.price );
+     } else {
+        this.ngxNotificationService.error('Something Went Wrong');
+     }
   }
+
   container1() {
+    this.price = '3500';
     this.selectedContainer = 1;
-    document.getElementById('container1').style.background = '#56a2f5';
-    document.getElementById('container1').style.color = 'white';
-    document.getElementById('button1').style.color = 'white';
-    document.getElementById('button1').style.background = '#56a2f5';
-    document.getElementById('container2').style.background = '#f3f3f3';
-    document.getElementById('container2').style.color = 'black';
-    document.getElementById('button2').style.color = 'black';
-    document.getElementById('button2').style.background = '#6ba8a9';
-    document.getElementById('container3').style.background = '#f3f3f3';
-    document.getElementById('container3').style.color = 'black';
-    document.getElementById('button3').style.color = 'black';
-    document.getElementById('button3').style.background = '#6ba8a9';
+   
   }
   container2() {
+    this.price = '5500';
     this.selectedContainer = 2;
-    document.getElementById('container2').style.background = '#56a2f5';
-    document.getElementById('container2').style.color = 'white';
-    document.getElementById('button2').style.color = 'white';
-    document.getElementById('button2').style.background = '#56a2f5';
-    document.getElementById('container1').style.background = '#f3f3f3';
-    document.getElementById('container1').style.color = 'black';
-    document.getElementById('button1').style.color = 'black';
-    document.getElementById('button1').style.background = '#6ba8a9';
-    document.getElementById('container3').style.background = '#f3f3f3';
-    document.getElementById('container3').style.color = 'black';
-    document.getElementById('button3').style.color = 'black';
-    document.getElementById('button3').style.background = '#6ba8a9';
+   
   }
   container3() {
+    this.price = '5500';
     this.selectedContainer = 3;
-    document.getElementById('container3').style.background = '#56a2f5';
-    document.getElementById('container3').style.color = 'white';
-    document.getElementById('button3').style.color = 'white';
-    document.getElementById('button3').style.background = '#56a2f5';
-    document.getElementById('container2').style.background = '#f3f3f3';
-    document.getElementById('container2').style.color = 'black';
-    document.getElementById('button2').style.color = 'black';
-    document.getElementById('button2').style.background = '#6ba8a9';
-    document.getElementById('container1').style.background = '#f3f3f3';
-    document.getElementById('container1').style.color = 'black';
-    document.getElementById('button1').style.color = 'black';
-    document.getElementById('button1').style.background = '#6ba8a9';
+    
   }
 
   container4() {
+    this.price = '5500';
     this.selectedContainer = 4;
-    document.getElementById('container4').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container4').style.color = 'white';
-    document.getElementById('button4').style.color = 'white';
-    document.getElementById('button4').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container5').style.background = '#f3f3f3';
-    document.getElementById('container5').style.color = 'black';
-    document.getElementById('button5').style.color = 'black';
-    document.getElementById('button5').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container6').style.background = '#f3f3f3';
-    document.getElementById('container6').style.color = 'black';
-    document.getElementById('button6').style.color = 'black';
-    document.getElementById('button6').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
+    
   }
+
   container5() {
+    this.price = '19000';
     this.selectedContainer = 5;
-    document.getElementById('container5').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container5').style.color = 'white';
-    document.getElementById('button5').style.color = 'white';
-    document.getElementById('button5').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container4').style.background = '#f3f3f3';
-    document.getElementById('container4').style.color = 'black';
-    document.getElementById('button4').style.color = 'black';
-    document.getElementById('button4').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container6').style.background = '#f3f3f3';
-    document.getElementById('container6').style.color = 'black';
-    document.getElementById('button6').style.color = 'black';
-    document.getElementById('button6').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
+
   }
   container6() {
+    this.price = '25000';
     this.selectedContainer = 6;
-    document.getElementById('container6').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container6').style.color = 'white';
-    document.getElementById('button6').style.color = 'white';
-    document.getElementById('button6').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container5').style.background = '#f3f3f3';
-    document.getElementById('container5').style.color = 'black';
-    document.getElementById('button5').style.color = 'black';
-    document.getElementById('button5').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
-    document.getElementById('container4').style.background = '#f3f3f3';
-    document.getElementById('container4').style.color = 'black';
-    document.getElementById('button4').style.color = 'black';
-    document.getElementById('button4').style.background = 'linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff)';
+
+  }
+  container7() {
+    this.price = '31000';
+    this.selectedContainer = 7;
+  }
+  container8() {
+    this.price = '31000';
+    this.selectedContainer = 8;
   }
 
 }

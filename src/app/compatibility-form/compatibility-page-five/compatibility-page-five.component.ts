@@ -376,12 +376,13 @@ export class CompatibilityPageFiveComponent implements OnInit {
           (data: any) => {
               console.log(data);
               if (data.status === '1') {
-          this.clearHistory();
           if (localStorage.getItem('getListMobile')) { // mode 3
             window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
           } else if (localStorage.getItem('getListId')) { // mode 2
             window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
           }
+
+          this.clearHistory();
               } else {
                 this.ngxNotificationService.error(data.message, 'Not Approved');
               }
