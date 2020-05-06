@@ -547,7 +547,9 @@ LifeStatus(person: string, work: string) {
   }
 
 profileReAnswer(item: any, answer: any, index: any) {
-  if (this.itemService.getCredits().toString() === '0') {
+
+  // if main kisse pasand hu and credits are zero...on any response show offer 1
+  if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0') {
       this.itemService.openOfferOne(item);
       return;
   }

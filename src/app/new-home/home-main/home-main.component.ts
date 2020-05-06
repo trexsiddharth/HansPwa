@@ -4,6 +4,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { LockdownOffComponent } from 'src/app/offers/lockdown-off/lockdown-off.component';
 import { OfferOneComponent } from 'src/app/offers/offer-one/offer-one.component';
+import { OfferTwoComponent } from 'src/app/offers/offer-two/offer-two.component';
 
 @Component({
   selector: 'app-home-main',
@@ -17,14 +18,14 @@ export class HomeMainComponent implements OnInit {
               private breakPointObserver: BreakpointObserver) { }
 
   ngOnInit() {
-    // this.openOfferOne();
+    // this.openOfferTwo();
   }
 
   openPlaystore() {
     window.open('https://play.google.com/store/apps/details?id=com.twango.me');
   }
 
-  openOfferOne() {
+  openOfferTwo() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
@@ -44,7 +45,7 @@ export class HomeMainComponent implements OnInit {
         }
       }
     );
-    const dialogRef = this.dialog.open(OfferOneComponent, dialogConfig);
+    const dialogRef = this.dialog.open(OfferTwoComponent, dialogConfig);
   }
 
 }

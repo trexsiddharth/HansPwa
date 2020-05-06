@@ -32,6 +32,7 @@ import { HomeDrawerComponent } from './new-home/home-drawer/home-drawer.componen
 import { NewHomeService } from './new-home/new-home.service';
 import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.component';
 import { OfferOneComponent } from './offers/offer-one/offer-one.component';
+import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { OfferOneComponent } from './offers/offer-one/offer-one.component';
     HomeDrawerComponent,
     LockdownOffComponent,
     OfferOneComponent,
+    OfferTwoComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { OfferOneComponent } from './offers/offer-one/offer-one.component';
   // tslint:disable-next-line: max-line-length
   entryComponents: [TiktokAdsFormComponent,
   LockdownOffComponent,
-  OfferOneComponent],
+  OfferOneComponent,
+  OfferTwoComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
