@@ -1,14 +1,23 @@
-<main>
-    <div class="t-c">
-        <img id="profileImage" src="../../../assets/avatar-blue.svg" alt="profle image">
-        <p class="contentText">
-            Name
+<main *ngIf="data">
+    <div class="t-c topDiv">
+        <img id="profileImage" [src]="getProfilePhoto()" alt="profle image">
+        <button style="color: #737373;
+         font-size: 35px;
+         font-weight: bold; 
+         position: absolute;
+         right: 10px;
+         top: 0px;"
+         (click)="closeDialog()">
+            X
+        </button>
+        <p class="contentText" style="margin-top: -30px;">
+            {{data.data.profile.name}}
         </p>
     </div>
 
     <div class="t-c">
         <p class="contentText">
-            देर किस बात की ? इन्हे अभी कॉल करे
+            देर किस बात की ? इन्हे अभी कॉल करें
         </p>
     </div>
 
@@ -37,6 +46,8 @@
     </div>
 
     <div class="t-c">
-
+        <p class="contentText" style="margin: 0px;">
+            अभी <span style="color: #58d1fd;font-family: sans-serif;font-size: 1.5rem;">50%</span> की बचत करें 
+        </p>
     </div>
 </main>

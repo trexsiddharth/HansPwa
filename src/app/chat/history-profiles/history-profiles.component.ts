@@ -424,7 +424,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         }
        }
       );
-       
+
        console.log(this.profile);
        this.updateLocalList();
        res(this.profile);
@@ -547,7 +547,12 @@ LifeStatus(person: string, work: string) {
   }
 
 profileReAnswer(item: any, answer: any, index: any) {
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+  if (this.itemService.getCredits().toString() === '0') {
+      this.itemService.openOfferOne(item);
+      return;
+  }
+
+  if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     this.itemService.getPhotoStatus() === false &&
     answer === 'SHORTLIST') {
      this.openMessageDialog(item, answer);

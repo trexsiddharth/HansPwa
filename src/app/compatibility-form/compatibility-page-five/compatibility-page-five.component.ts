@@ -209,8 +209,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter Working City');
         } else if (userProfile.about === null  || userProfile.about === '') {
           return this.ngxNotificationService.error('Enter About');
-        } else if (userProfile.abroad === null  || userProfile.abroad === '') {
-          return this.ngxNotificationService.error('Enter Wish to go abroad detail');
         } else if (userProfile.birthPlace === null  || userProfile.birthPlace === '') {
           return this.ngxNotificationService.error('Enter Birth Place');
         } else if (userProfile.birthTime === null  || userProfile.birthTime === '') {
