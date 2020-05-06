@@ -78,6 +78,7 @@
   background-color: #FAC8F1;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border: 0.5px solid #c8c8c8;
 }
 
 .planHeaderText {
