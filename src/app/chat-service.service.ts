@@ -27,7 +27,6 @@ export class ChatServiceService {
       hitCallback: () => {
 
         console.log('Tracking ' + type + ' successful');
-
       }
 
     });

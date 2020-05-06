@@ -1,9 +1,11 @@
 import { Component, Input, OnInit, AfterViewInit, enableProdMode } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
-import { Router } from '@angular/router';
+import { Router , NavigationEnd} from '@angular/router';
 import {firebase} from '@firebase/app';
 import {environment} from '../environments/environment';
 import {  NotificationsService } from '../../src/app/notifications.service';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -25,6 +27,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(private swUpdate: SwUpdate, public router: Router, public notificationService: NotificationsService) {
+//     this.router.events.subscribe(event => {
+//       console.log(event);
+//       if (event instanceof NavigationEnd) {
+//         gtag('config', 'G-1ES443XD0F',
+//                 {
+//                   'pageview': event.urlAfterRedirects
+//                 }
+//                );
+//        }
+//     }
+//  );
   }
 
   async ngOnInit() {
