@@ -2,6 +2,8 @@
 ::ng-deep .mat-dialog-container{
     padding: 0px;
     border-radius: 10px;
+    background-image: url('https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/320+grey.jpg');
+    background-size: contain;
 }
 ::ng-deep .mat-dialog-content{
     max-height: 79vh;
@@ -15,8 +17,7 @@
 
 
 main{
-    background-image: url('https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/320+grey.jpg');
-    background-size: contain;
+    
 }
 
 #cancel{
