@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.component';
 import { OfferOneComponent } from './offers/offer-one/offer-one.component';
+import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 
 
 @Injectable({
@@ -18,6 +19,7 @@ export class FindOpenHistoryProfileService {
   profileCount = new ProfileCount();
   countUpdated = new EventEmitter();
   setTab = new EventEmitter();
+  lockdownCount = 0;
 
   constructor(
     private dialog: MatDialog,
@@ -29,6 +31,9 @@ export class FindOpenHistoryProfileService {
   }
   setCredits(credits: any) {
     this.credits = credits;
+    if (this.credits < 1) {
+      this.lockdownCount++;
+    }
     console.log(this.credits);
   }
   getItem() {
@@ -111,10 +116,12 @@ export class FindOpenHistoryProfileService {
     return this.profileCount.shortedCount;
   }
 
+  // lockdown popup
   openLockdownAd() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.hasBackdrop = true;
-    this.breakPointObserver.observe([
+    if (this.lockdownCount === 0) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.hasBackdrop = true;
+      this.breakPointObserver.observe([
       '(min-width: 1024px)'
     ]).subscribe(
       result => {
@@ -131,9 +138,11 @@ export class FindOpenHistoryProfileService {
         }
       }
     );
-    const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
+      const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
+    }
   }
 
+  // Inhe abhi call kare popup
   openOfferOne(profile) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
@@ -158,5 +167,32 @@ export class FindOpenHistoryProfileService {
       data: profile
     };
     const dialogRef = this.dialog.open(OfferOneComponent, dialogConfig);
+  }
+
+  // ye rishta hath se na jane de pop up
+  openOfferTwo(profile) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    dialogConfig.data = {
+      data: profile
+    };
+    const dialogRef = this.dialog.open(OfferTwoComponent, dialogConfig);
   }
 }

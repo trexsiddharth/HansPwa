@@ -255,6 +255,11 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus() === false
     && (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
       this.openMessageDialog(this.item, reply);
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    reply.toLowerCase() === 'shortlist' && this.type === 'profile'
+    && this.shortListCount  !== 0 &&  this.shortListCount % 2 === 0) {
+      this.shortListCount++;
+      this.itemService.openOfferOne(this.item);
     } else {
         this.getData(reply);
     }
@@ -415,10 +420,6 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
         }
-          // show lockdown offer
-      //  if (reply === 'SHOW' && this.itemService.getCredits()  && this.itemService.getCredits().toString() === '0') {
-      //     this.itemService.openLockdownAd();
-      //   }
 
         // update profile left count
        data ? this.getProfilesLeft(this.item.profiles_left)

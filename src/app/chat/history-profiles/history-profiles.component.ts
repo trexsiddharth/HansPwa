@@ -364,11 +364,6 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               }
             }
           );
-
-          // show lockdown offer
-          if (this.itemService.getCredits().toString() === '0') {
-            this.itemService.openLockdownAd();
-          }
         }
       },
       (error: any) => {
@@ -550,9 +545,10 @@ LifeStatus(person: string, work: string) {
 
 profileReAnswer(item: any, answer: any, index: any) {
 
-  // if main kisse pasand hu and credits are zero...on any response show offer 1
-  if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0') {
-      this.itemService.openOfferOne(item);
+  // if main kisse pasand hu and credits are zero...on Shortlist  response show offer 2
+  if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0'
+  && answer === 'SHORTLIST') {
+      this.itemService.openOfferTwo(item);
       return;
   }
 

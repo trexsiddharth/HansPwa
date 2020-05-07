@@ -5,8 +5,8 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;">
-            <img id="profileImage" src="../../../assets/avatar.svg" alt="profle image">
-            <img id="profileImage" src="../../../assets/avatar.svg" alt="profle image">
+            <img id="profileImage" [src]="userPhoto()" alt="profle image">
+            <img id="profileImage" [src]="getProfilePhoto()" alt="profle image">
             <img style="width: 60px;
             position: absolute;
             opacity: 1;
@@ -14,19 +14,12 @@
             top: -20px;" src="../../../assets/heartdarkpink.svg" alt="heart">
         </div>
 
-        <button style="color: #737373;
-         font-size: 30px;
-         font-weight: bold; 
-         background: transparent;
-         border: none;
-         position: absolute;
-         right: 10px;
-         top: 0px;"
+        <button id="cross"
          (click)="closeDialog()">
             X
         </button>
         <p class="contentText" style="margin-top: -30px;">
-            Priyanka Arora
+           {{data.data.profile.name}}
         </p>
     </div>
 

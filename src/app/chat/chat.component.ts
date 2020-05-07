@@ -284,6 +284,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.spinner.hide();
+   this.itemService.openLockdownAd();
+
   }
 
   getCredits() {

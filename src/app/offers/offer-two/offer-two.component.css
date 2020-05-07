@@ -38,3 +38,27 @@ main{
     margin-top: 15px;
     font-size: 1.3rem;
 }
+
+#cross {
+    color: #737373;
+         font-size: 30px;
+         font-weight: bold; 
+         background: transparent;
+         border: none;
+         position: absolute;
+         right: 10px;
+         top: 0px;
+}
+
+@media (max-width: 350px) {
+    #cross {
+        color: #737373;
+             font-size: 30px;
+             font-weight: bold; 
+             background: transparent;
+             border: none;
+             position: absolute;
+             right: 10px;
+             top: 20px;
+    }
+}
