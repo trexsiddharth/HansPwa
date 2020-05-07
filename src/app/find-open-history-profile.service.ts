@@ -13,13 +13,13 @@ import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 export class FindOpenHistoryProfileService {
   openItem;
   credits;
+  creditsUpdated = new EventEmitter();
   is_lead;
   isPersonalized = false;
   hasPhoto = false;
   profileCount = new ProfileCount();
   countUpdated = new EventEmitter();
   setTab = new EventEmitter();
-  lockdownCount = 0;
 
   constructor(
     private dialog: MatDialog,
@@ -32,7 +32,7 @@ export class FindOpenHistoryProfileService {
   setCredits(credits: any) {
     this.credits = credits;
     if (this.credits < 1) {
-      this.lockdownCount++;
+      this.creditsUpdated.emit(true);
     }
     console.log(this.credits);
   }
@@ -118,10 +118,9 @@ export class FindOpenHistoryProfileService {
 
   // lockdown popup
   openLockdownAd() {
-    if (this.lockdownCount === 0) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.hasBackdrop = true;
-      this.breakPointObserver.observe([
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
       '(min-width: 1024px)'
     ]).subscribe(
       result => {
@@ -138,8 +137,7 @@ export class FindOpenHistoryProfileService {
         }
       }
     );
-      const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
-    }
+    const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
   }
 
   // Inhe abhi call kare popup

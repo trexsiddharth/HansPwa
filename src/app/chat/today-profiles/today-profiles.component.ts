@@ -125,7 +125,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
       );
     } else {
       setTimeout(() => {
-        let data = JSON.parse(localStorage.getItem('authData'));
+        const data = JSON.parse(localStorage.getItem('authData'));
         console.log(data);
         const text: string = data.apiwha_autoreply;
         const id = data.id;
@@ -424,6 +424,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         // update profile left count
        data ? this.getProfilesLeft(this.item.profiles_left)
             : this.ngxNotificationService.error('Profiles Left Not Found');
+
      },
     (error: any) => {
       this.ngxNotificationService.error('We couldn\'t get your credits, trying again');

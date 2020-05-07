@@ -180,6 +180,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   profilesCompletedStatus = false;
   timerMain;
   photo;
+  lockdownCount = 0;
 
 
   constructor(
@@ -284,8 +285,17 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.spinner.hide();
-   this.itemService.openLockdownAd();
 
+    this.itemService.creditsUpdated.subscribe(
+      data => {
+        if (data) {
+          this.lockdownCount++;
+          if (this.lockdownCount === 1) {
+            this.itemService.openLockdownAd();
+          }
+        }
+      }
+    );
   }
 
   getCredits() {
