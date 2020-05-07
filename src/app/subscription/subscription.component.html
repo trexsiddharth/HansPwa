@@ -18,18 +18,18 @@
             <div style="width: 100%;margin-top: 20px;" class="t-c">
                 <button mat-raised-button 
                     (click)="toggleOnline()"
-                 [ngClass]="{active: active === 'online' , inactive: active === 'personalized'}">
+                 [ngClass]="{active: isActive === 'online' , inactive: isActive !== 'online'}">
                     ऑनलाइन प्लान्स
                 </button>
                 <button mat-raised-button
                     (click)="togglePersonalized()"
-                 [ngClass]="{active: active === 'personalized', inactive: active === 'online' }" style="margin-left: 10px;">
+                 [ngClass]="{active: isActive !=='online', inactive: isActive === 'online' }" style="margin-left: 10px;">
                     पर्सनॅलिसेड प्लान्स
                 </button>
             </div>
 
           
-            <div *ngIf="active === 'online'" class="list" style="margin-top: 20px;">
+            <div *ngIf="isActive === 'online'" class="list" style="margin-top: 20px;">
 
                  <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-evenly;">
 
@@ -41,13 +41,13 @@
                                     </p>
                                 </button>
                                 <p>45 कांटेक्ट नंबर्स</p>
-                                <p style="font-size: 12px;">
-                                    <span>हर रिश्ते का पूरा पता</span><br>
+                                
+                                <ul>
+                                    <li>हर रिश्ते का पूरा पता</li>
+                                    <li>2 रिश्ते हर रोज़</li>
+                                    <li>25+ सेंटर्स के 50,000+ रिश्ते </li>
+                                </ul>
 
-                                      <span>  2 रिश्ते हर रोज़</span><br>
-                                        
-                                       <span> 25+ सेंटर्स के 50,000+ रिश्ते </span>
-                                </p>
                                <p class="amnt">₹3500</p>
                         </div>
 
@@ -60,18 +60,15 @@
                                 </p>
                             </button>
                             <p>90 कांटेक्ट नंबर्स</p>
-                            <p style="font-size: 12px;">
+                        
+                            <ul>
+                                <li>हर रिश्ते का पूरा पता</li>
+                                <li>4 रिश्ते हर रोज़ </li>
+                                <li>उच्च वर्ग के रिश्ते</li>
+                                <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
 
-                                  <span>हर रिश्ते का पूरा पता</span><br>
-                                    
-                                   <span> 4 रिश्ते हर रोज़ </span>
-
-                                   <span>उच्च वर्ग के रिश्ते</span>
-
-                                   <span> वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स) </span> <br>
-
-                                   <span>25+ सेंटर्स के 50,000+ रिश्ते</span>
-                            </p>
                            <p class="amnt">₹5500</p>
                     </div>
 
@@ -84,19 +81,14 @@
                                 </p>
                             </button>
                             <p>45 कांटेक्ट नंबर्स</p>
-                            <p style="font-size: 12px;">
-                                <span>
-                                    हर एक प्रोफाइल के साथ उसका कुंडली का मैचिंग स्कोर भी 
-                                </span><br>
 
-                                  <span>हर रिश्ते का पूरा पता</span><br>
-                                    
-                                   <span> 4 रिश्ते हर रोज़ </span>
-
-                                   <span> वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स) </span> <br>
-
-                                   <span>25+ सेंटर्स के 50,000+ रिश्ते</span>
-                            </p>
+                            <ul>
+                                <li>हर एक प्रोफाइल के साथ उसका कुंडली का मैचिंग स्कोर भी </li>
+                                <li>हर रिश्ते का पूरा पता</li>
+                                <li>4 रिश्ते हर रोज़ </li>
+                                <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
                            <p class="amnt">₹5500</p>
                     </div>
 
@@ -109,26 +101,22 @@
                             </p>
                         </button>
                         <p>45 कांटेक्ट नंबर्स</p>
-                        <p style="font-size: 12px;">
-                            <span>
-                                सभी VIP एवं अन्य सेकंड-मैरिज सदस्यों के रिश्ते
-                            </span><br>
 
-                              <span>हर रिश्ते का पूरा पता</span><br>
-                                
-                               <span> 4 रिश्ते हर रोज़ </span>
+                        <ul>
+                            <li>सभी VIP एवं अन्य सेकंड-मैरिज सदस्यों के रिश्ते</li>
+                            <li>हर रिश्ते का पूरा पता</li>
+                            <li>4 रिश्ते हर रोज़ </li>
+                            <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
+                            <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                        </ul>
 
-                               <span> वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स) </span> <br>
-
-                               <span>25+ सेंटर्स के 50,000+ रिश्ते</span>
-                        </p>
                        <p class="amnt">₹5500</p>
                 </div>
 
                  </div>
             </div>
 
-            <div *ngIf="active === 'personalized'" 
+            <div *ngIf="isActive === 'personalized'" 
             style="padding-top: 20px;padding-bottom: 20px;">
             
             <div>
@@ -175,7 +163,7 @@
                     </div>
             </div>
 
-            <div class="list" *ngIf="active === 'personalized'" >
+            <div class="list" *ngIf="isActive === 'personalized'" >
                     <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-evenly;">
                         
                         <div (click)="container5()" id="container5"
@@ -186,25 +174,16 @@
                                    6 महीने
                                </p>
                            </button>
-                           <p style="font-size: 12px;">
 
-                            <span>
-                                मैचमेकर द्वारा मैचिंग प्रोफाइल
-                            </span><br>
-   
-                            <span>
-                                हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात 
-                            </span>
-                                   
-                                  <span> परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</span>
-   
-                                  <span> VIP मेंबर्स से फ्री कॉन्टेक्ट </span> <br>
-
-                                  <span> उच्च वर्ग के रिश्ते </span> <br>
-   
-                                  <span>25+ सेंटर्स के 50,000+ रिश्ते</span>
-                           </p>
-                          <p class="amnt">19000</p>
+                           <ul>
+                               <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                               <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                               <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                               <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                               <li>उच्च वर्ग के रिश्ते </li>
+                               <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                           </ul>
+                          <p class="amnt">₹19000</p>
                    </div>
 
 
@@ -216,24 +195,16 @@
                               12 महीने
                           </p>
                       </button>
-                      <p style="font-size: 12px;">
 
-                        <span>
-                            मैचमेकर द्वारा मैचिंग प्रोफाइल
-                        </span><br>
+                      <ul>
+                        <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                        <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                        <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                        <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                        <li>उच्च वर्ग के रिश्ते </li>
+                        <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                    </ul>
 
-                        <span>
-                            हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात 
-                        </span>
-                              
-                        <span> परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</span>
-
-                        <span> VIP मेंबर्स से फ्री कॉन्टेक्ट </span> <br>
-
-                        <span> उच्च वर्ग के रिश्ते </span> <br>
-
-                             <span>25+ सेंटर्स के 50,000+ रिश्ते</span>
-                      </p>
                      <p class="amnt">₹25000</p>
               </div>
 
@@ -246,24 +217,16 @@
                          24 महीने
                      </p>
                  </button>
-                 <p style="font-size: 12px;">
+       
+                 <ul>
+                    <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                    <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                    <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                    <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                    <li>उच्च वर्ग के रिश्ते </li>
+                    <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                </ul>
 
-                    <span>
-                        मैचमेकर द्वारा मैचिंग प्रोफाइल
-                    </span><br>
-
-                    <span>
-                        हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात 
-                    </span>
-                         
-                    <span> परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</span>
-
-                    <span> VIP मेंबर्स से फ्री कॉन्टेक्ट </span> <br>
-
-                    <span> उच्च वर्ग के रिश्ते </span> <br>
-
-                        <span>25+ सेंटर्स के 50,000+ रिश्ते</span>
-                 </p>
                 <p class="amnt">₹31000</p>
          </div>
 
@@ -275,23 +238,14 @@
                     3 महीने
                 </p>
             </button>
-            <p style="font-size: 12px;">
-                <span>
-                    मैचमेकर द्वारा मैचिंग प्रोफाइल
-                </span><br>
-
-                <span>
-                    हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात 
-                </span>
-                    
-                <span> परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</span>
-
-                <span> VIP मेंबर्स से फ्री कॉन्टेक्ट </span> <br>
-
-                <span> उच्च वर्ग के रिश्ते </span> <br>
-
-                   <span>25+ सेंटर्स के 50,000+ रिश्ते</span>
-            </p>
+            <ul>
+                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                <li>उच्च वर्ग के रिश्ते </li>
+                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+            </ul>
            <p class="amnt">₹11000</p>
     </div>
 
@@ -300,24 +254,15 @@
         </div>
         
         
-        <div class="t-c" style="margin-top: 20px;"> 
+        <div class="t-c" style="margin-top: 30px;"> 
             <button mat-raised-button 
             (click)="openDialog()"
             style="background-color: #D313AE;
-            font-size: 1rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            padding: 5px 30px;">
+            padding: 5px 60px;">
                 यह प्लान चुने
             </button>
-        </div>
-
-        <div class="t-c" style="font-size: 14px;margin-top: 20px;">
-            <span>
-                • हर रिश्ते का पूरा पता • 5-7 रिश्ते हर महीने • उच्च वर्ग के रिश्ते
-            </span><br>
-            <span>
-                • VIP मेंबर्स से फ्री कांटेक्ट • 25+ सेंटर्स के 50,000+ रिश्ते
-            </span>
         </div>
 
           </main>

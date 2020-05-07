@@ -25,7 +25,7 @@ export class SubscriptionComponent implements OnInit {
   selectedContainer: number;
   currentOnlineStatus;
   currentPersonalizedStatus;
-  active = 'online';
+  isActive = 'online';
 
   plan;
   benefit;
@@ -70,12 +70,14 @@ export class SubscriptionComponent implements OnInit {
   }
 
   togglePersonalized() {
-    this.active = 'personalized';
-    this.selectedContainer = 4;
+    this.isActive = 'personalized';
+    this.selectedContainer = 5;
+    console.log(this.isActive);
   }
   toggleOnline() {
-    this.active = 'online';
+    this.isActive = 'online';
     this.selectedContainer = 1;
+    console.log(this.isActive);
   }
 
   getCredits() {
