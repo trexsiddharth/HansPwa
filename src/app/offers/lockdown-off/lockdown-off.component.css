@@ -32,15 +32,15 @@ main{
 }
 
 #bannerDiv{
-    width: 90%;
+    width: auto;
     object-fit: cover;
-    height: 80px;
+    height: auto;
     position: relative;
-    margin: 10px auto;
+    padding-top: 10px;
 }
 
 #bannerImg{
-    width: 100%;
+    width: auto;
     height: 100%;
     object-fit: cover;
 }

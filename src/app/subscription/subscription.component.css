@@ -1,5 +1,6 @@
   main {
     height: 100vh;
+
   }
   p{
     margin: 5px 0px 5px;
@@ -9,6 +10,20 @@
     background-size: contain;
     opacity: 0.7;
     height: 100vh;
+    padding: 5px;
+    padding-top: 0px;
+    background-size: contain;
+    
+  }
+
+  #topCard{
+    background-image: url(../../assets/subsBack.svg);
+    background-size: cover;
+    background-position: top;
+    border-radius: 15px;
+    margin: 10px 10%;
+    padding: 240px 10px 150px;
+    height: 10vh;
   }
   ul {
     font-size: 14px;
@@ -45,7 +60,7 @@
   .planItem {
     border-radius: 15px;
     margin: 10px 10px;
-    width: 60vw;
+    width: 25vw;
     height: 45vh;
     display: flex;
     flex-direction: column;
@@ -57,7 +72,7 @@
   .planItemSelected {
     border-radius: 15px;
     margin: 10px 10px;
-    width: 60vw;
+        width: 25vw;
     height: 45vh;
     display: flex;
     flex-direction: column;
@@ -181,6 +196,49 @@ p{
     nav{
       padding: 0 45px;
     }
+    .back-ground{
+      background-image: url('https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/320+grey.jpg');
+      background-size: contain;
+      opacity: 0.7;
+      height: 100vh;
+      margin: 0px;
+    }
+
+
+    .planItem {
+      border-radius: 15px;
+      margin: 10px 10px;
+      width: 60vw;
+      height: 45vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      border: 0.5px solid #c8c8c8;
+      background-color: white;
+    }
+    .planItemSelected {
+      border-radius: 15px;
+      margin: 10px 10px;
+      width: 60vw;
+      height: 45vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      border: 0.5px solid #c8c8c8;
+      background-color: #c2f0fc;
+    }
+
+    #topCard {
+      background-image: url(../../assets/subsBack.svg);
+      background-size: cover;
+    background-position: top;
+    border-radius: 15px;
+    margin: 10px 20px;
+    padding: 120px 10px;
+    height: 30vh;
+    }
 
     
   }
@@ -206,6 +264,7 @@ p{
     font-weight: bold
 }
 
+
     
   }
   
@@ -219,11 +278,6 @@ p{
     }
     #company-name{
         font-size:1rem;margin-top:auto;margin-bottom:auto
-    }
-    .back-ground{
-       padding: 5px;
-       padding-top:0px;
-       background-size: contain;
     }
     .row{
         width: 100%;
@@ -277,6 +331,7 @@ p{
   }
 
   @media (max-width: 350px) {
+
     .planItem {
       border-radius: 15px;
       margin: 10px 10px;

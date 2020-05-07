@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1588833631501,
+  "timestamp": 1588838419030,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -8,12 +8,12 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/10-es2015.94868ba945a60503edc3.js",
-        "/10-es5.94868ba945a60503edc3.js",
+        "/10-es2015.8ce18106ad3f8a9a41c1.js",
+        "/10-es5.8ce18106ad3f8a9a41c1.js",
         "/2-es2015.5d3911d4c274306953b3.js",
         "/2-es5.5d3911d4c274306953b3.js",
-        "/7-es2015.383bef0b6bc75f616e3e.js",
-        "/7-es5.383bef0b6bc75f616e3e.js",
+        "/7-es2015.520430a944e342d9845c.js",
+        "/7-es5.520430a944e342d9845c.js",
         "/8-es2015.b47cddc9e1fd97985909.js",
         "/8-es5.b47cddc9e1fd97985909.js",
         "/9-es2015.999b059c9066877a91c8.js",
@@ -23,13 +23,13 @@
         "/favicon.ico",
         "/firebase-messaging-sw.js",
         "/index.html",
-        "/main-es2015.17d1df18a89fb898bd18.js",
-        "/main-es5.17d1df18a89fb898bd18.js",
+        "/main-es2015.4f9079f079b7fc5af91a.js",
+        "/main-es5.4f9079f079b7fc5af91a.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.b00a8ee45d22faafa706.js",
         "/polyfills-es5.298362be80e2b499ac95.js",
-        "/runtime-es2015.ae2a1dfea8346a0ec6ce.js",
-        "/runtime-es5.ae2a1dfea8346a0ec6ce.js",
+        "/runtime-es2015.80c30d4d14a9d8b7f18b.js",
+        "/runtime-es5.80c30d4d14a9d8b7f18b.js",
         "/styles.e57b21a071ee306eae33.css"
       ],
       "patterns": []
@@ -187,6 +187,7 @@
         "/assets/locations.svg",
         "/assets/locationwhite.svg",
         "/assets/lock.svg",
+        "/assets/lockdown_banner.svg",
         "/assets/log_out.svg",
         "/assets/logo1.ico",
         "/assets/logo_144.png",
@@ -282,6 +283,7 @@
         "/assets/small6.jpg",
         "/assets/star.png",
         "/assets/star.svg",
+        "/assets/subsBack.svg",
         "/assets/suitcase.svg",
         "/assets/suitcasewhite.svg",
         "/assets/sungrey.svg",
@@ -321,7 +323,8 @@
         "/assets/whatsappbackground.webp",
         "/assets/whatsappred.webp",
         "/assets/whatsbg.webp",
-        "/star.ab1ebaef802c15a69469.png"
+        "/star.ab1ebaef802c15a69469.png",
+        "/subsBack.27a98b2dfbca25590841.svg"
       ],
       "patterns": []
     }
@@ -339,12 +342,12 @@
     }
   ],
   "hashTable": {
-    "/10-es2015.94868ba945a60503edc3.js": "797396de5d5ada36decb3d413e2b1ab2b7ce9b46",
-    "/10-es5.94868ba945a60503edc3.js": "58ea83843bbbbef981438960f4d6bf56694bb532",
+    "/10-es2015.8ce18106ad3f8a9a41c1.js": "d86d69d710dc2b49a4a5146c7287132ee0b4cdec",
+    "/10-es5.8ce18106ad3f8a9a41c1.js": "ff48ec9e62411d061cabea6b6aa8432df1f258ed",
     "/2-es2015.5d3911d4c274306953b3.js": "2860f6e48586a7f29c60d7eff22f81d84b1970ce",
     "/2-es5.5d3911d4c274306953b3.js": "2860f6e48586a7f29c60d7eff22f81d84b1970ce",
-    "/7-es2015.383bef0b6bc75f616e3e.js": "9aa588d4c640267bc0e6bc6d8434779c606a1e26",
-    "/7-es5.383bef0b6bc75f616e3e.js": "932e2ac3d66e0ff3e22d192fff33405708cb2e2a",
+    "/7-es2015.520430a944e342d9845c.js": "92acb0630f2b916660d659733fc6c28f88583121",
+    "/7-es5.520430a944e342d9845c.js": "7918231152fe111a3811e93dddae6bf554c74031",
     "/8-es2015.b47cddc9e1fd97985909.js": "9f2b1c88cb803f96e2040426b3960f2e6c3b6d03",
     "/8-es5.b47cddc9e1fd97985909.js": "c995775a3e3c46bd45179fe930b80958bb50f369",
     "/9-es2015.999b059c9066877a91c8.js": "65e15746591e9f7e241737b708de81ae92e30b2e",
@@ -497,6 +500,7 @@
     "/assets/locations.svg": "65e1f5656c7539e67e94b6e33d2fcc83c57e03e5",
     "/assets/locationwhite.svg": "4704a7b1b4034f8f363d13956763d225178dc286",
     "/assets/lock.svg": "00a4498828e7af0f6b5885ad2ec0364bc5da6f08",
+    "/assets/lockdown_banner.svg": "115aab07d002b417be7dc386255c09ce4d748c3d",
     "/assets/log_out.svg": "c339ad1c2814cc2cab0cdb4330fb4a40ccd885ae",
     "/assets/logo1.ico": "2e77870cf3e066e1061fd04d9ff3289857ed9577",
     "/assets/logo_144.png": "1dbcf9d548c7e8c237e9477843c22345fc26f1bf",
@@ -592,6 +596,7 @@
     "/assets/small6.jpg": "0b3a125ef5d016f009cc276737103f17d62ac3e1",
     "/assets/star.png": "fec3e42924af891e36529a54084144ed187bf35a",
     "/assets/star.svg": "931bba7e736a821e6a82d2ac63bd683ed697ab20",
+    "/assets/subsBack.svg": "7241cda22f475449243831686edb7217fb9ee8b2",
     "/assets/suitcase.svg": "0a186ff0ba1f8c5e5de3c0f0209544f4a5f5cac5",
     "/assets/suitcasewhite.svg": "d380a8a23fc2b8ee62dc668129919876579c265c",
     "/assets/sungrey.svg": "7f7e2cac3ed4d886911d31a3952258a8da2461e5",
@@ -635,16 +640,17 @@
     "/common-es5.944ea1c9cc3f81da3fb1.js": "d38dc7647c84cea140c9df8ce57feb5e9fff7966",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "b8146b5ebe13383b5e8be7a2e00b89767dac0449",
-    "/main-es2015.17d1df18a89fb898bd18.js": "e391135dff6b9df91347ed29e9e0e13bdf5df60f",
-    "/main-es5.17d1df18a89fb898bd18.js": "b4a1348dd6d8de3de4716a4e8a2a71682f0a4924",
+    "/index.html": "ccbaa627a3183971539e3b1640b4d7275ab80e2f",
+    "/main-es2015.4f9079f079b7fc5af91a.js": "fd1627f50eb17894323f26e5bffdb3cbbf5e0665",
+    "/main-es5.4f9079f079b7fc5af91a.js": "3678b5c2ced9874797ab45af0494a31203acfff7",
     "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
     "/polyfills-es2015.b00a8ee45d22faafa706.js": "c37a8026023b3688ee0707b4afee9adfc3d4c95e",
     "/polyfills-es5.298362be80e2b499ac95.js": "57d8f1256ac0ec4c9ae61ca1b87bacf730e68eb7",
-    "/runtime-es2015.ae2a1dfea8346a0ec6ce.js": "db79ea683400c764f0bd739f25e5118c476cdbd1",
-    "/runtime-es5.ae2a1dfea8346a0ec6ce.js": "03b7aa35fc50b2488092de4049a04e5a1bbb4d0e",
+    "/runtime-es2015.80c30d4d14a9d8b7f18b.js": "6b61f791489fb2791140873d066054a4c624865f",
+    "/runtime-es5.80c30d4d14a9d8b7f18b.js": "12a206280f7e429da509bcb54dbddd9f6c61ca37",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
-    "/styles.e57b21a071ee306eae33.css": "e715dfa5bc346d3d054ae3ec64640502f6b6ca7c"
+    "/styles.e57b21a071ee306eae33.css": "e715dfa5bc346d3d054ae3ec64640502f6b6ca7c",
+    "/subsBack.27a98b2dfbca25590841.svg": "7241cda22f475449243831686edb7217fb9ee8b2"
   },
   "navigationUrls": [
     {

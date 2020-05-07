@@ -126,7 +126,7 @@ export class FindOpenHistoryProfileService {
         } else {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '90vw';
-          dialogConfig.maxHeight = '80vh';
+          dialogConfig.minHeight = '70vh';
           dialogConfig.disableClose = true;
         }
       }
