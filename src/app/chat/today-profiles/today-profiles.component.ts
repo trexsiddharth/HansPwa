@@ -56,6 +56,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
               public subscriptionService: SubscriptionserviceService ) { }
               
   ngAfterViewInit(): void {
+    this.itemService.openLockdownAd();
   }
 
 
