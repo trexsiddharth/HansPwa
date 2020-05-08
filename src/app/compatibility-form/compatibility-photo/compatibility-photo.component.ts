@@ -64,7 +64,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   currentAge: number;
   public message: string;
   photoScore = 0;
-  
+
 
 
   FamilyOptions: Observable < string[] > ;
@@ -219,12 +219,12 @@ export class CompatibilityPhotoComponent implements OnInit {
         this.frontfile = userProfile.image2 ? userProfile.image2 : '';
         this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
   }
- 
+
 
   checkForPhoto() {
     if (this.fourPageService.getUserThrough()) {
       this.fourPageService.profile.photoScore = this.photoScore;
-      let userProfile = this.fourPageService.profile;
+      const userProfile = this.fourPageService.profile;
       if (userProfile.image1 === null  || userProfile.image1 === '') {
         return this.ngxNotificationService.error('Select Image 1');
       } else if (userProfile.image2 === null  || userProfile.image2 === '') {
@@ -251,6 +251,11 @@ export class CompatibilityPhotoComponent implements OnInit {
         console.log('Tracking ' + type + ' successful');
 
       }
+    });
+
+     // gtag app + web
+    (window as any).gtag('event', category , {
+      action: action
     });
   }
 

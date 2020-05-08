@@ -30,6 +30,11 @@ export class ChatServiceService {
       }
 
     });
+    // gtag app + web
+    (window as any).gtag('event', category ,{
+      'action': action
+    });
+
   }
   setLoginStatus(status: boolean) {
     this.loginStatus = status;

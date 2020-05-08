@@ -117,6 +117,11 @@ Analytics(type: string, category: string, action: string) {
     }
 
   });
+
+  // gtag app + web
+  (window as any).gtag('event', category , {
+    'action': action
+  });
 }
 
    openDialog() {

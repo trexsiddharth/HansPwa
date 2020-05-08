@@ -27,17 +27,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(private swUpdate: SwUpdate, public router: Router, public notificationService: NotificationsService) {
-//     this.router.events.subscribe(event => {
-//       console.log(event);
-//       if (event instanceof NavigationEnd) {
-//         gtag('config', 'G-1ES443XD0F',
-//                 {
-//                   'pageview': event.urlAfterRedirects
-//                 }
-//                );
-//        }
-//     }
-//  );
+    this.router.events.subscribe(event => {
+      console.log(event);
+      if (event instanceof NavigationEnd) {
+        (window as any).gtag('page_path', event.urlAfterRedirects);
+       }
+    }
+ );
   }
 
   async ngOnInit() {

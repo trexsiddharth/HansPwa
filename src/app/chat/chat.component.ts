@@ -510,16 +510,16 @@ export class ChatComponent implements OnInit, AfterViewInit {
       }
 
     });
+
+     // gtag app + web
+    (window as any).gtag('event', category , {
+      'action': action
+    });
   }
 
   changeSelectedTab(event: any) {
     console.log(event);
     this.currentTab = event;
-    // if (this.profilesCompletedStatus === true && this.currentTab === 0) {
-    //   this.startTimer(Math.floor(7 * 1000), '');
-    // } else {
-    //   clearInterval(this.timerMain);
-    // }
 
     if (this.itemService.getIsLead() === 0) {
     switch (event) {

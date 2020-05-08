@@ -22,7 +22,7 @@
               <span class="menuItems">Logout</span>
             </button>
             <button mat-menu-item>
-              <img width="30px" src="../../../assets/contract.svg" alt="subscription">
+              <img width="30px" [routerLink]="['/subscription']" routerLinkActive="router-link-active"  src="../../../assets/contract.svg" alt="subscription">
               <span class="menuItems">Subscriptions</span>
             </button>
         </ng-template>

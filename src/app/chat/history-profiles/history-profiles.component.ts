@@ -606,6 +606,10 @@ Analytics(type: string, category: string, action: string) {
         console.log('Tracking ' + type + ' successful');
       }
     });
+    // gtag app + web
+    (window as any).gtag('event', category , {
+      'action': action
+    });
   }
 updateProfileList(ans: any, num: any, index: any) {
     switch (this.type) {

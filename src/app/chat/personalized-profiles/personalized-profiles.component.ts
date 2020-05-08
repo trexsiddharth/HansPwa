@@ -325,6 +325,11 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
         console.log('Tracking ' + type + ' successful');
       }
     });
+
+    // gtag app + web
+    (window as any).gtag('event', category , {
+      'action': action
+    });
   }
   updateProfileList(ans: any, index: any) {
            switch (ans) {
@@ -552,14 +557,16 @@ getPersonalizedProfiles() {
    (data: any) => {
     console.log(data);
     if (data.status === 1) {
-    if (!localStorage.getItem('premiumProf')) {
+      this.Analytics('personalized section', 'personalized section' , 'personalized clicked');
+      
+      if (!localStorage.getItem('premiumProf')) {
       this.profile = JSON.parse(data.message);
     } else {
       this.addRemoveNewData(JSON.parse(data.message));
     }
-    localStorage.setItem('premiumProf', data.message);
-    console.log(this.profile);
-    this.spinner.hide();
+      localStorage.setItem('premiumProf', data.message);
+      console.log(this.profile);
+      this.spinner.hide();
     } else {
       this.profile = null;
       this.message = data.message;

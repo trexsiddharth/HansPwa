@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
 import { NewHomeService } from './new-home.service';
-import {  MatSidenavModule } from '@angular/material';
 
 @Component({
   selector: 'app-new-home',

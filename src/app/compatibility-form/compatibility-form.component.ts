@@ -429,6 +429,11 @@ export class CompatibilityFormComponent implements OnInit {
         console.log('Tracking ' + type + ' successful');
       }
     });
+    
+    // gtag app + web
+    (window as any).gtag('event', category , {
+      'action': action
+    });
   }
 
 

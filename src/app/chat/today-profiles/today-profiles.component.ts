@@ -237,6 +237,11 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
       }
 
     });
+
+    // gtag app + web
+    (window as any).gtag('event', category , {
+      'action': action
+    });
   }
 
   getNextMessageOrProfile(reply: string) {
@@ -275,6 +280,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
+        this.Analytics('Today Profiles Responses', 'Today Profiles Responses', reply);
 
         if (data && data.get_status_count) {
           this.itemService.saveCount(data.get_status_count);

@@ -504,6 +504,11 @@ export class RegComponent implements OnInit {
 
       }
     });
+
+     // gtag app + web
+    (window as any).gtag('event', category , {
+      'action': action
+    });
   }
 gtag_report_conversion(url) {
     (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
