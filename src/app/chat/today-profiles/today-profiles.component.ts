@@ -54,9 +54,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
               public router: Router,
               private dialog: MatDialog,
               public subscriptionService: SubscriptionserviceService ) { }
-              
+
   ngAfterViewInit(): void {
-    this.itemService.openLockdownAd();
   }
 
 
