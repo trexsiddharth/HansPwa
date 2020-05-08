@@ -20,6 +20,7 @@ import { PersonalizedDialogComponent } from './personalized-profiles/personalize
 import { MyProfileService } from './myprofile/my-profile.service';
 import { TodayMessageComponent } from './today-profiles/today-message/today-message.component';
 import { PersonalizedMessageDialogComponent } from './history-profiles/personalized-message-dialog/personalized-message-dialog.component';
+import { AppDownloadDialogComponent } from './app-download-dialog/app-download-dialog.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { PersonalizedMessageDialogComponent } from './history-profiles/personali
     PersonalizedDialogComponent,
     TodayMessageComponent,
     PersonalizedMessageDialogComponent,
+    AppDownloadDialogComponent,
 ],
 entryComponents: [
   MessageDialogComponent,
@@ -51,7 +53,8 @@ entryComponents: [
   EditPreferenceDialogComponent,
   HistoryProfilesDialogComponent,
   PersonalizedDialogComponent,
-  PersonalizedMessageDialogComponent
+  PersonalizedMessageDialogComponent,
+  AppDownloadDialogComponent
 ],
 providers: [
   FindOpenHistoryProfileService,

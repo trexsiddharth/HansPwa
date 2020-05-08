@@ -1,0 +1,47 @@
+
+::ng-deep .mat-dialog-container{
+    background: transparent;
+    padding: 0px;
+    border-radius: 20px;
+}
+::ng-deep .mat-dialog-content{
+    max-height: 79vh;
+    margin: 0px;
+    padding: 0px;
+}
+
+::ng-deep .cdk-overlay-dark-backdrop{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+}
+
+main{
+    background-color: white;
+    border-radius: 20px;
+}
+
+.topDiv{
+    position: relative;
+    background: transparent;
+    margin-top: 100px;
+}
+
+#profileImage{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    top: -75px;
+    background: white;
+}
+
+.contentText {
+    color: #797979;
+    margin-top: 15px;
+    font-size: 1.3rem;
+    word-wrap: break-word;
+}
+
+.boldText {
+    color: balck;font-weight: bold;
+            font-family: sans-serif;
+}

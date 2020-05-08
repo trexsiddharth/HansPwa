@@ -5,6 +5,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.component';
 import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
+import { AppDownloadDialogComponent } from './chat/app-download-dialog/app-download-dialog.component';
 
 
 @Injectable({
@@ -192,5 +193,32 @@ export class FindOpenHistoryProfileService {
       data: profile
     };
     const dialogRef = this.dialog.open(OfferTwoComponent, dialogConfig);
+  }
+
+  // download the app pop up
+  openDownloadAppDialog(profile) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    dialogConfig.data = {
+      data: profile
+    };
+    const dialogRef = this.dialog.open(AppDownloadDialogComponent, dialogConfig);
   }
 }

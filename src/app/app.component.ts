@@ -5,7 +5,6 @@ import {firebase} from '@firebase/app';
 import {environment} from '../environments/environment';
 import {  NotificationsService } from '../../src/app/notifications.service';
 
-declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -30,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.router.events.subscribe(event => {
       console.log(event);
       if (event instanceof NavigationEnd) {
-        (window as any).gtag('page_path', event.urlAfterRedirects);
+        (window as any).gtag('page_view', event.urlAfterRedirects);
        }
     }
  );

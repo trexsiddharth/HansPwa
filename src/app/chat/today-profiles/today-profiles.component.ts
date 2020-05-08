@@ -54,6 +54,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
               public router: Router,
               private dialog: MatDialog,
               public subscriptionService: SubscriptionserviceService ) { }
+              
   ngAfterViewInit(): void {
   }
 
@@ -265,6 +266,11 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     && this.shortListCount  !== 0 &&  this.shortListCount % 2 === 0) {
       this.shortListCount++;
       this.itemService.openOfferOne(this.item);
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    reply.toLowerCase() === 'shortlist' && this.type === 'profile'
+    && this.shortListCount  !== 0 &&  this.shortListCount % 5 === 0) {
+      this.shortListCount++;
+      this.itemService.openDownloadAppDialog(this.item);
     } else {
         this.getData(reply);
     }
