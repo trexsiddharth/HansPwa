@@ -2,8 +2,6 @@ import {
   Component,
   OnInit,
   ViewChild,
-  EventEmitter,
-  Output,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -24,7 +22,6 @@ import {  NotificationsService } from '../../notifications.service';
 
 import {
   MatDialog,
-  MatDialogConfig,
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';

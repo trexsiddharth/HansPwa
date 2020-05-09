@@ -16,14 +16,20 @@
     
   }
 
-  #topCard{
-    background-image: url(../../assets/subsBack.svg);
-    background-size: cover;
-    background-position: top;
-    border-radius: 15px;
-    margin: 10px 10%;
-    padding: 240px 10px 150px;
-    height: 10vh;
+  .topBannerText {
+    top: 45%;
+    position: absolute;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 30px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
   }
   ul {
     font-size: 14px;
@@ -209,7 +215,7 @@ p{
       border-radius: 15px;
       margin: 10px 10px;
       width: 60vw;
-      height: 45vh;
+      height: 55vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -221,23 +227,13 @@ p{
       border-radius: 15px;
       margin: 10px 10px;
       width: 60vw;
-      height: 45vh;
+      height: 55vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       border: 0.5px solid #c8c8c8;
       background-color: #c2f0fc;
-    }
-
-    #topCard {
-      background-image: url(../../assets/subsBack.svg);
-      background-size: cover;
-    background-position: top;
-    border-radius: 15px;
-    margin: 10px 20px;
-    padding: 120px 10px;
-    height: 30vh;
     }
 
     
@@ -262,6 +258,10 @@ p{
   
   .featurePersonalised{
     font-weight: bold
+}
+
+h2,h4 {
+  font-size: 1.5rem;
 }
 
 
@@ -332,6 +332,16 @@ p{
 
   @media (max-width: 350px) {
 
+    .topBannerText {
+      top: 30%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+     width: 100%;
+     align-items: center;
+    justify-content: center;
+    }
+
     .planItem {
       border-radius: 15px;
       margin: 10px 10px;
@@ -356,6 +366,7 @@ p{
       border: 0.5px solid #c8c8c8;
       background-color: #c2f0fc;
     }
+    
 
     .amnt {
       bottom: 10px;
@@ -383,5 +394,8 @@ p{
       font-weight: bold;
       font-size: 1rem;
       padding: 5px 20px;
+    }
+    h2,h4 {
+      font-size: 1.5rem;
     }
   }
