@@ -55,6 +55,9 @@ export class SubscriptionComponent implements OnInit {
     if (localStorage.getItem('id')) {
       this.getCredits();
     }
+    if (localStorage.getItem('mobile_number')) {
+      this.subscriptionViewed();
+    }
   }
 
   loadRazorPayScript() {
@@ -108,6 +111,16 @@ export class SubscriptionComponent implements OnInit {
    @HostListener('window:resize', ['$event'])
 onResize(event) {
   this.innerWidth = window.innerWidth;
+}
+
+subscriptionViewed() {
+  const formData = new FormData();
+  formData.append('mobile', localStorage.getItem('mobile_number'));
+  this.http.post('https://partner.hansmatrimony.com/ap/isSubscriptionViewed', formData).subscribe(
+    (data: any) => {
+     console.log(data);
+    }
+  );
 }
 
 Analytics(type: string, category: string, action: string) {
