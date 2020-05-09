@@ -52,8 +52,10 @@
                                     <li>2 रिश्ते हर रोज़</li>
                                     <li>25+ सेंटर्स के 50,000+ रिश्ते </li>
                                 </ul>
-
-                               <p class="amnt">₹3500</p>
+                                <div class="amnt">
+                                    <p> <del>₹5600</del></p>
+                                    <p>₹2800</p>
+                                </div>
                         </div>
 
                           <div (click)="container2()" id="container2" 
@@ -74,7 +76,10 @@
                                 <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
                             </ul>
 
-                           <p class="amnt">₹5500</p>
+                            <div class="amnt">
+                                <p> <del>₹7100</del></p>
+                                <p>₹4500</p>
+                            </div>
                     </div>
 
                         <div (click)="container3()" id="container3" 
@@ -94,7 +99,10 @@
                                 <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
                                 <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
                             </ul>
-                           <p class="amnt">₹5500</p>
+                            <div class="amnt">
+                                <p> <del>₹9100</del></p>
+                                <p>₹6500</p>
+                            </div>
                     </div>
 
                     <div (click)="container4()" id="container4"
@@ -115,7 +123,10 @@
                             <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
                         </ul>
 
-                       <p class="amnt">₹5500</p>
+                        <div class="amnt">
+                            <p> <del>₹7100</del></p>
+                            <p>₹4500</p>
+                        </div>
                 </div>
 
                  </div>
@@ -170,10 +181,32 @@
 
             <div class="list" *ngIf="isActive === 'personalized'" >
                     <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-evenly;">
-                        
+
                         <div (click)="container5()" id="container5"
-                        [ngClass]="{planItem: selectedContainer != 5 , planItemSelected: selectedContainer === 5}">
+                        [ngClass]="{planItem: selectedContainer != 5 , planItemSelected: selectedContainer === 5 }">
                            <button id="button5" (click)="container5()" class="planHeader">
+                               <p class="planHeaderText">छोटा VIP प्लान</p>
+                               <p class="planSubHeaderText">
+                                   3 महीने
+                               </p>
+                           </button>
+                           <ul>
+                               <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                               <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                               <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                               <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                               <li>उच्च वर्ग के रिश्ते </li>
+                               <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                           </ul>
+                           <div class="amnt">
+                            <p> <del>₹15000</del></p>
+                            <p>₹11000</p>
+                        </div>
+                   </div>
+                        
+                        <div (click)="container6()" id="container6"
+                        [ngClass]="{planItem: selectedContainer !=6 , planItemSelected: selectedContainer === 6}">
+                           <button id="button6" (click)="container6()" class="planHeader">
                                <p class="planHeaderText">प्रीमियम 6</p>
                                <p class="planSubHeaderText">
                                    6 महीने
@@ -188,13 +221,16 @@
                                <li>उच्च वर्ग के रिश्ते </li>
                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
                            </ul>
-                          <p class="amnt">₹19000</p>
+                           <div class="amnt">
+                            <p> <del>₹21000</del></p>
+                            <p>₹17000</p>
+                        </div>
                    </div>
 
 
-                   <div (click)="container6()" id="container6"
-                   [ngClass]="{planItem: selectedContainer != 6, planItemSelected: selectedContainer === 6 }">
-                      <button id="button4" (click)="container6()" class="planHeader">
+                   <div (click)="container7()" id="container7"
+                   [ngClass]="{planItem: selectedContainer != 7, planItemSelected: selectedContainer === 7 }">
+                      <button id="button7" (click)="container7()" class="planHeader">
                           <p class="planHeaderText">प्रीमियम 12</p>
                           <p class="planSubHeaderText">
                               12 महीने
@@ -210,13 +246,16 @@
                         <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
                     </ul>
 
-                     <p class="amnt">₹25000</p>
+                    <div class="amnt">
+                        <p> <del>₹41000</del></p>
+                        <p>₹25000</p>
+                    </div>
               </div>
 
 
-              <div (click)="container7()" id="container7"
-              [ngClass]="{planItem: selectedContainer != 7 , planItemSelected: selectedContainer === 7 }">
-                 <button id="button4" (click)="container7()" class="planHeader">
+              <div (click)="container8()" id="container8"
+              [ngClass]="{planItem: selectedContainer != 8 , planItemSelected: selectedContainer === 8 }">
+                 <button id="button8" (click)="container8()" class="planHeader">
                      <p class="planHeaderText">डीलक्स NRI</p>
                      <p class="planSubHeaderText">
                          24 महीने
@@ -232,27 +271,11 @@
                     <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
                 </ul>
 
-                <p class="amnt">₹31000</p>
+                <div class="amnt">
+                    <p> <del>₹51000</del></p>
+                    <p>₹31000</p>
+                </div>
          </div>
-
-         <div (click)="container8()" id="container8"
-         [ngClass]="{planItem: selectedContainer != 8 , planItemSelected: selectedContainer === 8 }">
-            <button id="button4" (click)="container8()" class="planHeader">
-                <p class="planHeaderText">छोटा VIP प्लान</p>
-                <p class="planSubHeaderText">
-                    3 महीने
-                </p>
-            </button>
-            <ul>
-                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
-                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
-                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
-                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
-                <li>उच्च वर्ग के रिश्ते </li>
-                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
-            </ul>
-           <p class="amnt">₹11000</p>
-    </div>
 
                         </div>
             </div>
@@ -261,6 +284,7 @@
         
         <div class="t-c" style="margin-top: 30px;"> 
             <button mat-raised-button 
+            id="planButton"
             (click)="openDialog()"
             style="background-color: #D313AE;
             font-size: 1.4rem;

@@ -116,7 +116,8 @@ export class CompatibilityFormComponent implements OnInit {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, 
-    private _formBuilder: FormBuilder, private router: Router,
+    private _formBuilder: FormBuilder, 
+    private router: Router,
               public notification: NotificationsService,
               public fourPageService: FourPageService,
               private matDialog: MatDialog,
@@ -180,6 +181,7 @@ export class CompatibilityFormComponent implements OnInit {
       }
     );
 
+    // for skippable
     this.route.url.subscribe(
         link => {
          if (link && link[0]  &&  link[0].path) {

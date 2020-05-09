@@ -72,11 +72,13 @@ export class SubscriptionComponent implements OnInit {
   togglePersonalized() {
     this.isActive = 'personalized';
     this.selectedContainer = 5;
+    this.container5();
     console.log(this.isActive);
   }
   toggleOnline() {
     this.isActive = 'online';
     this.selectedContainer = 1;
+    this.container1();
     console.log(this.isActive);
   }
 
@@ -139,44 +141,50 @@ Analytics(type: string, category: string, action: string) {
   }
 
   container1() {
-    this.price = '3500';
+    this.price = '2800';
     this.selectedContainer = 1;
-   
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
   container2() {
-    this.price = '5500';
+    this.price = '4500';
     this.selectedContainer = 2;
-   
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
   container3() {
-    this.price = '5500';
+    this.price = '6500';
     this.selectedContainer = 3;
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
     
   }
 
   container4() {
-    this.price = '5500';
+    this.price = '4500';
     this.selectedContainer = 4;
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
     
   }
 
   container5() {
-    this.price = '19000';
+    this.price = '11000';
     this.selectedContainer = 5;
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
 
   }
   container6() {
-    this.price = '25000';
+    this.price = '17000';
     this.selectedContainer = 6;
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
 
   }
   container7() {
-    this.price = '31000';
+    this.price = '25000';
     this.selectedContainer = 7;
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
   container8() {
-    this.price = '11000';
+    this.price = '31000';
     this.selectedContainer = 8;
+    document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
 
 }

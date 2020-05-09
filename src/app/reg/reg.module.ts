@@ -13,7 +13,7 @@ import { RegRoutingModule } from './reg-routing.module';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    RegRoutingModule
+    RegRoutingModule,
   ]
 })
 export class RegModule { }
