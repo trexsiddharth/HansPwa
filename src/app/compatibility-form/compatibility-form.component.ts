@@ -426,6 +426,7 @@ export class CompatibilityFormComponent implements OnInit {
     }
   }
   Analytics(type: string, category: string, action: string) {
+    if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {
         console.log('Tracking ' + type + ' successful');
@@ -436,6 +437,7 @@ export class CompatibilityFormComponent implements OnInit {
     (window as any).gtag('event', category , {
       'action': action
     });
+  }
   }
 
 

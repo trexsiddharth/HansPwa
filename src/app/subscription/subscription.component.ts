@@ -116,7 +116,7 @@ onResize(event) {
 subscriptionViewed() {
   const formData = new FormData();
   formData.append('mobile', localStorage.getItem('mobile_number'));
-  this.http.post('https://partner.hansmatrimony.com/ap/isSubscriptionViewed', formData).subscribe(
+  this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
     (data: any) => {
      console.log(data);
     }
@@ -167,14 +167,12 @@ Analytics(type: string, category: string, action: string) {
     this.price = '6500';
     this.selectedContainer = 3;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
-    
   }
 
   container4() {
     this.price = '4500';
     this.selectedContainer = 4;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
-    
   }
 
   container5() {

@@ -245,6 +245,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   }
 
   Analytics(type: string, category: string, action: string) {
+    if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {
 
@@ -257,6 +258,7 @@ export class CompatibilityPhotoComponent implements OnInit {
     (window as any).gtag('event', category , {
       action: action
     });
+  }
   }
 
   skip(type) {
