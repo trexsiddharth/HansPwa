@@ -30,6 +30,7 @@
  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} 
  gtag('js', new Date()); 
  gtag('config', 'G-1ES443XD0F');
+ gtag('set', {'user_id': localStorage.getItem('id')}); // Set the user ID using signed-in user_id.
 
  </script>
 
@@ -42,7 +43,9 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     
       window.ga_debug = {trace: true};
-      ga('create', 'UA-153124145-1', 'auto');
+      ga('create', 'UA-153124145-1', 'auto', {
+        'userId': localStorage.getItem('id')
+      });
       ga('send', 'page_view'); 
     
     </script>
