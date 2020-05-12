@@ -113,6 +113,7 @@ export class CompatibilityFormComponent implements OnInit {
   lat;
   long;
   isDisable = false;
+  isAllCastePref = true;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, 
@@ -181,6 +182,17 @@ export class CompatibilityFormComponent implements OnInit {
       }
     );
 
+    // for team user we will make page non linear from page two...because page one details are compulsory
+    this.fourPageService.makeLinear.subscribe(
+      (makeLinear: boolean) => {
+        console.log(makeLinear);
+        if (makeLinear === true) {
+          this.isLinear = false;
+          this.fourPageService.setUserThrough(true);
+        }
+      }
+    );
+
     // for skippable
     this.route.url.subscribe(
         link => {
@@ -200,7 +212,6 @@ export class CompatibilityFormComponent implements OnInit {
           } else if (route.params.mobile) {
             this.numberCheck = route.params.mobile;
             this.fourPageService.setUserThrough(true);
-            this.isLinear = false;
             localStorage.setItem('getListMobile', route.params.mobile);
             } else {
             this.fourPageService.setUserThrough(false);
@@ -227,12 +238,13 @@ export class CompatibilityFormComponent implements OnInit {
           localStorage.setItem('getListSource', route.params.source);
         }
         if (route.params.id) {
-          this.isLinear = false;
           this.getProfile();
           }
         }
       }
     );
+
+
 
     this.spinner.hide();
     localStorage.setItem('gender', '');
@@ -291,6 +303,32 @@ export class CompatibilityFormComponent implements OnInit {
         map(value => this._Castefilter(value))
       );
     }
+    }
+
+    setNewFormGroup() {
+      if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
+        this.PageOne = this._formBuilder.group({
+          // tslint:disable-next-line: max-line-length
+          firstName: [''],
+          lastName: [''],
+          phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+          email: [''],
+          Relation: ['', Validators.compose([Validators.required])],
+          gender: ['', Validators.compose([Validators.required])],
+          birth_date: ['01', Validators.compose([Validators.required])],
+          birth_month: ['January', Validators.compose([Validators.required])],
+          birth_year: ['1980', Validators.compose([Validators.required])],
+          Height: ['', Validators.compose([Validators.required])],
+          Weight: ['', Validators.compose([Validators.required])],
+          MaritalStatus: ['', Validators.compose([Validators.required])],
+          AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
+          Religion: ['', Validators.compose([Validators.required])],
+          Castes: ['', Validators.compose([Validators.required])],
+          Mangalik: ['', Validators.compose([Validators.required])],
+          locality: ['', Validators.compose([Validators.required])],
+          disabledPart: ['']
+        });
+      }
     }
 
 
@@ -432,7 +470,7 @@ export class CompatibilityFormComponent implements OnInit {
         console.log('Tracking ' + type + ' successful');
       }
     });
-    
+
     // gtag app + web
     (window as any).gtag('event', category , {
       'action': action
@@ -677,6 +715,9 @@ getProfile() {
     }
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
+
+    localStorage.setItem('getListMobile', profileData.family.mobile ? profileData.family.mobile : '');
+
     this.userProfile.email = profileData.family.email;
 
     if (profileData.family.relation === 'Mother') {
@@ -790,6 +831,10 @@ getProfile() {
   checkDisable(event) {
     console.log(event.checked);
     this.isDisable = event.checked;
+  }
+  checkAllCastePref(event) {
+    console.log(event.checked);
+    this.isAllCastePref = event.checked;
   }
 }
 

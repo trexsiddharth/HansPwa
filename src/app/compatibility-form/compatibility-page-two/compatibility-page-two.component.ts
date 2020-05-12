@@ -103,6 +103,49 @@ export class CompatibilityPageTwoComponent implements OnInit {
   ];
   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
 
+  designations: string[] = [
+    'Manager',
+    'Sales Manager',
+    'Accounts Manager',
+    'Product Manager',
+    'Software Engineer',
+    'Engineer',
+    'Hotel Management',
+    'Operations Manager',
+    'Sales Executive',
+    'Operations Executive',
+    'Accountant',
+    'Marketing Manager',
+    'Marketing Executive',
+    'Chartered Accountant',
+    'Owner',
+    'Secretary',
+    'Company Secretary',
+    'Telesales Executive',
+    'Teacher',
+    'Clerk',
+    'Office Assistant',
+    'Relationship Manager',
+    'Computer Operator',
+    'Chief Executive Officer',
+    'Chief Marketing Officer',
+    'Chief Finance Officer',
+    'Business Development',
+    'Project Manager',
+    'Program Manager',
+    'Solution Architect',
+    'Graphic Designer',
+    'Content Writer',
+    'Director',
+    'Business Analyst',
+    'Front Office',
+    'Back office',
+    'Counselor',
+    'Event Manager',
+    'Legal',
+    'Public Relations',
+    'Others'];
+
 
 constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
             public notification: NotificationsService,
@@ -113,6 +156,7 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
       Qualification: ['', Validators.compose([Validators.required])],
       Occupation: ['', Validators.compose([Validators.required])],
       Designation: ['', Validators.compose([Validators.required])],
+      OtherDesignation: [''],
       Working: ['', Validators.compose([Validators.required])],
       About: [''],
       abroad: ['']
@@ -124,9 +168,13 @@ ngOnInit() {
       this.fourPageService.getListData.subscribe(
         () => {
           console.log(this.fourPageService.getProfile());
-          this.setFormOneData(this.fourPageService.getProfile());
+          this.setFormForGetUserThrough();
         }
       );
+  }
+
+    if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
+    this.fourPageService.setLinear(true);
   }
     }
 
@@ -151,10 +199,14 @@ firstStep() {
 
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
-      firststepdata.append('mobile', localStorage.getItem('mobile_number'));
+      firststepdata.append('mobile', localStorage.getItem('mobile_number')
+       ? localStorage.getItem('mobile_number') : localStorage.getItem('getListMobile') );
       firststepdata.append('degree', this.PageTwo.value.Qualification);
       firststepdata.append('occupation', this.PageTwo.value.Occupation);
-      firststepdata.append('profession', this.PageTwo.value.Designation);
+      // if designation equals others set profession equals value of OtherDesignation only if OtherDesignation is not empty.
+      firststepdata.append('profession', this.PageTwo.value.Designation !== 'Others' ?
+       this.PageTwo.value.Designation :  this.PageTwo.value.OtherDesignation ?
+       this.PageTwo.value.OtherDesignation : this.PageTwo.value.Designation );
       firststepdata.append('working_city', this.workplace);
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
@@ -229,18 +281,21 @@ changedQualification() {
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
    }
+  this.setAbout();
 }
 changedOccupation() {
   console.log('changed Occupation');
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
    }
+  this.setAbout();
 }
 changedDesignation() {
   console.log('changed Designation');
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
    }
+  this.setAbout();
 }
 changedAbroad() {
   console.log('changed Abroad');
@@ -289,13 +344,8 @@ setAbout() {
     && this.PageTwo.value.Working) {
     console.log('Setting About');
     this.PageTwo.patchValue({
-      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)}
-       yr old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik}
-      ${this.fourPageService.getProfile().gender === 'Male' ?  'Boy' : 'Girl'} residing in ${this.fourPageService.getProfile().locality}.
-      I've completed my ${this.PageTwo.value.Qualification} and
-        ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Occupation
-      : 'Currently not working' }
-      ${this.PageTwo.value.Working !== 'Not Working' ? 'in ' + this.PageTwo.value.Working : '' }.`
+      // tslint:disable-next-line: max-line-length
+      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Designation : 'Currently not working ' }${this.PageTwo.value.Working !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
     });
   }
 }
@@ -304,10 +354,25 @@ this.workplace = userProfile.workingCity ? userProfile.workingCity : '';
 this.PageTwo.patchValue({
     Qualification: userProfile.qualification ? this.getQualification(userProfile.qualification) : '',
     Occupation: userProfile.occupation,
-      Designation: userProfile.designation,
+      Designation: this.designations.includes(userProfile.designation) ? userProfile.designation : 'Others' ,
+      OtherDesignation: userProfile.designation,
       Working: userProfile.workingCity,
       About: userProfile.about
   });
+}
+
+setFormForGetUserThrough() {
+  this.PageTwo = this._formBuilder.group({
+    // tslint:disable-next-line: max-line-length
+    Qualification: [''],
+    Occupation: [''],
+    Designation: [''],
+    OtherDesignation: [''],
+    Working: [''],
+    About: [''],
+    abroad: ['']
+  });
+  this.setFormOneData(this.fourPageService.getProfile());
 }
 
 }

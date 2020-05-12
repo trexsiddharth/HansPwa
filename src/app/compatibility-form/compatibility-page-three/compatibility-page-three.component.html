@@ -70,13 +70,12 @@
                    
                           <div class="col-md-12">
                             <mat-form-field class="full-width fieldFit" appearance="standard" >
-                              <mat-label style="color: black;">Family's Annual Income (In LPA)<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
-                              <input type="text" pattern="\d*" maxlength="3" (change)="changed('Fincome')" matInput formControlName="FamilyIncome"  name="FamilyIncome">
-                              <span matSuffix>LPA &nbsp;</span>
+                              <mat-label style="color: black;">Family's Annual Income</mat-label>
+                              <input type="number" (change)="changed('Fincome')" matInput formControlName="FamilyIncome"  name="FamilyIncome">
+                              <span matSuffix>Lakh Per Year &nbsp;</span>
                               <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageThree.get('FamilyIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
                             </mat-form-field>
                           </div>
-     
                           
 
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">

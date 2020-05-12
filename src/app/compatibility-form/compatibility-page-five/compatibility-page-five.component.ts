@@ -211,9 +211,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter About');
         } else if (userProfile.birthPlace === null  || userProfile.birthPlace === '') {
           return this.ngxNotificationService.error('Enter Birth Place');
-        } else if (userProfile.birthTime === null  || userProfile.birthTime === '') {
-          return this.ngxNotificationService.error('Enter Birth Time');
-        } else if (userProfile.foodChoice  === null || userProfile.foodChoice === '') {
+        }  else if (userProfile.foodChoice  === null || userProfile.foodChoice === '') {
           return this.ngxNotificationService.error('Select Food Choice');
         } else if (userProfile.fatherStatus === null  || userProfile.fatherStatus === '') {
           return this.ngxNotificationService.error('Select Father Status');
@@ -235,7 +233,9 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter a valid Follow Up Date');
         } else if (!this.pageFive.controls.source.valid) {
           return this.ngxNotificationService.error('Select a source');
-        } else if (!this.pageFive.controls.interest.valid) {
+        } else if (!this.pageFive.controls.assign_to.valid) {
+          return this.ngxNotificationService.error('Select Assign To');
+        }  else if (!this.pageFive.controls.interest.valid) {
           return this.ngxNotificationService.error('Select interest level');
         }  else if (!this.pageFive.controls.comments.valid) {
           return this.ngxNotificationService.error('Enter a comment');
@@ -252,7 +252,9 @@ export class CompatibilityPageFiveComponent implements OnInit {
         }  else if (!this.pageFive.controls.follow_date.valid) {
           return this.ngxNotificationService.error('Enter a valid Follow Up Date');
         } else if (!this.pageFive.controls.source.valid) {
-          return this.ngxNotificationService.error('Select a source');
+          return this.ngxNotificationService.error('Select a Source');
+        }  else if (!this.pageFive.controls.assign_to.valid) {
+          return this.ngxNotificationService.error('Select Assign To');
         } else if (!this.pageFive.controls.interest.valid) {
           return this.ngxNotificationService.error('Select interest level');
         }  else if (!this.pageFive.controls.comments.valid) {

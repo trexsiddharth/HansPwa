@@ -119,7 +119,7 @@ ngOnInit() {
       this.ngxNotificationService.error('Select A Valid Mother Status');
       }
       return false;
-    } else if (!this.PageThree.value.FamilyIncome && !this.PageThree.controls.FamilyIncome.valid) {
+    } else if (!this.PageThree.value.FamilyIncome || !this.PageThree.controls.FamilyIncome.valid) {
       if (notificationStatus === 1) {
       this.ngxNotificationService.error('Enter A Valid Family Income');
       }
@@ -157,8 +157,6 @@ firstStep() {
 
               if (res.status === 1) {
                 this.spinner.hide();
-
-                this.fourPageService.form3Completed.emit(true);
 
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormThreeData(firststepdata);
@@ -211,7 +209,14 @@ onLocationSelected(e) {
   // tslint:disable-next-line: no-shadowed-variable
   changed(element: any) {
     console.log(element);
+    if (!this.fourPageService.getUserThrough() && this.isValid(0) === false ) {
+      this.fourPageService.form3Completed.emit(false);
+      return;
+  } else {
+    this.fourPageService.form3Completed.emit(true);
   }
+  }
+
   updateFormThreeData(profileData: FormData) {
     this.fourPageService.profile.birthPlace = profileData.get('birth_place').toString();
     this.fourPageService.profile.birthTime = profileData.get('birth_time').toString();
