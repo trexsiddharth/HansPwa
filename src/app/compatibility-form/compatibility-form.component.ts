@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core';
 
 import {
@@ -56,7 +57,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 
 
-export class CompatibilityFormComponent implements OnInit {
+export class CompatibilityFormComponent implements OnInit, AfterViewInit {
   @ViewChild('otpModal', {static: false}) private otpModal: any;
 
   time = {
@@ -116,7 +117,7 @@ export class CompatibilityFormComponent implements OnInit {
   isAllCastePref = true;
 
 
-  constructor(private http: HttpClient, public dialog: MatDialog, 
+  constructor(private http: HttpClient, public dialog: MatDialog,
     private _formBuilder: FormBuilder, 
     private router: Router,
               public notification: NotificationsService,
@@ -147,6 +148,19 @@ export class CompatibilityFormComponent implements OnInit {
       locality: ['', Validators.compose([Validators.required])],
       disabledPart: ['']
     });
+  }
+  ngAfterViewInit(): void {
+    
+    // for team user we will make page non linear from page two...because page one details are compulsory
+    this.fourPageService.makeLinear.subscribe(
+      (makeLinear: boolean) => {
+        console.log(makeLinear);
+        if (makeLinear === true) {
+          this.isLinear = false;
+          this.fourPageService.setUserThrough(true);
+        }
+      }
+    );
   }
 
   ngOnInit() {
@@ -182,69 +196,56 @@ export class CompatibilityFormComponent implements OnInit {
       }
     );
 
-    // for team user we will make page non linear from page two...because page one details are compulsory
-    this.fourPageService.makeLinear.subscribe(
-      (makeLinear: boolean) => {
-        console.log(makeLinear);
-        if (makeLinear === true) {
-          this.isLinear = false;
-          this.fourPageService.setUserThrough(true);
-        }
-      }
-    );
-
-    // for skippable
+     // for skippable
     this.route.url.subscribe(
-        link => {
-         if (link && link[0]  &&  link[0].path) {
-           console.log(link[0].path);
-           this.fourPageService.setSkippable(true);
-         }
-        }
-      );
-    this.route.paramMap.subscribe(
-      (route: any) => {
-        console.log(route.params);
-        if (route) {
-        if (route.params.id) {
-          this.fourPageService.setUserThrough(true);
-          localStorage.setItem('getListId', route.params.id);
-          } else if (route.params.mobile) {
-            this.numberCheck = route.params.mobile;
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListMobile', route.params.mobile);
-            } else {
-            this.fourPageService.setUserThrough(false);
-            localStorage.setItem('getListId', '');
-            localStorage.setItem('getListMobile', '');
-          }
-        if (route.params.leadId) {
-          this.fourPageService.setUserThrough(true);
-          localStorage.setItem('getListLeadId', route.params.leadId);
-          } else {
-            this.fourPageService.setUserThrough(false);
-            localStorage.setItem('getListLeadId', '');
-          }
-        if (route.params.templeId) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListTempleId', route.params.templeId);
-            }
-        if (route.params.enqDate) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('enqDate', route.params.enqDate);
-            }
-        if (route.params.source) {
-          this.fourPageService.setUserThrough(true);
-          localStorage.setItem('getListSource', route.params.source);
-        }
-        if (route.params.id) {
-          this.getProfile();
-          }
-        }
+      link => {
+       if (link && link[0]  &&  link[0].path) {
+         console.log(link[0].path);
+         this.fourPageService.setSkippable(true);
+       }
       }
     );
-
-
+    this.route.paramMap.subscribe(
+    (route: any) => {
+      console.log(route.params);
+      if (route) {
+      if (route.params.id) {
+        this.fourPageService.setUserThrough(true);
+        localStorage.setItem('getListId', route.params.id);
+        } else if (route.params.mobile) {
+          this.numberCheck = route.params.mobile;
+          this.fourPageService.setUserThrough(true);
+          localStorage.setItem('getListMobile', route.params.mobile);
+          } else {
+          this.fourPageService.setUserThrough(false);
+          localStorage.setItem('getListId', '');
+          localStorage.setItem('getListMobile', '');
+        }
+      if (route.params.leadId) {
+        this.fourPageService.setUserThrough(true);
+        localStorage.setItem('getListLeadId', route.params.leadId);
+        } else {
+          this.fourPageService.setUserThrough(false);
+          localStorage.setItem('getListLeadId', '');
+        }
+      if (route.params.templeId) {
+          this.fourPageService.setUserThrough(true);
+          localStorage.setItem('getListTempleId', route.params.templeId);
+          }
+      if (route.params.enqDate) {
+          this.fourPageService.setUserThrough(true);
+          localStorage.setItem('enqDate', route.params.enqDate);
+          }
+      if (route.params.source) {
+        this.fourPageService.setUserThrough(true);
+        localStorage.setItem('getListSource', route.params.source);
+      }
+      if (route.params.id) {
+        this.getProfile();
+        }
+      }
+    }
+  );
 
     this.spinner.hide();
     localStorage.setItem('gender', '');
@@ -255,6 +256,8 @@ export class CompatibilityFormComponent implements OnInit {
     if (this.fourPageService.getUserThrough()) {
       this.openMessageDialog();
       }
+
+    console.log(this.isLinear);
 
     }
       // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
