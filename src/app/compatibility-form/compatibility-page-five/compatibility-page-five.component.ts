@@ -276,7 +276,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
                       if (data.status === '1') {
                 this.approveProfileApi();
                   } else {
-                    this.ngxNotificationService.error('Not Approved');
+                    if (data.message) {
+                      this.ngxNotificationService.error(data.message);
+                    } else {
+                      this.ngxNotificationService.error('Not Approved');
+                    }
                   }
                 }
                   , err => {
@@ -296,9 +300,13 @@ export class CompatibilityPageFiveComponent implements OnInit {
             (data: any) => {
                 console.log(data);
                 if (data.status === '1') {
-          this.approveProfileApi();
+                 this.approveProfileApi();
             } else {
-              this.ngxNotificationService.error('Not Approved');
+              if (data.message) {
+                this.ngxNotificationService.error(data.message);
+              } else {
+                this.ngxNotificationService.error('Not Approved');
+              }
             }
           }
             , err => {
@@ -386,7 +394,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
           this.clearHistory();
               } else {
-                this.ngxNotificationService.error(data.message, 'Not Approved');
+                if (data.message) {
+                  this.ngxNotificationService.error(data.message);
+                } else {
+                  this.ngxNotificationService.error('Not Approved');
+                }
               }
           }, err => {
               console.log(err);

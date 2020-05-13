@@ -605,6 +605,7 @@ resolve(statusConfirmed);
   }
 
   onAutocompleteSelected(event) {
+    console.log(event);
     this.PageOne.value.locality = event.formatted_address;
     this.locality = event.formatted_address;
     console.log('address of family', this.PageOne.value.locality);

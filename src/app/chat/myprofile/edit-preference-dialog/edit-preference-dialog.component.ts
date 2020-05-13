@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { NgxNotificationService } from 'ngx-kc-notification';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 
 @Component({
@@ -16,6 +18,10 @@ export class EditPreferenceDialogComponent implements OnInit {
   maxHeight: any;
   minHeight: any;
   gender;
+  casteo: Observable<string[]>;
+  getcastes: any = [];
+
+
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
   // tslint:disable-next-line: max-line-length
@@ -40,6 +46,8 @@ export class EditPreferenceDialogComponent implements OnInit {
     console.log(this.preferenceData);
     this.maxHeight = this.getHeight(this.preferenceData.height_max);
     this.minHeight = this.getHeight(this.preferenceData.height_min);
+
+    this.getAllCaste();
   }
   onSubmit() {
     console.log('marital_status', this.preferenceData.marital_status);
@@ -96,4 +104,70 @@ export class EditPreferenceDialogComponent implements OnInit {
     return this.Heights[this.Heights1.indexOf(ht)];
   }
 
+
+    // Caste Selection
+
+    getAllCaste() {
+      this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+        this.getcastes = res;
+      });
+      if (this.preferenceData.Castes && this.preferenceData.Castes !== '') {
+      this.casteo = this.preferenceData.Castes.valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value.toString()))
+      );
+    } else {
+      this.preferenceData.Castes = '';
+      this.casteo = this.preferenceData.Castes.valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value.toString()))
+      );
+    }
+    }
+
+    private _Castefilter(value: string): string[] {
+      if (value != null) {
+        const filterValue = value.toLowerCase();
+        return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+      } else {
+        const filterValue = 'arora';
+        return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+      }
+    }
+  
+    async casteValidation(value) {
+      console.log('caste changed', value );
+      const status = 1;
+      let statusConfirmed;
+      await this.checkCaste(value).then((res: boolean) => {
+           statusConfirmed = res;
+         });
+      console.log('caste changed', statusConfirmed );
+  
+      if (statusConfirmed === false) {
+          this.ngxNotificationService.warning('Please choose a caste from the dropdown');
+          this.preferenceData.Castes.setValue('');
+          return false;
+        }
+      return true;
+  
+      }
+  
+      checkCaste(value) {
+        let status = 1;
+        let statusConfirmed = false;
+        this.casteo.forEach(element => {
+          element.forEach(item => {
+            if (value !== '' && item.includes(value) && item.length === value.length ) {
+              console.log('confirmed');
+              statusConfirmed = true;
+            } else {
+              status = 0;
+            }
+          });
+        });
+        return new Promise((resolve) => {
+    resolve(statusConfirmed);
+        });
+      }
 }

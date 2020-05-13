@@ -43,10 +43,21 @@
                 </div>
                 <hr style="margin: 0px 10px;width: 100%">
     
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <h6 style="display: inline-block">Caste : </h6>
                     <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceData.caste}}</p>
-                  </div>
+                  </div> -->
+
+                  <div class="col-12">
+                    <h6>Caste</h6>
+                    <input type="text" class="form-control" name="Castes" [(ngModel)]="preferenceData.Castes" required [matAutocomplete]="caste"  >
+                    <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
+                            <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
+                              {{name}}
+                            </mat-option>
+                    </mat-autocomplete>
+            </div>
+                  
                   <hr style="margin: 0px 10px;width: 100%">
                   <div class="col-12">
                       <h6 style="display: inline-block">Manglik : </h6>
