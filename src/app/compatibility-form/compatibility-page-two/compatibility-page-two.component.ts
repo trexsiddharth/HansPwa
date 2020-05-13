@@ -25,7 +25,6 @@ import {
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';
-import { element } from 'protractor';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -104,6 +103,7 @@ export class CompatibilityPageTwoComponent implements OnInit {
   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
 
   designations: string[] = [
+    'Owner',
     'Manager',
     'Sales Manager',
     'Accounts Manager',
@@ -284,6 +284,11 @@ changedQualification() {
 }
 changedOccupation() {
   console.log('changed Occupation');
+  if (this.PageTwo.value.Occupation === 'Business/Self-Employed') {
+    this.PageTwo.patchValue({
+      Designation: 'Owner'
+    });
+  }
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
    }
@@ -342,10 +347,17 @@ setAbout() {
     && this.PageTwo.value.Occupation
     && this.PageTwo.value.Working) {
     console.log('Setting About');
+    if (this.PageTwo.value.Occupation === 'Business/Self-Employed') {
+      this.PageTwo.patchValue({
+        // tslint:disable-next-line: max-line-length
+        About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and Self-Employed${this.PageTwo.value.Working !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
+      });
+    } else {
     this.PageTwo.patchValue({
       // tslint:disable-next-line: max-line-length
-      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Designation : 'Currently not working ' }${this.PageTwo.value.Working !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
+      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Designation === 'Others' ? this.PageTwo.value.OtherDesignation ? this.PageTwo.value.OtherDesignation : this.PageTwo.value.Designation  : this.PageTwo.value.Designation  : 'Currently not working ' }${this.PageTwo.value.Working !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
     });
+  }
   }
 }
 setFormOneData(userProfile: Profile) {
