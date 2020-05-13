@@ -25,6 +25,7 @@ export class EditPreferenceDialogComponent implements OnInit {
   Working: string[] = ['Working', 'Not Working', 'Doesn\'t Matter'];
   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Doesn\'t Matter',
   'Defence', 'Civil Services'];
+  MaritalStatus: string[] = ['Doesn\'t Matter', 'Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
   @ViewChild('preferencesForm', {static: false}) preferenceForm: NgForm;
   constructor(private http: HttpClient,
               private ngxNotificationService: NgxNotificationService,
@@ -53,6 +54,7 @@ export class EditPreferenceDialogComponent implements OnInit {
       }
       preferenceFormData.append('caste', this.preferenceData.caste);
       preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
+      preferenceFormData.append('marital_status', this.preferenceForm.value.maritalStatus);
       if (this.gender === 'Male') {
       preferenceFormData.append('working', this.preferenceForm.value.working);
       preferenceFormData.append('occupation', 'na');
@@ -60,7 +62,6 @@ export class EditPreferenceDialogComponent implements OnInit {
       preferenceFormData.append('occupation', this.preferenceForm.value.occupation);
       preferenceFormData.append('working', 'na');
     }
-      preferenceFormData.append('working', this.preferenceForm.value.working);
       preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice);
       preferenceFormData.append('description', this.preferenceData.description);
       preferenceFormData.append('income_min', this.preferenceData.income_min);
@@ -86,7 +87,7 @@ export class EditPreferenceDialogComponent implements OnInit {
       }
     );
     } else {
-      alert('enter valid details');
+      alert('enter all details');
     }
   }
 

@@ -29,6 +29,32 @@
             {{setAge(personalData.birth_date)}}
           </div>
 
+          <div class="row" style="padding-left: 15px;
+  margin-top: 1rem;">
+    <h6 style="margin:0px">Birth Date:</h6>
+    <div class="col-12" style="display: flex;
+    flex-direction: row;
+    padding-left: 0px;">
+    <select class="classic form-control" formControlName="birth_date" style="border: 1px solid black;"  required name="birth_date">
+        <option *ngFor="let  option of date" [value]="option">
+          {{option}}
+        </option>
+      </select> 
+
+      <select class="classic form-control" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;"  required name="birth_month">
+        <option *ngFor="let  option of month" [value]="option">
+          {{option}}
+        </option>
+      </select> 
+      
+      <select class="classic form-control" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;"  required name="birth_year">
+        <option *ngFor="let  option of years" [value]="option">
+          {{option}}
+        </option>
+      </select>
+    </div>
+  </div>
+
           <div class="col-12" >
             <h6>Weight:</h6>
             <input type="text" class="form-control"  formControlName="Weight" required>
@@ -122,7 +148,7 @@
   </div>
 
   <div class="col-12">
-    <h6>Profession:</h6>
+    <h6>Designation:</h6>
       <input type="text" class="form-control" formControlName="Profession" required> 
 </div>
 <div class="col-12">
@@ -148,32 +174,6 @@
           <option value="Non-Manglik">Non-Manglik</option>
           <option value="Anshik Manglik">Anshik Manglik</option>
       </select>
-  </div>
-
-  <div class="row" style="padding-left: 15px;
-  margin-top: 1rem;">
-    <h6 style="margin:0px">Birth Date:</h6>
-    <div class="col-12" style="display: flex;
-    flex-direction: row;
-    padding-left: 0px;">
-    <select class="classic form-control" formControlName="birth_date" style="border: 1px solid black;"  required name="birth_date">
-        <option *ngFor="let  option of date" [value]="option">
-          {{option}}
-        </option>
-      </select> 
-
-      <select class="classic form-control" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;"  required name="birth_month">
-        <option *ngFor="let  option of month" [value]="option">
-          {{option}}
-        </option>
-      </select> 
-      
-      <select class="classic form-control" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;"  required name="birth_year">
-        <option *ngFor="let  option of years" [value]="option">
-          {{option}}
-        </option>
-      </select>
-    </div>
   </div>
 
   <div class="col-12">

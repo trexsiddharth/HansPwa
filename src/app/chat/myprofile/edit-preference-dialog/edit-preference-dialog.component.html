@@ -54,6 +54,12 @@
                           <option *ngFor="let item of Mangalika"[value]="item">{{item}}</option>
                           </select> 
                     </div>
+                    <div class="col-12">
+                      <h6 style="display: inline-block">Marital Status : </h6>
+                      <select type="text" class="form-control" name="maritalStatus" [(ngModel)]="preferenceData.marital_status" required>
+                        <option *ngFor="let item of MaritalStatus"[value]="item">{{item}}</option>
+                        </select> 
+                    </div>
                     <hr style="margin: 0px 10px;width: 100%">
                     <div class="col-12">
                         <h6 style="display: inline-block">Mother Tongue : </h6>
@@ -80,7 +86,7 @@
                           </div>
                           <div class="col-12">
                             <h6>Description: (max 300 words)</h6>
-                              <input class="form-control" maxlength="300" type="text" name="description" [(ngModel)]="preferenceData.description"  required> 
+                              <input class="form-control" maxlength="300" type="text" name="description" [(ngModel)]="preferenceData.description" > 
                         </div>
 
                         <div style="text-align: center; width: 100%;">
