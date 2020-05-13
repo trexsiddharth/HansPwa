@@ -57,7 +57,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 
 
-export class CompatibilityFormComponent implements OnInit, AfterViewInit {
+export class CompatibilityFormComponent implements OnInit {
   @ViewChild('otpModal', {static: false}) private otpModal: any;
 
   time = {
@@ -149,19 +149,6 @@ export class CompatibilityFormComponent implements OnInit, AfterViewInit {
       disabledPart: ['']
     });
   }
-  ngAfterViewInit(): void {
-    
-    // for team user we will make page non linear from page two...because page one details are compulsory
-    this.fourPageService.makeLinear.subscribe(
-      (makeLinear: boolean) => {
-        console.log(makeLinear);
-        if (makeLinear === true) {
-          this.isLinear = false;
-          this.fourPageService.setUserThrough(true);
-        }
-      }
-    );
-  }
 
   ngOnInit() {
     localStorage.clear();
@@ -195,6 +182,18 @@ export class CompatibilityFormComponent implements OnInit, AfterViewInit {
          }
       }
     );
+
+      // for team user we will make page non linear from page two...because page one details are compulsory
+    this.fourPageService.makeLinear.subscribe(
+        (makeLinear: boolean) => {
+          console.log(makeLinear);
+          if (makeLinear === true) {
+            this.isLinear = false;
+            this.fourPageService.setUserThrough(true);
+            console.log(this.isLinear);
+          }
+        }
+      );
 
      // for skippable
     this.route.url.subscribe(

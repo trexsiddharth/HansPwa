@@ -169,12 +169,11 @@ ngOnInit() {
         () => {
           console.log(this.fourPageService.getProfile());
           this.setFormForGetUserThrough();
+          if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
+            this.fourPageService.makeLinear.emit(true);
+          }
         }
       );
-  }
-
-    if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
-    this.fourPageService.setLinear(true);
   }
     }
 

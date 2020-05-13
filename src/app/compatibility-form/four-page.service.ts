@@ -58,8 +58,4 @@ export class FourPageService {
     console.log(this.profile);
   }
 
-  setLinear(value: boolean) {
-    this.makeLinear.emit(value);
-  }
-
 }
