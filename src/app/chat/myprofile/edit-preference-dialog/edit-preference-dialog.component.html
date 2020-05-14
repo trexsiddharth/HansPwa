@@ -50,12 +50,20 @@
 
                   <div class="col-12">
                     <h6>Caste</h6>
-                    <input type="text" class="form-control" name="Castes" [(ngModel)]="preferenceData.Castes" required [matAutocomplete]="caste"  >
-                    <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
-                            <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
+                    <mat-select 
+                    type="text" class="form-control"  
+                    [multiple]="true" [formControl]="searchCaste"
+                    #multiSelect
+                     required >
+                     <mat-option>
+                      <ngx-mat-select-search 
+                      aria-placeholder="test"
+                      [formControl]="searchCasteText"></ngx-mat-select-search>
+                     </mat-option>
+                            <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
                               {{name}}
                             </mat-option>
-                    </mat-autocomplete>
+                    </mat-select>
             </div>
                   
                   <hr style="margin: 0px 10px;width: 100%">
@@ -99,6 +107,10 @@
                             <h6>Description: (max 300 words)</h6>
                               <input class="form-control" maxlength="300" type="text" name="description" [(ngModel)]="preferenceData.description" > 
                         </div>
+
+                        <p>
+                          {{searchedCaste}}
+                        </p>
 
                         <div style="text-align: center; width: 100%;">
                           <button type="submit"  class="btn"

@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { NgForm } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSelect } from '@angular/material';
+import { NgForm, FormControl } from '@angular/forms';
 import { NgxNotificationService } from 'ngx-kc-notification';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { startWith, map, take, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -12,14 +12,22 @@ import { startWith, map } from 'rxjs/operators';
   templateUrl: './edit-preference-dialog.component.html',
   styleUrls: ['./edit-preference-dialog.component.css']
 })
-export class EditPreferenceDialogComponent implements OnInit {
+export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnDestroy {
+  constructor(private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
+              public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
+    this.data = data;
+  }
   data: any;
   preferenceData: any;
   maxHeight: any;
   minHeight: any;
   gender;
-  casteo: Observable<string[]>;
   getcastes: any = [];
+  searchedCaste = '';
+  searchCaste = new FormControl();
+  searchCasteText = new FormControl();
+
 
 
   // tslint:disable-next-line: max-line-length
@@ -33,11 +41,21 @@ export class EditPreferenceDialogComponent implements OnInit {
   'Defence', 'Civil Services'];
   MaritalStatus: string[] = ['Doesn\'t Matter', 'Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
   @ViewChild('preferencesForm', {static: false}) preferenceForm: NgForm;
-  constructor(private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
-    this.data = data;
-  }
+
+
+    // Caste Selection
+
+
+    // multi caste selection
+
+
+  /** list of banks filtered by search keyword */
+  public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+
+  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
 
   ngOnInit() {
     this.gender = localStorage.getItem('gender');
@@ -60,7 +78,7 @@ export class EditPreferenceDialogComponent implements OnInit {
       } else {
         preferenceFormData.append('id', localStorage.getItem('id'));
       }
-      preferenceFormData.append('caste', this.preferenceData.caste);
+      preferenceFormData.append('caste', this.searchCaste.value);
       preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
       preferenceFormData.append('marital_status', this.preferenceForm.value.maritalStatus);
       if (this.gender === 'Male') {
@@ -105,69 +123,76 @@ export class EditPreferenceDialogComponent implements OnInit {
   }
 
 
-    // Caste Selection
+  getAllCaste() {
+    this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+      this.getcastes = res;
 
-    getAllCaste() {
-      this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
-        this.getcastes = res;
-      });
-      if (this.preferenceData.Castes && this.preferenceData.Castes !== '') {
-      this.casteo = this.preferenceData.Castes.valueChanges.pipe(
-        startWith(''),
-        map(value => this._Castefilter(value.toString()))
-      );
-    } else {
-      this.preferenceData.Castes = '';
-      this.casteo = this.preferenceData.Castes.valueChanges.pipe(
-        startWith(''),
-        map(value => this._Castefilter(value.toString()))
-      );
-    }
-    }
-
-    private _Castefilter(value: string): string[] {
-      if (value != null) {
-        const filterValue = value.toLowerCase();
-        return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
-      } else {
-        const filterValue = 'arora';
-        return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
-      }
-    }
-  
-    async casteValidation(value) {
-      console.log('caste changed', value );
-      const status = 1;
-      let statusConfirmed;
-      await this.checkCaste(value).then((res: boolean) => {
-           statusConfirmed = res;
-         });
-      console.log('caste changed', statusConfirmed );
-  
-      if (statusConfirmed === false) {
-          this.ngxNotificationService.warning('Please choose a caste from the dropdown');
-          this.preferenceData.Castes.setValue('');
-          return false;
+       // set initial selection
+       let values = [];
+      this.preferenceData.caste.split(',').forEach(element => {
+        console.log(element);
+        if (this.getcastes.indexOf(element)) {
+          values.push(this.getcastes[this.getcastes.indexOf(element)]);
         }
-      return true;
-  
-      }
-  
-      checkCaste(value) {
-        let status = 1;
-        let statusConfirmed = false;
-        this.casteo.forEach(element => {
-          element.forEach(item => {
-            if (value !== '' && item.includes(value) && item.length === value.length ) {
-              console.log('confirmed');
-              statusConfirmed = true;
-            } else {
-              status = 0;
-            }
-          });
-        });
-        return new Promise((resolve) => {
-    resolve(statusConfirmed);
-        });
-      }
+      });
+      this.searchCaste.setValue(values);
+
+      // load the initial bank list
+      this.filteredCastesMulti.next(this.getcastes.slice());
+
+      // listen for search field value changes
+      this.searchCasteText.valueChanges
+    .pipe(takeUntil(this._onDestroy))
+    .subscribe(() => {
+      this.filterCasteMulti();
+    });
+
+
+  });
+  }
+
+  ngAfterViewInit() {
+    this.setInitialValue();
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
+   // Sets the initial value after the filteredBanks are loaded initially
+
+  protected setInitialValue() {
+    this.filteredCastesMulti
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredBanks are loaded initially
+        // and after the mat-option elements are available
+        this.multiSelect.compareWith = (a: string, b: string) => a && b && a === b;
+      });
+  }
+
+  protected filterCasteMulti() {
+    if (!this.getcastes) {
+      return;
+    }
+    // get the search keyword
+    let search = this.searchCasteText.value;
+    if (!search) {
+      this.filteredCastesMulti.next(this.getcastes.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredCastesMulti.next(
+      this.getcastes.filter(bank => bank.toLowerCase().indexOf(search) > -1)
+    );
+  }
+
+
+
 }

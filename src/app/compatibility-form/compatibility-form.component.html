@@ -172,7 +172,7 @@
                                 
                                  <mat-form-field class="full-width fieldFit" *ngIf="Caste" appearance="standard">
                                    <mat-label style="color: black;">Caste</mat-label>
-                                   <input type="text" matInput formControlName="Castes" required [matAutocomplete]="caste" required  >
+                                   <input type="text" matInput formControlName="Castes" multiple required [matAutocomplete]="caste" required  >
                                    <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
                                       
                                            <mat-option *ngFor="let name of casteo | async" [value]="name"  required>

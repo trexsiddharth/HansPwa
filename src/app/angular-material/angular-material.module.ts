@@ -13,6 +13,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { AgmCoreModule } from '@agm/core';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ exports: [
   FormsModule,
   ReactiveFormsModule,
   AgmCoreModule,
-  MatGoogleMapsAutocompleteModule
+  MatGoogleMapsAutocompleteModule,
+  NgxMatSelectSearchModule
 ]
 })
 export class AngularMaterialModule { }

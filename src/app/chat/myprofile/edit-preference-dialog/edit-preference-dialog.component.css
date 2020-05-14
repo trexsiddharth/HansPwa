@@ -16,6 +16,13 @@
 ::ng-deep .mat-form-field-label{
     color: black;
 }
+::ng-deep .mat-select-value{
+    color: black;
+}
+::ng-deep .mat-select-search-inner{
+    background: white;
+    margin-left: 0px;
+}
 option{
     font-size: 14px;
 }
