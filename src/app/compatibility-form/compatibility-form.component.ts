@@ -118,8 +118,8 @@ export class CompatibilityFormComponent implements OnInit {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-    private _formBuilder: FormBuilder, 
-    private router: Router,
+              private _formBuilder: FormBuilder, 
+              private router: Router,
               public notification: NotificationsService,
               public fourPageService: FourPageService,
               private matDialog: MatDialog,
@@ -242,6 +242,11 @@ export class CompatibilityFormComponent implements OnInit {
       if (route.params.id) {
         this.getProfile();
         }
+      }
+
+      // when user comes from app to webview four page reg
+      if (route.params.appMobile) {
+        this.numberCheck = route.params.appMobile;
       }
     }
   );

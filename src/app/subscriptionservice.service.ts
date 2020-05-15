@@ -4,13 +4,16 @@ import {
   NgxNotificationService
 } from 'ngx-kc-notification';
 
+import { Router } from '@angular/router';
 
 declare var Razorpay: any;
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionserviceService {
-  constructor( private http: HttpClient, private ngxNotificationService: NgxNotificationService ) {
+  constructor( private http: HttpClient,
+               private route: Router,
+               private ngxNotificationService: NgxNotificationService ) {
    }
   payNowT(amt, type, plan, name, email, phone) {
     let notes = {service: ''};
@@ -158,6 +161,7 @@ captureStandardPayment(response, amount) {
         if (data.status === 1) {
           alert('Payment Successful, Credits has been added to your account.');
           this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amount);
+          this.route.navigateByUrl('chat');
         } else {
           alert('Something went wrong. Please try again later.');
         }
