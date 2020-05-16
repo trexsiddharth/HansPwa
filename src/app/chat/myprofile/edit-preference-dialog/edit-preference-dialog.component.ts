@@ -60,13 +60,41 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
   ngOnInit() {
     this.gender = localStorage.getItem('gender');
     console.log(this.data);
-    this.preferenceData = this.data.preferencesDetails;
+    this.preferenceData = {...this.data.preferencesDetails};
     console.log(this.preferenceData);
     this.maxHeight = this.getHeight(this.preferenceData.height_max);
     this.minHeight = this.getHeight(this.preferenceData.height_min);
 
     this.getAllCaste();
   }
+
+  setNullToNotMatter() {
+    setTimeout(() => {
+      if (this.preferenceData) {
+        console.log('working');
+        if (!this.preferenceData.manglik) {
+          this.preferenceData.manglik = 'Doesn\'t Matter';
+        }
+        if (!this.preferenceData.working) {
+          this.preferenceData.working = 'Doesn\'t Matter';
+        }
+        if (!this.preferenceData.marital_status) {
+          this.preferenceData.marital_status = 'Doesn\'t Matter';
+        }
+        if (!this.preferenceData.mother_tongue) {
+          this.preferenceData.mother_tongue = 'Hindi';
+        }
+        if (!this.preferenceData.food_choice) {
+          this.preferenceData.food_choice = 'Doesn\'t Matter';
+        }
+        if (!this.preferenceData.occupation) {
+          this.preferenceData.occupation = 'Doesn\'t Matter';
+        }
+
+    }
+    }, 1000);
+  }
+
   onSubmit() {
     console.log('marital_status', this.preferenceData.marital_status);
 
@@ -155,6 +183,7 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
 
   ngAfterViewInit() {
     this.setInitialValue();
+    this.setNullToNotMatter();
   }
 
   ngOnDestroy() {
