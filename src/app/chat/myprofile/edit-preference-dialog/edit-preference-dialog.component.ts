@@ -183,6 +183,8 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
 
   ngAfterViewInit() {
     this.setInitialValue();
+
+    // to update the values to doesnt matter if null
     this.setNullToNotMatter();
   }
 

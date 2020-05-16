@@ -23,6 +23,9 @@
     background: white;
     margin-left: 0px;
 }
+::ng-deep .mat-select-search-input{
+    color: black;
+}
 option{
     font-size: 14px;
 }
