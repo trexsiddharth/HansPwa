@@ -128,14 +128,16 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
       this.getcastes = res;
 
        // set initial selection
+      if (this.preferenceData.caste && this.preferenceData.caste !== 'null' && this.preferenceData.caste !== 'all' ) {
        let values = [];
-      this.preferenceData.caste.split(',').forEach(element => {
+       this.preferenceData.caste.split(',').forEach(element => {
         console.log(element);
         if (this.getcastes.indexOf(element)) {
           values.push(this.getcastes[this.getcastes.indexOf(element)]);
         }
       });
-      this.searchCaste.setValue(values);
+       this.searchCaste.setValue(values);
+    }
 
       // load the initial bank list
       this.filteredCastesMulti.next(this.getcastes.slice());

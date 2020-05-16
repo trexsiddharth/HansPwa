@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
