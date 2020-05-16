@@ -593,6 +593,10 @@ getData(item: any, answer: any, index: any) {
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
       (data: any) => {
         console.log(data);
+        // update the count of all sections after response on any profile
+        if (data && data.count) {
+          this.itemService.saveCount(data.count);
+        }
         this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer);
         this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
         this.getCredits();
