@@ -68,8 +68,8 @@ export class EditPersonalDialogComponent implements OnInit {
     this.personalForm = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       name: [''],
-      phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
-      Whatsapp: ['' , Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+      phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(91)?[6-9][0-9]{9}')])],
+      Whatsapp: ['' , Validators.compose([Validators.max(9999999999999), Validators.pattern('(91)?[6-9][0-9]{9}')])],
       email: [''],
       birth_date: ['01'],
       birth_month: ['January'],
