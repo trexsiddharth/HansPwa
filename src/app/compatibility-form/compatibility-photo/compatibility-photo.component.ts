@@ -225,6 +225,7 @@ export class CompatibilityPhotoComponent implements OnInit {
 
   photoScoreChanged(event) {
     console.log(event);
+    this.fourPageService.profile.photoScore = event;
     if (event && event > 1) {
       this.fourPageService.form4Completed.emit(true);
     } else {
