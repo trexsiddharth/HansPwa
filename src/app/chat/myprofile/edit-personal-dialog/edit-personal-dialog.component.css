@@ -1,3 +1,4 @@
+html, body{margin:0 0 0 0;}
 ::ng-deep .mat-dialog-container {
     padding: 0px;
     background: white;
@@ -16,6 +17,7 @@
 ::ng-deep .mat-form-field-label{
     color: black;
 }
+
 .row {
     padding: 0px;
     margin: 0px;

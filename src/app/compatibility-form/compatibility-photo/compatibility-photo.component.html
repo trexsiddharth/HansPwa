@@ -50,7 +50,9 @@
     <label for="photoScore">Photo Score:</label>
     <input style="border:1px solid darkgrey;margin-left: 10px;"
      class="form-control"
-     name="photoScore" type="number" [(ngModel)]="photoScore" />
+     name="photoScore" 
+     (ngModelChange)="photoScoreChanged($event)"
+     type="number" [(ngModel)]="photoScore" />
   </div>
   <p *ngIf="fourPageService.getUserThrough()" class="impNote">
     कस्टमर की फोटो देखकर उसे 5 से लेकर 10 के बीच एक स्कोर दीजिये - अगर बहुत देखने में बहुत अच्छा है तो 10,9 ya 8 etc  और बहुत ही काम  अच्छा है  तो 5

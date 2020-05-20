@@ -167,6 +167,27 @@
  <!-- // index = 4 -->
  <div *ngIf="index==4">
 
+
+<!-- <div class="col-12">
+  <h6>Birth Place</h6>
+  <input type="text" class="form-control" matValidateAddress
+   matGoogleMapsAutocomplete
+    #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+  (onAutocompleteSelected)="onAutocompleteSelected($event, 'Birth')" 
+  (onLocationSelected)="onLocationSelected($event, 'Birth')"
+  formControlName="BirthPlace">
+</div> -->
+
+<div class="col-12">
+  <h6>Locality:</h6>
+      <input type="text" class="form-control" 
+      matValidateAddress matGoogleMapsAutocomplete
+       #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+      (onAutocompleteSelected)="onAutocompleteSelected($event, 'Birth')" 
+      (onLocationSelected)="onLocationSelected($event, 'Birth')"
+      required formControlName="BirthPlace">
+</div>
+
   <div class="col-12">
     <h6>Manglik:</h6>
     <select type="text" class="form-control"  formControlName="Manglik" required>
@@ -176,15 +197,6 @@
       </select>
   </div>
 
-  <div class="col-12">
-    <h6>Birth Place</h6>
-    <input type="text" class="form-control" matValidateAddress
-     matGoogleMapsAutocomplete
-      #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-    (onAutocompleteSelected)="onAutocompleteSelected($event, 'Birth')" 
-    (onLocationSelected)="onLocationSelected($event, 'Birth')"
-    formControlName="BirthPlace">
-</div>
 
 <div class="col-12">
   <h6>Time of Birth</h6>
@@ -211,16 +223,15 @@
 <input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp" >
 </div>
 
-<div class="col-12">
+<div class="col-12" style="padding: 0px;margin: 0px;">
   <h6>Working City:</h6>
-      <input type="text" class="form-control" 
+      <input type="text" #input class="form-control" 
       matValidateAddress matGoogleMapsAutocomplete
        #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
       (onAutocompleteSelected)="onAutocompleteSelected($event, 'Working')" 
       (onLocationSelected)="onLocationSelected($event, 'Working')"
       required formControlName="WorkingCity">
 </div>
-
 
   </div>
   

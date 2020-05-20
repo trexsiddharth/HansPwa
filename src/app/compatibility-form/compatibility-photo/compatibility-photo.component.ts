@@ -191,6 +191,9 @@ export class CompatibilityPhotoComponent implements OnInit {
       } else {
         this.BackimgURL = this.suc.profile_pic_url;
         this.fourPageService.profile.image3 = this.suc.profile_pic_url;
+        if (this.fourPageService.profile.photoScore > 1) {
+        this.fourPageService.form4Completed.emit(true);
+        }
       }
     } else {
       this.spinner.hide();
@@ -220,23 +223,32 @@ export class CompatibilityPhotoComponent implements OnInit {
         this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
   }
 
+  photoScoreChanged(event) {
+    console.log(event);
+    if (event && event > 1) {
+      this.fourPageService.form4Completed.emit(true);
+    } else {
+      this.fourPageService.form4Completed.emit(false);
+    }
+  }
 
   checkForPhoto() {
     if (this.fourPageService.getUserThrough()) {
       this.fourPageService.profile.photoScore = this.photoScore;
       const userProfile = this.fourPageService.profile;
-      if (userProfile.image1 === null  || userProfile.image1 === '') {
+      console.log(userProfile);
+      if (!userProfile.image1 || userProfile.image1 === null  || userProfile.image1 === '') {
         return this.ngxNotificationService.error('Select Image 1');
-      } else if (userProfile.image2 === null  || userProfile.image2 === '') {
+      } else if (!userProfile.image2 || userProfile.image2 === null  || userProfile.image2 === '') {
         return this.ngxNotificationService.error('Select Image 2');
-      } else if (userProfile.image3 === null  || userProfile.image3 === '') {
-        this.fourPageService.form4Completed.emit(true);
+      } else if (!userProfile.image3 || userProfile.image3 === null  || userProfile.image3 === '') {
         return this.ngxNotificationService.error('Select Image 3');
       } else if (userProfile.photoScore < 1) {
         return this.ngxNotificationService.error('Give a score');
-      } else if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
+      } else if (!localStorage.getItem('getListId') || !localStorage.getItem('getListMobile')) {
         console.log(this.fourPageService.getProfile().mobile);
         localStorage.setItem('mobile_number', this.fourPageService.getProfile().mobile);
+      } else {
         this.skip(1);
       }
     } else {
