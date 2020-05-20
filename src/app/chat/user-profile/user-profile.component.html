@@ -472,12 +472,20 @@
                         <span class="labelText">फ़ूड चॉइस प्रेफरेंस:</span>  {{preferenceProfileData.food_choice}}
                     </span>
                 </div>
-                <div class="col-12">
+                <div class="col-12" *ngIf="personalProfileData.gender === 'Female'">
                     <img class="iconSize" src="../../../assets/suitcase.svg" alt="pref occupation"> 
                     <span style="margin-left: 5px;">
                         <span class="labelText">ऑक्यूपेशन प्रेफरेंस:</span>  {{preferenceProfileData.occupation}}
                     </span>
                 </div>
+
+                <div class="col-12" *ngIf="personalProfileData.gender === 'Male'">
+                    <img class="iconSize" src="../../../assets/suitcase.svg" alt="pref working"> 
+                    <span style="margin-left: 5px;">
+                        <span class="labelText">वर्किंग प्रेफरेंस:</span>  {{preferenceProfileData.working}}
+                    </span>
+                </div>
+
                 <div class="col-12">
                     <span>
                         Description: {{preferenceProfileData.description}}
