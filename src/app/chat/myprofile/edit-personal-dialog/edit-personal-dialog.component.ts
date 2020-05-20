@@ -286,7 +286,7 @@ onLocationSelected(e, type: string) {
       BirthTime: this.personalData.birth_time,
       email: this.familyData.email ? this.familyData.email : '',
       phone: this.familyData.mobile,
-      Whatsapp: this.personalData.whatsapp ? this.personalData.whatsapp : this.familyData.mobile,
+      Whatsapp: this.personalData.whats_app_no ? this.personalData.whats_app_no : this.familyData.mobile,
       Castes: this.familyData.caste,
       Food: this.personalData.food_choice ? this.personalData.food_choice : 'Vegetarian',
       WorkingCity: this.personalData.working_city,

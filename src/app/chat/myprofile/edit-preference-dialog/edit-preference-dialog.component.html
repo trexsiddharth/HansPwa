@@ -43,10 +43,6 @@
                 </div>
                 <hr style="margin: 0px 10px;width: 100%">
     
-                <!-- <div class="col-12">
-                    <h6 style="display: inline-block">Caste : </h6>
-                    <p style="font-size: 14px;display: inline-block;margin-left: 10px">{{preferenceData.caste}}</p>
-                  </div> -->
 
                   <div class="col-12">
                     <h6>Caste</h6>
@@ -65,6 +61,8 @@
                             </mat-option>
                     </mat-select>
             </div>
+
+            <!-- <mat-checkbox>All Caste Preferred</mat-checkbox> -->
                   
                   <hr style="margin: 0px 10px;width: 100%">
                   <div class="col-12">
@@ -107,10 +105,6 @@
                             <h6>Description: (max 300 words)</h6>
                               <input class="form-control" maxlength="300" type="text" name="description" [(ngModel)]="preferenceData.description" > 
                         </div>
-
-                        <p>
-                          {{searchedCaste}}
-                        </p>
 
                         <div style="text-align: center; width: 100%;">
                           <button type="submit"  class="btn"

@@ -26,6 +26,9 @@
 ::ng-deep .mat-select-search-input{
     color: black;
 }
+::ng-deep .mat-checkbox-inner-container{
+    border: 1px solid black;
+  }
 option{
     font-size: 14px;
 }
