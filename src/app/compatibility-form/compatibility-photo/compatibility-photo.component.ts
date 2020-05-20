@@ -274,6 +274,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   }
 
   skip(type) {
+    this.fourPageService.form4Completed.emit(true);
     (window as any).fbq('track', 'FourPageRegistration', {
       value: 15,
       currency: 'INR',
@@ -291,7 +292,7 @@ export class CompatibilityPhotoComponent implements OnInit {
                  'Registered through Four Page Registration Page Four');
 
                  // 0 -> got to chat  1-> got to fifth page
-    if (type === 0) {
+    if (type === 0 && !this.fourPageService.getUserThrough()) {
       this.router.navigateByUrl('chat?first');
     }
   }
