@@ -13,6 +13,10 @@ minutes = 0;
 
   ngOnInit() {
     this.setTimer();
+
+    setTimeout(() => {
+      this.closeDialog();
+    }, 10000);
   }
 
   closeDialog() {
