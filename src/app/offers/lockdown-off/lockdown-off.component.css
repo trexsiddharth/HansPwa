@@ -64,7 +64,25 @@
 
 }
 
-
+.subHeading2{
+    margin-top: 50px;
+}
+.timer {
+    display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 30px 0px 0px;
+}
+.offer-btn{
+    background: #D313AE;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 10px 50px;
+            border-radius: 10px;
+            margin: 30px 0px
+}
 @media (max-width: 575px) {
     #bannerText {
         position: absolute;
@@ -88,7 +106,7 @@
     #offerHeadLine{
         color: #737373;
         font-weight: bold;
-        margin-top: 50px;
+        margin-top: 20px;
         font-size: 1.4rem;
     }
     .subHeading{
@@ -96,5 +114,24 @@
         color: #797979;
         margin-top: 20px;
     
+    }
+    .subHeading2 {
+        margin-top: 20px;
+    }
+    .timer {
+        display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 10px 0px 0px;
+    }
+    .offer-btn{
+        background: #D313AE;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: bold;
+                padding: 10px 50px;
+                border-radius: 10px;
+                margin: 10px 0px
     }
 }

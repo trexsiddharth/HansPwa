@@ -27,16 +27,12 @@
 
     </div>
 
-    <div class="t-c" style="margin-top: 50px;">
+    <div class="t-c subHeading2">
         <span class="subHeading">
             जल्दी करें ऑफर सिर्फ
         </span>
 
-        <div style="display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
-        margin: 30px 0px 0px;">
+        <div class="timer">
             <div class="t-c" style="display: flex;flex-direction: column;width: fit-content;">
                 <span style="color: #797979;">मिनट</span>
                 <p style="font-size: 2rem;
@@ -81,13 +77,8 @@
         </div>
 
         <div class="t-c">
-            <button [routerLink]="['/subscription']" routerLinkActive="router-link-active" (click)="closeDialog()"  class="btn" style="background: #D313AE;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            padding: 10px 50px;
-            border-radius: 10px;
-            margin: 30px 0px" mat-raised-button>
+            <button [routerLink]="['/subscription']" routerLinkActive="router-link-active" (click)="closeDialog()"  class="btn offer-btn"
+             mat-raised-button>
                 मेम्बरशिप चुनें   
             </button>
         </div>
