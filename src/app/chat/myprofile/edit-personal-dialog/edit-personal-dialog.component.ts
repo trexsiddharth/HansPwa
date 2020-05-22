@@ -299,10 +299,10 @@ designations: string[] = [
     } else if (type === 'Working') {
       this.personalForm.value.working_city = event.formatted_address;
     } else {
-      this.personalForm.value.BirthTime = event.formatted_address;
+      this.personalForm.value.BirthPlace = event.formatted_address;
     }
     this.locality = event.formatted_address;
-    console.log('address of family', this.personalForm.value.locality);
+    console.log('address of family', event.formatted_address);
 
 }
 onLocationSelected(e, type: string) {

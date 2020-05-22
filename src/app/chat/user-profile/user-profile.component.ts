@@ -9,7 +9,6 @@ import { EditPersonalDialogComponent } from '../myprofile/edit-personal-dialog/e
 import { EditFamilyDialogComponent } from '../myprofile/edit-family-dialog/edit-family-dialog.component';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { timeout, retry, catchError } from 'rxjs/operators';
-import { Profile } from 'src/app/compatibility-form/profile';
 
 
 @Component({
@@ -113,6 +112,7 @@ onResize(event) {
       }
       }
     openPersonalDialog(i: number, titleText: string) {
+      document.querySelector('#imgProfile').scrollIntoView();
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
         dialogConfig.maxWidth = '40vh';
@@ -139,6 +139,7 @@ onResize(event) {
     }
 
     openFamilyDialog() {
+      document.querySelector('#imgProfile').scrollIntoView();
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
         dialogConfig.maxWidth = '40vh';
