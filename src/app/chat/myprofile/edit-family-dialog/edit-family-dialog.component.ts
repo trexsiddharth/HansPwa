@@ -18,6 +18,8 @@ export class EditFamilyDialogComponent implements OnInit {
   Count: any[] = ['None', 0, 1, 2, 3, 4, 5, 6, 7, 8];
   HouseType: string[] = ['Owned', 'Rented', 'Leased'];
   @ViewChild('familyForm', {static: false}) familyForm: NgForm;
+  city;
+  cityLocation;
 
 
   constructor(private http: HttpClient,
@@ -45,6 +47,7 @@ export class EditFamilyDialogComponent implements OnInit {
     familyDataForm.append('unmarried_daughters', this.familyForm.value.unmarried_daughters);
     familyDataForm.append('gotra', this.familyForm.value.gotra);
     familyDataForm.append('family_income', this.familyForm.value.family_income);
+    familyDataForm.append('city', this.familyForm.value.city);
     familyDataForm.append('is_lead', localStorage.getItem('is_lead'));
 
 
@@ -59,5 +62,15 @@ export class EditFamilyDialogComponent implements OnInit {
     );
     this.dialogRef.close();
   }
+
+  onAutocompleteSelected(event) {
+    this.familyData.city = event.formatted_address;
+    console.log('address of family', this.city);
+
+}
+onLocationSelected(e) {
+    this.cityLocation = e;
+    console.log('location of family', e);
+}
 
 }

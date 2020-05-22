@@ -235,8 +235,8 @@ designations: string[] = [
        ? this.personalForm.value.Food : this.personalData.food_choice);
       personalDataForm.append('caste', this.personalForm.value.Castes
        ? this.personalForm.value.Castes : this.familyData.caste);
-      personalDataForm.append('city', this.personalForm.value.Locality
-       ? this.personalForm.value.Locality : this.familyData.city);
+      personalDataForm.append('locality', this.personalForm.value.Locality
+       ? this.personalForm.value.Locality : this.familyData.locality);
       personalDataForm.append('working_city', this.personalForm.value.WorkingCity
        ? this.personalForm.value.WorkingCity : this.personalData.working_city);
       personalDataForm.append('degree', this.personalForm.value.Degree
@@ -338,7 +338,7 @@ onLocationSelected(e, type: string) {
       Castes: this.familyData.caste,
       Food: this.personalData.food_choice ? this.personalData.food_choice : 'Vegetarian',
       WorkingCity: this.personalData.working_city,
-      Locality: this.familyData.city,
+      Locality: this.familyData.locality,
       Degree: this.personalData.degree ? this.personalData.degree : this.personalData.education,
       Profession: this.personalData.profession,
       College: this.personalData.college,
