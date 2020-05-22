@@ -12,7 +12,7 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 export class EditFamilyDialogComponent implements OnInit {
   data: any;
   familyData: any;
-  Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Homely', 'Not Employed'];
+  Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Homely', 'Not Employed', 'Not Alive'];
   Status: string[] = ['Alive', 'Not Alive'];
   FamilyType: string[] = ['Joint', 'Nuclear'];
   Count: any[] = ['None', 0, 1, 2, 3, 4, 5, 6, 7, 8];

@@ -115,8 +115,9 @@ onResize(event) {
     openPersonalDialog(i: number, titleText: string) {
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
-        dialogConfig.minWidth = '30vw';
-        dialogConfig.maxWidth = '100vh';
+        dialogConfig.maxWidth = '40vh';
+        dialogConfig.minWidth = '35vh';
+        dialogConfig.maxHeight = '90vh';
       } else {
       dialogConfig.minWidth = '80vw';
       dialogConfig.maxHeight = '80vh';
@@ -140,8 +141,9 @@ onResize(event) {
     openFamilyDialog() {
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
-        dialogConfig.minWidth = '30vw';
-        dialogConfig.maxWidth = '100vh';
+        dialogConfig.maxWidth = '40vh';
+        dialogConfig.minWidth = '35vh';
+        dialogConfig.maxHeight = '90vh';
       } else {
       dialogConfig.minWidth = '80vw';
       dialogConfig.maxHeight = '80vh';
@@ -162,8 +164,9 @@ onResize(event) {
     openPreferenceDialog() {
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
-        dialogConfig.minWidth = '30vw';
-        dialogConfig.maxWidth = '100vh';
+        dialogConfig.maxWidth = '40vh';
+        dialogConfig.minWidth = '35vh';
+        dialogConfig.maxHeight = '90vh';
       } else {
       dialogConfig.minWidth = '80vw';
       dialogConfig.maxHeight = '80vh';

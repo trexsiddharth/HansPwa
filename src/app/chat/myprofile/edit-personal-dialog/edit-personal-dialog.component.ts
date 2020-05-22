@@ -57,6 +57,50 @@ export class EditPersonalDialogComponent implements OnInit {
   '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010',
   '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'
 ];
+
+designations: string[] = [
+  'Owner',
+  'Manager',
+  'Sales Manager',
+  'Accounts Manager',
+  'Product Manager',
+  'Software Engineer',
+  'Engineer',
+  'Hotel Management',
+  'Operations Manager',
+  'Sales Executive',
+  'Operations Executive',
+  'Accountant',
+  'Marketing Manager',
+  'Marketing Executive',
+  'Chartered Accountant',
+  'Owner',
+  'Secretary',
+  'Company Secretary',
+  'Telesales Executive',
+  'Teacher',
+  'Clerk',
+  'Office Assistant',
+  'Relationship Manager',
+  'Computer Operator',
+  'Chief Executive Officer',
+  'Chief Marketing Officer',
+  'Chief Finance Officer',
+  'Business Development',
+  'Project Manager',
+  'Program Manager',
+  'Solution Architect',
+  'Graphic Designer',
+  'Content Writer',
+  'Director',
+  'Business Analyst',
+  'Front Office',
+  'Back office',
+  'Counselor',
+  'Event Manager',
+  'Legal',
+  'Public Relations',
+  'Others'];
   constructor(private http: HttpClient,
               public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
               @Inject(MAT_DIALOG_DATA) data,
@@ -85,6 +129,7 @@ export class EditPersonalDialogComponent implements OnInit {
       Food: [''],
       Degree: [''],
       Profession: [''],
+      OtherProfession: '',
       College: [''],
       Additional: [''],
       Occupation: [''],
@@ -190,8 +235,10 @@ export class EditPersonalDialogComponent implements OnInit {
        ? this.personalForm.value.Food : this.personalData.food_choice);
       personalDataForm.append('caste', this.personalForm.value.Castes
        ? this.personalForm.value.Castes : this.familyData.caste);
-      personalDataForm.append('working_city', this.personalForm.value.WorkingCity
+      personalDataForm.append('city', this.personalForm.value.Locality
        ? this.personalForm.value.Locality : this.familyData.city);
+      personalDataForm.append('working_city', this.personalForm.value.WorkingCity
+       ? this.personalForm.value.WorkingCity : this.personalData.working_city);
       personalDataForm.append('degree', this.personalForm.value.Degree
        ? this.personalForm.value.Degree : this.personalData.degree);
       personalDataForm.append('college', this.personalForm.value.College
@@ -212,8 +259,9 @@ export class EditPersonalDialogComponent implements OnInit {
       personalDataForm.append('mobile', this.personalForm.value.phone
        ? this.personalForm.value.phone : this.familyData.phone);
       personalDataForm.append('whatsapp', this.personalForm.value.Whatsapp ? this.personalForm.value.Whatsapp : this.familyData.mobile);
-      personalDataForm.append('profession', this.personalForm.value.Profession
-       ? this.personalForm.value.Profession : this.personalData.profession);
+      personalDataForm.append('profession', this.personalForm.value.Profession !== 'Others'
+       ? this.personalForm.value.Profession : this.personalForm.value.OtherProfession
+       ? this.personalForm.value.OtherProfession : this.personalData.profession);
       personalDataForm.append('education', this.personalForm.value.Degree
        ? this.personalForm.value.Degree : this.personalData.degree);
       personalDataForm.append('is_lead', localStorage.getItem('is_lead'));

@@ -107,7 +107,7 @@
                  #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                 (onAutocompleteSelected)="onAutocompleteSelected($event, 'Locality')" 
                 (onLocationSelected)="onLocationSelected($event, 'Locality')"
-                required formControlName="WorkingCity">
+                required formControlName="Locality">
         </div>
       </div>
       </div>
@@ -147,10 +147,23 @@
      </select>
   </div>
 
-  <div class="col-12">
+<div class="col-12">
+
+  
     <h6>Designation:</h6>
-      <input type="text" class="form-control" formControlName="Profession" required> 
+    <select  #relation class="form-control" formControlName="Profession" >
+            <option *ngFor="let  option of designations" [value]="option">
+                    {{option}}
+            </option>
+    </select>
+  </div>
+
+  <div class="col-12"  *ngIf="personalForm.value.Profession === 'Others'">
+<h6>Other Designation:</h6>
+    <input type="text" class="form-control"  formControlName="OtherProfession" name="OtherProfession">
 </div>
+
+
 <div class="col-12">
   <h6>Company:</h6>
   <input type="text" class="form-control"  formControlName="Company">
@@ -168,17 +181,17 @@
  <div *ngIf="index==4">
 
 
-<!-- <div class="col-12">
+<div class="col-12">
   <h6>Birth Place</h6>
   <input type="text" class="form-control" matValidateAddress
    matGoogleMapsAutocomplete
-    #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+    #matGoogleMapsAutocomplete2="matGoogleMapsAutocomplete" 
   (onAutocompleteSelected)="onAutocompleteSelected($event, 'Birth')" 
   (onLocationSelected)="onLocationSelected($event, 'Birth')"
   formControlName="BirthPlace">
-</div> -->
+</div>
 
-<div class="col-12">
+<!-- <div class="col-12">
   <h6>Locality:</h6>
       <input type="text" class="form-control" 
       matValidateAddress matGoogleMapsAutocomplete
@@ -186,7 +199,7 @@
       (onAutocompleteSelected)="onAutocompleteSelected($event, 'Birth')" 
       (onLocationSelected)="onLocationSelected($event, 'Birth')"
       required formControlName="BirthPlace">
-</div>
+</div> -->
 
   <div class="col-12">
     <h6>Manglik:</h6>
@@ -223,15 +236,17 @@
 <input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp" >
 </div>
 
-<div class="col-12" style="padding: 0px;margin: 0px;">
+<!-- <div class="col-12">
   <h6>Working City:</h6>
       <input type="text" #input class="form-control" 
-      matValidateAddress matGoogleMapsAutocomplete
-       #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+      matValidateAddress
+      formControlName="WorkingCity"
+       matGoogleMapsAutocomplete
+       #matGoogleMapsAutocomplete3="matGoogleMapsAutocomplete" 
       (onAutocompleteSelected)="onAutocompleteSelected($event, 'Working')" 
       (onLocationSelected)="onLocationSelected($event, 'Working')"
-      required formControlName="WorkingCity">
-</div>
+      required >
+</div> -->
 
   </div>
   
