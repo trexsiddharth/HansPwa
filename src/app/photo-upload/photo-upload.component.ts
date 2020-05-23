@@ -77,6 +77,9 @@ export class PhotoUploadComponent implements OnInit {
       (route: any) => {
         console.log(route.params);
         if (route) {
+        if (route.params.mobile) {
+            localStorage.setItem('mobile_number', route.params.mobile);
+          }
         if (route.params.id) {
           this.id = route.params.id;
         }

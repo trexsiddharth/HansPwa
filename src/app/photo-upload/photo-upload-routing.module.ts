@@ -4,7 +4,7 @@ import { PhotoUploadComponent } from './photo-upload.component';
 
 const routes: Routes = [
 
-  { path: ':id/:isLead', component: PhotoUploadComponent },
+  { path: ':mobile/:id/:isLead', component: PhotoUploadComponent },
 ];
 
 @NgModule({
