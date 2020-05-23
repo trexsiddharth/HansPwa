@@ -286,11 +286,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.spinner.hide();
 
+    // as soon as the credits are updated we will show lockdown offer to the free user
+    // lockdown offer will not be shown to first time coming user
     this.itemService.creditsUpdated.subscribe(
       data => {
         if (data) {
           this.lockdownCount++;
-          if (this.lockdownCount === 1) {
+          if (!this.router.url.match('first') && this.lockdownCount === 1) {
             this.itemService.openLockdownAd();
           }
         }
