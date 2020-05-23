@@ -1,12 +1,12 @@
 {
   "configVersion": 1,
-  "timestamp": 1590220861155,
+  "timestamp": 1590221208872,
   "index": "/index.html",
   "assetGroups": [
     {
       "name": "app",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
+      "installMode": "lazy",
+      "updateMode": "lazy",
       "urls": [
         "/1-es2015.48d58d02deade107b09d.js",
         "/1-es5.48d58d02deade107b09d.js",
