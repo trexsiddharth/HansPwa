@@ -675,6 +675,38 @@ updateProfileList(ans: any, num: any, index: any) {
             break;
         }
         break;
+
+        case 'interestReceived':
+          switch (ans) {
+            case 'YES':
+              if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+                this.slideAndOpenProfile(this.profile[index], 1);
+                this.profile.splice(index, 1);
+                this.itemService.changeTab(1);
+              } else {
+                this.ngxNotificationService.error('You Dont have Enough Credits', '',
+                  null, {
+                    duration: 4000,
+                    closeButton: true
+                  });
+              }
+              break;
+            case 'SHORTLIST':
+              this.profile.splice(index, 1);
+              this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+                duration: 4000
+              });
+              break;
+            case 'NO':
+              this.profile.splice(index, 1);
+              this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
+                duration: 4000
+              });
+              break;
+            default:
+              break;
+          }
+          break;
       default:
         break;
     }
