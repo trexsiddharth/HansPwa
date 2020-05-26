@@ -240,7 +240,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
         }  else if (!this.pageFive.controls.comments.valid) {
           return this.ngxNotificationService.error('Enter a comment');
         }   else {
-          // this.approveUser();
+          this.approveUser();
         }
       }
 
