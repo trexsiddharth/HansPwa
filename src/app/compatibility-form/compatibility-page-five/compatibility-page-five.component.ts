@@ -205,7 +205,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Select Occupation');
         } else if (userProfile.designation === null  || userProfile.designation === '') {
           return this.ngxNotificationService.error('Enter Designation');
-        } else if (userProfile.workingCity === null  || userProfile.workingCity === '') {
+        } else if (userProfile.occupation !== 'Not Working' &&  userProfile.workingCity === null  || userProfile.workingCity === '') {
           return this.ngxNotificationService.error('Enter Working City');
         } else if (userProfile.about === null  || userProfile.about === '') {
           return this.ngxNotificationService.error('Enter About');
