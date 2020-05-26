@@ -30,7 +30,7 @@
     </div>
 
     <div style="position: relative;">
-        <ngb-carousel>
+        <ngb-carousel id="carousel">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
                 <div class="picsum-img-wrapper" style="text-align: center;">
                   <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,index+1)"/> 

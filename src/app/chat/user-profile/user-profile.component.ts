@@ -112,7 +112,7 @@ onResize(event) {
       }
       }
     openPersonalDialog(i: number, titleText: string) {
-      document.querySelector('#imgProfile').scrollIntoView();
+      document.querySelector('#carousel').scrollIntoView();
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
         dialogConfig.maxWidth = '40vh';
@@ -139,7 +139,7 @@ onResize(event) {
     }
 
     openFamilyDialog() {
-      document.querySelector('#imgProfile').scrollIntoView();
+      document.querySelector('#carousel').scrollIntoView();
       const dialogConfig = new MatDialogConfig();
       if (this.innerWidth >= 1024) {
         dialogConfig.maxWidth = '40vh';
