@@ -401,14 +401,20 @@ onResize(event) {
 
       LifeStatus(person: string, work: string) {
         if (person != null && person !== '') {
-          if (person.match('Alive')) {
+          if (person === 'Alive') {
             if (work) {
               return 'Alive | ' + work;
             } else {
               return 'Alive';
             }
           } else {
-            return 'Dead';
+            return 'Not Alive';
+          }
+        } else {
+          if (work) {
+            return  work;
+          } else {
+            return '';
           }
         }
       }
