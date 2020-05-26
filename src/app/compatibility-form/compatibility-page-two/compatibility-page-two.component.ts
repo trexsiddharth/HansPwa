@@ -188,7 +188,10 @@ ngOnInit() {
 firstStep() {
     this.errors = [];
     console.log(this.PageTwo.value.Working);
-    if (!this.fourPageService.getUserThrough() && this.workingCity == null || this.workingCity === '') {
+    if (!this.fourPageService.getUserThrough() &&
+     this.PageTwo.value.Occupation !== 'Not Working' &&
+    this.workingCity == null
+    || this.workingCity === '') {
       this.ngxNotificationService.error('Select A Valid Working City');
       return;
     }
@@ -237,7 +240,7 @@ firstStep() {
           } else {
             // tslint:disable-next-line: forin
             for (const control in this.PageTwo.controls) {
-                if (this.PageTwo.controls[control].value === '') {
+                if (this.PageTwo.controls[control].invalid) {
                   this.errors.push(control);
                 }
             }
@@ -288,6 +291,11 @@ changedOccupation() {
     this.PageTwo.patchValue({
       Designation: 'Owner'
     });
+  } else if (this.PageTwo.value.Occupation === 'Not Working') {
+    this.PageTwo.patchValue({
+      Working: 'na'
+    });
+    this.workplace = 'na';
   }
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
@@ -355,7 +363,7 @@ setAbout() {
     } else {
     this.PageTwo.patchValue({
       // tslint:disable-next-line: max-line-length
-      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Designation === 'Others' ? this.PageTwo.value.OtherDesignation ? this.PageTwo.value.OtherDesignation : this.PageTwo.value.Designation  : this.PageTwo.value.Designation  : 'Currently not working ' }${this.PageTwo.value.Working !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
+      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Designation === 'Others' ? this.PageTwo.value.OtherDesignation ? this.PageTwo.value.OtherDesignation : this.PageTwo.value.Designation  : this.PageTwo.value.Designation  : 'Currently not working ' }${this.PageTwo.value.Occupation !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
     });
   }
   }

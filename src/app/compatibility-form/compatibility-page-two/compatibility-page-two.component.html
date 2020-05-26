@@ -54,7 +54,7 @@
                         जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |
                       </p>
 
-                      <div class="col-md-12">
+                      <div class="col-md-12" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label style="color: black;">Working City</mat-label>
                           <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 

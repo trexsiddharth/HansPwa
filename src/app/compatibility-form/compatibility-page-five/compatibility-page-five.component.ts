@@ -219,11 +219,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Select Mother Status');
         } else if (userProfile.familyIncome  === null || userProfile.familyIncome === '') {
           return this.ngxNotificationService.error('Enter Family Income');
-        } else if (userProfile.image1 === null  || userProfile.image1 === '') {
+        } else if (!userProfile.image1 || userProfile.image1 === null  || userProfile.image1 === '') {
           return this.ngxNotificationService.error('Select Image 1');
-        } else if (userProfile.image2 === null  || userProfile.image2 === '') {
+        } else if ( !userProfile.image2 || userProfile.image2 === null  || userProfile.image2 === '') {
           return this.ngxNotificationService.error('Select Image 2');
-        } else if (userProfile.image3 === null  || userProfile.image3 === '') {
+        } else if (!userProfile.image3 || userProfile.image3 === null  || userProfile.image3 === '') {
           return this.ngxNotificationService.error('Select Image 3');
         } else if (userProfile.photoScore < 1) {
           return this.ngxNotificationService.error('Give a score');
@@ -240,7 +240,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
         }  else if (!this.pageFive.controls.comments.valid) {
           return this.ngxNotificationService.error('Enter a comment');
         }   else {
-          this.approveUser();
+          // this.approveUser();
         }
       }
 
