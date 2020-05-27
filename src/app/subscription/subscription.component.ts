@@ -22,6 +22,7 @@ export class SubscriptionComponent implements OnInit {
   dialogData: any;
   formData: any;
   price: any;
+  credits;
   selectedContainer: number;
   currentOnlineStatus;
   currentPersonalizedStatus;
@@ -101,10 +102,10 @@ export class SubscriptionComponent implements OnInit {
    getRazorPay(amt: any, type: any, plan: any, name: any, email: any, phone: any) {
      // plan = 0 for online plans and plan = 1 for personalized plans
      if (plan === 0) {
-      return this.subscriptionService.payNowT(amt, type, 0, name, email, phone);
+      return this.subscriptionService.payNowT(amt, type, 0, name, email, phone, this.credits);
      } else {
           // tslint:disable-next-line: no-unused-expression
-          return this.subscriptionService.payNowT(amt, type, 1, name, email, phone);
+          return this.subscriptionService.payNowT(amt, type, 1, name, email, phone, this.credits);
      }
    }
 
@@ -155,45 +156,53 @@ Analytics(type: string, category: string, action: string) {
 
   container1() {
     this.price = '2800';
+    this.credits = '45';
     this.selectedContainer = 1;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
   container2() {
     this.price = '4500';
+    this.credits = '90';
     this.selectedContainer = 2;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
   container3() {
     this.price = '6500';
+    this.credits = '45';
     this.selectedContainer = 3;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
 
   container4() {
     this.price = '4500';
+    this.credits = '45';
     this.selectedContainer = 4;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
 
   container5() {
     this.price = '11000';
+    this.credits = '5';
     this.selectedContainer = 5;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
 
   }
   container6() {
     this.price = '17000';
+    this.credits = '5';
     this.selectedContainer = 6;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
 
   }
   container7() {
     this.price = '25000';
+    this.credits = '5';
     this.selectedContainer = 7;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }
   container8() {
     this.price = '31000';
+    this.credits = '5';
     this.selectedContainer = 8;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});
   }

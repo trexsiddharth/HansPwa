@@ -33,7 +33,7 @@ export class TodayMessageComponent implements OnInit {
       this.itemService.changeTab(4);
     }
     buyPlan(plan: any) {
-      this.subscriptionService.payNowT(plan, 'live', 0, '', '', localStorage.getItem('mobile_number'));
+      this.router.navigateByUrl('subscription');
     }
 
 }

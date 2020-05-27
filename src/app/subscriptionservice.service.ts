@@ -15,7 +15,7 @@ export class SubscriptionserviceService {
                private route: Router,
                private ngxNotificationService: NgxNotificationService ) {
    }
-  payNowT(amt, type, plan, name, email, phone) {
+  payNowT(amt, type, plan, name, email, phone, points) {
     let notes = {service: ''};
     let keyId;
     if (amt === 3100) {
@@ -46,7 +46,7 @@ export class SubscriptionserviceService {
       'handler': (response) => {
           console.log(response);
           if (plan === 0) {
-            this.captureStandardPayment(response, amt);
+            this.captureStandardPayment(response, amt, points);
           } else {
             alert('Payment Successfull \n' + ' We will get back to you shortly \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
             this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amt);
@@ -149,11 +149,12 @@ Analytics(type: string, category: string, action: string) {
   });
 }
 
-captureStandardPayment(response, amount) {
+captureStandardPayment(response, amount, points) {
   let formData = new FormData();
   formData.append('mobile', localStorage.getItem('mobile_number'));
   formData.append('payment_id', response.razorpay_payment_id);
   formData.append('amount', amount);
+  formData.append('whatsapp_point', points);
   formData.append('currency', 'INR');
   this.http.post('https://partner.hansmatrimony.com/api/paymentCapture', formData).subscribe(
     (data: any) => {
