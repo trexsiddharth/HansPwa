@@ -222,7 +222,6 @@ export class LanguageService {
         this.currentLanguage = lang ? lang : 'hindi';
         localStorage.setItem('language', this.currentLanguage);
         this.setProfileLanguage();
-        this.ngxNotificationService.success('Language Changed Successfully');
       }, err => {
         console.log(err);
         this.ngxNotificationService.error('something went wrong, Try again later');
