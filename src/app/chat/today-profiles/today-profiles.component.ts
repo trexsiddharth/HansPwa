@@ -14,6 +14,7 @@ import { SubscriptionserviceService } from '../../subscriptionservice.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { ApiwhaAutoreply } from './profile-today-model';
+import { LanguageService } from 'src/app/language.service';
 
 
 @Component({
@@ -53,6 +54,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
               public itemService: FindOpenHistoryProfileService,
               public router: Router,
               private dialog: MatDialog,
+              public languageService: LanguageService,
               public subscriptionService: SubscriptionserviceService ) { }
 
   ngAfterViewInit(): void {
@@ -60,6 +62,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+    // set profile language
+    this.languageService.setProfileLanguage();
+
+
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
 

@@ -114,7 +114,7 @@ export class CompatibilityFormComponent implements OnInit {
   lat;
   long;
   isDisable = false;
-  isAllCastePref = false;
+  isAllCastePref = true;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -794,9 +794,6 @@ getProfile() {
       Mangalik: this.userProfile.manglik,
       locality: this.userProfile.locality,
       });
-      if (this.userProfile.caste.toLowerCase() === 'all') {
-        this.isAllCastePref = true;
-      }
   }
   getMonthString(month: string) {
     switch (month) {
@@ -846,11 +843,6 @@ getProfile() {
   checkAllCastePref(event) {
     console.log(event.checked);
     this.isAllCastePref = event.checked;
-    if (this.isAllCastePref) {
-      this.PageOne.patchValue({
-        Castes: 'All'
-      });
-    }
   }
 }
 

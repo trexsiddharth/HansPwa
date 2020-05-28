@@ -11,6 +11,8 @@ martialStatus: string;
 annualIncome: string;
 religion: string;
 caste: string;
+education: string;
+college: string;
 manglik: string;
 locality: string;
 disabledPart: string;
