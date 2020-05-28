@@ -320,21 +320,6 @@ onResize(event) {
 
       this.router.navigateByUrl('/home');
     }
-    changeLanguage(lang: string) {
-      console.log('changing language');
-      // tslint:disable-next-line: max-line-length
-      return this.http.get<any>(' https://partner.hansmatrimony.com/api/language', {params: { ['phone_number'] : localStorage.getItem('mobile_number'), ['language'] : lang}}).subscribe(
-        data => {
-          console.log(data);
-          this.ngxNotificationService.success('Language Changed Successfully');
-          this.currentLanguage = lang;
-          localStorage.setItem('language', this.currentLanguage);
-        }, err => {
-          console.log(err);
-          this.ngxNotificationService.error('something went wrong, Try again later');
-        }
-      );
-    }
     backToChat() {
       this.backToProfiles.emit('chatbot');
     }
