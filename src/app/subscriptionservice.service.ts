@@ -164,7 +164,7 @@ captureStandardPayment(response, amount, points) {
           this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amount);
           this.route.navigateByUrl('chat');
         } else {
-          alert('Something went wrong. Please try again later.');
+          this.ngxNotificationService.error('Something went wrong. Please try again later.');
         }
     },
     err => {

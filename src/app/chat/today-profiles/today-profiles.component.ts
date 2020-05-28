@@ -278,9 +278,14 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 
   getData(reply) {
     // shortlist count
+
+    console.log(reply);
     this.setCount(reply);
     const previousItem = this.item;
     if (!localStorage.getItem('todayProfile')) {
+      this.spinner.show();
+    }
+    if (reply !== 'SHOW') {
       this.spinner.show();
     }
     this.chatRequest(reply).subscribe(
@@ -347,7 +352,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
               document.getElementById('profilePic').scrollIntoView({behavior: 'smooth'});
             }
           }
-        this.getCredits(reply);
+        this.getCredits();
       }, err => {
         console.log(err);
         this.spinner.hide();
@@ -405,7 +410,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
       this.spinner.hide();
     }
 
-  getCredits(reply) {
+  getCredits() {
     const creditsData = new FormData();
     creditsData.append('id', localStorage.getItem('id'));
     if (localStorage.getItem('is_lead')) {
@@ -418,6 +423,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     },
     err => {
         console.log(err);
+        this.spinner.hide();
     });
     }
    // tslint:disable-next-line: max-line-length
@@ -460,6 +466,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
       if (document.querySelector<HTMLImageElement>('#profilePic').complete) {
       this.spinner.hide();
       console.log('spinner stopped');
+      } else {
+        this.spinner.show();
       }
     }
   }

@@ -568,6 +568,7 @@ profileReAnswer(item: any, answer: any, index: any) {
   }
 
 getData(item: any, answer: any, index: any) {
+    this.spinner.show();
     this.panelOpenState = null;
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
@@ -587,6 +588,7 @@ getData(item: any, answer: any, index: any) {
         },
         err => {
           console.log(err);
+          this.spinner.hide();
         });
     }
     // tslint:disable-next-line: max-line-length
@@ -602,6 +604,7 @@ getData(item: any, answer: any, index: any) {
         this.getCredits();
       }, (error: any) => {
         console.log(error);
+        this.spinner.hide();
       });
   }
 Analytics(type: string, category: string, action: string) {
@@ -846,6 +849,7 @@ getCredits() {
      const points = data.whatsapp_points;
      this.itemService.setCredits(data.whatsapp_points);
      console.log('credits', points);
+     this.spinner.hide();
    },
   (error: any) => {
     this.ngxNotificationService.error('We couldn\'t get your credits, trying again');

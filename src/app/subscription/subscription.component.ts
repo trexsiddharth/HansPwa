@@ -50,7 +50,6 @@ export class SubscriptionComponent implements OnInit {
       console.log(this.plans);
     }, (err: any) => {
       this.spinner.hide();
-      this.ngxNotificationService.error('Something went wrong', 'danger');
     });
 
     if (localStorage.getItem('id')) {
