@@ -83,32 +83,44 @@ export class FindOpenHistoryProfileService {
 
   getOtherProfiles() {
     if (this.isPersonalized) {
-    return 'अन्य रिश्ते';
+    return localStorage.getItem('language') === 'hindi' ? 'अन्य रिश्ते' : 'Other Rishte';
   } else {
-    return 'VIP रिश्ते';
+    return localStorage.getItem('language') === 'hindi' ? 'VIP रिश्ते' : 'VIP Rishte';
   }
   }
   getOtherName() {
     if (this.isPersonalized) {
-    return 'अन्य';
+    return localStorage.getItem('language') === 'hindi' ? 'अन्य' : 'Other';
   } else {
     return 'VIP';
   }
   }
   getDailyCount() {
-    return this.profileCount.dailyCount ? 'आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )' : 'आज के रिश्ते';
+    return this.profileCount.dailyCount ?
+    localStorage.getItem('language') === 'hindi' ?
+     'आज के रिश्ते ( ' +  this.profileCount.dailyCount + ' )'
+     : 'Today\'s Profiles ( ' +  this.profileCount.dailyCount + ' )'
+      : localStorage.getItem('language') === 'hindi' ? 'आज के रिश्ते' : 'Today\'s Profiles';
   }
   getContactedCount() {
-    return 'कॉंटैक्टेड ( ' + this.profileCount.contactedCount + ' )';
+    return localStorage.getItem('language') === 'hindi' ?
+    'कॉंटैक्टेड ( ' + this.profileCount.contactedCount + ' )'
+    : 'Contacted ( ' + this.profileCount.contactedCount + ' )';
   }
   getShortlistedCount() {
-    return 'मेरी पसंद ( ' + this.profileCount.shortlistCount + ' )';
+    return localStorage.getItem('language') === 'hindi' ?
+    'मेरी पसंद ( ' + this.profileCount.shortlistCount + ' )'
+    : 'Shortlisted ( ' + this.profileCount.shortlistCount + ' )';
   }
   getShortedCount() {
-    return 'मै किसे पसंद हूँ? ( ' + this.profileCount.shortedCount + ' )';
+    return  localStorage.getItem('language') === 'hindi' ?
+    'मै किसे पसंद हूँ? ( ' + this.profileCount.shortedCount + ' )'
+    : 'Liked Me? ( ' + this.profileCount.shortedCount + ' )';
   }
   getRejectedCount() {
-    return 'नापसंद ( ' + this.profileCount.rejectedCount + ' )';
+    return localStorage.getItem('language') === 'hindi' ?
+    'नापसंद ( ' + this.profileCount.rejectedCount + ' )'
+    : 'Rejected ( ' + this.profileCount.rejectedCount + ' )';
   }
   getCountOnlyShortlist() {
     return this.profileCount.shortlistCount;

@@ -18,6 +18,9 @@ export class HomeMainComponent implements OnInit {
               private breakPointObserver: BreakpointObserver) { }
 
   ngOnInit() {
+    if (!localStorage.getItem('language')) {
+      localStorage.setItem('language', 'hindi');
+    }
   }
 
   openPlaystore() {

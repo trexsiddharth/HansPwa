@@ -58,6 +58,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
               public subscriptionService: SubscriptionserviceService ) { }
 
   ngAfterViewInit(): void {
+    // this.languageService.setCurrentLanguage('hindi');
   }
 
 

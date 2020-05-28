@@ -39,7 +39,7 @@
                   <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
                 </button><br>
                 <span style="color: #737373;font-weight: 600;font-size: 18px;">
-                    नापसंद है
+                    {{languageService.profileLang.reject}}
                 </span>
             </div>
             <div class="t-c">
@@ -50,7 +50,7 @@
                   <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
                 </button><br>
                 <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
-                    कांटेक्ट करें
+                    {{languageService.profileLang.contact}}
                 </span>
             </div>
             <div class="t-c">
@@ -61,7 +61,7 @@
                   <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
                 </button><br>
                 <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
-                    पसंद है
+                    {{languageService.profileLang.shortlist}}
                 </span>
             </div>
                 
@@ -73,7 +73,7 @@
                     <img style="width: 40px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
                 </div>
                 <div class="col-10">
-                        <span style="font-size: 16px;font-weight: bold;">वेरिफ़िएड एट:</span><br>
+                        <span style="font-size: 16px;font-weight: bold;">{{languageService.profileLang.verifiedAt}}</span><br>
                         <span>{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
                 </div>
             </div>
@@ -86,14 +86,14 @@
                 </div>
                 <div class="col-10" style="align-self: center;">
                         <span style="font-size: 16px;font-weight: bold;align-self: center;
-                        color: #8c978b;">प्रोफाइल मैनेज्ड बय: {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}</span>
+                        color: #8c978b;">{{languageService.profileLang.managedBy}} {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}</span>
                 </div>
             </div>
         </div>
 
         <div id="aboutSection">
             <p>
-                <span style="color: #D313AE;font-size: 30px;font-weight: bold;">हेलो,</span> Myself {{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
+                <span style="color: #D313AE;font-size: 30px;font-weight: bold;">{{languageService.profileLang.hello}},</span> Myself {{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
             </p>
         </div>
 
@@ -102,7 +102,7 @@
         <div id="personalSection">
             <div style="display: flex;justify-content: space-between;">
                 <span style="color: #0C9BF2;font-size: 18px; font-weight: bold;align-self: center;">
-                    पर्सनल डिटेल्स
+                    {{languageService.profileLang.personalizedDetails}}
                 </span>
                     <img width="80px" height="80px" src="../../../assets/new icons/Personal Details.svg" alt="personal details">
             </div>
@@ -163,7 +163,7 @@
         <div id="careerSection">
             <div style="display: flex;justify-content: space-between;">
                 <span style="color: #CA58FD;font-size: 18px; font-weight: bold;align-self: center;">
-                    करियर डिटेल्स
+                    {{languageService.profileLang.careerDetails}}
                 </span>
                     <img height="80px" width="80px"  src="../../../assets/new icons/Career Details.svg" alt="career details">
             </div>
@@ -224,7 +224,7 @@
         <div id="horoscopeSection">
             <div style="display: flex;justify-content: space-between;">
                 <span style="color: #070973;font-size: 18px; font-weight: bold;align-self: center;">
-                    होरोस्कोप
+                    {{languageService.profileLang.horoscopeDetails}}
                 </span>
                     <img width="80px" height="80px"  src="../../../assets/new icons/Horoscope.svg" alt="horoscope details">
             </div>
@@ -274,7 +274,7 @@
         <div id="familySection">
             <div style="display: flex;justify-content: space-between;">
                 <span style="color: #58D1FD;font-size: 18px; font-weight: bold;align-self: center;">
-                    फॅमिली डिटेल्स
+                    {{languageService.profileLang.familyDetails}}
                 </span>
                     <img width="80px" height="80px" style="margin-top: 20px;" src="../../../assets/new icons/Family Details.svg" alt="family details">
             </div>

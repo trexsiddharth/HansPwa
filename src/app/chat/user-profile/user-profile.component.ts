@@ -9,6 +9,7 @@ import { EditPersonalDialogComponent } from '../myprofile/edit-personal-dialog/e
 import { EditFamilyDialogComponent } from '../myprofile/edit-family-dialog/edit-family-dialog.component';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { timeout, retry, catchError } from 'rxjs/operators';
+import { LanguageService } from 'src/app/language.service';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService,
               private matDialog: MatDialog, private http: HttpClient,
+              public languageService: LanguageService,
               private ngxNotificationService: NgxNotificationService, private router: Router) { }
 
   ngOnInit() {
@@ -43,6 +45,9 @@ export class UserProfileComponent implements OnInit {
     this.currentLanguage = localStorage.getItem('language');
   }
 
+  changeCurrentLanguage(lang) {
+    this.languageService.setCurrentLanguage(lang);
+  }
 
   setAge(dob: string) {
     if (dob != null) {

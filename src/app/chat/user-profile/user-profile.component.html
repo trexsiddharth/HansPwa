@@ -25,6 +25,18 @@
               <img width="30px" src="../../../assets/contract.svg" alt="subscription">
               <span class="menuItems">Subscriptions</span>
             </button>
+            <button mat-menu-item 
+            (click)="changeCurrentLanguage('hindi')"
+            *ngIf="languageService.getCurrentLanguage() === 'english'">
+                <img width="30px" src="../../../assets/languagechange.png" alt="subscription">
+                <span class="menuItems">हिंदी</span>
+              </button>
+              <button mat-menu-item 
+              (click)="changeCurrentLanguage('english')"
+               *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                <img width="30px" src="../../../assets/languagechange.png" alt="subscription">
+                <span class="menuItems">English</span>
+              </button>
         </ng-template>
           </mat-menu>
     </div>
