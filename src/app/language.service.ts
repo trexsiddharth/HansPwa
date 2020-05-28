@@ -48,6 +48,16 @@ export class LanguageService {
         this.profileLang.birthPlace = 'बर्थ प्लेस';
         this.profileLang.manglik = 'मांगलिक';
 
+        // family details
+        this.profileLang.sisters = 'बहनें';
+        this.profileLang.brothers = 'भाई';
+        this.profileLang.fatherStatus = 'पिता';
+        this.profileLang.motherStatus = 'माता';
+        this.profileLang.gotra = 'गोत्र';
+        this.profileLang.familyType = 'फॅमिली टाइप';
+        this.profileLang.houseType = 'हाउस टाइप';
+        this.profileLang.familyIncome = 'फॅमिली इनकम';
+
         break;
 
         case 'english':
@@ -70,6 +80,16 @@ export class LanguageService {
         this.profileLang.birthTime = 'Birth Time';
         this.profileLang.birthPlace = 'Birth Place';
         this.profileLang.manglik = 'Manglik';
+
+        // family details
+        this.profileLang.sisters = 'Sisters';
+        this.profileLang.brothers = 'Brothers';
+        this.profileLang.fatherStatus = 'Father';
+        this.profileLang.motherStatus = 'Mother';
+        this.profileLang.gotra = 'Gotra';
+        this.profileLang.familyType = 'Family Type';
+        this.profileLang.houseType = 'House Type';
+        this.profileLang.familyIncome = 'Family Income';
 
         break;
 

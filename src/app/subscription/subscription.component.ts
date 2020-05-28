@@ -142,9 +142,9 @@ Analytics(type: string, category: string, action: string) {
    openDialog() {
      if (this.price) {
     if (localStorage.getItem('mobile_number')) {
-      this.getRazorPay(this.price, 'test', 0, '', '', localStorage.getItem('mobile_number'));
+      this.getRazorPay(this.price, 'live', 0, '', '', localStorage.getItem('mobile_number'));
       } else {
-        this.getRazorPay(this.price, 'test', 0, '', '', '');
+        this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
     this.Analytics('RazorPay Payement Gateway', 'RazorPay Payement Gateway Opened',
      'Payement Gateway Opened For ' + this.price );
