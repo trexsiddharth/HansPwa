@@ -515,22 +515,24 @@
                         <p style="font-size: 30px;margin: 0px;">{{itemService.getCountOnlyShortlist()}}</p>
                     </div>
                     <div class="col-5" style="text-align: end;margin: 0px;">
-                        <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">लोगो को</p>
+                        <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">
+                            {{languageService.getCurrentLanguage() === 'hindi' ? 'लोगो को' : 'People'}}</p>
                     </div>
                     <div class="col-2" style="text-align: center;">
                         <img style="width: 100%;" src="../../../assets/heartpink.svg" alt="heart">
                     </div>
                     <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px;">
-                        <p class="boxText" style="margin: 0px;">रिश्ते है</p>
+                        <p class="boxText" style="margin: 0px;">{{languageService.getCurrentLanguage() === 'hindi' ? 'रिश्ते है' : 'Rishte'}}</p>
                     </div>
                     <div class="col-5" style="text-align: end;margin: 0px;line-height: 1;">
-                        <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">आप पसंद आये</p>
+                        <p class="boxText" style="color: #D313AE;font-weight: bold;margin: 0px;">
+                            {{languageService.getCurrentLanguage() === 'hindi' ? 'आप पसंद आये' : 'Liked You'}}</p>
                     </div>
                     <div class="col-2">
 
                     </div>
                     <div class="col-5" style="text-align: start;color: #0C9BF2;font-weight: bold;margin: 0px; line-height: 1;">
-                        <p class="boxText" style="margin: 0px;">आपको पसंद</p>
+                        <p class="boxText" style="margin: 0px;">{{languageService.getCurrentLanguage() === 'hindi' ? 'आपको पसंद' : 'Liked By You'}}</p>
                     </div>
                 </div>
                 
@@ -538,13 +540,13 @@
                     <div class="col-6">
                         <button class="boxBtn" (click)="itemService.changeTab(3)" mat-raised-button style="background-color: #FAC8F1;
                         width: 100%;color: #D313AE;">
-                            मैं किसे पसंद हूँ ?
+                            {{languageService.getCurrentLanguage() === 'hindi' ? 'मैं किसे पसंद हूँ ?' : 'Liked Me?'}}
                         </button>
                     </div>
                     <div class="col-6">
                         <button class="boxBtn" (click)="itemService.changeTab(2)" mat-raised-button style="background-color: #CDEBFF; 
                         width: 100%;color: #0C9BF2;">
-                            मेरी पसंद
+                            {{languageService.getCurrentLanguage() === 'hindi' ? 'मेरी पसंद' : 'Liked By Me'}}
                         </button>
                     </div>
                 </div>
