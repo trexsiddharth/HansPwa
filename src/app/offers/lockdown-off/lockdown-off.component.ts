@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { LanguageService } from 'src/app/language.service';
 
 @Component({
   selector: 'app-lockdown-off',
@@ -9,7 +10,8 @@ import { MatDialogRef } from '@angular/material';
 export class LockdownOffComponent implements OnInit {
 seconds = 59;
 minutes = 0;
-  constructor(public dialogRef: MatDialogRef<LockdownOffComponent>) { }
+  constructor(public dialogRef: MatDialogRef<LockdownOffComponent>,
+              public languageService: LanguageService) { }
 
   ngOnInit() {
     this.setTimer();

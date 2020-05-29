@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { LanguageService } from 'src/app/language.service';
 
 @Component({
   selector: 'app-offer-two',
@@ -9,7 +10,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class OfferTwoComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<OfferTwoComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data,
+              public languageService: LanguageService) { }
 
   ngOnInit() {
   }

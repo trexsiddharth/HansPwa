@@ -16,8 +16,11 @@
     </div>
 
     <div class="t-c">
-        <p class="contentText">
+        <p class="contentText" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
             देर किस बात की ? इन्हे अभी कॉल करें
+        </p>
+        <p class="contentText" *ngIf="languageService.getCurrentLanguage() === 'english'">
+            Why Wait? Call Now!!
         </p>
     </div>
 
@@ -40,14 +43,17 @@
             padding: 10px 50px;
             border-radius: 10px;
             margin: 20px 0px" mat-raised-button>
-                मेम्बरशिप चुनें   
+                {{languageService.getCurrentLanguage() === 'hindi' ? 'मेम्बरशिप चुनें' : 'Buy Plan'}}  
             </button>
         </div>
     </div>
 
     <div class="t-c">
-        <p class="contentText" style="margin: 0px;">
+        <p class="contentText" style="margin: 0px;" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
             अभी <span style="color: #58d1fd;font-family: sans-serif;font-size: 1.5rem;">50%</span> की बचत करें 
+        </p>
+        <p class="contentText" style="margin: 0px;" *ngIf="languageService.getCurrentLanguage() === 'english'">
+            Save <span style="color: #58d1fd;font-family: sans-serif;font-size: 1.5rem;">50%</span> On Plans Now!!
         </p>
     </div>
 </main>

@@ -11,15 +11,29 @@
 
     <div class="t-c">
         
-        <h3 id="offerHeadLine">
+        <h3 id="offerHeadLine" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
             सभी प्लान्स पर <span style="color: #58d1fd;
             font-weight: bold;
             font-family: sans-serif;
             font-size: 2.3rem;">50%</span> की छूट
         </h3>
 
-        <p class="subHeading">
+        <h3 id="offerHeadLine" *ngIf="languageService.getCurrentLanguage() === 'english'">
+            All Plans Are On <span style="color: #58d1fd;
+            font-weight: bold;
+            font-family: sans-serif;
+            font-size: 2.3rem;">50%</span> OFF!!
+        </h3>
+
+        <p class="subHeading" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
             बेसिक प्लान&nbsp;@&nbsp;<del>5600</del> &nbsp; <span style="color: #707070;
+            font-family: sans-serif;
+            font-weight: bolder;
+            font-size: 1.6rem;">₹2800</span> 
+        </p>
+
+        <p class="subHeading" *ngIf="languageService.getCurrentLanguage() === 'english'">
+            Basic Plan&nbsp;@&nbsp;<del>5600</del> &nbsp; <span style="color: #707070;
             font-family: sans-serif;
             font-weight: bolder;
             font-size: 1.6rem;">₹2800</span> 
@@ -28,13 +42,16 @@
     </div>
 
     <div class="t-c subHeading2">
-        <span class="subHeading">
+        <span class="subHeading" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
             जल्दी करें ऑफर सिर्फ
+        </span>
+        <span class="subHeading" *ngIf="languageService.getCurrentLanguage() === 'english'">
+            Buy Fast, Offer Valid For
         </span>
 
         <div class="timer">
             <div class="t-c" style="display: flex;flex-direction: column;width: fit-content;">
-                <span style="color: #797979;">मिनट</span>
+                <span style="color: #797979;">{{languageService.getCurrentLanguage() === 'hindi' ? 'मिनट' : 'Minutes'}}</span>
                 <p style="font-size: 2rem;
                 color: #737373;
                 display: inline-block;
@@ -56,7 +73,7 @@
 
             <div>
                 <div class="t-c" style="display: flex;flex-direction: column;width: fit-content;">
-                    <span style="color: #797979;">सेकंड</span>
+                    <span style="color: #797979;">{{languageService.getCurrentLanguage() === 'hindi' ? 'सेकंड' : 'Seconds'}}</span>
                     <p style="font-size: 2rem;
                     color: #737373;
                     display: inline-block;
@@ -71,7 +88,7 @@
         </div>
 
         <div>
-            <span class="subHeading">
+            <span class="subHeading" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
                 के लिए
             </span>
         </div>
@@ -79,7 +96,7 @@
         <div class="t-c">
             <button [routerLink]="['/subscription']" routerLinkActive="router-link-active" (click)="closeDialog()"  class="btn offer-btn"
              mat-raised-button>
-                मेम्बरशिप चुनें   
+                {{languageService.getCurrentLanguage() === 'hindi' ? 'मेम्बरशिप चुनें ' : 'Buy Plan'}}  
             </button>
         </div>
     </div>
