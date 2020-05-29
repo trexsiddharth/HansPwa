@@ -15,7 +15,9 @@ export class HomeDrawerComponent implements OnInit {
   }
 
   logout() {
+    let lang = localStorage.getItem('language');
     localStorage.clear();
+    localStorage.setItem('language', lang);
     this.homeService.getDrawerInstance().toggle();
   }
   openBlog() {

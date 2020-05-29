@@ -315,9 +315,9 @@ onResize(event) {
         } else {return ''; }
     }
     logout() {
-      // this.loginStatus = false;
+      let lang = localStorage.getItem('language');
       localStorage.clear();
-
+      localStorage.setItem('language', lang);
       this.router.navigateByUrl('/home');
     }
     backToChat() {

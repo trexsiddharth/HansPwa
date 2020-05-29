@@ -20,9 +20,9 @@ export class NewHomeComponent implements OnInit {
       localStorage.setItem('language', 'hindi');
       this.langCheck = false;
     }
-    if (this.languageService.getCurrentLanguage() === 'hindi') {
+    if (localStorage.getItem('language') === 'hindi') {
       this.langCheck = false;
-    } else if (this.languageService.getCurrentLanguage() === 'english')  {
+    } else if (localStorage.getItem('language')  === 'english')  {
       this.langCheck = true;
     }
     this.languageService.setHomeLang(localStorage.getItem('language'));

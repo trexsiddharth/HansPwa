@@ -48,7 +48,7 @@ export class LanguageService {
   }
 
   getCurrentLanguage() {
-    return this.currentLanguage;
+    return localStorage.getItem('language');
   }
 
   setProfileLanguage() {
