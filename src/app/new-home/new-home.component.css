@@ -1,3 +1,15 @@
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+    background-color: #C8C8C8;
+}
+::ng-deep .mat-slide-toggle-thumb {
+    background-color: #c8c8c8;
+}
+::ng-deep .mat-slide-toggle-bar {
+    background-color: white;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+    background-color: white;
+}
 .mainContainer{
     width: 100%;
     height: 100%;
