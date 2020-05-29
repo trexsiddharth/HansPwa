@@ -44,6 +44,9 @@ width: 25%;
     background-color: #0C9BF2;
     padding: 0px 0px 10px;
     margin-top: -10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .b-r{
     border-right: 1px solid white;
