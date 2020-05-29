@@ -8,7 +8,7 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 })
 export class LanguageService {
 
-  private currentLanguage = 'hindi';
+  private currentLanguage;
    profileLang = new Profile();
   languageChangedFromMainStatus = false;
    homeLang: any = {
@@ -41,13 +41,6 @@ export class LanguageService {
 
   constructor(private http: HttpClient,
               private ngxNotificationService: NgxNotificationService) {
-
-                if (localStorage.getItem('language')) {
-                  this.currentLanguage = localStorage.getItem('language').toLowerCase();
-                } else {
-                  localStorage.setItem('language', 'hindi');
-                  this.currentLanguage = 'hindi';
-                }
    }
 
   setCurrentLanguage(lang: string) {
@@ -59,11 +52,8 @@ export class LanguageService {
   }
 
   setProfileLanguage() {
-    this.profileLang.weight = this.currentLanguage === 'english' ? 'Weight' : 'वेट';
-    this.profileLang.martialStatus = this.currentLanguage === 'english' ? 'Marital Status' : 'मैरिटल स्टेटस';
-    this.profileLang.foodChoice = this.currentLanguage === 'english' ? 'Food Choice' : 'फ़ूड चॉइस';
 
-    switch (this.currentLanguage) {
+    switch (localStorage.getItem('language')) {
       case 'hindi':
 
       // buttons

@@ -63,9 +63,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    // set profile language
-    this.languageService.setProfileLanguage();
-
 
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
@@ -306,6 +303,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         }
 
         // set language according to user choice
+        console.log(this.languageService.languageChangedFromMainStatus,
+          localStorage.getItem('language') , data.apiwha_autoreply.language.toLowerCase() );
         if (this.languageService.languageChangedFromMainStatus &&
            localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase() ) {
             this.languageService.setCurrentLanguage(localStorage.getItem('language'));
@@ -313,9 +312,12 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           } else if (!this.languageService.languageChangedFromMainStatus &&
             localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
               this.languageService.setCurrentLanguage(data.apiwha_autoreply.language.toLowerCase());
+          } else {
+            this.languageService.setProfileLanguage();
+            this.languageService.languageChangedFromMainStatus = false;
           }
 
-        if (data.type === 'profile') {
+        if (data.type === 'profile') { 
           this.type = 'profile';
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             this.item = data.apiwha_autoreply;

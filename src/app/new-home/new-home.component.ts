@@ -7,11 +7,15 @@ import { LanguageService } from '../language.service';
   templateUrl: './new-home.component.html',
   styleUrls: ['./new-home.component.css']
 })
-export class NewHomeComponent implements OnInit, AfterViewInit {
+export class NewHomeComponent implements OnInit {
   langCheck = false;
 
   constructor(public homeService: NewHomeService, public languageService: LanguageService) { }
-  ngAfterViewInit(): void {
+ 
+
+  ngOnInit() {
+    console.log(this.languageService.getCurrentLanguage());
+
     if (!localStorage.getItem('language')) {
       localStorage.setItem('language', 'hindi');
       this.langCheck = false;
@@ -22,10 +26,6 @@ export class NewHomeComponent implements OnInit, AfterViewInit {
       this.langCheck = true;
     }
     this.languageService.setHomeLang(localStorage.getItem('language'));
-  }
-
-  ngOnInit() {
-    console.log(this.languageService.getCurrentLanguage());
   }
 
   sendWhatsAppLink() {
