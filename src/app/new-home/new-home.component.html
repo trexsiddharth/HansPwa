@@ -7,14 +7,18 @@
         <mat-toolbar class="fixToolBar">
             <mat-toolbar-row>
                 <div class="mainDivToolbar">
-                    <div>
+                    <div style="display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;">
                         <img width="40px" [defaultImage]="'../../assets/logo_72.png'" 
                             [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'" 
                              [useSrcset]="true" alt="Hans Matrimony">
                         <span style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans Matrimony</strong></span>
                     </div>
-                    <div style="margin-right: 15px;padding-top: 4px;">
-                        <img style="width: 20px;" (click)="sidenav.toggle()" src="../../assets/menu.svg" alt="menu">
+                    <div>
+                       <span style="font-size: 18px;">Hi <mat-slide-toggle [checked]="langCheck" (change)="langChanged($event)">En</mat-slide-toggle></span>
+                        <img class="drawerImg" (click)="sidenav.toggle()" src="../../assets/menu.svg" alt="menu">
                     </div>
                 </div>
               </mat-toolbar-row>
@@ -23,14 +27,14 @@
                   <div class="row toolBarRow2">
                  
                 <div class="col-4 t-c b-r">
-                    <span class="toolText"><a style="color: white;text-decoration: none;" href="https://play.google.com/store/apps/details?id=com.twango.me"> डाउनलोड करें</a></span>
+                    <span class="toolText"><a style="color: white;text-decoration: none;" href="https://play.google.com/store/apps/details?id=com.twango.me"> {{languageService.homeLang.downloadApp}}</a></span>
                 </div>
                 <div class="col-4 t-c b-r">
                     <img style="width: 25px;" (click)="sendWhatsAppLink()" src="../../assets/whatsapp-white.svg" alt="whatsapp share">
                 </div>
                 <div class="col-4 t-c">
-                    <span class="toolText" *ngIf="homeService.getLoginStatus()==false"><a style="color: white;text-decoration: none;" [routerLink]="['/phone-number']" routerLinkActive="router-link-active">लॉगिन करें</a></span>
-                    <span class="toolText" *ngIf="homeService.getLoginStatus()"><a style="color: white;text-decoration: none;" [routerLink]="['/chat']" routerLinkActive="router-link-active">रिश्ते देखें</a></span>
+                    <span class="toolText" *ngIf="homeService.getLoginStatus()==false"><a style="color: white;text-decoration: none;" [routerLink]="['/phone-number']" routerLinkActive="router-link-active">{{languageService.homeLang.login}}</a></span>
+                    <span class="toolText" *ngIf="homeService.getLoginStatus()"><a style="color: white;text-decoration: none;" [routerLink]="['/chat']" routerLinkActive="router-link-active">{{languageService.homeLang.rishteDekhein}}</a></span>
                 </div>
             </div>
               </mat-toolbar-row>

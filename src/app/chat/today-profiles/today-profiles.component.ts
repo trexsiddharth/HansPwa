@@ -304,9 +304,15 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           this.itemService.saveCount(data.get_status_count);
           this.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
         }
-          // set language
-        if (!localStorage.getItem('language') || localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
-            this.languageService.setCurrentLanguage(data.apiwha_autoreply.language.toLowerCase());
+
+        // set language according to user choice
+        if (this.languageService.languageChangedFromMainStatus &&
+           localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase() ) {
+            this.languageService.setCurrentLanguage(localStorage.getItem('language'));
+            this.languageService.languageChangedFromMainStatus = false;
+          } else if (!this.languageService.languageChangedFromMainStatus &&
+            localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
+              this.languageService.setCurrentLanguage(data.apiwha_autoreply.language.toLowerCase());
           }
 
         if (data.type === 'profile') {

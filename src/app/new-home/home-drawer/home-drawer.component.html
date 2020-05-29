@@ -3,7 +3,7 @@
         <div class="profilePicSection">
             <div style="width: 100%;background-color: #83C9F4;">
                 <p style="margin: 0px;padding: 10px 0px;text-align: center;font-weight: bold;font-size: 20px;">
-                    मेरी प्रोफाइल
+                    {{languageService.homeLang.myprofile}}
                 </p>
             </div>
             <div style="
@@ -24,27 +24,27 @@
                     *ngIf="homeService.getLoginStatus() == false">
                         <img width="40px" src="../../../assets/note.svg" alt="register">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; रजिस्टर फ्री</span>
+                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.freeRegister}}</span>
                     </button>
 
                     <button class="btn drawerBtn" [routerLink]="['/phone-number']" routerLinkActive="router-link-active" 
                     *ngIf="homeService.getLoginStatus() == false">
                         <img width="40px" src="../../../assets/password.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; लॉगिन करें</span>
+                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.login}}</span>
                     </button>
 
                     <button class="btn drawerBtn" [routerLink]="['/subscription']" routerLinkActive="router-link-active" >
                         <img width="40px" src="../../../assets/contract.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; सब्सक्रिप्शन</span>
+                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.subscription}}</span>
                     </button>
 
                     <button class="btn drawerBtn" (click)="logout()"
                     *ngIf="homeService.getLoginStatus()">
                         <img width="40px" src="../../../assets/log_out.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; लॉगआउट</span>
+                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.logout}}</span>
                     </button>
                 </div>
             </ng-container>
@@ -60,7 +60,7 @@
                         font-weight: bold;
                         color: #070973;"
                         (click)="openBlog()">
-                           <img class="btnImage" src="../../../assets/settings.svg" alt="settings icon">  हमारा ब्लॉग पढ़ें
+                           <img class="btnImage" src="../../../assets/settings.svg" alt="settings icon">  {{languageService.homeLang.ourBlog}}
                         </button>
 
                         <button mat-raised-button style="background-color: #FAC8F1;
@@ -72,7 +72,7 @@
                         padding: 10px 0px;
                         color: #070973;">
                            <img class="btnImage" src="../../../assets/couplehearts.svg" alt="couple hearts">
-                           VIP मैच मेकिंग
+                           {{languageService.homeLang.vipMatchmaking}}
                         </button>
                 </div>
 

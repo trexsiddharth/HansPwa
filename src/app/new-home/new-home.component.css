@@ -26,6 +26,7 @@ width: 25%;
     justify-content: space-between;
     padding: 10px 5px;
     background-color: #0C9BF2;
+    align-items: center;
 }
 .toolBarRow2{
     background-color: #0C9BF2;
@@ -34,6 +35,12 @@ width: 25%;
 }
 .b-r{
     border-right: 1px solid white;
+}
+
+.drawerImg{
+    width: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 @media (max-width: 1024px) {
@@ -60,5 +67,9 @@ width: 25%;
     .toolText{
         color: white;
         font-size: 16px;
+    }
+    .drawerImg{
+        width: 20px;
+        margin: 0px;
     }
 }

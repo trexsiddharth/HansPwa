@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewHomeService } from '../new-home.service';
-import { MatDialogConfig, MatDialog } from '@angular/material';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { LockdownOffComponent } from 'src/app/offers/lockdown-off/lockdown-off.component';
-import { OfferOneComponent } from 'src/app/offers/offer-one/offer-one.component';
-import { OfferTwoComponent } from 'src/app/offers/offer-two/offer-two.component';
+import { LanguageService } from 'src/app/language.service';
 
 @Component({
   selector: 'app-home-main',
@@ -14,19 +10,14 @@ import { OfferTwoComponent } from 'src/app/offers/offer-two/offer-two.component'
 export class HomeMainComponent implements OnInit {
 
   constructor(public homeService: NewHomeService,
-              private dialog: MatDialog,
-              private breakPointObserver: BreakpointObserver) { }
+              public languageService: LanguageService) { }
 
   ngOnInit() {
-    if (!localStorage.getItem('language')) {
-      localStorage.setItem('language', 'hindi');
-    }
+
   }
 
   openPlaystore() {
     window.open('https://play.google.com/store/apps/details?id=com.twango.me');
   }
-
-  
 
 }

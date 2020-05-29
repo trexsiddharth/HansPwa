@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewHomeService } from '../new-home.service';
+import { LanguageService } from 'src/app/language.service';
 
 @Component({
   selector: 'app-home-drawer',
@@ -8,7 +9,7 @@ import { NewHomeService } from '../new-home.service';
 })
 export class HomeDrawerComponent implements OnInit {
 
-  constructor(public homeService: NewHomeService) { }
+  constructor(public homeService: NewHomeService, public languageService: LanguageService) { }
 
   ngOnInit() {
   }

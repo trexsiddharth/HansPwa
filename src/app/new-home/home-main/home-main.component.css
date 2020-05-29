@@ -79,7 +79,7 @@
 .headingThree {
     background-color: #5C1F90 !important;display: flex;
     flex-direction: row;   
-    padding: 20px 20%;
+    padding: 20px 10% 20px 20%;
     background-color: transparent;
     justify-content: space-between;
 }
@@ -264,7 +264,7 @@ li{
 
     .headingThree {
         background-color: #5C1F90 !important;display: flex;
-        flex-direction: row;padding: 20px 40px;
+        flex-direction: row;padding: 20px 20px 20px 40px;
         background-color: transparent;
         justify-content: space-between;
     }
@@ -388,7 +388,7 @@ li{
 }
 .headingThree {
     background-color: #5C1F90 !important;display: flex;
-    flex-direction: row;padding: 20px 40px;
+    flex-direction: row;padding: 20px 20px 20px 40px;
     background-color: transparent;
     justify-content: space-between;
 }

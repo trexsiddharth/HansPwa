@@ -9,6 +9,7 @@ import {
   MatIconModule,
   MatMenuModule,
   MatButtonModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
@@ -34,6 +35,7 @@ exports: [
   MatIconModule,
   MatMenuModule,
   MatButtonModule,
+  MatSlideToggleModule,
   FormsModule,
   ReactiveFormsModule,
   AgmCoreModule,

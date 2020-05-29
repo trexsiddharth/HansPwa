@@ -8,12 +8,45 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 })
 export class LanguageService {
 
-  currentLanguage = 'hindi';
-  profileLang = new Profile();
+  private currentLanguage = 'hindi';
+   profileLang = new Profile();
+  languageChangedFromMainStatus = false;
+   homeLang: any = {
+     downloadApp : '',
+     login : '',
+     rishteDekhein: '',
+     familyTogether : '',
+     freeRegister : '',
+     moreThan : '',
+     chooseFrom : '',
+     manyMatchmakers : '',
+     helpingHands: '',
+     manyTemple: '',
+     verificationCenters: '',
+     offlineCentres: '',
+     showMore: '',
+     shivTemple: '',
+     sanatanTemple: '',
+     lakshmiTemple: '',
+     joinHearts: '',
+     matchmakingApp: '',
+     getOnPhone: '',
+     myprofile: '',
+     logout: '',
+     subscription: '',
+     ourBlog: '',
+     vipMatchmaking: ''
+   };
 
   constructor(private http: HttpClient,
               private ngxNotificationService: NgxNotificationService) {
-    this.currentLanguage = localStorage.getItem('language').toLowerCase();
+
+                if (localStorage.getItem('language')) {
+                  this.currentLanguage = localStorage.getItem('language').toLowerCase();
+                } else {
+                  localStorage.setItem('language', 'hindi');
+                  this.currentLanguage = 'hindi';
+                }
    }
 
   setCurrentLanguage(lang: string) {
@@ -219,6 +252,67 @@ export class LanguageService {
         break;
     }
   }
+
+  setHomeLang(lang) {
+    switch (lang) {
+      case 'hindi':
+        this.homeLang.downloadApp = 'डाउनलोड करें';
+        this.homeLang.login = 'लॉगिन करें';
+        this.homeLang.rishteDekhein = 'रिश्ते देखें';
+        this.homeLang.familyTogether = 'हम परिवारों को जोड़ते है...';
+        this.homeLang.freeRegister = 'रजिस्टर करें नि: शुल्क';
+        this.homeLang.moreThan = '50,000+ से अधिक';
+        this.homeLang.chooseFrom = 'रिश्तों में से चुनिए अपनी पसंद';
+        this.homeLang.manyMatchmakers = '1000+ मैचमेकर्स';
+        this.homeLang.helpingHands = 'जो आपको रिश्ते चुनने में मदद करेंगी';
+        this.homeLang.manyTemple = '25+ मंदिर';
+        this.homeLang.verificationCenters = 'में वेरिफिकेशन सेंटर्स';
+        this.homeLang.offlineCentres = 'ऑफलाइन केन्द्र नेटवर्क';
+        this.homeLang.showMore = 'सभी देखें';
+        this.homeLang.shivTemple = 'श्री शिव साई धाम मंदिर';
+        this.homeLang.sanatanTemple = 'श्री सनातन धर्म मंदिर';
+        this.homeLang.lakshmiTemple = 'श्री लक्ष्मी नारायण मंदिर';
+        this.homeLang.joinHearts = 'रिश्ते ही नहीं जोड़ें दिलों को भी।';
+        this.homeLang.matchmakingApp = 'मैचमेकिंग ऐप';
+        this.homeLang.getOnPhone = 'अभी पाये, फ़ोन पर';
+        this.homeLang.myprofile = 'मेरी प्रोफाइल';
+        this.homeLang.logout = 'लॉगआउट';
+        this.homeLang.subscription = 'सब्सक्रिप्शन';
+        this.homeLang.ourBlog = 'हमारा ब्लॉग पढ़ें';
+        this.homeLang.vipMatchmaking = 'VIP मैच मेकिंग';
+        break;
+      case 'english':
+        this.homeLang.downloadApp = 'Download App';
+        this.homeLang.login = 'Log In';
+        this.homeLang.rishteDekhein = 'Rishte Dekhein';
+        this.homeLang.familyTogether = 'We Bring Families Together...';
+        this.homeLang.freeRegister = 'Register For Free';
+        this.homeLang.moreThan = 'More Than 50,000';
+        this.homeLang.chooseFrom = 'To Choose From';
+        this.homeLang.manyMatchmakers = '1000+ Mathmakers';
+        this.homeLang.helpingHands = 'Who Will Help In Finding A Perfect Match ';
+        this.homeLang.manyTemple = '25+ Temples';
+        this.homeLang.verificationCenters = 'Verification Centres';
+        this.homeLang.offlineCentres = 'Offline Centres Network';
+        this.homeLang.showMore = 'Show More';
+        this.homeLang.shivTemple = 'Shree Shiv Sai Dham Mandir';
+        this.homeLang.sanatanTemple = 'Shree Sanatan Dharam Mandir';
+        this.homeLang.lakshmiTemple = 'Shree Lakshmi Narayan Mandir';
+        this.homeLang.joinHearts = 'Rishtey Nahi Jode Dilo Ko Bhi';
+        this.homeLang.matchmakingApp = 'Matchmaking App';
+        this.homeLang.getOnPhone = 'Download On Phone';
+        this.homeLang.myprofile = 'My Profile';
+        this.homeLang.logout = 'Log Out';
+        this.homeLang.subscription = 'Subscription';
+        this.homeLang.ourBlog = 'Read Our Blog';
+        this.homeLang.vipMatchmaking = 'VIP Matchmaking';
+        break;
+
+      default:
+        break;
+    }
+  }
+
   changeLanguage(lang: string) {
     console.log('changing language');
     // tslint:disable-next-line: max-line-length
