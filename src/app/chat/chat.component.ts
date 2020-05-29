@@ -42,6 +42,7 @@ import {
 import {
   ChatServiceService
 } from '../chat-service.service';
+import { LanguageService } from '../language.service';
 
 
 @Component({
@@ -193,7 +194,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     public notification: NotificationsService,
     private route: ActivatedRoute,
     public itemService: FindOpenHistoryProfileService,
-    private chatServivce: ChatServiceService
+    private chatServivce: ChatServiceService,
+    public languageService: LanguageService
   ) {
   }
 

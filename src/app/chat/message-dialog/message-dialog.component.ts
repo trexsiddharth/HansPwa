@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
+import { LanguageService } from 'src/app/language.service';
 
 
 @Component({
@@ -15,8 +16,10 @@ export class MessageDialogComponent implements OnInit {
   type;
   selfImage;
   selfName;
-  constructor(private router: Router, public dialogRef: MatDialogRef<MessageDialogComponent>,
+  constructor(private router: Router,
+              public dialogRef: MatDialogRef<MessageDialogComponent>,
               private spinner: NgxSpinnerService,
+              public languageService: LanguageService,
               private http: HttpClient,
               @Inject(MAT_DIALOG_DATA) public data) {
                 console.log(data);
@@ -128,7 +131,7 @@ export class MessageDialogComponent implements OnInit {
 
   premiumInterest() {
     this.spinner.show();
-    let interestForm = new FormData();
+    const interestForm = new FormData();
     interestForm.append('id', localStorage.getItem('id'));
     interestForm.append('is_lead', localStorage.getItem('is_lead'));
     interestForm.append('interest_profile', this.profile.identity_number);

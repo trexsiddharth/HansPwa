@@ -118,13 +118,16 @@ export class LanguageService {
       this.profileLang.workingPref = 'वर्किंग प्रेफरेंस';
       this.profileLang.desc = 'डिस्क्रिप्शन';
 
+      // credits
+      this.profileLang.credits = 'कांटेक्ट नंबर';
+
       break;
 
         case 'english':
 
           this.profileLang.contact = 'Contact';
           this.profileLang.reject = 'Reject';
-          this.profileLang.shortlist = 'Shortlist';
+          this.profileLang.shortlist = 'Like';
 
         // top details
           this.profileLang.verifiedAt = 'Verified At:';
@@ -205,6 +208,9 @@ export class LanguageService {
           this.profileLang.occupationPref = 'Occupation Preference';
           this.profileLang.workingPref = 'Working preference';
           this.profileLang.desc = 'Description';
+
+          // credits
+          this.profileLang.credits = 'Credits';
 
 
           break;

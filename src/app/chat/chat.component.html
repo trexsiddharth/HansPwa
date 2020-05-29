@@ -7,7 +7,7 @@
             <mat-tab [label]="itemService.getDailyCount()" id="today">
                   <ng-template matTabContent>
                     <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                      कांटेक्ट नंबर: {{itemService.getCredits()}}
+                      {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                   </button>
                     <div class="mainBody  w-full bg-white ht-full setBotUi">
                         <app-today-profiles (setProfileImage)="setProfileImage($event)"></app-today-profiles>
@@ -17,7 +17,7 @@
                   <mat-tab [label]="itemService.getContactedCount()" id="contacted">
                       <ng-template matTabContent>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{itemService.getCredits()}}
+                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi'>
                                    <app-history-profiles [type]="tabType"></app-history-profiles>
@@ -28,7 +28,7 @@
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{itemService.getCredits()}}
+                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi'>
                                    <app-history-profiles [type]="tabType"></app-history-profiles>
@@ -40,7 +40,7 @@
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{itemService.getCredits()}}
+                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi'>
                                    <app-history-profiles [type]="tabType"></app-history-profiles>
@@ -52,7 +52,7 @@
                     <ng-template matTabContent>
                     <div>
                       <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        कांटेक्ट नंबर: {{itemService.getCredits()}}
+                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                     </button>
                         <div class='mainBody  w-full bg-white ht-full setBotUi' >
                                  <app-personalized-profiles [type]="tabType" ></app-personalized-profiles>
@@ -64,7 +64,7 @@
                       <ng-template matTabContent>
                       <div>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          कांटेक्ट नंबर: {{itemService.getCredits()}}
+                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi' >
                                    <app-history-profiles [type]="tabType"></app-history-profiles>

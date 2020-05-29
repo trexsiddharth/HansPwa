@@ -79,4 +79,5 @@ foodChoicePref;
 occupationPref;
 workingPref;
 desc;
+credits;
 }
