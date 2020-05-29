@@ -35,7 +35,8 @@ export class LanguageService {
      logout: '',
      subscription: '',
      ourBlog: '',
-     vipMatchmaking: ''
+     vipMatchmaking: '',
+     registerFree: ''
    };
 
   constructor(private http: HttpClient,
@@ -280,6 +281,7 @@ export class LanguageService {
         this.homeLang.subscription = 'सब्सक्रिप्शन';
         this.homeLang.ourBlog = 'हमारा ब्लॉग पढ़ें';
         this.homeLang.vipMatchmaking = 'VIP मैच मेकिंग';
+        this.homeLang.registerFree = 'रजिस्टर फ्री';
         break;
       case 'english':
         this.homeLang.downloadApp = 'Download App';
@@ -306,6 +308,7 @@ export class LanguageService {
         this.homeLang.subscription = 'Subscription';
         this.homeLang.ourBlog = 'Read Our Blog';
         this.homeLang.vipMatchmaking = 'VIP Matchmaking';
+        this.homeLang.registerFree = 'Register Free';
         break;
 
       default:

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit } from '@angular/core';
 import { NewHomeService } from './new-home.service';
 import { LanguageService } from '../language.service';
 
@@ -7,19 +7,25 @@ import { LanguageService } from '../language.service';
   templateUrl: './new-home.component.html',
   styleUrls: ['./new-home.component.css']
 })
-export class NewHomeComponent implements OnInit {
+export class NewHomeComponent implements OnInit, AfterViewInit {
   langCheck = false;
 
   constructor(public homeService: NewHomeService, public languageService: LanguageService) { }
-
-  ngOnInit() {
-    console.log(this.languageService.getCurrentLanguage());
+  ngAfterViewInit(): void {
+    if (!localStorage.getItem('language')) {
+      localStorage.setItem('language', 'hindi');
+      this.langCheck = false;
+    }
     if (this.languageService.getCurrentLanguage() === 'hindi') {
       this.langCheck = false;
     } else if (this.languageService.getCurrentLanguage() === 'english')  {
       this.langCheck = true;
     }
     this.languageService.setHomeLang(localStorage.getItem('language'));
+  }
+
+  ngOnInit() {
+    console.log(this.languageService.getCurrentLanguage());
   }
 
   sendWhatsAppLink() {
