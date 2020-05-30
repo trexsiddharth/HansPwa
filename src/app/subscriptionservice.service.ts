@@ -154,6 +154,8 @@ captureStandardPayment(response, amount, points) {
   formData.append('mobile', localStorage.getItem('mobile_number'));
   formData.append('payment_id', response.razorpay_payment_id);
   formData.append('amount', amount);
+  formData.append('id', localStorage.getItem('id'));
+  formData.append('is_lead', localStorage.getItem('is_lead'));
   formData.append('whatsapp_point', points);
   formData.append('currency', 'INR');
   this.http.post('https://partner.hansmatrimony.com/api/paymentCapture', formData).subscribe(
