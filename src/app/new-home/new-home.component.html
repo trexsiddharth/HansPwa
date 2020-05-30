@@ -29,10 +29,10 @@
                 <div class="col-4 t-c b-r">
                     <span class="toolText"><a style="color: white;text-decoration: none;" href="https://play.google.com/store/apps/details?id=com.twango.me"> {{languageService.homeLang.downloadApp}}</a></span>
                 </div>
-                <div class="col-4 t-c b-r">
+                <div class="col-4 t-c ">
                     <img style="width: 25px;" (click)="sendWhatsAppLink()" src="../../assets/whatsapp-white.svg" alt="whatsapp share">
                 </div>
-                <div class="col-4 t-c">
+                <div class="col-4 t-c b-l">
                     <span class="toolText" *ngIf="homeService.getLoginStatus()==false"><a style="color: white;text-decoration: none;" [routerLink]="['/phone-number']" routerLinkActive="router-link-active">{{languageService.homeLang.login}}</a></span>
                     <span class="toolText" *ngIf="homeService.getLoginStatus()"><a style="color: white;text-decoration: none;" [routerLink]="['/chat']" routerLinkActive="router-link-active">{{languageService.homeLang.rishteDekhein}}</a></span>
                 </div>

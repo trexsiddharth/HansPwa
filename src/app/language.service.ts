@@ -276,7 +276,7 @@ export class LanguageService {
       case 'english':
         this.homeLang.downloadApp = 'Download App';
         this.homeLang.login = 'Log In';
-        this.homeLang.rishteDekhein = 'Rishte Dekhein';
+        this.homeLang.rishteDekhein = 'View Profiles';
         this.homeLang.familyTogether = 'We Bring Families Together...';
         this.homeLang.freeRegister = 'Register For Free';
         this.homeLang.moreThan = 'More Than 50,000';

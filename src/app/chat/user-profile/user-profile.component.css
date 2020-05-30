@@ -39,6 +39,7 @@ main {
 .col-6, .col-12{
     margin: 10px 0px 0px ;
     text-transform: capitalize;
+   
 }
 .iconSize{
     width: 30px;

@@ -52,6 +52,10 @@ width: 25%;
     border-right: 1px solid white;
 }
 
+.b-l {
+    border-left: 1px solid white;  
+}
+
 .drawerImg{
     width: 25px;
     margin-left: 10px;
