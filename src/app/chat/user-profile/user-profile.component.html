@@ -143,7 +143,7 @@
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/heart.svg" alt="marital status"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.martialStatus}}:</span>  {{personalProfileData.marital_status}}
+                        <span class="labelText">{{languageService.profileLang.martialStatus}}:</span>  {{personalProfileData.marital_status ? personalProfileData.marital_status : 'Add Detail'}}
                     </span>
                 </div>
                 <div class="col-6">
@@ -155,7 +155,7 @@
                 <div class="col-6">
                     <img class="iconSize" src="../../../assets/cutlery.svg" alt="food choice"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.foodChoice}}:</span>  {{personalProfileData.food_choice}}
+                        <span class="labelText">{{languageService.profileLang.foodChoice}}:</span>  {{personalProfileData.food_choice ? personalProfileData.food_choice : 'Add Detail'}}
                     </span>
                 </div>
                 <div class="col-6">
@@ -455,13 +455,13 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/tarot.svg" alt="pref manglik"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.manglikPref}}:</span>  {{preferenceProfileData.manglik}}
+                        <span class="labelText">{{languageService.profileLang.manglikPref}}:</span>  {{preferenceProfileData.manglik ? preferenceProfileData.manglik : 'Add Detail'}}
                     </span>
                 </div>
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/heart.svg" alt="pref marital status"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.martialStatus}}:</span>  {{preferenceProfileData.marital_status}}
+                        <span class="labelText">{{languageService.profileLang.martialStatus}}:</span>  {{preferenceProfileData.marital_status ? preferenceProfileData.marital_status : 'Add Detail'}}
                     </span>
                 </div>
                 <div class="col-12">
@@ -473,26 +473,26 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/cutlery.svg" alt="food choice"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.foodChoicePref}}:</span>  {{preferenceProfileData.food_choice}}
+                        <span class="labelText">{{languageService.profileLang.foodChoicePref}}:</span>  {{preferenceProfileData.food_choice ? preferenceProfileData.food_choice : 'Add Detail'}}
                     </span>
                 </div>
                 <div class="col-12" *ngIf="personalProfileData.gender === 'Female'">
                     <img class="iconSize" src="../../../assets/suitcase.svg" alt="pref occupation"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.occupationPref}}:</span>  {{preferenceProfileData.occupation}}
+                        <span class="labelText">{{languageService.profileLang.occupationPref}}:</span>  {{preferenceProfileData.occupation ? preferenceProfileData.occupation : 'Add Detail'}}
                     </span>
                 </div>
 
                 <div class="col-12" *ngIf="personalProfileData.gender === 'Male'">
                     <img class="iconSize" src="../../../assets/suitcase.svg" alt="pref working"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.workingPref}}:</span>  {{preferenceProfileData.working}}
+                        <span class="labelText">{{languageService.profileLang.workingPref}}:</span>  {{preferenceProfileData.working ? preferenceProfileData.working : 'Add Detail'}}
                     </span>
                 </div>
 
                 <div class="col-12">
                     <span>
-                        {{languageService.profileLang.desc}}: {{preferenceProfileData.description}}
+                        {{languageService.profileLang.desc}}: {{preferenceProfileData.description ? preferenceProfileData.description : 'Add Detail'}}
                     </span>
                 </div>
             </div>

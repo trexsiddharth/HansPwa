@@ -15,6 +15,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { ApiwhaAutoreply } from './profile-today-model';
 import { LanguageService } from 'src/app/language.service';
+import { Profile } from 'src/app/compatibility-form/profile';
 
 
 @Component({
@@ -314,14 +315,20 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
             localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
               this.languageService.setCurrentLanguage(data.apiwha_autoreply.language.toLowerCase());
           } else {
-            this.languageService.setProfileLanguage();
-            this.languageService.languageChangedFromMainStatus = false;
+            if (!this.languageService.profileLang.name) {
+              this.languageService.setProfileLanguage();
+              this.languageService.languageChangedFromMainStatus = false;
+            }
           }
 
         } else {
           if (this.languageService.languageChangedFromMainStatus) {
             this.languageService.setCurrentLanguage(localStorage.getItem('language'));
             this.languageService.languageChangedFromMainStatus = false;
+          } else {
+            if (!this.languageService.profileLang.name) {
+            this.languageService.setProfileLanguage();
+            }
           }
         }
 
