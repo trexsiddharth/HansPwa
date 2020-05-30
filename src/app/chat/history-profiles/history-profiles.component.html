@@ -32,7 +32,7 @@
                 (click)="profileReAnswer(item,'NO',i)"
                 style="background-color: #C8C8C8;
                     padding: 20px;
-                     border-radius: 10px;"  *ngIf="type !== 'rejected' && type !== 'contacted'">
+                     border-radius: 10px;"  *ngIf="type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
                     <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
                 </button>
 
@@ -67,7 +67,7 @@
                 (click)="profileReAnswer(item,'SHORTLIST',i)"
                  style="background-color: #D313AE;margin-top: 20px;
                 padding: 20px;
-                 border-radius: 10px;" *ngIf="type !== 'interestShown'  && type !== 'contacted'">
+                 border-radius: 10px;" *ngIf="type !== 'interestShown'  && type !== 'contacted' && type !== 'mutual'">
                     <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
                 </button>
 

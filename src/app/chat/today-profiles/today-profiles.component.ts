@@ -301,10 +301,11 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           this.itemService.saveCount(data.get_status_count);
           this.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
         }
-
-        // set language according to user choice
+      // set language according to user choice
+        if (data.apiwha_autoreply.language) {
         console.log(this.languageService.languageChangedFromMainStatus,
           localStorage.getItem('language') , data.apiwha_autoreply.language.toLowerCase() );
+
         if (this.languageService.languageChangedFromMainStatus &&
            localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase() ) {
             this.languageService.setCurrentLanguage(localStorage.getItem('language'));
@@ -317,7 +318,14 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
             this.languageService.languageChangedFromMainStatus = false;
           }
 
-        if (data.type === 'profile') { 
+        } else {
+          if (this.languageService.languageChangedFromMainStatus) {
+            this.languageService.setCurrentLanguage(localStorage.getItem('language'));
+            this.languageService.languageChangedFromMainStatus = false;
+          }
+        }
+
+        if (data.type === 'profile') {
           this.type = 'profile';
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             this.item = data.apiwha_autoreply;

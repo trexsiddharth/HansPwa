@@ -122,6 +122,11 @@ export class FindOpenHistoryProfileService {
     'नापसंद ( ' + this.profileCount.rejectedCount + ' )'
     : 'Rejected ( ' + this.profileCount.rejectedCount + ' )';
   }
+  getMutualCount() {
+    return localStorage.getItem('language') === 'hindi' ?
+    'आपसी पसंद ( ' + this.profileCount.rejectedCount + ' )'
+    : 'Mutual Liking ( ' + this.profileCount.rejectedCount + ' )';
+  }
   getCountOnlyShortlist() {
     return this.profileCount.shortlistCount;
   }

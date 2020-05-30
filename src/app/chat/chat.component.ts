@@ -550,6 +550,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.tabType = 'rejected';
         this.changeToHistory();
         break;
+      case 6:
+        this.tabType = 'mutual';
+        this.changeToHistory();
+        break;
 
       default:
         break;
@@ -573,6 +577,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
         break;
       case 4:
         this.tabType = 'rejected';
+        this.changeToHistory();
+        break;
+      case 5:
+        this.tabType = 'mutual';
         this.changeToHistory();
         break;
 

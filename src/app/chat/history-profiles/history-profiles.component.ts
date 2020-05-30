@@ -111,6 +111,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           console.log(this.profile);
           }
         break;
+      case 'mutual':
+        if (localStorage.getItem('rejectedProfiles')) {
+          this.profile = JSON.parse(localStorage.getItem('rejectedProfiles'));
+          console.log(this.profile);
+          }
+        break;
       default:
         break;
     }
@@ -127,6 +133,9 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         this.getHistorydata('interestReceived');
         break;
       case 'rejected':
+        this.getHistorydata('rejectedProfiles');
+        break;
+      case 'mutual':
         this.getHistorydata('rejectedProfiles');
         break;
       default:
