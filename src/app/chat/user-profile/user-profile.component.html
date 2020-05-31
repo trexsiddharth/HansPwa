@@ -54,8 +54,12 @@
           <div style="position: absolute;bottom:0px;color: white; 
           padding: 10px 10px;
           width: 100%; text-align: center;
+          z-index: 99999;
           background-image: linear-gradient(0deg, black, transparent);">
-            <img width="25px" style="float: right;" src="../../../assets/pencil.svg" alt="edit">
+            <img width="45px"
+            (click)="addProfileImage(getCarouselCount())"
+            style="position: absolute;
+            right: 10px;" src="../../../assets/add.svg" alt="edit">
             <span style="font-weight:bold;font-size: 18px;text-transform: capitalize;">
             {{personalProfileData.name}}, {{setAge(personalProfileData.birth_date)}}
             </span><br>

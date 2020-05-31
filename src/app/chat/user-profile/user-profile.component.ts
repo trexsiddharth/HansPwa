@@ -230,6 +230,7 @@ onResize(event) {
             this.personalProfileData = data.profile ? data.profile : null;
             this.familyProfileData = data.family ? data.family : null;
             this.preferenceProfileData = data.preferences ? data.preferences : null;
+
             this.spinner.hide();
           },
           (error: any) => {
@@ -286,15 +287,40 @@ onResize(event) {
     }
 
     getImagesCount() {
-      let num = this.personalProfileData.carousel;
-      if (num !== '[]' && num && num !== 'null') {
+      if (!this.carouselSize) {
+        this.carouselSize = [];
+        let num = this.personalProfileData.carousel;
+        if (num !== '[]' && num && num !== 'null') {
         const carousel: object = JSON.parse(num);
         if (carousel) {
-          return [1, 2, 3];
+          Object.keys(carousel).forEach(
+            element => {
+              this.carouselSize.push(element);
+            }
+          );
+          return this.carouselSize;
         }
       } else {
         this.carouselSize = [1];
         return this.carouselSize;
+      }
+      } else {
+        return this.carouselSize;
+      }
+      
+    }
+    
+    getCarouselCount() {
+      let num = this.personalProfileData.carousel;
+      if (num !== '[]' && num && num !== 'null') {
+        const carousel: object = JSON.parse(num);
+        if (carousel) {
+          let size = Object.keys(carousel);
+          console.log(size.length);
+          return size.length;
+        }
+      } else {
+        return 1;
       }
     }
 
@@ -303,6 +329,15 @@ onResize(event) {
      console.log('current index is ' + i);
      document.querySelectorAll('#backfile')[index].click();
     }
+    addProfileImage(index: number) {
+      const i = index + 1;
+      console.log('current index is ' + i);
+      this.carouselSize.push(i);
+      setTimeout(() => {
+        document.querySelectorAll('#backfile')[index.toString()].click();
+      }, 1000);
+    }
+
     getIncome(value: number) {
       if (value != null) {
         if (value.toString().length >= 6) {
