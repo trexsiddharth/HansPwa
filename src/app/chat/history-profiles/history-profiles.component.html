@@ -50,7 +50,7 @@
                 style="background-color: #58D1FD;
                 margin-top: 20px;
                 padding: 20px;
-                 border-radius: 10px;"  *ngIf="type == 'contacted' && item.family">
+                 border-radius: 10px;"  *ngIf="type == 'contacted' && item.family && itemService.getPersonalized() == false">
                 <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
             </button>
 
@@ -59,7 +59,7 @@
                 style="background-color: #58D1FD;
                 margin-top: 20px;
                 padding: 20px 10px;
-                 border-radius: 10px;"  *ngIf="type == 'contacted' && item.family == null">
+                 border-radius: 10px;"  *ngIf="type == 'contacted' && itemService.getPersonalized()">
                 <img width="30px" src="../../../assets/comment.svg" alt="contact profile">
             </button>
 
