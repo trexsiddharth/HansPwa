@@ -297,7 +297,7 @@ designations: string[] = [
     if (type === 'Locality') {
       this.personalForm.value.Locality = event.formatted_address;
     } else if (type === 'Working') {
-      this.personalForm.value.working_city = event.formatted_address;
+      this.personalForm.value.WorkingCity = event.formatted_address;
     } else {
       this.personalForm.value.BirthPlace = event.formatted_address;
     }
