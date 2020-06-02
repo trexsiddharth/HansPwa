@@ -62,7 +62,9 @@
                     </mat-select>
             </div>
 
-            <!-- <mat-checkbox>All Caste Preferred</mat-checkbox> -->
+            <div class="col-12" style="margin-top: 10px;">
+              <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">No Caste Bar</mat-checkbox>
+            </div>
                   
                   <hr style="margin: 0px 10px;width: 100%">
                   <div class="col-12">

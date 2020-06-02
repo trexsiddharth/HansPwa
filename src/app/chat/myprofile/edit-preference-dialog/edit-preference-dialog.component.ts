@@ -27,6 +27,7 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
   searchedCaste = '';
   searchCaste = new FormControl();
   searchCasteText = new FormControl();
+  isAllCastePref = false;
 
 
 
@@ -150,13 +151,25 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
     return this.Heights[this.Heights1.indexOf(ht)];
   }
 
+  // set checkbox value to all if checked
+  checkAllCastePref(event) {
+    console.log(event);
+    if (event.checked) {
+      this.searchCaste.setValue(['All']);
+    } else {
+      this.searchCaste.setValue(['']);
+    }
+  }
+
 
   getAllCaste() {
     this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
       this.getcastes = res;
+      // adittion of all to the list of castes
+      this.getcastes.push('All');
 
        // set initial selection
-      if (this.preferenceData.caste && this.preferenceData.caste !== 'null' && this.preferenceData.caste !== 'all' ) {
+      if (this.preferenceData.caste && this.preferenceData.caste !== 'null') {
        let values = [];
        this.preferenceData.caste.split(',').forEach(element => {
         console.log(element);
@@ -164,6 +177,10 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
           values.push(this.getcastes[this.getcastes.indexOf(element)]);
         }
       });
+      // if all , check the check box for no caste bar
+       if (values.includes('All')) {
+        this.isAllCastePref = true;
+      }
        this.searchCaste.setValue(values);
     }
 
