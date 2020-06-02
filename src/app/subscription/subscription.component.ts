@@ -154,7 +154,7 @@ Analytics(type: string, category: string, action: string) {
   }
 
   container1() {
-    this.price = '1';
+    this.price = '2800';
     this.credits = '45';
     this.selectedContainer = 1;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});

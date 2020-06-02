@@ -411,7 +411,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.history = 'connection_error';
     document.getElementById('footerVisibility').style.display = 'none';
   }
-  
+
   changeToHistory() {
     if (this.currentContact) {
       (window as any).ga('send', 'event', 'history', 'history clicked', {
@@ -539,19 +539,19 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.changeToHistory();
         break;
       case 3:
-        this.tabType = 'interestReceived';
+        this.tabType = 'mutual';
         this.changeToHistory();
         break;
       case 4:
+        this.tabType = 'interestReceived';
+        this.changeToHistory();
+        break;
+      case 5:
         this.tabType = 'personalized';
         this.changeToPersonalized();
         break;
-      case 5:
-        this.tabType = 'rejected';
-        this.changeToHistory();
-        break;
       case 6:
-        this.tabType = 'mutual';
+        this.tabType = 'rejected';
         this.changeToHistory();
         break;
 
@@ -572,18 +572,17 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.changeToHistory();
         break;
       case 3:
-        this.tabType = 'interestReceived';
-        this.changeToHistory();
-        break;
-      case 4:
-        this.tabType = 'rejected';
-        this.changeToHistory();
-        break;
-      case 5:
         this.tabType = 'mutual';
         this.changeToHistory();
         break;
-
+      case 4:
+        this.tabType = 'interestReceived';
+        this.changeToHistory();
+        break;
+      case 5:
+        this.tabType = 'rejected';
+        this.changeToHistory();
+        break;
       default:
         break;
     }
@@ -608,39 +607,5 @@ export class ChatComponent implements OnInit, AfterViewInit {
   scrollHorizontal(index: any) {
     document.querySelectorAll('.mat-tab-label')[index].scrollIntoView();
   }
-  chatTimer() {
-    this.profilesCompletedStatus = true;
-    let timerMaxSeconds = Math.floor(7 * 1000);
-    let timerCurrentSecond;
-    this.botui.message.add({
-      loading: true,
-      delay: 500,
-      type: 'html',
-      content: '<div id="3no">' +
-
-        '<div style="text-align:center">' +
-        '<h5>Moving To मेरी पसंद in</h5>' +
-        '</div>' +
-        // tslint:disable-next-line: max-line-length
-        '<div style="text-align: center;"><p style="display: inline-block;border: 2px solid red;border-radius:10px;padding-left:20px;padding-right:20px;font-size:18px" id="timer"></p></div>' +
-        '</div>'
-    }).then(() => {
-      this.startTimer(timerMaxSeconds, timerCurrentSecond);
-    });
-  }
-
-  startTimer(timerMaxSeconds: any, timerCurrentSecond: any) {
-    this.timerMain = setInterval(() => {
-      timerMaxSeconds = timerMaxSeconds - 1000;
-      timerCurrentSecond = Math.floor(timerMaxSeconds / 1000);
-      document.getElementById('timer').innerText = timerCurrentSecond.toString() + 's';
-
-      if (Math.floor(timerCurrentSecond) === 0) {
-        this.setSelectedTab(2);
-        clearInterval(this.timerMain);
-      }
-    }, 1000);
-  }
-
 
 }

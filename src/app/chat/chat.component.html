@@ -14,6 +14,7 @@
                     </div>
                   </ng-template>
                   </mat-tab>
+                  <!-- // contacted-->
                   <mat-tab [label]="itemService.getContactedCount()" id="contacted">
                       <ng-template matTabContent>
                         <button (click)="goToSubs()" id="creditButton" mat-raised-button>
@@ -24,6 +25,7 @@
                      </div>
                   </ng-template>
                   </mat-tab>
+                  <!-- // liked by me -->
                   <mat-tab [label]="itemService.getShortlistedCount()" id="melike">
                       <ng-template matTabContent>
                       <div>
@@ -31,42 +33,6 @@
                           {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                       </button>
                           <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history-profiles [type]="tabType"></app-history-profiles>
-                         </div>
-                     </div>
-                  </ng-template>
-                  </mat-tab>
-                  <mat-tab [label]="itemService.getShortedCount()" id="likeme">
-                      <ng-template matTabContent>
-                      <div>
-                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                      </button>
-                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history-profiles [type]="tabType"></app-history-profiles>
-                         </div>
-                     </div>
-                  </ng-template>
-                  </mat-tab>
-                  <mat-tab [label]="itemService.getOtherProfiles()" *ngIf="itemService.getIsLead() == '0'">
-                    <ng-template matTabContent>
-                    <div>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                 <app-personalized-profiles [type]="tabType" ></app-personalized-profiles>
-                       </div>
-                   </div>
-                </ng-template>
-                </mat-tab>
-                  <mat-tab [label]="itemService.getRejectedCount()" id="rejected">
-                      <ng-template matTabContent>
-                      <div>
-                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                      </button>
-                          <div class='mainBody  w-full bg-white ht-full setBotUi' >
                                    <app-history-profiles [type]="tabType"></app-history-profiles>
                          </div>
                      </div>
@@ -85,6 +51,45 @@
                    </div>
                 </ng-template>
                 </mat-tab>
+                <!-- // liked me  -->
+                  <mat-tab [label]="itemService.getShortedCount()" id="likeme">
+                      <ng-template matTabContent>
+                      <div>
+                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                      </button>
+                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
+                                   <app-history-profiles [type]="tabType"></app-history-profiles>
+                         </div>
+                     </div>
+                  </ng-template>
+                  </mat-tab>
+                   <!-- // personalized profiles-->
+                  <mat-tab [label]="itemService.getOtherProfiles()" *ngIf="itemService.getIsLead() == '0'">
+                    <ng-template matTabContent>
+                    <div>
+                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                    </button>
+                        <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                                 <app-personalized-profiles [type]="tabType" ></app-personalized-profiles>
+                       </div>
+                   </div>
+                </ng-template>
+                </mat-tab>
+                 <!-- // rejected-->
+                  <mat-tab [label]="itemService.getRejectedCount()" id="rejected">
+                      <ng-template matTabContent>
+                      <div>
+                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                      </button>
+                          <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                                   <app-history-profiles [type]="tabType"></app-history-profiles>
+                         </div>
+                     </div>
+                  </ng-template>
+                  </mat-tab>
                   </mat-tab-group>
 
         </div>
