@@ -34,6 +34,7 @@ export class UserProfileComponent implements OnInit {
   maxHeight;
   carouselSize;
   currentLanguage;
+  langCheck;
 
   constructor(private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService,
               private matDialog: MatDialog, private http: HttpClient,
@@ -43,10 +44,24 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.innerWidth = window.innerWidth;
     this.currentLanguage = localStorage.getItem('language');
+    // set already selected language in toggle
+    if (localStorage.getItem('language') === 'hindi') {
+      this.langCheck = false;
+    } else {
+      this.langCheck = true;
+    }
   }
 
-  changeCurrentLanguage(lang) {
-    this.languageService.setCurrentLanguage(lang);
+  // set language on the basis of toggle
+  langChanged(event) {
+    console.log(event.checked);
+    if (event.checked) {
+      localStorage.setItem('language', 'english');
+      this.languageService.setCurrentLanguage('english');
+    } else {
+      localStorage.setItem('language', 'hindi');
+      this.languageService.setCurrentLanguage('hindi');
+    }
   }
 
   setAge(dob: string) {

@@ -392,6 +392,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         console.log(err);
         this.spinner.hide();
         this.ngxNotificationService.error('Something Went Wrong');
+        this.languageService.setProfileLanguage();
       }
     );
   }
@@ -491,7 +492,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     console.log('called for stopping spinner');
     if (document.querySelectorAll('#profilePic').length > 1) {
       console.log('trying to stop spinner');
-      if (document.querySelectorAll<HTMLImageElement>('#profilePic')[document.querySelectorAll('#profilePic').length - 1].complete) {
+      if (document.querySelectorAll<HTMLImageElement>('#profilePic')[0].complete) {
         this.spinner.hide();
         console.log('spinner stopped');
       } else {

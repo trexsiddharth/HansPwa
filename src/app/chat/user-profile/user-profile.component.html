@@ -6,39 +6,29 @@
         <h5 style="font-weight: bold;margin: 0px;">
             {{languageService.profileLang.myprofile}}
         </h5>
-
-        <button mat-icon-button 
-        style="position: absolute;
+        <div style="position: absolute;
         right: 10px;
-        top: 0px;"
-        [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon style="font-size: 30px !important;">more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-              <ng-template matMenuContent>
-            <button mat-menu-item
-            (click)="logout()">
-            <img width="30px" src="../../../assets/log_out.svg" alt="log out">
-              <span class="menuItems">{{languageService.profileLang.logout}}</span>
-            </button>
-            <button mat-menu-item [routerLink]="['/subscription']" routerLinkActive="router-link-active">
-              <img width="30px" src="../../../assets/contract.svg" alt="subscription">
-              <span class="menuItems">{{languageService.profileLang.subscription}}</span>
-            </button>
-            <button mat-menu-item 
-            (click)="changeCurrentLanguage('hindi')"
-            *ngIf="languageService.getCurrentLanguage() === 'english'">
-                <img width="30px" src="../../../assets/languagechange.png" alt="subscription">
-                <span class="menuItems">हिंदी</span>
+        top: 5px;">
+            <span style="font-size: 18px;">हिं <mat-slide-toggle  [checked]="langCheck" (change)="langChanged($event)">En</mat-slide-toggle></span>
+            <button mat-icon-button 
+            [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon style="font-size: 30px !important;
+                margin-top: -7px;">more_vert</mat-icon>
               </button>
-              <button mat-menu-item 
-              (click)="changeCurrentLanguage('english')"
-               *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-                <img width="30px" src="../../../assets/languagechange.png" alt="subscription">
-                <span class="menuItems">English</span>
-              </button>
-        </ng-template>
-          </mat-menu>
+              <mat-menu #menu="matMenu">
+                  <ng-template matMenuContent>
+                <button mat-menu-item
+                (click)="logout()">
+                <img width="30px" src="../../../assets/log_out.svg" alt="log out">
+                  <span class="menuItems">{{languageService.profileLang.logout}}</span>
+                </button>
+                <button mat-menu-item [routerLink]="['/subscription']" routerLinkActive="router-link-active">
+                  <img width="30px" src="../../../assets/contract.svg" alt="subscription">
+                  <span class="menuItems">{{languageService.profileLang.subscription}}</span>
+                </button>
+            </ng-template>
+              </mat-menu>
+        </div>
     </div>
 
     <div style="position: relative;">
