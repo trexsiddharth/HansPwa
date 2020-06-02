@@ -433,5 +433,33 @@ export class CompatibilityPageFiveComponent implements OnInit {
         formData.append('id', localStorage.getItem('getListId'));
         return this.http.post('https://partner.hansmatrimony.com/api/getLeadDetails', formData);
       }
+
+      // send photo upload link to the user
+      sendPhotoLink() {
+        if (localStorage.getItem('getListId') &&
+        localStorage.getItem('getListLeadId') &&
+        localStorage.getItem('getListMobile')) {
+          const formData = new FormData();
+          formData.append('id', localStorage.getItem('getListId'));
+          formData.append('mobile', localStorage.getItem('getListMobile'));
+          formData.append('is_lead', localStorage.getItem('getListLeadId'));
+
+          this.http.post('https://partner.hansmatrimony.com/api/sendPhotoUploadLink', formData).subscribe(
+            (data: any) => {
+                if (data) {
+                  console.log(data);
+                  if (data.status === 1) {
+                    this.ngxNotificationService.success('Link Shared Successfully');
+                  }
+                } else {
+                  this.ngxNotificationService.error('SomeThing Went Wrong');
+                }
+            }, err => {
+              console.log(err);
+              this.ngxNotificationService.error('SomeThing Went Wrong');
+            }
+          );
+        }
+      }
   }
 

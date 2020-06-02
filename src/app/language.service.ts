@@ -256,8 +256,8 @@ export class LanguageService {
         this.homeLang.moreThan = '50,000+ से अधिक';
         this.homeLang.chooseFrom = 'रिश्तों में से चुनिए अपनी पसंद';
         this.homeLang.manyMatchmakers = '1000+ मैचमेकर्स';
-        this.homeLang.helpingHands = 'जो आपको रिश्ते चुनने में मदद करेंगी';
-        this.homeLang.manyTemple = '25+ मंदिर';
+        this.homeLang.helpingHands = 'जो आपको रिश्ते चुनने में मदद करेंगे';
+        this.homeLang.manyTemple = '25+ मंदिरो';
         this.homeLang.verificationCenters = 'में वेरिफिकेशन सेंटर्स';
         this.homeLang.offlineCentres = 'ऑफलाइन केन्द्र नेटवर्क';
         this.homeLang.showMore = 'सभी देखें';
