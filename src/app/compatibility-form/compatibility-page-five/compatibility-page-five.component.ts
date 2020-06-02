@@ -85,7 +85,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
             interest: value.data.speed,
             source: value.data.source,
             follow_date: value.data.follow_call_date,
-            enq_date: value.data.enquiry_date
+            enq_date: value.data.enquiry_date ? value.data.enquiry_date : value.data.created_at.split(' ')[0]
           });
           console.log(this.pageFive.value);
         } else {

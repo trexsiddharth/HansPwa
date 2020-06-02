@@ -558,6 +558,7 @@ profileReAnswer(item: any, answer: any, index: any) {
   if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0'
   && answer === 'SHORTLIST') {
       this.itemService.openOfferTwo(item);
+      this.getData(item, answer, index);
       return;
   }
 
