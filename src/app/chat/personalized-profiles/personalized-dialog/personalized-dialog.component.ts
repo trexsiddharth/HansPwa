@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NotificationsService } from 'src/app/notifications.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { LanguageService } from 'src/app/language.service';
 
 @Component({
   selector: 'app-personalized-dialog',
@@ -26,6 +27,7 @@ export class PersonalizedDialogComponent implements OnInit {
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
               public notification: NotificationsService,
+              public languageService: LanguageService,
               public itemService: FindOpenHistoryProfileService,
               public dialogRef: MatDialogRef<PersonalizedDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {

@@ -76,7 +76,6 @@ export class LanguageService {
       this.profileLang.martialStatus = 'मैरिटल स्टेटस';
       this.profileLang.foodChoice = 'फ़ूड चॉइस';
       this.profileLang.religion = 'रिलिजन';
-      this.profileLang.workingCity = 'वर्किंग सिटी';
 
         // career details
       this.profileLang.occupation = 'ऑक्यूपेशन';
@@ -84,6 +83,7 @@ export class LanguageService {
       this.profileLang.annualIncome = 'आय';
       this.profileLang.education = 'ग्रेजुएशन';
       this.profileLang.college = 'कॉलेज';
+      this.profileLang.workingCity = 'वर्किंग सिटी';
 
         // horoscope details
       this.profileLang.dob = 'D.O.B';
@@ -168,7 +168,7 @@ export class LanguageService {
           this.profileLang.martialStatus = 'Marital Status';
           this.profileLang.foodChoice = 'Food Choice';
           this.profileLang.religion = 'Religion';
-          this.profileLang.workingCity = 'Working City';
+          
 
          // career details
           this.profileLang.occupation = 'Occupation';
@@ -176,6 +176,7 @@ export class LanguageService {
           this.profileLang.annualIncome = 'Annual Income';
           this.profileLang.education = 'Graduation';
           this.profileLang.college = 'College';
+          this.profileLang.workingCity = 'Working City';
 
         // horoscope details
           this.profileLang.dob = 'D.O.B';

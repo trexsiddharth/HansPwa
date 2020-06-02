@@ -130,7 +130,7 @@
         
                 <div id="aboutSection">
                     <p>
-                        <span style="color: #D313AE;font-size: 30px;font-weight: bold;">{{languageService.profileLang.hello}},</span> Myself {{toTitleCase(item.profile.name)}}, {{toTitleCase(item.profile.about)}}
+                        <span style="color: #D313AE;font-size: 30px;font-weight: bold;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}} {{toTitleCase(item.profile.name)}}, {{toTitleCase(item.profile.about)}}
                     </p>
                 </div>
         
@@ -186,11 +186,11 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Working City.svg" alt="Working City">
-                            <span class="title">{{languageService.profileLang.workingCity}}</span>
+                            <img width="30px" src="../../../../assets/new icons/locality.svg" alt="Locality">
+                            <span class="title">{{languageService.profileLang.locality}}</span>
                         </div>
                         <div class="col-6">
-                            {{item.profile.working_city}}
+                            {{item.family.locality}}
                         </div>
                     </div>
         
@@ -252,6 +252,16 @@
                         </div>
                         <div class="col-6">
                             {{toTitleCase(item.family ? item.profile.college : item.profile.ugcol)}}
+                        </div>
+                    </div>
+
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../../assets/new icons/workingCity.svg" alt="Working City">
+                            <span class="title">{{languageService.profileLang.workingCity}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.working_city}}
                         </div>
                     </div>
         
@@ -378,6 +388,16 @@
                         </div>
                         <div class="col-6">
                             {{item.family ? item.family.family_type : item.profile.family_type}}
+                        </div>
+                    </div>
+
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../../assets/new icons/familyIn.svg" alt="Family City">
+                            <span class="title">{{languageService.profileLang.familyLivingIn}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.family.city}}
                         </div>
                     </div>
         

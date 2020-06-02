@@ -93,7 +93,7 @@
         
                 <div id="aboutSection">
                     <p>
-                        <span style="color: #D313AE;font-size: 30px;font-weight: bold;">हेलो,</span> Myself {{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
+                        <span style="color: #D313AE;font-size: 30px;font-weight: bold;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}} {{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
                     </p>
                 </div>
         
@@ -102,7 +102,7 @@
                 <div id="personalSection">
                     <div style="display: flex;justify-content: space-between;">
                         <span style="color: #0C9BF2;font-size: 18px; font-weight: bold;align-self: center;">
-                            पर्सनल डिटेल्स
+                            {{languageService.profileLang.personalizedDetails}}
                         </span>
                         <img width="80px" height="80px" src="../../../assets/new icons/Personal Details.svg" alt="personal details">
 
@@ -110,7 +110,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Weight.svg" alt="weight">
-                            <span class="title">वेट</span>
+                            <span class="title">{{languageService.profileLang.weight}}</span>
                         </div>
                         <div class="col-6">
                             {{item.weight}} Kg
@@ -120,7 +120,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
-                            <span class="title">मैरिटल स्टेटस</span>
+                            <span class="title">{{languageService.profileLang.martialStatus}}</span>
                         </div>
                         <div class="col-6">
                             {{item.marital_status}}
@@ -130,7 +130,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Food Choice.svg" alt="Food Choice">
-                            <span class="title">फ़ूड चॉइस</span>
+                            <span class="title">{{languageService.profileLang.foodChoice}}</span>
                         </div>
                         <div class="col-6">
                             {{item.food_choice}}
@@ -140,7 +140,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Religion.svg" alt="Religion">
-                            <span class="title">रिलिजन</span>
+                            <span class="title">{{languageService.profileLang.religion}}</span>
                         </div>
                         <div class="col-6">
                             {{item.religion}},{{item.caste}}
@@ -149,11 +149,11 @@
         
                     <div class="row field">
                         <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Working City.svg" alt="Working City">
-                            <span class="title">वर्किंग सिटी</span>
+                            <img width="30px" src="../../../../assets/new icons/locality.svg" alt="Locality">
+                            <span class="title">{{languageService.profileLang.locality}}</span>
                         </div>
                         <div class="col-6">
-                            {{item.working_city}}
+                            {{item.locality}}
                         </div>
                     </div>
         
@@ -164,14 +164,14 @@
                 <div id="careerSection">
                     <div style="display: flex;justify-content: space-between;">
                         <span style="color: #CA58FD;font-size: 18px; font-weight: bold;align-self: center;">
-                            करियर डिटेल्स
+                            {{languageService.profileLang.careerDetails}}
                         </span>
                         <img height="80px" width="80px"  src="../../../assets/new icons/Career Details.svg" alt="career details">
                     </div>
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Occupation.svg" alt="occupation">
-                            <span class="title">ऑक्यूपेशन</span>
+                            <span class="title">{{languageService.profileLang.occupation}}</span>
                         </div>
                         <div class="col-6">
                             {{item.occupation}}
@@ -181,7 +181,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Designation.svg" alt="designation">
-                            <span class="title">देसिग्नेशन</span>
+                            <span class="title">{{languageService.profileLang.designation}}</span>
                         </div>
                         <div class="col-6">
                             {{item.profession}}
@@ -191,7 +191,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
-                            <span class="title">आय</span>
+                            <span class="title">{{languageService.profileLang.annualIncome}}</span>
                         </div>
                         <div class="col-6">
                             {{setIncome(item.monthly_income)}} LPA
@@ -201,7 +201,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Graduation.svg" alt="graduation">
-                            <span class="title">ग्रेजुएशन</span>
+                            <span class="title">{{languageService.profileLang.education}}</span>
                         </div>
                         <div class="col-6">
                             {{item.ugdeg}}
@@ -211,10 +211,20 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Schooling.svg" alt="college">
-                            <span class="title">कॉलेज</span>
+                            <span class="title">{{languageService.profileLang.college}}</span>
                         </div>
                         <div class="col-6">
                             {{toTitleCase(item.ugcol)}}
+                        </div>
+                    </div>
+
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../../assets/new icons/workingCity.svg" alt="Working City">
+                            <span class="title">{{languageService.profileLang.workingCity}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.working_city}}
                         </div>
                     </div>
         
@@ -225,14 +235,14 @@
                 <div id="horoscopeSection">
                     <div style="display: flex;justify-content: space-between;">
                         <span style="color: #070973;font-size: 18px; font-weight: bold;align-self: center;">
-                            होरोस्कोप
+                            {{languageService.profileLang.horoscopeDetails}}
                         </span>
                         <img width="80px" height="80px"  src="../../../assets/new icons/Horoscope.svg" alt="horoscope details">
                     </div>
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/DOB.svg" alt="birth date">
-                            <span class="title">D.O.B</span>
+                            <span class="title">{{languageService.profileLang.dob}}</span>
                         </div>
                         <div class="col-6">
                             {{item.birth_date}}
@@ -242,7 +252,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
-                            <span class="title">बर्थ टाइम</span>
+                            <span class="title">{{languageService.profileLang.birthTime}}</span>
                         </div>
                         <div class="col-6">
                             {{item.birth_time}}
@@ -252,7 +262,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
-                            <span class="title">बर्थ प्लेस</span>
+                            <span class="title">{{languageService.profileLang.birthPlace}}</span>
                         </div>
                         <div class="col-6">
                             {{item.birth_place}}
@@ -262,7 +272,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
-                            <span class="title">मांगलिक</span>
+                            <span class="title">{{languageService.profileLang.manglik}}</span>
                         </div>
                         <div class="col-6">
                             {{item.manglik}}
@@ -275,14 +285,14 @@
                 <div id="familySection">
                     <div style="display: flex;justify-content: space-between;">
                         <span style="color: #58D1FD;font-size: 18px; font-weight: bold;align-self: center;">
-                            फॅमिली डिटेल्स
+                            {{languageService.profileLang.familyDetails}}
                         </span>
                         <img width="80px" height="80px" style="margin-top: 20px;" src="../../../assets/new icons/Family Details.svg" alt="family details">
                     </div>
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Sister.svg" alt="sister">
-                            <span class="title">बहनें</span>
+                            <span class="title">{{languageService.profileLang.sisters}}</span>
                         </div>
                         <div class="col-6">
                             {{setMarriageSisters(item.unmarried_daughter
@@ -293,7 +303,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Brother.svg" alt="brothers">
-                            <span class="title">भाई</span>
+                            <span class="title">{{languageService.profileLang.brothers}}</span>
                         </div>
                         <div class="col-6">
                             {{setMarriageBrothers(item.unmarried_sons
@@ -304,7 +314,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Mother.svg" alt="mother">
-                            <span class="title">माता</span>
+                            <span class="title">{{languageService.profileLang.motherStatus}}</span>
                         </div>
                         <div class="col-6">
                             {{LifeStatus(item.mother_status
@@ -315,7 +325,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Father.svg" alt="father">
-                            <span class="title">पिता</span>
+                            <span class="title">{{languageService.profileLang.fatherStatus}}</span>
                         </div>
                         <div class="col-6">
                             {{LifeStatus(item.father_status
@@ -326,7 +336,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Gotra.svg" alt="gotra">
-                            <span class="title">गोत्र</span>
+                            <span class="title">{{languageService.profileLang.gotra}}</span>
                         </div>
                         <div class="col-6">
                             {{item.gotra}}
@@ -336,17 +346,27 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/Family Type.svg" alt="family type">
-                            <span class="title">फॅमिली टाइप</span>
+                            <span class="title">{{languageService.profileLang.familyType}}</span>
                         </div>
                         <div class="col-6">
                             {{item.family_type}}
+                        </div>
+                    </div>
+
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../../assets/new icons/familyIn.svg" alt="Family City">
+                            <span class="title">{{languageService.profileLang.familyLivingIn}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.city}}
                         </div>
                     </div>
         
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/new icons/House Type.svg" alt="house type">
-                            <span class="title">हाउस टाइप</span>
+                            <span class="title">{{languageService.profileLang.houseType}}</span>
                         </div>
                         <div class="col-6">
                             <span class="highlightedValue">
@@ -358,7 +378,7 @@
                     <div class="row field">
                         <div class="col-6">
                             <img width="30px" src="../../../assets/moneybag.svg" alt="house type">
-                            <span class="title">फॅमिली इनकम</span>
+                            <span class="title">{{languageService.profileLang.familyIncome}}</span>
                         </div>
                         <div class="col-6">
                             <span class="highlightedValue">
