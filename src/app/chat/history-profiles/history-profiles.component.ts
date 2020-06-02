@@ -719,6 +719,26 @@ updateProfileList(ans: any, num: any, index: any) {
               break;
           }
           break;
+
+          case 'mutual':
+        switch (ans) {
+          case 'YES':
+            if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+              this.slideAndOpenProfile(this.profile[index], 1);
+              this.profile.splice(index, 1);
+              this.itemService.changeTab(1);
+            } else {
+              this.ngxNotificationService.error('You Dont have Enough Credits', '',
+                null, {
+                  duration: 4000,
+                  closeButton: true
+                });
+            }
+            break;
+          default:
+            break;
+        }
+        break;
       default:
         break;
     }
