@@ -81,16 +81,7 @@
         <hr>
         </div>
 
-        <ngx-spinner
-        bdOpacity = 0.9
-        [name]="'historySpinner'"
-        bdColor = ""
-        size = "default"
-        color = "#58D1FD"
-        type = "ball-pulse-sync"
-        [fullScreen] = "false"
-        >
-        </ngx-spinner>
+            <mat-spinner *ngIf="smallSpinner" style="margin: 0px auto;" [diameter]="30"></mat-spinner>
 
     </section>
         <!-- <ngx-spinner  bdColor = "transparent" size = "small" color = "#58D1FD" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white"></ngx-spinner> -->

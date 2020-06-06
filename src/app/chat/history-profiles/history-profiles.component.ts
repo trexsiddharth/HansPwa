@@ -75,7 +75,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
   // tslint:disable-next-line: max-line-length
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
-
+  smallSpinner = false;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
@@ -125,19 +125,19 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     switch (this.type) {
       case 'contacted':
-        this.getHistorydata('contactedProfiles');
+        this.getHistorydata('pageContactedProfiles');
         break;
       case 'interestShown':
-        this.getHistorydata('sortListProfiles');
+        this.getHistorydata('pageSortListProfiles');
         break;
       case 'interestReceived':
-        this.getHistorydata('interestReceived');
+        this.getHistorydata('pageInterestReceived');
         break;
       case 'rejected':
-        this.getHistorydata('rejectedProfiles');
+        this.getHistorydata('pageRejectedProfiles');
         break;
       case 'mutual':
-        this.getHistorydata('mutualProfiles');
+        this.getHistorydata('pageMutualProfiles');
         break;
       default:
         break;
@@ -344,11 +344,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
         if (localStorage.getItem(link)) {
         // update new data only
-          if (JSON.stringify(this.profile) !== JSON.stringify(data)) {
-          await this.addRemoveNewData(data);
+          if (JSON.stringify(this.profile) !== JSON.stringify(data.data)) {
+          await this.addRemoveNewData(data.data);
       }
       } else {
-        this.profile = data;
+        this.profile = data.data;
         localStorage.setItem(link, JSON.stringify(data));
       }
 
@@ -946,41 +946,48 @@ setHouseType(type) {
   // get data when current page data has been completely scrolled
   getScrollData() {
     console.log('scrolled');
-    // this.spinner.show('historySpinner');
-    
-    // const historyData = new FormData();
-    // historyData.append('id', localStorage.getItem('id'));
-    // if (this.type.match('contacted')) {
-    //   historyData.append('contacted', '1');
-    // } else {
-    //   historyData.append('contacted', '0');
-    // }
-    // if (localStorage.getItem('is_lead')) {
-    //   historyData.append('is_lead', localStorage.getItem('is_lead'));
-    // } else {
-    //   this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-    //       console.log(res);
-    //       historyData.append('is_lead', res.is_lead);
-    //       localStorage.setItem('is_lead', res.is_lead);
-    //     },
-    //     err => {
-    //       console.log(err);
-    //     });
-    // }
-    // // tslint:disable-next-line: max-line-length
-    // return this.http.post < any > (`https://partner.hansmatrimony.com/api/pageRejectedProfiles${this.wholeData.next_page_url}`, historyData).subscribe(
-    //  async (data: any) => {
-    //     console.log(data.data);
-    //     console.log(this.profile);
-    //     this.spinner.hide('historySpinner');
 
-    //   },
-    //   (error: any) => {
-    //     this.spinner.hide();
-    //     this.ngxNotificationService.error('Something Went Wrong');
-    //     console.log(error);
-    //   }
-    // );
+    if (this.wholeData.next_page_url) {
+    this.smallSpinner = true;
+
+    const historyData = new FormData();
+    historyData.append('id', localStorage.getItem('id'));
+    if (this.type.match('contacted')) {
+      historyData.append('contacted', '1');
+    } else {
+      historyData.append('contacted', '0');
+    }
+    if (localStorage.getItem('is_lead')) {
+      historyData.append('is_lead', localStorage.getItem('is_lead'));
+    } else {
+      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+          console.log(res);
+          historyData.append('is_lead', res.is_lead);
+          localStorage.setItem('is_lead', res.is_lead);
+        },
+        err => {
+          console.log(err);
+        });
+    }
+    // tslint:disable-next-line: max-line-length
+    return this.http.post < any > (`https://partner.hansmatrimony.com/api/pageRejectedProfiles${this.wholeData.next_page_url}`, historyData).subscribe(
+     async (data: any) => {
+        console.log(data);
+        this.wholeData = data;
+        let newData = Object.values(data.data);
+        console.log(newData);
+        this.profile = this.profile.concat(newData);
+        console.log(this.profile);
+        this.smallSpinner = false;
+
+      },
+      (error: any) => {
+        this.spinner.hide();
+        this.ngxNotificationService.error('Something Went Wrong');
+        console.log(error);
+      }
+    );
+    }
 
   }
 
