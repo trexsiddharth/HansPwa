@@ -190,7 +190,7 @@
                             <span class="title">{{languageService.profileLang.locality}}</span>
                         </div>
                         <div class="col-6">
-                            {{item.family.locality}}
+                            {{item.family ? item.family.locality : item.profile.locality}}
                         </div>
                     </div>
         
@@ -397,7 +397,7 @@
                             <span class="title">{{languageService.profileLang.familyLivingIn}}</span>
                         </div>
                         <div class="col-6">
-                            {{item.family.city}}
+                            {{item.family ? item.family.city : item.profile.city}}
                         </div>
                     </div>
         

@@ -62,6 +62,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
 
   profile: any[] = [];
+  wholeData;
   @Input() type: any;
   likeCount;
   dislikeCount;
@@ -336,6 +337,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
      async (data: any) => {
         console.log(data);
+        this.wholeData = data;
         if (this.itemService.getItem()) {
         this.openContactedProfile(data);
         }
@@ -939,6 +941,47 @@ setHouseType(type) {
     } else {
       return '';
     }
+  }
+
+  // get data when current page data has been completely scrolled
+  getScrollData() {
+    console.log('scrolled');
+    // this.spinner.show('historySpinner');
+    
+    // const historyData = new FormData();
+    // historyData.append('id', localStorage.getItem('id'));
+    // if (this.type.match('contacted')) {
+    //   historyData.append('contacted', '1');
+    // } else {
+    //   historyData.append('contacted', '0');
+    // }
+    // if (localStorage.getItem('is_lead')) {
+    //   historyData.append('is_lead', localStorage.getItem('is_lead'));
+    // } else {
+    //   this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+    //       console.log(res);
+    //       historyData.append('is_lead', res.is_lead);
+    //       localStorage.setItem('is_lead', res.is_lead);
+    //     },
+    //     err => {
+    //       console.log(err);
+    //     });
+    // }
+    // // tslint:disable-next-line: max-line-length
+    // return this.http.post < any > (`https://partner.hansmatrimony.com/api/pageRejectedProfiles${this.wholeData.next_page_url}`, historyData).subscribe(
+    //  async (data: any) => {
+    //     console.log(data.data);
+    //     console.log(this.profile);
+    //     this.spinner.hide('historySpinner');
+
+    //   },
+    //   (error: any) => {
+    //     this.spinner.hide();
+    //     this.ngxNotificationService.error('Something Went Wrong');
+    //     console.log(error);
+    //   }
+    // );
+
   }
 
 }

@@ -21,6 +21,7 @@ import { MyProfileService } from './myprofile/my-profile.service';
 import { TodayMessageComponent } from './today-profiles/today-message/today-message.component';
 import { PersonalizedMessageDialogComponent } from './history-profiles/personalized-message-dialog/personalized-message-dialog.component';
 import { AppDownloadDialogComponent } from './app-download-dialog/app-download-dialog.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AppDownloadDialogComponent } from './app-download-dialog/app-download-d
     CommonModule,
     ChatRoutingModule,
     NgbModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    InfiniteScrollModule
   ],
   declarations: [ChatComponent,
     PersonalizedProfilesComponent,

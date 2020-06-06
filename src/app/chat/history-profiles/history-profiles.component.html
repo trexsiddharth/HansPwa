@@ -1,5 +1,10 @@
 <main>
-    <section>
+    <section 
+    infiniteScroll
+    [infiniteScrollDistance]="0.5"
+    [infiniteScrollThrottle]="50"
+    [scrollWindow]="false"
+    (scrolled)="getScrollData()">
         <div  *ngFor="let item of profile;let i = index">
         <div class="historyProfile"  >
             <img class="historyImage" #profilePic
@@ -76,6 +81,19 @@
         <hr>
         </div>
 
+        <ngx-spinner
+        bdOpacity = 0.9
+        [name]="'historySpinner'"
+        bdColor = ""
+        size = "default"
+        color = "#58D1FD"
+        type = "ball-pulse-sync"
+        [fullScreen] = "false"
+        >
+        </ngx-spinner>
+
     </section>
+        <!-- <ngx-spinner  bdColor = "transparent" size = "small" color = "#58D1FD" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white"></ngx-spinner> -->
+        
 
 </main>

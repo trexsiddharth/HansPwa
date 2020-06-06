@@ -117,6 +117,10 @@ body {
 }
 button:focus{outline:none !important;}
 
+ngx-spinner .overlay div:not(.loading-text)  {
+  bottom: 50px !important;
+    top: auto !important;
+}
 
 
 

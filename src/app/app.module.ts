@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxNotificationModule } from 'ngx-kc-notification';
 
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
-import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,7 +57,7 @@ import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
     NgxNotificationModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
-    HttpClientModule, NgxSpinnerModule,
+    HttpClientModule,
     NgxMatIntlTelInputModule
     , RouterModule,
     LazyLoadImageModule.forRoot({

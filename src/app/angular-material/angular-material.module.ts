@@ -16,6 +16,8 @@ import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/go
 import { AgmCoreModule } from '@agm/core';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   imports: [
      // important !!! AIzaSyCU-ZHkKEBJgfbcotGjEqrsU6C2aB9tDj4 // old api
@@ -40,7 +42,8 @@ exports: [
   ReactiveFormsModule,
   AgmCoreModule,
   MatGoogleMapsAutocompleteModule,
-  NgxMatSelectSearchModule
+  NgxMatSelectSearchModule,
+  NgxSpinnerModule
 ]
 })
 export class AngularMaterialModule { }

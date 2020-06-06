@@ -1,5 +1,7 @@
 section{
     padding: 40px 30px 100px;
+    overflow: scroll;
+    height: 100vh;
 }
 
 span{
@@ -125,6 +127,7 @@ border-radius: 10px;
         border: 1px solid #58D1FD;
         border-radius: 5px;
 }
+
 
 @media (max-width: 350px) {
     .historyDetails{
