@@ -125,19 +125,19 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     switch (this.type) {
       case 'contacted':
-        this.getHistorydata('pageContactedProfiles');
+        this.getHistorydata('contactedProfiles');
         break;
       case 'interestShown':
-        this.getHistorydata('pageSortListProfiles');
+        this.getHistorydata('sortListProfiles');
         break;
       case 'interestReceived':
-        this.getHistorydata('pageInterestReceived');
+        this.getHistorydata('interestReceived');
         break;
       case 'rejected':
-        this.getHistorydata('pageRejectedProfiles');
+        this.getHistorydata('rejectedProfiles');
         break;
       case 'mutual':
-        this.getHistorydata('pageMutualProfiles');
+        this.getHistorydata('mutualProfiles');
         break;
       default:
         break;
