@@ -349,7 +349,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
       } else {
         this.profile = data.data;
-        localStorage.setItem(link, JSON.stringify(data));
+        localStorage.setItem(link, JSON.stringify(data.data));
       }
 
         console.log(this.profile);
