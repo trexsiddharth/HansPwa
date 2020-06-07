@@ -241,7 +241,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   }
 
   checkForPhoto() {
-    if (this.fourPageService.getUserThrough()) {
+    if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
       this.fourPageService.profile.photoScore = this.photoScore;
       const userProfile = this.fourPageService.profile;
       console.log(userProfile);
@@ -300,8 +300,11 @@ export class CompatibilityPhotoComponent implements OnInit {
                  'Registered through Four Page Registration Page Four');
 
                  // 0 -> got to chat  1-> got to fifth page
+                 // if type is 0 and  getListLeadId === 0 send to hot leads
     if (type === 0 && !this.fourPageService.getUserThrough()) {
       this.router.navigateByUrl('chat?first');
+    } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
+      window.open('https://partner.hansmatrimony.com/hot-leads');
     }
   }
 

@@ -82,6 +82,8 @@ export class CompatibilityFormComponent implements OnInit {
   Caste = false;
   AllCastes = false;
   locality;
+  profileData;
+  isLeadIsZero = false;
 
 
   // Height
@@ -223,6 +225,7 @@ export class CompatibilityFormComponent implements OnInit {
       if (route.params.leadId) {
         this.fourPageService.setUserThrough(true);
         localStorage.setItem('getListLeadId', route.params.leadId);
+        this.isLeadIsZero = true;
         } else {
           this.fourPageService.setUserThrough(false);
           localStorage.setItem('getListLeadId', '');
@@ -371,7 +374,14 @@ export class CompatibilityFormComponent implements OnInit {
               console.log(date + '-' + month + '-' + year);
               const firststepdata = new FormData();
               firststepdata.append('mobile', this.PageOne.value.phone);
-              firststepdata.append('birth_date', date + '-' + month + '-' + year);
+              if (localStorage.getItem('getListLeadId') !== '1') {
+                firststepdata.append('id', localStorage.getItem('getListId'));
+                firststepdata.append('identity_number', this.profileData.profile.identity_number);
+                firststepdata.append('temple_id', this.profileData.profile.temple_id);
+                firststepdata.append('birth_date', year + '-' + month + '-' + date);
+              } else {
+                firststepdata.append('birth_date', date + '-' + month + '-' + year);
+              }
               firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName);
               firststepdata.append('email', this.PageOne.value.email);
 
@@ -406,7 +416,7 @@ export class CompatibilityFormComponent implements OnInit {
               // if url with enqData : mode -> 3 , if with id: mode -> 2 if only with fourReg : mode -> 1
               firststepdata.append('mode', localStorage.getItem('enqDate') ? '3'
         : localStorage.getItem('getListId') ? '2' : '1');
-
+              
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
               console.log('gender', this.PageOne.value.gender);
@@ -415,6 +425,10 @@ export class CompatibilityFormComponent implements OnInit {
               console.log('annual_income', this.PageOne.value.AnnualIncome);
               console.log('religion', this.PageOne.value.Religion);
               console.log('caste', this.PageOne.value.Castes);
+
+
+              if (localStorage.getItem('getListLeadId') !== '0') {
+                
               
 
 
@@ -442,6 +456,18 @@ export class CompatibilityFormComponent implements OnInit {
               this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
               console.log(err);
             });
+          } else {
+            // tslint:disable-next-line: max-line-length
+            return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata ).subscribe(
+              (res: any) => {
+              console.log('first', res);
+              this.spinner.hide();
+            }, err => {
+              this.spinner.hide();
+              this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+              console.log(err);
+            });
+          }
           } else {
             this.ngxNotificationService.error('Fill the details');
           }
@@ -695,6 +721,7 @@ getProfile() {
     })).subscribe(
       (data: any) => {
         console.log(data);
+        this.profileData = data;
         if (this.fourPageService.userThroughGetList) {
         this.setProfileValues(data);
         }
