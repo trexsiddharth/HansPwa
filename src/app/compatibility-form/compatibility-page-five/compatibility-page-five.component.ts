@@ -25,6 +25,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
   moderatorList = [];
   moderatorChecked = false;
   checkStatus = false;
+  hasIsLead;
 
 
   constructor(private http: HttpClient, public fourPageService: FourPageService,
@@ -94,6 +95,10 @@ export class CompatibilityPageFiveComponent implements OnInit {
         }
       );
     }
+
+    this.hasIsLead = localStorage.getItem('getListLeadId') === '0' ? true : false;
+    console.log(this.hasIsLead);
+
   }
 
   getProfileId(): Observable<any> {

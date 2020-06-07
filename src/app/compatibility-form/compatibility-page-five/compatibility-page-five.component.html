@@ -81,7 +81,7 @@
 
                       <div sclass="row"  style="margin-top:20px; margin-bottom:20px;text-align: center;width: 100%;">
                       <button class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="checkForPhoto('0')">Assign</button>
-                      <button style="margin-left: 10px;" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="checkForPhoto('1')">Assign and Approve</button><br>
+                      <button style="margin-left: 10px;" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()  && hasIsLead === true" (click)="checkForPhoto('1')">Assign and Approve</button><br>
                       <button style="margin-top: 10px;" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="sendPhotoLink()">Send Photo Link</button>
                       </div>  
 
