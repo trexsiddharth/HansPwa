@@ -225,7 +225,7 @@ export class CompatibilityFormComponent implements OnInit {
       if (route.params.leadId) {
         this.fourPageService.setUserThrough(true);
         localStorage.setItem('getListLeadId', route.params.leadId);
-        this.isLeadIsZero = true;
+        this.isLeadIsZero =  route.params.leadId === '0' ? true : false;
         } else {
           this.fourPageService.setUserThrough(false);
           localStorage.setItem('getListLeadId', '');

@@ -259,6 +259,7 @@
                   </ng-template>
                   <app-compatibility-photo></app-compatibility-photo>
                 </mat-step>
+                <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
                 <mat-step *ngIf="fourPageService.getUserThrough() && !isLeadIsZero ">
                   <ng-template matStepLabel  >
                     Page V
