@@ -339,7 +339,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         console.log(data);
         this.wholeData = data;
         if (this.itemService.getItem()) {
-        this.openContactedProfile(data);
+        this.openContactedProfile(data.data);
         }
 
         if (localStorage.getItem(link)) {
