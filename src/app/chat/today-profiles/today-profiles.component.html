@@ -1,4 +1,4 @@
-<main *ngIf="item && type == 'profile'">
+<main id="main" *ngIf="item && type == 'profile'">
     <div id="profileImageDiv">
         <ngb-carousel>
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
@@ -19,15 +19,26 @@
             </span>
           </div>
             
-            <!-- <button id="profileLeft" mat-fab style="color: #0F9CF2;
-                background: white;
-                float: right;"
+            <button class="down-arrow"
+            (click)="scrollDown()"
+             mat-fab style="background-color: #50ed9d;
+                float: right;display: flex;
+                align-items: center;
+                position: fixed;
+                z-index: 999999999;
+                margin-top: 65vh;
+                justify-content: center;"
           aria-label="Example icon-button with a heart icon" >
-        </button> -->
+          <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+        </button>
         </div>
     </div>
 
-    <section style="padding: 0px 20px;position: relative;">
+    <div class="">
+                    
+    </div>
+
+    <section id="content" style="padding: 0px 20px;position: relative;">
 
         <!-- // buttons -->
 
@@ -64,7 +75,7 @@
                     {{languageService.profileLang.shortlist}}
                 </span>
             </div>
-                
+
         </div>
 
         <div  style="margin-top: 20px;">

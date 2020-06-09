@@ -112,12 +112,40 @@ main{
 }
 
 
+@-webkit-keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+@keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+
+
 @media (max-width: 350px){
     .title{
         width: 100%;
         color: #C6C6C6;
         margin-left: 10px;
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .down-arrow{
+        right: 0px;
+        -webkit-animation: 2s arrow infinite ease;
+        animation: 2s arrow infinite ease;
+        vertical-align:middle
+    
     }
 }
 

@@ -16,6 +16,7 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { ApiwhaAutoreply } from './profile-today-model';
 import { LanguageService } from 'src/app/language.service';
 import { Profile } from 'src/app/compatibility-form/profile';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -743,6 +744,12 @@ getQualification(degree, education) {
 return education != null && education !== '' ? education : degree;
 }
 
+scrollDown() {
+  console.log('scroll down');
+  document.querySelector('.mainBody').scrollBy({
+        top: 150,
+        behavior: 'smooth'
+  });
 }
-
+}
 
