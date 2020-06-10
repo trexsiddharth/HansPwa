@@ -374,7 +374,7 @@ export class CompatibilityFormComponent implements OnInit {
               console.log(date + '-' + month + '-' + year);
               const firststepdata = new FormData();
               firststepdata.append('mobile', this.PageOne.value.phone);
-              if (localStorage.getItem('getListLeadId') !== '1') {
+              if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') !== '1') {
                 firststepdata.append('id', localStorage.getItem('getListId'));
                 firststepdata.append('identity_number', this.profileData.profile.identity_number);
                 firststepdata.append('temple_id', this.profileData.profile.temple_id);
@@ -427,13 +427,21 @@ export class CompatibilityFormComponent implements OnInit {
               console.log('caste', this.PageOne.value.Castes);
 
 
-              if (localStorage.getItem('getListLeadId') !== '0') {
-                
-              
-
+              if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
 
             // tslint:disable-next-line: max-line-length
-              return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata ).subscribe((res: any) => {
+            return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata ).subscribe(
+              (res: any) => {
+              console.log('first', res);
+              this.spinner.hide();
+            }, err => {
+              this.spinner.hide();
+              this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+              console.log(err);
+            });
+          } else {
+            // tslint:disable-next-line: max-line-length
+            return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata ).subscribe((res: any) => {
               console.log('first', res);
 
               if (res.status === 1) {
@@ -451,17 +459,6 @@ export class CompatibilityFormComponent implements OnInit {
                 this.spinner.hide();
                 this.ngxNotificationService.error(res.message);
               }
-            }, err => {
-              this.spinner.hide();
-              this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
-              console.log(err);
-            });
-          } else {
-            // tslint:disable-next-line: max-line-length
-            return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata ).subscribe(
-              (res: any) => {
-              console.log('first', res);
-              this.spinner.hide();
             }, err => {
               this.spinner.hide();
               this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
