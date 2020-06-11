@@ -403,7 +403,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     setMessageText(text) {
       console.log(text);
       switch (text) {
-            case '👉We have already shared 6 profiles with you.\n \n Please come back tomorrow to see more profiles':
+            case '👉We have already shared profiles with you.\n \n Please come back tomorrow to see more profiles':
             this.button = '1';
             break;
             case 'हम आपको आज के रिश्ते दिखा चुके हैं । कृपया कल यहाँ पुनः पधारे । धन्यवाद्।🙏':

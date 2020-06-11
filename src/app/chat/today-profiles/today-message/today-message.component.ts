@@ -13,12 +13,17 @@ export class TodayMessageComponent implements OnInit {
 @Input() button = '0';
   constructor(public router: Router,
               public itemService: FindOpenHistoryProfileService,
-              public subscriptionService: SubscriptionserviceService ) { }
+              public subscriptionService: SubscriptionserviceService ) {
+              }
 
   ngOnInit() {
   }
     callHans() {
       window.open('tel:9697989697');
+    }
+    getMessage() {
+      console.log(this.messageData, this.button);
+      return this.messageData;
     }
     showPlan() {
     this.router.navigateByUrl('subscription');
