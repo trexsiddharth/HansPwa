@@ -36,7 +36,7 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
-import { link } from 'fs';
+
 
 
 @Component({
@@ -77,6 +77,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: max-line-length
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
   smallSpinner = false;
+  scrollLink;
+  scrollFlag = false;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
@@ -126,18 +128,23 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     switch (this.type) {
       case 'contacted':
-        this.getHistorydata('contactedProfiles');
-        break;
+       this.scrollLink = 'contactedProfiles';
+       this.getHistorydata('contactedProfiles');
+       break;
       case 'interestShown':
+        this.scrollLink = 'sortListProfiles';
         this.getHistorydata('sortListProfiles');
         break;
       case 'interestReceived':
+        this.scrollLink = 'interestReceived';
         this.getHistorydata('interestReceived');
         break;
       case 'rejected':
+        this.scrollLink = 'rejectedProfiles';
         this.getHistorydata('rejectedProfiles');
         break;
       case 'mutual':
+        this.scrollLink = 'mutualProfiles';
         this.getHistorydata('mutualProfiles');
         break;
       default:
@@ -628,7 +635,7 @@ Analytics(type: string, category: string, action: string) {
     });
     // gtag app + web
     (window as any).gtag('event', category , {
-      'action': action
+      action: action
     });
   }
 updateProfileList(ans: any, num: any, index: any) {
@@ -947,28 +954,11 @@ setHouseType(type) {
   // get data when current page data has been completely scrolled
   getScrollData() {
     console.log('scrolled');
-    let scrollLink;
-    switch (this.type) {
-      case 'contacted':
-        scrollLink = 'contactedProfiles';
-        break;
-      case 'interestShown':
-        scrollLink = 'sortListProfiles';
-        break;
-      case 'interestReceived':
-        scrollLink = 'interestReceived';
-        break;
-      case 'rejected':
-        scrollLink = 'rejectedProfiles';
-        break;
-      case 'mutual':
-        scrollLink = 'mutualProfiles';
-        break;
-      default:
-        break;
-    }
 
-    if (this.wholeData.next_page_url) {
+    if (!this.scrollFlag) {
+      this.scrollFlag = true;
+
+      if (this.wholeData.next_page_url) {
     this.smallSpinner = true;
 
     const historyData = new FormData();
@@ -991,14 +981,15 @@ setHouseType(type) {
         });
     }
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > (`https://partner.hansmatrimony.com/api/${scrollLink}${this.wholeData.next_page_url}`, historyData).subscribe(
-     async (data: any) => {
+    this.http.post < any > ('https://partner.hansmatrimony.com/api/' + this.scrollLink + this.wholeData.next_page_url, historyData).subscribe(
+      (data: any) => {
         console.log(data);
         this.wholeData = data;
-        let newData = Object.values(data.data);
+        const newData = Object.values(data.data);
         console.log(newData);
         this.profile = this.profile.concat(newData);
         console.log(this.profile);
+        this.scrollFlag = false;
         this.smallSpinner = false;
 
       },
@@ -1009,7 +1000,7 @@ setHouseType(type) {
       }
     );
     }
-
+  }
   }
 
 }
