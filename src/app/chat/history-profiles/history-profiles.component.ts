@@ -36,6 +36,7 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
+import { link } from 'fs';
 
 
 @Component({
@@ -946,6 +947,26 @@ setHouseType(type) {
   // get data when current page data has been completely scrolled
   getScrollData() {
     console.log('scrolled');
+    let scrollLink;
+    switch (this.type) {
+      case 'contacted':
+        scrollLink = 'contactedProfiles';
+        break;
+      case 'interestShown':
+        scrollLink = 'sortListProfiles';
+        break;
+      case 'interestReceived':
+        scrollLink = 'interestReceived';
+        break;
+      case 'rejected':
+        scrollLink = 'rejectedProfiles';
+        break;
+      case 'mutual':
+        scrollLink = 'mutualProfiles';
+        break;
+      default:
+        break;
+    }
 
     if (this.wholeData.next_page_url) {
     this.smallSpinner = true;
@@ -970,7 +991,7 @@ setHouseType(type) {
         });
     }
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > (`https://partner.hansmatrimony.com/api/pageRejectedProfiles${this.wholeData.next_page_url}`, historyData).subscribe(
+    return this.http.post < any > (`https://partner.hansmatrimony.com/api/${scrollLink}${this.wholeData.next_page_url}`, historyData).subscribe(
      async (data: any) => {
         console.log(data);
         this.wholeData = data;
