@@ -29,7 +29,7 @@ export class NewHomeComponent implements OnInit {
   }
 
   sendWhatsAppLink() {
-    window.open('http://wa.me/918368090821?text=We%20are%20interested%20in%20Registering%20for%20Personalized%20Services');
+    window.open('http://wa.me/918766217175?text=We%20are%20interested%20in%20Registering%20for%20Personalized%20Services');
   }
 
   langChanged(event) {
