@@ -124,7 +124,7 @@ export class FindOpenHistoryProfileService {
   }
   getMutualCount() {
     return localStorage.getItem('language') === 'hindi' ?
-    'आपसी पसंद'
+    'दोनो को पसंद'
     : 'Mutual Like';
   }
   getCountOnlyShortlist() {
