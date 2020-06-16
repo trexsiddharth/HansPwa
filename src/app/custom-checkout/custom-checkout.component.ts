@@ -23,6 +23,7 @@ export class CustomCheckoutComponent implements OnInit {
               private spinner: NgxSpinnerService, private ngxNotificationService: NgxNotificationService, ) { }
 
   ngOnInit() {
+    this.subscriptionService.loadRazorPayScript();
 
   }
 

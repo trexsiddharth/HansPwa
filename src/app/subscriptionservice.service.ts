@@ -15,6 +15,20 @@ export class SubscriptionserviceService {
                private route: Router,
                private ngxNotificationService: NgxNotificationService ) {
    }
+
+   // load razor pay dynamically
+   loadRazorPayScript() {
+    const razor = document.getElementById('razorPay');
+    if (!razor) {
+      const fileName = document.createElement('script');
+      fileName.async = true;
+      fileName.setAttribute('type', 'text/javascript');
+      fileName.setAttribute('src', 'https://checkout.razorpay.com/v1/checkout.js');
+      fileName.id = 'razorPay';
+      document.body.appendChild(fileName);
+    }
+  }
+  
   payNowT(amt, type, plan, name, email, phone, points) {
     let notes = {service: ''};
     let keyId;

@@ -38,7 +38,7 @@ export class SubscriptionComponent implements OnInit {
               private spinner: NgxSpinnerService, private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
-    this.loadRazorPayScript();
+    this.subscriptionService.loadRazorPayScript();
     this.innerWidth = window.innerWidth;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -60,17 +60,7 @@ export class SubscriptionComponent implements OnInit {
     }
   }
 
-  loadRazorPayScript() {
-    const razor = document.getElementById('razorPay');
-    if (!razor) {
-      const fileName = document.createElement('script');
-      fileName.async = true;
-      fileName.setAttribute('type', 'text/javascript');
-      fileName.setAttribute('src', 'https://checkout.razorpay.com/v1/checkout.js');
-      fileName.id = 'razorPay';
-      document.body.appendChild(fileName);
-    }
-  }
+ 
 
   togglePersonalized() {
     this.isActive = 'personalized';
