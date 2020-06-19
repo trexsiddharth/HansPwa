@@ -241,7 +241,7 @@
                             <span class="title">{{languageService.profileLang.education}}</span>
                         </div>
                         <div class="col-6">
-                            {{item.family ? item.profile.degree : item.profile.ugdeg}}
+                            {{item.family ? item.profile.degree ? item.profile.degree : item.profile.education  : item.profile.ugdeg}}
                         </div>
                     </div>
         

@@ -253,7 +253,7 @@ export class LanguageService {
         this.homeLang.rishteDekhein = 'रिश्ते देखें';
         this.homeLang.familyTogether = 'हम परिवारों को जोड़ते है...';
         this.homeLang.freeRegister = 'रजिस्टर करें नि: शुल्क';
-        this.homeLang.moreThan = '50,000+ से अधिक';
+        this.homeLang.moreThan = '50,000 से अधिक प्रोफाइल';
         this.homeLang.chooseFrom = 'रिश्तों में से चुनिए अपनी पसंद';
         this.homeLang.manyMatchmakers = '1000+ मैचमेकर्स';
         this.homeLang.helpingHands = 'जो आपको रिश्ते चुनने में मदद करेंगे';
@@ -280,9 +280,9 @@ export class LanguageService {
         this.homeLang.rishteDekhein = 'View Profiles';
         this.homeLang.familyTogether = 'We Bring Families Together...';
         this.homeLang.freeRegister = 'Register For Free';
-        this.homeLang.moreThan = 'More Than 50,000';
+        this.homeLang.moreThan = 'More Than 50,000 Profiles';
         this.homeLang.chooseFrom = 'To Choose From';
-        this.homeLang.manyMatchmakers = '1000+ Mathmakers';
+        this.homeLang.manyMatchmakers = '1000+ Matchmakers';
         this.homeLang.helpingHands = 'Who Will Help In Finding A Perfect Match ';
         this.homeLang.manyTemple = '25+ Temples';
         this.homeLang.verificationCenters = 'Verification Centres';
