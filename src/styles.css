@@ -115,8 +115,28 @@ body {
 .m-l-5 {
   margin-left: 5px;
 }
+.mt-10{
+  margin-top: 10px;
+}
 button:focus{outline:none !important;}
 
+.mat-select-placeholder{
+color: #c8c8c8;
+}
 
-
-
+.mat-select-arrow{
+  color: #c8c8c8;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline{
+  color: #c8c8c8;
+  height: 45px;
+}
+.mat-form-field-appearance-outline .mat-form-field-infix{
+  padding: 8px 0px;
+}
+mat-label {
+  color: #737373;
+}
+mat-label.ng-invalid.ng-touched {
+  color: red;
+}

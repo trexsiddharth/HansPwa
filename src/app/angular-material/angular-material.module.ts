@@ -10,6 +10,7 @@ import {
   MatMenuModule,
   MatButtonModule,
   MatSlideToggleModule,
+  MatToolbarModule,
   MatProgressSpinnerModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { AgmCoreModule } from '@agm/core';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
@@ -26,7 +28,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     apiKey: 'AIzaSyDxD0PlzfG7pAEDY0-p8vPbXKDgjCKFj1o',
     libraries: ['places']
   }),
-  MatGoogleMapsAutocompleteModule
+  MatGoogleMapsAutocompleteModule,
+  LazyLoadImageModule.forRoot({
+    preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
+  })
   ],
 exports: [
   MatFormFieldModule, MatDatepickerModule, MatInputModule, MatButtonToggleModule,
@@ -45,7 +50,9 @@ exports: [
   AgmCoreModule,
   MatGoogleMapsAutocompleteModule,
   NgxMatSelectSearchModule,
-  NgxSpinnerModule
+  NgxSpinnerModule,
+  LazyLoadImageModule,
+  MatToolbarModule
 ]
 })
 export class AngularMaterialModule { }

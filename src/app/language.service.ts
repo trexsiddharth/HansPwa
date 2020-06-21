@@ -38,6 +38,13 @@ export class LanguageService {
      vipMatchmaking: '',
      registerFree: ''
    };
+   registerLang = {
+     freeRegistration: '',
+     lookingFor: '',
+     firstName: '',
+     lastName: '',
+     dob: ''
+   };
 
   constructor(private http: HttpClient,
               private ngxNotificationService: NgxNotificationService) {
@@ -52,7 +59,7 @@ export class LanguageService {
   }
 
   setProfileLanguage() {
-
+    if (localStorage.getItem('language')) {
     switch (localStorage.getItem('language')) {
       case 'hindi':
 
@@ -243,6 +250,10 @@ export class LanguageService {
       default:
         break;
     }
+  } else {
+    localStorage.setItem('language', 'hindi');
+    this.setProfileLanguage();
+  }
   }
 
   setHomeLang(lang) {
@@ -305,6 +316,34 @@ export class LanguageService {
       default:
         break;
     }
+  }
+
+ setRegisterLang() {
+   if (localStorage.getItem('language')) {
+  switch (localStorage.getItem('language')) {
+    case 'hindi':
+      this.registerLang.freeRegistration = 'नि: शुल्क रजिस्ट्रेशन';
+      this.registerLang.lookingFor = 'मॅट्रिमोनी प्रोफाइल किसके लिए बना रहे हैं';
+      this.registerLang.firstName = 'पहला नाम';
+      this.registerLang.lastName = 'उपनाम';
+      this.registerLang.dob = 'जनम तिथि';
+      break;
+
+      case 'english':
+        this.registerLang.freeRegistration = 'Free Registration';
+        this.registerLang.lookingFor = 'Looking Rishta For';
+        this.registerLang.firstName = 'First Name';
+        this.registerLang.lastName = 'Last Name';
+        this.registerLang.dob = 'Date Of Birth';
+        break;
+
+    default:
+      break;
+  }
+} else {
+  localStorage.setItem('language', 'hindi');
+  this.setRegisterLang();
+}
   }
 
   changeLanguage(lang: string) {

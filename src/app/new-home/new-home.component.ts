@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, AfterViewInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NewHomeService } from './new-home.service';
 import { LanguageService } from '../language.service';
 
@@ -16,6 +16,8 @@ export class NewHomeComponent implements OnInit {
   ngOnInit() {
     console.log(this.languageService.getCurrentLanguage());
 
+    // lang check is used to set the selected language as user language once user logs in.
+    // it will be only set if user changes the language from the current language to other language.
     if (!localStorage.getItem('language')) {
       localStorage.setItem('language', 'hindi');
       this.langCheck = false;

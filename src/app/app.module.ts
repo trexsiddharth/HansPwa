@@ -23,7 +23,6 @@ import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-s
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 
-import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
 
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { NewHomeComponent } from './new-home/new-home.component';
@@ -59,10 +58,7 @@ import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxMatIntlTelInputModule
-    , RouterModule,
-    LazyLoadImageModule.forRoot({
-      preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
-    })
+    , RouterModule
   ],
   providers: [SubscriptionserviceService, NewHomeService],
   bootstrap: [AppComponent],

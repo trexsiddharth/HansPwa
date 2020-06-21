@@ -161,6 +161,7 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
       About: [''],
       abroad: ['']
     });
+    this.setAbout();
   }
 
 ngOnInit() {
@@ -260,13 +261,15 @@ Analytics(type: string, category: string, action: string) {
 
      // gtag app + web
     (window as any).gtag('event', category , {
-      'action': action
+      action: action
     });
   }
   }
 
 onAutocompleteSelected(event) {
-      this.PageTwo.value.Working = event.formatted_address;
+      this.PageTwo.patchValue({
+        Working: event.formatted_address
+      });
       this.setAbout();
       this.workplace = event.formatted_address;
       console.log('address of family', this.PageTwo.value.Working);
@@ -347,26 +350,42 @@ setAge(dob: string) {
 }
 setAbout() {
   console.log(this.fourPageService.getProfile());
-  if (this.fourPageService.getProfile().caste
-    && this.fourPageService.getProfile().manglik
-    && this.fourPageService.getProfile().gender
-    && this.fourPageService.getProfile().locality
-    && this.PageTwo.value.Qualification
-    && this.PageTwo.value.Occupation
-    && this.PageTwo.value.Working) {
-    console.log('Setting About');
-    if (this.PageTwo.value.Occupation === 'Business/Self-Employed') {
-      this.PageTwo.patchValue({
-        // tslint:disable-next-line: max-line-length
-        About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and Self-Employed${this.PageTwo.value.Working !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
-      });
-    } else {
-    this.PageTwo.patchValue({
-      // tslint:disable-next-line: max-line-length
-      About: `I am ${this.setAge(this.fourPageService.getProfile().dob)} yrs old ${this.fourPageService.getProfile().caste} ${this.fourPageService.getProfile().manglik} ${this.fourPageService.getProfile().gender === 'Male' ?  'boy' : 'girl'} residing in ${this.fourPageService.getProfile().locality}. I've completed my ${this.PageTwo.value.Qualification} and ${this.PageTwo.value.Occupation !== 'Not Working' ? 'working as ' + this.PageTwo.value.Designation === 'Others' ? this.PageTwo.value.OtherDesignation ? this.PageTwo.value.OtherDesignation : this.PageTwo.value.Designation  : this.PageTwo.value.Designation  : 'Currently not working ' }${this.PageTwo.value.Occupation !== 'Not Working' ? ' in ' + this.PageTwo.value.Working : '' }.`
-    });
-  }
-  }
+  const aboutObject = {
+    dob: this.fourPageService.getProfile().dob ? `I am ${this.setAge(this.fourPageService.getProfile().dob )} yrs old ` : '',
+    caste: this.fourPageService.getProfile().caste ? this.fourPageService.getProfile().caste : '',
+    manglik: this.fourPageService.getProfile().manglik ? this.fourPageService.getProfile().manglik : '',
+    gender: this.fourPageService.getProfile().gender ? this.fourPageService.getProfile().gender === 'Male' ? 'boy' : 'girl' : '',
+    locality: this.fourPageService.getProfile().locality ? ` residing in ${this.fourPageService.getProfile().locality}` : '',
+    qualification: this.PageTwo.value.Qualification ? `. I've completed my ${this.PageTwo.value.Qualification}` : '',
+    occupation: this.PageTwo.value.Occupation ?
+    this.PageTwo.value.Occupation === 'Business/Self-Employed' ?
+     ' and Self-Employed' : this.PageTwo.value.Occupation === 'Not Working' ? 'current not working'
+    : this.PageTwo.value.Occupation === 'Doctor' ||
+    this.PageTwo.value.Occupation === 'Teacher'
+    ? ` currently working as ${this.PageTwo.value.Occupation}` :
+     ` currently working in ${this.PageTwo.value.Occupation}` : '' ,
+    working: this.PageTwo.value.Working ? this.PageTwo.value.Occupation !== 'Not Working' ?  `in ${this.PageTwo.value.Working}`  : '' : '',
+    designation : this.PageTwo.value.Designation && this.PageTwo.value.Occupation ?
+    this.PageTwo.value.Occupation === 'Business/Self-Employed' ||
+    this.PageTwo.value.Occupation === 'Teacher' ||
+    this.PageTwo.value.Occupation === 'Doctor' ? '' :
+     this.PageTwo.value.Occupation !== 'Not Working' ?
+     ` as  ${this.PageTwo.value.Designation !== 'Others' ? this.PageTwo.value.Designation : '' }` : '' : '',
+    OtherDesignation: !this.PageTwo.value.OtherDesignation ||
+     this.PageTwo.value.Occupation === 'Business/Self-Employed' ||
+     this.PageTwo.value.Occupation === 'Teacher' ||
+     this.PageTwo.value.Occupation === 'Doctor' ||
+     this.PageTwo.value.Occupation === 'Not Working'  ? '' :
+     this.PageTwo.value.Designation === 'Others' ? this.PageTwo.value.OtherDesignation : ''
+  };
+
+  console.log('Setting About');
+
+  this.PageTwo.patchValue({
+          About: `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik}
+          ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification}
+            ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.OtherDesignation} ${aboutObject.working}.`
+        });
 }
 setFormOneData(userProfile: Profile) {
 this.workplace = userProfile.workingCity ? userProfile.workingCity : '';
@@ -376,8 +395,16 @@ this.PageTwo.patchValue({
       Designation: this.designations.includes(userProfile.designation) ? userProfile.designation : 'Others' ,
       OtherDesignation: userProfile.designation,
       Working: userProfile.workingCity,
-      About: userProfile.about
+      About: this.setAgeIfNan(userProfile.about)
   });
+}
+
+setAgeIfNan(value: string) {
+  if (value.toLowerCase().includes('i am nan')) {
+    return this.setAge(this.fourPageService.getProfile().dob);
+  } else {
+    return value;
+  }
 }
 
 setFormForGetUserThrough() {

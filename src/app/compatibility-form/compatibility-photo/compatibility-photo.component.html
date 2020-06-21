@@ -62,8 +62,8 @@
   
   <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
       <div class="col-md-12 text-center">
-        <button class="btn btn-blue" mat-raised-button color="primary" id="photoBtn"  matStepperNext (click)="skip(0)">Skip</button>
-        <button type="button" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Please Click to Proceed</button>
+        <button class="btn btn-blue" mat-raised-button style="background-color: #c8c8c8;" id="photoBtn"  matStepperNext (click)="skip(0)">Upload Photo Later</button>
+        <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Submit</button>
       </div>
    </div> 
    <p *ngIf="fourPageService.getUserThrough()" class="impNote">

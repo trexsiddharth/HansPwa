@@ -1,35 +1,63 @@
+<!-- toolbar  -->
+<mat-toolbar class="fixToolBar">
+  <mat-toolbar-row>
+      <div class="mainDivToolbar">
+          <div style="display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;">
+              <img width="40px" [defaultImage]="'../../assets/logo_72.png'" 
+                  [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'" 
+                   [useSrcset]="true" alt="Hans Matrimony">
+              <span style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans Matrimony</strong></span>
+          </div>
+      </div>
+    </mat-toolbar-row>
+ 
+</mat-toolbar>
+
 <main class='pwaSize fixed t-0 b-0 bg-white w-full HC overflowY' >
-        <div class="container t-c">
-            <div class="section">
-                <div class="container" style="margin-left:auto;margin-right:auto; text-align: center;"> 
-                    <img src="../../../assets/logo_hans.png" style="width:60%">
-                </div>              
-            </div>
-            <div class="row" style="margin:0px;text-align: center;padding: 0px 10%;height: 25%">
+        <!-- <div class="container t-c">
+            <div class="row" style="margin:20px 0px;text-align: center;padding: 0px 10%;height: 25%">
                     <img src="../../assets/avatar.svg" style="width: 25%;border-right: 4px solid #34b7f1;" alt="register">
                     <h5 style="display: inline-block;margin: auto auto auto 10px;">Free Registration</h5>
             </div>
-        </div>
+        </div> -->
        
         <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
         <div class="container customBackground" style="width:80%;background: white;border-radius: 20px;margin-top: 20px; margin-bottom: 20px;">
             <div class="w-full" style="margin-left:auto;margin-right:auto">
             
-                <mat-step [stepControl]="PageOne">
+                  <mat-step [stepControl]="PageOne">
                   <form  [formGroup]="PageOne">
                     <ng-template matStepLabel>Page I</ng-template>
                       <div class="row">
 
+                        <div class="col-md-12">
+                          <mat-form-field class="full-width fieldFit" appearance="outline">
+                          <mat-label >Looking Rista For</mat-label>
+                              <mat-select (selectionChange)="setGender()" #relation formControlName="Relation" required >
+                                      <mat-option *ngFor="let  option of createProfile" [value]="option">
+                                              {{option}}
+                                      </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                      </div>
+
+                      <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                        आप जिस कस्टमर से फ़ोन पर बात कर रहे हैं वो किसके लिए रिश्ता देख रहे हैं ये भरे ।
+                      </p>
+
                         <div class="col-6">
                           <mat-form-field class="full-width fieldFit" appearance="standard">
-                            <mat-label style="color: black;">First Name</mat-label>
+                            <mat-label >First Name</mat-label>
                             <input  type="text"  matInput formControlName="firstName" required name="firstName">
                           </mat-form-field>
                         </div>
 
                         <div class="col-6">
                           <mat-form-field class="full-width fieldFit" appearance="standard" >
-                            <mat-label style="color: black;">Last Name</mat-label>
+                            <mat-label >Last Name</mat-label>
                             <input type="text"  matInput formControlName="lastName" name="lastName">
                           </mat-form-field>
                         </div>
@@ -37,17 +65,86 @@
                         <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                           यहाँ पर कैंडिडेट यानि जिसके लिए रिश्ता देखा जा रहा है उसका नाम लिखे (लड़का या लड़की जो भी है )
                         </p>
+
+                        <div class="col-md-12">
+                           
+                          <label style="color: #737373; margin-top: 8px;margin-bottom: 10px;">Date Of Birth</label>
+                          <div class="row" style="margin: 0px; margin-bottom: 8px;display: flex;
+                          flex-direction: row;
+                          align-items: center;
+                          justify-content: space-between;">
+                            <select class="classic" formControlName="birth_date" style="border: 1px solid black;
+                            flex: 1;"  required name="birth_date">
+                                <option *ngFor="let  option of date" [value]="option">
+                                  {{option}}
+                                </option>
+                              </select> 
+
+                              <select class="classic" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;
+                              flex: 1;"  required name="birth_month">
+                                <option *ngFor="let  option of month" [value]="option">
+                                  {{option}}
+                                </option>
+                              </select> 
+                              
+                              <select class="classic" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;
+                              flex: 1;"  required name="birth_year">
+                                <option *ngFor="let  option of years" [value]="option">
+                                  {{option}}
+                                </option>
+                              </select>
+                          </div>
+                        
+                       
+                      </div>
+
+                      <div class="col-md-12 matSelect">
+                        <mat-form-field class="full-width fieldFit" appearance="outline">
+                            <mat-label >Gender</mat-label>
+                            <mat-select [ngModel]="PageOne.value.gender"  formControlName="gender" required >
+                                <mat-option value="Male">Male</mat-option>
+                                <mat-option value="Female">Female</mat-option>
+                            </mat-select>
+                        
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-12">
+                      <mat-form-field class="full-width fieldFit" appearance="outline" >
+                         <mat-label >Religion</mat-label>
+                          <mat-select  #relation formControlName="Religion" (selectionChange)="Religion($event)" required >
+                                  <mat-option *ngFor="let  option of Religions" [value]="option">
+                                          {{option}}
+                                  </mat-option>
+                          </mat-select>
+                  
+                     </mat-form-field> 
+                </div>
+
+                <div class="col-md-12">
+                                
+                  <mat-form-field class="full-width fieldFit" *ngIf="Caste" appearance="outline">
+                    <mat-label >Caste</mat-label>
+                    <input type="text" matInput formControlName="Castes" multiple required [matAutocomplete]="caste" required  >
+                    <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
+                       
+                            <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
+                              {{name}}
+                            </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+            </div>
   
                           <div class="col-md-12">
-                              <mat-form-field  class="full-width fieldFit" appearance="standard">
-                                  <mat-label style="color: black;">Mobile number</mat-label>
+                              <mat-form-field  class="full-width fieldFit" appearance="outline">
+                                  <mat-label >Mobile number</mat-label>
                                   <input style="display: inline;" type="number" id="phone" matInput formControlName="phone" (change)="mobileNumberChanged(numberCheck)" [(ngModel)]="numberCheck" required name="phone">
                               </mat-form-field>
                           </div>
 
                           <div class="col-md-12">
-                            <mat-form-field  class="full-width fieldFit" appearance="standard">
-                                <mat-label style="color: black;">Email</mat-label>
+                            <mat-form-field  class="full-width fieldFit" appearance="outline">
+                                <mat-label >Email</mat-label>
                                 <input type="email" id="email" matInput formControlName="email" name="email">
     
                             </mat-form-field>
@@ -56,63 +153,11 @@
                         <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                           ईमेल optional है पर Customer से ईमेल लेने की जरूर कोशिश करे। घर में किसी का भी ईमेल मांग ले जो भी यूज़ करता हो 
                         </p>
-
-
-                        <div class="col-md-12">
-                          <mat-form-field class="full-width" appearance="standard" style="height:60px;border-bottom: 1px solid black;">
-                              <mat-label style="color: black;">Looking Rishta For</mat-label>
-                              <mat-select (selectionChange)="setGender()" #relation formControlName="Relation" required >
-                                      <mat-option *ngFor="let  option of createProfile" [value]="option">
-                                              {{option}}
-                                      </mat-option>
-                              </mat-select>
-                          </mat-form-field> 
-                      </div>
-
-                      <p *ngIf="fourPageService.getUserThrough()" class="impNote">
-                        आप जिस कस्टमर से फ़ोन पर बात कर रहे हैं वो किसके लिए रिश्ता देख रहे हैं ये भरे ।
-                      </p>
-      
-                          <div class="col-md-12">
-                              <mat-form-field class="full-width fieldFit" appearance="standard">
-                                  <mat-label style="color: black;">Gender</mat-label>
-                                  <mat-select [ngModel]="PageOne.value.gender"  formControlName="gender" required >
-                                      <mat-option value="Male">Male</mat-option>
-                                      <mat-option value="Female">Female</mat-option>
-                                  </mat-select>
-                              
-                              </mat-form-field>
-                          </div>
                           
-                          <div class="col-md-12">
-                           
-                                <label style="color: black; margin-top: 8px;">Date of Birth</label>
-                                <div class="row" style="margin: 0px;">
-                                  <select class="classic" formControlName="birth_date" style="border: 1px solid black;"  required name="birth_date">
-                                      <option *ngFor="let  option of date" [value]="option">
-                                        {{option}}
-                                      </option>
-                                    </select> 
-  
-                                    <select class="classic" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;"  required name="birth_month">
-                                      <option *ngFor="let  option of month" [value]="option">
-                                        {{option}}
-                                      </option>
-                                    </select> 
-                                    
-                                    <select class="classic" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;"  required name="birth_year">
-                                      <option *ngFor="let  option of years" [value]="option">
-                                        {{option}}
-                                      </option>
-                                    </select>
-                                </div>
-                              
-                             
-                            </div>
   
                             <div class="col-6">
-                                <mat-form-field class="full-width fieldFit" appearance="standard">
-                                  <mat-label style="color: black;">Height</mat-label>
+                                <mat-form-field class="full-width fieldFit" appearance="outline">
+                                  <mat-label >Height</mat-label>
                                   <select matNativeControl #height formControlName="Height" required name="Height">
                                       <option *ngFor="let option of Heights;let i = index" [value]="i">
                                         {{option}}
@@ -122,18 +167,18 @@
                               </div>
 
                               <div class="col-6">
-                                <mat-form-field class="full-width fieldFit" appearance="standard" >
-                                  <mat-label style="color: black;">Weight</mat-label>
-                                  <input style="padding-bottom: 6px" type="text" pattern="\d*" maxlength="3" matInput formControlName="Weight" required name="Weight">
+                                <mat-form-field class="full-width fieldFit" appearance="outline" >
+                                  <mat-label >Weight</mat-label>
+                                  <input type="text" pattern="\d*" maxlength="3" matInput formControlName="Weight" required name="Weight">
                                   <span matSuffix>Kg &nbsp;</span>
                                 </mat-form-field>
                               </div>
   
                           <div class="col-md-12">
                        
-                                  <mat-form-field class="full-width fieldFit" appearance="standard">
+                                  <mat-form-field class="full-width fieldFit" appearance="outline">
                         
-                                      <mat-label style="color: black;">Marital Status</mat-label>
+                                      <mat-label >Marital Status</mat-label>
                                       <mat-select  #relation formControlName="MaritalStatus" required >
                                               <mat-option *ngFor="let  option of MaritalStatus" [value]="option">
                                                       {{option}}
@@ -144,8 +189,8 @@
 
                          
                                 <div class="col-md-12">
-                                  <mat-form-field class="full-width fieldFit" appearance="standard" >
-                                    <mat-label style="color: black;">Annual Income In Lakhs</mat-label>
+                                  <mat-form-field class="full-width fieldFit" appearance="outline" >
+                                    <mat-label >Annual Income In Lakhs</mat-label>
                                     <input type="number" matInput formControlName="AnnualIncome" required name="AnnualIncome">
                                     <span matSuffix>Lakh Per Year &nbsp;</span>
                                     <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageOne.get('AnnualIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
@@ -157,30 +202,6 @@
                                   अगर लड़का /लड़की की सालाना इनकम 10 लाख है तोह यहाँ सिर्फ 10 भरे । 
                                 </p>
   
-                                <div class="col-md-12">
-                                  <mat-form-field class="full-width fieldFit" appearance="standard" >
-                                     <mat-label style="color: black;">Religion</mat-label>
-                                      <mat-select  #relation formControlName="Religion" (selectionChange)="Religion($event)" required >
-                                              <mat-option *ngFor="let  option of Religions" [value]="option">
-                                                      {{option}}
-                                              </mat-option>
-                                      </mat-select>
-                              
-                                 </mat-form-field> 
-                            </div>
-                            <div class="col-md-12">
-                                
-                                 <mat-form-field class="full-width fieldFit" *ngIf="Caste" appearance="standard">
-                                   <mat-label style="color: black;">Caste</mat-label>
-                                   <input type="text" matInput formControlName="Castes" multiple required [matAutocomplete]="caste" required  >
-                                   <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
-                                      
-                                           <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
-                                             {{name}}
-                                           </mat-option>
-                                   </mat-autocomplete>
-                                 </mat-form-field>
-                           </div>
                            
                            <div class="col-12" *ngIf="Caste" style="margin-top: 30px;">
                              <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
@@ -189,10 +210,10 @@
                            </div>
   
 
-                           <div class="col-md-12">
+                           <div class="col-md-12 matSelect">
                      
-                              <mat-form-field class="full-width fieldFit" appearance="standard">
-                                  <mat-label style="color: black;">Manglik Status</mat-label>
+                              <mat-form-field class="full-width fieldFit" appearance="outline">
+                                  <mat-label >Manglik Status</mat-label>
                                   <mat-select  formControlName="Mangalik" required >
                                     <mat-option value="Manglik">Manglik</mat-option>
                                     <mat-option value="Non-Manglik">Non-Manglik</mat-option>
@@ -205,8 +226,8 @@
 
 
                           <div class="col-md-12">
-                            <mat-form-field class="full-width fieldFit" appearance="standard">
-                              <mat-label style="color: black;">Locality / Area</mat-label>
+                            <mat-form-field class="full-width fieldFit" appearance="outline">
+                              <mat-label >Locality / Area</mat-label>
                               <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                               (onAutocompleteSelected)="onAutocompleteSelected($event)" 
                               (onLocationSelected)="onLocationSelected($event)"
@@ -227,7 +248,7 @@
 
                           <div class="col-12" *ngIf="isDisable">
                             <mat-form-field class="full-width fieldFit" appearance="standard">
-                              <mat-label style="color: black;">Disabled Part</mat-label>
+                              <mat-label >Disabled Part</mat-label>
                               <input  type="text"  matInput formControlName="disabledPart">
                             </mat-form-field>
                           </div>
@@ -240,8 +261,8 @@
                           </p>
                       </div>
                   </form>
-                </mat-step>
-                <mat-step [completed]="formTwo">
+                </mat-step> --> -->
+                <mat-step [completed]="formTwo"> 
                   <ng-template matStepLabel>
                     Page II
                 </ng-template>

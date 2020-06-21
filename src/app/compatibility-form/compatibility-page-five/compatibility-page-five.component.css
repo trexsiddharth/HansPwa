@@ -8,8 +8,8 @@
     color: black !important;
 }
 .fieldFit{
-    height:60px;
-    margin-top: 10px;
+  height: 45px;
+  margin-bottom: 1rem;
 }
 ::ng-deep .mat-form-field-ripple {
     background-color:#34b7f1;

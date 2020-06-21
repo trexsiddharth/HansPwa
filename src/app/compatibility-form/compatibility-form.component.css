@@ -1,3 +1,6 @@
+.fixToolBar {
+  background-color: #0c9bf2;
+}
 .textRegister {
     font-weight:bolder;
     padding-top:1rem;
@@ -6,6 +9,12 @@
 }
 .mat-stepper-horizontal{
   background-color: white !important;
+}
+input.form-control.ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+select.form-control.ng-invalid.ng-touched{
+  border: 1px solid red;
 }
 ::ng-deep .mat-step-label{
   color: black !important;
@@ -29,8 +38,8 @@ background-color: rgba(0,0,0,.6) !important;
   border: 1px solid black;
 }
 .fieldFit{
-    height:60px;
-    margin-top: 10px;
+  height: 45px;
+  margin-bottom: 1rem;
 }
 ::ng-deep .mat-form-field-ripple {
     background-color:#34b7f1;
@@ -51,6 +60,10 @@ background-color: rgba(0,0,0,.6) !important;
   padding-left: 15px;
   color: #737373;
   font-size: 0.85rem;
+}
+
+.matSelect{
+  margin-top: 10px;
 }
 
 #viewButton{
