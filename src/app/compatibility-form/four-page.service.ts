@@ -10,6 +10,7 @@ export class FourPageService {
  form4Completed = new EventEmitter<boolean>();
  getListData = new EventEmitter<boolean>();
  makeLinear = new EventEmitter<boolean>();
+ pageOneUpdated = new EventEmitter<boolean>();
  profile = new Profile();
  userThroughGetList = false;
  skippable = false;
@@ -56,6 +57,7 @@ export class FourPageService {
     this.profile.locality = userData.get('locality').toString();
     this.profile.disabledPart = userData.get('disabled_part').toString();
     console.log(this.profile);
+    this.pageOneUpdated.emit(true);
   }
 
 }

@@ -116,7 +116,7 @@ export class CompatibilityFormComponent implements OnInit {
   lat;
   long;
   isDisable = false;
-  isAllCastePref = true;
+  isAllCastePref = false;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,

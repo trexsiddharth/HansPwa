@@ -123,19 +123,33 @@ button:focus{outline:none !important;}
 .mat-select-placeholder{
 color: #c8c8c8;
 }
-
+.mat-select-value {
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+}
+.mat-input-element{
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+}
+select{
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+}
+.mat-horizontal-content-container{
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+}
+.mat-checkbox{
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+}
 .mat-select-arrow{
   color: #c8c8c8;
 }
 .mat-form-field-appearance-outline .mat-form-field-outline{
   color: #c8c8c8;
-  height: 45px;
 }
 .mat-form-field-appearance-outline .mat-form-field-infix{
   padding: 8px 0px;
 }
 mat-label {
   color: #737373;
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
 }
 mat-label.ng-invalid.ng-touched {
   color: red;

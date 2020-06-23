@@ -161,7 +161,16 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
       About: [''],
       abroad: ['']
     });
-    this.setAbout();
+
+    fourPageService.pageOneUpdated.subscribe(
+      status => {
+        if (status) {
+          if (!fourPageService.getProfile().about) {
+            this.setAbout();
+          }
+        }
+      }
+    )
   }
 
 ngOnInit() {
@@ -370,7 +379,7 @@ setAbout() {
     this.PageTwo.value.Occupation === 'Teacher' ||
     this.PageTwo.value.Occupation === 'Doctor' ? '' :
      this.PageTwo.value.Occupation !== 'Not Working' ?
-     ` as  ${this.PageTwo.value.Designation !== 'Others' ? this.PageTwo.value.Designation : '' }` : '' : '',
+     ` as ${this.PageTwo.value.Designation !== 'Others' ? this.PageTwo.value.Designation : '' }` : '' : '',
     OtherDesignation: !this.PageTwo.value.OtherDesignation ||
      this.PageTwo.value.Occupation === 'Business/Self-Employed' ||
      this.PageTwo.value.Occupation === 'Teacher' ||
@@ -382,9 +391,8 @@ setAbout() {
   console.log('Setting About');
 
   this.PageTwo.patchValue({
-          About: `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik}
-          ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification}
-            ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.OtherDesignation} ${aboutObject.working}.`
+          // tslint:disable-next-line: max-line-length
+          About: `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.OtherDesignation} ${aboutObject.working}.`
         });
 }
 setFormOneData(userProfile: Profile) {

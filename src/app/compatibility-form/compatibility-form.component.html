@@ -17,12 +17,6 @@
 </mat-toolbar>
 
 <main class='pwaSize fixed t-0 b-0 bg-white w-full HC overflowY' >
-        <!-- <div class="container t-c">
-            <div class="row" style="margin:20px 0px;text-align: center;padding: 0px 10%;height: 25%">
-                    <img src="../../assets/avatar.svg" style="width: 25%;border-right: 4px solid #34b7f1;" alt="register">
-                    <h5 style="display: inline-block;margin: auto auto auto 10px;">Free Registration</h5>
-            </div>
-        </div> -->
        
         <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
         <div class="container customBackground" style="width:80%;background: white;border-radius: 20px;margin-top: 20px; margin-bottom: 20px;">
@@ -73,21 +67,21 @@
                           flex-direction: row;
                           align-items: center;
                           justify-content: space-between;">
-                            <select class="classic" formControlName="birth_date" style="border: 1px solid black;
+                            <select class="classic" formControlName="birth_date" style="
                             flex: 1;"  required name="birth_date">
                                 <option *ngFor="let  option of date" [value]="option">
                                   {{option}}
                                 </option>
                               </select> 
 
-                              <select class="classic" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;
+                              <select class="classic" formControlName="birth_month" style="margin-left: 10px;
                               flex: 1;"  required name="birth_month">
                                 <option *ngFor="let  option of month" [value]="option">
                                   {{option}}
                                 </option>
                               </select> 
                               
-                              <select class="classic" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;
+                              <select class="classic" formControlName="birth_year" style="margin-left: 10px;
                               flex: 1;"  required name="birth_year">
                                 <option *ngFor="let  option of years" [value]="option">
                                   {{option}}
@@ -261,7 +255,7 @@
                           </p>
                       </div>
                   </form>
-                </mat-step> --> -->
+                </mat-step> 
                 <mat-step [completed]="formTwo"> 
                   <ng-template matStepLabel>
                     Page II
