@@ -128,6 +128,12 @@
                     </mat-autocomplete>
                   </mat-form-field>
             </div>
+
+            <div class="col-12" *ngIf="Caste" style="margin-top: 30px;">
+              <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
+                All Caste Preferred
+              </mat-checkbox>
+            </div>
   
                           <div class="col-md-12">
                               <mat-form-field  class="full-width fieldFit" appearance="outline">
@@ -195,13 +201,6 @@
                                 <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                                   अगर लड़का /लड़की की सालाना इनकम 10 लाख है तोह यहाँ सिर्फ 10 भरे । 
                                 </p>
-  
-                           
-                           <div class="col-12" *ngIf="Caste" style="margin-top: 30px;">
-                             <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
-                               All Caste Preferred
-                             </mat-checkbox>
-                           </div>
   
 
                            <div class="col-md-12 matSelect">

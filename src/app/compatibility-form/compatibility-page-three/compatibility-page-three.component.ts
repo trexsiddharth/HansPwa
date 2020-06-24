@@ -172,7 +172,7 @@ firstStep() {
             }, err => {
               this.fourPageService.form3Completed.emit(false);
               this.spinner.hide();
-              this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+              this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
               console.log(err);
             });
     }

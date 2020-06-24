@@ -332,7 +332,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
                   this.clearHistory();
 
                   if (localStorage.getItem('getListMobile')) { // mode 3
-                          window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
+                          window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
                         } else if (localStorage.getItem('getListId')) { // mode 2
                           window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
                         }
@@ -359,7 +359,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
                 console.log(data);
                 if (data.status === '1') {
             if (localStorage.getItem('getListMobile')) { // mode 3
-              window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
+              window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
             } else if (localStorage.getItem('getListId')) { // mode 2
               window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
             }
@@ -388,7 +388,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
               console.log(data);
               if (data.status === '1') {
           if (localStorage.getItem('getListMobile')) { // mode 3
-            window.open('https://partner.hansmatrimony.com/incompleteleads', '_top', null, true);
+            window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
           } else if (localStorage.getItem('getListId')) { // mode 2
             window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
           }
