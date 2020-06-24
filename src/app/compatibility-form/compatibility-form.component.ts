@@ -682,27 +682,7 @@ switch (this.PageOne.value.Relation) {
     break;
 }
 }
-checkUrl(num: string): Observable < any > {
-  localStorage.setItem('is_lead', '');
-  if (localStorage.getItem('fcm_app')) {
-    // tslint:disable-next-line: max-line-length
-    return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
-      params: {
-        ['phone_number']: num,
-        ['fcm_id']: this.notification.getCurrentToken(),
-        ['fcm_app']: localStorage.getItem('fcm_app')
-      }
-    });
-  } else {
-    // tslint:disable-next-line: max-line-length
-    return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
-      params: {
-        ['phone_number']: num,
-        ['fcm_id']: this.notification.getCurrentToken()
-      }
-    });
-  }
-}
+
 
 getProfile() {
     this.spinner.show();

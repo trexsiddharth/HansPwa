@@ -216,9 +216,10 @@ firstStep() {
       firststepdata.append('degree', this.PageTwo.value.Qualification);
       firststepdata.append('occupation', this.PageTwo.value.Occupation);
       // if designation equals others set profession equals value of OtherDesignation only if OtherDesignation is not empty.
-      firststepdata.append('profession', this.PageTwo.value.Designation !== 'Others' ?
-       this.PageTwo.value.Designation :  this.PageTwo.value.OtherDesignation ?
-       this.PageTwo.value.OtherDesignation : this.PageTwo.value.Designation );
+      firststepdata.append('profession', this.PageTwo.value.Designation !== 'Others'
+      ? this.PageTwo.value.Designation : this.PageTwo.value.OtherDesignation ?
+      this.PageTwo.value.OtherDesignation :  this.PageTwo.value.Designation);
+
       firststepdata.append('working_city', this.workplace);
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
@@ -299,15 +300,35 @@ changedQualification() {
 }
 changedOccupation() {
   console.log('changed Occupation');
-  if (this.PageTwo.value.Occupation === 'Business/Self-Employed') {
+ 
+  switch (this.PageTwo.value.Occupation) {
+    case 'Not Working':
+      this.PageTwo.patchValue({
+        Designation: this.PageTwo.value.Occupation,
+        Working: 'na'
+      });
+      this.workplace = 'na';
+      break;
+    case 'Business/Self-Employed':
     this.PageTwo.patchValue({
       Designation: 'Owner'
     });
-  } else if (this.PageTwo.value.Occupation === 'Not Working') {
-    this.PageTwo.patchValue({
-      Working: 'na'
-    });
-    this.workplace = 'na';
+    break;
+    case 'Private Company' || 'Govt. Job':
+      this.PageTwo.patchValue({
+        Designation: ''
+      });
+      break;
+   case 'Doctor' || 'Teacher':
+     this.PageTwo.patchValue({
+      Designation: this.PageTwo.value.Occupation
+     });
+     break;
+    default:
+      this.PageTwo.patchValue({
+        Designation: this.PageTwo.value.Designation ? this.PageTwo.value.Designation : ''
+      });
+      break;
   }
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
@@ -316,6 +337,27 @@ changedOccupation() {
 }
 changedDesignation() {
   console.log('changed Designation');
+  switch (this.PageTwo.value.Occupation) {
+    case 'Not Working':
+      this.PageTwo.patchValue({
+        Designation: this.PageTwo.value.Occupation,
+        Working: 'na'
+      });
+      this.workplace = 'na';
+      break;
+    case 'Business/Self-Employed':
+    this.PageTwo.patchValue({
+      Designation: 'Owner'
+    });
+    break;
+   case 'Doctor' || 'Teacher':
+     this.PageTwo.patchValue({
+      Designation: this.PageTwo.value.Occupation
+     });
+     break;
+    default:
+      break;
+  }
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
    }
