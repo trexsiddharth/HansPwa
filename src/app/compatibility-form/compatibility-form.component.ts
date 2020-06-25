@@ -133,7 +133,7 @@ export class CompatibilityFormComponent implements OnInit {
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
-      lastName: ['', Validators.compose([Validators.required])],
+      lastName: [''],
       phone: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
@@ -299,7 +299,7 @@ export class CompatibilityFormComponent implements OnInit {
 
     getAllCaste() {
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
-        this.getcastes = res;
+        this.getcastes = ['All', ...res];
       });
       if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== '') {
       this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
@@ -569,33 +569,12 @@ datePickerClicked() {
 Religion(event) {
     console.log(event.value);
     if (event.value === 'Hindu') {
-      // console.log
       this.Caste = true;
-      this.AllCastes = true;
-    } else if (event.value === 'Muslim') {
-      this.Caste = true;
-      this.AllCastes = false;
-    } else if (event.value === 'Sikh') {
-      this.Caste = true;
-      this.AllCastes = true;
-    } else if (event.value === 'Christian') {
+    } else {
       this.Caste = false;
-      this.AllCastes = false;
-    } else if (event.value === 'Buddhist') {
-      this.Caste = false;
-      this.AllCastes = false;
-    } else if (event.value === 'Jain') {
-      this.Caste = true;
-      this.AllCastes = true;
-    } else if (event.value === 'Parsi') {
-      this.Caste = false;
-      this.AllCastes = false;
-    } else if (event.value === 'Jewish') {
-      this.Caste = false;
-      this.AllCastes = false;
-    } else if (event.value === 'Bahai') {
-      this.Caste = false;
-      this.AllCastes = false;
+      this.PageOne.patchValue({
+        Castes: 'All'
+      });
     }
   }
 async casteValidation(value) {

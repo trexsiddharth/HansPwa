@@ -168,7 +168,7 @@ constructor(private http: HttpClient, public dialog: MatDialog, private formBuil
       Qualification: ['', Validators.compose([Validators.required])],
       QualificationCtrl: [''],
       Occupation: ['', Validators.compose([Validators.required])],
-      Designation: ['', Validators.compose([Validators.required])],
+      Designation: [''],
       DesignationCtrl: [''],
       OtherDesignation: [''],
       Working: ['', Validators.compose([Validators.required])],
@@ -242,7 +242,7 @@ ngOnInit() {
         return;
       }
       // get the search keyword
-      let search = this.PageTwo.controls.QualificationCtrl.value;
+      let search: string = this.PageTwo.controls.QualificationCtrl.value;
       const educationGroupsCopy = this.copyEducationGroups(this.HigherEducation);
       if (!search) {
         this.filteredEducationGroups.next(educationGroupsCopy);
@@ -255,7 +255,10 @@ ngOnInit() {
         educationGroupsCopy.filter(educationGroup => {
           const showBankGroup = educationGroup.group.toLowerCase().indexOf(search) > -1;
           if (!showBankGroup) {
-            educationGroup.names = educationGroup.names.filter(bank => bank.toLowerCase().indexOf(search) > -1);
+            educationGroup.names = educationGroup.names.filter((bank: string) => {
+              bank = bank.toLowerCase().replace(/\./g, '');
+              return bank.toLowerCase().indexOf(search) > -1;
+            });
           }
           return educationGroup.names.length > 0;
         })
