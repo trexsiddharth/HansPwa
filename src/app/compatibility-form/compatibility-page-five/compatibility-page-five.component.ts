@@ -81,7 +81,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
           this.pageFive.patchValue({
             phone: value.data.alt_mobile,
-            assign_to: assignToName.name,
+            assign_to: assignToName ? assignToName.name : '' ,
             interest: value.data.speed,
             source: value.data.source,
             follow_date: value.data.follow_call_date,
