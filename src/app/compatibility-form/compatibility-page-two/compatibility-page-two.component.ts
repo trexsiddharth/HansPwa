@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -25,6 +26,8 @@ import {
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';
+import { ReplaySubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -46,7 +49,7 @@ export const _filter = (opt: string[], value: string): string[] => {
   templateUrl: './compatibility-page-two.component.html',
   styleUrls: ['./compatibility-page-two.component.css']
 })
-export class CompatibilityPageTwoComponent implements OnInit {
+export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     @ViewChild('otpModal', {static: false}) private otpModal: any;
 
     PageTwo: FormGroup;
@@ -146,16 +149,27 @@ export class CompatibilityPageTwoComponent implements OnInit {
     'Public Relations',
     'Others'];
 
+    /** list of education groups filtered by search keyword for option groups */
+    public filteredEducationGroups: ReplaySubject<hd[]> = new ReplaySubject<hd[]>(1);
 
-constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
+    /** list of designation filtered by search keyword for option groups */
+    public filteredDesignations: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+
+     /** Subject that emits when the component has been destroyed. */
+      protected onDestroy = new Subject<void>();
+
+
+constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
             public notification: NotificationsService,
             public fourPageService: FourPageService,
             private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
-    this.PageTwo = this._formBuilder.group({
+    this.PageTwo = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
       Qualification: ['', Validators.compose([Validators.required])],
+      QualificationCtrl: [''],
       Occupation: ['', Validators.compose([Validators.required])],
       Designation: ['', Validators.compose([Validators.required])],
+      DesignationCtrl: [''],
       OtherDesignation: [''],
       Working: ['', Validators.compose([Validators.required])],
       About: [''],
@@ -170,11 +184,36 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
           }
         }
       }
-    )
+    );
+  }
+  ngOnDestroy(): void {
+    this.onDestroy.next();
+    this.onDestroy.complete();
   }
 
 ngOnInit() {
-    if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
+
+  // load the initial eduation list
+  this.filteredEducationGroups.next(this.copyEducationGroups(this.HigherEducation));
+
+  // listen for search field value changes
+  this.PageTwo.controls.QualificationCtrl.valueChanges
+  .pipe(takeUntil(this.onDestroy))
+  .subscribe(() => {
+    this.filterEducationGroups();
+  });
+
+  // load the initial designation list
+  this.filteredDesignations.next(this.designations.slice());
+
+  // listen for search field value changes
+  this.PageTwo.controls.DesignationCtrl.valueChanges
+  .pipe(takeUntil(this.onDestroy))
+  .subscribe(() => {
+    this.filterDesignation();
+  });
+
+  if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
       this.fourPageService.getListData.subscribe(
         () => {
           console.log(this.fourPageService.getProfile());
@@ -185,6 +224,64 @@ ngOnInit() {
         }
       );
   }
+    }
+
+    protected copyEducationGroups(educationGroups: hd[]) {
+      const educationGroupsCopy = [];
+      educationGroups.forEach(bankGroup => {
+        educationGroupsCopy.push({
+          group: bankGroup.group,
+          names: bankGroup.names.slice()
+        });
+      });
+      return educationGroupsCopy;
+    }
+
+    protected filterEducationGroups() {
+      if (!this.HigherEducation) {
+        return;
+      }
+      // get the search keyword
+      let search = this.PageTwo.controls.QualificationCtrl.value;
+      const educationGroupsCopy = this.copyEducationGroups(this.HigherEducation);
+      if (!search) {
+        this.filteredEducationGroups.next(educationGroupsCopy);
+        return;
+      } else {
+        search = search.toLowerCase();
+      }
+      // filter the banks
+      this.filteredEducationGroups.next(
+        educationGroupsCopy.filter(educationGroup => {
+          const showBankGroup = educationGroup.group.toLowerCase().indexOf(search) > -1;
+          if (!showBankGroup) {
+            educationGroup.names = educationGroup.names.filter(bank => bank.toLowerCase().indexOf(search) > -1);
+          }
+          return educationGroup.names.length > 0;
+        })
+      );
+    }
+
+    protected filterDesignation() {
+      if (!this.designations) {
+        return;
+      }
+      // get the search keyword
+      let search = this.PageTwo.controls.DesignationCtrl.value;
+      if (!search) {
+        this.filteredDesignations.next(this.designations.slice());
+        return;
+      } else {
+        search = search.toLowerCase();
+      }
+      // filter the banks
+      const designationResults = this.designations.filter(bank => bank.toLowerCase().indexOf(search) > -1);
+      console.log(designationResults);
+      if (designationResults.length !== 0) {
+        this.filteredDesignations.next(designationResults);
+      } else {
+        this.filteredDesignations.next(this.designations.filter(bank => bank.toLowerCase().indexOf('other') > -1));
+      }
     }
 
     skip() {
@@ -458,7 +555,7 @@ setAgeIfNan(value: string) {
 }
 
 setFormForGetUserThrough() {
-  this.PageTwo = this._formBuilder.group({
+  this.PageTwo = this.formBuilder.group({
     // tslint:disable-next-line: max-line-length
     Qualification: [''],
     Occupation: [''],

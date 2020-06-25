@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 
 declare var Razorpay: any;
+declare var Paytm: any;
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +29,52 @@ export class SubscriptionserviceService {
       document.body.appendChild(fileName);
     }
   }
+// testing mid -> bkjPis66135619933053
+  loadPayTmScript() {
+    const razor = document.getElementById('paytm');
+    if (!razor) {
+      const fileName = document.createElement('script');
+      fileName.async = true;
+      fileName.setAttribute('type', 'application/javascript');
+      fileName.setAttribute('crossorigin', 'anonymous');
+      fileName.setAttribute('src', 'https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/bkjPis66135619933053.js');
+      fileName.setAttribute('onload', 'onScriptLoad()');
+      fileName.id = 'paytm';
+      document.body.appendChild(fileName);
+    }
+  }
+
+  onScriptLoad() {
+    let config = {
+      'root': '',
+      'flow': 'DEFAULT',
+      'data': {
+      'orderId': 'ORDER_ID_12345', /* update order id */
+      'token': 'fe795335ed3049c78a57271075f2199e1526969112097', /* update token value */
+      'tokenType': 'TXN_TOKEN',
+      'amount': '4594' /* update amount */
+      },
+      'handler': {
+        'notifyMerchant': function(eventName,data) {
+          console.log('notifyMerchant handler function called');
+          console.log('eventName => ', eventName);
+          console.log('data => ', data);
+        } 
+      }
+    };
+
+    if((window as any).Paytm && (window as any).Paytm.CheckoutJS) {
+      (window as any).Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
+            // initialze configuration using init method 
+            (window as any).Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                // after successfully updating configuration, invoke Blink Checkout
+                (window as any).Paytm.CheckoutJS.invoke();
+            }).catch(function onError(error) {
+                console.log('error => ', error);
+            });
+        });
+    } 
+}
   
   payNowT(amt, type, plan, name, email, phone, points) {
     let notes = {service: ''};
@@ -106,7 +153,7 @@ payNowCustom(amt, type, plan, name, email, phone,mode,orderId,cust_id) {
   let options = {
     'key': key,
     'amount': amt * 100,
-    "currency": "INR",
+    'currency': 'INR',
     'name': ' Hans Matrimony',
     'description': 'Order #' + orderId,
     'customer_id': cust_id,

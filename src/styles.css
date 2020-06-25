@@ -154,3 +154,6 @@ mat-label {
 mat-label.ng-invalid.ng-touched {
   color: red;
 }
+div.mat-select-search-inner input.mat-input-element {
+  caret-color: white;
+}

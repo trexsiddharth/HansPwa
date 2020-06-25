@@ -24,6 +24,7 @@ export class CustomCheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptionService.loadRazorPayScript();
+    // this.subscriptionService.loadPayTmScript();
 
   }
 
@@ -67,6 +68,10 @@ export class CustomCheckoutComponent implements OnInit {
       } else {
         this.ngxNotificationService.error('Something went wrong, Please try again later');
       }
+  }
+
+  openPaytm() {
+  this.subscriptionService.onScriptLoad();
   }
 
 }

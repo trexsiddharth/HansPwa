@@ -1,3 +1,4 @@
+<div id="paytm-checkoutjs"></div>
 <mat-card>
     <mat-card-title>
         <img style="width: 100px;" src="../../assets/logo_short.png" alt="">
@@ -30,6 +31,10 @@
             <hr>
             <button class="btn btnPaymentType" (click)="createSubscription('wallet')"> 
                 <img class="paymentImage" src="../../assets/wallet.svg"  alt="wallet payment"> <span class="paytype">Wallets</span> 
+            </button>
+            <hr>
+            <button class="btn btnPaymentType" (click)="openPaytm()"> 
+                <img class="paymentImage" src="../../assets/wallet.svg"  alt="wallet payment"> <span class="paytype">Paytm</span> 
             </button>
           </div>
         </form>
