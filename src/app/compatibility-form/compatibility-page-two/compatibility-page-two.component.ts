@@ -551,7 +551,7 @@ this.PageTwo.patchValue({
 
 setAgeIfNan(value: string) {
   if (value && value.toLowerCase().includes('i am nan')) {
-    return this.setAge(this.fourPageService.getProfile().dob);
+    return value.replace('NaN', `${this.setAge(this.fourPageService.getProfile().dob)}`);
   } else {
     return value;
   }
