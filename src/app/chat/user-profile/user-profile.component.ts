@@ -131,6 +131,15 @@ onResize(event) {
         }
       }
       }
+      onProfileLoadError(gen: string, index) {
+        console.log('error occured while loading image, Setting default image');
+        const image = document.querySelectorAll('#imgProfile')[index - 1];
+        if (gen === 'Male') {
+          image.setAttribute('src', '../../assets/male_pic.png');
+        } else {
+          image.setAttribute('src', '../../assets/female_pic.png');
+        }
+      }
     openPersonalDialog(i: number, titleText: string) {
       document.querySelector('#carousel').scrollIntoView();
       const dialogConfig = new MatDialogConfig();

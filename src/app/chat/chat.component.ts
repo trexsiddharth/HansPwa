@@ -365,6 +365,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onImageLoadError() {
+    console.log('error occured while loading profile image, Setting default image');
+    this.photo = '../../assets/avatar.svg';
+  }
+
   setTabNames(tab: any) {
     if (localStorage.getItem('language') === null) {
       localStorage.setItem('language', 'Hindi');

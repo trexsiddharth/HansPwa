@@ -2,7 +2,7 @@
 <main class='fixed t-0 b-0 w-full HC'>
        
         <div class="groupContainer" *ngIf="history!='myprofile'">
-          <img id="myProfImage" (click)="changeToMyProfile()" [src]="photo" alt="profile pic">
+          <img id="myProfImage" (click)="changeToMyProfile()" (error)="onImageLoadError()" [src]="photo" alt="profile pic">
           <mat-tab-group mat-align-tabs="center" class="matGroup"   [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"  >
             <mat-tab [label]="itemService.getDailyCount()" id="today">
                   <ng-template matTabContent>
