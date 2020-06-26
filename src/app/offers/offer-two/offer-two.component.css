@@ -40,25 +40,33 @@ main{
 }
 
 #cross {
-    color: #737373;
-         font-size: 30px;
-         font-weight: bold; 
-         background: transparent;
-         border: none;
-         position: absolute;
-         right: 10px;
-         top: 0px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: grey;
+    border: none;
+    position: absolute;
+    right: 0px;
+    border-radius: 100%;
+    top: -15px;
+    padding: 7px;
 }
 
 @media (max-width: 350px) {
     #cross {
-        color: #737373;
-             font-size: 30px;
-             font-weight: bold; 
-             background: transparent;
-             border: none;
-             position: absolute;
-             right: 10px;
-             top: 20px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: grey;
+    border: none;
+    position: absolute;
+    right: 10px;
+    border-radius: 100%;
+    top: 20px;
+    padding: 7px;
     }
 }

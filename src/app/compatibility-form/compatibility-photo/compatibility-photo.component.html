@@ -1,17 +1,26 @@
 <form>
     <div class="row" style="margin-top:20px">
-        <div class="col-md-12 text-center" style="margin: 0px auto">
+        <div class="col-md-12 text-center" style="margin: 0px auto;
+        font-size: 18px;
+        font-weight: 900;">
           <p>Multiple Pictures can be Uploaded</p>
     </div>
      </div>
   <div class="row"  style="margin:20px auto">
     <div class="col-12 text-center" style="margin: 0px auto">
-        <img [src]="imgURL"  height="100" width="170" *ngIf="imgURL" style="margin: 0px auto; border: 2px solid #285fdd;
-        border-radius: 100px;
-        padding: 10px;">
+
+      <mat-card class="photoCard" (click)="dfile.click()">
+          <div class="full-width photoDiv">
+            <div *ngIf="!imgURL">
+              <mat-icon >photo_camera</mat-icon>
+            <p class="uploadText">Upload Picture</p>
+            </div>
+            <img [src]="imgURL"  height="100%" width="100%" *ngIf="imgURL">
+          </div>
+      </mat-card>
         <br>
       <div>
-          <input style="margin: 10px 25%" #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,1)"  />
+          <input style="display: none" #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,1)"  />
                           
       </div>
     </div>
@@ -19,12 +28,19 @@
     
     <div class="row" style="margin:20px auto">
     <div class="col-12 text-center" style="margin: 0px auto">
-        <img [src]="frontfile" style="margin: 0px auto;border: 2px solid #285fdd;
-        border-radius: 100px;
-        padding: 10px;" height="100" width="170" *ngIf="frontfile">
+      <mat-card class="photoCard" (click)="fontfile.click()">
+        <div class="full-width photoDiv">
+          <div *ngIf="!frontfile">
+            <mat-icon >photo_camera</mat-icon>
+          <p class="uploadText">Upload Picture</p>
+          </div>
+          <img [src]="frontfile" height="100%" width="100%" *ngIf="frontfile">
+        </div>
+    </mat-card>
+        
         <br>
       <div>
-          <input style="margin: 10px 25%" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,2)"  />
+          <input style="display: none" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,2)"  />
                          
       </div>
     </div>
@@ -32,12 +48,18 @@
 
   <div class="row" style="margin:20px auto">
     <div class="col-12 text-center" style="margin: 0px auto">
-        <img [src]="BackimgURL" height="100" width="170" style="margin: 0px auto;border: 2px solid #285fdd;
-        border-radius: 100px;
-        padding: 10px;" *ngIf="BackimgURL">
+      <mat-card class="photoCard" (click)="backfile.click()">
+        <div class="full-width photoDiv">
+          <div *ngIf="!BackimgURL">
+            <mat-icon >photo_camera</mat-icon>
+          <p class="uploadText">Upload Picture</p>
+          </div>
+          <img [src]="BackimgURL" height="100%" width="100%" *ngIf="BackimgURL">
+        </div>
+    </mat-card>
         <br>
       <div>
-          <input style="margin: 10px 25%" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,3)"  />
+          <input style="display: none" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,3)"  />
                         
       </div>
   </div>
@@ -62,7 +84,7 @@
   
   <div sclass="row"  style="margin-top:20px; margin-bottom:20px">
       <div class="col-md-12 text-center">
-        <button class="btn btn-blue" mat-raised-button style="background-color: #c8c8c8;" id="photoBtn"  matStepperNext (click)="skip(0)">Upload Photo Later</button>
+        <button class="btn btn-blue" mat-raised-button style="background-color: grey;" id="photoBtn"  matStepperNext (click)="skip(0)">Upload Photo Later</button>
         <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Submit</button>
       </div>
    </div> 

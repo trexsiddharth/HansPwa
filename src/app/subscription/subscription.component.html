@@ -5,6 +5,16 @@
                 <mat-card class="t-c" style="background: white;
                 background: white;
                 margin: 10px 20px;">
+                <div class="matIconDiv" style="position: absolute;
+                z-index: 99999999999;" (click)="goBack()">
+                    <mat-icon style="color: white;">keyboard_backspace</mat-icon>
+                </div>
+                        <div class="matIconDiv" style="position: absolute;
+                        z-index: 99999999999;
+                        right: 20px;"
+                        [routerLink]="['/']" routerLinkActive="router-link-active" >
+                            <mat-icon style="color: white;">home</mat-icon>
+                        </div>
                         <img id="bannerImg" src="../../assets/subsBack.svg" alt="subscription banner">
                         <div class="topBannerText">
                             <h4 style="color:#D313AE">
@@ -170,7 +180,7 @@
                                 <img class="personalizedOfferImage" src="../../assets/familyMeeting.svg" alt="VIP Benefits1">
                             </div>
                             <div class="col-6" style="height: 100%;">
-                                <div  style="margin-top: 10%;text-align: center;">
+                                <div  style="margin-top: 10%;text-align: center; margin-bottom: 50px;">
                                     <h6 style="display: inline-block;background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff); border-radius: 100px;color: white;padding: 10px 15px;">3</h6><br>
                                     <p style="font-size: 18px;">फैमिली मुलाकात<br>हमारे हॉल में FREE</p>
                                 </div>
@@ -282,7 +292,7 @@
         </div>
         
         
-        <div class="t-c" style="margin-top: 30px;"> 
+        <div class="t-c" style="margin-top: 30px;margin-bottom: 50px;"> 
             <button mat-raised-button 
             id="planButton"
             (click)="openDialog()"

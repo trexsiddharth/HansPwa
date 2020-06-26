@@ -1,11 +1,12 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SubscriptionserviceService } from '../subscriptionservice.service';
-import {  MatDialogConfig } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
 } from 'ngx-kc-notification';
+
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-subscription',
@@ -34,8 +35,11 @@ export class SubscriptionComponent implements OnInit {
   amount;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private http: HttpClient, private subscriptionService: SubscriptionserviceService,
-              private spinner: NgxSpinnerService, private ngxNotificationService: NgxNotificationService) { }
+  constructor(private http: HttpClient,
+              private subscriptionService: SubscriptionserviceService,
+              private spinner: NgxSpinnerService,
+              private browserLocation: Location,
+              private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
     this.subscriptionService.loadRazorPayScript();
@@ -141,6 +145,10 @@ Analytics(type: string, category: string, action: string) {
      } else {
         this.ngxNotificationService.error('Something Went Wrong');
      }
+  }
+
+  goBack() {
+    this.browserLocation.back();
   }
 
   container1() {

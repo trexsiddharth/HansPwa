@@ -2,13 +2,19 @@
     <div class="t-c topDiv">
         <img id="profileImage" [src]="getProfilePhoto()" alt="profle image">
         <button style="color: #737373;
-         font-size: 35px;
-         font-weight: bold; 
          position: absolute;
+         border-radius: 100%;
          right: 10px;
+         display: flex;
+         flex-direction: column;
+         padding: 10px;
+         background-color: #c8c8c8;
+         border: none;
+         align-items: center;
+         justify-content: center;
          top: 0px;"
          (click)="closeDialog()">
-            X
+            <mat-icon style="color: white;">close</mat-icon>
         </button>
         <p class="contentText" style="margin-top: -55px;">
             {{data.data.name}}
