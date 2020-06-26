@@ -47,13 +47,17 @@
                   <div class="col-12">
                     <h6>Caste</h6>
                     <mat-select 
-                    type="text" class="form-control"  
-                    [multiple]="true" [formControl]="searchCaste"
+                    type="text"
+                    class="form-control"  
+                    [multiple]="true" 
+                    (selectionChange)="casteSelectionChanged($event)"
+                    [formControl]="searchCaste"
                     #multiSelect
                      required >
                      <mat-option>
                       <ngx-mat-select-search 
-                      aria-placeholder="test"
+                      noEntriesFoundLabel="No Castes Found" 
+                      placeholderLabel="Search Castes..."
                       [formControl]="searchCasteText"></ngx-mat-select-search>
                      </mat-option>
                             <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>

@@ -243,6 +243,11 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
     );
   }
 
+  casteSelectionChanged(event) {
+    console.log(event);
+    this.searchCasteText.setValue('');
+  }
+
 
 
 }

@@ -20,12 +20,15 @@
     color: black;
 }
 ::ng-deep .mat-select-search-inner{
-    background: white;
     margin-left: 0px;
+    
 }
-::ng-deep .mat-select-search-input{
-    color: black;
+::ng-deep .mat-select-search-input {
+    background: none;
+    width: 100%;
+    color: white;
 }
+
 ::ng-deep .mat-checkbox-inner-container{
     border: 1px solid black;
   }

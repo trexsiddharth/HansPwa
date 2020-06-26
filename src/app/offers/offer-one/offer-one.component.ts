@@ -8,7 +8,8 @@ import { LanguageService } from 'src/app/language.service';
   styleUrls: ['./offer-one.component.css']
 })
 export class OfferOneComponent implements OnInit {
-
+  numberGenerated = false;
+  generatedNumber;
   constructor(public dialogRef: MatDialogRef<OfferOneComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
               public languageService: LanguageService) { }
@@ -19,6 +20,16 @@ export class OfferOneComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  generateRandom() {
+    if (!this.numberGenerated) {
+      this.generatedNumber = '+91 - ' + Math.floor((Math.random() * 10000) + 70000) + 'XXXXX';
+      this.numberGenerated = true;
+      return  this.generatedNumber;
+    } else {
+      return  this.generatedNumber;
+    }
   }
 
   getProfilePhoto(): string {
