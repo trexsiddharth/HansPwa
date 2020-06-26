@@ -82,6 +82,9 @@
                       <button mat-raised-button type="button" id="skipBtn" matStepperNext class="btn" (click)="skip()" *ngIf="fourPageService.getSkippable()">Skip</button>
                         <button mat-raised-button matStepperNext type="button" id="viewButtonThree" (click)="firstStep()" class="btn" >Next</button>
                     </div>
+                    <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
+                      Just one more step and we’ll help you find your perfect match!
+                    </p>
                     <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                       डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
                     </p>

@@ -8,3 +8,14 @@
     color: #737373;
     font-size: 0.85rem;
   }
+
+  .impNoteMain {
+    margin: 0px;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #737373;
+    font-size: 0.85rem;
+    text-align: center;
+    letter-spacing: 2px;
+    line-height: 25px;
+  }

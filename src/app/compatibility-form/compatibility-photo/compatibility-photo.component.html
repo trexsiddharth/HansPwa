@@ -66,6 +66,9 @@
         <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Submit</button>
       </div>
    </div> 
+   <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
+    Add your photo to help your perfect match recognise you!
+  </p>
    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
     डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
   </p>
