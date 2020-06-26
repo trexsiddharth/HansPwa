@@ -157,3 +157,34 @@ mat-label.ng-invalid.ng-touched {
 div.mat-select-search-inner input.mat-input-element {
   caret-color: white;
 }
+
+.mat-select-panel {
+  background: white;
+}
+.mat-optgroup-label{
+  color: #737373;
+}
+.mat-option{
+  color: black;
+}
+.mat-option.mat-active{
+  color: black;
+}
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+  background: #0c9bf2;
+  color: white;
+}
+.mat-form-field.mat-focused .mat-form-field-ripple{
+  background-color: #0c9bf2;
+}
+.mat-form-field-ripple {
+  background-color:#0c9bf2;
+  height: 1px;
+}
+.mat-form-field-appearance-standard .mat-form-field-underline{
+  background-color: #0c9bf2;
+  height: 1px;
+}
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow{
+  color: #0c9bf2;
+}

@@ -44,14 +44,6 @@ background-color: rgba(0,0,0,.6) !important;
   height: 45px;
   margin-bottom: 1rem;
 }
-::ng-deep .mat-form-field-ripple {
-    background-color:#34b7f1;
-    height: 1px;
-}
-::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline{
-    background-color: #34b7f1;
-    height: 1px;
-}
 ::ng-deep .mat-hint{
   color: rgba(0,0,0,.6);
   padding-bottom: 5px;

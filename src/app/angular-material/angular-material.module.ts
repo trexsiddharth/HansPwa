@@ -53,6 +53,7 @@ exports: [
   NgxSpinnerModule,
   LazyLoadImageModule,
   MatToolbarModule
-]
+],
+providers: []
 })
 export class AngularMaterialModule { }

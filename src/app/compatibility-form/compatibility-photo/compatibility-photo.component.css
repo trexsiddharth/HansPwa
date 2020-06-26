@@ -1,13 +1,19 @@
 .photoCard{
   background-color: #C8C8C8;
-  height:200px;
-  width: 270px;
+  height:150px;
+  width: 220px;
+  margin: 0px auto;
+}
+.photoCardSmall{
+  background-color: #C8C8C8;
+  height:100px;
+  width: auto;
   margin: 0px auto;
 }
 .photoDiv{
     height: 100%;
     border: 1px solid white;
-    border-style: outset;
+    border-style: solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,4 +44,10 @@
     text-align: center;
     letter-spacing: 2px;
     line-height: 25px;
+  }
+  .buttonSet{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }

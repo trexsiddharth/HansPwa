@@ -561,6 +561,7 @@ setFormForGetUserThrough() {
   this.PageTwo = this.formBuilder.group({
     // tslint:disable-next-line: max-line-length
     Qualification: [''],
+    QualificationCtrl: [''],
     Occupation: [''],
     Designation: [''],
     OtherDesignation: [''],
@@ -569,6 +570,13 @@ setFormForGetUserThrough() {
     abroad: ['']
   });
   this.setFormOneData(this.fourPageService.getProfile());
+
+   // listen for search field value changes
+  this.PageTwo.controls.QualificationCtrl.valueChanges
+   .pipe(takeUntil(this.onDestroy))
+   .subscribe(() => {
+     this.filterEducationGroups();
+   });
 }
 
 }

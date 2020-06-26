@@ -3,7 +3,7 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <mat-form-field class="full-width fieldFit" appearance="outline">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label>Qualification</mat-label>
                           <mat-select (selectionChange)="changedQualification()" matInput formControlName="Qualification">
                             <mat-option>
@@ -22,7 +22,7 @@
                       </div>
 
                       <div class="col-md-12">
-                        <mat-form-field class="full-width fieldFit" appearance="outline">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
                         
                             <mat-label>Occupation</mat-label>
                             <mat-select  #relation formControlName="Occupation" (selectionChange)="changedOccupation()" >
@@ -38,7 +38,7 @@
                         
                       <!-- <div class="col-md-12">
 
-                        <mat-form-field class="full-width fieldFit" appearance="outline" *ngIf="PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' ">
+                        <mat-form-field class="full-width fieldFit" appearance="standard" *ngIf="PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' ">
                         
                           <mat-label>Designation</mat-label>
                           <mat-select  #relation formControlName="Designation" (selectionChange)="changedDesignation()" >
@@ -54,7 +54,7 @@
                        
                       </mat-form-field>
 
-                        <mat-form-field class="full-width fieldFit" *ngIf="PageTwo.value.Designation === 'Others' && PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working'" appearance="outline" >
+                        <mat-form-field class="full-width fieldFit" *ngIf="PageTwo.value.Designation === 'Others' && PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working'" appearance="standard" >
                           <mat-label>Other Designation</mat-label>
                           <input type="text" (change)="changedDesignation()"  matInput formControlName="OtherDesignation" name="Designation">
                         </mat-form-field>
@@ -65,7 +65,7 @@
                       </p>
 
                       <div class="col-md-12" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
-                        <mat-form-field class="full-width fieldFit" appearance="outline">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label>Working City</mat-label>
                           <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                           (onAutocompleteSelected)="onAutocompleteSelected($event)" 
@@ -75,7 +75,7 @@
                       </div>  
                    
                           <div class="col-md-12">
-                            <mat-form-field class="full-width" appearance="outline" >
+                            <mat-form-field class="full-width" appearance="standard" >
                               <mat-label>About<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
                               <textarea rows="5" type="text"  matInput formControlName="About" name="About">
                                 </textarea>
@@ -84,7 +84,7 @@
 
                           <div class="col-md-12" *ngIf="fourPageService.profile.gender === 'Female'">
                      
-                            <mat-form-field class="full-width fieldFit" appearance="outline">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
                                 <mat-label>Wish to go abroad?</mat-label>
                                 <mat-select  formControlName="abroad" (selectionChange)="changedAbroad()" >
                                   <mat-option value="Yes">Yes</mat-option>

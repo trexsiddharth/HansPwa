@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSelect } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSelect, MatSnackBar } from '@angular/material';
 import { NgForm, FormControl } from '@angular/forms';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
@@ -14,6 +14,7 @@ import { startWith, map, take, takeUntil } from 'rxjs/operators';
 })
 export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private http: HttpClient,
+              private snackBar: MatSnackBar,
               private ngxNotificationService: NgxNotificationService,
               public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
     this.data = data;
@@ -245,9 +246,14 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
 
   casteSelectionChanged(event) {
     console.log(event);
+    this.showSnackBar(`${event.value[0]} Added Successfully`, '');
     this.searchCasteText.setValue('');
   }
 
-
+  showSnackBar(msg: string, action: string) {
+    this.snackBar.open(msg, action, {
+      duration: 2000
+    });
+  }
 
 }
