@@ -88,7 +88,7 @@ export class LanguageService {
       this.profileLang.occupation = 'ऑक्यूपेशन';
       this.profileLang.designation = 'देसिग्नेशन';
       this.profileLang.annualIncome = 'आय';
-      this.profileLang.education = 'ग्रेजुएशन';
+      this.profileLang.education = 'क्वालिफिकेशन';
       this.profileLang.college = 'कॉलेज';
       this.profileLang.workingCity = 'वर्किंग सिटी';
 
@@ -181,7 +181,7 @@ export class LanguageService {
           this.profileLang.occupation = 'Occupation';
           this.profileLang.designation = 'Designation';
           this.profileLang.annualIncome = 'Annual Income';
-          this.profileLang.education = 'Graduation';
+          this.profileLang.education = 'Qualification';
           this.profileLang.college = 'College';
           this.profileLang.workingCity = 'Working City';
 

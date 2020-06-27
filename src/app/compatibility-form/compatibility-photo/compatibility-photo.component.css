@@ -1,27 +1,86 @@
+.matPhotoCard{
+  background-color: white;
+  height: 50vh;
+  width: 100%;
+  margin: 0px auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.matPhotoCardBig{
+  background-color: #E6E7E9;
+  height: inherit;
+  width: auto;
+  padding: 0px;
+  flex: 2;
+}
+.matPhotoCardSmall{
+  background-color: #E6E7E9;
+  height: inherit;
+  width: auto;
+  padding: 0px;
+
+}
+.row1{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex: 2;
+  width: 100%;
+}
+.col2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.row2{
+  flex: 1;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+
+}
+
 .photoCard{
-  background-color: #C8C8C8;
+  background-color: #E6E7E9;
   height:150px;
   width: 220px;
   margin: 0px auto;
+  padding: 0px;
 }
 .photoCardSmall{
-  background-color: #C8C8C8;
+  background-color: #E6E7E9;
   height:100px;
   width: auto;
   margin: 0px auto;
 }
 .photoDiv{
     height: 100%;
-    border: 1px solid white;
-    border-style: solid;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+.photoDiv img {
+  border-radius: 5px
+}
 .uploadText{
-  letter-spacing: 2px;
   margin-bottom: 0px;
+  color: #808080;
 }
 
 #photoBtn {

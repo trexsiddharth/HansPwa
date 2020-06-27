@@ -75,7 +75,7 @@
                       </div>  
                    
                           <div class="col-md-12">
-                            <mat-form-field class="full-width" appearance="standard" >
+                            <mat-form-field class="full-width" style="margin-top: 25px;" appearance="outline" >
                               <mat-label>About<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
                               <textarea rows="5" type="text"  matInput formControlName="About" name="About">
                                 </textarea>
@@ -95,7 +95,7 @@
                         
                         </div>
 
-                    <div class="col-xs-12 m-t-20" style="margin-top: 30px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
+                    <div class="col-xs-12 m-t-20" style="margin-top: 10px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                       <button mat-raised-button type="button" id="skipBtn" matStepperNext class="btn" (click)="skip()" *ngIf="fourPageService.getSkippable()">Skip</button>
                         <button type="button" id="viewButton" mat-raised-button matStepperNext class="btn" (click)="firstStep()">Next</button>
                     </div>

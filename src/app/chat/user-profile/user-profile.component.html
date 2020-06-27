@@ -181,7 +181,7 @@
                 <div class="col-12">
                     <img class="iconSize" src="../../../assets/graduation.svg" alt="degree"> 
                     <span style="margin-left: 5px;">
-                        <span class="labelText">{{languageService.profileLang.education}}:</span>  {{personalProfileData.education ? personalProfileData.education : 'Add Detail'}}
+                        <span class="labelText">{{languageService.profileLang.education}}:</span>  {{personalProfileData.education ? personalProfileData.education : personalProfileData.degree ? personalProfileData.degree  : 'Add Detail'}}
                     </span>
                 </div>
                 <div class="col-12">

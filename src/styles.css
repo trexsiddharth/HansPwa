@@ -188,3 +188,11 @@ div.mat-select-search-inner input.mat-input-element {
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow{
   color: #0c9bf2;
 }
+
+.mat-autocomplete-panel{
+  background-color: white;
+  color: black;
+}
+.mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover) {
+  background: #0cb9f2;
+}

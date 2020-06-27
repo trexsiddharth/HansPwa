@@ -68,6 +68,9 @@ export class CompatibilityPhotoComponent implements OnInit {
 
 
   FamilyOptions: Observable < string[] > ;
+  frontfile4: any;
+  frontfile5: any;
+  frontfile6: any;
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient,
               public fourPageService: FourPageService,
               private ngxNotificationService: NgxNotificationService,  private spinner: NgxSpinnerService) {
@@ -165,6 +168,7 @@ export class CompatibilityPhotoComponent implements OnInit {
 
 
   uploadPhoto(data, index) {
+    console.log(index);
     const photoBtn = document.getElementById('photoBtn') as HTMLButtonElement;
     photoBtn.disabled = true;
     const uploadData = new FormData();
@@ -180,28 +184,62 @@ export class CompatibilityPhotoComponent implements OnInit {
       this.spinner.hide();
       this.ngxNotificationService.success('Photo Uploaded Succesfully!');
       photoBtn.disabled = false;
-      if (index === 1) {
 
-        this.imgURL = this.suc.profile_pic_url;
-        this.fourPageService.profile.image1 = this.suc.profile_pic_url;
-        if (!this.frontfile && this.fourPageService.getUserThrough()) {
+      switch (index) {
+        case 1:
+          this.imgURL = this.suc.profile_pic_url;
+          this.fourPageService.profile.image1 = this.suc.profile_pic_url;
+          if (!this.frontfile && this.fourPageService.getUserThrough()) {
           this.uploadPhoto(data, 2);
         }
-        if (!this.BackimgURL && this.fourPageService.getUserThrough()) {
+          if (!this.BackimgURL && this.fourPageService.getUserThrough()) {
           this.uploadPhoto(data, 3);
         }
-        this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
+          this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
                  'Image One Uploaded on Four Page Registration Page Four');
-      } else if (index === 2) {
-        this.frontfile = this.suc.profile_pic_url;
-        this.fourPageService.profile.image2 = this.suc.profile_pic_url;
-      } else {
-        this.BackimgURL = this.suc.profile_pic_url;
-        this.fourPageService.profile.image3 = this.suc.profile_pic_url;
-        if (this.fourPageService.profile.photoScore > 1) {
-        this.fourPageService.form4Completed.emit(true);
-        }
+          break;
+
+          case 2:
+          this.frontfile = this.suc.profile_pic_url;
+          this.fourPageService.profile.image2 = this.suc.profile_pic_url;
+          break;
+
+          case 3:
+            this.BackimgURL = this.suc.profile_pic_url;
+            this.fourPageService.profile.image3 = this.suc.profile_pic_url;
+            if (this.fourPageService.profile.photoScore > 1) {
+            this.fourPageService.form4Completed.emit(true);
+            }
+            break;
+
+            case 4:
+            this.frontfile4 = this.suc.profile_pic_url;
+            this.fourPageService.profile.image3 = this.suc.profile_pic_url;
+            if (this.fourPageService.profile.photoScore > 1) {
+            this.fourPageService.form4Completed.emit(true);
+            }
+            break;
+
+            case 5:
+            this.frontfile5 = this.suc.profile_pic_url;
+            this.fourPageService.profile.image3 = this.suc.profile_pic_url;
+            if (this.fourPageService.profile.photoScore > 1) {
+            this.fourPageService.form4Completed.emit(true);
+            }
+            break;
+
+            case 6:
+            this.frontfile6 = this.suc.profile_pic_url;
+            this.fourPageService.profile.image3 = this.suc.profile_pic_url;
+            if (this.fourPageService.profile.photoScore > 1) {
+            this.fourPageService.form4Completed.emit(true);
+            }
+            break;
+
+        default:
+          break;
       }
+
     } else {
       this.spinner.hide();
       this.ngxNotificationService.error('Photo could not be Uploaded!');
@@ -228,6 +266,10 @@ export class CompatibilityPhotoComponent implements OnInit {
         this.imgURL = userProfile.image1 ? userProfile.image1 : '';
         this.frontfile = userProfile.image2 ? userProfile.image2 : '';
         this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
+        this.frontfile4 = userProfile.image2 ? userProfile.image4 : '';
+        this.frontfile5 = userProfile.image2 ? userProfile.image5 : '';
+        this.frontfile6 = userProfile.image2 ? userProfile.image6 : '';
+
   }
 
   photoScoreChanged(event) {
