@@ -348,6 +348,11 @@ export class CompatibilityPhotoComponent implements OnInit {
     } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
       window.open('https://partner.hansmatrimony.com/hot-leads');
     }
+
+    if (type === 0) {
+      this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
+      'User Skipped Photo Upload');
+    }
   }
 
   gtag_report_conversion() {

@@ -29,8 +29,10 @@
  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ES443XD0F"></script> 
  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} 
  gtag('js', new Date()); 
- gtag('config', 'G-1ES443XD0F');
- gtag('set', {'user_id': localStorage.getItem('id')}); // Set the user ID using signed-in user_id.
+ gtag('config', 'G-1ES443XD0F' ,{
+  'user_id': localStorage.getItem('mobile_number'),
+ });
+  // Set the user ID using signed-in user_id.
 
  </script>
 

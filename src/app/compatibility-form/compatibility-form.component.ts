@@ -287,6 +287,9 @@ export class CompatibilityFormComponent implements OnInit {
 
             } else {
               localStorage.setItem('RegisterNumber', number);
+              // signifies that new user has entered his mobile number.
+              this.Analytics('Four Page Registration', 'Four Page Registration Page Zero',
+              'Registered through Four Page Registration Page Zero');
               console.log('New User');
             }
             this.spinner.hide();
