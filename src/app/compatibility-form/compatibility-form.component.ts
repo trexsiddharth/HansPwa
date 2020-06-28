@@ -294,7 +294,7 @@ export class CompatibilityFormComponent implements OnInit {
 
               // gtag app + web
               (window as any).gtag('config', 'G-1ES443XD0F' , {
-                'user_id': localStorage.getItem(number)
+                'user_id': number
               });
             }
             this.spinner.hide();
