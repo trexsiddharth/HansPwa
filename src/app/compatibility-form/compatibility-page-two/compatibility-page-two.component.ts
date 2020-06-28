@@ -503,7 +503,8 @@ setAbout() {
   console.log(this.fourPageService.getProfile());
   const aboutObject = {
     dob: this.fourPageService.getProfile().dob ? `I am ${this.setAge(this.fourPageService.getProfile().dob )} yrs old ` : '',
-    caste: this.fourPageService.getProfile().caste ? this.fourPageService.getProfile().caste : '',
+    caste: this.fourPageService.getProfile().caste ?
+    this.fourPageService.getProfile().caste !== 'All' ? this.fourPageService.getProfile().caste : '' : '',
     manglik: this.fourPageService.getProfile().manglik ? this.fourPageService.getProfile().manglik : '',
     gender: this.fourPageService.getProfile().gender ? this.fourPageService.getProfile().gender === 'Male' ? 'boy' : 'girl' : '',
     locality: this.fourPageService.getProfile().locality ? ` residing in ${this.fourPageService.getProfile().locality}` : '',
