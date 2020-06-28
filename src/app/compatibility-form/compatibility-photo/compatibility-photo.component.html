@@ -8,106 +8,146 @@
      </div>
 
      <mat-card class="matPhotoCard">
-      <div class="row1">
+       <div class="box1">
+         <!-- // large box  -->
+          <div (click)="dfile.click()" class="flexIt" style="flex: 2;height: 100%;
+          border-radius: 5px;
+          background-color: #E6E7E9;">
+            <div class="t-c" *ngIf="!imgURL" >
+              <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
+            <p class="uploadText">Upload Picture</p>
+            </div>
+            <img [src]="imgURL"  height="100%" width="100%" *ngIf="imgURL" style="border-radius: 5px;">
+            <input style="display: none" #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,1)"  />
+          </div>
+
+          <!-- // column 2 with 2 vertical small boxes -->
+          <div class="verticalBox">
+            <div (click)="fontfile.click()" class="flexIt"  style="height: 100%;margin-bottom: 5px;
+            border-radius: 5px;
+            background-color: #E6E7E9;">
+              <div class="t-c" *ngIf="!frontfile">
+                <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
+                <p class="uploadText">Add More</p>
+              </div>
+              <img [src]="frontfile" height="100%" width="100%" *ngIf="frontfile" style="border-radius: 5px;">
+              <input style="display: none" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,2)"  />
+            </div>
+
+            <div (click)="backfile.click()" class="flexIt" style="height: 100%;margin-top: 5px;
+            border-radius: 5px;
+            background-color: #E6E7E9;">
+              <div class="t-c" *ngIf="!BackimgURL">
+                <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
+                <p class="uploadText">Add More</p>
+              </div>
+              <img [src]="BackimgURL" height="100%" width="100%" *ngIf="BackimgURL" style="border-radius: 5px;">
+              <input style="display: none" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,3)"/>
+            </div>
+
+          </div>
+       </div>
+
+
+       <div class="box2">
+         <div (click)="fontfile4.click()" class="flexIt" style="flex: 1;height: 100%;
+         border-radius: 5px;
+         background-color: #E6E7E9;">
+          <div class="t-c" *ngIf="!frontfile4">
+            <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
+            <p class="uploadText">Add More</p>
+          </div>
+          <img [src]="frontfile4" height="100%"  width="100%" *ngIf="frontfile4" style="border-radius: 5px;">
+          <input style="display: none" #fontfile4 type="file" id="fontfile4" accept='image/*' (change)="previewfront(fontfile4.files,4)"  />
+         </div>
+         <div (click)="fontfile5.click()" class="flexIt" style="flex: 1;height: 100%;
+         margin: 0px 10px;
+         border-radius: 5px;
+         background-color: #E6E7E9;">
+          <div class="t-c" *ngIf="!frontfile5">
+            <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
+            <p class="uploadText">Add More</p>
+          </div>
+          <img [src]="frontfile5" height="100%" width="100%" *ngIf="frontfile5" style="border-radius: 5px;">
+          <input style="display: none" #fontfile5 type="file" id="fontfile5" accept='image/*' (change)="previewfront(fontfile5.files,5)"  />
+         </div>
+         <div (click)="fontfile6.click()" class="flexIt" style="flex: 1;
+         border-radius: 5px;
+         height: 100%;
+         background-color: #E6E7E9;">
+          <div class="t-c" *ngIf="!frontfile6">
+            <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
+            <p class="uploadText">Add More</p>
+          </div>
+          <img [src]="frontfile6" height="100%" width="100%" *ngIf="frontfile6">
+          <input style="display: none" #fontfile6 type="file" id="fontfile6" accept='image/*' (change)="previewfront(fontfile6.files,6)"  />
+         </div>
+
+       </div>
+
+
+
+      <!-- <div class="row1">
 
         <mat-card class="matPhotoCardBig" (click)="dfile.click()">
-            <div class="full-width photoDiv">
               <div class="t-c" *ngIf="!imgURL">
                 <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
               <p class="uploadText">Upload Picture</p>
               </div>
               <img [src]="imgURL"  height="100%" width="100%" *ngIf="imgURL">
-            </div>
+              <input style="display: none" #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,1)"  />
         </mat-card>
-        <div>
-            <input style="display: none" #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,1)"  />
-                            
-        </div>
+
         <div class="col2">
-        <div class="full-width" style="height: inherit;">
           <mat-card class="matPhotoCardSmall" (click)="fontfile.click()">
-            <div class="full-width photoDiv">
               <div class="t-c" *ngIf="!frontfile">
                 <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
                 <p class="uploadText">Add More</p>
               </div>
               <img [src]="frontfile" height="100%" width="100%" *ngIf="frontfile">
-            </div>
+              <input style="display: none" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,2)"  />
         </mat-card>
-        <div>
-          <input style="display: none" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,2)"  />
-                         
-      </div>
-        </div>
 
-        <div class="full-width" style="height: inherit;margin-top: 10px">
           <mat-card class="matPhotoCardSmall" (click)="backfile.click()">
-            <div class="full-width photoDiv">
               <div class="t-c" *ngIf="!BackimgURL">
                 <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
                 <p class="uploadText">Add More</p>
               </div>
               <img [src]="BackimgURL" height="100%" width="100%" *ngIf="BackimgURL">
-            </div>
-        </mat-card>
-          <div>
               <input style="display: none" #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,3)"/>
-                             
-          </div>
-        </div>
+        </mat-card>
       </div>
 
       </div>
 
       <div class="row2">
-        <div class="full-width" style="height:100%">
           <mat-card class="matPhotoCardSmall" (click)="fontfile4.click()">
-            <div class="full-width photoDiv">
               <div class="t-c" *ngIf="!frontfile4">
                 <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
                 <p class="uploadText">Add More</p>
               </div>
-              <img [src]="frontfile4" height="100%" width="100%" *ngIf="frontfile4">
-            </div>
-        </mat-card>
-          <div>
+              <img [src]="frontfile4" height="100%"  width="100%" *ngIf="frontfile4">
               <input style="display: none" #fontfile4 type="file" id="fontfile4" accept='image/*' (change)="previewfront(fontfile4.files,4)"  />
-                             
-          </div>
-        </div>
+        </mat-card>
 
-        <div class="full-width" style="height:100%;margin: 0px 10px;">
           <mat-card class="matPhotoCardSmall" (click)="fontfile5.click()">
-            <div class="full-width photoDiv">
               <div class="t-c" *ngIf="!frontfile5">
                 <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
                 <p class="uploadText">Add More</p>
               </div>
               <img [src]="frontfile5" height="100%" width="100%" *ngIf="frontfile5">
-            </div>
-        </mat-card>
-          <div>
               <input style="display: none" #fontfile5 type="file" id="fontfile5" accept='image/*' (change)="previewfront(fontfile5.files,5)"  />
-                             
-          </div>
-        </div>
+        </mat-card>
 
-        <div class="full-width" style="height:100%">
           <mat-card class="matPhotoCardSmall" (click)="fontfile6.click()">
-            <div class="full-width photoDiv">
               <div class="t-c" *ngIf="!frontfile6">
                 <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
                 <p class="uploadText">Add More</p>
               </div>
               <img [src]="frontfile6" height="100%" width="100%" *ngIf="frontfile6">
-            </div>
-        </mat-card>
-          <div>
               <input style="display: none" #fontfile6 type="file" id="fontfile6" accept='image/*' (change)="previewfront(fontfile6.files,6)"  />
-                             
-          </div>
-        </div>
-      </div>
+        </mat-card>
+      </div> -->
 
      </mat-card>
 

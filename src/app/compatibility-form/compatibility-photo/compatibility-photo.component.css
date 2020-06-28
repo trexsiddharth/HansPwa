@@ -1,80 +1,48 @@
+.box1{
+width: 100%;
+height: 60%;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+}
+.box2{
+  width: 100%;
+  height: 36%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.verticalBox{
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.flexIt{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .matPhotoCard{
   background-color: white;
   height: 50vh;
   width: 100%;
-  margin: 0px auto;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
-.matPhotoCardBig{
-  background-color: #E6E7E9;
-  height: inherit;
-  width: auto;
-  padding: 0px;
-  flex: 2;
-}
-.matPhotoCardSmall{
-  background-color: #E6E7E9;
-  height: inherit;
-  width: auto;
-  padding: 0px;
 
-}
-.row1{
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  flex: 2;
-  width: 100%;
-}
-.col2{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
-  height: 100%;
-  margin-left: 10px;
-}
-
-.row2{
-  flex: 1;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  margin-top: 10px;
-
-}
-
-.photoCard{
-  background-color: #E6E7E9;
-  height:150px;
-  width: 220px;
-  margin: 0px auto;
-  padding: 0px;
-}
-.photoCardSmall{
-  background-color: #E6E7E9;
-  height:100px;
-  width: auto;
-  margin: 0px auto;
-}
-.photoDiv{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 .photoDiv img {
   border-radius: 5px
 }
