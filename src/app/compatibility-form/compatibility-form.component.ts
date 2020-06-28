@@ -291,6 +291,11 @@ export class CompatibilityFormComponent implements OnInit {
               this.Analytics('Four Page Registration', 'Four Page Registration Page Zero',
               'Registered through Four Page Registration Page Zero');
               console.log('New User');
+
+              // gtag app + web
+              (window as any).gtag('config', 'G-1ES443XD0F' , {
+                'user_id': localStorage.getItem(number)
+              });
             }
             this.spinner.hide();
           }, err => {
