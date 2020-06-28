@@ -252,6 +252,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
   }
 
   getNextMessageOrProfile(reply: string) {
+    // stop the button animation
+    this.stopAnimation();
+
     console.log('shortlist count', this.shortListCount);
     const modal = document.getElementById('myModal');
     if (modal.style.display !== 'none') {
@@ -269,7 +272,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
       this.openMessageDialog(this.item, reply);
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     reply.toLowerCase() === 'shortlist' && this.type === 'profile'
-    && this.shortListCount  !== 0 &&  this.shortListCount % 2 === 0) {
+    && this.shortListCount  !== 0 &&  this.shortListCount % 3 === 0) {
       this.shortListCount++;
       this.itemService.openOfferOne(this.item);
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
@@ -334,6 +337,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         }
 
         if (data.type === 'profile') {
+
           this.type = 'profile';
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             this.item = data.apiwha_autoreply;
@@ -345,6 +349,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           if (this.item.photo === null) {
               this.spinner.hide();
           }
+
+          // resets the buttons animation
+          this.resetAnimation();
 
           // if first time seen profile
           if (this.router.url.match('first') && reply === 'SHOW') {
@@ -388,6 +395,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
               document.getElementById('profilePic').scrollIntoView({behavior: 'smooth'});
             }
           }
+
+        this.spinner.hide();
         this.getCredits();
       }, err => {
         console.log(err);
@@ -480,6 +489,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
        data ? this.getProfilesLeft(this.item.profiles_left)
             : this.ngxNotificationService.error('Profiles Left Not Found');
 
+       this.spinner.hide();
+
      },
     (error: any) => {
       this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
@@ -489,25 +500,6 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
    );
   }
 
-  imageSetSuccess() {
-    console.log('called for stopping spinner');
-    if (document.querySelectorAll('#profilePic').length > 1) {
-      console.log('trying to stop spinner');
-      if (document.querySelectorAll<HTMLImageElement>('#profilePic')[0].complete) {
-        this.spinner.hide();
-        console.log('spinner stopped');
-      } else {
-        this.spinner.show();
-      }
-    } else {
-      if (document.querySelector<HTMLImageElement>('#profilePic').complete) {
-      this.spinner.hide();
-      console.log('spinner stopped');
-      } else {
-        this.spinner.show();
-      }
-    }
-  }
 
   setAge(birthDate: string) {
     if (birthDate != null) {
@@ -750,6 +742,26 @@ scrollDown() {
         top: 350,
         behavior: 'smooth'
   });
+}
+stopAnimation() {
+  const animationClass1 = 'animateButtonImage';
+  const class1 = document.querySelectorAll('.buttonImage')[2];
+  const class2 = document.querySelectorAll('.buttonImage')[1];
+  if (class1) {
+    class1.classList.remove(animationClass1);
+    class2.classList.remove(animationClass1);
+  }
+}
+resetAnimation() {
+const animationClass1 = 'animateButtonImage';
+const class1 = document.querySelectorAll('.buttonImage')[2];
+const class2 = document.querySelectorAll('.buttonImage')[1];
+
+// first step is removal
+if (class1) {
+    class1.classList.add(animationClass1);
+    class2.classList.add(animationClass1);
+}
 }
 }
 

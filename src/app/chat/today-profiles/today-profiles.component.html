@@ -2,7 +2,7 @@
     <div id="profileImageDiv">
         <ngb-carousel>
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
-                    <img id="profilePic" (load)="imageSetSuccess()" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
+                    <img id="profilePic" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
             </ng-template>
           </ngb-carousel>
 
@@ -46,8 +46,8 @@
         <div id="answerButtons">
             <div class="t-c blur">
                 <button 
-                (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="width: 70px;
-                height: 70px;color: grey;background: #C8C8C8;margin-bottom: 10px;">
+                (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
+                background: #C8C8C8;">
                   <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
                 </button><br>
                 <span style="color: #737373;font-weight: 600;font-size: 18px;">
@@ -56,10 +56,10 @@
             </div>
             <div class="t-c">
                 <button 
-                (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="width: 70px;
-                height: 70px;color: green;background: #58D1FD;margin-bottom: 10px;"
+                (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="color: green;
+                background: #58D1FD;"
                   aria-label="Example icon-button with a heart icon" >
-                  <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
+                  <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
                 </button><br>
                 <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.contact}}
@@ -67,10 +67,10 @@
             </div>
             <div class="t-c">
                 <button 
-                (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="width: 70px;
-                height: 70px;color: red;background: #D313AE;margin-bottom: 10px;"
+                (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="color: red;
+                background: #D313AE;margin-bottom: 10px;"
                   aria-label="Example icon-button with a heart icon" >
-                  <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
+                  <img class="buttonImage animateButtonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
                 </button><br>
                 <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.shortlist}}

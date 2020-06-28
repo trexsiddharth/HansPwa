@@ -35,6 +35,12 @@ main{
           display: flex;justify-content: space-between;
           border-radius: 10px;
 }
+.setButtons{
+    width: 70px;
+     height: 70px;
+     margin-bottom: 10px;
+     
+}
 #answerButtons{
     display: flex;
     justify-content: space-evenly;
@@ -47,6 +53,19 @@ main{
 }
 .buttonImage{
     width: 40px;
+}
+
+.animateButtonImage{
+    animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
 }
 #verified{
     background-color: #50ed9d;
@@ -129,6 +148,14 @@ main{
     }
 }
 
+@keyframes scale-in-out-image {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 40px;
+    }
+}
 
 @media (max-width: 350px){
     .title{
