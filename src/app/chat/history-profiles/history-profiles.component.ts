@@ -405,6 +405,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   addRemoveNewData(data: any) {
     return  new Promise((res) => {
        // finding and adding the new element to the locally stored list
+       const newProfilesList: any[] = [];
        (data as any[]).forEach(
         element => {
          const newProfiles =  this.profile.find(
@@ -417,10 +418,14 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
            });
          if (!newProfiles) {
             //  this.profile.push(element);
-             this.profile = [element, ...this.profile];
+            newProfilesList.push(element);
            }
         }
       );
+
+       if (newProfilesList.length > 0) {
+        this.profile = [...newProfilesList, ...this.profile];
+      }
 
       // finding and removing the old element from the locally stored list
 
