@@ -284,7 +284,6 @@ export class CompatibilityFormComponent implements OnInit {
             } else if (res.registered === 2) {
               localStorage.setItem('RegisterNumber', number);
               this.ngxNotificationService.info('Please complete the form and update');
-
             } else {
               localStorage.setItem('RegisterNumber', number);
               // signifies that new user has entered his mobile number.
@@ -307,7 +306,7 @@ export class CompatibilityFormComponent implements OnInit {
 
     getAllCaste() {
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
-        this.getcastes = ['All', ...res];
+        this.getcastes = [...res, 'All'];
       });
       if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== '') {
       this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
