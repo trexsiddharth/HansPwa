@@ -24,27 +24,27 @@
                     *ngIf="homeService.getLoginStatus() == false">
                         <img width="40px" src="../../../assets/note.svg" alt="register">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.registerFree}}</span>
+                        margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.registerFree}}</span>
                     </button>
 
                     <button class="btn drawerBtn" [routerLink]="['/phone-number']" routerLinkActive="router-link-active" 
                     *ngIf="homeService.getLoginStatus() == false">
                         <img width="40px" src="../../../assets/password.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.login}}</span>
+                        margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.login}}</span>
                     </button>
 
                     <button class="btn drawerBtn" [routerLink]="['/subscription']" routerLinkActive="router-link-active" >
                         <img width="40px" src="../../../assets/contract.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.subscription}}</span>
+                        margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.subscription}}</span>
                     </button>
 
                     <button class="btn drawerBtn" (click)="logout()"
                     *ngIf="homeService.getLoginStatus()">
                         <img width="40px" src="../../../assets/log_out.svg" alt="settings icon">  
                         <span style="padding-top: 4.5px; color: #070973;
-                        margin-left: 20px;">&nbsp;&nbsp; {{languageService.homeLang.logout}}</span>
+                        margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.logout}}</span>
                     </button>
                 </div>
             </ng-container>
