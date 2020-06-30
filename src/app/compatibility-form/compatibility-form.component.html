@@ -24,7 +24,8 @@
             
                   <mat-step [stepControl]="PageOne">
                   <form  [formGroup]="PageOne">
-                    <ng-template matStepLabel>Page I</ng-template>
+                     <!-- label name if required -->
+                    <!-- <ng-template matStepLabel>Page I</ng-template> -->
                       <div class="row">
 
                         <div class="col-md-12">
@@ -259,28 +260,29 @@
                   </form>
                 </mat-step> 
                 <mat-step [completed]="formTwo"> 
-                  <ng-template matStepLabel>
+                  <!-- label name if required -->
+                  <!-- <ng-template matStepLabel>
                     Page II
-                </ng-template>
+                </ng-template> -->
                       <app-compatibility-page-two></app-compatibility-page-two>
                 </mat-step>
                 <mat-step [completed]="formThree">
-                  <ng-template matStepLabel>
+                  <!-- <ng-template matStepLabel>
                       Page III
-                  </ng-template>
+                  </ng-template> -->
                   <app-compatibility-page-three></app-compatibility-page-three>
                 </mat-step>
                 <mat-step [completed]="formFour">
-                  <ng-template matStepLabel>
+                  <!-- <ng-template matStepLabel>
                     Page IV
-                  </ng-template>
+                  </ng-template> -->
                   <app-compatibility-photo></app-compatibility-photo>
                 </mat-step>
                 <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
                 <mat-step *ngIf="fourPageService.getUserThrough() && !isLeadIsZero ">
-                  <ng-template matStepLabel  >
+                  <!-- <ng-template matStepLabel  >
                     Page V
-                  </ng-template>
+                  </ng-template> -->
                   <app-compatibility-page-five></app-compatibility-page-five>
                 </mat-step>
               </div> 
