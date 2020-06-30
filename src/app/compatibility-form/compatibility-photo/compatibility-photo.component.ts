@@ -266,10 +266,6 @@ export class CompatibilityPhotoComponent implements OnInit {
         this.imgURL = userProfile.image1 ? userProfile.image1 : '';
         this.frontfile = userProfile.image2 ? userProfile.image2 : '';
         this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
-        this.frontfile4 = userProfile.image2 ? userProfile.image4 : '';
-        this.frontfile5 = userProfile.image2 ? userProfile.image5 : '';
-        this.frontfile6 = userProfile.image2 ? userProfile.image6 : '';
-
   }
 
   photoScoreChanged(event) {

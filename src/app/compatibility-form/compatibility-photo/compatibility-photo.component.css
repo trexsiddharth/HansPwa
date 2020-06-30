@@ -1,18 +1,20 @@
+.matPhotoCard{
+  background-color: white;
+  height: 35vh;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
 .box1{
 width: 100%;
-height: 60%;
+height: 100%;
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
-}
-.box2{
-  width: 100%;
-  height: 36%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 }
 .verticalBox{
   flex: 1;
@@ -32,16 +34,7 @@ justify-content: space-between;
   width: 100%;
 }
 
-.matPhotoCard{
-  background-color: white;
-  height: 50vh;
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
+
 
 .photoDiv img {
   border-radius: 5px

@@ -49,42 +49,6 @@
        </div>
 
 
-       <div class="box2">
-         <div (click)="fontfile4.click()" class="flexIt" style="flex: 1;height: 100%;
-         border-radius: 5px;
-         background-color: #E6E7E9;">
-          <div class="t-c" *ngIf="!frontfile4">
-            <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
-            <p class="uploadText">Add More</p>
-          </div>
-          <img [src]="frontfile4" height="100%"  width="100%" *ngIf="frontfile4" style="border-radius: 5px;">
-          <input style="display: none" #fontfile4 type="file" id="fontfile4" accept='image/*' (change)="previewfront(fontfile4.files,4)"  />
-         </div>
-         <div (click)="fontfile5.click()" class="flexIt" style="flex: 1;height: 100%;
-         margin: 0px 10px;
-         border-radius: 5px;
-         background-color: #E6E7E9;">
-          <div class="t-c" *ngIf="!frontfile5">
-            <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
-            <p class="uploadText">Add More</p>
-          </div>
-          <img [src]="frontfile5" height="100%" width="100%" *ngIf="frontfile5" style="border-radius: 5px;">
-          <input style="display: none" #fontfile5 type="file" id="fontfile5" accept='image/*' (change)="previewfront(fontfile5.files,5)"  />
-         </div>
-         <div (click)="fontfile6.click()" class="flexIt" style="flex: 1;
-         border-radius: 5px;
-         height: 100%;
-         background-color: #E6E7E9;">
-          <div class="t-c" *ngIf="!frontfile6">
-            <img width="30px" src="../../../assets/icons/addmore.svg" alt="add more">
-            <p class="uploadText">Add More</p>
-          </div>
-          <img [src]="frontfile6" height="100%" width="100%" *ngIf="frontfile6">
-          <input style="display: none" #fontfile6 type="file" id="fontfile6" accept='image/*' (change)="previewfront(fontfile6.files,6)"  />
-         </div>
-
-       </div>
-
 
 
       <!-- <div class="row1">
