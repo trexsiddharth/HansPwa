@@ -34,9 +34,9 @@
                         </mat-form-field>
                       </div>
 
-                        <!-- // designation is hidden to check the user drop in analytics -->
+                       
                         
-                      <!-- <div class="col-md-12">
+                      <div class="col-md-12" *ngIf="fourPageService.getUserThrough()">
 
                         <mat-form-field class="full-width fieldFit" appearance="standard" *ngIf="PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' ">
                         
@@ -58,7 +58,7 @@
                           <mat-label>Other Designation</mat-label>
                           <input type="text" (change)="changedDesignation()"  matInput formControlName="OtherDesignation" name="Designation">
                         </mat-form-field>
-                      </div> -->
+                      </div>
 
                       <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                         जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |

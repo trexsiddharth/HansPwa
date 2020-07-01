@@ -23,7 +23,7 @@
 
           <!-- // column 2 with 2 vertical small boxes -->
           <div class="verticalBox">
-            <div (click)="fontfile.click()" class="flexIt"  style="height: 100%;margin-bottom: 5px;
+            <div (click)="fontfile.click()" class="flexIt"  style="height: 49%;
             border-radius: 5px;
             background-color: #E6E7E9;">
               <div class="t-c" *ngIf="!frontfile">
@@ -34,7 +34,7 @@
               <input style="display: none" #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,2)"  />
             </div>
 
-            <div (click)="backfile.click()" class="flexIt" style="height: 100%;margin-top: 5px;
+            <div (click)="backfile.click()" class="flexIt" style="height: 49%;
             border-radius: 5px;
             background-color: #E6E7E9;">
               <div class="t-c" *ngIf="!BackimgURL">
