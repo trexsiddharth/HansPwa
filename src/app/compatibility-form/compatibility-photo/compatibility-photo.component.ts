@@ -322,15 +322,26 @@ export class CompatibilityPhotoComponent implements OnInit {
   skip(type) {
     this.fourPageService.form4Completed.emit(true);
     (window as any).fbq('track', 'FourPageRegistration', {
-      value: 15,
-      currency: 'INR',
+      value: localStorage.getItem('id'),
       content_name: localStorage.getItem('RegisterNumber'),
     });
     (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', {
-      value: 15,
-      currency: 'INR',
+      value: localStorage.getItem('id'),
       content_name: localStorage.getItem('RegisterNumber'),
     });
+
+    (window as any).fbq('track', 'CompleteRegistration', {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('RegisterNumber'),
+    });
+    (window as any).fbq('track', '692972151223870' , 'CompleteRegistration', {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('RegisterNumber'),
+    });
+
+
+
+
     this.gtag_report_conversion();
 
 

@@ -69,6 +69,7 @@ export class CompatibilityFormComponent implements OnInit {
   MaritalStatus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
   createProfile: string[] = ['Myself', 'Son', 'Daughter', 'Brother', 'Sister', 'Other'];
   PageOne: FormGroup;
+  PageTwo: FormGroup;
 
   // birth date
   birthDate: any;
@@ -93,7 +94,6 @@ export class CompatibilityFormComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
-  numberCheck: string = localStorage.getItem('RegisterNumber');
   changeNumber = false;
   // tslint:disable-next-line: max-line-length
   date: string[] = ['01', '02' , '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
@@ -134,7 +134,8 @@ export class CompatibilityFormComponent implements OnInit {
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
-      phone: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+      phone: [localStorage.getItem('RegisterNumber')
+      , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
@@ -157,7 +158,9 @@ export class CompatibilityFormComponent implements OnInit {
     localStorage.clear();
     this.languageService.setRegisterLang();
     if (localStorage.getItem('RegisterNumber')) {
-    this.numberCheck = localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length);
+    this.PageOne.patchValue({
+      phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
+    });
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
     document.querySelector('body').style.background = 'white';
@@ -168,6 +171,15 @@ export class CompatibilityFormComponent implements OnInit {
       (complete: boolean) => {
         if (complete === true) {
           this.formTwo = true;
+         }
+      }
+    );
+    this.fourPageService.formTwoGroup.subscribe(
+      (formGroup) => {
+        console.log(formGroup);
+        if (formGroup) {
+          console.log(formGroup);
+          this.PageTwo = formGroup;
          }
       }
     );
@@ -216,7 +228,9 @@ export class CompatibilityFormComponent implements OnInit {
         this.fourPageService.setUserThrough(true);
         localStorage.setItem('getListId', route.params.id);
         } else if (route.params.mobile) {
-          this.numberCheck = route.params.mobile;
+          this.PageOne.patchValue({
+            phone: route.params.mobile
+          });
           this.fourPageService.setUserThrough(true);
           localStorage.setItem('getListMobile', route.params.mobile);
           } else {
@@ -251,7 +265,9 @@ export class CompatibilityFormComponent implements OnInit {
 
       // when user comes from app to webview four page reg
       if (route.params.appMobile) {
-        this.numberCheck = route.params.appMobile;
+        this.PageOne.patchValue({
+          phone: route.params.appMobile
+        });
       }
     }
   );
@@ -270,8 +286,9 @@ export class CompatibilityFormComponent implements OnInit {
 
     }
       // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
-    mobileNumberChanged(number) {
+    mobileNumberChanged() {
       if (localStorage.getItem('getListId') === null || localStorage.getItem('getListId') === '' ) {
+        const number = this.PageOne.value.phone;
         console.log(number);
         console.log(this.authMobileNumberStatus);
           // tslint:disable-next-line: max-line-length

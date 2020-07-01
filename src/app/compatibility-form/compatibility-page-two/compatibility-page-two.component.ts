@@ -193,6 +193,18 @@ constructor(private http: HttpClient, public dialog: MatDialog, private formBuil
 
 ngOnInit() {
 
+  // if user can pass through is true
+  this.fourPageService.userThroughStatusUpdated.subscribe(
+    (status: boolean) => {
+        if (status) {
+          if (this.PageTwo) {
+            console.log('user get through', status, this.PageTwo);
+            this.fourPageService.formTwoGroup.emit(this.PageTwo);
+          }
+        }
+    }
+  );
+
   // load the initial eduation list
   this.filteredEducationGroups.next(this.copyEducationGroups(this.HigherEducation));
 
@@ -388,6 +400,7 @@ onLocationSelected(e) {
     this.workingCity = e;
     if (this.PageTwo.valid) {
       this.fourPageService.formCompleted.emit(true);
+      this.fourPageService.formTwoGroup.emit(this.PageTwo);
      }
     console.log('location of family', e);
 }
@@ -395,6 +408,7 @@ changedQualification() {
   console.log('changed Qualification');
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
+    this.fourPageService.formTwoGroup.emit(this.PageTwo);
    }
   this.setAbout();
 }
@@ -432,6 +446,7 @@ changedOccupation() {
   }
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
+    this.fourPageService.formTwoGroup.emit(this.PageTwo);
    }
   this.setAbout();
 }
@@ -460,6 +475,7 @@ changedDesignation() {
   }
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
+    this.fourPageService.formTwoGroup.emit(this.PageTwo);
    }
   this.setAbout();
 }
@@ -467,6 +483,7 @@ changedAbroad() {
   console.log('changed Abroad');
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
+    this.fourPageService.formTwoGroup.emit(this.PageTwo);
    }
 }
 getQualification(text) {

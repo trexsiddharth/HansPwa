@@ -163,6 +163,7 @@ payNowCustom(amt, type, plan, name, email, phone,mode,orderId,cust_id) {
     'handler': (response) =>  {
         console.log(response);
         if (plan === 0) {
+          this.facebookAnalytics('Purchase', amt);
           alert('Payment Successfull \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
           this.authorizeFirstPaymentCustom(response);
         } else {
@@ -225,6 +226,7 @@ captureStandardPayment(response, amount, points) {
         if (data.status === 1) {
           alert('Payment Successful, Credits has been added to your account.');
           this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amount);
+          this.facebookAnalytics('Subscribe', amount);
           this.route.navigateByUrl('chat');
         } else {
           this.ngxNotificationService.error('Something went wrong. Please try again later.');
@@ -235,5 +237,17 @@ captureStandardPayment(response, amount, points) {
       this.ngxNotificationService.error('Something went wrong. Please try again later.');
     }
   );
+}
+facebookAnalytics(event, amount) {
+  (window as any).fbq('track', event, {
+    value: amount,
+    currency: 'INR',
+    content_name: localStorage.getItem('mobile_number'),
+  });
+  (window as any).fbq('track', '692972151223870' , event, {
+    value: amount,
+    currency: 'INR',
+    content_name: localStorage.getItem('mobiler_number'),
+  });
 }
 }

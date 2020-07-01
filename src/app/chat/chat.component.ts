@@ -200,6 +200,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+
     if (this.router.url.match('logout')) {
       this.loginStatus = false;
       localStorage.setItem('mobile_number', '');

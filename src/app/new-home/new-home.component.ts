@@ -31,6 +31,7 @@ export class NewHomeComponent implements OnInit {
   }
 
   sendWhatsAppLink() {
+    this.facebookAnalytics();
     window.open('http://wa.me/918766217175?text=We%20are%20interested%20in%20Registering%20for%20Personalized%20Services');
   }
 
@@ -45,6 +46,17 @@ export class NewHomeComponent implements OnInit {
       localStorage.setItem('language', 'hindi');
       this.languageService.setHomeLang('hindi');
     }
+  }
+
+  facebookAnalytics() {
+    (window as any).fbq('track', 'Contact', {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('mobile_number'),
+    });
+    (window as any).fbq('track', '692972151223870' , 'Contact', {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('mobiler_number'),
+    });
   }
 
 }

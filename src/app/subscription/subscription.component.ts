@@ -133,6 +133,17 @@ Analytics(type: string, category: string, action: string) {
   });
 }
 
+facebookAnalytics(event) {
+  (window as any).fbq('track', event, {
+    value: localStorage.getItem('id'),
+    content_name: localStorage.getItem('mobile_number'),
+  });
+  (window as any).fbq('track', '692972151223870' , event, {
+    value: localStorage.getItem('id'),
+    content_name: localStorage.getItem('mobiler_number'),
+  });
+}
+
    openDialog() {
      if (this.price) {
     if (localStorage.getItem('mobile_number')) {
@@ -142,6 +153,8 @@ Analytics(type: string, category: string, action: string) {
       }
     this.Analytics('RazorPay Payement Gateway', 'RazorPay Payement Gateway Opened',
      'Payement Gateway Opened For ' + this.price );
+
+    this.facebookAnalytics('InitiateCheckout');
      } else {
         this.ngxNotificationService.error('Something Went Wrong');
      }

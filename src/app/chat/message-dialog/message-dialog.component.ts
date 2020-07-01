@@ -141,6 +141,7 @@ export class MessageDialogComponent implements OnInit {
     this.http.post<any>('https://partner.hansmatrimony.com/api/insertPremiumInterest', interestForm).subscribe(
       data => {
         console.log(data);
+        this.facebookAnalytics();
         this.dialogRef.close({
           request: true
         });
@@ -152,6 +153,17 @@ export class MessageDialogComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+
+  facebookAnalytics() {
+    (window as any).fbq('track', 'Contact', {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('mobile_number'),
+    });
+    (window as any).fbq('track', '692972151223870' , 'Contact', {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('mobile_number'),
+    });
   }
 
 }

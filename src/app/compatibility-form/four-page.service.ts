@@ -1,18 +1,25 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Profile } from './profile';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FourPageService {
+  // page two form event
  formCompleted = new EventEmitter<boolean>();
+ formTwoGroup = new EventEmitter<FormGroup>();
+ // page three form event
  form3Completed = new EventEmitter<boolean>();
+ // page four form event
  form4Completed = new EventEmitter<boolean>();
  getListData = new EventEmitter<boolean>();
  makeLinear = new EventEmitter<boolean>();
  pageOneUpdated = new EventEmitter<boolean>();
  profile = new Profile();
  userThroughGetList = false;
+ // will be used to notify user can pass through or not to all the sections
+userThroughStatusUpdated = new EventEmitter<boolean>();
  skippable = false;
 
   constructor() { }
@@ -26,6 +33,7 @@ export class FourPageService {
 
   setUserThrough(status) {
     this.userThroughGetList = status;
+    this.userThroughStatusUpdated.emit(status);
   }
   getUserThrough() {
     return this.userThroughGetList;
