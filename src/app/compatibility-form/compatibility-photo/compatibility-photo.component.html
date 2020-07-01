@@ -1,11 +1,5 @@
 <form>
-    <div class="row">
-        <div class="col-md-12 text-center" style="margin: 0px auto;
-        font-size: 18px;
-        font-weight: 900;">
-          <p>Multiple Pictures can be Uploaded</p>
-    </div>
-     </div>
+
 
      <mat-card class="matPhotoCard">
        <div class="box1">
@@ -139,9 +133,9 @@
         <button class="btn btn-blue" mat-raised-button style="background-color: grey;" id="photoBtn"  matStepperNext (click)="skip(0)">Upload Photo Later</button>
         <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Submit</button>
    </div> 
-   <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
+   <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
     Add your photo to help your perfect match recognise you!
-  </p>
+  </p> -->
    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
     डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
   </p>

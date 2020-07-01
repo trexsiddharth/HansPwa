@@ -414,7 +414,7 @@ changedOccupation() {
       Designation: 'Owner'
     });
     break;
-    case 'Private Company' || 'Govt. Job':
+    case 'Private Job' || 'Govt. Job':
       this.PageTwo.patchValue({
         Designation: ''
       });
