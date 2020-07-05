@@ -53,6 +53,7 @@ showTimer = false;
     return this.http.post<{type: any, message: any}>('https://partner.hansmatrimony.com/api/verifyOTP', otp).subscribe(res => {
       console.log('verify res', res);
       if (res.type === 'success') {
+        this.showSnackBar('OTP Verified!!');
         this.dialogRef.close({
           success: 'verified',
           is_lead: this.data.is_lead
