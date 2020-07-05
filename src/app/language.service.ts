@@ -46,6 +46,14 @@ export class LanguageService {
      dob: ''
    };
 
+   verificationLang = {
+     verifyMobile : '',
+     otpSent: '',
+     resendOtp: '',
+     verify: '',
+     changeNumber: ''
+   };
+
   constructor(private http: HttpClient,
               private ngxNotificationService: NgxNotificationService) {
    }
@@ -344,6 +352,32 @@ export class LanguageService {
   localStorage.setItem('language', 'hindi');
   this.setRegisterLang();
 }
+  }
+
+  setVerificationLanguage() {
+    if (localStorage.getItem('language')) {
+      switch (localStorage.getItem('language')) {
+        case 'hindi':
+          this.verificationLang.verifyMobile = 'वैरिफाई मोबाइल नंबर';
+          this.verificationLang.otpSent = 'OTP भेज दिया गया है';
+          this.verificationLang.resendOtp = 'दुबारा भेजें ';
+          this.verificationLang.verify = 'वैरिफाई';
+          this.verificationLang.changeNumber = 'नंबर बदलें';
+
+          break;
+
+          case 'english':
+            this.verificationLang.verifyMobile = 'Verify Mobile Number';
+            this.verificationLang.otpSent = 'An OTP has been sent to ';
+            this.verificationLang.resendOtp = 'Resend Otp in ';
+            this.verificationLang.verify = 'Verify';
+            this.verificationLang.changeNumber = 'Change Number';
+            break;
+
+        default:
+          break;
+      }
+    }
   }
 
   changeLanguage(lang: string) {

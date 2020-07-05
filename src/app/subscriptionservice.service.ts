@@ -25,6 +25,7 @@ export class SubscriptionserviceService {
       fileName.async = true;
       fileName.setAttribute('type', 'text/javascript');
       fileName.setAttribute('src', 'https://checkout.razorpay.com/v1/checkout.js');
+     
       fileName.id = 'razorPay';
       document.body.appendChild(fileName);
     }

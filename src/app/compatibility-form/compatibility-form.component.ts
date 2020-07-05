@@ -59,7 +59,6 @@ export const _filter = (opt: string[], value: string): string[] => {
 
 
 export class CompatibilityFormComponent implements OnInit {
-  @ViewChild('otpModal', {static: false}) private otpModal: any;
 
   time = {
     hour: 13,

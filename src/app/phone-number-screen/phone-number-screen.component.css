@@ -4,6 +4,10 @@
     background-color: #34b7f1;
 }
 .containerTwo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     padding: 5% 0px;
     text-align: center;
     font-size: 20px;
@@ -19,11 +23,20 @@
     margin: auto auto;
 }
 
+.submitImage{
+    width: 50px;
+    margin-top: 30px;
+}
+
 @media (max-width: 900px) {
     .containerOne{
         padding: 25% 0px;
     }
     .containerTwo{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         padding: 25% 0px;
         font-size: 24px;
         margin: 0px;
@@ -32,4 +45,11 @@
         width: 80%;
     }
     
+}
+
+@media screen and (max-width: 350px) {
+    .submitImage{
+        width: 40px;
+        margin-top: 30px;
+    }
 }

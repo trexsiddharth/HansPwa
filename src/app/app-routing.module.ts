@@ -5,7 +5,6 @@ import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-s
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 import { NewHomeComponent } from './new-home/new-home.component';
-import { SubscriptionComponent } from './subscription/subscription.component';
 
 
 const routes: Routes = [
@@ -24,6 +23,10 @@ const routes: Routes = [
 { path: 'subscription',
   loadChildren: () => import('./subscription/subscription.module').
   then(m => m.SubscriptionModule)
+},
+{ path: 'bless',
+  loadChildren: () => import('./bless/bless.module').
+  then(m => m.BlessModule)
 },
   { path: '',
   redirectTo: '',

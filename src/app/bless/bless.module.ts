@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BlessRoutingModule } from './bless-routing.module';
+import { BlessPaymentComponent } from './bless-payment/bless-payment.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
-import { RegComponent } from './reg.component';
-import { RegRoutingModule } from './reg-routing.module';
 
 
 
 @NgModule({
   declarations: [
-    RegComponent
+    BlessPaymentComponent
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule,
-    RegRoutingModule,
-  ],
-  entryComponents: [
-    RegComponent
+    BlessRoutingModule,
+    AngularMaterialModule
   ]
 })
-export class RegModule { }
+export class BlessModule { }

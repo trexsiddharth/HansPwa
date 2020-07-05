@@ -32,6 +32,7 @@ import { NewHomeService } from './new-home/new-home.service';
 import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.component';
 import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
+import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
     LockdownOffComponent,
     OfferOneComponent,
     OfferTwoComponent,
+    VerifyOtpComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
   entryComponents: [TiktokAdsFormComponent,
   LockdownOffComponent,
   OfferOneComponent,
-  OfferTwoComponent],
+  OfferTwoComponent,
+  VerifyOtpComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
