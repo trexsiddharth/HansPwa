@@ -3,6 +3,7 @@ import { LanguageService } from '../language.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-verify-otp',
@@ -16,11 +17,14 @@ showTimer = false;
   constructor(public languageService: LanguageService,
               private http: HttpClient,
               private snackBar: MatSnackBar,
+              private spinner: NgxSpinnerService,
               public dialogRef: MatDialogRef<VerifyOtpComponent>,
               @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
     this.languageService.setVerificationLanguage();
+
+    this.spinner.hide();
 
     this.otpForm = new FormGroup({
       otp1 : new FormControl('', [Validators.required, Validators.min(0), Validators.max(9)]),

@@ -127,6 +127,7 @@ button:focus{outline:none !important;}
 .mat-dialog-container{
   background-color: white;
   padding: 0px !important;
+    border-radius: 10px;
 }
 
 .mat-select-placeholder{

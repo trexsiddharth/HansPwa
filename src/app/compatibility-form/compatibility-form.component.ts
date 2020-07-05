@@ -35,6 +35,8 @@ import { element } from 'protractor';
 import { FourPageService } from './four-page.service';
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
 import { LanguageService } from '../language.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -124,6 +126,7 @@ export class CompatibilityFormComponent implements OnInit {
               public notification: NotificationsService,
               public fourPageService: FourPageService,
               private matDialog: MatDialog,
+              private breakPointObserver: BreakpointObserver,
               public languageService: LanguageService,
               private route: ActivatedRoute,
               private ngxNotificationService: NgxNotificationService, 
@@ -294,9 +297,9 @@ export class CompatibilityFormComponent implements OnInit {
         this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : number, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
             console.log(res);
             if (res.registered === 1) {
-              localStorage.setItem('mobile_number', number);
-              localStorage.setItem('is_lead', res.is_lead);
-              this.router.navigateByUrl('chat');
+              this.ngxNotificationService.success('Already Registered');
+              this.openVerificationDialog(res.is_lead);
+              this.spinner.show();
             } else if (res.registered === 2) {
               localStorage.setItem('RegisterNumber', number);
               this.ngxNotificationService.info('Please complete the form and update');
@@ -318,6 +321,45 @@ export class CompatibilityFormComponent implements OnInit {
             console.log(err);
           });
         }
+    }
+
+    openVerificationDialog(isLead: string) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.hasBackdrop = true;
+      this.breakPointObserver.observe([
+        '(min-width: 1024px)'
+      ]).subscribe(
+        result => {
+          if (result.matches) {
+            console.log('screen is greater than  1024px');
+            dialogConfig.maxWidth = '30vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = false;
+          } else {
+            console.log('screen is less than  1024px');
+            dialogConfig.minWidth = '90vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = false;
+          }
+        }
+      );
+  
+      dialogConfig.data = {
+        mobile : this.PageOne.value.phone,
+        is_lead: isLead
+      };
+      const dialogRef = this.dialog.open(VerifyOtpComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(
+        (data: any) => {
+          if (data) {
+            if (data.success === 'verified') {
+              localStorage.setItem('mobile_number', this.PageOne.value.phone);
+              localStorage.setItem('is_lead', data.is_lead);
+              this.router.navigateByUrl('chat');
+            } else { return; }
+          }
+        }
+      );
     }
 
     getAllCaste() {
