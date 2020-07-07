@@ -65,12 +65,12 @@
   </div>
   
   <div class="buttonSet"  style="margin-bottom:20px;margin-top: 20px;">
-        <button class="btn btn-blue" mat-raised-button style="background-color: grey;" id="photoBtn"  matStepperNext (click)="skip(0)">Upload Photo Later</button>
-        <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Submit</button>
+        <button class="btn btn-blue" mat-raised-button style="background-color: grey;" id="photoBtn"  matStepperNext (click)="skip(0)">Go Without Photo</button>
+        <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Go</button>
    </div> 
-   <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
-    Add your photo to help your perfect match recognise you!
-  </p> -->
+   <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
+    Click 'Go' to see your perfect matches.
+  </p>
    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
     डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
   </p>

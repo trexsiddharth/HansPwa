@@ -204,9 +204,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     if (this.router.url.match('logout')) {
       this.loginStatus = false;
-      localStorage.setItem('mobile_number', '');
-      localStorage.setItem('id', '');
-      localStorage.setItem('gender', '');
+      localStorage.clear();
     }
     window.addEventListener('offline',
       () => {
@@ -545,12 +543,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.tabType = 'interestShown';
         this.changeToHistory();
         break;
-      case 3:
-        this.tabType = 'mutual';
+        case 3:
+        this.tabType = 'interestReceived';
         this.changeToHistory();
         break;
       case 4:
-        this.tabType = 'interestReceived';
+        this.tabType = 'mutual';
         this.changeToHistory();
         break;
       case 5:
@@ -578,12 +576,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.tabType = 'interestShown';
         this.changeToHistory();
         break;
-      case 3:
-        this.tabType = 'mutual';
+        case 3:
+        this.tabType = 'interestReceived';
         this.changeToHistory();
         break;
       case 4:
-        this.tabType = 'interestReceived';
+        this.tabType = 'mutual';
         this.changeToHistory();
         break;
       case 5:

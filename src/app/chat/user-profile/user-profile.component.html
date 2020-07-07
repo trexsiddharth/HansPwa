@@ -1,16 +1,17 @@
 <main *ngIf="personalProfileData">
-    <div class="t-c" style="color: white;padding: 10px 10px;background-color: #83C9F4;">
+    <div class="t-c" style="color: white;padding: 10px 0px;background-color: #83C9F4;">
         <img (click)="backToChat()" style="float: left;width: 20px;
         position: absolute;
-            left: 20px;" src="../../../assets/backbtn.svg" alt="back button">
+            left: 10px;" src="../../../assets/backbtn.svg" alt="back button">
         <h5 style="font-weight: bold;margin: 0px;">
             {{languageService.profileLang.myprofile}}
         </h5>
         <div style="position: absolute;
         right: 10px;
         top: 5px;">
-            <span style="font-size: 18px;">हिं <mat-slide-toggle  [checked]="langCheck" (change)="langChanged($event)">En</mat-slide-toggle></span>
-            <button mat-icon-button 
+            <span style="font-size: 18px;">हिं <mat-slide-toggle  [checked]="langCheck"
+                 (change)="langChanged($event)">En</mat-slide-toggle></span>
+            <button mat-icon-button  style="width: auto;"
             [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon style="font-size: 30px !important;
                 margin-top: -7px;">more_vert</mat-icon>

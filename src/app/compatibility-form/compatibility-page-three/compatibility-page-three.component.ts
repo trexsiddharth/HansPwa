@@ -99,12 +99,13 @@ ngOnInit() {
     }
 
     isValid(notificationStatus): boolean { // notification status -> whether to show error notification
-      if (this.birthPlace == null || this.birthPlace === '') {
-        if (notificationStatus === 1) {
-          this.ngxNotificationService.error('Select A Valid Birth Place');
-        }
-        return false;
-    } else if (!this.PageThree.value.FoodChoice) {
+    //   if (this.birthPlace == null || this.birthPlace === '') {
+    //     if (notificationStatus === 1) {
+    //       this.ngxNotificationService.error('Select A Valid Birth Place');
+    //     }
+    //     return false;
+    // }
+     if (!this.PageThree.value.FoodChoice) {
       if (notificationStatus === 1) {
       this.ngxNotificationService.error('Select A Valid Food Choice');
       }
@@ -139,7 +140,7 @@ firstStep() {
       this.spinner.show();
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
-      firststepdata.append('birth_place', this.birthPlaceText);
+      firststepdata.append('birth_place', this.birthPlaceText ? this.birthPlaceText : this.PageThree.value.BirthPlace);
 
       if (this.PageThree.value.BirthTime) {
               firststepdata.append('birth_time', this.PageThree.value.BirthTime);

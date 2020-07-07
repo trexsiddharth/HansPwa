@@ -38,19 +38,6 @@
                      </div>
                   </ng-template>
                   </mat-tab>
-                  <!-- // mutual liking -->
-                  <mat-tab [label]="itemService.getMutualCount()" id="mutual">
-                    <ng-template matTabContent>
-                    <div>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                 <app-history-profiles [type]="tabType"></app-history-profiles>
-                       </div>
-                   </div>
-                </ng-template>
-                </mat-tab>
                 <!-- // liked me  -->
                   <mat-tab [label]="itemService.getShortedCount()" id="likeme">
                       <ng-template matTabContent>
@@ -64,6 +51,19 @@
                      </div>
                   </ng-template>
                   </mat-tab>
+                   <!-- // mutual liking -->
+                   <mat-tab [label]="itemService.getMutualCount()" id="mutual">
+                    <ng-template matTabContent>
+                    <div>
+                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                    </button>
+                        <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                                 <app-history-profiles [type]="tabType"></app-history-profiles>
+                       </div>
+                   </div>
+                </ng-template>
+                </mat-tab>
                    <!-- // personalized profiles-->
                   <mat-tab [label]="itemService.getOtherProfiles()" *ngIf="itemService.getIsLead() == '0'">
                     <ng-template matTabContent>

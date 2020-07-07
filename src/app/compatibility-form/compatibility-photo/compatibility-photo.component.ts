@@ -345,9 +345,6 @@ export class CompatibilityPhotoComponent implements OnInit {
     this.gtag_report_conversion();
 
 
-    this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
-                 'Registered through Four Page Registration Page Four');
-
                  // 0 -> got to chat  1-> got to fifth page
                  // if type is 0 and  getListLeadId === 0 send to hot leads
     if (type === 0 && !this.fourPageService.getUserThrough()) {
@@ -359,6 +356,9 @@ export class CompatibilityPhotoComponent implements OnInit {
     if (type === 0) {
       this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
       'User Skipped Photo Upload');
+    } else {
+      this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
+      'Registered through Four Page Registration Page Four');
     }
   }
 

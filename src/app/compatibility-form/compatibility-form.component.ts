@@ -424,10 +424,10 @@ export class CompatibilityFormComponent implements OnInit {
        return;
     }
 
-    if (!this.fourPageService.getUserThrough() && this.locationFamily == null || this.locationFamily === '') {
-      this.ngxNotificationService.error('Select A Valid Location');
-      return;
-    }
+    // if (!this.fourPageService.getUserThrough() && this.locationFamily == null || this.locationFamily === '') {
+    //   this.ngxNotificationService.error('Select A Valid Location');
+    //   return;
+    // }
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
       console.log('caste', this.PageOne.value.Castes);
@@ -469,7 +469,7 @@ export class CompatibilityFormComponent implements OnInit {
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
-              firststepdata.append('locality', this.locality);
+              firststepdata.append('locality', this.locality ? this.locality : this.PageOne.value.locality);
               firststepdata.append('disability', this.isDisable ? 'yes' : null);
               firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
 

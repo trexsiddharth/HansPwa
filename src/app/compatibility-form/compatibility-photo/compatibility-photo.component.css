@@ -62,8 +62,6 @@ justify-content: space-between;
     color: #737373;
     font-size: 0.85rem;
     text-align: center;
-    letter-spacing: 2px;
-    line-height: 25px;
   }
   .buttonSet{
     display: flex;

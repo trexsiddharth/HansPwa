@@ -310,13 +310,13 @@ ngOnInit() {
 firstStep() {
     this.errors = [];
     console.log(this.PageTwo.value.Working);
-    if (!this.fourPageService.getUserThrough() &&
-     this.PageTwo.value.Occupation !== 'Not Working' &&
-    this.workingCity == null
-    || this.workingCity === '') {
-      this.ngxNotificationService.error('Select A Valid Working City');
-      return;
-    }
+    // if (!this.fourPageService.getUserThrough() &&
+    //  this.PageTwo.value.Occupation !== 'Not Working' &&
+    // this.workingCity == null
+    // || this.workingCity === '') {
+    //   this.ngxNotificationService.error('Select A Valid Working City');
+    //   return;
+    // }
 
     if (this.PageTwo.valid) {
       this.spinner.show();
@@ -332,7 +332,7 @@ firstStep() {
       ? this.PageTwo.value.Designation : this.PageTwo.value.OtherDesignation ?
       this.PageTwo.value.OtherDesignation :  this.PageTwo.value.Designation);
 
-      firststepdata.append('working_city', this.workplace);
+      firststepdata.append('working_city', this.workplace ? this.workplace : this.PageTwo.value.Working);
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
 
