@@ -44,13 +44,6 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
   MaritalStatus: string[] = ['Doesn\'t Matter', 'Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
   @ViewChild('preferencesForm', {static: false}) preferenceForm: NgForm;
 
-
-    // Caste Selection
-
-
-    // multi caste selection
-
-
   /** list of banks filtered by search keyword */
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { FourPageService } from '../four-page.service';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { Profile } from '../profile';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { MatSelect } from '@angular/material';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-compatibility-page-five',
@@ -25,6 +27,17 @@ export class CompatibilityPageFiveComponent implements OnInit {
   moderatorList = [];
   moderatorChecked = false;
   checkStatus = false;
+  getcastes: any = [];
+  compatibiltyCount;
+  castePref: any[];
+
+   /** list of banks filtered by search keyword */
+   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+
+   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+ 
+   /** Subject that emits when the component has been destroyed. */
+   protected onDestroy = new Subject<void>();
 
 
   constructor(private http: HttpClient, public fourPageService: FourPageService,
@@ -32,8 +45,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
               private formBuilder: FormBuilder,
               private router: Router) {
                 this.pageFive = this.formBuilder.group({
+                  searchCaste : (null),
+                  searchCasteText : (null),
+                  allCaste: (false),
                   phone: ['', Validators.compose([Validators.required,
-                    Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+                  Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
                   enq_date: ['', Validators.compose([Validators.required])],
                   follow_date: ['', Validators.compose([Validators.required])],
                   source: ['', Validators.compose([Validators.required])],
@@ -44,6 +60,10 @@ export class CompatibilityPageFiveComponent implements OnInit {
               }
 
   async ngOnInit() {
+    // get caste preferences / compatibilty count
+    
+    this.getAllCaste(null);
+
     await this.getAssignToList();
     if (localStorage.getItem('getListTempleId') && localStorage.getItem('enqDate')) {
         this.pageFive.patchValue({
@@ -94,7 +114,6 @@ export class CompatibilityPageFiveComponent implements OnInit {
         }
       );
     }
-
   }
 
   getProfileId(): Observable<any> {
@@ -172,6 +191,127 @@ export class CompatibilityPageFiveComponent implements OnInit {
         console.log(event.checked);
         this.checkStatus = event.checked;
       }
+
+      getAllCaste(caste: any) {
+        if (this.fourPageService.getAllCastes()) {
+          this.getcastes = this.fourPageService.getAllCastes();
+          const formData = new FormData();
+          formData.append('lead_id', localStorage.getItem('getListId'));
+          formData.append('castes', caste);
+          this.http.post('https://partner.hansmatrimony.com/api/getAvailableRishtey' , formData).subscribe(
+           (data: any) =>  {
+             console.log(data);
+                // set initial selection
+             if (data && data.castes) {
+              let values = [];
+              if (data.castes.length > 1) {
+                console.log(data.castes.length);
+                this.castePref = data.castes;
+                data.castes.forEach(element => {
+                  if (this.getcastes.indexOf(element)) {
+                    values.push(this.getcastes[this.getcastes.indexOf(element)]);
+                  }
+                });
+              } else {
+                console.log(data.castes.length);
+                this.castePref = data.castes[0].split(',');
+                data.castes[0].split(',').forEach(element => {
+                  if (this.getcastes.indexOf(element)) {
+                    values.push(this.getcastes[this.getcastes.indexOf(element)]);
+                  }
+                });
+              }
+
+           // if all , check the check box for no caste bar
+              if (values.includes('All')) {
+              this.pageFive.patchValue({
+                allCaste: true
+              });
+           }
+           // set caste dropdown values
+              this.pageFive.patchValue({
+            searchCaste: values
+           });
+
+              if (data.count) {
+             this.compatibiltyCount = data.count;
+
+           }
+         }
+     
+           // load the initial bank list
+             this.filteredCastesMulti.next(this.getcastes.slice());
+     
+           // listen for search field value changes
+             this.pageFive.controls.searchCasteText.valueChanges
+         .pipe(takeUntil(this.onDestroy))
+         .subscribe(() => {
+           this.filterCasteMulti();
+         });
+          });
+
+      } else {
+        this.getAllCasteList();
+      }
+      }
+
+      getAllCasteList() {
+        this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+          this.getcastes = [...res, 'All'];
+          this.fourPageService.setAllCastes(this.getcastes);
+          this.getAllCaste(null);
+        });
+      }
+
+      protected filterCasteMulti() {
+        if (!this.getcastes) {
+          return;
+        }
+        // get the search keyword
+        let search = this.pageFive.value.searchCasteText;
+        if (!search) {
+          this.filteredCastesMulti.next(this.getcastes.slice());
+          return;
+        } else {
+          search = search.toLowerCase();
+        }
+        // filter the banks
+        this.filteredCastesMulti.next(
+          this.getcastes.filter(bank => bank.toLowerCase().indexOf(search) > -1)
+        );
+      }
+
+      casteSelectionChanged(event) {
+        console.log(event);
+        console.log(event.value[0]);
+
+        let values = [];
+        event.value.forEach(element => {
+      if (this.getcastes.indexOf(element)) {
+        values.push(this.getcastes[this.getcastes.indexOf(element)]);
+      }
+    });
+
+    // set caste dropdown values
+        this.pageFive.patchValue({
+      searchCaste: values
+     });
+
+        console.log(this.pageFive.value.searchCaste);
+        this.getAllCaste(this.pageFive.value.searchCaste);
+      }
+
+
+  // set checkbox value to all if checked
+  checkAllCastePref(event) {
+    console.log(event);
+    if (event.checked) {
+      this.pageFive.controls.searchCaste.setValue(['All']);
+      this.getAllCaste('All');
+    } else {
+      this.getAllCaste(null);
+    }
+  }
 
       validate(userProfile: Profile, status: any) {
         console.log(userProfile);

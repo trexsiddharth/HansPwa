@@ -20,7 +20,9 @@ export class FourPageService {
  userThroughGetList = false;
  // will be used to notify user can pass through or not to all the sections
 userThroughStatusUpdated = new EventEmitter<boolean>();
+allCasteListUpdated = false;
  skippable = false;
+ allCastes: any[] = [];
 
   constructor() { }
 
@@ -39,9 +41,24 @@ userThroughStatusUpdated = new EventEmitter<boolean>();
     return this.userThroughGetList;
   }
 
+  setAllCastes(castesList: any[]) {
+    if (castesList) {
+      this.allCastes = castesList;
+    }
+  }
+
+  getAllCastes() {
+    if (this.allCastes.length > 0) {
+      return [...this.allCastes];
+    } else {
+      return null;
+    }
+    
+  }
+
   setProfile(profile: Profile) {
-    this.profile = profile;
     console.log(this.profile);
+    this.profile = profile;
   }
   getProfile() {
     return this.profile;

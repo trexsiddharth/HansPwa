@@ -37,6 +37,8 @@ import { FormsMessageDialogComponent } from './forms-message-dialog/forms-messag
 import { LanguageService } from '../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
+import { resolve } from 'url';
+import { async } from '@angular/core/testing';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -156,7 +158,7 @@ export class CompatibilityFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+ngOnInit() {
     localStorage.clear();
     this.languageService.setRegisterLang();
     if (localStorage.getItem('RegisterNumber')) {
@@ -223,7 +225,7 @@ export class CompatibilityFormComponent implements OnInit {
       }
     );
     this.route.paramMap.subscribe(
-    (route: any) => {
+    async (route: any) => {
       console.log(route.params);
       if (route) {
       if (route.params.id) {
@@ -261,6 +263,7 @@ export class CompatibilityFormComponent implements OnInit {
         localStorage.setItem('getListSource', route.params.source);
       }
       if (route.params.id) {
+        await this.getAllCaste();
         this.getProfile();
         }
       }
@@ -275,10 +278,10 @@ export class CompatibilityFormComponent implements OnInit {
   );
 
     this.spinner.hide();
+    localStorage.setItem('id', '');
     localStorage.setItem('gender', '');
     localStorage.setItem('mobile_number', '') ;
     localStorage.setItem('selectedCaste', '');
-    this.getAllCaste();
 
     if (this.fourPageService.getUserThrough()) {
       this.openMessageDialog();
@@ -363,8 +366,11 @@ export class CompatibilityFormComponent implements OnInit {
     }
 
     getAllCaste() {
+      return new Promise((res, rej) => {
+     
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
         this.getcastes = [...res, 'All'];
+        this.fourPageService.setAllCastes(this.getcastes);
       });
       if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== '') {
       this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
@@ -380,6 +386,9 @@ export class CompatibilityFormComponent implements OnInit {
         map(value => this._Castefilter(value))
       );
     }
+
+      res(this.getcastes);
+  });
     }
 
     setNewFormGroup() {
