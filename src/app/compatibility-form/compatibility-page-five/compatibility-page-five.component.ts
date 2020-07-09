@@ -145,6 +145,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
       checkForPhoto(status: any) {
         if (this.fourPageService.getUserThrough()) {
+            if (this.compatibiltyCount < 100 && !this.pageFive.value.allCaste &&
+              this.pageFive.value.searchCaste !== 'All') {
+              this.ngxNotificationService.warning('Please Select No Caste Bar');
+              return;
+            }
             if (status === '1') {
               this.validate(this.fourPageService.profile, status);
             } else {
