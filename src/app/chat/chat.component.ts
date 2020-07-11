@@ -287,21 +287,34 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.spinner.hide();
-
+    this.openTodaysPopupHere();
     // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
+
+    // this.itemService.creditsUpdated.subscribe(
+    //   data => {
+    //     if (data) {
+    //       this.lockdownCount++;
+    //       if (!this.router.url.match('first') && this.lockdownCount === 1) {
+    //         this.itemService.openTodaysPopupAd();//changes were made here instead of lockdown offer todays new offer opens up.
+    //       }
+    //     }
+    //   }
+    // );
+  }
+  openTodaysPopupHere()
+  { 
     this.itemService.creditsUpdated.subscribe(
-      data => {
-        if (data) {
-          this.lockdownCount++;
-          if (!this.router.url.match('first') && this.lockdownCount === 1) {
-            this.itemService.openLockdownAd();
-          }
-        }
-      }
+       data => {
+         if (data) {
+           this.lockdownCount++;
+           if (!this.router.url.match('first') && this.lockdownCount === 1) {
+             this.itemService.openTodaysPopupAd();
+           }
+         }
+       }
     );
   }
-
   getCredits() {
     const creditsData = new FormData();
     creditsData.append('id', localStorage.getItem('id'));
@@ -607,6 +620,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     console.log('selectedTabValue', this.selectedTab);
   }
   goToSubs() {
+    //this.openTodaysPopupHere();
     this.router.navigateByUrl('subscription');
   }
   scrollHorizontal(index: any) {
