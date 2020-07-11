@@ -1,0 +1,148 @@
+
+::ng-deep .mat-dialog-container{
+    padding: 0px;
+    border-radius: 10px;
+    background-size: contain;
+}
+::ng-deep .mat-dialog-content{
+    max-height: 70vh;
+    margin: 0px;
+    padding: 0px;
+}
+#offBanner{
+    text-align:center;
+    justify-content: center;
+    width:90%;
+    position: absolute;
+    z-index: 99999999;
+    top:7%;
+}
+#cancel{
+    position: absolute;
+    z-index: 99999999;
+    right: 0;
+    top: -5px;
+}
+#footer{
+    text-align:center;
+    justify-content: center;
+    width:90%;
+    position: absolute;
+    z-index: 99999999;
+    background-image: url(/../../../assets/trapezoid.svg);
+    background-position: center center; 
+    background-size: 100% 100%;
+}
+
+#topBanner{
+    width: 100%;
+    text-align: center;
+}
+
+#bannerDiv{
+    width: auto;
+    object-fit: cover;
+    height: auto;
+    position: relative;
+    padding-top: 0px;
+}
+
+#bannerImg{
+    width: auto;
+    height: 10%;
+    object-fit: cover;
+}
+
+#bannerText {
+    position: absolute;
+    font-size: 2rem;
+    color: white;
+    top: 5px;
+    left: 25%;
+    font-weight: 500;
+}
+
+#offerHeadLine{
+    color: #737373;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+.subHeading{
+    font-size: 1.4rem;
+    color: #797979;
+    margin-top: 20px;
+
+}
+
+.subHeading2{
+    margin-top: 50px;
+}
+.timer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 30px 0px 0px;
+}
+.offer-btn{
+    background: #D313AE;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 10px 50px;
+            border-radius: 10px;
+            margin: 30px 0px
+}
+@media (max-width: 575px) {
+    #bannerText {
+        position: absolute;
+        font-size: 2rem;
+        color: white;
+        top: 5px;
+        left: 20%;
+        font-weight: 500;
+    }
+
+}
+@media (max-width: 350px) {
+    #bannerText {
+        position: absolute;
+        font-size: 1.6rem;
+        color: white;
+        top: 10px;
+        left: 20%;
+        font-weight: 500;
+    }
+    #offerHeadLine{
+        color: #737373;
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 1.4rem;
+    }
+    .subHeading{
+        font-size: 1.1rem;
+        color: #797979;
+        margin-top: 20px;
+    
+    }
+    .subHeading2 {
+        margin-top: 20px;
+    }
+    .timer {
+        display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 10px 0px 0px;
+    }
+    .offer-btn{
+        background: #D313AE;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: bold;
+                padding: 10px 50px;
+                border-radius: 10px;
+                margin: 10px 0px
+    }
+}
