@@ -6,6 +6,7 @@ import { SubscriptionserviceService} from 'src/app/subscriptionservice.service';
 import {
   NgxNotificationService
 } from 'ngx-kc-notification';
+import{NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
  
 @Component({
@@ -31,17 +32,16 @@ export class TodaysPaymentPopupComponent implements OnInit {
   benefit;
   value;
   amount;
-  numOfImages = 3;
-  url1 = 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.18.18+PM.png';
-  url2 = 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.07.12+PM.png';
-  url3 = 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.29.33+PM+(1).png';
+
+  images = ['../../../assets/popupCarousal1.png','../../../assets/popupCarousal2.png','../../../assets/popupCarousal3.png' ];
+  showNavigationArrows = false;
+  showNavigationIndicators = false;
   constructor(public dialogRef: MatDialogRef<TodaysPaymentPopupComponent>,
               public languageService: LanguageService,
               private subscriptionservice: SubscriptionserviceService,
               private http: HttpClient,
               private ngxNotificationService: NgxNotificationService ) { }
   ngOnInit() {
-    console.log("alkjvniufndaw");
     this.subscriptionservice.loadRazorPayScript();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -66,17 +66,8 @@ export class TodaysPaymentPopupComponent implements OnInit {
       this.closeDialog();
     }, 20000);
   }
-  getImagePhoto(index: number): String {
-      if (index == 0){
-          return this.url1;
-      }
-      else if (index == 0){
-          return this.url2;
-      }
-      else{
-        return this.url3;
-      }
-        
+  getImagePhoto(index: number){
+      this.images[index];
     }
 
   closeDialog() {
