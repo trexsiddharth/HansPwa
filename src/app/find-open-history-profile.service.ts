@@ -159,7 +159,7 @@ export class FindOpenHistoryProfileService {
     const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
   }
   //new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
-  openTodaysPopupAd(){
+  openTodaysPopupAd() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([

@@ -15,8 +15,6 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { ApiwhaAutoreply } from './profile-today-model';
 import { LanguageService } from 'src/app/language.service';
-import { Profile } from 'src/app/compatibility-form/profile';
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -61,6 +59,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
+    this.itemService.openTodaysPopupAd();
   }
 
 

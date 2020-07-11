@@ -32,12 +32,12 @@ export class TodaysPaymentPopupComponent implements OnInit {
   value;
   amount;
   numOfImages = 3;
-  url1='https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.18.18+PM.png';
-  url2='https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.07.12+PM.png';
-  url3='https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.29.33+PM+(1).png';
+  url1 = 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.18.18+PM.png';
+  url2 = 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.07.12+PM.png';
+  url3 = 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Screenshot+2020-07-10+at+6.29.33+PM+(1).png';
   constructor(public dialogRef: MatDialogRef<TodaysPaymentPopupComponent>,
               public languageService: LanguageService,
-              private subscriptionservice : SubscriptionserviceService,
+              private subscriptionservice: SubscriptionserviceService,
               private http: HttpClient,
               private ngxNotificationService: NgxNotificationService ) { }
   ngOnInit() {
@@ -67,10 +67,10 @@ export class TodaysPaymentPopupComponent implements OnInit {
     }, 20000);
   }
   getImagePhoto(index: number): String {
-      if(index==0){
+      if (index == 0){
           return this.url1;
       }
-      else if(index==0){
+      else if (index == 0){
           return this.url2;
       }
       else{
