@@ -6,6 +6,7 @@ import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.compone
 import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { AppDownloadDialogComponent } from './chat/app-download-dialog/app-download-dialog.component';
+import { TodaysPaymentPopupComponent} from './chat/today-profiles/todays-payment-popup/todays-payment-popup.component';
 
 
 @Injectable({
@@ -156,6 +157,30 @@ export class FindOpenHistoryProfileService {
       }
     );
     const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
+  }
+  //new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
+  openTodaysPopupAd(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.minHeight = '70vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
+
   }
 
   // Inhe abhi call kare popup
