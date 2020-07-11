@@ -25,7 +25,6 @@
 
 .submitImage{
     width: 50px;
-    margin-top: 30px;
 }
 
 @media (max-width: 900px) {
@@ -50,6 +49,5 @@
 @media screen and (max-width: 350px) {
     .submitImage{
         width: 40px;
-        margin-top: 30px;
     }
 }

@@ -225,17 +225,19 @@ ngOnInit() {
     this.filterDesignation();
   });
 
-  if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
-      this.fourPageService.getListData.subscribe(
+
+    // if user can get through and profile data has been retrieved
+  this.fourPageService.getListData.subscribe(
         () => {
+          if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
           console.log(this.fourPageService.getProfile());
           this.setFormForGetUserThrough();
           if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
             this.fourPageService.makeLinear.emit(true);
           }
         }
+      }
       );
-  }
     }
 
     protected copyEducationGroups(educationGroups: hd[]) {

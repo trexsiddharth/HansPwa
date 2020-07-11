@@ -252,13 +252,13 @@ export class CompatibilityPhotoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
       this.fourPageService.getListData.subscribe(
         () => {
+          if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
           this.setPhotoData(this.fourPageService.getProfile());
+          }
         }
       );
-    }
   }
 
   setPhotoData(userProfile: Profile) {

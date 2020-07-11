@@ -2,8 +2,6 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  AfterViewInit,
 } from '@angular/core';
 
 import {
@@ -158,7 +156,7 @@ export class CompatibilityFormComponent implements OnInit {
     });
   }
 
-ngOnInit() {
+async ngOnInit() {
     localStorage.clear();
     this.languageService.setRegisterLang();
     if (localStorage.getItem('RegisterNumber')) {
@@ -224,6 +222,8 @@ ngOnInit() {
        }
       }
     );
+    // get all castes before get the data of the profile
+    await this.getAllCaste();
     this.route.paramMap.subscribe(
     async (route: any) => {
       console.log(route.params);
@@ -263,7 +263,6 @@ ngOnInit() {
         localStorage.setItem('getListSource', route.params.source);
       }
       if (route.params.id) {
-        await this.getAllCaste();
         this.getProfile();
         }
       }

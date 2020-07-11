@@ -81,13 +81,13 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
   }
 
 ngOnInit() {
-        if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
           this.fourPageService.getListData.subscribe(
             () => {
+              if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
                 this.setFormThreeData(this.fourPageService.getProfile());
+              }
             }
           );
-        }
     }
 
     skip() {
