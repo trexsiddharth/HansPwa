@@ -8,8 +8,7 @@ import {
 } from '@angular/common/http';
 import {
   Router,
-  ActivatedRoute,
-  Event
+  ActivatedRoute
 } from '@angular/router';
 import {
   Observable,
@@ -287,7 +286,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.spinner.hide();
-    this.openTodaysPopupHere();
+    // this.openTodaysPopupHere();
     // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
 
@@ -302,8 +301,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     //   }
     // );
   }
-  openTodaysPopupHere()
-  { 
+
+  openTodaysPopupHere() {
     this.itemService.creditsUpdated.subscribe(
        data => {
          if (data) {
@@ -620,7 +619,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     console.log('selectedTabValue', this.selectedTab);
   }
   goToSubs() {
-    //this.openTodaysPopupHere();
     this.router.navigateByUrl('subscription');
   }
   scrollHorizontal(index: any) {

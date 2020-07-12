@@ -118,6 +118,12 @@ body {
 .mt-10{
   margin-top: 10px;
 }
+
+/* .mat-tab-label {
+  padding: 0px 10px !important;
+  width: 80px;
+    min-width: 0px;
+} */
 button:focus{outline:none !important;}
 
 .mat-raised-button {

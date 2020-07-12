@@ -59,7 +59,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
-    this.itemService.openTodaysPopupAd();
   }
 
 
