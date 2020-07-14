@@ -1,0 +1,29 @@
+.root {
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+}
+.rateUsText{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0px;
+}
+.rateUsText2 {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+.btnSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.dialogBtn{
+    color: black;
+    background-color: white;
+    font-size: 16px;
+    flex: 1;
+}

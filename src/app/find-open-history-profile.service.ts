@@ -7,6 +7,7 @@ import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { AppDownloadDialogComponent } from './chat/app-download-dialog/app-download-dialog.component';
 import { TodaysPaymentPopupComponent} from './chat/today-profiles/todays-payment-popup/todays-payment-popup.component';
+import { RateUsDialogComponent } from './chat/rate-us-dialog/rate-us-dialog.component';
 
 
 @Injectable({
@@ -262,5 +263,29 @@ export class FindOpenHistoryProfileService {
       data: profile
     };
     const dialogRef = this.dialog.open(AppDownloadDialogComponent, dialogConfig);
+  }
+
+  // rate us pop up
+  openRateUsDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.minWidth = '40vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '80vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    const dialogRef = this.dialog.open(RateUsDialogComponent, dialogConfig);
   }
 }
