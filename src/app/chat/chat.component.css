@@ -1,21 +1,40 @@
 
+:root{
+  --main-background-pink: #FF8EB2;
+  --main-background-blue: #B1E3F3;
+  --tab-selected-text: #4A5D6A;
+}
+
+.drawerSettings{
+  width: 25%;
+  overflow-x: hidden;
+  }
+
+.main {
+  /* background-image: linear-gradient(180deg, #9ADCF0, #FFFFFF); */
+  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+
 #myProfImage{
-  width:65px;
-  height: 65px;
+  width:55px;
+  height: 55px;
   margin: 10px 5px;
   border-radius: 50%;
   z-index: 999;
-  border: 2px solid #58D1FD;
+  border: 3px solid white;
 }
 /* tabs */
 
 .groupContainer{
   width: 100%;
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   padding-right: 50px;
   padding-bottom: 10px;
-  background-color: white;
+  background-color: #9ADCF0;
 }
 .matGroup{
   width: 100%;
@@ -30,59 +49,6 @@
         border: 0;
         border-top: 1px solid #c8c8c8;
         margin-top: -2px;
-}
-
-::ng-deep .mat-tab-label-active {
-  color: white !important;
-  font-weight: bolder;
-  background: #58D1FD;
-}
-
-::ng-deep .mat-tab-labels{
-  margin-left: 40px;
-}
-
-::ng-deep .mat-tab-label {
-  border: 1px solid #C8C8C8;
-  color: #9ba9b6;
-  padding-top: 30px !important;
-  padding-bottom: 30px !important;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  box-shadow:  4px 4px 1px rgba(0,0,0,0.1);
-  opacity: 1 !important;
-}
-
-::ng-deep .mat-tab-label-content {
-  font-size: 18px;
-}
-::ng-deep .mat-tab-body {
-  padding-bottom: 1000px;
-}
-::ng-deep .mat-tab-header-pagination-chevron {
-  border-color: black;
-}
-::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
-  border-color: white;
-  height: 10px;
-  width: 10px;
-}
-::ng-deep mat-ink-bar {
-  display: none;
-}
-
-::ng-deep .mat-tab-header-pagination {
-  display: none !important;
-} 
-
-::ng-deep .mat-tab-header {
-overflow-x: scroll !important;
-margin-left: 30px;
-}
-
-::ng-deep .mat-tab-label-container {
-overflow: visible !important;
 }
 
 /* ::ng-deep .mat-tab-header::-webkit-scrollbar {
@@ -123,7 +89,7 @@ display: none !important;
     color: white;
   }
   .ht-full {                
-    margin: 0px 30%;
+    margin: 0px 32%;
     width: auto;
     left: 0px;
     right: 0px;
@@ -192,6 +158,14 @@ display: none !important;
   
 
   @media (max-width: 576px) {
+    .mainBack {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      z-index: -1;
+      transform: rotate(-60deg) translate(65%, 10px) !important;
+      background-color: #9ADCF0;
+    }
     .navbar {
       background: #f3f3f3;
       overflow: hidden;
@@ -298,6 +272,18 @@ display: none !important;
     }
 
     @media (max-width: 1024px) {
+      .drawerSettings{
+        width: 65vw;
+        overflow-x: hidden;
+        }
+      .mainBack {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        z-index: -1;
+        transform: rotate(-60deg) translate(65%, -150px);
+        background-color: #9ADCF0;
+      }
       .navbar {
         background: #f3f3f3;
         overflow: hidden;
@@ -399,26 +385,15 @@ display: none !important;
           margin: 0px;
           width: 100%
          }
-      
-         ::ng-deep .mat-tab-label {
-          border: 1px solid #C8C8C8;
-          color: #9ba9b6;;
-          height: 50px !important;
-          padding: 0px 20px !important;
-          border-radius: 10px;
-          margin-bottom: 10px;
-          margin-right: 10px;
-          box-shadow:  4px 4px 1px rgba(0,0,0,0.1);
-          opacity: 1 !important;
-        }
+    
 
         #myProfImage{
-          width:55px;
-          height: 55px;
+          width:40px;
+          height: 40px;
           margin: 10px 5px;
           border-radius: 50%;
           z-index: 999;
-          border: 2px solid #58D1FD;
+          border: 3px solid white;
         }
 
         .tabLine {
@@ -431,6 +406,18 @@ display: none !important;
           margin-top: 30px;
         }
         
+    }
+
+    @media (min-width: 1024px) {
+      .mainBack {
+        width: 100vw;
+        height: 100vh;
+        z-index: -99999;
+        position: absolute;
+        background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
+        background-size: contain;
+      
+      }
     }
   
     @media (min-width: 576px) {
@@ -489,10 +476,10 @@ display: none !important;
        .groupContainer{
          width: 100%;
         display: flex;
-        overflow-x: auto;
+        overflow-x: hidden;
         padding-bottom: 5px;
         padding-right: 50px;
-        background-image: white
+        background-image: #9ADCF0
        }
        .matGroup{
         width: 100%;

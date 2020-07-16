@@ -1,0 +1,542 @@
+
+:root{
+  --main-background-pink: #FF8EB2;
+  --main-background-blue: #B1E3F3;
+  --tab-selected-text: #4A5D6A;
+}
+
+main {
+  background-color: var(--main-background-pink);
+}
+
+#myProfImage{
+  width:55px;
+  height: 55px;
+  margin: 10px 5px;
+  border-radius: 50%;
+  z-index: 999;
+  border: 2px solid #58D1FD;
+}
+/* tabs */
+
+.groupContainer{
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  background-color: #FF8EB2;
+}
+.matGroup{
+  width: 100%;
+  position: fixed;
+  padding-top: 10px;
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+  
+}
+
+.tabLine {
+  margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid #c8c8c8;
+        margin-top: -2px;
+}
+
+::ng-deep .mat-ink-bar {
+  display: none;
+}
+/* ::ng-deep .mat-tab-header::-webkit-scrollbar {
+display: none !important;
+} */
+
+
+
+/*   footer   */
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+  background: #f3f3f3;
+    overflow: hidden;
+    position: fixed;
+    border: 1px solid lightgrey;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  /* Change the color of links on hover */
+  .navbar a:hover {
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .navbar a.active {
+    color: white;
+  }
+  .ht-full {                
+    margin: 0px 30%;
+    width: auto;
+    left: 0px;
+    right: 0px;
+    top: 55px;
+  }
+  .setLogo {
+    margin: 0px 30%;
+  }
+  .filterImage {
+    filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+    width: 45px;
+    margin-top: 10px;
+  }
+  .filterLogout {
+    filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+    width: 30px;
+    margin-top: 15px;
+  }
+  .setNavIcons {
+ margin-top: 15px;
+ font-weight: bolder;
+ margin-right: 20px;
+  }
+  #chatText {
+    margin: 0px; font-size: 20px;color: white;font-weight: bolder;    padding: 0px;
+    border: 0px;
+    background: #34b7f1;
+    width: 100%;
+  }
+  #historyText {
+    margin: 0px; font-size: 20px;font-weight: bolder;    padding: 0px;
+    border: 0px;
+    background: #f3f3f3;
+    width: 100%;
+  }
+  #profileText {
+    margin: 0px; font-size: 20px;font-weight: bolder;    padding: 0px;
+    border: 0px;
+    background: #f3f3f3;
+    width: 100%;
+  }
+  #chatButton {
+    padding: 10px 15px;background: #34b7f1;
+  }
+  #historyButton {
+    padding: 10px 15px;background: #f3f3f3;
+  }
+  #profileButton{
+    padding: 10px 15px;background: #f3f3f3;
+  }
+  .rowClass {
+   margin: 0px;
+   width: 100%
+  }
+  #creditButton{
+    position: fixed;
+    right: 5px;
+    z-index: 1;
+    color: white;
+    font-size: 16px;
+    background-color: #50ed9d;
+  }
+  .setBotUi{
+    margin-top: 50px;
+  }
+  
+
+  @media (max-width: 576px) {
+    .navbar {
+      background: #f3f3f3;
+      overflow: hidden;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+      footer input {
+        width: 90%;
+        margin-right: 0px;
+        margin-left: 20px;
+        border: 2px solid #f1f1f1;
+        border-radius: 30px;
+        padding: 15px;
+        padding-left: 80px;
+      }
+      footer #write-button {
+        width: 95%;
+        margin-right: 1%;
+        position: relative;
+      }
+      footer #send-button {
+        width: 60px;
+        margin-right: 10px;
+      }
+      footer .circle {
+        width: 100%;
+        border-radius: 50%;
+        background-color: #34b7f1;
+      }
+      #icon1 {
+        position: absolute;
+        display: block;
+        left: 50px;
+        top: 100px;
+        z-index: 9;
+      }
+      #show-me-profile {
+        border-radius: 20px;
+        background-color: #34b7f1;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+      }
+      p {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
+      }
+  
+      .setLogo {
+        margin: 0px;
+      }
+      .ht-full {
+        margin: 0px;
+        width: auto;
+        left: 0px;
+        right: 0px;
+        top: 40px;
+      }
+      .setNavIcons {
+        margin-top: 7px;
+        font-weight: bolder;
+        margin-right: 5px;
+         }
+
+       .filterImage {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 30px;
+          margin-top: 15px;
+          margin-left: 10px;
+        }
+        .filterLogout {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 25px;
+          margin-top: 15px;
+          margin-left: 10px;
+        }
+        #chatText {
+          margin: 0px; font-size: 16px;font-weight: bolder;    padding: 0px;
+          border: 0px;
+          background: #34b7f1;
+          width: 100%;
+        }
+        #historyText {
+          margin: 0px; font-size: 16px;font-weight: bolder;    padding: 0px;
+          border: 0px;
+          background: #f3f3f3;
+          width: 100%;
+        }
+        #profileText {
+          margin: 0px; font-size: 16px;font-weight: bolder;    padding: 0px;
+          border: 0px;
+          background: #f3f3f3;
+          width: 100%;
+        }
+        .rowClass {
+          margin: 0px;
+          width: 100%
+         }
+    }
+
+    @media (max-width: 1024px) {
+      .navbar {
+        background: #f3f3f3;
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      footer input {
+        width: 90%;
+        margin-right: 0px;
+        margin-left: 20px;
+        border: 2px solid #f1f1f1;
+        border-radius: 30px;
+        padding: 15px;
+        padding-left: 80px;
+      }
+      footer #write-button {
+        width: 95%;
+        margin-right: 1%;
+        position: relative;
+      }
+      footer #send-button {
+        width: 60px;
+        margin-right: 10px;
+      }
+      footer .circle {
+        width: 100%;
+        border-radius: 50%;
+        background-color: #34b7f1;
+      }
+      #icon1 {
+        position: absolute;
+        display: block;
+        left: 50px;
+        top: 100px;
+        z-index: 9;
+      }
+      #show-me-profile {
+        border-radius: 20px;
+        background-color: #34b7f1;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+      }
+      p {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
+      }
+      .setLogo {
+        margin: 0px ;
+      }
+      .ht-full {
+        margin: 0px;
+        width: auto;
+        left: 0px;
+        right: 0px;
+        top: 40px;
+      }
+      .setNavIcons {
+        margin-top: 7px;
+        font-weight: bolder;
+        margin-right: 5px;
+         }
+         .filterImage {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 30px;
+          margin-top: 10px;
+          margin-left: 10px;
+        }
+        .filterLogout {
+          filter: invert(100%) sepia(44%) saturate(2%) hue-rotate(56deg) brightness(111%) contrast(100%);
+          width: 25px;
+          margin-top: 10px;
+          margin-left: 10px;
+        }
+        #chatText {
+          margin: 0px; font-size: 16px;font-weight: bolder;padding: 0px;
+          border: 0px;
+          background: #34b7f1;
+          width: 100%;
+        }
+        #historyText {
+          margin: 0px; font-size: 16px;font-weight: bolder;padding: 0px;
+          border: 0px;
+          background: #f3f3f3;
+          width: 100%;
+        }
+        #profileText {
+          margin: 0px; font-size: 16px;font-weight: bolder;padding: 0px;
+          border: 0px;
+          background: #f3f3f3;
+          width: 100%;
+        }
+        .rowClass {
+          margin: 0px;
+          width: 100%
+         }
+    
+
+        #myProfImage{
+          width:40px;
+          height: 40px;
+          margin: 10px 5px;
+          border-radius: 50%;
+          z-index: 999;
+          border: 2px solid #58D1FD;
+        }
+
+        .tabLine {
+          margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid #c8c8c8;
+        margin-top: -16px;
+        }
+        .setBotUi{
+          margin-top: 30px;
+        }
+        
+    }
+  
+    @media (min-width: 576px) {
+      /*   body   */
+      /*   footer   */
+      h6 {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
+        font-size: 1.1em;
+        font-weight: 600;
+      }
+      footer input {
+        width: 100%;
+        margin-right: 0px;
+        margin-left: 20px;
+        border: 2px solid white;
+        border-radius: 60px;
+        padding: 15px;
+        padding-left: 80px;
+      }
+      footer #write-button {
+        width: 95%;
+        margin-right: 2%;
+        position: relative;
+      }
+      footer #send-button {
+        width: 60px;
+      }
+      footer .circle {
+        width: 100%;
+        border-radius: 50%;
+        background-color: #34b7f1;
+      }
+      #icon1 {
+        position: absolute;
+        display: block;
+        left: 50px;
+        top: 100px;
+      }
+      #show-me-profile {
+        margin-top: 20px;
+        border-radius: 20px;
+        background-color: #34b7f1;
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+      } 
+      .rowClass {
+        margin: 0px;
+        width: 100%
+       }
+       .groupContainer{
+         width: 100%;
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        padding-right: 50px;
+        background-image: #B1E3F3
+       }
+       .matGroup{
+        width: 100%;
+        position: fixed;
+        padding-top: 10px;
+      }
+    }
+
+
+
+
+    /* modal */
+
+    /* Style the Image Used to Trigger the Modal */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+#closeModal {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#closeModal:hover,
+#closeModal:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+
+
+    
+    
+    

@@ -1,10 +1,8 @@
 
-::ng-deep .mat-drawer{
-    background-color: white;
-}
 main{
     background-color: white;
     height: 100%;
+    font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
 }
 hr{
     margin:1px;
@@ -12,7 +10,7 @@ hr{
 }
 .backArrow{
     position:absolute;
-    z-index:10000;
+    z-index:999999;
     width:1.8rem;
     height:1.8rem;
     top:5px;
@@ -33,34 +31,44 @@ hr{
 .parentTop{
     text-align: center;
     background-color: #e1f0fc;
+    
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
 }
+
 .nameText{
     position: relative;
     display:inline-block;
     font-family: fantasy;
     font-weight:bold;
-    font-size:1.7rem;
+    font-size:1.3rem;
     color:#4a5d6a ;
+    font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
 }
 .iconImage{
-    width: 2.4rem;
-    height:2.4rem;
+    width: 1.4rem;
+    height:1.4rem;
     margin:7px;
 }
 .nextImage{
     opacity:0.5;
     position:absolute;
     right:10px;
-    width: 1.4rem;
-    height:1.4rem;
+    width: 1rem;
+    height:1rem;
     margin:4px;
 }
 .rowMore{
-    width:fit-content;
+    width:100%;
     padding-top:5px;
     padding-bottom:5px;
     color: #4a5d6a;
-    font-size:1.5rem ;
+    font-size:1rem ;
+    position: relative;
+    display: flex;
+        flex-direction: row;
+        align-items: center;
 }
 .btnImage{
     float: left;
@@ -70,9 +78,7 @@ hr{
 }
 .drawerButtonSection{
      width: 100%;
-     position: absolute;
-     bottom: 0px;
-     padding: 0px 20px 30px;
+     position: relative;
      background-color: white;
 }
 .buttonStyle{
@@ -80,7 +86,9 @@ hr{
     border-radius: 7px;
     width: 90%;
     padding: 8px 0px;
-    font-size: 1.8rem;
+    margin: 10px auto;
+    display: block;
+    font-size: 1rem;
     color:rgb(236, 242, 248);padding-right:10px;
 }
 
@@ -103,16 +111,16 @@ hr{
         }
         .drawerButtonSection{
          width: 100%;
-         position: absolute;
-         bottom: 4px;
-         padding: 0px 12px 15px;
+         position: relative;
     }
         .buttonStyle{
         background-color: #ff588f;
         border-radius: 5px;
-        width: 100%;
+        width: 90%;
         padding: 4px 0px;
-        font-size: 1.4rem;
+        display: block;
+        margin: 10px auto;
+        font-size: 1rem;
         color:rgb(236, 242, 248);padding-right:6px;
     }
 }
@@ -127,14 +135,18 @@ hr{
         overflow:hidden;
       }
       .rowMore{
-        width:fit-content;
+        width:100%;
         padding-top:3px;
         padding-bottom:3px;
-        font-size:1.4rem ;
+        font-size:1rem ;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
     .iconImage{
-        width: 2.1rem;
-        height:2.1rem;
+        width: 1.2rem;
+        height:1.2rem;
         margin:5px;
         margin-right:10px;
     }
@@ -146,16 +158,16 @@ hr{
     }
     .drawerButtonSection{
          width: 100%;
-         position: absolute;
-         bottom: 12px;
-         padding: 0px 12px 15px;
+         position: relative;
     }
     .buttonStyle{
         background-color: #ff588f;
         border-radius: 5px;
-        width: 100%;
+        width: 90%;
+        display: block;
+        margin: 10px auto;
         padding: 4px 0px;
-        font-size: 1.4rem;
+        font-size: 1rem;
         color:rgb(236, 242, 248);padding-right:6px;
     }
 }
@@ -169,6 +181,15 @@ hr{
         border-radius: 50%;
         overflow:hidden;
       }
+      .nameText{
+        position: relative;
+        display:inline-block;
+        font-family: fantasy;
+        font-weight:bold;
+        font-size:1rem;
+        font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
+        color:#4a5d6a ;
+    }
       .btnImage{
         float: left;
         margin-left: 5px;
@@ -177,28 +198,39 @@ hr{
         }
         .drawerButtonSection{
          width: 100%;
-         position: absolute;
-         bottom: 3px;
-         padding: 0px 9px 13px;
+         position: relative;
     }
         .buttonStyle{
         background-color: #ff588f;
         border-radius: 4px;
-        width: 100%;
+        width: 90%;
+        display: block;
+        margin: 10px auto;
         padding: 3px 0px;
-        font-size: 1.2rem;
+        font-size: 14px;
         color:#FFFFFF;padding-right:4px;
     }
     .rowMore{
-        width:fit-content;
+        width:100%;
         padding-top:2px;
         padding-bottom:2px;
-        font-size:1.2rem ;
+        font-size:14px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
     .iconImage{
-        width: 1.7rem;
-        height:1.7rem;
+        width: 1.2rem;
+        height:1.2rem;
         margin:3px;
         margin-right:9px;
+    }
+    .nextImage{
+        opacity:0.5;
+        position:absolute;
+        right:5px;
+        width: 15px;
+        height:15px;
     }
 }

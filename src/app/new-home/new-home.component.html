@@ -1,5 +1,7 @@
   <mat-sidenav-container class="mainContainer">
-    <mat-sidenav id="sidenav" class="drawerSettings" mode="over" position="end" (opened)="homeService.saveDrawerInstance(sidenav)" #sidenav>
+    <mat-sidenav id="sidenav" class="drawerSettings" mode="over"
+     position="end" 
+     (opened)="homeService.saveDrawerInstance(sidenav)" #sidenav>
         <app-home-drawer></app-home-drawer>
     </mat-sidenav>
     <mat-sidenav-content>

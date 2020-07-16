@@ -26,6 +26,7 @@ allCasteListUpdated = false;
 
   constructor() { }
 
+
   setSkippable(status) {
     this.skippable = status;
   }

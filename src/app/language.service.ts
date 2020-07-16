@@ -77,9 +77,10 @@ export class LanguageService {
       this.profileLang.shortlist = 'पसंद है';
 
       // top details
-      this.profileLang.verifiedAt = 'वेरिफ़िएड एट:';
-      this.profileLang.managedBy = 'प्रोफाइल मैनेज्ड बय:';
+      this.profileLang.verifiedAt = 'वेरिफ़िएड एट';
+      this.profileLang.managedBy = 'मैनेज्ड बय';
       this.profileLang.hello = 'हेलो';
+      this.profileLang.about = 'अबाउट';
       this.profileLang.personalizedDetails = 'पर्सनल डिटेल्स';
       this.profileLang.careerDetails = 'करियर डिटेल्स';
       this.profileLang.horoscopeDetails = 'होरोस्कोप';
@@ -169,9 +170,10 @@ export class LanguageService {
           this.profileLang.shortlist = 'Like';
 
         // top details
-          this.profileLang.verifiedAt = 'Verified At:';
-          this.profileLang.managedBy = 'Profile Managed By:';
+          this.profileLang.verifiedAt = 'Verified At';
+          this.profileLang.managedBy = 'Managed By';
           this.profileLang.hello = 'Hello';
+          this.profileLang.about = 'About';
           this.profileLang.personalizedDetails = 'Personal Details';
           this.profileLang.careerDetails = 'Career Details';
           this.profileLang.horoscopeDetails = 'Horoscope';

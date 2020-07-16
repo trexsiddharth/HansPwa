@@ -8,7 +8,8 @@ import {
 } from '@angular/common/http';
 import {
   Router,
-  ActivatedRoute
+  ActivatedRoute,
+  Event
 } from '@angular/router';
 import {
   Observable,
@@ -301,6 +302,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     //   }
     // );
   }
+
+
 
   openTodaysPopupHere() {
     this.itemService.creditsUpdated.subscribe(

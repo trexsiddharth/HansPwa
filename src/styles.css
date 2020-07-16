@@ -118,12 +118,81 @@ body {
 .mt-10{
   margin-top: 10px;
 }
+.mat-drawer{
+  background-color: white;
+}
+.mat-tab-group {
+  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important;
+}
+.mat-tab-labels {
+  display: flex;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    margin-left: 40px;
 
-/* .mat-tab-label {
+}
+ .mat-tab-label {
+    padding: 0px 10px !important;
+    color: white;
+    flex: 1;
+    width: auto !important;
+    min-width: auto !important;
+    opacity: 1 !important;
+}
+ .mat-tab-label-active {
+  color: #4A5D6A !important;
+  font-weight: bolder;
+  opacity: 1 !important;
+}
+ .mat-tab-label-content {
+  font-size: 12px;
+  display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+ .mat-ink-bar {
+  display: none;
+}
+
+ .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination{
+  display: none !important;
+}
+
+#infoLabels .mat-tab-labels {
+  display: flex;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    margin-left: 0px;
+    font-size: 14px;
+}
+#infoLabels .mat-tab-label {
   padding: 0px 10px !important;
-  width: 80px;
-    min-width: 0px;
-} */
+  color: grey;
+  flex: 1;
+  width: auto !important;
+  min-width: auto !important;
+  opacity: 1 !important;
+}
+#infoLabels .mat-tab-label-active {
+  color: black !important;
+  font-weight: bolder;
+  opacity: 1 !important;
+}
+
+#infoLabels .mat-tab-label-content {
+  font-size: 16px;
+    display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+}
+#infoLabels .mat-ink-bar {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+
 button:focus{outline:none !important;}
 
 .mat-raised-button {
@@ -211,4 +280,22 @@ div.mat-select-search-inner input.mat-input-element {
 }
 .mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover) {
   background: #0cb9f2;
+}
+
+@media screen and (max-width: 350px) {
+  .mat-tab-label-content {
+    font-size: 10px;
+    display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+  }
+  #infoLabels .mat-tab-label-content {
+    font-size: 12px;
+    display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+  }
+ 
 }

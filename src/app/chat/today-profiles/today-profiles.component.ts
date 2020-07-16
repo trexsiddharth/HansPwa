@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit, HostListener } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import {  NotificationsService } from '../../notifications.service';
 import { ChatServiceService } from '../../chat-service.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
-import { Router } from '@angular/router';
+import { Router, Event } from '@angular/router';
 import { SubscriptionserviceService } from '../../subscriptionservice.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
@@ -40,6 +40,11 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   selfName;
   shortListCount = 0;
   @Output() setProfileImage = new EventEmitter <any> ();
+  section;
+  about: any;
+  personal;
+  family;
+  selectedTab = 0;
    // Height
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
@@ -59,8 +64,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
+      this.section = document.querySelector('#today-main');
   }
-
 
   ngOnInit() {
 

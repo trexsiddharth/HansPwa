@@ -6,236 +6,235 @@
             </ng-template>
           </ngb-carousel>
 
-          <div id="imageContent">
+
+    <!-- // image info  -->
+
+    <div id="imageContent">
+        <div>
           <div>
             <span style="font-weight: bold;font-size: 18px;">
-                {{toTitleCase(item.name)}} | {{setAge(item.birth_date)}}
+                {{toTitleCase(item.name)}}
             </span><br>
             <span style="font-size: 14px;">
-                {{item.working_city}} | {{setHeight(item.height)}}
+                {{item.working_city}} {{item.working_city ? '|' : ''}} {{setHeight(item.height)}}
             </span> <br>
             <span style="font-size: 14px;">
                 {{setIncome(item.monthly_income)}} LPA
             </span>
           </div>
-            
-            <div class="down-arrow"
-            (click)="scrollDown()"
-             style="background-color: #50ed9d;
-            float: right;display: flex;
-            align-items: center;
-            position: fixed;
-            border-radius: 100px;
-            z-index: 999999999;
-            margin-top: 65vh;
-            box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
-            justify-content: center;">
-          <img width="40px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+          <div style="position: absolute;
+           top: -10px;right: 10px;
+           border-radius: 10px;
+           padding: 0px 10px;
+           background-color: #48CDF7;" >{{setAge(item.birth_date)}}
+          </div>
+
+          <div style="position: absolute;
+          top: 25px;right: 25px;">
+              <img width="30px" src="../../../assets/new icons/shield.svg"
+               alt="verified profile">
+          </div>
         </div>
-        </div>
+          
+          <div class="down-arrow"
+          (click)="scrollDown()"
+           style="background-color: #50ed9d;
+          float: right;display: flex;
+          align-items: center;
+          position: fixed;
+          border-radius: 100px;
+          z-index: 999999999;
+          margin-top: 65vh;
+          box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+          justify-content: center;">
+        <img width="40px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+      </div>
+      </div>
+
+          
     </div>
 
-    <div class="">
-                    
-    </div>
-
-    <section id="content" style="padding: 0px 20px;position: relative;">
+    <section id="content" style="
+    margin: -29% 10px;
+    position: relative;
+    border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      padding: 0px 10px 100px;
+      background-color: white;
+      overflow-y: auto;
+      box-shadow: 1px 1px 5px #9ADCF0, -1px -1px 5px #9ADCF0;">
 
         <!-- // buttons -->
 
         <div id="answerButtons">
-            <div class="t-c blur">
-                <button 
-                (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
-                background: #C8C8C8;">
-                  <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
-                </button><br>
-                <span style="color: #737373;font-weight: 600;font-size: 18px;">
-                    {{languageService.profileLang.reject}}
-                </span>
-            </div>
-            <div class="t-c">
+            <div class="t-c" style="margin-top: 10px;">
                 <button 
                 (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="color: green;
                 background: #58D1FD;"
                   aria-label="Example icon-button with a heart icon" >
                   <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
                 </button><br>
-                <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
+                <!-- <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.contact}}
-                </span>
+                </span> -->
             </div>
+
             <div class="t-c">
                 <button 
-                (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons" mat-fab style="color: red;
-                background: #D313AE;margin-bottom: 10px;"
+                (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtonsCenter" mat-fab style="color: red;
+                background: #D313AE;
+                margin-bottom: 10px;"
                   aria-label="Example icon-button with a heart icon" >
-                  <img class="buttonImage animateButtonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
+                  <img class="buttonImageCenter animateButtonImageCenter" src="../../../assets/heartwhite.svg" alt="पसंद है">
                 </button><br>
-                <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
+                <!-- <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.shortlist}}
-                </span>
+                </span> -->
             </div>
+
+            
+            <div class="t-c blur" style="margin-top: 10px;">
+                <button 
+                (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
+                background: #C8C8C8;">
+                  <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                </button><br>
+                <!-- <span style="color: #737373;font-weight: 600;font-size: 18px;">
+                    {{languageService.profileLang.reject}}
+                </span> -->
+            </div>
+
+            
 
         </div>
 
-        <div  style="margin-top: 20px;">
-            <div class="row" id="verified">
-                <div class="col-2">
-                    <img style="width: 40px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
+               <div class="verifiedClass">
+                <div  id="verified">
+                    <div class="titleGrey">
+                        <img class="titleImage" style="margin-left: 10px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
+                        {{languageService.profileLang.verifiedAt}}
+                    </div>
+                    <div>
+                            <span class="textVerified full-width t-c">
+                             {{item.facebook ? item.facebook : 'Hans Matrimony Office'}}
+                            </span>
+                    </div>
                 </div>
-                <div class="col-10">
-                        <span style="font-size: 16px;font-weight: bold;">{{languageService.profileLang.verifiedAt}}</span><br>
-                        <span>{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
-                </div>
-            </div>
-        </div>
 
-        <div style="margin-top: 20px;">
-            <div class="row" id="controlledBy">
-                <div class="col-2">
-                    <img style="width: 40px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
+         
+            <div  id="controlledBy">
+                <div class="titleGrey">
+                    <img class="titleImage" style="margin-left: 10px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
+                    {{languageService.profileLang.managedBy}}
                 </div>
-                <div class="col-10" style="align-self: center;">
-                        <span style="font-size: 16px;font-weight: bold;align-self: center;
-                        color: #8c978b;">{{languageService.profileLang.managedBy}} {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}</span>
+                <div >
+                        <span class="textVerified full-width t-c">
+                            {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}
+                        </span>
                 </div>
             </div>
-        </div>
+               </div>
 
         <div id="aboutSection">
-            <p>
-                <span style="color: #D313AE;font-size: 30px;font-weight: bold;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}}{{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
+            <u class="titleHeading">
+                {{languageService.profileLang.about}}
+            </u>
+            <p class="title" style="margin-left:0px">
+                <span style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}}{{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
             </p>
         </div>
 
 <!-- // personal details  -->
 
         <div id="personalSection">
-            <div style="display: flex;justify-content: space-between;">
-                <span style="color: #0C9BF2;font-size: 18px; font-weight: bold;align-self: center;">
-                    {{languageService.profileLang.personalizedDetails}}
+            <div style="display: flex;
+            justify-content: space-between;">
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.personalizedDetails}}
+                    </u>
                 </span>
-                    <img width="80px" height="80px" src="../../../assets/new icons/Personal Details.svg" alt="personal details">
             </div>
+
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Weight.svg" alt="weight">
-                    <span class="title">{{languageService.profileLang.weight}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
+                    <span class="title">{{item.mobile}}</span>
                 </div>
                 <div class="col-6">
-                    {{item.weight}} Kg
+                    <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
+                    <span class="title">{{item.locality}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
-                    <span class="title">{{languageService.profileLang.martialStatus}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Religion.svg" alt="caste">
+                    <span class="title">{{item.religion}} {{item.religion ? '|' : ''}} {{item.caste}} </span>
                 </div>
                 <div class="col-6">
-                    {{item.marital_status}}
+                    <img class="titleImage" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
+                    <span class="title">{{item.marital_status}}</span>
                 </div>
             </div>
 
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Food Choice.svg" alt="Food Choice">
-                    <span class="title">{{languageService.profileLang.foodChoice}}</span>
-                </div>
-                <div class="col-6">
-                    {{item.food_choice}}
-                </div>
-            </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Religion.svg" alt="Religion">
-                    <span class="title">{{languageService.profileLang.religion}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Food Choice.svg" alt="food choice">
+                    <span class="title">{{item.food_choice}}</span>
                 </div>
                 <div class="col-6">
-                    {{item.religion}},{{item.caste}}
+                    <img class="titleImage" src="../../../assets/new icons/Weight.svg" alt="weight">
+                    <span class="title">{{item.weight}} Kg</span>
                 </div>
             </div>
 
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/locality.svg" alt="Locality">
-                    <span class="title">{{languageService.profileLang.locality}}</span>
-                </div>
-                <div class="col-6">
-                    {{item.locality}}
-                </div>
-            </div>
 
         </div>
 
         <!-- // career details  -->
 
         <div id="careerSection">
-            <div style="display: flex;justify-content: space-between;">
-                <span style="color: #CA58FD;font-size: 18px; font-weight: bold;align-self: center;">
-                    {{languageService.profileLang.careerDetails}}
+            <div style="display: flex;
+            justify-content: space-between;">
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.careerDetails}}
+                    </u>
                 </span>
-                    <img height="80px" width="80px"  src="../../../assets/new icons/Career Details.svg" alt="career details">
             </div>
+
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Occupation.svg" alt="occupation">
-                    <span class="title">{{languageService.profileLang.occupation}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Occupation.svg" alt="occupation">
+                    <span class="title">{{item.occupation}}</span>
                 </div>
                 <div class="col-6">
-                    {{item.occupation}}
+                    <img class="titleImage" src="../../../assets/new icons/Designation.svg" alt="designation">
+                    <span class="title">{{item.profession}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Designation.svg" alt="designation">
-                    <span class="title">{{languageService.profileLang.designation}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
+                    <span class="title">{{setIncome(item.monthly_income)}} LPA</span>
                 </div>
                 <div class="col-6">
-                    {{item.profession}}
-                </div>
-            </div>
-
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
-                    <span class="title">{{languageService.profileLang.annualIncome}}</span>
-                </div>
-                <div class="col-6">
-                    {{setIncome(item.monthly_income)}} LPA
+                    <img class="titleImage" src="../../../assets/new icons/Graduation.svg" alt="education">
+                    <span class="title">{{item.degree ? item.degree : item.education}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Graduation.svg" alt="graduation">
-                    <span class="title">{{languageService.profileLang.education}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Schooling.svg" alt="college">
+                    <span class="title">{{toTitleCase(item.college)}}</span>
                 </div>
                 <div class="col-6">
-                    {{item.degree ? item.degree : item.education}}
-                </div>
-            </div>
-
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Schooling.svg" alt="college">
-                    <span class="title">{{languageService.profileLang.college}}</span>
-                </div>
-                <div class="col-6">
-                    {{toTitleCase(item.college)}}
-                </div>
-            </div>
-
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/workingCity.svg" alt="Working City">
-                    <span class="title">{{languageService.profileLang.workingCity}}</span>
-                </div>
-                <div class="col-6">
-                    {{item.working_city}}
+                    <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="working">
+                    <span class="title">{{item.working_city}}</span>
                 </div>
             </div>
 
@@ -245,157 +244,103 @@
 
         <div id="horoscopeSection">
             <div style="display: flex;justify-content: space-between;">
-                <span style="color: #070973;font-size: 18px; font-weight: bold;align-self: center;">
-                    {{languageService.profileLang.horoscopeDetails}}
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.horoscopeDetails}}
+                    </u>
                 </span>
-                    <img width="80px" height="80px"  src="../../../assets/new icons/Horoscope.svg" alt="horoscope details">
             </div>
+
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/DOB.svg" alt="birth date">
-                    <span class="title">{{languageService.profileLang.dob}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/DOB.svg" alt="birth date">
+                    <span class="title">{{item.birth_date | date}}</span>
                 </div>
                 <div class="col-6">
-                    {{item.birth_date}}
+                    <img class="titleImage" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
+                    <span class="title">{{item.birth_time}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
-                    <span class="title">{{languageService.profileLang.birthTime}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
+                    <span class="title">{{item.birth_place}}</span>
                 </div>
                 <div class="col-6">
-                    {{item.birth_time}}
+                    <img class="titleImage" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
+                    <span class="title">{{setManglik(item.manglik)}}</span>
                 </div>
             </div>
 
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
-                    <span class="title">{{languageService.profileLang.birthPlace}}</span>
-                </div>
-                <div class="col-6">
-                    {{item.birth_place}}
-                </div>
-            </div>
 
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
-                    <span class="title">{{languageService.profileLang.manglik}}</span>
-                </div>
-                <div class="col-6">
-                    {{setManglik(item.manglik)}}
-                </div>
-            </div>
         </div>
 
         <!-- //family details  -->
 
         <div id="familySection">
             <div style="display: flex;justify-content: space-between;">
-                <span style="color: #58D1FD;font-size: 18px; font-weight: bold;align-self: center;">
-                    {{languageService.profileLang.familyDetails}}
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.familyDetails}}
+                    </u>
                 </span>
-                    <img width="80px" height="80px" style="margin-top: 20px;" src="../../../assets/new icons/Family Details.svg" alt="family details">
             </div>
+
+
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Sister.svg" alt="sister">
-                    <span class="title">{{languageService.profileLang.sisters}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Sister.svg" alt="Sisters">
+                    <span class="title">{{setMarriageSisters(item.unmarried_daughters,item.married_daughters)}}</span>
                 </div>
                 <div class="col-6">
-                    {{setMarriageSisters(item.unmarried_daughters,item.married_daughters)}}
+                    <img class="titleImage" src="../../../assets/new icons/Brother.svg" alt="Brothers">
+                    <span class="title">{{setMarriageBrothers( item.unmarried_sons,item.married_sons)}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Brother.svg" alt="brothers">
-                    <span class="title">{{languageService.profileLang.brothers}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
+                    <span class="title">{{LifeStatus(item.mother_status,item.occupation_mother)}}</span>
                 </div>
                 <div class="col-6">
-                    {{setMarriageBrothers( item.unmarried_sons,item.married_sons)}}
-                </div>
-            </div>
-
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Mother.svg" alt="mother">
-                    <span class="title">{{languageService.profileLang.motherStatus}}</span>
-                </div>
-                <div class="col-6">
-                    {{LifeStatus(item.mother_status,item.occupation_mother)}}
-                </div>
-            </div>
-
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Father.svg" alt="father">
-                    <span class="title">{{languageService.profileLang.fatherStatus}}</span>
-                </div>
-                <div class="col-6">
-                    {{LifeStatus(item.father_status,item.occupation)}}
-                </div>
-            </div>
-
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Gotra.svg" alt="gotra">
-                    <span class="title">{{languageService.profileLang.gotra}}</span>
-                </div>
-                <div class="col-6">
-                    {{item.gotra}}
-                </div>
-            </div>
-
-            <div class="row field">
-                <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/Family Type.svg" alt="family type">
-                    <span class="title">{{languageService.profileLang.familyType}}</span>
-                </div>
-                <div class="col-6">
-                    {{item.family_type}}
+                    <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
+                    <span class="title">{{LifeStatus(item.father_status,item.occupation)}}</span>
                 </div>
             </div>
 
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/familyIn.svg" alt="Family City">
-                    <span class="title">{{languageService.profileLang.familyLivingIn}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/Gotra.svg" alt="Gotra">
+                    <span class="title">{{item.gotra}}</span>
                 </div>
                 <div class="col-6">
-                    {{item.city}}
+                    <img class="titleImage" src="../../../assets/new icons/Family Type.svg" alt="Father Type">
+                    <span class="title">{{item.family_type}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/new icons/House Type.svg" alt="house type">
-                    <span class="title">{{languageService.profileLang.houseType}}</span>
+                    <img class="titleImage" src="../../../assets/new icons/familyIn.svg" alt="Family Living In">
+                    <span class="title">{{item.city}}</span>
                 </div>
                 <div class="col-6">
-                    <span class="highlightedValue">
-                        {{item.house_type}}
-                    </span>
+                    <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">
+                    <span class="title">{{item.house_type}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
-                    <img width="30px" src="../../../assets/moneybag.svg" alt="house type">
-                    <span class="title">{{languageService.profileLang.familyIncome}}</span>
-                </div>
-                <div class="col-6">
-                    <span class="highlightedValue">
-                        {{setIncome(item.family_income)}} LPA
-                    </span>
+                    <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
+                    <span class="title">{{setIncome(item.family_income)}} LPA</span>
                 </div>
             </div>
+
         </div>
-
     </section>
 </main>
 
