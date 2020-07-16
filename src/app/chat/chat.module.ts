@@ -24,6 +24,7 @@ import { AppDownloadDialogComponent } from './app-download-dialog/app-download-d
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TodaysPaymentPopupComponent } from './today-profiles/todays-payment-popup/todays-payment-popup.component';
 import { RateUsDialogComponent } from './rate-us-dialog/rate-us-dialog.component';
+import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { RateUsDialogComponent } from './rate-us-dialog/rate-us-dialog.component
     AppDownloadDialogComponent,
     TodaysPaymentPopupComponent,
     RateUsDialogComponent,
+    ChatDrawerComponent,
 ],
 entryComponents: [
   MessageDialogComponent,
@@ -62,7 +64,8 @@ entryComponents: [
   PersonalizedMessageDialogComponent,
   AppDownloadDialogComponent,
   TodaysPaymentPopupComponent,
-  RateUsDialogComponent
+  RateUsDialogComponent,
+  ChatDrawerComponent
 ],
 providers: [
   FindOpenHistoryProfileService,

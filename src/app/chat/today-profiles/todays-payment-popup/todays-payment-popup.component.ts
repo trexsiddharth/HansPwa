@@ -64,7 +64,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.setTimer();
     setTimeout(() => {
       this.closeDialog();
-    }, 20000);
+    }, 30000);
   }
   getImagePhoto(index: number){
       this.images[index];
