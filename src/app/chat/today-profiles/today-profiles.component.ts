@@ -39,7 +39,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   selfImage;
   selfName;
   shortListCount = 0;
-  @Output() setProfileImage = new EventEmitter <any> ();
   section;
   about: any;
   personal;
@@ -102,17 +101,19 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
 
           // set profile image (circular in top bar)
-          this.setProfileImage.emit(data.photo);
-          localStorage.setItem('profile_photo', data.photo);
-          if (data && data.photo) {
+
+          if (data) {
           this.selfImage = data.photo;
+          this.selfName = data.name;
+          this.chatService.authorized.emit({
+            name: data.name ? data.name : '' ,
+            photo: data.photo ? data.photo : '',
+            id: data.id,
+            isLead: data.is_lead
+          });
+          localStorage.setItem('profile_photo', data.photo);
           } else {
             this.selfImage = '../../assets/avatar.svg';
-          }
-
-          if (data && data.name) {
-            this.selfName = data.name;
-          } else {
             this.selfName = 'You';
           }
 
@@ -162,19 +163,22 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
 
       // set profile image (circular in top bar)
-        this.setProfileImage.emit(data.photo);
-        localStorage.setItem('profile_photo', data.photo);
-        if (data && data.photo) {
+        
+        if (data) {
       this.selfImage = data.photo;
+      this.selfName = data.name;
+      this.chatService.authorized.emit({
+        name: data.name ? data.name : '' ,
+        photo: data.photo ? data.photo : '',
+        id: data.id,
+        isLead: data.is_lead
+      });
+      localStorage.setItem('profile_photo', data.photo);
       } else {
         this.selfImage = '../../assets/avatar.svg';
-      }
-
-        if (data && data.name) {
-        this.selfName = data.name;
-      } else {
         this.selfName = 'You';
       }
+
 
         console.log(text);
         console.log(id);

@@ -5,12 +5,14 @@ import { PhoneNumberScreenComponent } from './phone-number-screen/phone-number-s
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 import { NewHomeComponent } from './new-home/new-home.component';
+import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
 
 
 const routes: Routes = [
   { path: 'chat',
   loadChildren: () => import('./chat/chat.module').
-  then(m => m.ChatModule)
+  then(m => m.ChatModule),
+  data: {preload: true}
 },
 { path: 'fourReg',
   loadChildren: () => import('./compatibility-form/compatibility-form.module').
@@ -43,7 +45,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: HansPreloadingStrategyService
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

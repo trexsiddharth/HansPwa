@@ -16,8 +16,15 @@
 ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
     background-color: white;
 }
+.mainDiv {
+    width: 100vw;
+    height: auto;
+    background-image: none;
+}
 main {
     position: relative;
+    top: 0px;
+    background-color: white;
 }
 .sections{
     padding: 5px 20px;
@@ -29,6 +36,15 @@ main {
     font-size: 18px;
     font-weight: bold;
     font-size: 20px;
+}
+.topBar {
+    color: white;
+    background-color: #83C9F4;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
 }
 .menuItems{
     color: black;
@@ -116,6 +132,12 @@ font-size: 18px;
 }
 
 @media (min-width: 1024px){
+    .mainDiv {
+        width: 100vw;
+        height: auto;
+        background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
+        background-size: contain;
+    }
     .navigationPanel{
         position: fixed;bottom: 0px ;
             width: 40%;
@@ -126,4 +148,5 @@ font-size: 18px;
             background-color: white;
             padding: 5px 0px;
     }
+
 }

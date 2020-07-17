@@ -233,8 +233,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
     if (localStorage.getItem('language')) {
       this.currentLanguage = localStorage.getItem('language');
     } else {
-      this.currentLanguage = 'Hindi';
-      localStorage.setItem('language', 'Hindi');
+      this.currentLanguage = 'english';
+      localStorage.setItem('language', 'english');
+      this.languageService.setCurrentLanguage('english');
     }
 
     if (this.router.url.match('mobile=')) {
@@ -281,6 +282,14 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.itemService.setTab.subscribe(
       data => {
         this.setSelectedTab(data);
+      }
+    );
+      // user authorized
+    this.chatServivce.authorized.subscribe(
+      data => {
+        if (data) {
+          this.setProfileImage(data.photo);
+        }
       }
     );
   }
@@ -554,7 +563,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.tabType = 'contacted';
         this.changeToHistory();
         break;
-      case 2:
+        case 2:
+        this.tabType = 'interestReceived';
+        this.changeToHistory();
+        break;
+      case 3:
         this.tabType = 'interestShown';
         this.changeToHistory();
         break;
@@ -587,12 +600,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.tabType = 'contacted';
         this.changeToHistory();
         break;
-      case 2:
-        this.tabType = 'interestShown';
+        case 2:
+        this.tabType = 'interestReceived';
         this.changeToHistory();
         break;
-        case 3:
-        this.tabType = 'interestReceived';
+      case 3:
+        this.tabType = 'interestShown';
         this.changeToHistory();
         break;
       case 4:

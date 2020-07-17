@@ -4,6 +4,32 @@ section{
     height: 100vh;
 }
 
+.paddingToSection {
+    padding: 70px 30px 100px !important;
+}
+
+/* // only for explicit view */
+.mainBack {
+    background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
+    background-size: contain;
+}
+
+.toolBar {
+    background-color: #83C9F4;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid grey;
+    position: fixed;
+    z-index: 999999;
+}
+
+.titleText {
+    font-size: 20px;
+}
+
 
 span{
     text-transform: capitalize;
@@ -155,6 +181,9 @@ border-radius: 10px;
             border-radius: 10px;
             object-fit: fill;
         }
+        .titleText {
+            font-size: 16px;
+        }
 }
 
 @media (max-width: 575px) {
@@ -182,4 +211,11 @@ border-radius: 10px;
             border-radius: 10px;
             object-fit: fill;
         }
+        .titleText {
+            font-size: 18px;
+        }
+        /* // only for explicit view */
+    .mainBack {
+    background-image: none;
+}
 }

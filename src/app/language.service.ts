@@ -261,7 +261,7 @@ export class LanguageService {
         break;
     }
   } else {
-    localStorage.setItem('language', 'hindi');
+    localStorage.setItem('language', 'english');
     this.setProfileLanguage();
   }
   }

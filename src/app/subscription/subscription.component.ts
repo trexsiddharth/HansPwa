@@ -7,6 +7,7 @@ import {
 } from 'ngx-kc-notification';
 
 import {Location} from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subscription',
@@ -39,6 +40,7 @@ export class SubscriptionComponent implements OnInit {
               private subscriptionService: SubscriptionserviceService,
               private spinner: NgxSpinnerService,
               private browserLocation: Location,
+              private router: Router,
               private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
@@ -145,6 +147,8 @@ facebookAnalytics(event) {
 }
 
    openDialog() {
+     if (localStorage.getItem('mobile_number')) {
+
      if (this.price) {
     if (localStorage.getItem('mobile_number')) {
       this.getRazorPay(this.price, 'live', 0, '', '', localStorage.getItem('mobile_number'));
@@ -158,6 +162,11 @@ facebookAnalytics(event) {
      } else {
         this.ngxNotificationService.error('Something Went Wrong');
      }
+
+    } else {
+      this.ngxNotificationService.warning('Please Login First');
+      this.router.navigateByUrl('phone-number');
+    }
   }
 
   goBack() {

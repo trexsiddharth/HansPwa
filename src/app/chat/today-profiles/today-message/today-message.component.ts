@@ -22,7 +22,6 @@ export class TodayMessageComponent implements OnInit {
       window.open('tel:9697989697');
     }
     getMessage() {
-      console.log(this.messageData, this.button);
       return this.messageData;
     }
     showPlan() {

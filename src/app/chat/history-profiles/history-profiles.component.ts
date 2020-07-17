@@ -28,7 +28,7 @@ import {
   FindOpenHistoryProfileService
 } from '../../find-open-history-profile.service';
 import {
-  Router
+  Router, ActivatedRoute
 } from '@angular/router';
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 import { MatDialogConfig, MatDialog } from '@angular/material';
@@ -36,6 +36,7 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
+import { Location } from '@angular/common';
 
 
 
@@ -79,6 +80,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   smallSpinner = false;
   scrollLink;
   scrollFlag = false;
+  title;
+  section;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
@@ -86,24 +89,40 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               public notification: NotificationsService,
               public itemService: FindOpenHistoryProfileService,
               private router: Router,
+              private browserLocation: Location,
+              private activatedRoute: ActivatedRoute,
               private breakPointObserver: BreakpointObserver) {}
 
   ngOnInit() {
+    // url for the particular section of history
+    this.activatedRoute.paramMap.subscribe(
+      (routeData: any) => {
+        console.log(routeData);
+        if ( routeData && routeData.params && routeData.params.section) {
+          this.section = routeData.params.section;
+          this.type = routeData.params.section;
+        }
+      }
+    );
+
     console.log(this.type);
     switch (this.type) {
       case 'contacted':
+        this.title = this.itemService.getContactedCount();
         if (localStorage.getItem('contactedProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('contactedProfiles'));
           console.log(this.profile);
           }
         break;
       case 'interestShown':
+        this.title = this.itemService.getShortlistedCount();
         if (localStorage.getItem('sortListProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('sortListProfiles'));
           console.log(this.profile);
           }
         break;
       case 'interestReceived':
+        this.title = this.itemService.getShortedCount();
         if (localStorage.getItem('interestReceived')) {
           this.profile = JSON.parse(localStorage.getItem('interestReceived'));
           console.log(this.profile);
@@ -128,9 +147,9 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     switch (this.type) {
       case 'contacted':
-       this.scrollLink = 'contactedProfiles';
-       this.getHistorydata('contactedProfiles');
-       break;
+        this.scrollLink = 'contactedProfiles';
+        this.getHistorydata('contactedProfiles');
+        break;
       case 'interestShown':
         this.scrollLink = 'sortListProfiles';
         this.getHistorydata('sortListProfiles');
@@ -150,9 +169,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
-
-
   }
+
+  goBack() {
+    this.browserLocation.back();
+  }
+
   getProfilePhoto(item: any, num: any, gen: string): string {
     if (item.family) {
       if (num === null) {

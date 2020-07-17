@@ -19,13 +19,13 @@ export class NewHomeComponent implements OnInit {
     // lang check is used to set the selected language as user language once user logs in.
     // it will be only set if user changes the language from the current language to other language.
     if (!localStorage.getItem('language')) {
-      localStorage.setItem('language', 'hindi');
-      this.langCheck = false;
-    }
-    if (localStorage.getItem('language') === 'hindi') {
-      this.langCheck = false;
-    } else if (localStorage.getItem('language')  === 'english')  {
+      localStorage.setItem('language', 'english');
       this.langCheck = true;
+    }
+    if (localStorage.getItem('language') === 'english') {
+      this.langCheck = true;
+    } else if (localStorage.getItem('language')  === 'hindi')  {
+      this.langCheck = false;
     }
     this.languageService.setHomeLang(localStorage.getItem('language'));
   }

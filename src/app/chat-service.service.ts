@@ -8,6 +8,13 @@ export class ChatServiceService {
   contactNumber;
   loginStatus;
   credits;
+  authorized = new EventEmitter<{
+    name,
+    photo,
+    id,
+    isLead
+  }>();
+
   constructor() { }
 
   setContactNumber(contact: any) {

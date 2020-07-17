@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, HostListener, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { EditPersonalDialogComponent } from '../myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { EditFamilyDialogComponent } from '../myprofile/edit-family-dialog/edit-family-dialog.component';
@@ -18,11 +18,6 @@ import { LanguageService } from 'src/app/language.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  @Output() preferenceChanged = new EventEmitter();
-  @Input() personalProfileData: any;
-  @Input() familyProfileData: any;
-  @Input() preferenceProfileData: any;
-  @Output() backToProfiles = new EventEmitter();
 
   innerWidth: any;
   public message: string;
@@ -35,14 +30,22 @@ export class UserProfileComponent implements OnInit {
   carouselSize;
   currentLanguage;
   langCheck;
+  userId;
+  userIsLead;
+  personalProfileData: any;
+  familyProfileData: any;
+  preferenceProfileData: any;
 
   constructor(private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService,
               private matDialog: MatDialog, private http: HttpClient,
               public languageService: LanguageService,
-              private ngxNotificationService: NgxNotificationService, private router: Router) { }
+              private ngxNotificationService: NgxNotificationService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
+    this.languageService.setProfileLanguage();
     this.currentLanguage = localStorage.getItem('language');
     // set already selected language in toggle
     if (localStorage.getItem('language') === 'hindi') {
@@ -50,6 +53,20 @@ export class UserProfileComponent implements OnInit {
     } else {
       this.langCheck = true;
     }
+
+    this.activatedRoute.paramMap.subscribe(
+      (routeData: any) => {
+          console.log(routeData);
+          if (routeData && routeData.params) {
+            if (routeData.params.id && routeData.params.isLead) {
+                this.userId = routeData.params.id;
+                this.userIsLead = routeData.params.isLead;
+            }
+          }
+      }
+    );
+
+    this.getUserProfileData();
   }
 
   // set language on the basis of toggle
@@ -62,6 +79,10 @@ export class UserProfileComponent implements OnInit {
       localStorage.setItem('language', 'hindi');
       this.languageService.setCurrentLanguage('hindi');
     }
+  }
+
+  openSubscription() {
+    this.router.navigateByUrl('subscription');
   }
 
   setAge(dob: string) {
@@ -210,9 +231,9 @@ onResize(event) {
       dialogRef.afterClosed().subscribe(
         res => {
           this.getUserProfileData();
-          if (res) {
-            this.preferenceChanged.emit(res);
-          }
+          // if (res) {
+          //   this.preferenceChanged.emit(res);
+          // }
         }
       );
     }
@@ -238,23 +259,25 @@ onResize(event) {
     }
 
     getUserProfileData() {
-      if (localStorage.getItem('mobile_number')) {
+      if (this.userId || localStorage.getItem('id')) {
         this.spinner.show();
-        console.log(localStorage.getItem('id'));
         const myprofileData = new FormData();
-        myprofileData.append('id', localStorage.getItem('id'));
+        myprofileData.append('id', this.userId ? this.userId : localStorage.getItem('id'));
         myprofileData.append('contacted', '1');
-        myprofileData.append('is_lead', localStorage.getItem('is_lead'));
+        myprofileData.append('is_lead', this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead'));
         // tslint:disable-next-line: max-line-length
-        return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
-          throw new Error('Server Timeout ' + e);
+        return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', myprofileData)
+        .pipe(timeout(7000),
+         retry(2),
+          catchError(e => {
+            this.ngxNotificationService.error('Server Time Out, Try Again Later');
+            throw new Error('Server Timeout ' + e);
         })).subscribe(
           (data: any) => {
             console.log(data);
             this.personalProfileData = data.profile ? data.profile : null;
             this.familyProfileData = data.family ? data.family : null;
             this.preferenceProfileData = data.preferences ? data.preferences : null;
-
             this.spinner.hide();
           },
           (error: any) => {
@@ -380,7 +403,8 @@ onResize(event) {
       this.router.navigateByUrl('/home');
     }
     backToChat() {
-      this.backToProfiles.emit('chatbot');
+      // this.backToProfiles.emit('chatbot');
+      this.router.navigateByUrl('/chat');
     }
     setLocality(locality, city) {
       if (locality && locality !== '') {

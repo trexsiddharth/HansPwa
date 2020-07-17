@@ -33,6 +33,7 @@ import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.compone
 import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
+import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
     NgxMatIntlTelInputModule
     , RouterModule
   ],
-  providers: [SubscriptionserviceService, NewHomeService],
+  providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [TiktokAdsFormComponent,

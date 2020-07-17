@@ -18,6 +18,13 @@ body {
   .full-width {
     width: 100%;
   }
+  .ht-full {                
+    margin: 0px 32%;
+    width: auto;
+    left: 0px;
+    right: 0px;
+    top: 55px;
+  }
   .btn-blue, .btn.btn-blue {
     color: white;
     background-color: #34b7f1;
@@ -281,8 +288,24 @@ div.mat-select-search-inner input.mat-input-element {
 .mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover) {
   background: #0cb9f2;
 }
+@media screen and (max-width: 576px) {
+  .ht-full {
+    margin: 0px;
+    width: auto;
+    left: 0px;
+    right: 0px;
+    top: 40px;
+  }
+}
 
 @media screen and (max-width: 350px) {
+  .ht-full {
+    margin: 0px;
+    width: auto;
+    left: 0px;
+    right: 0px;
+    top: 40px;
+  }
   .mat-tab-label-content {
     font-size: 10px;
     display: flex !important;

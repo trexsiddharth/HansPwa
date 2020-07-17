@@ -11,7 +11,7 @@
 
     <div id="imageContent">
         <div>
-          <div>
+          <div style="width: 70%;">
             <span style="font-weight: bold;font-size: 18px;">
                 {{toTitleCase(item.name)}}
             </span><br>
@@ -108,32 +108,29 @@
 
         </div>
 
-               <div class="verifiedClass">
-                <div  id="verified">
-                    <div class="titleGrey">
-                        <img class="titleImage" style="margin-left: 10px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
-                        {{languageService.profileLang.verifiedAt}}
-                    </div>
-                    <div>
-                            <span class="textVerified full-width t-c">
-                             {{item.facebook ? item.facebook : 'Hans Matrimony Office'}}
-                            </span>
-                    </div>
+               <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/verifiedwhite.svg" alt="verified at">
+                    <span class="title">{{languageService.profileLang.verifiedAt}}</span>
                 </div>
-
-         
-            <div  id="controlledBy">
-                <div class="titleGrey">
-                    <img class="titleImage" style="margin-left: 10px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
-                    {{languageService.profileLang.managedBy}}
-                </div>
-                <div >
-                        <span class="textVerified full-width t-c">
-                            {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}
-                        </span>
+                <div class="col-6">
+                    <span class="title">{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
                 </div>
             </div>
-               </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/controlledby.svg" alt="managedBy">
+                    <span class="title">
+                        {{languageService.profileLang.managedBy}}
+                    </span>
+                </div>
+                <div class="col-6">
+                    <span class="title">
+                        {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}
+                    </span>
+                </div>
+            </div>
 
         <div id="aboutSection">
             <u class="titleHeading">

@@ -50,6 +50,7 @@ main{
     position: absolute;
     margin-top: 30%;
     width: 100%;
+    color: black;
   }
 
   .messageFooter{
@@ -113,6 +114,7 @@ main{
             position: absolute;
             margin-top: 30%;
             width: 100vw;
+            color: black;
           }
           main{
             height: 100vh;
