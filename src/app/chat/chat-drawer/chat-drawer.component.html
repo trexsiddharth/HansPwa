@@ -1,72 +1,86 @@
 <main class="mainContainer">
     <div class="row parentTop">
         <div>
-            <img src="../../assets/back.svg" class="backArrow" (click)="closeSideNav()" alt="BACK">
+            <img src="../../assets/backN.svg" class="backArrow" (click)="closeSideNav()" alt="BACK">
         </div>
         <div class="circular">
+            <!-- <img *ngIf="getProfilePic() == null" src="../../../assets/logo_192.png">
+            <img *ngIf="getProfilePic() !== null" [src]="getProfilePic()" > -->
             <img src="../../../assets/logo_192.png">
         </div>
         <div class="nameText">
           <b>Abhay Bhardwaj</b>
         </div>
-    </div>
+    </div>  
     <div style="text-align:center;position: relative; ;overflow-y: auto;">
         <div class="rowMore">
           <img src="../../assets/personN.svg" class="iconImage">
-          <span >My Profile</span>
+          <span >{{languageService.profileLang.myprofile}}</span>
           <img src="../../assets/nextN.svg" class="nextImage">
       </div>
       <hr>
         <div class="rowMore">
             <img src="../../assets/phoneN.svg" class="iconImage">
-            <span>Contacted Profiles</span>
+            <span *ngIf="languageService.getCurrentLanguage()==='english'" >Contacted Profiles</span>
+            <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कोनटैकटीड प्रोफाइलस</span>
         </div>
         <div class="rowMore">
             <img src="../../assets/favorite.svg" class="iconImage">
-            <span>Liked Profiles</span>
+            <span *ngIf="languageService.getCurrentLanguage()==='english'" >Liked Profiles</span>
+            <span *ngIf="languageService.getCurrentLanguage()==='hindi'">आपको {{languageService.profileLang.shortlist}}</span>
         </div>
         <div class="rowMore">
           <img src="../../assets/likesyou.svg" class="iconImage">
-          <span>Likes You</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Likes You</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">जो आपको पसंद करते है</span>
         </div>   
         <div class="rowMore">
           <img src="../../assets/clear.svg" class="iconImage">
-          <span>Skipped Profiles</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Skipped Profiles</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">छोड़ी गई प्रोफाइल</span>
         </div> 
         <hr>
         <div class="rowMore">
           <img src="../../assets/search.svg" class="iconImage">
-          <span>Discover Profiles</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Discover Profiles</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">डिस्कवर प्रोफाइल</span>
           <img src="../../assets/nextN.svg" class="nextImage">
         </div>
         <div class="rowMore">
           <img src="../../assets/customer.svg" class="iconImage">
-          <span>Change Preferences</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Change Preferences</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">{{languageService.profileLang.preference}} बदलें</span>
         </div>
         <hr>
         <div class="rowMore">
           <img src="../../assets/support.svg"class="iconImage">
-          <span>Customer Support</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'" >Customer Support</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">ग्राहक सहेयता</span>
         </div>
         <div class="rowMore">
           <img src="../../assets/support.svg" class="iconImage">
-          <span>Get A Call Back</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Get A Call Back</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कौल बैक पाऐं</span>
         </div>
         <div class="rowMore">
           <img src="../../assets/gear.svg" class="iconImage">
-          <span>Settings</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Settings</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">सेटींग॒स</span>
         </div>
-        <div class="rowMore">
+        <div class="rowMore" (click)="logout()" >
           <img src="../../assets/logoutN.svg" class="iconImage">
-          <span>Logout</span>
+          <span>{{languageService.profileLang.logout}}</span>
         </div>
         <hr>
     </div>
     <ng-container>
       <div class="drawerButtonSection">
-        <button class="buttonStyle">
+        <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='english'" [routerLink]="['/subscription']" routerLinkActive="router-link-active">
            <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;Latest Subscription Offers
         </button>
+        <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='hindi'" [routerLink]="['/subscription']" routerLinkActive="router-link-active">
+          <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;नवीनतम {{languageService.profileLang.subscription}} ऑफर
+       </button>
       </div>
     </ng-container>
 
