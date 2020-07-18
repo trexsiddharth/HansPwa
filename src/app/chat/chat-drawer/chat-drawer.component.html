@@ -35,7 +35,7 @@
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Likes You</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">जो आपको पसंद करते है</span>
         </button>   
-        <button class="rowMore">
+        <button class="rowMore" (click)="openHistoryProfiles('rejected')">
           <img src="../../assets/clear.svg" class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Skipped Profiles</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">छोड़ी गई प्रोफाइल</span>

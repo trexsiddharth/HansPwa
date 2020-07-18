@@ -34,6 +34,7 @@ export class FindOpenHistoryProfileService {
   }
   setCredits(credits: any) {
     this.credits = credits;
+    localStorage.setItem('credits' , credits);
     if (this.credits < 1) {
       this.creditsUpdated.emit(true);
     }
@@ -47,7 +48,8 @@ export class FindOpenHistoryProfileService {
     }
   }
   getCredits() {
-    return this.credits;
+   let credits = localStorage.getItem('credits');
+   return credits;
   }
   setIsPersonalized(status: boolean) {
     this.isPersonalized = status;
@@ -78,6 +80,8 @@ export class FindOpenHistoryProfileService {
     this.profileCount.shortlistCount = count.SL;
     this.profileCount.shortedCount = count.S;
     this.profileCount.rejectedCount = count.R;
+
+    localStorage.setItem('count',  JSON.stringify(this.profileCount));
   }
   saveDailyCount(count: any) {
     this.profileCount.dailyCount = count + 1;
@@ -105,24 +109,28 @@ export class FindOpenHistoryProfileService {
       : localStorage.getItem('language') === 'hindi' ? 'आज के रिश्ते' : 'Today\'s Profiles';
   }
   getContactedCount() {
+    let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
-    'कॉंटैक्टेड ( ' + this.profileCount.contactedCount + ' )'
-    : 'Contacted ( ' + this.profileCount.contactedCount + ' )';
+    'कॉंटैक्टेड ( ' + count.contactedCount + ' )'
+    : 'Contacted ( ' + count.contactedCount + ' )';
   }
   getShortlistedCount() {
+    let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
-    'मेरी पसंद ( ' + this.profileCount.shortlistCount + ' )'
-    : 'Shortlisted ( ' + this.profileCount.shortlistCount + ' )';
+    'मेरी पसंद ( ' + count.shortlistCount + ' )'
+    : 'Shortlisted ( ' + count.shortlistCount + ' )';
   }
   getShortedCount() {
+    let count = JSON.parse(localStorage.getItem('count'));
     return  localStorage.getItem('language') === 'hindi' ?
-    'मै किसे पसंद हूँ? ( ' + this.profileCount.shortedCount + ' )'
-    : 'Liked Me? ( ' + this.profileCount.shortedCount + ' )';
+    'मै किसे पसंद हूँ? ( ' + count.shortedCount + ' )'
+    : 'Liked Me? ( ' + count.shortedCount + ' )';
   }
   getRejectedCount() {
+    let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
-    'नापसंद ( ' + this.profileCount.rejectedCount + ' )'
-    : 'Rejected ( ' + this.profileCount.rejectedCount + ' )';
+    'स्किप्पड़ ( ' + count.rejectedCount + ' )'
+    : 'Skipped ( ' + count.rejectedCount + ' )';
   }
   getMutualCount() {
     return localStorage.getItem('language') === 'hindi' ?

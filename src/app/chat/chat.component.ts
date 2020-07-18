@@ -180,7 +180,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   currentTab;
   profilesCompletedStatus = false;
   timerMain;
-  photo;
+  photo = '../../assets/avatar.svg';
   lockdownCount = 0;
 
 

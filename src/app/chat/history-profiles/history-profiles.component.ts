@@ -129,6 +129,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           }
         break;
       case 'rejected':
+        this.title = this.itemService.getRejectedCount();
         if (localStorage.getItem('rejectedProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('rejectedProfiles'));
           console.log(this.profile);
