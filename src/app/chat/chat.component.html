@@ -5,8 +5,8 @@
   position="start" #sidenav>
   <app-chat-drawer  [drawerReference]="sidenav"></app-chat-drawer>
  </mat-sidenav>
- <mat-sidenav-content>
-  <main class='fixed t-0 b-0 w-full HC main'>
+ <mat-sidenav-content style="overflow: hidden;">
+  <main class='fixed t-0 b-0 w-full HC main' style="overflow: hidden;">
 
     <div class="mainBack">
     </div>
@@ -18,11 +18,17 @@
       font-size: 14px;
       display: flex;
       flex-direction: row;
-      align-items: center;">
-        <mat-icon style="width: 14px;height: 14px; color: white;">call</mat-icon> {{itemService.getCredits()}}
+      align-items: center;"
+      (click)="openContactedProfiles()"
+      >
+        <mat-icon 
+        style="width: 14px;
+        height: 14px; 
+        color: white;">call</mat-icon> {{itemService.getCredits()}}
       </div>
 
-      <div style="position: relative;z-index: 99999999999999999;">
+      <div style="position: relative;
+      z-index: 99999999999999999;">
         <img  id="myProfImage"
       (click)="sidenav.toggle()" 
       (error)="onImageLoadError()" 
@@ -43,16 +49,15 @@
         <mat-tab id="today">
   
           <ng-template mat-tab-label>
-            <img width="30px" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab && selectedTab != 0"> 
-            <img width="30px" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="!selectedTab || selectedTab == 0 ">
+            <span [matBadge]="itemService.getDailyNumber()">
+              <img width="30px" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab && selectedTab != 0"> 
+              <img width="30px" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="!selectedTab || selectedTab == 0 ">
+            </span>
             <!-- {{itemService.getDailyCount()}} -->
             Today's Special
           </ng-template>
   
               <ng-template matTabContent>
-                <!-- <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                  {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-              </button> -->
                 <div class="mainBody w-full ht-full setBotUi" style="z-index: 1;" id="today-main">
                     <app-today-profiles></app-today-profiles>
                 </div>
@@ -125,9 +130,6 @@
   
                 <ng-template matTabContent>
                 <div>
-                  <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                    {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                </button>
                     <div class='mainBody  w-full bg-white ht-full setBotUi'>
                              <app-history-profiles [type]="tabType"></app-history-profiles>
                    </div>
@@ -138,18 +140,17 @@
   
               <!-- // liked by me -->
               <mat-tab id="melike">
-                <ng-template mat-tab-label>
-                  <img width="32px" src="../../assets/tabs-icons/heart-like-white.svg" alt="icon" *ngIf="selectedTab !== 3"> 
-            <img width="32px" src="../../assets/tabs-icons/heart-like-dark.svg" alt="icon" *ngIf="selectedTab === 3 ">
+                <ng-template mat-tab-label >
+                  <span [matBadge]="itemService.getShortlistNumber()">
+                    <img width="32px" src="../../assets/tabs-icons/heart-like-white.svg" alt="icon" *ngIf="selectedTab !== 3"> 
+                    <img width="32px" src="../../assets/tabs-icons/heart-like-dark.svg" alt="icon" *ngIf="selectedTab === 3 ">
+                  </span>
                   <!-- {{itemService.getShortlistedCount()}} -->
                   Your Likes
                 </ng-template>
   
                   <ng-template matTabContent>
                   <div>
-                    <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                      {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                  </button>
                       <div class='mainBody  w-full bg-white ht-full setBotUi'>
                                <app-history-profiles [type]="tabType"></app-history-profiles>
                      </div>

@@ -195,7 +195,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     public itemService: FindOpenHistoryProfileService,
     private chatServivce: ChatServiceService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -312,6 +313,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
     // );
   }
 
+  openContactedProfiles() {
+    this.router.navigate(['history', 'contacted'] , {relativeTo: this.activatedRoute});
+  }
 
 
   openTodaysPopupHere() {
