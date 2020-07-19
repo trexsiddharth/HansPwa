@@ -5,7 +5,11 @@
   position="start" #sidenav>
   <app-chat-drawer  [drawerReference]="sidenav"></app-chat-drawer>
  </mat-sidenav>
- <mat-sidenav-content style="overflow: hidden;">
+ <mat-sidenav-content style="overflow: hidden;height: 100vh;position: relative;
+ z-index: 1;
+ display: block;
+ margin: 0px;
+ padding: 0px;">
   <main class='w-full HC main'>
 
     <div class="mainBack">
