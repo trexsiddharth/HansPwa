@@ -1,11 +1,12 @@
-<mat-sidenav-container class="bg-white">
+<mat-sidenav-container class="bg-white" style="width: 100vw; position:fixed;overflow: hidden;">
   <mat-sidenav id="sidenav"
    class="drawerSettings"
     mode="over"
   position="start" #sidenav>
   <app-chat-drawer  [drawerReference]="sidenav"></app-chat-drawer>
  </mat-sidenav>
- <mat-sidenav-content style="overflow: hidden;height: 100vh;position: relative;
+ <mat-sidenav-content 
+ style="overflow: hidden;height: 100vh;position: relative;
  z-index: 1;
  display: block;
  margin: 0px;
