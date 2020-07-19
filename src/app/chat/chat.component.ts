@@ -560,7 +560,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.changeToBot();
         break;
       case 1:
-        this.tabType = 'contacted';
+        this.tabType = 'discover';
         this.changeToHistory();
         break;
         case 2:
@@ -597,7 +597,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.changeToBot();
         break;
       case 1:
-        this.tabType = 'contacted';
+        this.tabType = 'discover';
         this.changeToHistory();
         break;
         case 2:

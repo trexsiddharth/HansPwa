@@ -25,6 +25,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TodaysPaymentPopupComponent } from './today-profiles/todays-payment-popup/todays-payment-popup.component';
 import { RateUsDialogComponent } from './rate-us-dialog/rate-us-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
+import { DiscoverComponent } from './discover/discover.component';
 
 
 @NgModule({
@@ -53,13 +54,13 @@ import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
     TodaysPaymentPopupComponent,
     RateUsDialogComponent,
     ChatDrawerComponent,
+    DiscoverComponent,
 ],
 entryComponents: [
   MessageDialogComponent,
   EditFamilyDialogComponent,
   EditPersonalDialogComponent,
   EditPreferenceDialogComponent,
-  HistoryProfilesDialogComponent,
   PersonalizedDialogComponent,
   PersonalizedMessageDialogComponent,
   AppDownloadDialogComponent,

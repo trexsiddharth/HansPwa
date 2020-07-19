@@ -8,6 +8,9 @@ import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { AppDownloadDialogComponent } from './chat/app-download-dialog/app-download-dialog.component';
 import { TodaysPaymentPopupComponent} from './chat/today-profiles/todays-payment-popup/todays-payment-popup.component';
 import { RateUsDialogComponent } from './chat/rate-us-dialog/rate-us-dialog.component';
+import { MessageDialogComponent } from './chat/message-dialog/message-dialog.component';
+import { NgxNotificationService } from 'ngx-kc-notification';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -26,7 +29,9 @@ export class FindOpenHistoryProfileService {
 
   constructor(
     private dialog: MatDialog,
-    private breakPointObserver: BreakpointObserver) { }
+    private breakPointObserver: BreakpointObserver,
+    private router: Router,
+    private ngxNotificationService: NgxNotificationService) { }
 
   setItem(item: any) {
     console.log(item);
@@ -295,5 +300,42 @@ export class FindOpenHistoryProfileService {
       }
     );
     const dialogRef = this.dialog.open(RateUsDialogComponent, dialogConfig);
+  }
+
+  openMessageDialog(shareItem, reply: string, coming: boolean = false) {
+    console.log(shareItem);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.width = '700px';
+    dialogConfig.disableClose = true;
+    switch (reply.toLowerCase()) {
+      case 'yes':
+        dialogConfig.data = {
+          profile: shareItem,
+          type: reply.toLowerCase()
+        };
+        break;
+        case 'contacted':
+        dialogConfig.data = {
+          profile: shareItem,
+          type: reply.toLowerCase()
+        };
+        break;
+  
+      default:
+        break;
+  
+    }
+    const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+    dialogRefYes.afterClosed().subscribe(
+          data => {
+            if (data && data.request) {
+            this.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
+            if (coming) {
+              this.router.navigateByUrl('chat');
+            }
+            }
+          }
+        );
   }
 }

@@ -2,10 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NotificationsService } from 'src/app/notifications.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history-profiles-dialog',
@@ -23,33 +24,138 @@ export class HistoryProfilesDialogComponent implements OnInit {
   item;
   index;
   type;
+  profile;
+  title;
 
-  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
+  constructor(private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
               public notification: NotificationsService,
               public itemService: FindOpenHistoryProfileService,
               public languageService: LanguageService,
-              public dialogRef: MatDialogRef<HistoryProfilesDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
-                this.item = data.profile;
-                this.index = data.index;
-                this.type = data.type;
+              private browserLocation: Location,
+              private router: Router
+              ) {
               }
 
   ngOnInit() {
+    // set heading according to the language
+    this.languageService.setProfileLanguage();
+    setTimeout(() => {
+      this.profile = localStorage.getItem('open_profile');
+      console.log(this.profile);
+      if (this.profile) {
+        this.item = JSON.parse(this.profile);
+        console.log(this.item);
+        this.title = `${this.item.profile.name}'s Profile`;
+
+        // section from which user is coming
+        this.type = this.item.coming;
+    }
+    }, 1000);
+
   }
 
-  closeDialog() {
-    this.dialogRef.close();
+  goBack() {
+    this.browserLocation.back();
+    localStorage.setItem('open_profile', null);
   }
+
   profileReAnswer(item: any, answer: string) {
-    this.dialogRef.close({
-      profile: item,
-      ans: answer,
-      index: this.index
-    });
+
+    // if main kisse pasand hu and credits are zero...on Shortlist  response show offer 2
+  if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0'
+  && answer === 'SHORTLIST') {
+      this.itemService.openOfferTwo(item);
+      this.reponseToNormal(item, answer);
+      return;
+  }
+
+  if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    this.itemService.getPhotoStatus() === false &&
+    answer === 'SHORTLIST') {
+      this.itemService.openMessageDialog(item, answer);
+   } else if (this.itemService.getPersonalized() === false &&
+    answer === 'YES' && !item.family ) {
+      this.itemService.openMessageDialog(item, 'contacted');
+   }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+   && answer === 'YES') {
+    this.itemService.openMessageDialog(item, answer);
+   } else {
+     this.reponseToNormal(item, answer);
+   }
 
   }
+
+  reponseToNormal(item, answer) {
+    this.spinner.show();
+    const reAnswerData = new FormData();
+    reAnswerData.append('id', localStorage.getItem('id'));
+    if (item.family) {
+    reAnswerData.append('action_id', item.profile.id);
+    } else {
+      reAnswerData.append('action_id', item.profile.identity_number);
+    }
+    reAnswerData.append('action', answer);
+    reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
+
+    // tslint:disable-next-line: max-line-length
+    return this.http.post < any > ('https://partner.hansmatrimony.com/api/saveAction', reAnswerData).subscribe(
+      (response: any) => {
+          console.log(response);
+          if (response && response.status === 1) {
+            // update the profile list
+            if (response.count) {
+            this.itemService.saveCount(response.count);
+            }
+            this.spinner.hide();
+            // after reponse update the user credits
+            this.getCredits();
+          } else {
+            this.ngxNotificationService.error(response.message);
+            this.spinner.hide();
+          }
+      },
+      err => {
+          this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+          this.spinner.hide();
+      }
+    );
+  }
+  // reponse on premium profile
+  reponseToPremium(item, answer) {
+    const reAnswerData = new FormData();
+    reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
+    reAnswerData.append('id', item.identity_number);
+    reAnswerData.append('TEXT', answer);
+    // tslint:disable-next-line: max-line-length
+    return this.http.post < any > ('https://partner.hansmatrimony.com/api/premiumProNew', reAnswerData).subscribe(
+      (response: any) => {
+        console.log(response);
+        if (response && response.status === 1) {
+          // update the profile list after response
+          this.spinner.hide();
+          // update the count
+          if (response.count) {
+            this.itemService.saveCount(response.count);
+          }
+  
+          this.getCredits();
+        } else {
+          this.ngxNotificationService.error(response.message);
+          this.spinner.hide();
+        }
+      },
+      err => {
+        this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+        this.spinner.hide();
+      }
+    );
+  }
+
+
+
+
   getQualification(degree, education) {
     return education != null && education !== '' ? education : degree;
     }
@@ -75,7 +181,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
         } else {
           return value;
         }
-  
+
       } else {
         return '';
       }
@@ -102,6 +208,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
        const points = data.whatsapp_points;
        this.itemService.setCredits(data.whatsapp_points);
        console.log('credits', points);
+       localStorage.setItem('open_profile', null);
+       this.router.navigateByUrl('chat');
      },
     (error: any) => {
       this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
@@ -111,8 +219,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
    );
   }
 
-  call(num: any) {
-    window.open('tel:' + num);
+  call() {
+    window.open('tel:' + `${this.item.family ? this.item.family.mobile : this.profile.mobile}`);
   }
 
   slideAndOpenProfile(item: any, slide: any) {
@@ -207,7 +315,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
        if (carousel[keys[index]].toString().match('jeevansathi')) {
          return carousel[keys[index]];
        } else {
-       return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
        }
      }
    }
@@ -243,7 +351,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
        return value;
      }
    }
- 
+
    setAge(birthDate: string) {
      if (birthDate != null) {
        return String(Math.floor((Date.now() - new Date(birthDate).getTime()) / (1000 * 60 * 60 * 24 * 365))) + ' Yrs';
@@ -251,5 +359,13 @@ export class HistoryProfilesDialogComponent implements OnInit {
        return '';
      }
    }
+
+   scrollDown() {
+    console.log('scroll down');
+    document.querySelector('.mainBody').scrollBy({
+          top: 350,
+          behavior: 'smooth'
+    });
+  }
 
 }

@@ -13,6 +13,15 @@
          
     <div class="groupContainer" *ngIf="history!='myprofile'">
 
+      <div style="position: absolute; right: 10px;
+      top: 0px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;">
+        <mat-icon style="width: 14px;height: 14px; color: white;">call</mat-icon> {{itemService.getCredits()}}
+      </div>
+
       <div style="position: relative;z-index: 99999999999999999;">
         <img  id="myProfImage"
       (click)="sidenav.toggle()" 
@@ -29,7 +38,7 @@
   
       <mat-tab-group mat-align-tabs="center" id="mainLabels" class="matGroup"  
        [(selectedIndex)]="selectedTab" 
-       (selectedIndexChange)="changeSelectedTab($event)"  >
+       (selectedIndexChange)="changeSelectedTab($event)">
   
         <mat-tab id="today">
   
@@ -69,11 +78,11 @@
   
                    <!-- // personalized profiles-->
               <!-- <mat-tab *ngIf="itemService.getIsLead() == '0'">  -->
-              <mat-tab> 
+              <!-- <mat-tab> 
                 <ng-template mat-tab-label>
                   <img width="30px" src="../../assets/tabs-icons/discover-white.svg" alt="icon" *ngIf="selectedTab !== 1"> 
             <img width="30px" src="../../assets/tabs-icons/discover-dark.svg" alt="icon" *ngIf="selectedTab === 1 ">
-                    <!-- {{itemService.getOtherProfiles()}} -->
+                    {{itemService.getOtherProfiles()}}
                     Discover
                 </ng-template>
                 <ng-template matTabContent>
@@ -86,7 +95,24 @@
                    </div>
                </div>
             </ng-template>
-            </mat-tab>
+            </mat-tab> -->
+
+          <!-- // discover-->
+           <mat-tab id="discover">
+             <ng-template mat-tab-label>
+              <img width="30px" src="../../assets/tabs-icons/discover-white.svg" alt="icon" *ngIf="selectedTab !== 1"> 
+              <img width="30px" src="../../assets/tabs-icons/discover-dark.svg" alt="icon" *ngIf="selectedTab === 1 ">
+               Discover
+             </ng-template>
+
+               <ng-template matTabContent>
+               <div>
+                   <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                            <app-discover></app-discover>
+                  </div>
+              </div>
+           </ng-template>
+           </mat-tab>
   
             <!-- // liked me  -->
             <mat-tab id="likeme">

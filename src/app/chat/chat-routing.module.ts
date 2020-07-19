@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ChatComponent } from './chat.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HistoryProfilesComponent } from './history-profiles/history-profiles.component';
+import { HistoryProfilesDialogComponent } from './history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'history/:section',
     component: HistoryProfilesComponent
+  },
+  {
+    path: 'open/discover-profile',
+    component: HistoryProfilesDialogComponent
   }
 ];
 

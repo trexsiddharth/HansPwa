@@ -1,434 +1,431 @@
-<main matDialogContent>
-
-    <div id="cancel">
-        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg" alt="cancel">
+<mat-toolbar class="toolBar">
+    <div style="display: flex;
+    flex-direction: row;
+    align-items: center;">
+        <button mat-icon-button 
+        (click)="goBack()"
+    class="example-icon"
+     aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="titleText">{{title}}</span>
     </div>
-    <div class="historyProfile">
+    <button mat-icon-button 
+    class="example-icon" 
+    aria-label="Example icon-button with share icon">
+      <mat-icon>call</mat-icon>
+      <span class="titleText">{{this.itemService.getCredits()}}</span>
+    </button>
+  </mat-toolbar>
+
+<main class="ht-full" *ngIf="item">  
+
+    <div id="profileImageDiv">
 <ngb-carousel>
     <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index" >
-            <img  id="profileImage" 
+            <img  id="profilePic" 
             [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)" 
             alt="item.profile.name">
     </ng-template>
   </ngb-carousel>
 
-  <div class="historyDetails">
-    <span>
-        {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
-    </span><br>
-    <span>
-        {{item.family ? item.family.city : item.profile.working_city}} | {{setHeight(item.profile.height)}} 
-        | {{item.family ? item.family.religion : item.profile.religion}}, {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
-        | {{setIncome(item.profile.monthly_income)}} LPA
-    </span>
+<!-- // image info  -->
+
+<div id="imageContent">
+    <div>
+      <div style="width: 70%;">
+        <span style="font-weight: bold;font-size: 18px;">
+            {{toTitleCase(item.profile.name)}}
+        </span><br>
+        <span style="font-size: 14px;">
+            {{item.profile.working_city}} {{item.profile.working_city ? '|' : ''}} {{setHeight(item.profile.height)}}
+        </span> <br>
+        <span style="font-size: 14px;">
+            {{setIncome(item.profile.monthly_income)}} LPA
+        </span>
+      </div>
+      <div style="position: absolute;
+       top: -10px;right: 10px;
+       border-radius: 10px;
+       padding: 0px 10px;
+       background-color: #48CDF7;" >{{setAge(item.profile.birth_date)}}
+      </div>
+
+      <div style="position: absolute;
+      top: 25px;right: 25px;">
+          <img width="30px" src="../../../assets/new icons/shield.svg"
+           alt="verified profile">
+      </div>
+    </div>
+      
+      <div class="down-arrow"
+      (click)="scrollDown()"
+       style="background-color: #50ed9d;
+      float: right;display: flex;
+      align-items: center;
+      position: fixed;
+      border-radius: 100px;
+      z-index: 999999999;
+      margin-top: 65vh;
+      box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+      justify-content: center;">
+    <img width="40px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+  </div>
 </div>
 </div>
 
 
-          <!-- panel details  -->
+<section id="content" style="
+margin: -29% 10px;
+position: relative;
+border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  padding: 0px 10px 100px;
+  background-color: white;
+  overflow-y: auto;
+  box-shadow: 1px 1px 5px #9ADCF0, -1px -1px 5px #9ADCF0;">
 
-          <div>
+    <!-- // buttons -->
 
-            <section style="padding: 0px 0px;position: relative;color: black;">
-
-                <div style="position: relative;text-align: center;" *ngIf="item.family != null && type == 'contacted'">
-                    <button mat-raised-button class="btn"
-                    (click)="call(item.family.mobile)"
-                     style="background: #58D1FD;margin: 5px 5px;"
-                    *ngIf="type === 'contacted' && itemService.getPersonalized() === false">
-                        <img width="20px" src="../../../assets/phonewhite.svg" 
-                        alt="call profile">
-                        <span style="color: white;">&nbsp;{{item.family.mobile}}</span>
-                    </button>
-                    <button mat-raised-button class="btn" 
-                    (click)="call(item.family.mobile)"
-                    style="background: #58D1FD;margin: 5px 5px;"
-                    *ngIf="type === 'contacted' && itemService.getPersonalized()">
-                        <img width="20px" src="../../../assets/phonewhite.svg" 
-                        alt="call profile">
-                        <span style="color: white;">Matchmaker:&nbsp;{{item.family.mobile}}</span>
-                    </button>
-                    <button mat-raised-button class="btn" style="background: #1098f5;margin: 5px 5px;">
-                        <img width="20px" src="../../../assets/placeholderwhite.png" 
-                        alt="profile location">
-                        <span style="color: white;">&nbsp;{{item.family.city}}</span>
-                    </button>
-                </div>
-
-        
-                <div  style="margin-top: 20px;">
-                    <div class="row" id="verified">
-                        <div class="col-2">
-                            <img style="width: 40px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
-                        </div>
-                        <div class="col-10">
-                                <span style="font-size: 16px;font-weight: bold;">{{languageService.profileLang.verifiedAt}}</span><br>
-                                <span>{{item.family ? item.profile.facebook ? item.profile.facebook : 'Hans Matrimony Office' : 'Online'}}</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <div style="margin-top: 20px;">
-                    <div class="row" id="controlledBy">
-                        <div class="col-2">
-                            <img style="width: 40px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
-                        </div>
-                        <div class="col-10" style="align-self: center;">
-                                <span style="font-size: 16px;font-weight: bold;align-self: center;
-                                color: #8c978b;">{{languageService.profileLang.managedBy}} {{item.family ? item.family.relation ? item.family.relation : item.profile.gender == 'male' ? 'Mother' : 'Father'  : item.profile.gender == 'male' ? 'Mother' : 'Father' }}</span>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- // buttons -->
-        
-                 <div id="answerButtons" *ngIf="type != 'contacted'">
-                    <div class="t-c blur" *ngIf="type != 'rejected'">
-                        <button 
-                        (click)="profileReAnswer(item,'NO')" id="setRejectBtn" mat-fab>
-                          <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
-                        </button><br>
-                        <span style="color: #737373;font-weight: 600;font-size: 18px;">
-                            {{languageService.profileLang.reject}}
-                        </span>
-                    </div>
-                    <div class="t-c" *ngIf="type != 'contacted'">
-                        <button 
-                        (click)="profileReAnswer(item,'YES')"   id="setCallBtn" mat-fab
-                          aria-label="Example icon-button with a heart icon" >
-                          <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
-                        </button><br>
-                        <span style="color: #58D1FD;font-weight:600;font-size: 18px;">
-                            {{languageService.profileLang.contact}}
-                        </span>
-                    </div>
-                    <div class="t-c" *ngIf="type != 'interestShown'">
-                        <button 
-                        (click)="profileReAnswer(item,'SHORTLIST')" id="setShortlistBtn" mat-fab
-                          aria-label="Example icon-button with a heart icon" >
-                          <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
-                        </button><br>
-                        <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
-                            {{languageService.profileLang.shortlist}}
-                        </span>
-                    </div>
-                        
-                </div>
-
-                <!-- // profile status if premium user  -->
-
-                <ng-container *ngIf="itemService.getPersonalized()">
-                    <div id="feedBackTextGreen" *ngIf="item.profile.bNS == '1'">
-                      <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
-                    </div>
-                    <div id="feedBackTextRed" *ngIf="item.profile.bNS == '0'">
-                      <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
-                    </div>
-                  </ng-container>
-
-                <!-- // about user -->
-        
-                <div id="aboutSection">
-                    <p>
-                        <span style="color: #D313AE;font-size: 30px;font-weight: bold;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}} {{toTitleCase(item.profile.name)}}, {{toTitleCase(item.profile.about)}}
-                    </p>
-                </div>
-        
-        <!-- // personal details  -->
-        
-                <div id="personalSection">
-                    <div style="display: flex;justify-content: space-between;">
-                        <span style="color: #0C9BF2;font-size: 18px; font-weight: bold;align-self: center;">
-                            {{languageService.profileLang.personalizedDetails}}
-                        </span>
-                        <img width="80px" height="80px" src="../../../assets/new icons/Personal Details.svg" alt="personal details">
-
-                    </div>
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Weight.svg" alt="weight">
-                            <span class="title">{{languageService.profileLang.weight}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.weight}} Kg
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
-                            <span class="title">{{languageService.profileLang.martialStatus}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.marital_status}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Food Choice.svg" alt="Food Choice">
-                            <span class="title">{{languageService.profileLang.foodChoice}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.food_choice}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Religion.svg" alt="Religion">
-                            <span class="title">{{languageService.profileLang.religion}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.family ? item.family.religion : item.profile.religion}},{{item.family ? item.family.caste : item.profile.caste}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../../assets/new icons/locality.svg" alt="Locality">
-                            <span class="title">{{languageService.profileLang.locality}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.family ? item.family.locality : item.profile.locality}}
-                        </div>
-                    </div>
-        
-                </div>
-        
-                <!-- // career details  -->
-        
-                <div id="careerSection">
-                    <div style="display: flex;justify-content: space-between;">
-                        <span style="color: #CA58FD;font-size: 18px; font-weight: bold;align-self: center;">
-                            {{languageService.profileLang.careerDetails}}
-                        </span>
-                        <img height="80px" width="80px"  src="../../../assets/new icons/Career Details.svg" alt="career details">
-                    </div>
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Occupation.svg" alt="occupation">
-                            <span class="title">{{languageService.profileLang.occupation}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.occupation}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Designation.svg" alt="designation">
-                            <span class="title">{{languageService.profileLang.designation}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.profession}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
-                            <span class="title">{{languageService.profileLang.annualIncome}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{setIncome(item.profile.monthly_income)}} LPA
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Graduation.svg" alt="graduation">
-                            <span class="title">{{languageService.profileLang.education}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.family ? item.profile.degree ? item.profile.degree : item.profile.education  : item.profile.ugdeg}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Schooling.svg" alt="college">
-                            <span class="title">{{languageService.profileLang.college}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{toTitleCase(item.family ? item.profile.college : item.profile.ugcol)}}
-                        </div>
-                    </div>
-
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../../assets/new icons/workingCity.svg" alt="Working City">
-                            <span class="title">{{languageService.profileLang.workingCity}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.working_city}}
-                        </div>
-                    </div>
-        
-                </div>
-        
-                <!-- //horoscope details  -->
-        
-                <div id="horoscopeSection">
-                    <div style="display: flex;justify-content: space-between;">
-                        <span style="color: #070973;font-size: 18px; font-weight: bold;align-self: center;">
-                            {{languageService.profileLang.horoscopeDetails}}
-                        </span>
-                        <img width="80px" height="80px"  src="../../../assets/new icons/Horoscope.svg" alt="horoscope details">
-
-                    </div>
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/DOB.svg" alt="birth date">
-                            <span class="title">{{languageService.profileLang.dob}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.birth_date}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
-                            <span class="title">{{languageService.profileLang.birthTime}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.birth_time}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
-                            <span class="title">{{languageService.profileLang.birthPlace}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.birth_place}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
-                            <span class="title">{{languageService.profileLang.manglik}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.profile.manglik}}
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- //family details  -->
-        
-                <div id="familySection">
-                    <div style="display: flex;justify-content: space-between;">
-                        <span style="color: #58D1FD;font-size: 18px; font-weight: bold;align-self: center;">
-                            {{languageService.profileLang.familyDetails}}
-                        </span>
-                        <img width="80px" height="80px" style="margin-top: 20px;" src="../../../assets/new icons/Family Details.svg" alt="family details">
-                    </div>
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Sister.svg" alt="sister">
-                            <span class="title">{{languageService.profileLang.sisters}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{setMarriageSisters(item.family ? item.family.unmarried_daughters : item.profile.unmarried_daughter
-                                ,item.family ? item.family.married_daughters : item.profile.married_daughter)}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Brother.svg" alt="brothers">
-                            <span class="title">{{languageService.profileLang.brothers}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{setMarriageBrothers(  item.family ? item.family.unmarried_sons : item.profile.unmarried_sons
-                                , item.family ? item.family.married_sons : item.profile.married_sons)}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Mother.svg" alt="mother">
-                            <span class="title">{{languageService.profileLang.motherStatus}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{LifeStatus(item.family ? item.family.mother_status : item.profile.mother_status
-                                ,item.family ? item.family.occupation_mother : item.profile.mother_occupation)}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Father.svg" alt="father">
-                            <span class="title">{{languageService.profileLang.fatherStatus}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{LifeStatus(item.family ? item.family.father_status : item.profile.father_status
-                                ,item.family ? item.family.occupation : item.profile.father_occupation)}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Gotra.svg" alt="gotra">
-                            <span class="title">{{languageService.profileLang.gotra}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.family ? item.family.gotra : item.profile.gotra}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/Family Type.svg" alt="family type">
-                            <span class="title">{{languageService.profileLang.familyType}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.family ? item.family.family_type : item.profile.family_type}}
-                        </div>
-                    </div>
-
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../../assets/new icons/familyIn.svg" alt="Family City">
-                            <span class="title">{{languageService.profileLang.familyLivingIn}}</span>
-                        </div>
-                        <div class="col-6">
-                            {{item.family ? item.family.city : item.profile.city}}
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/new icons/House Type.svg" alt="house type">
-                            <span class="title">{{languageService.profileLang.houseType}}</span>
-                        </div>
-                        <div class="col-6">
-                            <span class="highlightedValue">
-                                {{item.family ? item.family.house_type : setHouseType(item.profile.house)}}
-                            </span>
-                            
-                        </div>
-                    </div>
-        
-                    <div class="row field">
-                        <div class="col-6">
-                            <img width="30px" src="../../../assets/moneybag.svg" alt="house type">
-                            <span class="title">{{languageService.profileLang.familyIncome}}</span>
-                        </div>
-                        <div class="col-6">
-                            <span class="highlightedValue">
-                                {{setIncome(item.family ? item.family.family_income : item.profile.family_income)}} LPA
-                            </span>
-                            
-                        </div>
-                    </div>
-                </div>
-        
-            </section>
-
+    <div id="answerButtons">
+        <div class="t-c" *ngIf="type !== 'contacted' || type === 'discover'"
+        style="margin-top: 10px;">
+            <button 
+            (click)="profileReAnswer(item,'YES')"  
+             class="setButtons" mat-fab style="color: green;
+            background: #58D1FD;"
+              aria-label="Example icon-button with a heart icon" >
+              <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
+            </button><br>
+            <!-- <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
+                {{languageService.profileLang.contact}}
+            </span> -->
         </div>
+
+        <div class="t-c"
+        *ngIf="type === 'contacted'"
+         style="margin-top: 10px;">
+            <button 
+            (click)="call()"  
+             class="setButtons" mat-fab style="color: green;
+            background: #58D1FD;"
+              aria-label="Example icon-button with a heart icon" >
+              <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
+            </button><br>
+            <!-- <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
+                {{languageService.profileLang.contact}}
+            </span> -->
+        </div>
+
+        <div class="t-c" *ngIf="type !== 'interestShown' && type !== 'contacted' && type !== 'discover'">
+            <button 
+            (click)="profileReAnswer(item,'SHORTLIST')" 
+            class="setButtonsCenter" mat-fab style="color: red;
+            background: #D313AE;
+            margin-bottom: 10px;"
+              aria-label="Example icon-button with a heart icon" >
+              <img class="buttonImageCenter animateButtonImageCenter" src="../../../assets/heartwhite.svg" alt="पसंद है">
+            </button><br>
+            <!-- <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
+                {{languageService.profileLang.shortlist}}
+            </span> -->
+        </div>
+
+        
+        <div class="t-c blur"  *ngIf="type !== 'rejected' && type !== 'contacted' && type !== 'discover'"
+        style="margin-top: 10px;">
+            <button 
+            (click)="profileReAnswer(item,'NO')" 
+            class="setButtons" mat-fab style="color: grey;
+            background: #C8C8C8;">
+              <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+            </button><br>
+            <!-- <span style="color: #737373;font-weight: 600;font-size: 18px;">
+                {{languageService.profileLang.reject}}
+            </span> -->
+        </div>
+
+    </div>
+
+           <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/verifiedwhite.svg" alt="verified at">
+                <span class="title">{{languageService.profileLang.verifiedAt}}</span>
+            </div>
+            <div class="col-6">
+                <span class="title">
+                    {{item.family ? item.profile.facebook ? item.profile.facebook : 'Hans Matrimony Office' : 'Online'}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/controlledby.svg" alt="managedBy">
+                <span class="title">
+                    {{languageService.profileLang.managedBy}}
+                </span>
+            </div>
+            <div class="col-6">
+                <span class="title">
+                    {{item.family ? item.family.relation ? item.family.relation : item.profile.gender == 'male' ? 'Mother' : 'Father'  : item.profile.gender == 'male' ? 'Mother' : 'Father' }}
+                </span>
+            </div>
+        </div>
+
+    <div id="aboutSection">
+        <u class="titleHeading">
+            {{languageService.profileLang.about}}
+        </u>
+        <p class="title" style="margin-left:0px">
+            <span style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;text-transform: capitalize;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}}{{item.profile.name}}, {{item.profile.about}}
+        </p>
+    </div>
+
+<!-- // personal details  -->
+
+    <div id="personalSection">
+        <div style="display: flex;
+        justify-content: space-between;">
+            <span class="titleHeading">
+                <u>
+                    {{languageService.profileLang.personalizedDetails}}
+                </u>
+            </span>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
+                <span class="title">{{item.family ? item.family.mobile : item.profile.mobile}}</span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
+                <span class="title">
+                    {{item.family ? item.family.locality : item.profile.locality}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Religion.svg" alt="caste">
+                <span class="title">
+                    {{item.family ? item.family.religion : item.profile.family}} {{item.family ? item.family.religion ? '|' : '' : item.profile.religion ? '|' : ''}} {{item.family ? item.family.caste : item.profile.caste}} 
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
+                <span class="title">
+                    {{item.profile.marital_status}}
+                </span>
+            </div>
+        </div>
+
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Food Choice.svg" alt="food choice">
+                <span class="title">
+                    {{item.profile.food_choice}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Weight.svg" alt="weight">
+                <span class="title">
+                    {{item.profile.weight}} Kg
+                </span>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- // career details  -->
+
+    <div id="careerSection">
+        <div style="display: flex;
+        justify-content: space-between;">
+            <span class="titleHeading">
+                <u>
+                    {{languageService.profileLang.careerDetails}}
+                </u>
+            </span>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Occupation.svg" alt="occupation">
+                <span class="title">
+                    {{item.profile.occupation}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Designation.svg" alt="designation">
+                <span class="title">
+                    {{item.profile.profession}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
+                <span class="title">
+                    {{setIncome(item.profile.monthly_income)}} LPA
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Graduation.svg" alt="education">
+                <span class="title">
+                    {{item.family ? item.profile.degree ? item.profile.degree : item.profile.education  : item.profile.ugdeg}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Schooling.svg" alt="college">
+                <span class="title">
+                    {{toTitleCase(item.family ? item.profile.college : item.profile.ugcol)}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="working">
+                <span class="title">
+                    {{item.profile.working_city}}
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- //horoscope details  -->
+
+    <div id="horoscopeSection">
+        <div style="display: flex;justify-content: space-between;">
+            <span class="titleHeading">
+                <u>
+                    {{languageService.profileLang.horoscopeDetails}}
+                </u>
+            </span>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/DOB.svg" alt="birth date">
+                <span class="title">{{item.profile.birth_date | date}}</span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
+                <span class="title">
+                    {{item.profile.birth_time}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
+                <span class="title">
+                    {{item.profile.birth_place}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
+                <span class="title">
+                    {{item.profile.manglik}}
+                </span>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- //family details  -->
+
+    <div id="familySection">
+        <div style="display: flex;justify-content: space-between;">
+            <span class="titleHeading">
+                <u>
+                    {{languageService.profileLang.familyDetails}}
+                </u>
+            </span>
+        </div>
+
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Sister.svg" alt="Sisters">
+                <span class="title">
+                    {{setMarriageSisters(item.family ? item.family.unmarried_daughters : item.profile.unmarried_daughter
+                        ,item.family ? item.family.married_daughters : item.profile.married_daughter)}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Brother.svg" alt="Brothers">
+                <span class="title">
+                    {{setMarriageBrothers(  item.family ? item.family.unmarried_sons : item.profile.unmarried_sons
+                        , item.family ? item.family.married_sons : item.profile.married_sons)}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
+                <span class="title">
+                    {{LifeStatus(item.family ? item.family.mother_status : item.profile.mother_status
+                        ,item.family ? item.family.occupation_mother : item.profile.mother_occupation)}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
+                <span class="title">
+                    {{LifeStatus(item.family ? item.family.father_status : item.profile.father_status
+                        ,item.family ? item.family.occupation : item.profile.father_occupation)}}
+                </span>
+            </div>
+        </div>
+
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Gotra.svg" alt="Gotra">
+                <span class="title">
+                    {{item.family ? item.family.gotra : item.profile.gotra}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/Family Type.svg" alt="Father Type">
+                <span class="title">
+                    {{item.family ? item.family.family_type : item.profile.family_type}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/familyIn.svg" alt="Family Living In">
+                <span class="title">
+                    {{item.family ? item.family.city : item.profile.city}}
+                </span>
+            </div>
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">
+                <span class="title">
+                    {{item.family ? item.family.house_type : setHouseType(item.profile.house)}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
+                <span class="title">{{languageService.profileLang.familyIncome}}</span>
+            </div>
+        </div>
+
+    </div>
+</section>
     </main>

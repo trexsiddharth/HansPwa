@@ -89,8 +89,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               public notification: NotificationsService,
               public itemService: FindOpenHistoryProfileService,
               private router: Router,
-              private browserLocation: Location,
               private activatedRoute: ActivatedRoute,
+              private browserLocation: Location,
               private breakPointObserver: BreakpointObserver) {}
 
   ngOnInit() {
@@ -302,39 +302,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   openProfileDialog(item: any, ind: any) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.hasBackdrop = true;
-    this.breakPointObserver.observe([
-      '(min-width: 1024px)'
-    ]).subscribe(
-      result => {
-        if (result.matches) {
-          console.log('screen is greater than  1024px');
-          dialogConfig.maxWidth = '30vw';
-          dialogConfig.minHeight = '80vh';
-          dialogConfig.disableClose = false;
-        } else {
-          console.log('screen is less than  1024px');
-          dialogConfig.minWidth = '90vw';
-          dialogConfig.minHeight = '80vh';
-          dialogConfig.disableClose = true;
-        }
-      }
-    );
-
-    dialogConfig.data = {
-      profile : item,
-      index : ind,
-      type: this.type
-    };
-    const dialogRef = this.dialog.open(HistoryProfilesDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      (data: any) => {
-        if (data) {
-          this.profileReAnswer(data.profile, data.ans, data.index);
-        }
-      }
-    );
+    // section from which user is going
+    item.coming = this.type;
+    localStorage.setItem('open_profile', JSON.stringify(item));
+    // navigate to HISTORY PROFILE DIALOG COMPONENT
+    this.router.navigateByUrl('chat/open/discover-profile');
   }
 
   setId(index: any) {
@@ -603,13 +575,13 @@ profileReAnswer(item: any, answer: any, index: any) {
   if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     this.itemService.getPhotoStatus() === false &&
     answer === 'SHORTLIST') {
-     this.openMessageDialog(item, answer);
+      this.itemService.openMessageDialog(item, answer);
    } else if (this.itemService.getPersonalized() === false &&
     answer === 'YES' && !item.family ) {
-    this.openMessageDialog(item, 'contacted');
+      this.itemService.openMessageDialog(item, 'contacted');
    }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
    && answer === 'YES') {
-    this.openMessageDialog(item, answer);
+    this.itemService.openMessageDialog(item, answer);
    } else {
      this.getData(item, answer, index);
    }
@@ -927,39 +899,7 @@ getCredits() {
  );
 }
 
-openMessageDialog(shareItem, reply: string) {
-  console.log(shareItem);
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.hasBackdrop = true;
-  dialogConfig.width = '700px';
-  dialogConfig.disableClose = true;
-  switch (reply.toLowerCase()) {
-    case 'yes':
-      dialogConfig.data = {
-        profile: shareItem,
-        type: reply.toLowerCase()
-      };
-      break;
-      case 'contacted':
-      dialogConfig.data = {
-        profile: shareItem,
-        type: reply.toLowerCase()
-      };
-      break;
 
-    default:
-      break;
-
-  }
-  const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
-  dialogRefYes.afterClosed().subscribe(
-        data => {
-          if (data && data.request) {
-          this.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
-          }
-        }
-      );
-}
 getQualification(degree, education) {
   return education != null && education !== '' ? education : degree;
   }

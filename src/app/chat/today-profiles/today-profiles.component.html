@@ -2,7 +2,10 @@
     <div id="profileImageDiv">
         <ngb-carousel>
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
-                    <img id="profilePic" (click)="openImageModal(item.carousel,item.photo,item.name,index)" [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
+                    <img id="profilePic" 
+                    (click)="openImageModal(item.carousel,item.photo,item.name,index)"
+                     [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" 
+                     (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
             </ng-template>
           </ngb-carousel>
 
@@ -103,8 +106,6 @@
                     {{languageService.profileLang.reject}}
                 </span> -->
             </div>
-
-            
 
         </div>
 

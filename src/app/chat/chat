@@ -1,182 +1,465 @@
+<main matDialogContent>
 
-<main class='fixed t-0 b-0 w-full HC'>
-       
-        <div class="groupContainer" *ngIf="history!='myprofile'">
-          <img id="myProfImage" (click)="changeToMyProfile()" 
-          (error)="onImageLoadError()" 
-          [src]="photo" 
-          alt="profile pic">
-          <mat-tab-group mat-align-tabs="center" class="matGroup"  
-           [(selectedIndex)]="selectedTab" 
-           [color]="none"
-           [backgroundColor]="none"
-           [disableRipple]="true"
-           (selectedIndexChange)="changeSelectedTab($event)"  >
 
-            <mat-tab id="today">
+    <div id="profileImageDiv">
+<ngb-carousel>
+    <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index" >
+            <img  id="profilePic" 
+            [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)" 
+            alt="item.profile.name">
+    </ng-template>
+  </ngb-carousel>
 
-              <ng-template mat-tab-label>
-                <img width="30px" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab && selectedTab != 0"> 
-                <img width="30px" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="!selectedTab || selectedTab == 0 ">
-                <!-- {{itemService.getDailyCount()}} -->
-                Today's Special
-              </ng-template>
+<!-- // image info  -->
 
-                  <ng-template matTabContent>
-                    <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                      {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                  </button>
-                    <div class="mainBody  w-full bg-white ht-full setBotUi">
-                        <app-today-profiles (setProfileImage)="setProfileImage($event)"></app-today-profiles>
+<div id="imageContent">
+    <div>
+      <div style="width: 70%;">
+        <span style="font-weight: bold;font-size: 18px;">
+            {{toTitleCase(item.profile.name)}}
+        </span><br>
+        <span style="font-size: 14px;">
+            {{item.profile.working_city}} {{item.profile.working_city ? '|' : ''}} {{setHeight(item.profile.height)}}
+        </span> <br>
+        <span style="font-size: 14px;">
+            {{setIncome(item.profile.monthly_income)}} LPA
+        </span>
+      </div>
+      <div style="position: absolute;
+       top: -10px;right: 10px;
+       border-radius: 10px;
+       padding: 0px 10px;
+       background-color: #48CDF7;" >{{setAge(item.profile.birth_date)}}
+      </div>
+
+      <div style="position: absolute;
+      top: 25px;right: 25px;">
+          <img width="30px" src="../../../assets/new icons/shield.svg"
+           alt="verified profile">
+      </div>
+    </div>
+      
+      <div class="down-arrow"
+      (click)="scrollDown()"
+       style="background-color: #50ed9d;
+      float: right;display: flex;
+      align-items: center;
+      position: fixed;
+      border-radius: 100px;
+      z-index: 999999999;
+      margin-top: 65vh;
+      box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+      justify-content: center;">
+    <img width="40px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+  </div>
+</div>
+</div>
+
+
+          <!-- panel details  -->
+
+          <div>
+
+            <section style="padding: 0px 0px;position: relative;color: black;">
+
+                <div style="position: relative;text-align: center;" *ngIf="item.family != null && type == 'contacted'">
+                    <button mat-raised-button class="btn"
+                    (click)="call(item.family.mobile)"
+                     style="background: #58D1FD;margin: 5px 5px;"
+                    *ngIf="type === 'contacted' && itemService.getPersonalized() === false">
+                        <img width="20px" src="../../../assets/phonewhite.svg" 
+                        alt="call profile">
+                        <span style="color: white;">&nbsp;{{item.family.mobile}}</span>
+                    </button>
+                    <button mat-raised-button class="btn" 
+                    (click)="call(item.family.mobile)"
+                    style="background: #58D1FD;margin: 5px 5px;"
+                    *ngIf="type === 'contacted' && itemService.getPersonalized()">
+                        <img width="20px" src="../../../assets/phonewhite.svg" 
+                        alt="call profile">
+                        <span style="color: white;">Matchmaker:&nbsp;{{item.family.mobile}}</span>
+                    </button>
+                    <button mat-raised-button class="btn" style="background: #1098f5;margin: 5px 5px;">
+                        <img width="20px" src="../../../assets/placeholderwhite.png" 
+                        alt="profile location">
+                        <span style="color: white;">&nbsp;{{item.family.city}}</span>
+                    </button>
+                </div>
+
+        
+                <div  style="margin-top: 20px;">
+                    <div class="row" id="verified">
+                        <div class="col-2">
+                            <img style="width: 40px;" src="../../../assets/verifiedwhite.svg" alt="verified at"> 
+                        </div>
+                        <div class="col-10">
+                                <span style="font-size: 16px;font-weight: bold;">{{languageService.profileLang.verifiedAt}}</span><br>
+                                <span>{{item.family ? item.profile.facebook ? item.profile.facebook : 'Hans Matrimony Office' : 'Online'}}</span>
+                        </div>
                     </div>
-                  </ng-template>
-                  </mat-tab>
+                </div>
+        
+                <div style="margin-top: 20px;">
+                    <div class="row" id="controlledBy">
+                        <div class="col-2">
+                            <img style="width: 40px;" src="../../../assets/controlledby.svg" alt="controlled by"> 
+                        </div>
+                        <div class="col-10" style="align-self: center;">
+                                <span style="font-size: 16px;font-weight: bold;align-self: center;
+                                color: #8c978b;">{{languageService.profileLang.managedBy}} {{item.family ? item.family.relation ? item.family.relation : item.profile.gender == 'male' ? 'Mother' : 'Father'  : item.profile.gender == 'male' ? 'Mother' : 'Father' }}</span>
+                        </div>
+                    </div>
+                </div>
 
-                  <!-- // contacted-->
-                  <!-- <mat-tab  id="contacted">
-                    <ng-template mat-tab-label>
-                      <img width="30px" src="../../assets/thumbs-up-blue.svg" alt="icon">
-                        {{itemService.getContactedCount()}}
-                    </ng-template>
+                 <!-- // buttons -->
+        
+                 <div id="answerButtons" *ngIf="type != 'contacted'">
+                    <div class="t-c blur" *ngIf="type != 'rejected'">
+                        <button 
+                        (click)="profileReAnswer(item,'NO')" id="setRejectBtn" mat-fab>
+                          <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                        </button><br>
+                        <span style="color: #737373;font-weight: 600;font-size: 18px;">
+                            {{languageService.profileLang.reject}}
+                        </span>
+                    </div>
+                    <div class="t-c" *ngIf="type != 'contacted'">
+                        <button 
+                        (click)="profileReAnswer(item,'YES')"   id="setCallBtn" mat-fab
+                          aria-label="Example icon-button with a heart icon" >
+                          <img class="buttonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
+                        </button><br>
+                        <span style="color: #58D1FD;font-weight:600;font-size: 18px;">
+                            {{languageService.profileLang.contact}}
+                        </span>
+                    </div>
+                    <div class="t-c" *ngIf="type != 'interestShown'">
+                        <button 
+                        (click)="profileReAnswer(item,'SHORTLIST')" id="setShortlistBtn" mat-fab
+                          aria-label="Example icon-button with a heart icon" >
+                          <img class="buttonImage" src="../../../assets/heartwhite.svg" alt="पसंद है">
+                        </button><br>
+                        <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
+                            {{languageService.profileLang.shortlist}}
+                        </span>
+                    </div>
+                        
+                </div>
 
-                      <ng-template matTabContent>
-                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                      </button>
-                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history-profiles [type]="tabType"></app-history-profiles>
-                     </div>
-                  </ng-template>
-                  </mat-tab> -->
+                <!-- // profile status if premium user  -->
 
-                       <!-- // personalized profiles-->
-                  <!-- <mat-tab *ngIf="itemService.getIsLead() == '0'">  -->
-                  <mat-tab> 
-                    <ng-template mat-tab-label>
-                      <img width="30px" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab != 1"> 
-                <img width="30px" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="selectedTab == 1 ">
-                        <!-- {{itemService.getOtherProfiles()}} -->
-                        Discover
-                    </ng-template>
-                    <ng-template matTabContent>
-                    <div>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                 <app-personalized-profiles [type]="tabType" ></app-personalized-profiles>
-                       </div>
-                   </div>
-                </ng-template>
-                </mat-tab>
+                <ng-container *ngIf="itemService.getPersonalized()">
+                    <div id="feedBackTextGreen" *ngIf="item.profile.bNS == '1'">
+                      <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
+                    </div>
+                    <div id="feedBackTextRed" *ngIf="item.profile.bNS == '0'">
+                      <p style="margin-bottom: 0px;">{{item.profile.bEW}}</p>
+                    </div>
+                  </ng-container>
 
+                <!-- // about user -->
+        
+                <div id="aboutSection">
+                    <p>
+                        <span style="color: #D313AE;font-size: 30px;font-weight: bold;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}} {{toTitleCase(item.profile.name)}}, {{toTitleCase(item.profile.about)}}
+                    </p>
+                </div>
+        
+        <!-- // personal details  -->
+        
+                <div id="personalSection">
+                    <div style="display: flex;justify-content: space-between;">
+                        <span style="color: #0C9BF2;font-size: 18px; font-weight: bold;align-self: center;">
+                            {{languageService.profileLang.personalizedDetails}}
+                        </span>
+                        <img width="80px" height="80px" src="../../../assets/new icons/Personal Details.svg" alt="personal details">
 
-                  <!-- // liked by me -->
-                  <mat-tab id="melike">
-                    <ng-template mat-tab-label>
-                      <img width="30px" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab != 2"> 
-                <img width="30px" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="selectedTab == 2 ">
-                      <!-- {{itemService.getShortlistedCount()}} -->
-                      Your Likes
-                    </ng-template>
+                    </div>
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Weight.svg" alt="weight">
+                            <span class="title">{{languageService.profileLang.weight}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.weight}} Kg
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
+                            <span class="title">{{languageService.profileLang.martialStatus}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.marital_status}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Food Choice.svg" alt="Food Choice">
+                            <span class="title">{{languageService.profileLang.foodChoice}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.food_choice}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Religion.svg" alt="Religion">
+                            <span class="title">{{languageService.profileLang.religion}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.family ? item.family.religion : item.profile.religion}},{{item.family ? item.family.caste : item.profile.caste}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../../assets/new icons/locality.svg" alt="Locality">
+                            <span class="title">{{languageService.profileLang.locality}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.family ? item.family.locality : item.profile.locality}}
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <!-- // career details  -->
+        
+                <div id="careerSection">
+                    <div style="display: flex;justify-content: space-between;">
+                        <span style="color: #CA58FD;font-size: 18px; font-weight: bold;align-self: center;">
+                            {{languageService.profileLang.careerDetails}}
+                        </span>
+                        <img height="80px" width="80px"  src="../../../assets/new icons/Career Details.svg" alt="career details">
+                    </div>
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Occupation.svg" alt="occupation">
+                            <span class="title">{{languageService.profileLang.occupation}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.occupation}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Designation.svg" alt="designation">
+                            <span class="title">{{languageService.profileLang.designation}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.profession}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
+                            <span class="title">{{languageService.profileLang.annualIncome}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{setIncome(item.profile.monthly_income)}} LPA
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Graduation.svg" alt="graduation">
+                            <span class="title">{{languageService.profileLang.education}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.family ? item.profile.degree ? item.profile.degree : item.profile.education  : item.profile.ugdeg}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Schooling.svg" alt="college">
+                            <span class="title">{{languageService.profileLang.college}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{toTitleCase(item.family ? item.profile.college : item.profile.ugcol)}}
+                        </div>
+                    </div>
 
-                      <ng-template matTabContent>
-                      <div>
-                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                      </button>
-                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history-profiles [type]="tabType"></app-history-profiles>
-                         </div>
-                     </div>
-                  </ng-template>
-                  </mat-tab>
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../../assets/new icons/workingCity.svg" alt="Working City">
+                            <span class="title">{{languageService.profileLang.workingCity}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.working_city}}
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <!-- //horoscope details  -->
+        
+                <div id="horoscopeSection">
+                    <div style="display: flex;justify-content: space-between;">
+                        <span style="color: #070973;font-size: 18px; font-weight: bold;align-self: center;">
+                            {{languageService.profileLang.horoscopeDetails}}
+                        </span>
+                        <img width="80px" height="80px"  src="../../../assets/new icons/Horoscope.svg" alt="horoscope details">
 
-                <!-- // liked me  -->
-                  <mat-tab id="likeme">
-                    <ng-template mat-tab-label>
-                      <img width="30px" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab != 3"> 
-                <img width="30px" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="selectedTab == 3 ">
-                      <!-- {{itemService.getShortedCount()}} -->
-                      Likes You
-                    </ng-template>
+                    </div>
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/DOB.svg" alt="birth date">
+                            <span class="title">{{languageService.profileLang.dob}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.birth_date}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
+                            <span class="title">{{languageService.profileLang.birthTime}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.birth_time}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
+                            <span class="title">{{languageService.profileLang.birthPlace}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.birth_place}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
+                            <span class="title">{{languageService.profileLang.manglik}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.profile.manglik}}
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- //family details  -->
+        
+                <div id="familySection">
+                    <div style="display: flex;justify-content: space-between;">
+                        <span style="color: #58D1FD;font-size: 18px; font-weight: bold;align-self: center;">
+                            {{languageService.profileLang.familyDetails}}
+                        </span>
+                        <img width="80px" height="80px" style="margin-top: 20px;" src="../../../assets/new icons/Family Details.svg" alt="family details">
+                    </div>
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Sister.svg" alt="sister">
+                            <span class="title">{{languageService.profileLang.sisters}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{setMarriageSisters(item.family ? item.family.unmarried_daughters : item.profile.unmarried_daughter
+                                ,item.family ? item.family.married_daughters : item.profile.married_daughter)}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Brother.svg" alt="brothers">
+                            <span class="title">{{languageService.profileLang.brothers}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{setMarriageBrothers(  item.family ? item.family.unmarried_sons : item.profile.unmarried_sons
+                                , item.family ? item.family.married_sons : item.profile.married_sons)}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Mother.svg" alt="mother">
+                            <span class="title">{{languageService.profileLang.motherStatus}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{LifeStatus(item.family ? item.family.mother_status : item.profile.mother_status
+                                ,item.family ? item.family.occupation_mother : item.profile.mother_occupation)}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Father.svg" alt="father">
+                            <span class="title">{{languageService.profileLang.fatherStatus}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{LifeStatus(item.family ? item.family.father_status : item.profile.father_status
+                                ,item.family ? item.family.occupation : item.profile.father_occupation)}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Gotra.svg" alt="gotra">
+                            <span class="title">{{languageService.profileLang.gotra}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.family ? item.family.gotra : item.profile.gotra}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/Family Type.svg" alt="family type">
+                            <span class="title">{{languageService.profileLang.familyType}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.family ? item.family.family_type : item.profile.family_type}}
+                        </div>
+                    </div>
 
-                      <ng-template matTabContent>
-                      <div>
-                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                      </button>
-                          <div class='mainBody  w-full bg-white ht-full setBotUi'>
-                                   <app-history-profiles [type]="tabType"></app-history-profiles>
-                         </div>
-                     </div>
-                  </ng-template>
-                  </mat-tab>
-                   <!-- // mutual liking -->
-                   <!-- <mat-tab  id="mutual">
-                    <ng-template mat-tab-label>
-                      {{itemService.getMutualCount()}}
-                    </ng-template>
-
-                    <ng-template matTabContent>
-                    <div>
-                      <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                    </button>
-                        <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                 <app-history-profiles [type]="tabType"></app-history-profiles>
-                       </div>
-                   </div>
-                </ng-template>
-                </mat-tab> -->
-                 <!-- // rejected-->
-                  <!-- <mat-tab id="rejected">
-                    <ng-template mat-tab-label>
-                      {{itemService.getRejectedCount()}}
-                    </ng-template>
-
-                      <ng-template matTabContent>
-                      <div>
-                        <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                          {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                      </button>
-                          <div class='mainBody  w-full bg-white ht-full setBotUi' >
-                                   <app-history-profiles [type]="tabType"></app-history-profiles>
-                         </div>
-                     </div>
-                  </ng-template>
-                  </mat-tab> -->
-                  </mat-tab-group>
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../../assets/new icons/familyIn.svg" alt="Family City">
+                            <span class="title">{{languageService.profileLang.familyLivingIn}}</span>
+                        </div>
+                        <div class="col-6">
+                            {{item.family ? item.family.city : item.profile.city}}
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/new icons/House Type.svg" alt="house type">
+                            <span class="title">{{languageService.profileLang.houseType}}</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="highlightedValue">
+                                {{item.family ? item.family.house_type : setHouseType(item.profile.house)}}
+                            </span>
+                            
+                        </div>
+                    </div>
+        
+                    <div class="row field">
+                        <div class="col-6">
+                            <img width="30px" src="../../../assets/moneybag.svg" alt="house type">
+                            <span class="title">{{languageService.profileLang.familyIncome}}</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="highlightedValue">
+                                {{setIncome(item.family ? item.family.family_income : item.profile.family_income)}} LPA
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+        
+            </section>
 
         </div>
-    <div>
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- The Close Button -->
-  <a id="closeModal">&times;</a>
-
-  <!-- Modal Content (The Image) -->
-  <img class="modal-content" id="img01">
-
-  <!-- Modal Caption (Image Text) -->
-  <h4 id="caption"></h4>
-</div>
-
-    </div>
-  
-  <div>
-       <div class="w-full bg-white ht-full" style="background-size: cover;" *ngIf="history=='myprofile'">
-                <app-user-profile (backToProfiles)="changeToBot()" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-user-profile>
-      </div>
-  </div>
-
-  <div>
-    <div class='mainBody  w-full bg-white ht-full' style="margin-top: 30px;"  *ngIf="history=='connection_error'">
-             <app-connection-error></app-connection-error>
-   </div>
-</div>
-
-  </main>
-  
+    </main>

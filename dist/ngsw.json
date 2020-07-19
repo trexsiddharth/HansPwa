@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1595064312273,
+  "timestamp": 1595148842282,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -20,8 +20,8 @@
         "/2-es5.581db990e9c8e38f5871.js",
         "/7-es2015.cb39ada5808e57d22517.js",
         "/7-es5.cb39ada5808e57d22517.js",
-        "/8-es2015.fde2e19242659d55e00a.js",
-        "/8-es5.fde2e19242659d55e00a.js",
+        "/8-es2015.8d7c30802bf1547599b4.js",
+        "/8-es5.8d7c30802bf1547599b4.js",
         "/9-es2015.29fe6762563630890bce.js",
         "/9-es5.29fe6762563630890bce.js",
         "/favicon.ico",
@@ -32,9 +32,9 @@
         "/manifest.webmanifest",
         "/polyfills-es2015.b00a8ee45d22faafa706.js",
         "/polyfills-es5.298362be80e2b499ac95.js",
-        "/runtime-es2015.f916c8c5aac4c49780e7.js",
-        "/runtime-es5.f916c8c5aac4c49780e7.js",
-        "/styles.6d768b874c0f3e6cc6e2.css"
+        "/runtime-es2015.504ff92b6d9037522d16.js",
+        "/runtime-es5.504ff92b6d9037522d16.js",
+        "/styles.79094252afbf054cbe86.css"
       ],
       "patterns": []
     },
@@ -406,8 +406,8 @@
     "/2-es5.581db990e9c8e38f5871.js": "ed452bec5c0a37b612e717d906c91591691a4883",
     "/7-es2015.cb39ada5808e57d22517.js": "51384dc78df54bbbc10d13c1c7ead980f39fe99c",
     "/7-es5.cb39ada5808e57d22517.js": "6bba4dded0f3d46c08d67d4e21ab49e2217f1351",
-    "/8-es2015.fde2e19242659d55e00a.js": "8643c0e1abf33b64f469569de287ca51aa090353",
-    "/8-es5.fde2e19242659d55e00a.js": "1b7c97f9c486ea7b9cf452fa5d7f33656ce5600b",
+    "/8-es2015.8d7c30802bf1547599b4.js": "41ae371b879fa21897dc0e0c6fe7adce0efd2545",
+    "/8-es5.8d7c30802bf1547599b4.js": "5e69a595ea8085520517b057a085f85fdd60af07",
     "/9-es2015.29fe6762563630890bce.js": "df3b007e365876146d874978e73c4909f8a6ca26",
     "/9-es5.29fe6762563630890bce.js": "73186531d7ac2afeb3828d331cf9eec46098888d",
     "/GothamRounded-Book.2033c152fc99ddec25d1.woff": "bf9f809a41fcee841a745f8e7142bbe34c5dfb3c",
@@ -745,16 +745,16 @@
     "/assets/workingCity.svg": "07870ebfd42986c8ed4e71ea3df1b7e89e9d2839",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "c81d9caa77c2456ce3952a9d46bd254dd3dc7eae",
+    "/index.html": "9d5b0f1c96c4eb07af944fdfa9aa30cc6bfbb5ce",
     "/main-es2015.b3ceb1abd9f5d61cb552.js": "472f8c7339f05860945ee949eedf0713bb852006",
     "/main-es5.b3ceb1abd9f5d61cb552.js": "dce5f4b341c2f0ba534a5b413a644247a4d3a0c6",
     "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
     "/polyfills-es2015.b00a8ee45d22faafa706.js": "c37a8026023b3688ee0707b4afee9adfc3d4c95e",
     "/polyfills-es5.298362be80e2b499ac95.js": "57d8f1256ac0ec4c9ae61ca1b87bacf730e68eb7",
-    "/runtime-es2015.f916c8c5aac4c49780e7.js": "2d193526371a857a3996556db2b25197e0302659",
-    "/runtime-es5.f916c8c5aac4c49780e7.js": "e4073c7bc0784a707b48036b883c4347c3d6339d",
+    "/runtime-es2015.504ff92b6d9037522d16.js": "c46a7df53e35830bea40d5cc526a5d4fdaf88676",
+    "/runtime-es5.504ff92b6d9037522d16.js": "bcb28dce541a6e042125cd9f2bc67a9f52980b5e",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
-    "/styles.6d768b874c0f3e6cc6e2.css": "8bc09b61b441704c6bb7983e35e574876e969dcd"
+    "/styles.79094252afbf054cbe86.css": "9182819ce8f97dd4e5fc782ca0e480c5beca1229"
   },
   "navigationUrls": [
     {

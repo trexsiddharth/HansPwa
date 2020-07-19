@@ -1,239 +1,308 @@
-::ng-deep .mat-dialog-container{
+main{
+    padding-bottom: 200px;
+}
+.toolBar {
     background-color: white;
-    padding: 0px;
-    border-radius: 10px;
+    color: #4A5D6A;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    position: fixed;
+    z-index: 999999;
 }
-::ng-deep .mat-dialog-content{
-    max-height: 79vh;
-    margin: 0px;
-    padding: 0px;
-}
-
-::ng-deep .cdk-overlay-dark-backdrop{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
-}
-::ng-deep .carousel-indicators{
-    bottom: 60px !important;
-}
-.historyProfile{
-    width: 100%;
-    height: 70%;
-    border-radius: 20px;
+#profileImageDiv{
+    margin: 0px 20px;
     position: relative;
+    padding-top: 80px;
 }
-
-.historyDetails{
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
-    background-image: linear-gradient(0deg,black,transparent);
-    word-break: break-word;
-    color: white;
+.titleText {
     font-size: 1rem;
-    font-weight: bold;
-    padding: 15px 35px 15px 10px;
-    border-radius: 10px;
-    }
-
-#cancel{
-    position: absolute;
-    z-index: 99999999;
-    right: 0;
-    top: -5px;
 }
-
-#feedBackTextGreen{
-    margin-top: 20px;
-    padding: 15px 15px;
-    border: 1px solid green;
-    color: green;
-    border-radius: 5px;
-    text-transform: capitalize;
-}
-
-#feedBackTextRed{
-    margin-top: 20px;
-    padding: 15px 15px;
-    border: 1px solid red;
-    color: red;
-    text-transform: capitalize;
-    border-radius: 5px;
-}
-
-#profileImage{
-    width: 30vw;
+#profilePic{
+    width: 100%;
     height: 70vh;
     border-radius: 10px;
 }
+::ng-deep .carousel-indicators{
+    bottom: 80px !important;
+}
+::ng-deep .mat-card-image{
+    margin: 0px;
+}
 
-#answerButtons{
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.col-6{
     display: flex;
-    justify-content: space-evenly;
-    position: sticky;
-    top: 54vh;
-    margin-top: 20px;
-    bottom: 10px;
-    z-index: 99999;
-    background-image: linear-gradient(0deg, white,transparent);
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px;
 }
-#setRejectBtn{
-    width: 70px;
-    height: 70px;
-    color: grey;
-    background: #C8C8C8;
-    margin-bottom: 10px;
+
+#imageContent{
+    width: 100%;
+    position: absolute;
+    bottom: 26%;
+    padding: 0px 10px 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
 }
-#setCallBtn{
-    width: 70px;
-    height: 70px;
-    color: green;
-    background: #58D1FD;
-    margin-bottom: 10px;
+.setButtons{
+    width: 60px;
+     height: 60px;
+     margin-bottom: 10px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     
 }
-#setShortlistBtn{
+
+.setButtonsCenter{
     width: 70px;
-    height: 70px;
-    color: red;
-    background: #D313AE;
-    margin-bottom: 10px;
+     height: 70px;
+     margin-bottom: 10px;
+      display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
 }
 
 .buttonImage{
+    width: 30px;
+}
+.buttonImageCenter{
     width: 40px;
 }
-#verified{
-    background-color: #50ed9d;
-    border-radius: 5px;color: white;
-    padding: 10px 0px;
-    margin: 0px;
+
+.animateButtonImage{
+    animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
 }
-#controlledBy{
-    margin: 0px;
-    background-color: #ACDFFF;
-    display: flex;
-    border-radius: 5px;color: white;
-    padding: 10px 0px;
-    justify-content: space-evenly;
+.animateButtonImageCenter{
+    animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+}
+
+.titleHeading{
+    color: #4A5D6A;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-weight: bold;
+    
 }
 
 #aboutSection{
     margin-top: 20px; 
-        padding: 15px 15px;
-        border: 1px solid #FAC8F1; color: #707070;
-        border-radius: 5px;
 }
 
 #personalSection{
     margin-top: 20px; 
-        padding: 15px 15px;
-        border: 1px solid #FAC8F1;
-        border-radius: 5px;
 }
 .field{
     margin-top: 10px;
 }
+.titleImage {
+   width: 28px;
+}
 .title{
     width: 100%;
-    color: #C8C8C8;
+    color: #4A5D6A;
     margin-left: 1rem;
     font-size: 1rem;
-    font-weight: bold;
 }
+.titleGrey{
+    width: 100%;
+    color: grey;
+    font-size: 1rem;
+}
+
 
 #careerSection{
     margin-top: 20px; 
-        padding: 15px 15px;
-        border: 1px solid #CA58FD;
-        border-radius: 5px;
 }
 
 #horoscopeSection{
     margin-top: 20px; 
-        padding: 15px 15px;
-        border: 1px solid #070973;
-        border-radius: 5px;
 }
 
 #familySection{
     margin-top: 20px; 
-        padding: 15px 15px 150px;
-        border: 1px solid #58D1FD;
-        border-radius: 5px;
 }
-
 .highlightedValue{
     background-color: #C4E9F8;
     border-radius: 10px;
     padding: 10px;
 }
 
-@media (max-width: 350px) {
-    .historyDetails{
-        position: absolute;
-        bottom: 0px;
-        background-image: linear-gradient(0deg,black,transparent);
-        word-break: break-word;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-        padding: 15px 25px;
-        border-radius: 10px;
-        }
-        #answerButtons{
-            display: flex;
-            justify-content: space-evenly;
-            position: sticky;
-            top: 59vh !important;
-            margin-top: 20px;
-            bottom: 10px;
-            z-index: 99999;
-            background-image: linear-gradient(0deg, white,transparent);
-        }
-        #profileImage{
-            width: 100vw;
-            height: 50vh !important;
-            border-radius: 5px;
-        }
+
+@-webkit-keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+@keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
 }
 
-@media (max-width: 575px) {
-    .historyDetails{
-        position: absolute;
-        bottom: 0px;
-        background-image: linear-gradient(0deg,black,transparent);
-        word-break: break-word;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-        padding: 15px 35px 15px 10px;
-        border-radius: 10px;
-        }
-        #answerButtons{
-            display: flex;
-            justify-content: space-evenly;
-            position: sticky;
-            top: 65vh;
-            margin-top: 20px;
-            bottom: 10px;
-            z-index: 99999;
-            background-image: linear-gradient(0deg, white,transparent);
-        }
-        #profileImage{
-            width: 100vw;
-            height: 55vh !important;
-            border-radius: 5px;
-        }
+@keyframes scale-in-out-image {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 30px;
+    }
 }
+
+@keyframes scale-in-out-image-center {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 40px;
+    }
+}
+
+@media (max-width: 350px){
+    .titleImage {
+        width: 22px;
+     }
+    .title{
+        width: 100%;
+        color: #4A5D6A;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+    .titleGrey{
+        width: 100%;
+        color: grey;
+        font-size: 14px;
+    }
+  
+
+    .setButtons{
+        width: 50px;
+         height: 50px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .setButtonsCenter{
+        width: 60px;
+         height: 60px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .buttonImage{
+        width: 20px;
+    }
+    .buttonImageCenter{
+        width: 30px;
+    }
+
+    @keyframes scale-in-out-image {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 20px;
+        }
+    }
+
+    @keyframes scale-in-out-image-center {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .down-arrow{
+        right: 0px;
+        -webkit-animation: 2s arrow infinite ease;
+        animation: 2s arrow infinite ease;
+        vertical-align:middle
+    
+    }
+
+    #imageContent{
+        width: 100%;
+        position: absolute;
+        bottom: 17%;
+        padding: 0px 10px 10px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: fixed;
+        width: 90%;
+        background-color: transparent;
+        z-index: 99999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+    }
+}
+
 @media (min-width: 1024px){
     #answerButtons{
         display: flex;
         justify-content: space-evenly;
-        position: initial;
-        top: 35vh;
-        margin-top: 20px;
-        bottom: 10px;
+        position: relative;
+        width: 100%;
+        background-color: transparent;
         z-index: 99999;
+        bottom: 0px;
         background-image: linear-gradient(0deg, white,transparent);
+        margin-top: 10px;
     }
 
 }

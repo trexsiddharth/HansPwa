@@ -1,0 +1,86 @@
+<main>   
+    <section  
+    [ngClass]="{'ht-full': section, 'paddingToSection' : section}">
+        <div  *ngFor="let item of profile;let i = index">
+        <div class="historyProfile"  >
+            <img class="historyImage" #profilePic
+            [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)" 
+            (click)="openProfileDialog(item,i)"
+            (error) = "onLoadProfileError(item.profile.gender,profilePic)"
+            alt="profile picture">
+
+            <div style="position: absolute;top: -15px;
+            right: -20px;" *ngIf="item.family == null">
+                <button mat-fab id="premiumProfIcon">
+                        <img width="30px" src="../../../assets/king.svg" alt="premium profile">
+                </button>
+            </div>
+
+            <div class="historyDetails">
+                <span>
+                    {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
+                </span><br>
+                <span>
+                    {{item.family ? item.family.city : item.profile.working_city}} | {{setHeight(item.profile.height)}} 
+                    | {{item.family ? item.family.religion : item.profile.religion}}, {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
+                    | {{setIncome(item.profile.monthly_income)}} LPA
+                </span>
+            </div>
+
+            <div class="historyButtons">
+
+                <!-- <button mat-raised-button class="btn" 
+                (click)="profileReAnswer(item,'NO',i)"
+                style="background-color: #C8C8C8;
+                    padding: 20px;
+                     border-radius: 10px;"  *ngIf="type !== 'rejected' && type !== 'contacted' && type !== 'discover'">
+                    <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
+                </button> -->
+
+                <button mat-raised-button  class="btn" 
+                (click)="profileReAnswer(item,'YES',i)"
+                style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;">
+                <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+            </button>
+
+            <!-- <button mat-raised-button  class="btn" 
+                (click)="call(i)"
+                style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;"  *ngIf="type == 'contacted' && item.family && itemService.getPersonalized() == false">
+                <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+            </button> -->
+
+            <!-- <button mat-raised-button  class="btn" 
+                (click)="openPersonalizedMessageDialog(item)"
+                style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px 10px;
+                 border-radius: 10px;"  *ngIf="type == 'contacted' && itemService.getPersonalized()">
+                <img width="30px" src="../../../assets/comment.svg" alt="contact profile">
+            </button> -->
+
+                <!-- <button mat-raised-button  class="btn"
+                (click)="profileReAnswer(item,'SHORTLIST',i)"
+                 style="background-color: #D313AE;margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;" *ngIf="type !== 'interestShown'  && type !== 'contacted' && type !== 'discover'">
+                    <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
+                </button> -->
+
+            </div>
+        </div>
+        <hr>
+        </div>
+
+            <mat-spinner *ngIf="smallSpinner" style="margin: 0px auto;" [diameter]="30"></mat-spinner>
+
+    </section>
+        <!-- <ngx-spinner  bdColor = "transparent" size = "small" color = "#58D1FD" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white"></ngx-spinner> -->
+        
+
+</main>
