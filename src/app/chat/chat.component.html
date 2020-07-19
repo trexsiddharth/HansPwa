@@ -6,7 +6,7 @@
   <app-chat-drawer  [drawerReference]="sidenav"></app-chat-drawer>
  </mat-sidenav>
  <mat-sidenav-content style="overflow: hidden;">
-  <main class='t-0 b-0 w-full HC main' style="overflow: hidden;position: fixed;">
+  <main class='w-full HC main'>
 
     <div class="mainBack">
     </div>
@@ -18,8 +18,7 @@
       font-size: 14px;
       display: flex;
       flex-direction: row;
-      align-items: center;
-      z-index: 9999999999;"
+      align-items: center;"
       (click)="openContactedProfiles()"
       >
         <mat-icon 
@@ -29,9 +28,8 @@
       </div>
 
       <div style="position: relative;
-      z-index: 99999999999999999;">
+      z-index: 999;" (click)="sidenav.toggle()">
         <img  id="myProfImage"
-      (click)="sidenav.toggle()" 
       (error)="onImageLoadError()" 
       [src]="photo" 
       alt="profile pic">

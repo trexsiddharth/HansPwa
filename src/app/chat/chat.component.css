@@ -13,7 +13,7 @@
 .main {
   /* background-image: linear-gradient(180deg, #9ADCF0, #FFFFFF); */
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
 }
 
@@ -22,7 +22,6 @@
   width:55px;
   height: 55px;
   border-radius: 50%;
-  z-index: 999;
   border: 3px solid white;
 }
 .smallMenuImage {
@@ -53,6 +52,7 @@
   position: fixed;
   margin-top: 25px;
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+  z-index: 2;
   
 }
 
@@ -537,6 +537,7 @@ display: none !important;
         width: 100%;
         position: fixed;
         margin-top: 10px;
+        z-index: 2;
       }
     }
 
