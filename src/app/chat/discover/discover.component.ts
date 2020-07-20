@@ -229,7 +229,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     item.coming = 'discover';
     localStorage.setItem('open_profile', JSON.stringify(item));
     // navigate to HISTORY PROFILE DIALOG COMPONENT
-    this.router.navigate(['open/discover-profile'], {relativeTo: this.activatedRoute});
+    this.router.navigate(['open/open-profile'], {relativeTo: this.activatedRoute});
   }
 
   setId(index: any) {

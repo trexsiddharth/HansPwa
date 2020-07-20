@@ -57,9 +57,6 @@ export class TodaysPaymentPopupComponent implements OnInit {
     if (localStorage.getItem('id')) {
       this.getCredits();
     }
-    if (localStorage.getItem('mobile_number')) {
-      this.subscriptionViewed();
-    }
 
     this.setTimer();
     setTimeout(() => {
@@ -73,15 +70,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
-  subscriptionViewed() {
-    const formData = new FormData();
-    formData.append('mobile', localStorage.getItem('mobile_number'));
-    this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
-      (data: any) => {
-       console.log(data);
-      }
-    );
-  }
+
   getCredits(){
     return this.http.post('https://partner.hansmatrimony.com/api/getWhatsappPoint?id=' + localStorage.getItem('id'), {params: {['id']: localStorage.getItem('id')}}).subscribe(
       (data: any) => {
@@ -123,9 +112,10 @@ export class TodaysPaymentPopupComponent implements OnInit {
       content_name: localStorage.getItem('mobiler_number'),
     });
   }
-  HandlePayment(){
+  HandlePayment() {
     if (this.price) {
       if (localStorage.getItem('mobile_number')) {
+        console.log(localStorage.getItem('mobile_number'));
         this.getRazorPay(this.price, 'live', 0, '', '', localStorage.getItem('mobile_number'));
         } else {
           this.getRazorPay(this.price, 'live', 0, '', '', '');

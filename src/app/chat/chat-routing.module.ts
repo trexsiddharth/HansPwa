@@ -23,7 +23,7 @@ const routes: Routes = [
     component: HistoryProfilesComponent
   },
   {
-    path: 'open/discover-profile',
+    path: 'open/open-profile',
     component: HistoryProfilesDialogComponent
   }
 ];

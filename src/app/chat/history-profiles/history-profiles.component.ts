@@ -306,7 +306,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     item.coming = this.type;
     localStorage.setItem('open_profile', JSON.stringify(item));
     // navigate to HISTORY PROFILE DIALOG COMPONENT
-    this.router.navigateByUrl('chat/open/discover-profile');
+    this.router.navigateByUrl('chat/open/open-profile');
   }
 
   setId(index: any) {

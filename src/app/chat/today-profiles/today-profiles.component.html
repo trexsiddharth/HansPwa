@@ -14,15 +14,15 @@
 
     <div id="imageContent">
         <div>
-          <div style="width: 70%;">
+          <div >
             <span style="font-weight: bold;font-size: 18px;">
                 {{toTitleCase(item.name)}}
             </span><br>
             <span style="font-size: 14px;">
-                {{item.working_city}} {{item.working_city ? '|' : ''}} {{setHeight(item.height)}}
+                {{item.working_city ? item.working_city : ''}} {{item.working_city ? '|' : ''}} {{setHeight(item.height)}}
             </span> <br>
             <span style="font-size: 14px;">
-                {{setIncome(item.monthly_income)}} LPA
+                {{setIncome(item.monthly_income)}} Lakh per year
             </span>
           </div>
           <div style="position: absolute;
@@ -217,7 +217,7 @@
             <div class="row field">
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
-                    <span class="title">{{setIncome(item.monthly_income)}} LPA</span>
+                    <span class="title">{{setIncome(item.monthly_income)}} Lakh per year</span>
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/Graduation.svg" alt="education">
@@ -300,11 +300,11 @@
             <div class="row field">
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
-                    <span class="title">{{LifeStatus(item.mother_status,item.occupation_mother)}}</span>
+                    <span class="title">{{LifeStatus(item.mother_status,item.occupation_mother, 'Mother')}}</span>
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
-                    <span class="title">{{LifeStatus(item.father_status,item.occupation)}}</span>
+                    <span class="title">{{LifeStatus(item.father_status,item.occupation, 'Father')}}</span>
                 </div>
             </div>
 
@@ -316,7 +316,7 @@
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/Family Type.svg" alt="Father Type">
-                    <span class="title">{{item.family_type}}</span>
+                    <span class="title">{{familyType()}}</span>
                 </div>
             </div>
 
@@ -327,14 +327,14 @@
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">
-                    <span class="title">{{item.house_type}}</span>
+                    <span class="title">{{houseStatus()}}</span>
                 </div>
             </div>
 
             <div class="row field">
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
-                    <span class="title">{{setIncome(item.family_income)}} LPA</span>
+                    <span class="title">{{setIncome(item.family_income)}} Lakh per year</span>
                 </div>
             </div>
 

@@ -82,7 +82,7 @@ export class LanguageService {
       this.profileLang.hello = 'हेलो';
       this.profileLang.about = 'अबाउट';
       this.profileLang.personalizedDetails = 'पर्सनल डिटेल्स';
-      this.profileLang.careerDetails = 'करियर डिटेल्स';
+      this.profileLang.careerDetails = 'शिक्षा और करियर डिटेल्स';
       this.profileLang.horoscopeDetails = 'होरोस्कोप';
       this.profileLang.familyDetails = 'फॅमिली डिटेल्स';
       this.profileLang.myself = 'माइसेल्फ ';
@@ -175,7 +175,7 @@ export class LanguageService {
           this.profileLang.hello = 'Hello';
           this.profileLang.about = 'About';
           this.profileLang.personalizedDetails = 'Personal Details';
-          this.profileLang.careerDetails = 'Career Details';
+          this.profileLang.careerDetails = 'Education and Career Details';
           this.profileLang.horoscopeDetails = 'Horoscope';
           this.profileLang.familyDetails = 'Family Details';
           this.profileLang.myself = 'Myself ';

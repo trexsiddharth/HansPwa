@@ -43,7 +43,6 @@ export class HistoryProfilesDialogComponent implements OnInit {
     this.languageService.setProfileLanguage();
     setTimeout(() => {
       this.profile = localStorage.getItem('open_profile');
-      console.log(this.profile);
       if (this.profile) {
         this.item = JSON.parse(this.profile);
         console.log(this.item);
@@ -271,16 +270,16 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
   }
 
-  LifeStatus(person: string, work: string) {
+  LifeStatus(person: string, work: string , type: string) {
     if (person != null && person !== '') {
       if (person.match('Alive')) {
         if (work) {
-          return 'Alive | ' + work;
+          return `${type} is Alive | ` + work;
         } else {
-          return 'Alive';
+          return `${type} is Alive`;
         }
       } else {
-        return 'Dead';
+        return `${type} is Dead`;
       }
     } else {
       return work;
@@ -367,5 +366,35 @@ export class HistoryProfilesDialogComponent implements OnInit {
           behavior: 'smooth'
     });
   }
+
+  openImageModal(carous: string, src: string, name: string, index: any) {
+    if (carous && carous !== '') {
+      const carousel: object = JSON.parse(carous);
+      const keys = Object.keys(carousel);
+      // console.log(carousel[index]);
+      this.setModal('https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]]);
+    } else if ( src && src !== '') {
+      this.setModal(src);
+    }
+  }
+
+  setModal(image) {
+    const modal = document.getElementById('myModal');
+    const modalImg: HTMLElement = document.getElementById('img01');
+    const captionText = document.getElementById('caption');
+   
+    modal.style.display = 'block';
+    modal.style.zIndex = '9999999999';
+    modalImg.setAttribute('src', image);
+    captionText.innerHTML = name;
+   
+     // Get the <span> element that closes the modal
+    const span = document.getElementById('closeModal');
+   
+   // When the user clicks on <span> (x), close the modal
+    span.onclick = () => {
+   modal.style.display = 'none';
+   };
+   }
 
 }

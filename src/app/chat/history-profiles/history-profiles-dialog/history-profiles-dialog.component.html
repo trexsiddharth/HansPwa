@@ -24,6 +24,7 @@
 <ngb-carousel>
     <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index" >
             <img  id="profilePic" 
+            (click)="openImageModal(item.profile.carousel,item.profile.photo,item.profile.name,index)"
             [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)" 
             alt="item.profile.name">
     </ng-template>
@@ -41,7 +42,7 @@
             {{item.profile.working_city}} {{item.profile.working_city ? '|' : ''}} {{setHeight(item.profile.height)}}
         </span> <br>
         <span style="font-size: 14px;">
-            {{setIncome(item.profile.monthly_income)}} LPA
+            {{setIncome(item.profile.monthly_income)}} Lakh per year
         </span>
       </div>
       <div style="position: absolute;
@@ -272,7 +273,7 @@ border-top-right-radius: 20px;
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
                 <span class="title">
-                    {{setIncome(item.profile.monthly_income)}} LPA
+                    {{setIncome(item.profile.monthly_income)}} Lakh per year
                 </span>
             </div>
             <div class="col-6">
@@ -376,14 +377,14 @@ border-top-right-radius: 20px;
                 <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
                 <span class="title">
                     {{LifeStatus(item.family ? item.family.mother_status : item.profile.mother_status
-                        ,item.family ? item.family.occupation_mother : item.profile.mother_occupation)}}
+                        ,item.family ? item.family.occupation_mother : item.profile.mother_occupation, 'Mother')}}
                 </span>
             </div>
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
                 <span class="title">
                     {{LifeStatus(item.family ? item.family.father_status : item.profile.father_status
-                        ,item.family ? item.family.occupation : item.profile.father_occupation)}}
+                        ,item.family ? item.family.occupation : item.profile.father_occupation, 'Father')}}
                 </span>
             </div>
         </div>
@@ -428,4 +429,22 @@ border-top-right-radius: 20px;
 
     </div>
 </section>
+
+<div>
+  
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+    
+    <!-- The Close Button -->
+    <a id="closeModal">&times;</a>
+    
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="img01">
+    
+    <!-- Modal Caption (Image Text) -->
+    <h4 id="caption"></h4>
+    </div>
+    
+    </div>
+
     </main>

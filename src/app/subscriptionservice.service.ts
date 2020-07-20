@@ -116,9 +116,9 @@ export class SubscriptionserviceService {
 
          },
       'prefill': {
-          'name':  name,
-          'email': email,
-          'contact': phone,
+          'name':  name ? name : '',
+          'email': email ? email : '',
+          'contact': phone ? phone : '',
 
       },
       'notes': notes,

@@ -608,6 +608,7 @@ setModal(image) {
  const captionText = document.getElementById('caption');
 
  modal.style.display = 'block';
+ modal.style.zIndex = '9999999999';
  modalImg.setAttribute('src', image);
  captionText.innerHTML = name;
 
@@ -635,11 +636,11 @@ setManglik(value: string) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
       } else {
-        return String(Number(value1) + Number(value2)) + 'Brothers';
+        return String(Number(value1) + Number(value2)) + ' Brothers';
       }
     } else {
       if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + 'Brothers';
+        return String(Number(value1) + Number(value2)) + ' Brothers';
       } else {
         return '0 Brothers';
       }
@@ -651,27 +652,27 @@ setManglik(value: string) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
       } else {
-        return String(Number(value1) + Number(value2)) + 'Sisters';
+        return String(Number(value1) + Number(value2)) + ' Sisters';
       }
     } else {
       if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + 'Sisters';
+        return String(Number(value1) + Number(value2)) + ' Sisters';
       } else {
         return '0 Sisters';
       }
     }
   }
 
-  LifeStatus(person: string, work: string) {
+  LifeStatus(person: string, work: string, type: string) {
     if (person != null && person !== '') {
       if (person.match('Alive')) {
         if (work) {
-          return 'Alive | ' + work;
+          return `${type} is Alive | ` + work;
         } else {
-          return 'Alive';
+          return `${type} is Alive`;
         }
       } else {
-        return 'Dead';
+        return `${type} is Dead`;
       }
     }
   }
@@ -743,6 +744,7 @@ getQualification(degree, education) {
 return education != null && education !== '' ? education : degree;
 }
 
+// scroll down animation button
 scrollDown() {
   console.log('scroll down');
   document.querySelector('.mainBody').scrollBy({
@@ -750,6 +752,7 @@ scrollDown() {
         behavior: 'smooth'
   });
 }
+// stops animation
 stopAnimation() {
   const animationClass1 = 'animateButtonImage';
   const class1 = document.querySelectorAll('.buttonImage')[2];
@@ -759,6 +762,7 @@ stopAnimation() {
     class2.classList.remove(animationClass1);
   }
 }
+// resets animation
 resetAnimation() {
 const animationClass1 = 'animateButtonImage';
 const class1 = document.querySelectorAll('.buttonImage')[2];
@@ -769,6 +773,21 @@ if (class1) {
     class1.classList.add(animationClass1);
     class2.classList.add(animationClass1);
 }
+}
+
+houseStatus() {
+  if (this.item.house_type.toLowerCase().indexOf('own') !== -1) {
+    return 'Own House';
+  } else {
+    return 'Rented House';
+  }
+}
+familyType() {
+  if (this.item.family_type.toLowerCase().indexOf('nuclear') !== -1) {
+    return 'Nuclear Family';
+  } else {
+    return 'Joint Family';
+  }
 }
 }
 

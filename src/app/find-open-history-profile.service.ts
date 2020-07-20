@@ -89,10 +89,10 @@ export class FindOpenHistoryProfileService {
     localStorage.setItem('count',  JSON.stringify(this.profileCount));
   }
   getShortlistNumber() {
-    return JSON.parse(localStorage.getItem('count')).shortlistCount;
+    return this.profileCount.shortlistCount;
   }
   getDailyNumber() {
-    return JSON.parse(localStorage.getItem('count')).dailyCount + 1;
+    return this.profileCount.dailyCount + 1;
   }
   saveDailyCount(count: any) {
     this.profileCount.dailyCount = count + 1;
