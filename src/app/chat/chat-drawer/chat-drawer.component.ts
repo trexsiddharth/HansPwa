@@ -38,7 +38,7 @@ export class ChatDrawerComponent implements OnInit {
 
 
   openUserProfile() {
-    this.router.navigate(['user-profile', this.userId, this.userIsLead], {relativeTo: this.activatedRoute});
+    this.router.navigateByUrl(`chat/user-profile/${this.userId}/${this.userIsLead}`);
   }
 
   onImageLoadError() {
@@ -48,7 +48,7 @@ export class ChatDrawerComponent implements OnInit {
 
   // this will called only if the user is logged in and will open contacted, rejected etc sections.
   openHistoryProfiles(section: string) {
-    this.router.navigate(['history', section], {relativeTo: this.activatedRoute});
+    this.router.navigateByUrl(`chat/history/${section}`);
   }
 
   logout() {

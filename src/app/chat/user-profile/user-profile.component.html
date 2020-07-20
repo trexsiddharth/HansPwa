@@ -547,13 +547,13 @@
                     
                     <div class="row" style="margin-top: 25px;">
                         <div class="col-6">
-                            <button class="boxBtn" (click)="itemService.changeTab(3)" mat-raised-button style="background-color: #FAC8F1;
+                            <button class="boxBtn" (click)="itemService.changeBackToTab(2)" mat-raised-button style="background-color: #FAC8F1;
                             width: 100%;color: #D313AE;">
                                 {{languageService.getCurrentLanguage() === 'hindi' ? 'मैं किसे पसंद हूँ ?' : 'Liked Me?'}}
                             </button>
                         </div>
                         <div class="col-6">
-                            <button class="boxBtn" (click)="itemService.changeTab(2)" mat-raised-button style="background-color: #CDEBFF; 
+                            <button class="boxBtn" (click)="itemService.changeBackToTab(3)" mat-raised-button style="background-color: #CDEBFF; 
                             width: 100%;color: #0C9BF2;">
                                 {{languageService.getCurrentLanguage() === 'hindi' ? 'मेरी पसंद' : 'Liked By Me'}}
                             </button>

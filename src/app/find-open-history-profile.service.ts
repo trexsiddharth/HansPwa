@@ -80,6 +80,10 @@ export class FindOpenHistoryProfileService {
     this.setTab.emit(position);
   }
 
+  changeBackToTab(position: number) {
+    this.router.navigateByUrl(`chat/${position}`);
+  }
+
   saveCount(count: any) {
     this.profileCount.contactedCount = count.C;
     this.profileCount.shortlistCount = count.SL;
