@@ -776,14 +776,14 @@ if (class1) {
 }
 
 houseStatus() {
-  if (this.item.house_type.toLowerCase().indexOf('own') !== -1) {
+  if (this.item.house_type && this.item.house_type.toLowerCase().indexOf('own') !== -1) {
     return 'Own House';
   } else {
     return 'Rented House';
   }
 }
 familyType() {
-  if (this.item.family_type.toLowerCase().indexOf('nuclear') !== -1) {
+  if (this.item.family_type && this.item.family_type.toLowerCase().indexOf('nuclear') !== -1) {
     return 'Nuclear Family';
   } else {
     return 'Joint Family';
