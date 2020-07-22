@@ -112,7 +112,7 @@ main{
 
 .titleHeading{
     color: #4A5D6A;
-    font-size: 1.2em;
+    font-size: 1rem;
     margin-bottom: 10px;
     display: inline-block;
     font-weight: bold;
@@ -136,12 +136,12 @@ main{
     width: 100%;
     color: #4A5D6A;
     margin-left: 1rem;
-    font-size: 1rem;
+    font-size: 14px;
 }
 .titleGrey{
     width: 100%;
     color: grey;
-    font-size: 1rem;
+    font-size: 14px;
 }
 
 

@@ -27,7 +27,7 @@ section{
 }
 
 .titleText {
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 
@@ -182,7 +182,7 @@ border-radius: 10px;
             object-fit: fill;
         }
         .titleText {
-            font-size: 16px;
+            font-size: 14px;
         }
 }
 
@@ -212,7 +212,7 @@ border-radius: 10px;
             object-fit: fill;
         }
         .titleText {
-            font-size: 18px;
+            font-size: 14px;
         }
         /* // only for explicit view */
     .mainBack {
