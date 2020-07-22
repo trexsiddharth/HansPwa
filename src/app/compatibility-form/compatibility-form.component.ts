@@ -766,7 +766,7 @@ getProfile() {
     );
   }
   getProfilePhoto(carous: any, index: string): string {
-    if (carous && carous !== '')  {
+    if (carous && carous !== '' && carous !== 'null')  {
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
