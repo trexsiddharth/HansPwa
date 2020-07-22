@@ -343,3 +343,18 @@ div.mat-select-search-inner input.mat-input-element {
   }
  
 }
+
+ /* animations  */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
+}
+100% {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translateZ(100);
+    transform: translateZ(100);
+}
+}

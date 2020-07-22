@@ -47,7 +47,10 @@
        [(selectedIndex)]="selectedTab" 
        (selectedIndexChange)="changeSelectedTab($event)">
   
-        <mat-tab id="today" style="z-index: 99999999999999;">
+        <mat-tab id="today"
+          data-wow-duration="3000ms"
+          data-wow-delay="0ms"
+         style="z-index: 99999999999999;">
   
           <ng-template mat-tab-label>
             <span [matBadge]="itemService.getDailyNumber()">
@@ -57,9 +60,9 @@
             <!-- {{itemService.getDailyCount()}} -->
             Today's Special
           </ng-template>
-  
-                <div class="w-full ht-full"  id="today-main">
-                    <app-today-profiles></app-today-profiles>
+                <div class="w-full ht-full"
+                 id="today-main">
+                    <app-today-profiles ></app-today-profiles>
                 </div>
               </mat-tab>
   
@@ -111,7 +114,7 @@
 
                <ng-template matTabContent>
                <div>
-                   <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                   <div class='mainBody  w-full bg-white ht-full' >
                             <app-discover></app-discover>
                   </div>
               </div>
@@ -129,7 +132,7 @@
   
                 <ng-template matTabContent>
                 <div>
-                    <div class='mainBody  w-full bg-white ht-full setBotUi'>
+                    <div class='mainBody  w-full bg-white ht-full'>
                              <app-history-profiles [type]="tabType"></app-history-profiles>
                    </div>
                </div>
@@ -150,7 +153,7 @@
   
                   <ng-template matTabContent>
                   <div>
-                      <div class='mainBody  w-full bg-white ht-full setBotUi'>
+                      <div class='mainBody  w-full bg-white ht-full'>
                                <app-history-profiles [type]="tabType"></app-history-profiles>
                      </div>
                  </div>

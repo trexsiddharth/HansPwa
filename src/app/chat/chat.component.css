@@ -77,8 +77,8 @@ display: none !important;
 
 #today-main {
   overflow: auto;
+  animation: fadeInUp 1.5s 1;
 }
-
 
 /*   footer   */
 /* Place the navbar at the bottom of the page, and make it stick */

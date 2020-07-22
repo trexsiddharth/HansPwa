@@ -274,6 +274,7 @@ main{
         z-index: 99999;
         bottom: 0px;
         background-image: linear-gradient(0deg, white,transparent);
+        animation: fadeInUp 3.5s 1;
     }
 }
 
