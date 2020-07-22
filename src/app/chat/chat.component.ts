@@ -175,7 +175,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   exhaustCount = 0;
   paidStatus;
   exhaustedStatus;
-  selectedTab;
+  selectedTab = 0;
   tabType;
   currentTab;
   profilesCompletedStatus = false;

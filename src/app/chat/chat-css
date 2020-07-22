@@ -5,33 +5,70 @@
   --tab-selected-text: #4A5D6A;
 }
 
-main {
-  background-color: var(--main-background-pink);
+.drawerSettings{
+  width: 25%;
+  overflow-x: hidden;
+  }
+  .sideNavContent {
+overflow: hidden;
+height: 100vh;
+position: relative;
+ z-index: 1;
+ display: block;
+ margin: 0px;
+ padding: 0px
+  }
+
+.main {
+  /* background-image: linear-gradient(180deg, #9ADCF0, #FFFFFF); */
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
+
 
 #myProfImage{
   width:55px;
   height: 55px;
-  margin: 10px 5px;
   border-radius: 50%;
-  z-index: 999;
-  border: 2px solid #58D1FD;
+  border: 3px solid white;
+}
+.smallMenuImage {
+  display: flex;
+    position: absolute;
+    right: 0px;
+    top: 5px;
+    color: blue;
+    background: white;
+    border-radius: 100px;
 }
 /* tabs */
 
 .groupContainer{
   width: 100%;
+  display: -webkit-box;
   display: flex;
-  overflow-x: auto;
-  padding-right: 50px;
-  padding-bottom: 10px;
-  background-color: #FF8EB2;
+  height: 100px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background-image: -webkit-gradient(linear, left top, right top, from(#4FB0E5), to(#566EE8));
+  background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  padding: 10px 0px;
+  position: relative;
 }
 .matGroup{
   width: 100%;
   position: fixed;
-  padding-top: 10px;
+  margin-top: 25px;
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+  z-index: 2;
   
 }
 
@@ -42,9 +79,6 @@ main {
         margin-top: -2px;
 }
 
-::ng-deep .mat-ink-bar {
-  display: none;
-}
 /* ::ng-deep .mat-tab-header::-webkit-scrollbar {
 display: none !important;
 } */
@@ -83,11 +117,11 @@ display: none !important;
     color: white;
   }
   .ht-full {                
-    margin: 0px 30%;
+    margin: 0px 32%;
     width: auto;
     left: 0px;
     right: 0px;
-    top: 55px;
+    top: 100px;
   }
   .setLogo {
     margin: 0px 30%;
@@ -152,6 +186,15 @@ display: none !important;
   
 
   @media (max-width: 576px) {
+    .mainBack {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      overflow: hidden;
+      z-index: -1;
+      transform: rotate(-60deg) translate(65%, 10px) !important;
+      background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    }
     .navbar {
       background: #f3f3f3;
       overflow: hidden;
@@ -213,7 +256,7 @@ display: none !important;
         width: auto;
         left: 0px;
         right: 0px;
-        top: 40px;
+        top: 100px;
       }
       .setNavIcons {
         margin-top: 7px;
@@ -258,6 +301,19 @@ display: none !important;
     }
 
     @media (max-width: 1024px) {
+      .drawerSettings{
+        width: 65vw;
+        overflow-x: hidden;
+        }
+      .mainBack {
+        width: 100vw;
+        overflow: hidden;
+        height: 100vh;
+        position: absolute;
+        z-index: -1;
+        transform: rotate(-60deg) translate(65%, -150px);
+        background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+      }
       .navbar {
         background: #f3f3f3;
         overflow: hidden;
@@ -318,7 +374,7 @@ display: none !important;
         width: auto;
         left: 0px;
         right: 0px;
-        top: 40px;
+        top: 100px;
       }
       .setNavIcons {
         margin-top: 7px;
@@ -362,12 +418,11 @@ display: none !important;
     
 
         #myProfImage{
-          width:40px;
-          height: 40px;
-          margin: 10px 5px;
+          width:42px;
+          height: 42px;
           border-radius: 50%;
           z-index: 999;
-          border: 2px solid #58D1FD;
+          border: 3px solid white;
         }
 
         .tabLine {
@@ -381,6 +436,52 @@ display: none !important;
         }
         
     }
+
+    @media (min-width: 1024px) {
+      .mainBack {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        z-index: -99999;
+        position: absolute;
+        background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
+        background-size: contain;
+      
+      }
+    }
+
+    @media screen and (max-width: 350px) {
+      #myProfImage{
+        width:40px;
+        height: 40px;
+        margin: 10px 5px;
+        border-radius: 50%;
+        z-index: 999;
+        border: 3px solid white;
+        
+      }
+      .groupContainer{
+        width: 100%;
+        height: 100px;
+       display: flex;
+       flex-direction: row;
+       overflow: hidden;
+       padding-bottom: 5px;
+       background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+       align-items: center;
+       justify-content: flex-start;
+       padding: 0px;
+    }
+    .smallMenuImage {
+      display: flex;
+        position: absolute;
+        right: 0px;
+        top: 15px;
+        color: blue;
+        background: white;
+        border-radius: 100px;
+    }
+  }
   
     @media (min-width: 576px) {
       /*   body   */
@@ -438,15 +539,21 @@ display: none !important;
        .groupContainer{
          width: 100%;
         display: flex;
-        overflow-x: auto;
+        height: 100px;
+        flex-direction: row;
+        overflow: hidden;
         padding-bottom: 5px;
-        padding-right: 50px;
-        background-image: #B1E3F3
+        background-color: #9ADCF0;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px 0px;
+        
        }
        .matGroup{
         width: 100%;
         position: fixed;
-        padding-top: 10px;
+        margin-top: 10px;
+        z-index: 2;
       }
     }
 

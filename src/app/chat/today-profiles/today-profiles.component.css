@@ -1,5 +1,6 @@
 main{
     padding-bottom: 200px;
+    overflow-y: auto;
 }
 #profileImageDiv{
     margin: 20px;

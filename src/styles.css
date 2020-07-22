@@ -132,11 +132,15 @@ body {
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important;
 }
 .mat-tab-labels {
-  display: flex;
+  /* display: flex;
     align-items: center !important;
     justify-content: space-evenly !important;
-    margin-left: 45px;
-
+   margin: 0px 15px; */
+   text-align: center;
+   margin: 0px 20px;
+}
+.mat-tab-label-container{
+  background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
 }
  .mat-tab-label {
     padding: 0px 10px !important;
@@ -319,6 +323,16 @@ div.mat-select-search-inner input.mat-input-element {
       flex-direction: column !important;
       align-items: center !important;
       justify-content: center !important;
+  }
+  .mat-tab-labels {
+    /* display: flex;
+      align-items: center !important;
+      justify-content: space-evenly !important;
+     margin: 0px 15px; */
+     display: block !important;
+     text-align: center;
+     margin: 0px 20px;
+  
   }
   #infoLabels .mat-tab-label-content {
     font-size: 12px;

@@ -31,7 +31,7 @@ export class PhoneNumberScreenComponent implements OnInit {
               private ngxNotificationService: NgxNotificationService,
               private router: Router ) {
     this.phoneNumber = this.formBuilder.group({
-      phone: ['', Validators.compose([Validators.required])],
+      phone: [null, Validators.compose([Validators.required])],
     });
    }
 
