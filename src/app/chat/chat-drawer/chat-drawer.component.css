@@ -1,9 +1,11 @@
 
 main{
     background-color: white;
-    height: 100%;
+    height: auto;
+    padding-bottom: 100px;
     font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
 }
+
 hr{
     margin:1px;
     border-bottom: 1px solid rgba(124, 123, 123, 0.5);
