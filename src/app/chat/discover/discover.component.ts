@@ -351,7 +351,13 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     })).subscribe(
      (data: any) => {
       console.log(data);
-      this.profile = [...this.profile, ...data.message];
+      if (data.status === 1) {
+        this.profile = [...this.profile, ...data.message];
+      } else {
+        if (this.profile.length < 1) {
+          this.ngxNotificationService.error(data.message);
+        }
+      }
       console.log(this.profile);
      },
     (error: any) => {
