@@ -1,6 +1,6 @@
 <main id="main" *ngIf="item && type == 'profile'">
     <div id="profileImageDiv">
-        <ngb-carousel>
+        <ngb-carousel style="outline: none;">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
                     <img id="profilePic" 
                     (click)="openImageModal(item.carousel,item.photo,item.name,index)"

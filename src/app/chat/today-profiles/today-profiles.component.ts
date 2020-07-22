@@ -747,7 +747,7 @@ return education != null && education !== '' ? education : degree;
 // scroll down animation button
 scrollDown() {
   console.log('scroll down');
-  document.querySelector('.mainBody').scrollBy({
+  document.querySelector('#today-main').scrollBy({
         top: 350,
         behavior: 'smooth'
   });

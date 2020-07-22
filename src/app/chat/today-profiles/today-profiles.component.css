@@ -115,7 +115,7 @@ main{
     margin-top: 10px;
 }
 .titleImage {
-   width: 28px;
+   width: 25px;
 }
 .title{
     width: 100%;
@@ -185,7 +185,7 @@ main{
 
 @media (max-width: 350px){
     .titleImage {
-        width: 22px;
+        width: 20px;
      }
     .title{
         width: 100%;

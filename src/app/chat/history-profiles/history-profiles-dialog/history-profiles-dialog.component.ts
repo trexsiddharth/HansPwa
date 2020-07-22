@@ -361,7 +361,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
 
    scrollDown() {
     console.log('scroll down');
-    document.querySelector('.mainBody').scrollBy({
+    document.querySelector('#historyMain').scrollBy({
           top: 350,
           behavior: 'smooth'
     });
