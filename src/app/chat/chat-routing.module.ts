@@ -5,6 +5,7 @@ import { ChatComponent } from './chat.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HistoryProfilesComponent } from './history-profiles/history-profiles.component';
 import { HistoryProfilesDialogComponent } from './history-profiles/history-profiles-dialog/history-profiles-dialog.component';
+import { DiscoverComponent } from './discover/discover.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,11 @@ const routes: Routes = [
   {
     path: 'open/open-profile',
     component: HistoryProfilesDialogComponent
-  }
+  },
+  {
+    path: 'discover/:section',
+    component: DiscoverComponent
+  },
 ];
 
 @NgModule({

@@ -1,4 +1,23 @@
-<main>   
+<main [ngClass]="{'mainBack': section}">   
+    <mat-toolbar class="toolBar" *ngIf="section">
+        <div style="display: flex;
+        flex-direction: row;
+        align-items: center;">
+            <button mat-icon-button 
+            (click)="goBack()"
+        class="example-icon"
+         aria-label="Example icon-button with menu icon">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span class="titleText">{{title}}</span>
+        </div>
+        <button mat-icon-button 
+        class="example-icon" 
+        aria-label="Example icon-button with share icon">
+          <mat-icon>call</mat-icon>
+          <span class="titleText">{{this.itemService.getCredits()}}</span>
+        </button>
+      </mat-toolbar>
     <section  
     [ngClass]="{'ht-full': section, 'paddingToSection' : section}">
         <div  *ngFor="let item of profile;let i = index">

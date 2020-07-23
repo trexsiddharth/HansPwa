@@ -40,6 +40,9 @@ export class ChatDrawerComponent implements OnInit {
   openUserProfile() {
     this.router.navigateByUrl(`chat/user-profile/${this.userId}/${this.userIsLead}`);
   }
+  openDiscover() {
+    this.router.navigateByUrl('chat/discover/open');
+  }
 
   onImageLoadError() {
     this.userpic = '../../../assets/logo_192.png';

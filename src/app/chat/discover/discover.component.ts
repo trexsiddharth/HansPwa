@@ -39,6 +39,7 @@ import { PersonalizedMessageDialogComponent } from '../history-profiles/personal
 import { HistoryProfilesDialogComponent } from '../history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 import { retry, timeout, catchError } from 'rxjs/operators';
 import { ChatServiceService } from 'src/app/chat-service.service';
+import { LanguageService } from 'src/app/language.service';
 
 
 
@@ -91,13 +92,35 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
               public itemService: FindOpenHistoryProfileService,
               private activatedRoute: ActivatedRoute,
               private chatService: ChatServiceService,
+              private browserLocation: Location,
+              private languageService: LanguageService,
               private router: Router) {}
 
   ngOnInit() {
+     // url for the particular section of history
+     this.activatedRoute.paramMap.subscribe(
+      (routeData: any) => {
+        console.log(routeData);
+        if ( routeData && routeData.params && routeData.params.section) {
+          this.section = routeData.params.section;
+        }
+      }
+    );
+
     // get discover data
-    this.getDiscoveryData();
+     this.getDiscoveryData();
+
+      // if stage is not null set it to null so that when we get back to chat section it opens todays profile only
+    // back to chat from chat drawer options
+     if (localStorage.getItem('stage')) {
+      localStorage.setItem('stage', null);
+    }
   }
   ngAfterViewInit(): void {
+  }
+  goBack() {
+    this.browserLocation.back();
+    localStorage.setItem('open_profile', null);
   }
 
 
@@ -361,6 +384,11 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
         }
       }
       console.log(this.profile);
+      if (this.languageService.getCurrentLanguage() === 'english') {
+          this.title = `Discover (${this.profile.length})`;
+        } else {
+          this.title = `डिस्कवर (${this.profile.length})`;
+        }
      },
     (error: any) => {
       this.ngxNotificationService.error('We couldn\'t get your credits, trying again');

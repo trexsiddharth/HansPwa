@@ -41,7 +41,9 @@
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">छोड़ी गई प्रोफाइल</span>
         </button> 
         <hr>
-        <button class="rowMore">
+        <button class="rowMore"
+        (click)="openDiscover()"
+        >
           <img src="../../../assets/tabs-icons/search.svg" class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Discover Profiles</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">डिस्कवर प्रोफाइल</span>
