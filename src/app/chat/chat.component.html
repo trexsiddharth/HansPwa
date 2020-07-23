@@ -13,7 +13,7 @@
      width: 100vw;
      height: 100px">
       <div style="position: absolute;
-      right: 10px;
+      right: 5px;
      top: 0px;
      font-size: 14px;
      display: flex;
@@ -43,7 +43,8 @@
      </div>
      </div>
   
-      <mat-tab-group  id="mainLabels" class="matGroup"  
+      <mat-tab-group  id="mainLabels" 
+      class="matGroup"  
        [(selectedIndex)]="selectedTab" 
        (selectedIndexChange)="changeSelectedTab($event)">
   
@@ -54,8 +55,8 @@
   
           <ng-template mat-tab-label>
             <span [matBadge]="itemService.getDailyNumber()">
-              <img width="25px" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab && selectedTab != 0"> 
-              <img width="25px" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="!selectedTab || selectedTab == 0 ">
+              <img class="tabImage" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab && selectedTab != 0"> 
+              <img class="tabImage" src="../../assets/tabs-icons/calendar-dark.svg" alt="icon" *ngIf="!selectedTab || selectedTab == 0 ">
             </span>
             <!-- {{itemService.getDailyCount()}} -->
             Today's Special
@@ -105,10 +106,10 @@
             </mat-tab> -->
 
           <!-- // discover-->
-           <mat-tab id="discover">
+           <mat-tab id="discover" >
              <ng-template mat-tab-label>
-              <img width="25px" src="../../assets/tabs-icons/discover-white.svg" alt="icon" *ngIf="selectedTab !== 1"> 
-              <img width="25px" src="../../assets/tabs-icons/discover-dark.svg" alt="icon" *ngIf="selectedTab === 1 ">
+              <img [routerLink]="['/chat', '1']" class="tabImage" src="../../assets/tabs-icons/discover-white.svg" alt="icon" *ngIf="selectedTab !== 1"> 
+              <img  [routerLink]="['/chat', '1']" class="tabImage" src="../../assets/tabs-icons/discover-dark.svg" alt="icon" *ngIf="selectedTab === 1 ">
                Discover
              </ng-template>
 
@@ -124,8 +125,8 @@
             <!-- // liked me  -->
             <mat-tab id="likeme">
               <ng-template mat-tab-label>
-                <img width="27px" src="../../assets/tabs-icons/likes-you-heart-white.svg" alt="icon" *ngIf="selectedTab !==2"> 
-          <img width="27px" src="../../assets/tabs-icons/likes-you-heart-dark.svg" alt="icon" *ngIf="selectedTab === 2 ">
+                <img class="tabImage" [routerLink]="['/chat', '2']" src="../../assets/tabs-icons/likes-you-heart-white.svg" alt="icon" *ngIf="selectedTab !==2"> 
+          <img class="tabImage" [routerLink]="['/chat', '2']" src="../../assets/tabs-icons/likes-you-heart-dark.svg" alt="icon" *ngIf="selectedTab === 2 ">
                 <!-- {{itemService.getShortedCount()}} -->
                 Likes You
               </ng-template>
@@ -144,8 +145,8 @@
               <mat-tab id="melike">
                 <ng-template mat-tab-label >
                   <span [matBadge]="itemService.getShortlistNumber()">
-                    <img width="27px" src="../../assets/tabs-icons/heart-like-white.svg" alt="icon" *ngIf="selectedTab !== 3"> 
-                    <img width="27px" src="../../assets/tabs-icons/heart-like-dark.svg" alt="icon" *ngIf="selectedTab === 3 ">
+                    <img class="tabImage" [routerLink]="['/chat', '3']" src="../../assets/tabs-icons/heart-like-white.svg" alt="icon" *ngIf="selectedTab !== 3"> 
+                    <img class="tabImage" [routerLink]="['/chat', '3']" src="../../assets/tabs-icons/heart-like-dark.svg" alt="icon" *ngIf="selectedTab === 3 ">
                   </span>
                   <!-- {{itemService.getShortlistedCount()}} -->
                   Your Likes

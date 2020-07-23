@@ -70,6 +70,9 @@
         border-top: 1px solid #c8c8c8;
         margin-top: -2px;
 }
+.tabImage{
+  width: 25px;
+}
 
 /* ::ng-deep .mat-tab-header::-webkit-scrollbar {
 display: none !important;
@@ -452,7 +455,7 @@ display: none !important;
       #myProfImage{
         width:40px;
         height: 40px;
-        margin: 10px 5px;
+        margin: 10px 5px 10px 0px;
         border-radius: 50%;
         z-index: 999;
         border: 3px solid white;
@@ -479,6 +482,9 @@ display: none !important;
         color: blue;
         background: white;
         border-radius: 100px;
+    }
+    .tabImage{
+      width: 20px;
     }
   }
   

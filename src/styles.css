@@ -317,6 +317,15 @@ div.mat-select-search-inner input.mat-input-element {
     right: 0px;
     top: 60px;
   }
+  .mat-tab-label {
+    padding: 0px !important;
+    color: white;
+    flex: 1;
+    height: 70px !important;
+    width: auto !important;
+    min-width: auto !important;
+    opacity: 1 !important;
+}
   .mat-tab-label-content {
     font-size: 10px;
     display: flex !important;
@@ -325,13 +334,8 @@ div.mat-select-search-inner input.mat-input-element {
       justify-content: center !important;
   }
   .mat-tab-labels {
-    /* display: flex;
-      align-items: center !important;
-      justify-content: space-evenly !important;
-     margin: 0px 15px; */
-     display: block !important;
      text-align: center;
-     margin: 0px 20px;
+     margin: 0px 20px 0px 40px;
   
   }
   #infoLabels .mat-tab-label-content {
@@ -341,7 +345,6 @@ div.mat-select-search-inner input.mat-input-element {
       align-items: center !important;
       justify-content: center !important;
   }
- 
 }
 
  /* animations  */

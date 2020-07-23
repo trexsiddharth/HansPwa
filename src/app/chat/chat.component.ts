@@ -272,9 +272,23 @@ export class ChatComponent implements OnInit, AfterViewInit {
             this.Analytics('Android App', 'Android App', 'Logged In through App');
           }
           if (data.params.stage) {
-            setTimeout(() => {
+            /*
+            when we change routes for chat section using tabs ..
+             firstly tab always goes for tab1 and sendmessages api is called.
+             but when changing from first tab to another we dnt want that.
+             so by using the flag we will stop the call of the api.
+             */
+            if (this.selectedTab === 0 ) {
+              setTimeout(() => {
+                this.setSelectedTab(data.params.stage);
+                return;
+              }, 500);
+            } else {
+              this.chatServivce.setTabSpecific(true);
               this.setSelectedTab(data.params.stage);
-            }, 500);
+            }
+          } else {
+            this.chatServivce.setTabSpecific(false);
           }
         }
       }

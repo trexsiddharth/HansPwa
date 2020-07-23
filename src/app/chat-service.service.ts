@@ -8,6 +8,7 @@ export class ChatServiceService {
   contactNumber;
   loginStatus;
   credits;
+  private setSpecificTab = false;
   authorized = new EventEmitter<{
     name,
     photo,
@@ -19,6 +20,12 @@ export class ChatServiceService {
 
   setContactNumber(contact: any) {
     this.contactNumber = contact;
+  }
+  setTabSpecific(status: boolean) {
+    this.setSpecificTab = status;
+  }
+  getTabSpecificStatus(): boolean {
+    return this.setSpecificTab;
   }
   setSharedProfile(profile: any)  {
     this.profileItem = profile;
