@@ -53,6 +53,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
     }, 1000);
 
+
   }
 
   goBack() {

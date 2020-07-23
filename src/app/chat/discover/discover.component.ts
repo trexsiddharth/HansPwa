@@ -38,6 +38,7 @@ import { Location } from '@angular/common';
 import { PersonalizedMessageDialogComponent } from '../history-profiles/personalized-message-dialog/personalized-message-dialog.component';
 import { HistoryProfilesDialogComponent } from '../history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 import { retry, timeout, catchError } from 'rxjs/operators';
+import { ChatServiceService } from 'src/app/chat-service.service';
 
 
 
@@ -89,6 +90,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
               public notification: NotificationsService,
               public itemService: FindOpenHistoryProfileService,
               private activatedRoute: ActivatedRoute,
+              private chatService: ChatServiceService,
               private router: Router) {}
 
   ngOnInit() {
@@ -225,11 +227,11 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   // }
 
   openProfileDialog(item: any, ind: any) {
-    // section from which user is going
     item.coming = 'discover';
+    localStorage.setItem('stage', '1');
     localStorage.setItem('open_profile', JSON.stringify(item));
     // navigate to HISTORY PROFILE DIALOG COMPONENT
-    this.router.navigate(['open/open-profile'], {relativeTo: this.activatedRoute});
+    this.router.navigateByUrl('chat/open/open-profile');
   }
 
   setId(index: any) {

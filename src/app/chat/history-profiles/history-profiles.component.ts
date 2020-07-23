@@ -37,6 +37,7 @@ import { HistoryProfilesDialogComponent } from './history-profiles-dialog/histor
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
 import { Location } from '@angular/common';
+import { ChatServiceService } from 'src/app/chat-service.service';
 
 
 
@@ -91,6 +92,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private browserLocation: Location,
+              private chatService: ChatServiceService,
               private breakPointObserver: BreakpointObserver) {}
 
   ngOnInit() {
@@ -143,6 +145,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         break;
       default:
         break;
+    }
+
+    // if stage is not null set it to null so that when we get back to chat section it opens todays profile only
+    // back to chat from chat drawer options
+    if (localStorage.getItem('stage')) {
+      localStorage.setItem('stage', null);
     }
   }
   ngAfterViewInit(): void {
@@ -302,6 +310,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   openProfileDialog(item: any, ind: any) {
+    if (this.type === 'interestReceived') {
+      localStorage.setItem('stage', '2');
+    } else if (this.type === 'interestShown') {
+      localStorage.setItem('stage', '3');
+    }
     // section from which user is going
     item.coming = this.type;
     localStorage.setItem('open_profile', JSON.stringify(item));

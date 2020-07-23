@@ -267,28 +267,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
       (data: any) => {
         console.log(data.params.fcm_app);
         if (data) {
-          if (data.params.fcm_app) {
-            localStorage.setItem('fcm_app', data.params.fcm_app);
-            this.Analytics('Android App', 'Android App', 'Logged In through App');
-          }
           if (data.params.stage) {
-            /*
-            when we change routes for chat section using tabs ..
-             firstly tab always goes for tab1 and sendmessages api is called.
-             but when changing from first tab to another we dnt want that.
-             so by using the flag we will stop the call of the api.
-             */
-            if (this.selectedTab === 0 ) {
-              setTimeout(() => {
-                this.setSelectedTab(data.params.stage);
-                return;
-              }, 500);
-            } else {
-              this.chatServivce.setTabSpecific(true);
+            setTimeout(() => {
               this.setSelectedTab(data.params.stage);
-            }
-          } else {
-            this.chatServivce.setTabSpecific(false);
+            }, 500);
           }
         }
       }
@@ -307,6 +289,14 @@ export class ChatComponent implements OnInit, AfterViewInit {
         }
       }
     );
+
+    // if user when to profile details from any tab then they should be back on the same section
+    if (localStorage.getItem('stage')) {
+      setTimeout(() => {
+        this.selectedTab = Number(localStorage.getItem('stage'));
+        localStorage.setItem('stage', null);
+      }, 100);
+    }
   }
 
   ngAfterViewInit() {

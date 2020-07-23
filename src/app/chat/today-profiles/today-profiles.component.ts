@@ -70,7 +70,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
-
     if (!localStorage.getItem('authData')) {
       this.checkUrl().subscribe(
         data => {
@@ -122,11 +121,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
           localStorage.setItem('id', id);
           this.paidStatus = data.paid_status;
           console.log(this.paidStatus);
-            /*
-          this.chatService.getTabSpecificStatus() this is used to stop calling
-          of the api while switching from one tab to another
-          */
-          if (text.match('SHOW') && !this.chatService.getTabSpecificStatus()) {
+          if (text.match('SHOW')) {
               this.chatService.Analytics('login', 'login', 'logged In');
               this.chatService.setLoginStatus(true);
               if (localStorage.getItem('todayProfile')) {
@@ -189,11 +184,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
         localStorage.setItem('id', id);
         this.paidStatus = data.paid_status;
         console.log(this.paidStatus);
-         /*
-          this.chatService.getTabSpecificStatus() this is used to stop calling
-          of the api while switching from one tab to another
-          */
-        if (text.match('SHOW') && !this.chatService.getTabSpecificStatus()) {
+       
+        if (text.match('SHOW') ) {
           this.chatService.Analytics('login', 'login', 'logged In');
           this.chatService.setLoginStatus(true);
           if (localStorage.getItem('todayProfile') ) {
