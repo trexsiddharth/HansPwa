@@ -198,12 +198,14 @@ border-top-right-radius: 20px;
         <div class="row field">
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
-                <span class="title">{{item.family ? item.family.mobile : item.profile.mobile}}</span>
+                <span class="title">{{item.family ? item.family.mobile ? item.family.mobile :
+                     'Visible After Yes' : item.profile.mobile ? item.profile.mobile : 'Visible After Yes'  }}</span>
             </div>
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
                 <span class="title">
-                    {{item.family ? item.family.locality : item.profile.locality}}
+                    {{item.family ? item.family.locality ? item.family.locality : 'Visible After Yes' :
+                     item.profile.locality ? item.profile.locality : 'Visible After Yes'}}
                 </span>
             </div>
         </div>
@@ -327,7 +329,7 @@ border-top-right-radius: 20px;
 
         <div class="row field">
             <div class="col-6">
-                <img class="titleImage" src="../../../assets/new icons/Birth Place.svg" alt="birth place">
+                <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="birth place">
                 <span class="title">
                     {{item.profile.birth_place}}
                 </span>
@@ -392,7 +394,7 @@ border-top-right-radius: 20px;
 
         <div class="row field">
             <div class="col-6">
-                <img class="titleImage" src="../../../assets/new icons/Gotra.svg" alt="Gotra">
+                <img class="titleImage" src="../../../../assets/new icons/swastika.svg" alt="Gotra">
                 <span class="title">
                     {{item.family ? item.family.gotra : item.profile.gotra}}
                 </span>
@@ -423,7 +425,7 @@ border-top-right-radius: 20px;
         <div class="row field">
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
-                <span class="title">{{languageService.profileLang.familyIncome}}</span>
+                <span class="title">{{item.family ? setIncome(item.family.family_income) : setIncome(item.profile.house)}} Lakh Per Year</span>
             </div>
         </div>
 
