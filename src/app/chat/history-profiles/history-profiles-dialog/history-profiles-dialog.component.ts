@@ -287,11 +287,12 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
   }
 
-  onLoadProfileError(gender: string, id: any) {
+  onLoadProfileError(gender: string) {
+    let image = document.querySelector('#profilePic');
     if (gender === 'Male') {
-     id.setAttribute('src', '../../assets/male_pic.png');
+      image.setAttribute('src', '../../assets/male_pic.png');
    } else {
-     id.setAttribute('src', '../../assets/female_pic.png');
+    image.setAttribute('src', '../../assets/female_pic.png');
    }
    }
    onLoadComplete(id: any) {

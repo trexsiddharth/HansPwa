@@ -310,16 +310,19 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   openProfileDialog(item: any, ind: any) {
+    
     if (this.type === 'interestReceived') {
       localStorage.setItem('stage', '2');
     } else if (this.type === 'interestShown') {
       localStorage.setItem('stage', '3');
     }
+    if (item) {
     // section from which user is going
     item.coming = this.type;
     localStorage.setItem('open_profile', JSON.stringify(item));
     // navigate to HISTORY PROFILE DIALOG COMPONENT
     this.router.navigateByUrl('chat/open/open-profile');
+  }
   }
 
   setId(index: any) {
