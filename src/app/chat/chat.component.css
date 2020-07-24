@@ -202,7 +202,7 @@ display: none !important;
   
 
   @media (max-width: 576px) {
-    .mainBack {
+    /* .mainBack {
       width: 100vw;
       height: 100vh;
       position: absolute;
@@ -210,6 +210,26 @@ display: none !important;
       z-index: -1;
       transform: rotate(-60deg) translate(65%, 10px) !important;
       background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    } */
+    .whitBoxLeft {
+      width: 100%;
+      position: absolute;
+      height: 200px;
+      overflow: hidden;
+      transform: rotate(30deg);
+      background-color: white;
+      top: 68vh !important;
+      left: -100px !important;
+    }
+    .whitBoxRight {
+      width: 100%;
+      position: absolute;
+      height: 200px;
+      overflow: hidden;
+      transform: rotate(-30deg);
+      background-color: white;
+      top: 68vh !important;
+      right: -100px !important;
     }
     .navbar {
       background: #f3f3f3;
@@ -328,8 +348,37 @@ display: none !important;
         height: 100vh;
         position: absolute;
         z-index: -1;
-        transform: rotate(-60deg) translate(65%, -150px);
+        /* transform: rotate(-60deg) translate(65%, -150px); */
         background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+      }
+      .whiteBox {
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        height: 30vh;
+        overflow: hidden;
+        /* transform: rotate(30deg); */
+        background-color: white;
+      }
+      .whitBoxLeft {
+        width: 100%;
+        position: absolute;
+        height: 200px;
+        overflow: hidden;
+        transform: rotate(30deg);
+        background-color: white;
+        top: 72vh;
+        left: -150px;
+      }
+      .whitBoxRight {
+        width: 100%;
+        position: absolute;
+        height: 200px;
+        overflow: hidden;
+        transform: rotate(-30deg);
+        background-color: white;
+        top: 72vh;
+        right: -150px;
       }
       .navbar {
         background: #f3f3f3;
@@ -456,7 +505,7 @@ display: none !important;
     }
 
     @media (min-width: 1024px) {
-      .mainBack {
+      /* .mainBack {
         width: 100vw;
         height: 100vh;
         overflow: hidden;
@@ -465,7 +514,7 @@ display: none !important;
         background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
         background-size: contain;
       
-      }
+      } */
     }
 
     @media screen and (max-width: 350px) {
