@@ -568,11 +568,15 @@ profileReAnswer(item: any, answer: any, index: any) {
   //   this.itemService.getPhotoStatus() === false &&
   //   answer === 'SHORTLIST') {
   //    this.openMessageDialog(item, answer);
-  //  } else 
+  //  } else
+
    if (this.itemService.getPersonalized() === false &&
     answer === 'YES' && !item.family ) {
+      this.openMessageDialog(item, answer);
+   } else if (this.itemService.getPersonalized() === true &&
+   answer === 'YES' && !item.family ) {
     this.reponseToPremium(item, 'contacted', index);
-   }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+   } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
    && answer === 'YES') {
     this.openMessageDialog(item, answer);
    } else {
