@@ -20,11 +20,18 @@ const routes: Routes = [
     component: UserProfileComponent
   },
   {
+    // this is used for routing through chat drawer
     path: 'history/:section',
     component: HistoryProfilesComponent
   },
   {
+    // this is used for routing through chat navigation section
     path: 'open/open-profile',
+    component: HistoryProfilesDialogComponent
+  },
+  {
+    // this is used for routing through chat navigation section to profile details after contacted button clicked
+    path: 'open/open-profile/:id',
     component: HistoryProfilesDialogComponent
   },
   {

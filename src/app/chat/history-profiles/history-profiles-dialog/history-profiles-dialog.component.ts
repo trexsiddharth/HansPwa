@@ -6,7 +6,8 @@ import { NotificationsService } from 'src/app/notifications.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { timeout, retry, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-history-profiles-dialog',
@@ -34,24 +35,41 @@ export class HistoryProfilesDialogComponent implements OnInit {
               public itemService: FindOpenHistoryProfileService,
               public languageService: LanguageService,
               private browserLocation: Location,
-              private router: Router
+              private router: Router,
+              private activatedRoute: ActivatedRoute
               ) {
               }
 
   ngOnInit() {
     // set heading according to the language
     this.languageService.setProfileLanguage();
-    setTimeout(() => {
-      this.profile = localStorage.getItem('open_profile');
-      if (this.profile) {
-        this.item = JSON.parse(this.profile);
-        console.log(this.item);
-        this.title = `${this.item.profile.name}'s Profile`;
 
-        // section from which user is coming
-        this.type = this.item.coming;
-    }
-    }, 1000);
+
+    this.activatedRoute.paramMap.subscribe(
+      (routes: any) => {
+          if (routes) {
+            console.log(routes);
+            if (routes.params && routes.params.id) {
+              this.getUserProfileData(routes.params.id);
+            } else {
+               // open profile from other section
+                  setTimeout(() => {
+                    if (localStorage.getItem('open_profile')) {
+                    this.profile = localStorage.getItem('open_profile');
+                    if (this.profile) {
+                      this.item = JSON.parse(this.profile);
+                      console.log(this.item);
+                      this.title = `${this.item.profile.name}'s Profile`;
+
+                      // section from which user is coming
+                      this.type = this.item.coming;
+                  }
+                }
+                  }, 1000);
+            }
+          }
+      }
+    ) ;
 
 
   }
@@ -151,6 +169,35 @@ export class HistoryProfilesDialogComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+
+  getUserProfileData(userId) {
+      this.spinner.show();
+      const myprofileData = new FormData();
+      myprofileData.append('id', userId);
+      myprofileData.append('contacted', '1');
+      myprofileData.append('is_lead', '0');
+      // tslint:disable-next-line: max-line-length
+      return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', myprofileData)
+      .pipe(timeout(7000),
+       retry(2),
+        catchError(e => {
+          this.ngxNotificationService.error('Server Time Out, Try Again Later');
+          throw new Error('Server Timeout ' + e);
+      })).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.item = data;
+          this.title = data.profile.name + `'s Profile`;
+          this.type = 'contacted';
+          this.spinner.hide();
+        },
+        (error: any) => {
+          this.spinner.hide();
+          console.log(error);
+          this.ngxNotificationService.error('Something Went Wrong');
+        }
+      );
   }
 
 

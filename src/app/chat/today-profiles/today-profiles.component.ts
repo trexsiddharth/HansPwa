@@ -396,6 +396,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         }
         if (this.points > 0 && reply === 'YES') {
           this.itemService.setItem(previousItem);
+          this.router.navigateByUrl(`chat/open/open-profile/${previousItem.id}`);
           // this.itemService.changeTab(1);
           } else {
             if (document.getElementById('profilePic')) {

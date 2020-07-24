@@ -660,9 +660,10 @@ updateProfileList(ans: any, num: any, index: any) {
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              this.slideAndOpenProfile(this.profile[index], 1);
+              // this.slideAndOpenProfile(this.profile[index], 1);
+              this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
               this.profile.splice(index, 1);
-              this.itemService.changeTab(1);
+              // this.itemService.changeTab(1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
@@ -690,9 +691,10 @@ updateProfileList(ans: any, num: any, index: any) {
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              this.slideAndOpenProfile(this.profile[index], 1);
+              // this.slideAndOpenProfile(this.profile[index], 1);
+              this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
               this.profile.splice(this.profile[index], 1);
-              this.itemService.changeTab(1);
+              // this.itemService.changeTab(1);
               this.profile.splice(index, 1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
@@ -719,9 +721,10 @@ updateProfileList(ans: any, num: any, index: any) {
           switch (ans) {
             case 'YES':
               if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-                this.slideAndOpenProfile(this.profile[index], 1);
+                // this.slideAndOpenProfile(this.profile[index], 1);
+                this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
                 this.profile.splice(index, 1);
-                this.itemService.changeTab(1);
+                // this.itemService.changeTab(1);
               } else {
                 this.ngxNotificationService.error('You Dont have Enough Credits', '',
                   null, {
@@ -751,9 +754,10 @@ updateProfileList(ans: any, num: any, index: any) {
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              this.slideAndOpenProfile(this.profile[index], 1);
+              // this.slideAndOpenProfile(this.profile[index], 1);
+              this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
               this.profile.splice(index, 1);
-              this.itemService.changeTab(1);
+              // this.itemService.changeTab(1);
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
