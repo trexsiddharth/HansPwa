@@ -396,7 +396,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
         }
         if (this.points > 0 && reply === 'YES') {
           this.itemService.setItem(previousItem);
-          this.itemService.changeTab(1);
+          // this.itemService.changeTab(1);
           } else {
             if (document.getElementById('profilePic')) {
               document.getElementById('profilePic').scrollIntoView({behavior: 'smooth'});
