@@ -73,7 +73,11 @@
 .tabImage{
   width: 25px;
 }
-
+.labelSetting {
+  margin: 0px 0px 5px;
+  display: block;
+  position: relative;
+}
 /* ::ng-deep .mat-tab-header::-webkit-scrollbar {
 display: none !important;
 } */

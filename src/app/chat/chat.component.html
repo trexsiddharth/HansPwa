@@ -54,12 +54,12 @@
          style="z-index: 99999999999999;">
   
           <ng-template mat-tab-label>
-            <span [matBadge]="itemService.getDailyNumber()">
+            <span class="labelSetting" [matBadge]="itemService.getDailyNumber()">
               <img class="tabImage" src="../../assets/tabs-icons/calender-white.svg" alt="icon" *ngIf="selectedTab && selectedTab != 0"> 
               <img class="tabImage" src="../../assets/tabs-icons/calendar.svg" alt="icon" *ngIf="!selectedTab || selectedTab == 0 ">
             </span>
             <!-- {{itemService.getDailyCount()}} -->
-            Today's Special
+              Today's Special
           </ng-template>
                 <div class="w-full ht-full"
                  id="today-main">
@@ -108,8 +108,10 @@
           <!-- // discover-->
            <mat-tab id="discover" >
              <ng-template mat-tab-label>
+               <p class="labelSetting">
               <img  class="tabImage" src="../../assets/tabs-icons/discover-white.svg" alt="icon" *ngIf="selectedTab !== 1"> 
               <img   class="tabImage" src="../../assets/tabs-icons/search.svg" alt="icon" *ngIf="selectedTab === 1 ">
+            </p>
                Discover
              </ng-template>
 
@@ -125,9 +127,11 @@
             <!-- // liked me  -->
             <mat-tab id="likeme">
               <ng-template mat-tab-label>
+                <span class="labelSetting" [matBadge]="itemService.getShortedNumber()">
                 <img class="tabImage"  src="../../assets/tabs-icons/likes-you-heart-white.svg" alt="icon" *ngIf="selectedTab !==2"> 
                 <img class="tabImage"  src="../../assets/tabs-icons/heart in heart.svg" alt="icon" *ngIf="selectedTab === 2 ">
                 <!-- {{itemService.getShortedCount()}} -->
+              </span>
                 Likes You
               </ng-template>
   
@@ -144,10 +148,16 @@
               <!-- // liked by me -->
               <mat-tab id="melike">
                 <ng-template mat-tab-label >
-                  <span [matBadge]="itemService.getShortlistNumber()">
-                    <img class="tabImage"  src="../../assets/tabs-icons/heart-like-white.svg" alt="icon" *ngIf="selectedTab !== 3"> 
-                    <img class="tabImage" src="../../assets/tabs-icons/heart.svg" alt="icon" *ngIf="selectedTab === 3 ">
-                  </span>
+                  <p class="labelSetting">
+                    <img class="tabImage" 
+                     src="../../assets/tabs-icons/heart-like-white.svg" 
+                     alt="icon" 
+                     *ngIf="selectedTab !== 3"> 
+                    <img class="tabImage" 
+                    src="../../assets/tabs-icons/heart.svg"
+                     alt="icon" 
+                    *ngIf="selectedTab === 3 ">
+                  </p>
                   <!-- {{itemService.getShortlistedCount()}} -->
                   Your Likes
                 </ng-template>

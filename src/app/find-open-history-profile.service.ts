@@ -100,6 +100,13 @@ export class FindOpenHistoryProfileService {
     }
     
   }
+  getShortedNumber() {
+    if (this.profileCount.shortedCount) {
+      return this.profileCount.shortedCount;
+    } else {
+      return '0';
+    }
+  }
   getDailyNumber() {
     if (this.profileCount.dailyCount) {
       return this.profileCount.dailyCount + 1;
