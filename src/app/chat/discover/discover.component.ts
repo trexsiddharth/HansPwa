@@ -721,6 +721,7 @@ Analytics(type: string, category: string, action: string) {
   updateProfileList(index) {
     if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
                     // this.slideAndOpenProfile(this.profile[index], 1);
+                    localStorage.setItem('stage', '1');
                     this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
                     this.profile.splice(index, 1);
                     // this.itemService.changeTab(1);
