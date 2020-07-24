@@ -27,9 +27,7 @@
        color: white;">call</mat-icon> {{itemService.getCredits()}}
      </div>
 
-     <div style="position: relative;
-     z-index: 99999999999;
-     display: inline-block;" (click)="sidenav.toggle()">
+     <div class="menuIcon" (click)="sidenav.toggle()">
        <img  id="myProfImage"
      (error)="onImageLoadError()" 
      [src]="photo" 
@@ -130,7 +128,6 @@
                 <span class="labelSetting" [matBadge]="itemService.getShortedNumber()">
                 <img class="tabImage"  src="../../assets/tabs-icons/likes-you-heart-white.svg" alt="icon" *ngIf="selectedTab !==2"> 
                 <img class="tabImage"  src="../../assets/tabs-icons/heart in heart.svg" alt="icon" *ngIf="selectedTab === 2 ">
-                <!-- {{itemService.getShortedCount()}} -->
               </span>
                 Likes You
               </ng-template>
@@ -157,6 +154,9 @@
                     src="../../assets/tabs-icons/heart.svg"
                      alt="icon" 
                     *ngIf="selectedTab === 3 ">
+                    <span class="tabCount">
+                      {{itemService.getShortlistNumber()}}
+                    </span>
                   </p>
                   <!-- {{itemService.getShortlistedCount()}} -->
                   Your Likes

@@ -35,6 +35,12 @@
   border-radius: 50%;
   border: 3px solid white;
 }
+.menuIcon {
+  position: relative;
+     z-index: 99999999999;
+     display: inline-block;
+     margin: 5px 0px 0px;
+}
 .smallMenuImage {
   display: flex;
     position: absolute;
@@ -77,6 +83,13 @@
   margin: 0px 0px 5px;
   display: block;
   position: relative;
+}
+.tabCount{
+  font-size: 10px;
+    color: #566EE8;
+    position: absolute;
+    top: -1px;
+    right: 1px;
 }
 /* ::ng-deep .mat-tab-header::-webkit-scrollbar {
 display: none !important;
@@ -464,6 +477,12 @@ display: none !important;
         z-index: 999;
         border: 3px solid white;
         
+      }
+      .menuIcon {
+        position: relative;
+           z-index: 99999999999;
+           display: inline-block;
+           margin: 0px;
       }
       .groupContainer{
         width: 100%;
