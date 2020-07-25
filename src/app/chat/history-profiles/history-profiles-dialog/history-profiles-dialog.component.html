@@ -217,7 +217,7 @@ border-top-right-radius: 20px;
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
                 <span class="title">{{item.family ? item.family.mobile ? item.family.mobile :
-                     'Visible After Yes' : item.profile.mobile ? item.profile.mobile : 'Visible After Yes'  }}</span>
+                     'Visible After Yes' : item.profile.whatsapp ? item.profile.whatsapp : 'Visible After Yes'  }}</span>
             </div>
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
@@ -443,7 +443,7 @@ border-top-right-radius: 20px;
         <div class="row field">
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
-                <span class="title">{{item.family ? setIncome(item.family.family_income) : setIncome(item.profile.house)}} Lakh Per Year</span>
+                <span class="title">{{item.family ? setIncome(item.family.family_income) : setIncome(item.profile.family_income)}} Lakh Per Year</span>
             </div>
         </div>
 
