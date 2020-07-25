@@ -57,21 +57,21 @@
           <img src="../../assets/nextN.svg" class="nextImage">
         </button>
         <hr>
-        <button class="rowMore">
+        <!-- <button class="rowMore">
           <img src="../../../assets/tabs-icons/customer support.svg"class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'" >Customer Support</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">ग्राहक सहायता</span>
-        </button>
-        <button class="rowMore" (click)="premiumInterest()">
+        </button> -->
+        <button class="rowMore" (click)="getCallBack()">
           <img src="../../../assets/tabs-icons/phone arrow.svg" class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Get A Call Back</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कॉल बैक पाऐं</span>
         </button>
-        <button class="rowMore">
+        <!-- <button class="rowMore">
           <img src="../../../assets/tabs-icons/settings.svg" class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Settings</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">सेटींग॒स</span>
-        </button>
+        </button> -->
         <button class="rowMore" (click)="logout()" >
           <img src="../../../assets/tabs-icons/logout.svg" class="iconImage">
           <span>{{languageService.profileLang.logout}}</span>
@@ -79,11 +79,11 @@
         <hr>
     </div>
     <ng-container>
-      <div class="drawerButtonSection">
-        <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='english'" [routerLink]="['/subscription']" routerLinkActive="router-link-active">
+      <div class="drawerButtonSection" (click)="itemService.openTodaysPopupAd()">
+        <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='english'" >
            <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;Latest Subscription Offers
         </button>
-        <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='hindi'" [routerLink]="['/subscription']" routerLinkActive="router-link-active">
+        <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='hindi'">
           <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;नवीनतम {{languageService.profileLang.subscription}} ऑफर
        </button>
       </div>

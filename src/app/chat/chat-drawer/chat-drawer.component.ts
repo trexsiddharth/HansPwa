@@ -6,6 +6,7 @@ import { ChatServiceService } from 'src/app/chat-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
+import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ChatDrawerComponent implements OnInit {
               private http: HttpClient,
               private ngxNotificationService: NgxNotificationService,
               public router: Router,
+              public itemService: FindOpenHistoryProfileService,
               public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -72,18 +74,22 @@ export class ChatDrawerComponent implements OnInit {
     this.drawerReference.toggle();
   }
 
-  premiumInterest() {
+  getCallBack() {
     this.spinner.show();
     const interestForm = new FormData();
     interestForm.append('id', localStorage.getItem('id'));
     interestForm.append('is_lead', localStorage.getItem('is_lead'));
-    interestForm.append('interest_profile', localStorage.getItem('id'));
-    this.http.post<any>('https://partner.hansmatrimony.com/api/insertPremiumInterest', interestForm).subscribe(
+    this.http.post<any>('https://partner.hansmatrimony.com/api/updateCallBack', interestForm).subscribe(
       data => {
         console.log(data);
-        this.ngxNotificationService.error('We will get back to soon!!');
+        if (data.status === 1) {
+        this.ngxNotificationService.success('We will get back to soon!!');
         this.spinner.hide();
         this.closeSideNav();
+        } else {
+        this.ngxNotificationService.error('Something Went Wrong, Please try again later');
+        this.spinner.hide();
+        }
       },
       err => {
         console.log(err);
@@ -92,5 +98,4 @@ export class ChatDrawerComponent implements OnInit {
       }
     );
   }
-
 }
