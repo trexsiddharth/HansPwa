@@ -14,6 +14,9 @@ export class TodayMessageComponent implements OnInit, OnDestroy {
 seconds = 60;
 minutes = 59;
 hour = 9;
+month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July',
+ 'August', 'September', 'October', 'November', 'December'];
+
   constructor(public router: Router,
               public itemService: FindOpenHistoryProfileService,
               public subscriptionService: SubscriptionserviceService ) {
@@ -65,40 +68,36 @@ hour = 9;
     }
 
     getDifferenceInTime() {
-      if (localStorage.getItem('saveTimer')) {
-        const date1: any = new Date('Sat Jul 25 2020 11:17:15');
-        const date2: any = new Date();
-        const res = Math.abs(date1 - date2) / 1000;
+      const todaysDate = new Date().getDate() + 1;
+      const todaysMonth = new Date().getMonth();
+      const todaysYear = new Date().getFullYear();
+      const nextDay = `${todaysDate} ${this.month[todaysMonth]} ${todaysYear} 00:00:00`;
+      const date1: any = new Date(nextDay);
+      const date2: any = new Date();
+      const res = Math.abs(date1 - date2) / 1000;
+
 
          // get total days between two dates
-        let days = Math.floor(res / 86400);
-        console.log('<br>Difference (Days): ' + days);
+      let days = Math.floor(res / 86400);
+      console.log('<br>Difference (Days): ' + days);
 
          // get hours
-        let hours = Math.floor(res / 3600) % 24;
-        console.log('<br>Difference (Hours): ' + hours);
+      let hours = Math.floor(res / 3600) % 24;
+      console.log('<br>Difference (Hours): ' + hours);
 
          // get minutes
-        let minute = Math.floor(res / 60) % 60;
-        console.log('<br>Difference (Minutes): ' + minute);
+      let minute = Math.floor(res / 60) % 60;
+      console.log('<br>Difference (Minutes): ' + minute);
 
          // get seconds
-        let second = res % 60;
-        console.log('<br>Difference (Seconds): ' + second);
+      let second = res % 60;
+      console.log('<br>Difference (Seconds): ' + second);
 
-        if (hours < 12) {
-          this.hour -= hours;
-          this.minutes -= minute;
-          this.seconds -= Math.floor(second);
-          this.setTimer();
-        } else {
-          localStorage.setItem('saveTimer', null);
-          this.setTimer();
-        }
-      } else {
-        this.setTimer();
-      }
-    }
+      this.hour = hours;
+      this.minutes = minute;
+      this.seconds = Math.floor(second);
+      this.setTimer();
+  }
 
     goToDiscover() {
       this.itemService.changeTab(1);

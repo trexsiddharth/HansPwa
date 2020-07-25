@@ -3,6 +3,9 @@ import { MatSidenav } from '@angular/material';
 import { LanguageService } from 'src/app/language.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChatServiceService } from 'src/app/chat-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { HttpClient } from '@angular/common/http';
+import { NgxNotificationService } from 'ngx-kc-notification';
 
 
 @Component({
@@ -18,6 +21,9 @@ export class ChatDrawerComponent implements OnInit {
   userIsLead;
   constructor(public languageService: LanguageService,
               private chatService: ChatServiceService,
+              private spinner: NgxSpinnerService,
+              private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
               public router: Router,
               public activatedRoute: ActivatedRoute) { }
 
@@ -64,6 +70,27 @@ export class ChatDrawerComponent implements OnInit {
   }
   closeSideNav() {
     this.drawerReference.toggle();
+  }
+
+  premiumInterest() {
+    this.spinner.show();
+    const interestForm = new FormData();
+    interestForm.append('id', localStorage.getItem('id'));
+    interestForm.append('is_lead', localStorage.getItem('is_lead'));
+    interestForm.append('interest_profile', localStorage.getItem('id'));
+    this.http.post<any>('https://partner.hansmatrimony.com/api/insertPremiumInterest', interestForm).subscribe(
+      data => {
+        console.log(data);
+        this.ngxNotificationService.error('We will get back to soon!!');
+        this.spinner.hide();
+        this.closeSideNav();
+      },
+      err => {
+        console.log(err);
+        this.ngxNotificationService.error('Something Went Wrong, Please try again later');
+        this.spinner.hide();
+      }
+    );
   }
 
 }

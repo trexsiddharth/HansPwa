@@ -352,7 +352,11 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
             localStorage.setItem('todayProfile', JSON.stringify(data));
           }
 
-          this.itemService.openWelcomeDialog(this.item.profiles_left);
+          // data.first_time = 0 -> when user comes for the first time on a day
+          // data.first_time = 1 -> it gets 1 once he has seen first profile
+          if (data.first_time === 0) {
+            this.itemService.openWelcomeDialog(this.item.profiles_left);
+          }
 
           // if photo is null
           if (this.item.photo === null) {

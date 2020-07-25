@@ -15,6 +15,9 @@ export class DailyWelcomePopupComponent implements OnInit {
               }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.closeDialog();
+    }, 10000);
   }
 
   closeDialog() {
