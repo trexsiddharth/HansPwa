@@ -110,13 +110,13 @@ export class FindOpenHistoryProfileService {
   }
   getDailyNumber() {
     if (this.profileCount.dailyCount) {
-      return this.profileCount.dailyCount + 1;
+      return this.profileCount.dailyCount;
     } else {
       return '0';
     }
   }
   saveDailyCount(count: any) {
-    this.profileCount.dailyCount = count + 1;
+    this.profileCount.dailyCount = count;
   }
 
   getOtherProfiles() {

@@ -213,7 +213,7 @@ border-top-right-radius: 20px;
             </span>
         </div>
 
-        <div class="row field">
+        <div class="row field" [ngClass]="{'contactShown': type === 'contacted'}">
             <div class="col-6">
                 <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
                 <span class="title">{{item.family ? item.family.mobile ? item.family.mobile :
