@@ -159,7 +159,7 @@ export class LanguageService {
       this.profileLang.desc = 'डिस्क्रिप्शन';
 
       // credits
-      this.profileLang.credits = 'कांटेक्ट नंबर';
+      this.profileLang.credits = 'बचे हुए कॉन्टेक्ट्स:';
 
       break;
 
@@ -252,7 +252,7 @@ export class LanguageService {
           this.profileLang.desc = 'Description';
 
           // credits
-          this.profileLang.credits = 'Credits';
+          this.profileLang.credits = 'Contacts Left: ';
 
 
           break;

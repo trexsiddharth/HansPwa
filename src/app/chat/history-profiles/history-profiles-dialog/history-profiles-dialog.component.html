@@ -105,7 +105,7 @@ border-top-right-radius: 20px;
         </div>
 
         <div class="t-c"
-        *ngIf="type === 'contacted'"
+        *ngIf="type === 'contacted' && item.family"
          style="margin-top: 10px;">
             <button 
             (click)="call()"  
@@ -146,6 +146,23 @@ border-top-right-radius: 20px;
                 {{languageService.profileLang.reject}}
             </span> -->
         </div>
+
+        <div class="t-c blur" 
+        *ngIf="type === 'contacted' && personalizedUser"
+        style="margin-top: 10px;">
+            <button mat-raised-button  class="btn" 
+                (click)="openPersonalizedMessageDialog(item)"
+                class="setButtons"
+                style="background-color: #58D1FD;"  
+                >
+                <img width="30px" src="../../../assets/comment.svg" alt="contact profile">
+            </button><br>
+            <!-- <span style="color: #737373;font-weight: 600;font-size: 18px;">
+                {{languageService.profileLang.reject}}
+            </span> -->
+        </div>
+
+        
 
     </div>
 

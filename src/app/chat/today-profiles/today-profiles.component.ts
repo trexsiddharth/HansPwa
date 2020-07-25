@@ -64,6 +64,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
       this.section = document.querySelector('#today-main');
+      this.itemService.openWelcomeDialog();
   }
 
   ngOnInit() {

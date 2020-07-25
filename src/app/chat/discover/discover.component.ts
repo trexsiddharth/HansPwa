@@ -575,7 +575,7 @@ profileReAnswer(item: any, answer: any, index: any) {
       this.openMessageDialog(item, answer);
    } else if (this.itemService.getPersonalized() === true &&
    answer === 'YES' && !item.family ) {
-    this.reponseToPremium(item, 'contacted', index);
+    this.reponseToPremium(item, 'CONTACTED', index);
    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
    && answer === 'YES') {
     this.openMessageDialog(item, answer);
@@ -679,7 +679,7 @@ reponseToPremium(item, answer, index) {
   this.panelOpenState = null;
   const reAnswerData = new FormData();
   reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
-  reAnswerData.append('id', item.identity_number);
+  reAnswerData.append('id', item.profile.identity_number);
   reAnswerData.append('TEXT', answer);
   // tslint:disable-next-line: max-line-length
   return this.http.post < any > ('https://partner.hansmatrimony.com/api/premiumProNew', reAnswerData).subscribe(
@@ -687,7 +687,7 @@ reponseToPremium(item, answer, index) {
       console.log(response);
       if (response && response.status === 1) {
         // update the profile list after response
-        this.updateProfileList(index);
+        this.updatePremiumProfileList(index);
         this.spinner.hide();
         // update the count
         if (response.count) {
@@ -737,6 +737,25 @@ Analytics(type: string, category: string, action: string) {
                       });
                   }
   }
+    // update the list after response
+    updatePremiumProfileList(index) {
+      if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+                      // this.slideAndOpenProfile(this.profile[index], 1);
+                      localStorage.setItem('stage', '1');
+                      let shareProfile = this.profile[index];
+                      shareProfile.coming = 'contacted';
+                      localStorage.setItem('open_profile', JSON.stringify(shareProfile));
+                      this.router.navigateByUrl(`chat/open/open-profile`);
+                      this.profile.splice(index, 1);
+                      // this.itemService.changeTab(1);
+                    } else {
+                      this.ngxNotificationService.error('You Dont have Enough Credits', '',
+                        null, {
+                          duration: 4000,
+                          closeButton: true
+                        });
+                    }
+    }
 // updateProfileList(ans: any,
 //    num: any, index: any) {
 //     switch (this.type) {

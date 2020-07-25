@@ -11,10 +11,13 @@
         </button>
         <span class="titleText">{{title}}</span>
         </div>
-        <button mat-icon-button 
-        class="example-icon" 
+        <button 
+        class="example-icon titleText" 
+        style="color: #4A5D6A; background-color: white;border: none;"
         aria-label="Example icon-button with share icon">
-          <mat-icon>call</mat-icon>
+          <span>
+              {{languageService.profileLang.credits}}
+          </span>
           <span class="titleText">{{this.itemService.getCredits()}}</span>
         </button>
       </mat-toolbar>

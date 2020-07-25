@@ -11,6 +11,7 @@ import { RateUsDialogComponent } from './chat/rate-us-dialog/rate-us-dialog.comp
 import { MessageDialogComponent } from './chat/message-dialog/message-dialog.component';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
+import { DailyWelcomePopupComponent } from './chat/daily-welcome-popup/daily-welcome-popup.component';
 
 
 @Injectable({
@@ -364,4 +365,29 @@ export class FindOpenHistoryProfileService {
           }
         );
   }
+
+
+    // daily welcome popup
+    openWelcomeDialog() {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.hasBackdrop = true;
+      this.breakPointObserver.observe([
+        '(min-width: 1024px)'
+      ]).subscribe(
+        result => {
+          if (result.matches) {
+            console.log('screen is greater than  1024px');
+            dialogConfig.minWidth = '40vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = false;
+          } else {
+            console.log('screen is less than  1024px');
+            dialogConfig.minWidth = '95vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = true;
+          }
+        }
+      );
+      const dialogRef = this.dialog.open(DailyWelcomePopupComponent, dialogConfig);
+    }
 }

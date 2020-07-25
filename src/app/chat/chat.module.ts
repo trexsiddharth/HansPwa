@@ -26,6 +26,7 @@ import { TodaysPaymentPopupComponent } from './today-profiles/todays-payment-pop
 import { RateUsDialogComponent } from './rate-us-dialog/rate-us-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { DiscoverComponent } from './discover/discover.component';
+import { DailyWelcomePopupComponent } from './daily-welcome-popup/daily-welcome-popup.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { DiscoverComponent } from './discover/discover.component';
     RateUsDialogComponent,
     ChatDrawerComponent,
     DiscoverComponent,
+    DailyWelcomePopupComponent,
 ],
 entryComponents: [
   MessageDialogComponent,
@@ -66,7 +68,8 @@ entryComponents: [
   AppDownloadDialogComponent,
   TodaysPaymentPopupComponent,
   RateUsDialogComponent,
-  ChatDrawerComponent
+  ChatDrawerComponent,
+  DailyWelcomePopupComponent
 ],
 providers: [
   FindOpenHistoryProfileService,

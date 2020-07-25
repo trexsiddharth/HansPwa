@@ -8,6 +8,9 @@ import { LanguageService } from 'src/app/language.service';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { timeout, retry, catchError } from 'rxjs/operators';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { PersonalizedMessageDialogComponent } from '../personalized-message-dialog/personalized-message-dialog.component';
 
 @Component({
   selector: 'app-history-profiles-dialog',
@@ -27,7 +30,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
   type;
   profile;
   title;
-
+  personalizedUser = false;
   constructor(private http: HttpClient,
               private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
@@ -36,7 +39,9 @@ export class HistoryProfilesDialogComponent implements OnInit {
               public languageService: LanguageService,
               private browserLocation: Location,
               private router: Router,
-              private activatedRoute: ActivatedRoute
+              private activatedRoute: ActivatedRoute,
+              private breakPointObserver: BreakpointObserver,
+              private dialog: MatDialog
               ) {
               }
 
@@ -44,6 +49,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
     // set heading according to the language
     this.languageService.setProfileLanguage();
 
+    // we will check if the user is a premium user
+    this.checkUser();
 
     this.activatedRoute.paramMap.subscribe(
       (routes: any) => {
@@ -72,6 +79,15 @@ export class HistoryProfilesDialogComponent implements OnInit {
     ) ;
 
 
+  }
+
+  checkUser() {
+    if (localStorage.getItem('authData')) {
+        const authData = JSON.parse(localStorage.getItem('authData'));
+        if (authData.is_premium === '1') {
+          this.personalizedUser = true;
+        }
+    }
   }
 
   goBack() {
@@ -445,5 +461,32 @@ export class HistoryProfilesDialogComponent implements OnInit {
    modal.style.display = 'none';
    };
    }
+
+   openPersonalizedMessageDialog(item) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        }
+      }
+    );
+    dialogConfig.data = {
+      profile : item,
+      type: this.type
+    };
+    const dialogRef = this.dialog.open(PersonalizedMessageDialogComponent, dialogConfig);
+  }
 
 }

@@ -32,12 +32,11 @@ import {
 } from '@angular/router';
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 import { MatDialogConfig, MatDialog } from '@angular/material';
-import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
-import { HistoryProfilesDialogComponent } from './history-profiles-dialog/history-profiles-dialog.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonalizedMessageDialogComponent } from './personalized-message-dialog/personalized-message-dialog.component';
 import { Location } from '@angular/common';
 import { ChatServiceService } from 'src/app/chat-service.service';
+import { LanguageService } from 'src/app/language.service';
 
 
 
@@ -93,6 +92,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               private activatedRoute: ActivatedRoute,
               private browserLocation: Location,
               private chatService: ChatServiceService,
+              public languageService: LanguageService,
               private breakPointObserver: BreakpointObserver) {}
 
   ngOnInit() {
@@ -103,6 +103,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if ( routeData && routeData.params && routeData.params.section) {
           this.section = routeData.params.section;
           this.type = routeData.params.section;
+          this.languageService.setProfileLanguage();
         }
       }
     );

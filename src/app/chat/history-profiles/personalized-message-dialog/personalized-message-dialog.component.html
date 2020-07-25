@@ -1,16 +1,23 @@
-<main style="padding: 20px;">
-    <h3 style="color: #58d1fd;text-align: center;">
+<main style="padding: 20px;position: relative;">
+    <div class="cross" (click)="closeDialog()">
+        <img width="40px" src="../../../../assets/cancelwhite.svg" alt="close">
+    </div>
+    <h5 style="color: #58d1fd;text-align: center;">
         {{profile.name}} Response Status
-    </h3>
+    </h5>
     <hr>
     <h5 style="color: black;">
         Status: <h6 style="display: inline-block;" 
-        [ngStyle]="{color: profile.bNS === 1 ? 'green' : 'red'}">{{profile.bNS === 1 ? 'Positive' : 'Negative' }}</h6> 
+        [ngStyle]="{color: profile.bNS ?  profile.bNS === 1 ? 'green' : 'red' : 'green'}">{{profile.bNs ? profile.bNS === 1 ? 'Positive' : 'Negative' : 'Positive' }}</h6> 
     </h5>
    <h5 style="color: black;">
     Message:
        <h6 style="margin-top: 10px;">
-        {{profile.bEW}}
+        {{profile.bEW ? profile.bEW : getDefaultbEW()}}
        </h6>
    </h5>
+
+   <button mat-raised-button class="callBtn" (click)="call()">
+       <mat-icon>call</mat-icon> Call Matchmaker 
+   </button>
 </main>
