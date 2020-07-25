@@ -376,10 +376,16 @@ export class HistoryProfilesDialogComponent implements OnInit {
        const carousel: object = JSON.parse(carous);
        const keys = Object.keys(carousel);
        // console.log(carousel[index]);
-       if (carousel[keys[index]].toString().match('jeevansathi')) {
+       if (carousel[keys[index]] && carousel[keys[index]].toString().match('jeevansathi') ) {
          return carousel[keys[index]];
-       } else {
+       } else if (carousel[keys[index]]) {
         return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+       } else {
+        if (gen === 'Male') {
+          return '../../assets/male_pic.png';
+        } else {
+          return '../../assets/female_pic.png';
+        }
        }
      }
    }
