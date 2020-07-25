@@ -28,8 +28,10 @@ export class PersonalizedMessageDialogComponent implements OnInit {
   }
 
   call() {
-    if (this.profile.mobile) {
-      window.open('tel:' + this.profile.mobile);
+    if (this.data.profile.family) {
+      window.open('tel:' + this.data.profile.family.mobile);
+    } else if (this.profile.mobile) {
+      window.open('tel:' + this.data.profile.family.mobile);
     } else {
       this.ngxNotificationService.error('Mobile Number Not Found');
     }

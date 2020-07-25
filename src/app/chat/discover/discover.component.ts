@@ -570,15 +570,18 @@ profileReAnswer(item: any, answer: any, index: any) {
   //    this.openMessageDialog(item, answer);
   //  } else
 
-   if (this.itemService.getPersonalized() === false &&
-    answer === 'YES' && !item.family ) {
-      this.openMessageDialog(item, answer);
+  if (this.itemService.getPersonalized() === true &&
+  answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+    this.ngxNotificationService.warning('You don\'t have enough credits ');
+  } else if (this.itemService.getPersonalized() === false &&
+    answer === 'YES' && !item.family) {
+      this.openMessageDialog(item, 'contacted' );
    } else if (this.itemService.getPersonalized() === true &&
    answer === 'YES' && !item.family ) {
     this.reponseToPremium(item, 'CONTACTED', index);
    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-   && answer === 'YES') {
-    this.openMessageDialog(item, answer);
+   && answer === 'YES' && this.itemService.getPersonalized() === false) {
+    this.itemService.openTodaysPopupAd();
    } else {
      this.reponseToNormal(item, answer, index);
    }

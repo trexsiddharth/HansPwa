@@ -368,7 +368,7 @@ export class FindOpenHistoryProfileService {
 
 
     // daily welcome popup
-    openWelcomeDialog() {
+    openWelcomeDialog(dailyCount) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.hasBackdrop = true;
       this.breakPointObserver.observe([
@@ -388,6 +388,9 @@ export class FindOpenHistoryProfileService {
           }
         }
       );
+      dialogConfig.data = {
+        dailyQuota:  dailyCount
+      };
       const dialogRef = this.dialog.open(DailyWelcomePopupComponent, dialogConfig);
     }
 }

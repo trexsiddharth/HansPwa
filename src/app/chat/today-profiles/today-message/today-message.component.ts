@@ -100,4 +100,7 @@ hour = 9;
       }
     }
 
+    goToDiscover() {
+      this.itemService.changeTab(1);
+    }
 }

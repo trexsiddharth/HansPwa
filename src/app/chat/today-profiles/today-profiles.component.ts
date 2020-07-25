@@ -64,7 +64,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
       this.section = document.querySelector('#today-main');
-      this.itemService.openWelcomeDialog();
   }
 
   ngOnInit() {
@@ -352,6 +351,8 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
              // locally storing the new profile
             localStorage.setItem('todayProfile', JSON.stringify(data));
           }
+
+          this.itemService.openWelcomeDialog(this.item.profiles_left);
 
           // if photo is null
           if (this.item.photo === null) {

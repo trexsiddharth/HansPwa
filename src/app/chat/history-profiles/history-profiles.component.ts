@@ -588,8 +588,10 @@ profileReAnswer(item: any, answer: any, index: any) {
       this.getData(item, answer, index);
       return;
   }
-
-  if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+  if (this.itemService.getPersonalized() === true &&
+  answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+    this.ngxNotificationService.warning('You don\'t have enough credits ');
+  }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     this.itemService.getPhotoStatus() === false &&
     answer === 'SHORTLIST') {
       this.itemService.openMessageDialog(item, answer);
@@ -598,7 +600,7 @@ profileReAnswer(item: any, answer: any, index: any) {
       this.itemService.openMessageDialog(item, 'contacted');
    }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
    && answer === 'YES') {
-    this.itemService.openMessageDialog(item, answer);
+    this.itemService.openTodaysPopupAd();
    } else {
      this.getData(item, answer, index);
    }

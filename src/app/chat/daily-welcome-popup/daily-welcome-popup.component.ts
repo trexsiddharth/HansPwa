@@ -7,9 +7,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./daily-welcome-popup.component.css']
 })
 export class DailyWelcomePopupComponent implements OnInit {
+  count;
 
   constructor(public dialogRef: MatDialogRef<DailyWelcomePopupComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+                this.count = data.dailyQuota;
+              }
 
   ngOnInit() {
   }
