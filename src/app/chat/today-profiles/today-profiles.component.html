@@ -3,6 +3,7 @@
         <ngb-carousel style="outline: none;">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
                     <img id="profilePic" 
+                    class="img-fluid"
                     (click)="openImageModal(item.carousel,item.photo,item.name,index)"
                      [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" 
                      (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
@@ -58,8 +59,8 @@
     </div>
 
     <section id="content" style="
-    margin: -29% 10px;
     position: relative;
+    margin: -120px 10px 0px;
     border-top-right-radius: 20px;
       border-top-left-radius: 20px;
       padding: 0px 10px 100px;

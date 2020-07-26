@@ -8,7 +8,7 @@ main{
 }
 #profilePic{
     width: 100%;
-    height: 70vh;
+    height: 75vh;
     border-radius: 10px;
 }
 ::ng-deep .carousel-indicators{
@@ -31,17 +31,7 @@ main{
     padding: 0px;
 }
 
-#imageContent{
-    width: 100%;
-    position: absolute;
-    bottom: 26%;
-    padding: 0px 10px 10px;
-    color: white;
-    background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-}
+
 .setButtons{
     width: 60px;
      height: 60px;
@@ -255,7 +245,8 @@ main{
     #imageContent{
         width: 100%;
         position: absolute;
-        bottom: 17%;
+        bottom: 0;
+        margin-bottom: 100px;
         padding: 0px 10px 10px;
         color: white;
         background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
@@ -289,5 +280,21 @@ main{
         background-image: linear-gradient(0deg, white,transparent);
         margin-top: 10px;
     }
-
+    #imageContent{
+        width: 100%;
+        position: absolute;
+        bottom: 0%;
+        margin-bottom: 100px;
+        padding: 0px 10px 10px;
+        color: white;
+        background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+    #profilePic{
+        width: 100%;
+        height: 90vh;
+        border-radius: 10px;
+    }
 }
