@@ -21,7 +21,7 @@
     <section  
     [ngClass]="{'ht-full': section,
      'paddingToSection' : section}"
-     *ngIf="profile.length > 1"
+     *ngIf="profile.length > 0"
      >
         <div  *ngFor="let item of profile;let i = index">
         <div class="historyProfile"  >
