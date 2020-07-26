@@ -272,7 +272,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     reply.toLowerCase() === 'yes' && this.type === 'profile') {
-      this.openMessageDialog(this.item, reply);
+      this.itemService.openTodaysPopupAd();
     }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus() === false
     && (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
