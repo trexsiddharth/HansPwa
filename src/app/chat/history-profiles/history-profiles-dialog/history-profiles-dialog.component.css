@@ -27,7 +27,7 @@ main{
 }
 #profilePic{
     width: 100%;
-    height: 70vh;
+    height: 75vh;
     border-radius: 10px;
 }
 ::ng-deep .carousel-indicators{
@@ -54,7 +54,8 @@ main{
 #imageContent{
     width: 100%;
     position: absolute;
-    bottom: 26%;
+    bottom: 0;
+    margin-bottom: 100px;
     padding: 0px 10px 10px;
     color: white;
     background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
@@ -276,7 +277,8 @@ main{
     #imageContent{
         width: 100%;
         position: absolute;
-        bottom: 17%;
+        bottom: 0;
+        margin-bottom: 100px;
         padding: 0px 10px 10px;
         color: white;
         background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
