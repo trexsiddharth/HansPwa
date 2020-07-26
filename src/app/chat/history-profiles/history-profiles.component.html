@@ -22,6 +22,7 @@
         </button>
       </mat-toolbar>
     <section  
+    *ngIf="profile.length > 1"
     [ngClass]="{'ht-full': section, 'paddingToSection' : section}"
     infiniteScroll
     [infiniteScrollDistance]="2"
@@ -111,3 +112,15 @@
         
 
 </main>
+
+<main class="noProfileMain" 
+*ngIf="!section && profile.length < 1">
+    <div style="position: relative;display: block;margin: 30% auto;">
+     <p class="text-center">
+         <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
+     </p>
+    <p class="text-center noProfile">
+     No Profiles Here
+    </p>
+    </div>
+ </main>

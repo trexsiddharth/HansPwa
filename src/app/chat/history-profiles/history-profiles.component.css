@@ -31,6 +31,18 @@ section{
     font-size: 1rem;
 }
 
+.noProfileMain{
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: relative;
+}
+.noProfile{
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
 
 span{
     text-transform: capitalize;

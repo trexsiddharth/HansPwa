@@ -19,7 +19,10 @@
         </button>
       </mat-toolbar>
     <section  
-    [ngClass]="{'ht-full': section, 'paddingToSection' : section}">
+    [ngClass]="{'ht-full': section,
+     'paddingToSection' : section}"
+     *ngIf="profile.length > 1"
+     >
         <div  *ngFor="let item of profile;let i = index">
         <div class="historyProfile"  >
             <img class="historyImage" #profilePic
@@ -103,3 +106,15 @@
         
 
 </main>
+
+<main class="noProfileMain" 
+*ngIf="!section && profile.length < 1">
+    <div style="position: relative;display: block;margin: 30% auto;">
+     <p class="text-center">
+         <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
+     </p>
+    <p class="text-center noProfile">
+     No Profiles Here
+    </p>
+    </div>
+ </main>
