@@ -112,3 +112,9 @@
         font-size:1.2rem!important;
     }
 }
+
+@media screen and (min-width: 1024px) {
+    main {
+        position: relative;
+    }
+}

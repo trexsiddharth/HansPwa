@@ -195,6 +195,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
     }
       }, 100);
   }
+
     }
 
     private setProfileLocally() {
