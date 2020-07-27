@@ -1,88 +1,190 @@
+<div id="offBanner">
+  <img id="offBannerImg" src="../../../assets/todays-off-image.png" />
+</div>
 <main>
-  <span id="offBanner">
-    <img id="offBannerImg" class="responsive center" style=" border-radius: 8px;" src="../../../assets/todays-off-image.png" >
-  </span>
   <div id="topBanner">
     <div id="cancel">
-      <img (click)="closeDialog()" style="width: 24px;margin: 5px 5px 0px 0px;" src="../../../assets/closewhite.svg" alt="cancel">
+      <img (click)="closeDialog()" style="width: 24px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg"
+        alt="cancel" />
     </div>
-      <div id="bannerDiv">
-        <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
-          <ng-template ngbSlide *ngFor="let image of images">
-            <div class="picsum-img-wrapper">
-              <img [src]="image" alt="Offers" style="height:30vh;width:100%">
-            </div>
-          </ng-template>
-        </ngb-carousel>
-      </div>
+    <div id="bannerDiv">
+      <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows"
+        [showNavigationIndicators]="showNavigationIndicators">
+        <ng-template ngbSlide *ngFor="let image of images">
+          <div class="picsum-img-wrapper" style="border:0px!important">
+            <img [src]="image" alt="Offers" style="height: 30vh; width: 100%;" />
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
   </div>
-  <div class="planrow text-dark" style="background-color: #bff0ff;border-radius :18px;margin-top:2%">
+  <br />
+  <div class="plansArea">
+    <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
       <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-        <b >बेसिक प्लान</b><br>
-        <i><b>45</b> कांटेक्टस</i><br>
+        <b>बेसिक प्लान</b><br />
+        <i>45 कांटेक्टस</i><br />
       </div>
       <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
-        <b>Basic Plan</b><br>
-        <i><b>45</b> Contacts</i><br>
+        <b>Basic Plan</b><br />
+        <i>45 Contacts</i><br />
       </div>
-      <div class="plancolumn" style="background-color: #a6e5f8;">
-        <i style="text-decoration: line-through;font-size:medium">₹ 5500</i><br><b class="specialCase"[ngStyle]="{'font-size':'x-large'}">₹2800</b>
+      <div class="plancolumn" style="background-color: #f0f1f0; color: black !important;">
+        <b class="specialCase" style="font-size: x-large; color: black !important;">₹2800</b>
+        <br />
+        <i style="
+            text-decoration: line-through;
+            font-size: medium;
+            color: black !important;
+          ">₹ 5500</i>
       </div>
-    <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="background-color: #a6e5f8;border-radius :18px; border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-      <i >3 महीने</i>&nbsp;
-      <button class="btn btn-primary btn-small"(click)="container1()" >BUY</button>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        ">
+        <i>3 महीने</i>
+        &nbsp;
+        <button class="btn btn-primary btn-small" (click)="container1()" style="vertical-align: middle !important;">
+          BUY
+        </button>
+      </div>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        ">
+        <div class="month">
+          <i>3 months</i>
+        </div>
+        <button class="btn btn-primary btn-small" (click)="container1()" style="vertical-align: middle !important;">
+          BUY
+        </button>
+      </div>
     </div>
-    <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'" style="background-color: #a6e5f8;border-radius :18px; border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-      <i>3 months</i>&nbsp;
-      <button class="btn btn-primary btn-small" (click)="container1()" >BUY</button>
-  </div>
-</div>
 
-<div class="planrow text-dark" style="background-color: #bff0ff;border-radius :18px;margin-top:0px">
-  <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-    <b >सुप्रीम प्लान</b><br>
-    <i><b>90</b> कांटेक्टस</i><br>
-  </div>
-  <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
-    <b>Supreme Plan</b><br>
-    <i><b>90</b> Contacts</i><br>
-  </div>
-  <div class="plancolumn" style="background-color: #a6e5f8;">
-    <i style="text-decoration: line-through;font-size:medium">₹ 8500</i><br><b class="specialCase"[ngStyle]="{'font-size':'x-large'}">₹5500</b>
-  </div>
-<div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="background-color: #a6e5f8;border-radius :18px; border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-  <i >6 महीने</i>&nbsp;
-  <button class="btn btn-primary btn-small"(click)="container2()" >BUY</button>
-</div>
-<div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'" style="background-color: #a6e5f8;border-radius :18px; border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-  <i>6 months</i>&nbsp;
-  <button class="btn btn-primary btn-small" (click)="container2()" >BUY</button>
-</div>
-</div>
-<div class="planrow text-dark" style="background-color: #bff0ff;border-radius :18px;margin-top:0px">
-  <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-    <b >कुंडली प्लान</b><br>
-    <i><b>45</b> कांटेक्टस</i><br>
-  </div>
-  <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
-    <b>Kundali Plan</b><br>
-    <i><b>45</b> Contacts</i><br>
-  </div>
-  <div class="plancolumn" style="background-color: #a6e5f8;">
-    <i style="text-decoration: line-through;font-size:medium">₹ 9100</i><br><b class="specialCase" [ngStyle]="{'font-size':'x-large'}">₹8500</b>
-  </div>
-<div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="background-color: #a6e5f8;border-radius :18px; border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-  <i >6 महीने</i>&nbsp;
-  <button class="btn btn-primary btn-small"(click)="container3()" >BUY</button>
-</div>
-<div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'" style="background-color: #a6e5f8;border-radius :18px; border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-  <i>6 months</i>&nbsp;
-  <button class="btn btn-primary btn-small" (click)="container3()" >BUY</button>
-</div>
-</div>
-  <div id="footer" class="text-dark text-center" >
-    <img style=" width:1.9rem" src="../../../assets/timer.svg" >&nbsp;
-    <b >Offer ends in :</b> <br>
-    <b [ngStyle]="{'font-size':'larger','font-weight':'bold'}">{{minutes}} min:{{seconds}} sec</b>
+    <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 0px;">
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+        <div style="
+            font-weight: 500 !important;
+            position: absolute;
+            top: -15px !important;
+            left: 8%;
+            background: #ff39c4;
+            color: white;
+            padding: 2px 2px 2px 2px;
+            border-radius: 3px 3px 3px 3px;
+          ">
+          Bestseller
+        </div>
+        <b>सुप्रीम प्लान</b><br />
+        <i>90 कांटेक्टस</i><br />
+      </div>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+        <div style="
+            font-weight: 500 !important;
+            position: absolute;
+            top: -15px !important;
+            left: 8%;
+            background: #ff39c4;
+            color: white;
+            padding: 2px 2px 2px 2px;
+            border-radius: 3px 3px 3px 3px;
+          ">
+          Bestseller
+        </div>
+        <b>Supreme Plan</b><br />
+        <i>90 Contacts</i><br />
+      </div>
+      <div class="plancolumn" style="background-color: #f0f1f0; color: black !important;">
+        <b class="specialCase" Style=" font-size: x-large;color: black !important; ">₹5500</b><br />
+        <i style="
+            text-decoration: line-through;
+            font-size: medium;
+            color: black !important;
+          ">₹ 8500</i><br />
+      </div>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        ">
+        <div class="month">
+          <i>6 महीने</i>
+        </div>
+        <button class="btn btn-primary btn-small" (click)="container2()">
+          BUY
+        </button>
+      </div>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        ">
+        <div class="month">
+          <i>6 months</i>
+        </div>
+        <button class="btn btn-primary btn-small" (click)="container2()">
+          BUY
+        </button>
+      </div>
+    </div>
+    <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 0px;">
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+        <b>कुंडली प्लान</b><br />
+        <i>45 कांटेक्टस</i><br />
+      </div>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+        <b>Kundali Plan</b><br />
+        <i>45 Contacts</i><br />
+      </div>
+      <div class="plancolumn" style="background-color: #f0f1f0;">
+        <b class="specialCase" style="font-size: x-large; color: black !important;">₹8500</b><br />
+        <i style="
+            text-decoration: line-through;
+            font-size: medium;
+            color: black !important;
+          ">₹ 9100</i>
+      </div>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        ">
+        <div class="month">
+          <i>6 महीने</i>
+        </div>
+        <button class="btn btn-primary btn-small" (click)="container3()">
+          BUY
+        </button>
+      </div>
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        ">
+        <div class="month">
+          <i>6 months</i>
+        </div>
+        <button class="btn btn-primary btn-small" (click)="container3()">
+          BUY
+        </button>
+      </div>
+    </div>
   </div>
 </main>
+<div id="footer" class="text-dark text-center">
+  <div class="plancolumn">
+    <img style="width: 2.2rem;" src="../../../assets/timer.svg" />&nbsp;
+  </div>
+  <div class="plancolumn" style="margin-right: 15px;">
+    <b style="color: black !important;">Offer ends in :</b> <br />
+    <b style="font-size: larger; font-weight: bold; color: black !important;">{{ minutes }} min:{{ seconds }} sec</b>
+  </div>
+</div>

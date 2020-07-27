@@ -3,6 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxNotificationModule } from 'ngx-kc-notification';
 
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 
@@ -60,8 +61,9 @@ import { HansPreloadingStrategyService } from './hans-preloading-strategy.servic
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxMatIntlTelInputModule
-    , RouterModule
+    NgxMatIntlTelInputModule, 
+    RouterModule,
+    Ng5SliderModule
   ],
   providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
   bootstrap: [AppComponent],

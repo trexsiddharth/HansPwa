@@ -1,120 +1,220 @@
-::ng-deep .mat-dialog-container{
-    padding: 0px;
-    border-radius: 10px;
-    background-size: contain;
+::ng-deep .mat-dialog-container {
+  padding: 20px;
+  position: relative;
+  background: transparent;
+  /* border-radius: 20px 20px 20px 20px; */
+
+  background-size: contain;
 }
-::ng-deep .mat-dialog-content{
-    max-height: 10rem;
-    margin: 0px;
-    padding: 0px;
+::ng-deep .mat-dialog-content {
+  max-height: 3rem;
+  margin: 0px;
+  padding: 0px;
 }
-::ng-deep .cdk-overlay-dark-backdrop{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+::ng-deep .cdk-overlay-dark-backdrop {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
 }
-#offBanner{
-    width:100%;
-    position: absolute;
-    z-index: 99999999;
-    height:1.5rem;    
+i {
+  color: white;
+}
+b {
+  color: white;
+}
+main {
+  position: relative;
+  z-index: 0;
+  background: white;
+  border-radius: 20px 20px 20px 20px;
+  padding-bottom: 5px;
+}
+.planArea {
+  position: relative;
+  padding: 15px 15px 15px 15px !important;
+  overflow-y: hidden;
+}
+#offBanner {
+  position: relative;
+  display: flex;
+  width: 100%;
+  z-index: 0;
+  height: 1.8rem;
+  align-items: center;
+  justify-content: center;
+}
+#offBannerImg {
+  position: absolute;
+  border-radius: 8px;
+  bottom: 0px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-.responsive{
-    max-width:100%;
-    max-height:100%;
-  }
-  
-.center{
-    position: absolute;
-    top: 50%;
-    left: 45%; 
-    transform: translate(-50%, -50%);
-  }
-  
-#cancel{
-    position: absolute;
-    z-index: 99999999;
-    right:4%;   
+.responsive {
+  max-width: 100%;
+  max-height: 100%;
 }
-#footer{
-    text-align:center;
-    justify-content: center;
-    width:90%;
-    position: absolute;
-    z-index: 99999999;
-    background-image: url(/../../../assets/trapezoid.svg);
-    background-position: center center; 
-    background-size: 100% 100%;
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
 }
-#topBanner{
-    width: 100%;
-    text-align: center;
+
+#cancel {
+  position: absolute;
+  z-index: 99999999;
+  right: 4%;
 }
-#bannerDiv{
-    width: auto;
-    object-fit: cover;
-    height: 45%;
-    position: relative;
-    padding-top: 0px;
+#footer {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  width: 60%;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 99999999;
+  background-image: url(/../../../assets/trapazoid.png);
+  background-position: center center;
+  background-size: 100% 100%;
+  border-radius: 0px 0px 10px 10px !important;
+}
+#topBanner {
+  position: relative;
+  width: 100%;
+  height: 30vh;
+  text-align: center;
+  background: white !important;
+  border: 0px !important;
+  border-radius: 20px 20px;
+}
+#bannerDiv {
+  width: auto;
+  object-fit: cover;
+  /* height: 45%; */
+  position: relative;
+  padding-top: 0px;
 }
 
 .planrow {
-    height:auto;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    margin-top:2%;
-    margin-bottom:2%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: 6% 1% 6% 1%;
 }
 .plancolumn {
-    padding-top:1rem;
-    padding-bottom:0rem;
-    padding-left:1rem;
-    font-size:1rem;
+  position: relative;
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+  flex: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+button {
+  position: absolute;
+  z-index: 1000 !important;
+  right: 5.5%;
+  top: 32%;
+  vertical-align: middle !important;
+  background: #5552ff;
+}
+.month {
+  font-weight: 500;
+  position: absolute;
+  top: -11px !important;
+  right: 5%;
+  background: #00c2cb;
+  border-radius: 3px 3px 3px 3px;
+}
+.flex-rectangle {
+  position: absolute;
+  width: 90%;
+  background: #f0f1f0;
+  border-radius: 0px 0px 20px 20px;
+}
+.flex-rectangle:before {
+  content: "";
+  display: block;
+  padding-top: 2%;
+}
+
+@media (max-width: 575px) {
+  #footer {
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    width: 70%;
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 99999999;
+    background-image: url(/../../../assets/trapazoid.png);
+    background-position: center center;
+    background-size: 100% 100%;
+    border-radius: 0px 0px 10px 10px !important;
+  }
+
+  .plancolumn {
+    padding-top: 0.8rem;
+    padding-bottom: 0rem;
+    padding-left: 0.8rem;
+    font-size: 1.1rem;
+    flex: 50%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+@media (max-width: 370px) {
+  .plancolumn {
+    padding-top: 0.8rem;
+    padding-bottom: 0rem;
+    padding-left: 0.8rem;
+    font-size: 0.8rem !important;
     flex: 40%;
-    display:inline-block;
-    vertical-align:middle;
-}
-
-@media (max-height: 575px) {
-    #footer{
-        text-align:center;
-        justify-content: center;
-        width:90%;
-        font-size:0.8rem;
-        position: absolute;
-        z-index: 99999999;
-        background-image: url(/../../../assets/trapezoid.svg);
-        background-position: center center; 
-        background-size: 100% 100%;
-    }
-    .plancolumn {
-        padding-top:0.8rem;
-        padding-bottom:0rem;
-        padding-left:0.8rem;
-        font-size:0.9rem;
-        flex: 50%;
-        display:inline-block;
-        vertical-align:middle;
-    }
-
-}
-@media (max-width: 370px ) {
-    .plancolumn {
-        padding-top:0.8rem;
-        padding-bottom:0rem;
-        padding-left:0.8rem;
-        font-size:0.7rem!important;
-        flex: 40%;
-        display:inline-block;
-        vertical-align:middle;
-    }
-    .specialCase{
-        font-size:1.2rem!important;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    main {
-        position: relative;
-    }
+    display: inline-block;
+    vertical-align: middle;
+  }
+  button {
+    position: absolute;
+    right: 5.5%;
+    top: 25%;
+    vertical-align: middle !important;
+    background: #5552ff;
+  }
+  #offBanner {
+    position: relative;
+    display: flex;
+    width: 100%;
+    z-index: 0;
+    height: 1.3rem;
+    align-items: center;
+    justify-content: center;
+  }
+  #footer {
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 99999999;
+    background-image: url(/../../../assets/trapazoid.png);
+    background-position: center center;
+    background-size: 100% 100%;
+    border-radius: 0px 0px 10px 10px !important;
+  }
+  #topBanner {
+    position: relative;
+    width: 100%;
+    height: 28vh;
+    text-align: center;
+    background: white !important;
+    border: 0px !important;
+    border-radius: 20px 20px;
+  }
+  .specialCase {
+    font-size: 1.2rem !important;
+  }
 }

@@ -208,6 +208,48 @@ body {
   margin-bottom: 10px;
 }
 
+#myprofMatTabGroup .mat-tab-label-container{
+  background:transparent!important;
+  padding-top: 12px!important;
+  padding-bottom: 5px!important;
+  margin-top:15px!important;
+  height:8rem!important;
+}
+#myprofMatTabGroup .mat-tab-labels{
+   margin:0px 4px!important;
+   height:100px!important;
+}
+#myprofMatTabGroup .mat-tab-label-content{
+  font-size: 10px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#myprofMatTabGroup .mat-tab-label-active {
+  color: #ffffff !important;
+  font-weight: bold;
+  height: 70px !important;
+  opacity: 1 !important;
+}
+#myprofMatTabGroup .mat-tab-body-content{
+  background:transparent!important;
+  /* border-radius: 20px 20px 0px 0px!important; */
+}
+/* #expansion-header .mat-expansion-panel-header{
+  border-radius: 20px 20px 0px 0px!important;
+} */
+
+
+#matAccordion .mat-expansion-panel-content{
+  background:white;
+  color:black;
+}
+#matAccordion .mat-expansion-panel-header{
+  background:white;
+  border-bottom: 1px solid rgb(194, 190, 190);
+
+}
 
 button:focus{outline:none !important;}
 

@@ -6,6 +6,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HistoryProfilesComponent } from './history-profiles/history-profiles.component';
 import { HistoryProfilesDialogComponent } from './history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 import { DiscoverComponent } from './discover/discover.component';
+import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
   },
   {
     // this is used for routing through chat drawer
+    path: 'my-profile-new/:id/:isLead',
+    component: MyProfileNewComponent
+  },
+  {
     path: 'history/:section',
     component: HistoryProfilesComponent
   },
