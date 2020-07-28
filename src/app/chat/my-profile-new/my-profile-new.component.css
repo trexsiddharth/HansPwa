@@ -289,11 +289,3 @@ main {
     clip-path: polygon(100% 0%, 100% 67%, 50% 90%, 50% 90%, 0 67%, 0 0);
   }
 }
-
-/* @media (max-width: 1024px) {
-  .mainDiv {
-    width: 100vw;
-    height: auto;
-    background: none;
-  }
-} */
