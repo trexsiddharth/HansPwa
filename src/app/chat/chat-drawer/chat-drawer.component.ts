@@ -21,32 +21,32 @@ export class ChatDrawerComponent implements OnInit {
   userId;
   userIsLead;
   constructor(public languageService: LanguageService,
-              private chatService: ChatServiceService,
-              private spinner: NgxSpinnerService,
-              private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              public router: Router,
-              public itemService: FindOpenHistoryProfileService,
-              public activatedRoute: ActivatedRoute) { }
+    private chatService: ChatServiceService,
+    private spinner: NgxSpinnerService,
+    private http: HttpClient,
+    private ngxNotificationService: NgxNotificationService,
+    public router: Router,
+    public itemService: FindOpenHistoryProfileService,
+    public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
-      // user authorized
+    // user authorized
     this.chatService.authorized.subscribe(
-        data => {
-          if (data) {
-            this.username = data.name;
-            this.userpic = data.photo;
-            this.userId = data.id;
-            this.userIsLead = data.isLead;
-          }
+      data => {
+        if (data) {
+          this.username = data.name;
+          this.userpic = data.photo;
+          this.userId = data.id;
+          this.userIsLead = data.isLead;
         }
-      );
+      }
+    );
   }
 
 
   openUserProfile() {
-    this.router.navigateByUrl(`chat/user-profile/${this.userId}/${this.userIsLead}`);
+    this.router.navigateByUrl(`chat/my-profile-new/${this.userId}/${this.userIsLead}`);
   }
   openDiscover() {
     this.router.navigateByUrl('chat/discover/open');
@@ -83,12 +83,12 @@ export class ChatDrawerComponent implements OnInit {
       data => {
         console.log(data);
         if (data.status === 1) {
-        this.ngxNotificationService.success('We will get back to soon!!');
-        this.spinner.hide();
-        this.closeSideNav();
+          this.ngxNotificationService.success('We will get back to soon!!');
+          this.spinner.hide();
+          this.closeSideNav();
         } else {
-        this.ngxNotificationService.error('Something Went Wrong, Please try again later');
-        this.spinner.hide();
+          this.ngxNotificationService.error('Something Went Wrong, Please try again later');
+          this.spinner.hide();
         }
       },
       err => {
