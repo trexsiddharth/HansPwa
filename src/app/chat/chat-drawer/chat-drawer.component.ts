@@ -46,7 +46,7 @@ export class ChatDrawerComponent implements OnInit {
 
 
   openUserProfile() {
-    this.router.navigateByUrl(`chat/my-profile-new/${this.userId}/${this.userIsLead}`);
+    this.router.navigateByUrl(`chat/user-profile/${this.userId}/${this.userIsLead}`);
   }
   openDiscover() {
     this.router.navigateByUrl('chat/discover/open');
