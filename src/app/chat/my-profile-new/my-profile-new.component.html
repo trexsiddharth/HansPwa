@@ -409,7 +409,7 @@
                         [(ngModel)]="personalProfileData.marital_status"
                       >
                         <option
-                          *ngFor="let item of MaritalStaus"
+                          *ngFor="let item of MaritalStatus"
                           [value]="item"
                           >{{ item }}</option
                         >
@@ -971,6 +971,7 @@
                       "
                       (onLocationSelected)="onLocationSelected($event, 'Birth')"
                       formControlName="BirthPlace"
+                      [(ngModel)]="personalProfileData.birth_place"
                     />
                   </div>
                   <div class="col-12">
@@ -994,6 +995,7 @@
                       type="time"
                       placeholder="Choose a time"
                       formControlName="BirthTime"
+                      [(ngModel)] = "personalProfileData.birth_time"
                     />
                   </div>
                 </div>
@@ -1321,8 +1323,8 @@
                       matValidateAddress
                       matGoogleMapsAutocomplete
                       #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
-                      (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                      (onLocationSelected)="onLocationSelected($event)"
+                      (onAutocompleteSelected)="onAutocompleteSelectedFamily($event)"
+                      (onLocationSelected)="onLocationSelectedFamily($event)"
                       [(ngModel)]="familyProfileData.city"
                     />
                   </div>

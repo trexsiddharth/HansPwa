@@ -14,8 +14,6 @@ import {
   FormControl,
 } from "@angular/forms";
 import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
   MatSelect,
   MatSnackBar,
 } from "@angular/material";
@@ -27,10 +25,10 @@ import { FindOpenHistoryProfileService } from "src/app/find-open-history-profile
 import { EditPersonalDialogComponent } from "../myprofile/edit-personal-dialog/edit-personal-dialog.component";
 import { EditFamilyDialogComponent } from "../myprofile/edit-family-dialog/edit-family-dialog.component";
 import { EditPreferenceDialogComponent } from "../myprofile/edit-preference-dialog/edit-preference-dialog.component";
-import { timeout, retry, catchError } from "rxjs/operators";
+import { timeout, retry, catchError, startWith, map } from "rxjs/operators";
 import { LanguageService } from "src/app/language.service";
 import { Options, LabelType } from "ng5-slider";
-import { forkJoin, ReplaySubject, Subject } from "rxjs";
+import { forkJoin, ReplaySubject, Subject, Observable } from "rxjs";
 import { take, takeUntil } from "rxjs/operators";
 
 @Component({
@@ -65,12 +63,19 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   searchCaste = new FormControl();
   searchCasteText = new FormControl();
   isAllCastePref = false;
+  casteo: Observable<string[]>;
+  getcastesPersonal: any = [];
 
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<
     string[]
   >(1);
   protected _onDestroy = new Subject<void>();
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
+
+  HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
+    'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
+    // tslint:disable-next-line: max-line-length
+    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other'];
 
   Heights: string[] = [
     "4'0\"",
@@ -288,6 +293,49 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     "Widowed",
     "Anulled",
   ];
+  designations: string[] = [
+    'Owner',
+    'Manager',
+    'Sales Manager',
+    'Accounts Manager',
+    'Product Manager',
+    'Software Engineer',
+    'Engineer',
+    'Hotel Management',
+    'Operations Manager',
+    'Sales Executive',
+    'Operations Executive',
+    'Accountant',
+    'Marketing Manager',
+    'Marketing Executive',
+    'Chartered Accountant',
+    'Owner',
+    'Secretary',
+    'Company Secretary',
+    'Telesales Executive',
+    'Teacher',
+    'Clerk',
+    'Office Assistant',
+    'Relationship Manager',
+    'Computer Operator',
+    'Chief Executive Officer',
+    'Chief Marketing Officer',
+    'Chief Finance Officer',
+    'Business Development',
+    'Project Manager',
+    'Program Manager',
+    'Solution Architect',
+    'Graphic Designer',
+    'Content Writer',
+    'Director',
+    'Business Analyst',
+    'Front Office',
+    'Back office',
+    'Counselor',
+    'Event Manager',
+    'Legal',
+    'Public Relations',
+    'Others'];
   Status: string[] = ["Alive", "Not Alive"];
   FamilyType: string[] = ["Joint", "Nuclear"];
   Count: any[] = ["None", 0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -1053,6 +1101,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               : null;
             this.spinner.hide();
             this.getAllCaste();
+            this.getAllCastePersonal();
             this.setCurrentProfileValue();
           },
           (error: any) => {
@@ -1387,6 +1436,102 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   navigateTo(id: string) {
     console.log(id);
     document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  }
+  getAllCastePersonal() {
+    this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+      this.getcastesPersonal = res;
+    });
+    if (this.personalForm.get('Castes').value && this.personalForm.get('Castes').value !== '') {
+      this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value))
+      );
+    } else {
+      this.personalForm.patchValue({
+        Castes: ''
+      });
+      this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value))
+      );
+    }
+  }
+
+  private _Castefilter(value: string): string[] {
+    if (value != null) {
+      const filterValue = value.toLowerCase();
+      return this.getcastesPersonal.filter(option => option.toLowerCase().includes(filterValue));
+    } else {
+      const filterValue = 'arora';
+      return this.getcastesPersonal.filter(option => option.toLowerCase().includes(filterValue));
+    }
+  }
+
+  async casteValidation(value) {
+    console.log('caste changed', value);
+    const status = 1;
+    let statusConfirmed;
+    await this.checkCaste(value).then((res: boolean) => {
+      statusConfirmed = res;
+    });
+    console.log('caste changed', statusConfirmed);
+
+    if (statusConfirmed === false) {
+      this.ngxNotificationService.warning('Please choose a caste from the dropdown');
+      this.personalForm.get('Castes').setValue('');
+      return false;
+    }
+    return true;
+
+  }
+
+  checkCaste(value) {
+    let status = 1;
+    let statusConfirmed = false;
+    this.casteo.forEach(element => {
+      element.forEach(item => {
+        if (value !== '' && item.includes(value) && item.length === value.length) {
+          console.log('confirmed');
+          statusConfirmed = true;
+        } else {
+          status = 0;
+        }
+      });
+    });
+    return new Promise((resolve) => {
+      resolve(statusConfirmed);
+    });
+  }
+  onAutocompleteSelected(event, type: string) {
+    if (type === 'Locality') {
+      this.personalForm.value.Locality = event.formatted_address;
+    } else if (type === 'Working') {
+      this.personalForm.value.WorkingCity = event.formatted_address;
+    } else {
+      this.personalForm.value.BirthPlace = event.formatted_address;
+    }
+    this.familyProfileData.locality = event.formatted_address;
+    console.log('address of family', event.formatted_address);
+
+  }
+  onLocationSelected(e, type: string) {
+    if (type === 'Locality') {
+      this.familyProfileData.locationFamily = e;
+    } else if (type === 'Working') {
+      this.familyProfileData.locationWorking = e;
+    } else {
+      this.familyProfileData.locationBirth = e;
+    }
+    console.log('location of family', e);
+  }
+  onAutocompleteSelectedFamily(event) {
+    this.familyProfileData.city = event.formatted_address;
+    console.log('address of family', this.familyProfileData.city);
+
+  }
+  onLocationSelectedFamily(e) {
+    this.familyProfileData.city = e;
+    console.log('location of family', e);
   }
   /*
   
