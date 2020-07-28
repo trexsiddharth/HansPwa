@@ -449,12 +449,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   setStep(index: number) {
     this.step = index;
   }
-  nextStep() {
-    this.step++;
-  }
-  prevStep() {
-    this.step--;
-  }
+
   changeSelectedTab(event: any) { }
   optionsFamilyIncome: Options = {
     floor: 0,
@@ -539,6 +534,16 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   editIndexPersonal = -1;
   editIndexFamily = -1;
   editIndexPrefs = -1;
+
+  panelOpenState = true;
+  blockExpansion = 0;
+
+  // isExpansionDisabled(): string {
+  //   if (this.blockExpansion) {
+  //     return 'disabled-pointer';
+  //   }
+  //   return '';
+  // }
 
   setEditIndex(index: number) {
     this.editIndexPersonal = index;

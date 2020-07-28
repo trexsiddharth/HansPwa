@@ -1134,12 +1134,122 @@
               <ng5-slider [(value)]="preferenceProfileData.income_min" [(highValue)]="preferenceProfileData.income_max"
                 [options]="optionsIncome" (userChangeEnd)="setEditIndexPrefs(0)"></ng5-slider>
             </div>
-            <hr>
             <button style="position: absolute; top: 5px; right: 30px;" class="mat-elevation-z5" mat-button
               class="btn-success btn-small" [hidden]="editIndexPrefs != 0" (click)="onSubmitPreferences()">
               SAVE
             </button>
-            <mat-accordion class="example-headers-align" id="matAccordion">
+            <hr>
+            <a style="
+                      color: rgb(68, 67, 67);
+                      font-size: large;
+                      margin-left: 30px;
+                      font-weight: 600;
+                    ">
+              {{ languageService.profileLang.castePref }}</a>
+            <button *ngIf="editIndexPrefs != 1" style=" position: absolute; right: 30px;
+              background:transparent!important;border : 0px" (click)="setEditIndexPrefs(1)">
+              <img class="editPencil" src="../../../assets/editN.svg" alt="edit contact" />
+            </button>
+            <div *ngIf="editIndexPrefs != 1">
+              <div class="row">
+                <div class="col-12">
+                  <span style="margin-left: 5px;">
+                    <span class="labelText" style="color:white!important">randomText</span>{{
+                            preferenceProfileData.caste
+                          }}
+                  </span>
+                </div>
+                <div class="col-12" style="color:white!important">
+                  <h6 style="display: inline-block;">Random text</h6>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="editIndexPrefs == 1">
+              <div class="col-12">
+                <h6>Caste</h6>
+                <mat-select type="text" class="form-control" [multiple]="true"
+                  (selectionChange)="casteSelectionChanged($event)" [formControl]="searchCaste" #multiSelect
+                  [(ngModel)]="preferenceProfileData.caste" required>
+                  <mat-option>
+                    <ngx-mat-select-search noEntriesFoundLabel="No Castes Found" placeholderLabel="Search Castes..."
+                      [formControl]="searchCasteText"></ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
+                    {{ name }}
+                  </mat-option>
+                </mat-select>
+              </div>
+
+              <div class="col-12" style="margin-top: 10px;">
+                <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">No Caste Bar
+                </mat-checkbox>
+              </div>
+              <div style="position:relative">
+                <button style="position: absolute; top: 5px; right: 30px;" class="mat-elevation-z5" mat-button
+                  class="btn-success btn-small" [hidden]="editIndexPrefs != 1" (click)="onSubmitPreferences()">
+                  SAVE
+                </button>
+              </div>
+            </div>
+            <hr>
+            <a style="
+                      color: rgb(68, 67, 67);
+                      font-size: large;
+                      margin-left: 30px;
+                      font-weight: 600;
+                    ">
+              {{ languageService.profileLang.manglikPref }}</a>
+            <button *ngIf="editIndexPrefs != 2" style=" position: absolute; right: 30px;
+                  background:transparent!important;border : 0px" (click)="setEditIndexPrefs(2)">
+              <img class="editPencil" src="../../../assets/editN.svg" alt="edit
+                    contact" />
+            </button>
+
+            <div *ngIf="editIndexPrefs != 2">
+              <div class="row">
+                <div class="col-12">
+                  <span style="margin-left: 5px;">
+                    <span class="labelText" style="color:white!important">randomText</span>{{
+                            preferenceProfileData.manglik
+                              ? preferenceProfileData.manglik
+                              : "Add Detail"
+                          }}
+                  </span>
+                </div>
+                <div class="col-12" style="color:white!important">
+                  <h6 style="display: inline-block;">Random text</h6>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="editIndexPrefs == 2">
+              <div class="row">
+                <div class="col-12">
+                  <h6 style="display: inline-block;">Manglik :</h6>
+                  <select type="text" class="form-control" name="manglik" [(ngModel)]="preferenceProfileData.manglik"
+                    required>
+                    <option *ngFor="let item of Mangalika" [value]="item">{{
+                            item
+                          }}</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <mat-action-row>
+                    <div style="position:relative">
+                      <button style="position: absolute; top: 5px; right: 30px;" class="mat-elevation-z5" mat-button
+                        class="btn-success btn-small" [hidden]="editIndexPrefs != 2" (click)="onSubmitPreferences()">
+                        SAVE
+                      </button>
+                    </div>
+                  </mat-action-row>
+                </div>
+                <div class="col-12" style="color:white!important">
+                  <h6 style="display: inline-block;">Random text</h6>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- <mat-accordion class="example-headers-align" id="matAccordion">
               <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
                 <mat-expansion-panel-header>
                   <a style="
@@ -1252,7 +1362,7 @@
 
               </mat-expansion-panel>
 
-            </mat-accordion>
+            </mat-accordion> -->
           </div>
         </form>
       </mat-tab>
