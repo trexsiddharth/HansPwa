@@ -174,7 +174,7 @@ facebookAnalytics(event) {
   }
 
   container1() {
-    this.price = '2800';
+    this.price = '1';
     this.credits = '45';
     this.selectedContainer = 1;
     document.getElementById('planButton').scrollIntoView({behavior: 'smooth'});

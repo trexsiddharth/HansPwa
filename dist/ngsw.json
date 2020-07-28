@@ -1,6 +1,10 @@
 {
   "configVersion": 1,
+<<<<<<< HEAD
   "timestamp": 1595923358326,
+=======
+  "timestamp": 1595920743008,
+>>>>>>> 8748669cf3b545bc38e76964faa99dd32fff6f2f
   "index": "/index.html",
   "assetGroups": [
     {
@@ -10,6 +14,7 @@
       "urls": [
         "/1-es2015.1e36558cb666baede129.js",
         "/1-es5.1e36558cb666baede129.js",
+<<<<<<< HEAD
         "/10-es2015.ff7adc7455122e530ae9.js",
         "/10-es5.ff7adc7455122e530ae9.js",
         "/11-es2015.0169dd7f65b9d5bf53da.js",
@@ -35,6 +40,33 @@
         "/runtime-es2015.b56b8d0067ae04b75bf1.js",
         "/runtime-es5.b56b8d0067ae04b75bf1.js",
         "/styles.1fdc89fd142d1c46a57b.css"
+=======
+        "/10-es2015.70e4d0fbd96eca208318.js",
+        "/10-es5.70e4d0fbd96eca208318.js",
+        "/11-es2015.37b42491a80f03f69e34.js",
+        "/11-es5.37b42491a80f03f69e34.js",
+        "/12-es2015.a535233a0b7ca9eddd1a.js",
+        "/12-es5.a535233a0b7ca9eddd1a.js",
+        "/2-es2015.7d8b4b08e05ad58d9c82.js",
+        "/2-es5.7d8b4b08e05ad58d9c82.js",
+        "/7-es2015.38961be776d933d5f1b1.js",
+        "/7-es5.38961be776d933d5f1b1.js",
+        "/8-es2015.0780e8fced0cf51a8c9d.js",
+        "/8-es5.0780e8fced0cf51a8c9d.js",
+        "/9-es2015.acd0b7dd4764315603b1.js",
+        "/9-es5.acd0b7dd4764315603b1.js",
+        "/favicon.ico",
+        "/firebase-messaging-sw.js",
+        "/index.html",
+        "/main-es2015.bc4f84a333b8d0d4ead1.js",
+        "/main-es5.bc4f84a333b8d0d4ead1.js",
+        "/manifest.webmanifest",
+        "/polyfills-es2015.34906a5f002ccde5c8ac.js",
+        "/polyfills-es5.7cfbe60d591e0b8ad282.js",
+        "/runtime-es2015.a00bd3735c3734fd3ec6.js",
+        "/runtime-es5.a00bd3735c3734fd3ec6.js",
+        "/styles.31cb90f20eb7c80f5a7a.css"
+>>>>>>> 8748669cf3b545bc38e76964faa99dd32fff6f2f
       ],
       "patterns": []
     },
@@ -447,6 +479,7 @@
   "hashTable": {
     "/1-es2015.1e36558cb666baede129.js": "644b93aebfb7e3865f4ef1266e135085f468660c",
     "/1-es5.1e36558cb666baede129.js": "644b93aebfb7e3865f4ef1266e135085f468660c",
+<<<<<<< HEAD
     "/10-es2015.ff7adc7455122e530ae9.js": "138f7ffcb6317b4454e0bf38c150f900b6188d37",
     "/10-es5.ff7adc7455122e530ae9.js": "a73fd9aab927ea1639008f03e57f01c6cfde0e8e",
     "/11-es2015.0169dd7f65b9d5bf53da.js": "429e815a4e935243f75127a2ee1e024518039a92",
@@ -461,6 +494,22 @@
     "/8-es5.aa2da35a10bd7b3a6097.js": "d048f6ff67828b18630a899320921353fe2a2006",
     "/9-es2015.7beeeae3dc5038e786e7.js": "f6f85654632bff366c294ab152eb58d34c04f2e5",
     "/9-es5.7beeeae3dc5038e786e7.js": "855d789fdf99f7633c41bcd888e2323bbc7ad4b6",
+=======
+    "/10-es2015.70e4d0fbd96eca208318.js": "a904414e3dcb6926f5b93e28e56d3b127e9e4c4f",
+    "/10-es5.70e4d0fbd96eca208318.js": "05f8febd64b3b723fdab94aedc85b3fb5aebbc43",
+    "/11-es2015.37b42491a80f03f69e34.js": "098958e03c49c8d39b6829c88482840ca76ec647",
+    "/11-es5.37b42491a80f03f69e34.js": "116d78e42b29927d3309719642e718c90ae5bcdb",
+    "/12-es2015.a535233a0b7ca9eddd1a.js": "2a367b6da926c5295ee7803311c721e3fd0c68db",
+    "/12-es5.a535233a0b7ca9eddd1a.js": "8a6eefa9da805d8ecfd600cf014d3cd22dd9f8bb",
+    "/2-es2015.7d8b4b08e05ad58d9c82.js": "6bd0baaa3916839785c446d81c19ad1c5689ffc8",
+    "/2-es5.7d8b4b08e05ad58d9c82.js": "86d6aec7ca15958345b801eee2293b3504834e2c",
+    "/7-es2015.38961be776d933d5f1b1.js": "4865c05f8fba167e0a187e3b07227eee257cf271",
+    "/7-es5.38961be776d933d5f1b1.js": "5cdda96fcbefa0bb7121a53409302a68064d57de",
+    "/8-es2015.0780e8fced0cf51a8c9d.js": "3da15999d9f2efc15044b8f7133644f71621f19a",
+    "/8-es5.0780e8fced0cf51a8c9d.js": "07b7acf2036c8598a48800e3b6d0289cd9cfa12e",
+    "/9-es2015.acd0b7dd4764315603b1.js": "27d7761c0f1f7739cd327c10b8a733f26ffa85c6",
+    "/9-es5.acd0b7dd4764315603b1.js": "a279c93d47009aa2e3edad7c89c21c553de72c9b",
+>>>>>>> 8748669cf3b545bc38e76964faa99dd32fff6f2f
     "/GothamRounded-Book.2033c152fc99ddec25d1.woff": "bf9f809a41fcee841a745f8e7142bbe34c5dfb3c",
     "/GothamRounded-Book.c5159f60ee2b71329202.woff2": "dafc996100011ef39a813ad8ea9ef0e4ca786640",
     "/assets/Aprajita.webp": "6c66fe588e1d66e8754584544b901a2c740ce7ca",
@@ -847,6 +896,7 @@
     "/assets/x.svg": "a2fa2501e2770d1a5e9d00eed8c422cf8d261e06",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
+<<<<<<< HEAD
     "/index.html": "2f5dc0ed213bcb9708240c94a8dee0595522f03a",
     "/main-es2015.310158183905c128225f.js": "2636307091f6bb92c449ec22abd31202ede9d423",
     "/main-es5.310158183905c128225f.js": "b565aec72b4aa4594c2c20a3314a75812fa45d61",
@@ -857,6 +907,18 @@
     "/runtime-es5.b56b8d0067ae04b75bf1.js": "b0f50b45429d254c91244debb2ea2933040facc1",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
     "/styles.1fdc89fd142d1c46a57b.css": "d6d1aa9a3bc47a6f99cfb42bad038d21c725e8dd"
+=======
+    "/index.html": "bb2d09d5038ed166da1d5b2f829ba0e9511e7ffe",
+    "/main-es2015.bc4f84a333b8d0d4ead1.js": "9e646e0147dd62b00ecdf048066c2c611cce7a4e",
+    "/main-es5.bc4f84a333b8d0d4ead1.js": "cd048a60e7b379dbbe65f6f803211423723fdd1d",
+    "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
+    "/polyfills-es2015.34906a5f002ccde5c8ac.js": "298a7975e035f20254580f7df181e5afac1df141",
+    "/polyfills-es5.7cfbe60d591e0b8ad282.js": "689055ffa1167f075fd60e3ea329b414c7080ace",
+    "/runtime-es2015.a00bd3735c3734fd3ec6.js": "082792b601440984e0d9e67354c9d2d4a5a245c3",
+    "/runtime-es5.a00bd3735c3734fd3ec6.js": "d2939d3a066129d99afda6f4fe2b833793e3ceb3",
+    "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
+    "/styles.31cb90f20eb7c80f5a7a.css": "53190cbb4876f033302938cb932707a2caf80812"
+>>>>>>> 8748669cf3b545bc38e76964faa99dd32fff6f2f
   },
   "navigationUrls": [
     {
