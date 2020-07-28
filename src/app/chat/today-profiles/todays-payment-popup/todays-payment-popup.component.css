@@ -37,7 +37,7 @@ main {
   display: flex;
   width: 100%;
   z-index: 0;
-  height: 1.8rem;
+  height: 1.9rem;
   align-items: center;
   justify-content: center;
 }
@@ -47,18 +47,6 @@ main {
   bottom: 0px;
   max-width: 100%;
   max-height: 100%;
-}
-
-.responsive {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.center {
-  position: absolute;
-  top: 50%;
-  left: 45%;
-  transform: translate(-50%, -50%);
 }
 
 #cancel {
@@ -82,7 +70,7 @@ main {
 #topBanner {
   position: relative;
   width: 100%;
-  height: 30vh;
+  height: 29vh;
   text-align: center;
   background: white !important;
   border: 0px !important;
@@ -123,22 +111,13 @@ button {
 }
 .month {
   font-weight: 500;
+  font-style: normal!important;
+  font-size:0.8rem;
   position: absolute;
   top: -11px !important;
   right: 5%;
   background: #00c2cb;
   border-radius: 3px 3px 3px 3px;
-}
-.flex-rectangle {
-  position: absolute;
-  width: 90%;
-  background: #f0f1f0;
-  border-radius: 0px 0px 20px 20px;
-}
-.flex-rectangle:before {
-  content: "";
-  display: block;
-  padding-top: 2%;
 }
 
 @media (max-width: 575px) {
@@ -160,18 +139,18 @@ button {
     padding-top: 0.8rem;
     padding-bottom: 0rem;
     padding-left: 0.8rem;
-    font-size: 1.1rem;
-    flex: 50%;
+    font-size: 1rem;
+    flex: 40%;
     display: inline-block;
     vertical-align: middle;
   }
 }
-@media (max-width: 370px) {
+@media (max-width: 375px) {
   .plancolumn {
     padding-top: 0.8rem;
     padding-bottom: 0rem;
     padding-left: 0.8rem;
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
     flex: 40%;
     display: inline-block;
     vertical-align: middle;
@@ -188,7 +167,7 @@ button {
     display: flex;
     width: 100%;
     z-index: 0;
-    height: 1.3rem;
+    height: 1.2rem;
     align-items: center;
     justify-content: center;
   }
@@ -208,13 +187,13 @@ button {
   #topBanner {
     position: relative;
     width: 100%;
-    height: 28vh;
+    height: 27vh;
     text-align: center;
     background: white !important;
     border: 0px !important;
     border-radius: 20px 20px;
   }
   .specialCase {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
   }
 }
