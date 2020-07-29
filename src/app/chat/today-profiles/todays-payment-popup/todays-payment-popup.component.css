@@ -85,8 +85,23 @@ main {
   position: relative;
   padding-top: 0px;
 }
-#bannerDiv ::after ::before{
+/* #bannerDiv ::after , ::before{
   box-sizing: none!important;
+} */
+* {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 .planrow {
