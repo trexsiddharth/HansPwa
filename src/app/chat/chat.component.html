@@ -1,5 +1,6 @@
 <mat-sidenav-container class="bg-white" style="width: 100vw; position:fixed;overflow: hidden;">
   <mat-sidenav id="sidenav"
+  (openedChange)="drawerPosition($event)"
    class="drawerSettings"
     mode="over"
   position="start" #sidenav>

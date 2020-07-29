@@ -405,6 +405,11 @@ export class HistoryProfilesDialogComponent implements OnInit {
        return this.carouselSize;
      }
    }
+  //  getLocality() {
+  //    if (condition) {
+       
+  //    }
+  //  }
    setName(value: string, type: any): string {
      if (type === 1) {
        if (value != null) {

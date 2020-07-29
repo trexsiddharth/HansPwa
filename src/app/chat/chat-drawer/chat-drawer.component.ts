@@ -21,13 +21,16 @@ export class ChatDrawerComponent implements OnInit {
   userId;
   userIsLead;
   constructor(public languageService: LanguageService,
-    private chatService: ChatServiceService,
-    private spinner: NgxSpinnerService,
-    private http: HttpClient,
-    private ngxNotificationService: NgxNotificationService,
-    public router: Router,
-    public itemService: FindOpenHistoryProfileService,
-    public activatedRoute: ActivatedRoute) { }
+              private chatService: ChatServiceService,
+              private spinner: NgxSpinnerService,
+              private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
+              public router: Router,
+              public itemService: FindOpenHistoryProfileService,
+              public activatedRoute: ActivatedRoute) { 
+
+
+    }
 
   ngOnInit() {
 
@@ -46,9 +49,11 @@ export class ChatDrawerComponent implements OnInit {
 
 
   openUserProfile() {
+    this.analyticsEvent('User Clicked My Profile From Chat Drawer');
     this.router.navigateByUrl(`chat/user-profile/${this.userId}/${this.userIsLead}`);
   }
   openDiscover() {
+    this.analyticsEvent('User Clicked Discover From Chat Drawer');
     this.router.navigateByUrl('chat/discover/open');
   }
 
@@ -59,10 +64,21 @@ export class ChatDrawerComponent implements OnInit {
 
   // this will called only if the user is logged in and will open contacted, rejected etc sections.
   openHistoryProfiles(section: string) {
+    if (section.indexOf('contact') !== -1) {
+      this.analyticsEvent('User Clicked Contacted From Chat Drawer');
+    } else if (section.indexOf('Received') !== -1) {
+      this.analyticsEvent('User Clicked Likes You From Chat Drawer');
+    } else if (section.indexOf('Shown') !== -1) {
+      this.analyticsEvent('User Clicked Liked By Me From Chat Drawer');
+    } else {
+      this.analyticsEvent('User Clicked Rejected From Chat Drawer');
+    }
+
     this.router.navigateByUrl(`chat/history/${section}`);
   }
 
   logout() {
+    this.analyticsEvent('User Clicked Logout From Chat Drawer');
     let lang = localStorage.getItem('language');
     localStorage.clear();
     localStorage.setItem('language', lang);
@@ -83,6 +99,7 @@ export class ChatDrawerComponent implements OnInit {
       data => {
         console.log(data);
         if (data.status === 1) {
+          this.analyticsEvent('Requested For A Callback From Chat Drawer');
           this.ngxNotificationService.success('We will get back to soon!!');
           this.spinner.hide();
           this.closeSideNav();
@@ -97,5 +114,29 @@ export class ChatDrawerComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+
+  analyticsEvent(event) {
+    (window as any).ga('send', 'event', event, '', {
+      hitCallback: () => {
+
+        console.log('Tracking ' + event + ' successful');
+
+      }
+
+    });
+
+     // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () =>  {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
+    });
+
+  }
+
+  openSubscriptionOffer() {
+    this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
+    this.itemService.openTodaysPopupAd();
   }
 }

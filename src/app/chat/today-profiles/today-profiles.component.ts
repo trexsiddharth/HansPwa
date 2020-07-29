@@ -59,7 +59,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
               public router: Router,
               private dialog: MatDialog,
               public languageService: LanguageService,
-              public subscriptionService: SubscriptionserviceService ) { }
+              public subscriptionService: SubscriptionserviceService ) {
+              }
 
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
@@ -243,20 +244,23 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     }
   }
 
-  Analytics(type: string, category: string, action: string) {
-    (window as any).ga('send', 'event', category, action, {
+  analyticsEvent(event) {
+    (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
 
-        console.log('Tracking ' + type + ' successful');
+        console.log('Tracking ' + event + ' successful');
 
       }
 
     });
 
-    // gtag app + web
-    (window as any).gtag('event', category , {
-      'action': action
+     // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () =>  {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
     });
+
   }
 
   getNextMessageOrProfile(reply: string) {
@@ -308,7 +312,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
     this.chatRequest(reply).subscribe(
       data => {
         console.log(data);
-        this.Analytics('Today Profiles Responses', 'Today Profiles Responses', reply);
+        this.analyticsEvent(`Response ${reply} On Today's Special Profile`);
 
         if (data && data.get_status_count) {
           this.itemService.saveCount(data.get_status_count);
@@ -369,11 +373,9 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 
           // if first time seen profile
           if (this.router.url.match('first') && reply === 'SHOW') {
-            this.Analytics('Four Page Registration', 'Four Page Registration Chat Page',
-              'First Profiles Shown on  Chat Page');
+            this.analyticsEvent('First Profile Shown To Newly Registered');
           } else if (this.router.url.match('first')) {
-            this.Analytics('Four Page Registration', 'Four Page Registration Chat Page',
-              'First Response ' +  reply + ' on First Profile Shown');
+            this.analyticsEvent(`Response ${reply} to first profile shown to newly registered`);
             this.router.navigateByUrl('chat');
           }
 
@@ -600,6 +602,7 @@ getImagesCount() {
   }
 }
 openImageModal(carous: string, src: string, name: string, index: any) {
+  this.analyticsEvent('User zoomed in the todays special profile image');
   if (carous && carous !== '') {
     const carousel: object = JSON.parse(carous);
     const keys = Object.keys(carousel);

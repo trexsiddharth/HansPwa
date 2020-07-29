@@ -33,9 +33,6 @@ export class FindOpenHistoryProfileService {
     private breakPointObserver: BreakpointObserver,
     private router: Router,
     private ngxNotificationService: NgxNotificationService) {
-
-      // show payment popup every time user open the app
-      this.openTodaysPopupAd();
     }
 
   setItem(item: any) {
