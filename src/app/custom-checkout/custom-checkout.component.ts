@@ -32,7 +32,7 @@ export class CustomCheckoutComponent implements OnInit {
     // this.subscriptionService.loadRazorPayScript();
     // this.subscriptionService.loadPayTmScript();
 
-    if (this.router.url.match('verifyPayemt')) {
+    if (this.router.url.match('verifyPayment')) {
       this.getTransactionStatus();
     } else {
       this.getPaytmOrderId().subscribe(
@@ -123,6 +123,7 @@ export class CustomCheckoutComponent implements OnInit {
         (data: any) => {
             console.log(data);
             localStorage.setItem('oId', null);
+            alert('Payment Successful');
         },
         err => {
           console.log(err);

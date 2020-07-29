@@ -348,6 +348,70 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
           }
         }
 
+
+        // if profile_created == 1 ...re hit auth api
+        if (data.profile_created === 1) {
+          this.checkUrl().subscribe(
+            data => {
+              console.log(data);
+              localStorage.setItem('authData', JSON.stringify(data));
+              const text: string = data.apiwha_autoreply;
+              const id = data.id;
+              if (data && data.get_status_count) {
+                this.itemService.saveCount(data.get_status_count);
+              }
+              if (data.hasPhoto === '1') {
+              this.itemService.setPhotoStatus(true);
+              } else {
+                this.itemService.setPhotoStatus(false);
+              }
+              // for personalized users
+              if (data && data.is_premium && data.is_premium === '1') {
+                this.itemService.setIsPersonalized(true);
+              } else {
+                this.itemService.setIsPersonalized(false);
+              }
+              // for is_lead
+              if (data && data.is_lead != null) {
+                  this.itemService.setIsLead(data.is_lead);
+              } else {
+                this.itemService.setIsLead(1);
+              }
+              // set profile image (circular in top bar)
+              if (data) {
+              this.selfImage = data.photo;
+              this.selfName = data.name;
+              this.chatService.authorized.emit({
+                name: data.name ? data.name : '' ,
+                photo: data.photo ? data.photo : '',
+                id: data.id,
+                isLead: data.is_lead
+              });
+              localStorage.setItem('profile_photo', data.photo);
+              } else {
+                this.selfImage = '../../assets/avatar.svg';
+                this.selfName = 'You';
+              }
+              console.log(text);
+              console.log(id);
+              localStorage.setItem('id', id);
+              this.paidStatus = data.paid_status;
+              console.log(this.paidStatus);
+              if (text.match('SHOW')) {
+                  this.chatService.setLoginStatus(true);
+                  if (localStorage.getItem('todayProfile')) {
+                    this.setProfileLocally();
+                  }
+                  this.getNextMessageOrProfile('SHOW');
+            }
+          }, err => {
+              console.log(err);
+            }
+          );
+          return;
+        }
+
+        // if data.type is profile or message
         if (data.type === 'profile') {
 
           this.type = 'profile';
