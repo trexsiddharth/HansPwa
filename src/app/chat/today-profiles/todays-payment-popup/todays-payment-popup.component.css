@@ -54,7 +54,7 @@ main {
 #cancel {
   position: absolute;
   z-index: 99999999;
-  right: 4%;
+  right: 1%;
 }
 #footer {
   margin: auto;
