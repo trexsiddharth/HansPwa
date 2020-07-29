@@ -45,6 +45,7 @@ export class CustomCheckoutComponent implements OnInit {
               // formData.append('mid', 'bkjPis66135619933053');
               const paytmData = JSON.parse(data.response);
               this.oId = data.order_id;
+              localStorage.setItem('oId', data.order_id);
               this.txnToken = paytmData.body.txnToken;
               this.mId = 'bkjPis66135619933053';
               // tslint:disable-next-line: max-line-length
@@ -116,11 +117,12 @@ export class CustomCheckoutComponent implements OnInit {
 
   getTransactionStatus() {
       const formData = new FormData();
-      formData.append('orderId', this.oId);
+      formData.append('orderId', localStorage.getItem('oId'));
 
       this.http.post('https://partner.hansmatrimony.com/api/transactionStatus', formData).subscribe(
         (data: any) => {
             console.log(data);
+            localStorage.setItem('oId', null);
         },
         err => {
           console.log(err);
