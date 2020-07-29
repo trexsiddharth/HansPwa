@@ -119,7 +119,7 @@ border-top-right-radius: 20px;
             </span> -->
         </div>
 
-        <div class="t-c" *ngIf="type !== 'interestShown' && type !== 'contacted' && type !== 'discover'">
+        <div class="t-c" *ngIf="type !== 'interestShown' && type !== 'interestReceived' && type !== 'contacted' && type !== 'discover'">
             <button 
             (click)="profileReAnswer(item,'SHORTLIST')" 
             class="setButtonsCenter" mat-fab style="color: red;

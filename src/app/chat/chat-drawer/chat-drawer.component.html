@@ -79,11 +79,13 @@
         <hr>
     </div>
     <ng-container>
-      <div class="drawerButtonSection" (click)="itemService.openTodaysPopupAd()">
+      <div class="drawerButtonSection" (click)="openSubscriptionOffer()">
         <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='english'" >
            <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;Latest Subscription Offers
         </button>
-        <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='hindi'">
+        <button class="buttonStyle" 
+        (click)="openSubscriptionOffer()"
+        *ngIf="languageService.getCurrentLanguage()==='hindi'">
           <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;नवीनतम {{languageService.profileLang.subscription}} ऑफर
        </button>
       </div>

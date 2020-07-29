@@ -222,7 +222,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     );
 
     if (this.router.url.match('push')) {
-      this.Analytics('Push Web', 'Push Web', 'Notification Clicked');
+      this.analyticsEvent('Web Push Notification Clicked');
     }
 
 
@@ -251,7 +251,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     } else if (this.currentUrl) {
       this.chatServivce.setContactNumber(this.currentUrl);
-      this.Analytics('login', 'login', 'logged In');
+      this.analyticsEvent('User Logged In');
       this.currentContact = this.currentUrl;
     } else {
       this.router.navigateByUrl('phone-number');
@@ -297,28 +297,28 @@ export class ChatComponent implements OnInit, AfterViewInit {
         localStorage.setItem('stage', null);
       }, 100);
     }
+
+     // as soon as the credits are updated we will show lockdown offer to the free user
+    // lockdown offer will not be shown to first time coming user
+    this.openTodaysPopupHere();
   }
 
   ngAfterViewInit() {
     this.spinner.hide();
-    // this.openTodaysPopupHere();
-    // as soon as the credits are updated we will show lockdown offer to the free user
-    // lockdown offer will not be shown to first time coming user
-
-    // this.itemService.creditsUpdated.subscribe(
-    //   data => {
-    //     if (data) {
-    //       this.lockdownCount++;
-    //       if (!this.router.url.match('first') && this.lockdownCount === 1) {
-    //         this.itemService.openTodaysPopupAd();//changes were made here instead of lockdown offer todays new offer opens up.
-    //       }
-    //     }
-    //   }
-    // );
   }
 
   openContactedProfiles() {
     this.router.navigate(['history', 'contacted'] , {relativeTo: this.activatedRoute});
+  }
+
+  // determines the current position of the drawer
+  drawerPosition(event) {
+    console.log(event);
+    if (event) {
+    this.analyticsEvent('Chat Drawer Opened');
+    } else {
+      this.analyticsEvent('Chat Drawer Closed');
+    }
   }
 
 
@@ -328,6 +328,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
          if (data) {
            this.lockdownCount++;
            if (!this.router.url.match('first') && this.lockdownCount === 1) {
+             // show payment popup every time user open the app
              this.itemService.openTodaysPopupAd();
            }
          }
@@ -535,99 +536,75 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
   }
 
- 
+
   logout() {
     this.loginStatus = false;
     localStorage.clear();
     this.router.navigateByUrl('/home');
   }
 
-  Analytics(type: string, category: string, action: string) {
-    (window as any).gtag('send', 'event', category, action, {
+  // Analytics(type: string, category: string, action: string) {
+  //   (window as any).gtag('send', 'event', category, action, {
+  //     hitCallback: () => {
+
+  //       console.log('Tracking ' + type + ' successful');
+
+  //     }
+
+  //   });
+
+  //    // gtag app + web
+  //   (window as any).gtag('event', category , {
+  //     'action': action
+  //   });
+  // }
+
+  analyticsEvent(event) {
+    (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
 
-        console.log('Tracking ' + type + ' successful');
+        console.log('Tracking ' + event + ' successful');
 
       }
 
     });
 
      // gtag app + web
-    (window as any).gtag('event', category , {
-      'action': action
+    (window as any).gtag('event', event, {
+      event_callback: () =>  {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
     });
+
   }
 
   changeSelectedTab(event: any) {
     console.log(event);
     this.currentTab = event;
 
-    if (this.itemService.getIsLead() === 0) {
     switch (event) {
       case 0:
+        this.analyticsEvent('Today\'s Special Section Visited');
         this.changeToBot();
         break;
       case 1:
         this.tabType = 'discover';
+        this.analyticsEvent('Discover Section Visited');
         this.changeToHistory();
         break;
         case 2:
+        this.analyticsEvent('Likes You Section Visited');
         this.tabType = 'interestReceived';
         this.changeToHistory();
         break;
       case 3:
+        this.analyticsEvent('Liked By Me Section Visited');
         this.tabType = 'interestShown';
-        this.changeToHistory();
-        break;
-        case 3:
-        this.tabType = 'interestReceived';
-        this.changeToHistory();
-        break;
-      case 4:
-        this.tabType = 'mutual';
-        this.changeToHistory();
-        break;
-      case 5:
-        this.tabType = 'personalized';
-        this.changeToPersonalized();
-        break;
-      case 6:
-        this.tabType = 'rejected';
-        this.changeToHistory();
-        break;
-
-      default:
-        break;
-    }
-  } else {
-    switch (event) {
-      case 0:
-        this.changeToBot();
-        break;
-      case 1:
-        this.tabType = 'discover';
-        this.changeToHistory();
-        break;
-        case 2:
-        this.tabType = 'interestReceived';
-        this.changeToHistory();
-        break;
-      case 3:
-        this.tabType = 'interestShown';
-        this.changeToHistory();
-        break;
-      case 4:
-        this.tabType = 'mutual';
-        this.changeToHistory();
-        break;
-      case 5:
-        this.tabType = 'rejected';
         this.changeToHistory();
         break;
       default:
         break;
     }
-  }
 
   }
   setSelectedTab(index: any) {

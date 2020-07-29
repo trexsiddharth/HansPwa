@@ -214,6 +214,10 @@ export class RegComponent implements OnInit {
 
             } else {
               console.log('New User');
+               // gtag app + web
+              (window as any).gtag('config', 'G-1ES443XD0F' , {
+                'user_id': number
+              });
             }
             this.spinner.hide();
           }, err => {
