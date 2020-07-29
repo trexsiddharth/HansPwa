@@ -6,6 +6,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
 } from 'ngx-kc-notification';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-custom-checkout',
@@ -19,13 +21,41 @@ export class CustomCheckoutComponent implements OnInit {
   });
   custId;
   orderId;
+  mId;
+  oId;
+  txnToken;
   constructor(private subscriptionService: SubscriptionserviceService, private http: HttpClient,
+              private router: Router,
               private spinner: NgxSpinnerService, private ngxNotificationService: NgxNotificationService, ) { }
 
   ngOnInit() {
-    this.subscriptionService.loadRazorPayScript();
+    // this.subscriptionService.loadRazorPayScript();
     // this.subscriptionService.loadPayTmScript();
 
+    if (this.router.url.match('verifyPayemt')) {
+      this.getTransactionStatus();
+    } else {
+      this.getPaytmOrderId().subscribe(
+        (data: any) => {
+          console.log(data);
+          if (data) {
+              // const formData = new FormData();
+              // formData.append('orderId', `HANS_ORDER_${Math.floor(Math.random() * 10000000) + 1}`);
+              // formData.append('txnToken', data.body.txnToken);
+              // formData.append('mid', 'bkjPis66135619933053');
+              const paytmData = JSON.parse(data.response);
+              this.oId = data.order_id;
+              this.txnToken = paytmData.body.txnToken;
+              this.mId = 'bkjPis66135619933053';
+              // tslint:disable-next-line: max-line-length
+              // window.open(`https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=HANS_ORDER_${Math.floor(Math.random() * 10000000) + 1}`);
+          }
+        },
+        err => {
+          console.log('error', err);
+        }
+      );
+    }
   }
 
   createSubscription(payMode) {
@@ -71,7 +101,31 @@ export class CustomCheckoutComponent implements OnInit {
   }
 
   openPaytm() {
-  this.subscriptionService.onScriptLoad();
+  // this.subscriptionService.onScriptLoad();
+      const form = document.getElementById('pay');
+      (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=${this.oId}`;
+      (form as any).submit();
+  }
+
+  getPaytmOrderId(): Observable<any> {
+    const formData = new FormData();
+    formData.append('mobile', '9910395820');
+    formData.append('amount', '100');
+    return this.http.post('https://partner.hansmatrimony.com/api/order', formData);
+  }
+
+  getTransactionStatus() {
+      const formData = new FormData();
+      formData.append('orderId', this.oId);
+
+      this.http.post('https://partner.hansmatrimony.com/api/transactionStatus', formData).subscribe(
+        (data: any) => {
+            console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
 }
