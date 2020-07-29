@@ -25,7 +25,7 @@
           </ng-template>
         </ngb-carousel>
       </div>
-      <div class="circular2" style="padding: 5px !important;">
+      <div class="circular2" style="padding: 10px !important;">
         <img (click)="addProfileImage(getCarouselCount())" style="width: 80%;" src="../../../assets/editN.svg"
           alt="edit" />
       </div>
@@ -1250,7 +1250,7 @@
             </div> -->
 
             <mat-accordion class="example-headers-align" id="matAccordion">
-              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel [expanded]="step === 1" (opened)="specialCase()" hideToggle>
                 <mat-expansion-panel-header>
                   <a style="
                       color: rgb(68, 67, 67);
@@ -1264,18 +1264,18 @@
                       src="../../../assets/editN.svg" alt="edit contact" />
                   </div>
                 </mat-expansion-panel-header>
-                <div class="row" *ngIf="editIndexPrefs != 1">
-                  <div class="col-12">
+                <div class="row" *ngIf="editIndexPrefs != 1" style="width:100%!important">
+                  <div class="col-12" *ngFor="let caste of castePreferences">
                     <span style="
                         color: rgb(112, 111, 111);
                         margin-left: 5px;
-                        word-wrap: break-word;
+                        word-wrap: break-word!important;
                       ">
-                      {{ preferenceProfileData.caste }}
+                      {{ caste }}
                     </span>
                   </div>
                 </div>
-                <div class="row" *ngIf="editIndexPrefs == 1">
+                <div class="row" *ngIf="editIndexPrefs == 1" style="width:100%!important">
                   <div class="col-12">
                     <h6>Caste</h6>
                     <mat-select type="text" class="form-control" [multiple]="true"

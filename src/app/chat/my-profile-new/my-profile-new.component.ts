@@ -449,7 +449,13 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   setStep(index: number) {
     this.step = index;
   }
-
+  castePreferences: string[] = [];
+  specialCase() {
+    this.setStep(1);
+    this.castePreferences = this.preferenceProfileData.caste.split(",");
+    console.log(this.preferenceProfileData.caste);
+    console.log(this.castePreferences);
+  }
   changeSelectedTab(event: any) { }
   optionsFamilyIncome: Options = {
     floor: 0,
@@ -928,7 +934,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   onSubmitPreferences() {
     this.editIndexPrefs = -1;
+
+    this.preferenceProfileData.caste = this.preferenceProfileData.caste.join(",");
+    this.castePreferences = this.preferenceProfileData.caste.split(",");
     console.log("preference Data to update");
+
     console.log(this.preferenceProfileData);
 
     const newPrefForm = new FormData();
