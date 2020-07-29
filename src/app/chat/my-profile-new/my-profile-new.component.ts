@@ -476,9 +476,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     floor: 18,
     ceil: 100,
     step: 1,
-    minRange: 10,
-    maxRange: 15,
-    pushRange: true,
+    // minRange: 10,
+    // maxRange: 15,
+    // pushRange: true,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
@@ -511,9 +511,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     floor: 0,
     ceil: 100,
     step: 2,
-    minRange: 10,
-    maxRange: 20,
-    pushRange: true,
+    // minRange: 10,
+    // maxRange: 20,
+    // pushRange: true,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
