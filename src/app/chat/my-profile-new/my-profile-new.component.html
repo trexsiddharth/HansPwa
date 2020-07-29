@@ -3,7 +3,7 @@
   <main *ngIf="personalProfileData" class="fixed ht-full t-0 b-0 HC main">
     <div class="row parentTop">
       <div>
-        <img src="../../assets/backN.svg" class="backArrow" (click)="backToChat()" alt="BACK" />
+        <img src="../../assets/left-arrow-key.svg" class="backArrow" (click)="backToChat()" alt="BACK" />
       </div>
       <div class="circular">
         <ngb-carousel id="carousel">
@@ -26,7 +26,7 @@
         </ngb-carousel>
       </div>
       <div class="circular2" style="padding: 10px !important;">
-        <img (click)="addProfileImage(getCarouselCount())" style="width: 80%;" src="../../../assets/editN.svg"
+        <img (click)="addProfileImage(getCarouselCount())" style="width: 100%;" src="../../../assets/editN.svg"
           alt="edit" />
       </div>
       <div style="
@@ -1280,7 +1280,7 @@
                     <h6>Caste</h6>
                     <mat-select type="text" class="form-control" [multiple]="true"
                       (selectionChange)="casteSelectionChanged($event)" [formControl]="searchCaste" #multiSelect
-                      [(ngModel)]="preferenceProfileData.caste" required>
+                      [(ngModel)]="castePreferences" required>
                       <mat-option>
                         <ngx-mat-select-search noEntriesFoundLabel="No Castes Found" placeholderLabel="Search Castes..."
                           [formControl]="searchCasteText"></ngx-mat-select-search>

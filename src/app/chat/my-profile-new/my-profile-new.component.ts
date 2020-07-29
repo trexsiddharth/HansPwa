@@ -935,8 +935,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmitPreferences() {
     this.editIndexPrefs = -1;
 
-    this.preferenceProfileData.caste = this.preferenceProfileData.caste.join(",");
-    this.castePreferences = this.preferenceProfileData.caste.split(",");
+    //this.preferenceProfileData.caste = this.preferenceProfileData.caste.join(",");
+    //this.castePreferences = this.preferenceProfileData.caste.split(",");
+    this.preferenceProfileData.caste = this.castePreferences.join(",");
     console.log("preference Data to update");
 
     console.log(this.preferenceProfileData);
