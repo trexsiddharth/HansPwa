@@ -58,12 +58,13 @@
             style="background: #4adee4 !important; padding: 14px !important;">
             <img src="../../assets/personalNW.svg" alt="icon" />
           </button>
-          Personal
+          <a style="font-size:small">Personal</a>
         </ng-template>
         <form [formGroup]="personalForm">
           <div class="tabContent">
             <mat-accordion class="example-headers-align" id="matAccordion">
-              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle id="expansion-header">
+              <mat-expansion-panel [expanded]="stepPersonal === 0" (opened)="setStepPersonal(0)" hideToggle
+                id="expansion-header">
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/personalN.svg" />
                   <a style="
@@ -86,8 +87,8 @@
                   </div>
                   <div *ngIf="editIndexPersonal == 0">
                     <h6>(max 300 words)</h6>
-                    <input class="form-control" maxlength="300" type="text" formControlName="About" required
-                      [(ngModel)]="personalProfileData.about" />
+                    <textarea cols="40" class="form-control" maxlength="300" type="textarea" formControlName="About"
+                      required></textarea>
                   </div>
                   <div *ngIf="editIndexPersonal != 0">
                     <p style="margin-top: 10px; text-transform: capitalize;">
@@ -195,8 +196,7 @@
                   <div class="row">
                     <div class="col-12">
                       <h6>Name:</h6>
-                      <input type="text" class="form-control" formControlName="name" required
-                        [(ngModel)]="personalProfileData.name" />
+                      <input type="text" class="form-control" formControlName="name" required />
                     </div>
                     <div class="col-12">
                       <h6>Age:</h6>
@@ -236,32 +236,28 @@
 
                     <div class="col-12">
                       <h6>Weight:</h6>
-                      <input type="text" class="form-control" formControlName="Weight" required
-                        [(ngModel)]="personalProfileData.weight" />
+                      <input type="text" class="form-control" formControlName="Weight" required />
                     </div>
 
                     <div class="col-12">
                       <h6>Height:</h6>
-                      <select type="text" class="form-control" formControlName="Height" required
-                        [(ngModel)]="personalProfileData.height">
+                      <select type="text" class="form-control" formControlName="Height" required>
                         <option *ngFor="let item of Heights" [value]="item">{{
                           item
                         }}</option>
                       </select>
                     </div>
 
-                    <div class="col-12">
+                    <div class=" col-12">
                       <h6>Marital Status:</h6>
-                      <select class="form-control" formControlName="MaritalStatus" required
-                        [(ngModel)]="personalProfileData.marital_status">
+                      <select class="form-control" formControlName="MaritalStatus" required>
                         <option *ngFor="let item of MaritalStatus" [value]="item">{{ item }}</option>
                       </select>
                     </div>
 
                     <div class="col-12">
                       <h6>Religion:</h6>
-                      <select class="form-control" formControlName="Religion" required
-                        [(ngModel)]="personalProfileData.religion">
+                      <select class="form-control" formControlName="Religion" required>
                         <option *ngFor="let option of Religions" [value]="option">
                           {{ option }}
                         </option>
@@ -271,7 +267,7 @@
                     <div class="col-12">
                       <h6>Caste</h6>
                       <input type="text" class="form-control" formControlName="Castes" required
-                        [(ngModel)]="personalProfileData.caste" [matAutocomplete]="caste" />
+                        [matAutocomplete]="caste" />
                       <mat-autocomplete (optionSelected)="casteValidation($event.option.value)" autoActiveFirstOption
                         #caste="matAutocomplete">
                         <mat-option *ngFor="let name of casteo | async" [value]="name" required>
@@ -282,8 +278,7 @@
 
                     <div class="col-12">
                       <h6>Food Choice:</h6>
-                      <select class="form-control" formControlName="Food" required
-                        [(ngModel)]="personalProfileData.food_choice">
+                      <select class="form-control" formControlName="Food" required>
                         <option *ngFor="let item of Foodpreferences" [value]="item">{{ item }}</option>
                       </select>
                     </div>
@@ -295,7 +290,7 @@
                           onAutocompleteSelected($event, 'Locality')
                         " (onLocationSelected)="
                           onLocationSelected($event, 'Locality')
-                        " required formControlName="Locality" [(ngModel)]="personalProfileData.locality" />
+                        " required formControlName="Locality" />
                     </div>
                   </div>
                 </div>
@@ -307,7 +302,7 @@
                 </mat-action-row>
               </mat-expansion-panel>
 
-              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel [expanded]="stepPersonal === 1" (opened)="setStepPersonal(1)" hideToggle>
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/educationN.svg" />
                   <a style="
@@ -451,25 +446,21 @@
                 <div *ngIf="editIndexPersonal == 1">
                   <div class="col-12">
                     <h6>Education:</h6>
-                    <select class="form-control" formControlName="Degree" [(ngModel)]="personalProfileData.degree"
-                      required>
+                    <select class="form-control" formControlName="Degree" required>
                       <option *ngFor="let item of HigherEducation" [value]="item">{{ item }}</option>
                     </select>
                   </div>
                   <div class="col-12">
                     <h6>College:</h6>
-                    <input type="text" class="form-control" formControlName="College"
-                      [(ngModel)]="personalProfileData.college" />
+                    <input type="text" class="form-control" formControlName="College" />
                   </div>
                   <div class="col-12">
                     <h6>Additional Qualifications:</h6>
-                    <input type="text" class="form-control" formControlName="Additional"
-                      [(ngModel)]="personalProfileData.additional_qualification" />
+                    <input type="text" class="form-control" formControlName="Additional" />
                   </div>
                   <div class="col-12">
                     <h6>Occupation:</h6>
-                    <select #relation class="form-control" formControlName="Occupation"
-                      [(ngModel)]="personalProfileData.occupation" required>
+                    <select #relation class="form-control" formControlName="Occupation" required>
                       <option *ngFor="let option of Occupation" [value]="option">
                         {{ option }}
                       </option>
@@ -477,8 +468,7 @@
                   </div>
                   <div class="col-12">
                     <h6>Designation:</h6>
-                    <select #relation class="form-control" formControlName="Profession"
-                      [(ngModel)]="personalProfileData.profession">
+                    <select #relation class="form-control" formControlName="Profession">
                       <option *ngFor="let option of designations" [value]="option">
                         {{ option }}
                       </option>
@@ -486,13 +476,11 @@
                   </div>
                   <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
                     <h6>Other Designation:</h6>
-                    <input type="text" class="form-control" formControlName="OtherProfession" name="OtherProfession"
-                      [(ngModel)]="personalProfileData.profession" />
+                    <input type="text" class="form-control" formControlName="OtherProfession" name="OtherProfession" />
                   </div>
                   <div class="col-12">
                     <h6>Company:</h6>
-                    <input type="text" class="form-control" formControlName="Company"
-                      [(ngModel)]="personalProfileData.company" />
+                    <input type="text" class="form-control" formControlName="Company" />
                   </div>
                   <div class="col-12">
                     <h6>Annual Income In Lakhs:</h6>
@@ -517,7 +505,7 @@
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel [expanded]="stepPersonal === 2" (opened)="setStepPersonal(2)" hideToggle>
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/horoscopeN.svg" />
                   <a style="
@@ -595,8 +583,7 @@
                     <input type="text" class="form-control" matValidateAddress matGoogleMapsAutocomplete
                       #matGoogleMapsAutocomplete2="matGoogleMapsAutocomplete" (onAutocompleteSelected)="
                         onAutocompleteSelected($event, 'Birth')
-                      " (onLocationSelected)="onLocationSelected($event, 'Birth')" formControlName="BirthPlace"
-                      [(ngModel)]="personalProfileData.birth_place" />
+                      " (onLocationSelected)="onLocationSelected($event, 'Birth')" formControlName="BirthPlace" />
                   </div>
                   <div class="col-12">
                     <h6>Manglik:</h6>
@@ -609,7 +596,7 @@
                   <div class="col-12">
                     <h6>Time of Birth</h6>
                     <input class="form-control" id="BirthTime" type="time" placeholder="Choose a time"
-                      formControlName="BirthTime" [(ngModel)]="personalProfileData.birth_time" />
+                      formControlName="BirthTime" />
                   </div>
                 </div>
                 <mat-action-row>
@@ -619,7 +606,7 @@
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel [expanded]="stepPersonal === 2" (opened)="setStepPersonal(2)" hideToggle>
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/phoneNN.svg" />
                   <a style="
@@ -677,20 +664,18 @@
                 <div *ngIf="editIndexPersonal == 3">
                   <div class="col-12">
                     <h6>Email</h6>
-                    <input type="email" id="email" class="form-control" formControlName="email"
-                      [(ngModel)]="familyProfileData.email" />
+                    <input type="email" id="email" class="form-control" formControlName="email" required />
                   </div>
 
                   <div class="col-12">
                     <h6>Mobile number</h6>
                     <input style="display: inline;" type="number" id="phone" class="form-control"
-                      formControlName="phone" [(ngModel)]="familyProfileData.moblie" required />
+                      formControlName="phone" required />
                   </div>
 
                   <div class="col-12">
                     <h6>Whatsapp number</h6>
-                    <input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp"
-                      [(ngModel)]="familyProfileData.whats_app_no" />
+                    <input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp" />
                   </div>
                 </div>
                 <mat-action-row>
@@ -713,12 +698,13 @@
             style="background: #4adee4 !important;">
             <img src="../../assets/familyNW.svg" alt="icon" />
           </button>
-          Family
+          <a style="font-size:small">Family</a>
         </ng-template>
         <form (ngSubmit)="onSubmitFamily()" #familyForm="ngForm">
           <div class="tabContent" style="margin-top: 0px !important; background: white !important;">
             <mat-accordion class="example-headers-align" id="matAccordion">
-              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle id="expansion-header">
+              <mat-expansion-panel [expanded]="stepFamily === 0" (opened)="setStepFamily(0)" hideToggle
+                id="expansion-header">
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/phoneNN.svg" />
                   <a style="
@@ -830,7 +816,7 @@
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel [expanded]="stepFamily === 1" (opened)="setStepFamily(1)" hideToggle>
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/paretnsN.svg" />
                   <a style="
@@ -933,7 +919,7 @@
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel [expanded]="stepFamily === 2" (opened)="setStepFamily(2)" hideToggle>
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/siblingsN.svg" />
                   <a style="
@@ -1018,7 +1004,7 @@
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel [expanded]="stepFamily === 3" (opened)="setStepFamily(3)" hideToggle>
                 <mat-expansion-panel-header>
                   <img class="accordion-image" src="../../assets/lifestyleN.svg" />
                   <a style="
@@ -1030,57 +1016,76 @@
                     src="../../assets/downN.png" />
                 </mat-expansion-panel-header>
                 <br />
-                <div class="row">
-                  <a style="
-                      color: rgb(112, 111, 111);
-                      font-size: x-large;
+                <div *ngIf="editIndexFamily != 3">
+                  <div class="row">
+                    <a style="
+                      color: rgb(59, 59, 59);
+                      font-size: large;
                       margin-left: 15px;
-                      font-weight: 500;
+                      font-weight: 400;
                       font-style: 'Poppins' !important;
                     ">
-                    {{ languageService.profileLang.familyIncome }}:</a><br />
-                </div>
-                <div class="custom-slider">
+                      {{ languageService.profileLang.familyIncome }}:</a>
+                    <span style="margin-left: 15px;">
+                      {{
+                    familyProfileData.family_income
+                      ? familyProfileData.family_income+" LPA"
+                      : "Add Detail"
+                  }}
+                    </span>
+                    <img style="position:absolute!important; right:40px;" *ngIf="editIndexFamily != 3"
+                      (click)="setEditIndexFamily(3)" class="editPencil" src="../../../assets/editN.svg"
+                      alt="editParents" />
+                  </div>
+                  <!-- <div class="custom-slider">
                   <ng5-slider [(value)]="familyProfileData.family_income" [options]="optionsFamilyIncome"></ng5-slider>
-                </div>
-                <br />
+                </div> -->
+                  <br />
 
-                <div class="row" *ngIf="editIndexFamily != 3">
-                  <a style="
-                      color: rgb(112, 111, 111);
-                      font-size: x-large;
+                  <div class="row" *ngIf="editIndexFamily != 3">
+                    <a style="
+                      color: rgb(59, 59, 59);
+                      font-size: large;
                       margin-left: 15px;
-                      font-weight: 500;
+                      font-weight: 400;
                     ">
-                    {{ languageService.profileLang.familyType }}:</a><br />
-                  <span style="margin-left: 15px;">
-                    {{
+                      {{ languageService.profileLang.familyType }}:</a><br />
+                    <span style="margin-left: 15px;">
+                      {{
                       familyProfileData.family_type
                         ? familyProfileData.family_type
                         : "Add Detail"
                     }}
-                  </span>
-                  <img style="margin-left: 60px !important;" *ngIf="editIndexFamily != 3"
-                    (click)="setEditIndexFamily(3)" class="editPencil" src="../../../assets/editN.svg"
-                    alt="editParents" />
-                </div>
-                <div class="row" *ngIf="editIndexFamily == 3">
-                  <div class="col-12">
-                    <h6 style="display: inline-block;">Family Type :</h6>
-                    <select type="text" class="form-control" name="family_type"
-                      [(ngModel)]="familyProfileData.family_type" required>
-                      <option *ngFor="let item of FamilyType" [value]="item">{{
-                        item
-                      }}</option>
-                    </select>
+                    </span>
+
                   </div>
                 </div>
-                <mat-action-row>
-                  <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexFamily != 3"
-                    (click)="onSubmitFamily()">
-                    SAVE
-                  </button>
-                </mat-action-row>
+                <div *ngIf="editIndexFamily == 3">
+                  <div class="row">
+                    <div class="col-12">
+                      <h6 style="display: inline-block;">Family Type :</h6>
+                      <input type="text" class="form-control" name="family_income"
+                        [(ngModel)]="familyProfileData.family_income" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <h6 style="display: inline-block;">Family Type :</h6>
+                      <select type="text" class="form-control" name="family_type"
+                        [(ngModel)]="familyProfileData.family_type" required>
+                        <option *ngFor="let item of FamilyType" [value]="item">{{
+                        item
+                      }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <mat-action-row>
+                    <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexFamily != 3"
+                      (click)="onSubmitFamily()">
+                      SAVE
+                    </button>
+                  </mat-action-row>
+                </div>
               </mat-expansion-panel>
             </mat-accordion>
           </div>
@@ -1095,7 +1100,7 @@
             style="background: #4adee4 !important;">
             <img src="../../assets/preferencesNW.svg" alt="icon" />
           </button>
-          {{ languageService.profileLang.preference }}
+          <a style="font-size:small">{{ languageService.profileLang.preference }}</a>
         </ng-template>
         <form (ngSubmit)="onSubmitPreferences()" #preferencesForm="ngForm">
           <div class="tabContent">
@@ -1134,9 +1139,9 @@
               <ng5-slider [(value)]="preferenceProfileData.income_min" [(highValue)]="preferenceProfileData.income_max"
                 [options]="optionsIncome" (userChangeEnd)="setEditIndexPrefs(0)"></ng5-slider>
             </div>
-            <button style="position: absolute; top: 5px; right: 30px;" class="mat-elevation-z5" mat-button
-              class="btn-success btn-small" [hidden]="editIndexPrefs != 0" (click)="onSubmitPreferences()">
-              SAVE
+            <button style="position: absolute; top: 5px; right: 30px;" mat-button [hidden]="editIndexPrefs != 0"
+              (click)="onSubmitPreferences()">
+              <img style="width:30px!important" src="../../../assets/checked.svg">
             </button>
             <hr>
             <!-- <a style="
@@ -1250,21 +1255,23 @@
             </div> -->
 
             <mat-accordion class="example-headers-align" id="matAccordion">
-              <mat-expansion-panel [expanded]="step === 1" (opened)="specialCase()" hideToggle>
+              <mat-expansion-panel [expanded]="stepPreferences === 1" (opened)="specialCase()" hideToggle>
                 <mat-expansion-panel-header>
                   <a style="
                       color: rgb(68, 67, 67);
                       font-size: large;
                       margin-left: 12px;
                       font-weight: 600;
+                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important
                     ">
                     {{ languageService.profileLang.castePref }}</a>
-                  <div style="position: absolute; right: 30px;">
+                </mat-expansion-panel-header>
+
+                <div class="row" *ngIf="editIndexPrefs != 1" style="width:100%!important;position:relative">
+                  <div style="position: absolute; right: -8px!important;top:10px">
                     <img *ngIf="editIndexPrefs != 1" (click)="setEditIndexPrefs(1)" class="editPencil"
                       src="../../../assets/editN.svg" alt="edit contact" />
                   </div>
-                </mat-expansion-panel-header>
-                <div class="row" *ngIf="editIndexPrefs != 1" style="width:100%!important">
                   <div class="col-12" *ngFor="let caste of castePreferences">
                     <span style="
                         color: rgb(112, 111, 111);
@@ -1303,23 +1310,24 @@
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel [expanded]="stepPreferences === 2" (opened)="setStepPreferences(2)" hideToggle>
                 <mat-expansion-panel-header>
                   <a style="
                       color: rgb(68, 67, 67);
                       font-size: large;
                       margin-left: 12px;
                       font-weight: 600;
+                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;
                     ">
                     {{ languageService.profileLang.manglikPref }}</a>
-                  <div style="position: absolute; right: 30px;">
-                    <img *ngIf="editIndexPrefs != 2" (click)="setEditIndexPrefs(2)" class="editPencil"
-                      src="../../../assets/editN.svg" alt="edit
-                    contact" />
-                  </div>
                 </mat-expansion-panel-header>
                 <div *ngIf="editIndexPrefs != 2">
-                  <div class="row">
+                  <div class="row" style="position:relative">
+                    <div style="position: absolute; right: 30px;top:10px">
+                      <img *ngIf="editIndexPrefs != 2" (click)="setEditIndexPrefs(2)" class="editPencil"
+                        src="../../../assets/editN.svg" alt="edit
+                      contact" />
+                    </div>
                     <div class="col-12">
                       <span style="margin-left: 5px;">
                         <span class="labelText">{{ languageService.profileLang.manglikPref }}:</span>{{

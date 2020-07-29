@@ -55,7 +55,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   preferenceProfileData: any;
 
   selectedTab = 0;
-  step = -1;
+  stepPersonal = -1;
+  stepFamily = -1;
+  stepPreferences = -1;
   errors = [];
 
   getcastes: any = [];
@@ -393,6 +395,25 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       Locality: [""],
       About: ["", Validators.compose([Validators.maxLength(300)])],
     });
+    this.familyForm1 = this._formBuilder.group({
+      identity_number: [""],
+      id: [""],
+      temple_id: [""],
+      family_type: [""],
+      house_type: [""],
+      about: [""],
+      occupation_father: [""],
+      occupation_mother: [""],
+      father_status: [""],
+      mother_status: [""],
+      married_sons: [""],
+      unmarried_sons: [""],
+      married_daughters: [""],
+      unmarried_daughters: [""],
+      gotra: [""],
+      family_income: [""],
+      city: [""],
+    });
   }
   ngOnInit() {
     this.innerWidth = window.innerWidth;
@@ -446,12 +467,20 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
           a && b && a === b;
       });
   }
-  setStep(index: number) {
-    this.step = index;
+
+  setStepPersonal(index: number) {
+    this.stepPersonal = index;
   }
+  setStepFamily(index: number) {
+    this.stepFamily = index;
+  }
+  setStepPreferences(index: number) {
+    this.stepPreferences = index;
+  }
+
   castePreferences: string[] = [];
   specialCase() {
-    this.setStep(1);
+    this.setStepPreferences(1);
     this.castePreferences = this.preferenceProfileData.caste.split(",");
     console.log(this.preferenceProfileData.caste);
     console.log(this.castePreferences);
@@ -534,6 +563,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   personalForm: FormGroup;
+  //familyForm: NgForm;
+  familyForm1: FormGroup;
   familyForm: NgForm;
   preferencesForm: NgForm;
 
@@ -623,6 +654,28 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         : "",
       AnnualIncome: this.getIncome(this.personalProfileData.monthly_income),
       About: this.personalProfileData.about,
+    });
+  }
+  setCurrentFamilyValues() {
+    console.log(this.familyProfileData);
+    this.familyForm1.patchValue({
+      identity_number: this.familyProfileData.identity_number,
+      id: this.familyProfileData.id,
+      temple_id: this.familyProfileData.temple_id,
+      family_type: this.familyProfileData.family_type,
+      house_type: this.familyProfileData.house_type,
+      about: this.familyProfileData.about,
+      occupation_father: this.familyProfileData.occupation,
+      occupation_mother: this.familyProfileData.occupation_mother,
+      father_status: this.familyProfileData.father_status,
+      mother_status: this.familyProfileData.mother_status,
+      married_sons: this.familyProfileData.married_sons,
+      unmarried_sons: this.familyProfileData.unmarried_sons,
+      married_daughters: this.familyProfileData.married_daughters,
+      unmarried_daughters: this.familyProfileData.unmarried_daughters,
+      gotra: this.familyProfileData.gotra,
+      family_income: this.personalProfileData.family_income,
+      city: this.familyProfileData.city,
     });
   }
   getMonthString(month: string) {
@@ -849,6 +902,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe(
           (data: any) => {
             console.log(data);
+            this.getUserProfileData();
           },
           (error: any) => {
             console.log(error);
@@ -870,7 +924,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         );
       }
     }
-    this.getUserProfileData();
   }
   onSubmitFamily() {
     this.editIndexFamily = -1;
@@ -888,11 +941,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     newFamilyForm.append("about", this.familyProfileData.about);
     newFamilyForm.append(
       "occupation_father",
-      this.familyProfileData.father_occupation
+      this.familyProfileData.occupation
     );
     newFamilyForm.append(
       "occupation_mother",
-      this.familyProfileData.mother_occupation
+      this.familyProfileData.occupation_mother
     );
     newFamilyForm.append("father_status", this.familyProfileData.father_status);
     newFamilyForm.append("mother_status", this.familyProfileData.mother_status);
@@ -922,6 +975,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(
         (data: any) => {
           console.log(data);
+          this.getUserProfileData();
           console.log("Family Deatils Updated successfully");
         },
         (error: any) => {
@@ -949,7 +1003,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     newPrefForm.append("temple_id", this.preferenceProfileData.temple_id);
     newPrefForm.append("id", this.preferenceProfileData.id);
-    newPrefForm.append("caste", this.preferenceProfileData.caste);
+    newPrefForm.append("caste", this.searchCaste.value);
     newPrefForm.append("manglik", this.preferenceProfileData.manglik);
     newPrefForm.append(
       "marital_status",
@@ -1119,6 +1173,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             this.getAllCaste();
             this.getAllCastePersonal();
             this.setCurrentProfileValue();
+            this.setCurrentFamilyValues();
           },
           (error: any) => {
             this.spinner.hide();
@@ -1526,7 +1581,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.personalForm.value.BirthPlace = event.formatted_address;
     }
-    this.familyProfileData.locality = event.formatted_address;
+
+    this.familyProfileData.city = event.formatted_address;
     console.log('address of family', event.formatted_address);
 
   }
@@ -1546,7 +1602,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   onLocationSelectedFamily(e) {
-    this.familyProfileData.city = e;
+    //this.familyProfileData.city = e;
     console.log('location of family', e);
   }
   /*
