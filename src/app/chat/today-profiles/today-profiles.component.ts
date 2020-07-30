@@ -163,7 +163,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
 
       // set profile image (circular in top bar)
-        
+
         if (data) {
       this.selfImage = data.photo;
       this.selfName = data.name;
@@ -185,7 +185,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
         localStorage.setItem('id', id);
         this.paidStatus = data.paid_status;
         console.log(this.paidStatus);
-       
+
         if (text.match('SHOW') ) {
           this.chatService.Analytics('login', 'login', 'logged In');
           this.chatService.setLoginStatus(true);
@@ -449,6 +449,21 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
             localStorage.setItem('todayProfile', '');
             this.setMessageText(data.apiwha_autoreply);
             this.spinner.hide();
+
+             // if profiles for the day are over
+             /*
+             rate us dialog to be shown when profiles are ended for the day.
+             that means TPL equals zero and credits should be greater than 0
+             coz we want to show this popup to ppl with credits only.
+             */
+            if (data.type === 'message'
+               && data.buttons === 'History'
+               && data.get_status_count.TPL === 0
+               && data.is_rated === 0
+               && this.points > 0) {
+                 this.itemService.openRateUsDialog();
+              }
+
           }
 
         switch (reply) {

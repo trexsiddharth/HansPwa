@@ -318,14 +318,14 @@ export class FindOpenHistoryProfileService {
       result => {
         if (result.matches) {
           console.log('screen is greater than  1024px');
-          dialogConfig.minWidth = '40vw';
+          dialogConfig.minWidth = '30vw';
           dialogConfig.maxHeight = '80vh';
           dialogConfig.disableClose = false;
         } else {
           console.log('screen is less than  1024px');
-          dialogConfig.minWidth = '98vw';
+          dialogConfig.minWidth = '96vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = true;
+          dialogConfig.disableClose = false;
         }
       }
     );

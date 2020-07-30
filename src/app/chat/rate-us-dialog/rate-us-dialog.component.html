@@ -1,6 +1,6 @@
 <div class="mainDiv">
 <div class="topImg">
-    <img width="50px" src="../../../assets/new icons/gift.svg" alt="gift">
+    <img width="60px" src="../../../assets/new icons/gift.svg" alt="gift">
 </div>
 <p id="firstLine">
     Give Us 5 Stars And
@@ -9,13 +9,18 @@
     Get 3 Contacts Free
 </p>
 
-<div class="text-center stars">
+<div class="text-center stars" 
+(click)="openPlayStore()">
     <img width="35px" *ngFor="let item of [1,2,3,4,5]" src="../../../assets/new icons/star_green.svg" alt="star">
 </div>
 
 <div class="bottomDiv">
-    <img width="40px" src="../../../assets/new icons/playstore.svg" alt="playstore">
-    <button mat-raised-button class="rateBtn">
+    <img width="45px" 
+    (click)="openPlayStore()"
+    src="../../../assets/new icons/playstore.svg" alt="playstore">
+    <button mat-raised-button
+    (click)="openPlayStore()"
+     class="rateBtn">
         Rate us
     </button>
 </div>

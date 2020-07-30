@@ -10,11 +10,11 @@
     background-color: white;
     overflow: visible;
     border-radius: 10px;
-    padding-bottom: 40px;
+    padding: 0px 20px 40px;
 }
 .topImg{
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     border-radius: 100%;
     background-color: #4adee4;
     position: relative;
@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
     margin: 0px auto;
-    top: -35px;
+    top: -45px;
 }
 #firstLine {
     color: #4A5D6A;
@@ -43,8 +43,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    padding: 0px 10px;
-    margin: 20px 40px;
+    margin: 20px 30px 40px;
 }
 .bottomDiv{
     width: 100%;
@@ -52,13 +51,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    padding: 0px 40px;
 }
 .rateBtn{
-    background-image: linear-gradient(90deg, #566EE8, #4FB0E5, white);
+    background-image: linear-gradient(90deg, #566EE8, #4FB0E5);
     border-radius: 100px;
-    padding: 5px 40px;
-    font-size: 1rem;
+    padding: 10px 40px;
+    font-size: 1.3rem;
     font-family: 'Roboto';
     font-weight: bold;
 }
