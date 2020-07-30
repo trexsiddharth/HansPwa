@@ -34,7 +34,7 @@
         </button>
         <button class="rowMore" (click)="openHistoryProfiles('interestShown')">
             <img src="../../../assets/tabs-icons/heart.svg" class="iconImage">
-            <span *ngIf="languageService.getCurrentLanguage()==='english'" >Liked Profiles</span>
+            <span *ngIf="languageService.getCurrentLanguage()==='english'" >Your Likes</span>
             <span *ngIf="languageService.getCurrentLanguage()==='hindi'">आपको {{languageService.profileLang.shortlist}}</span>
         </button>
         <button class="rowMore" (click)="openHistoryProfiles('interestReceived')">

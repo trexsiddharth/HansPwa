@@ -21,13 +21,13 @@ export class ChatDrawerComponent implements OnInit {
   userId;
   userIsLead;
   constructor(public languageService: LanguageService,
-    private chatService: ChatServiceService,
-    private spinner: NgxSpinnerService,
-    private http: HttpClient,
-    private ngxNotificationService: NgxNotificationService,
-    public router: Router,
-    public itemService: FindOpenHistoryProfileService,
-    public activatedRoute: ActivatedRoute) {
+              private chatService: ChatServiceService,
+              private spinner: NgxSpinnerService,
+              private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
+              public router: Router,
+              public itemService: FindOpenHistoryProfileService,
+              public activatedRoute: ActivatedRoute) {
 
 
   }
@@ -54,7 +54,8 @@ export class ChatDrawerComponent implements OnInit {
   }
   openDiscover() {
     this.analyticsEvent('User Clicked Discover From Chat Drawer');
-    this.router.navigateByUrl('chat/discover/open');
+    this.closeSideNav();
+    this.itemService.changeTab(1);
   }
 
   onImageLoadError() {
@@ -66,15 +67,18 @@ export class ChatDrawerComponent implements OnInit {
   openHistoryProfiles(section: string) {
     if (section.indexOf('contact') !== -1) {
       this.analyticsEvent('User Clicked Contacted From Chat Drawer');
+      this.router.navigateByUrl(`chat/history/${section}`);
     } else if (section.indexOf('Received') !== -1) {
+      this.itemService.changeTab(2);
       this.analyticsEvent('User Clicked Likes You From Chat Drawer');
     } else if (section.indexOf('Shown') !== -1) {
+      this.itemService.changeTab(3);
       this.analyticsEvent('User Clicked Liked By Me From Chat Drawer');
     } else {
       this.analyticsEvent('User Clicked Rejected From Chat Drawer');
+      this.router.navigateByUrl(`chat/history/${section}`);
     }
-
-    this.router.navigateByUrl(`chat/history/${section}`);
+    this.closeSideNav();
   }
 
   logout() {

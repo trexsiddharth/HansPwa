@@ -530,7 +530,7 @@ setAbout() {
     qualification: this.PageTwo.value.Qualification ? `. I've completed my ${this.PageTwo.value.Qualification}` : '',
     occupation: this.PageTwo.value.Occupation ?
     this.PageTwo.value.Occupation === 'Business/Self-Employed' ?
-     ' and Self-Employed' : this.PageTwo.value.Occupation === 'Not Working' ? 'current not working'
+     ' and Self-Employed' : this.PageTwo.value.Occupation === 'Not Working' ? 'currently not working'
     : this.PageTwo.value.Occupation === 'Doctor' ||
     this.PageTwo.value.Occupation === 'Teacher'
     ? ` currently working as ${this.PageTwo.value.Occupation}` :

@@ -420,6 +420,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
              // locally storing the new profile
             localStorage.setItem('todayProfile', JSON.stringify(data));
           }
+          this.item.working_city = 'na';
 
           // data.first_time = 0 -> when user comes for the first time on a day
           // data.first_time = 1 -> it gets 1 once he has seen first profile
@@ -878,6 +879,41 @@ familyType() {
   } else {
     return 'Joint Family';
   }
+}
+setAbout() {
+  if (this.item) {
+  const aboutObject = {
+    dob: this.item.birth_date ? `I am ${this.setAge(this.item.birth_date)} old ` : '',
+    caste: this.item.caste ?
+    this.item.caste !== 'All' ? this.item.caste : '' : '',
+    manglik: this.item.manglik ? this.item.manglik : '',
+    gender: this.item.gender ? this.item.gender === 'Male' ? 'boy' : 'girl' : '',
+    locality: this.item.locality ? this.item.locality === 'Visible after Contact' ?
+     '' : ` residing in ${this.item.locality}` : '',
+    qualification: this.item.education ?
+    `. I've completed my ${this.item.education}` : this.item.degree ?
+    `. I've completed my ${this.item.degree}` : '',
+    occupation: this.item.occupation ?
+    this.item.occupation === 'Business/Self-Employed' ?
+     ' and Self-Employed' : this.item.occupation === 'Not Working' ? 'currently not working'
+    : this.item.occupation === 'Doctor' ||
+    this.item.occupation === 'Teacher'
+    ? ` currently working as ${this.item.occupation}` :
+     ` currently working in ${this.item.occupation}` : '' ,
+    working: this.item.working_city ? this.item.working_city !== 'Not Working'
+    ?  this.item.working_city !== 'na' ? `in ${this.item.working_city}` : ''  : '' : '',
+    designation : this.item.profession && this.item.occupation ?
+    this.item.occupation === 'Business/Self-Employed' ||
+    this.item.occupation === 'Teacher' ||
+    this.item.occupation === 'Doctor' ? '' :
+    this.item.occupation !== 'Not Working' ?
+     ` as ${this.item.profession !== 'Others' ? this.item.profession : '' }` : '' : '',
+  };
+
+          // tslint:disable-next-line: max-line-length
+  return  `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.working}.`;
+
+}
 }
 }
 

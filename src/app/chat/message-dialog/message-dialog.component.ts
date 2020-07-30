@@ -24,7 +24,8 @@ export class MessageDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data) {
                 console.log(data);
                 this.profile = data.profile;
-                this.selfImage = data.selfImage;
+                this.selfImage = data.selfImage ? data.selfImage : this.profile.gender === 'Male' 
+                ? '../../assets/female_pic.png' : '../../assets/male_pic.png' ; 
                 this.selfName = data.selfName;
                 this.type = data.type;
   }
@@ -50,12 +51,28 @@ export class MessageDialogComponent implements OnInit {
       const carousel: object = JSON.parse(this.profile.carousel);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
-      return carousel[keys[0]];
-    } else if (this.profile.profile.carousel) {
+      if (carousel[keys[0]]) {
+        return carousel[keys[0]];
+      } else {
+        if (this.profile.gender === 'Male') {
+          return '../../assets/male_pic.png';
+        } else {
+          return '../../assets/female_pic.png';
+        }
+      }
+    } else if (this.profile.profile && this.profile.profile.carousel) {
       const carousel: object = JSON.parse(this.profile.profile.carousel);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
-      return carousel[keys[0]];
+      if (carousel[keys[0]]) {
+        return carousel[keys[0]];
+      } else {
+        if (this.profile.gender === 'Male') {
+          return '../../assets/male_pic.png';
+        } else {
+          return '../../assets/female_pic.png';
+        }
+      }
     } else {
       if (this.profile.gender === 'Male') {
         return '../../assets/male_pic.png';

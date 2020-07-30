@@ -20,7 +20,7 @@
                 {{toTitleCase(item.name)}}
             </span><br>
             <span style="font-size: 14px;">
-                {{item.working_city ? item.working_city : ''}} {{item.working_city ? '|' : ''}} {{setHeight(item.height)}}
+                {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? '' : item.working_city : ''}} {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? '' : '|' : ''}} {{setHeight(item.height)}}
             </span> <br>
             <span style="font-size: 14px;">
                 {{setIncome(item.monthly_income)}} Lakh per year
@@ -139,7 +139,7 @@
                 {{languageService.profileLang.about}}
             </u>
             <p class="title" style="margin-left:0px">
-                <span style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}}{{toTitleCase(item.name)}}, {{toTitleCase(item.about)}}
+                <span style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}}{{toTitleCase(item.name)}}, {{item.about ? toTitleCase(item.about) : toTitleCase(setAbout())}}
             </p>
         </div>
 

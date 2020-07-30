@@ -1,10 +1,12 @@
-::ng-deep .mat-dialog-container{
+.mat-dialog-container{
     padding: 0px;
     background-color: white;
     color: black;
 }
 main{
     padding-bottom: 20px;
+    background-color: white;
+    color: black;
 }
 .row{
     margin: 0px;

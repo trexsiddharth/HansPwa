@@ -466,7 +466,7 @@ export class RegComponent implements OnInit {
                   currency: 'INR',
                   content_name: this.PageOne.value.phone,
                 });
-                this.router.navigate(['/chat']);
+                this.router.navigateByUrl('chat?first');
                 this.ngxNotificationService.success('Registered Successfully');
               } else {
                 this.spinner.hide();
