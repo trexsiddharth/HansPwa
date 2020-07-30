@@ -265,7 +265,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     "Teacher",
     "Homely",
     "Not Employed",
-    "Not Alive",
   ];
   Mangalika = ["Manglik", "Non-Manglik", "Anshik Manglik", "Doesn't Matter"];
   Religions: string[] = [
