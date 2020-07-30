@@ -350,7 +350,7 @@ return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params
 
 
         // if profile_created == 1 ...re hit auth api
-        if (data.profile_created === 1) {
+        if (data.profile_created && data.profile_created === 1 && localStorage.getItem('is_lead') === '1') {
           this.checkUrl().subscribe(
             data => {
               console.log(data);
