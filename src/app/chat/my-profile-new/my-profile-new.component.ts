@@ -1496,26 +1496,16 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   prevEventLength: number = 0;
-  prevEventPrefs = [""];
   casteSelectionChanged(event) {
     console.log(event);
     if (event.value.length > this.prevEventLength) {
-      let index = 0;
-      for (let i = 0; i < event.value.length && i < this.prevEventPrefs.length;) {
-        if (this.prevEventPrefs[i] != event.value[i]) {
-          index = i;
-          break;
-        }
-        i++;
-      }
-      this.showSnackBar(`${event.value[index]} Added Successfully`, "");
+      this.showSnackBar(`Added Successfully`, "");
       this.searchCasteText.setValue("");
     }
     else if (event.value.length < this.prevEventLength) {
       this.showSnackBar(` Removed Successfully`, "");
     }
     this.prevEventLength = event.value.length;
-    this.prevEventPrefs = event.value;
   }
   showSnackBar(msg: string, action: string) {
     this.snackbar.open(msg, action, {

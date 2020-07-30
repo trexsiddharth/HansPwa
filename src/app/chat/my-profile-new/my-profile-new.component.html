@@ -6,13 +6,13 @@
         <img src="../../assets/left-arrow-key.svg" class="backArrow" (click)="backToChat()" alt="BACK" />
       </div>
       <div class="circular">
-        <ngb-carousel id="carousel">
+        <ngb-carousel id="carousel" [showNavigationArrows]="false" [showNavigationIndicators]="false">
           <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
             <div class="picsum-img-wrapper" style="text-align: center;">
               <input style="margin: 10px 25%; display: none;" #backfile type="file" id="backfile" accept="image/*"
                 (change)="previewBack(backfile.files, index + 1)" />
               <img (click)="changeProfileImage(index)" id="imgProfile"
-                style="width: 100%; height: 70vh; background-color: lightblue;"
+                style="width: 100%; height:35vh;background-color: lightblue;"
                 (error)="onProfileLoadError(personalProfileData.gender, i)" [src]="
                   getProfilesPhoto(
                     personalProfileData.carousel,
