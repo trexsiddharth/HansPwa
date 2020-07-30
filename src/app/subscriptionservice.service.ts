@@ -25,27 +25,26 @@ export class SubscriptionserviceService {
       fileName.async = true;
       fileName.setAttribute('type', 'text/javascript');
       fileName.setAttribute('src', 'https://checkout.razorpay.com/v1/checkout.js');
-     
       fileName.id = 'razorPay';
       document.body.appendChild(fileName);
     }
   }
 // testing mid -> bkjPis66135619933053
   loadPayTmScript() {
-    const razor = document.getElementById('paytm');
-    if (!razor) {
+    const payt = document.getElementById('paytm');
+    if (!payt) {
       const fileName = document.createElement('script');
-      fileName.async = true;
+      fileName.async = false;
       fileName.setAttribute('type', 'application/javascript');
       fileName.setAttribute('crossorigin', 'anonymous');
       fileName.setAttribute('src', 'https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/bkjPis66135619933053.js');
-      fileName.setAttribute('onload', 'onScriptLoad()');
+      // fileName.setAttribute('onload', `${this.onScriptLoad()}`);
       fileName.id = 'paytm';
       document.body.appendChild(fileName);
     }
   }
-
   onScriptLoad() {
+    console.log('opened');
     let config = {
       'root': '',
       'flow': 'DEFAULT',
@@ -60,10 +59,17 @@ export class SubscriptionserviceService {
           console.log('notifyMerchant handler function called');
           console.log('eventName => ', eventName);
           console.log('data => ', data);
-        } 
+        },
+        'style': {'bodyColor': 'balck',
+      'themeBackgroundColor':'black',
+      'themeColor':'black',
+      'headerBackgroundColor':'black',
+      'headerColor':'black',
+      'errorColor':'red',
+      'successColor':'green'}
       }
     };
-
+    console.log(document.getElementById('paytm'));
     if((window as any).Paytm && (window as any).Paytm.CheckoutJS) {
       (window as any).Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
             // initialze configuration using init method 
@@ -74,7 +80,9 @@ export class SubscriptionserviceService {
                 console.log('error => ', error);
             });
         });
-    } 
+    }  else {
+      console.log('Not FOund');
+    }
 }
   
   payNowT(amt, type, plan, name, email, phone, points) {
