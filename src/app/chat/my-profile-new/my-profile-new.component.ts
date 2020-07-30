@@ -593,6 +593,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editIndexPrefs = index;
     console.log("pref index set to" + String(index));
   }
+  setEdit(index) {
+    console.log("viaebrnifakujrnviksjsrn");
+  }
   setCurrentProfileValue() {
     console.log(this.personalProfileData);
     this.personalForm.patchValue({
@@ -1492,10 +1495,27 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       this.searchCaste.setValue([""]);
     }
   }
+  prevEventLength: number = 0;
+  prevEventPrefs = [""];
   casteSelectionChanged(event) {
     console.log(event);
-    this.showSnackBar(`${event.value[0]} Added Successfully`, "");
-    this.searchCasteText.setValue("");
+    if (event.value.length > this.prevEventLength) {
+      let index = 0;
+      for (let i = 0; i < event.value.length && i < this.prevEventPrefs.length;) {
+        if (this.prevEventPrefs[i] != event.value[i]) {
+          index = i;
+          break;
+        }
+        i++;
+      }
+      this.showSnackBar(`${event.value[index]} Added Successfully`, "");
+      this.searchCasteText.setValue("");
+    }
+    else if (event.value.length < this.prevEventLength) {
+      this.showSnackBar(` Removed Successfully`, "");
+    }
+    this.prevEventLength = event.value.length;
+    this.prevEventPrefs = event.value;
   }
   showSnackBar(msg: string, action: string) {
     this.snackbar.open(msg, action, {

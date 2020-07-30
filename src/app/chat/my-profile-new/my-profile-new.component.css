@@ -219,7 +219,7 @@ main {
   text-transform: capitalize;
 }
 .iconSize {
-  width: 30px;
+  width: 18px;
 }
 .disabled-pointer {
   pointer-events: none;
