@@ -300,8 +300,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
      // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
-    // this.openTodaysPopupHere();
-    this.itemService.openRateUsDialog();
+    this.openTodaysPopupHere();
+    // this.itemService.openRateUsDialog();
   }
 
   ngAfterViewInit() {
