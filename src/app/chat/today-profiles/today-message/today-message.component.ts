@@ -68,10 +68,11 @@ month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July
     }
 
     getDifferenceInTime() {
-      const todaysDate = new Date().getDate() + 1;
-      const todaysMonth = new Date().getMonth();
+      const todaysDate = new Date().getDate() === 31 ? 1 : new Date().getDate() + 1 ;
+      const todaysMonth = todaysDate === 1 ? new Date().getMonth() + 1 : new Date().getMonth();
       const todaysYear = new Date().getFullYear();
       const nextDay = `${todaysDate} ${this.month[todaysMonth]} ${todaysYear} 00:00:00`;
+      console.log(nextDay);
       const date1: any = new Date(nextDay);
       const date2: any = new Date();
       const res = Math.abs(date1 - date2) / 1000;

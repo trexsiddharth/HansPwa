@@ -40,7 +40,7 @@
             {{toTitleCase(item.profile.name)}}
         </span><br>
         <span style="font-size: 14px;">
-            {{item.profile.working_city}} {{item.profile.working_city ? '|' : ''}} {{setHeight(item.profile.height)}}
+            {{item.profile.working_city ? item.profile.working_city === 'na' || item.profile.working_city === 'NA' || item.profile.working_city === 'Na' ? '' : item.profile.working_city : ''}} {{item.profile.working_city ? item.profile.working_city === 'na' || item.profile.working_city === 'NA' || item.profile.working_city === 'Na' ? '' : '|' : ''}} {{setHeight(item.height)}}
         </span> <br>
         <span style="font-size: 14px;">
             {{setIncome(item.profile.monthly_income)}} Lakh per year

@@ -880,6 +880,8 @@ familyType() {
     return 'Joint Family';
   }
 }
+
+// setting dynamic about me if users about me is null or na
 setAbout() {
   if (this.item) {
   const aboutObject = {
@@ -902,12 +904,10 @@ setAbout() {
      ` currently working in ${this.item.occupation}` : '' ,
     working: this.item.working_city ? this.item.working_city !== 'Not Working'
     ?  this.item.working_city !== 'na' ? `in ${this.item.working_city}` : ''  : '' : '',
-    designation : this.item.profession && this.item.occupation ?
-    this.item.occupation === 'Business/Self-Employed' ||
-    this.item.occupation === 'Teacher' ||
-    this.item.occupation === 'Doctor' ? '' :
+    designation : this.item.profession ?
     this.item.occupation !== 'Not Working' ?
-     ` as ${this.item.profession !== 'Others' ? this.item.profession : '' }` : '' : '',
+    this.item.profession !== 'n/a' ? this.item.profession !== 'na' ?
+     ` as ${this.item.profession}` : '' : '' : '' : '',
   };
 
           // tslint:disable-next-line: max-line-length

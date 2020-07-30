@@ -50,6 +50,9 @@ p{
     font-family: sans-serif;
     margin-top: 10px;
 }
+.timerDiv span {
+    font-size: 14px;
+}
 .discoverDiv{
     color: white;
     background-color: #4ADEE4;
