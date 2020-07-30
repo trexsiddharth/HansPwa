@@ -263,6 +263,12 @@ button:focus{outline:none !important;}
     border-radius: 10px;
 }
 
+#rateDialog.mat-dialog-container {
+  background-color: transparent !important;
+  padding: 60px 10px 0px !important;
+  box-shadow: none !important;
+}
+
 .mat-select-placeholder{
 color: #c8c8c8;
 }

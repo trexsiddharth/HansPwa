@@ -12,6 +12,7 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { DailyWelcomePopupComponent } from './chat/daily-welcome-popup/daily-welcome-popup.component';
+import { stat } from 'fs';
 
 
 @Injectable({
@@ -66,6 +67,7 @@ export class FindOpenHistoryProfileService {
   }
   setIsLead(status) {
     this.is_lead = status;
+    localStorage.setItem('is_lead', status);
   }
   getIsLead() {
     return this.is_lead;
@@ -321,12 +323,13 @@ export class FindOpenHistoryProfileService {
           dialogConfig.disableClose = false;
         } else {
           console.log('screen is less than  1024px');
-          dialogConfig.minWidth = '80vw';
+          dialogConfig.minWidth = '98vw';
           dialogConfig.maxHeight = '80vh';
           dialogConfig.disableClose = true;
         }
       }
     );
+    dialogConfig.id = 'rateDialog';
     const dialogRef = this.dialog.open(RateUsDialogComponent, dialogConfig);
   }
 
