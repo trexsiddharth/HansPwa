@@ -2,8 +2,21 @@
 <div class="topImg">
     <img width="50px" src="../../../assets/new icons/gift.svg" alt="gift">
 </div>
-<p>
-    hello
-
+<p id="firstLine">
+    Give Us 5 Stars And
 </p>
+<p id="secondLine">
+    Get 3 Contacts Free
+</p>
+
+<div class="text-center stars">
+    <img width="35px" *ngFor="let item of [1,2,3,4,5]" src="../../../assets/new icons/star_green.svg" alt="star">
+</div>
+
+<div class="bottomDiv">
+    <img width="40px" src="../../../assets/new icons/playstore.svg" alt="playstore">
+    <button mat-raised-button class="rateBtn">
+        Rate us
+    </button>
+</div>
 </div>
