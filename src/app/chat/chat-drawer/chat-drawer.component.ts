@@ -21,16 +21,16 @@ export class ChatDrawerComponent implements OnInit {
   userId;
   userIsLead;
   constructor(public languageService: LanguageService,
-              private chatService: ChatServiceService,
-              private spinner: NgxSpinnerService,
-              private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              public router: Router,
-              public itemService: FindOpenHistoryProfileService,
-              public activatedRoute: ActivatedRoute) { 
+    private chatService: ChatServiceService,
+    private spinner: NgxSpinnerService,
+    private http: HttpClient,
+    private ngxNotificationService: NgxNotificationService,
+    public router: Router,
+    public itemService: FindOpenHistoryProfileService,
+    public activatedRoute: ActivatedRoute) {
 
 
-    }
+  }
 
   ngOnInit() {
 
@@ -50,7 +50,7 @@ export class ChatDrawerComponent implements OnInit {
 
   openUserProfile() {
     this.analyticsEvent('User Clicked My Profile From Chat Drawer');
-    this.router.navigateByUrl(`chat/user-profile/${this.userId}/${this.userIsLead}`);
+    this.router.navigateByUrl(`chat/my-profile-new/${this.userId}/${this.userIsLead}`);
   }
   openDiscover() {
     this.analyticsEvent('User Clicked Discover From Chat Drawer');
@@ -126,9 +126,9 @@ export class ChatDrawerComponent implements OnInit {
 
     });
 
-     // gtag app + web
+    // gtag app + web
     (window as any).gtag('event', event, {
-      event_callback: () =>  {
+      event_callback: () => {
         console.log('Tracking gtag ' + event + ' successful');
       }
     });

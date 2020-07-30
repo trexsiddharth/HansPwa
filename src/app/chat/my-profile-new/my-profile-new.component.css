@@ -73,7 +73,7 @@ hr {
 .icon-circular {
   margin-top: 4px !important;
   padding: 7px;
-  width: 58px;
+  width: 50px;
   height: 58px;
   border: 0px;
   background-color: rgb(255, 255, 255);
@@ -127,7 +127,9 @@ hr {
   width: 100%;
 }
 .circular2 {
+  display:flex;
   position: absolute;
+  padding:5px;
   z-index: 100;
   margin: auto;
   width: 45px;
@@ -183,13 +185,6 @@ hr {
   place-items: center;
   width: 100vw;
   height: auto;
-  background: rgb(62, 60, 92);
-  background: linear-gradient(
-    207deg,
-    rgba(62, 60, 92, 1) 0%,
-    rgba(97, 97, 164, 1) 17%,
-    rgba(0, 212, 255, 1) 100%
-  );
 }
 main {
   position: relative;
@@ -205,29 +200,10 @@ main {
   font-size: 20px !important;
   font-weight: bold !important;
 }
-.topBar {
-  color: #4a5d6a;
-  background-color: white;
-  height: 50px;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-  -webkit-box-align: center;
-  align-items: center;
-  width: 100%;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-}
-.menuItems {
-  color: black;
-  margin-left: 10px;
-  font-size: 1rem;
-}
 .labelText {
   font-weight: bold;
   font-size: 16px;
-  color: #c8c8c8;
+  color: #9e9b9b;
   margin-right: 0.5rem;
 }
 .editPencil {
@@ -243,52 +219,12 @@ main {
   text-transform: capitalize;
 }
 .iconSize {
-  width: 30px;
+  width: 18px;
+}
+.disabled-pointer {
+  pointer-events: none;
 }
 
-.boxText {
-  font-size: 18px;
-}
-.boxBtn {
-  font-size: 16px;
-  font-weight: bold;
-}
-#pinkSide {
-  text-align: end;
-  margin: 0px;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-end;
-}
-#blueSide {
-  text-align: start;
-  color: #0c9bf2;
-  font-weight: bold;
-  margin: 0px;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  justify-content: flex-end;
-}
-.navigationPanel {
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  z-index: 999;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  background-color: white;
-  border-top: 1px solid #707070;
-  box-shadow: 0px -3px 1px lightgrey;
-  padding: 5px 0px;
-  color: #707070;
-}
-.navigationIcons {
-  width: 30px;
-}
 @media (max-height: 814px) {
   .back-drop {
     position: absolute;
@@ -308,18 +244,6 @@ main {
 }
 
 @media (max-height: 642px) {
-  .boxText {
-    font-size: 14px;
-  }
-
-  .boxBtn {
-    font-size: 14px;
-    font-weight: bold;
-  }
-
-  .navigationIcons {
-    width: 20px;
-  }
   .back-drop {
     position: absolute;
     z-index: -999999;
@@ -368,24 +292,5 @@ main {
       rgba(0, 212, 255, 1) 100%
     );
     clip-path: polygon(100% 0%, 100% 67%, 50% 90%, 50% 90%, 0 67%, 0 0);
-  }
-}
-
-@media (max-width: 1024px) {
-  .mainDiv {
-    width: 100vw;
-    height: auto;
-    background: none;
-  }
-  .navigationPanel {
-    position: fixed;
-    bottom: 0px;
-    width: 40%;
-    z-index: 999;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    background-color: white;
-    padding: 5px 0px;
   }
 }

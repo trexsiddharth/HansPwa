@@ -14,8 +14,8 @@
 ::ng-deep .cdk-overlay-dark-backdrop {
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
 }
-i {
-  color: white;
+a {
+  color: white !important;
 }
 b {
   color: white;
@@ -36,15 +36,17 @@ main {
   position: relative;
   display: flex;
   width: 100%;
-  z-index: 0;
+  z-index: 10;
   height: 1.9rem;
   align-items: center;
   justify-content: center;
 }
+
 #offBannerImg {
   position: absolute;
+  z-index:99999999;
   border-radius: 8px;
-  bottom: 0px;
+  bottom: -15px;
   max-width: 100%;
   max-height: 100%;
 }
@@ -52,7 +54,7 @@ main {
 #cancel {
   position: absolute;
   z-index: 99999999;
-  right: 4%;
+  right: 1%;
 }
 #footer {
   margin: auto;
@@ -83,6 +85,24 @@ main {
   position: relative;
   padding-top: 0px;
 }
+/* #bannerDiv ::after , ::before{
+  box-sizing: none!important;
+} */
+* {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+}
 
 .planrow {
   height: auto;
@@ -111,6 +131,7 @@ button {
 }
 .month {
   font-weight: 500;
+  padding:0px 3px 0px 3px;
   font-style: normal!important;
   font-size:0.8rem;
   position: absolute;
@@ -166,8 +187,8 @@ button {
     position: relative;
     display: flex;
     width: 100%;
-    z-index: 0;
-    height: 1.2rem;
+    z-index: 10;
+    height: 1.5rem;
     align-items: center;
     justify-content: center;
   }
@@ -183,6 +204,14 @@ button {
     background-position: center center;
     background-size: 100% 100%;
     border-radius: 0px 0px 10px 10px !important;
+  }
+  #offBannerImg {
+    position: absolute;
+    z-index:99999999;
+    border-radius: 8px;
+    bottom: -10px;
+    max-width: 100%;
+    max-height: 100%;
   }
   #topBanner {
     position: relative;
