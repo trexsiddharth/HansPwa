@@ -209,12 +209,14 @@ export class HistoryProfilesDialogComponent implements OnInit {
           this.type = 'contacted';
           this.spinner.hide();
 
-          if (localStorage.getItem('visibleAfter') && localStorage.getItem('visibleAfter') === 'true') {
-            document.getElementById('visibleAfter').scrollIntoView({
-              behavior: 'smooth',
-              block: 'center'
-            });
-          }
+          setTimeout(() => {
+            if (localStorage.getItem('visibleAfter') && localStorage.getItem('visibleAfter') === 'true') {
+              document.getElementById('visibleAfter').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+              });
+            }
+          }, 1000);
         },
         (error: any) => {
           this.spinner.hide();
