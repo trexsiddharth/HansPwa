@@ -11,6 +11,7 @@ import { timeout, retry, catchError } from 'rxjs/operators';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { PersonalizedMessageDialogComponent } from '../personalized-message-dialog/personalized-message-dialog.component';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-history-profiles-dialog',
@@ -207,6 +208,13 @@ export class HistoryProfilesDialogComponent implements OnInit {
           this.title = data.profile.name + `'s Profile`;
           this.type = 'contacted';
           this.spinner.hide();
+
+          if (localStorage.getItem('visibleAfter') && localStorage.getItem('visibleAfter') === 'true') {
+            document.getElementById('visibleAfter').scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+          }
         },
         (error: any) => {
           this.spinner.hide();
@@ -271,10 +279,13 @@ export class HistoryProfilesDialogComponent implements OnInit {
        const points = data.whatsapp_points;
        this.itemService.setCredits(data.whatsapp_points);
        console.log('credits', points);
-       localStorage.setItem('open_profile', null);
        if (answer === 'YES') {
+         this.item.coming = 'contacted';
+         localStorage.setItem('open_profile', JSON.stringify(this.item));
          this.getUserProfileData(item.profile.id);
+         localStorage.setItem('visibleAfter', 'true');
        } else {
+        localStorage.setItem('open_profile', null);
         this.router.navigateByUrl('chat');
        }
      },
