@@ -30,11 +30,14 @@
     font-size: 1.5rem;
     font-family: 'Roboto';
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 #secondLine {
     color: #4A5D6A;
     font-size: 1.5rem;
-    font-weight: bold;
     font-family: 'Roboto';
     text-align: center;
 }

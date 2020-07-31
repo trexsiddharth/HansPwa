@@ -144,7 +144,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
             }
             this.spinner.hide();
             // after reponse update the user credits
-            this.getCredits();
+            this.getCredits(answer, item);
           } else {
             this.ngxNotificationService.error(response.message);
             this.spinner.hide();
@@ -173,8 +173,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
           if (response.count) {
             this.itemService.saveCount(response.count);
           }
-  
-          this.getCredits();
+
+          this.getCredits(answer, item);
         } else {
           this.ngxNotificationService.error(response.message);
           this.spinner.hide();
@@ -261,7 +261,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
         return '';
       }
   }
-  getCredits() {
+  getCredits(answer, item) {
     const creditsData = new FormData();
     creditsData.append('id', localStorage.getItem('id'));
     creditsData.append('is_lead', localStorage.getItem('is_lead'));
@@ -272,7 +272,11 @@ export class HistoryProfilesDialogComponent implements OnInit {
        this.itemService.setCredits(data.whatsapp_points);
        console.log('credits', points);
        localStorage.setItem('open_profile', null);
-       this.router.navigateByUrl('chat');
+       if (answer === 'YES') {
+         this.getUserProfileData(item.profile.id);
+       } else {
+        this.router.navigateByUrl('chat');
+       }
      },
     (error: any) => {
       this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
