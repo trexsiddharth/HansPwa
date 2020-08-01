@@ -280,10 +280,10 @@
             </div>
         </div>
     </main>
-    <main *ngIf="!itemService.getPhotoStatus()" class="special">
+    <main *ngIf="!itemService.getPhotoStatus()" class="special noProfileMain">
         <!-- <main *ngIf="true" class="special"> -->
         <div style="height:45vh!important; 
-    width:80vw!important; 
+    width:85%!important; 
     border-radius: 20px!important;
     background:white!important;
     margin:auto;
@@ -291,7 +291,7 @@
     flex-direction: row;
     align-items: center;
     justify-content:center">
-            <img src="../../../assets/plus.svg" style="width:60vw">
+            <img src="../../../assets/plus.svg" style="width:60%">
         </div>
         <div class="text-center" style="margin:10px 0px 0px 0px;
     display:flex;
@@ -306,7 +306,7 @@
             <button class="SpecialCase" style="position:absolute;
             height:80px;
             background:#00c2cb!important; 
-            width:85vw!important; 
+            width:85%!important; 
             color:rgb(255, 255, 255);
             margin-top: 2%;
             border:0px!important;
@@ -317,7 +317,7 @@
         <div style="
     position:relative;
     height:40vh!important; 
-    width:80vw!important; 
+    width:80%!important; 
     border-radius: 20px!important;
     background:white!important;
     margin:auto;
@@ -341,11 +341,12 @@
                 ">Personal Matchmaker</a></p>
             </div>
         </div>
-        <div style="position: relative;">
+        <div style="position: relative;" class="text-center">
             <button class="SpecialCase" style="position:absolute;
+            margin:auto;
     height:80px;
     background:#00c2cb!important; 
-    width:85vw!important; 
+    width:87%!important; 
     color:rgb(255, 255, 255);
     margin-top: 10%;
     border:0px!important;

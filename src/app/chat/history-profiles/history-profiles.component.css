@@ -32,10 +32,13 @@ section{
 }
 
 .noProfileMain{
-    width: 100vw;
+    margin-top: 0px!important;
+    background-size: contain;
+    width:100vw;
     height: 100vh;
     display: block;
     position: relative;
+
     animation: fadeInUp 1.5s 1;
 }
 .noProfile{
@@ -169,6 +172,20 @@ border-radius: 10px;
         border-radius: 5px;
 }
 
+@media (min-width:1024px){
+    .noProfileMain{
+        margin-top: 0px!important;
+        overflow: auto;
+        width: 100%;
+        background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+        padding: 50px 10px 0px;
+        background-size: contain;
+        height: 100vh;
+        display: block;
+        position: relative;
+        animation: fadeInUp 1.5s 1;
+    }
+}
 
 @media (max-width: 350px) {
     .historyDetails{
@@ -253,6 +270,7 @@ border-radius: 10px;
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
     padding: 50px 10px 0px;
     animation: fadeInUp 1.5s 1;
+    background-size: contain;
 }
 .SpecialCase{
     font-size:2.3rem!important;
