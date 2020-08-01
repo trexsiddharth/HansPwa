@@ -7,16 +7,19 @@ import { HistoryProfilesComponent } from './history-profiles/history-profiles.co
 import { HistoryProfilesDialogComponent } from './history-profiles/history-profiles-dialog/history-profiles-dialog.component';
 import { DiscoverComponent } from './discover/discover.component';
 import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component';
+import { GetcallbackComponent } from './getcallback/getcallback.component';
 
 
 const routes: Routes = [
   {
-   path: 'app/:fcm_app', component: ChatComponent},
-    { path: ':stage', component: ChatComponent},
-    {path: '',
+    path: 'app/:fcm_app', component: ChatComponent
+  },
+  { path: ':stage', component: ChatComponent },
+  {
+    path: '',
     component: ChatComponent
   },
-   {
+  {
     path: 'user-profile/:id/:isLead',
     component: UserProfileComponent
   },
@@ -24,6 +27,11 @@ const routes: Routes = [
     // this is used for routing through chat drawer
     path: 'my-profile-new/:id/:isLead',
     component: MyProfileNewComponent
+  },
+  {
+    // this is used for routing through chat drawer
+    path: 'getcallback/',
+    component: GetcallbackComponent
   },
   {
     path: 'history/:section',

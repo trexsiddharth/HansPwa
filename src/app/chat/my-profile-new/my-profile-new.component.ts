@@ -1172,6 +1172,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               ? data.preferences
               : null;
             this.spinner.hide();
+            if (this.getCarouselCount() != 1) {
+              console.log("Photo status set to true");
+              this.itemService.setPhotoStatus(true);
+            }
             this.getAllCaste();
             this.getAllCastePersonal();
             this.setCurrentProfileValue();
@@ -1187,7 +1191,52 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       this.ngxNotificationService.error("No user found");
     }
   }
+  changeProfileImageNew() {
+    document.querySelector<HTMLInputElement>('#backfileNew').click();
+  }
+  chooseFileForUploadNew(files) {
+    if (files.length === 0) {
+      return;
+    } else {
+      const mimeType = files[0].type;
+      if (mimeType.match(/image\/*/) == null) {
+        alert('Only images are supported.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        // use backimgurl to set image
+        // this.BackimgURL = reader.result;
+        this.uploadPhotoNew(files[0]);
+      };
+    }
+  }
+  uploadPhotoNew(data) {
+    this.spinner.show();
+    const uploadData = new FormData();
+    uploadData.append('id', localStorage.getItem('id'));
+    uploadData.append('index', '1');
+    uploadData.append('image', data);
+    uploadData.append('is_lead', localStorage.getItem('is_lead'));
 
+    return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe((suc: any) => {
+      console.log('photos', suc);
+      if (suc.pic_upload_status === 'Y') {
+        this.spinner.hide();
+        console.log("Image Upload successful");
+        this.ngxNotificationService.success("Photo Uploaded Succesfully!");
+        this.itemService.setPhotoStatus(true);
+      } else {
+        this.ngxNotificationService.error("Photo Upload Unsuccessful!");
+        this.spinner.hide();
+      }
+    }, err => {
+      this.ngxNotificationService.error("Photo could not be Uploaded!Try after some time");
+      console.log(err);
+      this.spinner.hide();
+    });
+  }
   uploadPhoto(data, index) {
     this.spinner.show();
     const uploadData = new FormData();

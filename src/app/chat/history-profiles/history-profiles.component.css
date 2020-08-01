@@ -36,10 +36,11 @@ section{
     height: 100vh;
     display: block;
     position: relative;
+    animation: fadeInUp 1.5s 1;
 }
 .noProfile{
     color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
 }
 
@@ -232,3 +233,116 @@ border-radius: 10px;
     background-image: none;
 }
 }
+.circular {
+    position: absolute;
+    top:-40px;
+    padding: 20px;
+    width: 90px;
+    height: 90px;
+    border: 0px;
+    background-color:#00c2cb;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+.special{
+    height: 100vh;
+    overflow: auto;
+    width: 100%;
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    padding: 50px 10px 0px;
+    animation: fadeInUp 1.5s 1;
+}
+.SpecialCase{
+    font-size:2.3rem!important;
+}
+  a{
+    color: white !important;
+  }
+  b {
+    color: white;
+  }
+  .plansArea {
+    margin-top:0px;
+    position: relative;
+    z-index: 0;
+    padding: 30px 10px 10px 10px !important;
+    background:white!important;
+    object-fit:cover;
+    margin: 10px 5px 10px 5px;
+    border-radius:15px;
+    overflow-y: scroll!important;
+  }
+  .plancolumn {
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+    flex: 50%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .planrow {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin: 7% 1% 7% 1%;
+  }
+  button {
+    position: absolute;
+    z-index: 1000 !important;
+    right: 5.5%;
+    top: 32%;
+    vertical-align: middle !important;
+    background: #5552ff;
+  }
+  .month {
+    font-weight: 500;
+    padding:0px 3px 0px 3px;
+    font-style: normal!important;
+    font-size:0.8rem;
+    position: absolute;
+    top: -11px !important;
+    right: 5%;
+    background: #00c2cb;
+    border-radius: 3px 3px 3px 3px;
+  }
+  
+  @media (max-width: 575px) {
+    .plancolumn {
+      padding-top: 0.8rem;
+      padding-bottom: 0rem;
+      padding-left: 0.8rem;
+      font-size: 1.2rem;
+      flex: 40%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .SpecialCase{
+        font-size:1.9rem!important;
+    }
+  }
+  @media (max-width: 375px) {
+    .plancolumn {
+      padding-top: 0.8rem;
+      padding-bottom: 0rem;
+      padding-left: 0.8rem;
+      font-size: 0.9rem !important;
+      flex: 40%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    button {
+      position: absolute;
+      right: 5.5%;
+      top: 25%;
+      vertical-align: middle !important;
+      background: #5552ff;
+    }
+    .SpecialCase {
+      font-size: 1.4rem !important;
+    }
+  }

@@ -29,6 +29,8 @@ import { DiscoverComponent } from './discover/discover.component';
 import { DailyWelcomePopupComponent } from './daily-welcome-popup/daily-welcome-popup.component';
 import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { GetcallbackComponent } from './getcallback/getcallback.component';
+import { OkdialogComponent } from './getcallback/okdialog/okdialog.component';
 
 @NgModule({
   imports: [
@@ -61,6 +63,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     DiscoverComponent,
     DailyWelcomePopupComponent,
     MyProfileNewComponent,
+    GetcallbackComponent,
+    OkdialogComponent
   ],
   entryComponents: [
     MessageDialogComponent,
@@ -74,6 +78,7 @@ import { Ng5SliderModule } from 'ng5-slider';
     RateUsDialogComponent,
     ChatDrawerComponent,
     DailyWelcomePopupComponent,
+    OkdialogComponent
   ],
   providers: [
     FindOpenHistoryProfileService,
@@ -81,4 +86,4 @@ import { Ng5SliderModule } from 'ng5-slider';
     MyProfileService,
   ],
 })
-export class ChatModule {}
+export class ChatModule { }

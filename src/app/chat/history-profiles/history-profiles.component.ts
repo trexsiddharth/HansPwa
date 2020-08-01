@@ -6,7 +6,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import {
-  HttpClient
+  HttpClient, HttpHeaders
 } from '@angular/common/http';
 import {
   NgxNotificationService
@@ -37,6 +37,7 @@ import { PersonalizedMessageDialogComponent } from './personalized-message-dialo
 import { Location } from '@angular/common';
 import { ChatServiceService } from 'src/app/chat-service.service';
 import { LanguageService } from 'src/app/language.service';
+import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 
 
 
@@ -49,13 +50,13 @@ import { LanguageService } from 'src/app/language.service';
         stagger(100, [
           animate('0.5s', style({ opacity: 0 }))
         ])
-      ], {optional: true}),
+      ], { optional: true }),
       query(':enter', [
         style({ opacity: 0 }),
         stagger(100, [
           animate('0.5s', style({ opacity: 1 }))
         ]),
-      ], {optional: true})
+      ], { optional: true })
     ])
   ])],
   styleUrls: ['./history-profiles.component.css']
@@ -84,23 +85,43 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   section;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              private dialog: MatDialog,
-              public notification: NotificationsService,
-              public itemService: FindOpenHistoryProfileService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private browserLocation: Location,
-              private chatService: ChatServiceService,
-              public languageService: LanguageService,
-              private breakPointObserver: BreakpointObserver) {}
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog,
+    public notification: NotificationsService,
+    public itemService: FindOpenHistoryProfileService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private browserLocation: Location,
+    private chatService: ChatServiceService,
+    public languageService: LanguageService,
+    private breakPointObserver: BreakpointObserver,
+    private subscriptionservice: SubscriptionserviceService,) { }
 
   ngOnInit() {
+    if (this.itemService.getPhotoStatus() && this.isNotPaid()) {
+      this.subscriptionservice.loadRazorPayScript();
+      const headers = new HttpHeaders({
+        "Content-Type": "application/json",
+      });
+      this.http
+        .get("https://partner.hansmatrimony.com/api/subscription", { headers })
+        .subscribe(
+          (res: any) => {
+            this.plans = res;
+            //this.container1();
+            console.log(this.plans);
+          },
+          (err: any) => {
+            this.subscriptionservice.loadRazorPayScript();
+          }
+        );
+
+    }
     // url for the particular section of history
     this.activatedRoute.paramMap.subscribe(
       (routeData: any) => {
         console.log(routeData);
-        if ( routeData && routeData.params && routeData.params.section) {
+        if (routeData && routeData.params && routeData.params.section) {
           this.section = routeData.params.section;
           this.type = routeData.params.section;
           this.languageService.setProfileLanguage();
@@ -115,34 +136,34 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem('contactedProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('contactedProfiles'));
           console.log(this.profile);
-          }
+        }
         break;
       case 'interestShown':
         this.title = this.itemService.getShortlistedCount();
         if (localStorage.getItem('sortListProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('sortListProfiles'));
           console.log(this.profile);
-          }
+        }
         break;
       case 'interestReceived':
         this.title = this.itemService.getShortedCount();
         if (localStorage.getItem('interestReceived')) {
           this.profile = JSON.parse(localStorage.getItem('interestReceived'));
           console.log(this.profile);
-          }
+        }
         break;
       case 'rejected':
         this.title = this.itemService.getRejectedCount();
         if (localStorage.getItem('rejectedProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('rejectedProfiles'));
           console.log(this.profile);
-          }
+        }
         break;
       case 'mutual':
         if (localStorage.getItem('mutualProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('mutualProfiles'));
           console.log(this.profile);
-          }
+        }
         break;
       default:
         break;
@@ -185,6 +206,61 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.browserLocation.back();
   }
 
+  isNotPaid() {
+    if (this.itemService.getCredits() && this.itemService.getCredits().toString() === '0')
+      return true;
+    else
+      return false
+  }
+  // user photo upload 
+  changeProfileImage() {
+    document.querySelector<HTMLInputElement>('#backfile').click();
+  }
+
+  chooseFileForUpload(files) {
+    if (files.length === 0) {
+      return;
+    } else {
+      const mimeType = files[0].type;
+      if (mimeType.match(/image\/*/) == null) {
+        alert('Only images are supported.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        // use backimgurl to set image
+        // this.BackimgURL = reader.result;
+        this.uploadPhoto(files[0]);
+      };
+    }
+  }
+  uploadPhoto(data) {
+    this.spinner.show();
+    const uploadData = new FormData();
+    uploadData.append('id', localStorage.getItem('id'));
+    uploadData.append('index', '1');
+    uploadData.append('image', data);
+    uploadData.append('is_lead', localStorage.getItem('is_lead'));
+
+    return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe((suc: any) => {
+      console.log('photos', suc);
+      if (suc.pic_upload_status === 'Y') {
+        this.spinner.hide();
+        console.log("Image Upload successful");
+        this.ngxNotificationService.success("Photo Uploaded Succesfully!");
+        this.itemService.setPhotoStatus(true);
+      } else {
+        this.ngxNotificationService.error("Photo Upload Unsuccessful!");
+        this.spinner.hide();
+      }
+    }, err => {
+      this.ngxNotificationService.error("Photo could not be Uploaded!Try after some time");
+      console.log(err);
+      this.spinner.hide();
+    });
+  }
+
   getProfilePhoto(item: any, num: any, gen: string): string {
     if (item.family) {
       if (num === null) {
@@ -204,11 +280,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   onLoadProfileError(gender: string, id: any) {
-   if (gender === 'Male') {
-    id.setAttribute('src', '../../assets/male_pic.png');
-  } else {
-    id.setAttribute('src', '../../assets/female_pic.png');
-  }
+    if (gender === 'Male') {
+      id.setAttribute('src', '../../assets/male_pic.png');
+    } else {
+      id.setAttribute('src', '../../assets/female_pic.png');
+    }
   }
   onLoadComplete(id: any) {
     id.setAttribute('src', '../../assets/male_pic.png');
@@ -216,14 +292,14 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
     if (carous === null || carous === 'null') {
       if (photo === null) {
-      if (gen === 'Male') {
-        return '../../assets/male_pic.png';
+        if (gen === 'Male') {
+          return '../../assets/male_pic.png';
+        } else {
+          return '../../assets/female_pic.png';
+        }
       } else {
-        return '../../assets/female_pic.png';
+        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
       }
-    } else {
-      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
-    }
     } else {
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
@@ -231,20 +307,20 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       if (carousel[keys[index]].toString().match('jeevansathi')) {
         return carousel[keys[index]];
       } else {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
       }
     }
   }
   getImagesCount(num: string) {
     if (num !== '[]' && num && num !== 'null') {
-       const carouselObject: object = JSON.parse(num);
-       if (carouselObject) {
-          const size = Object.keys(carouselObject).length;
-          const arr: any[]  = [];
-          for (let index = 0; index < size; index++) {
-            arr.push(index);
-          }
-          return  arr;
+      const carouselObject: object = JSON.parse(num);
+      if (carouselObject) {
+        const size = Object.keys(carouselObject).length;
+        const arr: any[] = [];
+        for (let index = 0; index < size; index++) {
+          arr.push(index);
+        }
+        return arr;
       }
     } else {
       this.carouselSize = [1];
@@ -297,7 +373,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
     );
     dialogConfig.data = {
-      profile : item,
+      profile: item,
       type: this.type
     };
     const dialogRef = this.dialog.open(PersonalizedMessageDialogComponent, dialogConfig);
@@ -311,19 +387,19 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   openProfileDialog(item: any, ind: any) {
-    
+
     if (this.type === 'interestReceived') {
       localStorage.setItem('stage', '2');
     } else if (this.type === 'interestShown') {
       localStorage.setItem('stage', '3');
     }
     if (item) {
-    // section from which user is going
-    item.coming = this.type;
-    localStorage.setItem('open_profile', JSON.stringify(item));
-    // navigate to HISTORY PROFILE DIALOG COMPONENT
-    this.router.navigateByUrl('chat/open/open-profile');
-  }
+      // section from which user is going
+      item.coming = this.type;
+      localStorage.setItem('open_profile', JSON.stringify(item));
+      // navigate to HISTORY PROFILE DIALOG COMPONENT
+      this.router.navigateByUrl('chat/open/open-profile');
+    }
   }
 
   setId(index: any) {
@@ -345,32 +421,32 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       historyData.append('is_lead', localStorage.getItem('is_lead'));
     } else {
       this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-          console.log(res);
-          historyData.append('is_lead', res.is_lead);
-          localStorage.setItem('is_lead', res.is_lead);
-        },
+        console.log(res);
+        historyData.append('is_lead', res.is_lead);
+        localStorage.setItem('is_lead', res.is_lead);
+      },
         err => {
           console.log(err);
         });
     }
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
-     async (data: any) => {
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
+      async (data: any) => {
         console.log(data);
         this.wholeData = data;
         if (this.itemService.getItem()) {
-        this.openContactedProfile(data.data);
+          this.openContactedProfile(data.data);
         }
 
         if (localStorage.getItem(link)) {
-        // update new data only
+          // update new data only
           if (JSON.stringify(this.profile) !== JSON.stringify(data.data)) {
-          await this.addRemoveNewData(data.data);
-      }
-      } else {
-        this.profile = data.data;
-        localStorage.setItem(link, JSON.stringify(data.data));
-      }
+            await this.addRemoveNewData(data.data);
+          }
+        } else {
+          this.profile = data.data;
+          localStorage.setItem(link, JSON.stringify(data.data));
+        }
 
         console.log(this.profile);
         this.spinner.hide();
@@ -385,13 +461,13 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
               console.log(res);
               if (res.si_status && res.si_status === 0 && this.profile.length > 1) {
                 this.Analytics('Mein Kisse Pasand Hu',
-                 'Mein Kisse Pasand Hu Section Visited',
+                  'Mein Kisse Pasand Hu Section Visited',
                   'Mein Kisse Pasand Hu Section Visited');
                 this.getInterestReceivedEventStatus(1).subscribe(
-                    data => {
-                        console.log(data);
-                    }
-                  );
+                  data => {
+                    console.log(data);
+                  }
+                );
               }
             }
           );
@@ -415,53 +491,53 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
   // updates the new data to locally stored data
   addRemoveNewData(data: any) {
-    return  new Promise((res) => {
-       // finding and adding the new element to the locally stored list
-       const newProfilesList: any[] = [];
-       (data as any[]).forEach(
+    return new Promise((res) => {
+      // finding and adding the new element to the locally stored list
+      const newProfilesList: any[] = [];
+      (data as any[]).forEach(
         element => {
-         const newProfiles =  this.profile.find(
-           item => {
-             if (item.family) {
-              return item.profile.id === element.profile.id;
-             } else {
-              return item.profile.identity_number === element.profile.identity_number;
-             }
-           });
-         if (!newProfiles) {
+          const newProfiles = this.profile.find(
+            item => {
+              if (item.family) {
+                return item.profile.id === element.profile.id;
+              } else {
+                return item.profile.identity_number === element.profile.identity_number;
+              }
+            });
+          if (!newProfiles) {
             //  this.profile.push(element);
             newProfilesList.push(element);
-           }
+          }
         }
       );
 
-       if (newProfilesList.length > 0) {
+      if (newProfilesList.length > 0) {
         this.profile = [...newProfilesList, ...this.profile];
       }
 
       // finding and removing the old element from the locally stored list
 
-       this.profile.forEach(
-       (item, index) => {
-        const removeProfile =  (data as any[]).find(
-           element => {
-            if (item.family) {
-              return item.profile.id === element.profile.id;
-             } else {
-              return item.profile.identity_number === element.profile.identity_number;
-             }
-           }
-         );
-        if (!removeProfile) {
-          this.profile.splice(index, 1);
+      this.profile.forEach(
+        (item, index) => {
+          const removeProfile = (data as any[]).find(
+            element => {
+              if (item.family) {
+                return item.profile.id === element.profile.id;
+              } else {
+                return item.profile.identity_number === element.profile.identity_number;
+              }
+            }
+          );
+          if (!removeProfile) {
+            this.profile.splice(index, 1);
+          }
         }
-       }
       );
 
-       console.log(this.profile);
-       this.updateLocalList();
-       res(this.profile);
-      });
+      console.log(this.profile);
+      this.updateLocalList();
+      res(this.profile);
+    });
   }
 
   openContactedProfile(data: any) {
@@ -494,14 +570,14 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   updateLocalList() {
     switch (this.type) {
       case 'contacted':
-          localStorage.setItem('contactedProfiles', JSON.stringify(this.profile));
-          break;
+        localStorage.setItem('contactedProfiles', JSON.stringify(this.profile));
+        break;
       case 'interestShown':
-          localStorage.setItem('sortListProfiles', JSON.stringify(this.profile));
-          break;
+        localStorage.setItem('sortListProfiles', JSON.stringify(this.profile));
+        break;
       case 'interestReceived':
-          localStorage.setItem('interestReceived', JSON.stringify(this.profile));
-          break;
+        localStorage.setItem('interestReceived', JSON.stringify(this.profile));
+        break;
       case 'rejected':
         localStorage.setItem('rejectedProfiles', JSON.stringify(this.profile));
         break;
@@ -510,10 +586,10 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-checkUrl(num: string): Observable < any > {
+  checkUrl(num: string): Observable<any> {
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
           ['fcm_id']: this.notification.getCurrentToken(),
@@ -522,7 +598,7 @@ checkUrl(num: string): Observable < any > {
       });
     } else {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
           ['fcm_id']: this.notification.getCurrentToken()
@@ -531,7 +607,7 @@ checkUrl(num: string): Observable < any > {
     }
   }
 
-setMarriageBrothers(value1: any, value2: any) {
+  setMarriageBrothers(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
@@ -547,7 +623,7 @@ setMarriageBrothers(value1: any, value2: any) {
     }
   }
 
-setMarriageSisters(value1: any, value2: any) {
+  setMarriageSisters(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
@@ -563,7 +639,7 @@ setMarriageSisters(value1: any, value2: any) {
     }
   }
 
-LifeStatus(person: string, work: string) {
+  LifeStatus(person: string, work: string) {
     if (person != null && person !== '') {
       if (person.match('Alive')) {
         if (work) {
@@ -579,40 +655,40 @@ LifeStatus(person: string, work: string) {
     }
   }
 
-profileReAnswer(item: any, answer: any, index: any) {
+  profileReAnswer(item: any, answer: any, index: any) {
 
-  // if main kisse pasand hu and credits are zero...on Shortlist  response show offer 2
-  if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0'
-  && answer === 'SHORTLIST') {
+    // if main kisse pasand hu and credits are zero...on Shortlist  response show offer 2
+    if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0'
+      && answer === 'SHORTLIST') {
       this.itemService.openOfferTwo(item);
       this.getData(item, answer, index);
       return;
-  }
-  if (this.itemService.getPersonalized() === true &&
-  answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-    this.ngxNotificationService.warning('You don\'t have enough credits ');
-  }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-    this.itemService.getPhotoStatus() === false &&
-    answer === 'SHORTLIST') {
+    }
+    if (this.itemService.getPersonalized() === true &&
+      answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+      this.ngxNotificationService.warning('You don\'t have enough credits ');
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+      this.itemService.getPhotoStatus() === false &&
+      answer === 'SHORTLIST') {
       this.itemService.openMessageDialog(item, answer);
-   } else if (this.itemService.getPersonalized() === false &&
-    answer === 'YES' && !item.family ) {
+    } else if (this.itemService.getPersonalized() === false &&
+      answer === 'YES' && !item.family) {
       this.itemService.openMessageDialog(item, 'contacted');
-   }  else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-   && answer === 'YES') {
-    this.itemService.openTodaysPopupAd();
-   } else {
-     this.getData(item, answer, index);
-   }
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+      && answer === 'YES') {
+      this.itemService.openTodaysPopupAd();
+    } else {
+      this.getData(item, answer, index);
+    }
   }
 
-getData(item: any, answer: any, index: any) {
+  getData(item: any, answer: any, index: any) {
     this.spinner.show();
     this.panelOpenState = null;
     const reAnswerData = new FormData();
     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
     if (item.family) {
-    reAnswerData.append('id', item.profile.id);
+      reAnswerData.append('id', item.profile.id);
     } else {
       reAnswerData.append('id', item.profile.identity_number);
     }
@@ -621,17 +697,17 @@ getData(item: any, answer: any, index: any) {
       reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
     } else {
       this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-          console.log(res);
-          reAnswerData.append('is_lead', res.is_lead);
-          localStorage.setItem('is_lead', res.is_lead);
-        },
+        console.log(res);
+        reAnswerData.append('is_lead', res.is_lead);
+        localStorage.setItem('is_lead', res.is_lead);
+      },
         err => {
           console.log(err);
           this.spinner.hide();
         });
     }
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
       (data: any) => {
         console.log(data);
         // update the count of all sections after response on any profile
@@ -646,18 +722,18 @@ getData(item: any, answer: any, index: any) {
         this.spinner.hide();
       });
   }
-Analytics(type: string, category: string, action: string) {
+  Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {
         console.log('Tracking ' + type + ' successful');
       }
     });
     // gtag app + web
-    (window as any).gtag('event', category , {
+    (window as any).gtag('event', category, {
       action: action
     });
   }
-updateProfileList(ans: any, num: any, index: any) {
+  updateProfileList(ans: any, num: any, index: any) {
     switch (this.type) {
       case 'interestShown':
         switch (ans) {
@@ -671,9 +747,9 @@ updateProfileList(ans: any, num: any, index: any) {
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
-                  duration: 4000,
-                  closeButton: true
-                });
+                duration: 4000,
+                closeButton: true
+              });
             }
             break;
           case 'SHORTLIST':
@@ -703,9 +779,9 @@ updateProfileList(ans: any, num: any, index: any) {
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
-                  duration: 4000,
-                  closeButton: true
-                });
+                duration: 4000,
+                closeButton: true
+              });
             }
             break;
           case 'SHORTLIST':
@@ -721,41 +797,41 @@ updateProfileList(ans: any, num: any, index: any) {
         }
         break;
 
-        case 'interestReceived':
-          switch (ans) {
-            case 'YES':
-              if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-                // this.slideAndOpenProfile(this.profile[index], 1);
-                localStorage.setItem('stage', '2');
-                this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
-                this.profile.splice(index, 1);
-                // this.itemService.changeTab(1);
-              } else {
-                this.ngxNotificationService.error('You Dont have Enough Credits', '',
-                  null, {
-                    duration: 4000,
-                    closeButton: true
-                  });
-              }
-              break;
-            case 'SHORTLIST':
+      case 'interestReceived':
+        switch (ans) {
+          case 'YES':
+            if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+              // this.slideAndOpenProfile(this.profile[index], 1);
+              localStorage.setItem('stage', '2');
+              this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
               this.profile.splice(index, 1);
-              this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
-                duration: 4000
+              // this.itemService.changeTab(1);
+            } else {
+              this.ngxNotificationService.error('You Dont have Enough Credits', '',
+                null, {
+                duration: 4000,
+                closeButton: true
               });
-              break;
-            case 'NO':
-              this.profile.splice(index, 1);
-              this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
-                duration: 4000
-              });
-              break;
-            default:
-              break;
-          }
-          break;
+            }
+            break;
+          case 'SHORTLIST':
+            this.profile.splice(index, 1);
+            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+              duration: 4000
+            });
+            break;
+          case 'NO':
+            this.profile.splice(index, 1);
+            this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
+              duration: 4000
+            });
+            break;
+          default:
+            break;
+        }
+        break;
 
-          case 'mutual':
+      case 'mutual':
         switch (ans) {
           case 'YES':
             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
@@ -766,9 +842,9 @@ updateProfileList(ans: any, num: any, index: any) {
             } else {
               this.ngxNotificationService.error('You Dont have Enough Credits', '',
                 null, {
-                  duration: 4000,
-                  closeButton: true
-                });
+                duration: 4000,
+                closeButton: true
+              });
             }
             break;
           default:
@@ -780,33 +856,33 @@ updateProfileList(ans: any, num: any, index: any) {
     }
     this.updateLocalList();
   }
-goToSubscription() {
+  goToSubscription() {
     this.router.navigateByUrl('subscription');
   }
-call(index: any) {
-  if (this.profile[index].family) {
-    window.open('tel:' + this.profile[index].family.mobile);
-  } else {
-    this.ngxNotificationService.error('Mobile Number Not Found');
+  call(index: any) {
+    if (this.profile[index].family) {
+      window.open('tel:' + this.profile[index].family.mobile);
+    } else {
+      this.ngxNotificationService.error('Mobile Number Not Found');
+    }
   }
-  }
-slideAndOpenProfile(item: any, slide: any) {
+  slideAndOpenProfile(item: any, slide: any) {
     this.spinner.show();
     this.itemService.setItem(item);
     this.itemService.changeTab(slide);
   }
-setDate(date: string) {
+  setDate(date: string) {
     const newDate = new Date(date);
     return new Intl.DateTimeFormat('en-AU').format(newDate);
   }
-setHeight(height: any) {
+  setHeight(height: any) {
     if (height && height !== '') {
       return this.Heights[this.Heights1.indexOf(height)];
     } else {
       return '';
     }
   }
-disableForAWhile() {
+  disableForAWhile() {
     if (this.panelOpenState === null) {
       setTimeout(() => {
         this.panelOpenState = -1;
@@ -816,7 +892,7 @@ disableForAWhile() {
       return false;
     }
   }
-setTabNames(tab: any) {
+  setTabNames(tab: any) {
     if (localStorage.getItem('language') === null) {
       localStorage.setItem('language', 'Hindi');
     }
@@ -857,12 +933,12 @@ setTabNames(tab: any) {
         break;
     }
   }
-setAllTabNames() {
+  setAllTabNames() {
     for (let index = 0; index < 5; index++) {
       this.setTabNames(index);
     }
   }
-getNoDataText(type: any) {
+  getNoDataText(type: any) {
     switch (type) {
       case 'contactedProfiles':
         this.noData = '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
@@ -880,7 +956,7 @@ getNoDataText(type: any) {
         break;
     }
   }
-setIncome(value: string): String {
+  setIncome(value: string): String {
     if (value != null) {
       if (Number(value) > 1000) {
         return String((Number(value) / 100000));
@@ -892,50 +968,50 @@ setIncome(value: string): String {
       return '';
     }
   }
-toTitleCase(str) {
+  toTitleCase(str) {
     if (str) {
       return str.replace(
         /\w\S*/g,
         (txt) => {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
-    );
+      );
     } else {
       return '';
     }
-}
-getCredits() {
-  const creditsData = new FormData();
-  creditsData.append('id', localStorage.getItem('id'));
-  creditsData.append('is_lead', localStorage.getItem('is_lead'));
- // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
-   (data: any) => {
-     const points = data.whatsapp_points;
-     this.itemService.setCredits(data.whatsapp_points);
-     console.log('credits', points);
-     this.spinner.hide();
-   },
-  (error: any) => {
-    this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
-    console.log(error);
-    this.spinner.hide();
   }
- );
-}
-
-
-getQualification(degree, education) {
-  return education != null && education !== '' ? education : degree;
+  getCredits() {
+    const creditsData = new FormData();
+    creditsData.append('id', localStorage.getItem('id'));
+    creditsData.append('is_lead', localStorage.getItem('is_lead'));
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
+      (data: any) => {
+        const points = data.whatsapp_points;
+        this.itemService.setCredits(data.whatsapp_points);
+        console.log('credits', points);
+        this.spinner.hide();
+      },
+      (error: any) => {
+        this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+        console.log(error);
+        this.spinner.hide();
+      }
+    );
   }
 
-setHouseType(type) {
+
+  getQualification(degree, education) {
+    return education != null && education !== '' ? education : degree;
+  }
+
+  setHouseType(type) {
     if (type) {
       switch (type) {
         case 'Y':
           return 'Owned';
-          case 'N':
-            return 'Rented';
+        case 'N':
+          return 'Rented';
         default:
           break;
       }
@@ -952,48 +1028,148 @@ setHouseType(type) {
       this.scrollFlag = true;
 
       if (this.wholeData.next_page_url) {
-    this.smallSpinner = true;
+        this.smallSpinner = true;
 
-    const historyData = new FormData();
-    historyData.append('id', localStorage.getItem('id'));
-    if (this.type.match('contacted')) {
-      historyData.append('contacted', '1');
-    } else {
-      historyData.append('contacted', '0');
-    }
-    if (localStorage.getItem('is_lead')) {
-      historyData.append('is_lead', localStorage.getItem('is_lead'));
-    } else {
-      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-          console.log(res);
-          historyData.append('is_lead', res.is_lead);
-          localStorage.setItem('is_lead', res.is_lead);
-        },
-        err => {
-          console.log(err);
-        });
-    }
-    // tslint:disable-next-line: max-line-length
-    this.http.post < any > ('https://partner.hansmatrimony.com/api/' + this.scrollLink + this.wholeData.next_page_url, historyData).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.wholeData = data;
-        const newData = Object.values(data.data);
-        console.log(newData);
-        this.profile = this.profile.concat(newData);
-        console.log(this.profile);
-        this.scrollFlag = false;
-        this.smallSpinner = false;
+        const historyData = new FormData();
+        historyData.append('id', localStorage.getItem('id'));
+        if (this.type.match('contacted')) {
+          historyData.append('contacted', '1');
+        } else {
+          historyData.append('contacted', '0');
+        }
+        if (localStorage.getItem('is_lead')) {
+          historyData.append('is_lead', localStorage.getItem('is_lead'));
+        } else {
+          this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+            console.log(res);
+            historyData.append('is_lead', res.is_lead);
+            localStorage.setItem('is_lead', res.is_lead);
+          },
+            err => {
+              console.log(err);
+            });
+        }
+        // tslint:disable-next-line: max-line-length
+        this.http.post<any>('https://partner.hansmatrimony.com/api/' + this.scrollLink + this.wholeData.next_page_url, historyData).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.wholeData = data;
+            const newData = Object.values(data.data);
+            console.log(newData);
+            this.profile = this.profile.concat(newData);
+            console.log(this.profile);
+            this.scrollFlag = false;
+            this.smallSpinner = false;
 
-      },
-      (error: any) => {
-        this.spinner.hide();
-        this.ngxNotificationService.error('Something Went Wrong');
-        console.log(error);
+          },
+          (error: any) => {
+            this.spinner.hide();
+            this.ngxNotificationService.error('Something Went Wrong');
+            console.log(error);
+          }
+        );
       }
-    );
     }
   }
+  //subscriptions offers
+  plan = 0;
+  benefit;
+  value;
+  amount;
+  plans: any = [];
+  show1 = true;
+  show2 = false;
+  points: any;
+  formData: any;
+  price: any;
+  credits;
+  selectedContainer: number;
+  getRazorPay(
+    amt: any,
+    type: any,
+    plan: any,
+    name: any,
+    email: any,
+    phone: any
+  ) {
+    if (plan === 0) {
+      return this.subscriptionservice.payNowT(
+        amt,
+        type,
+        0,
+        name,
+        email,
+        phone,
+        this.credits
+      );
+    } else {
+      return this.subscriptionservice.payNowT(
+        amt,
+        type,
+        1,
+        name,
+        email,
+        phone,
+        this.credits
+      );
+    }
+  }
+  facebookAnalytics(event) {
+    (window as any).fbq("track", event, {
+      value: localStorage.getItem("id"),
+      content_name: localStorage.getItem("mobile_number"),
+    });
+    (window as any).fbq("track", "692972151223870", event, {
+      value: localStorage.getItem("id"),
+      content_name: localStorage.getItem("mobiler_number"),
+    });
+  }
+  HandlePayment() {
+    if (this.price) {
+      if (localStorage.getItem("mobile_number")) {
+        console.log(localStorage.getItem("mobile_number"));
+        this.getRazorPay(
+          this.price,
+          "live",
+          0,
+          "",
+          "",
+          localStorage.getItem("mobile_number")
+        );
+      } else {
+        this.getRazorPay(this.price, "live", 0, "", "", "");
+      }
+      this.Analytics(
+        "RazorPay Payement Gateway",
+        "RazorPay Payement Gateway Opened",
+        "Payement Gateway Opened For " + this.price
+      );
+
+      this.facebookAnalytics("InitiateCheckout");
+    } else {
+      this.ngxNotificationService.error("Something Went Wrong");
+    }
+  }
+  container1() {
+    this.price = "2800";
+    this.credits = "45";
+    this.selectedContainer = 1;
+    console.log("plan 1 selected");
+    this.HandlePayment();
+  }
+  container2() {
+    this.price = "5500";
+    this.credits = "90";
+    this.selectedContainer = 2;
+    console.log("plan 1 selected");
+    this.HandlePayment();
+  }
+  container3() {
+    this.price = "8500";
+    this.credits = "45";
+    this.selectedContainer = 3;
+    console.log("plan 1 selected");
+    this.HandlePayment();
   }
 
 }

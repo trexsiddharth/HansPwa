@@ -95,29 +95,30 @@ export class ChatDrawerComponent implements OnInit {
   }
 
   getCallBack() {
-    this.spinner.show();
-    const interestForm = new FormData();
-    interestForm.append('id', localStorage.getItem('id'));
-    interestForm.append('is_lead', localStorage.getItem('is_lead'));
-    this.http.post<any>('https://partner.hansmatrimony.com/api/updateCallBack', interestForm).subscribe(
-      data => {
-        console.log(data);
-        if (data.status === 1) {
-          this.analyticsEvent('Requested For A Callback From Chat Drawer');
-          this.ngxNotificationService.success('We will get back to soon!!');
-          this.spinner.hide();
-          this.closeSideNav();
-        } else {
-          this.ngxNotificationService.error('Something Went Wrong, Please try again later');
-          this.spinner.hide();
-        }
-      },
-      err => {
-        console.log(err);
-        this.ngxNotificationService.error('Something Went Wrong, Please try again later');
-        this.spinner.hide();
-      }
-    );
+    this.router.navigateByUrl('chat/getcallback/');
+    // this.spinner.show();
+    // const interestForm = new FormData();
+    // interestForm.append('id', localStorage.getItem('id'));
+    // interestForm.append('is_lead', localStorage.getItem('is_lead'));
+    // this.http.post<any>('https://partner.hansmatrimony.com/api/updateCallBack', interestForm).subscribe(
+    //   data => {
+    //     console.log(data);
+    //     if (data.status === 1) {
+    //       this.analyticsEvent('Requested For A Callback From Chat Drawer');
+    //       this.ngxNotificationService.success('We will get back to soon!!');
+    //       this.spinner.hide();
+    //       this.closeSideNav();
+    //     } else {
+    //       this.ngxNotificationService.error('Something Went Wrong, Please try again later');
+    //       this.spinner.hide();
+    //     }
+    //   },
+    //   err => {
+    //     console.log(err);
+    //     this.ngxNotificationService.error('Something Went Wrong, Please try again later');
+    //     this.spinner.hide();
+    //   }
+    // );
   }
 
   analyticsEvent(event) {
