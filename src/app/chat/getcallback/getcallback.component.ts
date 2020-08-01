@@ -23,9 +23,6 @@ export class GetcallbackComponent implements OnInit {
   ngOnInit() {
   }
   query: string = "I'm interested in Hans Matrimony's services.\nI would love to know more about them so please give a call back regarding the same.";
-  queryClear() {
-    this.query = "";
-  }
   backToChat() {
     // this.backToProfiles.emit('chatbot');
     this.router.navigateByUrl("/chat");
