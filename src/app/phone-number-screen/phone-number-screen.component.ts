@@ -52,12 +52,8 @@ export class PhoneNumberScreenComponent implements OnInit {
 
   submitPhone() {
 
-    (window as any).location = `truecallersdk://truesdk/web_verify?
-                               requestNonce=hans_matrimony123
-                               &partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2
-                               &partnerName=Hans Matrimony
-                               &lang=en
-                               &title=Login`;
+    // tslint:disable-next-line: max-line-length
+    (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${Math.floor(Math.random() * 100000000) + 1}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 
     setTimeout(() => {
 
