@@ -2,6 +2,13 @@
   <img id="offBannerImg" src="../../../assets/todays-off-image.png" />
 </div>
 <main>
+  <img width="20px"
+   *ngIf="chooseMethod" 
+   id="backBtn" 
+   (click)="goBack()"
+   src="../../../../assets/backbtn.svg" 
+   alt="back">
+
   <div id="topBanner">
     <div id="cancel">
       <img (click)="closeDialog()" style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg"
@@ -18,7 +25,7 @@
     </div>
   </div>
   <br />
-  <div class="plansArea">
+  <div class="plansArea" *ngIf="!chooseMethod">
     <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
       <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
         <b>बेसिक प्लान</b><br />
@@ -180,7 +187,37 @@ border-bottom-left-radius: 0px;
       </div>
     </div>
   </div>
+
+  <div class="plansArea" *ngIf="chooseMethod">
+    <p class="methods text-center">
+      Payement Method: 
+    </p>
+    <p class="payOpt">
+     <button mat-raised-button
+     (click)="HandlePayment()"
+      id="razor">
+      <img width="100%" src="../../../../assets/icons/razorpay.svg" alt="razorpay">
+     </button>
+     <button mat-raised-button
+     (click)="onPaytm()"
+      id="paytm">
+      <img width="100%" src="../../../../assets/icons/paytm.svg" alt="paytm">
+     </button>
+    </p>
+
+    <form method="post" id="pay" name="paytm">
+      <table border="1">
+         <tbody>
+            <input type="hidden" name="mid" [value]="mId">
+            <input type="hidden" name="orderId" [value]="oId">
+            <input type="hidden" name="txnToken" [value]="txnToken">
+         </tbody>
+      </table>
+   </form>
+  </div>
 </main>
+
+
 <div id="footer" class="text-dark text-center">
   <div class="plancolumn">
     <img style="width: 2.2rem!important;" src="../../../assets/timer.svg" />&nbsp;

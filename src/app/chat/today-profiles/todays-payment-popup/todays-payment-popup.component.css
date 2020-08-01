@@ -27,6 +27,12 @@ main {
   border-radius: 20px 20px 20px 20px;
   padding-bottom: 5px;
 }
+#backBtn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 99999;
+}
 .planArea {
   position: relative;
   padding: 15px 15px 15px 15px !important;
@@ -121,13 +127,35 @@ main {
   display: inline-block;
   vertical-align: middle;
 }
-button {
+button.btn-small {
   position: absolute;
   z-index: 1000 !important;
   right: 5.5%;
   top: 32%;
   vertical-align: middle !important;
   background: #5552ff;
+}
+.methods{
+  color: black;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 1rem;
+}
+.payOpt{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#razor {
+  background-color: white;
+  height: 50px;
+  width: 60px;
+}
+#paytm {
+  background-color: white;
+  height: 50px;
+  width: 60px;
 }
 .month {
   font-weight: 500;
@@ -176,7 +204,7 @@ button {
     display: inline-block;
     vertical-align: middle;
   }
-  button {
+  button.btn-small {
     position: absolute;
     right: 5.5%;
     top: 25%;
