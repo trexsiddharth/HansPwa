@@ -51,31 +51,29 @@ export class PhoneNumberScreenComponent implements OnInit {
 
 
   submitPhone() {
-    this.spinner.show();
-    localStorage.setItem('is_lead', '');
-    if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') {
-      // tslint:disable-next-line: max-line-length
-    this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
-    console.log(res);
-    if (res.registered === 1) {
-      this.openVerificationDialog(res.is_lead);
-      // localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
-      // localStorage.setItem('is_lead', res.is_lead);
-      // this.router.navigateByUrl('chat');
-    } else {
-      this.ngxNotificationService.info('You are not registered with us, Kindly register');
-      localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
-      this.router.navigateByUrl('reg');
-    }
-    this.spinner.hide();
-  }, err => {
-    this.spinner.hide();
-    console.log(err);
-  });
+
+    (window as any).location = `truecallersdk://truesdk/web_verify?
+                               requestNonce=hans_matrimony123
+                               &partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2
+                               &partnerName=Hans Matrimony
+                               &lang=en
+                               &title=Login`;
+
+    setTimeout(() => {
+
+  if ( document.hasFocus() ) {
+    
+    this.ngxNotificationService.error('truecaller not found');
+     // Truecaller app not present on the device and you redirect the user 
+     // to your alternate verification page
   } else {
-    this.ngxNotificationService.info('Enter a valid number');
-    this.spinner.hide();
+    this.ngxNotificationService.error('truecaller  found');
+     // Truecaller app present on the device and the profile overlay opens
+     // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
+     // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
   }
+}, 600);
+
   }
 
   openVerificationDialog(isLead: string) {
@@ -115,6 +113,34 @@ export class PhoneNumberScreenComponent implements OnInit {
         }
       }
     );
+  }
+
+  try() {
+    this.spinner.show();
+    localStorage.setItem('is_lead', '');
+    if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') {
+      // tslint:disable-next-line: max-line-length
+    this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
+    console.log(res);
+    if (res.registered === 1) {
+      this.openVerificationDialog(res.is_lead);
+      // localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
+      // localStorage.setItem('is_lead', res.is_lead);
+      // this.router.navigateByUrl('chat');
+    } else {
+      this.ngxNotificationService.info('You are not registered with us, Kindly register');
+      localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
+      this.router.navigateByUrl('reg');
+    }
+    this.spinner.hide();
+  }, err => {
+    this.spinner.hide();
+    console.log(err);
+  });
+  } else {
+    this.ngxNotificationService.info('Enter a valid number');
+    this.spinner.hide();
+  }
   }
 
 }
