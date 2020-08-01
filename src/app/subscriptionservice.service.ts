@@ -119,7 +119,10 @@ export class SubscriptionserviceService {
             this.captureStandardPayment(response, amt, points);
           } else {
             alert('Payment Successfull \n' + ' We will get back to you shortly \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
-            this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amt);
+            this.analyticsEvent(`RazorPay Payment Completed For ${localStorage.getItem('selected_plan') ?
+            localStorage.getItem('selected_plan') === 'plan 1' ?
+             '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
+              '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800'}`);
           }
 
          },
@@ -209,15 +212,24 @@ authorizeFirstPaymentCustom(response){
   );
 }
 
-Analytics(type: string, category: string, action: string) {
-  (window as any).ga('send', 'event', category, action, {
+
+analyticsEvent(event) {
+  (window as any).ga('send', 'event', event, '', {
     hitCallback: () => {
 
-      console.log('Tracking ' + type + ' successful');
+      console.log('Tracking ' + event + ' successful');
 
     }
 
   });
+
+   // gtag app + web
+  (window as any).gtag('event', event, {
+    event_callback: () =>  {
+      console.log('Tracking gtag ' + event + ' successful');
+    }
+  });
+
 }
 
 captureStandardPayment(response, amount, points) {
@@ -234,7 +246,10 @@ captureStandardPayment(response, amount, points) {
         console.log(data);
         if (data.status === 1) {
           alert('Payment Successful, Credits has been added to your account.');
-          this.Analytics('RazorPay Payment', 'RazorPay Payment Completed', 'RazorPay Payment Completed For' + amount);
+          this.analyticsEvent(`RazorPay Payment Completed For ${localStorage.getItem('selected_plan') ?
+          localStorage.getItem('selected_plan') === 'plan 1' ?
+           '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
+            '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800'}`);
           this.facebookAnalytics('Subscribe', amount);
           this.route.navigateByUrl('chat');
         } else {
@@ -258,5 +273,46 @@ facebookAnalytics(event, amount) {
     currency: 'INR',
     content_name: localStorage.getItem('mobiler_number'),
   });
+}
+
+ // for verifying the paytm payment we will check if the url has verifyPayment keyword
+ getTransactionStatus() {
+  const formData = new FormData();
+  formData.append('orderId', localStorage.getItem('oId'));
+  formData.append('is_lead', localStorage.getItem('is_lead'));
+  formData.append('mobile', localStorage.getItem('mobile_number'));
+  formData.append('whatsapp_point', localStorage.getItem('selected_plan') ?
+  localStorage.getItem('selected_plan') === 'plan 1' ?
+   '45' : localStorage.getItem('selected_plan') === 'plan 2' ?
+    '90' : localStorage.getItem('selected_plan') === 'plan 3' ? '45' : '45' : '45');
+  formData.append('id', localStorage.getItem('oId'));
+
+
+  this.http.post('https://partner.hansmatrimony.com/api/transactionStatus', formData).subscribe(
+    (data: any) => {
+        console.log(data);
+        localStorage.removeItem('oId');
+        localStorage.removeItem('selected_plan');
+        alert('Payment Successful');
+
+        if (data.status === 1) {
+          alert('Payment Successful, Credits has been added to your account.');
+          this.analyticsEvent(`Paytm Payment Completed For ${localStorage.getItem('selected_plan') ?
+          localStorage.getItem('selected_plan') === 'plan 1' ?
+           '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
+            '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800'}`);
+          this.facebookAnalytics('Subscribe', localStorage.getItem('selected_plan') ?
+          localStorage.getItem('selected_plan') === 'plan 1' ?
+           '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
+            '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800');
+          this.route.navigateByUrl('chat');
+        } else {
+          this.ngxNotificationService.error('Something went wrong. Please try again later.');
+        }
+    },
+    err => {
+      console.log(err);
+    }
+  );
 }
 }

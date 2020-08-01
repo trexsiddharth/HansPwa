@@ -4,8 +4,6 @@ import { MatDialogRef } from '@angular/material';
 import { LanguageService } from 'src/app/language.service';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 import { NgxNotificationService } from 'ngx-kc-notification';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -82,8 +80,9 @@ export class TodaysPaymentPopupComponent implements OnInit {
   }
 
   closeDialog() {
+    localStorage.removeItem('oId');
+    localStorage.removeItem('selected_plan');
     this.dialogRef.close();
-    localStorage.setItem('oId', null);
   }
 
   getCredits() {
@@ -134,16 +133,23 @@ export class TodaysPaymentPopupComponent implements OnInit {
       );
     }
   }
-  Analytics(type: string, category: string, action: string) {
-    (window as any).ga('send', 'event', category, action, {
+  analyticsEvent(event) {
+    (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
-        console.log('Tracking ' + type + ' successful');
-      },
+
+        console.log('Tracking ' + event + ' successful');
+
+      }
+
     });
-    // gtag app + web
-    (window as any).gtag('event', category, {
-      action: action,
+
+     // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () =>  {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
     });
+
   }
   facebookAnalytics(event) {
     (window as any).fbq('track', event, {
@@ -170,10 +176,8 @@ export class TodaysPaymentPopupComponent implements OnInit {
       } else {
         this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
-      this.Analytics(
-        'RazorPay Payement Gateway',
-        'RazorPay Payement Gateway Opened',
-        'Payement Gateway Opened For ' + this.price
+      this.analyticsEvent(
+        'RazorPay Payement Gateway Opened For ' + this.price
       );
 
       this.facebookAnalytics('InitiateCheckout');
@@ -196,13 +200,15 @@ export class TodaysPaymentPopupComponent implements OnInit {
   }
 
   goBack() {
+    localStorage.removeItem('oId');
+    localStorage.removeItem('selected_plan');
     this.chooseMethod = false;
-    localStorage.setItem('oId', null);
   }
 
   container1() {
     this.price = '2800';
     this.credits = '45';
+    localStorage.setItem('selected_plan', 'plan 1');
     this.selectedContainer = 1;
     console.log('plan 1 selected');
     // this.HandlePayment();
@@ -212,6 +218,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   container2() {
     this.price = '5500';
     this.credits = '90';
+    localStorage.setItem('selected_plan', 'plan 2');
     this.selectedContainer = 2;
     console.log('plan 2 selected');
     // this.HandlePayment();
@@ -221,6 +228,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   container3() {
     this.price = '8500';
     this.credits = '45';
+    localStorage.setItem('selected_plan', 'plan 3');
     this.selectedContainer = 3;
     console.log('plan 3 selected');
     // this.HandlePayment();
@@ -249,23 +257,10 @@ export class TodaysPaymentPopupComponent implements OnInit {
     );
   }
 
-  getTransactionStatus() {
-    const formData = new FormData();
-    formData.append('orderId', localStorage.getItem('oId'));
-
-    this.http.post('https://partner.hansmatrimony.com/api/transactionStatus', formData).subscribe(
-      (data: any) => {
-          console.log(data);
-          localStorage.setItem('oId', null);
-          alert('Payment Successful');
-      },
-      err => {
-        console.log(err);
-      }
-    );
-}
-
 onPaytm() {
+  this.analyticsEvent(
+    'Paytm Payement Gateway Opened For ' + this.price
+  );
   const form = document.getElementById('pay');
             // tslint:disable-next-line: max-line-length
   (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=${this.oId}`;

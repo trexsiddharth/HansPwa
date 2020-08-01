@@ -43,6 +43,7 @@ import {
   ChatServiceService
 } from '../chat-service.service';
 import { LanguageService } from '../language.service';
+import { SubscriptionserviceService } from '../subscriptionservice.service';
 
 
 @Component({
@@ -193,6 +194,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     public notification: NotificationsService,
     private route: ActivatedRoute,
+    private subscriptionService: SubscriptionserviceService,
     public itemService: FindOpenHistoryProfileService,
     private chatServivce: ChatServiceService,
     public languageService: LanguageService,
@@ -327,9 +329,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
        data => {
          if (data) {
            this.lockdownCount++;
-           if (!this.router.url.match('first') && this.lockdownCount === 1) {
+           if (!this.router.url.match('first') && !this.router.url.match('verifyPayment') && this.lockdownCount === 1) {
              // show payment popup every time user open the app
              this.itemService.openTodaysPopupAd();
+           } else if (this.router.url.match('verifyPayment')) {
+             this.subscriptionService.getTransactionStatus();
            }
          }
        }
