@@ -336,7 +336,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
              await this.subscriptionService.getTransactionStatus().then(
                response => {
                     if (response === 1) {
-                      this.getCredits();
+                      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+                        console.log(res);
+                        localStorage.setItem('authData', JSON.stringify(res));
+                        this.itemService.setIsLead(res.is_lead);
+                        this.getCredits();
+                      },
+                      err => {
+                        console.log(err);
+                      });
                     }
                }
              );
@@ -370,6 +378,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
         }
+        this.spinner.hide();
       },
       (error: any) => {
         this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
