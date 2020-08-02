@@ -347,9 +347,10 @@ firstStep() {
                 this.spinner.hide();
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormTwoData(firststepdata);
+                } else {
+                  this.Analytics('Four Page Registration', 'Four Page Registration Page Two',
+                  'Registered through Four Page Registration Page Two');
                 }
-                this.Analytics('Four Page Registration', 'Four Page Registration Page Two',
-                 'Registered through Four Page Registration Page Two');
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {
                 this.fourPageService.formCompleted.emit(false);
