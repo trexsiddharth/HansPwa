@@ -283,6 +283,7 @@ facebookAnalytics(event, amount) {
   formData.append('orderId', localStorage.getItem('oId'));
   formData.append('is_lead', localStorage.getItem('is_lead'));
   formData.append('mobile', localStorage.getItem('mobile_number'));
+  // set credits according to the plan number
   formData.append('whatsapp_point', localStorage.getItem('selected_plan') ?
   localStorage.getItem('selected_plan') === 'plan 1' ?
    '45' : localStorage.getItem('selected_plan') === 'plan 2' ?
@@ -297,10 +298,14 @@ facebookAnalytics(event, amount) {
         localStorage.removeItem('selected_plan');
         if (data.status === 1) {
           alert('Payment Successful, Credits has been added to your account.');
+
+          // set amount according to the plan number
           this.analyticsEvent(`Paytm Payment Completed For ${localStorage.getItem('selected_plan') ?
           localStorage.getItem('selected_plan') === 'plan 1' ?
            '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
             '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800'}`);
+
+            // set amount according to the plan number
           this.facebookAnalytics('Subscribe', localStorage.getItem('selected_plan') ?
           localStorage.getItem('selected_plan') === 'plan 1' ?
            '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
