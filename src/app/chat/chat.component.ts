@@ -43,6 +43,7 @@ import {
   ChatServiceService
 } from '../chat-service.service';
 import { LanguageService } from '../language.service';
+import { SubscriptionserviceService } from '../subscriptionservice.service';
 
 
 @Component({
@@ -193,6 +194,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     public notification: NotificationsService,
     private route: ActivatedRoute,
+    private subscriptionService: SubscriptionserviceService,
     public itemService: FindOpenHistoryProfileService,
     private chatServivce: ChatServiceService,
     public languageService: LanguageService,
@@ -322,14 +324,33 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
 
-  openTodaysPopupHere() {
+ openTodaysPopupHere() {
     this.itemService.creditsUpdated.subscribe(
-       data => {
+      async data => {
          if (data) {
            this.lockdownCount++;
-           if (!this.router.url.match('first') && this.lockdownCount === 1) {
+           if (!this.router.url.match('first') && !this.router.url.match('verifyPayment') && this.lockdownCount === 1) {
              // show payment popup every time user open the app
              this.itemService.openTodaysPopupAd();
+           } else if (this.router.url.match('verifyPayment')) {
+             this.spinner.show();
+             await this.subscriptionService.getTransactionStatus().then(
+               response => {
+                    if (response === 1) {
+                      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+                        console.log(res);
+                        localStorage.setItem('authData', JSON.stringify(res));
+                        localStorage.setItem('id', res.id);
+                        this.itemService.setIsLead(res.is_lead);
+                        this.getCredits();
+                      },
+                      err => {
+                        console.log(err);
+                        this.spinner.hide();
+                      });
+                    }
+               }
+             );
            }
          }
        }
@@ -360,6 +381,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
           console.log('this is a exhausted profile');
           this.exhaustedStatus = true;
         }
+        this.spinner.hide();
       },
       (error: any) => {
         this.ngxNotificationService.error('We couldn\'t get your credits, trying again');

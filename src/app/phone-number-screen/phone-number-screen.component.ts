@@ -59,10 +59,10 @@ if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') {
 this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
 console.log(res);
 if (res.registered === 1) {
-  // this.openVerificationDialog(res.is_lead);
-  localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
-  localStorage.setItem('is_lead', res.is_lead);
-  this.router.navigateByUrl('chat');
+  this.openVerificationDialog(res.is_lead);
+  // localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
+  // localStorage.setItem('is_lead', res.is_lead);
+  // this.router.navigateByUrl('chat');
 } else {
   this.ngxNotificationService.info('You are not registered with us, Kindly register');
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
@@ -120,7 +120,6 @@ this.spinner.hide();
   }
 
   try() {
-   
     // tslint:disable-next-line: max-line-length
     (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${Math.floor(Math.random() * 100000000) + 1}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 

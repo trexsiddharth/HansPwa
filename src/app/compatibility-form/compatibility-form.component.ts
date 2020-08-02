@@ -527,9 +527,10 @@ async ngOnInit() {
                 this.fourPageService.updateFormOneData(firststepdata);
                 if (this.fourPageService.getUserThrough()) {
                   this.locality = firststepdata.get('locality');
+                } else {
+                  this.Analytics('Four Page Registration', 'Four Page Registration Page One',
+                  'Registered through Four Page Registration Page One');
                 }
-                this.Analytics('Four Page Registration', 'Four Page Registration Page One',
-                'Registered through Four Page Registration Page One');
               } else {
                 this.spinner.hide();
                 this.ngxNotificationService.error(res.message);

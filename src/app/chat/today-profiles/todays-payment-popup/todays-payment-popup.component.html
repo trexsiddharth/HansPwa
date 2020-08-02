@@ -190,18 +190,19 @@ border-bottom-left-radius: 0px;
 
   <div class="plansArea" *ngIf="chooseMethod">
     <p class="methods text-center">
-      Payement Method: 
+      Payment Method: 
     </p>
     <p class="payOpt">
      <button mat-raised-button
      (click)="HandlePayment()"
       id="razor">
-      <img width="100%" src="../../../../assets/icons/razorpay.svg" alt="razorpay">
+      <!-- <img width="100%" src="../../../../assets/icons/razorpay.svg" alt="razorpay"> -->
+      Card / NetBanking / Wallets
      </button>
      <button mat-raised-button
      (click)="onPaytm()"
       id="paytm">
-      <img width="100%" src="../../../../assets/icons/paytm.svg" alt="paytm">
+      <img width="90px" height="100%" src="../../../../assets/icons/paytm.svg" alt="paytm">
      </button>
     </p>
 

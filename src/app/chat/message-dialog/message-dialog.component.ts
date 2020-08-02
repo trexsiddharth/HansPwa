@@ -151,7 +151,7 @@ export class MessageDialogComponent implements OnInit {
     const interestForm = new FormData();
     interestForm.append('id', localStorage.getItem('id'));
     interestForm.append('is_lead', localStorage.getItem('is_lead'));
-    interestForm.append('interest_profile', this.profile.identity_number);
+    interestForm.append('interest_profile', this.profile.profile.identity_number);
     console.log(localStorage.getItem('id'));
     console.log(localStorage.getItem('is_lead'));
     console.log(this.profile.identity_number);

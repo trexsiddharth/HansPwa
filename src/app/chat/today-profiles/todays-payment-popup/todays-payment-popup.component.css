@@ -136,26 +136,37 @@ button.btn-small {
   background: #5552ff;
 }
 .methods{
-  color: black;
-  font-family: 'Roboto';
+  color: #4A5D6A;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 .payOpt{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  padding: 0px 40px;
 }
 #razor {
-  background-color: white;
   height: 50px;
-  width: 60px;
+  color: black;
+  width: 100%;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 500;
+  font-size: 1.2em;
+  background-color: white;
+  border-radius: 50px;
+  border: 1px solid #00c2cb;
 }
 #paytm {
-  background-color: white;
   height: 50px;
-  width: 60px;
+  color: black;
+  margin: 20px 0px;
+  width: 100%;
+  border-radius: 50px;
+  background-color: white;
+  border: 1px solid #00c2cb;
 }
 .month {
   font-weight: 500;
@@ -252,5 +263,8 @@ button.btn-small {
   }
   .specialCase {
     font-size: 1.1rem !important;
+  }
+  #razor {
+    font-size: 1em;
   }
 }
