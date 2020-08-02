@@ -339,6 +339,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
                       this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
                         console.log(res);
                         localStorage.setItem('authData', JSON.stringify(res));
+                        localStorage.setItem('id', res.id);
                         this.itemService.setIsLead(res.is_lead);
                         this.getCredits();
                       },
