@@ -139,7 +139,7 @@
                 {{languageService.profileLang.about}}
             </u>
             <p class="title" style="margin-left:0px">
-                <span style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}}{{toTitleCase(item.name)}}, {{item.about ? toTitleCase(item.about) : toTitleCase(setAbout())}}
+                <span style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span> {{languageService.profileLang.myself}}{{toTitleCase(item.name)}}, {{item.about ? item.about.length < 30 ? toTitleCase(setAbout()) : toTitleCase(item.about) : toTitleCase(setAbout())}}
             </p>
         </div>
 
