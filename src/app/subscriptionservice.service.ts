@@ -316,6 +316,8 @@ facebookAnalytics(event, amount) {
       console.log(err);
       rej(err);
       this.ngxNotificationService.error('Something went wrong. Please try again later.');
+      localStorage.removeItem('oId');
+      localStorage.removeItem('selected_plan');
     }
   );
 });
