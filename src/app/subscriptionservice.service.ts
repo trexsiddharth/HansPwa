@@ -309,7 +309,7 @@ facebookAnalytics(event, amount) {
           this.route.navigateByUrl('chat');
         } else {
           res(0);
-          this.ngxNotificationService.error('Something went wrong. Please try again later.');
+          this.ngxNotificationService.error(data.error_description);
         }
     },
     err => {
