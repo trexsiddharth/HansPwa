@@ -18,6 +18,15 @@ hr{
     top:5px;
     left:10px;
 }
+.toggle{
+    position:absolute;
+    z-index:999999;
+    width:fit-content!important;
+    /* height:1.0rem!important; */
+    top:5px;
+    right:6px;
+    color:black!important;
+}
 .circular {
     margin: auto;
     width: 150px;

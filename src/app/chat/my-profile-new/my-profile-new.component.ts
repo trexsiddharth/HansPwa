@@ -1009,7 +1009,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     newPrefForm.append("manglik", this.preferenceProfileData.manglik);
     newPrefForm.append(
       "marital_status",
-      this.preferenceProfileData.maritalStatus
+      (this.preferenceProfileData.maritalStatus == "undefined" || this.preferenceProfileData.maritalStatus) === undefined ?
+        "Doesn't Matter" : this.preferenceProfileData.maritalStatus
     );
     if (this.personalProfileData.gender === "Male") {
       newPrefForm.append("working", this.preferenceProfileData.working);

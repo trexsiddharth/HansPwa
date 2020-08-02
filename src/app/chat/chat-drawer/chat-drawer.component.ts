@@ -20,19 +20,29 @@ export class ChatDrawerComponent implements OnInit {
   userpic = '../../../assets/logo_192.png';
   userId;
   userIsLead;
+  langCheck;
+  currentLanguage;
   constructor(public languageService: LanguageService,
-              private chatService: ChatServiceService,
-              private spinner: NgxSpinnerService,
-              private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              public router: Router,
-              public itemService: FindOpenHistoryProfileService,
-              public activatedRoute: ActivatedRoute) {
+    private chatService: ChatServiceService,
+    private spinner: NgxSpinnerService,
+    private http: HttpClient,
+    private ngxNotificationService: NgxNotificationService,
+    public router: Router,
+    public itemService: FindOpenHistoryProfileService,
+    public activatedRoute: ActivatedRoute) {
 
 
   }
 
   ngOnInit() {
+    this.languageService.setProfileLanguage();
+    this.currentLanguage = localStorage.getItem('language');
+    // set already selected language in toggle
+    if (localStorage.getItem('language') === 'hindi') {
+      this.langCheck = false;
+    } else {
+      this.langCheck = true;
+    }
 
     // user authorized
     this.chatService.authorized.subscribe(
@@ -120,7 +130,16 @@ export class ChatDrawerComponent implements OnInit {
     //   }
     // );
   }
-
+  langChanged(event) {
+    console.log(event.checked);
+    if (event.checked) {
+      localStorage.setItem('language', 'english');
+      this.languageService.setCurrentLanguage('english');
+    } else {
+      localStorage.setItem('language', 'hindi');
+      this.languageService.setCurrentLanguage('hindi');
+    }
+  }
   analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {

@@ -1,0 +1,142 @@
+<!-- toolbar  -->
+<mat-toolbar class="fixToolBar">
+    <mat-toolbar-row>
+        <div class="mainDivToolbar">
+            <div style="display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;">
+                <img width="40px" [defaultImage]="'../../assets/logo_72.png'"
+                    [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'" [useSrcset]="true"
+                    alt="Hans Matrimony">
+                <span
+                    style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans
+                        Matrimony</strong></span>
+            </div>
+        </div>
+    </mat-toolbar-row>
+
+</mat-toolbar>
+
+<main class='pwaSize fixed t-0 b-0 bg-white w-full HC overflowY'>
+
+    <div class="container customBackground"
+        style="width:80%;background: white;border-radius: 20px;margin-top: 20px; margin-bottom: 20px;">
+        <div class="w-full" style="margin-left:auto;margin-right:auto">
+
+            <form [formGroup]="verifyForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>College</mat-label>
+                            <input type="text" matInput formControlName="college" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Company</mat-label>
+                            <input type="text" matInput formControlName="company" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Fathers Occupation</mat-label>
+                            <mat-select #relation formControlName="fathers_occupation" required>
+                                <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Mothers Occupation</mat-label>
+                            <mat-select #relation formControlName="mothers_occupation" required>
+                                <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Sisters Married</mat-label>
+                            <mat-select #relation formControlName="sisters_married" required>
+                                <mat-option *ngFor="let option of Count" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Sisters Unmarried</mat-label>
+                            <mat-select #relation formControlName="sisters_unmarried" required>
+                                <mat-option *ngFor="let option of Count" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Brothers Married</mat-label>
+                            <mat-select #relation formControlName="brothers_married" required>
+                                <mat-option *ngFor="let option of Count" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Brothers Unmarried</mat-label>
+                            <mat-select #relation formControlName="brothers_unmarried" required>
+                                <mat-option *ngFor="let option of Count" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>House Type</mat-label>
+                            <mat-select #relation formControlName="house_type" required>
+                                <mat-option *ngFor="let  option of HouseType" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Family Type</mat-label>
+                            <mat-select #relation formControlName="family_type" required>
+                                <mat-option *ngFor="let  option of FamilyType" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label>Family living in:</mat-label>
+                            <input matInput type="text" formControlname="family_living_in" matValidateAddress
+                                matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                (onLocationSelected)="onLocationSelected($event)" required>
+                        </mat-form-field>
+                    </div><br><br><br><br>
+                    <div class="col-xs-12 m-t-20"
+                        style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
+                        <button mat-raised-button type="button" class="btn-primary" (click)="onSubmit()">Verify</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</main>

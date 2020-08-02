@@ -1,11 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CompatibilityFormComponent } from './compatibility-form.component';
+import { CompatibilityVerifyComponent } from './compatibility-verify/compatibility-verify.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CompatibilityFormComponent
+  },
+  {
+    path: 'compatibility-verify',
+    component: CompatibilityVerifyComponent
+  },
+  {
+    path: 'thank-you',
+    component: ThankYouComponent
   },
   { path: ':appMobile', component: CompatibilityFormComponent },
   { path: 'skip', component: CompatibilityFormComponent },

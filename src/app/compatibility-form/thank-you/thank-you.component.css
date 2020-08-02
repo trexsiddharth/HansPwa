@@ -8,7 +8,28 @@ section{
 .paddingToSection {
     padding: 70px 30px 100px !important;
 }
-
+.topheader{
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px white;
+    font-family: sans-serif;
+    text-align: center;
+}
+.cardMiddle{
+    position:relative;
+    height:30vh!important; 
+    width:80%!important; 
+    border-radius: 20px!important;
+    background:white!important;
+    margin:auto;
+    margin-top:13%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    color:black
+}
 /* // only for explicit view */
 .mainBack {
     background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
@@ -151,29 +172,16 @@ border-radius: 10px;
     font-weight: bold;
 }
 
-#careerSection{
-    margin-top: 20px; 
-        padding: 15px 15px;
-        border: 1px solid #CA58FD;
-        border-radius: 5px;
-}
-
-#horoscopeSection{
-    margin-top: 20px; 
-        padding: 15px 15px;
-        border: 1px solid #070973;
-        border-radius: 5px;
-}
-
-#familySection{
-    margin-top: 20px; 
-        padding: 15px 15px;
-        border: 1px solid #58D1FD;
-        border-radius: 5px;
-}
 
 @media (min-width:1024px){
-    .noProfileMain{
+    .special{
+        height: 100vh;
+        overflow: auto;
+        width: 60vw;
+        background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+        padding: 50px 10px 0px;
+        animation: fadeInUp 1.5s 1;
+        background-size: contain;
         margin-top: 0px!important;
         overflow: auto;
         width: 100%;
@@ -185,6 +193,29 @@ border-radius: 10px;
         position: relative;
         animation: fadeInUp 1.5s 1;
     }
+    .topheader{
+            color: white;
+            font-size: 7rem;
+            font-weight: bolder;
+            text-shadow: 4px 4px 20px white;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .cardMiddle{
+            position:relative;
+            height:27vh!important; 
+            width:40%!important; 
+            border-radius: 20px!important;
+            background:white!important;
+            margin:auto;
+            margin-top:5%;
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content:center;
+            color:black
+        }
+    
 }
 
 @media (max-width: 350px) {
@@ -252,12 +283,12 @@ border-radius: 10px;
 }
 .circular {
     position: absolute;
-    top:-40px;
-    padding: 20px;
-    width: 90px;
-    height: 90px;
+    top:-50px;
+    padding: 0px;
+    width: 80px;
+    height: 80px;
     border: 0px;
-    background-color:#00c2cb;
+    background-color:transparent;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -363,4 +394,7 @@ border-radius: 10px;
     .SpecialCase {
       font-size: 1.4rem !important;
     }
+  }
+  @media (min-width:1024px){
+
   }
