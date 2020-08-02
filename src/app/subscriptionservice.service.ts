@@ -276,7 +276,9 @@ facebookAnalytics(event, amount) {
 }
 
  // for verifying the paytm payment we will check if the url has verifyPayment keyword
- getTransactionStatus() {
+ getTransactionStatus(): Promise<any> {
+   return new Promise((res, rej) => {
+
   const formData = new FormData();
   formData.append('orderId', localStorage.getItem('oId'));
   formData.append('is_lead', localStorage.getItem('is_lead'));
@@ -293,8 +295,6 @@ facebookAnalytics(event, amount) {
         console.log(data);
         localStorage.removeItem('oId');
         localStorage.removeItem('selected_plan');
-        alert('Payment Successful');
-
         if (data.status === 1) {
           alert('Payment Successful, Credits has been added to your account.');
           this.analyticsEvent(`Paytm Payment Completed For ${localStorage.getItem('selected_plan') ?
@@ -305,14 +305,18 @@ facebookAnalytics(event, amount) {
           localStorage.getItem('selected_plan') === 'plan 1' ?
            '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
             '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800');
+          res(1);
           this.route.navigateByUrl('chat');
         } else {
+          res(1);
           this.ngxNotificationService.error('Something went wrong. Please try again later.');
         }
     },
     err => {
       console.log(err);
+      rej(err);
     }
   );
+});
 }
 }

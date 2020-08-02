@@ -324,16 +324,22 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
 
-  openTodaysPopupHere() {
+ openTodaysPopupHere() {
     this.itemService.creditsUpdated.subscribe(
-       data => {
+      async data => {
          if (data) {
            this.lockdownCount++;
            if (!this.router.url.match('first') && !this.router.url.match('verifyPayment') && this.lockdownCount === 1) {
              // show payment popup every time user open the app
              this.itemService.openTodaysPopupAd();
            } else if (this.router.url.match('verifyPayment')) {
-             this.subscriptionService.getTransactionStatus();
+             await this.subscriptionService.getTransactionStatus().then(
+               response => {
+                    if (response === 1) {
+                      this.getCredits();
+                    }
+               }
+             );
            }
          }
        }
