@@ -248,7 +248,10 @@ export class TodaysPaymentPopupComponent implements OnInit {
             this.oId = data.order_id;
             localStorage.setItem('oId', data.order_id);
             this.txnToken = paytmData.body.txnToken;
-            this.mId = 'Twango57803369412564';
+            // testing mId
+            this.mId = 'bkjPis66135619933053';
+            // production mId
+            // this.mId = 'Twango57803369412564';
         }
       },
       err => {
@@ -264,9 +267,9 @@ onPaytm() {
   const form = document.getElementById('pay');
             // tslint:disable-next-line: max-line-length
             // staging/ testing url
-  // (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
+  (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=${this.oId}`;
   // production url
-  (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
+  // (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
   (form as any).submit();
 }
 
