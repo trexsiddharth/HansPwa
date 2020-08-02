@@ -279,7 +279,6 @@ facebookAnalytics(event, amount) {
 
  // for verifying the paytm payment we will check if the url has verifyPayment keyword
  getTransactionStatus(): Promise<any> {
-   this.spinner.show();
    return new Promise((res, rej) => {
 
   const formData = new FormData();
@@ -317,14 +316,12 @@ facebookAnalytics(event, amount) {
           this.route.navigateByUrl('chat');
         } else {
           res(0);
-          this.spinner.hide();
           this.ngxNotificationService.error(data.error_description);
         }
     },
     err => {
       console.log(err);
       rej(err);
-      this.spinner.hide();
       this.ngxNotificationService.error('Something went wrong. Please try again later.');
       localStorage.removeItem('oId');
       localStorage.removeItem('selected_plan');

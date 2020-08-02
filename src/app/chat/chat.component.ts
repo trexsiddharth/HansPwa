@@ -333,6 +333,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
              // show payment popup every time user open the app
              this.itemService.openTodaysPopupAd();
            } else if (this.router.url.match('verifyPayment')) {
+             this.spinner.show();
              await this.subscriptionService.getTransactionStatus().then(
                response => {
                     if (response === 1) {
@@ -345,6 +346,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
                       },
                       err => {
                         console.log(err);
+                        this.spinner.hide();
                       });
                     }
                }
