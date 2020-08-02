@@ -384,9 +384,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
             res => {
               console.log(res);
               if (res.si_status && res.si_status === 0 && this.profile.length > 1) {
-                this.Analytics('Mein Kisse Pasand Hu',
-                 'Mein Kisse Pasand Hu Section Visited',
-                  'Mein Kisse Pasand Hu Section Visited');
+                this.analyticsEvent('Likes You Section Visited');
                 this.getInterestReceivedEventStatus(1).subscribe(
                     data => {
                         console.log(data);
@@ -638,7 +636,7 @@ getData(item: any, answer: any, index: any) {
         if (data && data.count) {
           this.itemService.saveCount(data.count);
         }
-        this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer);
+        this.analyticsEvent(`Profile Reanswered ${answer} From ${this.type}`);
         this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
         this.getCredits();
       }, (error: any) => {
@@ -646,16 +644,24 @@ getData(item: any, answer: any, index: any) {
         this.spinner.hide();
       });
   }
-Analytics(type: string, category: string, action: string) {
-    (window as any).ga('send', 'event', category, action, {
+
+  analyticsEvent(event) {
+    (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
-        console.log('Tracking ' + type + ' successful');
+
+        console.log('Tracking ' + event + ' successful');
+
+      }
+
+    });
+
+     // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () =>  {
+        console.log('Tracking gtag ' + event + ' successful');
       }
     });
-    // gtag app + web
-    (window as any).gtag('event', category , {
-      action: action
-    });
+
   }
 updateProfileList(ans: any, num: any, index: any) {
     switch (this.type) {
