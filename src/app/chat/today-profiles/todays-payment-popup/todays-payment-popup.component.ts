@@ -226,7 +226,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.getPaytmOrderId();
   }
   container3() {
-    this.price = '8500';
+    this.price = '1';
     this.credits = '45';
     localStorage.setItem('selected_plan', 'plan 3');
     this.selectedContainer = 3;
@@ -249,9 +249,9 @@ export class TodaysPaymentPopupComponent implements OnInit {
             localStorage.setItem('oId', data.order_id);
             this.txnToken = paytmData.body.txnToken;
             // testing mId
-            this.mId = 'bkjPis66135619933053';
+            // this.mId = 'bkjPis66135619933053';
             // production mId
-            // this.mId = 'Twango57803369412564';
+            this.mId = 'Twango57803369412564';
         }
       },
       err => {
@@ -267,9 +267,9 @@ onPaytm() {
   const form = document.getElementById('pay');
             // tslint:disable-next-line: max-line-length
             // staging/ testing url
-  (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=${this.oId}`;
+  // (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=${this.oId}`;
   // production url
-  // (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
+  (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
   (form as any).submit();
 }
 
