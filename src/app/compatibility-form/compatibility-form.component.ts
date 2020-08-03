@@ -151,7 +151,7 @@ export class CompatibilityFormComponent implements OnInit {
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
       Mangalik: ['', Validators.compose([Validators.required])],
-      locality: ['', Validators.compose([Validators.required])],
+      // locality: ['', Validators.compose([Validators.required])],
       disabledPart: ['']
     });
   }
@@ -410,7 +410,7 @@ async ngOnInit() {
           Religion: ['', Validators.compose([Validators.required])],
           Castes: ['', Validators.compose([Validators.required])],
           Mangalik: ['', Validators.compose([Validators.required])],
-          locality: ['', Validators.compose([Validators.required])],
+          // locality: ['', Validators.compose([Validators.required])],
           disabledPart: ['']
         });
       }
@@ -477,7 +477,7 @@ async ngOnInit() {
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
-              firststepdata.append('locality', this.locality ? this.locality : this.PageOne.value.locality);
+              // firststepdata.append('locality', this.locality ? this.locality : this.PageOne.value.locality);
               firststepdata.append('disability', this.isDisable ? 'yes' : null);
               firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
 
@@ -526,7 +526,7 @@ async ngOnInit() {
                 localStorage.setItem('mobile_number', this.PageOne.value.phone);
                 this.fourPageService.updateFormOneData(firststepdata);
                 if (this.fourPageService.getUserThrough()) {
-                  this.locality = firststepdata.get('locality');
+                  // this.locality = firststepdata.get('locality');
                 } else {
                   this.Analytics('Four Page Registration', 'Four Page Registration Page One',
                   'Registered through Four Page Registration Page One');
@@ -689,9 +689,9 @@ resolve(statusConfirmed);
 
   onAutocompleteSelected(event) {
     console.log(event);
-    this.PageOne.value.locality = event.formatted_address;
-    this.locality = event.formatted_address;
-    console.log('address of family', this.PageOne.value.locality);
+    // this.PageOne.value.locality = event.formatted_address;
+    // this.locality = event.formatted_address;
+    // console.log('address of family', this.PageOne.value.locality);
 
 }
 onLocationSelected(e) {
@@ -807,8 +807,8 @@ getProfile() {
     this.userProfile.religion = profileData.family.religion;
     this.userProfile.caste = profileData.family.caste;
     this.userProfile.manglik = profileData.profile.manglik;
-    this.locality = profileData.family.locality;
-    this.userProfile.locality = profileData.family.locality;
+    // this.locality = profileData.family.locality;
+    // this.userProfile.locality = profileData.family.locality;
     this.lat = profileData.profile.lat_locality;
     this.long = profileData.profile.long_locality;
     this.userProfile.qualification = profileData.profile.degree;
@@ -851,7 +851,7 @@ getProfile() {
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
       Mangalik: this.userProfile.manglik,
-      locality: this.userProfile.locality,
+      // locality: this.userProfile.locality,
       });
   }
   getMonthString(month: string) {
