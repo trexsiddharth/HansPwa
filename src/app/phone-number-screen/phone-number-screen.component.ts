@@ -54,9 +54,30 @@ export class PhoneNumberScreenComponent implements OnInit {
 
 this.spinner.show();
 localStorage.setItem('is_lead', '');
-if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') {
+if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '' && !localStorage.getItem('fcm_app')) {
   // tslint:disable-next-line: max-line-length
-this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
+this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
+, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
+console.log(res);
+if (res.registered === 1) {
+  this.openVerificationDialog(res.is_lead);
+  // localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
+  // localStorage.setItem('is_lead', res.is_lead);
+  // localStorage.setItem('id', res.id);
+  // this.router.navigateByUrl('chat');
+} else {
+  this.ngxNotificationService.info('You are not registered with us, Kindly register');
+  localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
+  this.router.navigateByUrl('reg');
+}
+this.spinner.hide();
+}, err => {
+this.spinner.hide();
+console.log(err);
+});
+}  else if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '' && localStorage.getItem('fcm_app')) {
+  this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
+, ['fcm_app'] : localStorage.getItem('fcm_app')}}).subscribe(res => {
 console.log(res);
 if (res.registered === 1) {
   this.openVerificationDialog(res.is_lead);
@@ -142,3 +163,4 @@ this.spinner.hide();
   }
 
 }
+
