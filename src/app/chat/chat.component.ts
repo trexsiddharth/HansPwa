@@ -283,7 +283,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.setSelectedTab(data);
       }
     );
-      // user authorized
+    // user authorized
     this.chatServivce.authorized.subscribe(
       data => {
         if (data) {
@@ -300,7 +300,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       }, 100);
     }
 
-     // as soon as the credits are updated we will show lockdown offer to the free user
+    // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
     this.openTodaysPopupHere();
   }
@@ -310,50 +310,51 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   openContactedProfiles() {
-    this.router.navigate(['history', 'contacted'] , {relativeTo: this.activatedRoute});
+    this.itemService.setcontactedPhoneClicked(true);
+    this.router.navigate(['history', 'contacted'], { relativeTo: this.activatedRoute });
   }
 
   // determines the current position of the drawer
   drawerPosition(event) {
     console.log(event);
     if (event) {
-    this.analyticsEvent('Chat Drawer Opened');
+      this.analyticsEvent('Chat Drawer Opened');
     } else {
       this.analyticsEvent('Chat Drawer Closed');
     }
   }
 
 
- openTodaysPopupHere() {
+  openTodaysPopupHere() {
     this.itemService.creditsUpdated.subscribe(
       async data => {
-         if (data) {
-           this.lockdownCount++;
-           if (!this.router.url.match('first') && !this.router.url.match('verifyPayment') && this.lockdownCount === 1) {
-             // show payment popup every time user open the app
-             this.itemService.openTodaysPopupAd();
-           } else if (this.router.url.match('verifyPayment')) {
-             this.spinner.show();
-             await this.subscriptionService.getTransactionStatus().then(
-               response => {
-                    if (response === 1) {
-                      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-                        console.log(res);
-                        localStorage.setItem('authData', JSON.stringify(res));
-                        localStorage.setItem('id', res.id);
-                        this.itemService.setIsLead(res.is_lead);
-                        this.getCredits();
-                      },
-                      err => {
-                        console.log(err);
-                        this.spinner.hide();
-                      });
-                    }
-               }
-             );
-           }
-         }
-       }
+        if (data) {
+          this.lockdownCount++;
+          if (!this.router.url.match('first') && !this.router.url.match('verifyPayment') && this.lockdownCount === 1) {
+            // show payment popup every time user open the app
+            this.itemService.openTodaysPopupAd();
+          } else if (this.router.url.match('verifyPayment')) {
+            this.spinner.show();
+            await this.subscriptionService.getTransactionStatus().then(
+              response => {
+                if (response === 1) {
+                  this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+                    console.log(res);
+                    localStorage.setItem('authData', JSON.stringify(res));
+                    localStorage.setItem('id', res.id);
+                    this.itemService.setIsLead(res.is_lead);
+                    this.getCredits();
+                  },
+                    err => {
+                      console.log(err);
+                      this.spinner.hide();
+                    });
+                }
+              }
+            );
+          }
+        }
+      }
     );
   }
   getCredits() {
@@ -363,16 +364,16 @@ export class ChatComponent implements OnInit, AfterViewInit {
       creditsData.append('is_lead', localStorage.getItem('is_lead'));
     } else {
       this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-          console.log(res);
-          creditsData.append('is_lead', res.is_lead);
-          localStorage.setItem('is_lead', res.is_lead);
-        },
+        console.log(res);
+        creditsData.append('is_lead', res.is_lead);
+        localStorage.setItem('is_lead', res.is_lead);
+      },
         err => {
           console.log(err);
         });
     }
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
       (data: any) => {
         this.points = data.whatsapp_points;
         this.itemService.setCredits(this.points);
@@ -392,11 +393,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
 
-  checkUrl(num: string): Observable < any > {
+  checkUrl(num: string): Observable<any> {
     localStorage.setItem('is_lead', '');
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
           ['fcm_app']: localStorage.getItem('fcm_app')
@@ -404,7 +405,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       });
     } else {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
         }
@@ -414,7 +415,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   setProfileImage(image) {
     if (image) {
-    this.photo = image;
+      this.photo = image;
     } else {
       this.photo = '../../assets/avatar.svg';
     }
@@ -511,16 +512,16 @@ export class ChatComponent implements OnInit, AfterViewInit {
         myprofileData.append('is_lead', localStorage.getItem('is_lead'));
       } else {
         this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-            console.log(res);
-            myprofileData.append('is_lead', res.is_lead);
-            localStorage.setItem('is_lead', res.is_lead);
-          },
+          console.log(res);
+          myprofileData.append('is_lead', res.is_lead);
+          localStorage.setItem('is_lead', res.is_lead);
+        },
           err => {
             console.log(err);
           });
       }
       // tslint:disable-next-line: max-line-length
-      return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
+      return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
         throw new Error('Server Timeout ' + e);
       })).subscribe(
         (data: any) => {
@@ -591,9 +592,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     });
 
-     // gtag app + web
+    // gtag app + web
     (window as any).gtag('event', event, {
-      event_callback: () =>  {
+      event_callback: () => {
         console.log('Tracking gtag ' + event + ' successful');
       }
     });
@@ -614,7 +615,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.analyticsEvent('Discover Section Visited');
         this.changeToHistory();
         break;
-        case 2:
+      case 2:
         this.analyticsEvent('Likes You Section Visited');
         this.tabType = 'interestReceived';
         this.changeToHistory();

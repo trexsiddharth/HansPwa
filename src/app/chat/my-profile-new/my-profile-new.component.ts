@@ -990,9 +990,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   onSubmitPreferences() {
     this.editIndexPrefs = -1;
-
-    //this.preferenceProfileData.caste = this.preferenceProfileData.caste.join(",");
-    //this.castePreferences = this.preferenceProfileData.caste.split(",");
+    this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(",");
     this.preferenceProfileData.caste = this.castePreferences.join(",");
     console.log("preference Data to update");
 
@@ -1009,8 +1007,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     newPrefForm.append("manglik", this.preferenceProfileData.manglik);
     newPrefForm.append(
       "marital_status",
-      (this.preferenceProfileData.maritalStatus == "undefined" || this.preferenceProfileData.maritalStatus) === undefined ?
-        "Doesn't Matter" : this.preferenceProfileData.maritalStatus
+      (this.preferenceProfileData.marital_status == "undefined" || this.preferenceProfileData.marital_status) === undefined ?
+        "Doesn't Matter" : this.preferenceProfileData.marital_status
     );
     if (this.personalProfileData.gender === "Male") {
       newPrefForm.append("working", this.preferenceProfileData.working);
@@ -1181,6 +1179,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             this.getAllCastePersonal();
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
+            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
           },
           (error: any) => {
             this.spinner.hide();

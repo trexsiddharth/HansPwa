@@ -1392,6 +1392,132 @@
                 </div>
 
               </mat-expansion-panel>
+              <mat-expansion-panel [expanded]="stepPreferences === 3" (opened)="setStepPreferences(3)" hideToggle>
+                <mat-expansion-panel-header>
+                  <a style="
+                      color: rgb(68, 67, 67);
+                      font-size: large;
+                      margin-left: 12px;
+                      font-weight: 600;
+                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;
+                    ">
+                    {{ languageService.profileLang.martialStatus }}</a>
+                </mat-expansion-panel-header>
+                <div *ngIf="editIndexPrefs != 3">
+                  <div class="row" style="position:relative">
+                    <button
+                      style="background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important"
+                      (click)="setEditIndexPrefs(3)" mat-button>
+                      <img *ngIf="editIndexPrefs != 3" class="editPencil" src="../../../assets/editN.svg"
+                        alt="edit contact" />
+                    </button>
+                    <div class="col-12">
+                      <span style="margin-left: 5px;">
+                        <span class="labelText">{{ languageService.profileLang.martialStatus }}:</span>{{
+                          preferenceProfileData.marital_status
+                            ? preferenceProfileData.marital_status
+                            : "Add Detail"
+                        }}
+                      </span>
+                    </div>
+                    <div class="col-12" style="color:white!important">
+                      <h6 style="display: inline-block;">Random text</h6>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="editIndexPrefs == 3">
+                  <div class="row">
+                    <div class="col-12">
+                      <h6 style="display: inline-block;">{{languageService.profileLang.martialStatus}}:</h6>
+                      <select type="text" class="form-control" name="manglik"
+                        [(ngModel)]="preferenceProfileData.marital_status" required>
+                        <option [value]="preferenceProfileData.marital_status">{{preferenceProfileData.marital_status}}
+                        </option>
+                        <option [value]="MaritalStatus[0]">{{MaritalStatus[0]}}</option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <mat-action-row>
+                        <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexPrefs != 3"
+                          (click)="onSubmitPreferences()">
+                          SAVE
+                        </button>
+                      </mat-action-row>
+                    </div>
+                    <div class="col-12" style="color:white!important">
+                      <h6 style="display: inline-block;">Random text</h6>
+                    </div>
+                  </div>
+
+                </div>
+
+              </mat-expansion-panel>
+              <mat-expansion-panel [expanded]="stepPreferences === 4" (opened)="setStepPreferences(4)" hideToggle>
+                <mat-expansion-panel-header>
+                  <a style="
+                      color: rgb(68, 67, 67);
+                      font-size: large;
+                      margin-left: 12px;
+                      font-weight: 600;
+                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;
+                    ">
+                    {{ languageService.profileLang.religion}}
+                    {{ languageService.profileLang.preference}}</a>
+                </mat-expansion-panel-header>
+                <div *ngIf="editIndexPrefs != 4">
+                  <div class="row" style="position:relative">
+                    <button
+                      style="background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important"
+                      (click)="setEditIndexPrefs(4)" mat-button>
+                      <img *ngIf="editIndexPrefs != 4" class="editPencil" src="../../../assets/editN.svg"
+                        alt="edit contact" />
+                    </button>
+                    <div class="col-12">
+                      <span style="margin-left: 5px;">
+                        <span class="labelText">{{ languageService.profileLang.religion}}:</span>{{
+                          preferenceProfileData.religion
+                            ? preferenceProfileData.religion
+                            : "Add Detail"
+                        }}
+                      </span>
+                    </div>
+                    <div class="col-12" style="color:white!important">
+                      <h6 style="display: inline-block;">Random text</h6>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="editIndexPrefs == 4">
+                  <div class="row">
+                    <div class="col-12">
+                      <h6 style="display: inline-block;">{{languageService.profileLang.religion}}:</h6>
+                      <mat-select type="text" class="form-control" [multiple]="true" name="religion" #multiSelect
+                        [(ngModel)]="preferenceProfileData.religion" required>
+                        <!-- <ngx-mat-select-search noEntriesFoundLabel="No Religion Found"
+                          placeholderLabel="Search Religons..."></ngx-mat-select-search> -->
+                        <!-- <mat-option>
+                          
+                        </mat-option> -->
+                        <mat-option *ngFor="let item of Religions" [value]="item" required>
+                          {{ item}}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-12">
+                      <mat-action-row>
+                        <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexPrefs != 4"
+                          (click)="onSubmitPreferences()">
+                          SAVE
+                        </button>
+                      </mat-action-row>
+                    </div>
+                    <div class="col-12" style="color:white!important">
+                      <h6 style="display: inline-block;">Random text</h6>
+                    </div>
+                  </div>
+
+                </div>
+
+              </mat-expansion-panel>
 
             </mat-accordion>
           </div>
