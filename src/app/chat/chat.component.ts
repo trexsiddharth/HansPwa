@@ -214,7 +214,22 @@ export class ChatComponent implements OnInit, AfterViewInit {
           } else if (data.params.fcm_app) {
             // if user open twa app we share their fcm id with server
             console.log(data.params.fcm_app);
-            localStorage.setItem('fcm_app', data.params.fcm_app);
+            // if fcm_app in local is not same with the coming fcm_app in url
+            if (localStorage.getItem('mobile_number') &&
+            localStorage.getItem('fcm_app') &&
+             localStorage.getItem('fcm_app') !== data.params.fcm_app) {
+              localStorage.setItem('fcm_app', data.params.fcm_app);
+              // update the new fcm id on the server
+              this.checkUrl(localStorage.getItem('mobile_number')).subscribe(
+                (data) => {
+                      if (data) {
+                        console.log('FCM ID Updated');
+                      }
+                }
+              );
+            } else {
+              localStorage.setItem('fcm_app', data.params.fcm_app);
+            }
           }
         }
       }

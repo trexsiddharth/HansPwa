@@ -178,11 +178,11 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
         this.selfImage = '../../assets/avatar.svg';
         this.selfName = 'You';
       }
-
-
         console.log(text);
         console.log(id);
-        localStorage.setItem('id', id);
+        if (id) {
+          localStorage.setItem('id', id);
+        }
         this.paidStatus = data.paid_status;
         console.log(this.paidStatus);
 
