@@ -66,7 +66,6 @@ export class SubscriptionComponent implements OnInit {
     }
   }
 
- 
 
   togglePersonalized() {
     this.isActive = 'personalized';

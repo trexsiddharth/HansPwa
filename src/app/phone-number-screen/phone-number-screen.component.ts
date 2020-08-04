@@ -62,6 +62,7 @@ if (res.registered === 1) {
   this.openVerificationDialog(res.is_lead);
   // localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
   // localStorage.setItem('is_lead', res.is_lead);
+  // localStorage.setItem('id', res.id);
   // this.router.navigateByUrl('chat');
 } else {
   this.ngxNotificationService.info('You are not registered with us, Kindly register');
@@ -112,6 +113,7 @@ this.spinner.hide();
           if (data.success === 'verified') {
             localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
             localStorage.setItem('is_lead', data.is_lead);
+            localStorage.setItem('id', data.id);
             this.router.navigateByUrl('chat');
           } else { return; }
         }

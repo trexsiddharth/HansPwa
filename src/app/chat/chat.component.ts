@@ -267,12 +267,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     this.route.paramMap.subscribe(
       (data: any) => {
-        console.log(data.params.fcm_app);
         if (data) {
           if (data.params.stage) {
             setTimeout(() => {
               this.setSelectedTab(data.params.stage);
             }, 500);
+          } else if (data.params.fcm_app) {
+            // if user open twa app we share their fcm id with server
+            console.log(data.params.fcm_app);
+            localStorage.setItem('fcm_app', data.params.fcm_app);
           }
         }
       }
