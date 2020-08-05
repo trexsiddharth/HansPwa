@@ -97,8 +97,55 @@
 </main>
 
 <div *ngIf="!section && profile.length < 1">
+    <main *ngIf="itemService.getPersonalized()">
+        <div style="position: relative;display: block;margin: 30% auto;">
+            <p class="text-center">
+                <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
+            </p>
+            <p class="text-center noProfile">
+                No Profiles Here
+            </p>
+        </div>
+    </main>
+    <main *ngIf="!itemService.getPhotoStatus()" class="special noProfileMain">
+        <!-- <main *ngIf="true" class="special"> -->
+        <div style="height:45vh!important; 
+    width:85%!important; 
+    border-radius: 20px!important;
+    background:white!important;
+    margin:auto;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center">
+            <img src="../../../assets/plus.svg" style="width:60%">
+        </div>
+        <div class="text-center" style="margin:10px 0px 0px 0px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center">
+            <p style="font-size: 1.2rem;">Please upload pictures so people can see your profile</p>
+        </div>
+        <div c style="position: relative;
+        display:flex;margin-top: 7%;
+        flex-direction: row;
+        align-items: center;
+        justify-content:center">
+            <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*'
+                (change)="chooseFileForUpload(backfile.files)" />
+            <button class="SpecialCase" style="position:absolute;
+            height:80px;
+            background:#00c2cb!important; 
+            width:80%!important; 
+            color:rgb(255, 255, 255);
+            margin-top: 2%;
+            border:0px!important;
+            border-radius:30px 30px 30px 30px" mat-raised-button (click)="changeProfileImage()">Upload Photos</button>
+        </div>
+    </main>
     <!-- <main class="noProfileMain" *ngIf="false"> -->
-    <main class="noProfileMain" *ngIf="itemService.getPhotoStatus() && isNotPaid() ">
+    <main class="noProfileMain" *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()">
         <!-- <div style="position: relative;display: block;margin: 30% auto;">
      <p class="text-center">
          <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
@@ -280,43 +327,6 @@
             </div>
         </div>
     </main>
-    <main *ngIf="!itemService.getPhotoStatus()" class="special noProfileMain">
-        <!-- <main *ngIf="true" class="special"> -->
-        <div style="height:45vh!important; 
-    width:85%!important; 
-    border-radius: 20px!important;
-    background:white!important;
-    margin:auto;
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:center">
-            <img src="../../../assets/plus.svg" style="width:60%">
-        </div>
-        <div class="text-center" style="margin:10px 0px 0px 0px;
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:center">
-            <p style="font-size: 1.2rem;">Please upload pictures so people can see your profile</p>
-        </div>
-        <div c style="position: relative;
-        display:flex;margin-top: 7%;
-        flex-direction: row;
-        align-items: center;
-        justify-content:center">
-            <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*'
-                (change)="chooseFileForUpload(backfile.files)" />
-            <button class="SpecialCase" style="position:absolute;
-            height:80px;
-            background:#00c2cb!important; 
-            width:80%!important; 
-            color:rgb(255, 255, 255);
-            margin-top: 2%;
-            border:0px!important;
-            border-radius:30px 30px 30px 30px" mat-raised-button (click)="changeProfileImage()">Upload Photos</button>
-        </div>
-    </main>
     <main *ngIf="itemService.getPhotoStatus() && !isNotPaid() && !itemService.getPersonalized()" class="special">
         <div style="
     position:relative;
@@ -355,16 +365,6 @@
     margin-top: 10%;
     border:0px!important;
     border-radius:30px 30px 30px 30px" mat-raised-button (click)="goToSubscription()">Upgrade Now</button>
-        </div>
-    </main>
-    <main *ngIf="itemService.getPhotoStatus() && !isNotPaid() && itemService.getPersonalized()">
-        <div style="position: relative;display: block;margin: 30% auto;">
-            <p class="text-center">
-                <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
-            </p>
-            <p class="text-center noProfile">
-                No Profiles Here
-            </p>
         </div>
     </main>
 </div>
