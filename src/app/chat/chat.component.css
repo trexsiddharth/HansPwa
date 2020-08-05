@@ -84,6 +84,16 @@
   display: block;
   position: relative;
 }
+.labelS {
+  width:6px!important;
+  /* margin:auto; */
+  margin: 7px 2px 7px ;
+  padding:2px;
+  font-size:5px!important;
+  display: block;
+  position: absolute;
+  z-index:99999999;
+}
 .tabCount{
   font-size: 10px;
     color: #566EE8;

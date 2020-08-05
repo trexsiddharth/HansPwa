@@ -25,18 +25,18 @@
     z-index: 99999999999;
     flex-direction: row;
     align-items: center;" (click)="openContactedProfiles()">
-          <span class="labelSetting mat-elevation-z7" [matBadge]="'!'"
-            [matBadgeHidden]="itemService.getcontactedPhoneClicked()"></span>
           <mat-icon style="width: 14px;
       height: 14px; 
       color: white;">call</mat-icon> {{itemService.getCredits()}}
+          <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"
+            [matBadgeHidden]="itemService.getcontactedPhoneClicked()"></span>
         </div>
 
         <div class="menuIcon" (click)="sidenav.toggle()">
           <img id="myProfImage" (error)="onImageLoadError()" [src]="photo" alt="profile pic"
             (click)="itemService.setdrawerBadgeClicked(true)">
           <div class="smallMenuImage">
-            <span class="labelSetting mat-elevation-z7" [matBadge]="'!'"
+            <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"
               [matBadgeHidden]="itemService.getdrawerBadgeClicked()"></span>
             <mat-icon style="font-size: 14px;
         color: #D39BBE;
