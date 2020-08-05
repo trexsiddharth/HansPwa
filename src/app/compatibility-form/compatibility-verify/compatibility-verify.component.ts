@@ -106,19 +106,33 @@ export class CompatibilityVerifyComponent implements OnInit {
     private ngxNotificationService: NgxNotificationService,
     private spinner: NgxSpinnerService) {
 
+    // this.verifyForm = this._formBuilder.group({
+    //   // tslint:disable-next-line: max-line-length
+    //   college: ['', Validators.compose([Validators.required])],
+    //   company: ['', Validators.compose([Validators.required])],
+    //   fathers_occupation: ['', Validators.compose([Validators.required])],
+    //   mothers_occupation: ['', Validators.compose([Validators.required])],
+    //   sisters_married: ['', Validators.compose([Validators.required])],
+    //   sisters_unmarried: ['', Validators.compose([Validators.required])],
+    //   brothers_married: ['', Validators.compose([Validators.required])],
+    //   brothers_unmarried: ['', Validators.compose([Validators.required])],
+    //   house_type: ['', Validators.compose([Validators.required])],
+    //   family_type: ['', Validators.compose([Validators.required])],
+    //   family_living_in: ['', Validators.compose([Validators.required])],
+    // });
     this.verifyForm = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      college: ['', Validators.compose([Validators.required])],
-      company: ['', Validators.compose([Validators.required])],
-      fathers_occupation: ['', Validators.compose([Validators.required])],
-      mothers_occupation: ['', Validators.compose([Validators.required])],
-      sisters_married: ['', Validators.compose([Validators.required])],
-      sisters_unmarried: ['', Validators.compose([Validators.required])],
-      brothers_married: ['', Validators.compose([Validators.required])],
-      brothers_unmarried: ['', Validators.compose([Validators.required])],
-      house_type: ['', Validators.compose([Validators.required])],
-      family_type: ['', Validators.compose([Validators.required])],
-      family_living_in: ['', Validators.compose([Validators.required])],
+      college: [''],
+      company: [''],
+      fathers_occupation: [''],
+      mothers_occupation: [''],
+      sisters_married: [''],
+      sisters_unmarried: [''],
+      brothers_married: [''],
+      brothers_unmarried: [''],
+      house_type: [''],
+      family_type: [''],
+      family_living_in: [''],
     });
   }
 
@@ -142,132 +156,95 @@ export class CompatibilityVerifyComponent implements OnInit {
     this.long = e.longitude;
     console.log('location of family', e);
   }
-  onSubmit() {
+  onSubmitPersonal() {
     console.log(this.verifyForm.value);
-    console.log(this.verifyForm.valid);
+    // console.log(this.verifyForm.valid);
+    this.errors = [];
     if (this.verifyForm.valid) {
-      // the code for onsubmitting goes here.
+      const leadId = localStorage.getItem('getListLeadId');
+      const id = localStorage.getItem('getListId');
+      // const leadId = localStorage.getItem('is_lead');
+      // const id = localStorage.getItem('id');
+      const personalProfileDataForm = new FormData();
+
+      personalProfileDataForm.append("id", id);
+      personalProfileDataForm.append("is_lead", leadId);
+
+      personalProfileDataForm.append(
+        "college", this.verifyForm.value.college);
+
+      personalProfileDataForm.append(
+        "company", this.verifyForm.value.company
+      );
+      console.log(personalProfileDataForm);
+      this.http
+        .post(
+          "https://partner.hansmatrimony.com/api/updatePersonalDetails",
+          personalProfileDataForm
+        )
+        .subscribe(
+          (data: any) => {
+            console.log(data);
+            this.onSubmitFamily();
+          },
+          (error: any) => {
+            console.log(error);
+            this.ngxNotificationService.error(
+              "Something Went Wrong, Try Again Later"
+            );
+          }
+        );
+    } else {
+      for (const control in this.verifyForm.controls) {
+        console.log(this.verifyForm.controls[control].value);
+        if (!this.verifyForm.controls[control].valid) {
+          this.errors.push(control);
+        }
+      }
+      if (this.errors[0]) {
+        this.ngxNotificationService.error(
+          "Fill the " + this.errors[0] + " detail"
+        );
+      }
     }
   }
+  onSubmitFamily() {
+    const newFamilyForm = new FormData();
+    const leadId = localStorage.getItem('getListLeadId');
+    const id = localStorage.getItem('getListId');
+    // const leadId = localStorage.getItem('is_lead');
+    //   const id = localStorage.getItem('id');
 
+    newFamilyForm.append("id", id);
+    newFamilyForm.append("is_lead", leadId);
+    newFamilyForm.append("family_type", this.verifyForm.value.family_type);
+    newFamilyForm.append("house_type", this.verifyForm.value.house_type);
+    newFamilyForm.append("occupation_father", this.verifyForm.value.fathers_occupation);
+    newFamilyForm.append("occupation_mother", this.verifyForm.value.mothers_occupation);
+    newFamilyForm.append("married_sons", this.verifyForm.value.brothers_married);
+    newFamilyForm.append("unmarried_sons", this.verifyForm.value.brothers_unmarried);
+    newFamilyForm.append("married_daughters", this.verifyForm.value.sisters_married);
+    newFamilyForm.append("unmarried_daughters", this.verifyForm.value.sisters_unmarried);
+    newFamilyForm.append("city", this.verifyForm.value.family_living_in);
 
-  // getProfile() {
-  //   this.spinner.show();
-  //   const leadId = localStorage.getItem('getListLeadId');
-  //   const id = localStorage.getItem('getListId');
-  //   console.log(id, leadId);
-  //   const myprofileData = new FormData();
-  //   myprofileData.append('id', id);
-  //   myprofileData.append('contacted', '1');
-  //   myprofileData.append('is_lead', leadId);
-
-  //   // tslint:disable-next-line: max-line-length
-  //   return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
-  //     throw new Error('Server Timeout ' + e);
-  //   })).subscribe(
-  //     (data: any) => {
-  //       console.log(data);
-  //       this.profileData = data;
-  //       if (this.fourPageService.userThroughGetList) {
-  //         this.setProfileValues(data);
-  //       }
-  //       this.spinner.hide();
-  //     },
-  //     (error: any) => {
-  //       this.spinner.hide();
-  //       console.log(error);
-  //       this.ngxNotificationService.error('Something Went Wrong');
-  //     }
-  //   );
-  // }
-  // getProfilePhoto(carous: any, index: string): string {
-  //   if (carous && carous !== '' && carous !== 'null') {
-  //     const carousel: object = JSON.parse(carous);
-  //     const keys = Object.keys(carousel);
-  //     // console.log(carousel[index]);
-  //     if (carousel[keys[index]]) {
-  //       return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
-  //     }
-  //   }
-  // }
-  // setProfileValues(profileData) {
-  //   if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-  //     localStorage.setItem('getListTempleId', profileData.profile.temple_id);
-  //   }
-  //   this.userProfile.name = profileData.profile.name;
-  //   this.userProfile.mobile = profileData.family.mobile;
-
-  //   localStorage.setItem('getListMobile', profileData.family.mobile ? profileData.family.mobile : '');
-
-  //   this.userProfile.email = profileData.family.email;
-
-  //   if (profileData.family.relation === 'Mother') {
-  //     this.userProfile.relation = 'Son';
-  //   } else if (profileData.family.relation === 'Father') {
-  //     this.userProfile.relation = 'Daughter';
-  //   } else {
-  //     this.userProfile.relation = profileData.family.relation;
-  //   }
-
-  //   this.userProfile.gender = profileData.profile.gender;
-  //   this.userProfile.dob = profileData.profile.birth_date;
-  //   this.userProfile.height = profileData.profile.height;
-  //   this.userProfile.weight = profileData.profile.weight;
-  //   this.userProfile.martialStatus = profileData.profile.marital_status;
-  //   this.userProfile.annualIncome = profileData.profile.monthly_income;
-  //   if (profileData.family.religion) {
-  //     this.Caste = true;
-  //   }
-  //   this.userProfile.religion = profileData.family.religion;
-  //   this.userProfile.caste = profileData.family.caste;
-  //   this.userProfile.manglik = profileData.profile.manglik;
-  //   this.locality = profileData.family.locality;
-  //   this.userProfile.locality = profileData.family.locality;
-  //   this.lat = profileData.profile.lat_locality;
-  //   this.long = profileData.profile.long_locality;
-  //   this.userProfile.qualification = profileData.profile.degree;
-  //   this.userProfile.occupation = profileData.profile.occupation;
-  //   this.userProfile.designation = profileData.profile.profession;
-  //   this.userProfile.workingCity = profileData.profile.working_city;
-  //   this.userProfile.about = profileData.profile.about;
-  //   this.userProfile.birthPlace = profileData.profile.birth_place;
-  //   this.userProfile.birthTime = profileData.profile.birth_time;
-  //   this.userProfile.gotra = profileData.family.gotra;
-  //   this.userProfile.foodChoice = profileData.profile.food_choice;
-  //   this.userProfile.fatherStatus = profileData.family.father_status;
-  //   this.userProfile.motherStatus = profileData.family.mother_status;
-  //   this.userProfile.familyIncome = profileData.family.family_income;
-  //   this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
-  //   this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
-  //   this.userProfile.image3 = this.getProfilePhoto(profileData.profile.carousel, '2');
-
-  //   console.log(this.userProfile);
-  //   this.fourPageService.setProfile(this.userProfile);
-  //   this.fourPageService.getListData.emit(true);
-  //   this.setverifyFormData();
-  // }
-
-  // setverifyFormData() {
-  //   this.verifyForm.patchValue({
-  //     firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
-  //     lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] : '',
-  //     phone: this.userProfile.mobile,
-  //     email: this.userProfile.email,
-  //     Relation: this.userProfile.relation,
-  //     gender: this.userProfile.gender,
-  //     birth_date: this.userProfile.dob ? this.userProfile.dob.toString().split('-')[2] : '',
-  //     birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1]) : '',
-  //     birth_year: this.userProfile.dob ? this.years[this.years.indexOf(this.userProfile.dob.toString().split('-')[0])] : '',
-  //     Height: this.userProfile.height ? this.Heights1.indexOf(this.userProfile.height) : '',
-  //     Weight: this.userProfile.weight,
-  //     MaritalStatus: this.userProfile.martialStatus,
-  //     AnnualIncome: this.userProfile.annualIncome,
-  //     Religion: this.userProfile.religion,
-  //     Castes: this.userProfile.caste,
-  //     Mangalik: this.userProfile.manglik,
-  //     locality: this.userProfile.locality,
-  //   });
-  // }
+    this.http
+      .post(
+        "https://partner.hansmatrimony.com/api/updateFamilyDetails",
+        newFamilyForm
+      )
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          console.log("Family Deatils Updated successfully");
+        },
+        (error: any) => {
+          console.log(error);
+          this.ngxNotificationService.error(
+            "Something Went Wrong, Try Again Later"
+          );
+        }
+      );
+  }
 }
 
 
