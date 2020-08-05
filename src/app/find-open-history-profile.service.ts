@@ -81,7 +81,7 @@ export class FindOpenHistoryProfileService {
       localStorage.setItem("contactedPhoneClicked", "0");
     }
   }
-  getdrawerBadgeClicked(status: boolean) {
+  getdrawerBadgeClicked() {
     let temp = localStorage.getItem("drawerBadgeClicked");
     if (temp == "1") return true
     else return false;
