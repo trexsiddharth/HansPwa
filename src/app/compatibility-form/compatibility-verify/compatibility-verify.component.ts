@@ -293,6 +293,8 @@ export class CompatibilityVerifyComponent implements OnInit {
     this.fourPageService.profile.family.married_sons = profileData.get('married_sons').toString();
     this.fourPageService.profile.family.unmarried_sons = profileData.get('unmarried_sons').toString();
     this.fourPageService.profile.family.city = profileData.get('city') ? profileData.get('city').toString() : '';
+    this.fourPageService.profile.family.house_type = profileData.get('house_type') ? profileData.get('house_type').toString() : '';
+    this.fourPageService.profile.family.family_type = profileData.get('family_type') ? profileData.get('family_type').toString() : '';
     console.log(this.fourPageService.getProfile());
   }
 }
