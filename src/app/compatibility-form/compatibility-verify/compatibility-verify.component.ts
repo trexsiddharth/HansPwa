@@ -81,30 +81,31 @@ export class CompatibilityVerifyComponent implements OnInit {
   isDisable = false;
   isAllCastePref = false;
   Occupation: string[] = [
-    "Private Job",
-    "Business/Self-Employed",
-    "Govt Job",
-    "Doctor",
-    "Teacher",
-    "Homely",
-    "Not Employed",
+    'Private Job',
+    'Business/Self-Employed',
+    'Govt Job',
+    'Doctor',
+    'Teacher',
+    'Homely',
+    'Not Employed',
   ];
-  Status: string[] = ["Alive", "Not Alive"];
-  FamilyType: string[] = ["Joint", "Nuclear"];
-  Count: any[] = ["None", 0, 1, 2, 3, 4, 5, 6, 7, 8];
-  HouseType: string[] = ["Owned", "Rented", "Leased"];
+  Status: string[] = ['Alive', 'Not Alive'];
+  FamilyType: string[] = ['Joint', 'Nuclear'];
+  Count: any[] = ['None', 0, 1, 2, 3, 4, 5, 6, 7, 8];
+  HouseType: string[] = ['Owned', 'Rented', 'Leased'];
+  familyData;
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-    private _formBuilder: FormBuilder,
-    private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private matDialog: MatDialog,
-    private breakPointObserver: BreakpointObserver,
-    public languageService: LanguageService,
-    private route: ActivatedRoute,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService) {
+              private _formBuilder: FormBuilder,
+              private router: Router,
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private matDialog: MatDialog,
+              private breakPointObserver: BreakpointObserver,
+              public languageService: LanguageService,
+              private route: ActivatedRoute,
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService) {
 
     // this.verifyForm = this._formBuilder.group({
     //   // tslint:disable-next-line: max-line-length
@@ -126,10 +127,10 @@ export class CompatibilityVerifyComponent implements OnInit {
       company: [''],
       fathers_occupation: [''],
       mothers_occupation: [''],
-      sisters_married: [''],
-      sisters_unmarried: [''],
-      brothers_married: [''],
-      brothers_unmarried: [''],
+      sisters_married: [0],
+      sisters_unmarried: [0],
+      brothers_married: [0],
+      brothers_unmarried: [0],
       house_type: [''],
       family_type: [''],
       family_living_in: [''],
@@ -138,11 +139,40 @@ export class CompatibilityVerifyComponent implements OnInit {
 
   ngOnInit() {
 
+    // when the remote data gets uploaded
+    this.fourPageService.getListData.subscribe(
+      (data) => {
+          if (data) {
+            console.log(this.fourPageService.getProfile());
+            this.setData(this.fourPageService.getProfile());
+          }
+      } ,
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   onDate(event): void {
     console.log(event);
   }
+
+  // set user data
+  setData(profile) {
+    this.verifyForm.setValue({
+      college: profile.college,
+      company: profile.company,
+      fathers_occupation: profile.family.occupation,
+      mothers_occupation: profile.family.occupation_mother,
+      sisters_married: profile.family.married_daughters,
+      sisters_unmarried: profile.family.unmarried_daughters,
+      brothers_married: profile.family.married_sons,
+      brothers_unmarried: profile.family.unmarried_sons,
+      house_type: profile.family.house_type,
+      family_type: profile.family.family_type,
+      family_living_in: profile.family.city,
+    });
+}
 
   onAutocompleteSelected(event) {
     console.log(event);
@@ -167,30 +197,32 @@ export class CompatibilityVerifyComponent implements OnInit {
       // const id = localStorage.getItem('id');
       const personalProfileDataForm = new FormData();
 
-      personalProfileDataForm.append("id", id);
-      personalProfileDataForm.append("is_lead", leadId);
+      personalProfileDataForm.append('id', id);
+      personalProfileDataForm.append('is_lead', leadId);
 
       personalProfileDataForm.append(
-        "college", this.verifyForm.value.college);
+        'college', this.verifyForm.value.college);
 
       personalProfileDataForm.append(
-        "company", this.verifyForm.value.company
+        'company', this.verifyForm.value.company
       );
       console.log(personalProfileDataForm);
       this.http
         .post(
-          "https://partner.hansmatrimony.com/api/updatePersonalDetails",
+          'https://partner.hansmatrimony.com/api/updatePersonalDetails',
           personalProfileDataForm
         )
         .subscribe(
           (data: any) => {
             console.log(data);
-            this.onSubmitFamily();
+            if (data.updatePerosnalDetails_status === 'Y') {
+              this.onSubmitFamily();
+            }
           },
           (error: any) => {
             console.log(error);
             this.ngxNotificationService.error(
-              "Something Went Wrong, Try Again Later"
+              'Something Went Wrong, Try Again Later'
             );
           }
         );
@@ -203,7 +235,7 @@ export class CompatibilityVerifyComponent implements OnInit {
       }
       if (this.errors[0]) {
         this.ngxNotificationService.error(
-          "Fill the " + this.errors[0] + " detail"
+          'Fill the ' + this.errors[0] + ' detail'
         );
       }
     }
@@ -215,36 +247,57 @@ export class CompatibilityVerifyComponent implements OnInit {
     // const leadId = localStorage.getItem('is_lead');
     //   const id = localStorage.getItem('id');
 
-    newFamilyForm.append("id", id);
-    newFamilyForm.append("is_lead", leadId);
-    newFamilyForm.append("family_type", this.verifyForm.value.family_type);
-    newFamilyForm.append("house_type", this.verifyForm.value.house_type);
-    newFamilyForm.append("occupation_father", this.verifyForm.value.fathers_occupation);
-    newFamilyForm.append("occupation_mother", this.verifyForm.value.mothers_occupation);
-    newFamilyForm.append("married_sons", this.verifyForm.value.brothers_married);
-    newFamilyForm.append("unmarried_sons", this.verifyForm.value.brothers_unmarried);
-    newFamilyForm.append("married_daughters", this.verifyForm.value.sisters_married);
-    newFamilyForm.append("unmarried_daughters", this.verifyForm.value.sisters_unmarried);
-    newFamilyForm.append("city", this.verifyForm.value.family_living_in);
+    newFamilyForm.append('id', id);
+    newFamilyForm.append('is_lead', leadId);
+    newFamilyForm.append('family_type', this.verifyForm.value.family_type);
+    newFamilyForm.append('house_type', this.verifyForm.value.house_type);
+    newFamilyForm.append('occupation_father', this.verifyForm.value.fathers_occupation);
+    newFamilyForm.append('occupation_mother', this.verifyForm.value.mothers_occupation);
+    newFamilyForm.append('married_sons', this.verifyForm.value.brothers_married);
+    newFamilyForm.append('unmarried_sons', this.verifyForm.value.brothers_unmarried);
+    newFamilyForm.append('married_daughters', this.verifyForm.value.sisters_married);
+    newFamilyForm.append('unmarried_daughters', this.verifyForm.value.sisters_unmarried);
+    newFamilyForm.append('city', this.verifyForm.value.family_living_in);
 
     this.http
       .post(
-        "https://partner.hansmatrimony.com/api/updateFamilyDetails",
+        'https://partner.hansmatrimony.com/api/updateFamilyDetails',
         newFamilyForm
       )
       .subscribe(
         (data: any) => {
           console.log(data);
-          console.log("Family Deatils Updated successfully");
+          console.log('Family Deatils Updated successfully');
+          if (data.updateFamilyDetails_status === 'Y') {
+          this.updateVerifyFormData(newFamilyForm);
+          }
         },
         (error: any) => {
           console.log(error);
           this.ngxNotificationService.error(
-            "Something Went Wrong, Try Again Later"
+            'Something Went Wrong, Try Again Later'
           );
         }
       );
   }
+
+  updateVerifyFormData(profileData: FormData) {
+    this.fourPageService.profile.college = this.verifyForm.value.college;
+    this.fourPageService.profile.company = this.verifyForm.value.company ;
+    this.fourPageService.profile.family.occupation = profileData.get('occupation_father') ?
+     profileData.get('occupation_father').toString() : '';
+    this.fourPageService.profile.family.occupation_mother = profileData.get('occupation_mother') ?
+     profileData.get('occupation_mother').toString() : '';
+    this.fourPageService.profile.family.married_daughters = profileData.get('married_daughters').toString();
+    this.fourPageService.profile.family.unmarried_daughters = profileData.get('unmarried_daughters').toString();
+    this.fourPageService.profile.family.married_sons = profileData.get('married_sons').toString();
+    this.fourPageService.profile.family.unmarried_sons = profileData.get('unmarried_sons').toString();
+    this.fourPageService.profile.family.city = profileData.get('city') ? profileData.get('city').toString() : '';
+    this.fourPageService.profile.family.house_type = profileData.get('house_type') ? profileData.get('house_type').toString() : '';
+    this.fourPageService.profile.family.family_type = profileData.get('family_type') ? profileData.get('family_type').toString() : '';
+    console.log(this.fourPageService.getProfile());
+  }
 }
+
 
 

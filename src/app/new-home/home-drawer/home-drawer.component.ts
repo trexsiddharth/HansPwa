@@ -19,6 +19,11 @@ export class HomeDrawerComponent implements OnInit {
     localStorage.clear();
     localStorage.setItem('language', lang);
     this.homeService.getDrawerInstance().toggle();
+
+    (window as any).FB.logout((response) => {
+      console.log(response);
+      // Person is now logged out
+   });
   }
   openBlog() {
     window.open('https://hansmatrimony.com/blog/?ngsw-bypass=true');

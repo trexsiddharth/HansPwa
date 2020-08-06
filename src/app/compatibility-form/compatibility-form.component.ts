@@ -826,6 +826,9 @@ getProfile() {
     this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
     this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
     this.userProfile.image3 = this.getProfilePhoto(profileData.profile.carousel, '2');
+    this.userProfile.company = profileData.profile.company;
+    this.userProfile.college = profileData.profile.college;
+    this.userProfile.family = profileData.family;
 
     console.log(this.userProfile);
     this.fourPageService.setProfile(this.userProfile);

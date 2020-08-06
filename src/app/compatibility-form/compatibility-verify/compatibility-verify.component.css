@@ -79,13 +79,13 @@
   box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
   12px 12px 14px rgba(0, 0, 0, 0.2);
   }
-  .customBackground{
+  /* .customBackground{
     border-radius: 10px;
     padding: 5px;
     background: white;
     box-shadow: -12px -12px 12px 0 rgba(0, 0, 0, 0.1),
   12px 12px 12px 0 rgba(0, 0, 0, 0.1);
-  }
+  } */
   
   @media (max-width: 900px) {
   main {
@@ -149,13 +149,13 @@
           border-color: grey;
           outline: 0;
         }
-        .customBackground{
+        /* .customBackground{
           border-radius: 10px;
           padding: 5px;
           background: white;
           box-shadow: -12px -12px 12px 0 rgba(0, 0, 0, 0.03),
         12px 12px 12px 0 rgba(0, 0, 0, 0.1);
-        }
+        } */
   }
   
     

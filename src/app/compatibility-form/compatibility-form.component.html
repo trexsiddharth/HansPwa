@@ -282,8 +282,12 @@
                 </mat-step>
                 <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
                 <mat-step *ngIf="fourPageService.getUserThrough() && !isLeadIsZero ">
+                  <app-compatibility-verify></app-compatibility-verify>
+                </mat-step>
+                <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
+                <mat-step *ngIf="fourPageService.getUserThrough() && !isLeadIsZero ">
                   <!-- <ng-template matStepLabel  >
-                    Page V
+                    Page VI
                   </ng-template> -->
                   <app-compatibility-page-five></app-compatibility-page-five>
                 </mat-step>

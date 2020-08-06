@@ -176,6 +176,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
       } else {
         this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
+      this.closeDialog();
       this.analyticsEvent(
         'RazorPay Payement Gateway Opened For ' + this.price
       );
@@ -214,6 +215,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
+    this.analyticsEvent('Subscription Seen');
   }
   container2() {
     this.price = '5500';
@@ -224,6 +226,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
+    this.analyticsEvent('Subscription Seen');
   }
   container3() {
     this.price = '8500';
@@ -234,11 +237,12 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
+    this.analyticsEvent('Subscription Seen');
   }
 
   getPaytmOrderId() {
     const formData = new FormData();
-    formData.append('mobile', '9910395820');
+    formData.append('mobile', localStorage.getItem('mobile_number'));
     formData.append('amount', this.price);
     this.http.post('https://partner.hansmatrimony.com/api/order', formData).subscribe(
       (data: any) => {
@@ -272,5 +276,4 @@ onPaytm() {
   (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
   (form as any).submit();
 }
-
 }

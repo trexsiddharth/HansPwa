@@ -371,6 +371,28 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Select Image 2');
         } else if (!userProfile.image3 || userProfile.image3 === null  || userProfile.image3 === '') {
           return this.ngxNotificationService.error('Select Image 3');
+        } else if (!userProfile.college  || userProfile.college === '') {
+          return this.ngxNotificationService.error('Enter College Name');
+        } else if (!userProfile.company  || userProfile.company === '') {
+          return this.ngxNotificationService.error('Enter Company Name');
+        } else if (!userProfile.family.occupation  || userProfile.family.occupation === '') {
+          return this.ngxNotificationService.error('Select Father Occupation');
+        }  else if (!userProfile.family.occupation_mother  || userProfile.family.occupation_mother === '') {
+          return this.ngxNotificationService.error('Select Mother Occupation');
+        }  else if (userProfile.family.married_daughters == null) {
+          return this.ngxNotificationService.error('Select Married Sisters');
+        }   else if (userProfile.family.unmarried_daughters == null ) {
+          return this.ngxNotificationService.error('Select Un Married Sisters');
+        }  else if (userProfile.family.married_sons == null) {
+          return this.ngxNotificationService.error('Select Married Brothers');
+        }   else if (userProfile.family.unmarried_sons == null) {
+          return this.ngxNotificationService.error('Select Un Married Brothers');
+        }    else if (!userProfile.family.house_type  || userProfile.family.house_type === '') {
+          return this.ngxNotificationService.error('Select House Type');
+        }    else if (!userProfile.family.family_type  || userProfile.family.family_type === '') {
+          return this.ngxNotificationService.error('Select Family Type');
+        }    else if (!userProfile.family.city  || userProfile.family.city === '') {
+          return this.ngxNotificationService.error('Enter Family Living In');
         } else if (userProfile.photoScore < 1) {
           return this.ngxNotificationService.error('Give a score');
         }  else if (!this.pageFive.controls.enq_date.valid) {
