@@ -31,6 +31,7 @@ import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component
 import { Ng5SliderModule } from 'ng5-slider';
 import { GetcallbackComponent } from './getcallback/getcallback.component';
 import { OkdialogComponent } from './getcallback/okdialog/okdialog.component';
+import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component';
 
 @NgModule({
   imports: [
@@ -64,7 +65,8 @@ import { OkdialogComponent } from './getcallback/okdialog/okdialog.component';
     DailyWelcomePopupComponent,
     MyProfileNewComponent,
     GetcallbackComponent,
-    OkdialogComponent
+    OkdialogComponent,
+    MyProfilePhotoUploadComponent
   ],
   entryComponents: [
     MessageDialogComponent,

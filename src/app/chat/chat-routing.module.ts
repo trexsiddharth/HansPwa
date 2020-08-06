@@ -8,6 +8,7 @@ import { HistoryProfilesDialogComponent } from './history-profiles/history-profi
 import { DiscoverComponent } from './discover/discover.component';
 import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component';
 import { GetcallbackComponent } from './getcallback/getcallback.component';
+import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component'
 
 
 const routes: Routes = [
@@ -27,6 +28,11 @@ const routes: Routes = [
     // this is used for routing through chat drawer
     path: 'my-profile-new/:id/:isLead',
     component: MyProfileNewComponent
+  },
+  {
+    // this is used for routing through chat drawer
+    path: 'my-profile-photo-upload/:id/:isLead',
+    component: MyProfilePhotoUploadComponent
   },
   {
     // this is used for routing through chat drawer

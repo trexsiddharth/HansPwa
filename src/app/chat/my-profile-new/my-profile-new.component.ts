@@ -30,6 +30,7 @@ import { LanguageService } from "src/app/language.service";
 import { Options, LabelType } from "ng5-slider";
 import { forkJoin, ReplaySubject, Subject, Observable } from "rxjs";
 import { take, takeUntil } from "rxjs/operators";
+import { ChatServiceService } from 'src/app/chat-service.service';
 
 @Component({
   selector: "app-my-profile-new",
@@ -351,7 +352,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     private ngxNotificationService: NgxNotificationService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public snackbar: MatSnackBar
+    public snackbar: MatSnackBar,
+    public chatService: ChatServiceService
   ) {
     this.personalForm = this._formBuilder.group({
       name: [""],
@@ -424,6 +426,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.langCheck = true;
     }
+
     this.activatedRoute.paramMap.subscribe((routeData: any) => {
       console.log(routeData);
       if (routeData && routeData.params) {
@@ -465,6 +468,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         this.multiSelect.compareWith = (a: string, b: string) =>
           a && b && a === b;
       });
+  }
+  openPhotoUpload() {
+    this.router.navigateByUrl(`chat/my-profile-photo-upload/${this.userId}/${this.userIsLead}`);
   }
 
   setStepPersonal(index: number) {
