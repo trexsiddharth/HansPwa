@@ -313,7 +313,7 @@ facebookAnalytics(event, amount) {
            '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
             '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800');
           res(1);
-          this.route.navigateByUrl('chat');
+          this.route.navigateByUrl('chat?razorVerifyPayment');
         } else {
           res(0);
           this.ngxNotificationService.error(data.error_description);

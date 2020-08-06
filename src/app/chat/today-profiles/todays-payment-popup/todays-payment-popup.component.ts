@@ -176,6 +176,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
       } else {
         this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
+      this.closeDialog();
       this.analyticsEvent(
         'RazorPay Payement Gateway Opened For ' + this.price
       );
@@ -206,7 +207,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   }
 
   container1() {
-    this.price = '2800';
+    this.price = '1';
     this.credits = '45';
     localStorage.setItem('selected_plan', 'plan 1');
     this.selectedContainer = 1;
@@ -214,6 +215,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
+    this.analyticsEvent('Subscription Seen');
   }
   container2() {
     this.price = '5500';
@@ -224,6 +226,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
+    this.analyticsEvent('Subscription Seen');
   }
   container3() {
     this.price = '8500';
@@ -234,6 +237,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
+    this.analyticsEvent('Subscription Seen');
   }
 
   getPaytmOrderId() {
@@ -272,5 +276,4 @@ onPaytm() {
   (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
   (form as any).submit();
 }
-
 }

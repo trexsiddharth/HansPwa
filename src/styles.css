@@ -350,6 +350,15 @@ div.mat-select-search-inner input.mat-input-element {
 .mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover) {
   background: #0cb9f2;
 }
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+  background: #0c9bf2;
+  color: white;
+}
+.mat-option:hover:not(.mat-option-disabled) {
+  background: #0c9bf2;
+  color: white;
+  transition: all 0.5s ease;
+}
 @media screen and (max-width: 576px) {
   .ht-full {
     margin: 0px;

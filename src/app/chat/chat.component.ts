@@ -214,6 +214,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
           } else if (data.params.fcm_app) {
             // if user open twa app we share their fcm id with server
             console.log(data.params.fcm_app);
+            this.analyticsEvent('User Through TWA App');
             // if fcm_app in local is not same with the coming fcm_app in url
             if (localStorage.getItem('mobile_number') &&
             localStorage.getItem('fcm_app') &&
@@ -288,6 +289,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.currentContact = this.currentUrl;
     } else {
       this.router.navigateByUrl('phone-number');
+    //   // check for facebook login status
+    //   (window as any).FB.getLoginStatus((response) => {
+    //     this.statusChangeCallback(response);
+    // });
     }
 
     // add to home screen prompt
@@ -323,6 +328,14 @@ export class ChatComponent implements OnInit, AfterViewInit {
     // lockdown offer will not be shown to first time coming user
     this.openTodaysPopupHere();
   }
+
+  // // get facebook login status
+  // statusChangeCallback(value) {
+  //   console.log(value);
+  //   if (value.status === 'unknown') {
+  //     this.router.navigateByUrl('phone-number');
+  //   }
+  // }
 
   ngAfterViewInit() {
     this.spinner.hide();
@@ -374,6 +387,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
           }
         }
       }
+
     );
   }
   getCredits() {

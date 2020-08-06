@@ -46,6 +46,12 @@ export class PhoneNumberScreenComponent implements OnInit {
       localStorage.removeItem('mobile_number');
       localStorage.removeItem('is_lead');
       localStorage.removeItem('RegisterNumber');
+
+      // setTimeout(() => {
+      //   (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+      //     this.statusChangeCallback(response);        // Returns the login status.
+      //   });
+      // }, 500);
     }
     this.spinner.hide();
   }
@@ -105,8 +111,27 @@ this.spinner.hide();
 
   }
 
-  
-  openVerificationDialog(isLead: string) {
+// Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+  // testAPI() {
+  //   console.log('Welcome!  Fetching your information.... ');
+  //   (window as any).FB.api('/me',
+  //   'GET',
+  //   {}, (response) => {
+  //     console.log(response);
+  //     console.log('Successful login for: ' + response.name);
+  //   });
+  // }
+
+   // get facebook login status
+  //  statusChangeCallback(value) {
+  //   console.log(value);
+  //   if (value.status === 'connected') {
+  //     localStorage.setItem('fb_token', value.authResponse.accessToken);
+  //     this.testAPI();
+  //   }
+  // }
+
+openVerificationDialog(isLead: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
@@ -147,7 +172,7 @@ this.spinner.hide();
     );
   }
 
-  try() {
+try() {
     // tslint:disable-next-line: max-line-length
     (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${Math.floor(Math.random() * 100000000) + 1}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 
