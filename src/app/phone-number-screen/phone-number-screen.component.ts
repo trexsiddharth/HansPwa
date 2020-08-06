@@ -111,18 +111,29 @@ this.spinner.hide();
 
   }
 
-// Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-  // testAPI() {
-  //   console.log('Welcome!  Fetching your information.... ');
-  //   (window as any).FB.api('/me',
-  //   'GET',
-  //   {}, (response) => {
-  //     console.log(response);
-  //     console.log('Successful login for: ' + response.name);
-  //   });
-  // }
+// // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+//   testAPI() {
+//     console.log('Welcome!  Fetching your information.... ');
 
-   // get facebook login status
+//     // fetch user image
+//     (window as any).FB.api('/me/picture',
+//     'GET',
+//     {height: '600', width: '400', redirect: 'false'}, (response) => {
+//       console.log(response.data.url);
+//     });
+
+//     // fetch user data
+//     (window as any).FB.api('/me',
+//     'GET',
+//     {fields: 'email, address, first_name, gender, last_name'}, (response) => {
+//       console.log(response);
+//       console.log('Successful login for: ' + response.name);
+//     });
+
+    
+//   }
+
+  // //  get facebook login status
   //  statusChangeCallback(value) {
   //   console.log(value);
   //   if (value.status === 'connected') {

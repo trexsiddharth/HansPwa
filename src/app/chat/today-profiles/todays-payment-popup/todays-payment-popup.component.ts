@@ -242,7 +242,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
 
   getPaytmOrderId() {
     const formData = new FormData();
-    formData.append('mobile', '9910395820');
+    formData.append('mobile', localStorage.getItem('mobile_number'));
     formData.append('amount', this.price);
     this.http.post('https://partner.hansmatrimony.com/api/order', formData).subscribe(
       (data: any) => {
