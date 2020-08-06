@@ -125,12 +125,10 @@ this.spinner.hide();
 //     // fetch user data
 //     (window as any).FB.api('/me',
 //     'GET',
-//     {fields: 'email, address, first_name, gender, last_name'}, (response) => {
+//     {fields: 'email, address, first_name, gender, last_name, birthday'}, (response) => {
 //       console.log(response);
 //       console.log('Successful login for: ' + response.name);
 //     });
-
-    
 //   }
 
   // //  get facebook login status
