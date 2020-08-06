@@ -220,14 +220,20 @@ body {
   flex:1 1!important;
   border-radius:14px;
 }
-#myprofMatTabGroup .mat-tab-header{
-  position:sticky!important;
-  top:0px;
-  z-index:9999999!important;
-}
+/* #myprofMatTabGroup .mat-tab-header{
+
+  position: sticky!important;
+  position: -webkit-sticky!important;
+  top:0%!important;
+  z-index:9999999999!important;
+  overflow:auto!important;
+} */
 #myprofMatTabGroup .mat-tab-labels{
    margin:0px 4px!important;
    height:100px!important;
+}
+#myProfileTabGroup {
+  overflow:auto!important;
 }
 #myprofMatTabGroup .mat-tab-label-content{
   font-size: 10px;
@@ -244,6 +250,12 @@ body {
 }
 #myprofMatTabGroup .mat-tab-body-content{
   background:transparent!important;
+  
+  /* border-radius: 20px 20px 0px 0px!important; */
+}
+#myprofMatTabGroup .mat-tab-body{
+  background:transparent!important;
+  overflow-y: hidden!important;
   /* border-radius: 20px 20px 0px 0px!important; */
 }
 /* #expansion-header .mat-expansion-panel-header{

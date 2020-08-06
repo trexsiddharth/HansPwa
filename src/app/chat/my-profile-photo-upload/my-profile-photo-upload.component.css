@@ -42,10 +42,14 @@
     border-radius:8px;
     width:50%!important;
     flex: 1 1;
-    margin:12px;
+    margin:16px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center
 }
 .footer{
-    width:70%;
+    width:80%;
     background:white;
     height: 15vh;
     position:absolute;
@@ -53,11 +57,39 @@
     bottom:0px;
     margin: 5% auto auto 0px;
     display:flex;
-    flex-direction: row;
+    flex-direction:column;
     align-items: center;
     justify-content:center;
     border-radius: 20px 20px 0px 0px;
 }
+.SpecialCase{
+    font-size:1.4rem!important;
+    border:2px solid rgb(106, 190, 241);
+    color:rgb(106, 190, 241)!important;
+    background:transparent!important; 
+    width:20vw!important; 
+    border-radius:40px!important;
+    margin:10px
+}
+.circular2 {
+    display:flex;
+    position: absolute;
+    padding:5px;
+    z-index: 100;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    background: white;
+    bottom: -8%;
+    right: -8%;
+    vertical-align: middle;
+    justify-content: center;
+    border: 1px solid rgba(124, 123, 123, 0.5);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
 @media (min-width:1024px){
     .special{
             position: relative;

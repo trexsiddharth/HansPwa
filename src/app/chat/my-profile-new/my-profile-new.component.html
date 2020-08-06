@@ -112,12 +112,13 @@
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p>{{personalProfileData.religion}} | {{personalProfileData.caste}}</p>
-                  <p>{{getHeight(personalProfileData.height)}} | {{personalProfileData.weight}}</p>
+                  <p>{{personalProfileData.religion ? personalProfileData.religion : "Add Religion"}} |
+                    {{personalProfileData.caste ? personalProfileData.caste : "Add Caste"}}</p>
+                  <p>{{getHeight(personalProfileData.height)}} | {{personalProfileData.weight}} Kg</p>
                   <p>{{personalProfileData.working_city}}</p>
                 </div>
                 <div class="columnar">
-                  <p>{{setAge(personalProfileData.birth_date)}} | {{personalProfileData.birth_date}}</p>
+                  <p>{{setAge(personalProfileData.birth_date)}} Yrs | {{personalProfileData.birth_date}}</p>
                   <p>{{personalProfileData.food_choice}}</p>
                   <p>{{personalProfileData.marital_status}}</p>
                 </div>
@@ -129,7 +130,7 @@
                 <input type="text" class="form-control" formControlName="name" required />
               </div>
               <div class="col-12">
-                <h6>Age:</h6>&nbsp;{{ setAge(personalProfileData.birth_date) }}
+                <h6>Age : {{ setAge(personalProfileData.birth_date) }}</h6>
               </div>
               <label style="margin-left:15px;">Birth Date:</label>
               <div class="col-12" style="
@@ -159,56 +160,56 @@
                   </option>
                 </select>
               </div>
-
-              <div class="col-12">
-                <h6>Weight:</h6>
-                <input type="text" class="form-control" formControlName="Weight" required />
-              </div>
-
-              <div class="col-12">
-                <h6>Height:</h6>
-                <select type="text" class="form-control" formControlName="Height" required>
-                  <option *ngFor="let item of Heights" [value]="item">{{
+              <div class="row information">
+                <div class="col-6">
+                  <h6>Weight:</h6>
+                  <input type="text" class="form-control" formControlName="Weight" required />
+                </div>
+                <div class="col-6">
+                  <h6>Height:</h6>
+                  <select type="text" class="form-control" formControlName="Height" required>
+                    <option *ngFor="let item of Heights" [value]="item">{{
                     item
                   }}</option>
-                </select>
+                  </select>
+                </div>
               </div>
+              <div class="row information">
+                <div class="col-5">
+                  <h6>Religion:</h6>
+                  <select class="form-control" formControlName="Religion" required>
+                    <option *ngFor="let option of Religions" [value]="option">
+                      {{ option }}
+                    </option>
+                  </select>
+                </div>
 
-              <div class=" col-12">
-                <h6>Marital Status:</h6>
-                <select class="form-control" formControlName="MaritalStatus" required>
-                  <option *ngFor="let item of MaritalStatus" [value]="item">{{ item }}</option>
-                </select>
+                <div class="col-7">
+                  <h6>Caste</h6>
+                  <input type="text" class="form-control" formControlName="Castes" required [matAutocomplete]="caste" />
+                  <mat-autocomplete (optionSelected)="casteValidation($event.option.value)" autoActiveFirstOption
+                    #caste="matAutocomplete">
+                    <mat-option *ngFor="let name of casteo | async" [value]="name" required>
+                      {{ name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
               </div>
-
-              <div class="col-12">
-                <h6>Religion:</h6>
-                <select class="form-control" formControlName="Religion" required>
-                  <option *ngFor="let option of Religions" [value]="option">
-                    {{ option }}
-                  </option>
-                </select>
+              <div class="row information">
+                <div class=" col-6">
+                  <h6>Marital Status:</h6>
+                  <select class="form-control" formControlName="MaritalStatus" required>
+                    <option *ngFor="let item of MaritalStatus" [value]="item">{{ item }}</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <h6>Food Choice:</h6>
+                  <select class="form-control" formControlName="Food" required>
+                    <option *ngFor="let item of Foodpreferences" [value]="item">{{ item }}</option>
+                  </select>
+                </div>
               </div>
-
-              <div class="col-12">
-                <h6>Caste</h6>
-                <input type="text" class="form-control" formControlName="Castes" required [matAutocomplete]="caste" />
-                <mat-autocomplete (optionSelected)="casteValidation($event.option.value)" autoActiveFirstOption
-                  #caste="matAutocomplete">
-                  <mat-option *ngFor="let name of casteo | async" [value]="name" required>
-                    {{ name }}
-                  </mat-option>
-                </mat-autocomplete>
-              </div>
-
-              <div class="col-12">
-                <h6>Food Choice:</h6>
-                <select class="form-control" formControlName="Food" required>
-                  <option *ngFor="let item of Foodpreferences" [value]="item">{{ item }}</option>
-                </select>
-              </div>
-
-              <div class="col-12">
+              <div class="col-12" style="margin-bottom: 10px;">
                 <h6>Locality:</h6>
                 <input type="text" class="form-control" matValidateAddress matGoogleMapsAutocomplete
                   #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (onAutocompleteSelected)="
@@ -217,14 +218,18 @@
                     onLocationSelected($event, 'Locality')
                   " required formControlName="Locality" />
               </div>
+              <button class="mat-elevation-z5 save-button btn-success" mat-button [hidden]="editIndexPersonal != 0"
+                (click)="onSubmitPersonal()">
+                SAVE
+              </button>
             </div>
           </div>
           <div class="infoRow">
-            <div class="column">
+            <div class="column" *ngIf="editIndexPersonal != 1">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/personalN.svg" />
                 <p>{{languageService.profileLang.aboutMe}}</p>
-                <img *ngIf="editIndexPersonal != 0" (click)="setEditIndex(0)" class="editPencil"
+                <img *ngIf="editIndexPersonal != 1" (click)="setEditIndex(1)" class="editPencil"
                   src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
@@ -241,13 +246,27 @@
                 </div>
               </div>
             </div>
+            <div class="column" *ngIf="editIndexPersonal == 1">
+              <div class="row title">
+                <img class="accordion-image" src="../../assets/personalN.svg" />
+                <p>{{languageService.profileLang.aboutMe}}</p>
+              </div>
+              <h6>(max 300 words)</h6>
+              <textarea style="margin-bottom:10px" cols="30" rows="5" class="form-control" maxlength="300"
+                type="textarea" formControlName="About" required></textarea>
+              <button class="mat-elevation-z5 save-button btn-success" mat-button [hidden]="editIndexPersonal != 1"
+                (click)="onSubmitPersonal()">
+                SAVE
+              </button>
+            </div>
+
           </div>
           <div class="infoRow">
-            <div class="column">
+            <div class="column" *ngIf="editIndexPersonal != 2">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/educationN.svg" />
                 <p>{{languageService.profileLang.careerDetails}}</p>
-                <img *ngIf="editIndexPersonal != 0" (click)="setEditIndex(0)" class="editPencil"
+                <img *ngIf="editIndexPersonal != 2" (click)="setEditIndex(2)" class="editPencil"
                   src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
@@ -267,58 +286,152 @@
                 }}</p>
                   <p class="headings">{{languageService.profileLang.designation}}</p>
                   <p>{{
-                  personalProfileData.designation
-                    ? personalProfileData.designation
+                  personalProfileData.profession
+                    ? personalProfileData.profession
                     : "Add Detail"
+                }} | {{
+                  personalProfileData.company 
+                    ? personalProfileData.company
+                    : "Add Company"
+                }} | {{
+                  getIncome(personalProfileData.monthly_income)
+                    ? getIncome(personalProfileData.monthly_income)
+                    : "Add Salary"
+                }} LPA</p>
+                  <p class="headings">{{languageService.profileLang.workingCity}}</p>
+                  <p>{{
+                  personalProfileData.working_city
+                    ? personalProfileData.working_city
+                    : "Add Working City"
                 }}</p>
                 </div>
               </div>
             </div>
+            <div class="column" *ngIf="editIndexPersonal == 2">
+              <div class="col-12">
+                <h6>Education:</h6>
+                <select class="form-control" formControlName="Degree" required>
+                  <option *ngFor="let item of HigherEducation" [value]="item">{{ item }}</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <h6>College:</h6>
+                <input type="text" class="form-control" formControlName="College" />
+              </div>
+              <div class="col-12">
+                <h6>Additional Qualifications:</h6>
+                <input type="text" class="form-control" formControlName="Additional" />
+              </div>
+              <div class="col-12">
+                <h6>Occupation:</h6>
+                <select #relation class="form-control" formControlName="Occupation" required>
+                  <option *ngFor="let option of Occupation" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-12">
+                <h6>Designation:</h6>
+                <select #relation class="form-control" formControlName="Profession">
+                  <option *ngFor="let option of designations" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
+                <h6>Other Designation:</h6>
+                <input type="text" class="form-control" formControlName="OtherProfession" name="OtherProfession" />
+              </div>
+              <div class="col-12">
+                <h6>Company:</h6>
+                <input type="text" class="form-control" formControlName="Company" />
+              </div>
+              <div class="col-12">
+                <h6>Annual Income In Lakhs:</h6>
+                <input type="text" pattern="\d*" maxlength="3" class="form-control" formControlName="AnnualIncome"
+                  required />
+              </div>
+              <div class="col-12" style="margin-bottom: 10px;">
+                <h6>Working City:</h6>
+                <input type="text" #input class="form-control" matValidateAddress formControlName="WorkingCity"
+                  matGoogleMapsAutocomplete #matGoogleMapsAutocomplete3="matGoogleMapsAutocomplete"
+                  (onAutocompleteSelected)="
+                    onAutocompleteSelected($event, 'Working')
+                  " (onLocationSelected)="
+                    onLocationSelected($event, 'Working')
+                  " required />
+              </div>
+              <button class="mat-elevation-z5 save-button btn-success" mat-button [hidden]="editIndexPersonal != 2"
+                (click)="onSubmitPersonal()">
+                SAVE
+              </button>
+            </div>
           </div>
           <div class="infoRow">
-            <div class="column">
+            <div class="column" *ngIf="editIndexPersonal!=3">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/horoscopeN.svg" />
                 <p>{{languageService.profileLang.horoscope}}</p>
-                <img *ngIf="editIndexPersonal != 0" (click)="setEditIndex(0)" class="editPencil"
+                <img *ngIf="editIndexPersonal != 3" (click)="setEditIndex(3)" class="editPencil"
                   src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p>{{personalProfileData.degree}} <br> {{personalProfileData.college}}</p>
-                  <p class="headings">{{languageService.profileLang.additional}}</p>
                   <p>{{
-                  personalProfileData.additional_qualification
-                    ? personalProfileData.additional_qualification
-                    : "Add Detail"
-                }}</p>
-                  <p class="headings">{{languageService.profileLang.occupation}}</p>
-                  <p>{{
-                  personalProfileData.occupation
-                    ? personalProfileData.occupation
-                    : "Add Detail"
-                }}</p>
-                  <p class="headings">{{languageService.profileLang.designation}}</p>
-                  <p>{{
-                  personalProfileData.designation
-                    ? personalProfileData.designation
-                    : "Add Detail"
+                    personalProfileData.manglik
+                      ? personalProfileData.manglik
+                      : "Add Detail"
+                  }}
+                  <p>{{personalProfileData.birth_time ? personalProfileData.birth_time : "Add birth time"}} |
+                    {{personalProfileData.birth_date ? personalProfileData.birth_date : "Add birth date"}} |
+                    {{personalProfileData.birth_place ? personalProfileData.birth_place : "Add birth place"}}
+                  </p>
+                  <p class="headings">{{languageService.profileLang.gotra}}</p>
+                  <p>{{ personalProfileData.gotra
+                    ? personalProfileData.gotra
+                    : "Add Gotra"
                 }}</p>
                 </div>
               </div>
             </div>
+            <div class="column" *ngIf="editIndexPersonal==3">
+              <div class="col-12">
+                <h6>Birth Place</h6>
+                <input type="text" class="form-control" matValidateAddress matGoogleMapsAutocomplete
+                  #matGoogleMapsAutocomplete2="matGoogleMapsAutocomplete" (onAutocompleteSelected)="
+                    onAutocompleteSelected($event, 'Birth')
+                  " (onLocationSelected)="onLocationSelected($event, 'Birth')" formControlName="BirthPlace" />
+              </div>
+              <div class="col-12">
+                <h6>Manglik:</h6>
+                <select type="text" class="form-control" formControlName="Manglik" required>
+                  <option value="Manglik">Manglik</option>
+                  <option value="Non-Manglik">Non-Manglik</option>
+                  <option value="Anshik Manglik">Anshik Manglik</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <h6>Time of Birth</h6>
+                <input class="form-control" id="BirthTime" type="time" placeholder="Choose a time"
+                  formControlName="BirthTime" />
+              </div>
+              <button class="mat-elevation-z5 save-button btn-success" mat-button [hidden]="editIndexPersonal != 3"
+                (click)="onSubmitPersonal()">
+                SAVE
+              </button>
+            </div>
           </div>
           <div class="infoRow">
-            <div class="column">
+            <div class="column" *ngIf="editIndexPersonal!= 4">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/phoneNN.svg" />
                 <p>{{languageService.profileLang.contact}}</p>
-                <img *ngIf="editIndexPersonal != 0" (click)="setEditIndex(0)" class="editPencil"
+                <img *ngIf="editIndexPersonal != 4" (click)="setEditIndex(4)" class="editPencil"
                   src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p>{{personalProfileData.email ? personalProfileData.email : "Add Email" }}</p>
+                  <p>{{personalProfileData.email ? personalProfileData.email : familyProfileData.email }}</p>
                   <p class="headings">{{languageService.profileLang.mobile}}</p>
                   <p>{{
                   familyProfileData.mobile
@@ -334,630 +447,29 @@
                 </div>
               </div>
             </div>
+            <div class="column" *ngIf="editIndexPersonal==4">
+              <div class="col-12">
+                <h6>Email</h6>
+                <input type="email" id="email" class="form-control" formControlName="email" required />
+              </div>
+
+              <div class="col-12">
+                <h6>Mobile number</h6>
+                <input style="display: inline;" type="number" id="phone" class="form-control" formControlName="phone"
+                  required />
+              </div>
+
+              <div class="col-12">
+                <h6>Whatsapp number</h6>
+                <input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp" />
+              </div>
+              <button class="mat-elevation-z5 save-button btn-success" mat-button [hidden]="editIndexPersonal != 4"
+                (click)="onSubmitPersonal()">
+                SAVE
+              </button>
+            </div>
           </div>
-
-          <div class="tabContent">
-            <mat-accordion class="example-headers-align" id="matAccordion">
-              <mat-expansion-panel [expanded]="stepPersonal === 0" (opened)="setStepPersonal(0)" hideToggle
-                id="expansion-header">
-                <mat-expansion-panel-header>
-                  <img class="accordion-image" src="../../assets/personalN.svg" />
-                  <a style="
-                      color: rgb(112, 111, 111);
-                      font-size: large;
-                      margin-left: 15px;
-                    ">Bio-Data</a>
-                  <img style="position: absolute; right: 25px; opacity: 0.4;" class="accordion-image"
-                    src="../../assets/downN.png" />
-                </mat-expansion-panel-header>
-
-                <div class="sections">
-                  <div>
-                    <br />
-                    <span class="sectionTitle">
-                      {{ languageService.profileLang.aboutMe }}
-                    </span>
-                    <img *ngIf="editIndexPersonal != 0" (click)="setEditIndex(0)" class="editPencil"
-                      src="../../../assets/editN.svg" alt="editaboutme" />
-                  </div>
-                  <div *ngIf="editIndexPersonal == 0">
-                    <h6>(max 300 words)</h6>
-                    <textarea cols="40" class="form-control" maxlength="300" type="textarea" formControlName="About"
-                      required></textarea>
-                  </div>
-                  <div *ngIf="editIndexPersonal != 0">
-                    <p style="margin-top: 10px; text-transform: capitalize;">
-                      {{ languageService.profileLang.hello }},
-                      {{ languageService.profileLang.myself }}
-                      {{ personalProfileData.name }},
-                      {{ personalProfileData.about }}
-                    </p>
-                  </div>
-                </div>
-
-                <hr />
-
-                <!-- personal details -->
-
-                <div class="sections" id="personal" *ngIf="editIndexPersonal != 0">
-                  <div>
-                    <br />
-                    <span class="sectionTitle">
-                      {{ languageService.profileLang.personalizedDetails }}
-                    </span>
-                    <!-- <img (click)="openPersonalDialog(1, 'पर्सनल डिटेल्स')" class="editPencil" src="../../../assets/editN.svg" alt="edit personal"> -->
-                  </div>
-
-                  <div class="row">
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/avatar-blue.svg" alt="avatar" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.name }}:</span>
-                        {{ personalProfileData.name }}
-                      </span>
-                    </div>
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/calendar.svg" alt="age" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.age }}:</span>
-                        {{ setAge(personalProfileData.birth_date) }} Yrs
-                      </span>
-                    </div>
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/weight.svg" alt="weight" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.weight }}:</span>
-                        {{
-                          personalProfileData.weight
-                            ? personalProfileData.weight
-                            : "Add Detail"
-                        }}
-                        Kg
-                      </span>
-                    </div>
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/scale.svg" alt="height" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.height }}:</span>
-                        {{ getHeight(personalProfileData.height) }}
-                      </span>
-                    </div>
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/heart.svg" alt="marital status" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{
-                            languageService.profileLang.martialStatus
-                          }}:</span>
-                        {{
-                          personalProfileData.marital_status
-                            ? personalProfileData.marital_status
-                            : "Add Detail"
-                        }}
-                      </span>
-                    </div>
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/tarot.svg" alt="caste" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.religion }}:</span>
-                        {{ familyProfileData.religion }},
-                        {{ familyProfileData.caste }}
-                      </span>
-                    </div>
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/cutlery.svg" alt="food choice" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.foodChoice }}:</span>
-                        {{
-                          personalProfileData.food_choice
-                            ? personalProfileData.food_choice
-                            : "Add Detail"
-                        }}
-                      </span>
-                    </div>
-                    <div class="col-6">
-                      <img class="iconSize" src="../../../assets/house.svg" alt="working city" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.locality }}:</span>
-                        {{
-                          familyProfileData.locality
-                            ? familyProfileData.locality
-                            : "Add Detail"
-                        }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="editIndexPersonal == 0">
-                  <div class="row">
-                    <div class="col-12">
-                      <h6>Name:</h6>
-                      <input type="text" class="form-control" formControlName="name" required />
-                    </div>
-                    <div class="col-12">
-                      <h6>Age:</h6>
-                      &nbsp;
-                      {{ setAge(personalProfileData.birth_date) }}
-                    </div>
-
-                    <div class="row" style="padding-left: 15px; margin-top: 1rem;">
-                      <h6 style="margin: 0px;">Birth Date:</h6>
-                      <div class="col-12" style="
-                          display: flex;
-                          flex-direction: row;
-                          padding-left: 0px;
-                        ">
-                        <select class="classic form-control" formControlName="birth_date"
-                          style="border: 1px solid black;" required name="birth_date">
-                          <option *ngFor="let option of date" [value]="option">
-                            {{ option }}
-                          </option>
-                        </select>
-
-                        <select class="classic form-control" formControlName="birth_month"
-                          style="border: 1px solid black; margin-left: 10px;" required name="birth_month">
-                          <option *ngFor="let option of month" [value]="option">
-                            {{ option }}
-                          </option>
-                        </select>
-
-                        <select class="classic form-control" formControlName="birth_year"
-                          style="border: 1px solid black; margin-left: 10px;" required name="birth_year">
-                          <option *ngFor="let option of years" [value]="option">
-                            {{ option }}
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <h6>Weight:</h6>
-                      <input type="text" class="form-control" formControlName="Weight" required />
-                    </div>
-
-                    <div class="col-12">
-                      <h6>Height:</h6>
-                      <select type="text" class="form-control" formControlName="Height" required>
-                        <option *ngFor="let item of Heights" [value]="item">{{
-                          item
-                        }}</option>
-                      </select>
-                    </div>
-
-                    <div class=" col-12">
-                      <h6>Marital Status:</h6>
-                      <select class="form-control" formControlName="MaritalStatus" required>
-                        <option *ngFor="let item of MaritalStatus" [value]="item">{{ item }}</option>
-                      </select>
-                    </div>
-
-                    <div class="col-12">
-                      <h6>Religion:</h6>
-                      <select class="form-control" formControlName="Religion" required>
-                        <option *ngFor="let option of Religions" [value]="option">
-                          {{ option }}
-                        </option>
-                      </select>
-                    </div>
-
-                    <div class="col-12">
-                      <h6>Caste</h6>
-                      <input type="text" class="form-control" formControlName="Castes" required
-                        [matAutocomplete]="caste" />
-                      <mat-autocomplete (optionSelected)="casteValidation($event.option.value)" autoActiveFirstOption
-                        #caste="matAutocomplete">
-                        <mat-option *ngFor="let name of casteo | async" [value]="name" required>
-                          {{ name }}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </div>
-
-                    <div class="col-12">
-                      <h6>Food Choice:</h6>
-                      <select class="form-control" formControlName="Food" required>
-                        <option *ngFor="let item of Foodpreferences" [value]="item">{{ item }}</option>
-                      </select>
-                    </div>
-
-                    <div class="col-12">
-                      <h6>Locality:</h6>
-                      <input type="text" class="form-control" matValidateAddress matGoogleMapsAutocomplete
-                        #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (onAutocompleteSelected)="
-                          onAutocompleteSelected($event, 'Locality')
-                        " (onLocationSelected)="
-                          onLocationSelected($event, 'Locality')
-                        " required formControlName="Locality" />
-                    </div>
-                  </div>
-                </div>
-                <mat-action-row>
-                  <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexPersonal != 0"
-                    (click)="onSubmitPersonal()">
-                    SAVE
-                  </button>
-                </mat-action-row>
-              </mat-expansion-panel>
-
-              <mat-expansion-panel [expanded]="stepPersonal === 1" (opened)="setStepPersonal(1)" hideToggle>
-                <mat-expansion-panel-header>
-                  <img class="accordion-image" src="../../assets/educationN.svg" />
-                  <a style="
-                      color: rgb(112, 111, 111);
-                      font-size: large;
-                      margin-left: 15px;
-                    ">Career & Education</a>
-                  <img style="position: absolute; right: 25px; opacity: 0.4;" class="accordion-image"
-                    src="../../assets/downN.png" />
-                </mat-expansion-panel-header><br>
-                <div *ngIf="editIndexPersonal != 1">
-                  <div class="sections">
-                    <div>
-                      <span class="sectionTitle">
-                        {{ languageService.profileLang.educational }}
-                      </span>
-                      <!-- <img (click)="openPersonalDialog(2, 'शिक्षा')" class="editPencil" src="../../../assets/editN.svg" alt="edit education"> -->
-                      <img *ngIf="editIndexPersonal != 1" (click)="setEditIndex(1)" class="editPencil"
-                        src="../../../assets/editN.svg" alt="editaboutme" />
-                    </div>
-
-                    <div class="row">
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/graduation.svg" alt="degree" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.education }}:</span>
-                          {{
-                            personalProfileData.education
-                              ? personalProfileData.education
-                              : personalProfileData.degree
-                              ? personalProfileData.degree
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/graduation.svg" alt="college" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.college }}:</span>
-                          {{
-                            personalProfileData.college
-                              ? personalProfileData.college
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <!-- <img class="iconSize" src="../../../assets/graduation.svg" alt="additional">  -->
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.additional }}:</span>
-                          {{
-                            personalProfileData.additional_qualification
-                              ? personalProfileData.additional_qualification
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <hr /><br>
-
-                  <!-- career details  -->
-
-                  <div class="sections">
-                    <div>
-                      <span class="sectionTitle">
-                        {{ languageService.profileLang.careerDetails }}
-                      </span>
-                      <div style="padding: 5px !important;">
-                        <!-- <img (click)="openPersonalDialog(3, 'करियर')" class="editPencil" src="../../../assets/editN.svg" alt="edit career"> -->
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/suitcase.svg" alt="occupation" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.occupation }}:</span>
-                          {{
-                            personalProfileData.occupation
-                              ? personalProfileData.occupation
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/suitcase.svg" alt="profession" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{
-                              languageService.profileLang.designation
-                            }}:</span>
-                          {{
-                            personalProfileData.profession
-                              ? personalProfileData.profession
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/company.svg" alt="company" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.company }}:</span>
-                          {{
-                            personalProfileData.company
-                              ? personalProfileData.company
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/house.svg" alt="working_city" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{
-                              languageService.profileLang.workingCity
-                            }}:</span>
-                          {{
-                            personalProfileData.working_city
-                              ? personalProfileData.working_city
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/rupee.svg" alt="income" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{
-                              languageService.profileLang.annualIncome
-                            }}:</span>
-                          {{
-                            getIncome(personalProfileData.monthly_income)
-                              ? getIncome(personalProfileData.monthly_income)
-                              : "Add Detail"
-                          }}
-                          LPA
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="editIndexPersonal == 1">
-                  <div class="col-12">
-                    <h6>Education:</h6>
-                    <select class="form-control" formControlName="Degree" required>
-                      <option *ngFor="let item of HigherEducation" [value]="item">{{ item }}</option>
-                    </select>
-                  </div>
-                  <div class="col-12">
-                    <h6>College:</h6>
-                    <input type="text" class="form-control" formControlName="College" />
-                  </div>
-                  <div class="col-12">
-                    <h6>Additional Qualifications:</h6>
-                    <input type="text" class="form-control" formControlName="Additional" />
-                  </div>
-                  <div class="col-12">
-                    <h6>Occupation:</h6>
-                    <select #relation class="form-control" formControlName="Occupation" required>
-                      <option *ngFor="let option of Occupation" [value]="option">
-                        {{ option }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col-12">
-                    <h6>Designation:</h6>
-                    <select #relation class="form-control" formControlName="Profession">
-                      <option *ngFor="let option of designations" [value]="option">
-                        {{ option }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
-                    <h6>Other Designation:</h6>
-                    <input type="text" class="form-control" formControlName="OtherProfession" name="OtherProfession" />
-                  </div>
-                  <div class="col-12">
-                    <h6>Company:</h6>
-                    <input type="text" class="form-control" formControlName="Company" />
-                  </div>
-                  <div class="col-12">
-                    <h6>Annual Income In Lakhs:</h6>
-                    <input type="text" pattern="\d*" maxlength="3" class="form-control" formControlName="AnnualIncome"
-                      required />
-                  </div>
-                  <div class="col-12">
-                    <h6>Working City:</h6>
-                    <input type="text" #input class="form-control" matValidateAddress formControlName="WorkingCity"
-                      matGoogleMapsAutocomplete #matGoogleMapsAutocomplete3="matGoogleMapsAutocomplete"
-                      (onAutocompleteSelected)="
-                        onAutocompleteSelected($event, 'Working')
-                      " (onLocationSelected)="
-                        onLocationSelected($event, 'Working')
-                      " required />
-                  </div>
-                </div>
-                <mat-action-row>
-                  <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexPersonal != 1"
-                    (click)="onSubmitPersonal()">
-                    SAVE
-                  </button>
-                </mat-action-row>
-              </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="stepPersonal === 2" (opened)="setStepPersonal(2)" hideToggle>
-                <mat-expansion-panel-header>
-                  <img class="accordion-image" src="../../assets/horoscopeN.svg" />
-                  <a style="
-                      color: rgb(112, 111, 111);
-                      font-size: large;
-                      margin-left: 15px;
-                    ">Horoscope</a>
-                  <img style="position: absolute; right: 25px; opacity: 0.4;" class="accordion-image"
-                    src="../../assets/downN.png" />
-                </mat-expansion-panel-header>
-                <div *ngIf="editIndexPersonal != 2">
-                  <div class="sections" id="horoscope">
-                    <div>
-                      <span class="sectionTitle">
-                        {{ languageService.profileLang.horoscope }}
-                      </span>
-                      <div style="padding: 5px !important;">
-                        <!-- <img (click)="openPersonalDialog(4, 'होरोस्कोप')" class="editPencil" src="../../../assets/editN.svg" alt="edit horoscope"> -->
-                        <img *ngIf="editIndexPersonal != 2" (click)="setEditIndex(2)" class="editPencil"
-                          src="../../../assets/editN.svg" alt="editaboutme" />
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/tarot.svg" alt="manglik status" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.manglik }}:</span>
-                          {{
-                            personalProfileData.manglik
-                              ? personalProfileData.manglik
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/birthday.svg" alt="brith date" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.birthDate }}:</span>
-                          {{
-                            personalProfileData.birth_date
-                              ? personalProfileData.birth_date
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/birthplace.svg" alt="birth place" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.birthPlace }}:</span>
-                          {{
-                            personalProfileData.birth_place
-                              ? personalProfileData.birth_place
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                      <div class="col-12">
-                        <img class="iconSize" src="../../../assets/clock.svg" alt="birth time" />
-                        <span style="margin-left: 5px;">
-                          <span class="labelText">{{ languageService.profileLang.birthTime }}:</span>
-                          {{
-                            personalProfileData.birth_time
-                              ? personalProfileData.birth_time
-                              : "Add Detail"
-                          }}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="editIndexPersonal == 2">
-                  <div class="col-12">
-                    <h6>Birth Place</h6>
-                    <input type="text" class="form-control" matValidateAddress matGoogleMapsAutocomplete
-                      #matGoogleMapsAutocomplete2="matGoogleMapsAutocomplete" (onAutocompleteSelected)="
-                        onAutocompleteSelected($event, 'Birth')
-                      " (onLocationSelected)="onLocationSelected($event, 'Birth')" formControlName="BirthPlace" />
-                  </div>
-                  <div class="col-12">
-                    <h6>Manglik:</h6>
-                    <select type="text" class="form-control" formControlName="Manglik" required>
-                      <option value="Manglik">Manglik</option>
-                      <option value="Non-Manglik">Non-Manglik</option>
-                      <option value="Anshik Manglik">Anshik Manglik</option>
-                    </select>
-                  </div>
-                  <div class="col-12">
-                    <h6>Time of Birth</h6>
-                    <input class="form-control" id="BirthTime" type="time" placeholder="Choose a time"
-                      formControlName="BirthTime" />
-                  </div>
-                </div>
-                <mat-action-row>
-                  <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexPersonal != 2"
-                    (click)="onSubmitPersonal()">
-                    SAVE
-                  </button>
-                </mat-action-row>
-              </mat-expansion-panel>
-              <mat-expansion-panel [expanded]="stepPersonal === 2" (opened)="setStepPersonal(2)" hideToggle>
-                <mat-expansion-panel-header>
-                  <img class="accordion-image" src="../../assets/phoneNN.svg" />
-                  <a style="
-                      color: rgb(112, 111, 111);
-                      font-size: large;
-                      margin-left: 15px;
-                    ">Contact</a>
-                  <img style="position: absolute; right: 25px; opacity: 0.4;" class="accordion-image"
-                    src="../../assets/downN.png" />
-                </mat-expansion-panel-header>
-                <div class="sections" *ngIf="editIndexPersonal != 3">
-                  <div>
-                    <div style="padding: 5px !important;">
-                      <!-- <img (click)="openPersonalDialog(5, 'कांटेक्ट')" class="editPencil" src="../../../assets/editN.svg" alt="edit contact"> -->
-                      <img *ngIf="editIndexPersonal != 3" (click)="setEditIndex(3)" class="editPencil"
-                        src="../../../assets/editN.svg" alt="editaboutme" />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-12">
-                      <img class="iconSize" src="../../../assets/phone_blue.svg" alt="email" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.email }}:</span>
-                        {{
-                          familyProfileData.email
-                            ? familyProfileData.email
-                            : "Add Detail"
-                        }}
-                      </span>
-                    </div>
-                    <div class="col-12">
-                      <img class="iconSize" src="../../../assets/phone_blue.svg" alt="phone" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.mobile }}:</span>
-                        {{ familyProfileData.mobile }}
-                      </span>
-                    </div>
-                    <div class="col-12">
-                      <img class="iconSize" src="../../../assets/phone_blue.svg" alt="whatsapp" />
-                      <span style="margin-left: 5px;">
-                        <span class="labelText">{{ languageService.profileLang.whatsapp }}:</span>
-                        {{
-                          familyProfileData.whats_app_no
-                            ? familyProfileData.whats_app_no
-                            : familyProfileData.mobile
-                        }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="editIndexPersonal == 3">
-                  <div class="col-12">
-                    <h6>Email</h6>
-                    <input type="email" id="email" class="form-control" formControlName="email" required />
-                  </div>
-
-                  <div class="col-12">
-                    <h6>Mobile number</h6>
-                    <input style="display: inline;" type="number" id="phone" class="form-control"
-                      formControlName="phone" required />
-                  </div>
-
-                  <div class="col-12">
-                    <h6>Whatsapp number</h6>
-                    <input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp" />
-                  </div>
-                </div>
-                <mat-action-row>
-                  <button class="mat-elevation-z5" mat-button class="btn-success" [hidden]="editIndexPersonal != 3"
-                    (click)="onSubmitPersonal()">
-                    SAVE
-                  </button>
-                </mat-action-row>
-              </mat-expansion-panel>
-            </mat-accordion>
+          <div class="inforRow" style="margin-bottom:20px">
           </div>
         </form>
       </mat-tab>

@@ -36,6 +36,13 @@
   border-top: 0px solid transparent!important; 
   border-radius: 50%!important;
 }
+::ng-deep .mat-tab-header{
+  position: sticky!important;
+  position: -webkit-sticky!important;
+  top:0px!important;
+  z-index:9999999999!important;
+  overflow:auto!important;
+}
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
@@ -301,13 +308,19 @@ main {
   color:rgba(36, 35, 35, 0.966);
 }
 .information{
-  font-size:15px;
+  font-size:14px;
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
   margin:5px;
 }
 p{
   margin:2px!important;
 }
+.save-button{
+  position:relative;
+  float:right;
+  margin:7px;
+}
+
 
 @media (max-height: 814px) {
   .back-drop {
@@ -379,14 +392,9 @@ p{
     justify-content: center;
   }
   .UpInfo{
-    width:58%;
+    width:50%;
     margin:auto;
   }
-  /* .mainDiv{
-    background-image:url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
-    background-size:100% 100%;
-    height:100vh;
-  } */
   .special{
     width: 35%;
     position: relative;
