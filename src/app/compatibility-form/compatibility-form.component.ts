@@ -776,7 +776,7 @@ setGender() {
 console.log(this.PageOne.value.Relation);
 if (!this.fourPageService.getUserThrough()) {
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-// this.openRegisterWith(this.PageOne.value.Relation);
+this.openRegisterWith(this.PageOne.value.Relation);
 }
 switch (this.PageOne.value.Relation) {
   case 'Brother':
@@ -1016,6 +1016,8 @@ getProfile() {
             (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
               this.statusChangeCallback(response);        // Returns the login status.
             });
+          } else if (response.chose === 'truecaller') {
+            this.callTruecaller();
           }
         }
       }
@@ -1023,7 +1025,7 @@ getProfile() {
   }
 
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-testAPI() {
+getFbData() {
     console.log('Welcome!  Fetching your information.... ');
 
     // fetch user image
@@ -1062,17 +1064,37 @@ statusChangeCallback(value) {
     console.log(value);
     if (value.status === 'connected') {
       localStorage.setItem('fb_token', value.authResponse.accessToken);
-      this.testAPI();
+      this.getFbData();
     } else {
       (window as any).FB.login((response) => {
         if (response.authResponse) {
          console.log('Welcome!  Fetching your information.... ');
-         this.testAPI();
+         this.getFbData();
         } else {
          console.log('User cancelled login or did not fully authorize.');
         }
     }, {scope: 'email, public_profile'});
     }
+  }
+
+  callTruecaller() {
+    // tslint:disable-next-line: max-line-length
+    (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${Math.floor(Math.random() * 100000000) + 1}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
+
+    setTimeout(() => {
+
+  if ( document.hasFocus() ) {
+    
+    this.ngxNotificationService.error('truecaller not found');
+     // Truecaller app not present on the device and you redirect the user
+     // to your alternate verification page
+  } else {
+    this.ngxNotificationService.error('truecaller  found');
+     // Truecaller app present on the device and the profile overlay opens
+     // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
+     // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
+  }
+}, 600);
   }
 }
 

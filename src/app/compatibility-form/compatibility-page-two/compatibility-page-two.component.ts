@@ -392,6 +392,7 @@ Analytics(type: string, category: string, action: string) {
   }
 
 onAutocompleteSelected(event) {
+      console.log(event);
       this.PageTwo.patchValue({
         Working: event.formatted_address
       });
