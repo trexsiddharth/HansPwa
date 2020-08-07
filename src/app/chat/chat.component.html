@@ -60,7 +60,7 @@
                 *ngIf="!selectedTab || selectedTab == 0 ">
             </span>
             <!-- {{itemService.getDailyCount()}} -->
-            Today's Special
+            {{languageService.profileLang.todaysSpecial}}
           </ng-template>
           <div class="w-full ht-full" id="today-main">
             <app-today-profiles></app-today-profiles>
@@ -113,7 +113,7 @@
                 *ngIf="selectedTab !== 1">
               <img class="tabImage" src="../../assets/tabs-icons/search.svg" alt="icon" *ngIf="selectedTab === 1 ">
             </p>
-            Discover
+            {{languageService.profileLang.discover}}
           </ng-template>
 
           <ng-template matTabContent>
@@ -135,7 +135,7 @@
               <img class="tabImage" src="../../assets/tabs-icons/heart in heart.svg" alt="icon"
                 *ngIf="selectedTab === 2 ">
             </span>
-            Likes You
+            {{languageService.profileLang.likesYou}}
           </ng-template>
 
           <ng-template matTabContent>
@@ -160,7 +160,7 @@
               </span>
             </p>
             <!-- {{itemService.getShortlistedCount()}} -->
-            Your Likes
+            {{languageService.profileLang.yourLikes}}
           </ng-template>
 
           <ng-template matTabContent>
