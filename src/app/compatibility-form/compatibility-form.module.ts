@@ -11,6 +11,7 @@ import { CompatibilityPageFiveComponent } from './compatibility-page-five/compat
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
 import { CompatibilityVerifyComponent } from './compatibility-verify/compatibility-verify.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { RegisterWithComponent } from './register-with/register-with.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
     CompatibilityPageFiveComponent,
     FormsMessageDialogComponent,
     CompatibilityVerifyComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    RegisterWithComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
     FourPageService
   ],
   entryComponents: [
-    FormsMessageDialogComponent
+    FormsMessageDialogComponent,
+    RegisterWithComponent
   ]
 })
 export class CompatibilityFormModule { }

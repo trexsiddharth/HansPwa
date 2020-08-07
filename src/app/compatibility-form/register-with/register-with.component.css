@@ -1,0 +1,32 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.heading {
+    color: black;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px 0px;
+}
+.btnDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 30px 0px 40px; 
+}
+.btnDiv button {
+    padding: 5px 30px;
+    border-radius: 50px;
+    font-size: 1rem;
+    color: white;
+}
+
+#facebook {
+    background-color: #3b5998;
+}
+
+#truecaller {
+    background-color: lightblue;
+}

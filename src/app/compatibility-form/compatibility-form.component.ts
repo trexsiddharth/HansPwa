@@ -37,6 +37,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { resolve } from 'url';
 import { async } from '@angular/core/testing';
+import { RegisterWithComponent } from './register-with/register-with.component';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -775,6 +776,7 @@ setGender() {
 console.log(this.PageOne.value.Relation);
 if (!this.fourPageService.getUserThrough()) {
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
+// this.openRegisterWith();
 }
 switch (this.PageOne.value.Relation) {
   case 'Brother':
@@ -979,6 +981,30 @@ getProfile() {
   checkAllCastePref(event) {
     console.log(event.checked);
     this.isAllCastePref = event.checked;
+  }
+
+  // show register with popup
+  openRegisterWith() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.minWidth = '40vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '95vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
   }
 }
 
