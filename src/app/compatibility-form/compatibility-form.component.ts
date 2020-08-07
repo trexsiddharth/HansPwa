@@ -289,6 +289,66 @@ async ngOnInit() {
     console.log(this.isLinear);
 
     }
+    // event on change of input field
+    inputFieldChanged(fieldName) {
+      console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
+      if (!this.fourPageService.getUserThrough()) {
+        switch (fieldName) {
+          case 'email':
+            this.analyticsEvent('Four Page Registration Page One Email Changed');
+            break;
+          case 'Weight':
+            this.analyticsEvent('Four Page Registration Page One Weight Changed');
+            break;
+          case 'AnnualIncome':
+            this.analyticsEvent('Four Page Registration Page One Annual Income Changed');
+            break;
+          case 'firstName':
+            this.analyticsEvent('Four Page Registration Page One First Name Changed');
+            break;
+          case 'lastName':
+            this.analyticsEvent('Four Page Registration Page One Last Name Changed');
+            break;
+        
+          default:
+            break;
+        }
+      }
+    }
+    // event on change of select field
+    selectFieldChange(fieldName) {
+      console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
+      if (!this.fourPageService.getUserThrough()) {
+        switch (fieldName) {
+          case 'birth_date':
+            this.analyticsEvent('Four Page Registration Page One Birth Date Changed');
+            break;
+          case 'birth_month':
+            this.analyticsEvent('Four Page Registration Page One Birth Month Changed');
+            break;
+          case 'birth_year':
+            this.analyticsEvent('Four Page Registration Page One Birth Year Changed');
+            break;
+          case 'gender':
+            this.analyticsEvent('Four Page Registration Page One GenderChanged');
+            break;
+          case 'Height':
+            this.analyticsEvent('Four Page Registration Page One Height Changed');
+            break;
+          case 'MaritalStatus':
+            this.analyticsEvent('Four Page Registration Page One Marital Status Changed');
+            break;
+          case 'Mangalik':
+            this.analyticsEvent('Four Page Registration Page One Manglik Status Changed');
+            break;
+        
+          default:
+            break;
+        }
+      }
+    }
+
+
       // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
     mobileNumberChanged() {
       if (localStorage.getItem('getListId') === null || localStorage.getItem('getListId') === '' ) {
@@ -305,12 +365,13 @@ async ngOnInit() {
             } else if (res.registered === 2) {
               localStorage.setItem('RegisterNumber', number);
               this.ngxNotificationService.info('Please complete the form and update');
+              this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
             } else {
               localStorage.setItem('RegisterNumber', number);
               // signifies that new user has entered his mobile number.
-              this.Analytics('Four Page Registration', 'Four Page Registration Page Zero',
-              'Registered through Four Page Registration Page Zero');
+              this.analyticsEvent('Registered through Four Page Registration Page Zero');
               console.log('New User');
+              this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
 
               // gtag app + web
               (window as any).gtag('config', 'G-1ES443XD0F' , {
@@ -528,8 +589,7 @@ async ngOnInit() {
                 if (this.fourPageService.getUserThrough()) {
                   // this.locality = firststepdata.get('locality');
                 } else {
-                  this.Analytics('Four Page Registration', 'Four Page Registration Page One',
-                  'Registered through Four Page Registration Page One');
+                  this.analyticsEvent('Registered through Four Page Registration Page One');
                 }
               } else {
                 this.spinner.hide();
@@ -569,19 +629,24 @@ async ngOnInit() {
       return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
     }
   }
-  Analytics(type: string, category: string, action: string) {
-    if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-    (window as any).ga('send', 'event', category, action, {
+
+  analyticsEvent(event) {
+    (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
-        console.log('Tracking ' + type + ' successful');
+
+        console.log('Tracking ' + event + ' successful');
+
       }
+
     });
 
     // gtag app + web
-    (window as any).gtag('event', category , {
-      'action': action
+    (window as any).gtag('event', event, {
+      event_callback: () => {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
     });
-  }
+
   }
 
 
@@ -642,6 +707,9 @@ datePickerClicked() {
   // Religion
 Religion(event) {
     console.log(event.value);
+    if (!this.fourPageService.getUserThrough()) {
+      this.analyticsEvent('Four Page Registration Page One Religion Changed');
+    }
     if (event.value === 'Hindu') {
       this.Caste = true;
     } else {
@@ -652,6 +720,9 @@ Religion(event) {
     }
   }
 async casteValidation(value) {
+  if (!this.fourPageService.getUserThrough()) {
+    this.analyticsEvent('Four Page Registration Page One Caste Changed');
+  }
   console.log('caste changed', value );
   const status = 1;
   let statusConfirmed;
@@ -702,6 +773,9 @@ onLocationSelected(e) {
 }
 setGender() {
 console.log(this.PageOne.value.Relation);
+if (!this.fourPageService.getUserThrough()) {
+this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
+}
 switch (this.PageOne.value.Relation) {
   case 'Brother':
     this.PageOne.patchValue(

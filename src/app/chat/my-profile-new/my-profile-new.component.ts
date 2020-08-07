@@ -5,36 +5,36 @@ import {
   OnDestroy,
   AfterViewInit,
   ViewChild,
-} from "@angular/core";
+} from '@angular/core';
 import {
   NgForm,
   FormGroup,
   FormBuilder,
   Validators,
   FormControl,
-} from "@angular/forms";
+} from '@angular/forms';
 import {
   MatSelect,
   MatSnackBar,
-} from "@angular/material";
-import { NgxNotificationService } from "ngx-kc-notification";
-import { HttpClient } from "@angular/common/http";
-import { NgxSpinnerService } from "ngx-spinner";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FindOpenHistoryProfileService } from "src/app/find-open-history-profile.service";
-import { EditPersonalDialogComponent } from "../myprofile/edit-personal-dialog/edit-personal-dialog.component";
-import { EditFamilyDialogComponent } from "../myprofile/edit-family-dialog/edit-family-dialog.component";
-import { EditPreferenceDialogComponent } from "../myprofile/edit-preference-dialog/edit-preference-dialog.component";
-import { timeout, retry, catchError, startWith, map } from "rxjs/operators";
-import { LanguageService } from "src/app/language.service";
-import { Options, LabelType } from "ng5-slider";
-import { forkJoin, ReplaySubject, Subject, Observable } from "rxjs";
-import { take, takeUntil } from "rxjs/operators";
+} from '@angular/material';
+import { NgxNotificationService } from 'ngx-kc-notification';
+import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { EditPersonalDialogComponent } from '../myprofile/edit-personal-dialog/edit-personal-dialog.component';
+import { EditFamilyDialogComponent } from '../myprofile/edit-family-dialog/edit-family-dialog.component';
+import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
+import { timeout, retry, catchError, startWith, map } from 'rxjs/operators';
+import { LanguageService } from 'src/app/language.service';
+import { Options, LabelType } from 'ng5-slider';
+import { forkJoin, ReplaySubject, Subject, Observable } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: "app-my-profile-new",
-  templateUrl: "./my-profile-new.component.html",
-  styleUrls: ["./my-profile-new.component.css"],
+  selector: 'app-my-profile-new',
+  templateUrl: './my-profile-new.component.html',
+  styleUrls: ['./my-profile-new.component.css'],
 })
 export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   innerWidth: any;
@@ -61,7 +61,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   errors = [];
 
   getcastes: any = [];
-  searchedCaste = "";
+  searchedCaste = '';
   searchCaste = new FormControl();
   searchCasteText = new FormControl();
   isAllCastePref = false;
@@ -72,7 +72,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     string[]
   >(1);
   protected _onDestroy = new Subject<void>();
-  @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
+  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
   HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
     'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
@@ -80,219 +80,219 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other'];
 
   Heights: string[] = [
-    "4'0\"",
-    "4'1\"",
-    "4'2\"",
-    "4'3\"",
-    "4'4\"",
-    "4'5\"",
-    "4'6\"",
-    "4'7\"",
-    "4'8\"",
-    "4'9\"",
-    "4'10\"",
-    "4'11\"",
-    "5'0\"",
-    "5'1\"",
-    "5'2\"",
-    "5'3\"",
-    "5'4\"",
-    "5'5\"",
-    "5'6\"",
-    "5'7\"",
-    "5'8\"",
-    "5'9\"",
-    "5'10\"",
-    "5'11\"",
-    "6'0\"",
-    "6'1\"",
-    "6'2\"",
-    "6'3\"",
-    "6'4\"",
-    "6'5\"",
-    "6'6\"",
-    "6'7\"",
-    "6'8\"",
-    "6'9\"",
-    "6'10\"",
-    "6'11\"",
-    "7'0\"",
+    '4\'0"',
+    '4\'1"',
+    '4\'2"',
+    '4\'3"',
+    '4\'4"',
+    '4\'5"',
+    '4\'6"',
+    '4\'7"',
+    '4\'8"',
+    '4\'9"',
+    '4\'10"',
+    '4\'11"',
+    '5\'0"',
+    '5\'1"',
+    '5\'2"',
+    '5\'3"',
+    '5\'4"',
+    '5\'5"',
+    '5\'6"',
+    '5\'7"',
+    '5\'8"',
+    '5\'9"',
+    '5\'10"',
+    '5\'11"',
+    '6\'0"',
+    '6\'1"',
+    '6\'2"',
+    '6\'3"',
+    '6\'4"',
+    '6\'5"',
+    '6\'6"',
+    '6\'7"',
+    '6\'8"',
+    '6\'9"',
+    '6\'10"',
+    '6\'11"',
+    '7\'0"',
   ];
   Heights1: string[] = [
-    "48",
-    "49",
-    "50",
-    "51",
-    "52",
-    "53",
-    "54",
-    "55",
-    "56",
-    "57",
-    "58",
-    "59",
-    "60",
-    "61",
-    "62",
-    "63",
-    "64",
-    "65",
-    "66",
-    "67",
-    "68",
-    "69",
-    "70",
-    "71",
-    "72",
-    "73",
-    "74",
-    "75",
-    "76",
-    "77",
-    "78",
-    "79",
-    "80",
-    "81",
-    "82",
-    "83",
-    "84",
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+    '55',
+    '56',
+    '57',
+    '58',
+    '59',
+    '60',
+    '61',
+    '62',
+    '63',
+    '64',
+    '65',
+    '66',
+    '67',
+    '68',
+    '69',
+    '70',
+    '71',
+    '72',
+    '73',
+    '74',
+    '75',
+    '76',
+    '77',
+    '78',
+    '79',
+    '80',
+    '81',
+    '82',
+    '83',
+    '84',
   ];
   date: string[] = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-    "25",
-    "26",
-    "27",
-    "28",
-    "29",
-    "30",
-    "31",
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
   ];
   month: string[] = [
-    "January",
-    "Feburary",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'Feburary',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   years: string[] = [
-    "1970",
-    "1971",
-    "1972",
-    "1973",
-    "1974",
-    "1975",
-    "1976",
-    "1977",
-    "1978",
-    "1979",
-    "1980",
-    "1981",
-    "1982",
-    "1983",
-    "1984",
-    "1985",
-    "1986",
-    "1987",
-    "1988",
-    "1989",
-    "1990",
-    "1991",
-    "1992",
-    "1993",
-    "1994",
-    "1995",
-    "1996",
-    "1997",
-    "1998",
-    "1999",
-    "2000",
-    "2001",
-    "2002",
-    "2003",
-    "2004",
-    "2005",
-    "2006",
-    "2007",
-    "2008",
-    "2009",
-    "2010",
-    "2011",
-    "2012",
-    "2013",
-    "2014",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
+    '1970',
+    '1971',
+    '1972',
+    '1973',
+    '1974',
+    '1975',
+    '1976',
+    '1977',
+    '1978',
+    '1979',
+    '1980',
+    '1981',
+    '1982',
+    '1983',
+    '1984',
+    '1985',
+    '1986',
+    '1987',
+    '1988',
+    '1989',
+    '1990',
+    '1991',
+    '1992',
+    '1993',
+    '1994',
+    '1995',
+    '1996',
+    '1997',
+    '1998',
+    '1999',
+    '2000',
+    '2001',
+    '2002',
+    '2003',
+    '2004',
+    '2005',
+    '2006',
+    '2007',
+    '2008',
+    '2009',
+    '2010',
+    '2011',
+    '2012',
+    '2013',
+    '2014',
+    '2015',
+    '2016',
+    '2017',
+    '2018',
+    '2019',
+    '2020',
   ];
   Occupation: string[] = [
-    "Private Job",
-    "Business/Self-Employed",
-    "Govt Job",
-    "Doctor",
-    "Teacher",
-    "Homely",
-    "Not Employed",
+    'Private Job',
+    'Business/Self-Employed',
+    'Govt Job',
+    'Doctor',
+    'Teacher',
+    'Homely',
+    'Not Employed',
   ];
-  Mangalika = ["Manglik", "Non-Manglik", "Anshik Manglik", "Doesn't Matter"];
+  Mangalika = ['Manglik', 'Non-Manglik', 'Anshik Manglik', 'Doesn\'t Matter'];
   Religions: string[] = [
-    "Hindu",
-    "Muslim",
-    "Sikh",
-    "Christian",
-    "Buddhist",
-    "Jain",
-    "Parsi",
-    "Jewish",
-    "Bahai",
+    'Hindu',
+    'Muslim',
+    'Sikh',
+    'Christian',
+    'Buddhist',
+    'Jain',
+    'Parsi',
+    'Jewish',
+    'Bahai',
   ];
   Foodpreferences: string[] = [
-    "Doesn't Matter",
-    "Non-Vegetarian",
-    "Vegetarian",
+    'Doesn\'t Matter',
+    'Non-Vegetarian',
+    'Vegetarian',
   ];
-  Working: string[] = ["Working", "Not Working", "Doesn't Matter"];
+  Working: string[] = ['Working', 'Not Working', 'Doesn\'t Matter'];
   //Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Doesn\'t Matter',
   //'Defence', 'Civil Services'];
   MaritalStatus: string[] = [
-    "Doesn't Matter",
-    "Never Married",
-    "Awaiting Divorce",
-    "Divorcee",
-    "Widowed",
-    "Anulled",
+    'Doesn\'t Matter',
+    'Never Married',
+    'Awaiting Divorce',
+    'Divorcee',
+    'Widowed',
+    'Anulled',
   ];
   designations: string[] = [
     'Owner',
@@ -337,10 +337,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     'Legal',
     'Public Relations',
     'Others'];
-  Status: string[] = ["Alive", "Not Alive"];
-  FamilyType: string[] = ["Joint", "Nuclear"];
-  Count: any[] = ["None", 0, 1, 2, 3, 4, 5, 6, 7, 8];
-  HouseType: string[] = ["Owned", "Rented", "Leased"];
+  Status: string[] = ['Alive', 'Not Alive'];
+  FamilyType: string[] = ['Joint', 'Nuclear'];
+  Count: any[] = ['None', 0, 1, 2, 3, 4, 5, 6, 7, 8];
+  HouseType: string[] = ['Owned', 'Rented', 'Leased'];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -354,72 +354,72 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     public snackbar: MatSnackBar
   ) {
     this.personalForm = this._formBuilder.group({
-      name: [""],
+      name: [''],
       phone: [
-        "",
+        '',
         Validators.compose([
           Validators.max(9999999999999),
-          Validators.pattern("(91)?[6-9][0-9]{9}"),
+          Validators.pattern('(91)?[6-9][0-9]{9}'),
         ]),
       ],
       Whatsapp: [
-        "",
+        '',
         Validators.compose([
           Validators.max(9999999999999),
-          Validators.pattern("(91)?[6-9][0-9]{9}"),
+          Validators.pattern('(91)?[6-9][0-9]{9}'),
         ]),
       ],
-      email: [""],
-      birth_date: ["01"],
-      birth_month: ["January"],
-      birth_year: ["1980"],
-      BirthPlace: [""],
-      BirthTime: [""],
-      Height: [""],
-      Weight: [""],
-      MaritalStatus: [""],
-      AnnualIncome: ["", Validators.compose([Validators.max(999)])],
-      Religion: [""],
-      Manglik: [""],
-      Food: [""],
-      Degree: [""],
-      Profession: [""],
-      OtherProfession: "",
-      College: [""],
-      Additional: [""],
-      Occupation: [""],
-      Company: [""],
-      Castes: [""],
-      WorkingCity: [""],
-      Locality: [""],
-      About: ["", Validators.compose([Validators.maxLength(300)])],
+      email: [''],
+      birth_date: ['01'],
+      birth_month: ['January'],
+      birth_year: ['1980'],
+      BirthPlace: [''],
+      BirthTime: [''],
+      Height: [''],
+      Weight: [''],
+      MaritalStatus: [''],
+      AnnualIncome: ['', Validators.compose([Validators.max(999)])],
+      Religion: [''],
+      Manglik: [''],
+      Food: [''],
+      Degree: [''],
+      Profession: [''],
+      OtherProfession: '',
+      College: [''],
+      Additional: [''],
+      Occupation: [''],
+      Company: [''],
+      Castes: [''],
+      WorkingCity: [''],
+      Locality: [''],
+      About: ['', Validators.compose([Validators.maxLength(300)])],
     });
     this.familyForm1 = this._formBuilder.group({
-      identity_number: [""],
-      id: [""],
-      temple_id: [""],
-      family_type: [""],
-      house_type: [""],
-      about: [""],
-      occupation_father: [""],
-      occupation_mother: [""],
-      father_status: [""],
-      mother_status: [""],
-      married_sons: [""],
-      unmarried_sons: [""],
-      married_daughters: [""],
-      unmarried_daughters: [""],
-      gotra: [""],
-      family_income: [""],
-      city: [""],
+      identity_number: [''],
+      id: [''],
+      temple_id: [''],
+      family_type: [''],
+      house_type: [''],
+      about: [''],
+      occupation_father: [''],
+      occupation_mother: [''],
+      father_status: [''],
+      mother_status: [''],
+      married_sons: [''],
+      unmarried_sons: [''],
+      married_daughters: [''],
+      unmarried_daughters: [''],
+      gotra: [''],
+      family_income: [''],
+      city: [''],
     });
   }
   ngOnInit() {
     this.innerWidth = window.innerWidth;
     this.languageService.setProfileLanguage();
-    this.currentLanguage = localStorage.getItem("language");
+    this.currentLanguage = localStorage.getItem('language');
     // set already selected language in toggle
-    if (localStorage.getItem("language") === "hindi") {
+    if (localStorage.getItem('language') === 'hindi') {
       this.langCheck = false;
     } else {
       this.langCheck = true;
@@ -480,7 +480,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   castePreferences: string[] = [];
   specialCase() {
     this.setStepPreferences(1);
-    this.castePreferences = this.preferenceProfileData.caste.split(",");
+    this.castePreferences = this.preferenceProfileData.caste.split(',');
     console.log(this.preferenceProfileData.caste);
     console.log(this.castePreferences);
   }
@@ -492,11 +492,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return "₹" + value + "LPA";
+          return '₹' + value + 'LPA';
         case LabelType.High:
-          return "₹" + value + " LPA";
+          return '₹' + value + ' LPA';
         default:
-          return "";
+          return '';
       }
     },
   };
@@ -510,11 +510,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return "" + value + " Yrs";
+          return '' + value + ' Yrs';
         case LabelType.High:
-          return "" + value + " Yrs";
+          return '' + value + ' Yrs';
         default:
-          return "";
+          return '';
       }
     },
   };
@@ -525,13 +525,13 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return "" + this.Heights[this.Heights1.indexOf(String(value))];
+          return '' + this.Heights[this.Heights1.indexOf(String(value))];
         // return "" + this.Heights[value - 36];
         case LabelType.High:
-          return "" + this.Heights[this.Heights1.indexOf(String(value))];
+          return '' + this.Heights[this.Heights1.indexOf(String(value))];
         // return "" + this.Heights[value - 36];
         default:
-          return "";
+          return '';
       }
     },
   };
@@ -545,17 +545,17 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return "₹" + value + "LPA";
+          return '₹' + value + 'LPA';
         case LabelType.High:
-          return "₹" + value + " LPA";
+          return '₹' + value + ' LPA';
         default:
-          return "";
+          return '';
       }
     },
   };
   showValue() {
     console.log(
-      "this is value of heights of preferenceProfileData" +
+      'this is value of heights of preferenceProfileData' +
       String(this.preferenceProfileData.height_min) +
       String(this.preferenceProfileData.height_max)
     );
@@ -583,18 +583,18 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   setEditIndex(index: number) {
     this.editIndexPersonal = index;
-    console.log("Personal index set to" + String(index));
+    console.log('Personal index set to' + String(index));
   }
   setEditIndexFamily(index: number) {
     this.editIndexFamily = index;
-    console.log("Family index set to" + String(index));
+    console.log('Family index set to' + String(index));
   }
   setEditIndexPrefs(index: number) {
     this.editIndexPrefs = index;
-    console.log("pref index set to" + String(index));
+    console.log('pref index set to' + String(index));
   }
   setEdit(index) {
-    console.log("viaebrnifakujrnviksjsrn");
+    console.log('viaebrnifakujrnviksjsrn');
   }
   setCurrentProfileValue() {
     console.log(this.personalProfileData);
@@ -606,31 +606,31 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       ],
       MaritalStatus: this.personalProfileData.marital_status
         ? this.personalProfileData.marital_status
-        : "Never Married",
+        : 'Never Married',
       Religion: this.familyProfileData.religion
         ? this.familyProfileData.religion
-        : "Hindu",
+        : 'Hindu',
       Manglik: this.personalProfileData.manglik
         ? this.personalProfileData.manglik
-        : "Non-Manglik",
+        : 'Non-Manglik',
       birth_date: this.personalProfileData.birth_date
-        ? this.personalProfileData.birth_date.toString().split("-")[2]
-        : "",
+        ? this.personalProfileData.birth_date.toString().split('-')[2]
+        : '',
       birth_month: this.personalProfileData.birth_date
         ? this.getMonthString(
-          this.personalProfileData.birth_date.toString().split("-")[1]
+          this.personalProfileData.birth_date.toString().split('-')[1]
         )
-        : "",
+        : '',
       birth_year: this.personalProfileData.birth_date
         ? this.years[
         this.years.indexOf(
-          this.personalProfileData.birth_date.toString().split("-")[0]
+          this.personalProfileData.birth_date.toString().split('-')[0]
         )
         ]
-        : "",
+        : '',
       BirthPlace: this.personalProfileData.birth_place,
       BirthTime: this.personalProfileData.birth_time,
-      email: this.familyProfileData.email ? this.familyProfileData.email : "",
+      email: this.familyProfileData.email ? this.familyProfileData.email : '',
       phone: this.familyProfileData.mobile,
       Whatsapp: this.personalProfileData.whats_app_no
         ? this.personalProfileData.whats_app_no
@@ -638,7 +638,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       Castes: this.familyProfileData.caste,
       Food: this.personalProfileData.food_choice
         ? this.personalProfileData.food_choice
-        : "Vegetarian",
+        : 'Vegetarian',
       WorkingCity: this.personalProfileData.working_city,
       Locality: this.familyProfileData.locality,
       Degree: this.personalProfileData.degree
@@ -648,12 +648,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       College: this.personalProfileData.college,
       Additional: this.personalProfileData.additional_qualification,
       Occupation:
-        this.personalProfileData.occupation === "Private Company"
-          ? "Private Job"
+        this.personalProfileData.occupation === 'Private Company'
+          ? 'Private Job'
           : this.personalProfileData.occupation,
       Company: this.personalProfileData.company
         ? this.personalProfileData.company
-        : "",
+        : '',
       AnnualIncome: this.getIncome(this.personalProfileData.monthly_income),
       About: this.personalProfileData.about,
     });
@@ -682,30 +682,30 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   getMonthString(month: string) {
     switch (month) {
-      case "01":
-        return "January";
-      case "02":
-        return "Feburary";
-      case "03":
-        return "March";
-      case "04":
-        return "April";
-      case "05":
-        return "May";
-      case "06":
-        return "June";
-      case "07":
-        return "July";
-      case "08":
-        return "August";
-      case "09":
-        return "September";
-      case "10":
-        return "October";
-      case "11":
-        return "November";
-      case "12":
-        return "December";
+      case '01':
+        return 'January';
+      case '02':
+        return 'Feburary';
+      case '03':
+        return 'March';
+      case '04':
+        return 'April';
+      case '05':
+        return 'May';
+      case '06':
+        return 'June';
+      case '07':
+        return 'July';
+      case '08':
+        return 'August';
+      case '09':
+        return 'September';
+      case '10':
+        return 'October';
+      case '11':
+        return 'November';
+      case '12':
+        return 'December';
       default:
         break;
     }
@@ -721,184 +721,184 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       const personalProfileDataForm = new FormData();
       if (this.personalProfileData.identity_number) {
         personalProfileDataForm.append(
-          "identity_number",
+          'identity_number',
           this.personalProfileData.identity_number
         );
       } else {
-        personalProfileDataForm.append("id", this.personalProfileData.id);
+        personalProfileDataForm.append('id', this.personalProfileData.id);
       }
       personalProfileDataForm.append(
-        "temple_id",
+        'temple_id',
         this.personalProfileData.temple_id
       );
       personalProfileDataForm.append(
-        "about",
+        'about',
         this.personalForm.value.About
           ? this.personalForm.value.About
           : this.personalProfileData.about
       );
       personalProfileDataForm.append(
-        "name",
+        'name',
         this.personalForm.value.name
           ? this.personalForm.value.name
           : this.personalProfileData.name
       );
       personalProfileDataForm.append(
-        "birth_date",
-        year + "-" + month + "-" + date
-          ? year + "-" + month + "-" + date
+        'birth_date',
+        year + '-' + month + '-' + date
+          ? year + '-' + month + '-' + date
           : this.personalProfileData.birth_date
       );
       personalProfileDataForm.append(
-        "birth_place",
+        'birth_place',
         this.personalForm.value.BirthPlace
           ? this.personalForm.value.BirthPlace
           : this.personalProfileData.birth_place
       );
       personalProfileDataForm.append(
-        "birth_time",
+        'birth_time',
         this.personalForm.value.BirthTime
           ? this.personalForm.value.BirthTime
           : this.personalProfileData.birth_time
       );
       personalProfileDataForm.append(
-        "marital_status",
+        'marital_status',
         this.personalForm.value.MaritalStatus
           ? this.personalForm.value.MaritalStatus
           : this.personalProfileData.marital_status
       );
       personalProfileDataForm.append(
-        "manglik",
+        'manglik',
         this.personalForm.value.Manglik
           ? this.personalForm.value.Manglik
           : this.personalProfileData.manglik
       );
       personalProfileDataForm.append(
-        "religion",
+        'religion',
         this.personalForm.value.Religion
           ? this.personalForm.value.Religion
           : this.familyProfileData.religion
       );
       personalProfileDataForm.append(
-        "height",
+        'height',
         this.Heights1[this.Heights.indexOf(this.personalForm.value.Height)]
           ? this.Heights1[this.Heights.indexOf(this.personalForm.value.Height)]
           : this.personalProfileData.height
       );
       personalProfileDataForm.append(
-        "weight",
+        'weight',
         this.personalForm.value.Weight
           ? this.personalForm.value.Weight
           : this.personalProfileData.weight
       );
       personalProfileDataForm.append(
-        "food_choice",
+        'food_choice',
         this.personalForm.value.Food
           ? this.personalForm.value.Food
           : this.personalProfileData.food_choice
       );
       personalProfileDataForm.append(
-        "caste",
+        'caste',
         this.personalForm.value.Castes
           ? this.personalForm.value.Castes
           : this.familyProfileData.caste
       );
       personalProfileDataForm.append(
-        "locality",
+        'locality',
         this.personalForm.value.Locality
           ? this.personalForm.value.Locality
           : this.familyProfileData.locality
       );
       personalProfileDataForm.append(
-        "working_city",
+        'working_city',
         this.personalForm.value.WorkingCity
           ? this.personalForm.value.WorkingCity
           : this.personalProfileData.working_city
       );
       personalProfileDataForm.append(
-        "degree",
+        'degree',
         this.personalForm.value.Degree
           ? this.personalForm.value.Degree
           : this.personalProfileData.degree
       );
       personalProfileDataForm.append(
-        "college",
+        'college',
         this.personalForm.value.College
           ? this.personalForm.value.College
           : this.personalProfileData.college
       );
       personalProfileDataForm.append(
-        "occupation",
+        'occupation',
         this.personalForm.value.Occupation
           ? this.personalForm.value.Occupation
           : this.personalProfileData.occupation
       );
       personalProfileDataForm.append(
-        "annual_income",
+        'annual_income',
         this.personalForm.value.AnnualIncome
           ? this.personalForm.value.AnnualIncome
           : this.personalProfileData.monthly_income
       );
 
       personalProfileDataForm.append(
-        "additional_qualification",
+        'additional_qualification',
         this.personalForm.value.Additional
           ? this.personalForm.value.Additional
           : this.personalProfileData.additional_qualification
       );
 
       personalProfileDataForm.append(
-        "company",
+        'company',
         this.personalForm.value.Company
           ? this.personalForm.value.Company
           : this.personalProfileData.company
       );
       personalProfileDataForm.append(
-        "address",
+        'address',
         this.personalForm.value.WorkingCity
           ? this.personalForm.value.WorkingCity
           : this.personalProfileData.working_city
       );
       personalProfileDataForm.append(
-        "email",
+        'email',
         this.personalForm.value.email
           ? this.personalForm.value.email
           : this.personalProfileData.email
       );
       personalProfileDataForm.append(
-        "mobile",
+        'mobile',
         this.personalForm.value.phone
           ? this.personalForm.value.phone
           : this.familyProfileData.phone
       );
       personalProfileDataForm.append(
-        "whatsapp",
+        'whatsapp',
         this.personalForm.value.Whatsapp
           ? this.personalForm.value.Whatsapp
           : this.familyProfileData.mobile
       );
       personalProfileDataForm.append(
-        "profession",
-        this.personalForm.value.Profession !== "Others"
+        'profession',
+        this.personalForm.value.Profession !== 'Others'
           ? this.personalForm.value.Profession
           : this.personalForm.value.OtherProfession
             ? this.personalForm.value.OtherProfession
             : this.personalProfileData.profession
       );
       personalProfileDataForm.append(
-        "education",
+        'education',
         this.personalForm.value.Degree
           ? this.personalForm.value.Degree
           : this.personalProfileData.degree
       );
       personalProfileDataForm.append(
-        "is_lead",
-        localStorage.getItem("is_lead")
+        'is_lead',
+        localStorage.getItem('is_lead')
       );
       console.log(personalProfileDataForm);
       this.http
         .post(
-          "https://partner.hansmatrimony.com/api/updatePersonalDetails",
+          'https://partner.hansmatrimony.com/api/updatePersonalDetails',
           personalProfileDataForm
         )
         .subscribe(
@@ -909,7 +909,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
           (error: any) => {
             console.log(error);
             this.ngxNotificationService.error(
-              "Something Went Wrong, Try Again Later"
+              'Something Went Wrong, Try Again Later'
             );
           }
         );
@@ -922,128 +922,128 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       if (this.errors[0]) {
         this.ngxNotificationService.error(
-          "Fill the " + this.errors[0] + " detail"
+          'Fill the ' + this.errors[0] + ' detail'
         );
       }
     }
   }
   onSubmitFamily() {
     this.editIndexFamily = -1;
-    console.log("family Data to update");
+    console.log('family Data to update');
     console.log(this.familyProfileData);
     const newFamilyForm = new FormData();
     newFamilyForm.append(
-      "identity_number",
+      'identity_number',
       this.familyProfileData.identity_number
     );
-    newFamilyForm.append("id", this.familyProfileData.id);
-    newFamilyForm.append("temple_id", this.familyProfileData.temple_id);
-    newFamilyForm.append("family_type", this.familyProfileData.family_type);
-    newFamilyForm.append("house_type", this.familyProfileData.house_type);
-    newFamilyForm.append("about", this.familyProfileData.about);
+    newFamilyForm.append('id', this.familyProfileData.id);
+    newFamilyForm.append('temple_id', this.familyProfileData.temple_id);
+    newFamilyForm.append('family_type', this.familyProfileData.family_type);
+    newFamilyForm.append('house_type', this.familyProfileData.house_type);
+    newFamilyForm.append('about', this.familyProfileData.about);
     newFamilyForm.append(
-      "occupation_father",
+      'occupation_father',
       this.familyProfileData.occupation
     );
     newFamilyForm.append(
-      "occupation_mother",
+      'occupation_mother',
       this.familyProfileData.occupation_mother
     );
-    newFamilyForm.append("father_status", this.familyProfileData.father_status);
-    newFamilyForm.append("mother_status", this.familyProfileData.mother_status);
-    newFamilyForm.append("married_sons", this.familyProfileData.married_sons);
+    newFamilyForm.append('father_status', this.familyProfileData.father_status);
+    newFamilyForm.append('mother_status', this.familyProfileData.mother_status);
+    newFamilyForm.append('married_sons', this.familyProfileData.married_sons);
     newFamilyForm.append(
-      "unmarried_sons",
+      'unmarried_sons',
       this.familyProfileData.unmarried_sons
     );
     newFamilyForm.append(
-      "married_daughters",
+      'married_daughters',
       this.familyProfileData.married_daughters
     );
     newFamilyForm.append(
-      "unmarried_daughters",
+      'unmarried_daughters',
       this.familyProfileData.unmarried_daughters
     );
-    newFamilyForm.append("gotra", this.familyProfileData.gotra);
-    newFamilyForm.append("family_income", this.familyProfileData.family_income); //income is updated here.
-    newFamilyForm.append("city", this.familyProfileData.city);
-    newFamilyForm.append("is_lead", localStorage.getItem("is_lead"));
+    newFamilyForm.append('gotra', this.familyProfileData.gotra);
+    newFamilyForm.append('family_income', this.familyProfileData.family_income); //income is updated here.
+    newFamilyForm.append('city', this.familyProfileData.city);
+    newFamilyForm.append('is_lead', localStorage.getItem('is_lead'));
 
     this.http
       .post(
-        "https://partner.hansmatrimony.com/api/updateFamilyDetails",
+        'https://partner.hansmatrimony.com/api/updateFamilyDetails',
         newFamilyForm
       )
       .subscribe(
         (data: any) => {
           console.log(data);
           this.getUserProfileData();
-          console.log("Family Deatils Updated successfully");
+          console.log('Family Deatils Updated successfully');
         },
         (error: any) => {
           console.log(error);
           this.ngxNotificationService.error(
-            "Something Went Wrong, Try Again Later"
+            'Something Went Wrong, Try Again Later'
           );
         }
       );
   }
   onSubmitPreferences() {
     this.editIndexPrefs = -1;
-    this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(",");
-    this.preferenceProfileData.caste = this.castePreferences.join(",");
-    console.log("preference Data to update");
+    this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
+    this.preferenceProfileData.caste = this.castePreferences.join(',');
+    console.log('preference Data to update');
 
     console.log(this.preferenceProfileData);
 
     const newPrefForm = new FormData();
     newPrefForm.append(
-      "identity_number",
+      'identity_number',
       this.preferenceProfileData.identity_number
     );
-    newPrefForm.append("temple_id", this.preferenceProfileData.temple_id);
-    newPrefForm.append("id", this.preferenceProfileData.id);
-    newPrefForm.append("caste", this.searchCaste.value);
-    newPrefForm.append("manglik", this.preferenceProfileData.manglik);
+    newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
+    newPrefForm.append('id', this.preferenceProfileData.id);
+    newPrefForm.append('caste', this.searchCaste.value);
+    newPrefForm.append('manglik', this.preferenceProfileData.manglik);
     newPrefForm.append(
-      "marital_status",
-      (this.preferenceProfileData.marital_status == "undefined" || this.preferenceProfileData.marital_status) === undefined ?
-        "Doesn't Matter" : this.preferenceProfileData.marital_status
+      'marital_status',
+      (this.preferenceProfileData.marital_status == 'undefined' || this.preferenceProfileData.marital_status) === undefined ?
+        'Doesn\'t Matter' : this.preferenceProfileData.marital_status
     );
-    if (this.personalProfileData.gender === "Male") {
-      newPrefForm.append("working", this.preferenceProfileData.working);
-      newPrefForm.append("occupation", "na");
+    if (this.personalProfileData.gender === 'Male') {
+      newPrefForm.append('working', this.preferenceProfileData.working);
+      newPrefForm.append('occupation', 'na');
     } else {
-      newPrefForm.append("occupation", this.preferenceProfileData.occupation);
-      newPrefForm.append("working", "na");
+      newPrefForm.append('occupation', this.preferenceProfileData.occupation);
+      newPrefForm.append('working', 'na');
     }
-    newPrefForm.append("food_choice", this.preferenceProfileData.food_choice);
-    newPrefForm.append("description", this.preferenceProfileData.description);
-    newPrefForm.append("income_min", this.preferenceProfileData.income_min);
-    newPrefForm.append("income_max", this.preferenceProfileData.income_max);
-    newPrefForm.append("height_min", this.preferenceProfileData.height_min);
-    newPrefForm.append("height_max", this.preferenceProfileData.height_max);
-    newPrefForm.append("age_min", this.preferenceProfileData.age_min);
-    newPrefForm.append("age_max", this.preferenceProfileData.age_max);
+    newPrefForm.append('food_choice', this.preferenceProfileData.food_choice);
+    newPrefForm.append('description', this.preferenceProfileData.description);
+    newPrefForm.append('income_min', this.preferenceProfileData.income_min);
+    newPrefForm.append('income_max', this.preferenceProfileData.income_max);
+    newPrefForm.append('height_min', this.preferenceProfileData.height_min);
+    newPrefForm.append('height_max', this.preferenceProfileData.height_max);
+    newPrefForm.append('age_min', this.preferenceProfileData.age_min);
+    newPrefForm.append('age_max', this.preferenceProfileData.age_max);
     newPrefForm.append(
-      "mother_tongue",
+      'mother_tongue',
       this.preferenceProfileData.mother_tongue
     );
-    newPrefForm.append("is_lead", localStorage.getItem("is_lead"));
+    newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
     this.http
       .post(
-        "https://partner.hansmatrimony.com/api/updatePreferencesDetails",
+        'https://partner.hansmatrimony.com/api/updatePreferencesDetails',
         newPrefForm
       )
       .subscribe(
         (data: any) => {
           console.log(data);
-          console.log("Preference Details updated successfully");
+          console.log('Preference Details updated successfully');
         },
         (error: any) => {
           console.log(error);
           this.ngxNotificationService.error(
-            "Something Went Wrong, Try Again Later"
+            'Something Went Wrong, Try Again Later'
           );
         }
       );
@@ -1051,15 +1051,15 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   langChanged(event) {
     console.log(event.checked);
     if (event.checked) {
-      localStorage.setItem("language", "english");
-      this.languageService.setCurrentLanguage("english");
+      localStorage.setItem('language', 'english');
+      this.languageService.setCurrentLanguage('english');
     } else {
-      localStorage.setItem("language", "hindi");
-      this.languageService.setCurrentLanguage("hindi");
+      localStorage.setItem('language', 'hindi');
+      this.languageService.setCurrentLanguage('hindi');
     }
   }
   openSubscription() {
-    this.router.navigateByUrl("subscription");
+    this.router.navigateByUrl('subscription');
   }
   setAge(dob: string) {
     if (dob != null) {
@@ -1070,7 +1070,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       return null;
     }
   }
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
   }
@@ -1078,38 +1078,60 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.Heights[this.Heights1.indexOf(num)];
   }
   getProfilesPhoto(
-    num: string,
-    num2: string,
-    gen: string,
-    index: string
-  ): String {
-    if (num !== "[]" && num && num !== "null") {
+    num: string, // carousel
+    numUnapprove: string, // unapprove_carousel
+    num2: string, // photo
+    gen: string, // gender
+    index: string // index
+  ): string {
+    if (num !== '[]' && num && num !== 'null') {
       const carousel: any = JSON.parse(num);
-      if (carousel[index]) {
-        return (
-          "http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/" +
-          carousel[index]
-        );
+      // if an image is present in unapprove_carousel for the particular index.
+      // we will give preference to unapprove_carousel first.
+      if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
+        const carouselUnapproved: any = JSON.parse(numUnapprove);
+        if (carouselUnapproved[index]) {
+          return (
+            'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+            carouselUnapproved[index]
+          );
+        } else {
+          if (carousel[index]) {
+            return (
+              'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+              carousel[index]
+            );
+          } else {
+            return '../../assets/empty_profile.jpeg';
+          }
+        }
       } else {
-        return "../../assets/empty_profile.jpeg";
+        if (carousel[index]) {
+          return (
+            'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+            carousel[index]
+          );
+        } else {
+          return '../../assets/empty_profile.jpeg';
+        }
       }
     } else if (num2) {
-      return "http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/" + num2;
+      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
     } else {
-      if (gen === "Male") {
-        return "../../assets/male_pic.png";
+      if (gen === 'Male') {
+        return '../../assets/male_pic.png';
       } else {
-        return "../../assets/female_pic.png";
+        return '../../assets/female_pic.png';
       }
     }
   }
   onProfileLoadError(gen: string, index) {
-    console.log("error occured while loading image, Setting default image");
-    const image = document.querySelectorAll("#imgProfile")[index - 1];
-    if (gen === "Male") {
-      image.setAttribute("src", "../../assets/male_pic.png");
+    console.log('error occured while loading image, Setting default image');
+    const image = document.querySelectorAll('#imgProfile')[index - 1];
+    if (gen === 'Male') {
+      image.setAttribute('src', '../../assets/male_pic.png');
     } else {
-      image.setAttribute("src", "../../assets/female_pic.png");
+      image.setAttribute('src', '../../assets/female_pic.png');
     }
   }
 
@@ -1120,7 +1142,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       const mimeType = files[0].type;
       if (mimeType.match(/image\/*/) == null) {
-        this.message = "Only images are supported.";
+        this.message = 'Only images are supported.';
         return;
       }
       const reader = new FileReader();
@@ -1134,22 +1156,22 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getUserProfileData() {
-    if (this.userId || localStorage.getItem("id")) {
+    if (this.userId || localStorage.getItem('id')) {
       this.spinner.show();
       const myprofileData = new FormData();
       myprofileData.append(
-        "id",
-        this.userId ? this.userId : localStorage.getItem("id")
+        'id',
+        this.userId ? this.userId : localStorage.getItem('id')
       );
-      myprofileData.append("contacted", "1");
+      myprofileData.append('contacted', '1');
       myprofileData.append(
-        "is_lead",
-        this.userIsLead ? this.userIsLead : localStorage.getItem("is_lead")
+        'is_lead',
+        this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
       );
       // tslint:disable-next-line: max-line-length
       return this.http
         .post<any>(
-          "https://partner.hansmatrimony.com/api/getProfile",
+          'https://partner.hansmatrimony.com/api/getProfile',
           myprofileData
         )
         .pipe(
@@ -1157,9 +1179,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
           retry(2),
           catchError((e) => {
             this.ngxNotificationService.error(
-              "Server Time Out, Try Again Later"
+              'Server Time Out, Try Again Later'
             );
-            throw new Error("Server Timeout " + e);
+            throw new Error('Server Timeout ' + e);
           })
         )
         .subscribe(
@@ -1172,7 +1194,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               : null;
             this.spinner.hide();
             if (this.getCarouselCount() != 1) {
-              console.log("Photo status set to true");
+              console.log('Photo status set to true');
               this.itemService.setPhotoStatus(true);
             }
             this.getAllCaste();
@@ -1184,11 +1206,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
           (error: any) => {
             this.spinner.hide();
             console.log(error);
-            this.ngxNotificationService.error("Something Went Wrong");
+            this.ngxNotificationService.error('Something Went Wrong');
           }
         );
     } else {
-      this.ngxNotificationService.error("No user found");
+      this.ngxNotificationService.error('No user found');
     }
   }
   changeProfileImageNew() {
@@ -1224,15 +1246,15 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log('photos', suc);
       if (suc.pic_upload_status === 'Y') {
         this.spinner.hide();
-        console.log("Image Upload successful");
-        this.ngxNotificationService.success("Photo Uploaded Succesfully!");
+        console.log('Image Upload successful');
+        this.ngxNotificationService.success('Photo Uploaded Succesfully!');
         this.itemService.setPhotoStatus(true);
       } else {
-        this.ngxNotificationService.error("Photo Upload Unsuccessful!");
+        this.ngxNotificationService.error('Photo Upload Unsuccessful!');
         this.spinner.hide();
       }
     }, err => {
-      this.ngxNotificationService.error("Photo could not be Uploaded!Try after some time");
+      this.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
       console.log(err);
       this.spinner.hide();
     });
@@ -1240,33 +1262,33 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   uploadPhoto(data, index) {
     this.spinner.show();
     const uploadData = new FormData();
-    uploadData.append("id", localStorage.getItem("id"));
-    uploadData.append("index", index);
-    uploadData.append("image", data);
-    uploadData.append("is_lead", localStorage.getItem("is_lead"));
+    uploadData.append('id', localStorage.getItem('id'));
+    uploadData.append('index', index);
+    uploadData.append('image', data);
+    uploadData.append('is_lead', localStorage.getItem('is_lead'));
 
     return this.http
       .post(
-        "https://partner.hansmatrimony.com/api/" + "uploadProfilePicture",
+        'https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture',
         uploadData
       )
       .subscribe(
         (suc) => {
           this.suc = suc;
-          console.log("photos", suc);
-          if (this.suc.pic_upload_status === "Y") {
+          console.log('photos', suc);
+          if (this.suc.pic_upload_status === 'Y') {
             this.spinner.hide();
             document
-              .querySelectorAll("#imgProfile")
-            [index - 1].setAttribute("src", this.BackimgURL);
-            this.ngxNotificationService.success("Photo Uploaded Succesfully!");
+              .querySelectorAll('#imgProfile')
+            [index - 1].setAttribute('src', this.BackimgURL);
+            this.ngxNotificationService.success('Photo Uploaded Succesfully!');
           } else {
             this.spinner.hide();
-            this.ngxNotificationService.error("Photo Upload Unsuccesful!");
+            this.ngxNotificationService.error('Photo Upload Unsuccesful!');
           }
         },
         (err) => {
-          this.ngxNotificationService.error("Photo could not be Uploaded!");
+          this.ngxNotificationService.error('Photo could not be Uploaded!');
           // console.log(err);
           console.log(err);
         }
@@ -1274,7 +1296,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   getMotherTongue(value: string) {
     if (!value) {
-      return "Hindi-Delhi";
+      return 'Hindi-Delhi';
     } else {
       return value;
     }
@@ -1285,7 +1307,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     } else if (value2) {
       return value2;
     } else {
-      return "N/A";
+      return 'N/A';
     }
   }
 
@@ -1293,7 +1315,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.carouselSize) {
       this.carouselSize = [];
       let num = this.personalProfileData.carousel;
-      if (num !== "[]" && num && num !== "null") {
+      if (num !== '[]' && num && num !== 'null') {
         const carousel: object = JSON.parse(num);
         if (carousel) {
           Object.keys(carousel).forEach((element) => {
@@ -1312,7 +1334,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCarouselCount() {
     let num = this.personalProfileData.carousel;
-    if (num !== "[]" && num && num !== "null") {
+    if (num !== '[]' && num && num !== 'null') {
       const carousel: object = JSON.parse(num);
       if (carousel) {
         let size = Object.keys(carousel);
@@ -1326,15 +1348,15 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeProfileImage(index: string) {
     const i = Number(index) + 1;
-    console.log("current index is " + i);
-    document.querySelectorAll("#backfile")[index].click();
+    console.log('current index is ' + i);
+    document.querySelectorAll('#backfile')[index].click();
   }
   addProfileImage(index: number) {
     const i = index + 1;
-    console.log("current index is " + i);
+    console.log('current index is ' + i);
     this.carouselSize.push(i);
     setTimeout(() => {
-      document.querySelectorAll("#backfile")[index.toString()].click();
+      document.querySelectorAll('#backfile')[index.toString()].click();
     }, 1000);
   }
 
@@ -1348,21 +1370,21 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         return value;
       }
     } else {
-      return "";
+      return '';
     }
   }
   logout() {
-    let lang = localStorage.getItem("language");
+    let lang = localStorage.getItem('language');
     localStorage.clear();
-    localStorage.setItem("language", lang);
-    this.router.navigateByUrl("/home");
+    localStorage.setItem('language', lang);
+    this.router.navigateByUrl('/home');
   }
   backToChat() {
     // this.backToProfiles.emit('chatbot');
-    this.router.navigateByUrl("/chat");
+    this.router.navigateByUrl('/chat');
   }
   setLocality(locality, city) {
-    if (locality && locality !== "") {
+    if (locality && locality !== '') {
       return locality;
     } else {
       return city;
@@ -1370,22 +1392,22 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   downloadMyProfile() {
     const pdfData = new FormData();
-    pdfData.append("id", localStorage.getItem("id"));
-    pdfData.append("profile_to_send_id", localStorage.getItem("id"));
-    pdfData.append("full", "1");
-    pdfData.append("is_lead", localStorage.getItem("is_lead"));
+    pdfData.append('id', localStorage.getItem('id'));
+    pdfData.append('profile_to_send_id', localStorage.getItem('id'));
+    pdfData.append('full', '1');
+    pdfData.append('is_lead', localStorage.getItem('is_lead'));
 
     return this.http
-      .post<any>("https://partner.hansmatrimony.com/api/downloadPdf", pdfData)
+      .post<any>('https://partner.hansmatrimony.com/api/downloadPdf', pdfData)
       .subscribe(
         (data) => {
           console.log(data);
           if (data.status === 1) {
             const downloadLink = document.querySelectorAll<HTMLElement>(
-              "#downLink"
+              '#downLink'
             );
             this.spinner.hide();
-            this.ngxNotificationService.info("Downloading your file");
+            this.ngxNotificationService.info('Downloading your file');
             if (data.url) {
               window.open(data.url);
             }
@@ -1393,71 +1415,71 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         (err) => {
           console.log(err);
-          this.ngxNotificationService.error("Error Occured");
+          this.ngxNotificationService.error('Error Occured');
         }
       );
   }
   getQualification(degree, education) {
-    return education != null && education !== "" ? education : degree;
+    return education != null && education !== '' ? education : degree;
   }
 
   setMarriageBrothers(value1: any, value2: any) {
-    if (value1 != null && value1 !== "" && value1 !== 0) {
-      if (value2 != null && value2 !== "" && value2 !== 0) {
+    if (value1 != null && value1 !== '' && value1 !== 0) {
+      if (value2 != null && value2 !== '' && value2 !== 0) {
         return (
-          String(Number(value1) + Number(value2)) + "| " + value1 + " Married"
+          String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married'
         );
       } else {
-        return String(Number(value1) + Number(value2)) + "Brothers";
+        return String(Number(value1) + Number(value2)) + 'Brothers';
       }
     } else {
-      if (value2 != null && value2 !== "" && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + "Brothers";
+      if (value2 != null && value2 !== '' && value2 !== 0) {
+        return String(Number(value1) + Number(value2)) + 'Brothers';
       } else {
-        return "0 Brothers";
+        return '0 Brothers';
       }
     }
   }
 
   setMarriageSisters(value1: any, value2: any) {
-    if (value1 != null && value1 !== "" && value1 !== 0) {
-      if (value2 != null && value2 !== "" && value2 !== 0) {
+    if (value1 != null && value1 !== '' && value1 !== 0) {
+      if (value2 != null && value2 !== '' && value2 !== 0) {
         return (
-          String(Number(value1) + Number(value2)) + "| " + value1 + " Married"
+          String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married'
         );
       } else {
-        return String(Number(value1) + Number(value2)) + "Sisters";
+        return String(Number(value1) + Number(value2)) + 'Sisters';
       }
     } else {
-      if (value2 != null && value2 !== "" && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + "Sisters";
+      if (value2 != null && value2 !== '' && value2 !== 0) {
+        return String(Number(value1) + Number(value2)) + 'Sisters';
       } else {
-        return "0 Sisters";
+        return '0 Sisters';
       }
     }
   }
   getAllCaste() {
     this.http
-      .get("https://partner.hansmatrimony.com/api/getAllCaste")
+      .get('https://partner.hansmatrimony.com/api/getAllCaste')
       .subscribe((res: any) => {
         this.getcastes = res;
         // adittion of all to the list of castes
-        this.getcastes.push("All");
+        this.getcastes.push('All');
 
         // set initial selection
         if (
           this.preferenceProfileData.caste &&
-          this.preferenceProfileData.caste !== "null"
+          this.preferenceProfileData.caste !== 'null'
         ) {
           let values = [];
-          this.preferenceProfileData.caste.split(",").forEach((element) => {
+          this.preferenceProfileData.caste.split(',').forEach((element) => {
             console.log(element);
             if (this.getcastes.indexOf(element)) {
               values.push(this.getcastes[this.getcastes.indexOf(element)]);
             }
           });
           // if all , check the check box for no caste bar
-          if (values.includes("All")) {
+          if (values.includes('All')) {
             this.isAllCastePref = true;
           }
           this.searchCaste.setValue(values);
@@ -1477,24 +1499,24 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   setNullToNotMatter() {
     setTimeout(() => {
       if (this.preferenceProfileData) {
-        console.log("working");
+        console.log('working');
         if (!this.preferenceProfileData.manglik) {
-          this.preferenceProfileData.manglik = "Doesn't Matter";
+          this.preferenceProfileData.manglik = 'Doesn\'t Matter';
         }
         if (!this.preferenceProfileData.working) {
-          this.preferenceProfileData.working = "Doesn't Matter";
+          this.preferenceProfileData.working = 'Doesn\'t Matter';
         }
         if (!this.preferenceProfileData.marital_status) {
-          this.preferenceProfileData.marital_status = "Doesn't Matter";
+          this.preferenceProfileData.marital_status = 'Doesn\'t Matter';
         }
         if (!this.preferenceProfileData.mother_tongue) {
-          this.preferenceProfileData.mother_tongue = "Hindi";
+          this.preferenceProfileData.mother_tongue = 'Hindi';
         }
         if (!this.preferenceProfileData.food_choice) {
-          this.preferenceProfileData.food_choice = "Doesn't Matter";
+          this.preferenceProfileData.food_choice = 'Doesn\'t Matter';
         }
         if (!this.preferenceProfileData.occupation) {
-          this.preferenceProfileData.occupation = "Doesn't Matter";
+          this.preferenceProfileData.occupation = 'Doesn\'t Matter';
         }
       }
     }, 1000);
@@ -1518,41 +1540,41 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   LifeStatus(person: string, work: string) {
-    if (person != null && person !== "") {
-      if (person === "Alive") {
+    if (person != null && person !== '') {
+      if (person === 'Alive') {
         if (work) {
-          return "Alive | " + work;
+          return 'Alive | ' + work;
         } else {
-          return "Alive";
+          return 'Alive';
         }
       } else {
-        return "Not Alive";
+        return 'Not Alive';
       }
     } else {
       if (work) {
         return work;
       } else {
-        return "";
+        return '';
       }
     }
   }
   checkAllCastePref(event) {
     console.log(event);
     if (event.checked) {
-      this.searchCaste.setValue(["All"]);
+      this.searchCaste.setValue(['All']);
     } else {
-      this.searchCaste.setValue([""]);
+      this.searchCaste.setValue(['']);
     }
   }
   prevEventLength: number = 0;
   casteSelectionChanged(event) {
     console.log(event);
     if (event.value.length > this.prevEventLength) {
-      this.showSnackBar(`Added Successfully`, "");
-      this.searchCasteText.setValue("");
+      this.showSnackBar(`Added Successfully`, '');
+      this.searchCasteText.setValue('');
     }
     else if (event.value.length < this.prevEventLength) {
-      this.showSnackBar(` Removed Successfully`, "");
+      this.showSnackBar(` Removed Successfully`, '');
     }
     this.prevEventLength = event.value.length;
   }
@@ -1564,7 +1586,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   navigateTo(id: string) {
     console.log(id);
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
   }
   getAllCastePersonal() {
     this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
