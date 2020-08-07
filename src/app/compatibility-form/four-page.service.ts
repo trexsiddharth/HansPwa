@@ -23,6 +23,7 @@ userThroughStatusUpdated = new EventEmitter<boolean>();
 allCasteListUpdated = false;
  skippable = false;
  allCastes: any[] = [];
+ facebookProfilePicUploaded = new EventEmitter<string>();
 
   constructor() { }
 

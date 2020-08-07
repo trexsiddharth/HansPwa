@@ -259,6 +259,14 @@ export class CompatibilityPhotoComponent implements OnInit {
           }
         }
       );
+
+      this.fourPageService.facebookProfilePicUploaded.subscribe(
+        (link) => {
+          if (link) {
+            this.imgURL = link;
+          }
+        }
+      );
   }
 
   setPhotoData(userProfile: Profile) {
@@ -338,9 +346,6 @@ export class CompatibilityPhotoComponent implements OnInit {
       value: localStorage.getItem('id'),
       content_name: localStorage.getItem('RegisterNumber'),
     });
-
-
-
 
     this.gtag_report_conversion();
 

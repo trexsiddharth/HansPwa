@@ -776,7 +776,7 @@ setGender() {
 console.log(this.PageOne.value.Relation);
 if (!this.fourPageService.getUserThrough()) {
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-// this.openRegisterWith();
+// this.openRegisterWith(this.PageOne.value.Relation);
 }
 switch (this.PageOne.value.Relation) {
   case 'Brother':
@@ -984,7 +984,7 @@ getProfile() {
   }
 
   // show register with popup
-  openRegisterWith() {
+  openRegisterWith(selection) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
@@ -1004,7 +1004,75 @@ getProfile() {
         }
       }
     );
+    dialogConfig.data = {
+      value : selection
+    };
     const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (response) => {
+        console.log(response);
+        if (response) {
+          if (response.chose === 'facebook') {
+            (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+              this.statusChangeCallback(response);        // Returns the login status.
+            });
+          }
+        }
+      }
+    );
+  }
+
+  // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+
+    // fetch user image
+    (window as any).FB.api('/me/picture',
+    'GET',
+    {height: '600', width: '400', redirect: 'false'}, (response) => {
+      console.log(response.data.url);
+      if (response.data.url) {
+        this.fourPageService.facebookProfilePicUploaded.emit(response.data.url);
+      }
+    });
+
+    // fetch user photos
+    (window as any).FB.api('/me/photos',
+    'GET',
+    {}, (response) => {
+      console.log(response);
+    });
+
+    // fetch user data
+    (window as any).FB.api('/me',
+    'GET',
+    {fields: 'email, address, first_name, gender, last_name, birthday, hometown'}, (response) => {
+      console.log(response);
+      this.PageOne.patchValue({
+        firstName: response.first_name ? response.first_name : '',
+        lastName: response.last_name ? response.last_name : '',
+        email: response.email ? response.email : '',
+        gender: response.gender ? response.gender : ''
+      });
+    });
+  }
+
+  //  get facebook login status
+statusChangeCallback(value) {
+    console.log(value);
+    if (value.status === 'connected') {
+      localStorage.setItem('fb_token', value.authResponse.accessToken);
+      this.testAPI();
+    } else {
+      (window as any).FB.login((response) => {
+        if (response.authResponse) {
+         console.log('Welcome!  Fetching your information.... ');
+         this.testAPI();
+        } else {
+         console.log('User cancelled login or did not fully authorize.');
+        }
+    }, {scope: 'email, public_profile'});
+    }
   }
 }
 

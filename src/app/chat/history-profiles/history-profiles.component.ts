@@ -1132,6 +1132,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
   HandlePayment() {
     if (this.price) {
+      this.subscriptionViewed();
       if (localStorage.getItem("mobile_number")) {
         console.log(localStorage.getItem("mobile_number"));
         this.getRazorPay(
@@ -1174,6 +1175,17 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.selectedContainer = 3;
     console.log("plan 1 selected");
     this.HandlePayment();
+  }
+
+  subscriptionViewed() {
+    const formData = new FormData();
+    formData.append('mobile', localStorage.getItem('mobile_number'));
+    this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
+      (data: any) => {
+       console.log(data);
+       this.analyticsEvent('Subscription Seen');
+      }
+    );
   }
 
 }

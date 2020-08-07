@@ -1,10 +1,10 @@
 <main>
     <h3 class="heading">Register Using</h3>
    <div class="text-center btnDiv">
-    <button id="facebook" mat-raised-button>
+    <button id="facebook" (click)="registerUsing('facebook')" *ngIf="selection === 'Myself'" mat-raised-button>
         Facebook
     </button>
-    <button id="truecaller" mat-raised-button>
+    <button id="truecaller" (click)="registerUsing('truecaller')" mat-raised-button>
         Truecaller
     </button>
    </div>
