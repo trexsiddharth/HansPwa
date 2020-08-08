@@ -375,13 +375,11 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter College Name');
         } else if (!userProfile.company  || userProfile.company === '') {
           return this.ngxNotificationService.error('Enter Company Name');
-        } else if (userProfile.fatherStatus !== null  || userProfile.fatherStatus !== '' &&
-        userProfile.fatherStatus !== 'Not Alive' &&
-        !userProfile.family.occupation  || userProfile.family.occupation === '') {
+        } else if (userProfile.fatherStatus !== 'Not Alive' &&
+          userProfile.family.occupation === null || userProfile.family.occupation === '') {
           return this.ngxNotificationService.error('Select Father Occupation');
-        }  else if (userProfile.motherStatus != null  || userProfile.motherStatus !== '' &&
-        userProfile.motherStatus !== 'Not Alive' &&
-          !userProfile.family.occupation_mother  || userProfile.family.occupation_mother === '') {
+        }  else if (userProfile.motherStatus !== 'Not Alive' &&
+          userProfile.family.occupation_mother === null  || userProfile.family.occupation_mother === '') {
           return this.ngxNotificationService.error('Select Mother Occupation');
         }  else if (userProfile.family.married_daughters == null) {
           return this.ngxNotificationService.error('Select Married Sisters');
