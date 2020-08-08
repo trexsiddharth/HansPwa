@@ -396,6 +396,20 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       Locality: [''],
       About: ['', Validators.compose([Validators.maxLength(300)])],
     });
+    this.preferencesForm = this._formBuilder.group({
+      age_min: [''],
+      age_max: [''],
+      income_min: [''],
+      income_max: [''],
+      caste_pref: [''],
+      manglik_pref: [''],
+      occupation: [''],
+      religion: [''],
+      height_min: [''],
+      height_max: [''],
+      marital_status: [''],
+      working: [''],
+    });
     this.familyForm1 = this._formBuilder.group({
       identity_number: [''],
       id: [''],
@@ -570,8 +584,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   personalForm: FormGroup;
   //familyForm: NgForm;
   familyForm1: FormGroup;
+
   familyForm: NgForm;
-  preferencesForm: NgForm;
+  preferencesForm: FormGroup;
 
   editIndexPersonal = -1;
   editIndexFamily = -1;
@@ -684,6 +699,26 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       gotra: this.familyProfileData.gotra,
       family_income: this.personalProfileData.family_income,
       city: this.familyProfileData.city,
+    });
+  }
+  setCurrentPreferenceValue() {
+    console.log(this.personalProfileData);
+    this.preferencesForm.patchValue({
+      age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
+      age_max: this.preferenceProfileData.age_max ? this.preferenceProfileData.age_max : '70',
+      income_min: this.preferenceProfileData.income_min,
+      income_max: this.preferenceProfileData.income_max,
+      caste_pref: this.preferenceProfileData.caste ? this.preferenceProfileData.caste : 'All',
+      manglik_pref: this.preferenceProfileData.manglik ? this.preferenceProfileData.manglik : 'Doesn\'t Matter',
+      occupation: this.preferenceProfileData.occupation ? this.preferenceProfileData.occupation : 'Doesn\'t Matter',
+
+      working: (this.preferenceProfileData.working === 'na' || this.preferenceProfileData.working === undefined || this.preferenceProfileData.working)
+        ? 'Doesn\'t Matter' : this.preferenceProfileData.working,
+
+      religion: this.preferenceProfileData.religion,
+      height_min: this.getHeight(this.preferenceProfileData.height_min),
+      height_max: this.getHeight(this.preferenceProfileData.height_max),
+      marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter'
     });
   }
   getMonthString(month: string) {
@@ -998,8 +1033,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editIndexPrefs = -1;
     this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
     this.preferenceProfileData.caste = this.castePreferences.join(',');
-    console.log('preference Data to update');
+    this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
 
+    console.log('preference Data to update');
     console.log(this.preferenceProfileData);
 
     const newPrefForm = new FormData();
@@ -1009,28 +1045,37 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
     newPrefForm.append('id', this.preferenceProfileData.id);
-    newPrefForm.append('caste', this.searchCaste.value);
-    newPrefForm.append('manglik', this.preferenceProfileData.manglik);
+    newPrefForm.append('caste', this.preferencesForm.value.caste_pref ? this.preferencesForm.value.caste_pref : this.preferenceProfileData.caste);
+    newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
     newPrefForm.append(
-      'marital_status',
-      (this.preferenceProfileData.marital_status == 'undefined' || this.preferenceProfileData.marital_status) === undefined ?
-        'Doesn\'t Matter' : this.preferenceProfileData.marital_status
+      'marital_status', this.preferencesForm.value.marital_status ?
+      this.preferencesForm.value.marital_status : this.preferenceProfileData.marital_status
     );
     if (this.personalProfileData.gender === 'Male') {
-      newPrefForm.append('working', this.preferenceProfileData.working);
+      newPrefForm.append('working', this.preferencesForm.value.working
+        ? this.preferencesForm.value.working : this.preferenceProfileData.working);
       newPrefForm.append('occupation', 'na');
     } else {
-      newPrefForm.append('occupation', this.preferenceProfileData.occupation);
+      newPrefForm.append('occupation', this.preferencesForm.value.occupation ?
+        this.preferencesForm.value.occupation : this.preferenceProfileData.occupation);
       newPrefForm.append('working', 'na');
     }
     newPrefForm.append('food_choice', this.preferenceProfileData.food_choice);
     newPrefForm.append('description', this.preferenceProfileData.description);
-    newPrefForm.append('income_min', this.preferenceProfileData.income_min);
-    newPrefForm.append('income_max', this.preferenceProfileData.income_max);
-    newPrefForm.append('height_min', this.preferenceProfileData.height_min);
-    newPrefForm.append('height_max', this.preferenceProfileData.height_max);
-    newPrefForm.append('age_min', this.preferenceProfileData.age_min);
-    newPrefForm.append('age_max', this.preferenceProfileData.age_max);
+    newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
+      this.preferencesForm.value.income_min : this.preferenceProfileData.income_min);
+    newPrefForm.append('income_max', this.preferencesForm.value.income_max ?
+      this.preferencesForm.value.income_max : this.preferenceProfileData.income_max);
+    newPrefForm.append('height_min', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
+      ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
+      : this.preferenceProfileData.height_min);
+    newPrefForm.append('height_max', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
+      ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
+      : this.preferenceProfileData.height_max);
+    newPrefForm.append('age_min', this.preferencesForm.value.age_min ?
+      this.preferencesForm.value.age_min : this.preferenceProfileData.age_min);
+    newPrefForm.append('age_max', this.preferencesForm.value.age_max ?
+      this.preferencesForm.value.age_max : this.preferenceProfileData.age_max);
     newPrefForm.append(
       'mother_tongue',
       this.preferenceProfileData.mother_tongue
@@ -1045,6 +1090,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         (data: any) => {
           console.log(data);
           console.log('Preference Details updated successfully');
+          this.getUserProfileData();
         },
         (error: any) => {
           console.log(error);
@@ -1080,8 +1126,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   onResize(event) {
     this.innerWidth = window.innerWidth;
   }
-  getHeight(num: string) {
-    return this.Heights[this.Heights1.indexOf(num)];
+  getHeight(num: number) {
+    return this.Heights[this.Heights1.indexOf(String(num))];
   }
   getProfilesPhoto(
     num: string, // carousel
@@ -1207,7 +1253,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             this.getAllCastePersonal();
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
+            this.setCurrentPreferenceValue();
             this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
+            this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
+            console.log(this.preferenceProfileData.occupation);
           },
           (error: any) => {
             this.spinner.hide();
@@ -1433,16 +1482,16 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return (
-          String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married'
+          String(Number(value1) + Number(value2)) + ' | ' + value1 + ' Married'
         );
       } else {
-        return String(Number(value1) + Number(value2)) + 'Brothers';
+        return String(Number(value1) + Number(value2)) + ' ';
       }
     } else {
       if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + 'Brothers';
+        return String(Number(value1) + Number(value2)) + ' ';
       } else {
-        return '0 Brothers';
+        return '0 ';
       }
     }
   }
@@ -1451,16 +1500,16 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return (
-          String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married'
+          String(Number(value1) + Number(value2)) + ' | ' + value1 + ' Married'
         );
       } else {
-        return String(Number(value1) + Number(value2)) + 'Sisters';
+        return String(Number(value1) + Number(value2)) + ' ';
       }
     } else {
       if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + 'Sisters';
+        return String(Number(value1) + Number(value2)) + '';
       } else {
-        return '0 Sisters';
+        return '0 ';
       }
     }
   }

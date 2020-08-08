@@ -8,48 +8,126 @@
     <div class="container" style="height:70vh; position:relative">
         <div class="photoSection">
             <div class="col">
-                <img src="../../../assets/plus.svg" style="width:60%">
-                <div class="circular2" style="padding: 10px !important;">
+                <input style="margin: 10px 25%; display: none;" #first type="file" id="first" accept="image/*"
+                    (change)="previewBack(first.files, 1)" />
+                <img (click)="first.click()" id="imgProfile1"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 1)
+                      " alt="image 1" />
+                <div class="circular2" style="padding: 10px !important;" (click)="first.click()">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
             <div class="col">
-                <img src="../../../assets/plus.svg" style="width:60%">
-                <div class="circular2" style="padding: 10px !important;">
+                <input style="margin: 10px 25%; display: none;" #second type="file" id="second" accept="image/*"
+                    (change)="previewBack(second.files, 2)" />
+                <img (click)="second.click()" id="imgProfile2"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 2)
+                      " alt="image 2" />
+                <div class="circular2" style="padding: 10px !important;" (click)="second.click()">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
         </div>
         <div class=" photoSection">
             <div class="col">
-                <img src="../../../assets/plus.svg" style="width:60%">
-                <div class="circular2" style="padding: 10px !important;">
+                <input style="margin: 10px 25%; display: none;" #third type="file" id="third" accept="image/*"
+                    (change)="previewBack(third.files, 3)" />
+                <img (click)="third.click()" id="imgProfile3"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 3)
+                      " alt="image 3" />
+                <div class="circular2" style="padding: 10px !important;" (click)="third.click()">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
             <div class="col">
-                <img src="../../../assets/plus.svg" style="width:60%">
-                <div class="circular2" style="padding: 10px !important;">
+                <input style="margin: 10px 25%; display: none;" #fourth type="file" id="fourth" accept="image/*"
+                    (change)="previewBack(fourth.files, 4)" />
+                <img (click)="fourth.click()" id="imgProfile4"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 4)
+                      " alt="image 4" />
+                <div class="circular2" style="padding: 10px !important;" (click)="fourth.click()">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
         </div>
         <div class="photoSection">
             <div class="col">
-                <img src="../../../assets/plus.svg" style="width:60%">
-                <div class="circular2" style="padding: 10px !important;">
+                <input style="margin: 10px 25%; display: none;" #fifth type="file" id="fifth" accept="image/*"
+                    (change)="previewBack(fifth.files, 5)" />
+                <img (click)="fifth.click()" id="imgProfile5"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 5)
+                      " alt="image 5" />
+                <div class="circular2" style="padding: 10px !important;" (click)="fifth.click()">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
             <div class="col">
-                <img src="../../../assets/plus.svg" style="width:60%">
-                <div class="circular2" style="padding: 10px !important;">
+                <input style="margin: 10px 25%; display: none;" #sixth type="file" id="sixth" accept="image/*"
+                    (change)="previewBack(sixth.files, 6)" />
+                <img (click)="sixth.click()" id="imgProfile6"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 6)
+                      " alt="image 6" />
+                <div class="circular2" style="padding: 10px !important;" (click)="sixth.click()">
+                    <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
+                </div>
+            </div>
+        </div>
+        <div class="photoSection" *ngIf="carouselSize > 6">
+            <div class="col">
+                <input style="margin: 10px 25%; display: none;" #seventh type="file" id="seventh" accept="image/*"
+                    (change)="previewBack(seventh.files, 7)" />
+                <img (click)="seventh.click()" id="imgProfile7"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 7)
+                      " alt="image 7" />
+                <div class="circular2" style="padding: 10px !important;" (click)="seventh.click()">
+                    <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
+                </div>
+            </div>
+            <div class="col">
+                <input style="margin: 10px 25%; display: none;" #eighth type="file" id="eighth" accept="image/*"
+                    (change)="previewBack(eighth.files, 8)" />
+                <img (click)="eighth.click()" id="imgProfile8"
+                    style="width:100%!important;height:100%!important;object-fit:cover;" [src]="
+                        getProfilesPhoto(
+                          personalProfileData.carousel,
+                          personalProfileData.unapprove_carousel,
+                          personalProfileData.photo , 8)
+                      " alt="image 8" />
+                <div class="circular2" style="padding: 10px !important;" (click)="eighth.click()">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer">
+    <!-- <div class="footer">
         <div class="photoSection">
             Do you want to save your changes ?
         </div>
@@ -57,5 +135,5 @@
             <button class="SpecialCase">Yes</button>
             <button class="SpecialCase">No</button>
         </div>
-    </div>
+    </div> -->
 </main>

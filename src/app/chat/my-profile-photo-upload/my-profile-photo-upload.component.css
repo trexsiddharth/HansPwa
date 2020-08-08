@@ -37,6 +37,7 @@
     justify-content:center ;
 }
 .col{
+    padding:0px!important;
     height:17vh;
     background:white;
     border-radius:8px;

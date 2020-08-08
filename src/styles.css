@@ -218,7 +218,7 @@ body {
   margin-bottom:1.6rem!important;
   width:100%!important;
   flex:1 1!important;
-  border-radius:14px;
+  border-radius: 0 0 14px 14px;
 }
 /* #myprofMatTabGroup .mat-tab-header{
 
