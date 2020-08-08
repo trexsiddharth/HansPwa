@@ -1080,7 +1080,6 @@ statusChangeCallback(value) {
   callTruecaller() {
     // tslint:disable-next-line: max-line-length
     let randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
-    alert(randomNumber);
     (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 
     setTimeout(() => {
