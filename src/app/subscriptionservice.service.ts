@@ -253,7 +253,7 @@ captureStandardPayment(response, amount, points) {
            '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
             '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800'}`);
           this.facebookAnalytics('Subscribe', amount);
-          this.route.navigateByUrl('chat');
+          this.route.navigateByUrl('chat?razorVerifyPayment');
         } else {
           this.ngxNotificationService.error('Something went wrong. Please try again later.');
         }
@@ -313,10 +313,11 @@ facebookAnalytics(event, amount) {
            '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
             '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800');
           res(1);
-          this.route.navigateByUrl('chat?razorVerifyPayment');
+          this.route.navigateByUrl('chat');
         } else {
           res(0);
           this.ngxNotificationService.error(data.error_description);
+          this.route.navigateByUrl('chat');
         }
     },
     err => {
@@ -325,6 +326,7 @@ facebookAnalytics(event, amount) {
       this.ngxNotificationService.error('Something went wrong. Please try again later.');
       localStorage.removeItem('oId');
       localStorage.removeItem('selected_plan');
+      this.route.navigateByUrl('chat');
     }
   );
 });

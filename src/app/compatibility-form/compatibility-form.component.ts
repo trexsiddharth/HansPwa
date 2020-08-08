@@ -27,16 +27,13 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable } from 'rxjs';
-import { startWith, map, timeout, retry, catchError } from 'rxjs/operators';
-import { element } from 'protractor';
+import { Observable, timer, Subject } from 'rxjs';
+import { startWith, map, timeout, retry, catchError, switchMap, share, takeUntil } from 'rxjs/operators';
 import { FourPageService } from './four-page.service';
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
 import { LanguageService } from '../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
-import { resolve } from 'url';
-import { async } from '@angular/core/testing';
 import { RegisterWithComponent } from './register-with/register-with.component';
 export interface StateGroup {
   letter: string;
@@ -89,7 +86,6 @@ export class CompatibilityFormComponent implements OnInit {
   profileData;
   isLeadIsZero = false;
 
-
   // Height
     // tslint:disable-next-line: max-line-length
     Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
@@ -119,6 +115,9 @@ export class CompatibilityFormComponent implements OnInit {
   long;
   isDisable = false;
   isAllCastePref = false;
+
+   // stop true caller polling
+   stopPolling = new Subject();
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -1085,7 +1084,6 @@ statusChangeCallback(value) {
     setTimeout(() => {
 
   if ( document.hasFocus() ) {
-    
     this.ngxNotificationService.error('truecaller not found');
      // Truecaller app not present on the device and you redirect the user
      // to your alternate verification page
@@ -1097,6 +1095,16 @@ statusChangeCallback(value) {
   }
 }, 600);
   }
+
+  getUserFromTrueCaller(): Observable<any> {
+   return timer(1, 3000).pipe(
+      switchMap(() => this.http.get('http://localhost:8000/currencyInfo')),
+      retry(),
+      share(),
+      takeUntil(this.stopPolling)
+   );
+  }
+
 }
 
 
