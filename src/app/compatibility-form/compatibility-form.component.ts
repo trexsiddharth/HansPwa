@@ -1099,6 +1099,10 @@ statusChangeCallback(value) {
       (response) => {
           console.log(response);
           if (response.status === 1) {
+            const data = JSON.parse(response.data);
+            if (data) {
+              this.setTruecallerData(data);
+            }
             this.stopPolling.next();
           }
       },
@@ -1120,6 +1124,16 @@ statusChangeCallback(value) {
       share(),
       takeUntil(this.stopPolling)
    );
+  }
+
+  setTruecallerData(data) {
+    this.PageOne.patchValue({
+      firstName: data.name.first,
+      lastName: data.name.last,
+      email: data.onlineIdentities.email
+    });
+
+    this.fourPageService.facebookProfilePicUploaded.emit(data.avatarUrl);
   }
 
 }
