@@ -220,23 +220,29 @@ onLocationSelected(e) {
   }
 
   updateFormThreeData(profileData: FormData) {
-    this.fourPageService.profile.birthPlace = profileData.get('birth_place').toString();
-    this.fourPageService.profile.birthTime = profileData.get('birth_time').toString();
-    this.fourPageService.profile.gotra = profileData.get('gotra').toString();
-    this.fourPageService.profile.foodChoice = profileData.get('food_choice').toString();
-    this.fourPageService.profile.fatherStatus = profileData.get('father_status').toString();
+    this.fourPageService.profile.birthPlace = profileData.get('birth_place') ?
+     profileData.get('birth_place').toString() : '';
+    this.fourPageService.profile.birthTime = profileData.get('birth_time') ?
+     profileData.get('birth_time').toString() : '';
+    this.fourPageService.profile.gotra = profileData.get('gotra') ?  profileData.get('gotra').toString() : '';
+    this.fourPageService.profile.foodChoice = profileData.get('food_choice') ?
+    profileData.get('food_choice').toString() : '';
+    this.fourPageService.profile.fatherStatus = profileData.get('father_status') ?
+     profileData.get('father_status').toString() : '';
     if (profileData.get('father_status') && profileData.get('father_status').toString() === 'Not Alive' ) {
       this.fourPageService.isFatherDead = true;
     } else {
       this.fourPageService.isFatherDead = false;
     }
-    this.fourPageService.profile.motherStatus = profileData.get('mother_status').toString();
+    this.fourPageService.profile.motherStatus = profileData.get('mother_status') ? 
+     profileData.get('mother_status').toString() : '';
     if (profileData.get('mother_status') && profileData.get('mother_status').toString() === 'Not Alive' ) {
       this.fourPageService.isMotherDead = true;
     } else {
       this.fourPageService.isMotherDead = false;
     }
-    this.fourPageService.profile.familyIncome = profileData.get('family_income').toString();
+    this.fourPageService.profile.familyIncome = profileData.get('family_income') ?
+     profileData.get('family_income').toString() : '';
     console.log(this.fourPageService.getProfile());
   }
 
