@@ -1109,7 +1109,7 @@ statusChangeCallback(value) {
 
   getUserFromTrueCaller(requestId): Observable<any> {
    return timer(1, 3000).pipe(
-      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}}`)),
+      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}`)),
       retry(),
       share(),
       takeUntil(this.stopPolling)
