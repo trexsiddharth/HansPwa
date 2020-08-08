@@ -70,7 +70,7 @@ if (res.registered === 1) {
 } else {
   this.ngxNotificationService.info('You are not registered with us, Kindly register');
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
-  this.router.navigateByUrl('reg');
+  this.router.navigateByUrl('fourReg');
 }
 this.spinner.hide();
 }, err => {
@@ -91,7 +91,7 @@ if (res.registered === 1) {
 } else {
   this.ngxNotificationService.info('You are not registered with us, Kindly register');
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
-  this.router.navigateByUrl('reg');
+  this.router.navigateByUrl('fourReg');
 }
 this.spinner.hide();
 }, err => {

@@ -119,6 +119,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
    // stop true caller polling
    stopPolling = new Subject();
+   pollingCount = 0;
+   hideMobileNumber = false;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -1107,16 +1109,24 @@ statusChangeCallback(value) {
     this.ngxNotificationService.error('truecaller  found');
     this.getUserFromTrueCaller(randomNumber).subscribe(
       (response) => {
-          console.log(response);
-          if (response.status === 1) {
+        this.pollingCount++;
+        console.log(response);
+        if (this.pollingCount < 10) {
+        if (response.status === 1) {
             const data = JSON.parse(response.data);
             if (data) {
               this.setTruecallerData(data);
             }
             this.stopPolling.next();
+          } else if (response.status !== 0) {
+            this.stopPolling.next();
           }
+        } else {
+          this.stopPolling.next();
+        }
       },
       err => {
+        this.pollingCount++;
         console.log(err);
       }
     );
@@ -1140,8 +1150,15 @@ statusChangeCallback(value) {
     this.PageOne.patchValue({
       firstName: data.name.first,
       lastName: data.name.last,
-      email: data.onlineIdentities.email
+      email: data.onlineIdentities.email,
+      phone: data.phoneNumbers[0]
     });
+
+    if (data.phoneNumbers && data.phoneNumbers[0]) {
+      this.hideMobileNumber = true;
+    } else {
+      this.hideMobileNumber = true;
+    }
 
     this.fourPageService.facebookProfilePicUploaded.emit(data.avatarUrl);
   }
