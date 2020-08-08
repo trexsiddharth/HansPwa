@@ -902,7 +902,17 @@ getProfile() {
     this.userProfile.gotra = profileData.family.gotra;
     this.userProfile.foodChoice = profileData.profile.food_choice;
     this.userProfile.fatherStatus = profileData.family.father_status;
+    if (profileData.family.father_status && profileData.family.father_status === 'Not Alive') {
+      this.fourPageService.isFatherDead = true;
+    } else {
+      this.fourPageService.isFatherDead = false;
+    }
     this.userProfile.motherStatus = profileData.family.mother_status;
+    if (profileData.family.mother_status && profileData.family.mother_status === 'Not Alive') {
+      this.fourPageService.isMotherDead = true;
+    } else {
+      this.fourPageService.isMotherDead = false;
+    }
     this.userProfile.familyIncome = profileData.family.family_income;
     this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
     this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');

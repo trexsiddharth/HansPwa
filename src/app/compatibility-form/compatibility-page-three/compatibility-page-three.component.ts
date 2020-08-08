@@ -225,7 +225,17 @@ onLocationSelected(e) {
     this.fourPageService.profile.gotra = profileData.get('gotra').toString();
     this.fourPageService.profile.foodChoice = profileData.get('food_choice').toString();
     this.fourPageService.profile.fatherStatus = profileData.get('father_status').toString();
+    if (profileData.get('father_status') && profileData.get('father_status').toString() === 'Not Alive' ) {
+      this.fourPageService.isFatherDead = true;
+    } else {
+      this.fourPageService.isFatherDead = false;
+    }
     this.fourPageService.profile.motherStatus = profileData.get('mother_status').toString();
+    if (profileData.get('mother_status') && profileData.get('mother_status').toString() === 'Not Alive' ) {
+      this.fourPageService.isMotherDead = true;
+    } else {
+      this.fourPageService.isMotherDead = false;
+    }
     this.fourPageService.profile.familyIncome = profileData.get('family_income').toString();
     console.log(this.fourPageService.getProfile());
   }
