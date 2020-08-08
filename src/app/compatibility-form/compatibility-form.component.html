@@ -137,7 +137,7 @@
             </div>
   
                           <div class="col-md-12" 
-                          *ngIf="hideMobileNumber">
+                          *ngIf="!hideMobileNumber">
                               <mat-form-field  class="full-width fieldFit" appearance="standard">
                                   <mat-label >Mobile number</mat-label>
                                   <input style="display: inline;" type="number" id="phone" matInput formControlName="phone" (change)="mobileNumberChanged()" required name="phone">

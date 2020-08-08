@@ -1157,7 +1157,7 @@ statusChangeCallback(value) {
     if (data.phoneNumbers && data.phoneNumbers[0]) {
       this.hideMobileNumber = true;
     } else {
-      this.hideMobileNumber = true;
+      this.hideMobileNumber = false;
     }
 
     this.fourPageService.facebookProfilePicUploaded.emit(data.avatarUrl);
