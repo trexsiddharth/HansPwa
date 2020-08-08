@@ -1089,6 +1089,17 @@ statusChangeCallback(value) {
      // to your alternate verification page
   } else {
     this.ngxNotificationService.error('truecaller  found');
+    this.getUserFromTrueCaller(randomNumber).subscribe(
+      (response) => {
+          console.log(response);
+          if (response.status === 1) {
+            this.stopPolling.next();
+          }
+      },
+      err => {
+        console.log(err);
+      }
+    );
      // Truecaller app present on the device and the profile overlay opens
      // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
      // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
@@ -1096,9 +1107,9 @@ statusChangeCallback(value) {
 }, 600);
   }
 
-  getUserFromTrueCaller(): Observable<any> {
+  getUserFromTrueCaller(requestId): Observable<any> {
    return timer(1, 3000).pipe(
-      switchMap(() => this.http.get('http://localhost:8000/currencyInfo')),
+      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}}`)),
       retry(),
       share(),
       takeUntil(this.stopPolling)
