@@ -67,7 +67,7 @@
                       <div class="col-md-12" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label>Working City</mat-label>
-                          <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+                          <input type="text" matInput matValidateAddress  matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                           (onAutocompleteSelected)="onAutocompleteSelected($event)" 
                           (onLocationSelected)="onLocationSelected($event)"
                           formControlName="Working">

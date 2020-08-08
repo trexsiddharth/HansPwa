@@ -114,24 +114,28 @@ subscriptionViewed() {
   this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
     (data: any) => {
      console.log(data);
+     this.analyticsEvent('Subscription Seen');
     }
   );
 }
 
-Analytics(type: string, category: string, action: string) {
-  (window as any).ga('send', 'event', category, action, {
+analyticsEvent(event) {
+  (window as any).ga('send', 'event', event, '', {
     hitCallback: () => {
 
-      console.log('Tracking ' + type + ' successful');
+      console.log('Tracking ' + event + ' successful');
 
     }
 
   });
 
   // gtag app + web
-  (window as any).gtag('event', category , {
-    'action': action
+  (window as any).gtag('event', event, {
+    event_callback: () => {
+      console.log('Tracking gtag ' + event + ' successful');
+    }
   });
+
 }
 
 facebookAnalytics(event) {
@@ -154,8 +158,10 @@ facebookAnalytics(event) {
       } else {
         this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
-    this.Analytics('RazorPay Payement Gateway', 'RazorPay Payement Gateway Opened',
-     'Payement Gateway Opened For ' + this.price );
+    this.analyticsEvent('Payement Gateway Opened For ' + this.price );
+
+    this.subscriptionViewed();
+    
 
     this.facebookAnalytics('InitiateCheckout');
      } else {

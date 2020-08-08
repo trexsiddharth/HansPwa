@@ -20,7 +20,9 @@
                             <input type="text" matInput formControlName="company" >
                         </mat-form-field>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12"
+                    *ngIf="!fourPageService.isFatherDead"
+                    >
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Fathers Occupation</mat-label>
                             <mat-select #relation formControlName="fathers_occupation" >
@@ -30,7 +32,8 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12"
+                    *ngIf="!fourPageService.isMotherDead">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Mothers Occupation</mat-label>
                             <mat-select #relation formControlName="mothers_occupation" >

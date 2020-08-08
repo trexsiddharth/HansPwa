@@ -46,12 +46,6 @@ export class PhoneNumberScreenComponent implements OnInit {
       localStorage.removeItem('mobile_number');
       localStorage.removeItem('is_lead');
       localStorage.removeItem('RegisterNumber');
-
-      // setTimeout(() => {
-      //   (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-      //     this.statusChangeCallback(response);        // Returns the login status.
-      //   });
-      // }, 500);
     }
     this.spinner.hide();
   }
@@ -76,7 +70,7 @@ if (res.registered === 1) {
 } else {
   this.ngxNotificationService.info('You are not registered with us, Kindly register');
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
-  this.router.navigateByUrl('reg');
+  this.router.navigateByUrl('fourReg');
 }
 this.spinner.hide();
 }, err => {
@@ -97,7 +91,7 @@ if (res.registered === 1) {
 } else {
   this.ngxNotificationService.info('You are not registered with us, Kindly register');
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
-  this.router.navigateByUrl('reg');
+  this.router.navigateByUrl('fourReg');
 }
 this.spinner.hide();
 }, err => {
@@ -111,34 +105,6 @@ this.spinner.hide();
 
   }
 
-// // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-//   testAPI() {
-//     console.log('Welcome!  Fetching your information.... ');
-
-//     // fetch user image
-//     (window as any).FB.api('/me/picture',
-//     'GET',
-//     {height: '600', width: '400', redirect: 'false'}, (response) => {
-//       console.log(response.data.url);
-//     });
-
-//     // fetch user data
-//     (window as any).FB.api('/me',
-//     'GET',
-//     {fields: 'email, address, first_name, gender, last_name, birthday'}, (response) => {
-//       console.log(response);
-//       console.log('Successful login for: ' + response.name);
-//     });
-//   }
-
-  // //  get facebook login status
-  //  statusChangeCallback(value) {
-  //   console.log(value);
-  //   if (value.status === 'connected') {
-  //     localStorage.setItem('fb_token', value.authResponse.accessToken);
-  //     this.testAPI();
-  //   }
-  // }
 
 openVerificationDialog(isLead: string) {
     const dialogConfig = new MatDialogConfig();
@@ -179,26 +145,6 @@ openVerificationDialog(isLead: string) {
         }
       }
     );
-  }
-
-try() {
-    // tslint:disable-next-line: max-line-length
-    (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${Math.floor(Math.random() * 100000000) + 1}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
-
-    setTimeout(() => {
-
-  if ( document.hasFocus() ) {
-    
-    this.ngxNotificationService.error('truecaller not found');
-     // Truecaller app not present on the device and you redirect the user 
-     // to your alternate verification page
-  } else {
-    this.ngxNotificationService.error('truecaller  found');
-     // Truecaller app present on the device and the profile overlay opens
-     // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
-     // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
-  }
-}, 600);
   }
 
 }

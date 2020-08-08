@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-register-with',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register-with.component.css']
 })
 export class RegisterWithComponent implements OnInit {
-
-  constructor() { }
+selection;
+  constructor(public dialogRef: MatDialogRef<RegisterWithComponent>,
+              @Inject(MAT_DIALOG_DATA) public data) {
+                this.selection = data.value;
+              }
 
   ngOnInit() {
   }
+
+  registerUsing(btnName) {
+    console.log(btnName);
+    this.dialogRef.close({
+      chose: btnName
+    });
+  }
+  
 
 }

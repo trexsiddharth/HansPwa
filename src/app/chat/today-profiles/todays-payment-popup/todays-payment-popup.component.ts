@@ -215,7 +215,8 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
-    this.analyticsEvent('Subscription Seen');
+    this.subscriptionViewed();
+    
   }
   container2() {
     this.price = '5500';
@@ -226,7 +227,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
-    this.analyticsEvent('Subscription Seen');
+    this.subscriptionViewed();
   }
   container3() {
     this.price = '8500';
@@ -237,7 +238,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     // this.HandlePayment();
     this.chooseMethod = true;
     this.getPaytmOrderId();
-    this.analyticsEvent('Subscription Seen');
+    this.subscriptionViewed();
   }
 
   getPaytmOrderId() {
@@ -275,5 +276,16 @@ onPaytm() {
   // production url
   (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
   (form as any).submit();
+}
+
+subscriptionViewed() {
+  const formData = new FormData();
+  formData.append('mobile', localStorage.getItem('mobile_number'));
+  this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
+    (data: any) => {
+     console.log(data);
+     this.analyticsEvent('Subscription Seen');
+    }
+  );
 }
 }

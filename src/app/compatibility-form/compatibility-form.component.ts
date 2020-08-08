@@ -2,6 +2,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 
 import {
@@ -27,16 +28,13 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable } from 'rxjs';
-import { startWith, map, timeout, retry, catchError } from 'rxjs/operators';
-import { element } from 'protractor';
+import { Observable, timer, Subject } from 'rxjs';
+import { startWith, map, timeout, retry, catchError, switchMap, share, takeUntil } from 'rxjs/operators';
 import { FourPageService } from './four-page.service';
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
 import { LanguageService } from '../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
-import { resolve } from 'url';
-import { async } from '@angular/core/testing';
 import { RegisterWithComponent } from './register-with/register-with.component';
 export interface StateGroup {
   letter: string;
@@ -61,7 +59,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 
 
-export class CompatibilityFormComponent implements OnInit {
+export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   time = {
     hour: 13,
@@ -88,7 +86,6 @@ export class CompatibilityFormComponent implements OnInit {
   locality;
   profileData;
   isLeadIsZero = false;
-
 
   // Height
     // tslint:disable-next-line: max-line-length
@@ -119,6 +116,11 @@ export class CompatibilityFormComponent implements OnInit {
   long;
   isDisable = false;
   isAllCastePref = false;
+
+   // stop true caller polling
+   stopPolling = new Subject();
+   pollingCount = 0;
+   hideMobileNumber = false;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -155,6 +157,11 @@ export class CompatibilityFormComponent implements OnInit {
       // locality: ['', Validators.compose([Validators.required])],
       disabledPart: ['']
     });
+  }
+
+  ngOnDestroy(): void {
+    // truecaller polling is active and user closes the page.
+    this.stopPolling.next();
   }
 
 async ngOnInit() {
@@ -776,7 +783,7 @@ setGender() {
 console.log(this.PageOne.value.Relation);
 if (!this.fourPageService.getUserThrough()) {
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-// this.openRegisterWith();
+// this.openRegisterWith(this.PageOne.value.Relation);
 }
 switch (this.PageOne.value.Relation) {
   case 'Brother':
@@ -897,7 +904,17 @@ getProfile() {
     this.userProfile.gotra = profileData.family.gotra;
     this.userProfile.foodChoice = profileData.profile.food_choice;
     this.userProfile.fatherStatus = profileData.family.father_status;
+    if (profileData.family.father_status && profileData.family.father_status === 'Not Alive') {
+      this.fourPageService.isFatherDead = true;
+    } else {
+      this.fourPageService.isFatherDead = false;
+    }
     this.userProfile.motherStatus = profileData.family.mother_status;
+    if (profileData.family.mother_status && profileData.family.mother_status === 'Not Alive') {
+      this.fourPageService.isMotherDead = true;
+    } else {
+      this.fourPageService.isMotherDead = false;
+    }
     this.userProfile.familyIncome = profileData.family.family_income;
     this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
     this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
@@ -984,7 +1001,7 @@ getProfile() {
   }
 
   // show register with popup
-  openRegisterWith() {
+  openRegisterWith(selection) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
@@ -1004,8 +1021,148 @@ getProfile() {
         }
       }
     );
+    dialogConfig.data = {
+      value : selection
+    };
     const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (response) => {
+        console.log(response);
+        if (response) {
+          if (response.chose === 'facebook') {
+            (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+              this.statusChangeCallback(response);        // Returns the login status.
+            });
+          } else if (response.chose === 'truecaller') {
+            this.callTruecaller();
+          }
+        }
+      }
+    );
   }
+
+  // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+getFbData() {
+    console.log('Welcome!  Fetching your information.... ');
+
+    // fetch user image
+    (window as any).FB.api('/me/picture',
+    'GET',
+    {height: '600', width: '400', redirect: 'false'}, (response) => {
+      console.log(response.data.url);
+      if (response.data.url) {
+        this.fourPageService.facebookProfilePicUploaded.emit(response.data.url);
+      }
+    });
+
+    // fetch user photos
+    (window as any).FB.api('/me/photos',
+    'GET',
+    {}, (response) => {
+      console.log(response);
+    });
+
+    // fetch user data
+    (window as any).FB.api('/me',
+    'GET',
+    {fields: 'email, address, first_name, gender, last_name, birthday, hometown'}, (response) => {
+      console.log(response);
+      this.PageOne.patchValue({
+        firstName: response.first_name ? response.first_name : '',
+        lastName: response.last_name ? response.last_name : '',
+        email: response.email ? response.email : '',
+        gender: response.gender ? response.gender : ''
+      });
+    });
+  }
+
+  //  get facebook login status
+statusChangeCallback(value) {
+    console.log(value);
+    if (value.status === 'connected') {
+      localStorage.setItem('fb_token', value.authResponse.accessToken);
+      this.getFbData();
+    } else {
+      (window as any).FB.login((response) => {
+        if (response.authResponse) {
+         console.log('Welcome!  Fetching your information.... ');
+         this.getFbData();
+        } else {
+         console.log('User cancelled login or did not fully authorize.');
+        }
+    }, {scope: 'email, public_profile'});
+    }
+  }
+
+  callTruecaller() {
+    // tslint:disable-next-line: max-line-length
+    let randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
+    (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
+
+    setTimeout(() => {
+
+  if ( document.hasFocus() ) {
+    this.ngxNotificationService.error('truecaller not found');
+     // Truecaller app not present on the device and you redirect the user
+     // to your alternate verification page
+  } else {
+    this.ngxNotificationService.error('truecaller  found');
+    this.getUserFromTrueCaller(randomNumber).subscribe(
+      (response) => {
+        this.pollingCount++;
+        console.log(response);
+        if (this.pollingCount < 10) {
+        if (response.status === 1) {
+            const data = JSON.parse(response.data);
+            if (data) {
+              this.setTruecallerData(data);
+            }
+            this.stopPolling.next();
+          } else if (response.status !== 0) {
+            this.stopPolling.next();
+          }
+        } else {
+          this.stopPolling.next();
+        }
+      },
+      err => {
+        this.pollingCount++;
+        console.log(err);
+      }
+    );
+     // Truecaller app present on the device and the profile overlay opens
+     // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
+     // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
+  }
+}, 600);
+  }
+
+  getUserFromTrueCaller(requestId): Observable<any> {
+   return timer(1, 3000).pipe(
+      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}`)),
+      retry(),
+      share(),
+      takeUntil(this.stopPolling)
+   );
+  }
+
+  setTruecallerData(data) {
+    this.PageOne.patchValue({
+      firstName: data.name.first,
+      lastName: data.name.last,
+      email: data.onlineIdentities.email,
+      phone: data.phoneNumbers[0]
+    });
+
+    if (data.phoneNumbers && data.phoneNumbers[0]) {
+      this.hideMobileNumber = true;
+    } else {
+      this.hideMobileNumber = false;
+    }
+
+    this.fourPageService.facebookProfilePicUploaded.emit(data.avatarUrl);
+  }
+
 }
 
 

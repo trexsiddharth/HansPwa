@@ -23,6 +23,9 @@ userThroughStatusUpdated = new EventEmitter<boolean>();
 allCasteListUpdated = false;
  skippable = false;
  allCastes: any[] = [];
+ facebookProfilePicUploaded = new EventEmitter<string>();
+ isFatherDead = false;
+ isMotherDead = false;
 
   constructor() { }
 
