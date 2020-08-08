@@ -2,6 +2,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 
 import {
@@ -58,7 +59,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 
 
-export class CompatibilityFormComponent implements OnInit {
+export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   time = {
     hour: 13,
@@ -154,6 +155,11 @@ export class CompatibilityFormComponent implements OnInit {
       // locality: ['', Validators.compose([Validators.required])],
       disabledPart: ['']
     });
+  }
+
+  ngOnDestroy(): void {
+    // truecaller polling is active and user closes the page.
+    this.stopPolling.next();
   }
 
 async ngOnInit() {
@@ -775,7 +781,7 @@ setGender() {
 console.log(this.PageOne.value.Relation);
 if (!this.fourPageService.getUserThrough()) {
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-this.openRegisterWith(this.PageOne.value.Relation);
+// this.openRegisterWith(this.PageOne.value.Relation);
 }
 switch (this.PageOne.value.Relation) {
   case 'Brother':

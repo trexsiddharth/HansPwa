@@ -207,7 +207,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   }
 
   container1() {
-    this.price = '1';
+    this.price = '2800';
     this.credits = '45';
     localStorage.setItem('selected_plan', 'plan 1');
     this.selectedContainer = 1;
@@ -230,7 +230,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.subscriptionViewed();
   }
   container3() {
-    this.price = '8500';
+    this.price = '1';
     this.credits = '45';
     localStorage.setItem('selected_plan', 'plan 3');
     this.selectedContainer = 3;
