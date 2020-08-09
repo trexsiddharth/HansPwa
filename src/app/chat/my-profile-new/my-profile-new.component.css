@@ -299,14 +299,14 @@ main {
   font-size: 16px;
   font-family: Roboto;
   font-weight: 600;
-  color:rgba(34, 34, 34, 0.849);
+  color:#4a5d6a;
   margin:5px;
 }
 .headings{
-  font-size: 15px;
+  font-size: 14px;
   font-family: roboto;
   font-weight:600!important;
-  color:rgba(77, 76, 76, 0.966);
+  color:#4a5d6a;
 }
 .information{
   font-size:14px;
@@ -315,6 +315,7 @@ main {
 }
 p{
   margin:2px!important;
+  color:#4a5d6a!important;
 }
 .save-button{
   position:relative;
