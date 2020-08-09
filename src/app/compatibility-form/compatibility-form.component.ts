@@ -783,7 +783,7 @@ setGender() {
 console.log(this.PageOne.value.Relation);
 if (!this.fourPageService.getUserThrough()) {
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-// this.openRegisterWith(this.PageOne.value.Relation);
+this.openRegisterWith(this.PageOne.value.Relation);
 }
 switch (this.PageOne.value.Relation) {
   case 'Brother':
@@ -1017,7 +1017,7 @@ getProfile() {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '95vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = true;
+          dialogConfig.disableClose = false;
         }
       }
     );
@@ -1030,10 +1030,12 @@ getProfile() {
         console.log(response);
         if (response) {
           if (response.chose === 'facebook') {
+            this.analyticsEvent('Registered Through Facebook');
             (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
               this.statusChangeCallback(response);        // Returns the login status.
             });
           } else if (response.chose === 'truecaller') {
+            this.analyticsEvent('Registered Through True Caller');
             this.callTruecaller();
           }
         }
@@ -1162,6 +1164,7 @@ statusChangeCallback(value) {
 
     this.fourPageService.facebookProfilePicUploaded.emit(data.avatarUrl);
   }
+
 
 }
 
