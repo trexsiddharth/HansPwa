@@ -6,7 +6,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {
-  Observable
+  Observable, Observer
 } from 'rxjs';
 
 import {
@@ -48,7 +48,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class CompatibilityPhotoComponent implements OnInit {
 
-  @ViewChild('photoModal', {static: false}) private photoModal: any;
+  @ViewChild('photoModal', { static: false }) private photoModal: any;
 
   isCompleted5 = false;
   public imagePath;
@@ -67,13 +67,13 @@ export class CompatibilityPhotoComponent implements OnInit {
 
 
 
-  FamilyOptions: Observable < string[] > ;
+  FamilyOptions: Observable<string[]>;
   frontfile4: any;
   frontfile5: any;
   frontfile6: any;
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient,
-              public fourPageService: FourPageService,
-              private ngxNotificationService: NgxNotificationService,  private spinner: NgxSpinnerService) {
+    public fourPageService: FourPageService,
+    private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
 
   }
 
@@ -180,100 +180,190 @@ export class CompatibilityPhotoComponent implements OnInit {
     return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(suc => {
       this.suc = suc;
       if (this.suc.pic_upload_status === 'Y') {
-      console.log('photos', suc);
-      this.spinner.hide();
-      this.ngxNotificationService.success('Photo Uploaded Succesfully!');
-      photoBtn.disabled = false;
+        console.log('photos', suc);
+        this.spinner.hide();
+        this.ngxNotificationService.success('Photo Uploaded Succesfully!');
+        photoBtn.disabled = false;
 
-      switch (index) {
-        case 1:
-          this.imgURL = this.suc.profile_pic_url;
-          this.fourPageService.profile.image1 = this.suc.profile_pic_url;
-          if (!this.frontfile && this.fourPageService.getUserThrough()) {
-          this.uploadPhoto(data, 2);
-        }
-          if (!this.BackimgURL && this.fourPageService.getUserThrough()) {
-          this.uploadPhoto(data, 3);
-        }
-          this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
-                 'Image One Uploaded on Four Page Registration Page Four');
-          break;
+        switch (index) {
+          case 1:
+            this.imgURL = this.suc.profile_pic_url;
+            this.fourPageService.profile.image1 = this.suc.profile_pic_url;
+            if (!this.frontfile && this.fourPageService.getUserThrough()) {
+              this.uploadPhoto(data, 2);
+            }
+            if (!this.BackimgURL && this.fourPageService.getUserThrough()) {
+              this.uploadPhoto(data, 3);
+            }
+            this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
+              'Image One Uploaded on Four Page Registration Page Four');
+            break;
 
           case 2:
-          this.frontfile = this.suc.profile_pic_url;
-          this.fourPageService.profile.image2 = this.suc.profile_pic_url;
-          break;
+            this.frontfile = this.suc.profile_pic_url;
+            this.fourPageService.profile.image2 = this.suc.profile_pic_url;
+            break;
 
           case 3:
             this.BackimgURL = this.suc.profile_pic_url;
             this.fourPageService.profile.image3 = this.suc.profile_pic_url;
             if (this.fourPageService.profile.photoScore > 1) {
-            this.fourPageService.form4Completed.emit(true);
+              this.fourPageService.form4Completed.emit(true);
             }
             break;
 
-            case 4:
+          case 4:
             this.frontfile4 = this.suc.profile_pic_url;
             this.fourPageService.profile.image3 = this.suc.profile_pic_url;
             if (this.fourPageService.profile.photoScore > 1) {
-            this.fourPageService.form4Completed.emit(true);
+              this.fourPageService.form4Completed.emit(true);
             }
             break;
 
-            case 5:
+          case 5:
             this.frontfile5 = this.suc.profile_pic_url;
             this.fourPageService.profile.image3 = this.suc.profile_pic_url;
             if (this.fourPageService.profile.photoScore > 1) {
-            this.fourPageService.form4Completed.emit(true);
+              this.fourPageService.form4Completed.emit(true);
             }
             break;
 
-            case 6:
+          case 6:
             this.frontfile6 = this.suc.profile_pic_url;
             this.fourPageService.profile.image3 = this.suc.profile_pic_url;
             if (this.fourPageService.profile.photoScore > 1) {
-            this.fourPageService.form4Completed.emit(true);
+              this.fourPageService.form4Completed.emit(true);
             }
             break;
 
-        default:
-          break;
-      }
+          default:
+            break;
+        }
 
-    } else {
-      this.spinner.hide();
-      this.ngxNotificationService.error('Photo could not be Uploaded!');
-    }
+      } else {
+        this.spinner.hide();
+        this.ngxNotificationService.error('Photo could not be Uploaded!');
+      }
     }, err => {
       this.spinner.hide();
       this.ngxNotificationService.error('Photo could not be Uploaded!');
       console.log(err);
     });
   }
+  base64TrimmedURL: string;
+  base64DefaultURL: string;
+  generatedImage: string;
+  windowOPen: boolean;
 
-  ngOnInit() {
-      this.fourPageService.getListData.subscribe(
-        () => {
-          if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
-          this.setPhotoData(this.fourPageService.getProfile());
-          }
-        }
+  getImageWithoutWindowOpen(imageUrl: string) {
+    this.windowOPen = false;
+    this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
+      this.base64TrimmedURL = base64Data;
+      this.createBlobImageFileAndShow();
+    });
+  }
+  getBase64ImageFromURL(url: string): Observable<string> {
+    return Observable.create((observer: Observer<string>) => {
+      // create an image object
+      let img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.src = url;
+      if (!img.complete) {
+        // This will call another method that will create image from url
+        img.onload = () => {
+          observer.next(this.getBase64Image(img));
+          observer.complete();
+        };
+        img.onerror = err => {
+          observer.error(err);
+        };
+      } else {
+        observer.next(this.getBase64Image(img));
+        observer.complete();
+      }
+    });
+  }
+  getBase64Image(img: HTMLImageElement): string {
+    // We create a HTML canvas object that will create a 2d image
+    var canvas: HTMLCanvasElement = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+    // This will draw image
+    ctx.drawImage(img, 0, 0);
+    // Convert the drawn image to Data URL
+    let dataURL: string = canvas.toDataURL("image/png");
+    this.base64DefaultURL = dataURL;
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  }
+  createBlobImageFileAndShow(): void {
+    this.dataURItoBlob(this.base64TrimmedURL).subscribe((blob: Blob) => {
+      const imageBlob: Blob = blob;
+      const imageName: string = this.generateName();
+      const imageFile: File = new File([imageBlob], imageName, {
+        type: "image/jpeg"
+      });
+      this.generatedImage = window.URL.createObjectURL(imageFile);
+      // on demo image not open window
+      if (this.windowOPen) {
+        window.open(this.generatedImage);
+      }
+    });
+  }
+  dataURItoBlob(dataURI: string): Observable<Blob> {
+    return Observable.create((observer: Observer<Blob>) => {
+      const byteString: string = window.atob(dataURI);
+      const arrayBuffer: ArrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array: Uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: "image/jpeg" });
+      observer.next(blob);
+      observer.complete();
+    });
+  }
+  generateName(): string {
+    const date: number = new Date().valueOf();
+    let text: string = "";
+    const possibleText: string =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 0; i < 5; i++) {
+      text += possibleText.charAt(
+        Math.floor(Math.random() * possibleText.length)
       );
-
-      this.fourPageService.facebookProfilePicUploaded.subscribe(
-        (link) => {
-          if (link) {
-            this.imgURL = link;
-          }
-        }
-      );
+    }
+    // Replace extension according to your media type like this
+    return date + "." + text + ".jpeg";
   }
 
+  ngOnInit() {
+    this.fourPageService.getListData.subscribe(
+      () => {
+        if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
+          this.setPhotoData(this.fourPageService.getProfile());
+        }
+      }
+    );
+    this.fourPageService.facebookProfilePicUploaded.subscribe(
+      (link) => {
+        if (link) {
+          this.imgURL = link;
+          this.getImageWithoutWindowOpen(this.imgURL);
+          this.uploadPhoto(this.generatedImage, 1);
+        }
+      }
+    );
+
+  }
+
+
+
   setPhotoData(userProfile: Profile) {
-        console.log(userProfile);
-        this.imgURL = userProfile.image1 ? userProfile.image1 : '';
-        this.frontfile = userProfile.image2 ? userProfile.image2 : '';
-        this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
+    console.log(userProfile);
+    this.imgURL = userProfile.image1 ? userProfile.image1 : '';
+    this.frontfile = userProfile.image2 ? userProfile.image2 : '';
+    this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
   }
 
   photoScoreChanged(event) {
@@ -291,11 +381,11 @@ export class CompatibilityPhotoComponent implements OnInit {
       this.fourPageService.profile.photoScore = this.photoScore;
       const userProfile = this.fourPageService.profile;
       console.log(userProfile);
-      if (!userProfile.image1 || userProfile.image1 === null  || userProfile.image1 === '') {
+      if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
         return this.ngxNotificationService.error('Select Image 1');
-      } else if (!userProfile.image2 || userProfile.image2 === null  || userProfile.image2 === '') {
+      } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
         return this.ngxNotificationService.error('Select Image 2');
-      } else if (!userProfile.image3 || userProfile.image3 === null  || userProfile.image3 === '') {
+      } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
         return this.ngxNotificationService.error('Select Image 3');
       } else if (userProfile.photoScore < 1) {
         return this.ngxNotificationService.error('Give a score');
@@ -312,19 +402,19 @@ export class CompatibilityPhotoComponent implements OnInit {
 
   Analytics(type: string, category: string, action: string) {
     if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-    (window as any).ga('send', 'event', category, action, {
-      hitCallback: () => {
+      (window as any).ga('send', 'event', category, action, {
+        hitCallback: () => {
 
-        console.log('Tracking ' + type + ' successful');
+          console.log('Tracking ' + type + ' successful');
 
-      }
-    });
+        }
+      });
 
-     // gtag app + web
-    (window as any).gtag('event', category , {
-      action: action
-    });
-  }
+      // gtag app + web
+      (window as any).gtag('event', category, {
+        action: action
+      });
+    }
   }
 
   skip(type) {
@@ -333,7 +423,7 @@ export class CompatibilityPhotoComponent implements OnInit {
       value: localStorage.getItem('id'),
       content_name: localStorage.getItem('RegisterNumber'),
     });
-    (window as any).fbq('track', '692972151223870' , 'FourPageRegistration', {
+    (window as any).fbq('track', '692972151223870', 'FourPageRegistration', {
       value: localStorage.getItem('id'),
       content_name: localStorage.getItem('RegisterNumber'),
     });
@@ -342,7 +432,7 @@ export class CompatibilityPhotoComponent implements OnInit {
       value: localStorage.getItem('id'),
       content_name: localStorage.getItem('RegisterNumber'),
     });
-    (window as any).fbq('track', '692972151223870' , 'CompleteRegistration', {
+    (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
       value: localStorage.getItem('id'),
       content_name: localStorage.getItem('RegisterNumber'),
     });
@@ -350,8 +440,8 @@ export class CompatibilityPhotoComponent implements OnInit {
     this.gtag_report_conversion();
 
 
-                 // 0 -> got to chat  1-> got to fifth page
-                 // if type is 0 and  getListLeadId === 0 send to hot leads
+    // 0 -> got to chat  1-> got to fifth page
+    // if type is 0 and  getListLeadId === 0 send to hot leads
     if (type === 0 && !this.fourPageService.getUserThrough()) {
       this.router.navigateByUrl('chat?first');
     } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
@@ -360,15 +450,15 @@ export class CompatibilityPhotoComponent implements OnInit {
 
     if (type === 0) {
       this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
-      'User Skipped Photo Upload');
+        'User Skipped Photo Upload');
     } else {
       this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
-      'Registered through Four Page Registration Page Four');
+        'Registered through Four Page Registration Page Four');
     }
   }
 
   gtag_report_conversion() {
-    (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
+    (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC' });
     return false;
   }
 }

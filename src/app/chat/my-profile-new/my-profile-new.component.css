@@ -141,14 +141,14 @@ hr {
 .UpInfo{
   position: relative;
   display: flex;
-  height:23vh;
+  height:17vh;
   padding:0px;
   margin: 40px 70px 40px 70px!important;
   border-radius:15px;
   object-fit: cover;
   background:#ffffff;
 }
-.column {
+.columnA {
   flex: 50%;
 }
 
