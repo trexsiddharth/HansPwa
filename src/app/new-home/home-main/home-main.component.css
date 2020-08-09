@@ -88,10 +88,11 @@
     height: auto;
     padding-bottom: 20px;
     position: relative;
-    display: -webkit-box;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
+    align-items: center;
     background-image: linear-gradient(0deg,#AD018C , #5C1F90);
 
 }
