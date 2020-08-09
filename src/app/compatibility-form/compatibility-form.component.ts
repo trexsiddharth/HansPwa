@@ -1030,10 +1030,12 @@ getProfile() {
         console.log(response);
         if (response) {
           if (response.chose === 'facebook') {
+            this.analyticsEvent('Registered Through Facebook');
             (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
               this.statusChangeCallback(response);        // Returns the login status.
             });
           } else if (response.chose === 'truecaller') {
+            this.analyticsEvent('Registered Through True Caller');
             this.callTruecaller();
           }
         }
