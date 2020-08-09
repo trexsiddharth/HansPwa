@@ -299,14 +299,14 @@ main {
   font-size: 16px;
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
   font-weight: bold;
-  color:black;
+  color:rgba(34, 34, 34, 0.849);
   margin:5px;
 }
 .headings{
   font-size: 15px;
-  font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  color:rgba(36, 35, 35, 0.966);
+  font-family: roboto;
+  font-weight:600!important;
+  color:rgba(77, 76, 76, 0.966);
 }
 .information{
   font-size:14px;
