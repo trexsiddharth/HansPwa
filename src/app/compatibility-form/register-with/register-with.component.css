@@ -2,9 +2,17 @@
     padding: 0;
     margin: 0;
 }
-
+::ng-deep .mat-dialog-container{
+    border-radius: 15px;
+}
+::ng-deep .cdk-overlay-dark-backdrop {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+  }
+main{
+    border-radius: 15px;
+}
 .heading {
-    color: black;
+    color: #c5cbc6;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     padding: 20px 0px;
@@ -19,14 +27,19 @@
 .btnDiv button {
     padding: 5px 30px;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: white;
+    font-weight: 500;
 }
 
 #facebook {
-    background-color: #3b5998;
+    background-color: #1266c6;
+    padding:9px 22px!important;
+    border-radius: 5px!important;
 }
 
 #truecaller {
-    background-color: lightblue;
+    background-color: #179feb;
+    padding:8px 14px!important;
+    border-radius: 5px!important;
 }
