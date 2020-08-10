@@ -1158,6 +1158,7 @@ statusChangeCallback(value) {
 
     if (data.phoneNumbers && data.phoneNumbers[0]) {
       this.hideMobileNumber = true;
+      this.mobileNumberChanged();
     } else {
       this.hideMobileNumber = false;
     }
