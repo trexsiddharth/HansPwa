@@ -28,7 +28,7 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable, timer, Subject } from 'rxjs';
+import { Observable, timer, Subject, of } from 'rxjs';
 import { startWith, map, timeout, retry, catchError, switchMap, share, takeUntil } from 'rxjs/operators';
 import { FourPageService } from './four-page.service';
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
@@ -1124,7 +1124,12 @@ statusChangeCallback(value) {
      // Truecaller app not present on the device and you redirect the user
      // to your alternate verification page
   } else {
-    this.getUserFromTrueCaller(randomNumber).subscribe(
+    this.getUserFromTrueCaller(randomNumber).pipe(
+      catchError(e => {
+        throw new Error('True Caller Not Responding');
+    })
+    )
+    .subscribe(
       (response) => {
         this.pollingCount++;
         console.log(response);
@@ -1158,11 +1163,7 @@ statusChangeCallback(value) {
 
   getUserFromTrueCaller(requestId): Observable<any> {
    return timer(1, 3000).pipe(
-      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}`).pipe(
-        catchError(e => {
-          throw new Error('Something Went Wrong' +  e);
-      })
-      )),
+      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}`)),
       retry(),
       share(),
       takeUntil(this.stopPolling)
