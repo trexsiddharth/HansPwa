@@ -1163,6 +1163,7 @@ statusChangeCallback(value) {
       share(),
       takeUntil(this.stopPolling),
       catchError(e => {
+        alert(`Error ${e}`);
         throw new Error('Something Went Wrong' +  e);
     })
    );
