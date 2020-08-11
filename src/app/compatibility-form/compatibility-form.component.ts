@@ -1121,11 +1121,9 @@ statusChangeCallback(value) {
     setTimeout(() => {
 
   if ( document.hasFocus() ) {
-    this.ngxNotificationService.error('truecaller not found');
      // Truecaller app not present on the device and you redirect the user
      // to your alternate verification page
   } else {
-    this.ngxNotificationService.success('truecaller  found');
     this.getUserFromTrueCaller(randomNumber).subscribe(
       (response) => {
         this.pollingCount++;
