@@ -1161,7 +1161,10 @@ statusChangeCallback(value) {
       switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}`)),
       retry(),
       share(),
-      takeUntil(this.stopPolling)
+      takeUntil(this.stopPolling),
+      catchError(e => {
+        throw new Error('Something Went Wrong' +  e);
+    })
    );
   }
 
