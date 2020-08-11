@@ -253,6 +253,9 @@ export class CompatibilityPhotoComponent implements OnInit {
   base64TrimmedURL: string;
   base64DefaultURL: string;
   generatedImage: string;
+  facebookImageFile: File;
+  facebookImageFileSet: boolean = false;
+
 
   getImage(imageUrl: string) {
     this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
@@ -299,11 +302,11 @@ export class CompatibilityPhotoComponent implements OnInit {
     this.dataURItoBlob(this.base64TrimmedURL).subscribe((blob: Blob) => {
       const imageBlob: Blob = blob;
       const imageName: string = this.generateName();
-      const imageFile: File = new File([imageBlob], imageName, {
+      this.facebookImageFile = new File([imageBlob], imageName, {
         type: "image/jpeg"
       });
-      this.generatedImage = window.URL.createObjectURL(imageFile);
-
+      this.generatedImage = window.URL.createObjectURL(this.facebookImageFile);
+      this.facebookImageFileSet = true;
     });
   }
   dataURItoBlob(dataURI: string): Observable<Blob> {
@@ -346,14 +349,10 @@ export class CompatibilityPhotoComponent implements OnInit {
         if (link) {
           this.imgURL = link;
           this.getImage(this.imgURL);
-          this.uploadPhoto(this.generatedImage, 1);
         }
       }
     );
   }
-
-
-
   setPhotoData(userProfile: Profile) {
     console.log(userProfile);
     this.imgURL = userProfile.image1 ? userProfile.image1 : '';
@@ -372,6 +371,9 @@ export class CompatibilityPhotoComponent implements OnInit {
   }
 
   checkForPhoto() {
+    if (this.facebookImageFileSet) {
+      this.uploadPhoto(this.facebookImageFile, 1);
+    }
     if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
       this.fourPageService.profile.photoScore = this.photoScore;
       const userProfile = this.fourPageService.profile;
