@@ -1121,6 +1121,7 @@ statusChangeCallback(value) {
             }
             this.stopPolling.next();
           } else if (response.status !== 0) {
+            this.ngxNotificationService.error('True Caller Not Responding');
             this.stopPolling.next();
           }
         } else {
@@ -1128,8 +1129,9 @@ statusChangeCallback(value) {
         }
       },
       err => {
-        this.pollingCount++;
+        this.ngxNotificationService.error('True Caller Not Responding');
         console.log(err);
+        this.stopPolling.next();
       }
     );
      // Truecaller app present on the device and the profile overlay opens
