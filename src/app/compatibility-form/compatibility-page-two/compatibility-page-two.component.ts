@@ -22,7 +22,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import {  NotificationsService } from '../../notifications.service';
 
 import {
-  MatDialog,
+  MatDialog, MatAutocompleteDefaultOptions,
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';
@@ -158,6 +158,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
      /** Subject that emits when the component has been destroyed. */
       protected onDestroy = new Subject<void>();
 
+      autoComplete = {
+        type: 'address',
+        fields: ['name', 'formatted_address']
+      };
 
 constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
             public notification: NotificationsService,
@@ -401,12 +405,13 @@ onAutocompleteSelected(event) {
       console.log('address of family', this.PageTwo.value.Working);
   }
 onLocationSelected(e) {
-    this.workingCity = e;
-    if (this.PageTwo.valid) {
+  console.log(e);
+  this.workingCity = e;
+  if (this.PageTwo.valid) {
       this.fourPageService.formCompleted.emit(true);
       this.fourPageService.formTwoGroup.emit(this.PageTwo);
      }
-    console.log('location of family', e);
+  console.log('location of family', e);
 }
 changedQualification() {
   console.log('changed Qualification');
