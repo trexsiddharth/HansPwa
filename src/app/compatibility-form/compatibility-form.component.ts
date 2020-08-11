@@ -1125,7 +1125,7 @@ statusChangeCallback(value) {
      // Truecaller app not present on the device and you redirect the user
      // to your alternate verification page
   } else {
-    this.ngxNotificationService.error('truecaller  found');
+    this.ngxNotificationService.success('truecaller  found');
     this.getUserFromTrueCaller(randomNumber).subscribe(
       (response) => {
         this.pollingCount++;
@@ -1160,7 +1160,7 @@ statusChangeCallback(value) {
 
   getUserFromTrueCaller(requestId): Observable<any> {
    return timer(1, 3000).pipe(
-      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=33203894`)),
+      switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}`)),
       retry(),
       share(),
       takeUntil(this.stopPolling)
