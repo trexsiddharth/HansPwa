@@ -50,13 +50,13 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class CompatibilityPageThreeComponent implements OnInit {
     @ViewChild('otpModal', {static: false}) private otpModal: any;
-  
+
     time = {
       hour: 13,
       minute: 30
     };
     PageThree: FormGroup;
- 
+
 
     errors: string[] = [];
     authMobileNumberStatus = false;
@@ -100,8 +100,7 @@ ngOnInit() {
     skip() {
       this.fourPageService.form3Completed.emit(true);
       setTimeout(() => {
-        this.Analytics('Four Page Registration', 'Four Page Registration Page Three',
-        'Skipped through Four Page Registration Page Three');
+        this.analyticsEvent('Skipped through Four Page Registration Page Three');
       }, 100);
     }
 
@@ -169,8 +168,7 @@ firstStep() {
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormThreeData(firststepdata);
                 } else {
-                  this.Analytics('Four Page Registration', 'Four Page Registration Page Three',
-                'Registered through Four Page Registration Page Three');
+                  this.analyticsEvent('Registered through Four Page Registration Page Three');
                 }
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {
@@ -188,21 +186,25 @@ firstStep() {
 
   }
 
-Analytics(type: string, category: string, action: string) {
-  if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-    (window as any).ga('send', 'event', category, action, {
+  analyticsEvent(event) {
+    if (!this.fourPageService.getUserThrough()) {
+    (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
 
-        console.log('Tracking ' + type + ' successful');
+        console.log('Tracking ' + event + ' successful');
 
       }
+
     });
 
-     // gtag app + web
-    (window as any).gtag('event', category , {
-      'action': action
+    // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () => {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
     });
   }
+
   }
 
   placeChanged() {
@@ -212,6 +214,7 @@ Analytics(type: string, category: string, action: string) {
       this.PageThree.patchValue({
         BirthPlace: birthPlace.value
       });
+      this.analyticsEvent('Four Page Registration Page Three Birth Place Changed');
     }, 500);
   }
 
@@ -228,6 +231,28 @@ onLocationSelected(e) {
   // tslint:disable-next-line: no-shadowed-variable
   changed(element: any) {
     console.log(element);
+    switch (element) {
+      case 'bTime':
+      this.analyticsEvent('Four Page Registration Page Birth Time Changed');
+      break;
+      case 'gotra':
+      this.analyticsEvent('Four Page Registration Page Three Gotra Changed');
+      break;
+      case 'food':
+      this.analyticsEvent('Four Page Registration Page Three Food Choice Changed');
+      break;
+      case 'fstatus':
+      this.analyticsEvent('Four Page Registration Page Three Father Status Changed');
+      break;
+      case 'mstatus':
+      this.analyticsEvent('Four Page Registration Page Three Mother Status Changed');
+      break;
+      case 'Fincome':
+      this.analyticsEvent('Four Page Registration Page Three Family Income Changed');
+      break;
+      default:
+        break;
+    }
     if (!this.fourPageService.getUserThrough() && this.isValid(0) === false ) {
       this.fourPageService.form3Completed.emit(false);
       return;
@@ -251,7 +276,7 @@ onLocationSelected(e) {
     } else {
       this.fourPageService.isFatherDead = false;
     }
-    this.fourPageService.profile.motherStatus = profileData.get('mother_status') ? 
+    this.fourPageService.profile.motherStatus = profileData.get('mother_status') ?
      profileData.get('mother_status').toString() : '';
     if (profileData.get('mother_status') && profileData.get('mother_status').toString() === 'Not Alive' ) {
       this.fourPageService.isMotherDead = true;

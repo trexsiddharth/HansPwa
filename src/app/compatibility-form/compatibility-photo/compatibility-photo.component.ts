@@ -195,42 +195,19 @@ export class CompatibilityPhotoComponent implements OnInit {
             if (!this.BackimgURL && this.fourPageService.getUserThrough()) {
               this.uploadPhoto(data, 3);
             }
-            this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
-              'Image One Uploaded on Four Page Registration Page Four');
+            this.analyticsEvent('Image One Uploaded on Four Page Registration Page Four');
             break;
 
           case 2:
             this.frontfile = this.suc.profile_pic_url;
             this.fourPageService.profile.image2 = this.suc.profile_pic_url;
+            this.analyticsEvent('Image Two Uploaded on Four Page Registration Page Four');
             break;
 
           case 3:
             this.BackimgURL = this.suc.profile_pic_url;
             this.fourPageService.profile.image3 = this.suc.profile_pic_url;
-            if (this.fourPageService.profile.photoScore > 1) {
-              this.fourPageService.form4Completed.emit(true);
-            }
-            break;
-
-          case 4:
-            this.frontfile4 = this.suc.profile_pic_url;
-            this.fourPageService.profile.image3 = this.suc.profile_pic_url;
-            if (this.fourPageService.profile.photoScore > 1) {
-              this.fourPageService.form4Completed.emit(true);
-            }
-            break;
-
-          case 5:
-            this.frontfile5 = this.suc.profile_pic_url;
-            this.fourPageService.profile.image3 = this.suc.profile_pic_url;
-            if (this.fourPageService.profile.photoScore > 1) {
-              this.fourPageService.form4Completed.emit(true);
-            }
-            break;
-
-          case 6:
-            this.frontfile6 = this.suc.profile_pic_url;
-            this.fourPageService.profile.image3 = this.suc.profile_pic_url;
+            this.analyticsEvent('Image Three Uploaded on Four Page Registration Page Four');
             if (this.fourPageService.profile.photoScore > 1) {
               this.fourPageService.form4Completed.emit(true);
             }
@@ -397,21 +374,25 @@ export class CompatibilityPhotoComponent implements OnInit {
     }
   }
 
-  Analytics(type: string, category: string, action: string) {
-    if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-      (window as any).ga('send', 'event', category, action, {
-        hitCallback: () => {
+  analyticsEvent(event) {
+    if (!this.fourPageService.getUserThrough()) {
+    (window as any).ga('send', 'event', event, '', {
+      hitCallback: () => {
 
-          console.log('Tracking ' + type + ' successful');
+        console.log('Tracking ' + event + ' successful');
 
-        }
-      });
+      }
 
-      // gtag app + web
-      (window as any).gtag('event', category, {
-        action: action
-      });
-    }
+    });
+
+    // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () => {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
+    });
+  }
+
   }
 
   skip(type) {
@@ -446,11 +427,9 @@ export class CompatibilityPhotoComponent implements OnInit {
     }
 
     if (type === 0) {
-      this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
-        'User Skipped Photo Upload');
+      this.analyticsEvent('User Skipped Photo Upload');
     } else {
-      this.Analytics('Four Page Registration', 'Four Page Registration Page Four',
-        'Registered through Four Page Registration Page Four');
+      this.analyticsEvent('Registered through Four Page Registration Page Four');
     }
   }
 

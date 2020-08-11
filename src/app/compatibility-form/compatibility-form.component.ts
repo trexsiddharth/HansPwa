@@ -89,7 +89,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   // Height
     // tslint:disable-next-line: max-line-length
-    Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
+    Heights: string[] = ['4 feet', '4 feet 1 inches', '4 feet 2 inches', '4 feet 3 inches', '4 feet 4 inches', '4 feet 5 inches', '4 feet 6 inches', '4 feet 7 inches', '4 feet 8 inches', '4 feet 9 inches', '4 feet 10 inches', '4 feet 11 inches', '5 feet', '5 feet 1 inches', '5 feet 2 inches', '5 feet 3 inches', '5 feet 4 inches', '5 feet 5 inches', '5 feet 6 inches', '5 feet 7 inches', '5 feet 8 inches', '5 feet 9 inches', '5 feet 10 inches', '5 feet 11 inches', '6 feet', '6 feet 1 inches', '6 feet 2 inches', '6 feet 3 inches', '6 feet 4 inches', '6 feet 5 inches', '6 feet 6 inches', '6 feet 7 inches', '6 feet 8 inches', '6 feet 9 inches', '6 feet 10 inches', '6 feet 11 inches', '7 feet'];
     // tslint:disable-next-line: max-line-length
     Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
@@ -150,12 +150,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       birth_month: ['January', Validators.compose([Validators.required])],
       birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
-      Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
+      // Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
       AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
-      Mangalik: ['', Validators.compose([Validators.required])],
+      Mangalik: [''],
       // locality: ['', Validators.compose([Validators.required])],
       disabledPart: ['']
     });
@@ -299,8 +299,7 @@ async ngOnInit() {
     // event on change of input field
     inputFieldChanged(fieldName) {
       console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
-      if (!this.fourPageService.getUserThrough()) {
-        switch (fieldName) {
+      switch (fieldName) {
           case 'email':
             this.analyticsEvent('Four Page Registration Page One Email Changed');
             break;
@@ -320,13 +319,11 @@ async ngOnInit() {
           default:
             break;
         }
-      }
     }
     // event on change of select field
     selectFieldChange(fieldName) {
       console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
-      if (!this.fourPageService.getUserThrough()) {
-        switch (fieldName) {
+      switch (fieldName) {
           case 'birth_date':
             this.analyticsEvent('Four Page Registration Page One Birth Date Changed');
             break;
@@ -352,7 +349,6 @@ async ngOnInit() {
           default:
             break;
         }
-      }
     }
 
 
@@ -487,12 +483,12 @@ async ngOnInit() {
           birth_month: ['January', Validators.compose([Validators.required])],
           birth_year: ['1980', Validators.compose([Validators.required])],
           Height: ['', Validators.compose([Validators.required])],
-          Weight: ['', Validators.compose([Validators.required])],
+          // Weight: ['', Validators.compose([Validators.required])],
           MaritalStatus: ['', Validators.compose([Validators.required])],
           AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
           Religion: ['', Validators.compose([Validators.required])],
           Castes: ['', Validators.compose([Validators.required])],
-          Mangalik: ['', Validators.compose([Validators.required])],
+          Mangalik: [''],
           // locality: ['', Validators.compose([Validators.required])],
           disabledPart: ['']
         });
@@ -540,7 +536,8 @@ async ngOnInit() {
               } else {
                 firststepdata.append('birth_date', date + '-' + month + '-' + year);
               }
-              firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName);
+              firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName ?
+               this.PageOne.value.lastName : '');
               firststepdata.append('email', this.PageOne.value.email);
 
               // son -> mother and daughter -> father rest -> same
@@ -553,7 +550,7 @@ async ngOnInit() {
               }
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
-              firststepdata.append('weight', this.PageOne.value.Weight);
+              // firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
               firststepdata.append('manglik', this.PageOne.value.Mangalik);
 
@@ -653,6 +650,7 @@ async ngOnInit() {
   }
 
   analyticsEvent(event) {
+    if (!this.fourPageService.getUserThrough()) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
 
@@ -668,6 +666,7 @@ async ngOnInit() {
         console.log('Tracking gtag ' + event + ' successful');
       }
     });
+  }
 
   }
 
@@ -729,9 +728,7 @@ datePickerClicked() {
   // Religion
 Religion(event) {
     console.log(event.value);
-    if (!this.fourPageService.getUserThrough()) {
-      this.analyticsEvent('Four Page Registration Page One Religion Changed');
-    }
+    this.analyticsEvent('Four Page Registration Page One Religion Changed');
     if (event.value === 'Hindu') {
       this.Caste = true;
     } else {
@@ -742,23 +739,21 @@ Religion(event) {
     }
   }
 async casteValidation(value) {
-  if (!this.fourPageService.getUserThrough()) {
     this.analyticsEvent('Four Page Registration Page One Caste Changed');
-  }
-  console.log('caste changed', value );
-  const status = 1;
-  let statusConfirmed;
-  await this.checkCaste(value).then((res: boolean) => {
+    console.log('caste changed', value );
+    const status = 1;
+    let statusConfirmed;
+    await this.checkCaste(value).then((res: boolean) => {
        statusConfirmed = res;
      });
-  console.log('caste changed', statusConfirmed );
+    console.log('caste changed', statusConfirmed );
 
-  if (statusConfirmed === false) {
+    if (statusConfirmed === false) {
       this.ngxNotificationService.warning('Please choose a caste from the dropdown');
       this.PageOne.get('Castes').setValue('');
       return false;
     }
-  return true;
+    return true;
 
   }
 
@@ -795,10 +790,8 @@ onLocationSelected(e) {
 }
 setGender() {
 console.log(this.PageOne.value.Relation);
-if (!this.fourPageService.getUserThrough()) {
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
 this.openRegisterWith(this.PageOne.value.Relation);
-}
 switch (this.PageOne.value.Relation) {
   case 'Brother':
     this.PageOne.patchValue(
@@ -895,7 +888,7 @@ getProfile() {
     this.userProfile.gender = profileData.profile.gender;
     this.userProfile.dob = profileData.profile.birth_date;
     this.userProfile.height = profileData.profile.height;
-    this.userProfile.weight = profileData.profile.weight;
+    // this.userProfile.weight = profileData.profile.weight;
     this.userProfile.martialStatus = profileData.profile.marital_status;
     this.userProfile.annualIncome = profileData.profile.monthly_income;
     if (profileData.family.religion) {
@@ -946,7 +939,8 @@ getProfile() {
   setFormOneData() {
       this.PageOne.patchValue({
         firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
-      lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] : '',
+      lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] ?
+       this.userProfile.name.split(' ')[1] : '' : '',
       phone: this.userProfile.mobile,
       email: this.userProfile.email,
       Relation: this.userProfile.relation,
@@ -955,7 +949,7 @@ getProfile() {
       birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1]) : '',
       birth_year: this.userProfile.dob ? this.years[this.years.indexOf(this.userProfile.dob.toString().split('-')[0])] : '',
       Height: this.userProfile.height ? this.Heights1.indexOf(this.userProfile.height) : '',
-      Weight: this.userProfile.weight,
+      // Weight: this.userProfile.weight,
       MaritalStatus: this.userProfile.martialStatus,
       AnnualIncome: this.userProfile.annualIncome,
       Religion: this.userProfile.religion,
