@@ -1,27 +1,27 @@
 <main>
-<h1 class="mainHead">
-    Well Done!
-</h1>
-<div class="container workingDiv">
-    <img class="circularTick"  src="../../../../assets/new icons/green_circular_white_tick.svg" alt="green tick">
-    <p style="margin-top: 20px;">
-        Our matchmakers are working on your profile
-    </p>
-</div>
-<div class="container timerDiv">
-<p>
-    We'll share more handpicked profiles in
-</p>
-<p class="timer">
-    {{hour}} <span>h</span> : {{minutes}} <span>m</span> : {{seconds}} <span>s</span>
-</p>
-</div>
-<button mat-raised-button class="discoverDiv" (click)="goToDiscover()"> 
-    <p style="font-size: 2rem;font-family: sans-serif;">
-        Discover
-    </p>
-    <p style="font-size: 1.5rem;font-family: sans-serif;">
-        More Profiles
-    </p>
-</button>
+    <h1 class="mainHead">
+        Well Done!
+    </h1>
+    <div class="container workingDiv">
+        <img class="circularTick" src="../../../../assets/new icons/green_circular_white_tick.svg" alt="green tick">
+        <p style="margin-top: 20px;">
+            Our matchmakers are working on your profile
+        </p>
+    </div>
+    <div class="container timerDiv">
+        <p>
+            We'll share more handpicked profiles in
+        </p>
+        <p class="timer">
+            {{hour}} <span>h</span> : {{minutes}} <span>m</span> : {{seconds}} <span>s</span>
+        </p>
+    </div>
+    <button mat-raised-button class="discoverDiv mat-elevation-z15" (click)="goToDiscover()">
+        <p style="font-size: 2rem;font-family: sans-serif; font-weight: bolder;">
+            Discover
+        </p>
+        <p style="font-size: 1.5rem;font-family: sans-serif;">
+            More Profiles
+        </p>
+    </button>
 </main>

@@ -242,7 +242,7 @@ export class CompatibilityPhotoComponent implements OnInit {
 
       } else {
         this.spinner.hide();
-        this.ngxNotificationService.error('Photo could not be Uploaded!');
+        this.ngxNotificationService.error('Photo Upload Unsuccessful!');
       }
     }, err => {
       this.spinner.hide();

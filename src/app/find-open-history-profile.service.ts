@@ -31,6 +31,8 @@ export class FindOpenHistoryProfileService {
   countUpdated = new EventEmitter();
   setTab = new EventEmitter();
 
+  popupOpen: boolean = false;
+
   constructor(
     private dialog: MatDialog,
     private breakPointObserver: BreakpointObserver,
@@ -234,27 +236,32 @@ export class FindOpenHistoryProfileService {
   }
   //new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
   openTodaysPopupAd() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.hasBackdrop = true;
-    this.breakPointObserver.observe([
-      '(min-width: 1024px)'
-    ]).subscribe(
-      result => {
-        if (result.matches) {
-          console.log('screen is greater than  1024px');
-          dialogConfig.maxWidth = '30vw';
-          dialogConfig.minHeight = '80vh';
-          dialogConfig.disableClose = false;
-        } else {
-          console.log('screen is less than  1024px');
-          dialogConfig.minWidth = '90vw';
-          dialogConfig.minHeight = '70vh';
-          dialogConfig.disableClose = true;
+    if (this.popupOpen)
+      return;
+    else {
+      this.popupOpen = true;
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.hasBackdrop = true;
+      this.breakPointObserver.observe([
+        '(min-width: 1024px)'
+      ]).subscribe(
+        result => {
+          if (result.matches) {
+            console.log('screen is greater than  1024px');
+            dialogConfig.maxWidth = '30vw';
+            dialogConfig.minHeight = '80vh';
+            dialogConfig.disableClose = false;
+          } else {
+            console.log('screen is less than  1024px');
+            dialogConfig.minWidth = '90vw';
+            dialogConfig.minHeight = '70vh';
+            dialogConfig.disableClose = true;
+          }
         }
-      }
-    );
-    const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
+      );
+      const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
 
+    }
   }
 
   // Inhe abhi call kare popup
@@ -403,6 +410,7 @@ export class FindOpenHistoryProfileService {
 
   // daily welcome popup
   openWelcomeDialog(dailyCount) {
+    this.popupOpen = true;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
