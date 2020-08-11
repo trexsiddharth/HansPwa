@@ -141,9 +141,12 @@ hr {
 .UpInfo{
   position: relative;
   display: flex;
-  height:17vh;
+  height:23vh;
   padding:0px;
-  margin: 40px 70px 40px 70px!important;
+  margin-top: 40px!important;
+  margin-bottom: 40px!important;
+  margin-left: 10%!important;
+  margin-right: 10%!important;
   border-radius:15px;
   object-fit: cover;
   background:#ffffff;

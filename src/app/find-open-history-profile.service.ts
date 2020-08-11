@@ -13,6 +13,7 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { DailyWelcomePopupComponent } from './chat/daily-welcome-popup/daily-welcome-popup.component';
 import { stat } from 'fs';
+import { setTimeout } from 'timers';
 
 
 @Injectable({
@@ -238,30 +239,29 @@ export class FindOpenHistoryProfileService {
   openTodaysPopupAd() {
     if (this.popupOpen)
       return;
-    else {
-      this.popupOpen = true;
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.hasBackdrop = true;
-      this.breakPointObserver.observe([
-        '(min-width: 1024px)'
-      ]).subscribe(
-        result => {
-          if (result.matches) {
-            console.log('screen is greater than  1024px');
-            dialogConfig.maxWidth = '30vw';
-            dialogConfig.minHeight = '80vh';
-            dialogConfig.disableClose = false;
-          } else {
-            console.log('screen is less than  1024px');
-            dialogConfig.minWidth = '90vw';
-            dialogConfig.minHeight = '70vh';
-            dialogConfig.disableClose = true;
-          }
-        }
-      );
-      const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
 
-    }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.minHeight = '70vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    console.log("skatiiiiiiiiiing");
+    const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
+
   }
 
   // Inhe abhi call kare popup
@@ -433,6 +433,7 @@ export class FindOpenHistoryProfileService {
     dialogConfig.data = {
       dailyQuota: dailyCount
     };
+    console.log("falliiiiiiiiiiiiiiiing");
     const dialogRef = this.dialog.open(DailyWelcomePopupComponent, dialogConfig);
   }
 }

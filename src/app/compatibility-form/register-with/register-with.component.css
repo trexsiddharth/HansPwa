@@ -7,6 +7,7 @@
 }
 ::ng-deep .cdk-overlay-dark-backdrop {
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+    pointer-events: none!important;
   }
 main{
     border-radius: 15px;
@@ -34,8 +35,11 @@ main{
 
 #facebook {
     background-color: #1266c6;
-    padding:9px 22px!important;
+    padding:9px 32px!important;
     border-radius: 5px!important;
+    display:flex;
+    flex-direction: row;
+    align-items: center;justify-content:center;
 }
 
 #truecaller {

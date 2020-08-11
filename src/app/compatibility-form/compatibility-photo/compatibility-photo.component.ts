@@ -253,10 +253,8 @@ export class CompatibilityPhotoComponent implements OnInit {
   base64TrimmedURL: string;
   base64DefaultURL: string;
   generatedImage: string;
-  windowOPen: boolean;
 
-  getImageWithoutWindowOpen(imageUrl: string) {
-    this.windowOPen = false;
+  getImage(imageUrl: string) {
     this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
       this.base64TrimmedURL = base64Data;
       this.createBlobImageFileAndShow();
@@ -283,6 +281,7 @@ export class CompatibilityPhotoComponent implements OnInit {
       }
     });
   }
+
   getBase64Image(img: HTMLImageElement): string {
     // We create a HTML canvas object that will create a 2d image
     var canvas: HTMLCanvasElement = document.createElement("canvas");
@@ -304,10 +303,7 @@ export class CompatibilityPhotoComponent implements OnInit {
         type: "image/jpeg"
       });
       this.generatedImage = window.URL.createObjectURL(imageFile);
-      // on demo image not open window
-      if (this.windowOPen) {
-        window.open(this.generatedImage);
-      }
+
     });
   }
   dataURItoBlob(dataURI: string): Observable<Blob> {
@@ -349,12 +345,11 @@ export class CompatibilityPhotoComponent implements OnInit {
       (link) => {
         if (link) {
           this.imgURL = link;
-          this.getImageWithoutWindowOpen(this.imgURL);
+          this.getImage(this.imgURL);
           this.uploadPhoto(this.generatedImage, 1);
         }
       }
     );
-
   }
 
 
