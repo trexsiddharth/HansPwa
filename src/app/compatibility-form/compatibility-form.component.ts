@@ -122,6 +122,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
    pollingCount = 0;
    hideMobileNumber = false;
 
+   authData;
+
 
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
@@ -132,7 +134,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
               private breakPointObserver: BreakpointObserver,
               public languageService: LanguageService,
               private route: ActivatedRoute,
-              private ngxNotificationService: NgxNotificationService, 
+              private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
@@ -317,7 +319,7 @@ async ngOnInit() {
           case 'lastName':
             this.analyticsEvent('Four Page Registration Page One Last Name Changed');
             break;
-        
+
           default:
             break;
         }
@@ -349,7 +351,7 @@ async ngOnInit() {
           case 'Mangalik':
             this.analyticsEvent('Four Page Registration Page One Manglik Status Changed');
             break;
-        
+
           default:
             break;
         }
@@ -366,9 +368,19 @@ async ngOnInit() {
           // tslint:disable-next-line: max-line-length
         this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : number, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
             console.log(res);
-            if (res.registered === 1) {
+            if (res) {
+              this.authData = res;
+              if (res.registered === 1) {
               this.ngxNotificationService.success('Already Registered');
-              this.openVerificationDialog(res.is_lead);
+              if (this.pollingCount > 0) {
+                localStorage.setItem('authData', JSON.stringify(res));
+                localStorage.setItem('mobile_number', this.PageOne.value.phone);
+                localStorage.setItem('is_lead', res.is_lead);
+                localStorage.setItem('id', res.id);
+                this.router.navigateByUrl('chat');
+              } else {
+                this.openVerificationDialog(res.is_lead);
+              }
               this.spinner.show();
             } else if (res.registered === 2) {
               localStorage.setItem('RegisterNumber', number);
@@ -383,9 +395,10 @@ async ngOnInit() {
 
               // gtag app + web
               (window as any).gtag('config', 'G-1ES443XD0F' , {
-                'user_id': number
+                user_id: number
               });
             }
+          }
             this.spinner.hide();
           }, err => {
             this.spinner.hide();
@@ -414,7 +427,7 @@ async ngOnInit() {
           }
         }
       );
-  
+
       dialogConfig.data = {
         mobile : this.PageOne.value.phone,
         is_lead: isLead
@@ -426,6 +439,10 @@ async ngOnInit() {
             if (data.success === 'verified') {
               localStorage.setItem('mobile_number', this.PageOne.value.phone);
               localStorage.setItem('is_lead', data.is_lead);
+              if (this.authData) {
+                localStorage.setItem('authData', JSON.stringify(this.authData));
+                localStorage.setItem('id', this.authData.id);
+              }
               this.router.navigateByUrl('chat');
             } else { return; }
           }
@@ -435,7 +452,7 @@ async ngOnInit() {
 
     getAllCaste() {
       return new Promise((res, rej) => {
-     
+
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
         this.getcastes = [...res, 'All'];
         this.fourPageService.setAllCastes(this.getcastes);
@@ -560,7 +577,7 @@ async ngOnInit() {
               // if url with enqData : mode -> 3 , if with id: mode -> 2 if only with fourReg : mode -> 1
               firststepdata.append('mode', localStorage.getItem('enqDate') ? '3'
         : localStorage.getItem('getListId') ? '2' : '1');
-              
+
               console.log('mobile', this.PageOne.value.phone);
               console.log('birth_date', this.birthDate);
               console.log('gender', this.PageOne.value.gender);
@@ -1098,7 +1115,7 @@ statusChangeCallback(value) {
 
   callTruecaller() {
     // tslint:disable-next-line: max-line-length
-    let randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
+    const randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
     (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 
     setTimeout(() => {
@@ -1135,7 +1152,7 @@ statusChangeCallback(value) {
       }
     );
      // Truecaller app present on the device and the profile overlay opens
-     // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
+     // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
      // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
   }
 }, 600);
