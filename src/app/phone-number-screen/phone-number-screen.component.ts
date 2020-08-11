@@ -68,8 +68,13 @@ if (res.registered === 1) {
   // localStorage.setItem('id', res.id);
   // this.router.navigateByUrl('chat');
 } else {
-  this.ngxNotificationService.info('You are not registered with us, Kindly register');
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
+  this.analyticsEvent('Registered through Four Page Registration Page Zero');
+   // gtag app + web
+  (window as any).gtag('config', 'G-1ES443XD0F' , {
+    user_id: this.phoneNumber.value.phone
+  });
+  this.ngxNotificationService.info('You are not registered with us, Kindly register');
   this.router.navigateByUrl('fourReg');
 }
 this.spinner.hide();
@@ -89,8 +94,13 @@ if (res.registered === 1) {
   // localStorage.setItem('id', res.id);
   // this.router.navigateByUrl('chat');
 } else {
-  this.ngxNotificationService.info('You are not registered with us, Kindly register');
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
+  this.analyticsEvent('Registered through Four Page Registration Page Zero');
+   // gtag app + web
+  (window as any).gtag('config', 'G-1ES443XD0F' , {
+    user_id: this.phoneNumber.value.phone
+  });
+  this.ngxNotificationService.info('You are not registered with us, Kindly register');
   this.router.navigateByUrl('fourReg');
 }
 this.spinner.hide();
@@ -145,6 +155,25 @@ openVerificationDialog(isLead: string) {
         }
       }
     );
+  }
+
+  analyticsEvent(event) {
+    (window as any).ga('send', 'event', event, '', {
+      hitCallback: () => {
+
+        console.log('Tracking ' + event + ' successful');
+
+      }
+
+    });
+
+    // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () => {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
+    });
+
   }
 
 }

@@ -5,9 +5,13 @@
                     <div class="col-6">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label>Birth Place</mat-label>
-                          <input type="text" matInput matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                          (onAutocompleteSelected)="onAutocompleteSelected($event)" 
-                          (onLocationSelected)="onLocationSelected($event)"
+                          <input type="text" 
+                          matInput matValidateAddress 
+                          id="birthPlace"
+                          [autoCompleteOptions]="autoComplete"
+                          (change)="placeChanged()"
+                          matGoogleMapsAutocomplete
+                           #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                           formControlName="BirthPlace">
                         </mat-form-field>
                       </div>

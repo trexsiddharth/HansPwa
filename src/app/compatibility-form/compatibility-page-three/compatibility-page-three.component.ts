@@ -63,6 +63,13 @@ export class CompatibilityPageThreeComponent implements OnInit {
     birthPlace;
     birthPlaceText;
 
+    // for only getting the autocomplete predictions
+    autoComplete = {
+      strictBounds: false,
+      type: 'geocode',
+      fields: ['name']
+    };
+
 
 constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
             public notification: NotificationsService,
@@ -140,7 +147,7 @@ firstStep() {
       this.spinner.show();
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
-      firststepdata.append('birth_place', this.birthPlaceText ? this.birthPlaceText : this.PageThree.value.BirthPlace);
+      firststepdata.append('birth_place', this.PageThree.value.BirthPlace);
 
       if (this.PageThree.value.BirthTime) {
               firststepdata.append('birth_time', this.PageThree.value.BirthTime);
@@ -196,6 +203,16 @@ Analytics(type: string, category: string, action: string) {
       'action': action
     });
   }
+  }
+
+  placeChanged() {
+    const birthPlace: HTMLInputElement = document.querySelector('#birthPlace');
+    setTimeout(() => {
+      console.log(birthPlace.value);
+      this.PageThree.patchValue({
+        BirthPlace: birthPlace.value
+      });
+    }, 500);
   }
 
 onAutocompleteSelected(event) {

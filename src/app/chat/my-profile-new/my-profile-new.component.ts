@@ -1138,6 +1138,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   ): string {
     if (num !== '[]' && num && num !== 'null') {
       const carousel: any = JSON.parse(num);
+      this.itemService.setPhotoStatus(true);
       // if an image is present in unapprove_carousel for the particular index.
       // we will give preference to unapprove_carousel first.
       if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
@@ -1245,7 +1246,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               ? data.preferences
               : null;
             this.spinner.hide();
-            if (this.getCarouselCount() != 1) {
+            if (this.getCarouselCount() > 0) {
               console.log('Photo status set to true');
               this.itemService.setPhotoStatus(true);
             }
@@ -1387,7 +1388,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  getCarouselCount() {
+  getCarouselCount(): number {
     let num = this.personalProfileData.carousel;
     if (num !== '[]' && num && num !== 'null') {
       const carousel: object = JSON.parse(num);
@@ -1397,7 +1398,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         return size.length;
       }
     } else {
-      return 1;
+      return null;
     }
   }
 

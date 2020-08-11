@@ -35,7 +35,6 @@ import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
-import { GooglePlacesDirective } from './directives/google-places.directive';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { GooglePlacesDirective } from './directives/google-places.directive';
     OfferOneComponent,
     OfferTwoComponent,
     VerifyOtpComponent,
-    GooglePlacesDirective,
   ],
   imports: [
     BrowserModule,

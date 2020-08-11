@@ -167,26 +167,23 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   }
 
 async ngOnInit() {
-    localStorage.clear();
-    this.languageService.setRegisterLang();
-    if (localStorage.getItem('RegisterNumber')) {
+  if (localStorage.getItem('RegisterNumber')) {
     this.PageOne.patchValue({
       phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
     });
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
-    document.querySelector('body').style.background = 'white';
-    document.querySelector('body').style.backgroundImage = 'url(\'../../assets/bgicon.png\')';
-    document.querySelector('body').style.backgroundSize = 'cover';
+  localStorage.clear();
+  this.languageService.setRegisterLang();
 
-    this.fourPageService.formCompleted.subscribe(
+  this.fourPageService.formCompleted.subscribe(
       (complete: boolean) => {
         if (complete === true) {
           this.formTwo = true;
          }
       }
     );
-    this.fourPageService.formTwoGroup.subscribe(
+  this.fourPageService.formTwoGroup.subscribe(
       (formGroup) => {
         console.log(formGroup);
         if (formGroup) {
@@ -195,14 +192,14 @@ async ngOnInit() {
          }
       }
     );
-    this.fourPageService.form3Completed.subscribe(
+  this.fourPageService.form3Completed.subscribe(
       (complete: boolean) => {
         if (complete === true) {
           this.formThree = true;
          }
       }
     );
-    this.fourPageService.form4Completed.subscribe(
+  this.fourPageService.form4Completed.subscribe(
       (complete: boolean) => {
         if (complete === true) {
           this.formFour = true;
@@ -212,7 +209,7 @@ async ngOnInit() {
     );
 
       // for team user we will make page non linear from page two...because page one details are compulsory
-    this.fourPageService.makeLinear.subscribe(
+  this.fourPageService.makeLinear.subscribe(
         (makeLinear: boolean) => {
           console.log(makeLinear);
           if (makeLinear === true) {
@@ -224,7 +221,7 @@ async ngOnInit() {
       );
 
      // for skippable
-    this.route.url.subscribe(
+  this.route.url.subscribe(
       link => {
        if (link && link[0]  &&  link[0].path) {
          console.log(link[0].path);
@@ -233,8 +230,8 @@ async ngOnInit() {
       }
     );
     // get all castes before get the data of the profile
-    await this.getAllCaste();
-    this.route.paramMap.subscribe(
+  await this.getAllCaste();
+  this.route.paramMap.subscribe(
     async (route: any) => {
       console.log(route.params);
       if (route) {
@@ -286,17 +283,17 @@ async ngOnInit() {
     }
   );
 
-    this.spinner.hide();
-    localStorage.setItem('id', '');
-    localStorage.setItem('gender', '');
-    localStorage.setItem('mobile_number', '') ;
-    localStorage.setItem('selectedCaste', '');
+  this.spinner.hide();
+  localStorage.setItem('id', '');
+  localStorage.setItem('gender', '');
+  localStorage.setItem('mobile_number', '') ;
+  localStorage.setItem('selectedCaste', '');
 
-    if (this.fourPageService.getUserThrough()) {
+  if (this.fourPageService.getUserThrough()) {
       this.openMessageDialog();
       }
 
-    console.log(this.isLinear);
+  console.log(this.isLinear);
 
     }
     // event on change of input field

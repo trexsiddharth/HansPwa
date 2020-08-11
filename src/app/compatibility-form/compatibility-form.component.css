@@ -9,6 +9,8 @@
 }
 main{
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
+  background: url(../../assets/bgicon.png) no-repeat center !important;
+  background-size: cover;
 }
 .mat-stepper-horizontal{
   background-color: white !important;

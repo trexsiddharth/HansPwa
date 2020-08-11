@@ -3,6 +3,7 @@ import {
   OnInit,
   ViewChild,
   OnDestroy,
+  ElementRef,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -158,9 +159,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
      /** Subject that emits when the component has been destroyed. */
       protected onDestroy = new Subject<void>();
 
+      // for only getting the autocomplete predictions
       autoComplete = {
-        type: 'address',
-        fields: ['name', 'formatted_address']
+        strictBounds: false,
+        type: 'geocode',
+        fields: ['name']
       };
 
 constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
@@ -338,7 +341,7 @@ firstStep() {
       ? this.PageTwo.value.Designation : this.PageTwo.value.OtherDesignation ?
       this.PageTwo.value.OtherDesignation :  this.PageTwo.value.Designation);
 
-      firststepdata.append('working_city', this.workplace ? this.workplace : this.PageTwo.value.Working);
+      firststepdata.append('working_city', this.PageTwo.value.Working);
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
 
@@ -393,6 +396,21 @@ Analytics(type: string, category: string, action: string) {
       action: action
     });
   }
+  }
+
+  placeChanged() {
+    const workingCity: HTMLInputElement = document.querySelector('#workingCity');
+    setTimeout(() => {
+      console.log(workingCity.value);
+      this.PageTwo.patchValue({
+        Working: workingCity.value
+      });
+      this.setAbout();
+      if (this.PageTwo.valid) {
+        this.fourPageService.formCompleted.emit(true);
+        this.fourPageService.formTwoGroup.emit(this.PageTwo);
+       }
+    }, 500);
   }
 
 onAutocompleteSelected(event) {

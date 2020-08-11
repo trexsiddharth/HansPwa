@@ -241,6 +241,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.loginStatus = false;
       localStorage.clear();
     }
+
     window.addEventListener('offline',
       () => {
         console.log('No Internet');
