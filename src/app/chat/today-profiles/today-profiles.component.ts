@@ -427,6 +427,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
           if (data.first_time === 0) {
             this.itemService.openWelcomeDialog(this.item.profiles_left);
           }
+          else {
+            this.itemService.openTodaysPopupAd();
+          }
 
           // if photo is null
           if (this.item.photo === null) {
