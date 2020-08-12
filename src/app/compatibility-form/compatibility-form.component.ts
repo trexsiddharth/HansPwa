@@ -536,8 +536,8 @@ async ngOnInit() {
               } else {
                 firststepdata.append('birth_date', date + '-' + month + '-' + year);
               }
-              firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName ?
-               this.PageOne.value.lastName : '');
+              firststepdata.append('name', `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
+                 this.PageOne.value.lastName : ''}`);
               firststepdata.append('email', this.PageOne.value.email);
 
               // son -> mother and daughter -> father rest -> same
@@ -552,7 +552,8 @@ async ngOnInit() {
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               // firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
-              firststepdata.append('manglik', this.PageOne.value.Mangalik);
+              firststepdata.append('manglik', this.PageOne.value.Mangalik ?
+               this.PageOne.value.Mangalik  === 'Don\'t Know' ? 'Anshik Manglik' : this.PageOne.value.Mangalik : '');
 
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);

@@ -533,12 +533,18 @@ getQualification(text) {
   return this.HigherEducation[groupIndex].names[valueIndex];
 }
 updateFormTwoData(profileData: FormData) {
-  this.fourPageService.profile.qualification = profileData.get('degree').toString();
-  this.fourPageService.profile.occupation = profileData.get('occupation').toString();
-  this.fourPageService.profile.designation = profileData.get('profession').toString();
-  this.fourPageService.profile.workingCity = profileData.get('working_city').toString();
-  this.fourPageService.profile.about = profileData.get('about').toString();
-  this.fourPageService.profile.abroad = profileData.get('abroad').toString();
+  this.fourPageService.profile.qualification = profileData.get('degree') ?
+  profileData.get('degree').toString() : '';
+  this.fourPageService.profile.occupation = profileData.get('occupation') ?
+  profileData.get('occupation').toString() : '';
+  this.fourPageService.profile.designation = profileData.get('profession') ?
+  profileData.get('profession').toString() : '';
+  this.fourPageService.profile.workingCity = profileData.get('working_city') ?
+  profileData.get('working_city').toString() : '';
+  this.fourPageService.profile.about = profileData.get('about') ?
+  profileData.get('about').toString() : '';
+  this.fourPageService.profile.abroad = profileData.get('abroad') ?
+  profileData.get('abroad').toString() : '';
 
   console.log(this.fourPageService.getProfile());
 }
