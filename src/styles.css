@@ -449,3 +449,21 @@ div.mat-select-search-inner input.mat-input-element {
     transform: translateZ(100);
 }
 }
+
+@keyframes actionOnProfile {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0) scale(0);
+    
+}
+100% {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translateZ(50);
+    transform: translateZ(50) scale(2);
+    
+
+}
+}
+

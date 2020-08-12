@@ -382,7 +382,7 @@ async ngOnInit() {
             } else {
               localStorage.setItem('RegisterNumber', number);
               // signifies that new user has entered his mobile number.
-              this.analyticsEvent('Registered through Four Page Registration Page Zero');
+              this.analyticsEvent('Four Page Registration Page Zero');
               console.log('New User');
               this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
 
@@ -608,7 +608,7 @@ async ngOnInit() {
                 if (this.fourPageService.getUserThrough()) {
                   // this.locality = firststepdata.get('locality');
                 } else {
-                  this.analyticsEvent('Registered through Four Page Registration Page One');
+                  this.analyticsEvent('Four Page Registration Page One');
                 }
               } else {
                 this.spinner.hide();
@@ -1025,7 +1025,7 @@ getProfile() {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '95vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = false;
+          dialogConfig.disableClose = true;
         }
       }
     );

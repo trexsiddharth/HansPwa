@@ -69,7 +69,7 @@ if (res.registered === 1) {
   // this.router.navigateByUrl('chat');
 } else {
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
-  this.analyticsEvent('Registered through Four Page Registration Page Zero');
+  this.analyticsEvent('Four Page Registration Page Zero');
    // gtag app + web
   (window as any).gtag('config', 'G-1ES443XD0F' , {
     user_id: this.phoneNumber.value.phone
@@ -95,7 +95,7 @@ if (res.registered === 1) {
   // this.router.navigateByUrl('chat');
 } else {
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
-  this.analyticsEvent('Registered through Four Page Registration Page Zero');
+  this.analyticsEvent('Four Page Registration Page Zero');
    // gtag app + web
   (window as any).gtag('config', 'G-1ES443XD0F' , {
     user_id: this.phoneNumber.value.phone
