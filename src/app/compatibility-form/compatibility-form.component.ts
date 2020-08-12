@@ -139,24 +139,24 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      firstName: ['', Validators.compose([Validators.required])],
+      firstName: [''],
       lastName: [''],
       phone: [localStorage.getItem('RegisterNumber')
-      , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+      , Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
-      Relation: ['', Validators.compose([Validators.required])],
-      gender: ['', Validators.compose([Validators.required])],
-      birth_date: ['01', Validators.compose([Validators.required])],
-      birth_month: ['January', Validators.compose([Validators.required])],
-      birth_year: ['1980', Validators.compose([Validators.required])],
-      Height: ['', Validators.compose([Validators.required])],
+      Relation: ['' ],
+      gender: ['' ],
+      birth_date: ['01' ],
+      birth_month: ['January'],
+      birth_year: ['1980' ],
+      Height: ['', ],
       // Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
-      MaritalStatus: ['', Validators.compose([Validators.required])],
-      AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
-      Religion: ['', Validators.compose([Validators.required])],
-      Castes: ['', Validators.compose([Validators.required])],
+      MaritalStatus: [''],
+      AnnualIncome: ['', Validators.compose([ Validators.max(999)])],
+      Religion: [''],
+      Castes: [''],
       Mangalik: [''],
-      // locality: ['', Validators.compose([Validators.required])],
+      // locality: ['', ],
       disabledPart: ['']
     });
   }
@@ -175,6 +175,9 @@ async ngOnInit() {
     }
   localStorage.clear();
   this.languageService.setRegisterLang();
+
+  // for facebook testing
+  this.fourPageService.setUserThrough(true);
 
   this.fourPageService.formCompleted.subscribe(
       (complete: boolean) => {
@@ -477,19 +480,19 @@ async ngOnInit() {
           lastName: [''],
           phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
           email: [''],
-          Relation: ['', Validators.compose([Validators.required])],
-          gender: ['', Validators.compose([Validators.required])],
-          birth_date: ['01', Validators.compose([Validators.required])],
-          birth_month: ['January', Validators.compose([Validators.required])],
-          birth_year: ['1980', Validators.compose([Validators.required])],
-          Height: ['', Validators.compose([Validators.required])],
-          // Weight: ['', Validators.compose([Validators.required])],
-          MaritalStatus: ['', Validators.compose([Validators.required])],
-          AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
-          Religion: ['', Validators.compose([Validators.required])],
-          Castes: ['', Validators.compose([Validators.required])],
+          Relation: [''],
+          gender: [''],
+          birth_date: ['01'],
+          birth_month: ['January'],
+          birth_year: ['1980'],
+          Height: ['', ],
+          // Weight: ['', ],
+          MaritalStatus: [''],
+          AnnualIncome: ['', Validators.compose([Validators.max(999)])],
+          Religion: [''],
+          Castes: [''],
           Mangalik: [''],
-          // locality: ['', Validators.compose([Validators.required])],
+          // locality: ['', ],
           disabledPart: ['']
         });
       }
@@ -999,6 +1002,19 @@ getProfile() {
     const dialogRef = this.matDialog.open(FormsMessageDialogComponent, dialogConfig);
   }
 
+  toTitleCase(str) {
+    if (str) {
+      return str.replace(
+        /\w\S*/g,
+        (txt) => {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+      );
+    } else {
+      return '';
+    }
+  }
+
   checkDisable(event) {
     console.log(event.checked);
     this.isDisable = event.checked;
@@ -1065,13 +1081,6 @@ getFbData() {
       }
     });
 
-    // fetch user photos
-    (window as any).FB.api('/me/photos',
-    'GET',
-    {}, (response) => {
-      console.log(response);
-    });
-
     // fetch user data
     (window as any).FB.api('/me',
     'GET',
@@ -1081,7 +1090,10 @@ getFbData() {
         firstName: response.first_name ? response.first_name : '',
         lastName: response.last_name ? response.last_name : '',
         email: response.email ? response.email : '',
-        gender: response.gender ? response.gender : ''
+        gender: response.gender ? this.toTitleCase(response.gender) : '',
+        birth_date: response.birthday ? response.birthday.split('/')[1] : '',
+        birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
+        birth_year: response.birthday ? response.birthday.split('/')[2] : ''
       });
     });
   }
@@ -1100,7 +1112,7 @@ statusChangeCallback(value) {
         } else {
          console.log('User cancelled login or did not fully authorize.');
         }
-    }, {scope: 'email, public_profile'});
+    }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
     }
   }
 

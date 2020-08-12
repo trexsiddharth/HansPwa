@@ -24,14 +24,14 @@
             
                   <mat-step [stepControl]="PageOne" >
                   <form  [formGroup]="PageOne">
-                     <!-- label name if required -->
+                     <!-- label name if  -->
                     <!-- <ng-template matStepLabel>Page I</ng-template> -->
                       <div class="row">
 
                         <div class="col-md-12">
                           <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label >Looking Rista For</mat-label>
-                              <mat-select (selectionChange)="setGender()" #relation formControlName="Relation" required >
+                              <mat-select (selectionChange)="setGender()" #relation formControlName="Relation"  >
                                       <mat-option *ngFor="let  option of createProfile" [value]="option">
                                               {{option}}
                                       </mat-option>
@@ -46,7 +46,7 @@
                         <div class="col-6">
                           <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label >First Name</mat-label>
-                            <input  type="text" (change)="inputFieldChanged('firstName')"  matInput formControlName="firstName" required name="firstName">
+                            <input  type="text" (change)="inputFieldChanged('firstName')"  matInput formControlName="firstName"  name="firstName">
                           </mat-form-field>
                         </div>
 
@@ -69,21 +69,21 @@
                           align-items: center;
                           justify-content: space-between;">
                             <select class="classic" (change)="selectFieldChange('birth_date')"  formControlName="birth_date" style="
-                            flex: 1;"  required name="birth_date">
+                            flex: 1;"   name="birth_date">
                                 <option *ngFor="let  option of date" [value]="option">
                                   {{option}}
                                 </option>
                               </select> 
 
                               <select class="classic" (change)="selectFieldChange('birth_month')" formControlName="birth_month" style="margin-left: 10px;
-                              flex: 1;"  required name="birth_month">
+                              flex: 1;"   name="birth_month">
                                 <option *ngFor="let  option of month" [value]="option">
                                   {{option}}
                                 </option>
                               </select> 
                               
                               <select class="classic" (change)="selectFieldChange('birth_year')" formControlName="birth_year" style="margin-left: 10px;
-                              flex: 1;"  required name="birth_year">
+                              flex: 1;"   name="birth_year">
                                 <option *ngFor="let  option of years" [value]="option">
                                   {{option}}
                                 </option>
@@ -96,7 +96,7 @@
                       <div class="col-md-12 matSelect">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label >Gender</mat-label>
-                            <mat-select formControlName="gender" (selectionChange)="selectFieldChange('gender')" required >
+                            <mat-select formControlName="gender" (selectionChange)="selectFieldChange('gender')"  >
                                 <mat-option value="Male">Male</mat-option>
                                 <mat-option value="Female">Female</mat-option>
                             </mat-select>
@@ -107,7 +107,7 @@
                     <div class="col-md-12">
                       <mat-form-field class="full-width fieldFit" appearance="standard" >
                          <mat-label >Religion</mat-label>
-                          <mat-select  #relation formControlName="Religion" (selectionChange)="Religion($event)" required >
+                          <mat-select  #relation formControlName="Religion" (selectionChange)="Religion($event)"  >
                                   <mat-option *ngFor="let  option of Religions" [value]="option">
                                           {{option}}
                                   </mat-option>
@@ -120,10 +120,10 @@
                                 
                   <mat-form-field class="full-width fieldFit" *ngIf="Caste" appearance="standard">
                     <mat-label >Caste</mat-label>
-                    <input type="text" matInput formControlName="Castes" multiple required [matAutocomplete]="caste" required  >
+                    <input type="text" matInput formControlName="Castes" multiple  [matAutocomplete]="caste"   >
                     <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
                        
-                            <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
+                            <mat-option *ngFor="let name of casteo | async" [value]="name"  >
                               {{name}}
                             </mat-option>
                     </mat-autocomplete>
@@ -140,7 +140,7 @@
                           *ngIf="!hideMobileNumber">
                               <mat-form-field  class="full-width fieldFit" appearance="standard">
                                   <mat-label >Mobile number</mat-label>
-                                  <input style="display: inline;" type="number" id="phone" matInput formControlName="phone" (change)="mobileNumberChanged()" required name="phone">
+                                  <input style="display: inline;" type="number" id="phone" matInput formControlName="phone" (change)="mobileNumberChanged()"  name="phone">
                               </mat-form-field>
                           </div>
 
@@ -160,7 +160,7 @@
                             <div class="col-12">
                                 <mat-form-field class="full-width fieldFit" appearance="standard">
                                   <mat-label >Height</mat-label>
-                                  <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height formControlName="Height" required name="Height">
+                                  <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height formControlName="Height"  name="Height">
                                       <mat-option *ngFor="let option of Heights;let i = index" [value]="i">
                                         {{option}}
                                       </mat-option>
@@ -171,7 +171,7 @@
                               <!-- <div class="col-6">
                                 <mat-form-field class="full-width fieldFit" appearance="standard" >
                                   <mat-label >Weight</mat-label>
-                                  <input type="number" (change)="inputFieldChanged('Weight')" matInput formControlName="Weight" required name="Weight">
+                                  <input type="number" (change)="inputFieldChanged('Weight')" matInput formControlName="Weight"  name="Weight">
                                   <span matSuffix>Kg &nbsp;</span>
                                 </mat-form-field>
                               </div> -->
@@ -181,7 +181,7 @@
                                   <mat-form-field class="full-width fieldFit" appearance="standard">
                         
                                       <mat-label >Marital Status</mat-label>
-                                      <mat-select  #relation (selectionChange)="selectFieldChange('MaritalStatus')" formControlName="MaritalStatus" required >
+                                      <mat-select  #relation (selectionChange)="selectFieldChange('MaritalStatus')" formControlName="MaritalStatus"  >
                                               <mat-option *ngFor="let  option of MaritalStatus" [value]="option">
                                                       {{option}}
                                               </mat-option>
@@ -193,7 +193,7 @@
                                 <div class="col-md-12">
                                   <mat-form-field class="full-width fieldFit" appearance="standard" >
                                     <mat-label >Annual Income In Lakhs</mat-label>
-                                    <input type="number" (change)="inputFieldChanged('AnnualIncome')" matInput formControlName="AnnualIncome" required name="AnnualIncome">
+                                    <input type="number" (change)="inputFieldChanged('AnnualIncome')" matInput formControlName="AnnualIncome"  name="AnnualIncome">
                                     <span matSuffix>Lakh Per Year &nbsp;</span>
                                     <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageOne.get('AnnualIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
                                   </mat-form-field>
@@ -264,15 +264,15 @@
                   </form>
                 </mat-step> 
 
-                <mat-step [completed]="formTwo"> 
-                  <!-- label name if required -->
+                <mat-step > 
+                  <!-- label name if  -->
                   <!-- <ng-template matStepLabel>
                     Page II
                 </ng-template> -->
                       <app-compatibility-page-two></app-compatibility-page-two>
                 </mat-step>
 
-                <mat-step [completed]="formThree">
+                <mat-step >
                   <!-- <ng-template matStepLabel>
                       Page III
                   </ng-template> -->

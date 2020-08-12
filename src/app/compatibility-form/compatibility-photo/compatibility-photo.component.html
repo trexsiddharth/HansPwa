@@ -63,8 +63,10 @@
   </p>
 
   </div>
-  
-  <div class="buttonSet"  style="margin-bottom:20px;margin-top: 20px;">
+  <div style="text-align: center;margin-top: 20px;">
+    <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="getFacebookPics()">Upload From Facebook</button>
+  </div>
+  <div class="buttonSet"  style="margin-bottom:20px;margin-top: 10px;">
         <button class="btn btn-blue" mat-raised-button style="background-color: grey;" id="photoBtn"  matStepperNext (click)="skip(0)">Go Without Photo</button>
         <button type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;" mat-raised-button color="warn" id="photoBtn" matStepperNext   (click)="checkForPhoto()">Go</button>
    </div> 

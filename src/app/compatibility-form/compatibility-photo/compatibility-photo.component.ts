@@ -437,6 +437,46 @@ export class CompatibilityPhotoComponent implements OnInit {
     (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC' });
     return false;
   }
+
+  getFacebookPics() {
+     // fetch user photos
+     (window as any).FB.api('/me/albums',
+     'GET',
+     {'fields': 'link'}, (response) => {
+       console.log('album', response);
+       if (response.data.length > 0) {
+         if (response.data[0].id) {
+          (window as any).FB.api(`/${response.data[0].id}/photos`,
+          'GET',
+          {'fields': 'link'}, (res) => {
+            console.log('Photos', res);
+            if (res.data.length > 0) {
+                if (res.data[0] && res.data[0].id) {
+                  (window as any).FB.api(`/${res.data[0].id}/picture`,
+                  'GET',
+                  {redirect: 'false'}, (picRes) => {
+                      console.log(picRes);
+                      if (picRes.data && picRes.data.url) {
+                        this.frontfile = picRes.data.url;
+                      }
+                  });
+                }
+                if (res.data[1] && res.data[1].id) {
+                  (window as any).FB.api(`/${res.data[1].id}/picture`,
+                  'GET',
+                  {redirect: 'false'}, (picRes) => {
+                      console.log(picRes);
+                      if (picRes.data && picRes.data.url) {
+                        this.backimagePath = picRes.data.url;
+                      }
+                  });
+                }
+            }
+          });
+         }
+       }
+     });
+  }
 }
 
 

@@ -172,13 +172,13 @@ constructor(private http: HttpClient, public dialog: MatDialog, private formBuil
             private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageTwo = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      Qualification: ['', Validators.compose([Validators.required])],
+      Qualification: [''],
       QualificationCtrl: [''],
-      Occupation: ['', Validators.compose([Validators.required])],
+      Occupation: ['' ],
       Designation: [''],
       DesignationCtrl: [''],
       OtherDesignation: [''],
-      Working: ['', Validators.compose([Validators.required])],
+      Working: [''],
       About: [''],
       abroad: ['']
     });
@@ -200,6 +200,8 @@ constructor(private http: HttpClient, public dialog: MatDialog, private formBuil
 
 ngOnInit() {
 
+
+  
   // if user can pass through is true
   this.fourPageService.userThroughStatusUpdated.subscribe(
     (status: boolean) => {
