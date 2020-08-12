@@ -1033,7 +1033,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editIndexPrefs = -1;
     this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
     this.preferenceProfileData.caste = this.castePreferences.join(',');
-    this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
+    if (this.preferenceProfileData.occupation) {
+      //this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
+    }
 
     console.log('preference Data to update');
     console.log(this.preferenceProfileData);

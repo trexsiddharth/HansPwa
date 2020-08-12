@@ -107,9 +107,15 @@ export class FindOpenHistoryProfileService {
   }
 
   setPhotoStatus(status: boolean) {
+    if (status) localStorage.setItem("has_photo", '1');
+    else localStorage.setItem("has_photo", "0");
     this.hasPhoto = status;
   }
   getPhotoStatus() {
+    if (localStorage.getItem("has_photo") === '1')
+      this.hasPhoto = true;
+    else
+      this.hasPhoto = false;
     return this.hasPhoto;
   }
 
@@ -211,7 +217,6 @@ export class FindOpenHistoryProfileService {
   getCountOnlyShorted() {
     return this.profileCount.shortedCount;
   }
-
   // lockdown popup
   openLockdownAd() {
     const dialogConfig = new MatDialogConfig();
@@ -433,7 +438,6 @@ export class FindOpenHistoryProfileService {
     dialogConfig.data = {
       dailyQuota: dailyCount
     };
-    console.log("falliiiiiiiiiiiiiiiing");
     const dialogRef = this.dialog.open(DailyWelcomePopupComponent, dialogConfig);
   }
 }

@@ -24,6 +24,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';
 import { timeout, retry, catchError } from 'rxjs/operators';
+import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 
 export interface StateGroup {
   letter: string;
@@ -73,7 +74,8 @@ export class CompatibilityPhotoComponent implements OnInit {
   frontfile6: any;
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient,
     public fourPageService: FourPageService,
-    private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService) {
 
   }
 
@@ -373,6 +375,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   checkForPhoto() {
     if (this.facebookImageFileSet) {
       this.uploadPhoto(this.facebookImageFile, 1);
+      this.itemService.setPhotoStatus(true);
     }
     if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
       this.fourPageService.profile.photoScore = this.photoScore;
