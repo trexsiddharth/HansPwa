@@ -158,7 +158,7 @@ export class LanguageService {
           this.profileLang.workingPref = 'वर्किंग प्रेफरेंस';
           this.profileLang.desc = 'डिस्क्रिप्शन';
           this.profileLang.todaysSpecial = 'नए रिश्ते';
-          this.profileLang.discover = 'डिस्कवर';
+          this.profileLang.discover = 'और रिश्ते';
           this.profileLang.likesYou = 'आपको पसंद करते';
           this.profileLang.yourLikes = 'आपकी पसंद';
 
