@@ -427,7 +427,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
           if (data.first_time === 0) {
             this.itemService.openWelcomeDialog(this.item.profiles_left);
           }
-          else {
+          else if (this.itemService.getCredits() === '0') {
             this.itemService.openTodaysPopupAd();
           }
 
