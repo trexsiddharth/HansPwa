@@ -217,15 +217,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
             this.analyticsEvent('User Through TWA App');
             // if fcm_app in local is not same with the coming fcm_app in url
             if (localStorage.getItem('mobile_number') &&
-            localStorage.getItem('fcm_app') &&
-             localStorage.getItem('fcm_app') !== data.params.fcm_app) {
+              localStorage.getItem('fcm_app') &&
+              localStorage.getItem('fcm_app') !== data.params.fcm_app) {
               localStorage.setItem('fcm_app', data.params.fcm_app);
               // update the new fcm id on the server
               this.checkUrl(localStorage.getItem('mobile_number')).subscribe(
                 (data) => {
-                      if (data) {
-                        console.log('FCM ID Updated');
-                      }
+                  if (data) {
+                    console.log('FCM ID Updated');
+                  }
                 }
               );
             } else {
@@ -290,10 +290,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.currentContact = this.currentUrl;
     } else {
       this.router.navigateByUrl('phone-number');
-    //   // check for facebook login status
-    //   (window as any).FB.getLoginStatus((response) => {
-    //     this.statusChangeCallback(response);
-    // });
+      //   // check for facebook login status
+      //   (window as any).FB.getLoginStatus((response) => {
+      //     this.statusChangeCallback(response);
+      // });
     }
 
     // add to home screen prompt
@@ -643,6 +643,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
       case 0:
         this.analyticsEvent('Today\'s Special Section Visited');
         this.changeToBot();
+        if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+          this.itemService.openTodaysPopupAd();
+        }
+
         break;
       case 1:
         this.tabType = 'discover';
