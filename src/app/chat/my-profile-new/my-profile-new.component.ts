@@ -1045,12 +1045,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log(this.preferenceProfileData);
     console.log(this.preferenceProfileData.religion);
     if (Array.isArray(this.preferenceProfileData.religion))
-      this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(', ');
+      this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
 
     this.preferenceProfileData.caste = this.castePreferences.join(',');
 
     if (this.personalProfileData.gender === "Female" && Array.isArray(this.personalProfileData.occupation))
-      this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(', ');
+      this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
 
     const newPrefForm = new FormData();
     newPrefForm.append(
@@ -1265,16 +1265,16 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               console.log('Photo status set to true');
               this.itemService.setPhotoStatus(true);
             }
+            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
+            if (this.personalProfileData.gender === "Female")
+              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
             this.getAllCaste();
             this.getAllCastePersonal();
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
             this.setCurrentPreferenceValue();
 
-            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
 
-            if (this.personalProfileData.gender === "Female")
-              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
           },
           (error: any) => {
             this.spinner.hide();

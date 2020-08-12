@@ -849,7 +849,7 @@
                 <div class="columnar">
                   <p class="headings">{{ languageService.profileLang.religion}}
                     {{ languageService.profileLang.preference}}</p>
-                  <p>{{preferenceProfileData.religion}}</p>
+                  <p><a *ngFor="let rel of preferenceProfileData.religion">{{rel}}, </a></p>
                   <p class="headings">{{ languageService.profileLang.castePref}}</p>
                   <p>{{
                     preferenceProfileData.caste
