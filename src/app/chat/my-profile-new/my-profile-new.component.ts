@@ -1070,10 +1070,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         ? this.preferencesForm.value.working : this.preferenceProfileData.working);
       newPrefForm.append('occupation', 'na');
     } else {
-      newPrefForm.append('occupation', this.preferencesForm.value.occupation ?
-        this.preferencesForm.value.occupation : this.preferenceProfileData.occupation);
+      newPrefForm.append('occupation', this.preferenceProfileData.occupation);
       newPrefForm.append('working', 'na');
     }
+    newPrefForm.append('religion', this.preferenceProfileData.religion);
     newPrefForm.append('food_choice', this.preferenceProfileData.food_choice);
     newPrefForm.append('description', this.preferenceProfileData.description);
     newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
@@ -1095,6 +1095,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       this.preferenceProfileData.mother_tongue
     );
     newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
+
     this.http
       .post(
         'https://partner.hansmatrimony.com/api/updatePreferencesDetails',
