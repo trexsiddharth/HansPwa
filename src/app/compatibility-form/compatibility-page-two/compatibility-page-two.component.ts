@@ -3,6 +3,7 @@ import {
   OnInit,
   ViewChild,
   OnDestroy,
+  ElementRef,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -22,7 +23,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import {  NotificationsService } from '../../notifications.service';
 
 import {
-  MatDialog,
+  MatDialog, MatAutocompleteDefaultOptions,
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';
@@ -158,6 +159,12 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
      /** Subject that emits when the component has been destroyed. */
       protected onDestroy = new Subject<void>();
 
+      // for only getting the autocomplete predictions
+      autoComplete = {
+        strictBounds: false,
+        type: 'geocode',
+        fields: ['name']
+      };
 
 constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
             public notification: NotificationsService,
@@ -304,8 +311,7 @@ ngOnInit() {
     skip() {
       this.fourPageService.formCompleted.emit(true);
       setTimeout(() => {
-        this.Analytics('Four Page Registration', 'Four Page Registration Page Two',
-                 'Skipped through Four Page Registration Page Two');
+        this.analyticsEvent('Skipped through Four Page Registration Page Two');
       }, 100);
     }
 
@@ -334,7 +340,7 @@ firstStep() {
       ? this.PageTwo.value.Designation : this.PageTwo.value.OtherDesignation ?
       this.PageTwo.value.OtherDesignation :  this.PageTwo.value.Designation);
 
-      firststepdata.append('working_city', this.workplace ? this.workplace : this.PageTwo.value.Working);
+      firststepdata.append('working_city', this.PageTwo.value.Working);
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
 
@@ -348,8 +354,7 @@ firstStep() {
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormTwoData(firststepdata);
                 } else {
-                  this.Analytics('Four Page Registration', 'Four Page Registration Page Two',
-                  'Registered through Four Page Registration Page Two');
+                  this.analyticsEvent('Registered through Four Page Registration Page Two');
                 }
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {
@@ -374,21 +379,40 @@ firstStep() {
           }
   }
 
-Analytics(type: string, category: string, action: string) {
-  if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-    (window as any).ga('send', 'event', category, action, {
+  analyticsEvent(event) {
+    if (!this.fourPageService.getUserThrough()) {
+    (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
 
-        console.log('Tracking ' + type + ' successful');
+        console.log('Tracking ' + event + ' successful');
 
       }
+
     });
 
-     // gtag app + web
-    (window as any).gtag('event', category , {
-      action: action
+    // gtag app + web
+    (window as any).gtag('event', event, {
+      event_callback: () => {
+        console.log('Tracking gtag ' + event + ' successful');
+      }
     });
   }
+  }
+
+  placeChanged() {
+    const workingCity: HTMLInputElement = document.querySelector('#workingCity');
+    setTimeout(() => {
+      console.log(workingCity.value);
+      this.PageTwo.patchValue({
+        Working: workingCity.value
+      });
+      this.setAbout();
+      this.analyticsEvent('Four Page Registration Page Two Working City Changed');
+      if (this.PageTwo.valid) {
+        this.fourPageService.formCompleted.emit(true);
+        this.fourPageService.formTwoGroup.emit(this.PageTwo);
+       }
+    }, 500);
   }
 
 onAutocompleteSelected(event) {
@@ -401,15 +425,17 @@ onAutocompleteSelected(event) {
       console.log('address of family', this.PageTwo.value.Working);
   }
 onLocationSelected(e) {
-    this.workingCity = e;
-    if (this.PageTwo.valid) {
+  console.log(e);
+  this.workingCity = e;
+  if (this.PageTwo.valid) {
       this.fourPageService.formCompleted.emit(true);
       this.fourPageService.formTwoGroup.emit(this.PageTwo);
      }
-    console.log('location of family', e);
+  console.log('location of family', e);
 }
 changedQualification() {
   console.log('changed Qualification');
+  this.analyticsEvent('Four Page Registration Page Two Qualification Changed');
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
     this.fourPageService.formTwoGroup.emit(this.PageTwo);
@@ -418,7 +444,8 @@ changedQualification() {
 }
 changedOccupation() {
   console.log('changed Occupation');
- 
+  this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
+
   switch (this.PageTwo.value.Occupation) {
     case 'Not Working':
       this.PageTwo.patchValue({
@@ -456,6 +483,8 @@ changedOccupation() {
 }
 changedDesignation() {
   console.log('changed Designation');
+  this.analyticsEvent('Four Page Registration Page Two Designation Changed');
+
   switch (this.PageTwo.value.Occupation) {
     case 'Not Working':
       this.PageTwo.patchValue({
@@ -578,6 +607,21 @@ setAgeIfNan(value: string) {
     return value;
   }
 }
+
+// setAgeIfNan(value: string) {
+//   if (value && value.toLowerCase().includes('i am nan')) {
+//       const aboutText = value.toLowerCase();
+//       aboutText.replace('nan', `${this.setAge(this.fourPageService.getProfile().dob)}`);
+//       const returnArray: string[] = aboutText.split(' ');
+//       returnArray.map(element => {
+//         element.slice(1).toUpperCase();
+//     });
+//       const returnText = returnArray.join(' ');
+//       return returnText;
+//   } else {
+//     return value;
+//   }
+// }
 
 setFormForGetUserThrough() {
   this.PageTwo = this.formBuilder.group({

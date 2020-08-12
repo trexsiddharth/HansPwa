@@ -53,6 +53,7 @@ import { async } from '@angular/core/testing';
 //   return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
 // };
 
+
 @Component({
   selector: 'app-compatibility-verify',
   templateUrl: './compatibility-verify.component.html',
@@ -95,15 +96,19 @@ export class CompatibilityVerifyComponent implements OnInit {
   HouseType: string[] = ['Owned', 'Rented', 'Leased'];
   familyData;
 
+  // for only getting the autocomplete predictions
+  autoComplete = {
+    strictBounds: false,
+    type: 'geocode',
+    fields: ['name']
+  };
+
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
               private router: Router,
               public notification: NotificationsService,
               public fourPageService: FourPageService,
-              private matDialog: MatDialog,
-              private breakPointObserver: BreakpointObserver,
               public languageService: LanguageService,
-              private route: ActivatedRoute,
               private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService) {
 
@@ -173,6 +178,17 @@ export class CompatibilityVerifyComponent implements OnInit {
       family_living_in: profile.family.city,
     });
 }
+
+placeChanged() {
+  const familyIn: HTMLInputElement = document.querySelector('#familyIn');
+  setTimeout(() => {
+    console.log(familyIn.value);
+    this.verifyForm.patchValue({
+      family_living_in: familyIn.value
+    });
+  }, 500);
+}
+
 
   onAutocompleteSelected(event) {
     console.log(event);

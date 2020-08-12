@@ -16,7 +16,7 @@
  
 </mat-toolbar>
 
-<main class='pwaSize fixed t-0 b-0 bg-white w-full HC overflowY' >
+<main class='pwaSize fixed t-0 b-0 w-full HC overflowY' >
        
         <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
         <div class="container customBackground" style="width:80%;background: white;border-radius: 20px;margin-top: 20px; margin-bottom: 20px;">
@@ -157,7 +157,7 @@
                         </p>
                           
   
-                            <div class="col-6">
+                            <div class="col-12">
                                 <mat-form-field class="full-width fieldFit" appearance="standard">
                                   <mat-label >Height</mat-label>
                                   <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height formControlName="Height" required name="Height">
@@ -168,13 +168,13 @@
                                 </mat-form-field>
                               </div>
 
-                              <div class="col-6">
+                              <!-- <div class="col-6">
                                 <mat-form-field class="full-width fieldFit" appearance="standard" >
                                   <mat-label >Weight</mat-label>
                                   <input type="number" (change)="inputFieldChanged('Weight')" matInput formControlName="Weight" required name="Weight">
                                   <span matSuffix>Kg &nbsp;</span>
                                 </mat-form-field>
-                              </div>
+                              </div> -->
   
                           <div class="col-md-12">
                        
@@ -209,10 +209,13 @@
                      
                               <mat-form-field class="full-width fieldFit" appearance="standard">
                                   <mat-label >Manglik Status</mat-label>
-                                  <mat-select (selectionChange)="selectFieldChange('Mangalik')"  formControlName="Mangalik" required >
+                                  <mat-select (selectionChange)="selectFieldChange('Mangalik')"  
+                                  formControlName="Mangalik" >
                                     <mat-option value="Manglik">Manglik</mat-option>
                                     <mat-option value="Non-Manglik">Non-Manglik</mat-option>
                                     <mat-option value="Anshik Manglik">Anshik Manglik</mat-option>
+                                    <mat-option value="Anshik Manglik">Don't Know</mat-option>
+
                                   </mat-select>
                               
                               </mat-form-field>
