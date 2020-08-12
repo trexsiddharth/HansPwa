@@ -69,6 +69,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   casteo: Observable<string[]>;
   getcastesPersonal: any = [];
 
+  autoComplete = {
+    strictBounds: false,
+    type: 'geocode',
+    fields: ['name']
+  };
+
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<
     string[]
   >(1);
@@ -397,6 +403,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       About: ['', Validators.compose([Validators.maxLength(300)])],
     });
     this.preferencesForm = this._formBuilder.group({
+      food_choice: [''],
       age_min: [''],
       age_max: [''],
       income_min: [''],
@@ -499,9 +506,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   castePreferences: string[] = [];
   specialCase() {
-    this.setStepPreferences(1);
     this.castePreferences = this.preferenceProfileData.caste.split(',');
     console.log(this.preferenceProfileData.caste);
+    console.log('somethinjkha;vjks;dn');
     console.log(this.castePreferences);
   }
   changeSelectedTab(event: any) { }
@@ -613,6 +620,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   setEditIndexPrefs(index: number) {
     this.editIndexPrefs = index;
     console.log('pref index set to' + String(index));
+    this.specialCase();
   }
   setEdit(index) {
     console.log('viaebrnifakujrnviksjsrn');
@@ -704,6 +712,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   setCurrentPreferenceValue() {
     console.log(this.personalProfileData);
     this.preferencesForm.patchValue({
+      food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
       age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
       age_max: this.preferenceProfileData.age_max ? this.preferenceProfileData.age_max : '70',
       income_min: this.preferenceProfileData.income_min,
@@ -754,6 +763,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmitPersonal() {
     this.editIndexPersonal = -1;
     this.errors = [];
+    console.log(this.personalForm.value);
     if (this.personalForm.valid) {
       const date = this.personalForm.value.birth_date;
       const month = this.month.indexOf(this.personalForm.value.birth_month) + 1;
@@ -1031,14 +1041,16 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   onSubmitPreferences() {
     this.editIndexPrefs = -1;
-    this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
-    this.preferenceProfileData.caste = this.castePreferences.join(',');
-    if (this.preferenceProfileData.occupation) {
-      //this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
-    }
-
     console.log('preference Data to update');
     console.log(this.preferenceProfileData);
+    console.log(this.preferenceProfileData.religion);
+    if (Array.isArray(this.preferenceProfileData.religion))
+      this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
+
+    this.preferenceProfileData.caste = this.castePreferences.join(',');
+
+    if (this.personalProfileData.gender === "Female" && Array.isArray(this.personalProfileData.occupation))
+      this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
 
     const newPrefForm = new FormData();
     newPrefForm.append(
@@ -1124,10 +1136,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       return null;
     }
   }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = window.innerWidth;
-  }
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event) {
+  //   this.innerWidth = window.innerWidth;
+  // }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
   }
@@ -1257,9 +1269,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
             this.setCurrentPreferenceValue();
-            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
-            this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
-            console.log(this.preferenceProfileData.occupation);
+
+            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
+
+            if (this.personalProfileData.gender === "Female")
+              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
           },
           (error: any) => {
             this.spinner.hide();
@@ -1710,6 +1724,42 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     return new Promise((resolve) => {
       resolve(statusConfirmed);
     });
+  }
+
+  placeChangedLocality(): void {
+    const place: HTMLInputElement = document.querySelector('#Locality');
+    setTimeout(() => {
+      console.log(place.value);
+      this.personalForm.patchValue({
+        Locality: place.value
+      });
+    }, 500);
+  }
+  placeChangedWorkingcity(): void {
+    const place: HTMLInputElement = document.querySelector('#WorkingCity');
+    setTimeout(() => {
+      console.log(place.value);
+      this.personalForm.patchValue({
+        WorkingCity: place.value
+      });
+    }, 500);
+  }
+  placeChangedBirthPlace(): void {
+    const place: HTMLInputElement = document.querySelector('#BirthPlace');
+    setTimeout(() => {
+      console.log(place.value);
+      this.personalForm.patchValue({
+        BirthPlace: place.value
+      });
+    }, 500);
+  }
+
+  placeChangedFamily() {
+    const place: HTMLInputElement = document.querySelector('#familyLivingIn');
+    setTimeout(() => {
+      console.log(place.value);
+      this.familyProfileData.city = place.value;
+    }, 1000);
   }
   onAutocompleteSelected(event, type: string) {
     if (type === 'Locality') {
