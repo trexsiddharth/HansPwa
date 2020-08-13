@@ -61,12 +61,20 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
     public languageService: LanguageService,
     public subscriptionService: SubscriptionserviceService) {
   }
-
+  @HostListener('scroll', ['$event'])
+  onScroll(event) {
+    console.log("Scroll Event", document.body.scrollTop);
+    console.log("Scroll Event", window.pageYOffset);
+    this.onScrollOfMain();
+  }
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
     this.section = document.querySelector('#today-main');
+    if (localStorage.getItem('todaysSpecialScrollPos')) {
+      document.getElementById("main").scrollTo(0, Number(localStorage.getItem('todaysSpecialScrollPos')));
+    }
+    this.itemService.setTutorialIndex();
   }
-
   ngOnInit() {
 
     this.contactNumber = this.chatService.getContactNumber();
@@ -210,6 +218,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
     console.log(this.item);
   }
 
+  onScrollOfMain() {
+    console.log('scrolled' + document.getElementById("content").scrollTop);
+    this.itemService.setScroll('todaysSpecialScrollPos', document.getElementById("content").scrollTop);
+  }
   checkUrl(): Observable<any> {
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
@@ -266,7 +278,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
     this.stopAnimation();
-
+    this.itemService.setTutorialIndex();
     console.log('shortlist count', this.shortListCount);
     const modal = document.getElementById('myModal');
     if (modal.style.display !== 'none') {
@@ -426,9 +438,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
           // data.first_time = 1 -> it gets 1 once he has seen first profile
           if (data.first_time === 0) {
             this.itemService.openWelcomeDialog(this.item.profiles_left);
-          }
-          else if (this.itemService.getCredits() === '0') {
-            this.itemService.openTodaysPopupAd();
           }
 
           // if photo is null
