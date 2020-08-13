@@ -157,8 +157,8 @@ export class LanguageService {
           this.profileLang.occupationPref = 'ऑक्यूपेशन प्रेफरेंस';
           this.profileLang.workingPref = 'वर्किंग प्रेफरेंस';
           this.profileLang.desc = 'डिस्क्रिप्शन';
-          this.profileLang.todaysSpecial = 'नए रिश्ते';
-          this.profileLang.discover = 'और रिश्ते';
+          this.profileLang.todaysSpecial = 'आज के रिश्ते';
+          this.profileLang.discover = 'और रिश्ते देखे';
           this.profileLang.likesYou = 'आपको पसंद करते';
           this.profileLang.yourLikes = 'आपकी पसंद';
 
@@ -255,7 +255,7 @@ export class LanguageService {
           this.profileLang.workingPref = 'Working preference';
           this.profileLang.desc = 'Description';
           this.profileLang.todaysSpecial = 'Today\'s Special';
-          this.profileLang.discover = 'Discover';
+          this.profileLang.discover = 'See More';
           this.profileLang.likesYou = 'Likes You';
           this.profileLang.yourLikes = 'Your Likes';
 
