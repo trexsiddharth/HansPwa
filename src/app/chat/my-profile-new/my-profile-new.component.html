@@ -758,7 +758,7 @@
               </div>
               <div class="col-12">
                 <h6 style="display: inline-block;">Marital Status:</h6>
-                <select type="text" class="form-control" formControlName="marital_status" required>
+                <select type="text" class="form-control" formControlName="marital_status">
                   <option *ngFor="let item of MaritalStatus" [value]="item">{{
                     item
                   }}</option>
@@ -766,7 +766,7 @@
               </div>
               <div class="col-12">
                 <h6 style="display: inline-block;">Food Choice:</h6>
-                <select type="text" class="form-control" formControlName="food_choice" required>
+                <select type="text" class="form-control" formControlName="food_choice">
                   <option *ngFor="let item of Foodpreferences" [value]="item">{{
                     item
                   }}</option>
