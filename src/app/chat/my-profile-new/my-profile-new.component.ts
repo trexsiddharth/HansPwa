@@ -1070,7 +1070,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         ? this.preferencesForm.value.working : this.preferenceProfileData.working);
       newPrefForm.append('occupation', 'na');
     } else {
-      newPrefForm.append('occupation', this.preferenceProfileData.occupation);
+      newPrefForm.append('occupation', this.preferencesForm.value.occupation
+        ? this.preferencesForm.value.occupation : this.preferenceProfileData.occupation);
       newPrefForm.append('working', 'na');
     }
     newPrefForm.append('religion', this.preferenceProfileData.religion);

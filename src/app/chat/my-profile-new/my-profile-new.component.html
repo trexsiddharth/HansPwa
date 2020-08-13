@@ -868,8 +868,8 @@
             <div class="column" *ngIf="editIndexPrefs == 2">
               <div class="col-12">
                 <h6 style="display: inline-block;">{{languageService.profileLang.religion}}:</h6>
-                <mat-select type="text" class="form-control" [multiple]="true" formControlName="religion"
-                  [(ngModel)]="preferenceProfileData.religion" required>
+                <mat-select style="color:black!important" type="text" class="form-control" [multiple]="true"
+                  formControlName="religion" [(ngModel)]="preferenceProfileData.religion" required>
                   <mat-option *ngFor="let item of Religions" [value]="item" required>
                     {{ item}}
                   </mat-option>
@@ -879,10 +879,12 @@
                 <h6>Caste</h6>
                 <mat-select type="text" class="form-control" [multiple]="true"
                   (selectionChange)="casteSelectionChanged($event)" [formControl]="searchCaste" #multiSelect
-                  [(ngModel)]="castePreferences" required>
+                  [(ngModel)]="castePreferences">
                   <mat-option>
                     <ngx-mat-select-search noEntriesFoundLabel="No Castes Found" placeholderLabel="Search Castes..."
-                      [formControl]="searchCasteText"></ngx-mat-select-search>
+                      [formControl]="searchCasteText">
+                      <mat-icon ngxMatSelectSearchClear>close</mat-icon>
+                    </ngx-mat-select-search>
                   </mat-option>
                   <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
                     {{ name }}
@@ -895,7 +897,7 @@
               </div>
               <div class="col-12">
                 <h6 style="display: inline-block;">Manglik :</h6>
-                <select type="text" class="form-control" formControlName="manglik_pref"
+                <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
                   [(ngModel)]="preferenceProfileData.manglik" required>
                   <option *ngFor="let item of Mangalika" [value]="item">{{
                     item
