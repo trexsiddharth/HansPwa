@@ -74,9 +74,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
     this.section = document.querySelector('#today-main');
-    if (localStorage.getItem('todaysSpecialScrollPos')) {
-      document.getElementById("main").scrollTo(0, Number(localStorage.getItem('todaysSpecialScrollPos')));
-    }
+    // if (localStorage.getItem('todaysSpecialScrollPos')) {
+    //   document.getElementById("main").scrollTo(0, Number(localStorage.getItem('todaysSpecialScrollPos')));
+    // }
     // this.itemService.setTutorialIndex();
   }
   ngOnInit() {
@@ -221,10 +221,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
     console.log(this.item);
   }
 
-  onScrollOfMain() {
-    console.log('scrolled' + document.getElementById("content").scrollTop);
-    this.itemService.setScroll('todaysSpecialScrollPos', document.getElementById("content").scrollTop);
-  }
+  // onScrollOfMain() {
+  //   console.log('scrolled' + document.getElementById("content").scrollTop);
+  //   this.itemService.setScroll('todaysSpecialScrollPos', document.getElementById("content").scrollTop);
+  // }
   checkUrl(): Observable<any> {
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
