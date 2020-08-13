@@ -69,7 +69,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   onScroll(event) {
     console.log("Scroll Event", document.body.scrollTop);
     console.log("Scroll Event", window.pageYOffset);
-    this.onScrollOfMain();
+    // this.onScrollOfMain();
   }
   ngAfterViewInit(): void {
     // this.languageService.setCurrentLanguage('hindi');
