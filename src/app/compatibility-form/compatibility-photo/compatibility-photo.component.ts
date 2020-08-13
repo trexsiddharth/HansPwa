@@ -65,6 +65,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   currentAge: number;
   public message: string;
   photoScore = 0;
+  clickedFacebook = false;
 
 
 
@@ -73,9 +74,9 @@ export class CompatibilityPhotoComponent implements OnInit {
   frontfile5: any;
   frontfile6: any;
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient,
-    public fourPageService: FourPageService,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService) {
+              public fourPageService: FourPageService,
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService) {
 
   }
 
@@ -184,7 +185,13 @@ export class CompatibilityPhotoComponent implements OnInit {
       if (this.suc.pic_upload_status === 'Y') {
         console.log('photos', suc);
         this.spinner.hide();
-        this.ngxNotificationService.success('Photo Uploaded Succesfully!');
+        if (!this.clickedFacebook) {
+          this.ngxNotificationService.success('Photo Uploaded Succesfully!');
+        } else if (this.facebookImageFileSet) {
+          this.facebookImageFileSet = false;
+          this.ngxNotificationService.success('Photo Uploaded Succesfully!');
+        }
+        
         photoBtn.disabled = false;
 
         switch (index) {
@@ -233,15 +240,20 @@ export class CompatibilityPhotoComponent implements OnInit {
   base64DefaultURL: string;
   generatedImage: string;
   facebookImageFile: File;
+  facebookImageFile2: File;
+  facebookImageFile3: File;
   facebookImageFileSet: boolean = false;
+  facebookImageFileSet2: boolean = false;
+  facebookImageFileSet3: boolean = false;
 
 
-  getImage(imageUrl: string) {
+  getImage(imageUrl: string, index) {
     this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
       this.base64TrimmedURL = base64Data;
-      this.createBlobImageFileAndShow();
+      this.createBlobImageFileAndShow(index);
     });
   }
+
   getBase64ImageFromURL(url: string): Observable<string> {
     return Observable.create((observer: Observer<string>) => {
       // create an image object
@@ -277,15 +289,30 @@ export class CompatibilityPhotoComponent implements OnInit {
     this.base64DefaultURL = dataURL;
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
-  createBlobImageFileAndShow(): void {
+  createBlobImageFileAndShow(index): void {
     this.dataURItoBlob(this.base64TrimmedURL).subscribe((blob: Blob) => {
       const imageBlob: Blob = blob;
       const imageName: string = this.generateName();
-      this.facebookImageFile = new File([imageBlob], imageName, {
-        type: "image/jpeg"
-      });
-      this.generatedImage = window.URL.createObjectURL(this.facebookImageFile);
-      this.facebookImageFileSet = true;
+      if (index === 1) {
+        this.facebookImageFile = new File([imageBlob], imageName, {
+          type: "image/jpeg"
+        });
+        this.generatedImage = window.URL.createObjectURL(this.facebookImageFile);
+        this.facebookImageFileSet = true;
+      } else if (index === 2) {
+        this.facebookImageFile2 = new File([imageBlob], imageName, {
+          type: "image/jpeg"
+        });
+        this.generatedImage = window.URL.createObjectURL(this.facebookImageFile2);
+        this.facebookImageFileSet2 = true;
+      } else {
+        this.facebookImageFile3 = new File([imageBlob], imageName, {
+          type: "image/jpeg"
+        });
+        this.generatedImage = window.URL.createObjectURL(this.facebookImageFile3);
+        this.facebookImageFileSet3 = true;
+      }
+      
     });
   }
   dataURItoBlob(dataURI: string): Observable<Blob> {
@@ -327,7 +354,7 @@ export class CompatibilityPhotoComponent implements OnInit {
       (link) => {
         if (link) {
           this.imgURL = link;
-          this.getImage(this.imgURL);
+          this.getImage(this.imgURL, 1);
         }
       }
     );
@@ -352,6 +379,14 @@ export class CompatibilityPhotoComponent implements OnInit {
   checkForPhoto() {
     if (this.facebookImageFileSet) {
       this.uploadPhoto(this.facebookImageFile, 1);
+      this.itemService.setPhotoStatus(true);
+    }
+    if (this.facebookImageFileSet2) {
+      this.uploadPhoto(this.facebookImageFile2, 2);
+      this.itemService.setPhotoStatus(true);
+    }
+    if (this.facebookImageFileSet3) {
+      this.uploadPhoto(this.facebookImageFile3, 3);
       this.itemService.setPhotoStatus(true);
     }
     if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
@@ -440,6 +475,61 @@ export class CompatibilityPhotoComponent implements OnInit {
     (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC' });
     return false;
   }
+
+  // get pics from facebook
+  getFacebookPics() {
+    this.clickedFacebook = true;
+    this.spinner.show();
+    // fetch user photos
+    (window as any).FB.api('/me/albums',
+    'GET',
+    {'fields': 'link,name'}, (response) => {
+      console.log('album', response);
+      this.spinner.hide();
+      if (response.data.length > 0) {
+        response.data.forEach(element => {
+          if (element.name === 'प्रोफ़ाइल फ़ोटो' ||
+           element.name === 'Profile Photo' ||
+            element.name === 'Profile photo' ||
+            element.name === 'profile photo') {
+              if (element.id) {
+                (window as any).FB.api(`/${element.id}/photos`,
+                'GET',
+                {'fields': 'link'}, (res) => {
+                  console.log('Photos', res);
+                  if (res.data.length > 0) {
+                      if (res.data[0] && res.data[0].id) {
+                        (window as any).FB.api(`/${res.data[0].id}/picture`,
+                        'GET',
+                        {redirect: 'false'}, (picRes) => {
+                            console.log(picRes);
+                            if (picRes.data && picRes.data.url) {
+                              this.frontfile = picRes.data.url;
+                              this.getImage(this.frontfile, 2);
+                            }
+                        });
+                      }
+                      if (res.data[1] && res.data[1].id) {
+                        (window as any).FB.api(`/${res.data[1].id}/picture`,
+                        'GET',
+                        {redirect: 'false'}, (picRes) => {
+                            console.log(picRes);
+                            if (picRes.data && picRes.data.url) {
+                              this.BackimgURL = picRes.data.url;
+                              this.getImage(this.BackimgURL, 3);
+                            }
+                        });
+                      }
+                  }
+                });
+               }
+          }
+        });
+      } else {
+          this.ngxNotificationService.warning('No Facebook Picture Found');
+      }
+    });
+ }
 }
 
 

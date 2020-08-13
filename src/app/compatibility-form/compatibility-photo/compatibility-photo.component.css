@@ -43,6 +43,11 @@ justify-content: space-between;
   margin-bottom: 0px;
   color: #808080;
 }
+.facebookBtn {
+  background-color: #1266c6;
+    padding:9px 32px!important;
+    border-radius: 5px!important;
+}
 
 #photoBtn {
     margin: 3px;
