@@ -70,6 +70,17 @@ hr{
     height:1rem;
     margin:4px;
 }
+.labelS {
+    width:13px!important;
+    /* margin:auto; */
+    margin:0 ;
+    padding:2px;
+    font-size:5px!important;
+    display: block;
+    position: absolute;
+    z-index:99999999;
+    right:22px;
+  }
 .rowMore{
     width:100%;
     padding-top:5px;

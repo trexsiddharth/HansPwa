@@ -34,6 +34,8 @@ export class FindOpenHistoryProfileService {
 
   popupOpen: boolean = false;
 
+  tutorialIndex = -1;
+
   constructor(
     private dialog: MatDialog,
     private breakPointObserver: BreakpointObserver,
@@ -60,6 +62,23 @@ export class FindOpenHistoryProfileService {
       return null;
     }
   }
+  setTutorialIndex() {
+    console.log("hdfdjhfasdj");
+    console.log(this.tutorialIndex);
+    if (localStorage.getItem("tutorialIndex") === "-1")
+      return;
+    if (this.tutorialIndex == 4)
+      this.tutorialIndex = -1;
+    else
+      this.tutorialIndex = (this.tutorialIndex + 1);
+    localStorage.setItem("tutorialIndex", String(this.tutorialIndex));
+
+  }
+  getTutorialIndex() {
+    let temp = Number(localStorage.getItem("tutorialIndex"));
+    this.tutorialIndex = temp;
+    return this.tutorialIndex;
+  }
   getCredits() {
     let credits = localStorage.getItem('credits');
     return credits;
@@ -84,6 +103,19 @@ export class FindOpenHistoryProfileService {
       localStorage.setItem("contactedPhoneClicked", "0");
     }
   }
+  setChangePrefsClicked(status: boolean) {
+    if (status) {
+      localStorage.setItem("changePrefsClicked", "1");
+    }
+    else {
+      localStorage.setItem("changePrefsClicked", "0");
+    }
+  }
+  getChangePrefsClicked() {
+    let temp = localStorage.getItem("changePrefsClicked");
+    if (temp == "1") return true
+    else return false;
+  }
   getdrawerBadgeClicked() {
     let temp = localStorage.getItem("drawerBadgeClicked");
     if (temp == "1") return true
@@ -104,6 +136,17 @@ export class FindOpenHistoryProfileService {
   }
   getIsLead() {
     return this.is_lead;
+  }
+  setScroll(pagename: string, scrollPosition: number) {
+    switch (pagename) {
+      case 'todaysSpecial': localStorage.setItem('todaysSpecialScrollPos', String(scrollPosition));
+        break;
+      case 'discover': localStorage.setItem('discoverScrollPos', String(scrollPosition));
+        break;
+      case 'yourLikes': localStorage.setItem('yourLikesScrollPos', String(scrollPosition));
+        break;
+    }
+
   }
 
   setPhotoStatus(status: boolean) {

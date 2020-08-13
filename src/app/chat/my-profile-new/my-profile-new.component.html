@@ -17,7 +17,7 @@
           </span>
         </div>
         <div class="columnA">
-          <img src="../../../assets/shieldN.svg" style="vertical-align: middle;width:60px;margin-top:20px">
+          <img src="../../../assets/sunburst.svg" style="vertical-align: middle;width:110px;margin-top:2px">
         </div>
       </div>
       <div class="UpInfo" *ngIf="itemService.getPhotoStatus()">
@@ -758,7 +758,7 @@
               </div>
               <div class="col-12">
                 <h6 style="display: inline-block;">Marital Status:</h6>
-                <select type="text" class="form-control" formControlName="marital_status" required>
+                <select type="text" class="form-control" formControlName="marital_status">
                   <option *ngFor="let item of MaritalStatus" [value]="item">{{
                     item
                   }}</option>
@@ -766,7 +766,7 @@
               </div>
               <div class="col-12">
                 <h6 style="display: inline-block;">Food Choice:</h6>
-                <select type="text" class="form-control" formControlName="food_choice" required>
+                <select type="text" class="form-control" formControlName="food_choice">
                   <option *ngFor="let item of Foodpreferences" [value]="item">{{
                     item
                   }}</option>

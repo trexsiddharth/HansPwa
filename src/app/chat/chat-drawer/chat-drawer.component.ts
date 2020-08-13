@@ -60,6 +60,7 @@ export class ChatDrawerComponent implements OnInit {
 
   openUserProfile() {
     this.analyticsEvent('User Clicked My Profile From Chat Drawer');
+    this.itemService.setChangePrefsClicked(true);
     this.router.navigateByUrl(`chat/my-profile-new/${this.userId}/${this.userIsLead}`);
   }
   openDiscover() {

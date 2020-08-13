@@ -721,7 +721,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       manglik_pref: this.preferenceProfileData.manglik ? this.preferenceProfileData.manglik : 'Doesn\'t Matter',
       occupation: this.preferenceProfileData.occupation ? this.preferenceProfileData.occupation : 'Doesn\'t Matter',
 
-      working: (this.preferenceProfileData.working === 'na' || this.preferenceProfileData.working === undefined || this.preferenceProfileData.working)
+      working: (this.preferenceProfileData.working === 'na' || this.preferenceProfileData.working === undefined)
         ? 'Doesn\'t Matter' : this.preferenceProfileData.working,
 
       religion: this.preferenceProfileData.religion,
@@ -1075,7 +1075,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       newPrefForm.append('working', 'na');
     }
     newPrefForm.append('religion', this.preferenceProfileData.religion);
-    newPrefForm.append('food_choice', this.preferenceProfileData.food_choice);
+    newPrefForm.append('food_choice', this.preferencesForm.value.food_choice ?
+      this.preferencesForm.value.food_choice : this.preferenceProfileData.food_choice);
+
     newPrefForm.append('description', this.preferenceProfileData.description);
     newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
       this.preferencesForm.value.income_min : this.preferenceProfileData.income_min);
