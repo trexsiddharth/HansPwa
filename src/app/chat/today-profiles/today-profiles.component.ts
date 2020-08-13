@@ -55,15 +55,15 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   showActionAnimation = false;
 
   constructor(private http: HttpClient,
-              private spinner: NgxSpinnerService,
-              private ngxNotificationService: NgxNotificationService,
-              public notification: NotificationsService,
-              public chatService: ChatServiceService,
-              public itemService: FindOpenHistoryProfileService,
-              public router: Router,
-              private dialog: MatDialog,
-              public languageService: LanguageService,
-              public subscriptionService: SubscriptionserviceService) {
+    private spinner: NgxSpinnerService,
+    private ngxNotificationService: NgxNotificationService,
+    public notification: NotificationsService,
+    public chatService: ChatServiceService,
+    public itemService: FindOpenHistoryProfileService,
+    public router: Router,
+    private dialog: MatDialog,
+    public languageService: LanguageService,
+    public subscriptionService: SubscriptionserviceService) {
   }
   @HostListener('scroll', ['$event'])
   onScroll(event) {
@@ -77,7 +77,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
     if (localStorage.getItem('todaysSpecialScrollPos')) {
       document.getElementById("main").scrollTo(0, Number(localStorage.getItem('todaysSpecialScrollPos')));
     }
-    this.itemService.setTutorialIndex();
+    // this.itemService.setTutorialIndex();
   }
   ngOnInit() {
     this.contactNumber = this.chatService.getContactNumber();
@@ -297,7 +297,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
     this.stopAnimation();
-    this.itemService.setTutorialIndex();
+    // this.itemService.setTutorialIndex();
     console.log('shortlist count', this.shortListCount);
     const modal = document.getElementById('myModal');
     if (modal.style.display !== 'none') {
