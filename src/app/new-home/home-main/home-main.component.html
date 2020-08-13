@@ -121,13 +121,13 @@
         <span style="color: white;font-size: 16px;">{{languageService.homeLang.lakshmiTemple}}</span>
     </div>
 </div>
-    <div class="button3">
-        <button class="registerBtn" style="background-color: #0C9BF2;"
+    <div class="button3 btnRightPad">
+        <button class="registerBtn " style="background-color: #0C9BF2;"
         [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
          mat-raised-button *ngIf="homeService.getLoginStatus()==false">
             {{languageService.homeLang.freeRegister}}
         </button>
-        <button class="rishteBtn" style="background-color: #0C9BF2;"
+        <button class="rishteBtn " style="background-color: #0C9BF2;"
         [routerLink]="['/chat']" routerLinkActive="router-link-active"
          mat-raised-button *ngIf="homeService.getLoginStatus()">
          {{languageService.homeLang.rishteDekhein}}

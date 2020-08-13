@@ -382,7 +382,7 @@ async ngOnInit() {
             } else {
               localStorage.setItem('RegisterNumber', number);
               // signifies that new user has entered his mobile number.
-              this.analyticsEvent('Registered through Four Page Registration Page Zero');
+              this.analyticsEvent('Four Page Registration Page Zero');
               console.log('New User');
               this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
 
@@ -536,8 +536,8 @@ async ngOnInit() {
               } else {
                 firststepdata.append('birth_date', date + '-' + month + '-' + year);
               }
-              firststepdata.append('name', this.PageOne.value.firstName + ' ' + this.PageOne.value.lastName ?
-               this.PageOne.value.lastName : '');
+              firststepdata.append('name', `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
+                 this.PageOne.value.lastName : ''}`);
               firststepdata.append('email', this.PageOne.value.email);
 
               // son -> mother and daughter -> father rest -> same
@@ -552,7 +552,8 @@ async ngOnInit() {
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               // firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
-              firststepdata.append('manglik', this.PageOne.value.Mangalik);
+              firststepdata.append('manglik', this.PageOne.value.Mangalik ?
+               this.PageOne.value.Mangalik  === 'Don\'t Know' ? 'Anshik Manglik' : this.PageOne.value.Mangalik : '');
 
               firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
@@ -608,7 +609,7 @@ async ngOnInit() {
                 if (this.fourPageService.getUserThrough()) {
                   // this.locality = firststepdata.get('locality');
                 } else {
-                  this.analyticsEvent('Registered through Four Page Registration Page One');
+                  this.analyticsEvent('Four Page Registration Page One');
                 }
               } else {
                 this.spinner.hide();
@@ -1025,7 +1026,7 @@ getProfile() {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '95vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = false;
+          dialogConfig.disableClose = true;
         }
       }
     );

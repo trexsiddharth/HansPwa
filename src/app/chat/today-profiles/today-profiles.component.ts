@@ -50,16 +50,20 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: max-line-length
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
+  // last action
+  lastAction;
+  showActionAnimation = false;
+
   constructor(private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private ngxNotificationService: NgxNotificationService,
-    public notification: NotificationsService,
-    public chatService: ChatServiceService,
-    public itemService: FindOpenHistoryProfileService,
-    public router: Router,
-    private dialog: MatDialog,
-    public languageService: LanguageService,
-    public subscriptionService: SubscriptionserviceService) {
+              private spinner: NgxSpinnerService,
+              private ngxNotificationService: NgxNotificationService,
+              public notification: NotificationsService,
+              public chatService: ChatServiceService,
+              public itemService: FindOpenHistoryProfileService,
+              public router: Router,
+              private dialog: MatDialog,
+              public languageService: LanguageService,
+              public subscriptionService: SubscriptionserviceService) {
   }
   @HostListener('scroll', ['$event'])
   onScroll(event) {
@@ -76,7 +80,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
     this.itemService.setTutorialIndex();
   }
   ngOnInit() {
-
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
     if (!localStorage.getItem('authData')) {
@@ -242,6 +245,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
         text: data,
         channel_name: 'app'
       };
+      // last action for action animation
+      // this.lastAction = data;
+      // this.startActionAnimation();
 
       const myJSON = JSON.stringify(this.Data);
       console.log(myJSON);
@@ -254,6 +260,19 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
         throw new Error('Server Timeout ' + e);
       }));
     }
+  }
+
+  startActionAnimation() {
+    if (this.lastAction === 'SHOW') {
+      return;
+    }
+
+    this.showActionAnimation = true;
+
+    setTimeout(() => {
+      this.showActionAnimation = false;
+    }, 10000);
+
   }
 
   analyticsEvent(event) {

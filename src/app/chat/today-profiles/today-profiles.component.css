@@ -136,6 +136,24 @@ main{
     padding: 10px;
 }
 
+.actionAnimationDiv {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 999999;
+    text-align: center;
+    animation: actionOnProfile 5s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+}
+
+.actionAnimation{
+    width: 100px;
+}
+
 
 @-webkit-keyframes arrow {
     0%, 100% {

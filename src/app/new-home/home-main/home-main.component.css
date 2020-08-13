@@ -91,20 +91,19 @@
 .imageThreeGradient{
     width: 100%;
     height: auto;
-    padding-bottom: 20px;
     position: relative;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
     align-items: center;
+    padding: 20px 0 20px 20%;
     background-image: linear-gradient(0deg,#AD018C , #5C1F90);
 
 }
 .innerHoriz{
     width: 100%;
     height: 270px;
-    padding-left: 20px;
     position: relative;
     display: -webkit-box;
     -webkit-box-orient: horizontal;
@@ -120,6 +119,9 @@
     height: 100%;
     margin-left: 20px;
     overflow: hidden;
+}
+.btnRightPad {
+    padding-right: 20%;
 }
 .featureCard2{
     width: 100%;
@@ -280,6 +282,27 @@ li{
         height: 100%;
         margin-left: 20px;
         overflow: hidden;
+    }
+    .innerHoriz{
+        width: 100%;
+        height: 270px;
+        padding-left: 20px;
+        position: relative;
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        overflow: auto;
+        scroll-behavior: smooth;
+        flex-flow: row;
+        justify-content: center;
+    }
+    .imageThreeGradient{
+        padding: 0px;
+    
+    }
+    .btnRightPad {
+        padding-right: 0px;
     }
     .featureCard2{
         width: 100%;
