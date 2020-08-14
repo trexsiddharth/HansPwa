@@ -1052,6 +1052,24 @@ getProfile() {
     );
   }
 
+    //  get facebook login status
+statusChangeCallback(value) {
+  console.log(value);
+  if (value.status === 'connected') {
+    localStorage.setItem('fb_token', value.authResponse.accessToken);
+    this.getFbData();
+  } else {
+    (window as any).FB.login((response) => {
+      if (response.authResponse) {
+       console.log('Welcome!  Fetching your information.... ');
+       this.getFbData();
+      } else {
+       console.log('User cancelled login or did not fully authorize.');
+      }
+  }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
+  }
+}
+
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
 getFbData() {
     console.log('Welcome!  Fetching your information.... ');
@@ -1066,13 +1084,6 @@ getFbData() {
       }
     });
 
-    // fetch user photos
-    (window as any).FB.api('/me/photos',
-    'GET',
-    {}, (response) => {
-      console.log(response);
-    });
-
     // fetch user data
     (window as any).FB.api('/me',
     'GET',
@@ -1082,26 +1093,24 @@ getFbData() {
         firstName: response.first_name ? response.first_name : '',
         lastName: response.last_name ? response.last_name : '',
         email: response.email ? response.email : '',
-        gender: response.gender ? response.gender : ''
+        gender: response.gender ? this.toTitleCase(response.gender) : '',
+        birth_date: response.birthday ? response.birthday.split('/')[1] : '',
+        birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
+        birth_year: response.birthday ? response.birthday.split('/')[2] : ''
       });
     });
   }
 
-  //  get facebook login status
-statusChangeCallback(value) {
-    console.log(value);
-    if (value.status === 'connected') {
-      localStorage.setItem('fb_token', value.authResponse.accessToken);
-      this.getFbData();
-    } else {
-      (window as any).FB.login((response) => {
-        if (response.authResponse) {
-         console.log('Welcome!  Fetching your information.... ');
-         this.getFbData();
-        } else {
-         console.log('User cancelled login or did not fully authorize.');
+  toTitleCase(str) {
+    if (str) {
+      return str.replace(
+        /\w\S*/g,
+        (txt) => {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
-    }, {scope: 'email, public_profile'});
+      );
+    } else {
+      return '';
     }
   }
 
