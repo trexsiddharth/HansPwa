@@ -504,7 +504,9 @@ async ngOnInit() {
     console.log('year', this.PageOne.value.birth_year);
 
 
-    if (this.PageOne.value.phone.toString().length < 10 || this.PageOne.value.phone.toString().length > 13
+    if (this.PageOne.value.phone &&
+      this.PageOne.value.phone.toString().length < 10 ||
+       this.PageOne.value.phone.toString().length > 13
      || this.PageOne.value.phone.invalid) {
        console.log(this.PageOne.value.phone);
        this.ngxNotificationService.error('Enter A Valid Mobile Number');
