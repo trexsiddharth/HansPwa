@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { MatSidenav, MatSelect } from '@angular/material';
 import { LanguageService } from 'src/app/language.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChatServiceService } from 'src/app/chat-service.service';
@@ -7,6 +7,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { timeout, retry, catchError, takeUntil } from 'rxjs/operators';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { ReplaySubject, Subject } from 'rxjs';
 
 
 @Component({
@@ -22,17 +25,161 @@ export class ChatDrawerComponent implements OnInit {
   userIsLead;
   langCheck;
   currentLanguage;
+  gender: string;
+  preferenceProfileData: any;
+  preferencesForm: FormGroup;
   constructor(public languageService: LanguageService,
     private chatService: ChatServiceService,
     private spinner: NgxSpinnerService,
     private http: HttpClient,
     private ngxNotificationService: NgxNotificationService,
     public router: Router,
+    private _formBuilder: FormBuilder,
     public itemService: FindOpenHistoryProfileService,
     public activatedRoute: ActivatedRoute) {
-
+    this.preferencesForm = this._formBuilder.group({
+      food_choice: [''],
+      age_min: [''],
+      age_max: [''],
+      income_min: [''],
+      income_max: [''],
+      caste_pref: [''],
+      manglik_pref: [''],
+      occupation: [''],
+      religion: [''],
+      height_min: [''],
+      height_max: [''],
+      marital_status: [''],
+      working: [''],
+    });
 
   }
+  getcastes: any = [];
+  searchedCaste = '';
+  searchCaste = new FormControl();
+  searchCasteText = new FormControl();
+  isAllCastePref = false;
+
+  public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<
+    string[]
+  >(1);
+  protected _onDestroy = new Subject<void>();
+  @ViewChild('#multiSelect', { static: true }) multiSelect: MatSelect;
+  Heights: string[] = [
+    '4\'0"',
+    '4\'1"',
+    '4\'2"',
+    '4\'3"',
+    '4\'4"',
+    '4\'5"',
+    '4\'6"',
+    '4\'7"',
+    '4\'8"',
+    '4\'9"',
+    '4\'10"',
+    '4\'11"',
+    '5\'0"',
+    '5\'1"',
+    '5\'2"',
+    '5\'3"',
+    '5\'4"',
+    '5\'5"',
+    '5\'6"',
+    '5\'7"',
+    '5\'8"',
+    '5\'9"',
+    '5\'10"',
+    '5\'11"',
+    '6\'0"',
+    '6\'1"',
+    '6\'2"',
+    '6\'3"',
+    '6\'4"',
+    '6\'5"',
+    '6\'6"',
+    '6\'7"',
+    '6\'8"',
+    '6\'9"',
+    '6\'10"',
+    '6\'11"',
+    '7\'0"',
+  ];
+  Heights1: string[] = [
+    '48',
+    '49',
+    '50',
+    '51',
+    '52',
+    '53',
+    '54',
+    '55',
+    '56',
+    '57',
+    '58',
+    '59',
+    '60',
+    '61',
+    '62',
+    '63',
+    '64',
+    '65',
+    '66',
+    '67',
+    '68',
+    '69',
+    '70',
+    '71',
+    '72',
+    '73',
+    '74',
+    '75',
+    '76',
+    '77',
+    '78',
+    '79',
+    '80',
+    '81',
+    '82',
+    '83',
+    '84',
+  ];
+  Occupation: string[] = [
+    'Private Job',
+    'Business/Self-Employed',
+    'Govt Job',
+    'Doctor',
+    'Teacher',
+    'Homely',
+    'Not Employed',
+  ];
+  Mangalika = ['Manglik', 'Non-Manglik', 'Anshik Manglik', 'Doesn\'t Matter'];
+  Religions: string[] = [
+    'Hindu',
+    'Muslim',
+    'Sikh',
+    'Christian',
+    'Buddhist',
+    'Jain',
+    'Parsi',
+    'Jewish',
+    'Bahai',
+  ];
+  Foodpreferences: string[] = [
+    'Doesn\'t Matter',
+    'Non-Vegetarian',
+    'Vegetarian',
+  ];
+  Working: string[] = ['Working', 'Not Working', 'Doesn\'t Matter'];
+  //Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Doesn\'t Matter',
+  //'Defence', 'Civil Services'];
+  MaritalStatus: string[] = [
+    'Doesn\'t Matter',
+    'Never Married',
+    'Awaiting Divorce',
+    'Divorcee',
+    'Widowed',
+    'Anulled',
+  ];
 
   ngOnInit() {
     this.languageService.setProfileLanguage();
@@ -52,9 +199,14 @@ export class ChatDrawerComponent implements OnInit {
           this.userpic = data.photo;
           this.userId = data.id;
           this.userIsLead = data.isLead;
+          this.getUserProfileData();
         }
       }
     );
+  }
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
 
@@ -107,32 +259,232 @@ export class ChatDrawerComponent implements OnInit {
   customerSupport() {
     this.router.navigateByUrl('chat/customer-support/');
   }
-
   getCallBack() {
     this.router.navigateByUrl('chat/getcallback/');
-    // this.spinner.show();
-    // const interestForm = new FormData();
-    // interestForm.append('id', localStorage.getItem('id'));
-    // interestForm.append('is_lead', localStorage.getItem('is_lead'));
-    // this.http.post<any>('https://partner.hansmatrimony.com/api/updateCallBack', interestForm).subscribe(
-    //   data => {
-    //     console.log(data);
-    //     if (data.status === 1) {
-    //       this.analyticsEvent('Requested For A Callback From Chat Drawer');
-    //       this.ngxNotificationService.success('We will get back to soon!!');
-    //       this.spinner.hide();
-    //       this.closeSideNav();
-    //     } else {
-    //       this.ngxNotificationService.error('Something Went Wrong, Please try again later');
-    //       this.spinner.hide();
-    //     }
-    //   },
-    //   err => {
-    //     console.log(err);
-    //     this.ngxNotificationService.error('Something Went Wrong, Please try again later');
-    //     this.spinner.hide();
-    //   }
-    // );
+  }
+  editIndexPrefs = -1;
+  setEditIndexPrefs() {
+    this.editIndexPrefs = 0;
+  }
+  castePreferences: string[] = [];
+  specialCase() {
+    this.castePreferences = this.preferenceProfileData.caste.split(',');
+    // console.log(this.preferenceProfileData.caste);
+    // console.log(this.castePreferences);
+  }
+  getHeight(num: number) {
+    return this.Heights[this.Heights1.indexOf(String(num))];
+  }
+  setCurrentPreferenceValue() {
+    //console.log(this.personalProfileData);
+    this.preferencesForm.patchValue({
+      food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
+      age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
+      age_max: this.preferenceProfileData.age_max ? this.preferenceProfileData.age_max : '70',
+      income_min: this.preferenceProfileData.income_min,
+      income_max: this.preferenceProfileData.income_max,
+      caste_pref: this.preferenceProfileData.caste ? this.preferenceProfileData.caste : 'All',
+      manglik_pref: this.preferenceProfileData.manglik ? this.preferenceProfileData.manglik : 'Doesn\'t Matter',
+      occupation: this.preferenceProfileData.occupation ? this.preferenceProfileData.occupation : 'Doesn\'t Matter',
+
+      working: (this.preferenceProfileData.working === 'na' || this.preferenceProfileData.working === undefined)
+        ? 'Doesn\'t Matter' : this.preferenceProfileData.working,
+
+      religion: this.preferenceProfileData.religion,
+      height_min: this.getHeight(this.preferenceProfileData.height_min),
+      height_max: this.getHeight(this.preferenceProfileData.height_max),
+      marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter'
+    });
+  }
+  getUserProfileData() {
+    if (this.userId || localStorage.getItem('id')) {
+      this.spinner.show();
+      const myprofileData = new FormData();
+      myprofileData.append(
+        'id',
+        this.userId ? this.userId : localStorage.getItem('id')
+      );
+      myprofileData.append('contacted', '1');
+      myprofileData.append(
+        'is_lead',
+        this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
+      );
+      // tslint:disable-next-line: max-line-length
+      return this.http
+        .post<any>(
+          'https://partner.hansmatrimony.com/api/getProfile',
+          myprofileData
+        )
+        .pipe(
+          timeout(7000),
+          retry(2),
+          catchError((e) => {
+            this.ngxNotificationService.error(
+              'Server Time Out, Try Again Later'
+            );
+            throw new Error('Server Timeout ' + e);
+          })
+        )
+        .subscribe(
+          (data: any) => {
+            console.log(data.preference);
+            this.preferenceProfileData = data.preferences ? data.preferences : null;
+            this.spinner.hide();
+            this.gender = data.profile.gender;
+            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
+            if (this.gender === "Female") {
+              if (this.preferenceProfileData.occupation)
+                this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
+              else {
+                this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
+              }
+            }
+            this.setCurrentPreferenceValue();
+            this.getAllCaste();
+          },
+          (error: any) => {
+            this.spinner.hide();
+            console.log(error);
+            this.ngxNotificationService.error('Something Went Wrong');
+          }
+        );
+    } else {
+      this.ngxNotificationService.error('No user found');
+    }
+  }
+  onSubmitPreferences() {
+    this.editIndexPrefs = -1;
+    console.log('preference Data to update');
+    console.log(this.preferenceProfileData);
+    console.log(this.preferenceProfileData.religion);
+    if (Array.isArray(this.preferenceProfileData.religion))
+      this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
+
+    this.preferenceProfileData.caste = this.castePreferences.join(',');
+
+    if (this.gender === "Female" && Array.isArray(this.preferenceProfileData.occupation))
+      this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
+
+    const newPrefForm = new FormData();
+    newPrefForm.append(
+      'identity_number',
+      this.preferenceProfileData.identity_number
+    );
+    newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
+    newPrefForm.append('id', this.preferenceProfileData.id);
+    newPrefForm.append('caste', this.preferencesForm.value.caste_pref ? this.preferencesForm.value.caste_pref : this.preferenceProfileData.caste);
+    newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
+    newPrefForm.append(
+      'marital_status', this.preferencesForm.value.marital_status ?
+      this.preferencesForm.value.marital_status : this.preferenceProfileData.marital_status
+    );
+    if (this.gender === 'Male') {
+      newPrefForm.append('working', this.preferencesForm.value.working
+        ? this.preferencesForm.value.working : this.preferenceProfileData.working);
+      newPrefForm.append('occupation', 'na');
+    } else {
+      newPrefForm.append('occupation', this.preferencesForm.value.occupation
+        ? this.preferencesForm.value.occupation : this.preferenceProfileData.occupation);
+      newPrefForm.append('working', 'na');
+    }
+    newPrefForm.append('religion', this.preferenceProfileData.religion);
+    newPrefForm.append('food_choice', this.preferencesForm.value.food_choice ?
+      this.preferencesForm.value.food_choice : this.preferenceProfileData.food_choice);
+
+    newPrefForm.append('description', this.preferenceProfileData.description);
+    newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
+      this.preferencesForm.value.income_min : this.preferenceProfileData.income_min);
+    newPrefForm.append('income_max', this.preferencesForm.value.income_max ?
+      this.preferencesForm.value.income_max : this.preferenceProfileData.income_max);
+    newPrefForm.append('height_min', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
+      ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
+      : this.preferenceProfileData.height_min);
+    newPrefForm.append('height_max', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
+      ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
+      : this.preferenceProfileData.height_max);
+    newPrefForm.append('age_min', this.preferencesForm.value.age_min ?
+      this.preferencesForm.value.age_min : this.preferenceProfileData.age_min);
+    newPrefForm.append('age_max', this.preferencesForm.value.age_max ?
+      this.preferencesForm.value.age_max : this.preferenceProfileData.age_max);
+    newPrefForm.append(
+      'mother_tongue',
+      this.preferenceProfileData.mother_tongue
+    );
+    newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
+
+    this.http
+      .post(
+        'https://partner.hansmatrimony.com/api/updatePreferencesDetails',
+        newPrefForm
+      )
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          console.log('Preference Details updated successfully');
+          this.getUserProfileData();
+        },
+        (error: any) => {
+          console.log(error);
+          this.ngxNotificationService.error(
+            'Something Went Wrong, Try Again Later'
+          );
+        }
+      );
+  }
+  getAllCaste() {
+    this.http
+      .get('https://partner.hansmatrimony.com/api/getAllCaste')
+      .subscribe((res: any) => {
+        this.getcastes = res;
+        // adittion of all to the list of castes
+        this.getcastes.push('All');
+
+        // set initial selection
+        if (
+          this.preferenceProfileData.caste &&
+          this.preferenceProfileData.caste !== 'null'
+        ) {
+          let values = [];
+          this.preferenceProfileData.caste.split(',').forEach((element) => {
+            console.log(element);
+            if (this.getcastes.indexOf(element)) {
+              values.push(this.getcastes[this.getcastes.indexOf(element)]);
+            }
+          });
+          // if all , check the check box for no caste bar
+          if (values.includes('All')) {
+            this.isAllCastePref = true;
+          }
+          this.searchCaste.setValue(values);
+        }
+
+        // load the initial bank list
+        this.filteredCastesMulti.next(this.getcastes.slice());
+
+        // listen for search field value changes
+        this.searchCasteText.valueChanges
+          .pipe(takeUntil(this._onDestroy))
+          .subscribe(() => {
+            this.filterCasteMulti();
+          });
+      });
+  }
+  protected filterCasteMulti() {
+    if (!this.getcastes) {
+      return;
+    }
+    // get the search keyword
+    let search = this.searchCasteText.value;
+    if (!search) {
+      this.filteredCastesMulti.next(this.getcastes.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredCastesMulti.next(
+      this.getcastes.filter((bank) => bank.toLowerCase().indexOf(search) > -1)
+    );
   }
   langChanged(event) {
     console.log(event.checked);
