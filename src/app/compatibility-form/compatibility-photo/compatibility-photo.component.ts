@@ -187,11 +187,8 @@ export class CompatibilityPhotoComponent implements OnInit {
         this.spinner.hide();
         if (!this.clickedFacebook) {
           this.ngxNotificationService.success('Photo Uploaded Succesfully!');
-        } else if (this.facebookImageFileSet) {
-          this.facebookImageFileSet = false;
-          this.ngxNotificationService.success('Photo Uploaded Succesfully!');
         }
-        
+
         photoBtn.disabled = false;
 
         switch (index) {

@@ -1028,7 +1028,7 @@ getProfile() {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '95vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = true;
+          dialogConfig.disableClose = false;
         }
       }
     );
@@ -1091,6 +1091,7 @@ getFbData() {
     'GET',
     {fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
       console.log(response);
+      this.spinner.hide();
       this.PageOne.patchValue({
         firstName: response.first_name ? response.first_name : '',
         lastName: response.last_name ? response.last_name : '',
