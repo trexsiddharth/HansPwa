@@ -1023,12 +1023,12 @@ getProfile() {
           console.log('screen is greater than  1024px');
           dialogConfig.minWidth = '40vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = false;
+          dialogConfig.disableClose = true;
         } else {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '95vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = false;
+          dialogConfig.disableClose = true;
         }
       }
     );

@@ -67,9 +67,18 @@ export class CompatibilityPhotoComponent implements OnInit {
   photoScore = 0;
   clickedFacebook = false;
 
-
-
   FamilyOptions: Observable<string[]>;
+
+  // for uploading facebook foto
+  base64TrimmedURL: string;
+  base64DefaultURL: string;
+  generatedImage: string;
+  facebookImageFile: File;
+  facebookImageFile2: File;
+  facebookImageFile3: File;
+  facebookImageFileSet: boolean = false;
+  facebookImageFileSet2: boolean = false;
+  facebookImageFileSet3: boolean = false;
   frontfile4: any;
   frontfile5: any;
   frontfile6: any;
@@ -233,15 +242,6 @@ export class CompatibilityPhotoComponent implements OnInit {
       console.log(err);
     });
   }
-  base64TrimmedURL: string;
-  base64DefaultURL: string;
-  generatedImage: string;
-  facebookImageFile: File;
-  facebookImageFile2: File;
-  facebookImageFile3: File;
-  facebookImageFileSet: boolean = false;
-  facebookImageFileSet2: boolean = false;
-  facebookImageFileSet3: boolean = false;
 
 
   getImage(imageUrl: string, index) {
