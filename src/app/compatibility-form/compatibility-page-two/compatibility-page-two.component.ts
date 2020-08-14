@@ -212,6 +212,17 @@ ngOnInit() {
     }
   );
 
+  // location from facebook
+  this.fourPageService.facebookLocationUpdated.subscribe(
+    res => {
+      if (res) {
+        this.PageTwo.patchValue({
+          Working: res
+        });
+      }
+    }
+  );
+
   // load the initial eduation list
   this.filteredEducationGroups.next(this.copyEducationGroups(this.HigherEducation));
 

@@ -1087,7 +1087,7 @@ getFbData() {
     // fetch user data
     (window as any).FB.api('/me',
     'GET',
-    {fields: 'email, address, first_name, gender, last_name, birthday, hometown'}, (response) => {
+    {fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
       console.log(response);
       this.PageOne.patchValue({
         firstName: response.first_name ? response.first_name : '',
@@ -1101,6 +1101,10 @@ getFbData() {
       // set home town in birth place
       if (response.hometown && response.hometown.name) {
         this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
+      }
+      // set home town in birth place
+      if (response.location && response.location.name) {
+        this.fourPageService.facebookLocationUpdated.emit(response.location.name);
       }
       // to solve the overlapping issue for new user
       (document.querySelector('#firstName') as HTMLInputElement).focus();

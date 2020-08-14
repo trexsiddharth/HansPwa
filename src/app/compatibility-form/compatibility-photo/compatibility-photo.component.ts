@@ -350,11 +350,14 @@ export class CompatibilityPhotoComponent implements OnInit {
         }
       }
     );
+    // set current profile picture from facebook
     this.fourPageService.facebookProfilePicUploaded.subscribe(
       (link) => {
         if (link) {
           this.imgURL = link;
           this.getImage(this.imgURL, 1);
+          // get profile pics from facebook
+          this.getFacebookPics();
         }
       }
     );
@@ -491,7 +494,8 @@ export class CompatibilityPhotoComponent implements OnInit {
           if (element.name === 'प्रोफ़ाइल फ़ोटो' ||
            element.name === 'Profile Photo' ||
             element.name === 'Profile photo' ||
-            element.name === 'profile photo') {
+            element.name === 'profile photo' ||
+            (element.name as string).includes('Profile') || (element.name as string).includes('प्रोफ़ाइल')) {
               if (element.id) {
                 (window as any).FB.api(`/${element.id}/photos`,
                 'GET',
@@ -529,6 +533,41 @@ export class CompatibilityPhotoComponent implements OnInit {
           this.ngxNotificationService.warning('No Facebook Picture Found');
       }
     });
+ }
+
+ // fetch fb current profile pic
+ fetchFbCurrentProfilePic() {
+    (window as any).FB.api('/me/picture',
+    'GET',
+    {height: '600', width: '400', redirect: 'false'}, (response) => {
+      console.log(response.data.url);
+      if (response.data.url) {
+        this.imgURL = response.data.url;
+        this.getImage(this.imgURL, 1);
+          // get more  profile pics from facebook for second and third places in image grid
+        this.getFacebookPics();
+      }
+    });
+ }
+
+ // for facebook photos when user has not given permission on first page
+ loginToFacebookToGetPhotos() {
+  (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+    console.log(response);
+    if (response.status === 'connected') {
+      localStorage.setItem('fb_token', response.authResponse.accessToken);
+      this.fetchFbCurrentProfilePic();
+    } else {
+      (window as any).FB.login((response) => {
+        if (response.authResponse) {
+         console.log('Welcome!  Fetching your information.... ');
+         this.fetchFbCurrentProfilePic();
+        } else {
+         console.log('User cancelled login or did not fully authorize.');
+        }
+    }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
+    }       // Returns the login status.
+  });
  }
 }
 
