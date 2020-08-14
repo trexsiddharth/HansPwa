@@ -212,6 +212,17 @@ ngOnInit() {
     }
   );
 
+  // location from facebook
+  this.fourPageService.facebookLocationUpdated.subscribe(
+    res => {
+      if (res) {
+        this.PageTwo.patchValue({
+          Working: res
+        });
+      }
+    }
+  );
+
   // load the initial eduation list
   this.filteredEducationGroups.next(this.copyEducationGroups(this.HigherEducation));
 
@@ -550,7 +561,7 @@ updateFormTwoData(profileData: FormData) {
 }
 setAge(dob: string) {
   if (dob != null) {
-  return (Math.floor((Date.now() - new Date(dob).getTime()) / (1000 * 60 * 60 * 24 * 365)));
+  return (Math.floor((Date.now() - new Date(dob.split('-').reverse().join('-')).getTime()) / (1000 * 60 * 60 * 24 * 365)));
   } else {
     return null;
   }

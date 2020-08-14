@@ -123,6 +123,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
    hideMobileNumber = false;
 
    authData;
+  private fetchedFbProfilePic = null;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -504,7 +505,9 @@ async ngOnInit() {
     console.log('year', this.PageOne.value.birth_year);
 
 
-    if (this.PageOne.value.phone.toString().length < 10 || this.PageOne.value.phone.toString().length > 13
+    if (this.PageOne.value.phone &&
+      this.PageOne.value.phone.toString().length < 10 ||
+       this.PageOne.value.phone.toString().length > 13
      || this.PageOne.value.phone.invalid) {
        console.log(this.PageOne.value.phone);
        this.ngxNotificationService.error('Enter A Valid Mobile Number');
@@ -605,6 +608,14 @@ async ngOnInit() {
                 localStorage.setItem('id', res.id);
                 localStorage.setItem('gender', this.PageOne.value.gender);
                 localStorage.setItem('mobile_number', this.PageOne.value.phone);
+
+                // if facebook profile pic is fetched
+                if (this.fetchedFbProfilePic) {
+                  setTimeout(() => {
+                    this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
+                  }, 200);
+                }
+
                 this.fourPageService.updateFormOneData(firststepdata);
                 if (this.fourPageService.getUserThrough()) {
                   // this.locality = firststepdata.get('locality');
@@ -1021,7 +1032,7 @@ getProfile() {
           console.log('screen is greater than  1024px');
           dialogConfig.minWidth = '40vw';
           dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = false;
+          dialogConfig.disableClose = true;
         } else {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '95vw';
@@ -1080,15 +1091,16 @@ getFbData() {
     {height: '600', width: '400', redirect: 'false'}, (response) => {
       console.log(response.data.url);
       if (response.data.url) {
-        this.fourPageService.facebookProfilePicUploaded.emit(response.data.url);
+        this.fetchedFbProfilePic = response.data.url;
       }
     });
 
     // fetch user data
     (window as any).FB.api('/me',
     'GET',
-    {fields: 'email, address, first_name, gender, last_name, birthday, hometown'}, (response) => {
+    {fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
       console.log(response);
+      this.spinner.hide();
       this.PageOne.patchValue({
         firstName: response.first_name ? response.first_name : '',
         lastName: response.last_name ? response.last_name : '',
@@ -1098,6 +1110,16 @@ getFbData() {
         birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
         birth_year: response.birthday ? response.birthday.split('/')[2] : ''
       });
+      // set home town in birth place
+      if (response.hometown && response.hometown.name) {
+        this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
+      }
+      // set home town in birth place
+      if (response.location && response.location.name) {
+        this.fourPageService.facebookLocationUpdated.emit(response.location.name);
+      }
+      // to solve the overlapping issue for new user
+      (document.querySelector('#firstName') as HTMLInputElement).focus();
     });
   }
 
