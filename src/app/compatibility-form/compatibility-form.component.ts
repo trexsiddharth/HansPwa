@@ -1098,6 +1098,12 @@ getFbData() {
         birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
         birth_year: response.birthday ? response.birthday.split('/')[2] : ''
       });
+      // set home town in birth place
+      if (response.hometown && response.hometown.name) {
+        this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
+      }
+      // to solve the overlapping issue for new user
+      (document.querySelector('#firstName') as HTMLInputElement).focus();
     });
   }
 

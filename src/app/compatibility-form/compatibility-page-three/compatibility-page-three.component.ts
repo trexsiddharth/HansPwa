@@ -95,6 +95,16 @@ ngOnInit() {
               }
             }
           );
+          // set home town in birth place from facebook
+          this.fourPageService.facebookHomeTownUpdated.subscribe(
+            res => {
+                if (res) {
+                  this.PageThree.patchValue({
+                    BirthPlace: res
+                  });
+                }
+            }
+          );
     }
 
     skip() {
