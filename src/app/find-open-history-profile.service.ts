@@ -285,8 +285,10 @@ export class FindOpenHistoryProfileService {
   }
   //new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
   openTodaysPopupAd() {
-    if (this.popupOpen)
+    if (this.popupOpen) {
+      this.popupOpen = false;
       return;
+    }
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
