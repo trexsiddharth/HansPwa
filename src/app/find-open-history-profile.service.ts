@@ -309,7 +309,6 @@ export class FindOpenHistoryProfileService {
         }
       }
     );
-    console.log("skatiiiiiiiiiing");
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
 
   }

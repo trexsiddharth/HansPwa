@@ -63,6 +63,9 @@ hr {
   margin: 1px;
   border-bottom: 1px solid rgba(124, 123, 123, 0.5);
 }
+#carousel {
+  width: 100%;
+}
 .back-drop {
   position: absolute;
   z-index: -999999;
