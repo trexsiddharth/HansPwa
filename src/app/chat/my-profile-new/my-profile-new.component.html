@@ -816,11 +816,17 @@
               </div>
               <div class="col-12" *ngIf="personalProfileData.gender==='Female'">
                 <h6>Occupation</h6>
-                <select type="text" class="form-control" formControlName="occupation" required>
+                <!-- <select type="text" class="form-control" formControlName="occupation" required>
                   <option *ngFor="let name of Occupation" [value]="name" required>
                     {{ name }}
-                  <option>
-                </select>
+                  </option>
+                </select> -->
+                <mat-select type="text" class="form-control" [multiple]="true" formControlName="occupation"
+                  [(ngModel)]="preferenceProfileData.occupation" required>
+                  <mat-option *ngFor="let item of Occupation" [value]="item" required>
+                    {{ item}}
+                  </mat-option>
+                </mat-select>
               </div>
               <div class="col-12" *ngIf="personalProfileData.gender==='Male'">
                 <h6>Working</h6>

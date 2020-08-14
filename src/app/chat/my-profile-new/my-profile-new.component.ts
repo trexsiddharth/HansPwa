@@ -626,8 +626,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('viaebrnifakujrnviksjsrn');
   }
   setCurrentProfileValue() {
-    console.log("this is the profile dataaaaaaaaaaaaaaaaaaaaa...................")
-    console.log(this.personalProfileData);
+    //console.log(this.personalProfileData);
     this.personalForm.patchValue({
       name: this.personalProfileData.name,
       Weight: this.personalProfileData.weight,
@@ -689,7 +688,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
   setCurrentFamilyValues() {
-    console.log(this.familyProfileData);
+    //console.log(this.familyProfileData);
     this.familyForm1.patchValue({
       identity_number: this.familyProfileData.identity_number,
       id: this.familyProfileData.id,
@@ -711,7 +710,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
   setCurrentPreferenceValue() {
-    console.log(this.personalProfileData);
+    //console.log(this.personalProfileData);
     this.preferencesForm.patchValue({
       food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
       age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
@@ -1270,10 +1269,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               this.itemService.setPhotoStatus(true);
             }
             this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
-            if (this.personalProfileData.gender === "Female" && this.preferenceProfileData.occupation)
-              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
-            else {
-              this.preferenceProfileData.occupation = 'Doesn\'t Matter';
+            if (this.personalProfileData.gender === "Female") {
+              if (this.preferenceProfileData.occupation)
+                this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
+              else {
+                this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
+              }
             }
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
