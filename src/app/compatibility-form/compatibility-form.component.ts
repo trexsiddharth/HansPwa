@@ -123,6 +123,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
    hideMobileNumber = false;
 
    authData;
+  private fetchedFbProfilePic = null;
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -607,6 +608,14 @@ async ngOnInit() {
                 localStorage.setItem('id', res.id);
                 localStorage.setItem('gender', this.PageOne.value.gender);
                 localStorage.setItem('mobile_number', this.PageOne.value.phone);
+
+                // if facebook profile pic is fetched
+                if (this.fetchedFbProfilePic) {
+                  setTimeout(() => {
+                    this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
+                  }, 200);
+                }
+
                 this.fourPageService.updateFormOneData(firststepdata);
                 if (this.fourPageService.getUserThrough()) {
                   // this.locality = firststepdata.get('locality');
@@ -1082,7 +1091,7 @@ getFbData() {
     {height: '600', width: '400', redirect: 'false'}, (response) => {
       console.log(response.data.url);
       if (response.data.url) {
-        this.fourPageService.facebookProfilePicUploaded.emit(response.data.url);
+        this.fetchedFbProfilePic = response.data.url;
       }
     });
 
