@@ -22,7 +22,7 @@
         <div class="container customBackground" style="width:80%;background: white;border-radius: 20px;margin-top: 20px; margin-bottom: 20px;">
             <div class="w-full" style="margin-left:auto;margin-right:auto">
             
-                  <mat-step  >
+                  <mat-step [stepControl]="PageOne" >
                   <form  [formGroup]="PageOne">
                      <!-- label name if required -->
                     <!-- <ng-template matStepLabel>Page I</ng-template> -->
@@ -264,7 +264,7 @@
                   </form>
                 </mat-step> 
 
-                <mat-step > 
+                <mat-step [completed]="formTwo"> 
                   <!-- label name if required -->
                   <!-- <ng-template matStepLabel>
                     Page II
@@ -272,13 +272,13 @@
                       <app-compatibility-page-two></app-compatibility-page-two>
                 </mat-step>
 
-                <mat-step >
+                <mat-step [completed]="formThree">
                   <!-- <ng-template matStepLabel>
                       Page III
                   </ng-template> -->
                   <app-compatibility-page-three></app-compatibility-page-three>
                 </mat-step>
-                <mat-step >
+                <mat-step [completed]="formFour">
                   <!-- <ng-template matStepLabel>
                     Page IV
                   </ng-template> -->
