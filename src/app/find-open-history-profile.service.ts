@@ -195,7 +195,7 @@ export class FindOpenHistoryProfileService {
   }
   getDailyNumber() {
     if (this.profileCount.dailyCount) {
-      return this.profileCount.dailyCount;
+      return this.profileCount.dailyCount + 1;
     } else {
       return '0';
     }
