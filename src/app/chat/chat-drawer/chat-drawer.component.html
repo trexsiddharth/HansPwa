@@ -39,34 +39,34 @@
       <span *ngIf="languageService.getCurrentLanguage()==='english'">Contacted Profiles</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कॉन्टेक्टेड प्रोफाइलस</span>
     </button>
-    <button class="rowMore" (click)="openHistoryProfiles('interestShown')">
+    <!-- <button class="rowMore" (click)="openHistoryProfiles('interestShown')">
       <img src="../../../assets/tabs-icons/heart.svg" class="iconImage">
       <span *ngIf="languageService.getCurrentLanguage()==='english'">Your Likes</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">आपको {{languageService.profileLang.shortlist}}</span>
-    </button>
-    <button class="rowMore" (click)="openHistoryProfiles('interestReceived')">
+    </button> -->
+    <!-- <button class="rowMore" (click)="openHistoryProfiles('interestReceived')">
       <img src="../../../assets/tabs-icons/heart in heart.svg" class="iconImage">
       <span *ngIf="languageService.getCurrentLanguage()==='english'">Likes You</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">जो आपको पसंद करते है</span>
-    </button>
+    </button> -->
     <button class="rowMore" (click)="openHistoryProfiles('rejected')">
       <img src="../../../assets/tabs-icons/x.svg" class="iconImage">
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Skipped Profiles</span>
-      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">छोड़ी गई प्रोफाइल</span>
+      <span *ngIf="languageService.getCurrentLanguage()==='english'">Rejected Profiles</span>
+      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">रीजेकटेड प्रोफाइल</span>
     </button>
     <hr>
-    <button class="rowMore" (click)="openDiscover()">
+    <!-- <button class="rowMore" (click)="openDiscover()">
       <img src="../../../assets/tabs-icons/search.svg" class="iconImage">
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Discover Profiles</span>
+      <span *ngIf="languageService.getCurrentLanguage()==='english'">See Profiles</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">डिस्कवर प्रोफाइल</span>
       <img src="../../assets/nextN.svg" class="nextImage">
+    </button> -->
+    <!-- <hr> -->
+    <button class="rowMore" (click)="customerSupport()">
+      <img src="../../../assets/tabs-icons/customer support.svg" class="iconImage">
+      <span *ngIf="languageService.getCurrentLanguage()==='english'">Customer Support</span>
+      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">ग्राहक सहायता</span>
     </button>
-    <hr>
-    <!-- <button class="rowMore">
-          <img src="../../../assets/tabs-icons/customer support.svg"class="iconImage">
-          <span *ngIf="languageService.getCurrentLanguage()==='english'" >Customer Support</span>
-          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">ग्राहक सहायता</span>
-        </button> -->
     <button class="rowMore" (click)="getCallBack()">
       <img src="../../../assets/tabs-icons/phone arrow.svg" class="iconImage">
       <span *ngIf="languageService.getCurrentLanguage()==='english'">Get A Call Back</span>

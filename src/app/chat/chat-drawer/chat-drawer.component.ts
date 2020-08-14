@@ -104,6 +104,9 @@ export class ChatDrawerComponent implements OnInit {
   closeSideNav() {
     this.drawerReference.toggle();
   }
+  customerSupport() {
+    this.router.navigateByUrl('chat/customer-support/');
+  }
 
   getCallBack() {
     this.router.navigateByUrl('chat/getcallback/');

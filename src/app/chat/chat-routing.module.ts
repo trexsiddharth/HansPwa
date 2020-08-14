@@ -9,6 +9,7 @@ import { DiscoverComponent } from './discover/discover.component';
 import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component';
 import { GetcallbackComponent } from './getcallback/getcallback.component';
 import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component'
+import { CustomerSupportComponent } from './customer-support/customer-support.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,11 @@ const routes: Routes = [
     // this is used for routing through chat drawer
     path: 'getcallback/',
     component: GetcallbackComponent
+  },
+  {
+    // this is used for routing through chat drawer
+    path: 'customer-support/',
+    component: CustomerSupportComponent
   },
   {
     path: 'history/:section',
