@@ -626,6 +626,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('viaebrnifakujrnviksjsrn');
   }
   setCurrentProfileValue() {
+    console.log("this is the profile dataaaaaaaaaaaaaaaaaaaaa...................")
     console.log(this.personalProfileData);
     this.personalForm.patchValue({
       name: this.personalProfileData.name,
@@ -669,7 +670,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         ? this.personalProfileData.food_choice
         : 'Vegetarian',
       WorkingCity: this.personalProfileData.working_city,
-      Locality: this.familyProfileData.locality,
+      Locality: this.familyProfileData.locality ? this.familyProfileData.locality : '',
       Degree: this.personalProfileData.degree
         ? this.personalProfileData.degree
         : this.personalProfileData.education,
@@ -1269,14 +1270,16 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               this.itemService.setPhotoStatus(true);
             }
             this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
-            if (this.personalProfileData.gender === "Female")
+            if (this.personalProfileData.gender === "Female" && this.preferenceProfileData.occupation)
               this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
-            this.getAllCaste();
-            this.getAllCastePersonal();
+            else {
+              this.preferenceProfileData.occupation = 'Doesn\'t Matter';
+            }
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
             this.setCurrentPreferenceValue();
-
+            this.getAllCaste();
+            this.getAllCastePersonal();
 
           },
           (error: any) => {
