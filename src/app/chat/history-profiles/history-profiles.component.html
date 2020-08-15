@@ -1,4 +1,13 @@
-<main class="noProfileMain" *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()">
+<main class="noProfileMain"
+    *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized() && !section">
+    <!-- <div style="position: relative;display: block;margin: 30% auto;">
+     <p class="text-center">
+         <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
+     </p>
+    <p class="text-center noProfile">
+     No Profiles Here
+    </p> 
+    </div>-->
     <div style="position: relative;display: block;margin: 3%;margin-bottom:40px">
         <p class="text-center noProfile">
             Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>
@@ -21,17 +30,17 @@
                 <b class="specialCase" style="font-size: large; color: #5b6d78 !important;">₹2800</b>
                 <br />
                 <a style="
-            text-decoration: line-through;
-            font-size: medium;
-            color: #596a76 !important;
-          ">₹ 5500</a>
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 5500</a>
 
                 <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
-            background-color: #f0f1f0;
-            border-radius: 18px;
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px;
-        ">
+                background-color: #f0f1f0;
+                border-radius: 18px;
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+            ">
                     <div class="month">
                         <a>3 महीने</a>
                     </div>
@@ -41,11 +50,11 @@
                     </button>
                 </div>
                 <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
-background-color: #f0f1f0;
-border-radius: 18px;
-border-top-left-radius: 0px;
-border-bottom-left-radius: 0px;
-">
+    background-color: #f0f1f0;
+    border-radius: 18px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    ">
                     <div class="month">
                         <a>3 months</a>
                     </div>
@@ -60,15 +69,15 @@ border-bottom-left-radius: 0px;
         <div class="planrow" style="background-color: #00c2cb; border-radius: 18px; margin-top: 0px;">
             <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
                 <div style="
-            font-weight: 500 !important;
-            position: absolute;
-            top: -15px !important;
-            left: 8%;
-            background: #ff39c4;
-            color: white;
-            padding: 2px 2px 2px 2px;
-            border-radius: 3px 3px 3px 3px;
-          ">
+                font-weight: 500 !important;
+                position: absolute;
+                top: -15px !important;
+                left: 8%;
+                background: #ff39c4;
+                color: white;
+                padding: 2px 2px 2px 2px;
+                border-radius: 3px 3px 3px 3px;
+              ">
                     Bestseller
                 </div>
                 <b>सुप्रीम प्लान</b><br />
@@ -76,16 +85,16 @@ border-bottom-left-radius: 0px;
             </div>
             <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
                 <div style="
-            font-weight: 300 !important;
-            position: absolute;
-            top: -15px !important;
-            left: 8%;
-            font-size:small;
-            background: #ff39c4;
-            color: white;
-            padding: 1px 1px 1px 1px;
-            border-radius: 2px 2px 2px 2px;
-          ">
+                font-weight: 300 !important;
+                position: absolute;
+                top: -15px !important;
+                left: 8%;
+                font-size:small;
+                background: #ff39c4;
+                color: white;
+                padding: 1px 1px 1px 1px;
+                border-radius: 2px 2px 2px 2px;
+              ">
                     Bestseller
                 </div>
                 <b>Supreme Plan</b><br />
@@ -94,16 +103,16 @@ border-bottom-left-radius: 0px;
             <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
                 <b class="specialCase" Style=" font-size: large;color: #5b6d78 !important; ">₹5500</b><br />
                 <a style="
-            text-decoration: line-through;
-            font-size: medium;
-            color: #596a76 !important;
-          ">₹ 8500</a><br />
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 8500</a><br />
                 <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
-        background-color: #f0f1f0;
-        border-radius: 18px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-      ">
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
                     <div class="month">
                         <a>6 महीने</a>
                     </div>
@@ -112,11 +121,11 @@ border-bottom-left-radius: 0px;
                     </button>
                 </div>
                 <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
-        background-color: #f0f1f0;
-        border-radius: 18px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-      ">
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
                     <div class="month">
                         <a>6 months</a>
                     </div>
@@ -138,16 +147,16 @@ border-bottom-left-radius: 0px;
             <div class="plancolumn" style="background-color: #f0f1f0;">
                 <b class="specialCase" style="font-size: large; color: #596a76 !important;">₹8500</b><br />
                 <a style="
-            text-decoration: line-through;
-            font-size: medium;
-            color: #596a76 !important;
-          ">₹ 9100</a>
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 9100</a>
                 <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
-        background-color: #f0f1f0;
-        border-radius: 18px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-      ">
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
                     <div class="month">
                         <a>6 महीने</a>
                     </div>
@@ -156,11 +165,11 @@ border-bottom-left-radius: 0px;
                     </button>
                 </div>
                 <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
-        background-color: #f0f1f0;
-        border-radius: 18px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-      ">
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
                     <div class="month">
                         <a>6 months</a>
                     </div>

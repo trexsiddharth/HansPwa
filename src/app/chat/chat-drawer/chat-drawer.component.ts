@@ -214,7 +214,6 @@ export class ChatDrawerComponent implements OnInit {
 
   openUserProfile() {
     this.analyticsEvent('User Clicked My Profile From Chat Drawer');
-    this.itemService.setChangePrefsClicked(true);
     this.router.navigateByUrl(`chat/my-profile-new/${this.userId}/${this.userIsLead}`);
   }
   openDiscover() {
@@ -271,8 +270,7 @@ export class ChatDrawerComponent implements OnInit {
   castePreferences: string[] = [];
   specialCase() {
     this.castePreferences = this.preferenceProfileData.caste.split(',');
-    // console.log(this.preferenceProfileData.caste);
-    // console.log(this.castePreferences);
+    this.itemService.setChangePrefsClicked(true);
   }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
