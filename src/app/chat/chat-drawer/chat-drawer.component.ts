@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { MatSidenav, MatSelect } from '@angular/material';
+import { MatSidenav, MatSelect, MatSnackBar } from '@angular/material';
 import { LanguageService } from 'src/app/language.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChatServiceService } from 'src/app/chat-service.service';
@@ -36,7 +36,9 @@ export class ChatDrawerComponent implements OnInit {
     public router: Router,
     private _formBuilder: FormBuilder,
     public itemService: FindOpenHistoryProfileService,
-    public activatedRoute: ActivatedRoute) {
+    public activatedRoute: ActivatedRoute,
+    public snackbar: MatSnackBar,
+  ) {
     this.preferencesForm = this._formBuilder.group({
       food_choice: [''],
       age_min: [''],
@@ -274,6 +276,31 @@ export class ChatDrawerComponent implements OnInit {
   }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
+  }
+  checkAllCastePref(event) {
+    console.log(event);
+    if (event.checked) {
+      this.searchCaste.setValue(['All']);
+    } else {
+      this.searchCaste.setValue(['']);
+    }
+  }
+  prevEventLength: number = 0;
+  casteSelectionChanged(event) {
+    console.log(event);
+    if (event.value.length > this.prevEventLength) {
+      this.showSnackBar(`Added Successfully`, '');
+      this.searchCasteText.setValue('');
+    }
+    else if (event.value.length < this.prevEventLength) {
+      this.showSnackBar(` Removed Successfully`, '');
+    }
+    this.prevEventLength = event.value.length;
+  }
+  showSnackBar(msg: string, action: string) {
+    this.snackbar.open(msg, action, {
+      duration: 2000,
+    });
   }
   setCurrentPreferenceValue() {
     //console.log(this.personalProfileData);
