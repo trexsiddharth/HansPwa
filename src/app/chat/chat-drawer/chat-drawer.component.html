@@ -74,18 +74,18 @@
                 <div *ngIf="gender === 'Male'">
                   <p class="headings">{{languageService.profileLang.workingPref}}</p>
                   <p>{{preferenceProfileData.working}}</p>
-                  <p class="headings">{{ languageService.profileLang.religion}}
-                    {{ languageService.profileLang.preference}}</p>
-                  <p><a *ngFor="let rel of preferenceProfileData.religion">{{rel}}, </a></p>
-                  <p class="headings">{{ languageService.profileLang.castePref}}</p>
-                  <p><a *ngFor="let caste of castePreferences">{{caste}}, </a></p>
-                  <p class="headings">{{ languageService.profileLang.manglikPref}}</p>
-                  <p>{{
-                      preferenceProfileData.manglik
-                        ? preferenceProfileData.manglik
-                        : "+Add Detail"
-                    }}</p>
                 </div>
+                <p class="headings">{{ languageService.profileLang.religion}}
+                  {{ languageService.profileLang.preference}}</p>
+                <p><a *ngFor="let rel of preferenceProfileData.religion">{{rel}}, </a></p>
+                <p class="headings">{{ languageService.profileLang.castePref}}</p>
+                <p><a *ngFor="let caste of castePreferences">{{caste}}, </a></p>
+                <p class="headings">{{ languageService.profileLang.manglikPref}}</p>
+                <p>{{
+                    preferenceProfileData.manglik
+                      ? preferenceProfileData.manglik
+                      : "+Add Detail"
+                  }}</p>
               </div>
             </div>
           </div>

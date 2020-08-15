@@ -280,8 +280,10 @@ export class ChatDrawerComponent implements OnInit {
   checkAllCastePref(event) {
     console.log(event);
     if (event.checked) {
+      this.isAllCastePref = true;
       this.searchCaste.setValue(['All']);
     } else {
+      this.isAllCastePref = false;
       this.searchCaste.setValue(['']);
     }
   }
@@ -399,7 +401,7 @@ export class ChatDrawerComponent implements OnInit {
     );
     newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
     newPrefForm.append('id', this.preferenceProfileData.id);
-    newPrefForm.append('caste', this.preferencesForm.value.caste_pref ? this.preferencesForm.value.caste_pref : this.preferenceProfileData.caste);
+    newPrefForm.append('caste', this.preferenceProfileData.caste);
     newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
     newPrefForm.append(
       'marital_status', this.preferencesForm.value.marital_status ?

@@ -33,6 +33,11 @@
 ::ng-deep .mat-checkbox-label{
   color:#4a5d6a!important;
 }
+::ng-deep .mat-select-search-input{
+  width:100%!important;
+  background:rgba(34, 34, 34, 0.774)!important;
+  color:white!important;
+}
 main{
     background-color: white;
     height: auto;

@@ -49,6 +49,11 @@
 ::ng-deep .mat-select-value span{
   color:#4a5d6a!important;
 }
+::ng-deep .mat-select-search-input{
+  width:100%!important;
+  background:rgba(34, 34, 34, 0.774)!important;
+  color:white!important;
+}
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;

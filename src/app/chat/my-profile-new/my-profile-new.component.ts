@@ -79,7 +79,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     string[]
   >(1);
   protected _onDestroy = new Subject<void>();
-  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+  @ViewChild('#multiSelect', { static: true }) multiSelect: MatSelect;
 
   HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
     'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
@@ -1049,7 +1049,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.preferenceProfileData.caste = this.castePreferences.join(',');
 
-    if (this.personalProfileData.gender === "Female" && Array.isArray(this.personalProfileData.occupation))
+    if (this.personalProfileData.gender === "Female" && Array.isArray(this.preferenceProfileData.occupation))
       this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
 
     const newPrefForm = new FormData();
@@ -1059,7 +1059,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
     newPrefForm.append('id', this.preferenceProfileData.id);
-    newPrefForm.append('caste', this.preferencesForm.value.caste_pref ? this.preferencesForm.value.caste_pref : this.preferenceProfileData.caste);
+    newPrefForm.append('caste', this.preferenceProfileData.caste);
     newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
     newPrefForm.append(
       'marital_status', this.preferencesForm.value.marital_status ?
@@ -1558,7 +1558,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               values.push(this.getcastes[this.getcastes.indexOf(element)]);
             }
           });
-          // if all , check the check box for no caste bar
+          //if all , check the check box for no caste bar
           if (values.includes('All')) {
             this.isAllCastePref = true;
           }
@@ -1641,8 +1641,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   checkAllCastePref(event) {
     console.log(event);
     if (event.checked) {
+      this.isAllCastePref = true;
       this.searchCaste.setValue(['All']);
     } else {
+      this.isAllCastePref = false;
       this.searchCaste.setValue(['']);
     }
   }
