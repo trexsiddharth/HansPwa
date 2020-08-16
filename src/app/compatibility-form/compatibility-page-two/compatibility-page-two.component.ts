@@ -365,7 +365,7 @@ firstStep() {
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormTwoData(firststepdata);
                 } else {
-                  this.analyticsEvent('Registered through Four Page Registration Page Two');
+                  this.analyticsEvent('Four Page Registration Page Two');
                 }
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {
