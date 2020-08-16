@@ -1122,6 +1122,7 @@ statusChangeCallback(value) {
     localStorage.setItem('fb_token', value.authResponse.accessToken);
     this.getFbData();
   } else {
+    alert('trying to login in');
     return (window as any).FB.login((response) => {
       if (response.authResponse) {
        console.log('Welcome!  Fetching your information.... ');
