@@ -253,10 +253,10 @@ openVerificationDialog(isLead: string) {
    }
 
    setTruecallerData(trueData) {
-    this.phoneNumber.controls.phone.setValue(trueData.phoneNumbers[0]);
+    this.phoneNumber.controls.phone.setValue((trueData.phoneNumbers[0] as string).substr(2));
     setTimeout(() => {
       this.submitPhone(false);
-    }, 200);
+    }, 100);
    }
 
 }
