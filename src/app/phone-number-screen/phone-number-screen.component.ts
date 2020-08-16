@@ -215,16 +215,14 @@ openVerificationDialog(isLead: string) {
         console.log(response);
         if (this.pollingCount < 10) {
         if (response.status === 1) {
-              console.log(JSON.parse(response.data as string));
-              const data = JSON.parse(response.data  as string);
-              if (data) {
-              if (data.phoneNumbers && data.phoneNumbers[0]) {
+              console.log(response.data);
+              const trueData = JSON.parse(response.data);
+              if (trueData.phoneNumbers && trueData.phoneNumbers[0]) {
                 this.phoneNumber.setValue({
-                  phone: data.phoneNumbers[0]
+                  phone: trueData.phoneNumbers[0]
                 });
                 this.submitPhone(false);
               }
-            }
               this.stopPolling.next();
           } else if (response.status !== 0) {
             this.ngxNotificationService.error('True Caller Not Responding');
