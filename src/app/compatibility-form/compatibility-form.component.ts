@@ -1122,7 +1122,6 @@ statusChangeCallback(value) {
     localStorage.setItem('fb_token', value.authResponse.accessToken);
     this.getFbData();
   } else {
-    alert('trying to login in');
     return (window as any).FB.login((response) => {
       if (response.authResponse) {
        console.log('Welcome!  Fetching your information.... ');
@@ -1130,7 +1129,7 @@ statusChangeCallback(value) {
       } else {
        console.log('User cancelled login or did not fully authorize.');
       }
-  }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
+  }, {scope: 'email'});
   }
 }
 
