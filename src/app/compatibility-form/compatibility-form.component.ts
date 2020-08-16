@@ -241,17 +241,7 @@ async ngOnInit() {
        }
       }
     );
-
-
-    // get facebook login status
-  setTimeout(() => {
-      (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-        this.statusChangeCallback(response);        // Returns the login status.
-      });
-    }, 1000);
-
-
-
+    
     // get all castes before get the data of the profile
   await this.getAllCaste();
   this.route.paramMap.subscribe(
@@ -1117,19 +1107,18 @@ getProfile() {
     //  get facebook login status
 statusChangeCallback(value) {
   console.log(value);
-  alert(value.status);
   if (value.status === 'connected') {
     localStorage.setItem('fb_token', value.authResponse.accessToken);
     this.getFbData();
   } else {
-    return (window as any).FB.login((response) => {
+    (window as any).FB.login((response) => {
       if (response.authResponse) {
        console.log('Welcome!  Fetching your information.... ');
        this.getFbData();
       } else {
        console.log('User cancelled login or did not fully authorize.');
       }
-  }, {scope: 'email'});
+  }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
   }
 }
 
