@@ -17,17 +17,15 @@
     width: 100vw;
     height: 100px">
 
-        <div style="position: absolute;
-     right: 5px;
-    top: 0px;
+        <div class="circular2 mat-elevation-z12" style="
     font-size: 14px;
     display: flex;
     z-index: 99999999999;
     flex-direction: row;
     align-items: center;" (click)="openContactedProfiles()">
-          <mat-icon style="width: 14px;
-      height: 14px; 
-      color: white;">call</mat-icon> {{itemService.getCredits()}}
+          <mat-icon style="width: 15px;
+      height: 15px; 
+      color: white;">call</mat-icon>{{itemService.getCredits()}}
           <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"
             [matBadgeHidden]="itemService.getcontactedPhoneClicked()"></span>
         </div>
