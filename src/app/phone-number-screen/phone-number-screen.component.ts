@@ -59,28 +59,18 @@ export class PhoneNumberScreenComponent implements OnInit {
   }
 
 
-submitPhone(otpStatus: boolean, mobile = null) {
+submitPhone() {
 
 this.spinner.show();
 localStorage.setItem('is_lead', '');
-if ((this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') || (mobile != null && mobile !== '')
-&& !localStorage.getItem('fcm_app')) {
+if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '' && !localStorage.getItem('fcm_app')) {
   // tslint:disable-next-line: max-line-length
-this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone ?
-this.phoneNumber.value.phone !== '' ? this.phoneNumber.value.phone : mobile ? mobile !== '' ? mobile : '' : '' : ''
+this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
 , ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
 console.log(res);
 this.authData = res;
 if (res.registered === 1) {
-  if (otpStatus) {
     this.openVerificationDialog(res.is_lead);
-  } else {
-  localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
-  localStorage.setItem('is_lead', res.is_lead);
-  localStorage.setItem('id', res.id);
-  localStorage.setItem('authData', JSON.stringify(res));
-  this.router.navigateByUrl('chat');
-  }
 } else {
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
   this.analyticsEvent('Four Page Registration Page Zero');
@@ -96,23 +86,13 @@ this.spinner.hide();
 this.spinner.hide();
 console.log(err);
 });
-}  else if ((this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') || (mobile != null && mobile !== '')
- && localStorage.getItem('fcm_app')) {
-  this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone ?
-   this.phoneNumber.value.phone !== '' ? this.phoneNumber.value.phone : mobile ? mobile !== '' ? mobile : '' : '' : ''
+}  else if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '' && localStorage.getItem('fcm_app')) {
+  this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
 , ['fcm_app'] : localStorage.getItem('fcm_app')}}).subscribe(res => {
 console.log(res);
 this.authData = res;
 if (res.registered === 1) {
-  if (otpStatus) {
     this.openVerificationDialog(res.is_lead);
-  } else {
-  localStorage.setItem('mobile_number', this.phoneNumber.value.phone);
-  localStorage.setItem('is_lead', res.is_lead);
-  localStorage.setItem('id', res.id);
-  localStorage.setItem('authData', JSON.stringify(res));
-  this.router.navigateByUrl('chat');
-  }
 } else {
   localStorage.setItem('RegisterNumber', this.phoneNumber.value.phone);
   this.analyticsEvent('Four Page Registration Page Zero');
@@ -223,7 +203,7 @@ openVerificationDialog(isLead: string) {
               const trueData = JSON.parse(response.data);
               if (trueData.phoneNumbers && trueData.phoneNumbers[0]) {
                   console.log(trueData);
-                  this.submitPhone(false, trueData.phoneNumbers[0]);
+                  this.loginUsingTruecaller(trueData.phoneNumbers[0]);
               }
               this.stopPolling.next();
           } else if (response.status !== 0) {
@@ -255,6 +235,72 @@ openVerificationDialog(isLead: string) {
        takeUntil(this.stopPolling)
     );
    }
+
+ loginUsingTruecaller(mob) {
+
+    this.spinner.show();
+    localStorage.setItem('is_lead', '');
+    if (mob && !localStorage.getItem('fcm_app')) {
+      // tslint:disable-next-line: max-line-length
+    this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : mob
+    , ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
+    console.log(res);
+    this.authData = res;
+    if (res.registered === 1) {
+      this.analyticsEvent('Logged In Using Truecaller');
+      localStorage.setItem('mobile_number', mob);
+      localStorage.setItem('is_lead', res.is_lead);
+      localStorage.setItem('id', res.id);
+      localStorage.setItem('authData', JSON.stringify(res));
+      this.router.navigateByUrl('chat');
+    } else {
+      localStorage.setItem('RegisterNumber', mob);
+      this.analyticsEvent('Four Page Registration Page Zero');
+       // gtag app + web
+      (window as any).gtag('config', 'G-1ES443XD0F' , {
+        user_id: mob
+      });
+      this.ngxNotificationService.info('You are not registered with us, Kindly register');
+      this.router.navigateByUrl('fourReg');
+    }
+    this.spinner.hide();
+    }, err => {
+    this.spinner.hide();
+    console.log(err);
+    });
+    }  else if (mob && localStorage.getItem('fcm_app')) {
+      this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : mob
+    , ['fcm_app'] : localStorage.getItem('fcm_app')}}).subscribe(res => {
+    console.log(res);
+    this.authData = res;
+    if (res.registered === 1) {
+      this.analyticsEvent('Logged In Using Truecaller');
+      localStorage.setItem('mobile_number', mob);
+      localStorage.setItem('is_lead', res.is_lead);
+      localStorage.setItem('id', res.id);
+      localStorage.setItem('authData', JSON.stringify(res));
+      this.router.navigateByUrl('chat');
+    } else {
+      localStorage.setItem('RegisterNumber', mob);
+      this.analyticsEvent('Four Page Registration Page Zero');
+       // gtag app + web
+      (window as any).gtag('config', 'G-1ES443XD0F' , {
+        user_id: mob
+      });
+      this.ngxNotificationService.info('You are not registered with us, Kindly register');
+      this.router.navigateByUrl('fourReg');
+    }
+    this.spinner.hide();
+    }, err => {
+    this.spinner.hide();
+    console.log(err);
+    });
+    } else {
+    this.ngxNotificationService.info('Enter a valid number');
+    this.spinner.hide();
+    }
+    
+ }
 
 }
 
