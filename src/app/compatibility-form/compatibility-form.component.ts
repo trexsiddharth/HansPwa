@@ -1117,6 +1117,7 @@ getProfile() {
     //  get facebook login status
 statusChangeCallback(value) {
   console.log(value);
+  alert(value.status);
   if (value.status === 'connected') {
     localStorage.setItem('fb_token', value.authResponse.accessToken);
     this.getFbData();
