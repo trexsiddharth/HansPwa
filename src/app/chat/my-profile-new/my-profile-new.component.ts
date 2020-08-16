@@ -1864,10 +1864,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   openPreferenceDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.minWidth = "50vw";
-      dialogConfig.maxWidth = "50vw";
+      dialogConfig.minWidth = "40vw";
+      dialogConfig.maxWidth = "40vw";
     } else {
-      dialogConfig.minWidth = "100vw";
+      dialogConfig.minWidth = "100%";
     }
     dialogConfig.minHeight = "100vh";
     dialogConfig.disableClose = false;
