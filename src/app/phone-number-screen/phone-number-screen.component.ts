@@ -215,8 +215,8 @@ openVerificationDialog(isLead: string) {
         console.log(response);
         if (this.pollingCount < 10) {
         if (response.status === 1) {
-              console.log(JSON.parse(response.data));
-              const data = JSON.parse(response.data);
+              console.log(JSON.parse(response.data as string));
+              const data = JSON.parse(response.data  as string);
               if (data) {
               if (data.phoneNumbers && data.phoneNumbers[0]) {
                 this.phoneNumber.setValue({
