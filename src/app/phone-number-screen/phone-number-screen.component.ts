@@ -219,6 +219,7 @@ openVerificationDialog(isLead: string) {
               const trueData = JSON.parse(response.data);
               if (trueData.phoneNumbers && trueData.phoneNumbers[0]) {
                   console.log(trueData);
+                  // set truecaller details
                   this.setTruecallerData(trueData);
               }
               this.stopPolling.next();
@@ -253,7 +254,7 @@ openVerificationDialog(isLead: string) {
    }
 
    setTruecallerData(trueData) {
-    this.phoneNumber.controls.phone.setValue((trueData.phoneNumbers[0] as string).substr(2));
+    this.phoneNumber.controls.phone.setValue(`${trueData.phoneNumbers[0]}`.substr(2));
     setTimeout(() => {
       this.submitPhone(false);
     }, 100);
