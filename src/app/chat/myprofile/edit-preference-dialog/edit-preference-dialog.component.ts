@@ -31,7 +31,7 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
   searchCaste = new FormControl();
   searchCasteText = new FormControl();
   isAllCastePref = false;
-
+  editIndex: number;
 
 
   // tslint:disable-next-line: max-line-length
@@ -69,6 +69,7 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
     this.gender = localStorage.getItem('gender');
     console.log(this.data);
     this.preferenceData = { ...this.data.preferencesDetails };
+    this.editIndex = this.data.editIndex;
     console.log(this.preferenceData);
     this.maxHeight = this.getHeight(this.preferenceData.height_max);
     this.minHeight = this.getHeight(this.preferenceData.height_min);
@@ -123,17 +124,17 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
         preferenceFormData.append('id', localStorage.getItem('id'));
       }
       preferenceFormData.append('caste', this.searchCaste.value);
-      preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
-      preferenceFormData.append('marital_status', this.preferenceForm.value.maritalStatus);
+      preferenceFormData.append('manglik', this.preferenceData.manglik);
+      preferenceFormData.append('marital_status', this.preferenceData.marital_status);
       if (this.gender === 'Male') {
-        preferenceFormData.append('working', this.preferenceForm.value.working);
+        preferenceFormData.append('working', this.preferenceData.working);
         preferenceFormData.append('occupation', 'na');
       } else {
-        preferenceFormData.append('occupation', this.preferenceForm.value.occupation);
+        preferenceFormData.append('occupation', this.preferenceData.occupation);
         preferenceFormData.append('working', 'na');
       }
       preferenceFormData.append('religion', this.preferenceData.religion);
-      preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice);
+      preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice ? this.preferenceForm.value.food_choice : this.preferenceData.food_choice);
       preferenceFormData.append('description', this.preferenceData.description);
       preferenceFormData.append('income_min', this.preferenceData.income_min);
       preferenceFormData.append('income_max', this.preferenceData.income_max);

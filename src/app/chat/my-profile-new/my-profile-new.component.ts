@@ -511,8 +511,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   specialCase() {
     this.castePreferences = this.preferenceProfileData.caste.split(',');
     console.log(this.preferenceProfileData.caste);
-    console.log('somethinjkha;vjks;dn');
-    console.log(this.castePreferences);
   }
   changeSelectedTab(event: any) { }
   optionsFamilyIncome: Options = {
@@ -614,16 +612,17 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   setEditIndex(index: number) {
     this.editIndexPersonal = index;
-    console.log('Personal index set to' + String(index));
+    console.log('Personal index set to: ' + String(index));
   }
   setEditIndexFamily(index: number) {
     this.editIndexFamily = index;
-    console.log('Family index set to' + String(index));
+    console.log('Family index set to: ' + String(index));
   }
   setEditIndexPrefs(index: number) {
     this.editIndexPrefs = index;
-    console.log('pref index set to' + String(index));
+    console.log('pref index set to: ' + String(index));
     this.specialCase();
+    this.openPreferenceDialog();
   }
   setEdit(index) {
     console.log('viaebrnifakujrnviksjsrn');
@@ -1875,12 +1874,14 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
       preferencesDetails: this.preferenceProfileData,
+      editIndex: this.editIndexPrefs
     };
     const dialogRef = this.matDialog.open(
       EditPreferenceDialogComponent,
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((res) => {
+      this.editIndexPrefs = -1;
       this.getUserProfileData();
     });
   }

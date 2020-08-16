@@ -714,10 +714,12 @@
                 <img class="accordion-image" src="../../assets/personalN.svg" />
                 <p *ngIf="languageService.getCurrentLanguage()==='english'">Basic Details</p>
                 <p *ngIf="languageService.getCurrentLanguage()==='hindi'">बेसिक डीटेल्स्</p>
-                <div class="circular3 mat-elevation-z12" *ngIf="editIndexPrefs != 0">
+                <!-- <div class="circular3 mat-elevation-z12" *ngIf="editIndexPrefs != 0">
                   <img (click)="openPreferenceDialog()" width="100%" src="../../../assets/editN.svg"
                     alt="editBasicDetails" />
-                </div>
+                </div> -->
+                <img *ngIf="editIndexPrefs != 0" (click)="setEditIndexPrefs(0)" class="editPencil"
+                  src="../../../assets/editN.svg" alt="editBasicDetails" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -733,7 +735,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPrefs == 0">
+            <!-- <div class="column" *ngIf="editIndexPrefs == 0">
               <div class="row information">
                 <div class="col-6">
                   <h6 style="display: inline-block">Age Min: </h6>
@@ -778,7 +780,7 @@
                 (click)="onSubmitPreferences()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="infoRow">
             <div class="column" *ngIf="editIndexPrefs != 1 ">
@@ -786,8 +788,8 @@
                 <img class="accordion-image" src="../../assets/educationN.svg" />
                 <p *ngIf="languageService.getCurrentLanguage()==='english'">Career & Occupation</p>
                 <p *ngIf="languageService.getCurrentLanguage()==='hindi'">करियर & ऑक्यूपेशन</p>
-                <!-- <img *ngIf="editIndexPrefs != 1" (click)="setEditIndexPrefs(1)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editBasicDetails" /> -->
+                <img *ngIf="editIndexPrefs != 1" (click)="setEditIndexPrefs(1)" class="editPencil"
+                  src="../../../assets/editN.svg" alt="editBasicDetails" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -805,7 +807,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPrefs == 1">
+            <!-- <div class="column" *ngIf="editIndexPrefs == 1">
               <div class="row information">
                 <div class="col-6">
                   <h6 style="display: inline-block">Income Min(in LPA) : </h6>
@@ -818,11 +820,6 @@
               </div>
               <div class="col-12" *ngIf="personalProfileData.gender==='Female'">
                 <h6>Occupation</h6>
-                <!-- <select type="text" class="form-control" formControlName="occupation" required>
-                  <option *ngFor="let name of Occupation" [value]="name" required>
-                    {{ name }}
-                  </option>
-                </select> -->
                 <mat-select type="text" class="form-control" [multiple]="true" formControlName="occupation"
                   [(ngModel)]="preferenceProfileData.occupation" required>
                   <mat-option *ngFor="let item of Occupation" [value]="item" required>
@@ -842,7 +839,7 @@
                 (click)="onSubmitPreferences()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="infoRow">
             <div class="column" *ngIf="editIndexPrefs != 2 ">
@@ -850,8 +847,8 @@
                 <img class="accordion-image" src="../../assets/horoscopeN.svg" />
                 <p *ngIf="languageService.getCurrentLanguage()==='english'">Religion & Caste</p>
                 <p *ngIf="languageService.getCurrentLanguage()==='hindi'"> धर्म & जाती </p>
-                <!-- <img *ngIf="editIndexPrefs != 2" (click)="setEditIndexPrefs(2)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editBasicDetails" /> -->
+                <img *ngIf="editIndexPrefs != 2" (click)="setEditIndexPrefs(2)" class="editPencil"
+                  src="../../../assets/editN.svg" alt="editBasicDetails" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -873,7 +870,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPrefs == 2">
+            <!-- <div class="column" *ngIf="editIndexPrefs == 2">
               <div class="col-12">
                 <h6 style="display: inline-block;">{{languageService.profileLang.religion}}:</h6>
                 <mat-select style="color:black!important" type="text" class="form-control" [multiple]="true"
@@ -916,7 +913,7 @@
                 (click)="onSubmitPreferences()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <!-- <div class="tabContent">
             <a style="

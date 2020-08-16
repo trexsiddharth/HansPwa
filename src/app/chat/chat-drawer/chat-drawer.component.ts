@@ -559,6 +559,7 @@ export class ChatDrawerComponent implements OnInit {
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
       preferencesDetails: this.preferenceProfileData,
+      editIndex: 100,
     };
     const dialogRef = this.matDialog.open(
       EditPreferenceDialogComponent,
