@@ -28,9 +28,9 @@
                     <!-- <ng-template matStepLabel>Page I</ng-template> -->
                       <div class="row">
 
-                        <div class="col-md-12">
+                        <div class="col-6">
                           <mat-form-field class="full-width fieldFit" appearance="standard">
-                          <mat-label >Looking Rishta For</mat-label>
+                          <mat-label >Rishta For</mat-label>
                               <mat-select (selectionChange)="setGender()" #relation formControlName="Relation" required >
                                       <mat-option *ngFor="let  option of createProfile" [value]="option">
                                               {{option}}
@@ -38,6 +38,18 @@
                               </mat-select>
                             </mat-form-field>
                       </div>
+
+                      <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard" >
+                           <mat-label >Religion</mat-label>
+                            <mat-select  #relation formControlName="Religion" (selectionChange)="Religion($event)" required >
+                                    <mat-option *ngFor="let  option of Religions" [value]="option">
+                                            {{option}}
+                                    </mat-option>
+                            </mat-select>
+                    
+                       </mat-form-field> 
+                  </div>
 
                       <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                         आप जिस कस्टमर से फ़ोन पर बात कर रहे हैं वो किसके लिए रिश्ता देख रहे हैं ये भरे ।
@@ -60,18 +72,6 @@
                         <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                           यहाँ पर कैंडिडेट यानि जिसके लिए रिश्ता देखा जा रहा है उसका नाम लिखे (लड़का या लड़की जो भी है )
                         </p>
-
-                        <div class="col-md-12">
-                          <mat-form-field class="full-width fieldFit" appearance="standard" >
-                             <mat-label >Religion</mat-label>
-                              <mat-select (focus)="focused()"  #relation formControlName="Religion" (selectionChange)="Religion($event)" required >
-                                      <mat-option *ngFor="let  option of Religions" [value]="option">
-                                              {{option}}
-                                      </mat-option>
-                              </mat-select>
-                      
-                         </mat-form-field> 
-                    </div>
     
                     <div class="col-md-12" *ngIf="Caste">
     
@@ -90,6 +90,12 @@
                         </mat-select>
                      
                     </mat-form-field>
+                </div>
+
+                <div class="col-12" *ngIf="Caste" style="margin-top: 30px;">
+                  <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
+                    All Caste Preferred
+                  </mat-checkbox>
                 </div>
 
                 <div class="col-md-12" 
@@ -154,13 +160,6 @@
                         
                         </mat-form-field>
                     </div>
-
-            <div class="col-12" *ngIf="Caste" style="margin-top: 30px;">
-              <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
-                All Caste Preferred
-              </mat-checkbox>
-            </div>
-  
                             <div class="col-12">
                                 <mat-form-field class="full-width fieldFit" appearance="standard">
                                   <mat-label >Height</mat-label>

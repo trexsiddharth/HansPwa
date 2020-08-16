@@ -179,6 +179,7 @@ async ngOnInit() {
     this.PageOne.patchValue({
       phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
     });
+    this.hideMobileNumber = true;
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
   localStorage.clear();
@@ -373,7 +374,6 @@ async ngOnInit() {
             break;
           case 'Castes':
             this.analyticsEvent('Four Page Registration Page One Caste Changed');
-            (document.querySelector('#phone') as any).focus();
             break;
 
           default:
@@ -481,7 +481,7 @@ async ngOnInit() {
         this.fourPageService.setAllCastes(this.getcastes);
         if (this.getcastes) {
            // load the initial caste list
-                this.filteredCastes.next((this.getcastes as string[]).slice(0, 10));
+                this.filteredCastes.next((this.getcastes as string[]).slice(0, 100));
 
             // listen for search field value changes
                 this.PageOne.controls.CasteCtrl.valueChanges
@@ -758,19 +758,12 @@ datePickerClicked() {
     document.querySelector<HTMLElement>('.mat-icon-button').click();
   }
 
-  focused() {
-    console.log('Religion Focused');
-  }
-
   // Religion
 Religion(event) {
     console.log(event.value);
     this.analyticsEvent('Four Page Registration Page One Religion Changed');
     if (event.value === 'Hindu') {
       this.Caste = true;
-      setTimeout(() => {
-        (document.querySelector('#caste') as any).focus();
-      }, 200);
     } else {
       this.Caste = false;
       this.PageOne.patchValue({
