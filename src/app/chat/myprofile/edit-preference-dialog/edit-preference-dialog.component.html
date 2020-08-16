@@ -1,128 +1,152 @@
 <mat-dialog-content>
-    <form (ngSubmit)="onSubmit()" #preferencesForm="ngForm">
-      <div class="row" class="t-c" style="margin-top: 1rem;">
-        <h5 style="margin: auto 20px;
-         color: #58d1fd;
+
+  <form (ngSubmit)="onSubmit()" #preferencesForm="ngForm">
+    <div class="row toolBar" style="width: 100%!important;margin: 0px 0px">
+      <div class="backArrow">
+        <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="goBack()" alt="BACK" />
+      </div>
+      <h5 style="margin: auto 20px;
         font-weight: bold;
-         font-size: 1.5rem;">{{'प्रैफरेंसेज'}}</h5>
+         font-size: 1.5rem;">{{languageService.profileLang.preference}}</h5>
     </div>
-        <div class="row" style="margin: 10px 10px;">
-            <div class="col-12">
-              <h6 style="display: inline-block">Age Min: </h6>
-              <input type="text" class="form-control" name="age_min" [(ngModel)]="preferenceData.age_min">
-            </div>
-            <hr style="margin: 0px 10px;width: 100%">
-          <div class="col-12">
-              <h6 style="display: inline-block">Age Max : </h6>
-              <input type="text" class="form-control" name="age_max" [(ngModel)]="preferenceData.age_max">
-             </div>
-              <hr style="margin: 0px 10px;width: 100%">
-              <div class="col-12">
-                  <h6 style="display: inline-block">Height Min : </h6>
-                  <select type="text" class="form-control" name="height_min" [(ngModel)]="minHeight" required>
-                      <option *ngFor="let item of Heights"[value]="item">{{item}}</option>
-                      </select> 
-                </div>
-                <hr style="margin: 0px 10px;width: 100%">
-                <div class="col-12">
-                  <h6 style="display: inline-block">Height Max : </h6>
-                  <select type="text" class="form-control" name="height_max" [(ngModel)]="maxHeight" required>
-                      <option *ngFor="let item of Heights"[value]="item">{{item}}</option>
-                      </select> 
-                </div>
-                <hr style="margin: 0px 10px;width: 100%">
-    
-                <div class="col-12">
-                  <h6 style="display: inline-block">Income Min : </h6>
-                  <input type="text" class="form-control" name="income_min" [(ngModel)]="preferenceData.income_min">
-                </div>
-                <hr style="margin: 0px 10px;width: 100%">
-                <div class="col-12">
-                  <h6 style="display: inline-block">Income Max : </h6>
-                  <input type="text" class="form-control" name="income_max" [(ngModel)]="preferenceData.income_max">
-                </div>
-                <hr style="margin: 0px 10px;width: 100%">
-    
+    <div class="row" style="margin: 10px 10px;">
+      <div class="row information" style="margin: 5px 10px">
+        <div class="col-6">
+          <h6 style="display: inline-block">Age Min: </h6>
+          <input type="text" class="form-control" name="age_min" [(ngModel)]="preferenceData.age_min">
+        </div>
+        <div class="col-6">
+          <h6 style="display: inline-block">Age Max: </h6>
+          <input type="text" class="form-control" name="age_max" [(ngModel)]="preferenceData.age_max">
+        </div>
+      </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-6">
+          <h6 style="display: inline-block">Height Min: </h6>
+          <select style="width:100%" type="text" class="form-control" name="height_min" [(ngModel)]="minHeight"
+            required>
+            <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <h6 style="display: inline-block">Height Max: </h6>
+          <select style="width:100%" type="text" class="form-control" name="height_max" [(ngModel)]="maxHeight"
+            required>
+            <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-6">
+          <h6 style="display: inline-block">Income min: </h6>
+          <input type="text" class="form-control" name="income_min" [(ngModel)]="preferenceData.income_min">
+        </div>
+        <div class="col-6">
+          <h6 style="display: inline-block">Income max:</h6>
+          <input type="text" class="form-control" name="income_max" [(ngModel)]="preferenceData.income_max">
+        </div>
+      </div>
+      <!-- <div class="col-12">
+        <h6 style="display: inline-block">Income Min : </h6>
+        <input type="text" class="form-control" name="income_min" [(ngModel)]="preferenceData.income_min">
+      </div>
+      <hr style="margin: 0px 10px;width: 100%">
+      <div class="col-12">
+        <h6 style="display: inline-block">Income Max : </h6>
+        <input type="text" class="form-control" name="income_max" [(ngModel)]="preferenceData.income_max">
+      </div>
+      <hr style="margin: 0px 10px;width: 100%"> -->
 
-                  <div class="col-12">
-                    <h6>Caste</h6>
-                    <mat-select 
-                    type="text"
-                    class="form-control"  
-                    [multiple]="true" 
-                    (selectionChange)="casteSelectionChanged($event)"
-                    [formControl]="searchCaste"
-                    #multiSelect
-                     required >
-                     <mat-option>
-                      <ngx-mat-select-search 
-                      noEntriesFoundLabel="No Castes Found" 
-                      placeholderLabel="Search Castes..."
-                      [formControl]="searchCasteText"></ngx-mat-select-search>
-                     </mat-option>
-                            <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
-                              {{name}}
-                            </mat-option>
-                    </mat-select>
-            </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-12">
+          <h6>Caste</h6>
+          <mat-select style="width: 100%;" type="text" class="form-control" [multiple]="true"
+            (selectionChange)="casteSelectionChanged($event)" [formControl]="searchCaste" #multiSelect required>
+            <mat-option>
+              <ngx-mat-select-search noEntriesFoundLabel="No Castes Found" placeholderLabel="Search Castes..."
+                [formControl]="searchCasteText"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
+              {{name}}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col-12" style="margin-top: 10px;">
+          <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">No Caste Bar</mat-checkbox>
+        </div>
+      </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-12">
+          <h6 style="display: inline-block;">{{languageService.profileLang.religion}}:</h6>
+          <mat-select style="color:black!important" type="text" class="form-control" [multiple]="true" name="religion"
+            [(ngModel)]="preferenceData.religion" required>
+            <mat-option *ngFor="let item of Religions" [value]="item" required>
+              {{ item}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-6">
+          <h6 style="display: inline-block">Manglik : </h6>
+          <select type="text" class="form-control" name="manglik" [(ngModel)]="preferenceData.manglik" required>
+            <option *ngFor="let item of Mangalika" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <h6 style="display: inline-block">Marital Status : </h6>
+          <select type="text" class="form-control" name="maritalStatus" [(ngModel)]="preferenceData.marital_status"
+            required>
+            <option *ngFor="let item of MaritalStatus" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-6">
+          <h6 style="display: inline-block">Mother Tongue : </h6>
+          <input type="text" class="form-control" name="mother_tongue" [(ngModel)]="preferenceData.mother_tongue">
+        </div>
+        <div class="col-6">
+          <h6 style="display: inline-block">Food Preferences : </h6>
+          <select type="text" class="form-control" name="food_choice" [(ngModel)]="preferenceData.food_choice" required>
+            <option *ngFor="let item of Foodpreferences" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-12">
+          <h6 style="display: inline-block" *ngIf="gender=='Male'">Working Status: </h6>
+          <select type="text" class="form-control" name="working" [(ngModel)]="preferenceData.working" required
+            *ngIf="gender=='Male'">
+            <option *ngFor="let item of Working" [value]="item">{{item}}</option>
+          </select>
 
-            <div class="col-12" style="margin-top: 10px;">
-              <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">No Caste Bar</mat-checkbox>
-            </div>
-                  
-                  <hr style="margin: 0px 10px;width: 100%">
-                  <div class="col-12">
-                      <h6 style="display: inline-block">Manglik : </h6>
-                      <select type="text" class="form-control" name="manglik" [(ngModel)]="preferenceData.manglik" required>
-                          <option *ngFor="let item of Mangalika"[value]="item">{{item}}</option>
-                          </select> 
-                    </div>
-                    <div class="col-12">
-                      <h6 style="display: inline-block">Marital Status : </h6>
-                      <select type="text" class="form-control" name="maritalStatus" [(ngModel)]="preferenceData.marital_status" required>
-                        <option *ngFor="let item of MaritalStatus"[value]="item">{{item}}</option>
-                        </select> 
-                    </div>
-                    <hr style="margin: 0px 10px;width: 100%">
-                    <div class="col-12">
-                        <h6 style="display: inline-block">Mother Tongue : </h6>
-                        <input type="text" class="form-control" name="mother_tongue" [(ngModel)]="preferenceData.mother_tongue">
-                      </div>
-                      <hr style="margin: 0px 10px;width: 100%">
-                      <div class="col-12">
-                          <h6 style="display: inline-block">Food Preferences : </h6>
-                          <select type="text" class="form-control" name="food_choice" [(ngModel)]="preferenceData.food_choice" required>
-                              <option *ngFor="let item of Foodpreferences"[value]="item">{{item}}</option>
-                              </select> 
-                        </div>
-                        <hr style="margin: 0px 10px;width: 100%">
-                        <div class="col-12">
-                            <h6 style="display: inline-block" *ngIf="gender=='Male'">Working Status: </h6>
-                            <select type="text" class="form-control" name="working" [(ngModel)]="preferenceData.working" required *ngIf="gender=='Male'">
-                                <option *ngFor="let item of Working"[value]="item">{{item}}</option>
-                                </select> 
-
-                                <h6 style="display: inline-block" *ngIf="gender=='Female'">Occupation: </h6>
-                            <select type="text" class="form-control" name="occupation" [(ngModel)]="preferenceData.occupation" required *ngIf="gender=='Female'">
-                                <option *ngFor="let item of Occupation"[value]="item">{{item}}</option>
-                                </select> 
-                          </div>
-                          <div class="col-12">
-                            <h6>Description: (max 300 words)</h6>
-                              <input class="form-control" maxlength="300" type="text" name="description" [(ngModel)]="preferenceData.description" > 
-                        </div>
-
-                        <div style="text-align: center; width: 100%;">
-                          <button type="submit"  class="btn"
-                          mat-raised-button style="background-color: #34b7f1;
+          <h6 style="display: inline-block" *ngIf="gender=='Female'">Occupation</h6>
+          <mat-select type="text" class="form-control" [multiple]="true" name="occupation"
+            [(ngModel)]="preferenceData.occupation" required>
+            <mat-option *ngFor="let item of Occupation" [value]="item" required>
+              {{ item}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="row information" style="width: 100%;margin: 5px 10px">
+        <div class="col-12">
+          <h6>Description: (max 300 words)</h6>
+          <input class="form-control" maxlength="300" type="text" name="description"
+            [(ngModel)]="preferenceData.description">
+        </div>
+      </div>
+      <div style="text-align: center; width: 100%;">
+        <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
                           color: white;
                           padding: 5px 40px;
                           margin-bottom: 20px;
                           margin-top: 20px;
                           font-size: 1rem;
                           font-weight: bold;
-                          " >EDIT AND SAVE</button> 
-                    </div>
-          </div>
-        </form>
-      </mat-dialog-content>
+                          ">EDIT AND SAVE</button>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>

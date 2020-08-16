@@ -714,8 +714,10 @@
                 <img class="accordion-image" src="../../assets/personalN.svg" />
                 <p *ngIf="languageService.getCurrentLanguage()==='english'">Basic Details</p>
                 <p *ngIf="languageService.getCurrentLanguage()==='hindi'">बेसिक डीटेल्स्</p>
-                <img *ngIf="editIndexPrefs != 0" (click)="setEditIndexPrefs(0)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editBasicDetails" />
+                <div class="circular3 mat-elevation-z12" *ngIf="editIndexPrefs != 0">
+                  <img (click)="openPreferenceDialog()" width="100%" src="../../../assets/editN.svg"
+                    alt="editBasicDetails" />
+                </div>
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -784,8 +786,8 @@
                 <img class="accordion-image" src="../../assets/educationN.svg" />
                 <p *ngIf="languageService.getCurrentLanguage()==='english'">Career & Occupation</p>
                 <p *ngIf="languageService.getCurrentLanguage()==='hindi'">करियर & ऑक्यूपेशन</p>
-                <img *ngIf="editIndexPrefs != 1" (click)="setEditIndexPrefs(1)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editBasicDetails" />
+                <!-- <img *ngIf="editIndexPrefs != 1" (click)="setEditIndexPrefs(1)" class="editPencil"
+                  src="../../../assets/editN.svg" alt="editBasicDetails" /> -->
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -848,8 +850,8 @@
                 <img class="accordion-image" src="../../assets/horoscopeN.svg" />
                 <p *ngIf="languageService.getCurrentLanguage()==='english'">Religion & Caste</p>
                 <p *ngIf="languageService.getCurrentLanguage()==='hindi'"> धर्म & जाती </p>
-                <img *ngIf="editIndexPrefs != 2" (click)="setEditIndexPrefs(2)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editBasicDetails" />
+                <!-- <img *ngIf="editIndexPrefs != 2" (click)="setEditIndexPrefs(2)" class="editPencil"
+                  src="../../../assets/editN.svg" alt="editBasicDetails" /> -->
               </div>
               <div class="row information">
                 <div class="columnar">

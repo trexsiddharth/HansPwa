@@ -16,6 +16,8 @@ import {
 import {
   MatSelect,
   MatSnackBar,
+  MatDialogConfig,
+  MatDialog,
 } from "@angular/material";
 import { NgxNotificationService } from "ngx-kc-notification";
 import { HttpClient } from "@angular/common/http";
@@ -359,7 +361,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public snackbar: MatSnackBar,
-    public chatService: ChatServiceService
+    public chatService: ChatServiceService,
+    public matDialog: MatDialog
   ) {
     this.personalForm = this._formBuilder.group({
       name: [''],
@@ -1140,10 +1143,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       return null;
     }
   }
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event) {
-  //   this.innerWidth = window.innerWidth;
-  // }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
   }
@@ -1276,6 +1279,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
               }
             }
+            localStorage.setItem('gender', this.personalProfileData.gender);
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
             this.setCurrentPreferenceValue();
@@ -1856,18 +1860,17 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     dialogRef.afterClosed().subscribe((data) => {
       this.getUserProfileData();
     });
-  }
+  }*/
 
   openPreferenceDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.maxWidth = "40vh";
-      dialogConfig.minWidth = "35vh";
-      dialogConfig.maxHeight = "90vh";
+      dialogConfig.minWidth = "50vw";
+      dialogConfig.maxWidth = "50vw";
     } else {
-      dialogConfig.minWidth = "80vw";
-      dialogConfig.maxHeight = "80vh";
+      dialogConfig.minWidth = "100vw";
     }
+    dialogConfig.minHeight = "100vh";
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
@@ -1879,9 +1882,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     dialogRef.afterClosed().subscribe((res) => {
       this.getUserProfileData();
-      // if (res) {
-      //   this.preferenceChanged.emit(res);
-      // }
     });
-  } */
+  }
 }

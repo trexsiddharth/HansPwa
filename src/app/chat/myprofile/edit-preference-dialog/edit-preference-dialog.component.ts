@@ -5,6 +5,7 @@ import { NgForm, FormControl } from '@angular/forms';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { startWith, map, take, takeUntil } from 'rxjs/operators';
+import { LanguageService } from '../../../language.service';
 
 
 @Component({
@@ -14,9 +15,10 @@ import { startWith, map, take, takeUntil } from 'rxjs/operators';
 })
 export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private http: HttpClient,
-              private snackBar: MatSnackBar,
-              private ngxNotificationService: NgxNotificationService,
-              public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
+    private snackBar: MatSnackBar,
+    private ngxNotificationService: NgxNotificationService,
+    public languageService: LanguageService,
+    public dialogRef: MatDialogRef<EditPreferenceDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.data = data;
   }
   data: any;
@@ -35,14 +37,25 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
   // tslint:disable-next-line: max-line-length
-  Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84'];
+  Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
   Mangalika = ['Manglik', 'Non-Manglik', 'Anshik Manglik', 'Doesn\'t Matter'];
   Foodpreferences: string[] = ['Doesn\'t Matter', 'Non-Vegetarian', 'Vegetarian'];
   Working: string[] = ['Working', 'Not Working', 'Doesn\'t Matter'];
   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Doesn\'t Matter',
-  'Defence', 'Civil Services'];
+    'Defence', 'Civil Services'];
   MaritalStatus: string[] = ['Doesn\'t Matter', 'Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
-  @ViewChild('preferencesForm', {static: false}) preferenceForm: NgForm;
+  Religions: string[] = [
+    'Hindu',
+    'Muslim',
+    'Sikh',
+    'Christian',
+    'Buddhist',
+    'Jain',
+    'Parsi',
+    'Jewish',
+    'Bahai',
+  ];
+  @ViewChild('preferencesForm', { static: false }) preferenceForm: NgForm;
 
   /** list of banks filtered by search keyword */
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
@@ -55,14 +68,16 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
   ngOnInit() {
     this.gender = localStorage.getItem('gender');
     console.log(this.data);
-    this.preferenceData = {...this.data.preferencesDetails};
+    this.preferenceData = { ...this.data.preferencesDetails };
     console.log(this.preferenceData);
     this.maxHeight = this.getHeight(this.preferenceData.height_max);
     this.minHeight = this.getHeight(this.preferenceData.height_min);
 
     this.getAllCaste();
   }
-
+  goBack() {
+    this.dialogRef.close();
+  }
   setNullToNotMatter() {
     setTimeout(() => {
       if (this.preferenceData) {
@@ -86,12 +101,18 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
           this.preferenceData.occupation = 'Doesn\'t Matter';
         }
 
-    }
+      }
     }, 1000);
   }
 
   onSubmit() {
     console.log('marital_status', this.preferenceData.marital_status);
+    if (Array.isArray(this.preferenceData.religion))
+      this.preferenceData.religion = this.preferenceData.religion.join(',');
+
+
+    if (this.gender === "Female" && Array.isArray(this.preferenceData.occupation))
+      this.preferenceData.occupation = this.preferenceData.occupation.join(',');
 
     if (this.preferenceForm.valid) {
       const preferenceFormData = new FormData();
@@ -105,12 +126,13 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
       preferenceFormData.append('manglik', this.preferenceForm.value.manglik);
       preferenceFormData.append('marital_status', this.preferenceForm.value.maritalStatus);
       if (this.gender === 'Male') {
-      preferenceFormData.append('working', this.preferenceForm.value.working);
-      preferenceFormData.append('occupation', 'na');
-    } else {
-      preferenceFormData.append('occupation', this.preferenceForm.value.occupation);
-      preferenceFormData.append('working', 'na');
-    }
+        preferenceFormData.append('working', this.preferenceForm.value.working);
+        preferenceFormData.append('occupation', 'na');
+      } else {
+        preferenceFormData.append('occupation', this.preferenceForm.value.occupation);
+        preferenceFormData.append('working', 'na');
+      }
+      preferenceFormData.append('religion', this.preferenceData.religion);
       preferenceFormData.append('food_choice', this.preferenceForm.value.food_choice);
       preferenceFormData.append('description', this.preferenceData.description);
       preferenceFormData.append('income_min', this.preferenceData.income_min);
@@ -126,15 +148,15 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
 
 
       this.http.post('https://partner.hansmatrimony.com/api/updatePreferencesDetails', preferenceFormData).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.dialogRef.close({success: 'success'});
-      },
-      (error: any) => {
-        console.log(error);
-        this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
-      }
-    );
+        (data: any) => {
+          console.log(data);
+          this.dialogRef.close({ success: 'success' });
+        },
+        (error: any) => {
+          console.log(error);
+          this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+        }
+      );
     } else {
       alert('enter all details');
     }
@@ -162,34 +184,34 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
       // adittion of all to the list of castes
       this.getcastes.push('All');
 
-       // set initial selection
+      // set initial selection
       if (this.preferenceData.caste && this.preferenceData.caste !== 'null') {
-       let values = [];
-       this.preferenceData.caste.split(',').forEach(element => {
-        console.log(element);
-        if (this.getcastes.indexOf(element)) {
-          values.push(this.getcastes[this.getcastes.indexOf(element)]);
+        let values = [];
+        this.preferenceData.caste.split(',').forEach(element => {
+          console.log(element);
+          if (this.getcastes.indexOf(element)) {
+            values.push(this.getcastes[this.getcastes.indexOf(element)]);
+          }
+        });
+        // if all , check the check box for no caste bar
+        if (values.includes('All')) {
+          this.isAllCastePref = true;
         }
-      });
-      // if all , check the check box for no caste bar
-       if (values.includes('All')) {
-        this.isAllCastePref = true;
+        this.searchCaste.setValue(values);
       }
-       this.searchCaste.setValue(values);
-    }
 
       // load the initial bank list
       this.filteredCastesMulti.next(this.getcastes.slice());
 
       // listen for search field value changes
       this.searchCasteText.valueChanges
-    .pipe(takeUntil(this._onDestroy))
-    .subscribe(() => {
-      this.filterCasteMulti();
+        .pipe(takeUntil(this._onDestroy))
+        .subscribe(() => {
+          this.filterCasteMulti();
+        });
+
+
     });
-
-
-  });
   }
 
   ngAfterViewInit() {
@@ -204,7 +226,7 @@ export class EditPreferenceDialogComponent implements OnInit, AfterViewInit, OnD
     this._onDestroy.complete();
   }
 
-   // Sets the initial value after the filteredBanks are loaded initially
+  // Sets the initial value after the filteredBanks are loaded initially
 
   protected setInitialValue() {
     this.filteredCastesMulti

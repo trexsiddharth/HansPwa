@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { MatSidenav, MatSelect, MatSnackBar } from '@angular/material';
+import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core';
+import { MatSidenav, MatSelect, MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { LanguageService } from 'src/app/language.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChatServiceService } from 'src/app/chat-service.service';
@@ -10,7 +10,7 @@ import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile
 import { timeout, retry, catchError, takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-
+import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 
 @Component({
   selector: 'app-chat-drawer',
@@ -38,6 +38,7 @@ export class ChatDrawerComponent implements OnInit {
     public itemService: FindOpenHistoryProfileService,
     public activatedRoute: ActivatedRoute,
     public snackbar: MatSnackBar,
+    public matDialog: MatDialog,
   ) {
     this.preferencesForm = this._formBuilder.group({
       food_choice: [''],
@@ -182,8 +183,9 @@ export class ChatDrawerComponent implements OnInit {
     'Widowed',
     'Anulled',
   ];
-
+  innerWidth: any;
   ngOnInit() {
+    this.innerWidth = window.innerWidth;
     this.languageService.setProfileLanguage();
     this.currentLanguage = localStorage.getItem('language');
     // set already selected language in toggle
@@ -210,7 +212,10 @@ export class ChatDrawerComponent implements OnInit {
     this._onDestroy.next();
     this._onDestroy.complete();
   }
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
 
   openUserProfile() {
     this.analyticsEvent('User Clicked My Profile From Chat Drawer');
@@ -541,7 +546,28 @@ export class ChatDrawerComponent implements OnInit {
     });
 
   }
-
+  openPreferenceDialog() {
+    const dialogConfig = new MatDialogConfig();
+    if (this.innerWidth >= 1024) {
+      dialogConfig.minWidth = "50vw";
+      dialogConfig.maxWidth = "50vw";
+    } else {
+      dialogConfig.minWidth = "100vw";
+    }
+    dialogConfig.minHeight = "100vh";
+    dialogConfig.disableClose = false;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.data = {
+      preferencesDetails: this.preferenceProfileData,
+    };
+    const dialogRef = this.matDialog.open(
+      EditPreferenceDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((res) => {
+      this.getUserProfileData();
+    });
+  }
   openSubscriptionOffer() {
     this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
     this.itemService.openTodaysPopupAd();

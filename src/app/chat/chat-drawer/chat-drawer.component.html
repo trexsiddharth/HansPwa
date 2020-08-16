@@ -9,8 +9,6 @@
         </mat-slide-toggle> En</label>
     </div>
     <div class="circular" (click)="openUserProfile()">
-      <!-- <img *ngIf="getProfilePic() == null" src="../../../assets/logo_192.png">
-            <img *ngIf="getProfilePic() !== null" [src]="getProfilePic()" > -->
       <img height="100%" [src]="userpic" (error)="onImageLoadError()">
     </div>
     <div class="nameText">
@@ -23,7 +21,7 @@
       <span>{{languageService.profileLang.myprofile}}</span>
       <img src="../../assets/nextN.svg" class="nextImage">
     </button>
-    <mat-expansion-panel id="prefs" [expanded]="false" (opened)="specialCase()" hideToggle>
+    <!-- <mat-expansion-panel id="prefs" [expanded]="false" (opened)="specialCase()" hideToggle>
       <mat-expansion-panel-header class="rowMore">
         <img src="../../../assets/tabs-icons/family.svg" class="iconImage">
         <span class="labelS" [matBadge]="'!'" matBadgeSize="small"
@@ -61,9 +59,6 @@
                     <p>{{preferenceProfileData.food_choice}}</p>
                   </div>
                 </div>
-                <!-- <p>{{preferenceProfileData.marital_status}} | {{preferenceProfileData.food_choice}}</p> -->
-                <!-- <p class="headings">{{languageService.profileLang.foodChoice}}</p>
-                <p>{{preferenceProfileData.food_choice}}</p> -->
                 <p class="headings" *ngIf="languageService.getCurrentLanguage()==='english'">Annual Income</p>
                 <p class="headings" *ngIf="languageService.getCurrentLanguage()==='hindi'">सालाना आय</p>
                 <p>{{preferenceProfileData.income_min}} to {{preferenceProfileData.income_max}} LPA</p>
@@ -147,11 +142,6 @@
               </div>
               <div class="col-12" *ngIf="gender==='Female'">
                 <h6>Occupation</h6>
-                <!-- <select type="text" class="form-control" formControlName="occupation" required>
-                <option *ngFor="let name of Occupation" [value]="name" required>
-                  {{ name }}
-                </option>
-              </select> -->
                 <mat-select type="text" class="form-control" [multiple]="true" formControlName="occupation"
                   [(ngModel)]="preferenceProfileData.occupation" required>
                   <mat-option *ngFor="let item of Occupation" [value]="item" required>
@@ -215,15 +205,15 @@
           </form>
         </div>
       </div>
-    </mat-expansion-panel>
-    <!-- <button class="rowMore" (click)="openUserProfile()">
+    </mat-expansion-panel> -->
+    <button class="rowMore" (click)="openPreferenceDialog()">
       <img src="../../../assets/tabs-icons/family.svg" class="iconImage">
       <span class="labelS" [matBadge]="'!'" matBadgeSize="small"
         [matBadgeHidden]="itemService.getChangePrefsClicked()"></span>
       <span *ngIf="languageService.getCurrentLanguage()==='english'">Change Preferences</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">{{languageService.profileLang.preference}}
         बदलें</span>
-    </button> -->
+    </button>
 
     <button class="rowMore" (click)="openHistoryProfiles('contacted')">
       <img src="../../../assets/tabs-icons/phone.svg" class="iconImage">
