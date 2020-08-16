@@ -373,6 +373,7 @@ async ngOnInit() {
             break;
           case 'Castes':
             this.analyticsEvent('Four Page Registration Page One Caste Changed');
+            (document.querySelector('#phone') as any).focus();
             break;
 
           default:
@@ -757,12 +758,19 @@ datePickerClicked() {
     document.querySelector<HTMLElement>('.mat-icon-button').click();
   }
 
+  focused() {
+    console.log('Religion Focused');
+  }
+
   // Religion
 Religion(event) {
     console.log(event.value);
     this.analyticsEvent('Four Page Registration Page One Religion Changed');
     if (event.value === 'Hindu') {
       this.Caste = true;
+      setTimeout(() => {
+        (document.querySelector('#caste') as any).focus();
+      }, 200);
     } else {
       this.Caste = false;
       this.PageOne.patchValue({
