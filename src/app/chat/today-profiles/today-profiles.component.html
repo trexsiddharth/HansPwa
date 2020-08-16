@@ -162,7 +162,7 @@
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
-                    <span class="title">{{item.locality}}</span>
+                    <span class="title">{{item.locality ? item.locality : item.city ? item.city : ''}}</span>
                 </div>
             </div>
 
@@ -324,7 +324,7 @@
             <div class="row field">
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/familyIn.svg" alt="Family Living In">
-                    <span class="title">{{item.city}}</span>
+                    <span class="title">{{item.city ? item.city : item.locality ? item.locality : ''}}</span>
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">

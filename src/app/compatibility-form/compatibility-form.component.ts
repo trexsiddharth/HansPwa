@@ -84,7 +84,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   getcastes: any = [];
   Caste = false;
   AllCastes = false;
-  locality;
   profileData;
   isLeadIsZero = false;
 
@@ -160,12 +159,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       Height: ['', Validators.compose([Validators.required])],
       // Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
-      AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
       CasteCtrl: (null),
-      Mangalik: [''],
-      // locality: ['', Validators.compose([Validators.required])],
       disabledPart: ['']
     });
   }
@@ -241,7 +237,7 @@ async ngOnInit() {
        }
       }
     );
-    
+
     // get all castes before get the data of the profile
   await this.getAllCaste();
   this.route.paramMap.subscribe(
@@ -342,9 +338,6 @@ async ngOnInit() {
           case 'Weight':
             this.analyticsEvent('Four Page Registration Page One Weight Changed');
             break;
-          case 'AnnualIncome':
-            this.analyticsEvent('Four Page Registration Page One Annual Income Changed');
-            break;
           case 'firstName':
             this.analyticsEvent('Four Page Registration Page One First Name Changed');
             break;
@@ -377,9 +370,6 @@ async ngOnInit() {
             break;
           case 'MaritalStatus':
             this.analyticsEvent('Four Page Registration Page One Marital Status Changed');
-            break;
-          case 'Mangalik':
-            this.analyticsEvent('Four Page Registration Page One Manglik Status Changed');
             break;
           case 'Castes':
             this.analyticsEvent('Four Page Registration Page One Caste Changed');
@@ -535,12 +525,9 @@ async ngOnInit() {
           Height: ['', Validators.compose([Validators.required])],
           // Weight: ['', Validators.compose([Validators.required])],
           MaritalStatus: ['', Validators.compose([Validators.required])],
-          AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
           Religion: ['', Validators.compose([Validators.required])],
           Castes: ['', Validators.compose([Validators.required])],
           CasteCtrl: (null),
-          Mangalik: [''],
-          // locality: ['', Validators.compose([Validators.required])],
           disabledPart: ['']
         });
       }
@@ -601,13 +588,9 @@ async ngOnInit() {
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               // firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
-              firststepdata.append('manglik', this.PageOne.value.Mangalik ?
-               this.PageOne.value.Mangalik  === 'Don\'t Know' ? 'Anshik Manglik' : this.PageOne.value.Mangalik : '');
 
-              firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
-              // firststepdata.append('locality', this.locality ? this.locality : this.PageOne.value.locality);
               firststepdata.append('disability', this.isDisable ? 'yes' : null);
               firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
 
@@ -627,7 +610,6 @@ async ngOnInit() {
               console.log('gender', this.PageOne.value.gender);
               console.log('height', this.Heights1[this.PageOne.value.Height]);
               console.log('marital_status', this.PageOne.value.MaritalStatus);
-              console.log('annual_income', this.PageOne.value.AnnualIncome);
               console.log('religion', this.PageOne.value.Religion);
               console.log('caste', this.PageOne.value.Castes);
 
@@ -663,11 +645,8 @@ async ngOnInit() {
                 }
 
                 this.fourPageService.updateFormOneData(firststepdata);
-                if (this.fourPageService.getUserThrough()) {
-                  // this.locality = firststepdata.get('locality');
-                } else {
-                  this.analyticsEvent('Four Page Registration Page One');
-                }
+                this.analyticsEvent('Four Page Registration Page One');
+
               } else {
                 this.spinner.hide();
                 this.ngxNotificationService.error(res.message);
@@ -828,23 +807,10 @@ resolve(statusConfirmed);
     });
   }
 
-  onAutocompleteSelected(event) {
-    console.log(event);
-    // this.PageOne.value.locality = event.formatted_address;
-    // this.locality = event.formatted_address;
-    // console.log('address of family', this.PageOne.value.locality);
-
-}
-onLocationSelected(e) {
-    this.locationFamily = e;
-    this.lat = e.latitude;
-    this.long = e.longitude;
-    console.log('location of family', e);
-}
 setGender() {
 console.log(this.PageOne.value.Relation);
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-this.openRegisterWith(this.PageOne.value.Relation);
+// this.openRegisterWith(this.PageOne.value.Relation);
 switch (this.PageOne.value.Relation) {
   case 'Brother':
     this.PageOne.patchValue(
@@ -919,6 +885,8 @@ getProfile() {
       }
     }
   }
+  // #IMPORTANT
+  // setting getProfiles to our variables so that we can also update these values and check in the last page
   setProfileValues(profileData) {
     if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
     localStorage.setItem('getListTempleId', profileData.profile.temple_id);
@@ -950,10 +918,7 @@ getProfile() {
     this.userProfile.religion = profileData.family.religion;
     this.userProfile.caste = profileData.family.caste;
     this.userProfile.manglik = profileData.profile.manglik;
-    // this.locality = profileData.family.locality;
-    // this.userProfile.locality = profileData.family.locality;
-    this.lat = profileData.profile.lat_locality;
-    this.long = profileData.profile.long_locality;
+    this.userProfile.locality = profileData.family.locality;
     this.userProfile.qualification = profileData.profile.degree;
     this.userProfile.occupation = profileData.profile.occupation;
     this.userProfile.designation = profileData.profile.profession;
@@ -1004,11 +969,8 @@ getProfile() {
       Height: this.userProfile.height ? this.Heights1.indexOf(this.userProfile.height) : '',
       // Weight: this.userProfile.weight,
       MaritalStatus: this.userProfile.martialStatus,
-      AnnualIncome: this.userProfile.annualIncome,
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
-      Mangalik: this.userProfile.manglik,
-      // locality: this.userProfile.locality,
       });
   }
   getMonthString(month: string) {

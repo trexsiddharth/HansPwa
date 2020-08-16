@@ -9,7 +9,7 @@
                           matInput matValidateAddress 
                           id="birthPlace"
                           [autoCompleteOptions]="autoComplete"
-                          (change)="placeChanged()"
+                          (change)="placeChanged('birth')"
                           matGoogleMapsAutocomplete
                            #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
                           formControlName="BirthPlace">
@@ -48,6 +48,23 @@
                     
                     </div>
 
+                    <div class="col-md-12 matSelect">
+                     
+                      <mat-form-field class="full-width fieldFit" appearance="standard">
+                          <mat-label >Manglik Status</mat-label>
+                          <mat-select (selectionChange)="changed('manglik')" 
+                          formControlName="Mangalik" >
+                            <mat-option value="Manglik">Manglik</mat-option>
+                            <mat-option value="Non-Manglik">Non-Manglik</mat-option>
+                            <mat-option value="Anshik Manglik">Anshik Manglik</mat-option>
+                            <mat-option value="Anshik Manglik">Don't Know</mat-option>
+
+                          </mat-select>
+                      
+                      </mat-form-field>
+                  
+                  </div>
+
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                           <mat-label>Father's Status</mat-label>
@@ -84,6 +101,24 @@
                               <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageThree.get('FamilyIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
                             </mat-form-field>
                           </div>
+
+                          <div class="col-12">
+                            <mat-form-field class="full-width fieldFit" appearance="standard">
+                              <mat-label>Locality / Area</mat-label>
+                              <input type="text" 
+                              matInput matValidateAddress 
+                              id="locality"
+                              [autoCompleteOptions]="autoComplete"
+                              (change)="placeChanged('locality')"
+                              matGoogleMapsAutocomplete
+                               #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
+                              formControlName="Locality">
+                            </mat-form-field>
+                          </div>
+
+                          <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+                            यहाँ कस्टमर कहाँ रहता  है वो भरे जैसे की करोल बाघ , शादी पुर , बुरारी रोहिणी आदि |
+                          </p>
                           
 
                     <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">

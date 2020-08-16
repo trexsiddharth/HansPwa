@@ -551,7 +551,7 @@ export class CompatibilityPhotoComponent implements OnInit {
                               }
                           });
                         }
-                      } else if (index >= 5) {
+                      } else {
                         return;
                       }
                     });
