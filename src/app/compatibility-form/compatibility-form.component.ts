@@ -480,7 +480,7 @@ async ngOnInit() {
         this.fourPageService.setAllCastes(this.getcastes);
         if (this.getcastes) {
            // load the initial caste list
-                this.filteredCastes.next((this.getcastes as string[]).slice());
+                this.filteredCastes.next((this.getcastes as string[]).slice(0, 10));
 
             // listen for search field value changes
                 this.PageOne.controls.CasteCtrl.valueChanges
@@ -769,42 +769,6 @@ Religion(event) {
         Castes: 'All'
       });
     }
-  }
-async casteValidation(value) {
-    this.analyticsEvent('Four Page Registration Page One Caste Changed');
-    console.log('caste changed', value );
-    const status = 1;
-    let statusConfirmed;
-    await this.checkCaste(value).then((res: boolean) => {
-       statusConfirmed = res;
-     });
-    console.log('caste changed', statusConfirmed );
-
-    if (statusConfirmed === false) {
-      this.ngxNotificationService.warning('Please choose a caste from the dropdown');
-      this.PageOne.get('Castes').setValue('');
-      return false;
-    }
-    return true;
-
-  }
-
-  checkCaste(value) {
-    let status = 1;
-    let statusConfirmed = false;
-    this.casteo.forEach(element => {
-      element.forEach(item => {
-        if (value !== '' && item.includes(value) && item.length === value.length ) {
-          console.log('confirmed');
-          statusConfirmed = true;
-        } else {
-          status = 0;
-        }
-      });
-    });
-    return new Promise((resolve) => {
-resolve(statusConfirmed);
-    });
   }
 
 setGender() {
