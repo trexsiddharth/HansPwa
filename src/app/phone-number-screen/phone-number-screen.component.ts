@@ -59,11 +59,12 @@ export class PhoneNumberScreenComponent implements OnInit {
   }
 
 
-submitPhone(otpStatus: boolean) {
+submitPhone(otpStatus: boolean, mobile = null) {
 
 this.spinner.show();
 localStorage.setItem('is_lead', '');
-if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '' && !localStorage.getItem('fcm_app')) {
+if ((this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') || (mobile != null && mobile !== '')
+&& !localStorage.getItem('fcm_app')) {
   // tslint:disable-next-line: max-line-length
 this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
 , ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
@@ -94,7 +95,8 @@ this.spinner.hide();
 this.spinner.hide();
 console.log(err);
 });
-}  else if (this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '' && localStorage.getItem('fcm_app')) {
+}  else if ((this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') || (mobile != null && mobile !== '')
+ && localStorage.getItem('fcm_app')) {
   this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
 , ['fcm_app'] : localStorage.getItem('fcm_app')}}).subscribe(res => {
 console.log(res);
@@ -219,8 +221,7 @@ openVerificationDialog(isLead: string) {
               const trueData = JSON.parse(response.data);
               if (trueData.phoneNumbers && trueData.phoneNumbers[0]) {
                   console.log(trueData);
-                  // set truecaller details
-                  this.setTruecallerData(trueData);
+                  this.submitPhone(false, trueData.phoneNumbers[0])
               }
               this.stopPolling.next();
           } else if (response.status !== 0) {
@@ -251,13 +252,6 @@ openVerificationDialog(isLead: string) {
        share(),
        takeUntil(this.stopPolling)
     );
-   }
-
-   setTruecallerData(trueData) {
-    this.phoneNumber.controls.phone.setValue(`${trueData.phoneNumbers[0]}`.substr(2));
-    setTimeout(() => {
-      this.submitPhone(false);
-    }, 100);
    }
 
 }
