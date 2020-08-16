@@ -66,7 +66,8 @@ localStorage.setItem('is_lead', '');
 if ((this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') || (mobile != null && mobile !== '')
 && !localStorage.getItem('fcm_app')) {
   // tslint:disable-next-line: max-line-length
-this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
+this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone ?
+this.phoneNumber.value.phone !== '' ? this.phoneNumber.value.phone : mobile ? mobile !== '' ? mobile : '' : '' : ''
 , ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
 console.log(res);
 this.authData = res;
@@ -97,7 +98,8 @@ console.log(err);
 });
 }  else if ((this.phoneNumber.value.phone && this.phoneNumber.value.phone !== '') || (mobile != null && mobile !== '')
  && localStorage.getItem('fcm_app')) {
-  this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone
+  this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : this.phoneNumber.value.phone ?
+   this.phoneNumber.value.phone !== '' ? this.phoneNumber.value.phone : mobile ? mobile !== '' ? mobile : '' : '' : ''
 , ['fcm_app'] : localStorage.getItem('fcm_app')}}).subscribe(res => {
 console.log(res);
 this.authData = res;
@@ -221,7 +223,7 @@ openVerificationDialog(isLead: string) {
               const trueData = JSON.parse(response.data);
               if (trueData.phoneNumbers && trueData.phoneNumbers[0]) {
                   console.log(trueData);
-                  this.submitPhone(false, trueData.phoneNumbers[0])
+                  this.submitPhone(false, trueData.phoneNumbers[0]);
               }
               this.stopPolling.next();
           } else if (response.status !== 0) {
