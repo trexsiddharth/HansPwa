@@ -217,12 +217,12 @@ openVerificationDialog(isLead: string) {
         if (response.status === 1) {
               console.log(response.data);
               const trueData = JSON.parse(response.data);
-              // if (trueData.phoneNumbers && trueData.phoneNumbers[0]) {
-              //   this.phoneNumber.setValue({
-              //     phone: trueData.phoneNumbers[0]
-              //   });
-              //   this.submitPhone(false);
-              // }
+              if (trueData) {
+                this.phoneNumber.setValue({
+                  phone: trueData.phoneNumbers[0]
+                });
+                this.submitPhone(false);
+              }
               this.stopPolling.next();
           } else if (response.status !== 0) {
             this.ngxNotificationService.error('True Caller Not Responding');
