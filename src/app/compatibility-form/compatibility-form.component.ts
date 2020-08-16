@@ -28,7 +28,7 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable, timer, Subject, of } from 'rxjs';
+import { Observable, timer, Subject, of, ReplaySubject } from 'rxjs';
 import { startWith, map, timeout, retry, catchError, switchMap, share, takeUntil } from 'rxjs/operators';
 import { FourPageService } from './four-page.service';
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
@@ -36,6 +36,7 @@ import { LanguageService } from '../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
+import { element } from 'protractor';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -125,6 +126,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
    authData;
   private fetchedFbProfilePic = null;
 
+     /** list of designation filtered by search keyword for option groups */
+     public filteredCastes: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+
+     /** Subject that emits when the component has been destroyed. */
+      protected onDestroy = new Subject<void>();
+
 
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
@@ -156,6 +163,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
+      CasteCtrl: (null),
       Mangalik: [''],
       // locality: ['', Validators.compose([Validators.required])],
       disabledPart: ['']
@@ -165,6 +173,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // truecaller polling is active and user closes the page.
     this.stopPolling.next();
+    // destroy search for caste
+    this.onDestroy.next();
+    this.onDestroy.complete();
   }
 
 async ngOnInit() {
@@ -230,6 +241,17 @@ async ngOnInit() {
        }
       }
     );
+
+
+    // get facebook login status
+  setTimeout(() => {
+      (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+        this.statusChangeCallback(response);        // Returns the login status.
+      });
+    }, 1000);
+
+
+
     // get all castes before get the data of the profile
   await this.getAllCaste();
   this.route.paramMap.subscribe(
@@ -297,6 +319,29 @@ async ngOnInit() {
   console.log(this.isLinear);
 
     }
+
+    protected filterCastes() {
+      if (!this.getcastes) {
+        return;
+      }
+      // get the search keyword
+      let search = this.PageOne.controls.CasteCtrl.value;
+      if (!search) {
+        this.filteredCastes.next(this.getcastes.slice());
+        return;
+      } else {
+        search = search.toLowerCase();
+      }
+      // filter the banks
+      const casteResults = this.getcastes.filter(bank => bank.toLowerCase().indexOf(search) > -1);
+      if (casteResults.length !== 0) {
+        this.filteredCastes.next(casteResults);
+      }
+      // else {
+      //   this.filteredCastes.next(this.getcastes.filter(bank => bank.toLowerCase().indexOf('other') > -1));
+      // }
+    }
+
     // event on change of input field
     inputFieldChanged(fieldName) {
       console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
@@ -345,6 +390,9 @@ async ngOnInit() {
             break;
           case 'Mangalik':
             this.analyticsEvent('Four Page Registration Page One Manglik Status Changed');
+            break;
+          case 'Castes':
+            this.analyticsEvent('Four Page Registration Page One Caste Changed');
             break;
 
           default:
@@ -450,6 +498,17 @@ async ngOnInit() {
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
         this.getcastes = [...res, 'All'];
         this.fourPageService.setAllCastes(this.getcastes);
+        if (this.getcastes) {
+           // load the initial caste list
+                this.filteredCastes.next((this.getcastes as string[]).slice());
+
+            // listen for search field value changes
+                this.PageOne.controls.CasteCtrl.valueChanges
+            .pipe(takeUntil(this.onDestroy))
+            .subscribe(() => {
+              this.filterCastes();
+            });
+        }
       });
       if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== '') {
       this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
@@ -489,6 +548,7 @@ async ngOnInit() {
           AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
           Religion: ['', Validators.compose([Validators.required])],
           Castes: ['', Validators.compose([Validators.required])],
+          CasteCtrl: (null),
           Mangalik: [''],
           // locality: ['', Validators.compose([Validators.required])],
           disabledPart: ['']
@@ -520,10 +580,6 @@ async ngOnInit() {
     // }
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
-      console.log('caste', this.PageOne.value.Castes);
-      this.casteValidation(this.PageOne.value.Castes).then(res => {
-          if (res === true) {
-            if (this.PageOne.valid) {
               this.spinner.show();
               const date = this.PageOne.value.birth_date;
               const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
@@ -632,11 +688,6 @@ async ngOnInit() {
               console.log(err);
             });
           }
-          } else {
-            this.ngxNotificationService.error('Fill the details');
-          }
-          }
-    });
     } else {
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
