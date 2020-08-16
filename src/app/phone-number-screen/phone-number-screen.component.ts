@@ -219,7 +219,7 @@ openVerificationDialog(isLead: string) {
               const trueData = JSON.parse(response.data);
               if (trueData.phoneNumbers && trueData.phoneNumbers[0]) {
                   console.log(trueData);
-                this.submitPhone(false);
+                  this.setTruecallerData(trueData);
               }
               this.stopPolling.next();
           } else if (response.status !== 0) {
@@ -253,9 +253,10 @@ openVerificationDialog(isLead: string) {
    }
 
    setTruecallerData(trueData) {
-    this.phoneNumber.setValue({
-      phone: trueData.phoneNumbers[0]
-    });
+    this.phoneNumber.controls.phone.setValue(trueData.phoneNumbers[0]);
+    setTimeout(() => {
+      this.submitPhone(false);
+    }, 200);
    }
 
 }
