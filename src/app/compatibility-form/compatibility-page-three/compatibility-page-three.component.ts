@@ -63,6 +63,8 @@ export class CompatibilityPageThreeComponent implements OnInit {
     birthPlace;
     birthPlaceText;
 
+    Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working', 'Not Alive'];
+
     // for only getting the autocomplete predictions
     autoComplete = {
       strictBounds: false,
@@ -167,8 +169,15 @@ firstStep() {
       firststepdata.append('manglik', this.PageThree.value.Mangalik ?
                this.PageThree.value.Mangalik  === 'Don\'t Know' ? 'Anshik Manglik' : this.PageThree.value.Mangalik : '');
       firststepdata.append('gotra', this.PageThree.value.Gotra);
-      firststepdata.append('father_status', this.PageThree.value.FatherStatus);
-      firststepdata.append('mother_status', this.PageThree.value.MotherStatus);
+
+      firststepdata.append('father_status', this.PageThree.value.FatherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
+      firststepdata.append('mother_status', this.PageThree.value.MotherStatus  !== 'Not Alive' ? 'Alive' : 'Not Alive');
+      if (this.PageThree.value.FatherStatus !== 'Not Alive') {
+        firststepdata.append('occupation_father', this.PageThree.value.FatherStatus);
+      }
+      if (this.PageThree.value.MotherStatus !== 'Not Alive') {
+        firststepdata.append('occupation_mother', this.PageThree.value.MotherStatus);
+      }
       firststepdata.append('family_income', this.PageThree.value.FamilyIncome);
       firststepdata.append('locality',  this.PageThree.value.Locality);
 
@@ -231,7 +240,7 @@ firstStep() {
         BirthPlace: birthPlace.value
       });
       this.analyticsEvent('Four Page Registration Page Three Birth Place Changed');
-    }, 500);
+    }, 200);
     } else  {
       const locality: HTMLInputElement = document.querySelector('#locality');
       setTimeout(() => {
@@ -292,18 +301,16 @@ firstStep() {
     : '';
     this.fourPageService.profile.fatherStatus = profileData.get('father_status') ?
      profileData.get('father_status').toString() : '';
-    if (profileData.get('father_status') && profileData.get('father_status').toString() === 'Not Alive' ) {
-      this.fourPageService.isFatherDead = true;
-    } else {
-      this.fourPageService.isFatherDead = false;
-    }
+   
     this.fourPageService.profile.motherStatus = profileData.get('mother_status') ?
      profileData.get('mother_status').toString() : '';
-    if (profileData.get('mother_status') && profileData.get('mother_status').toString() === 'Not Alive' ) {
-      this.fourPageService.isMotherDead = true;
-    } else {
-      this.fourPageService.isMotherDead = false;
-    }
+   
+    this.fourPageService.profile.family.occupation = profileData.get('occupation_father') ?
+    profileData.get('occupation_father').toString() : '';
+    
+    this.fourPageService.profile.family.occupation_mother = profileData.get('occupation_mother') ?
+    profileData.get('occupation_mother').toString() : '';
+
     this.fourPageService.profile.familyIncome = profileData.get('family_income') ?
      profileData.get('family_income').toString() : '';
     console.log(this.fourPageService.getProfile());
@@ -320,8 +327,8 @@ firstStep() {
       Gotra: userProfile.gotra,
       FoodChoice: userProfile.foodChoice,
       Mangalik: userProfile.manglik,
-      FatherStatus: userProfile.fatherStatus,
-      MotherStatus: userProfile.motherStatus,
+      FatherStatus: userProfile.fatherStatus === 'Alive' ? userProfile.family.occupation : userProfile.fatherStatus,
+      MotherStatus: userProfile.motherStatus === 'Alive' ? userProfile.family.occupation_mother : userProfile.motherStatus,
       FamilyIncome: userProfile.familyIncome,
       Locality: userProfile.locality
     });

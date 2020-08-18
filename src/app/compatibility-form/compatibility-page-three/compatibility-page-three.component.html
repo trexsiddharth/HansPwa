@@ -65,31 +65,29 @@
                   
                   </div>
 
-                    <div class="col-md-12">
-                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                          <mat-label>Father's Status</mat-label>
-                          <select style="margin-bottom: -20px;" (change)="changed('fstatus')" #fStatus matNativeControl formControlName="FatherStatus"  name="FatherStatus">
-                              <option value="Alive">
-                                Alive
-                              </option>
-                              <option value="Not Alive">
-                                Not Alive
-                              </option>
-                            </select> 
-                        </mat-form-field>
-                      </div>
-                    
                       <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
-                          <mat-label>Mother's Status</mat-label>
-                          <select style="margin-bottom: -20px;" (change)="changed('mstatus')" #mStatus matNativeControl formControlName="MotherStatus"  name="MotherStatus">
-                              <option value="Alive">
-                                Alive
-                              </option>
-                              <option value="Not Alive">
-                                Not Alive
-                              </option>
-                            </select> 
+                        
+                            <mat-label>Father's Status</mat-label>
+                            <mat-select  formControlName="FatherStatus" (selectionChange)="changed('fstatus')" >
+                                    <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                            {{option}}
+                                    </mat-option>
+                            </mat-select>
+                         
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                        
+                            <mat-label>Mother's Status</mat-label>
+                            <mat-select  formControlName="MotherStatus" (selectionChange)="changed('mstatus')" >
+                                    <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                            {{option}}
+                                    </mat-option>
+                            </mat-select>
+                         
                         </mat-form-field>
                       </div>
                    

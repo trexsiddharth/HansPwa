@@ -26,8 +26,6 @@ allCasteListUpdated = false;
  facebookProfilePicUploaded = new EventEmitter<string>();
  facebookHomeTownUpdated = new EventEmitter<string>();
  facebookLocationUpdated = new EventEmitter<string>();
- isFatherDead = false;
- isMotherDead = false;
 
   constructor() { }
 
