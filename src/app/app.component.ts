@@ -39,11 +39,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     firebase.initializeApp(environment.firebase);
     await this.notificationService.init();
 
-    // if (environment.production) {
-    //   if (window) {
-    //     window.console.log = () => {};
-    //   }
-    // }
+    if (environment.production) {
+      if (window) {
+        window.console.log = () => {};
+      }
+    }
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {

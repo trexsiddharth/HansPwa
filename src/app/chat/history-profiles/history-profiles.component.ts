@@ -38,6 +38,7 @@ import { Location } from '@angular/common';
 import { ChatServiceService } from 'src/app/chat-service.service';
 import { LanguageService } from 'src/app/language.service';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
+import { AnalyticsService } from 'src/app/analytics.service';
 
 
 
@@ -85,26 +86,27 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   section;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService,
-    private dialog: MatDialog,
-    public notification: NotificationsService,
-    public itemService: FindOpenHistoryProfileService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private browserLocation: Location,
-    private chatService: ChatServiceService,
-    public languageService: LanguageService,
-    private breakPointObserver: BreakpointObserver,
-    private subscriptionservice: SubscriptionserviceService,) { }
+              private spinner: NgxSpinnerService,
+              private dialog: MatDialog,
+              public notification: NotificationsService,
+              public itemService: FindOpenHistoryProfileService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private browserLocation: Location,
+              private analyticsService: AnalyticsService,
+              private chatService: ChatServiceService,
+              public languageService: LanguageService,
+              private breakPointObserver: BreakpointObserver,
+              private subscriptionservice: SubscriptionserviceService) { }
 
   ngOnInit() {
     if (this.itemService.getPhotoStatus() && this.isNotPaid()) {
       this.subscriptionservice.loadRazorPayScript();
       const headers = new HttpHeaders({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       });
       this.http
-        .get("https://partner.hansmatrimony.com/api/subscription", { headers })
+        .get('https://partner.hansmatrimony.com/api/subscription', { headers })
         .subscribe(
           (res: any) => {
             this.plans = res;
@@ -247,15 +249,15 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       console.log('photos', suc);
       if (suc.pic_upload_status === 'Y') {
         this.spinner.hide();
-        console.log("Image Upload successful");
-        this.ngxNotificationService.success("Photo Uploaded Succesfully!");
+        console.log('Image Upload successful');
+        this.ngxNotificationService.success('Photo Uploaded Succesfully!');
         this.itemService.setPhotoStatus(true);
       } else {
-        this.ngxNotificationService.error("Photo Upload Unsuccessful!");
+        this.ngxNotificationService.error('Photo Upload Unsuccessful!');
         this.spinner.hide();
       }
     }, err => {
-      this.ngxNotificationService.error("Photo could not be Uploaded!Try after some time");
+      this.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
       console.log(err);
       this.spinner.hide();
     });
@@ -460,7 +462,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
             res => {
               console.log(res);
               if (res.si_status && res.si_status === 0 && this.profile.length > 1) {
-                this.analyticsEvent('Likes You Section Visited');
+                this.analyticsService.googleAnalytics('Likes You Section Visited');
                 this.getInterestReceivedEventStatus(1).subscribe(
                   data => {
                     console.log(data);
@@ -712,7 +714,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (data && data.count) {
           this.itemService.saveCount(data.count);
         }
-        this.analyticsEvent(`Profile Reanswered ${answer} From ${this.type}`);
+        this.analyticsService.googleAnalytics(`Profile Reanswered ${answer} From ${this.type}`);
         this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
         this.getCredits();
       }, (error: any) => {
@@ -721,24 +723,6 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       });
   }
 
-  analyticsEvent(event) {
-    (window as any).ga('send', 'event', event, '', {
-      hitCallback: () => {
-
-        console.log('Tracking ' + event + ' successful');
-
-      }
-
-    });
-
-    // gtag app + web
-    (window as any).gtag('event', event, {
-      event_callback: () => {
-        console.log('Tracking gtag ' + event + ' successful');
-      }
-    });
-
-  }
   updateProfileList(ans: any, num: any, index: any) {
     switch (this.type) {
       case 'interestShown':
@@ -1122,59 +1106,59 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
   facebookAnalytics(event) {
-    (window as any).fbq("track", event, {
-      value: localStorage.getItem("id"),
-      content_name: localStorage.getItem("mobile_number"),
+    (window as any).fbq('track', event, {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('mobile_number'),
     });
-    (window as any).fbq("track", "692972151223870", event, {
-      value: localStorage.getItem("id"),
-      content_name: localStorage.getItem("mobiler_number"),
+    (window as any).fbq('track', '692972151223870', event, {
+      value: localStorage.getItem('id'),
+      content_name: localStorage.getItem('mobiler_number'),
     });
   }
   HandlePayment() {
     if (this.price) {
       this.subscriptionViewed();
-      if (localStorage.getItem("mobile_number")) {
-        console.log(localStorage.getItem("mobile_number"));
+      if (localStorage.getItem('mobile_number')) {
+        console.log(localStorage.getItem('mobile_number'));
         this.getRazorPay(
           this.price,
-          "live",
+          'live',
           0,
-          "",
-          "",
-          localStorage.getItem("mobile_number")
+          '',
+          '',
+          localStorage.getItem('mobile_number')
         );
       } else {
-        this.getRazorPay(this.price, "live", 0, "", "", "");
+        this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
-      this.analyticsEvent(
-        "Payement Gateway Opened For " + this.price
+      this.analyticsService.googleAnalytics(
+        'Payement Gateway Opened For ' + this.price
       );
 
-      this.facebookAnalytics("InitiateCheckout");
+      this.facebookAnalytics('InitiateCheckout');
     } else {
-      this.ngxNotificationService.error("Something Went Wrong");
+      this.ngxNotificationService.error('Something Went Wrong');
     }
   }
   container1() {
-    this.price = "2800";
-    this.credits = "45";
+    this.price = '2800';
+    this.credits = '45';
     this.selectedContainer = 1;
-    console.log("plan 1 selected");
+    console.log('plan 1 selected');
     this.HandlePayment();
   }
   container2() {
-    this.price = "5500";
-    this.credits = "90";
+    this.price = '5500';
+    this.credits = '90';
     this.selectedContainer = 2;
-    console.log("plan 1 selected");
+    console.log('plan 1 selected');
     this.HandlePayment();
   }
   container3() {
-    this.price = "8500";
-    this.credits = "45";
+    this.price = '8500';
+    this.credits = '45';
     this.selectedContainer = 3;
-    console.log("plan 1 selected");
+    console.log('plan 1 selected');
     this.HandlePayment();
   }
 
@@ -1184,7 +1168,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
       (data: any) => {
        console.log(data);
-       this.analyticsEvent('Subscription Seen');
+       this.analyticsService.googleAnalytics('Subscription Seen');
+       this.analyticsService.facebookAnalytics('InitiateCheckout');
       }
     );
   }

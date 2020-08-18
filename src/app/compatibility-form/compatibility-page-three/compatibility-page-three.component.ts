@@ -157,7 +157,6 @@ firstStep() {
         this.fourPageService.form3Completed.emit(false);
         return;
     } else {
-      this.spinner.show();
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
       firststepdata.append('birth_place', this.PageThree.value.BirthPlace);

@@ -339,7 +339,6 @@ firstStep() {
     // }
 
     if (this.PageTwo.valid) {
-      this.spinner.show();
 
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );

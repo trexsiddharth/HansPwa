@@ -150,7 +150,7 @@
                        
                       </div>
 
-                      <div class="col-md-12 matSelect">
+                      <div class="col-md-12 matSelect" *ngIf="PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other'">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label >Gender</mat-label>
                             <mat-select formControlName="gender" (selectionChange)="selectFieldChange('gender')" required >

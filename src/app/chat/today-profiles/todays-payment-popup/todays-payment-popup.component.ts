@@ -5,6 +5,7 @@ import { LanguageService } from 'src/app/language.service';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AnalyticsService } from 'src/app/analytics.service';
 
 @Component({
   selector: 'app-todays-payment-popup',
@@ -45,7 +46,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     public languageService: LanguageService,
     private subscriptionservice: SubscriptionserviceService,
     private http: HttpClient,
-    private spinner: NgxSpinnerService,
+    private analyticsService: AnalyticsService,
     private ngxNotificationService: NgxNotificationService
   ) {}
   ngOnInit() {
@@ -133,34 +134,8 @@ export class TodaysPaymentPopupComponent implements OnInit {
       );
     }
   }
-  analyticsEvent(event) {
-    (window as any).ga('send', 'event', event, '', {
-      hitCallback: () => {
-
-        console.log('Tracking ' + event + ' successful');
-
-      }
-
-    });
-
-     // gtag app + web
-    (window as any).gtag('event', event, {
-      event_callback: () =>  {
-        console.log('Tracking gtag ' + event + ' successful');
-      }
-    });
-
-  }
-  facebookAnalytics(event) {
-    (window as any).fbq('track', event, {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('mobile_number'),
-    });
-    (window as any).fbq('track', '692972151223870', event, {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('mobiler_number'),
-    });
-  }
+ 
+ 
   HandlePayment() {
     if (this.price) {
       if (localStorage.getItem('mobile_number')) {
@@ -177,11 +152,10 @@ export class TodaysPaymentPopupComponent implements OnInit {
         this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
       this.closeDialog();
-      this.analyticsEvent(
+      this.analyticsService.googleAnalytics(
         'RazorPay Payement Gateway Opened For ' + this.price
       );
 
-      this.facebookAnalytics('InitiateCheckout');
     } else {
       this.ngxNotificationService.error('Something Went Wrong');
     }
@@ -266,7 +240,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   }
 
 onPaytm() {
-  this.analyticsEvent(
+  this.analyticsService.googleAnalytics(
     'Paytm Payement Gateway Opened For ' + this.price
   );
   const form = document.getElementById('pay');
@@ -284,7 +258,8 @@ subscriptionViewed() {
   this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
     (data: any) => {
      console.log(data);
-     this.analyticsEvent('Subscription Seen');
+     this.analyticsService.googleAnalytics('Subscription Seen');
+     this.analyticsService.facebookAnalytics('InitiateCheckout');
     }
   );
 }

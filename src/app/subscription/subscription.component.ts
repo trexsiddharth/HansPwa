@@ -8,6 +8,7 @@ import {
 
 import {Location} from '@angular/common';
 import { Router } from '@angular/router';
+import { AnalyticsService } from '../analytics.service';
 
 @Component({
   selector: 'app-subscription',
@@ -41,6 +42,7 @@ export class SubscriptionComponent implements OnInit {
               private spinner: NgxSpinnerService,
               private browserLocation: Location,
               private router: Router,
+              private analyticsService: AnalyticsService,
               private ngxNotificationService: NgxNotificationService) { }
 
   ngOnInit() {
@@ -114,40 +116,12 @@ subscriptionViewed() {
   this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
     (data: any) => {
      console.log(data);
-     this.analyticsEvent('Subscription Seen');
+     this.analyticsService.googleAnalytics('Subscription Seen');
     }
   );
 }
 
-analyticsEvent(event) {
-  (window as any).ga('send', 'event', event, '', {
-    hitCallback: () => {
 
-      console.log('Tracking ' + event + ' successful');
-
-    }
-
-  });
-
-  // gtag app + web
-  (window as any).gtag('event', event, {
-    event_callback: () => {
-      console.log('Tracking gtag ' + event + ' successful');
-    }
-  });
-
-}
-
-facebookAnalytics(event) {
-  (window as any).fbq('track', event, {
-    value: localStorage.getItem('id'),
-    content_name: localStorage.getItem('mobile_number'),
-  });
-  (window as any).fbq('track', '692972151223870' , event, {
-    value: localStorage.getItem('id'),
-    content_name: localStorage.getItem('mobiler_number'),
-  });
-}
 
    openDialog() {
      if (localStorage.getItem('mobile_number')) {
@@ -158,12 +132,12 @@ facebookAnalytics(event) {
       } else {
         this.getRazorPay(this.price, 'live', 0, '', '', '');
       }
-    this.analyticsEvent('Payement Gateway Opened For ' + this.price );
+    this.analyticsService.googleAnalytics('Payement Gateway Opened For ' + this.price );
 
     this.subscriptionViewed();
-    
 
-    this.facebookAnalytics('InitiateCheckout');
+    this.analyticsService.facebookAnalytics('InitiateCheckout');
+
      } else {
         this.ngxNotificationService.error('Something Went Wrong');
      }

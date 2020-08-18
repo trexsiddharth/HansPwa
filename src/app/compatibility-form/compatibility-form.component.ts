@@ -364,7 +364,7 @@ async ngOnInit() {
             this.analyticsEvent('Four Page Registration Page One Birth Year Changed');
             break;
           case 'gender':
-            this.analyticsEvent('Four Page Registration Page One GenderChanged');
+            this.analyticsEvent('Four Page Registration Page One Gender Changed');
             break;
           case 'Height':
             this.analyticsEvent('Four Page Registration Page One Height Changed');
@@ -552,13 +552,8 @@ async ngOnInit() {
        return;
     }
 
-    // if (!this.fourPageService.getUserThrough() && this.locationFamily == null || this.locationFamily === '') {
-    //   this.ngxNotificationService.error('Select A Valid Location');
-    //   return;
-    // }
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
-              this.spinner.show();
               const date = this.PageOne.value.birth_date;
               const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
               const year = this.PageOne.value.birth_year;
@@ -775,6 +770,7 @@ Religion(event) {
 setGender() {
 console.log(this.PageOne.value.Relation);
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
+this.analyticsEvent('Four Page Registration Page One Gender Changed');
 // this.openRegisterWith(this.PageOne.value.Relation);
 switch (this.PageOne.value.Relation) {
   case 'Brother':
