@@ -775,7 +775,7 @@ Religion(event) {
 setGender() {
 console.log(this.PageOne.value.Relation);
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-this.openRegisterWith(this.PageOne.value.Relation);
+// this.openRegisterWith(this.PageOne.value.Relation);
 switch (this.PageOne.value.Relation) {
   case 'Brother':
     this.PageOne.patchValue(
@@ -1045,10 +1045,7 @@ statusChangeCallback(value) {
       } else {
        console.log('User cancelled login or did not fully authorize.');
       }
-  }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
-        enable_profile_selector: true,
-        auth_type: 'rerequest',
-        return_scopes: true});
+  }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
   }
 }
 

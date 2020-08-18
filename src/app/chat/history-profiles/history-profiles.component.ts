@@ -860,6 +860,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+    // update the locally stored profile list
     this.updateLocalList();
   }
   goToSubscription() {
