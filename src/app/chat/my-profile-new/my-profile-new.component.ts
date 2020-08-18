@@ -613,15 +613,17 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   setEditIndex(index: number) {
     this.editIndexPersonal = index;
     console.log('Personal index set to: ' + String(index));
+    this.openPersonalDialog();
   }
   setEditIndexFamily(index: number) {
     this.editIndexFamily = index;
     console.log('Family index set to: ' + String(index));
+    this.openFamilyDialog();
   }
   setEditIndexPrefs(index: number) {
     this.editIndexPrefs = index;
     console.log('pref index set to: ' + String(index));
-    this.specialCase();
+    //this.specialCase();
     this.openPreferenceDialog();
   }
   setEdit(index) {
@@ -1279,6 +1281,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               }
             }
             localStorage.setItem('gender', this.personalProfileData.gender);
+            this.specialCase();
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
             this.setCurrentPreferenceValue();
@@ -1806,32 +1809,31 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     //this.familyProfileData.city = e;
     console.log('location of family', e);
   }
-  /*
-  
-  openPersonalDialog(i: number, titleText: string) {
+
+
+  openPersonalDialog() {
     document.querySelector("#carousel").scrollIntoView();
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.maxWidth = "40vh";
-      dialogConfig.minWidth = "35vh";
-      dialogConfig.maxHeight = "90vh";
+      dialogConfig.minWidth = "40vw";
+      dialogConfig.maxWidth = "40vw";
     } else {
-      dialogConfig.minWidth = "80vw";
-      dialogConfig.maxHeight = "80vh";
+      dialogConfig.minWidth = "100%";
     }
+    dialogConfig.minHeight = "100vh";
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
       personalDetails: this.personalProfileData,
       familyDetails: this.familyProfileData,
-      index: i,
-      title: titleText,
+      index: this.editIndexPersonal,
     };
     const dialogRef = this.matDialog.open(
       EditPersonalDialogComponent,
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((data) => {
+      this.editIndexPersonal = -1;
       this.getUserProfileData();
     });
   }
@@ -1840,13 +1842,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     document.querySelector("#carousel").scrollIntoView();
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.maxWidth = "40vh";
-      dialogConfig.minWidth = "35vh";
-      dialogConfig.maxHeight = "90vh";
+      dialogConfig.minWidth = "40vw";
+      dialogConfig.maxWidth = "40vw";
     } else {
-      dialogConfig.minWidth = "80vw";
-      dialogConfig.maxHeight = "80vh";
+      dialogConfig.minWidth = "100%";
     }
+    dialogConfig.minHeight = "100vh";
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
@@ -1857,9 +1858,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((data) => {
+      this.editIndexFamily = -1;
       this.getUserProfileData();
     });
-  }*/
+  }
 
   openPreferenceDialog() {
     const dialogConfig = new MatDialogConfig();

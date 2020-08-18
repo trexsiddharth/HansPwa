@@ -1,122 +1,119 @@
-<mat-dialog-content>
-    <form [formGroup]="personalForm">
-      <div class="row" class="t-c" style="margin-top: 1rem;">
-          <h5 style="margin: auto 20px;
-           color: #58d1fd;
+<main>
+  <form [formGroup]="personalForm">
+    <div class="row toolBar" style="width: 100%!important;margin:0px 0px">
+      <div class="backArrow">
+        <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="goBack()" alt="BACK" />
+      </div>
+      <h5 style="margin: auto 20px;
           font-weight: bold;
-           font-size: 1.5rem;">{{data ? data.title : 'PERSONAL DETAILS'}}</h5>
+           font-size: 1.5rem;">{{languageService.profileLang.personal}}</h5>
+    </div>
+    <div class="row" style="margin: 10px 10px;">
+      <div class="col-12" *ngIf="index==1" style="width: 100%!important">
+        <h6>About: (max 300 words)</h6>
+        <textarea class="form-control" maxlength="300" type="text" formControlName="About" required rows="7"></textarea>
       </div>
 
-      <hr>
-
-      <!-- // index = 0 -->
-
-      <div class="col-12" *ngIf="index==0">
-        <h6>About: (max 300 words)</h6>
-          <input class="form-control" maxlength="300" type="text" formControlName="About"  required> 
-    </div>
-
-      <!-- // index = 1 -->
-
-      <div *ngIf="index==1" >
-      <div class="row">
-        <div class="col-12">
-          <h6>Name:</h6>
-          <input type="text" class="form-control"  formControlName="name" required>
-        </div>
-        <div class="col-12">
+      <div *ngIf="index==0" style="width: 100%!important">
+        <div class="row information" style="width: 100%!important;margin: 5px 5px">
+          <div class="col-6">
+            <h6>Name:</h6>
+            <input type="text" class="form-control" formControlName="name" required>
+          </div>
+          <div class="col-6">
             <h6>Age:</h6>
             {{setAge(personalData.birth_date)}}
           </div>
-
-          <div class="row" style="padding-left: 15px;
+        </div>
+        <div class="row" style="padding-left: 15px;
   margin-top: 1rem;">
-    <h6 style="margin:0px">Birth Date:</h6>
-    <div class="col-12" style="display: flex;
+          <h6 style="margin:0px">Birth Date:</h6>
+          <div class="col-12" style="display: flex;
     flex-direction: row;
     padding-left: 0px;">
-    <select class="classic form-control" formControlName="birth_date" style="border: 1px solid black;"  required name="birth_date">
-        <option *ngFor="let  option of date" [value]="option">
-          {{option}}
-        </option>
-      </select> 
+            <select class="classic form-control" formControlName="birth_date" style="border: 1px solid black;" required
+              name="birth_date">
+              <option *ngFor="let  option of date" [value]="option">
+                {{option}}
+              </option>
+            </select>
 
-      <select class="classic form-control" formControlName="birth_month" style="border: 1px solid black;margin-left: 10px;"  required name="birth_month">
-        <option *ngFor="let  option of month" [value]="option">
-          {{option}}
-        </option>
-      </select> 
-      
-      <select class="classic form-control" formControlName="birth_year" style="border: 1px solid black;margin-left: 10px;"  required name="birth_year">
-        <option *ngFor="let  option of years" [value]="option">
-          {{option}}
-        </option>
-      </select>
-    </div>
-  </div>
+            <select class="classic form-control" formControlName="birth_month"
+              style="border: 1px solid black;margin-left: 10px;" required name="birth_month">
+              <option *ngFor="let  option of month" [value]="option">
+                {{option}}
+              </option>
+            </select>
 
-          <div class="col-12" >
-            <h6>Weight:</h6>
-            <input type="text" class="form-control"  formControlName="Weight" required>
+            <select class="classic form-control" formControlName="birth_year"
+              style="border: 1px solid black;margin-left: 10px;" required name="birth_year">
+              <option *ngFor="let  option of years" [value]="option">
+                {{option}}
+              </option>
+            </select>
           </div>
+        </div>
 
-          <div class="col-12">
+        <div class="row information" style="width: 100%!important;margin: 5px 5px">
+          <div class="col-6">
+            <h6>Weight:</h6>
+            <input type="text" class="form-control" formControlName="Weight" required>
+          </div>
+          <div class="col-6">
             <h6>Height:</h6>
             <select type="text" class="form-control" formControlName="Height" required>
-                <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
-                </select> 
+              <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
+            </select>
           </div>
+        </div>
 
-          <div class="col-12">
+        <div class="row information" style="width: 100%!important;margin: 5px 5px">
+          <div class="col-6">
             <h6>Marital Status:</h6>
             <select class="form-control" formControlName="MaritalStatus" required>
               <option *ngFor="let item of maritalStaus" [value]="item">{{item}}</option>
             </select>
           </div>
-
-          <div class="col-12">
-               <h6>Religion:</h6>
-                <select  class="form-control"  formControlName="Religion"  required >
-                        <option *ngFor="let  option of Religions" [value]="option">
-                                {{option}}
-                        </option>
-                </select>
-      </div>
-
-          <div class="col-12">
-              <h6>Caste</h6>
-              <input type="text" class="form-control" formControlName="Castes" required [matAutocomplete]="caste"  >
-              <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption #caste="matAutocomplete">
-                      <mat-option *ngFor="let name of casteo | async" [value]="name"  required>
-                        {{name}}
-                      </mat-option>
-              </mat-autocomplete>
-      </div>
-
-          <div class="col-12">
+          <div class="col-6">
             <h6>Food Choice:</h6>
             <select class="form-control" formControlName="Food" required>
               <option *ngFor="let item of foodpreferences" [value]="item">{{item}}</option>
             </select>
           </div>
+        </div>
 
-          <div class="col-12">
-            <h6>Locality:</h6>
-                <input type="text" class="form-control" 
-                matValidateAddress matGoogleMapsAutocomplete
-                 #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                (onAutocompleteSelected)="onAutocompleteSelected($event, 'Locality')" 
-                (onLocationSelected)="onLocationSelected($event, 'Locality')"
-                required formControlName="Locality">
+        <div class="row information" style="width: 100%!important;margin: 5px 5px">
+          <div class="col-6">
+            <h6>Religion:</h6>
+            <select class="form-control" formControlName="Religion" required>
+              <option *ngFor="let  option of Religions" [value]="option">
+                {{option}}
+              </option>
+            </select>
+          </div>
+          <div class="col-6">
+            <h6>Caste</h6>
+            <input type="text" class="form-control" formControlName="Castes" required [matAutocomplete]="caste">
+            <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption
+              #caste="matAutocomplete">
+              <mat-option *ngFor="let name of casteo | async" [value]="name" required>
+                {{name}}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <h6>Locality:</h6>
+          <input type="text" class="form-control" id="Locality" [autoCompleteOptions]="autoComplete" matValidateAddress
+            matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+            (change)="placeChangedLocality()" formControlName="Locality" />
+
         </div>
       </div>
-      </div>
 
-
-        <!-- // index = 2  -->
-        <div *ngIf="index==2">
-
-        <div class="col-12" >
+      <div *ngIf="index==2" style="width: 100%!important">
+        <div class="col-12">
           <h6>Education:</h6>
           <select class="form-control" formControlName="Degree" required>
             <option *ngFor="let item of HigherEducation" [value]="item">{{item}}</option>
@@ -125,141 +122,112 @@
 
         <div class="col-12">
           <h6>College:</h6>
-          <input type="text" class="form-control"  formControlName="College">
+          <input type="text" class="form-control" formControlName="College">
         </div>
 
         <div class="col-12">
           <h6>Additional Qualifications:</h6>
-          <input type="text" class="form-control"  formControlName="Additional">
+          <input type="text" class="form-control" formControlName="Additional">
+        </div>
+
+        <div class="col-12">
+          <h6>Occupation:</h6>
+          <select #relation class="form-control" formControlName="Occupation" required>
+            <option *ngFor="let  option of Occupation" [value]="option">
+              {{option}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <h6>Designation:</h6>
+          <select #relation class="form-control" formControlName="Profession">
+            <option *ngFor="let  option of designations" [value]="option">
+              {{option}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
+          <h6>Other Designation:</h6>
+          <input type="text" class="form-control" formControlName="OtherProfession" name="OtherProfession">
+        </div>
+
+        <div class="col-12">
+          <h6>Company:</h6>
+          <input type="text" class="form-control" formControlName="Company">
+        </div>
+
+        <div class="col-12">
+          <h6>Annual Income In Lakhs:</h6>
+          <input type="text" pattern="\d*" maxlength="3" class="form-control" formControlName="AnnualIncome" required>
+        </div>
+
+        <div class="col-12">
+          <h6>Working City:</h6>
+          <!-- <input type="text" #input class="form-control" matValidateAddress formControlName="WorkingCity"
+            matGoogleMapsAutocomplete #matGoogleMapsAutocomplete3="matGoogleMapsAutocomplete"
+            (onAutocompleteSelected)="onAutocompleteSelected($event, 'Working')"
+            (onLocationSelected)="onLocationSelected($event, 'Working')" required> -->
+          <input type="text" class="form-control" id="WorkingCity" matValidateAddress matGoogleMapsAutocomplete
+            #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedWorkingcity()"
+            formControlName="WorkingCity" />
+        </div>
+      </div>
+
+      <div *ngIf="index==3" style="width: 100%!important">
+        <div class="col-12">
+          <h6>Manglik:</h6>
+          <select type="text" class="form-control" formControlName="Manglik" required>
+            <option value="Manglik">Manglik</option>
+            <option value="Non-Manglik">Non-Manglik</option>
+            <option value="Anshik Manglik">Anshik Manglik</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <h6>Birth Place</h6>
+          <input type="text" class="form-control" id="BirthPlace" matValidateAddress matGoogleMapsAutocomplete
+            #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedBirthPlace()" required
+            formControlName="BirthPlace" />
+        </div>
+        <div class="col-12">
+          <h6>Time of Birth</h6>
+          <input class="form-control" id="BirthTime" type="time" placeholder="Choose a time"
+            formControlName="BirthTime">
+        </div>
+      </div>
+
+      <div *ngIf="index==4" style="width: 100%!important">
+
+        <div class="col-12">
+          <h6>Email</h6>
+          <input type="email" id="email" class="form-control" formControlName="email">
+        </div>
+
+        <div class="col-12">
+          <h6>Mobile number</h6>
+          <input style="display: inline;" type="number" id="phone" class="form-control" formControlName="phone"
+            required>
+        </div>
+
+        <div class="col-12">
+          <h6>Whatsapp number</h6>
+          <input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp">
         </div>
 
       </div>
 
- <!-- // index = 3 -->
- <div *ngIf="index==3">
-
-  <div class="col-12">
-    <h6>Occupation:</h6>
-  <select  #relation class="form-control" formControlName="Occupation" required >
-    <option *ngFor="let  option of Occupation" [value]="option">
-            {{option}}
-    </option>
-     </select>
-  </div>
-
-<div class="col-12">
-
-  
-    <h6>Designation:</h6>
-    <select  #relation class="form-control" formControlName="Profession" >
-            <option *ngFor="let  option of designations" [value]="option">
-                    {{option}}
-            </option>
-    </select>
-  </div>
-
-  <div class="col-12"  *ngIf="personalForm.value.Profession === 'Others'">
-<h6>Other Designation:</h6>
-    <input type="text" class="form-control"  formControlName="OtherProfession" name="OtherProfession">
-</div>
-
-
-<div class="col-12">
-  <h6>Company:</h6>
-  <input type="text" class="form-control"  formControlName="Company">
-</div>
-
-<div class="col-12">
-  <h6>Annual Income In Lakhs:</h6>
-    <input type="text" pattern="\d*" maxlength="3" class="form-control" formControlName="AnnualIncome" required>
-</div>
-
-<div class="col-12">
-  <h6>Working City:</h6>
-      <input type="text" #input class="form-control" 
-      matValidateAddress
-      formControlName="WorkingCity"
-       matGoogleMapsAutocomplete
-       #matGoogleMapsAutocomplete3="matGoogleMapsAutocomplete" 
-      (onAutocompleteSelected)="onAutocompleteSelected($event, 'Working')" 
-      (onLocationSelected)="onLocationSelected($event, 'Working')"
-      required >
-</div>
-
- </div>
-
-
- <!-- // index = 4 -->
- <div *ngIf="index==4">
-
-
-<div class="col-12">
-  <h6>Birth Place</h6>
-  <input type="text" class="form-control" matValidateAddress
-   matGoogleMapsAutocomplete
-    #matGoogleMapsAutocomplete2="matGoogleMapsAutocomplete" 
-  (onAutocompleteSelected)="onAutocompleteSelected($event, 'Birth')" 
-  (onLocationSelected)="onLocationSelected($event, 'Birth')"
-  formControlName="BirthPlace">
-</div>
-
-<!-- <div class="col-12">
-  <h6>Locality:</h6>
-      <input type="text" class="form-control" 
-      matValidateAddress matGoogleMapsAutocomplete
-       #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-      (onAutocompleteSelected)="onAutocompleteSelected($event, 'Birth')" 
-      (onLocationSelected)="onLocationSelected($event, 'Birth')"
-      required formControlName="BirthPlace">
-</div> -->
-
-  <div class="col-12">
-    <h6>Manglik:</h6>
-    <select type="text" class="form-control"  formControlName="Manglik" required>
-          <option value="Manglik">Manglik</option>
-          <option value="Non-Manglik">Non-Manglik</option>
-          <option value="Anshik Manglik">Anshik Manglik</option>
-      </select>
-  </div>
-
-
-<div class="col-12">
-  <h6>Time of Birth</h6>
-<input class="form-control" id="BirthTime" type="time" placeholder="Choose a time" formControlName="BirthTime">
-</div>
-
- </div>
-
-  <!-- // index = 5 -->
-  <div *ngIf="index==5">
-
-    <div class="col-12">
-      <h6>Email</h6>
-      <input type="email" id="email" class="form-control" formControlName="email">
-</div>
-
-<div class="col-12">
-      <h6>Mobile number</h6>
-      <input style="display: inline;" type="number" id="phone" class="form-control" formControlName="phone" required>
-</div>
-
-<div class="col-12">
-<h6>Whatsapp number</h6>
-<input style="display: inline;" type="number" class="form-control" formControlName="Whatsapp" >
-</div>
-
-  </div>
-  
-              <div style="text-align: center">
-                  <button  class="btn" (click)="onSubmit()" 
-                  mat-raised-button style="background-color: #34b7f1;
-                  color: white;
-                  padding: 5px 40px;
-                  margin-bottom: 20px;
-                  margin-top: 20px;
-                  font-size: 1rem;
-                  font-weight: bold;
-                  " >EDIT AND SAVE</button> 
-            </div>
-            </form>
-          </mat-dialog-content>
+      <div style="text-align: center; width: 100%;">
+        <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
+                        color: white;
+                        width:100%;
+                        padding: 5px 40px;
+                        margin-top:10px;
+                        margin-bottom:10px;
+                        font-size: 1rem;
+                        font-weight: bold;
+                        " (click)="onSubmit()">SAVE</button>
+      </div>
+    </div>
+  </form>
+</main>

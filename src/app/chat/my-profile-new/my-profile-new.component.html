@@ -107,12 +107,11 @@
         </ng-template>
         <form [formGroup]="personalForm">
           <div class="infoRow">
-            <div class="column" *ngIf="editIndexPersonal!=0">
+            <div class="column">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/personalN.svg" />
                 <p>{{personalProfileData.name}}</p>
-                <img *ngIf="editIndexPersonal != 0" (click)="setEditIndex(0)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editaboutme" />
+                <img (click)="setEditIndex(0)" class="editPencil" src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -128,7 +127,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPersonal==0">
+            <!-- <div class="column" *ngIf="editIndexPersonal==0">
               <div class="col-12">
                 <h6>{{languageService.profileLang.name}}</h6>
                 <input type="text" class="form-control" formControlName="name" required />
@@ -213,7 +212,7 @@
                   </select>
                 </div>
               </div>
-              <!-- <div class="col-12" style="margin-bottom: 10px;">
+               <div class="col-12" style="margin-bottom: 10px;">
                 <h6>Locality:</h6>
                 <input type="text" class="form-control" 
                 matValidateAddress 
@@ -222,7 +221,7 @@
                 onAutocompleteSelected($event, 'Locality')"
                 (onLocationSelected)="onLocationSelected($event, 'Locality')"
                 required formControlName="Locality" />
-              </div> -->
+              </div> 
               <div class="col-12" style="margin-bottom: 10px;">
                 <h6>Locality:</h6>
                 <input type="text" class="form-control" id="Locality" [autoCompleteOptions]="autoComplete"
@@ -234,15 +233,14 @@
                 (click)="onSubmitPersonal()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="infoRow">
-            <div class="column" *ngIf="editIndexPersonal != 1">
+            <div class="column">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/personalN.svg" />
                 <p>{{languageService.profileLang.aboutMe}}</p>
-                <img *ngIf="editIndexPersonal != 1" (click)="setEditIndex(1)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editaboutme" />
+                <img (click)="setEditIndex(1)" class="editPencil" src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -258,7 +256,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPersonal == 1">
+            <!-- <div class="column" *ngIf="editIndexPersonal == 1">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/personalN.svg" />
                 <p>{{languageService.profileLang.aboutMe}}</p>
@@ -270,15 +268,14 @@
                 (click)="onSubmitPersonal()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="infoRow">
-            <div class="column" *ngIf="editIndexPersonal != 2">
+            <div class="column">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/educationN.svg" />
                 <p>{{languageService.profileLang.careerDetails}}</p>
-                <img *ngIf="editIndexPersonal != 2" (click)="setEditIndex(2)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editaboutme" />
+                <img (click)="setEditIndex(2)" class="editPencil" src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -318,7 +315,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPersonal == 2">
+            <!-- <div class="column" *ngIf="editIndexPersonal == 2">
               <div class="col-12">
                 <h6>Education:</h6>
                 <select class="form-control" formControlName="Degree" required>
@@ -364,13 +361,13 @@
               </div>
               <div class="col-12" style="margin-bottom: 10px;">
                 <h6>Working City:</h6>
-                <!-- <input type="text" #input class="form-control" matValidateAddress formControlName="WorkingCity"
+                <input type="text" #input class="form-control" matValidateAddress formControlName="WorkingCity"
                   matGoogleMapsAutocomplete #matGoogleMapsAutocomplete3="matGoogleMapsAutocomplete"
                   (onAutocompleteSelected)="
                     onAutocompleteSelected($event, 'Working')
                   " (onLocationSelected)="
                     onLocationSelected($event, 'Working')
-                  " required /> -->
+                  " required /> 
                 <input type="text" class="form-control" id="WorkingCity" matValidateAddress matGoogleMapsAutocomplete
                   #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedWorkingcity()"
                   formControlName="WorkingCity" />
@@ -379,15 +376,14 @@
                 (click)="onSubmitPersonal()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="infoRow">
-            <div class="column" *ngIf="editIndexPersonal!=3">
+            <div class="column">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/horoscopeN.svg" />
                 <p>{{languageService.profileLang.horoscope}}</p>
-                <img *ngIf="editIndexPersonal != 3" (click)="setEditIndex(3)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editaboutme" />
+                <img (click)="setEditIndex(3)" class="editPencil" src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -408,13 +404,13 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPersonal==3">
+            <!-- <div class="column" *ngIf="editIndexPersonal==3">
               <div class="col-12">
                 <h6>Birth Place</h6>
-                <!-- <input type="text" class="form-control" matValidateAddress matGoogleMapsAutocomplete
+            <input type="text" class="form-control" matValidateAddress matGoogleMapsAutocomplete
                   #matGoogleMapsAutocomplete2="matGoogleMapsAutocomplete" (onAutocompleteSelected)="
                     onAutocompleteSelected($event, 'Birth')
-                  " (onLocationSelected)="onLocationSelected($event, 'Birth')" formControlName="BirthPlace" /> -->
+                  " (onLocationSelected)="onLocationSelected($event, 'Birth')" formControlName="BirthPlace" /> 
                 <input type="text" class="form-control" id="BirthPlace" matValidateAddress matGoogleMapsAutocomplete
                   #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedBirthPlace()" required
                   formControlName="BirthPlace" />
@@ -436,15 +432,14 @@
                 (click)="onSubmitPersonal()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="infoRow">
-            <div class="column" *ngIf="editIndexPersonal!= 4">
+            <div class="column">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/phoneNN.svg" />
                 <p>{{languageService.profileLang.contact}}</p>
-                <img *ngIf="editIndexPersonal != 4" (click)="setEditIndex(4)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editaboutme" />
+                <img (click)="setEditIndex(4)" class="editPencil" src="../../../assets/editN.svg" alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -464,7 +459,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexPersonal==4">
+            <!-- <div class="column" *ngIf="editIndexPersonal==4">
               <div class="col-12">
                 <h6>Email</h6>
                 <input type="email" id="email" class="form-control" formControlName="email" required />
@@ -484,7 +479,7 @@
                 (click)="onSubmitPersonal()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="infoRow" style="margin-bottom:20px">
           </div>
@@ -503,12 +498,12 @@
         </ng-template>
         <form (ngSubmit)="onSubmitFamily()" #familyForm="ngForm">
           <div class="infoRow">
-            <div class="column" *ngIf="editIndexFamily!= 1">
+            <div class="column">
               <div class="row title">
                 <img class="accordion-image" src="../../assets/familyN.svg" />
                 <p>{{languageService.profileLang.familyDetails}}</p>
-                <img *ngIf="editIndexFamily != 1" (click)="setEditIndexFamily(1)" class="editPencil"
-                  src="../../../assets/editN.svg" alt="editaboutme" />
+                <img (click)="setEditIndexFamily(1)" class="editPencil" src="../../../assets/editN.svg"
+                  alt="editaboutme" />
               </div>
               <div class="row information">
                 <div class="columnar">
@@ -557,8 +552,7 @@
                 </div>
               </div>
             </div>
-            <div class="column" *ngIf="editIndexFamily == 1">
-              <!-- family edit form goes here -->
+            <!-- <div class="column" *ngIf="editIndexFamily == 1">
               <div class="col-12">
                 <h6>Gotra:</h6>
                 <input type="text" class="form-control" name="gotra" [(ngModel)]="familyProfileData.gotra" required />
@@ -574,10 +568,10 @@
               </div>
               <div class="col-12">
                 <h6>Family Living In:</h6>
-                <!-- <input type="text" class="form-control" name="city" matValidateAddress matGoogleMapsAutocomplete
+                <input type="text" class="form-control" name="city" matValidateAddress matGoogleMapsAutocomplete
                   #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
                   (onAutocompleteSelected)="onAutocompleteSelectedFamily($event)"
-                  (onLocationSelected)="onLocationSelectedFamily($event)" [(ngModel)]="familyProfileData.city" /> -->
+                  (onLocationSelected)="onLocationSelectedFamily($event)" [(ngModel)]="familyProfileData.city" />
                 <input id="familyLivingIn" type="text" class="form-control" [autoCompleteOptions]="autoComplete"
                   name="city" matValidateAddress matGoogleMapsAutocomplete
                   #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedFamily()"
@@ -689,7 +683,7 @@
                 (click)="onSubmitFamily()">
                 SAVE
               </button>
-            </div>
+            </div> -->
           </div>
 
           <div class="infoRow" style="margin-bottom:20px">
@@ -856,11 +850,12 @@
                     {{ languageService.profileLang.preference}}</p>
                   <p><a *ngFor="let rel of preferenceProfileData.religion">{{rel}}, </a></p>
                   <p class="headings">{{ languageService.profileLang.castePref}}</p>
-                  <p>{{
+                  <!-- <p>{{
                     preferenceProfileData.caste
                       ? preferenceProfileData.caste
                       : "Add Detail"
-                  }}</p>
+                  }}</p> -->
+                  <p><a *ngFor="let caste of castePreferences">{{caste}}, </a></p>
                   <p class="headings">{{ languageService.profileLang.manglikPref}}</p>
                   <p>{{
                     preferenceProfileData.manglik

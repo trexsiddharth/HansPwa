@@ -269,13 +269,13 @@ export class ChatDrawerComponent implements OnInit {
     this.router.navigateByUrl('chat/getcallback/');
   }
   editIndexPrefs = -1;
-  setEditIndexPrefs() {
-    this.editIndexPrefs = 0;
+  setEditIndexPrefs(index: number) {
+    this.editIndexPrefs = index;
+    this.itemService.setChangePrefsClicked(true);
   }
   castePreferences: string[] = [];
   specialCase() {
     this.castePreferences = this.preferenceProfileData.caste.split(',');
-    this.itemService.setChangePrefsClicked(true);
   }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
@@ -372,6 +372,7 @@ export class ChatDrawerComponent implements OnInit {
               }
             }
             this.setCurrentPreferenceValue();
+            this.specialCase();
             this.getAllCaste();
           },
           (error: any) => {

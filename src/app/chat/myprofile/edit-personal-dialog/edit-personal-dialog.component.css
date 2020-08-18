@@ -1,18 +1,18 @@
 html, body{margin:0 0 0 0;}
-::ng-deep .mat-dialog-container {
+/* ::ng-deep .mat-dialog-container {
     padding: 0px;
     background: white;
     color: black;
     max-height: 79vh;
-}
-::ng-deep .mat-dialog-content{
+} */
+/* ::ng-deep .mat-dialog-content{
     max-height: 100%;
     margin: 0px;
     padding: 0px;
-}
-::ng-deep .cdk-overlay-dark-backdrop{
+} */
+/* ::ng-deep .cdk-overlay-dark-backdrop{
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
-}
+} */
 
 ::ng-deep .mat-form-field-label{
     color: black;
@@ -21,6 +21,16 @@ html, body{margin:0 0 0 0;}
 ::ng-deep .pac-container {
     z-index: 9999999999999999999 !important;
     height: 100vh !important;
+}
+main{
+    overflow: hidden!important;
+    background:white;
+    color:black;
+    min-height:100vh!important;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards!important;
+    animation-delay: 2s!important;
 }
 .row {
     padding: 0px;
@@ -38,7 +48,32 @@ select {
 input{
     font-size: 14px;
 }
-
+.backArrow {
+    position: absolute;
+    z-index: 99;
+    width: 1.6rem;
+    height: 1.6rem;
+    /* top: 5px;*/
+    left: 20px;
+  }
+.information{
+    /* display:flex; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.toolBar {
+    color:white!important;
+    position: relative;
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8)!important;
+    display: flex;
+    height:50px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    z-index: 999999;
+}
 
 .classic:focus {
     background-image:
