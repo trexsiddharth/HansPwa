@@ -335,7 +335,7 @@ div.mat-select-search-inner input.mat-input-element {
 }
 
 .mat-select-panel {
-  background: white;
+  background: #eeeeee;
 }
 .mat-optgroup-label{
   color: #737373;
@@ -379,7 +379,6 @@ div.mat-select-search-inner input.mat-input-element {
 .mat-option:hover:not(.mat-option-disabled) {
   background: #0c9bf2;
   color: white;
-  transition: all 0.5s ease;
 }
 @media screen and (max-width: 576px) {
   .ht-full {

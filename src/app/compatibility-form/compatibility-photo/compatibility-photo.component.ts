@@ -494,7 +494,7 @@ export class CompatibilityPhotoComponent implements OnInit {
     if (type === 0) {
       this.analyticsEvent('User Skipped Photo Upload');
     } else {
-      this.analyticsEvent('Registered through Four Page Registration Page Four');
+      this.analyticsEvent('Four Page Registration Page Four');
     }
   }
 
@@ -551,7 +551,7 @@ export class CompatibilityPhotoComponent implements OnInit {
                               }
                           });
                         }
-                      } else if (index >= 5) {
+                      } else {
                         return;
                       }
                     });

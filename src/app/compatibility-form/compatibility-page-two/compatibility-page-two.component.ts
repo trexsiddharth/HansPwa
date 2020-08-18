@@ -178,6 +178,7 @@ constructor(private http: HttpClient, public dialog: MatDialog, private formBuil
       Designation: [''],
       DesignationCtrl: [''],
       OtherDesignation: [''],
+      AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Working: ['', Validators.compose([Validators.required])],
       About: [''],
       abroad: ['']
@@ -338,7 +339,6 @@ firstStep() {
     // }
 
     if (this.PageTwo.valid) {
-      this.spinner.show();
 
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
@@ -350,6 +350,8 @@ firstStep() {
       firststepdata.append('profession', this.PageTwo.value.Designation !== 'Others'
       ? this.PageTwo.value.Designation : this.PageTwo.value.OtherDesignation ?
       this.PageTwo.value.OtherDesignation :  this.PageTwo.value.Designation);
+
+      firststepdata.append('annual_income', this.PageTwo.value.AnnualIncome);
 
       firststepdata.append('working_city', this.PageTwo.value.Working);
       firststepdata.append('about', this.PageTwo.value.About);
@@ -365,7 +367,7 @@ firstStep() {
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormTwoData(firststepdata);
                 } else {
-                  this.analyticsEvent('Registered through Four Page Registration Page Two');
+                  this.analyticsEvent('Four Page Registration Page Two');
                 }
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {
@@ -426,24 +428,6 @@ firstStep() {
     }, 500);
   }
 
-onAutocompleteSelected(event) {
-      console.log(event);
-      this.PageTwo.patchValue({
-        Working: event.formatted_address
-      });
-      this.setAbout();
-      this.workplace = event.formatted_address;
-      console.log('address of family', this.PageTwo.value.Working);
-  }
-onLocationSelected(e) {
-  console.log(e);
-  this.workingCity = e;
-  if (this.PageTwo.valid) {
-      this.fourPageService.formCompleted.emit(true);
-      this.fourPageService.formTwoGroup.emit(this.PageTwo);
-     }
-  console.log('location of family', e);
-}
 changedQualification() {
   console.log('changed Qualification');
   this.analyticsEvent('Four Page Registration Page Two Qualification Changed');
@@ -523,8 +507,17 @@ changedDesignation() {
    }
   this.setAbout();
 }
+incomeChanged() {
+  console.log('changed yearly income');
+  this.analyticsEvent('Four Page Registration Page Two Annual Income Changed');
+  if (this.PageTwo.valid) {
+    this.fourPageService.formCompleted.emit(true);
+    this.fourPageService.formTwoGroup.emit(this.PageTwo);
+   }
+}
 changedAbroad() {
   console.log('changed Abroad');
+  this.analyticsEvent('Four Page Registration Page Two Abroad Status Changed');
   if (this.PageTwo.valid) {
     this.fourPageService.formCompleted.emit(true);
     this.fourPageService.formTwoGroup.emit(this.PageTwo);
@@ -550,6 +543,8 @@ updateFormTwoData(profileData: FormData) {
   profileData.get('occupation').toString() : '';
   this.fourPageService.profile.designation = profileData.get('profession') ?
   profileData.get('profession').toString() : '';
+  this.fourPageService.profile.annualIncome = profileData.get('annual_income') ?
+  profileData.get('annual_income').toString() : '';
   this.fourPageService.profile.workingCity = profileData.get('working_city') ?
   profileData.get('working_city').toString() : '';
   this.fourPageService.profile.about = profileData.get('about') ?
@@ -612,6 +607,7 @@ this.PageTwo.patchValue({
     Occupation: userProfile.occupation,
       Designation: this.designations.includes(userProfile.designation) ? userProfile.designation : 'Others' ,
       OtherDesignation: userProfile.designation,
+      AnnualIncome: userProfile.annualIncome,
       Working: userProfile.workingCity,
       About: this.setAgeIfNan(userProfile.about)
   });
@@ -640,6 +636,7 @@ setAgeIfNan(value: string) {
 //   }
 // }
 
+// change PageTwo Form with no required fields
 setFormForGetUserThrough() {
   this.PageTwo = this.formBuilder.group({
     // tslint:disable-next-line: max-line-length
@@ -648,6 +645,7 @@ setFormForGetUserThrough() {
     Occupation: [''],
     Designation: [''],
     OtherDesignation: [''],
+    AnnualIncome: ['', Validators.max(999)],
     Working: [''],
     About: [''],
     abroad: ['']

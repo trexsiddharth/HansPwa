@@ -16,7 +16,8 @@ const routes: Routes = [
 },
 { path: 'fourReg',
   loadChildren: () => import('./compatibility-form/compatibility-form.module').
-  then(m => m.CompatibilityFormModule)
+  then(m => m.CompatibilityFormModule),
+  data: {preload: true}
 },
 { path: 'reg',
   loadChildren: () => import('./reg/reg.module').

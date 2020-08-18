@@ -26,8 +26,6 @@ allCasteListUpdated = false;
  facebookProfilePicUploaded = new EventEmitter<string>();
  facebookHomeTownUpdated = new EventEmitter<string>();
  facebookLocationUpdated = new EventEmitter<string>();
- isFatherDead = false;
- isMotherDead = false;
 
   constructor() { }
 
@@ -90,15 +88,10 @@ allCasteListUpdated = false;
     userData.get('weight').toString() : '';
     this.profile.martialStatus = userData.get('marital_status') ?
     userData.get('marital_status').toString() : '';
-    this.profile.annualIncome = userData.get('annual_income') ?
-    userData.get('annual_income').toString() : '';
     this.profile.religion = userData.get('religion') ?
     userData.get('religion').toString() : '';
     this.profile.caste = userData.get('caste') ?
     userData.get('caste').toString() : '';
-    this.profile.manglik = userData.get('manglik') ? userData.get('manglik').toString()
-    : '';
-    // this.profile.locality = userData.get('locality').toString();
     this.profile.disabledPart = userData.get('disabled_part') ?
     userData.get('disabled_part').toString() : '';
     console.log(this.profile);

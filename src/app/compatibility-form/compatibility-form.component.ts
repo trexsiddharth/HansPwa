@@ -28,7 +28,7 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable, timer, Subject, of } from 'rxjs';
+import { Observable, timer, Subject, of, ReplaySubject } from 'rxjs';
 import { startWith, map, timeout, retry, catchError, switchMap, share, takeUntil } from 'rxjs/operators';
 import { FourPageService } from './four-page.service';
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
@@ -36,6 +36,7 @@ import { LanguageService } from '../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
+import { element } from 'protractor';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -83,7 +84,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   getcastes: any = [];
   Caste = false;
   AllCastes = false;
-  locality;
   profileData;
   isLeadIsZero = false;
 
@@ -125,6 +125,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
    authData;
   private fetchedFbProfilePic = null;
 
+     /** list of designation filtered by search keyword for option groups */
+     public filteredCastes: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+
+     /** Subject that emits when the component has been destroyed. */
+      protected onDestroy = new Subject<void>();
+
 
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
@@ -153,11 +159,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       Height: ['', Validators.compose([Validators.required])],
       // Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
       MaritalStatus: ['', Validators.compose([Validators.required])],
-      AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
-      Mangalik: [''],
-      // locality: ['', Validators.compose([Validators.required])],
+      CasteCtrl: (null),
       disabledPart: ['']
     });
   }
@@ -165,6 +169,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // truecaller polling is active and user closes the page.
     this.stopPolling.next();
+    // destroy search for caste
+    this.onDestroy.next();
+    this.onDestroy.complete();
   }
 
 async ngOnInit() {
@@ -172,6 +179,7 @@ async ngOnInit() {
     this.PageOne.patchValue({
       phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
     });
+    this.hideMobileNumber = true;
     console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
   localStorage.clear();
@@ -230,6 +238,7 @@ async ngOnInit() {
        }
       }
     );
+
     // get all castes before get the data of the profile
   await this.getAllCaste();
   this.route.paramMap.subscribe(
@@ -297,6 +306,29 @@ async ngOnInit() {
   console.log(this.isLinear);
 
     }
+
+    protected filterCastes() {
+      if (!this.getcastes) {
+        return;
+      }
+      // get the search keyword
+      let search = this.PageOne.controls.CasteCtrl.value;
+      if (!search) {
+        this.filteredCastes.next(this.getcastes.slice());
+        return;
+      } else {
+        search = search.toLowerCase();
+      }
+      // filter the banks
+      const casteResults = this.getcastes.filter(bank => bank.toLowerCase().indexOf(search) > -1);
+      if (casteResults.length !== 0) {
+        this.filteredCastes.next(casteResults);
+      }
+      // else {
+      //   this.filteredCastes.next(this.getcastes.filter(bank => bank.toLowerCase().indexOf('other') > -1));
+      // }
+    }
+
     // event on change of input field
     inputFieldChanged(fieldName) {
       console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
@@ -306,9 +338,6 @@ async ngOnInit() {
             break;
           case 'Weight':
             this.analyticsEvent('Four Page Registration Page One Weight Changed');
-            break;
-          case 'AnnualIncome':
-            this.analyticsEvent('Four Page Registration Page One Annual Income Changed');
             break;
           case 'firstName':
             this.analyticsEvent('Four Page Registration Page One First Name Changed');
@@ -335,7 +364,7 @@ async ngOnInit() {
             this.analyticsEvent('Four Page Registration Page One Birth Year Changed');
             break;
           case 'gender':
-            this.analyticsEvent('Four Page Registration Page One GenderChanged');
+            this.analyticsEvent('Four Page Registration Page One Gender Changed');
             break;
           case 'Height':
             this.analyticsEvent('Four Page Registration Page One Height Changed');
@@ -343,8 +372,8 @@ async ngOnInit() {
           case 'MaritalStatus':
             this.analyticsEvent('Four Page Registration Page One Marital Status Changed');
             break;
-          case 'Mangalik':
-            this.analyticsEvent('Four Page Registration Page One Manglik Status Changed');
+          case 'Castes':
+            this.analyticsEvent('Four Page Registration Page One Caste Changed');
             break;
 
           default:
@@ -450,6 +479,17 @@ async ngOnInit() {
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
         this.getcastes = [...res, 'All'];
         this.fourPageService.setAllCastes(this.getcastes);
+        if (this.getcastes) {
+           // load the initial caste list
+                this.filteredCastes.next((this.getcastes as string[]).slice(0, 100));
+
+            // listen for search field value changes
+                this.PageOne.controls.CasteCtrl.valueChanges
+            .pipe(takeUntil(this.onDestroy))
+            .subscribe(() => {
+              this.filterCastes();
+            });
+        }
       });
       if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== '') {
       this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
@@ -486,11 +526,9 @@ async ngOnInit() {
           Height: ['', Validators.compose([Validators.required])],
           // Weight: ['', Validators.compose([Validators.required])],
           MaritalStatus: ['', Validators.compose([Validators.required])],
-          AnnualIncome: ['', Validators.compose([Validators.required, Validators.max(999)])],
           Religion: ['', Validators.compose([Validators.required])],
           Castes: ['', Validators.compose([Validators.required])],
-          Mangalik: [''],
-          // locality: ['', Validators.compose([Validators.required])],
+          CasteCtrl: (null),
           disabledPart: ['']
         });
       }
@@ -514,17 +552,8 @@ async ngOnInit() {
        return;
     }
 
-    // if (!this.fourPageService.getUserThrough() && this.locationFamily == null || this.locationFamily === '') {
-    //   this.ngxNotificationService.error('Select A Valid Location');
-    //   return;
-    // }
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
-      console.log('caste', this.PageOne.value.Castes);
-      this.casteValidation(this.PageOne.value.Castes).then(res => {
-          if (res === true) {
-            if (this.PageOne.valid) {
-              this.spinner.show();
               const date = this.PageOne.value.birth_date;
               const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
               const year = this.PageOne.value.birth_year;
@@ -555,13 +584,9 @@ async ngOnInit() {
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
               // firststepdata.append('weight', this.PageOne.value.Weight);
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
-              firststepdata.append('manglik', this.PageOne.value.Mangalik ?
-               this.PageOne.value.Mangalik  === 'Don\'t Know' ? 'Anshik Manglik' : this.PageOne.value.Mangalik : '');
 
-              firststepdata.append('annual_income', this.PageOne.value.AnnualIncome);
               firststepdata.append('religion', this.PageOne.value.Religion);
               firststepdata.append('caste', this.PageOne.value.Castes);
-              // firststepdata.append('locality', this.locality ? this.locality : this.PageOne.value.locality);
               firststepdata.append('disability', this.isDisable ? 'yes' : null);
               firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
 
@@ -581,7 +606,6 @@ async ngOnInit() {
               console.log('gender', this.PageOne.value.gender);
               console.log('height', this.Heights1[this.PageOne.value.Height]);
               console.log('marital_status', this.PageOne.value.MaritalStatus);
-              console.log('annual_income', this.PageOne.value.AnnualIncome);
               console.log('religion', this.PageOne.value.Religion);
               console.log('caste', this.PageOne.value.Castes);
 
@@ -617,11 +641,8 @@ async ngOnInit() {
                 }
 
                 this.fourPageService.updateFormOneData(firststepdata);
-                if (this.fourPageService.getUserThrough()) {
-                  // this.locality = firststepdata.get('locality');
-                } else {
-                  this.analyticsEvent('Four Page Registration Page One');
-                }
+                this.analyticsEvent('Four Page Registration Page One');
+
               } else {
                 this.spinner.hide();
                 this.ngxNotificationService.error(res.message);
@@ -632,11 +653,6 @@ async ngOnInit() {
               console.log(err);
             });
           }
-          } else {
-            this.ngxNotificationService.error('Fill the details');
-          }
-          }
-    });
     } else {
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
@@ -750,60 +766,12 @@ Religion(event) {
       });
     }
   }
-async casteValidation(value) {
-    this.analyticsEvent('Four Page Registration Page One Caste Changed');
-    console.log('caste changed', value );
-    const status = 1;
-    let statusConfirmed;
-    await this.checkCaste(value).then((res: boolean) => {
-       statusConfirmed = res;
-     });
-    console.log('caste changed', statusConfirmed );
 
-    if (statusConfirmed === false) {
-      this.ngxNotificationService.warning('Please choose a caste from the dropdown');
-      this.PageOne.get('Castes').setValue('');
-      return false;
-    }
-    return true;
-
-  }
-
-  checkCaste(value) {
-    let status = 1;
-    let statusConfirmed = false;
-    this.casteo.forEach(element => {
-      element.forEach(item => {
-        if (value !== '' && item.includes(value) && item.length === value.length ) {
-          console.log('confirmed');
-          statusConfirmed = true;
-        } else {
-          status = 0;
-        }
-      });
-    });
-    return new Promise((resolve) => {
-resolve(statusConfirmed);
-    });
-  }
-
-  onAutocompleteSelected(event) {
-    console.log(event);
-    // this.PageOne.value.locality = event.formatted_address;
-    // this.locality = event.formatted_address;
-    // console.log('address of family', this.PageOne.value.locality);
-
-}
-onLocationSelected(e) {
-    this.locationFamily = e;
-    this.lat = e.latitude;
-    this.long = e.longitude;
-    console.log('location of family', e);
-}
 setGender() {
 console.log(this.PageOne.value.Relation);
 this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-this.openRegisterWith(this.PageOne.value.Relation);
+this.analyticsEvent('Four Page Registration Page One Gender Changed');
+// this.openRegisterWith(this.PageOne.value.Relation);
 switch (this.PageOne.value.Relation) {
   case 'Brother':
     this.PageOne.patchValue(
@@ -878,6 +846,8 @@ getProfile() {
       }
     }
   }
+  // #IMPORTANT
+  // setting getProfiles to our variables so that we can also update these values and check in the last page
   setProfileValues(profileData) {
     if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
     localStorage.setItem('getListTempleId', profileData.profile.temple_id);
@@ -909,10 +879,7 @@ getProfile() {
     this.userProfile.religion = profileData.family.religion;
     this.userProfile.caste = profileData.family.caste;
     this.userProfile.manglik = profileData.profile.manglik;
-    // this.locality = profileData.family.locality;
-    // this.userProfile.locality = profileData.family.locality;
-    this.lat = profileData.profile.lat_locality;
-    this.long = profileData.profile.long_locality;
+    this.userProfile.locality = profileData.family.locality;
     this.userProfile.qualification = profileData.profile.degree;
     this.userProfile.occupation = profileData.profile.occupation;
     this.userProfile.designation = profileData.profile.profession;
@@ -923,17 +890,7 @@ getProfile() {
     this.userProfile.gotra = profileData.family.gotra;
     this.userProfile.foodChoice = profileData.profile.food_choice;
     this.userProfile.fatherStatus = profileData.family.father_status;
-    if (profileData.family.father_status && profileData.family.father_status === 'Not Alive') {
-      this.fourPageService.isFatherDead = true;
-    } else {
-      this.fourPageService.isFatherDead = false;
-    }
     this.userProfile.motherStatus = profileData.family.mother_status;
-    if (profileData.family.mother_status && profileData.family.mother_status === 'Not Alive') {
-      this.fourPageService.isMotherDead = true;
-    } else {
-      this.fourPageService.isMotherDead = false;
-    }
     this.userProfile.familyIncome = profileData.family.family_income;
     this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
     this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
@@ -963,11 +920,8 @@ getProfile() {
       Height: this.userProfile.height ? this.Heights1.indexOf(this.userProfile.height) : '',
       // Weight: this.userProfile.weight,
       MaritalStatus: this.userProfile.martialStatus,
-      AnnualIncome: this.userProfile.annualIncome,
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
-      Mangalik: this.userProfile.manglik,
-      // locality: this.userProfile.locality,
       });
   }
   getMonthString(month: string) {

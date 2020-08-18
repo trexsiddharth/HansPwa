@@ -341,11 +341,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Select Religion');
         } else if (userProfile.caste === null  || userProfile.caste === '') {
           return this.ngxNotificationService.error('Select Caste');
-        } else if (userProfile.manglik === null  || userProfile.manglik === '') {
-          return this.ngxNotificationService.error('Select Manglik Status');
-        } else if (userProfile.locality === null  || userProfile.locality === '') {
-          return this.ngxNotificationService.error('Enter Locality');
-        } else if (userProfile.qualification === null  || userProfile.qualification === '') {
+        }  else if (userProfile.qualification === null  || userProfile.qualification === '') {
           return this.ngxNotificationService.error('Select Qualification');
         } else if (userProfile.occupation === null  || userProfile.occupation === '') {
           return this.ngxNotificationService.error('Select Occupation');
@@ -353,6 +349,10 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter Designation');
         } else if (userProfile.occupation !== 'Not Working' &&  userProfile.workingCity === null  || userProfile.workingCity === '') {
           return this.ngxNotificationService.error('Enter Working City');
+        } else if (userProfile.manglik === null  || userProfile.manglik === '') {
+          return this.ngxNotificationService.error('Select Manglik Status');
+        } else if (userProfile.locality === null  || userProfile.locality === '') {
+          return this.ngxNotificationService.error('Enter Locality');
         } else if (userProfile.about === null  || userProfile.about === '') {
           return this.ngxNotificationService.error('Enter About');
         } else if (userProfile.birthPlace === null  || userProfile.birthPlace === '') {

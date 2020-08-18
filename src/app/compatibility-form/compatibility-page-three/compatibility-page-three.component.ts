@@ -63,6 +63,8 @@ export class CompatibilityPageThreeComponent implements OnInit {
     birthPlace;
     birthPlaceText;
 
+    Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working', 'Not Alive'];
+
     // for only getting the autocomplete predictions
     autoComplete = {
       strictBounds: false,
@@ -81,9 +83,11 @@ constructor(private http: HttpClient, public dialog: MatDialog, private _formBui
       BirthTime: [''],
       Gotra: [''],
       FoodChoice: [''],
+      Mangalik: [''],
       FatherStatus: [''],
       MotherStatus: [''],
       FamilyIncome: ['', Validators.compose([Validators.max(999)])],
+      Locality: ['']
     });
   }
 
@@ -153,7 +157,6 @@ firstStep() {
         this.fourPageService.form3Completed.emit(false);
         return;
     } else {
-      this.spinner.show();
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId') );
       firststepdata.append('birth_place', this.PageThree.value.BirthPlace);
@@ -162,10 +165,20 @@ firstStep() {
               firststepdata.append('birth_time', this.PageThree.value.BirthTime);
               }
       firststepdata.append('food_choice', this.PageThree.value.FoodChoice);
+      firststepdata.append('manglik', this.PageThree.value.Mangalik ?
+               this.PageThree.value.Mangalik  === 'Don\'t Know' ? 'Anshik Manglik' : this.PageThree.value.Mangalik : '');
       firststepdata.append('gotra', this.PageThree.value.Gotra);
-      firststepdata.append('father_status', this.PageThree.value.FatherStatus);
-      firststepdata.append('mother_status', this.PageThree.value.MotherStatus);
+
+      firststepdata.append('father_status', this.PageThree.value.FatherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
+      firststepdata.append('mother_status', this.PageThree.value.MotherStatus  !== 'Not Alive' ? 'Alive' : 'Not Alive');
+      if (this.PageThree.value.FatherStatus !== 'Not Alive') {
+        firststepdata.append('occupation_father', this.PageThree.value.FatherStatus);
+      }
+      if (this.PageThree.value.MotherStatus !== 'Not Alive') {
+        firststepdata.append('occupation_mother', this.PageThree.value.MotherStatus);
+      }
       firststepdata.append('family_income', this.PageThree.value.FamilyIncome);
+      firststepdata.append('locality',  this.PageThree.value.Locality);
 
 
             // tslint:disable-next-line: max-line-length
@@ -178,7 +191,7 @@ firstStep() {
                 if (this.fourPageService.getUserThrough()) {
                 this.updateFormThreeData(firststepdata);
                 } else {
-                  this.analyticsEvent('Registered through Four Page Registration Page Three');
+                  this.analyticsEvent('Four Page Registration Page Three');
                 }
                 // this.ngxNotificationService.success('Registered Successfully');
               } else {
@@ -217,25 +230,26 @@ firstStep() {
 
   }
 
-  placeChanged() {
-    const birthPlace: HTMLInputElement = document.querySelector('#birthPlace');
-    setTimeout(() => {
+  placeChanged(type) {
+    if (type === 'birth') {
+      const birthPlace: HTMLInputElement = document.querySelector('#birthPlace');
+      setTimeout(() => {
       console.log(birthPlace.value);
       this.PageThree.patchValue({
         BirthPlace: birthPlace.value
       });
       this.analyticsEvent('Four Page Registration Page Three Birth Place Changed');
+    }, 200);
+    } else  {
+      const locality: HTMLInputElement = document.querySelector('#locality');
+      setTimeout(() => {
+      console.log(locality.value);
+      this.PageThree.patchValue({
+        Locality: locality.value
+      });
+      this.analyticsEvent('Four Page Registration Page Three Locality Changed');
     }, 500);
   }
-
-onAutocompleteSelected(event) {
-    this.PageThree.value.BirthPlace = event.formatted_address;
-    this.birthPlaceText = event.formatted_address;
-    console.log('address of family', this.PageThree.value.BirthPlace);
-}
-onLocationSelected(e) {
-  this.birthPlace = e;
-  console.log('location of family', e);
 }
 
   // tslint:disable-next-line: no-shadowed-variable
@@ -250,6 +264,9 @@ onLocationSelected(e) {
       break;
       case 'food':
       this.analyticsEvent('Four Page Registration Page Three Food Choice Changed');
+      break;
+      case 'manglik':
+      this.analyticsEvent('Four Page Registration Page Three Manglik Status Changed');
       break;
       case 'fstatus':
       this.analyticsEvent('Four Page Registration Page Three Father Status Changed');
@@ -279,22 +296,25 @@ onLocationSelected(e) {
     this.fourPageService.profile.gotra = profileData.get('gotra') ?  profileData.get('gotra').toString() : '';
     this.fourPageService.profile.foodChoice = profileData.get('food_choice') ?
     profileData.get('food_choice').toString() : '';
+    this.fourPageService.profile.manglik = profileData.get('manglik') ? profileData.get('manglik').toString()
+    : '';
     this.fourPageService.profile.fatherStatus = profileData.get('father_status') ?
      profileData.get('father_status').toString() : '';
-    if (profileData.get('father_status') && profileData.get('father_status').toString() === 'Not Alive' ) {
-      this.fourPageService.isFatherDead = true;
-    } else {
-      this.fourPageService.isFatherDead = false;
-    }
+   
     this.fourPageService.profile.motherStatus = profileData.get('mother_status') ?
      profileData.get('mother_status').toString() : '';
-    if (profileData.get('mother_status') && profileData.get('mother_status').toString() === 'Not Alive' ) {
-      this.fourPageService.isMotherDead = true;
-    } else {
-      this.fourPageService.isMotherDead = false;
-    }
+   
+    this.fourPageService.profile.family.occupation = profileData.get('occupation_father') ?
+    profileData.get('occupation_father').toString() : '';
+    
+    this.fourPageService.profile.family.occupation_mother = profileData.get('occupation_mother') ?
+    profileData.get('occupation_mother').toString() : '';
+
     this.fourPageService.profile.familyIncome = profileData.get('family_income') ?
      profileData.get('family_income').toString() : '';
+    console.log(this.fourPageService.getProfile());
+    this.fourPageService.profile.locality = profileData.get('locality') ?
+    profileData.get('locality').toString() : '';
     console.log(this.fourPageService.getProfile());
   }
 
@@ -305,9 +325,11 @@ onLocationSelected(e) {
       BirthTime: userProfile.birthTime,
       Gotra: userProfile.gotra,
       FoodChoice: userProfile.foodChoice,
-      FatherStatus: userProfile.fatherStatus,
-      MotherStatus: userProfile.motherStatus,
-      FamilyIncome: userProfile.familyIncome
+      Mangalik: userProfile.manglik,
+      FatherStatus: userProfile.fatherStatus === 'Alive' ? userProfile.family.occupation : userProfile.fatherStatus,
+      MotherStatus: userProfile.motherStatus === 'Alive' ? userProfile.family.occupation_mother : userProfile.motherStatus,
+      FamilyIncome: userProfile.familyIncome,
+      Locality: userProfile.locality
     });
   }
 }

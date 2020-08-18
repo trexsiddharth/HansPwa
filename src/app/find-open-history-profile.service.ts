@@ -195,7 +195,7 @@ export class FindOpenHistoryProfileService {
   }
   getDailyNumber() {
     if (this.profileCount.dailyCount) {
-      return this.profileCount.dailyCount;
+      return this.profileCount.dailyCount + 1;
     } else {
       return '0';
     }
@@ -309,7 +309,6 @@ export class FindOpenHistoryProfileService {
         }
       }
     );
-    console.log("skatiiiiiiiiiing");
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
 
   }
