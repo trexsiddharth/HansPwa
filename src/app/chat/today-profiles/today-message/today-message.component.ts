@@ -61,7 +61,10 @@ month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July
         this.seconds = 60;
         this.minutes = 59;
         this.hour -= 1;
-       }  else if (this.hour === 0 && this.minutes === 0 && this.seconds === 0) {
+       }  else if (this.hour === 0 && this.minutes !== 0 &&  this.seconds === -1) {
+        this.seconds = 60;
+        this.minutes -= 1;
+       } else if (this.hour === 0 && this.minutes === 0 && this.seconds === 0) {
           clearInterval(timer);
        }
      }, 1000);
