@@ -466,3 +466,14 @@ div.mat-select-search-inner input.mat-input-element {
 }
 }
 
+@keyframes skewAnimation {
+  0% {
+    transform: scale(0.5)
+    
+}
+
+100% {
+  transform: scale(2)
+}
+}
+

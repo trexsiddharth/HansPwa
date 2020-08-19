@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   NgxNotificationService
 } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
-import { timeout, retry, catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { timeout, retry, catchError, shareReplay } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { NotificationsService } from '../../notifications.service';
 import { ChatServiceService } from '../../chat-service.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
@@ -22,7 +22,7 @@ import { LanguageService } from 'src/app/language.service';
   templateUrl: './today-profiles.component.html',
   styleUrls: ['./today-profiles.component.css']
 })
-export class TodayProfilesComponent implements OnInit, AfterViewInit {
+export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy {
   item = new ApiwhaAutoreply();
   itemMessage = 'Welcome To Hans Matrimony';
   Data;
@@ -54,17 +54,23 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   lastAction;
   showActionAnimation = false;
 
+  profileIsLoadingSubject = new Subject<string>();
+  profileIsLoading$: Observable<string> = this.profileIsLoadingSubject.asObservable().pipe(
+    shareReplay()
+  );
+
   constructor(private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private ngxNotificationService: NgxNotificationService,
-    public notification: NotificationsService,
-    public chatService: ChatServiceService,
-    public itemService: FindOpenHistoryProfileService,
-    public router: Router,
-    private dialog: MatDialog,
-    public languageService: LanguageService,
-    public subscriptionService: SubscriptionserviceService) {
+              private spinner: NgxSpinnerService,
+              private ngxNotificationService: NgxNotificationService,
+              public notification: NotificationsService,
+              public chatService: ChatServiceService,
+              public itemService: FindOpenHistoryProfileService,
+              public router: Router,
+              private dialog: MatDialog,
+              public languageService: LanguageService,
+              public subscriptionService: SubscriptionserviceService) {
   }
+
   @HostListener('scroll', ['$event'])
   onScroll(event) {
     console.log("Scroll Event", document.body.scrollTop);
@@ -210,6 +216,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
   }
 
+  ngOnDestroy(): void {
+  }
+
   private setProfileLocally() {
     this.type = 'profile';
     const data = JSON.parse(localStorage.getItem('todayProfile'));
@@ -330,7 +339,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
   getData(reply) {
     // shortlist count
-
     console.log(reply);
     this.setCount(reply);
     const previousItem = this.item;
@@ -338,7 +346,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
       this.spinner.show();
     }
     if (reply !== 'SHOW') {
-      this.spinner.show();
+      if (document.getElementById('profilePic')) {
+        document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
+        this.profileIsLoadingSubject.next(reply);
+      }
     }
     this.chatRequest(reply).subscribe(
       data => {
@@ -444,7 +455,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
 
         // if data.type is profile or message
         if (data.type === 'profile') {
-
+          
           this.type = 'profile';
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             this.item = data.apiwha_autoreply;
@@ -480,6 +491,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
           localStorage.setItem('todayProfile', '');
           this.setMessageText(data.apiwha_autoreply);
           this.spinner.hide();
+           // stop user response animation
+          this.profileIsLoadingSubject.next(null);
 
           // if profiles for the day are over
           /*
@@ -500,18 +513,18 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
         switch (reply) {
           case 'YES':
             if (this.points > 0) {
-              this.ngxNotificationService.success('Profile Contacted Successfully');
+              // this.ngxNotificationService.success('Profile Contacted Successfully');
             }
             break;
           case 'SHORTLIST':
-            this.ngxNotificationService.success('Profile Shortlisted Successfully');
+            // this.ngxNotificationService.success('Profile Shortlisted Successfully');
             break;
           case 'NO':
-            this.ngxNotificationService.success('Profile Rejected Successfully');
+            // this.ngxNotificationService.success('Profile Rejected Successfully');
             break;
 
           default:
-            break;
+              break;
         }
         if (this.points > 0 && reply === 'YES') {
           this.itemService.setItem(previousItem);
@@ -529,6 +542,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
       }, err => {
         console.log(err);
         this.spinner.hide();
+        // stop user response animation
+        this.profileIsLoadingSubject.next(null);
         this.ngxNotificationService.error('Something Went Wrong');
         this.languageService.setProfileLanguage();
       }
@@ -672,6 +687,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
     if (carous === null || carous === 'null' || carous === '') {
       if (photo === null) {
+        setTimeout(() => {
+          // stop user response animation
+        this.profileIsLoadingSubject.next(null);
+        }, 2000);
         if (gen === 'Male') {
           return '../../assets/profile.png';
         } else {
@@ -689,6 +708,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
   }
   onErrorProfilePhoto(gender, index) {
     this.spinner.hide();
+    // stop user response animation
+    this.profileIsLoadingSubject.next(null);
     const imageSrc = document.querySelectorAll('#profilePic')[index];
     if (gender === 'Male') {
       imageSrc.setAttribute('src', '../../assets/male_pic.png');
@@ -710,6 +731,18 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
     } else {
       this.carouselSize = [1];
       return this.carouselSize;
+    }
+  }
+  // on first image load complete
+  onLoadingImage(index) {
+    const imageElement: any = document.querySelector('#profilePic');
+    if (imageElement && index === 0) {
+      console.log('Image is loading');
+      if (imageElement.complete) {
+        console.log('Image Loaded Completely');
+        // stop user response animation
+        this.profileIsLoadingSubject.next(null);
+      }
     }
   }
   openImageModal(carous: string, src: string, name: string, index: any) {

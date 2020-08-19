@@ -1,10 +1,30 @@
 <main id="main" *ngIf="item && type == 'profile'">
+
+    <div class="full-width" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',
+    'greyBack': (profileIsLoading$ | async) === 'NO',
+    'blueBack': (profileIsLoading$ | async) === 'YES' }" style="position: absolute;
+    z-index: 1;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 0;">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'SHORTLIST'"
+            src="../../../assets/heartwhite.svg" alt="hans logo">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'NO'"
+            src="../../../assets/closewhite.svg" alt="hans logo">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'YES'"
+            src="../../../assets/phone_white.svg" alt="hans logo">
+    </div>
+
     <div id="profileImageDiv">
         <ngb-carousel style="outline: none;">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
                 <img id="profilePic" class="img-fluid"
                     (click)="openImageModal(item.carousel,item.photo,item.name,index)"
-                    [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)"
+                    [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (load)="onLoadingImage(index)"
                     (error)="onErrorProfilePhoto(item.gender, index)" alt={{item.name}}>
             </ng-template>
         </ngb-carousel>
@@ -42,6 +62,7 @@
                 </div>
             </div>
 
+
             <div class="down-arrow" (click)="scrollDown()" style="background-color: #50ed9d;
           float: right;display: flex;
           align-items: center;
@@ -70,7 +91,7 @@
 
         <!-- // buttons -->
 
-        <div id="answerButtons">
+        <div id="answerButtons" *ngIf="!(profileIsLoading$ | async)">
             <div class="t-c" style="margin-top: 10px;">
                 <button (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;
                 background: #58D1FD;" aria-label="Example icon-button with a heart icon">
