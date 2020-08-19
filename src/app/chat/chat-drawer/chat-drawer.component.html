@@ -1,101 +1,108 @@
-<main class="mainContainer" *ngIf="editIndexPrefs != 0">
-  <div class="row parentTop">
-    <div>
-      <img src="../../assets/backN.svg" class="backArrow" (click)="closeSideNav()" alt="BACK">
-    </div>
-    <div class="toggle">
-      <label class="" style="font-size: 15px;">हिं <mat-slide-toggle [checked]="langCheck"
-          (change)="langChanged($event)">
-        </mat-slide-toggle> En</label>
-    </div>
-    <div class="circular" (click)="openUserProfile()">
-      <img height="100%" [src]="userpic" (error)="onImageLoadError()">
-    </div>
-    <div class="nameText">
-      <b>{{username}}</b>
-    </div>
-  </div>
-  <div style="text-align:center;position: relative; ;overflow-y: auto;">
-    <button class="rowMore" (click)="openUserProfile()">
-      <img src="../../../assets/tabs-icons/personal.svg" class="iconImage">
-      <span>{{languageService.profileLang.myprofile}}</span>
-      <img src="../../assets/nextN.svg" class="nextImage">
-    </button>
-    <button class="rowMore" (click)="setEditIndexPrefs(0)">
-      <img src="../../../assets/tabs-icons/family.svg" class="iconImage">
-      <span class="labelS" [matBadge]="'!'" matBadgeSize="small"
-        [matBadgeHidden]="itemService.getChangePrefsClicked()"></span>
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Change Preferences</span>
-      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">{{languageService.profileLang.preference}}
-        बदलें</span>
-    </button>
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <main class="mainContainer">
+      <div class="row parentTop">
+        <div>
+          <img src="../../assets/backN.svg" class="backArrow" (click)="closeSideNav()" alt="BACK">
+        </div>
+        <div class="toggle">
+          <label class="" style="font-size: 15px;">हिं <mat-slide-toggle [checked]="langCheck"
+              (change)="langChanged($event)">
+            </mat-slide-toggle> En</label>
+        </div>
+        <div class="circular" (click)="openUserProfile()">
+          <img height="100%" [src]="userpic" (error)="onImageLoadError()">
+        </div>
+        <div class="nameText">
+          <b>{{username}}</b>
+        </div>
+      </div>
+      <div style="text-align:center;position: relative; ;overflow-y: auto;">
+        <button class="rowMore" (click)="openUserProfile()">
+          <img src="../../../assets/tabs-icons/personal.svg" class="iconImage">
+          <span>{{languageService.profileLang.myprofile}}</span>
+          <img src="../../assets/nextN.svg" class="nextImage">
+        </button>
+        <button class="rowMore" (click)="sidenav.toggle()">
+          <!-- <button class="rowMore" (click)="setEditIndexPrefs()"> -->
+          <img src="../../../assets/tabs-icons/family.svg" class="iconImage">
+          <span class="labelS" [matBadge]="'!'" matBadgeSize="small"
+            [matBadgeHidden]="itemService.getChangePrefsClicked()"></span>
+          <span *ngIf="languageService.getCurrentLanguage()==='english'" (click)="setEditIndexPrefs()">Change
+            Preferences</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'"
+            (click)="setEditIndexPrefs()">{{languageService.profileLang.preference}}
+            बदलें</span>
+        </button>
 
-    <button class="rowMore" (click)="openHistoryProfiles('contacted')">
-      <img src="../../../assets/tabs-icons/phone.svg" class="iconImage">
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Contacted Profiles</span>
-      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कॉन्टेक्टेड प्रोफाइलस</span>
-    </button>
-    <!-- <button class="rowMore" (click)="openHistoryProfiles('interestShown')">
+        <button class="rowMore" (click)="openHistoryProfiles('contacted')">
+          <img src="../../../assets/tabs-icons/phone.svg" class="iconImage">
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Contacted Profiles</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कॉन्टेक्टेड प्रोफाइलस</span>
+        </button>
+        <!-- <button class="rowMore" (click)="openHistoryProfiles('interestShown')">
       <img src="../../../assets/tabs-icons/heart.svg" class="iconImage">
       <span *ngIf="languageService.getCurrentLanguage()==='english'">Your Likes</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">आपको {{languageService.profileLang.shortlist}}</span>
     </button> -->
-    <!-- <button class="rowMore" (click)="openHistoryProfiles('interestReceived')">
+        <!-- <button class="rowMore" (click)="openHistoryProfiles('interestReceived')">
       <img src="../../../assets/tabs-icons/heart in heart.svg" class="iconImage">
       <span *ngIf="languageService.getCurrentLanguage()==='english'">Likes You</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">जो आपको पसंद करते है</span>
     </button> -->
-    <button class="rowMore" (click)="openHistoryProfiles('rejected')">
-      <img src="../../../assets/tabs-icons/x.svg" class="iconImage">
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Rejected Profiles</span>
-      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">रीजेकटेड प्रोफाइल</span>
-    </button>
-    <hr>
-    <!-- <button class="rowMore" (click)="openDiscover()">
+        <button class="rowMore" (click)="openHistoryProfiles('rejected')">
+          <img src="../../../assets/tabs-icons/x.svg" class="iconImage">
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Rejected Profiles</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">रीजेकटेड प्रोफाइल</span>
+        </button>
+        <hr>
+        <!-- <button class="rowMore" (click)="openDiscover()">
       <img src="../../../assets/tabs-icons/search.svg" class="iconImage">
       <span *ngIf="languageService.getCurrentLanguage()==='english'">See Profiles</span>
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">डिस्कवर प्रोफाइल</span>
       <img src="../../assets/nextN.svg" class="nextImage">
     </button> -->
-    <!-- <hr> -->
-    <button class="rowMore" (click)="customerSupport()">
-      <img src="../../../assets/tabs-icons/customer support.svg" class="iconImage">
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Customer Support</span>
-      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">ग्राहक सहायता</span>
-    </button>
-    <button class="rowMore" (click)="getCallBack()">
-      <img src="../../../assets/tabs-icons/phone arrow.svg" class="iconImage">
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Get A Call Back</span>
-      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कॉल बैक पाऐं</span>
-    </button>
-    <!-- <button class="rowMore">
+        <!-- <hr> -->
+        <button class="rowMore" (click)="customerSupport()">
+          <img src="../../../assets/tabs-icons/customer support.svg" class="iconImage">
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Customer Support</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">ग्राहक सहायता</span>
+        </button>
+        <button class="rowMore" (click)="getCallBack()">
+          <img src="../../../assets/tabs-icons/phone arrow.svg" class="iconImage">
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Talk to a Matchmaker</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">मैचमेकर से बात करे</span>
+        </button>
+        <!-- <button class="rowMore">
           <img src="../../../assets/tabs-icons/settings.svg" class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Settings</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">सेटींग॒स</span>
         </button> -->
-    <button class="rowMore" (click)="logout()">
-      <img src="../../../assets/tabs-icons/logout.svg" class="iconImage">
-      <span *ngIf="languageService.getCurrentLanguage()==='english'">Logout</span>
-      <span *ngIf="languageService.getCurrentLanguage()==='hindi'">लॉगआउट</span>
-      <!-- <span>{{languageService.profileLang.logout}}</span> -->
-    </button>
-    <hr>
-  </div>
-  <ng-container>
-    <div class="drawerButtonSection" (click)="openSubscriptionOffer()">
-      <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='english'">
-        <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;Latest Subscription Offers
-      </button>
-      <button class="buttonStyle" (click)="openSubscriptionOffer()"
-        *ngIf="languageService.getCurrentLanguage()==='hindi'">
-        <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;नवीनतम
-        {{languageService.profileLang.subscription}} ऑफर
-      </button>
-    </div>
-  </ng-container>
-</main>
-<main class="mainContainer" *ngIf="editIndexPrefs == 0">
-  <!-- <mat-expansion-panel id="prefs" [expanded]="false" (opened)="specialCase()" hideToggle>
+        <button class="rowMore" (click)="logout()">
+          <img src="../../../assets/tabs-icons/logout.svg" class="iconImage">
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Logout</span>
+          <span *ngIf="languageService.getCurrentLanguage()==='hindi'">लॉगआउट</span>
+          <!-- <span>{{languageService.profileLang.logout}}</span> -->
+        </button>
+        <hr>
+      </div>
+      <ng-container>
+        <div class="drawerButtonSection" (click)="openSubscriptionOffer()">
+          <button class="buttonStyle" *ngIf="languageService.getCurrentLanguage()==='english'">
+            <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;Latest Subscription Offers
+          </button>
+          <button class="buttonStyle" (click)="openSubscriptionOffer()"
+            *ngIf="languageService.getCurrentLanguage()==='hindi'">
+            <img class="btnImage" src="../../assets/money.svg" alt="settings icon">&nbsp;नवीनतम
+            {{languageService.profileLang.subscription}} ऑफर
+          </button>
+        </div>
+      </ng-container>
+    </main>
+  </mat-sidenav-content>
+  <mat-sidenav id="sidenav" class="drawerSettings" mode="over" position="start" #sidenav>
+    <main class="mainContainer">
+      <!-- <mat-expansion-panel id="prefs" [expanded]="false" (opened)="specialCase()" hideToggle>
       <mat-expansion-panel-header class="rowMore">
         <img src="../../../assets/tabs-icons/family.svg" class="iconImage">
         <span class="labelS" [matBadge]="'!'" matBadgeSize="small"
@@ -104,18 +111,20 @@
         <span *ngIf="languageService.getCurrentLanguage()==='hindi'">{{languageService.profileLang.preference}}
           बदलें</span>
       </mat-expansion-panel-header> -->
-  <div>
-    <div class="row toolBar" style="width: 100%!important;margin:0px 0px">
-      <div class="backArrow">
-        <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="setEditIndexPrefs(-1)" alt="BACK" />
-      </div>
-      <h5 style="margin: auto 20px;
+      <div>
+        <div class="row toolBar" style="width: 100%!important;margin:0px 0px">
+          <div class="backArrow">
+            <!-- <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="setEditIndexPrefs(-1)" alt="BACK" /> -->
+            <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="sidenav.toggle()" alt="BACK" />
+
+          </div>
+          <h5 style="margin: auto 20px;
               font-weight: bold;
                font-size: 1.2rem;">{{languageService.profileLang.preference}}</h5>
-    </div>
-    <form [formGroup]="preferencesForm">
-      <div class="row infoRow" style="margin-top:20px">
-        <!-- <div class="column" *ngIf="editIndexPrefs != 0">
+        </div>
+        <form [formGroup]="preferencesForm">
+          <div class="row infoRow" style="margin-top:20px">
+            <!-- <div class="column" *ngIf="editIndexPrefs != 0">
             <div class="circular2 mat-elevation-z10" (click)="setEditIndexPrefs()">
               <img class="editPencil" src="../../../assets/editN.svg" alt="edit" />
             </div>
@@ -168,88 +177,88 @@
             </div>
           </div> -->
 
-        <div class="">
-          <div class="row information">
-            <div class="col-5">
-              <h6 style="display: inline-block">Age Min: </h6>
-              <input type="text" class="form-control" formControlName="age_min" required>
-            </div>
-            <div class="col-5">
-              <h6 style="display: inline-block">Age Max : </h6>
-              <input type="text" class="form-control" formControlName="age_max" required>
-            </div>
-          </div>
-          <div class="row information">
-            <div class="col-5">
-              <h6 style="display: inline-block">Height Min : </h6>
-              <select type="text" class="form-control" formControlName="height_min">
-                <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
-              </select>
-            </div>
-            <div class="col-5">
-              <h6 style="display: inline-block">Height Max : </h6>
-              <select type="text" class="form-control" formControlName="height_max">
-                <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="row information">
-            <div class="col-5">
-              <h6 style="display: inline-block;">Marital Status:</h6>
-              <select type="text" class="form-control" formControlName="marital_status">
-                <option *ngFor="let item of MaritalStatus" [value]="item">{{
+            <div class="">
+              <div class="row information">
+                <div class="col-5">
+                  <h6 style="display: inline-block">Age Min: </h6>
+                  <input type="text" class="form-control" formControlName="age_min" required>
+                </div>
+                <div class="col-5">
+                  <h6 style="display: inline-block">Age Max : </h6>
+                  <input type="text" class="form-control" formControlName="age_max" required>
+                </div>
+              </div>
+              <div class="row information">
+                <div class="col-5">
+                  <h6 style="display: inline-block">Height Min : </h6>
+                  <select type="text" class="form-control" formControlName="height_min">
+                    <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
+                  </select>
+                </div>
+                <div class="col-5">
+                  <h6 style="display: inline-block">Height Max : </h6>
+                  <select type="text" class="form-control" formControlName="height_max">
+                    <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row information">
+                <div class="col-5">
+                  <h6 style="display: inline-block;">Marital Status:</h6>
+                  <select type="text" class="form-control" formControlName="marital_status">
+                    <option *ngFor="let item of MaritalStatus" [value]="item">{{
                   item
                 }}</option>
-              </select>
-            </div>
-            <div class="col-5">
-              <h6 style="display: inline-block;">Food Choice:</h6>
-              <select type="text" class="form-control" formControlName="food_choice">
-                <option *ngFor="let item of Foodpreferences" [value]="item">{{
+                  </select>
+                </div>
+                <div class="col-5">
+                  <h6 style="display: inline-block;">Food Choice:</h6>
+                  <select type="text" class="form-control" formControlName="food_choice">
+                    <option *ngFor="let item of Foodpreferences" [value]="item">{{
                   item
                 }}</option>
-              </select>
-            </div>
-          </div>
-          <div class="row information">
-            <div class="col-5">
-              <h6 style="display: inline-block">Income Min(in LPA):</h6>
-              <input type="text" class="form-control" formControlName="income_min" required>
-            </div>
-            <div class="col-5">
-              <h6 style="display: inline-block">Income Max(in LPA):</h6>
-              <input type="text" class="form-control" formControlName="income_max" required>
-            </div>
-          </div>
-          <div class="row information">
-            <div class="col-5" *ngIf="gender==='Female'">
-              <h6>Occupation</h6>
-              <mat-select type="text" class="form-control" [multiple]="true" formControlName="occupation"
-                [(ngModel)]="preferenceProfileData.occupation" required>
-                <mat-option *ngFor="let item of Occupation" [value]="item" required>
-                  {{ item}}
-                </mat-option>
-              </mat-select>
-            </div>
-            <div class="col-5" *ngIf="gender==='Male'">
-              <h6>Working</h6>
-              <select type="text" class="form-control" formControlName="working" required>
-                <option *ngFor="let name of Working" [value]="name" required>
-                  {{ name }}
-                </option>
-              </select>
-            </div>
-            <div class="col-5">
-              <h6 style="display: inline-block;">Manglik :</h6>
-              <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
-                [(ngModel)]="preferenceProfileData.manglik" required>
-                <option *ngFor="let item of Mangalika" [value]="item">{{
+                  </select>
+                </div>
+              </div>
+              <div class="row information">
+                <div class="col-5">
+                  <h6 style="display: inline-block">Income Min(in LPA):</h6>
+                  <input type="text" class="form-control" formControlName="income_min" required>
+                </div>
+                <div class="col-5">
+                  <h6 style="display: inline-block">Income Max(in LPA):</h6>
+                  <input type="text" class="form-control" formControlName="income_max" required>
+                </div>
+              </div>
+              <div class="row information">
+                <div class="col-5" *ngIf="gender==='Female'">
+                  <h6>Occupation</h6>
+                  <mat-select type="text" class="form-control" [multiple]="true" formControlName="occupation"
+                    [(ngModel)]="preferenceProfileData.occupation" required>
+                    <mat-option *ngFor="let item of Occupation" [value]="item" required>
+                      {{ item}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-5" *ngIf="gender==='Male'">
+                  <h6>Working</h6>
+                  <select type="text" class="form-control" formControlName="working" required>
+                    <option *ngFor="let name of Working" [value]="name" required>
+                      {{ name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-5">
+                  <h6 style="display: inline-block;">Manglik :</h6>
+                  <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
+                    [(ngModel)]="preferenceProfileData.manglik" required>
+                    <option *ngFor="let item of Mangalika" [value]="item">{{
                     item
                   }}</option>
-              </select>
-            </div>
-          </div>
-          <div class="row information">
+                  </select>
+                </div>
+              </div>
+              <!-- <div class="row information">
             <div class="col-10">
               <h6 style="display: inline-block;">{{languageService.profileLang.religion}}:</h6>
               <mat-select style="color:black!important" type="text" class="form-control" [multiple]="true"
@@ -259,32 +268,32 @@
                 </mat-option>
               </mat-select>
             </div>
-          </div>
-          <div class="row information">
-            <div class="col-10">
-              <h6>Caste</h6>
-              <mat-select type="text" class="form-control" [multiple]="true"
-                (selectionChange)="casteSelectionChanged($event)" [formControl]="searchCaste" #multiSelect
-                [(ngModel)]="castePreferences">
-                <mat-option>
-                  <ngx-mat-select-search noEntriesFoundLabel="No Castes Found" placeholderLabel="Search Castes..."
-                    [formControl]="searchCasteText">
-                    <mat-icon ngxMatSelectSearchClear>close</mat-icon>
-                  </ngx-mat-select-search>
-                </mat-option>
-                <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
-                  {{ name }}
-                </mat-option>
-              </mat-select>
-            </div>
-          </div>
-          <div class="row information">
-            <div class="col-10" style="margin-top: 10px;">
-              <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">No Caste Bar
-              </mat-checkbox>
-            </div>
-          </div>
-          <!-- <div style="text-align: center; width: 100%;">
+          </div> -->
+              <div class="row information">
+                <div class="col-10">
+                  <h6>Caste</h6>
+                  <mat-select type="text" class="form-control" [multiple]="true"
+                    (selectionChange)="casteSelectionChanged($event)" [formControl]="searchCaste" #multiSelect
+                    [(ngModel)]="castePreferences">
+                    <mat-option>
+                      <ngx-mat-select-search noEntriesFoundLabel="No Castes Found" placeholderLabel="Search Castes..."
+                        [formControl]="searchCasteText">
+                        <mat-icon ngxMatSelectSearchClear>close</mat-icon>
+                      </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
+                      {{ name }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="row information">
+                <div class="col-10" style="margin-top: 10px;">
+                  <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">No Caste Bar
+                  </mat-checkbox>
+                </div>
+              </div>
+              <!-- <div style="text-align: center; width: 100%;">
             <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
                               color: white;
                               width:100%;
@@ -295,26 +304,28 @@
                               font-weight: bold;
                               " (click)="onSubmitPreferences()">SAVE</button>
           </div> -->
-          <!-- <button class="mat-elevation-z5 btn-success" mat-button [hidden]="editIndexPrefs != 0"
+              <!-- <button class="mat-elevation-z5 btn-success" mat-button [hidden]="editIndexPrefs != 0"
             (click)="onSubmitPreferences()">
             SAVE
           </button> -->
-        </div>
-      </div>
-      <div class="row infoRow" style="margin:10px">
-        <div style="text-align: center; width: 100%;">
-          <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
+            </div>
+          </div>
+          <div class="row infoRow" style="margin:10px;position:absolute; top:-1px; right:-3px;z-index:9999999999">
+            <div style="text-align: center; width: 100%;">
+              <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
                           color: white;
                           width:100%;
-                          padding: 5px 40px;
-                          margin-top:10px;
-                          margin-bottom:10px;
-                          font-size: 1rem;
+                          /* padding: 5px 40px; */
+                          margin-top:2px;
+                          margin-bottom:2px;
+                          font-size: 0.75rem;
                           font-weight: bold;
                           " (click)="onSubmitPreferences()">SAVE</button>
-        </div>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
-  <!-- </mat-expansion-panel> -->
-</main>
+      <!-- </mat-expansion-panel> -->
+    </main>
+  </mat-sidenav>
+</mat-sidenav-container>

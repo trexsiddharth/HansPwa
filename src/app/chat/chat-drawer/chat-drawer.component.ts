@@ -11,14 +11,17 @@ import { timeout, retry, catchError, takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
+import { trigger, transition, animate, style } from '@angular/animations'
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-chat-drawer',
   templateUrl: './chat-drawer.component.html',
-  styleUrls: ['./chat-drawer.component.css']
+  styleUrls: ['./chat-drawer.component.css'],
 })
 export class ChatDrawerComponent implements OnInit {
   @Input() drawerReference: MatSidenav;
+  prefsRef: MatSidenav;
   username;
   userpic = '../../../assets/logo_192.png';
   userId;
@@ -268,9 +271,10 @@ export class ChatDrawerComponent implements OnInit {
   getCallBack() {
     this.router.navigateByUrl('chat/getcallback/');
   }
-  editIndexPrefs = -1;
-  setEditIndexPrefs(index: number) {
-    this.editIndexPrefs = index;
+
+  setEditIndexPrefs() {
+    //this.prefsRef.toggle();
+    //document.querySelector('#sidenav').toggle();
     this.itemService.setChangePrefsClicked(true);
   }
   castePreferences: string[] = [];
@@ -386,7 +390,7 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
   onSubmitPreferences() {
-    this.editIndexPrefs = -1;
+    //this.editIndexPrefs = -1;
     console.log('preference Data to update');
     console.log(this.preferenceProfileData);
     console.log(this.preferenceProfileData.religion);

@@ -29,7 +29,7 @@
                 (change)="previewBack(backfile.files, index + 1)" />
               <!-- <img (click)="changeProfileImage(index)" id="imgProfile" -->
               <img id="imgProfile"
-                style="width: 100%!important; height:23vh;background-color: lightblue;border-radius:15px ;object-fit:cover;"
+                style="min-width: 100%!important; height:23vh;background-color: lightblue;border-radius:15px ;object-fit:cover;"
                 (error)="onProfileLoadError(personalProfileData.gender, i)" [src]="
                   getProfilesPhoto(
                     personalProfileData.carousel,
