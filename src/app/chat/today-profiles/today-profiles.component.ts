@@ -358,7 +358,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       if (document.getElementById('profilePic')) {
         document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
       }
-      this.startRotationAnimation();
+      setTimeout(() => {
+        this.startRotationAnimation();
+      }, 200);
       this.imageIsLoadingSubject$.next(true);
     }
     this.chatRequest(reply).subscribe(
@@ -696,6 +698,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
     if (carous === null || carous === 'null' || carous === '') {
       if (photo === null) {
+        setTimeout(() => {
+          this.imageIsLoadingSubject$.next(false);
+        }, 2000);
         if (gen === 'Male') {
           return '../../assets/profile.png';
         } else {
@@ -713,6 +718,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   onErrorProfilePhoto(gender, index) {
     this.spinner.hide();
+    this.imageIsLoadingSubject$.next(false);
     const imageSrc = document.querySelectorAll('#profilePic')[index];
     if (gender === 'Male') {
       imageSrc.setAttribute('src', '../../assets/male_pic.png');

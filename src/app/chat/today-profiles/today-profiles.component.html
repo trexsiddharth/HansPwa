@@ -11,8 +11,8 @@
         justify-content: center;
         top: 0;
         margin-top: 50%;">
-        <img style="position: absolute;" src="../../../assets/logo_72.png" alt="hans logo">
-            <mat-spinner></mat-spinner>
+        <img style="position: absolute;width: 40px;" src="../../../assets/logo_72.png" alt="hans logo">
+            <mat-spinner [diameter]="60"></mat-spinner>
         </div>
         <ngb-carousel style="outline: none;">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
