@@ -38,6 +38,13 @@
   background:rgba(34, 34, 34, 0.774)!important;
   color:white!important;
 }
+::ng-deep .mat-chip-list-wrapper{
+  margin:5px 27px 5px 27px!important; 
+}
+::ng-deep .mat-chip.mat-standard-chip {
+  background-color: #34b7f1!important;
+  color: #ffffff!important;
+}
 main{
     background-color: white;
     height: auto;

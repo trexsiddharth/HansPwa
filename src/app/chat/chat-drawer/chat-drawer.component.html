@@ -275,6 +275,7 @@
                   <mat-select type="text" class="form-control" [multiple]="true"
                     (selectionChange)="casteSelectionChanged($event)" [formControl]="searchCaste" #multiSelect
                     [(ngModel)]="castePreferences">
+
                     <mat-option>
                       <ngx-mat-select-search noEntriesFoundLabel="No Castes Found" placeholderLabel="Search Castes..."
                         [formControl]="searchCasteText">
@@ -285,6 +286,19 @@
                       {{ name }}
                     </mat-option>
                   </mat-select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="">
+                  <mat-select-trigger>
+                    <mat-chip-list>
+                      <mat-chip *ngFor="let caste of castePreferences" [removable]="true"
+                        (removed)="onCasteRemoved(caste)">
+                        {{caste}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </mat-select-trigger>
                 </div>
               </div>
               <div class="row information">

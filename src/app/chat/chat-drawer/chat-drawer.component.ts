@@ -284,6 +284,18 @@ export class ChatDrawerComponent implements OnInit {
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
   }
+  onCasteRemoved(topping: string) {
+    const toppings = this.castePreferences as string[];
+    this.removeFirst(toppings, topping);
+    this.searchCaste.setValue(toppings); // To trigger change detection
+  }
+
+  private removeFirst<T>(array: T[], toRemove: T): void {
+    const index = array.indexOf(toRemove);
+    if (index !== -1) {
+      array.splice(index, 1);
+    }
+  }
   checkAllCastePref(event) {
     console.log(event);
     if (event.checked) {

@@ -6,7 +6,7 @@
 }
 
 .drawerSettings{
-  width: 27%;
+  width: 29%;
   overflow-x: hidden;
   }
 
@@ -369,7 +369,7 @@ display: none !important;
 
     @media (max-width: 1024px) {
       .drawerSettings{
-        width: 74vw;
+        width: 78vw;
         overflow-x: hidden;
         }
       .mainBack {
