@@ -2,47 +2,47 @@
     <div id="profileImageDiv">
         <ngb-carousel style="outline: none;">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
-                    <img id="profilePic" 
-                    class="img-fluid"
+                <img id="profilePic" class="img-fluid"
                     (click)="openImageModal(item.carousel,item.photo,item.name,index)"
-                     [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" 
-                     (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
+                    [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)"
+                    (error)="onErrorProfilePhoto(item.gender, index)" alt={{item.name}}>
             </ng-template>
-          </ngb-carousel>
+        </ngb-carousel>
 
 
-    <!-- // image info  -->
+        <!-- // image info  -->
 
-    <div id="imageContent">
-        <div class="full-width">
-          <div style="width: 80%;">
-            <span style="font-weight: bold;font-size: 18px;">
-                {{toTitleCase(item.name)}}
-            </span><br>
-            <span style="font-size: 14px;">
-                {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? item.city : '' : item.city ? item.city : '' : ''}} {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? '|' : '' : '|' : ''}} {{setHeight(item.height)}}
-            </span> <br>
-            <span style="font-size: 14px;">
-                {{setIncome(item.monthly_income)}} Lakh per year
-            </span>
-          </div>
-          <div style="position: absolute;
+        <div id="imageContent">
+            <div class="full-width">
+                <div style="width: 80%;">
+                    <span style="font-weight: bold;font-size: 18px;">
+                        {{toTitleCase(item.name)}}
+                    </span><br>
+                    <span style="font-size: 14px;">{{item.religion}} {{item.religion ? '|' : ''}} {{item.caste}}
+                    </span><br>
+                    <span style="font-size: 14px;">
+                        {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? item.city : '' : item.city ? item.city : '' : ''}}
+                        {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? '|' : '' : '|' : ''}}
+                        {{setHeight(item.height)}}
+                    </span> <br>
+                    <span style="font-size: 14px;">
+                        {{setIncome(item.monthly_income)}} Lakh per year
+                    </span>
+                </div>
+                <div style="position: absolute;
            top: -10px;right: 10px;
            border-radius: 10px;
            padding: 0px 10px;
-           background-color: #FE39C7;" >{{setAge(item.birth_date)}}
-          </div>
+           background-color: #FE39C7;">{{setAge(item.birth_date)}}
+                </div>
 
-          <div style="position: absolute;
+                <div style="position: absolute;
           top: 25px;right: 25px;">
-              <img width="20px" src="../../../assets/tabs-icons/shield.svg"
-               alt="verified profile">
-          </div>
-        </div>
-          
-          <div class="down-arrow"
-          (click)="scrollDown()"
-           style="background-color: #50ed9d;
+                    <img width="20px" src="../../../assets/tabs-icons/shield.svg" alt="verified profile">
+                </div>
+            </div>
+
+            <div class="down-arrow" (click)="scrollDown()" style="background-color: #50ed9d;
           float: right;display: flex;
           align-items: center;
           position: fixed;
@@ -51,11 +51,11 @@
           margin-top: 65vh;
           box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
           justify-content: center;">
-        <img width="40px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
-      </div>
-      </div>
+                <img width="40px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+            </div>
+        </div>
 
-          
+
     </div>
 
     <section id="content" style="
@@ -72,11 +72,10 @@
 
         <div id="answerButtons">
             <div class="t-c" style="margin-top: 10px;">
-                <button 
-                (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="color: green;
-                background: #58D1FD;"
-                  aria-label="Example icon-button with a heart icon" >
-                  <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
+                <button (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;
+                background: #58D1FD;" aria-label="Example icon-button with a heart icon">
+                    <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
+                        alt="कांटेक्ट करें">
                 </button><br>
                 <!-- <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.contact}}
@@ -84,24 +83,22 @@
             </div>
 
             <div class="t-c">
-                <button 
-                (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtonsCenter" mat-fab style="color: red;
+                <button (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtonsCenter" mat-fab style="color: red;
                 background: #D313AE;
-                margin-bottom: 10px;"
-                  aria-label="Example icon-button with a heart icon" >
-                  <img class="buttonImageCenter animateButtonImageCenter" src="../../../assets/heartwhite.svg" alt="पसंद है">
+                margin-bottom: 10px;" aria-label="Example icon-button with a heart icon">
+                    <img class="buttonImageCenter animateButtonImageCenter" src="../../../assets/heartwhite.svg"
+                        alt="पसंद है">
                 </button><br>
                 <!-- <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.shortlist}}
                 </span> -->
             </div>
 
-            
+
             <div class="t-c blur" style="margin-top: 10px;">
-                <button 
-                (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
+                <button (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
                 background: #C8C8C8;">
-                  <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                    <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
                 </button><br>
                 <!-- <span style="color: #737373;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.reject}}
@@ -110,40 +107,42 @@
 
         </div>
 
-               <div class="row field">
-                <div class="col-6">
-                    <img class="titleImage" src="../../../assets/tabs-icons/shield.svg" alt="verified at">
-                    <span class="title">{{languageService.profileLang.verifiedAt}}</span>
-                </div>
-                <div class="col-6">
-                    <span class="title">{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
-                </div>
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/tabs-icons/shield.svg" alt="verified at">
+                <span class="title">{{languageService.profileLang.verifiedAt}}</span>
             </div>
+            <div class="col-6">
+                <span class="title">{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
+            </div>
+        </div>
 
-            <div class="row field">
-                <div class="col-6">
-                    <img class="titleImage" src="../../../assets/tabs-icons/personal.svg" alt="managedBy">
-                    <span class="title">
-                        {{languageService.profileLang.managedBy}}
-                    </span>
-                </div>
-                <div class="col-6">
-                    <span class="title">
-                        {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}
-                    </span>
-                </div>
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/tabs-icons/personal.svg" alt="managedBy">
+                <span class="title">
+                    {{languageService.profileLang.managedBy}}
+                </span>
             </div>
+            <div class="col-6">
+                <span class="title">
+                    {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}
+                </span>
+            </div>
+        </div>
 
         <div id="aboutSection">
             <u class="titleHeading">
                 {{languageService.profileLang.about}}
             </u>
             <p class="title" style="margin-left:0px">
-                <span style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span> {{item.about ? item.about.length < 30 ? toTitleCase(setAbout()) : toTitleCase(item.about) : toTitleCase(setAbout())}}
+                <span
+                    style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span>
+                {{item.about ? item.about.length < 30 ? toTitleCase(setAbout()) : toTitleCase(item.about) : toTitleCase(setAbout())}}
             </p>
         </div>
 
-<!-- // personal details  -->
+        <!-- // personal details  -->
 
         <div id="personalSection">
             <div style="display: flex;
@@ -349,7 +348,5 @@
     <img class="actionAnimation" *ngIf="lastAction==='NO'" src="../../../assets/closewhite.svg" alt="नापसंद है">
 </div> -->
 
-<app-today-message [messageData]="itemMessage"
- [button]="button"
-  *ngIf="type == 'message'">
+<app-today-message [messageData]="itemMessage" [button]="button" *ngIf="type == 'message'">
 </app-today-message>
