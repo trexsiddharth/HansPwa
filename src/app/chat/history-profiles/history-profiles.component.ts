@@ -39,6 +39,7 @@ import { ChatServiceService } from 'src/app/chat-service.service';
 import { LanguageService } from 'src/app/language.service';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 import { AnalyticsService } from 'src/app/analytics.service';
+import { element } from 'protractor';
 
 
 
@@ -86,20 +87,20 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   section;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              private dialog: MatDialog,
-              public notification: NotificationsService,
-              public itemService: FindOpenHistoryProfileService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private browserLocation: Location,
-              private analyticsService: AnalyticsService,
-              private chatService: ChatServiceService,
-              public languageService: LanguageService,
-              private breakPointObserver: BreakpointObserver,
-              private subscriptionservice: SubscriptionserviceService) { }
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog,
+    public notification: NotificationsService,
+    public itemService: FindOpenHistoryProfileService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private browserLocation: Location,
+    private analyticsService: AnalyticsService,
+    private chatService: ChatServiceService,
+    public languageService: LanguageService,
+    private breakPointObserver: BreakpointObserver,
+    private subscriptionservice: SubscriptionserviceService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.itemService.getPhotoStatus() && this.isNotPaid()) {
       this.subscriptionservice.loadRazorPayScript();
       const headers = new HttpHeaders({
@@ -138,6 +139,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem('contactedProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('contactedProfiles'));
           console.log(this.profile);
+          await this.scrollOnBack();
+          this.scrollFlag = false;
         }
         break;
       case 'interestShown':
@@ -145,6 +148,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem('sortListProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('sortListProfiles'));
           console.log(this.profile);
+          await this.scrollOnBack();
+          this.scrollFlag = false;
         }
         break;
       case 'interestReceived':
@@ -152,6 +157,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem('interestReceived')) {
           this.profile = JSON.parse(localStorage.getItem('interestReceived'));
           console.log(this.profile);
+          await this.scrollOnBack();
+          this.scrollFlag = false;
         }
         break;
       case 'rejected':
@@ -159,6 +166,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem('rejectedProfiles')) {
           this.profile = JSON.parse(localStorage.getItem('rejectedProfiles'));
           console.log(this.profile);
+          await this.scrollOnBack();
+          this.scrollFlag = false;
         }
         break;
       case 'mutual':
@@ -177,6 +186,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       localStorage.setItem('stage', null);
     }
   }
+
   ngAfterViewInit(): void {
     switch (this.type) {
       case 'contacted':
@@ -204,17 +214,40 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
+  scrollOnBack() {
+    if (localStorage.getItem('index')) {
+      return new Promise((res) => {
+        setTimeout(() => {
+          const scrollItem = document.getElementById(localStorage.getItem('index'));
+          if (!scrollItem) {
+            return;
+          }
+          scrollItem.scrollIntoView();
+          this.scrollFlag = true;
+          localStorage.removeItem('index');
+          res('done');
+        }, 1000);
+      });
+    }
+  }
   goBack() {
     this.browserLocation.back();
+    // console.log("sonorvnerun")
+    // if (localStorage.getItem('index')) {
+    //   document.getElementById(localStorage.getItem('index')).scrollIntoView({ behavior: 'smooth' });
+    //   localStorage.removeItem('index');
+    // }
   }
 
   isNotPaid() {
-    if (this.itemService.getCredits() && this.itemService.getCredits().toString() === '0')
+    if (this.itemService.getCredits() && this.itemService.getCredits().toString() === '0') {
       return true;
-    else
+    }
+    else {
       return false
+    }
   }
-  // user photo upload 
+  // user photo upload
   changeProfileImage() {
     document.querySelector<HTMLInputElement>('#backfile').click();
   }
@@ -389,7 +422,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   openProfileDialog(item: any, ind: any) {
-
+    //setting the index in local strorage to use in scrollIntoView later
+    localStorage.setItem('index', String(ind));
+    if (this.wholeData) {
+      localStorage.setItem('page_url', JSON.stringify(this.wholeData));
+    }
+    this.updateLocalList();
     if (this.type === 'interestReceived') {
       localStorage.setItem('stage', '2');
     } else if (this.type === 'interestShown') {
@@ -435,16 +473,20 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     return this.http.post<any>('https://partner.hansmatrimony.com/api/' + link, historyData).subscribe(
       async (data: any) => {
         console.log(data);
-        this.wholeData = data;
+        if (!localStorage.getItem('index')) {
+          this.wholeData = data;
+        }
+
         if (this.itemService.getItem()) {
           this.openContactedProfile(data.data);
         }
 
         if (localStorage.getItem(link)) {
           // update new data only
-          if (JSON.stringify(this.profile) !== JSON.stringify(data.data)) {
+          if (JSON.stringify(this.profile) !== JSON.stringify(data.data) && !localStorage.getItem('index')) {
             await this.addRemoveNewData(data.data);
           }
+
         } else {
           this.profile = data.data;
           localStorage.setItem(link, JSON.stringify(data.data));
@@ -516,9 +558,10 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
 
       // finding and removing the old element from the locally stored list
-
+      let removableProfiles = [];
       this.profile.forEach(
         (item, index) => {
+          console.log(item.profile.id, index);
           const removeProfile = (data as any[]).find(
             element => {
               if (item.family) {
@@ -529,10 +572,23 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
             }
           );
           if (!removeProfile) {
-            this.profile.splice(index, 1);
+            removableProfiles.push(this.profile[index]);
           }
         }
       );
+        // removing all the removable profiles from the list
+      if (removableProfiles.length > 0) {
+        removableProfiles.forEach(element => {
+          const profileIndex = this.profile.findIndex(item => {
+            if (item.family) {
+              return item.profile.id === element.profile.id;
+            } else {
+              return item.profile.identity_number === element.profile.identity_number;
+            }
+          });
+          this.profile.splice(profileIndex, 1);
+        });
+      }
 
       console.log(this.profile);
       this.updateLocalList();
@@ -1018,6 +1074,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     if (!this.scrollFlag) {
       this.scrollFlag = true;
 
+      if (localStorage.getItem('page_url')) {
+        this.wholeData = JSON.parse(localStorage.getItem('page_url'));
+        localStorage.removeItem('page_url');
+      }
+
       if (this.wholeData.next_page_url) {
         this.smallSpinner = true;
 
@@ -1041,17 +1102,18 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
             });
         }
         // tslint:disable-next-line: max-line-length
-        this.http.post<any>('https://partner.hansmatrimony.com/api/' + this.scrollLink + this.wholeData.next_page_url, historyData).subscribe(
+        this.http.post<any>(`https://partner.hansmatrimony.com/api/${this.scrollLink}${this.wholeData.next_page_url}`, historyData).subscribe(
           (data: any) => {
             console.log(data);
             this.wholeData = data;
+            // if(localStorage.getItem('page_url'))
+            //   localStorage.removeItem('page_url');
             const newData = Object.values(data.data);
             console.log(newData);
             this.profile = this.profile.concat(newData);
             console.log(this.profile);
             this.scrollFlag = false;
             this.smallSpinner = false;
-
           },
           (error: any) => {
             this.spinner.hide();
@@ -1167,11 +1229,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     formData.append('mobile', localStorage.getItem('mobile_number'));
     this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
       (data: any) => {
-       console.log(data);
-       this.analyticsService.googleAnalytics('Subscription Seen');
-       this.analyticsService.facebookAnalytics('InitiateCheckout');
+        console.log(data);
+        this.analyticsService.googleAnalytics('Subscription Seen');
+        this.analyticsService.facebookAnalytics('InitiateCheckout');
       }
     );
   }
 
 }
+

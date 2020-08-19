@@ -451,7 +451,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit {
             // locally storing the new profile
             localStorage.setItem('todayProfile', JSON.stringify(data));
           }
-          this.item.working_city = 'na';
 
           // data.first_time = 0 -> when user comes for the first time on a day
           // data.first_time = 1 -> it gets 1 once he has seen first profile

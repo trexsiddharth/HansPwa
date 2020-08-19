@@ -157,7 +157,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       birth_month: ['January', Validators.compose([Validators.required])],
       birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
-      // Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
+      // Weight: [''],
       MaritalStatus: ['', Validators.compose([Validators.required])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
@@ -524,7 +524,7 @@ async ngOnInit() {
           birth_month: ['January', Validators.compose([Validators.required])],
           birth_year: ['1980', Validators.compose([Validators.required])],
           Height: ['', Validators.compose([Validators.required])],
-          // Weight: ['', Validators.compose([Validators.required])],
+          Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
           MaritalStatus: ['', Validators.compose([Validators.required])],
           Religion: ['', Validators.compose([Validators.required])],
           Castes: ['', Validators.compose([Validators.required])],
@@ -582,7 +582,9 @@ async ngOnInit() {
               }
               firststepdata.append('gender', this.PageOne.value.gender);
               firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
-              // firststepdata.append('weight', this.PageOne.value.Weight);
+              if (this.PageOne.value.Weight) {
+              firststepdata.append('weight', this.PageOne.value.Weight);
+              }
               firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
 
               firststepdata.append('religion', this.PageOne.value.Religion);
@@ -870,7 +872,7 @@ getProfile() {
     this.userProfile.gender = profileData.profile.gender;
     this.userProfile.dob = profileData.profile.birth_date;
     this.userProfile.height = profileData.profile.height;
-    // this.userProfile.weight = profileData.profile.weight;
+    this.userProfile.weight = profileData.profile.weight;
     this.userProfile.martialStatus = profileData.profile.marital_status;
     this.userProfile.annualIncome = profileData.profile.monthly_income;
     if (profileData.family.religion) {
@@ -918,7 +920,7 @@ getProfile() {
       birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1]) : '',
       birth_year: this.userProfile.dob ? this.years[this.years.indexOf(this.userProfile.dob.toString().split('-')[0])] : '',
       Height: this.userProfile.height ? this.Heights1.indexOf(this.userProfile.height) : '',
-      // Weight: this.userProfile.weight,
+      Weight: this.userProfile.weight,
       MaritalStatus: this.userProfile.martialStatus,
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,

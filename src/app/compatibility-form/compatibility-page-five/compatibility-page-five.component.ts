@@ -333,6 +333,8 @@ export class CompatibilityPageFiveComponent implements OnInit {
           return this.ngxNotificationService.error('Enter D.O.B');
         } else if (userProfile.height === null  || userProfile.height === '') {
           return this.ngxNotificationService.error('Select Height');
+        }  else if (userProfile.weight === null  || userProfile.weight === '') {
+          return this.ngxNotificationService.error('Enter Weight');
         } else if (userProfile.martialStatus === null  || userProfile.martialStatus === '') {
           return this.ngxNotificationService.error('Select Marital Status');
         } else if (userProfile.annualIncome === null  || userProfile.annualIncome === '') {
