@@ -1,11 +1,26 @@
 <main id="main" *ngIf="item && type == 'profile'">
     <div id="profileImageDiv">
+        <div class="full-width" 
+        *ngIf="imageIsLoading$ | async"
+        style="position: absolute;
+        z-index: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        margin-top: 50%;">
+        <img style="position: absolute;" src="../../../assets/logo_72.png" alt="hans logo">
+            <mat-spinner></mat-spinner>
+        </div>
         <ngb-carousel style="outline: none;">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
                     <img id="profilePic" 
                     class="img-fluid"
                     (click)="openImageModal(item.carousel,item.photo,item.name,index)"
                      [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" 
+                     (load)="onLoadingImage(index)"
                      (error)="onErrorProfilePhoto(item.gender, index)"  alt={{item.name}}>
             </ng-template>
           </ngb-carousel>
@@ -39,6 +54,7 @@
                alt="verified profile">
           </div>
         </div>
+
           
           <div class="down-arrow"
           (click)="scrollDown()"
