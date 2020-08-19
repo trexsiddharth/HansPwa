@@ -55,7 +55,7 @@ export class PhoneNumberScreenComponent implements OnInit {
     this.spinner.hide();
 
     // open true caller for login if installed
-    this.callTruecaller();
+    // this.callTruecaller();
   }
 
 
