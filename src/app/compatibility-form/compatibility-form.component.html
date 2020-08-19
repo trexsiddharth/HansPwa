@@ -160,7 +160,7 @@
                         
                         </mat-form-field>
                     </div>
-                            <div class="col-12">
+                            <div class="col-12" *ngIf="!fourPageService.getUserThrough()">
                                 <mat-form-field class="full-width fieldFit" appearance="standard">
                                   <mat-label >Height</mat-label>
                                   <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height formControlName="Height" required name="Height">
@@ -171,13 +171,24 @@
                                 </mat-form-field>
                               </div>
 
-                              <!-- <div class="col-6">
+                            <div class="col-6" *ngIf="fourPageService.getUserThrough()">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                  <mat-label >Height</mat-label>
+                                  <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height formControlName="Height" required name="Height">
+                                      <mat-option *ngFor="let option of Heights;let i = index" [value]="i">
+                                        {{option}}
+                                      </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-6" *ngIf="fourPageService.getUserThrough()">
                                 <mat-form-field class="full-width fieldFit" appearance="standard" >
                                   <mat-label >Weight</mat-label>
                                   <input type="number" (change)="inputFieldChanged('Weight')" matInput formControlName="Weight" required name="Weight">
                                   <span matSuffix>Kg &nbsp;</span>
                                 </mat-form-field>
-                              </div> -->
+                              </div>
   
                           <div class="col-md-12">
                        

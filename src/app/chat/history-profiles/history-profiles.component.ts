@@ -222,9 +222,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           if (!scrollItem) {
             return;
           }
-          scrollItem.scrollIntoView({
-            behavior: 'smooth'
-          });
+          scrollItem.scrollIntoView();
           this.scrollFlag = true;
           localStorage.removeItem('index');
           res('done');
