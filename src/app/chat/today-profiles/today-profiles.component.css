@@ -2,8 +2,18 @@ main{
     padding-bottom: 300px;
     overflow-y: auto;
 }
+
 .rotationAnimation {
-    animation: skewAnimation 1s ease-out 1;
+    animation: skewAnimation 1s linear infinite alternate;
+}
+.pinkBack {
+    background: rgba(211,19,174,0.7);
+}
+.greyBack {
+    background: rgba(200,200,200,0.7);
+}
+.blueBack {
+    background: rgba(88,209,253,0.7);
 }
 #profileImageDiv{
     margin: 20px;

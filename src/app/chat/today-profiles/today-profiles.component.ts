@@ -4,7 +4,7 @@ import {
   NgxNotificationService
 } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
-import { timeout, retry, catchError } from 'rxjs/operators';
+import { timeout, retry, catchError, shareReplay } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { NotificationsService } from '../../notifications.service';
 import { ChatServiceService } from '../../chat-service.service';
@@ -53,8 +53,11 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   // last action
   lastAction;
   showActionAnimation = false;
-  imageIsLoadingSubject$ = new Subject<boolean>();
-  imageIsLoading$: Observable<boolean> = this.imageIsLoadingSubject$.asObservable();
+
+  profileIsLoadingSubject = new Subject<string>();
+  profileIsLoading$: Observable<string> = this.profileIsLoadingSubject.asObservable().pipe(
+    shareReplay()
+  );
 
   constructor(private http: HttpClient,
               private spinner: NgxSpinnerService,
@@ -214,12 +217,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnDestroy(): void {
-    this.imageIsLoadingSubject$.next();
-    this.imageIsLoadingSubject$.complete();
   }
 
   private setProfileLocally() {
-    this.imageIsLoadingSubject$.next(true);
     this.type = 'profile';
     const data = JSON.parse(localStorage.getItem('todayProfile'));
     this.item = data.apiwha_autoreply;
@@ -284,14 +284,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
 
-  startRotationAnimation() {
-    const element = document.querySelector('#main');
-    element.classList.add('rotationAnimation');
-    setTimeout(() => {
-      element.classList.remove('rotationAnimation');
-    }, 2000);
-  }
-
   analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
@@ -347,7 +339,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
   getData(reply) {
     // shortlist count
-
     console.log(reply);
     this.setCount(reply);
     const previousItem = this.item;
@@ -357,11 +348,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     if (reply !== 'SHOW') {
       if (document.getElementById('profilePic')) {
         document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
+        this.profileIsLoadingSubject.next(reply);
       }
-      setTimeout(() => {
-        this.startRotationAnimation();
-      }, 200);
-      this.imageIsLoadingSubject$.next(true);
     }
     this.chatRequest(reply).subscribe(
       data => {
@@ -460,7 +448,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               }
             }, err => {
               console.log(err);
-              this.imageIsLoadingSubject$.next(false);
             }
           );
           return;
@@ -468,7 +455,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
         // if data.type is profile or message
         if (data.type === 'profile') {
-
+          
           this.type = 'profile';
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             this.item = data.apiwha_autoreply;
@@ -504,7 +491,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           localStorage.setItem('todayProfile', '');
           this.setMessageText(data.apiwha_autoreply);
           this.spinner.hide();
-          this.imageIsLoadingSubject$.next(false);
+           // stop user response animation
+          this.profileIsLoadingSubject.next(null);
 
           // if profiles for the day are over
           /*
@@ -525,14 +513,14 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         switch (reply) {
           case 'YES':
             if (this.points > 0) {
-              this.ngxNotificationService.success('Profile Contacted Successfully');
+              // this.ngxNotificationService.success('Profile Contacted Successfully');
             }
             break;
           case 'SHORTLIST':
-            this.ngxNotificationService.success('Profile Shortlisted Successfully');
+            // this.ngxNotificationService.success('Profile Shortlisted Successfully');
             break;
           case 'NO':
-            this.ngxNotificationService.success('Profile Rejected Successfully');
+            // this.ngxNotificationService.success('Profile Rejected Successfully');
             break;
 
           default:
@@ -554,7 +542,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }, err => {
         console.log(err);
         this.spinner.hide();
-        this.imageIsLoadingSubject$.next(false);
+        // stop user response animation
+        this.profileIsLoadingSubject.next(null);
         this.ngxNotificationService.error('Something Went Wrong');
         this.languageService.setProfileLanguage();
       }
@@ -699,7 +688,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     if (carous === null || carous === 'null' || carous === '') {
       if (photo === null) {
         setTimeout(() => {
-          this.imageIsLoadingSubject$.next(false);
+          // stop user response animation
+        this.profileIsLoadingSubject.next(null);
         }, 2000);
         if (gen === 'Male') {
           return '../../assets/profile.png';
@@ -718,7 +708,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   onErrorProfilePhoto(gender, index) {
     this.spinner.hide();
-    this.imageIsLoadingSubject$.next(false);
+    // stop user response animation
+    this.profileIsLoadingSubject.next(null);
     const imageSrc = document.querySelectorAll('#profilePic')[index];
     if (gender === 'Male') {
       imageSrc.setAttribute('src', '../../assets/male_pic.png');
@@ -749,7 +740,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       console.log('Image is loading');
       if (imageElement.complete) {
         console.log('Image Loaded Completely');
-        this.imageIsLoadingSubject$.next(false);
+        // stop user response animation
+        this.profileIsLoadingSubject.next(null);
       }
     }
   }

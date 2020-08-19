@@ -1,19 +1,25 @@
 <main id="main" *ngIf="item && type == 'profile'">
+
+    <div class="full-width" 
+    *ngIf="profileIsLoading$ | async"
+    [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',
+    'greyBack': (profileIsLoading$ | async) === 'NO',
+    'blueBack': (profileIsLoading$ | async) === 'YES' }"
+    style="position: absolute;
+    z-index: 1;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 0;">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'SHORTLIST'" src="../../../assets/heartwhite.svg" alt="hans logo">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'NO'" src="../../../assets/closewhite.svg" alt="hans logo">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'YES'" src="../../../assets/phone_white.svg" alt="hans logo">
+    </div>
+
     <div id="profileImageDiv">
-        <div class="full-width" 
-        *ngIf="imageIsLoading$ | async"
-        style="position: absolute;
-        z-index: 1;
-        text-align: center;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        top: 0;
-        margin-top: 50%;">
-        <img style="position: absolute;width: 40px;" src="../../../assets/logo_72.png" alt="hans logo">
-            <mat-spinner [diameter]="60"></mat-spinner>
-        </div>
         <ngb-carousel style="outline: none;">
             <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
                     <img id="profilePic" 
@@ -86,7 +92,7 @@
 
         <!-- // buttons -->
 
-        <div id="answerButtons">
+        <div id="answerButtons" *ngIf="!(profileIsLoading$ | async)">
             <div class="t-c" style="margin-top: 10px;">
                 <button 
                 (click)="getNextMessageOrProfile('YES')"   class="setButtons" mat-fab style="color: green;
