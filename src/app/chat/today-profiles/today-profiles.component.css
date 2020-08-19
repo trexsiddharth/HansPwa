@@ -2,6 +2,9 @@ main{
     padding-bottom: 300px;
     overflow-y: auto;
 }
+.rotationAnimation {
+    animation: skewAnimation 2s ease-out 1;
+}
 #profileImageDiv{
     margin: 20px;
     position: relative;

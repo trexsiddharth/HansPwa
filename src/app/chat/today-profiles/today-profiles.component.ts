@@ -284,6 +284,14 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
 
+  startRotationAnimation() {
+    const element = document.querySelector('#main');
+    element.classList.add('rotationAnimation');
+    setTimeout(() => {
+      element.classList.remove('rotationAnimation');
+    }, 2000);
+  }
+
   analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
@@ -350,6 +358,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       if (document.getElementById('profilePic')) {
         document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
       }
+      this.startRotationAnimation();
       this.imageIsLoadingSubject$.next(true);
     }
     this.chatRequest(reply).subscribe(
