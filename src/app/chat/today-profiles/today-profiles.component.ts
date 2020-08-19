@@ -347,6 +347,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.spinner.show();
     }
     if (reply !== 'SHOW') {
+      if (document.getElementById('profilePic')) {
+        document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
+      }
       this.imageIsLoadingSubject$.next(true);
     }
     this.chatRequest(reply).subscribe(
