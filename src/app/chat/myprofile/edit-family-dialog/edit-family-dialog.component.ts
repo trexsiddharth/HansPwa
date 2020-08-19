@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { NgxNotificationService } from 'ngx-kc-notification';
+import { LanguageService } from 'src/app/language.service';
 
 @Component({
   selector: 'app-edit-family-dialog',
@@ -17,19 +18,35 @@ export class EditFamilyDialogComponent implements OnInit {
   FamilyType: string[] = ['Joint', 'Nuclear'];
   Count: any[] = ['None', 0, 1, 2, 3, 4, 5, 6, 7, 8];
   HouseType: string[] = ['Owned', 'Rented', 'Leased'];
-  @ViewChild('familyForm', {static: false}) familyForm: NgForm;
+  @ViewChild('familyForm', { static: false }) familyForm: NgForm;
   city;
   cityLocation;
 
+  autoComplete = {
+    strictBounds: false,
+    type: 'geocode',
+    fields: ['name']
+  };
 
   constructor(private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              public dialogRef: MatDialogRef<EditFamilyDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
+    public languageService: LanguageService,
+    private ngxNotificationService: NgxNotificationService,
+    public dialogRef: MatDialogRef<EditFamilyDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.data = data;
   }
 
   ngOnInit() {
     this.familyData = this.data.familyDetails;
+  }
+  goBack() {
+    this.dialogRef.close();
+  }
+  placeChangedFamily() {
+    const place: HTMLInputElement = document.querySelector('#familyLivingIn');
+    setTimeout(() => {
+      console.log(place.value);
+      this.familyData.city = place.value;
+    }, 1000);
   }
 
   onSubmit() {
@@ -71,10 +88,10 @@ export class EditFamilyDialogComponent implements OnInit {
     this.familyData.city = event.formatted_address;
     console.log('address of family', this.city);
 
-}
-onLocationSelected(e) {
+  }
+  onLocationSelected(e) {
     this.cityLocation = e;
     console.log('location of family', e);
-}
+  }
 
 }

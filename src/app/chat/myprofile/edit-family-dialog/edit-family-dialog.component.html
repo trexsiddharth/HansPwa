@@ -1,123 +1,135 @@
-<mat-dialog-content>
+<main>
     <form (ngSubmit)="onSubmit()" #familyForm="ngForm">
-        <div class="row" class="t-c" style="margin-top: 1rem;">
-            <h5 style="margin: auto 20px;
-             color: #58d1fd;
-            font-weight: bold;
-             font-size: 1.5rem;">{{'फॅमिली'}}</h5>
-        </div>
-        <hr>
-        
-        <div class="row" style="margin: 10px 10px;">
-            <div class="col-12">
-              <h6 style="display: inline-block">Father's Occupation : </h6>
-              <select type="text" class="form-control" name="father_occupation" [(ngModel)]="familyData.occupation" required>
-                <option *ngFor="let item of Occupation" [value]="item">{{item}}</option>
-              </select>
+        <div class="row toolBar" style="width: 100%!important;margin:0px 0px">
+            <div class="backArrow">
+                <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="goBack()" alt="BACK" />
             </div>
-            
-            <div class="col-12">
-                <h6 style="display: inline-block">Mother's Occupation : </h6>
-                <select type="text" class="form-control" name="mother_occupation" [(ngModel)]="familyData.occupation_mother" required>
-                    <option *ngFor="let item of Occupation" [value]="item">{{item}}</option>
-                  </select>
-              </div>
-              
-              <div class="col-12">
-                  <h6 style="display: inline-block">Father Status : </h6>
-                  <select type="text" class="form-control" name="father_status" [(ngModel)]="familyData.father_status" required>
-                    <option *ngFor="let item of Status"[value]="item">{{item}}</option>
-                    </select> 
+            <h5 style="margin: auto 20px;
+              font-weight: bold;
+               font-size: 1.5rem;">{{languageService.profileLang.family}}</h5>
+        </div>
+
+        <div class="row" style="margin: 10px 10px;">
+            <div class="row information" style="width: 100%!important;margin-bottom:15px">
+                <div class="col-6">
+                    <h6 style="display: inline-block">Father Status : </h6>
+                    <select type="text" class="form-control" name="father_status" [(ngModel)]="familyData.father_status"
+                        required>
+                        <option *ngFor="let item of Status" [value]="item">{{item}}</option>
+                    </select>
                 </div>
-                
-                <div class="col-12">
-                  <h6 style="display: inline-block">Mother Status : </h6>
-                  <select type="text" class="form-control" name="mother_status" [(ngModel)]="familyData.mother_status" required>
-                      <option *ngFor="let item of Status"[value]="item">{{item}}</option>
-                      </select> 
+                <div class="col-6">
+                    <h6 style="display: inline-block">Mother Status : </h6>
+                    <select type="text" class="form-control" name="mother_status" [(ngModel)]="familyData.mother_status"
+                        required>
+                        <option *ngFor="let item of Status" [value]="item">{{item}}</option>
+                    </select>
                 </div>
-                
-                <div class="col-12">
+            </div>
+            <div class="row information" style="width: 100%!important">
+                <div class="col-6">
+                    <h6 style="display: inline-block">Father's Occupation : </h6>
+                    <select type="text" class="form-control" name="father_occupation"
+                        [(ngModel)]="familyData.occupation" required>
+                        <option *ngFor="let item of Occupation" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <h6 style="display: inline-block">Mother's Occupation : </h6>
+                    <select type="text" class="form-control" name="mother_occupation"
+                        [(ngModel)]="familyData.occupation_mother" required>
+                        <option *ngFor="let item of Occupation" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row information" style="width: 100%!important">
+                <div class="col-6">
                     <h6 style="display: inline-block">Family Income : </h6>
                     <input type="text" class="form-control" name="family_income" [(ngModel)]="familyData.family_income">
-                  </div>
-                  
-                      <div class="col-12">
-                          <h6 style="display: inline-block">Family Type : </h6>
-                          <select type="text" class="form-control" name="family_type" [(ngModel)]="familyData.family_type" required>
-                              <option *ngFor="let item of FamilyType" [value]="item">{{item}}</option>
-                              </select> 
-                        </div>
-                        
-                        <div class="col-12">
-                            <h6 style="display: inline-block">Sisters Married : </h6>
-                            <select type="text" class="form-control" name="married_daughters" [(ngModel)]="familyData.married_daughters" required>
-                                <option *ngFor="let item of Count" [value]="item">{{item}}</option>
-                                </select> 
-                          </div>
-                          
-                          <div class="col-12">
-                              <h6 style="display: inline-block">Brothers Married : </h6>
-                              <select type="text" class="form-control" name="married_sons" [(ngModel)]="familyData.married_sons" required>
-                                  <option *ngFor="let item of Count" [value]="item">{{item}}</option>
-                                  </select> 
-                            </div>
-                            
-                            <div class="col-12">
-                                <h6 style="display: inline-block">Sisters Unmarried : </h6>
-                                <select type="text" class="form-control" name="unmarried_daughters" [(ngModel)]="familyData.unmarried_daughters" required>
-                                    <option *ngFor="let item of Count" [value]="item">{{item}}</option>
-                                    </select> 
-                              </div>
-                              
-                              <div class="col-12">
-                                  <h6 style="display: inline-block">Brothers Unmarried : </h6>
-                                  <select type="text" class="form-control" name="unmarried_sons" [(ngModel)]="familyData.unmarried_sons" required>
-                                      <option *ngFor="let item of Count" [value]="item">{{item}}</option>
-                                      </select> 
-                                </div>
-                                
+                </div>
+                <div class="col-6">
+                    <h6 style="display: inline-block">Family Type : </h6>
+                    <select type="text" class="form-control" name="family_type" [(ngModel)]="familyData.family_type"
+                        required>
+                        <option *ngFor="let item of FamilyType" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row information" style="width: 100%!important">
+                <div class="col-6">
+                    <h6 style="display: inline-block">Sisters Married : </h6>
+                    <select type="text" class="form-control" name="married_daughters"
+                        [(ngModel)]="familyData.married_daughters" required>
+                        <option *ngFor="let item of Count" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <h6 style="display: inline-block">Brothers Married : </h6>
+                    <select type="text" class="form-control" name="married_sons" [(ngModel)]="familyData.married_sons"
+                        required>
+                        <option *ngFor="let item of Count" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+            </div>
 
-                                <div class="col-12">
-                                    <h6>Gotra:</h6>
-                                    <input type="text" class="form-control" name="gotra"  [(ngModel)]="familyData.gotra" required>
-                                  </div>
+            <div class="row information" style="width: 100%!important">
+                <div class="col-6">
+                    <h6 style="display: inline-block">Sisters Unmarried : </h6>
+                    <select type="text" class="form-control" name="unmarried_daughters"
+                        [(ngModel)]="familyData.unmarried_daughters" required>
+                        <option *ngFor="let item of Count" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <h6 style="display: inline-block">Brothers Unmarried : </h6>
+                    <select type="text" class="form-control" name="unmarried_sons"
+                        [(ngModel)]="familyData.unmarried_sons" required>
+                        <option *ngFor="let item of Count" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+            </div>
 
-                                  
-                                  <div class="col-12">
-                                      <h6 style="display: inline-block">House Type : </h6>
-                                      <select type="text" class="form-control" name="house_type" [(ngModel)]="familyData.house_type" required>
-                                          <option *ngFor="let item of HouseType" [value]="item">{{item}}</option>
-                                          </select> 
-                                    </div>
+            <div class="row information" style="width: 100%!important">
+                <div class="col-6">
+                    <h6>Gotra:</h6>
+                    <input type="text" class="form-control" name="gotra" [(ngModel)]="familyData.gotra" required>
+                </div>
+                <div class="col-6">
+                    <h6 style="display: inline-block">House Type : </h6>
+                    <select type="text" class="form-control" name="house_type" [(ngModel)]="familyData.house_type"
+                        required>
+                        <option *ngFor="let item of HouseType" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <h6>Family Living In:</h6>
+                <!-- <input type="text" class="form-control" name="city" matValidateAddress matGoogleMapsAutocomplete
+                    #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                    (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                    (onLocationSelected)="onLocationSelected($event)" [(ngModel)]="familyData.city"> -->
+                <input id="familyLivingIn" type="text" class="form-control" [autoCompleteOptions]="autoComplete"
+                    name="city" matValidateAddress matGoogleMapsAutocomplete
+                    #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedFamily()"
+                    value="{{familyData.city}}" />
+            </div>
 
-                                    <div class="col-12">
-                                        <h6>Family Living In:</h6>
-                                            <input type="text" class="form-control" 
-                                            name="city"
-                                            matValidateAddress matGoogleMapsAutocomplete
-                                             #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                                            (onAutocompleteSelected)="onAutocompleteSelected($event)" 
-                                            (onLocationSelected)="onLocationSelected($event)"
-                                             [(ngModel)]="familyData.city">
-                                    </div>
-                                    
-                                        <div class="col-12">
-                                            <h6>About Family: (max 300 words)</h6>
-                                              <input class="form-control" maxlength="300" type="text" name="about" [(ngModel)]="familyData.about"  required> 
-                                        </div>
-                                    <div style="text-align: center; margin: 10px auto">
-                                        <button  class="btn"
-                  mat-raised-button style="background-color: #34b7f1;
-                  color: white;
-                  padding: 5px 40px;
-                  margin-bottom: 20px;
-                  margin-top: 20px;
-                  font-size: 1rem;
-                  font-weight: bold;
-                  " >EDIT AND SAVE</button>
-                                  </div>
-    
-          </div>
+            <div class="col-12">
+                <h6>About Family: (max 300 words)</h6>
+                <textarea class="form-control" maxlength="300" type="text" name="about" [(ngModel)]="familyData.about"
+                    rows="3" required></textarea>
+            </div>
+            <div style="text-align: center; width: 100%;">
+                <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
+                                  color: white;
+                                  width:100%;
+                                  padding: 5px 40px;
+                                  margin-top:10px;
+                                  margin-bottom:10px;
+                                  font-size: 1rem;
+                                  font-weight: bold;
+                                  ">SAVE</button>
+            </div>
+        </div>
     </form>
-    </mat-dialog-content>
+</main>

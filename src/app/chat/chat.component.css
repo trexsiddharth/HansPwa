@@ -69,7 +69,26 @@
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
   
 }
-
+.circular2 {
+  display:flex!important;
+  position: absolute;
+  z-index: 100;
+  margin: auto;
+  width: 35px;
+  height: 35px;
+  background:transparent;
+  top:0px;
+  right: 0px;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(124, 123, 123, 0.5);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 5px !important;
+}
 .tabLine {
   margin-bottom: 1rem;
         border: 0;

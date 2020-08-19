@@ -16,6 +16,8 @@ import {
 import {
   MatSelect,
   MatSnackBar,
+  MatDialogConfig,
+  MatDialog,
 } from "@angular/material";
 import { NgxNotificationService } from "ngx-kc-notification";
 import { HttpClient } from "@angular/common/http";
@@ -79,7 +81,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     string[]
   >(1);
   protected _onDestroy = new Subject<void>();
-  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+  @ViewChild('#multiSelect', { static: true }) multiSelect: MatSelect;
 
   HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
     'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
@@ -359,7 +361,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public snackbar: MatSnackBar,
-    public chatService: ChatServiceService
+    public chatService: ChatServiceService,
+    public matDialog: MatDialog
   ) {
     this.personalForm = this._formBuilder.group({
       name: [''],
@@ -508,8 +511,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   specialCase() {
     this.castePreferences = this.preferenceProfileData.caste.split(',');
     console.log(this.preferenceProfileData.caste);
-    console.log('somethinjkha;vjks;dn');
-    console.log(this.castePreferences);
   }
   changeSelectedTab(event: any) { }
   optionsFamilyIncome: Options = {
@@ -611,16 +612,19 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   setEditIndex(index: number) {
     this.editIndexPersonal = index;
-    console.log('Personal index set to' + String(index));
+    console.log('Personal index set to: ' + String(index));
+    this.openPersonalDialog();
   }
   setEditIndexFamily(index: number) {
     this.editIndexFamily = index;
-    console.log('Family index set to' + String(index));
+    console.log('Family index set to: ' + String(index));
+    this.openFamilyDialog();
   }
   setEditIndexPrefs(index: number) {
     this.editIndexPrefs = index;
-    console.log('pref index set to' + String(index));
-    this.specialCase();
+    console.log('pref index set to: ' + String(index));
+    //this.specialCase();
+    this.openPreferenceDialog();
   }
   setEdit(index) {
     console.log('viaebrnifakujrnviksjsrn');
@@ -1049,7 +1053,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.preferenceProfileData.caste = this.castePreferences.join(',');
 
-    if (this.personalProfileData.gender === "Female" && Array.isArray(this.personalProfileData.occupation))
+    if (this.personalProfileData.gender === "Female" && Array.isArray(this.preferenceProfileData.occupation))
       this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
 
     const newPrefForm = new FormData();
@@ -1059,7 +1063,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
     newPrefForm.append('id', this.preferenceProfileData.id);
-    newPrefForm.append('caste', this.preferencesForm.value.caste_pref ? this.preferencesForm.value.caste_pref : this.preferenceProfileData.caste);
+    newPrefForm.append('caste', this.preferenceProfileData.caste);
     newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
     newPrefForm.append(
       'marital_status', this.preferencesForm.value.marital_status ?
@@ -1140,10 +1144,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       return null;
     }
   }
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event) {
-  //   this.innerWidth = window.innerWidth;
-  // }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
   }
@@ -1276,6 +1280,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
               }
             }
+            localStorage.setItem('gender', this.personalProfileData.gender);
+            this.specialCase();
             this.setCurrentProfileValue();
             this.setCurrentFamilyValues();
             this.setCurrentPreferenceValue();
@@ -1558,7 +1564,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               values.push(this.getcastes[this.getcastes.indexOf(element)]);
             }
           });
-          // if all , check the check box for no caste bar
+          //if all , check the check box for no caste bar
           if (values.includes('All')) {
             this.isAllCastePref = true;
           }
@@ -1641,8 +1647,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   checkAllCastePref(event) {
     console.log(event);
     if (event.checked) {
+      this.isAllCastePref = true;
       this.searchCaste.setValue(['All']);
     } else {
+      this.isAllCastePref = false;
       this.searchCaste.setValue(['']);
     }
   }
@@ -1801,32 +1809,31 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     //this.familyProfileData.city = e;
     console.log('location of family', e);
   }
-  /*
-  
-  openPersonalDialog(i: number, titleText: string) {
+
+
+  openPersonalDialog() {
     document.querySelector("#carousel").scrollIntoView();
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.maxWidth = "40vh";
-      dialogConfig.minWidth = "35vh";
-      dialogConfig.maxHeight = "90vh";
+      dialogConfig.minWidth = "40vw";
+      dialogConfig.maxWidth = "40vw";
     } else {
-      dialogConfig.minWidth = "80vw";
-      dialogConfig.maxHeight = "80vh";
+      dialogConfig.minWidth = "100%";
     }
+    dialogConfig.minHeight = "100vh";
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
       personalDetails: this.personalProfileData,
       familyDetails: this.familyProfileData,
-      index: i,
-      title: titleText,
+      index: this.editIndexPersonal,
     };
     const dialogRef = this.matDialog.open(
       EditPersonalDialogComponent,
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((data) => {
+      this.editIndexPersonal = -1;
       this.getUserProfileData();
     });
   }
@@ -1835,13 +1842,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     document.querySelector("#carousel").scrollIntoView();
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.maxWidth = "40vh";
-      dialogConfig.minWidth = "35vh";
-      dialogConfig.maxHeight = "90vh";
+      dialogConfig.minWidth = "40vw";
+      dialogConfig.maxWidth = "40vw";
     } else {
-      dialogConfig.minWidth = "80vw";
-      dialogConfig.maxHeight = "80vh";
+      dialogConfig.minWidth = "100%";
     }
+    dialogConfig.minHeight = "100vh";
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
@@ -1852,6 +1858,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((data) => {
+      this.editIndexFamily = -1;
       this.getUserProfileData();
     });
   }
@@ -1859,27 +1866,25 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   openPreferenceDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.maxWidth = "40vh";
-      dialogConfig.minWidth = "35vh";
-      dialogConfig.maxHeight = "90vh";
+      dialogConfig.minWidth = "40vw";
+      dialogConfig.maxWidth = "40vw";
     } else {
-      dialogConfig.minWidth = "80vw";
-      dialogConfig.maxHeight = "80vh";
+      dialogConfig.minWidth = "100%";
     }
+    dialogConfig.minHeight = "100vh";
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
       preferencesDetails: this.preferenceProfileData,
+      editIndex: this.editIndexPrefs
     };
     const dialogRef = this.matDialog.open(
       EditPreferenceDialogComponent,
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((res) => {
+      this.editIndexPrefs = -1;
       this.getUserProfileData();
-      // if (res) {
-      //   this.preferenceChanged.emit(res);
-      // }
     });
-  } */
+  }
 }
