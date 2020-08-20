@@ -15,7 +15,6 @@ html, body{margin:0 0 0 0;}
 } */
 ::ng-deep .mat-dialog-container {
     padding: 0px;
-    background: white;
     color: black;
     height:inherit!important;
     /* max-height: 79vh; */
