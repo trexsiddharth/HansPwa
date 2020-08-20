@@ -509,14 +509,6 @@
                 <div class="columnar">
                   <p class="headings">{{languageService.profileLang.aboutFamily}}</p>
                   <p>{{familyProfileData.about ? familyProfileData.about : "+Add About Family" }}</p>
-                  <p class="headings">{{ languageService.profileLang.familyType }}:</p>
-                  <p>{{familyProfileData.family_type ? familyProfileData.family_type : "+Add Family Type"}}</p>
-                  <p class="headings">{{languageService.profileLang.familyIncome}}</p>
-                  <p>{{
-                  familyProfileData.family_income
-                    ? familyProfileData.family_income
-                    : "+Add Family Income "
-                }}</p>
                   <!-- <p class="headings">{{languageService.profileLang.Mother}}</p> -->
                   <p class="headings">Mother Is</p>
                   <p *ngIf="familyProfileData.mother_status != 'Not Alive'">
@@ -527,22 +519,7 @@
                   <p *ngIf="familyProfileData.father_status != 'Not Alive'">
                     {{familyProfileData.occupation ? familyProfileData.occupation : "+Add Father's Occupation"}}</p>
                   <p *ngIf="familyProfileData.father_status == 'Not Alive'">Not Alive</p>
-                  <p class="headings">Siblings</p>
-                  <p>{{languageService.profileLang.sisters}} : <br>{{
-                    setMarriageSisters(
-                      familyProfileData.unmarried_daughters,
-                      familyProfileData.married_daughters
-                    )
-                  }}</p>
-                  <p>{{languageService.profileLang.brothers}} : <br>{{
-                    setMarriageBrothers(
-                      familyProfileData.unmarried_sons,
-                      familyProfileData.married_sons
-                    )
-                  }}</p>
-                  <p class="headings">Living With Parents?</p>
-                  <p>{{familyProfileData.living_with_parents ? familyProfileData.living_with_parents : "+Add Detail"}}
-                  </p>
+                  <!-- <p class="headings">Siblings</p> -->
                   <p class="headings">{{ languageService.profileLang.familyLivingIn}}</p>
                   <p>{{
                     familyProfileData.city
@@ -555,7 +532,67 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="column" *ngIf="editIndexFamily == 1">
+          </div>
+          <div class="infoRow">
+            <div class="column">
+              <div class="row title">
+                <img class="accordion-image" src="../../assets/familyN.svg" />
+                <!-- <p>{{languageService.profileLang.siblings}}</p> -->
+                Siblings
+              </div>
+              <div class="row information">
+                <div class="columnar" style="margin-top: 0px!important;">
+                  <p class="headings">{{languageService.profileLang.sisters}} : </p>
+                  <p>{{
+                    setMarriageSisters(
+                      familyProfileData.unmarried_daughters,
+                      familyProfileData.married_daughters
+                    )
+                  }}</p>
+                </div>
+                <div class="columnar" style="margin-top: 0px!important;">
+                  <p class="headings">{{languageService.profileLang.brothers}} : </p>
+                  <p>{{
+                    setMarriageBrothers(
+                      familyProfileData.unmarried_sons,
+                      familyProfileData.married_sons
+                    )
+                  }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="infoRow">
+            <div class="column">
+              <div class="row title">
+                <img class="accordion-image" src="../../assets/familyN.svg" />
+                <!-- <p>{{languageService.profileLang.siblings}}</p> -->
+                Lifestyle
+              </div>
+              <div class="row information">
+                <div class="columnar" style="margin-bottom: 0px!important;">
+                  <p class="headings">{{ languageService.profileLang.familyType }}:</p>
+                  <p>{{familyProfileData.family_type ? familyProfileData.family_type : "+Add Family Type"}}</p>
+                </div>
+                <div class="columnar" style="margin-bottom: 0px!important;">
+                  <p class=" headings">{{languageService.profileLang.familyIncome}}</p>
+                  <p>{{
+                  familyProfileData.family_income
+                    ? familyProfileData.family_income
+                    : "+Add Family Income "
+                }}</p>
+                </div>
+              </div>
+              <div class="row information" style="margin-top: 0px!important;">
+                <div class="columnar" style="margin-top: 0px!important;">
+                  <p class="headings">Living With Parents?</p>
+                  <p>{{familyProfileData.living_with_parents ? familyProfileData.living_with_parents : "+Add Detail"}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="column" *ngIf="editIndexFamily == 1">
               <div class="col-12">
                 <h6>Gotra:</h6>
                 <input type="text" class="form-control" name="gotra" [(ngModel)]="familyProfileData.gotra" required />
@@ -687,7 +724,6 @@
                 SAVE
               </button>
             </div> -->
-          </div>
           <div class="infoRow" style="margin-bottom:20px">
           </div>
         </form>

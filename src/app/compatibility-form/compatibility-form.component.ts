@@ -21,7 +21,7 @@ import {
 
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {  NotificationsService } from '../notifications.service';
+import { NotificationsService } from '../notifications.service';
 import { Profile } from './profile';
 
 import {
@@ -88,22 +88,22 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   isLeadIsZero = false;
 
   // Height
-    // tslint:disable-next-line: max-line-length
-    Heights: string[] = ['4 feet', '4 feet 1 inches', '4 feet 2 inches', '4 feet 3 inches', '4 feet 4 inches', '4 feet 5 inches', '4 feet 6 inches', '4 feet 7 inches', '4 feet 8 inches', '4 feet 9 inches', '4 feet 10 inches', '4 feet 11 inches', '5 feet', '5 feet 1 inches', '5 feet 2 inches', '5 feet 3 inches', '5 feet 4 inches', '5 feet 5 inches', '5 feet 6 inches', '5 feet 7 inches', '5 feet 8 inches', '5 feet 9 inches', '5 feet 10 inches', '5 feet 11 inches', '6 feet', '6 feet 1 inches', '6 feet 2 inches', '6 feet 3 inches', '6 feet 4 inches', '6 feet 5 inches', '6 feet 6 inches', '6 feet 7 inches', '6 feet 8 inches', '6 feet 9 inches', '6 feet 10 inches', '6 feet 11 inches', '7 feet'];
-    // tslint:disable-next-line: max-line-length
-    Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
+  // tslint:disable-next-line: max-line-length
+  Heights: string[] = ['4 feet', '4 feet 1 inches', '4 feet 2 inches', '4 feet 3 inches', '4 feet 4 inches', '4 feet 5 inches', '4 feet 6 inches', '4 feet 7 inches', '4 feet 8 inches', '4 feet 9 inches', '4 feet 10 inches', '4 feet 11 inches', '5 feet', '5 feet 1 inches', '5 feet 2 inches', '5 feet 3 inches', '5 feet 4 inches', '5 feet 5 inches', '5 feet 6 inches', '5 feet 7 inches', '5 feet 8 inches', '5 feet 9 inches', '5 feet 10 inches', '5 feet 11 inches', '6 feet', '6 feet 1 inches', '6 feet 2 inches', '6 feet 3 inches', '6 feet 4 inches', '6 feet 5 inches', '6 feet 6 inches', '6 feet 7 inches', '6 feet 8 inches', '6 feet 9 inches', '6 feet 10 inches', '6 feet 11 inches', '7 feet'];
+  // tslint:disable-next-line: max-line-length
+  Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
 
   changeNumber = false;
   // tslint:disable-next-line: max-line-length
-  date: string[] = ['01', '02' , '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+  date: string[] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
   // tslint:disable-next-line: max-line-length
   month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   years: string[] = [
-  '1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980',
-  '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990',
-  '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000',
-  '2001', '2002'
-];
+    '1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980',
+    '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990',
+    '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000',
+    '2001', '2002'
+  ];
   errors: string[] = [];
   authMobileNumberStatus = false;
   locationFamily;
@@ -117,39 +117,39 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   isDisable = false;
   isAllCastePref = false;
 
-   // stop true caller polling
-   stopPolling = new Subject();
-   pollingCount = 0;
-   hideMobileNumber = false;
+  // stop true caller polling
+  stopPolling = new Subject();
+  pollingCount = 0;
+  hideMobileNumber = false;
 
-   authData;
+  authData;
   private fetchedFbProfilePic = null;
 
-     /** list of designation filtered by search keyword for option groups */
-     public filteredCastes: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+  /** list of designation filtered by search keyword for option groups */
+  public filteredCastes: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
-     /** Subject that emits when the component has been destroyed. */
-      protected onDestroy = new Subject<void>();
+  /** Subject that emits when the component has been destroyed. */
+  protected onDestroy = new Subject<void>();
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-              private _formBuilder: FormBuilder,
-              private router: Router,
-              public notification: NotificationsService,
-              public fourPageService: FourPageService,
-              private matDialog: MatDialog,
-              private breakPointObserver: BreakpointObserver,
-              public languageService: LanguageService,
-              private route: ActivatedRoute,
-              private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService) {
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    public notification: NotificationsService,
+    public fourPageService: FourPageService,
+    private matDialog: MatDialog,
+    private breakPointObserver: BreakpointObserver,
+    public languageService: LanguageService,
+    private route: ActivatedRoute,
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
       phone: [localStorage.getItem('RegisterNumber')
-      , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+        , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
@@ -157,7 +157,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       birth_month: ['January', Validators.compose([Validators.required])],
       birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
-      // Weight: [''],
+      Weight: [''],
       MaritalStatus: ['', Validators.compose([Validators.required])],
       Religion: ['', Validators.compose([Validators.required])],
       Castes: ['', Validators.compose([Validators.required])],
@@ -174,317 +174,317 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.onDestroy.complete();
   }
 
-async ngOnInit() {
-  if (localStorage.getItem('RegisterNumber')) {
-    this.PageOne.patchValue({
-      phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
-    });
-    this.hideMobileNumber = true;
-    console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
+  async ngOnInit() {
+    if (localStorage.getItem('RegisterNumber')) {
+      this.PageOne.patchValue({
+        phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
+      });
+      this.hideMobileNumber = true;
+      console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
-  localStorage.clear();
-  this.languageService.setRegisterLang();
+    localStorage.clear();
+    this.languageService.setRegisterLang();
 
-  this.fourPageService.formCompleted.subscribe(
+    this.fourPageService.formCompleted.subscribe(
       (complete: boolean) => {
         if (complete === true) {
           this.formTwo = true;
-         }
+        }
       }
     );
-  this.fourPageService.formTwoGroup.subscribe(
+    this.fourPageService.formTwoGroup.subscribe(
       (formGroup) => {
         console.log(formGroup);
         if (formGroup) {
           console.log(formGroup);
           this.PageTwo = formGroup;
-         }
+        }
       }
     );
-  this.fourPageService.form3Completed.subscribe(
+    this.fourPageService.form3Completed.subscribe(
       (complete: boolean) => {
         if (complete === true) {
           this.formThree = true;
-         }
+        }
       }
     );
-  this.fourPageService.form4Completed.subscribe(
+    this.fourPageService.form4Completed.subscribe(
       (complete: boolean) => {
         if (complete === true) {
           this.formFour = true;
           console.log('formFour', this.formFour);
-         }
+        }
       }
     );
 
-      // for team user we will make page non linear from page two...because page one details are compulsory
-  this.fourPageService.makeLinear.subscribe(
-        (makeLinear: boolean) => {
-          console.log(makeLinear);
-          if (makeLinear === true) {
-            this.isLinear = false;
-            this.fourPageService.setUserThrough(true);
-            console.log(this.isLinear);
-          }
+    // for team user we will make page non linear from page two...because page one details are compulsory
+    this.fourPageService.makeLinear.subscribe(
+      (makeLinear: boolean) => {
+        console.log(makeLinear);
+        if (makeLinear === true) {
+          this.isLinear = false;
+          this.fourPageService.setUserThrough(true);
+          console.log(this.isLinear);
         }
-      );
+      }
+    );
 
-     // for skippable
-  this.route.url.subscribe(
+    // for skippable
+    this.route.url.subscribe(
       link => {
-       if (link && link[0]  &&  link[0].path) {
-         console.log(link[0].path);
-         this.fourPageService.setSkippable(true);
-       }
+        if (link && link[0] && link[0].path) {
+          console.log(link[0].path);
+          this.fourPageService.setSkippable(true);
+        }
       }
     );
 
     // get all castes before get the data of the profile
-  await this.getAllCaste();
-  this.route.paramMap.subscribe(
-    async (route: any) => {
-      console.log(route.params);
-      if (route) {
-      if (route.params.id) {
-        this.fourPageService.setUserThrough(true);
-        localStorage.setItem('getListId', route.params.id);
-        } else if (route.params.mobile) {
+    await this.getAllCaste();
+    this.route.paramMap.subscribe(
+      async (route: any) => {
+        console.log(route.params);
+        if (route) {
+          if (route.params.id) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('getListId', route.params.id);
+          } else if (route.params.mobile) {
+            this.PageOne.patchValue({
+              phone: route.params.mobile
+            });
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('getListMobile', route.params.mobile);
+          } else {
+            this.fourPageService.setUserThrough(false);
+            localStorage.setItem('getListId', '');
+            localStorage.setItem('getListMobile', '');
+          }
+          if (route.params.leadId) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('getListLeadId', route.params.leadId);
+            this.isLeadIsZero = route.params.leadId === '0' ? true : false;
+          } else {
+            this.fourPageService.setUserThrough(false);
+            localStorage.setItem('getListLeadId', '');
+          }
+          if (route.params.templeId) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('getListTempleId', route.params.templeId);
+          }
+          if (route.params.enqDate) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('enqDate', route.params.enqDate);
+          }
+          if (route.params.source) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('getListSource', route.params.source);
+          }
+          if (route.params.id) {
+            this.getProfile();
+          }
+        }
+
+        // when user comes from app to webview four page reg
+        if (route.params.appMobile) {
           this.PageOne.patchValue({
-            phone: route.params.mobile
+            phone: route.params.appMobile
           });
-          this.fourPageService.setUserThrough(true);
-          localStorage.setItem('getListMobile', route.params.mobile);
-          } else {
-          this.fourPageService.setUserThrough(false);
-          localStorage.setItem('getListId', '');
-          localStorage.setItem('getListMobile', '');
-        }
-      if (route.params.leadId) {
-        this.fourPageService.setUserThrough(true);
-        localStorage.setItem('getListLeadId', route.params.leadId);
-        this.isLeadIsZero =  route.params.leadId === '0' ? true : false;
-        } else {
-          this.fourPageService.setUserThrough(false);
-          localStorage.setItem('getListLeadId', '');
-        }
-      if (route.params.templeId) {
-          this.fourPageService.setUserThrough(true);
-          localStorage.setItem('getListTempleId', route.params.templeId);
-          }
-      if (route.params.enqDate) {
-          this.fourPageService.setUserThrough(true);
-          localStorage.setItem('enqDate', route.params.enqDate);
-          }
-      if (route.params.source) {
-        this.fourPageService.setUserThrough(true);
-        localStorage.setItem('getListSource', route.params.source);
-      }
-      if (route.params.id) {
-        this.getProfile();
         }
       }
+    );
 
-      // when user comes from app to webview four page reg
-      if (route.params.appMobile) {
-        this.PageOne.patchValue({
-          phone: route.params.appMobile
-        });
-      }
-    }
-  );
+    this.spinner.hide();
+    localStorage.setItem('id', '');
+    localStorage.setItem('gender', '');
+    localStorage.setItem('mobile_number', '');
+    localStorage.setItem('selectedCaste', '');
 
-  this.spinner.hide();
-  localStorage.setItem('id', '');
-  localStorage.setItem('gender', '');
-  localStorage.setItem('mobile_number', '') ;
-  localStorage.setItem('selectedCaste', '');
-
-  if (this.fourPageService.getUserThrough()) {
+    if (this.fourPageService.getUserThrough()) {
       this.openMessageDialog();
-      }
-
-  console.log(this.isLinear);
-
     }
 
-    protected filterCastes() {
-      if (!this.getcastes) {
-        return;
-      }
-      // get the search keyword
-      let search = this.PageOne.controls.CasteCtrl.value;
-      if (!search) {
-        this.filteredCastes.next(this.getcastes.slice());
-        return;
-      } else {
-        search = search.toLowerCase();
-      }
-      // filter the banks
-      const casteResults = this.getcastes.filter(bank => bank.toLowerCase().indexOf(search) > -1);
-      if (casteResults.length !== 0) {
-        this.filteredCastes.next(casteResults);
-      }
-      // else {
-      //   this.filteredCastes.next(this.getcastes.filter(bank => bank.toLowerCase().indexOf('other') > -1));
-      // }
+    console.log(this.isLinear);
+
+  }
+
+  protected filterCastes() {
+    if (!this.getcastes) {
+      return;
     }
-
-    // event on change of input field
-    inputFieldChanged(fieldName) {
-      console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
-      switch (fieldName) {
-          case 'email':
-            this.analyticsEvent('Four Page Registration Page One Email Changed');
-            break;
-          case 'Weight':
-            this.analyticsEvent('Four Page Registration Page One Weight Changed');
-            break;
-          case 'firstName':
-            this.analyticsEvent('Four Page Registration Page One First Name Changed');
-            break;
-          case 'lastName':
-            this.analyticsEvent('Four Page Registration Page One Last Name Changed');
-            break;
-
-          default:
-            break;
-        }
+    // get the search keyword
+    let search = this.PageOne.controls.CasteCtrl.value;
+    if (!search) {
+      this.filteredCastes.next(this.getcastes.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
     }
-    // event on change of select field
-    selectFieldChange(fieldName) {
-      console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
-      switch (fieldName) {
-          case 'birth_date':
-            this.analyticsEvent('Four Page Registration Page One Birth Date Changed');
-            break;
-          case 'birth_month':
-            this.analyticsEvent('Four Page Registration Page One Birth Month Changed');
-            break;
-          case 'birth_year':
-            this.analyticsEvent('Four Page Registration Page One Birth Year Changed');
-            break;
-          case 'gender':
-            this.analyticsEvent('Four Page Registration Page One Gender Changed');
-            break;
-          case 'Height':
-            this.analyticsEvent('Four Page Registration Page One Height Changed');
-            break;
-          case 'MaritalStatus':
-            this.analyticsEvent('Four Page Registration Page One Marital Status Changed');
-            break;
-          case 'Castes':
-            this.analyticsEvent('Four Page Registration Page One Caste Changed');
-            break;
-
-          default:
-            break;
-        }
+    // filter the banks
+    const casteResults = this.getcastes.filter(bank => bank.toLowerCase().indexOf(search) > -1);
+    if (casteResults.length !== 0) {
+      this.filteredCastes.next(casteResults);
     }
+    // else {
+    //   this.filteredCastes.next(this.getcastes.filter(bank => bank.toLowerCase().indexOf('other') > -1));
+    // }
+  }
 
+  // event on change of input field
+  inputFieldChanged(fieldName) {
+    console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
+    switch (fieldName) {
+      case 'email':
+        this.analyticsEvent('Four Page Registration Page One Email Changed');
+        break;
+      case 'Weight':
+        this.analyticsEvent('Four Page Registration Page One Weight Changed');
+        break;
+      case 'firstName':
+        this.analyticsEvent('Four Page Registration Page One First Name Changed');
+        break;
+      case 'lastName':
+        this.analyticsEvent('Four Page Registration Page One Last Name Changed');
+        break;
 
-      // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
-    mobileNumberChanged() {
-      if (localStorage.getItem('getListId') === null || localStorage.getItem('getListId') === '' ) {
-        const number = this.PageOne.value.phone;
-        console.log(number);
-        console.log(this.authMobileNumberStatus);
-          // tslint:disable-next-line: max-line-length
-        this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {params: { ['phone_number'] : number, ['fcm_id'] : this.notification.getCurrentToken()}}).subscribe(res => {
-            console.log(res);
-            if (res) {
-              this.authData = res;
-              if (res.registered === 1) {
-              this.ngxNotificationService.success('Already Registered');
-              if (this.pollingCount > 0) {
-                localStorage.setItem('authData', JSON.stringify(res));
-                localStorage.setItem('mobile_number', this.PageOne.value.phone);
-                localStorage.setItem('is_lead', res.is_lead);
-                localStorage.setItem('id', res.id);
-                this.router.navigateByUrl('chat');
-              } else {
-                this.openVerificationDialog(res.is_lead);
-              }
-              this.spinner.show();
-            } else if (res.registered === 2) {
-              localStorage.setItem('RegisterNumber', number);
-              this.ngxNotificationService.info('Please complete the form and update');
-              this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
-            } else {
-              localStorage.setItem('RegisterNumber', number);
-              // signifies that new user has entered his mobile number.
-              this.analyticsEvent('Four Page Registration Page Zero');
-              console.log('New User');
-              this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
-
-              // gtag app + web
-              (window as any).gtag('config', 'G-1ES443XD0F' , {
-                user_id: number
-              });
-            }
-          }
-            this.spinner.hide();
-          }, err => {
-            this.spinner.hide();
-            console.log(err);
-          });
-        }
+      default:
+        break;
     }
+  }
+  // event on change of select field
+  selectFieldChange(fieldName) {
+    console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
+    switch (fieldName) {
+      case 'birth_date':
+        this.analyticsEvent('Four Page Registration Page One Birth Date Changed');
+        break;
+      case 'birth_month':
+        this.analyticsEvent('Four Page Registration Page One Birth Month Changed');
+        break;
+      case 'birth_year':
+        this.analyticsEvent('Four Page Registration Page One Birth Year Changed');
+        break;
+      case 'gender':
+        this.analyticsEvent('Four Page Registration Page One Gender Changed');
+        break;
+      case 'Height':
+        this.analyticsEvent('Four Page Registration Page One Height Changed');
+        break;
+      case 'MaritalStatus':
+        this.analyticsEvent('Four Page Registration Page One Marital Status Changed');
+        break;
+      case 'Castes':
+        this.analyticsEvent('Four Page Registration Page One Caste Changed');
+        break;
 
-    openVerificationDialog(isLead: string) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.hasBackdrop = true;
-      this.breakPointObserver.observe([
-        '(min-width: 1024px)'
-      ]).subscribe(
-        result => {
-          if (result.matches) {
-            console.log('screen is greater than  1024px');
-            dialogConfig.maxWidth = '30vw';
-            dialogConfig.maxHeight = '80vh';
-            dialogConfig.disableClose = false;
-          } else {
-            console.log('screen is less than  1024px');
-            dialogConfig.minWidth = '90vw';
-            dialogConfig.maxHeight = '80vh';
-            dialogConfig.disableClose = false;
-          }
-        }
-      );
+      default:
+        break;
+    }
+  }
 
-      dialogConfig.data = {
-        mobile : this.PageOne.value.phone,
-        is_lead: isLead
-      };
-      const dialogRef = this.dialog.open(VerifyOtpComponent, dialogConfig);
-      dialogRef.afterClosed().subscribe(
-        (data: any) => {
-          if (data) {
-            if (data.success === 'verified') {
+
+  // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
+  mobileNumberChanged() {
+    if (localStorage.getItem('getListId') === null || localStorage.getItem('getListId') === '') {
+      const number = this.PageOne.value.phone;
+      console.log(number);
+      console.log(this.authMobileNumberStatus);
+      // tslint:disable-next-line: max-line-length
+      this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', { params: { ['phone_number']: number, ['fcm_id']: this.notification.getCurrentToken() } }).subscribe(res => {
+        console.log(res);
+        if (res) {
+          this.authData = res;
+          if (res.registered === 1) {
+            this.ngxNotificationService.success('Already Registered');
+            if (this.pollingCount > 0) {
+              localStorage.setItem('authData', JSON.stringify(res));
               localStorage.setItem('mobile_number', this.PageOne.value.phone);
-              localStorage.setItem('is_lead', data.is_lead);
-              if (this.authData) {
-                localStorage.setItem('authData', JSON.stringify(this.authData));
-                localStorage.setItem('id', this.authData.id);
-              }
+              localStorage.setItem('is_lead', res.is_lead);
+              localStorage.setItem('id', res.id);
               this.router.navigateByUrl('chat');
-            } else { return; }
+            } else {
+              this.openVerificationDialog(res.is_lead);
+            }
+            this.spinner.show();
+          } else if (res.registered === 2) {
+            localStorage.setItem('RegisterNumber', number);
+            this.ngxNotificationService.info('Please complete the form and update');
+            this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
+          } else {
+            localStorage.setItem('RegisterNumber', number);
+            // signifies that new user has entered his mobile number.
+            this.analyticsEvent('Four Page Registration Page Zero');
+            console.log('New User');
+            this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
+
+            // gtag app + web
+            (window as any).gtag('config', 'G-1ES443XD0F', {
+              user_id: number
+            });
           }
         }
-      );
+        this.spinner.hide();
+      }, err => {
+        this.spinner.hide();
+        console.log(err);
+      });
     }
+  }
 
-    getAllCaste() {
-      return new Promise((res, rej) => {
+  openVerificationDialog(isLead: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = false;
+        }
+      }
+    );
+
+    dialogConfig.data = {
+      mobile: this.PageOne.value.phone,
+      is_lead: isLead
+    };
+    const dialogRef = this.dialog.open(VerifyOtpComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (data: any) => {
+        if (data) {
+          if (data.success === 'verified') {
+            localStorage.setItem('mobile_number', this.PageOne.value.phone);
+            localStorage.setItem('is_lead', data.is_lead);
+            if (this.authData) {
+              localStorage.setItem('authData', JSON.stringify(this.authData));
+              localStorage.setItem('id', this.authData.id);
+            }
+            this.router.navigateByUrl('chat');
+          } else { return; }
+        }
+      }
+    );
+  }
+
+  getAllCaste() {
+    return new Promise((res, rej) => {
 
       this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
         this.getcastes = [...res, 'All'];
         this.fourPageService.setAllCastes(this.getcastes);
         if (this.getcastes) {
-           // load the initial caste list
-                this.filteredCastes.next((this.getcastes as string[]).slice(0, 100));
+          // load the initial caste list
+          this.filteredCastes.next((this.getcastes as string[]).slice(0, 100));
 
-            // listen for search field value changes
-                this.PageOne.controls.CasteCtrl.valueChanges
+          // listen for search field value changes
+          this.PageOne.controls.CasteCtrl.valueChanges
             .pipe(takeUntil(this.onDestroy))
             .subscribe(() => {
               this.filterCastes();
@@ -492,47 +492,47 @@ async ngOnInit() {
         }
       });
       if (this.PageOne.get('Castes').value && this.PageOne.get('Castes').value !== '') {
-      this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
-        startWith(''),
-        map(value => this._Castefilter(value))
-      );
-    } else {
-      this.PageOne.patchValue({
-        Castes: ''
-      });
-      this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
-        startWith(''),
-        map(value => this._Castefilter(value))
-      );
-    }
+        this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
+          startWith(''),
+          map(value => this._Castefilter(value))
+        );
+      } else {
+        this.PageOne.patchValue({
+          Castes: ''
+        });
+        this.casteo = this.PageOne.get('Castes').valueChanges.pipe(
+          startWith(''),
+          map(value => this._Castefilter(value))
+        );
+      }
 
       res(this.getcastes);
-  });
-    }
+    });
+  }
 
-    setNewFormGroup() {
-      if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
-        this.PageOne = this._formBuilder.group({
-          // tslint:disable-next-line: max-line-length
-          firstName: [''],
-          lastName: [''],
-          phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
-          email: [''],
-          Relation: ['', Validators.compose([Validators.required])],
-          gender: ['', Validators.compose([Validators.required])],
-          birth_date: ['01', Validators.compose([Validators.required])],
-          birth_month: ['January', Validators.compose([Validators.required])],
-          birth_year: ['1980', Validators.compose([Validators.required])],
-          Height: ['', Validators.compose([Validators.required])],
-          Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
-          MaritalStatus: ['', Validators.compose([Validators.required])],
-          Religion: ['', Validators.compose([Validators.required])],
-          Castes: ['', Validators.compose([Validators.required])],
-          CasteCtrl: (null),
-          disabledPart: ['']
-        });
-      }
+  setNewFormGroup() {
+    if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
+      this.PageOne = this._formBuilder.group({
+        // tslint:disable-next-line: max-line-length
+        firstName: [''],
+        lastName: [''],
+        phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+        email: [''],
+        Relation: ['', Validators.compose([Validators.required])],
+        gender: ['', Validators.compose([Validators.required])],
+        birth_date: ['01', Validators.compose([Validators.required])],
+        birth_month: ['January', Validators.compose([Validators.required])],
+        birth_year: ['1980', Validators.compose([Validators.required])],
+        Height: ['', Validators.compose([Validators.required])],
+        Weight: ['', Validators.compose([Validators.required, Validators.min(30), Validators.max(150)])],
+        MaritalStatus: ['', Validators.compose([Validators.required])],
+        Religion: ['', Validators.compose([Validators.required])],
+        Castes: ['', Validators.compose([Validators.required])],
+        CasteCtrl: (null),
+        disabledPart: ['']
+      });
     }
+  }
 
 
   firstStep() {
@@ -545,127 +545,127 @@ async ngOnInit() {
 
     if (this.PageOne.value.phone &&
       this.PageOne.value.phone.toString().length < 10 ||
-       this.PageOne.value.phone.toString().length > 13
-     || this.PageOne.value.phone.invalid) {
-       console.log(this.PageOne.value.phone);
-       this.ngxNotificationService.error('Enter A Valid Mobile Number');
-       return;
+      this.PageOne.value.phone.toString().length > 13
+      || this.PageOne.value.phone.invalid) {
+      console.log(this.PageOne.value.phone);
+      this.ngxNotificationService.error('Enter A Valid Mobile Number');
+      return;
     }
 
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
-              const date = this.PageOne.value.birth_date;
-              const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
-              const year = this.PageOne.value.birth_year;
-              console.log(date + '-' + month + '-' + year);
-              const firststepdata = new FormData();
-              firststepdata.append('mobile', this.PageOne.value.phone);
-              if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') !== '1') {
-                firststepdata.append('id', localStorage.getItem('getListId'));
-                firststepdata.append('identity_number', this.profileData.profile.identity_number);
-                firststepdata.append('temple_id', this.profileData.profile.temple_id);
-                firststepdata.append('birth_date', year + '-' + month + '-' + date);
-              } else {
-                firststepdata.append('birth_date', date + '-' + month + '-' + year);
-              }
-              firststepdata.append('name', `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
-                 this.PageOne.value.lastName : ''}`);
-              firststepdata.append('email', this.PageOne.value.email);
+      const date = this.PageOne.value.birth_date;
+      const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
+      const year = this.PageOne.value.birth_year;
+      console.log(date + '-' + month + '-' + year);
+      const firststepdata = new FormData();
+      firststepdata.append('mobile', this.PageOne.value.phone);
+      if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') !== '1') {
+        firststepdata.append('id', localStorage.getItem('getListId'));
+        firststepdata.append('identity_number', this.profileData.profile.identity_number);
+        firststepdata.append('temple_id', this.profileData.profile.temple_id);
+        firststepdata.append('birth_date', year + '-' + month + '-' + date);
+      } else {
+        firststepdata.append('birth_date', date + '-' + month + '-' + year);
+      }
+      firststepdata.append('name', `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
+        this.PageOne.value.lastName : ''}`);
+      firststepdata.append('email', this.PageOne.value.email);
 
-              // son -> mother and daughter -> father rest -> same
-              if (this.PageOne.value.Relation === 'Son') {
-              firststepdata.append('relation', 'Mother');
-              } else if (this.PageOne.value.Relation === 'Daughter') {
-                firststepdata.append('relation', 'Father');
-              } else {
-                firststepdata.append('relation', this.PageOne.value.Relation);
-              }
-              firststepdata.append('gender', this.PageOne.value.gender);
-              firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
-              if (this.PageOne.value.Weight) {
-              firststepdata.append('weight', this.PageOne.value.Weight);
-              }
-              firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
+      // son -> mother and daughter -> father rest -> same
+      if (this.PageOne.value.Relation === 'Son') {
+        firststepdata.append('relation', 'Mother');
+      } else if (this.PageOne.value.Relation === 'Daughter') {
+        firststepdata.append('relation', 'Father');
+      } else {
+        firststepdata.append('relation', this.PageOne.value.Relation);
+      }
+      firststepdata.append('gender', this.PageOne.value.gender);
+      firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
+      if (this.PageOne.value.Weight) {
+        firststepdata.append('weight', this.PageOne.value.Weight);
+      }
+      firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
 
-              firststepdata.append('religion', this.PageOne.value.Religion);
-              firststepdata.append('caste', this.PageOne.value.Castes);
-              firststepdata.append('disability', this.isDisable ? 'yes' : null);
-              firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
+      firststepdata.append('religion', this.PageOne.value.Religion);
+      firststepdata.append('caste', this.PageOne.value.Castes);
+      firststepdata.append('disability', this.isDisable ? 'yes' : null);
+      firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
 
 
-              this.lat ? firststepdata.append('lat', this.lat)
-              : firststepdata.append('lat', '');
+      this.lat ? firststepdata.append('lat', this.lat)
+        : firststepdata.append('lat', '');
 
-              this.long ? firststepdata.append('long', this.long)
-              : firststepdata.append('long', '');
+      this.long ? firststepdata.append('long', this.long)
+        : firststepdata.append('long', '');
 
-              // if url with enqData : mode -> 3 , if with id: mode -> 2 if only with fourReg : mode -> 1
-              firststepdata.append('mode', localStorage.getItem('enqDate') ? '3'
+      // if url with enqData : mode -> 3 , if with id: mode -> 2 if only with fourReg : mode -> 1
+      firststepdata.append('mode', localStorage.getItem('enqDate') ? '3'
         : localStorage.getItem('getListId') ? '2' : '1');
 
-              console.log('mobile', this.PageOne.value.phone);
-              console.log('birth_date', this.birthDate);
-              console.log('gender', this.PageOne.value.gender);
-              console.log('height', this.Heights1[this.PageOne.value.Height]);
-              console.log('marital_status', this.PageOne.value.MaritalStatus);
-              console.log('religion', this.PageOne.value.Religion);
-              console.log('caste', this.PageOne.value.Castes);
+      console.log('mobile', this.PageOne.value.phone);
+      console.log('birth_date', this.birthDate);
+      console.log('gender', this.PageOne.value.gender);
+      console.log('height', this.Heights1[this.PageOne.value.Height]);
+      console.log('marital_status', this.PageOne.value.MaritalStatus);
+      console.log('religion', this.PageOne.value.Religion);
+      console.log('caste', this.PageOne.value.Castes);
 
 
-              if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
+      if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
 
-            // tslint:disable-next-line: max-line-length
-            return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata ).subscribe(
-              (res: any) => {
-              console.log('first', res);
-              this.spinner.hide();
-            }, err => {
-              this.spinner.hide();
-              this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
-              console.log(err);
-            });
+        // tslint:disable-next-line: max-line-length
+        return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(
+          (res: any) => {
+            console.log('first', res);
+            this.spinner.hide();
+          }, err => {
+            this.spinner.hide();
+            this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+            console.log(err);
+          });
+      } else {
+        // tslint:disable-next-line: max-line-length
+        return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata).subscribe((res: any) => {
+          console.log('first', res);
+
+          if (res.status === 1) {
+            this.spinner.hide();
+            localStorage.setItem('id', res.id);
+            localStorage.setItem('gender', this.PageOne.value.gender);
+            localStorage.setItem('mobile_number', this.PageOne.value.phone);
+
+            // if facebook profile pic is fetched
+            if (this.fetchedFbProfilePic) {
+              setTimeout(() => {
+                this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
+              }, 200);
+            }
+
+            this.fourPageService.updateFormOneData(firststepdata);
+            this.analyticsEvent('Four Page Registration Page One');
+
           } else {
-            // tslint:disable-next-line: max-line-length
-            return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata ).subscribe((res: any) => {
-              console.log('first', res);
-
-              if (res.status === 1) {
-                this.spinner.hide();
-                localStorage.setItem('id', res.id);
-                localStorage.setItem('gender', this.PageOne.value.gender);
-                localStorage.setItem('mobile_number', this.PageOne.value.phone);
-
-                // if facebook profile pic is fetched
-                if (this.fetchedFbProfilePic) {
-                  setTimeout(() => {
-                    this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
-                  }, 200);
-                }
-
-                this.fourPageService.updateFormOneData(firststepdata);
-                this.analyticsEvent('Four Page Registration Page One');
-
-              } else {
-                this.spinner.hide();
-                this.ngxNotificationService.error(res.message);
-              }
-            }, err => {
-              this.spinner.hide();
-              this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
-              console.log(err);
-            });
+            this.spinner.hide();
+            this.ngxNotificationService.error(res.message);
           }
+        }, err => {
+          this.spinner.hide();
+          this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+          console.log(err);
+        });
+      }
     } else {
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
         console.log(control);
         if (!this.PageOne.controls[control].valid) {
-            this.errors.push(control);
-          }
+          this.errors.push(control);
+        }
       }
       if (this.errors[0]) {
         this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
-   }
+      }
     }
   }
 
@@ -681,34 +681,34 @@ async ngOnInit() {
 
   analyticsEvent(event) {
     if (!this.fourPageService.getUserThrough()) {
-    (window as any).ga('send', 'event', event, '', {
-      hitCallback: () => {
+      (window as any).ga('send', 'event', event, '', {
+        hitCallback: () => {
 
-        console.log('Tracking ' + event + ' successful');
+          console.log('Tracking ' + event + ' successful');
 
-      }
+        }
 
-    });
+      });
 
-    // gtag app + web
-    (window as any).gtag('event', event, {
-      event_callback: () => {
-        console.log('Tracking gtag ' + event + ' successful');
-      }
-    });
+      // gtag app + web
+      (window as any).gtag('event', event, {
+        event_callback: () => {
+          console.log('Tracking gtag ' + event + ' successful');
+        }
+      });
+    }
+
   }
 
-  }
 
 
 
-
-onDate(event): void {
+  onDate(event): void {
     console.log(event);
   }
 
-   // Calucalting age
-calculateAge(event: any) {
+  // Calucalting age
+  calculateAge(event: any) {
     this.birthDate = convert(event);
     const timediffernce = Math.abs(Date.now() - event);
     this.currentAge = Math.floor((timediffernce / (1000 * 3600 * 24)) / 365);
@@ -737,26 +737,26 @@ calculateAge(event: any) {
 
   }
 
-addSlashes() {
+  addSlashes() {
     console.log('sv');
     const newInput = document.getElementById('birthDate');
-    newInput.addEventListener('keydown', function(e) {
+    newInput.addEventListener('keydown', function (e) {
       if (e.which !== 8) {
-        const numChars = ( e.target as HTMLInputElement).value.length;
+        const numChars = (e.target as HTMLInputElement).value.length;
         if (numChars === 2 || numChars === 5) {
-          let thisVal = ( e.target as HTMLInputElement).value;
+          let thisVal = (e.target as HTMLInputElement).value;
           thisVal += '-';
-          ( e.target as HTMLInputElement).value = thisVal;
+          (e.target as HTMLInputElement).value = thisVal;
         }
       }
     });
   }
-datePickerClicked() {
+  datePickerClicked() {
     document.querySelector<HTMLElement>('.mat-icon-button').click();
   }
 
   // Religion
-Religion(event) {
+  Religion(event) {
     console.log(event.value);
     this.analyticsEvent('Four Page Registration Page One Religion Changed');
     if (event.value === 'Hindu') {
@@ -769,47 +769,47 @@ Religion(event) {
     }
   }
 
-setGender() {
-console.log(this.PageOne.value.Relation);
-this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
-this.analyticsEvent('Four Page Registration Page One Gender Changed');
-// this.openRegisterWith(this.PageOne.value.Relation);
-switch (this.PageOne.value.Relation) {
-  case 'Brother':
-    this.PageOne.patchValue(
-      {
-        gender: 'Male'
-    });
-    break;
+  setGender() {
+    console.log(this.PageOne.value.Relation);
+    this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
+    this.analyticsEvent('Four Page Registration Page One Gender Changed');
+    // this.openRegisterWith(this.PageOne.value.Relation);
+    switch (this.PageOne.value.Relation) {
+      case 'Brother':
+        this.PageOne.patchValue(
+          {
+            gender: 'Male'
+          });
+        break;
 
-    case 'Sister':
-    this.PageOne.patchValue(
-      {
-        gender: 'Female'
-    });
-    break;
+      case 'Sister':
+        this.PageOne.patchValue(
+          {
+            gender: 'Female'
+          });
+        break;
 
-    case 'Son':
-    this.PageOne.patchValue(
-      {
-        gender: 'Male'
-    });
-    break;
+      case 'Son':
+        this.PageOne.patchValue(
+          {
+            gender: 'Male'
+          });
+        break;
 
-    case 'Daughter':
-    this.PageOne.patchValue(
-      {
-        gender: 'Female'
-    });
-    break;
+      case 'Daughter':
+        this.PageOne.patchValue(
+          {
+            gender: 'Female'
+          });
+        break;
 
-  default:
-    break;
-}
-}
+      default:
+        break;
+    }
+  }
 
 
-getProfile() {
+  getProfile() {
     this.spinner.show();
     const leadId = localStorage.getItem('getListLeadId');
     const id = localStorage.getItem('getListId');
@@ -820,14 +820,14 @@ getProfile() {
     myprofileData.append('is_lead', leadId);
 
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {
       throw new Error('Server Timeout ' + e);
     })).subscribe(
       (data: any) => {
         console.log(data);
         this.profileData = data;
         if (this.fourPageService.userThroughGetList) {
-        this.setProfileValues(data);
+          this.setProfileValues(data);
         }
         this.spinner.hide();
       },
@@ -839,12 +839,12 @@ getProfile() {
     );
   }
   getProfilePhoto(carous: any, index: string): string {
-    if (carous && carous !== '' && carous !== 'null')  {
+    if (carous && carous !== '' && carous !== 'null') {
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
       if (carousel[keys[index]]) {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
       }
     }
   }
@@ -852,7 +852,7 @@ getProfile() {
   // setting getProfiles to our variables so that we can also update these values and check in the last page
   setProfileValues(profileData) {
     if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-    localStorage.setItem('getListTempleId', profileData.profile.temple_id);
+      localStorage.setItem('getListTempleId', profileData.profile.temple_id);
     }
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
@@ -908,10 +908,10 @@ getProfile() {
   }
 
   setFormOneData() {
-      this.PageOne.patchValue({
-        firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
+    this.PageOne.patchValue({
+      firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
       lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] ?
-       this.userProfile.name.split(' ')[1] : '' : '',
+        this.userProfile.name.split(' ')[1] : '' : '',
       phone: this.userProfile.mobile,
       email: this.userProfile.email,
       Relation: this.userProfile.relation,
@@ -924,34 +924,34 @@ getProfile() {
       MaritalStatus: this.userProfile.martialStatus,
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
-      });
+    });
   }
   getMonthString(month: string) {
     switch (month) {
       case '01':
         return 'January';
-        case '02':
-          return 'Feburary';
-        case '03':
-          return 'March';
-        case '04':
-          return 'April';
-        case '05':
-          return 'May';
-        case '06':
-          return 'June';
-        case '07':
-          return 'July';
-        case '08':
-          return 'August';
-        case '09':
-          return 'September';
-        case '10':
-          return 'October';
-          case '11':
-            return 'November';
-        case '12':
-          return 'December';
+      case '02':
+        return 'Feburary';
+      case '03':
+        return 'March';
+      case '04':
+        return 'April';
+      case '05':
+        return 'May';
+      case '06':
+        return 'June';
+      case '07':
+        return 'July';
+      case '08':
+        return 'August';
+      case '09':
+        return 'September';
+      case '10':
+        return 'October';
+      case '11':
+        return 'November';
+      case '12':
+        return 'December';
       default:
         break;
     }
@@ -998,7 +998,7 @@ getProfile() {
       }
     );
     dialogConfig.data = {
-      value : selection
+      value: selection
     };
     const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
@@ -1019,64 +1019,64 @@ getProfile() {
     );
   }
 
-    //  get facebook login status
-statusChangeCallback(value) {
-  console.log(value);
-  if (value.status === 'connected') {
-    localStorage.setItem('fb_token', value.authResponse.accessToken);
-    this.getFbData();
-  } else {
-    (window as any).FB.login((response) => {
-      if (response.authResponse) {
-       console.log('Welcome!  Fetching your information.... ');
-       this.getFbData();
-      } else {
-       console.log('User cancelled login or did not fully authorize.');
-      }
-  }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
+  //  get facebook login status
+  statusChangeCallback(value) {
+    console.log(value);
+    if (value.status === 'connected') {
+      localStorage.setItem('fb_token', value.authResponse.accessToken);
+      this.getFbData();
+    } else {
+      (window as any).FB.login((response) => {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          this.getFbData();
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location' });
+    }
   }
-}
 
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-getFbData() {
+  getFbData() {
     console.log('Welcome!  Fetching your information.... ');
 
     // fetch user image
     (window as any).FB.api('/me/picture',
-    'GET',
-    {height: '600', width: '400', redirect: 'false'}, (response) => {
-      console.log(response.data.url);
-      if (response.data.url) {
-        this.fetchedFbProfilePic = response.data.url;
-      }
-    });
+      'GET',
+      { height: '600', width: '400', redirect: 'false' }, (response) => {
+        console.log(response.data.url);
+        if (response.data.url) {
+          this.fetchedFbProfilePic = response.data.url;
+        }
+      });
 
     // fetch user data
     (window as any).FB.api('/me',
-    'GET',
-    {fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
-      console.log(response);
-      this.spinner.hide();
-      this.PageOne.patchValue({
-        firstName: response.first_name ? response.first_name : '',
-        lastName: response.last_name ? response.last_name : '',
-        email: response.email ? response.email : '',
-        gender: response.gender ? this.toTitleCase(response.gender) : '',
-        birth_date: response.birthday ? response.birthday.split('/')[1] : '',
-        birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
-        birth_year: response.birthday ? response.birthday.split('/')[2] : ''
+      'GET',
+      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location' }, (response) => {
+        console.log(response);
+        this.spinner.hide();
+        this.PageOne.patchValue({
+          firstName: response.first_name ? response.first_name : '',
+          lastName: response.last_name ? response.last_name : '',
+          email: response.email ? response.email : '',
+          gender: response.gender ? this.toTitleCase(response.gender) : '',
+          birth_date: response.birthday ? response.birthday.split('/')[1] : '',
+          birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
+          birth_year: response.birthday ? response.birthday.split('/')[2] : ''
+        });
+        // set home town in birth place
+        if (response.hometown && response.hometown.name) {
+          this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
+        }
+        // set home town in birth place
+        if (response.location && response.location.name) {
+          this.fourPageService.facebookLocationUpdated.emit(response.location.name);
+        }
+        // to solve the overlapping issue for new user
+        (document.querySelector('#firstName') as HTMLInputElement).focus();
       });
-      // set home town in birth place
-      if (response.hometown && response.hometown.name) {
-        this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
-      }
-      // set home town in birth place
-      if (response.location && response.location.name) {
-        this.fourPageService.facebookLocationUpdated.emit(response.location.name);
-      }
-      // to solve the overlapping issue for new user
-      (document.querySelector('#firstName') as HTMLInputElement).focus();
-    });
   }
 
   toTitleCase(str) {
@@ -1099,54 +1099,54 @@ getFbData() {
 
     setTimeout(() => {
 
-  if ( document.hasFocus() ) {
-     // Truecaller app not present on the device and you redirect the user
-     // to your alternate verification page
-  } else {
-    this.getUserFromTrueCaller(randomNumber).pipe(
-      catchError(e => {
-        throw new Error('True Caller Not Responding');
-    })
-    )
-    .subscribe(
-      (response) => {
-        this.pollingCount++;
-        console.log(response);
-        if (this.pollingCount < 10) {
-        if (response.status === 1) {
-            const data = JSON.parse(response.data);
-            if (data) {
-              this.setTruecallerData(data);
+      if (document.hasFocus()) {
+        // Truecaller app not present on the device and you redirect the user
+        // to your alternate verification page
+      } else {
+        this.getUserFromTrueCaller(randomNumber).pipe(
+          catchError(e => {
+            throw new Error('True Caller Not Responding');
+          })
+        )
+          .subscribe(
+            (response) => {
+              this.pollingCount++;
+              console.log(response);
+              if (this.pollingCount < 10) {
+                if (response.status === 1) {
+                  const data = JSON.parse(response.data);
+                  if (data) {
+                    this.setTruecallerData(data);
+                  }
+                  this.stopPolling.next();
+                } else if (response.status !== 0) {
+                  this.ngxNotificationService.error('True Caller Not Responding');
+                  this.stopPolling.next();
+                }
+              } else {
+                this.stopPolling.next();
+              }
+            },
+            err => {
+              this.ngxNotificationService.error('True Caller Not Responding');
+              console.log(err);
+              this.stopPolling.next();
             }
-            this.stopPolling.next();
-          } else if (response.status !== 0) {
-            this.ngxNotificationService.error('True Caller Not Responding');
-            this.stopPolling.next();
-          }
-        } else {
-          this.stopPolling.next();
-        }
-      },
-      err => {
-        this.ngxNotificationService.error('True Caller Not Responding');
-        console.log(err);
-        this.stopPolling.next();
+          );
+        // Truecaller app present on the device and the profile overlay opens
+        // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
+        // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
       }
-    );
-     // Truecaller app present on the device and the profile overlay opens
-     // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
-     // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
-  }
-}, 600);
+    }, 600);
   }
 
   getUserFromTrueCaller(requestId): Observable<any> {
-   return timer(1, 3000).pipe(
+    return timer(1, 3000).pipe(
       switchMap(() => this.http.get(`https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=${requestId}`)),
       retry(),
       share(),
       takeUntil(this.stopPolling)
-   );
+    );
   }
 
   setTruecallerData(data) {
