@@ -576,7 +576,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           }
         }
       );
-        // removing all the removable profiles from the list
+      // removing all the removable profiles from the list
       if (removableProfiles.length > 0) {
         removableProfiles.forEach(element => {
           const profileIndex = this.profile.findIndex(item => {
@@ -904,7 +904,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.updateLocalList();
   }
   goToSubscription() {
-    this.router.navigateByUrl('subscription');
+    this.router.navigateByUrl('chat/getcallback');
   }
   call(index: any) {
     if (this.profile[index].family) {

@@ -38,16 +38,19 @@
 }
 .col{
     padding:0px!important;
-    height:17vh;
+    height:22vh;
     background:white;
     border-radius:8px;
     width:50%!important;
     flex: 1 1;
-    margin:16px;
+    margin:10px;
     display:flex;
     flex-direction: row;
     align-items: center;
     justify-content:center
+}
+img{
+    border-radius:8px!important;
 }
 .footer{
     width:80%;

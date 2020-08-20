@@ -1,6 +1,14 @@
 ::ng-deep #prefsMain .mat-dialog-container{
     min-height: 100vh!important;
     background:white;
+
+}
+::ng-deep .mat-dialog-container {
+    padding: 0px;
+    background: white;
+    color: black;
+    height:inherit!important;
+    /* max-height: 79vh; */
 }
 ::ng-deep #prefsMain .mat-dialog{
     transition:none!important;

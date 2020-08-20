@@ -53,7 +53,12 @@
             </select>
           </div>
         </div>
-
+        <div class="col-12">
+          <h6>Locality:</h6>
+          <input type="text" class="form-control" id="Locality" [autoCompleteOptions]="autoComplete" matValidateAddress
+            matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+            (change)="placeChangedLocality()" formControlName="Locality" />
+        </div>
         <div class="row information" style="width: 100%!important;margin: 5px 5px">
           <div class="col-6">
             <h6>Weight:</h6>
@@ -102,14 +107,6 @@
             </mat-autocomplete>
           </div>
         </div>
-
-        <div class="col-12">
-          <h6>Locality:</h6>
-          <input type="text" class="form-control" id="Locality" [autoCompleteOptions]="autoComplete" matValidateAddress
-            matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
-            (change)="placeChangedLocality()" formControlName="Locality" />
-
-        </div>
       </div>
 
       <div *ngIf="index==2" style="width: 100%!important">
@@ -129,23 +126,29 @@
           <h6>Additional Qualifications:</h6>
           <input type="text" class="form-control" formControlName="Additional">
         </div>
-
         <div class="col-12">
-          <h6>Occupation:</h6>
-          <select #relation class="form-control" formControlName="Occupation" required>
-            <option *ngFor="let  option of Occupation" [value]="option">
-              {{option}}
-            </option>
-          </select>
+          <h6>Working City:</h6>
+          <input type="text" class="form-control" id="WorkingCity" matValidateAddress matGoogleMapsAutocomplete
+            #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedWorkingcity()"
+            formControlName="WorkingCity" />
         </div>
-
-        <div class="col-12">
-          <h6>Designation:</h6>
-          <select #relation class="form-control" formControlName="Profession">
-            <option *ngFor="let  option of designations" [value]="option">
-              {{option}}
-            </option>
-          </select>
+        <div class="row information">
+          <div class="col-6">
+            <h6>Occupation:</h6>
+            <select #relation class="form-control" formControlName="Occupation" required>
+              <option *ngFor="let  option of Occupation" [value]="option">
+                {{option}}
+              </option>
+            </select>
+          </div>
+          <div class="col-6">
+            <h6>Designation:</h6>
+            <select #relation class="form-control" formControlName="Profession">
+              <option *ngFor="let  option of designations" [value]="option">
+                {{option}}
+              </option>
+            </select>
+          </div>
         </div>
 
         <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
@@ -153,25 +156,16 @@
           <input type="text" class="form-control" formControlName="OtherProfession" name="OtherProfession">
         </div>
 
-        <div class="col-12">
-          <h6>Company:</h6>
-          <input type="text" class="form-control" formControlName="Company">
-        </div>
+        <div class="row information">
+          <div class="col-6">
+            <h6>Company:</h6>
+            <input type="text" class="form-control" formControlName="Company">
+          </div>
 
-        <div class="col-12">
-          <h6>Annual Income In Lakhs:</h6>
-          <input type="text" pattern="\d*" maxlength="3" class="form-control" formControlName="AnnualIncome" required>
-        </div>
-
-        <div class="col-12">
-          <h6>Working City:</h6>
-          <!-- <input type="text" #input class="form-control" matValidateAddress formControlName="WorkingCity"
-            matGoogleMapsAutocomplete #matGoogleMapsAutocomplete3="matGoogleMapsAutocomplete"
-            (onAutocompleteSelected)="onAutocompleteSelected($event, 'Working')"
-            (onLocationSelected)="onLocationSelected($event, 'Working')" required> -->
-          <input type="text" class="form-control" id="WorkingCity" matValidateAddress matGoogleMapsAutocomplete
-            #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedWorkingcity()"
-            formControlName="WorkingCity" />
+          <div class="col-6">
+            <h6>Annual Income In Lakhs:</h6>
+            <input type="text" pattern="\d*" maxlength="3" class="form-control" formControlName="AnnualIncome" required>
+          </div>
         </div>
       </div>
 
@@ -229,5 +223,6 @@
                         " (click)="onSubmit()">SAVE</button>
       </div>
     </div>
+    <div class="infoRow" style="margin-bottom:24%"></div>
   </form>
 </main>

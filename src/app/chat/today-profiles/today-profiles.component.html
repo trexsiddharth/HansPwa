@@ -38,7 +38,8 @@
                     <span style="font-weight: bold;font-size: 18px;">
                         {{toTitleCase(item.name)}}
                     </span><br>
-                    <span class="title">{{item.religion}} {{item.religion ? '|' : ''}} {{item.caste}} </span><br>
+                    <span style="font-size: 14px;">{{item.religion}} {{item.religion ? '|' : ''}} {{item.caste}}
+                    </span><br>
                     <span style="font-size: 14px;">
                         {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? item.city : '' : item.city ? item.city : '' : ''}}
                         {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? '|' : '' : '|' : ''}}

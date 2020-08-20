@@ -1,9 +1,11 @@
-/* ::ng-deep .mat-dialog-container {
+ ::ng-deep .mat-dialog-container {
     padding: 0px;
     background: white;
     color: black;
-    max-height: 79vh;
+    height:inherit!important;
+    /* max-height: 79vh; */
 }
+/*
 ::ng-deep .mat-dialog-content{
     max-height: 100%;
     margin: 0px;

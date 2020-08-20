@@ -55,6 +55,19 @@
                     </select>
                 </div>
             </div>
+            <div class="col-12">
+                <h6>Family Living In:</h6>
+                <input id="familyLivingIn" #familyLivingIn type="text" class="form-control"
+                    [autoCompleteOptions]="autoComplete" name="city" matValidateAddress matGoogleMapsAutocomplete
+                    #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedFamily()"
+                    value="{{familyData.city}}" />
+            </div>
+
+            <div class="col-12">
+                <h6>About Family: (max 300 words)</h6>
+                <textarea class="form-control" maxlength="300" type="text" name="about" [(ngModel)]="familyData.about"
+                    rows="1" required></textarea>
+            </div>
             <div class="row information" style="width: 100%!important">
                 <div class="col-6">
                     <h6 style="display: inline-block">Sisters Married : </h6>
@@ -102,23 +115,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-12">
-                <h6>Family Living In:</h6>
-                <!-- <input type="text" class="form-control" name="city" matValidateAddress matGoogleMapsAutocomplete
-                    #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
-                    (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                    (onLocationSelected)="onLocationSelected($event)" [(ngModel)]="familyData.city"> -->
-                <input id="familyLivingIn" #familyLivingIn type="text" class="form-control"
-                    [autoCompleteOptions]="autoComplete" name="city" matValidateAddress matGoogleMapsAutocomplete
-                    #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedFamily()"
-                    value="{{familyData.city}}" />
-            </div>
 
-            <div class="col-12">
-                <h6>About Family: (max 300 words)</h6>
-                <textarea class="form-control" maxlength="300" type="text" name="about" [(ngModel)]="familyData.about"
-                    rows="3" required></textarea>
-            </div>
             <div style="text-align: center; width: 100%;">
                 <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
                                   color: white;
@@ -130,6 +127,8 @@
                                   font-weight: bold;
                                   ">SAVE</button>
             </div>
+        </div>
+        <div class="infoRow" style="margin-bottom:20%">
         </div>
     </form>
 </main>
