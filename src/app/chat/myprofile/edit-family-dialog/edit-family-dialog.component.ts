@@ -46,7 +46,7 @@ export class EditFamilyDialogComponent implements OnInit {
     setTimeout(() => {
       console.log(place.value);
       this.familyData.city = place.value;
-    }, 1000);
+    }, 500);
   }
 
   onSubmit() {
@@ -68,7 +68,7 @@ export class EditFamilyDialogComponent implements OnInit {
     familyDataForm.append('unmarried_daughters', this.familyForm.value.unmarried_daughters);
     familyDataForm.append('gotra', this.familyForm.value.gotra);
     familyDataForm.append('family_income', this.familyForm.value.family_income);
-    familyDataForm.append('city', this.familyForm.value.city);
+    familyDataForm.append('city', this.familyData.city);
     familyDataForm.append('is_lead', localStorage.getItem('is_lead'));
 
 

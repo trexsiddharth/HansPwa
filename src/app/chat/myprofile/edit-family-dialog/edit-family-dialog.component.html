@@ -108,8 +108,8 @@
                     #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
                     (onAutocompleteSelected)="onAutocompleteSelected($event)"
                     (onLocationSelected)="onLocationSelected($event)" [(ngModel)]="familyData.city"> -->
-                <input id="familyLivingIn" type="text" class="form-control" [autoCompleteOptions]="autoComplete"
-                    name="city" matValidateAddress matGoogleMapsAutocomplete
+                <input id="familyLivingIn" #familyLivingIn type="text" class="form-control"
+                    [autoCompleteOptions]="autoComplete" name="city" matValidateAddress matGoogleMapsAutocomplete
                     #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedFamily()"
                     value="{{familyData.city}}" />
             </div>
