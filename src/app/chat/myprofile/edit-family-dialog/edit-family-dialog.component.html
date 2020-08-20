@@ -10,7 +10,7 @@
         </div>
 
         <div class="row" style="margin: 10px 10px;">
-            <div class="row information" style="width: 100%!important;margin-bottom:15px">
+            <!-- <div class="row information" style="width: 100%!important;margin-bottom:15px">
                 <div class="col-6">
                     <h6 style="display: inline-block">Father Status : </h6>
                     <select type="text" class="form-control" name="father_status" [(ngModel)]="familyData.father_status"
@@ -25,17 +25,17 @@
                         <option *ngFor="let item of Status" [value]="item">{{item}}</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="row information" style="width: 100%!important">
                 <div class="col-6">
-                    <h6 style="display: inline-block">Father's Occupation : </h6>
+                    <h6 style="display: inline-block">Father's Status : </h6>
                     <select type="text" class="form-control" name="father_occupation"
                         [(ngModel)]="familyData.occupation" required>
                         <option *ngFor="let item of Occupation" [value]="item">{{item}}</option>
                     </select>
                 </div>
                 <div class="col-6">
-                    <h6 style="display: inline-block">Mother's Occupation : </h6>
+                    <h6 style="display: inline-block">Mother's Status : </h6>
                     <select type="text" class="form-control" name="mother_occupation"
                         [(ngModel)]="familyData.occupation_mother" required>
                         <option *ngFor="let item of Occupation" [value]="item">{{item}}</option>

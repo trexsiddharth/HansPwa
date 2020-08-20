@@ -904,7 +904,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.updateLocalList();
   }
   goToSubscription() {
-    this.router.navigateByUrl('chat/getcallback');
+    this.router.navigateByUrl('chat/getcallback/');
   }
   call(index: any) {
     if (this.profile[index].family) {

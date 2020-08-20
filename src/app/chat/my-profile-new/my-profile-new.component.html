@@ -528,19 +528,19 @@
                     {{familyProfileData.occupation ? familyProfileData.occupation : "+Add Father's Occupation"}}</p>
                   <p *ngIf="familyProfileData.father_status == 'Not Alive'">Not Alive</p>
                   <p class="headings">Siblings</p>
-                  <p>{{languageService.profileLang.sisters}} : {{
+                  <p>{{languageService.profileLang.sisters}} : <br>{{
                     setMarriageSisters(
                       familyProfileData.unmarried_daughters,
                       familyProfileData.married_daughters
                     )
                   }}</p>
-                  <p>{{languageService.profileLang.brothers}} : {{
+                  <p>{{languageService.profileLang.brothers}} : <br>{{
                     setMarriageBrothers(
                       familyProfileData.unmarried_sons,
                       familyProfileData.married_sons
                     )
                   }}</p>
-                  <p class="headings">Living With Parents ?</p>
+                  <p class="headings">Living With Parents?</p>
                   <p>{{familyProfileData.living_with_parents ? familyProfileData.living_with_parents : "+Add Detail"}}
                   </p>
                   <p class="headings">{{ languageService.profileLang.familyLivingIn}}</p>
@@ -549,6 +549,9 @@
                       ? familyProfileData.city
                       : "Add Detail"
                   }}</p>
+                </div>
+                <div class="columnar">
+                  <p style="color:white!important">Random Text More</p>
                 </div>
               </div>
             </div>
@@ -685,7 +688,6 @@
               </button>
             </div> -->
           </div>
-
           <div class="infoRow" style="margin-bottom:20px">
           </div>
         </form>
