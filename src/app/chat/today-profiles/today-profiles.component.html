@@ -1,6 +1,6 @@
 <main id="main" *ngIf="item && type == 'profile'">
 
-    <div class="full-width" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',
+    <div class="full-width ht-full" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',
     'greyBack': (profileIsLoading$ | async) === 'NO',
     'blueBack': (profileIsLoading$ | async) === 'YES' }" style="position: absolute;
     z-index: 1;
