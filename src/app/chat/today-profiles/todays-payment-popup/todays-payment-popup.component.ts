@@ -193,7 +193,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     
   }
   container2() {
-    this.price = '5500';
+    this.price = '4500';
     this.credits = '90';
     localStorage.setItem('selected_plan', 'plan 2');
     this.selectedContainer = 2;

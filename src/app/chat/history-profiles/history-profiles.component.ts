@@ -1210,7 +1210,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.HandlePayment();
   }
   container2() {
-    this.price = '5500';
+    this.price = '4500';
     this.credits = '90';
     this.selectedContainer = 2;
     console.log('plan 1 selected');

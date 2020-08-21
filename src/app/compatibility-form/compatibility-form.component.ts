@@ -582,9 +582,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       }
       firststepdata.append('gender', this.PageOne.value.gender);
       firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
+
       if (this.PageOne.value.Weight) {
         firststepdata.append('weight', this.PageOne.value.Weight);
       }
+
       firststepdata.append('marital_status', this.PageOne.value.MaritalStatus);
 
       firststepdata.append('religion', this.PageOne.value.Religion);
