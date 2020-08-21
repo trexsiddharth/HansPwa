@@ -279,7 +279,10 @@ export class ChatDrawerComponent implements OnInit {
   }
   castePreferences: string[] = [];
   specialCase() {
-    this.castePreferences = this.preferenceProfileData.caste.split(',');
+
+    if (this.preferenceProfileData) {
+      this.castePreferences = this.preferenceProfileData.caste.split(',');
+    }
   }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
@@ -325,6 +328,9 @@ export class ChatDrawerComponent implements OnInit {
   }
   setCurrentPreferenceValue() {
     //console.log(this.personalProfileData);
+
+    if (this.preferenceProfileData) {
+  
     this.preferencesForm.patchValue({
       food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
       age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
@@ -343,6 +349,7 @@ export class ChatDrawerComponent implements OnInit {
       height_max: this.getHeight(this.preferenceProfileData.height_max),
       marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter'
     });
+  }
   }
   getUserProfileData() {
     if (this.userId || localStorage.getItem('id')) {
@@ -378,9 +385,13 @@ export class ChatDrawerComponent implements OnInit {
             console.log(data.preference);
             this.preferenceProfileData = data.preferences ? data.preferences : null;
             this.spinner.hide();
-            this.gender = data.profile.gender;
-            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
-            if (this.gender === "Female") {
+            if (data && data.profile) {
+              this.gender = data.profile.gender;
+            }
+            if (this.preferenceProfileData) {
+              this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
+            }
+            if (this.gender === 'Female') {
               if (this.preferenceProfileData.occupation)
                 this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
               else {
@@ -490,6 +501,7 @@ export class ChatDrawerComponent implements OnInit {
 
         // set initial selection
         if (
+          this.preferenceProfileData &&
           this.preferenceProfileData.caste &&
           this.preferenceProfileData.caste !== 'null'
         ) {
