@@ -1,134 +1,127 @@
+<form [formGroup]="PageThree">
+  <div class="row">
 
-            <form  [formGroup]="PageThree">
-                <div class="row">
+    <div class="col-6">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Birth Place</mat-label>
+        <input type="text" matInput matValidateAddress id="birthPlace" [autoCompleteOptions]="autoComplete"
+          (change)="placeChanged('birth')" matGoogleMapsAutocomplete
+          #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" formControlName="BirthPlace">
+      </mat-form-field>
+    </div>
 
-                    <div class="col-6">
-                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                          <mat-label>Birth Place</mat-label>
-                          <input type="text" 
-                          matInput matValidateAddress 
-                          id="birthPlace"
-                          [autoCompleteOptions]="autoComplete"
-                          (change)="placeChanged('birth')"
-                          matGoogleMapsAutocomplete
-                           #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                          formControlName="BirthPlace">
-                        </mat-form-field>
-                      </div>
+    <div class="col-6" style="padding-left: 0px;">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Birth Time<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
+        <input matInput id="BirthTime" (change)="changed('bTime')" type="time" placeholder="Choose a time"
+          formControlName="BirthTime">
+      </mat-form-field>
+    </div>
 
-                    <div class="col-6" style="padding-left: 0px;">
-                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                            <mat-label>Birth Time<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
-                          <input matInput id="BirthTime" 
-                          (change)="changed('bTime')"
-                          type="time" placeholder="Choose a time" formControlName="BirthTime">
-                        </mat-form-field>
-                      </div>
+    <div class="col-md-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Gotra <code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
+        <input type="text" matInput (change)="changed('gotra')" formControlName="Gotra">
+        <mat-hint>eg. Kashyap</mat-hint>
+      </mat-form-field>
+    </div>
 
-                      <div class="col-md-12">
-                        <mat-form-field class="full-width fieldFit" appearance="standard" >
-                          <mat-label>Gotra <code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
-                          <input type="text" matInput
-                          (change)="changed('gotra')"
-                           formControlName="Gotra" >
-                          <mat-hint>eg. Kashyap</mat-hint>
-                        </mat-form-field>
-                    </div>
+    <div class="col-6 mt-10">
 
-                    <div class="col-6 mt-10">
-                   
-                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                            <mat-label>Food Choice</mat-label>
-                            <mat-select (selectionChange)="changed('food')" formControlName="FoodChoice"  >
-                              <mat-option value="Vegetarian">Vegetarian</mat-option>
-                              <mat-option value="Non-Vegetarian">Non-Vegetarian</mat-option>
-                            </mat-select>
-                        
-                        </mat-form-field>
-                    
-                    </div>
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Food Choice</mat-label>
+        <mat-select (selectionChange)="changed('food')" formControlName="FoodChoice">
+          <mat-option value="Vegetarian">Vegetarian</mat-option>
+          <mat-option value="Non-Vegetarian">Non-Vegetarian</mat-option>
+        </mat-select>
 
-                    <div class="col-6 matSelect mt-10">
-                     
-                      <mat-form-field class="full-width fieldFit" appearance="standard">
-                          <mat-label >Manglik Status</mat-label>
-                          <mat-select (selectionChange)="changed('manglik')" 
-                          formControlName="Mangalik" >
-                            <mat-option value="Manglik">Manglik</mat-option>
-                            <mat-option value="Non-Manglik">Non-Manglik</mat-option>
-                            <mat-option value="Anshik Manglik">Anshik Manglik</mat-option>
-                            <mat-option value="Anshik Manglik">Don't Know</mat-option>
+      </mat-form-field>
 
-                          </mat-select>
-                      
-                      </mat-form-field>
-                  
-                  </div>
+    </div>
 
-                      <div class="col-md-12">
-                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                        
-                            <mat-label>Father's Status</mat-label>
-                            <mat-select  formControlName="FatherStatus" (selectionChange)="changed('fstatus')" >
-                                    <mat-option *ngFor="let  option of Occupation" [value]="option">
-                                            {{option}}
-                                    </mat-option>
-                            </mat-select>
-                         
-                        </mat-form-field>
-                      </div>
+    <div class="col-6 matSelect mt-10">
 
-                      <div class="col-md-12">
-                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                        
-                            <mat-label>Mother's Status</mat-label>
-                            <mat-select  formControlName="MotherStatus" (selectionChange)="changed('mstatus')" >
-                                    <mat-option *ngFor="let  option of Occupation" [value]="option">
-                                            {{option}}
-                                    </mat-option>
-                            </mat-select>
-                         
-                        </mat-form-field>
-                      </div>
-                   
-                          <div class="col-md-12">
-                            <mat-form-field class="full-width fieldFit" appearance="standard" >
-                              <mat-label>Family's Annual Income</mat-label>
-                              <input type="number" (change)="changed('Fincome')" matInput formControlName="FamilyIncome"  name="FamilyIncome">
-                              <span matSuffix>Lakh Per Year &nbsp;</span>
-                              <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageThree.get('FamilyIncome').invalid"> eg. 8 <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
-                            </mat-form-field>
-                          </div>
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Manglik Status</mat-label>
+        <mat-select (selectionChange)="changed('manglik')" formControlName="Mangalik">
+          <mat-option value="Manglik">Manglik</mat-option>
+          <mat-option value="Non-Manglik">Non-Manglik</mat-option>
+          <mat-option value="Anshik Manglik">Anshik Manglik</mat-option>
+          <mat-option value="Anshik Manglik">Don't Know</mat-option>
 
-                          <div class="col-12">
-                            <mat-form-field class="full-width fieldFit" appearance="standard">
-                              <mat-label>Locality / Area</mat-label>
-                              <input type="text" 
-                              matInput matValidateAddress 
-                              id="locality"
-                              [autoCompleteOptions]="autoComplete"
-                              (change)="placeChanged('locality')"
-                              matGoogleMapsAutocomplete
-                               #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" 
-                              formControlName="Locality">
-                            </mat-form-field>
-                          </div>
+        </mat-select>
 
-                          <p *ngIf="fourPageService.getUserThrough()" class="impNote">
-                            यहाँ कस्टमर कहाँ रहता  है वो भरे जैसे की करोल बाघ , शादी पुर , बुरारी रोहिणी आदि |
-                          </p>
-                          
+      </mat-form-field>
 
-                    <div class="col-xs-12 m-t-20" style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-                      <button mat-raised-button type="button" id="skipBtn" matStepperNext class="btn" (click)="skip()" *ngIf="fourPageService.getSkippable()">Skip</button>
-                        <button mat-raised-button matStepperNext type="button" id="viewButtonThree" (click)="firstStep()" class="btn" >Next</button>
-                    </div>
-                    <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
+    </div>
+
+    <div class="col-md-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+
+        <mat-label>Father's Status</mat-label>
+        <mat-select formControlName="FatherStatus" (selectionChange)="changed('fstatus')">
+          <mat-option *ngFor="let  option of Occupation" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+
+        <mat-label>Mother's Status</mat-label>
+        <mat-select formControlName="MotherStatus" (selectionChange)="changed('mstatus')">
+          <mat-option *ngFor="let  option of Occupation" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Family's Annual Income in LPA</mat-label>
+        <mat-select name="FamilyIncome" formControlName="FamilyIncome" (selectionChange)="changed('Fincome')">
+          <mat-option *ngFor="let item of incomeCategories" [value]="item">
+            {{item}} LPA
+          </mat-option>
+        </mat-select>
+        <!-- <input type="number" (change)="changed('Fincome')" matInput formControlName="FamilyIncome"  name="FamilyIncome">
+                              <span matSuffix>Lakh Per Year &nbsp;</span> -->
+        <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageThree.get('FamilyIncome').invalid"> eg. 8
+          <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Locality / Area</mat-label>
+        <input type="text" matInput matValidateAddress id="locality" [autoCompleteOptions]="autoComplete"
+          (change)="placeChanged('locality')" matGoogleMapsAutocomplete
+          #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" formControlName="Locality">
+      </mat-form-field>
+    </div>
+
+    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+      यहाँ कस्टमर कहाँ रहता है वो भरे जैसे की करोल बाघ , शादी पुर , बुरारी रोहिणी आदि |
+    </p>
+
+
+    <div class="col-xs-12 m-t-20"
+      style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
+      <button mat-raised-button type="button" id="skipBtn" matStepperNext class="btn" (click)="skip()"
+        *ngIf="fourPageService.getSkippable()">Skip</button>
+      <button mat-raised-button matStepperNext type="button" id="viewButtonThree" (click)="firstStep()"
+        class="btn">Next</button>
+    </div>
+    <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
                       Just one more step and we’ll help you find your perfect match!
                     </p> -->
-                    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
-                      डिटेल्स भरने के बाद  इस बटन पर जरूर क्लिक करे |
-                    </p>
-                </div>
-           </form> 
-
+    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+      डिटेल्स भरने के बाद इस बटन पर जरूर क्लिक करे |
+    </p>
+  </div>
+</form>
