@@ -377,10 +377,10 @@ export class CompatibilityPageFiveComponent implements OnInit {
       return this.ngxNotificationService.error('Enter College Name');
     } else if (!userProfile.company || userProfile.company === '') {
       return this.ngxNotificationService.error('Enter Company Name');
-    } else if (userProfile.fatherStatus !== 'Not Alive' &&
+    } else if (userProfile.fatherStatus !== 'Not Alive' && userProfile.fatherStatus !== 'Not Working' &&
       userProfile.family.occupation === null || userProfile.family.occupation === '') {
       return this.ngxNotificationService.error('Select Father Occupation');
-    } else if (userProfile.motherStatus !== 'Not Alive' &&
+    } else if (userProfile.motherStatus !== 'Not Alive' && userProfile.motherStatus !== 'Not Working' &&
       userProfile.family.occupation_mother === null || userProfile.family.occupation_mother === '') {
       return this.ngxNotificationService.error('Select Mother Occupation');
     } else if (userProfile.family.married_daughters == null) {

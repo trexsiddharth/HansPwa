@@ -316,10 +316,10 @@ export class CompatibilityPageThreeComponent implements OnInit {
       profileData.get('mother_status').toString() : '';
 
     this.fourPageService.profile.family.occupation = profileData.get('occupation_father') ?
-      profileData.get('occupation_father').toString() : '';
+      profileData.get('occupation_father').toString() : 'Not Working';
 
     this.fourPageService.profile.family.occupation_mother = profileData.get('occupation_mother') ?
-      profileData.get('occupation_mother').toString() : '';
+      profileData.get('occupation_mother').toString() : 'Not Working';
 
     this.fourPageService.profile.familyIncome = profileData.get('family_income') ?
       profileData.get('family_income').toString() : '';

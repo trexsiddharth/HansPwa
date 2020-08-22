@@ -248,7 +248,7 @@
                     </option>
                   </select>
                 </div>
-                <div class="col-5">
+                <div class="col-5" *ngIf="preferenceProfileData && preferenceProfileData.manglik">
                   <h6 style="display: inline-block;">Manglik :</h6>
                   <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
                     [(ngModel)]="preferenceProfileData.manglik" required>
