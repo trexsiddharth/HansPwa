@@ -95,6 +95,8 @@
       id="myprofMatTabGroup">
       <mat-tab>
         <ng-template mat-tab-label>
+          <span class="labelS mat-elevation-z7" [matBadge]="getDetailsLeft('personal')"
+            [matBadgeHidden]="getDetailsLeft('personal') == 0"></span>
           <button class="icon-circular mat-elevation-z7" *ngIf="selectedTab && selectedTab != 0"
             style="padding: 14px !important;">
             <img src="../../assets/personalN.svg" alt="icon" />
@@ -487,6 +489,8 @@
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
+          <span class="labelS mat-elevation-z7" [matBadge]="getDetailsLeft('family')"
+            [matBadgeHidden]="getDetailsLeft('family') == 0"></span>
           <button class="icon-circular mat-elevation-z7" *ngIf="selectedTab != 1">
             <img src="../../assets/familyN.svg" alt="icon" />
           </button>
@@ -528,7 +532,7 @@
                   }}</p>
                 </div>
                 <div class="columnar">
-                  <p style="color:white!important">Random Text More</p>
+                  <p style="color:white!important">Important Do not remove</p>
                 </div>
               </div>
             </div>
@@ -730,6 +734,8 @@
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
+          <span class="labelS mat-elevation-z7" [matBadge]="getDetailsLeft('preference')"
+            [matBadgeHidden]="getDetailsLeft('preference') == 0"></span>
           <button class="icon-circular mat-elevation-z7" *ngIf="selectedTab != 2">
             <img src="../../assets/preferencesN.svg" alt="icon" />
           </button>
@@ -764,6 +770,9 @@
                   <p>{{preferenceProfileData.marital_status}}</p>
                   <p class="headings">{{languageService.profileLang.foodChoice}}</p>
                   <p>{{preferenceProfileData.food_choice}}</p>
+                </div>
+                <div class="columnar">
+                  <p style="color:white!important">Important Do not remove this text</p>
                 </div>
               </div>
             </div>

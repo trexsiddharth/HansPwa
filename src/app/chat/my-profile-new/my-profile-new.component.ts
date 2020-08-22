@@ -1229,6 +1229,64 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       };
     }
   }
+  familyDetailsLeft: number;
+  personalDetailsLeft: number;
+  preferenceDetailsLeft: number;
+  getDetailsLeft(a: string) {
+    switch (a) {
+      case 'personal': return this.personalDetailsLeft;
+        break;
+      case 'family': return this.familyDetailsLeft;
+        break;
+      case 'preference': return this.preferenceDetailsLeft;
+        break;
+    }
+  }
+  setProfileCalculations() {
+    this.personalDetailsLeft = 0;
+    Object.entries(this.personalProfileData).forEach(
+      ([key, value]) => {
+        if ((!value) && key! in [
+          'lat_locality',
+          'disability',
+          'long_locality',
+          'is_premium_interest',
+          'is_premium_interest',
+          'disabled_part',
+          'abroad',
+          'si_event',
+          'unapprove_carousel',
+          'call_back_query',
+          'profiles_sent',
+          'sent_profiles',
+          'photo_score',
+          'pdf_url',
+          'is_premium_interest']
+        ) {
+          this.personalDetailsLeft += 1;
+          console.log(key, value);
+        }
+      }
+    );
+    console.log(this.personalDetailsLeft);
+    this.familyDetailsLeft = 0;
+    Object.entries(this.familyProfileData).forEach(
+      ([key, value]) => {
+        // console.log(key, value);
+        if (!value && key! in ['address', 'father_off_addr', 'mother_tongue', 'office_address', 'name', 'relation']) {
+          this.familyDetailsLeft += 1;
+        }
+      });
+    console.log(this.familyDetailsLeft);
+    this.preferenceDetailsLeft = 0;
+    Object.entries(this.preferenceProfileData).forEach(
+      ([key, value]) => {
+        //console.log(key, value);
+        if (!value && value != 'null' && key! in ['citizenship', 'description', 'caste_no_bar']) {
+          this.preferenceDetailsLeft += 1;
+        }
+      });
+  }
 
   getUserProfileData() {
     if (this.userId || localStorage.getItem('id')) {
@@ -1282,11 +1340,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             }
             localStorage.setItem('gender', this.personalProfileData.gender);
             this.specialCase();
-            this.setCurrentProfileValue();
-            this.setCurrentFamilyValues();
-            this.setCurrentPreferenceValue();
-            this.getAllCaste();
-            this.getAllCastePersonal();
+            //this.setCurrentProfileValue();
+            //this.setCurrentFamilyValues();
+            //this.setCurrentPreferenceValue();
+            this.setProfileCalculations();
+            //this.getAllCaste();
+            //this.getAllCastePersonal();
 
           },
           (error: any) => {

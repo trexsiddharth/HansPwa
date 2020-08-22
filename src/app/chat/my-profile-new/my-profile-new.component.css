@@ -171,7 +171,18 @@ hr {
 .columnA {
   flex: 50%;
 }
-
+.labelS {
+  width:10px!important;
+  /* margin:auto; */
+  margin: 7px 2px 7px ;
+  padding:0px;
+  font-size:5px!important;
+  display: block;
+  position: absolute;
+  top:4px;
+  right:38px;
+  z-index:99999999;
+}
 .UploadInfo:after {
   content: "";
   display: table;
