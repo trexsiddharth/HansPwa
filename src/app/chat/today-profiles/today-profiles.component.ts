@@ -60,15 +60,15 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   );
 
   constructor(private http: HttpClient,
-              private spinner: NgxSpinnerService,
-              private ngxNotificationService: NgxNotificationService,
-              public notification: NotificationsService,
-              public chatService: ChatServiceService,
-              public itemService: FindOpenHistoryProfileService,
-              public router: Router,
-              private dialog: MatDialog,
-              public languageService: LanguageService,
-              public subscriptionService: SubscriptionserviceService) {
+    private spinner: NgxSpinnerService,
+    private ngxNotificationService: NgxNotificationService,
+    public notification: NotificationsService,
+    public chatService: ChatServiceService,
+    public itemService: FindOpenHistoryProfileService,
+    public router: Router,
+    private dialog: MatDialog,
+    public languageService: LanguageService,
+    public subscriptionService: SubscriptionserviceService) {
   }
 
   @HostListener('scroll', ['$event'])
@@ -83,7 +83,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     // if (localStorage.getItem('todaysSpecialScrollPos')) {
     //   document.getElementById("main").scrollTo(0, Number(localStorage.getItem('todaysSpecialScrollPos')));
     // }
-    // this.itemService.setTutorialIndex();
+    this.itemService.setTutorialIndex();
   }
   ngOnInit() {
     this.contactNumber = this.chatService.getContactNumber();
@@ -306,7 +306,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
     this.stopAnimation();
-    // this.itemService.setTutorialIndex();
+    this.itemService.setTutorialIndex();
     console.log('shortlist count', this.shortListCount);
     const modal = document.getElementById('myModal');
     if (modal.style.display !== 'none') {
@@ -455,7 +455,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
         // if data.type is profile or message
         if (data.type === 'profile') {
-          
+
           this.type = 'profile';
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             this.item = data.apiwha_autoreply;
@@ -491,7 +491,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           localStorage.setItem('todayProfile', '');
           this.setMessageText(data.apiwha_autoreply);
           this.spinner.hide();
-           // stop user response animation
+          // stop user response animation
           this.profileIsLoadingSubject.next(null);
 
           // if profiles for the day are over
@@ -524,7 +524,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             break;
 
           default:
-              break;
+            break;
         }
         if (this.points > 0 && reply === 'YES') {
           this.itemService.setItem(previousItem);
@@ -689,7 +689,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       if (photo === null) {
         setTimeout(() => {
           // stop user response animation
-        this.profileIsLoadingSubject.next(null);
+          this.profileIsLoadingSubject.next(null);
         }, 2000);
         if (gen === 'Male') {
           return '../../assets/profile.png';

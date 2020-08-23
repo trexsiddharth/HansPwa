@@ -31,8 +31,8 @@
         </div>
 
         <div class="menuIcon" (click)="sidenav.toggle()">
-          <img id="myProfImage" (error)="onImageLoadError()" [src]="photo" alt="profile pic"
-            (click)="itemService.setdrawerBadgeClicked(true)">
+          <img id="myProfImage" (click)="itemService.setTutorialIndex()" (error)="onImageLoadError()" [src]="photo"
+            alt="profile pic" (click)="itemService.setdrawerBadgeClicked(true)">
           <div class="smallMenuImage">
             <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"
               [matBadgeHidden]="itemService.getdrawerBadgeClicked()"></span>
@@ -40,6 +40,10 @@
         color: #D39BBE;
         width: 14px;
         height: 14px;">menu</mat-icon>
+          </div>
+          <div class="tip" *ngIf="itemService.getTutorialIndex()==4">
+            <img id="move" src="../../../assets/handUp.svg">
+            <span>Click Here to see<strong>Your Profile,Rejected Profiles,Customer Support</strong> and more</span>
           </div>
         </div>
       </div>

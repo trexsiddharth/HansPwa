@@ -92,7 +92,11 @@
         <!-- // buttons -->
 
         <div id="answerButtons" *ngIf="!(profileIsLoading$ | async)">
-            <div class="t-c" style="margin-top: 10px;">
+            <div class="t-c" style="margin-top: 10px;position:relative">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()==1">
+                    <span>Click Here to <strong>Contact</strong> a profile</span>
+                    <img class="handAnimation" src="../../../assets/HandDown.png">
+                </div>
                 <button (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;
                 background: #58D1FD;" aria-label="Example icon-button with a heart icon">
                     <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
@@ -103,7 +107,11 @@
                 </span> -->
             </div>
 
-            <div class="t-c">
+            <div class="t-c" style="position:relative">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()==2">
+                    <span>Click Here to <strong>Like</strong> a profile</span>
+                    <img class="handAnimation" src="../../../assets/HandDown.png">
+                </div>
                 <button (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtonsCenter" mat-fab style="color: red;
                 background: #D313AE;
                 margin-bottom: 10px;" aria-label="Example icon-button with a heart icon">
@@ -116,7 +124,11 @@
             </div>
 
 
-            <div class="t-c blur" style="margin-top: 10px;">
+            <div class="t-c blur" style="margin-top: 10px;position:relative">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()==3">
+                    <span>Click Here to <strong>Reject</strong> a profile</span>
+                    <img class="handAnimation" src="../../../assets/HandDown.png">
+                </div>
                 <button (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
                 background: #C8C8C8;">
                     <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">

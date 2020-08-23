@@ -158,7 +158,7 @@ hr {
 .UpInfo{
   position: relative;
   display: flex;
-  height:23vh;
+  height:32vh;
   padding:0px;
   margin-top: 40px!important;
   margin-bottom: 40px!important;
@@ -395,7 +395,7 @@ p{
   .UpInfo{
     position: relative;
     display: flex;
-    height:23vh;
+    height:32vh;
     padding:0px;
     margin-top: 40px!important;
     margin-bottom: 40px!important;
@@ -426,7 +426,7 @@ p{
     justify-content: center;
   }
   .UpInfo{
-    width:50%;
+    width:75%;
     margin:auto;
   }
   .special{

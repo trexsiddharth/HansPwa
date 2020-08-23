@@ -183,7 +183,8 @@ border-top-right-radius: 20px;
             <p class="title" style="margin-left:0px">
                 <span
                     style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;text-transform: capitalize;">{{languageService.profileLang.hello}},</span>
-                {{languageService.profileLang.myself}}{{item.profile.name}}, {{item.profile.about}}
+                {{languageService.profileLang.myself}}{{item.profile.name}},
+                {{(!item.profile.about || item.profile.about == 'Na' || item.profile.about =='na') ? setAbout() : item.profile.about}}
             </p>
         </div>
 

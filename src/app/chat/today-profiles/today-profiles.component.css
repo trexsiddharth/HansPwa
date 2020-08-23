@@ -55,7 +55,27 @@ main{
      justify-content: center;
      
 }
-
+.tip{
+    z-index:999999999!important;
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    top:-130px;
+    left:-20px;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+    color:white!important;
+    width:100px;
+    border-radius:15px;
+}
+.handAnimation{
+    width:65px;position:absolute; bottom:-70px;
+    -webkit-animation: 2s arrow infinite ease;
+    animation: 2s arrow infinite ease;
+    vertical-align:middle;
+}
 .setButtonsCenter{
     width: 70px;
      height: 70px;

@@ -1165,13 +1165,13 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       // we will give preference to unapprove_carousel first.
       if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
         const carouselUnapproved: any = JSON.parse(numUnapprove);
-        if (carouselUnapproved[index]) {
+        if (carouselUnapproved[index] && Number(index) <= carouselUnapproved.size()) {
           return (
             'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
             carouselUnapproved[index]
           );
         } else {
-          if (carousel[index]) {
+          if (carousel[String(Number(index) - carouselUnapproved.size())]) {
             return (
               'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
               carousel[index]
@@ -1460,15 +1460,24 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.carouselSize) {
       this.carouselSize = [];
       let num = this.personalProfileData.carousel;
-      if (num !== '[]' && num && num !== 'null') {
+      let unum = this.personalProfileData.unapprove_carousel;
+      if ((num !== '[]' && num && num !== 'null') || (unum !== '[]' && unum && unum !== 'null')) {
         const carousel: object = JSON.parse(num);
+        const ucarousel: object = JSON.parse(unum);
         if (carousel) {
           Object.keys(carousel).forEach((element) => {
             this.carouselSize.push(element);
           });
-          return this.carouselSize;
         }
-      } else {
+        if (ucarousel) {
+          Object.keys(ucarousel).forEach((element) => {
+            this.carouselSize.push(element);
+          });
+        }
+        console.log(this.carouselSize);
+        return this.carouselSize;
+      }
+      else {
         this.carouselSize = [1];
         return this.carouselSize;
       }
