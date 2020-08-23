@@ -71,8 +71,7 @@ export class CompatibilityPageThreeComponent implements OnInit {
     type: 'geocode',
     fields: ['name']
   };
-  incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '11-15', '16-20', '21-25',
-    '26-35', '36-50', '51-60', '61-70', '71-80', '81-90', '91-100', '100+'];
+  incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,

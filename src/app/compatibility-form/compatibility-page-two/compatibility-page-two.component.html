@@ -72,9 +72,8 @@
         <mat-label>Yearly Income In Lakhs</mat-label>
         <mat-select formControlName="AnnualIncome" (selectionChange)="incomeChanged($event)">
           <mat-option *ngFor="let item of incomeCategories" [value]="item">
-            {{item}} LPA
+            Rs. {{item}} Lakhs Per Year
           </mat-option>
-          <span matSuffix>Lakh Per Year &nbsp;</span>
         </mat-select>
         <!-- <input type="number" (change)="incomeChanged()" matInput formControlName="AnnualIncome" name="AnnualIncome">
                           <span matSuffix>Lakh Per Year &nbsp;</span> -->

@@ -64,13 +64,19 @@ export class FindOpenHistoryProfileService {
   }
   setTutorialIndex() {
     console.log(this.tutorialIndex);
-    if (localStorage.getItem("tutorialIndex") === "-1")
-      return;
-    if (this.tutorialIndex == 5)
-      this.tutorialIndex = -1;
-    else
-      this.tutorialIndex = (this.tutorialIndex + 1);
-    localStorage.setItem("tutorialIndex", String(this.tutorialIndex));
+    if (localStorage.getItem("tutorialIndex")) {
+      var temp = Number(localStorage.getItem("tutorialIndex"));
+      if (temp == -1)
+        return;
+      if (temp == 5)
+        temp = -1;
+      else
+        temp++;
+      localStorage.setItem("tutorialIndex", String(temp));
+    }
+    else {
+      localStorage.setItem('tutorialIndex', '0');
+    }
   }
   getTutorialIndex() {
     let temp = Number(localStorage.getItem("tutorialIndex"));

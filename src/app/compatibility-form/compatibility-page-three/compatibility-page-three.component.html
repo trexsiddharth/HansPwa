@@ -86,7 +86,7 @@
         <mat-label>Family's Annual Income in LPA</mat-label>
         <mat-select name="FamilyIncome" formControlName="FamilyIncome" (selectionChange)="changed('Fincome')">
           <mat-option *ngFor="let item of incomeCategories" [value]="item">
-            {{item}} LPA
+            Rs. {{item}} Lakhs Per Year
           </mat-option>
         </mat-select>
         <!-- <input type="number" (change)="changed('Fincome')" matInput formControlName="FamilyIncome"  name="FamilyIncome">
