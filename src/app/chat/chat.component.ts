@@ -651,6 +651,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       case 1:
         this.tabType = 'discover';
         this.analyticsEvent('Discover Section Visited');
+        this.itemService.setDiscoverClicked(true);
         this.changeToHistory();
         break;
       case 2:

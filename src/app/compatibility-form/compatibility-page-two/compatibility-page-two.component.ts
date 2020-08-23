@@ -298,6 +298,13 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       })
     );
   }
+  setValue(item: string) {
+    let vals = item.split('-');
+    if (vals[0] == "100+")
+      return "Rs 1+ Crore per year";
+    else
+      return "Rs. " + vals[0] + " - " + vals[1] + " Lakhs per year"
+  }
 
   protected filterDesignation() {
     if (!this.designations) {

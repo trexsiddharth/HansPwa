@@ -93,7 +93,7 @@
 
         <div id="answerButtons" *ngIf="!(profileIsLoading$ | async)">
             <div class="t-c" style="margin-top: 10px;position:relative">
-                <div class="tip" *ngIf="itemService.getTutorialIndex()==1">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
                     <span>Click Here to <strong>Contact</strong> a profile</span>
                     <img class="handAnimation" src="../../../assets/HandDown.png">
                 </div>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="t-c" style="position:relative">
-                <div class="tip" *ngIf="itemService.getTutorialIndex()==2">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
                     <span>Click Here to <strong>Like</strong> a profile</span>
                     <img class="handAnimation" src="../../../assets/HandDown.png">
                 </div>
@@ -125,7 +125,7 @@
 
 
             <div class="t-c blur" style="margin-top: 10px;position:relative">
-                <div class="tip" *ngIf="itemService.getTutorialIndex()==3">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
                     <span>Click Here to <strong>Reject</strong> a profile</span>
                     <img class="handAnimation" src="../../../assets/HandDown.png">
                 </div>

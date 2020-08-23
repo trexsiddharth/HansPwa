@@ -231,7 +231,7 @@
                 </div>
               </div>
               <div class="row information">
-                <div class="col-5" *ngIf="gender==='Female'">
+                <!-- <div class="col-5" *ngIf="gender==='Female'">
                   <h6>Occupation</h6>
                   <mat-select type="text" class="form-control" [multiple]="true" formControlName="occupation"
                     [(ngModel)]="preferenceProfileData.occupation" required>
@@ -247,8 +247,8 @@
                       {{ name }}
                     </option>
                   </select>
-                </div>
-                <div class="col-5" *ngIf="preferenceProfileData && preferenceProfileData.manglik">
+                </div> -->
+                <div class="col-10" *ngIf="preferenceProfileData && preferenceProfileData.manglik">
                   <h6 style="display: inline-block;">Manglik :</h6>
                   <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
                     [(ngModel)]="preferenceProfileData.manglik" required>

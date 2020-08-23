@@ -83,7 +83,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     // if (localStorage.getItem('todaysSpecialScrollPos')) {
     //   document.getElementById("main").scrollTo(0, Number(localStorage.getItem('todaysSpecialScrollPos')));
     // }
-    this.itemService.setTutorialIndex();
+    //this.itemService.setTutorialIndex();
   }
   ngOnInit() {
     this.contactNumber = this.chatService.getContactNumber();

@@ -218,6 +218,13 @@ export class CompatibilityPageThreeComponent implements OnInit {
     }
 
   }
+  setValue(item: string) {
+    let vals = item.split('-');
+    if (vals[0] == "100+")
+      return "Rs 1+ Crore per year";
+    else
+      return "Rs. " + vals[0] + " - " + vals[1] + " Lakhs per year"
+  }
 
   analyticsEvent(event) {
     if (!this.fourPageService.getUserThrough()) {

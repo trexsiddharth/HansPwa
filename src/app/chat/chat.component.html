@@ -41,9 +41,9 @@
         width: 14px;
         height: 14px;">menu</mat-icon>
           </div>
-          <div class="tip" *ngIf="itemService.getTutorialIndex()==4">
+          <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
             <img id="move" src="../../../assets/handUp.svg">
-            <span>Click Here to see<strong>Your Profile,Rejected Profiles,Customer Support</strong> and more</span>
+            <span>Click Here for more options</span>
           </div>
         </div>
       </div>
@@ -113,11 +113,13 @@
         <!-- // discover-->
         <mat-tab id="discover">
           <ng-template mat-tab-label>
-            <p class="labelSetting">
+            <div class="labelSetting">
+              <span style="position:absolute;right:-5px;top:-5px" class="labelS mat-elevation-z7" [matBadge]="'!'"
+                matBadgeSize="small" [matBadgeHidden]="itemService.getDiscoverClicked()"></span>
               <img class="tabImage" src="../../assets/tabs-icons/discover-white.svg" alt="icon"
                 *ngIf="selectedTab !== 1">
-              <img class="tabImage" src="../../assets/tabs-icons/search.svg" alt="icon" *ngIf="selectedTab === 1 ">
-            </p>
+              <img class="tabImage" src="../../assets/tabs-icons/search.svg" alt="icon" *ngIf="selectedTab === 1">
+            </div>
             <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
               style="font-size:small">{{languageService.profileLang.discover}}</a>
             <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.discover}}</a>

@@ -65,14 +65,15 @@ export class FindOpenHistoryProfileService {
   setTutorialIndex() {
     console.log(this.tutorialIndex);
     if (localStorage.getItem("tutorialIndex")) {
-      var temp = Number(localStorage.getItem("tutorialIndex"));
-      if (temp == -1)
-        return;
-      if (temp == 5)
-        temp = -1;
-      else
-        temp++;
-      localStorage.setItem("tutorialIndex", String(temp));
+      // var temp = Number(localStorage.getItem("tutorialIndex"));
+      // if (temp == -1)
+      //   return;
+      // if (temp == 5)
+      //   temp = -1;
+      // else
+      //   temp++;
+      // localStorage.setItem("tutorialIndex", String(temp));
+      localStorage.setItem('tutorialIndex', '-1');
     }
     else {
       localStorage.setItem('tutorialIndex', '0');
@@ -91,6 +92,19 @@ export class FindOpenHistoryProfileService {
     this.isPersonalized = status;
   }
   // for showing the badge on phone and the chat drawer
+  setDiscoverClicked(status: boolean) {
+    if (status) {
+      localStorage.setItem("discoverClicked", "1");
+    }
+    else {
+      localStorage.setItem("discoverClicked", "0");
+    }
+  }
+  getDiscoverClicked() {
+    let temp = localStorage.getItem("discoverClicked");
+    if (temp == "1") return true;
+    else return false;
+  }
   setdrawerBadgeClicked(status: boolean) {
     if (status) {
       localStorage.setItem("drawerBadgeClicked", "1");
@@ -150,9 +164,7 @@ export class FindOpenHistoryProfileService {
       case 'yourLikes': localStorage.setItem('yourLikesScrollPos', String(scrollPosition));
         break;
     }
-
   }
-
   setPhotoStatus(status: boolean) {
     if (status) localStorage.setItem("has_photo", '1');
     else localStorage.setItem("has_photo", "0");
@@ -250,8 +262,8 @@ export class FindOpenHistoryProfileService {
   getRejectedCount() {
     let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
-      'स्किप्पड़ ( ' + count.rejectedCount + ' )'
-      : 'Skipped ( ' + count.rejectedCount + ' )';
+      'रीजेकटेड ( ' + count.rejectedCount + ' )'
+      : 'Rejected ( ' + count.rejectedCount + ' )';
   }
   getMutualCount() {
     return localStorage.getItem('language') === 'hindi' ?
