@@ -134,6 +134,7 @@ button.btn-small {
   top: 32%;
   vertical-align: middle !important;
   background: #ff39c4;
+  border:0px;
 }
 .methods{
   color: #4A5D6A;

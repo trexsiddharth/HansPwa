@@ -85,6 +85,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   scrollFlag = false;
   title;
   section;
+  popupOpened: boolean = false;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
     private spinner: NgxSpinnerService,
@@ -424,6 +425,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   openProfileDialog(item: any, ind: any) {
     //setting the index in local strorage to use in scrollIntoView later
     localStorage.setItem('index', String(ind));
+    this.popupOpened = true;
     if (this.wholeData) {
       localStorage.setItem('page_url', JSON.stringify(this.wholeData));
     }
@@ -731,7 +733,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       answer === 'YES' && !item.family) {
       this.itemService.openMessageDialog(item, 'contacted');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-      && answer === 'YES') {
+      && answer === 'YES' && !this.popupOpened) {
       this.itemService.openTodaysPopupAd();
     } else {
       this.getData(item, answer, index);
