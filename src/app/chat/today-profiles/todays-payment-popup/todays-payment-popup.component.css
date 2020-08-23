@@ -221,7 +221,8 @@ button.btn-small {
     right: 5.5%;
     top: 25%;
     vertical-align: middle !important;
-    background: #5552ff;
+    background: #ff39c4;
+    border:0px;
   }
   #offBanner {
     position: relative;
