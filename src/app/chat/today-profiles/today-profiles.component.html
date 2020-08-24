@@ -94,7 +94,6 @@
         <div id="answerButtons" *ngIf="!(profileIsLoading$ | async)">
             <div class="t-c" style="margin-top: 10px;position:relative">
                 <div class="tip" style="left:-30px;" *ngIf="itemService.getTutorialIndex()!=-1">
-                    <span>Click Here to <strong>Contact</strong> a profile</span>
                     <img class="handAnimation" src="../../../assets/HandDown.png">
                 </div>
                 <button (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;
@@ -102,6 +101,9 @@
                     <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
                         alt="कांटेक्ट करें">
                 </button><br>
+                <div class="tip2" *ngIf="itemService.getTutorialIndex()!=-1">
+                    <span><strong>Contact</strong></span>
+                </div>
                 <!-- <span style="color: #58D1FD;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.contact}}
                 </span> -->
@@ -109,7 +111,6 @@
 
             <div class="t-c" style="position:relative">
                 <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
-                    <span>Click Here to <strong>Like</strong> a profile</span>
                     <img class="handAnimation" src="../../../assets/HandDown.png">
                 </div>
                 <button (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtonsCenter" mat-fab style="color: red;
@@ -118,6 +119,10 @@
                     <img class="buttonImageCenter animateButtonImageCenter" src="../../../assets/heartwhite.svg"
                         alt="पसंद है">
                 </button><br>
+                <div class="tip2" style="top:70px!important;left:-13px!important"
+                    *ngIf="itemService.getTutorialIndex()!=-1">
+                    <span><strong>Like</strong></span>
+                </div>
                 <!-- <span style="color: #D313AE;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.shortlist}}
                 </span> -->
@@ -126,13 +131,15 @@
 
             <div class="t-c blur" style="margin-top: 10px;position:relative">
                 <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
-                    <span>Click Here to <strong>Reject</strong> a profile</span>
                     <img class="handAnimation" src="../../../assets/HandDown.png">
                 </div>
                 <button (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
                 background: #C8C8C8;">
                     <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
                 </button><br>
+                <div class="tip2" *ngIf="itemService.getTutorialIndex()!=-1">
+                    <span><strong>Reject</strong></span>
+                </div>
                 <!-- <span style="color: #737373;font-weight: 600;font-size: 18px;">
                     {{languageService.profileLang.reject}}
                 </span> -->

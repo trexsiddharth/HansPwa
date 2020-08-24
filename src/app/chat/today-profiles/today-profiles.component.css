@@ -56,12 +56,26 @@ main{
      
 }
 .tip{
-    z-index:999999999!important;
+    z-index:9999999999999999!important;
     position:absolute;
     display:flex;
     flex-direction:column;
     top:-130px;
     left:-20px;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+    color:white!important;
+    width:100px;
+    border-radius:15px;
+}
+.tip2{
+    position:absolute;
+    display:flex;
+    top:65px;
+    left:-20px;
+    flex-direction:column;
     text-align:center;
     align-items:center;
     justify-content:center;
@@ -328,7 +342,7 @@ main{
         z-index: 99999;
         bottom: 0px;
         background-image: linear-gradient(0deg, white,transparent);
-        margin-top: 10px;
+        margin-top: 50px;
     }
     #imageContent{
         width: 100%;
