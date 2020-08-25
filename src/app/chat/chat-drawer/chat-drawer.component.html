@@ -37,6 +37,7 @@
 
         <button class="rowMore" (click)="openHistoryProfiles('contacted')">
           <img src="../../../assets/tabs-icons/phone.svg" class="iconImage">
+          <span class="labelS" [matBadge]="getContactedCount()" [matBadgeHidden]="getContactedCount() == '0'"></span>
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Contacted Profiles</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कॉन्टेक्टेड प्रोफाइलस</span>
         </button>
@@ -52,6 +53,7 @@
     </button> -->
         <button class="rowMore" (click)="openHistoryProfiles('rejected')">
           <img src="../../../assets/tabs-icons/x.svg" class="iconImage">
+          <span class="labelS" [matBadge]="getRejectedCount()" [matBadgeHidden]="getRejectedCount() == '0'"></span>
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Rejected Profiles</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">रीजेकटेड प्रोफाइल</span>
         </button>

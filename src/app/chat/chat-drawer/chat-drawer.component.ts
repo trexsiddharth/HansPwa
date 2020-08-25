@@ -233,8 +233,16 @@ export class ChatDrawerComponent implements OnInit {
   onImageLoadError() {
     this.userpic = '../../../assets/logo_192.png';
   }
-
-
+  contactedCount = 0;
+  rejectedCount = 0;
+  getContactedCount() {
+    let count = JSON.parse(localStorage.getItem('count'));
+    return count.contactedCount
+  }
+  getRejectedCount() {
+    let count = JSON.parse(localStorage.getItem('count'));
+    return count.rejectedCount;
+  }
   // this will called only if the user is logged in and will open contacted, rejected etc sections.
   openHistoryProfiles(section: string) {
     if (section.indexOf('contact') !== -1) {
@@ -330,26 +338,26 @@ export class ChatDrawerComponent implements OnInit {
     //console.log(this.personalProfileData);
 
     if (this.preferenceProfileData) {
-  
-    this.preferencesForm.patchValue({
-      food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
-      age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
-      age_max: this.preferenceProfileData.age_max ? this.preferenceProfileData.age_max : '70',
-      income_min: this.preferenceProfileData.income_min,
-      income_max: this.preferenceProfileData.income_max,
-      caste_pref: this.preferenceProfileData.caste ? this.preferenceProfileData.caste : 'All',
-      manglik_pref: this.preferenceProfileData.manglik ? this.preferenceProfileData.manglik : 'Doesn\'t Matter',
-      occupation: this.preferenceProfileData.occupation ? this.preferenceProfileData.occupation : 'Doesn\'t Matter',
 
-      working: (this.preferenceProfileData.working === 'na' || this.preferenceProfileData.working === undefined)
-        ? 'Doesn\'t Matter' : this.preferenceProfileData.working,
+      this.preferencesForm.patchValue({
+        food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
+        age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
+        age_max: this.preferenceProfileData.age_max ? this.preferenceProfileData.age_max : '70',
+        income_min: this.preferenceProfileData.income_min,
+        income_max: this.preferenceProfileData.income_max,
+        caste_pref: this.preferenceProfileData.caste ? this.preferenceProfileData.caste : 'All',
+        manglik_pref: this.preferenceProfileData.manglik ? this.preferenceProfileData.manglik : 'Doesn\'t Matter',
+        occupation: this.preferenceProfileData.occupation ? this.preferenceProfileData.occupation : 'Doesn\'t Matter',
 
-      religion: this.preferenceProfileData.religion,
-      height_min: this.getHeight(this.preferenceProfileData.height_min),
-      height_max: this.getHeight(this.preferenceProfileData.height_max),
-      marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter'
-    });
-  }
+        working: (this.preferenceProfileData.working === 'na' || this.preferenceProfileData.working === undefined)
+          ? 'Doesn\'t Matter' : this.preferenceProfileData.working,
+
+        religion: this.preferenceProfileData.religion,
+        height_min: this.getHeight(this.preferenceProfileData.height_min),
+        height_max: this.getHeight(this.preferenceProfileData.height_max),
+        marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter'
+      });
+    }
   }
   getUserProfileData() {
     if (this.userId || localStorage.getItem('id')) {
