@@ -1,3 +1,6 @@
+  body{
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8)!important;
+  }
   main {
     height: fit-content!important;
 
@@ -36,9 +39,43 @@
     overflow: hidden;
   }
   .icon-circular img {
-    width: 80%;
+    width: 100%;
   }
-
+  .buttonOnline{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border:0px;
+    background:transparent;
+    float:left ;
+    margin-left:15%
+  }
+  .buttonPersonalised{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border:0px;
+    background:transparent;
+    float: right;
+    margin-right:12%
+  }
+  .information{
+    font-size:14px;
+    font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif;
+    margin:0px;
+    height:100%!important;
+  }
+  .buttonsDiv{
+    position:sticky;
+    top:0px;
+    z-index:10;
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    display:inline-block;
+    align-items:center;
+    justify-content:center;
+  }
   .topBannerText {
     top: 20%;
     position: absolute;
@@ -55,6 +92,74 @@
     justify-content: center;
 
   }
+  .infoRow1{
+    position:relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center ;
+    margin-top:20px;
+    width:73%!important;
+    margin:auto;
+  }
+  .infoRow{
+    position:relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center ;
+    margin-top:20px;
+    width:95%!important;
+    margin:auto;
+  }
+  .contentArea{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+  }
+  .column{
+    height:fit-content;
+    background:white;
+    border-radius:20px;
+    width:0%!important;
+    flex: 1 1;
+    margin:11px 13px 0px 13px;
+    /* border: 1px solid rgba(187, 172, 172, 0.253); */
+    /* box-shadow: 3px 2px 2px 2px #00000049; */
+    box-shadow: 0px 3px 3px 2px #00000049;
+  }
+  .columnQ{
+    height:fit-content;
+    background:white;
+    border-radius:20px;
+    width:0%!important;
+    flex: 1 1;
+    margin:11px 13px 0px 13px;
+    /* border: 1px solid rgba(187, 172, 172, 0.253); */
+    /* box-shadow: 3px 2px 2px 2px #00000049; */
+    box-shadow: 0px 3px 3px 2px #00000049;
+  }
+  .columnar{
+    background:white;
+    width:0%!important;
+    flex: 1 1;
+    margin:0px;
+    /* padding-left:5%; */
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content:flex-start;
+  }
+  .numOfContacts {
+    padding:0px 3px 0px 3px;
+    font-style: normal!important;
+    position: absolute;
+    top: -1px !important;
+    right: 5%;
+    background: #00c2cb;
+    border-radius: 3px 3px 3px 3px;
+    color:white;
+    font-weight: 600!important;
+    font-size:0.8rem;
+  }
   ul {
     font-size: 14px;
     margin-top: 10px;
@@ -70,7 +175,9 @@
      margin: 0px 400px 0px;
      padding-bottom: 30px;
   }
-  
+  .activeBut{
+    background:#4adee4;
+  }
   .active{
     color: #34b7f1;
     background-color: #c2f0fc;
@@ -159,6 +266,9 @@ p{
   width: 100%;
     text-align: center;
 }
+.spcase{
+  padding:8%
+}
 
   #buttonOnline {
     padding: 5px 10px;
@@ -203,12 +313,94 @@ p{
       border-radius:0;
   
   }
-  
-
-  .personalizedOfferImage{
-    width: 150px;height: 100px;border: 1px solid black; border-radius: 10px; margin: 10px 5px;
+  .buyNow{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    font-size:1.3rem!important;
+    font-weight: normal;
+    border-radius:15px;
+    height:2.5rem;
+    width:60%;
+    margin:auto;
+    background:#f562ed;
+    color:white;
+    border:0px;
+    padding:10px 0 10px 0px;
+    margin-bottom:5%;
   }
-
+  
+  .personalizedOfferImage{
+    width:45px;
+    margin:10px;
+  }
+@media(min-width:1024px){
+  .spcase{
+    padding:3% 6% 3% 6%;
+  }
+  .buttonOnline{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border:0px;
+    background:transparent;
+    float:left ;
+    margin-left:30%
+  }
+  .buttonPersonalised{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border:0px;
+    background:transparent;
+    float: right;
+    margin-right:29%
+  }
+  .contentArea{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .column{
+    height:fit-content;
+    background:white;
+    border-radius:20px;
+    width:0%!important;
+    flex: 1 1;
+    margin:11px 13px 0px 13px;
+    /* border: 1px solid rgba(187, 172, 172, 0.253); */
+    /* box-shadow: 3px 2px 2px 2px #00000049; */
+    box-shadow: 0px 3px 3px 2px #00000049;
+    height:30vh;
+  }
+  .columnQ{
+    height:fit-content;
+    background:white;
+    border-radius:20px;
+    width:0%!important;
+    flex: 1 1;
+    margin:11px 13px 0px 13px;
+    /* border: 1px solid rgba(187, 172, 172, 0.253); */
+    /* box-shadow: 3px 2px 2px 2px #00000049; */
+    box-shadow: 0px 3px 3px 2px #00000049;
+  }
+  .numOfContacts {
+    padding:0px 3px 0px 3px;
+    font-style: normal!important;
+    position: absolute;
+    top: -5px !important;
+    right: 10%;
+    background: #00c2cb;
+    border-radius: 3px 3px 3px 3px;
+    color:white;
+    font-weight: 600!important;
+    font-size:1rem;
+  }
+}
   @media only screen and (max-width: 1024px) {
     #main {
        margin: 0px;

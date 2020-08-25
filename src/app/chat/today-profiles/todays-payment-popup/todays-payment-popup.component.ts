@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LanguageService } from 'src/app/language.service';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 import { NgxNotificationService } from 'ngx-kc-notification';
@@ -27,6 +27,8 @@ export class TodaysPaymentPopupComponent implements OnInit {
   carouselSize;
   chooseMethod = false;
 
+  data: any = null;
+
   plan = 0;
   benefit;
   value;
@@ -42,13 +44,14 @@ export class TodaysPaymentPopupComponent implements OnInit {
   showNavigationArrows = false;
   showNavigationIndicators = false;
   constructor(
-    public dialogRef: MatDialogRef<TodaysPaymentPopupComponent>,
+    public dialogRef: MatDialogRef<TodaysPaymentPopupComponent>, @Inject(MAT_DIALOG_DATA) data,
     public languageService: LanguageService,
     private subscriptionservice: SubscriptionserviceService,
     private http: HttpClient,
     private analyticsService: AnalyticsService,
-    private ngxNotificationService: NgxNotificationService
-  ) { }
+    private ngxNotificationService: NgxNotificationService) {
+    this.data = data;
+  }
   ngOnInit() {
     this.subscriptionservice.loadRazorPayScript();
     const headers = new HttpHeaders({
@@ -69,7 +72,18 @@ export class TodaysPaymentPopupComponent implements OnInit {
     if (localStorage.getItem('id')) {
       this.getCredits();
     }
-
+    if (this.data) {
+      this.plan = this.data.plan;
+      this.price = this.data.price;
+      this.credits = this.data.credits;
+      //this.chooseMethod = this.data.chooseMethod;
+      this.selectedContainer = this.data.selectedContainer;
+      localStorage.setItem('selected_plan', 'plan ' + String(this.data.selectedContainer));
+      console.log('plan ' + String(this.data.selectedContainer) + ' is selected');
+      this.chooseMethod = this.data.chooseMethod;// is set to true.
+      this.getPaytmOrderId();
+      this.subscriptionViewed();
+    }
     this.setTimer();
     setTimeout(() => {
       this.closeDialog();
@@ -142,13 +156,13 @@ export class TodaysPaymentPopupComponent implements OnInit {
         this.getRazorPay(
           this.price,
           'live',
-          0,
+          this.plan,
           '',
           '',
           localStorage.getItem('mobile_number')
         );
       } else {
-        this.getRazorPay(this.price, 'live', 0, '', '', '');
+        this.getRazorPay(this.price, 'live', this.plan, '', '', '');
       }
       this.closeDialog();
       this.analyticsService.googleAnalytics(
