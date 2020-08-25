@@ -38,7 +38,7 @@ main {
 .planArea {
   position: relative;
   height:fit-content;
-  padding-top:10px;
+  padding-top:0px;
   overflow-y: scroll;
 }
 #offBanner {
@@ -127,7 +127,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: stretch;
-  margin: 5% 1% 0% 1%;
+  margin: 3% 1% 0% 1%;
 }
 .planRow2 {
   background:#00c2cb;
@@ -136,7 +136,7 @@ ul {
   flex-direction:row;
   justify-content: center;
   align-items: center;
-  margin: 0% 1% 0% 1%;
+  margin: 0% 1% 4% 1%;
   padding:0 3% 0 3%!important;
   border-radius: 0 0 15px 15px;
   font-size:15px;

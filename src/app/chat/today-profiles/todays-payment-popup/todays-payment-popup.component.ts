@@ -182,7 +182,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     return this.plans[index].amount - (this.plans[index].amount * this.plans[index].discount / 100);
   }
   setContent(index: number) {
-    let content = this.plans[index].content.split(';');
+    let content = this.plans[index].content.split('\n');
     return content;
   }
   container(index: number) {
