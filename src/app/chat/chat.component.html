@@ -3,7 +3,7 @@
     #sidenav>
     <app-chat-drawer [drawerReference]="sidenav"></app-chat-drawer>
   </mat-sidenav>
-  <mat-sidenav-content class="sideNavContent">
+  <mat-sidenav-content class="sideNavContent" (click)="itemService.setTutorialIndex()">
     <div class="whiteBox"></div>
     <div class="blueBox"></div>
     <div class="whitBoxLeft"></div>
@@ -41,10 +41,10 @@
         width: 14px;
         height: 14px;">menu</mat-icon>
           </div>
-          <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
+          <!-- <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
             <img id="move" src="../../../assets/handUp.svg">
             <span>Click Here for more options</span>
-          </div>
+          </div> -->
         </div>
       </div>
 
