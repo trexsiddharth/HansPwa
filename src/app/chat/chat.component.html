@@ -67,7 +67,7 @@
             <a
               *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.todaysSpecial}}</a>
           </ng-template>
-          <div class="w-full ht-full" id="today-main">
+          <div class="w-full ht-full" id="today-main" (scroll)="itemService.setTutorialIndex()">
             <app-today-profiles></app-today-profiles>
           </div>
         </mat-tab>
