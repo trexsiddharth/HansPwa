@@ -37,9 +37,10 @@
 
         <button class="rowMore" (click)="openHistoryProfiles('contacted')">
           <img src="../../../assets/tabs-icons/phone.svg" class="iconImage">
-          <span class="labelS" style="right:15px!important" [hidden]="getContactedCount()=='0'">(
-            {{getContactedCount()}} )</span>
-          <span *ngIf="languageService.getCurrentLanguage()==='english'">Contacted Profiles</span>
+          <!-- <span class="labelS" style="right:15px!important" [hidden]="getContactedCount()=='0'">(
+            {{getContactedCount()}} )</span> -->
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Contacted Profiles({{getContactedCount()}})
+          </span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">कॉन्टेक्टेड प्रोफाइलस</span>
         </button>
         <!-- <button class="rowMore" (click)="openHistoryProfiles('interestShown')">
@@ -54,9 +55,9 @@
     </button> -->
         <button class="rowMore" (click)="openHistoryProfiles('rejected')">
           <img src="../../../assets/tabs-icons/x.svg" class="iconImage">
-          <span class="labelS" style="right:15px!important" [hidden]="getRejectedCount()=='0'">( {{getRejectedCount()}}
-            )</span>
-          <span *ngIf="languageService.getCurrentLanguage()==='english'">Rejected Profiles</span>
+          <!-- <span class="labelS" style="right:15px!important" [hidden]="getRejectedCount()=='0'">( {{getRejectedCount()}})</span> -->
+          <span *ngIf="languageService.getCurrentLanguage()==='english'">Rejected
+            Profiles({{getRejectedCount()}})</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">रीजेकटेड प्रोफाइल</span>
         </button>
         <hr>

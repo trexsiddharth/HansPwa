@@ -24,7 +24,7 @@
   <div class="planArea" *ngIf="!chooseMethod">
     <div *ngFor="let item of plans; let i = index">
       <div class="planrow text-dark"
-        style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 2%;">
+        style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;">
         <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
           <b>{{item.plan_name}} Plan</b><br />
           <a>{{item.contacts}} Contacts</a>
@@ -55,7 +55,7 @@ border-bottom-left-radius: 0px;
         </div>
       </div>
       <div class="planRow2">
-        <a>{{setContent(i)}}</a>
+        <a style="color:#5b6d78!important">{{setContent(i)}}</a>
         <!-- <ul>
           <li *ngFor="let content of setContent(i)">{{content}}</li>
         </ul> -->
