@@ -2,6 +2,7 @@
   padding: 20px;
   position: relative;
   background: transparent;
+  overflow-y:scroll;
   /* border-radius: 20px 20px 20px 20px; */
 
   background-size: contain;
@@ -25,7 +26,8 @@ main {
   z-index: 0;
   background: white;
   border-radius: 20px 20px 20px 20px;
-  padding-bottom: 5px;
+  padding-bottom: 0px;
+  overflow: hidden;
 }
 #backBtn {
   position: absolute;
@@ -35,8 +37,9 @@ main {
 }
 .planArea {
   position: relative;
-  padding: 15px 15px 15px 15px !important;
-  overflow-y: hidden;
+  height:45vh;
+  padding-top:10px;
+  overflow-y: scroll;
 }
 #offBanner {
   position: relative;
@@ -47,7 +50,16 @@ main {
   align-items: center;
   justify-content: center;
 }
-
+ul {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  color:white;
+  padding-inline-start: 5px!important;
+  margin-block-end:0px!important;
+}
 #offBannerImg {
   position: absolute;
   z-index:99999999;
@@ -78,7 +90,7 @@ main {
 #topBanner {
   position: relative;
   width: 100%;
-  height: 29vh;
+  height: 27vh;
   text-align: center;
   background: white !important;
   border: 0px !important;
@@ -125,7 +137,7 @@ main {
   font-size: 1rem;
   flex: 50%;
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: middle!important;
 }
 button.btn-small {
   position: absolute;
@@ -203,7 +215,7 @@ button.btn-small {
     font-size: 1rem;
     flex: 40%;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle!important;
   }
 }
 @media (max-width: 375px) {
@@ -214,7 +226,7 @@ button.btn-small {
     font-size: 0.7rem !important;
     flex: 40%;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle!important;
   }
   button.btn-small {
     position: absolute;
@@ -257,7 +269,7 @@ button.btn-small {
   #topBanner {
     position: relative;
     width: 100%;
-    height: 27vh;
+    height: 25vh;
     text-align: center;
     background: white !important;
     border: 0px !important;

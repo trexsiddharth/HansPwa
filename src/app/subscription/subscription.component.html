@@ -1,122 +1,137 @@
 <ng-container>
     <main class="back-ground">
         <main id="back2">
-            <div class="t-c" >
-                <mat-card class="t-c" style="background: white;
-                background: white;
-                margin: 10px 20px;">
-                <div class="matIconDiv" style="position: absolute;
+
+            <div class="t-c" style="padding:4%">
+                <mat-card class="t-c" style="
+                background: rgba(47, 35, 211, 0.986);height:22vh; border-radius:15px;">
+                    <div class="matIconDiv" style="position: absolute;
                 z-index: 99999999999;" (click)="goBack()">
-                    <mat-icon style="color: white;">keyboard_backspace</mat-icon>
-                </div>
-                        <div class="matIconDiv" style="position: absolute;
-                        z-index: 99999999999;
-                        right: 20px;"
-                        [routerLink]="['/chat']" routerLinkActive="router-link-active" >
-                            <mat-icon style="color: white;">home</mat-icon>
-                        </div>
-                        <img id="bannerImg" src="../../assets/subsBack.svg" alt="subscription banner">
-                        <div class="topBannerText">
-                            <h4 style="color:#D313AE">
-                                पर्सनॅलिसेड मैच मेकिंग 
-                            </h4>
-                            <h5 style="color:#79807C">
-                                मतलब
-                            </h5>
-                            <h2 style="color: #5ad1fa;font-weight: bold;">
-                                रिश्ता पक्का
-                            </h2>
-                        </div>
-            </mat-card>
+                        <mat-icon style="color: white;width:50px!important">keyboard_backspace</mat-icon>
+                    </div>
+                    <!-- <img id="bannerImg" src="../../assets/subsBack.svg" alt="subscription banner"> -->
+                    <div class="topBannerText">
+                        <h4 style="color:#f5eff4">
+                            पर्सनॅलिसेड मैच मेकिंग
+                        </h4>
+                        <h5 style="color:#d8e6de">
+                            मतलब
+                        </h5>
+                        <h2 style="color: #5ad1fa;font-weight: bold;">
+                            रिश्ता पक्का
+                        </h2>
+                    </div>
+                </mat-card>
             </div>
 
             <div style="width: 100%;margin-top: 20px;" class="t-c">
-                <button mat-raised-button 
-                    (click)="toggleOnline()"
-                 [ngClass]="{active: isActive === 'online' , inactive: isActive !== 'online'}">
+                <button style="border:0px;background:transparent;" (click)="toggleOnline()">
+                    <div class="icon-circular mat-elevation-z7"
+                        [ngClass]="{active: isActive === 'online' , inactive: isActive !== 'online'}"
+                        style="padding: 14px !important;"><img src="../../assets/personalN.svg" alt="icon" /></div>
+                    <p>Online Plans</p>
+                </button>
+
+                <!-- <button mat-raised-button (click)="toggleOnline()"
+                    [ngClass]="{active: isActive === 'online' , inactive: isActive !== 'online'}">
+                    <div>
+                        <img src="" alt="">
+                    </div>
                     ऑनलाइन प्लान्स
+                </button> -->
+                <button style="border:0px;background:transparent;" (click)="toggleOnline()">
+                    <div class="icon-circular mat-elevation-z7"
+                        [ngClass]="{active: isActive === 'online' , inactive: isActive !== 'online'}"
+                        style="padding: 14px !important;"><img src="../../assets/personalN.svg" alt="icon" /></div>
+                    <p>Online Plans</p>
                 </button>
-                <button mat-raised-button
-                    (click)="togglePersonalized()"
-                 [ngClass]="{active: isActive !=='online', inactive: isActive === 'online' }" style="margin-left: 10px;">
+                <button class="icon-circular mat-elevation-z7" (click)="togglePersonalized()"
+                    [ngClass]="{active: isActive !=='online', inactive: isActive === 'online' }"
+                    style=" padding: 14px !important;">
+                    <img src="../../assets/personalN.svg" alt="icon" />
+                </button>
+                <!-- <button mat-raised-button (click)="togglePersonalized()"
+                    [ngClass]="{active: isActive !=='online', inactive: isActive === 'online' }"
+                    style="margin-left: 10px;">
                     पर्सनॅलिसेड प्लान्स
-                </button>
+                </button> -->
             </div>
 
-          
+
             <div *ngIf="isActive === 'online'" class="list" style="margin-top: 20px;">
 
-                 <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-evenly;">
+                <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-evenly;">
 
-                        <div (click)="container1()" id="container1" [ngClass]="{planItem: selectedContainer != 1 , planItemSelected: selectedContainer === 1 }">
-                                <button id="button1" (click)="container1()" class="planHeader">
-                                    <p class="planHeaderText">बेसिक</p>
-                                    <p class="planSubHeaderText">
-                                        3 महीने 
-                                    </p>
-                                </button>
-                                <p>45 कांटेक्ट नंबर्स</p>
-                                
-                                <ul>
-                                    <li>हर रिश्ते का पूरा पता</li>
-                                    <li>4 रिश्ते हर रोज़</li>
-                                    <li>25+ सेंटर्स के 50,000+ रिश्ते </li>
-                                </ul>
-                                <div class="amnt">
-                                    <p> <del>₹5600</del></p>
-                                    <p>₹2800</p>
-                                </div>
+                    <div (click)="container1()" id="container1"
+                        [ngClass]="{planItem: selectedContainer != 1 , planItemSelected: selectedContainer === 1 }">
+                        <button id="button1" (click)="container1()" class="planHeader">
+                            <p class="planHeaderText">बेसिक</p>
+                            <p class="planSubHeaderText">
+                                3 महीने 
+                            </p>
+                        </button>
+                        <p>45 कांटेक्ट नंबर्स</p>
+
+                        <ul>
+                            <li>हर रिश्ते का पूरा पता</li>
+                            <li>4 रिश्ते हर रोज़</li>
+                            <li>25+ सेंटर्स के 50,000+ रिश्ते </li>
+                        </ul>
+                        <div class="amnt">
+                            <p> <del>₹5600</del></p>
+                            <p>₹2800</p>
                         </div>
-
-                          <div (click)="container2()" id="container2" 
-                          [ngClass]="{planItem: selectedContainer != 2 , planItemSelected: selectedContainer === 2}">
-                            <button id="button2" (click)="container2()" class="planHeader">
-                                <p class="planHeaderText">सुप्रीम</p>
-                                <p class="planSubHeaderText">
-                                    6 महीने
-                                </p>
-                            </button>
-                            <p>90 कांटेक्ट नंबर्स</p>
-                        
-                            <ul>
-                                <li>हर रिश्ते का पूरा पता</li>
-                                <li>4 रिश्ते हर रोज़ </li>
-                                <li>उच्च वर्ग के रिश्ते</li>
-                                <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
-                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
-                            </ul>
-
-                            <div class="amnt">
-                                <p> <del>₹7100</del></p>
-                                <p>₹4500</p>
-                            </div>
                     </div>
 
-                        <div (click)="container3()" id="container3" 
-                        [ngClass]="{planItem: selectedContainer != 3 , planItemSelected: selectedContainer === 3 }">
-                            <button id="button3" (click)="container3()" class="planHeader">
-                                <p class="planHeaderText">कुंडली स्पेशल</p>
-                                <p class="planSubHeaderText">
-                                    6 महीने
-                                </p>
-                            </button>
-                            <p>45 कांटेक्ट नंबर्स</p>
+                    <div (click)="container2()" id="container2"
+                        [ngClass]="{planItem: selectedContainer != 2 , planItemSelected: selectedContainer === 2}">
+                        <button id="button2" (click)="container2()" class="planHeader">
+                            <p class="planHeaderText">सुप्रीम</p>
+                            <p class="planSubHeaderText">
+                                6 महीने
+                            </p>
+                        </button>
+                        <p>90 कांटेक्ट नंबर्स</p>
 
-                            <ul>
-                                <li>हर एक प्रोफाइल के साथ उसका कुंडली का मैचिंग स्कोर भी </li>
-                                <li>हर रिश्ते का पूरा पता</li>
-                                <li>4 रिश्ते हर रोज़ </li>
-                                <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
-                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
-                            </ul>
-                            <div class="amnt">
-                                <p> <del>₹9100</del></p>
-                                <p>₹6500</p>
-                            </div>
+                        <ul>
+                            <li>हर रिश्ते का पूरा पता</li>
+                            <li>4 रिश्ते हर रोज़ </li>
+                            <li>उच्च वर्ग के रिश्ते</li>
+                            <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
+                            <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                        </ul>
+
+                        <div class="amnt">
+                            <p> <del>₹7100</del></p>
+                            <p>₹4500</p>
+                        </div>
+                    </div>
+
+                    <div (click)="container3()" id="container3"
+                        [ngClass]="{planItem: selectedContainer != 3 , planItemSelected: selectedContainer === 3 }">
+                        <button id="button3" (click)="container3()" class="planHeader">
+                            <p class="planHeaderText">कुंडली स्पेशल</p>
+                            <p class="planSubHeaderText">
+                                6 महीने
+                            </p>
+                        </button>
+                        <p>45 कांटेक्ट नंबर्स</p>
+
+                        <ul>
+                            <li>हर एक प्रोफाइल के साथ उसका कुंडली का मैचिंग स्कोर भी </li>
+                            <li>हर रिश्ते का पूरा पता</li>
+                            <li>4 रिश्ते हर रोज़ </li>
+                            <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर रेस्पॉन्स)</li>
+                            <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                        </ul>
+                        <div class="amnt">
+                            <p> <del>₹9100</del></p>
+                            <p>₹6500</p>
+                        </div>
                     </div>
 
                     <div (click)="container4()" id="container4"
-                     [ngClass]="{planItem: selectedContainer != 4 , planItemSelected: selectedContainer === 4 }">
+                        [ngClass]="{planItem: selectedContainer != 4 , planItemSelected: selectedContainer === 4 }">
                         <button id="button4" (click)="container4()" class="planHeader">
                             <p class="planHeaderText">सेकंड-मैरिज</p>
                             <p class="planSubHeaderText">
@@ -137,23 +152,25 @@
                             <p> <del>₹7100</del></p>
                             <p>₹4500</p>
                         </div>
-                </div>
+                    </div>
 
-                 </div>
+                </div>
             </div>
 
-            <div *ngIf="isActive === 'personalized'" 
-            style="padding-top: 20px;padding-bottom: 20px;">
-            
-            <div>
+            <div *ngIf="isActive === 'personalized'" style="padding-top: 20px;padding-bottom: 20px;">
+
+                <div>
                     <div class="card" style="margin: 10px 10px;">
                         <div class="row" style="margin: 0px;">
                             <div class="col-6">
-                                <img class="personalizedOfferImage" src="../../assets/personalmatchmaking.svg" alt="VIP Benefits1">
+                                <img class="personalizedOfferImage" src="../../assets/personalmatchmaking.svg"
+                                    alt="VIP Benefits1">
                             </div>
                             <div class="col-6" style="height: 100%;">
-                                <div  style="margin-top: 10%; text-align: center;">
-                                    <h6 style="display: inline-block;background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff); border-radius: 100px;color: white;padding: 10px 17px;">1</h6><br>
+                                <div style="margin-top: 10%; text-align: center;">
+                                    <h6
+                                        style="display: inline-block;background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff); border-radius: 100px;color: white;padding: 10px 17px;">
+                                        1</h6><br>
                                     <p style="font-size: 18px;">पर्सनल मैचमेकर पाएं</p>
                                 </div>
                             </div>
@@ -163,11 +180,14 @@
                     <div class="card" style="margin: 10px 10px;">
                         <div class="row" style="margin: 0px;">
                             <div class="col-6">
-                                <img class="personalizedOfferImage" src="../../assets/vipRishte.svg" alt="VIP Benefits1">
+                                <img class="personalizedOfferImage" src="../../assets/vipRishte.svg"
+                                    alt="VIP Benefits1">
                             </div>
                             <div class="col-6" style="height: 100%;">
-                                <div  style="margin-top: 10%;text-align: center;">
-                                    <h6 style="display: inline-block;background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff); border-radius: 100px;color: white;padding: 10px 15px;">2</h6><br>
+                                <div style="margin-top: 10%;text-align: center;">
+                                    <h6
+                                        style="display: inline-block;background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff); border-radius: 100px;color: white;padding: 10px 15px;">
+                                        2</h6><br>
                                     <p style="font-size: 18px;">पाएं सारे VIP रिश्ते</p>
                                 </div>
                             </div>
@@ -177,134 +197,133 @@
                     <div class="card" style="margin: 10px 10px;">
                         <div class="row" style="margin: 0px;">
                             <div class="col-6">
-                                <img class="personalizedOfferImage" src="../../assets/familyMeeting.svg" alt="VIP Benefits1">
+                                <img class="personalizedOfferImage" src="../../assets/familyMeeting.svg"
+                                    alt="VIP Benefits1">
                             </div>
                             <div class="col-6" style="height: 100%;">
-                                <div  style="margin-top: 10%;text-align: center; margin-bottom: 50px;">
-                                    <h6 style="display: inline-block;background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff); border-radius: 100px;color: white;padding: 10px 15px;">3</h6><br>
+                                <div style="margin-top: 10%;text-align: center; margin-bottom: 50px;">
+                                    <h6
+                                        style="display: inline-block;background: linear-gradient(to right top,#285fdd,#0073e9,#0085f2,#0097f9,#00a8ff); border-radius: 100px;color: white;padding: 10px 15px;">
+                                        3</h6><br>
                                     <p style="font-size: 18px;">फैमिली मुलाकात<br>हमारे हॉल में FREE</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
 
-            <div class="list" *ngIf="isActive === 'personalized'" >
+                <div class="list" *ngIf="isActive === 'personalized'">
                     <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-evenly;">
 
                         <div (click)="container5()" id="container5"
-                        [ngClass]="{planItem: selectedContainer != 5 , planItemSelected: selectedContainer === 5 }">
-                           <button id="button5" (click)="container5()" class="planHeader">
-                               <p class="planHeaderText">छोटा VIP प्लान</p>
-                               <p class="planSubHeaderText">
-                                   3 महीने
-                               </p>
-                           </button>
-                           <ul>
-                               <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
-                               <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
-                               <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
-                               <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
-                               <li>उच्च वर्ग के रिश्ते </li>
-                               <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
-                           </ul>
-                           <div class="amnt">
-                            <p> <del>₹15000</del></p>
-                            <p>₹11000</p>
+                            [ngClass]="{planItem: selectedContainer != 5 , planItemSelected: selectedContainer === 5 }">
+                            <button id="button5" (click)="container5()" class="planHeader">
+                                <p class="planHeaderText">छोटा VIP प्लान</p>
+                                <p class="planSubHeaderText">
+                                    3 महीने
+                                </p>
+                            </button>
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
+                            <div class="amnt">
+                                <p> <del>₹15000</del></p>
+                                <p>₹11000</p>
+                            </div>
                         </div>
-                   </div>
-                        
+
                         <div (click)="container6()" id="container6"
-                        [ngClass]="{planItem: selectedContainer !=6 , planItemSelected: selectedContainer === 6}">
-                           <button id="button6" (click)="container6()" class="planHeader">
-                               <p class="planHeaderText">प्रीमियम 6</p>
-                               <p class="planSubHeaderText">
-                                   6 महीने
-                               </p>
-                           </button>
+                            [ngClass]="{planItem: selectedContainer !=6 , planItemSelected: selectedContainer === 6}">
+                            <button id="button6" (click)="container6()" class="planHeader">
+                                <p class="planHeaderText">प्रीमियम 6</p>
+                                <p class="planSubHeaderText">
+                                    6 महीने
+                                </p>
+                            </button>
 
-                           <ul>
-                               <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
-                               <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
-                               <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
-                               <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
-                               <li>उच्च वर्ग के रिश्ते </li>
-                               <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
-                           </ul>
-                           <div class="amnt">
-                            <p> <del>₹21000</del></p>
-                            <p>₹17000</p>
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
+                            <div class="amnt">
+                                <p> <del>₹21000</del></p>
+                                <p>₹17000</p>
+                            </div>
                         </div>
-                   </div>
 
 
-                   <div (click)="container7()" id="container7"
-                   [ngClass]="{planItem: selectedContainer != 7, planItemSelected: selectedContainer === 7 }">
-                      <button id="button7" (click)="container7()" class="planHeader">
-                          <p class="planHeaderText">प्रीमियम 12</p>
-                          <p class="planSubHeaderText">
-                              12 महीने
-                          </p>
-                      </button>
+                        <div (click)="container7()" id="container7"
+                            [ngClass]="{planItem: selectedContainer != 7, planItemSelected: selectedContainer === 7 }">
+                            <button id="button7" (click)="container7()" class="planHeader">
+                                <p class="planHeaderText">प्रीमियम 12</p>
+                                <p class="planSubHeaderText">
+                                    12 महीने
+                                </p>
+                            </button>
 
-                      <ul>
-                        <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
-                        <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
-                        <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
-                        <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
-                        <li>उच्च वर्ग के रिश्ते </li>
-                        <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
-                    </ul>
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
 
-                    <div class="amnt">
-                        <p> <del>₹41000</del></p>
-                        <p>₹25000</p>
+                            <div class="amnt">
+                                <p> <del>₹41000</del></p>
+                                <p>₹25000</p>
+                            </div>
+                        </div>
+
+
+                        <div (click)="container8()" id="container8"
+                            [ngClass]="{planItem: selectedContainer != 8 , planItemSelected: selectedContainer === 8 }">
+                            <button id="button8" (click)="container8()" class="planHeader">
+                                <p class="planHeaderText">डीलक्स NRI</p>
+                                <p class="planSubHeaderText">
+                                    24 महीने
+                                </p>
+                            </button>
+
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
+
+                            <div class="amnt">
+                                <p> <del>₹51000</del></p>
+                                <p>₹31000</p>
+                            </div>
+                        </div>
+
                     </div>
-              </div>
-
-
-              <div (click)="container8()" id="container8"
-              [ngClass]="{planItem: selectedContainer != 8 , planItemSelected: selectedContainer === 8 }">
-                 <button id="button8" (click)="container8()" class="planHeader">
-                     <p class="planHeaderText">डीलक्स NRI</p>
-                     <p class="planSubHeaderText">
-                         24 महीने
-                     </p>
-                 </button>
-       
-                 <ul>
-                    <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
-                    <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
-                    <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
-                    <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
-                    <li>उच्च वर्ग के रिश्ते </li>
-                    <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
-                </ul>
-
-                <div class="amnt">
-                    <p> <del>₹51000</del></p>
-                    <p>₹31000</p>
                 </div>
-         </div>
-
-                        </div>
             </div>
-        </div>
-        
-        
-        <div class="t-c" style="margin-top: 30px;margin-bottom: 50px;"> 
-            <button mat-raised-button 
-            id="planButton"
-            (click)="openDialog()"
-            style="background-color: #D313AE;
+
+
+            <div class="t-c" style="margin-top: 30px;margin-bottom: 50px;">
+                <button mat-raised-button id="planButton" (click)="openDialog()" style="background-color: #D313AE;
             font-size: 1.4rem;
             font-weight: bold;
             padding: 5px 60px;">
-                यह प्लान चुने
-            </button>
-        </div>
+                    यह प्लान चुने
+                </button>
+            </div>
 
-          </main>
+        </main>
     </main>
 </ng-container>
-

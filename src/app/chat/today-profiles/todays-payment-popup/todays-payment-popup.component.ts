@@ -48,19 +48,18 @@ export class TodaysPaymentPopupComponent implements OnInit {
     private http: HttpClient,
     private analyticsService: AnalyticsService,
     private ngxNotificationService: NgxNotificationService
-  ) {}
+  ) { }
   ngOnInit() {
     this.subscriptionservice.loadRazorPayScript();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http
-      .get('https://partner.hansmatrimony.com/api/subscription', { headers })
+    this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers })
       .subscribe(
         (res: any) => {
           this.plans = res;
-          //this.container1();
           console.log(this.plans);
+          //console.log(this.plans[0].content.split(" ")[0]);
         },
         (err: any) => {
           this.subscriptionservice.loadRazorPayScript();
@@ -90,7 +89,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     return this.http
       .post(
         'https://partner.hansmatrimony.com/api/getWhatsappPoint?id=' +
-          localStorage.getItem('id'),
+        localStorage.getItem('id'),
         { params: { ['id']: localStorage.getItem('id') } }
       )
       .subscribe(
@@ -134,8 +133,8 @@ export class TodaysPaymentPopupComponent implements OnInit {
       );
     }
   }
- 
- 
+
+
   HandlePayment() {
     if (this.price) {
       if (localStorage.getItem('mobile_number')) {
@@ -179,7 +178,22 @@ export class TodaysPaymentPopupComponent implements OnInit {
     localStorage.removeItem('selected_plan');
     this.chooseMethod = false;
   }
-
+  setAmount(index: number) {
+    return this.plans[index].amount - (this.plans[index].amount * this.plans[index].discount / 100);
+  }
+  setContent(index: number) {
+    let content = this.plans[index].content.split(';');
+    return content;
+  }
+  container(index: number) {
+    this.price = this.setAmount(index);
+    this.credits = this.plans[index].content.split(" ")[0];
+    this.selectedContainer = index;
+    localStorage.setItem('selected_plan', 'plan ' + String(index));
+    this.chooseMethod = true;
+    this.getPaytmOrderId();
+    this.subscriptionViewed();
+  }
   container1() {
     this.price = '2800';
     this.credits = '45';
@@ -190,7 +204,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.chooseMethod = true;
     this.getPaytmOrderId();
     this.subscriptionViewed();
-    
+
   }
   container2() {
     this.price = '4500';
@@ -223,14 +237,14 @@ export class TodaysPaymentPopupComponent implements OnInit {
       (data: any) => {
         console.log(data);
         if (data) {
-            const paytmData = JSON.parse(data.response);
-            this.oId = data.order_id;
-            localStorage.setItem('oId', data.order_id);
-            this.txnToken = paytmData.body.txnToken;
-            // testing mId
-            // this.mId = 'bkjPis66135619933053';
-            // production mId
-            this.mId = 'Twango57803369412564';
+          const paytmData = JSON.parse(data.response);
+          this.oId = data.order_id;
+          localStorage.setItem('oId', data.order_id);
+          this.txnToken = paytmData.body.txnToken;
+          // testing mId
+          // this.mId = 'bkjPis66135619933053';
+          // production mId
+          this.mId = 'Twango57803369412564';
         }
       },
       err => {
@@ -239,28 +253,28 @@ export class TodaysPaymentPopupComponent implements OnInit {
     );
   }
 
-onPaytm() {
-  this.analyticsService.googleAnalytics(
-    'Paytm Payement Gateway Opened For ' + this.price
-  );
-  const form = document.getElementById('pay');
-            // tslint:disable-next-line: max-line-length
-            // staging/ testing url
-  // (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=${this.oId}`;
-  // production url
-  (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
-  (form as any).submit();
-}
+  onPaytm() {
+    this.analyticsService.googleAnalytics(
+      'Paytm Payement Gateway Opened For ' + this.price
+    );
+    const form = document.getElementById('pay');
+    // tslint:disable-next-line: max-line-length
+    // staging/ testing url
+    // (form as any).action = `https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=bkjPis66135619933053&orderId=${this.oId}`;
+    // production url
+    (form as any).action = `https://securegw.paytm.in/theia/api/v1/showPaymentPage?mid=Twango57803369412564&orderId=${this.oId}`;
+    (form as any).submit();
+  }
 
-subscriptionViewed() {
-  const formData = new FormData();
-  formData.append('mobile', localStorage.getItem('mobile_number'));
-  this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
-    (data: any) => {
-     console.log(data);
-     this.analyticsService.googleAnalytics('Subscription Seen');
-     this.analyticsService.facebookAnalytics('InitiateCheckout');
-    }
-  );
-}
+  subscriptionViewed() {
+    const formData = new FormData();
+    formData.append('mobile', localStorage.getItem('mobile_number'));
+    this.http.post('https://partner.hansmatrimony.com/api/isSubscriptionViewed', formData).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.analyticsService.googleAnalytics('Subscription Seen');
+        this.analyticsService.facebookAnalytics('InitiateCheckout');
+      }
+    );
+  }
 }

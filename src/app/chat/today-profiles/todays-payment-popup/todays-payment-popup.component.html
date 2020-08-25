@@ -1,13 +1,9 @@
-<div id="offBanner">
+<div id="offBanner" *ngIf="!chooseMethod">
   <img id="offBannerImg" src="../../../assets/todays-off-image.png" />
 </div>
 <main>
-  <img width="20px"
-   *ngIf="chooseMethod" 
-   id="backBtn" 
-   (click)="goBack()"
-   src="../../../../assets/backbtn.svg" 
-   alt="back">
+  <img width="20px" *ngIf="chooseMethod" id="backBtn" (click)="goBack()" src="../../../../assets/backbtn.svg"
+    alt="back">
 
   <div id="topBanner">
     <div id="cancel">
@@ -18,15 +14,65 @@
       <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="false">
         <ng-template ngbSlide *ngFor="let image of images">
           <div class="picsum-img-wrapper" style="border:0px!important">
-            <img [src]="image" alt="Offers" style="height: 30vh; width: 100%;" />
+            <img [src]="image" alt="Offers" style="height: 25vh; width: 100%;" />
           </div>
         </ng-template>
       </ngb-carousel>
     </div>
   </div>
   <br />
-  <div class="plansArea" *ngIf="!chooseMethod">
-    <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
+  <div class="planArea" *ngIf="!chooseMethod">
+    <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;"
+      *ngFor="let item of plans; let i = index">
+      <!-- <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+        <b>बेसिक प्लान</b><br />
+        <a>45 कांटेक्टस</a><br />
+      </div> -->
+      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+        <b>{{item.plan_name}} Plan</b><br />
+        <ul>
+          <li *ngFor="let content of setContent(i)">{{content}}</li>
+        </ul><br />
+      </div>
+      <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+        <b class="specialCase" style="font-size: large; color: #5b6d78 !important;">₹ {{setAmount(i)}}</b>
+        <br />
+        <a style="
+            text-decoration: line-through;
+            font-size: medium;
+            color: #596a76 !important;
+          ">₹ {{item.amount}}</a>
+
+        <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        ">
+          <div class="month">
+            <a>3 महीने</a>
+          </div>
+          <button class="btn btn-primary btn-small" (click)="container(i)" style="vertical-align: middle !important;">
+            BUY
+          </button>
+        </div>
+        <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+background-color: #f0f1f0;
+border-radius: 18px;
+border-top-left-radius: 0px;
+border-bottom-left-radius: 0px;
+">
+          <div class="month">
+            <a>3 months</a>
+          </div>
+          <button class="btn btn-primary btn-small" (click)="container(i)" style="vertical-align: middle !important;">
+            BUY
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
       <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
         <b>बेसिक प्लान</b><br />
         <a>45 कांटेक्टस</a><br />
@@ -185,41 +231,37 @@ border-bottom-left-radius: 0px;
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="plansArea" *ngIf="chooseMethod">
     <p class="methods text-center">
-      Payment Method: 
+      Payment Method:
     </p>
     <p class="payOpt">
-     <button mat-raised-button
-     (click)="HandlePayment()"
-      id="razor">
-      <!-- <img width="100%" src="../../../../assets/icons/razorpay.svg" alt="razorpay"> -->
-      Card / NetBanking / Wallets
-     </button>
-     <button mat-raised-button
-     (click)="onPaytm()"
-      id="paytm">
-      <img width="90px" height="100%" src="../../../../assets/icons/paytm.svg" alt="paytm">
-     </button>
+      <button mat-raised-button (click)="HandlePayment()" id="razor">
+        <!-- <img width="100%" src="../../../../assets/icons/razorpay.svg" alt="razorpay"> -->
+        Card / NetBanking / Wallets
+      </button>
+      <button mat-raised-button (click)="onPaytm()" id="paytm">
+        <img width="90px" height="100%" src="../../../../assets/icons/paytm.svg" alt="paytm">
+      </button>
     </p>
 
     <form method="post" id="pay" name="paytm">
       <table border="1">
-         <tbody>
-            <input type="hidden" name="mid" [value]="mId">
-            <input type="hidden" name="orderId" [value]="oId">
-            <input type="hidden" name="txnToken" [value]="txnToken">
-         </tbody>
+        <tbody>
+          <input type="hidden" name="mid" [value]="mId">
+          <input type="hidden" name="orderId" [value]="oId">
+          <input type="hidden" name="txnToken" [value]="txnToken">
+        </tbody>
       </table>
-   </form>
+    </form>
   </div>
 </main>
 
 
-<div id="footer" class="text-dark text-center">
+<div id="footer" class="text-dark text-center" *ngIf="!chooseMethod">
   <div class="plancolumn">
     <img style="width: 2.2rem!important;" src="../../../assets/timer.svg" />&nbsp;
   </div>
