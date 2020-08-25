@@ -22,56 +22,45 @@
   </div>
   <br />
   <div class="planArea" *ngIf="!chooseMethod">
-    <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;"
-      *ngFor="let item of plans; let i = index">
-      <!-- <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-        <b>बेसिक प्लान</b><br />
-        <a>45 कांटेक्टस</a><br />
-      </div> -->
-      <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
-        <b>{{item.plan_name}} Plan</b><br />
-        <ul>
-          <li *ngFor="let content of setContent(i)">{{content}}</li>
-        </ul><br />
-      </div>
-      <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
-        <b class="specialCase" style="font-size: large; color: #5b6d78 !important;">₹ {{setAmount(i)}}</b>
-        <br />
-        <a style="
+    <div *ngFor="let item of plans; let i = index">
+      <div class="planrow text-dark"
+        style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 2%;">
+        <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+          <b>{{item.plan_name}} Plan</b><br />
+          <a>{{item.contacts}} Contacts</a>
+        </div>
+        <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+          <b class="specialCase"
+            style="font-size: large; color: #5b6d78 !important;vertical-align: middle !important;">₹
+            {{setAmount(i)}}</b>
+          <br />
+          <a style="
             text-decoration: line-through;
             font-size: medium;
-            color: #596a76 !important;
+            color: #596a76 !important;vertical-align: middle !important;
           ">₹ {{item.amount}}</a>
-
-        <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
-            background-color: #f0f1f0;
-            border-radius: 18px;
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px;
-        ">
-          <div class="month">
-            <a>3 महीने</a>
-          </div>
-          <button class="btn btn-primary btn-small" (click)="container(i)" style="vertical-align: middle !important;">
-            BUY
-          </button>
-        </div>
-        <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+          <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
 background-color: #f0f1f0;
 border-radius: 18px;
 border-top-left-radius: 0px;
 border-bottom-left-radius: 0px;
 ">
-          <div class="month">
-            <a>3 months</a>
+            <div class="month">
+              <a>{{item.validity}} months</a>
+            </div>
+            <button class="btn btn-primary btn-small" (click)="container(i)" style="vertical-align: middle !important;">
+              BUY
+            </button>
           </div>
-          <button class="btn btn-primary btn-small" (click)="container(i)" style="vertical-align: middle !important;">
-            BUY
-          </button>
         </div>
       </div>
+      <div class="planRow2">
+        <a>{{setContent(i)}}</a>
+        <!-- <ul>
+          <li *ngFor="let content of setContent(i)">{{content}}</li>
+        </ul> -->
+      </div>
     </div>
-
     <!-- <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
       <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
         <b>बेसिक प्लान</b><br />

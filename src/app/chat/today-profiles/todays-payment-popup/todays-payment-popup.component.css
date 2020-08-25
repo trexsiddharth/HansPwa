@@ -26,7 +26,7 @@ main {
   z-index: 0;
   background: white;
   border-radius: 20px 20px 20px 20px;
-  padding-bottom: 0px;
+  padding-bottom: 5px;
   overflow: hidden;
 }
 #backBtn {
@@ -37,7 +37,7 @@ main {
 }
 .planArea {
   position: relative;
-  height:45vh;
+  height:fit-content;
   padding-top:10px;
   overflow-y: scroll;
 }
@@ -53,10 +53,10 @@ main {
 ul {
   margin-top: 5px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   width: 100%;
-  color:white;
+  color:rgb(12, 12, 12);
   padding-inline-start: 5px!important;
   margin-block-end:0px!important;
 }
@@ -127,7 +127,19 @@ ul {
   display: flex;
   justify-content: center;
   align-items: stretch;
-  margin: 6% 1% 6% 1%;
+  margin: 5% 1% 0% 1%;
+}
+.planRow2 {
+  background:#00c2cb;
+  height: auto;
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+  margin: 0% 1% 0% 1%;
+  padding:0 3% 0 3%!important;
+  border-radius: 0 0 15px 15px;
+  font-size:15px;
 }
 .plancolumn {
   position: relative;
