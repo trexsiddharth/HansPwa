@@ -72,6 +72,11 @@ export class SubscriptionComponent implements OnInit {
       this.subscriptionViewed();
     }
   }
+  images = [
+    '../../../assets/Banner1.jpg',
+    '../../../assets/Banner2.jpeg',
+    '../../../assets/Banner3.jpeg',
+  ];
   togglePersonalized() {
     this.isActive = 'personalized';
     this.selectedContainer = 5;
