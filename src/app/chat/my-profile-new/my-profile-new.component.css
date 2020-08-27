@@ -46,6 +46,9 @@
 ::ng-deep .mat-checkbox-inner-container{
   border:1px solid black!important;
 }
+.pink{
+  color:rgb(228, 116, 135)!important;
+}
 ::ng-deep .mat-select-value span{
   color:#4a5d6a!important;
 }
@@ -79,7 +82,7 @@ hr {
   height: 100vh;
   background: rgb(62, 60, 92);
   background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-  clip-path: polygon(100% 0%, 100% 67%, 50% 90%, 50% 90%, 0 67%, 0 0);
+  clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
 }
 .accordion-image {
   width: 1.4rem;
@@ -365,7 +368,7 @@ p{
     height: 82vh;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 67%, 50% 90%, 50% 90%, 0 67%, 0 0);
+    clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
   }
 }
 
@@ -378,7 +381,7 @@ p{
     height: 105vh;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 64%, 50% 90%, 50% 90%, 0 64%, 0 0);
+    clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
   }
 }
 @media (min-height: 815px) {
@@ -390,7 +393,7 @@ p{
     height: 78vh;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 64%, 50% 90%, 50% 90%, 0 64%, 0 0);
+    clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
   }
   .UpInfo{
     position: relative;
@@ -406,6 +409,7 @@ p{
     background:#ffffff;
   }
 }
+
 @media (min-width: 605px) {
   .back-drop {
     position: absolute;
@@ -415,7 +419,7 @@ p{
     height: 65vh !important;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 67%, 50% 90%, 50% 90%, 0 67%, 0 0);
+    clip-path: polygon(100% 0%, 100% 80%, 50% 100%, 50% 100%, 0 80%, 0 0);
   }
 }
 @media (min-width:1024px){
@@ -441,5 +445,16 @@ p{
     height: 100vh; */
     animation: fadeInUp 1.5s 1;
   }
-
+  .labelS {
+    width:15px!important;
+    /* margin:auto; */
+    margin: 7px 2px 7px ;
+    padding:0px;
+    font-size:5px!important;
+    display: block;
+    position: absolute;
+    top:5px;
+    right:80px;
+    z-index:99999999;
+  }
 }

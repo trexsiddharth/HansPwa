@@ -192,6 +192,9 @@
                   <h6 style="display: inline-block">Age Max : </h6>
                   <input type="text" class="form-control" formControlName="age_max" required>
                 </div>
+                <div *ngIf="preferencesForm.value.age_min >= preferencesForm.value.age_max">
+                  <p style="color:red!important;font-size: 10px;">*Age Max cannot be less than Age Min</p>
+                </div>
               </div>
               <div class="row information">
                 <div class="col-5">
@@ -205,6 +208,9 @@
                   <select type="text" class="form-control" formControlName="height_max">
                     <option *ngFor="let item of Heights" [value]="item">{{item}}</option>
                   </select>
+                </div>
+                <div *ngIf="preferencesForm.value.height_min >= preferencesForm.value.height_max">
+                  <p style="color:red!important;font-size: 10px;">*Height Max cannot be less than Height Min</p>
                 </div>
               </div>
               <div class="row information">
@@ -233,6 +239,9 @@
                 <div class="col-5">
                   <h6 style="display: inline-block">Income Max(in LPA):</h6>
                   <input type="text" class="form-control" formControlName="income_max" required>
+                </div>
+                <div *ngIf="preferencesForm.value.income_min >= preferencesForm.value.income_max">
+                  <p style="color:red!important;font-size: 10px;">*Income Max cannot be less than Income Min</p>
                 </div>
               </div>
               <div class="row information">

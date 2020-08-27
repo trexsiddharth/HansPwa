@@ -8,7 +8,7 @@
       </div>
       <div class="UploadInfo" *ngIf="!itemService.getPhotoStatus()" (click)="changeProfileImageNew()">
         <!-- <div class="UploadInfo" *ngIf="true" (click)="changeProfileImageNew()"> -->
-        <div class="columnA">
+        <div class="columnA" id="carousel">
           <input style="margin: 10px 25%;display: none;" #backfileNew type="file" id="backfileNew" accept='image/*'
             (change)="chooseFileForUploadNew(backfileNew.files)" />
           <span style="position:relative;font-weight:200;">
@@ -29,7 +29,7 @@
                 (change)="previewBack(backfile.files, index + 1)" />
               <!-- <img (click)="changeProfileImage(index)" id="imgProfile" -->
               <img id="imgProfile"
-                style="width:80vw!important; height:32vh;background-color: lightblue;border-radius:15px ;object-fit:cover;"
+                style="width:100%!important; height:32vh;background-color: lightblue;border-radius:15px ;object-fit:cover!important;"
                 (error)="onProfileLoadError(personalProfileData.gender, i)" [src]="
                   getProfilesPhoto(
                     personalProfileData.carousel,
@@ -88,7 +88,8 @@
             text-transform: capitalize;
           ">
           {{ personalProfileData.name }},
-          {{ setAge(personalProfileData.birth_date) }} </span><br />
+          {{ setAge(personalProfileData.birth_date)}}</span><br />
+        <a style="font-size:15px">Profile Completion Percent : {{profileCompletionPercent}}%</a>
       </div>
     </div>
     <mat-tab-group [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)"
@@ -119,11 +120,16 @@
                 <div class="columnar">
                   <p>{{personalProfileData.religion ? personalProfileData.religion : "Add Religion"}} |
                     {{personalProfileData.caste ? personalProfileData.caste : "Add Caste"}}</p>
-                  <p>{{getHeight(personalProfileData.height)}} | {{personalProfileData.weight}} Kg</p>
+                  <p>{{getHeight(personalProfileData.height)}} |<a
+                      *ngIf="personalProfileData.weight&&personalProfileData.weight!='null'">{{personalProfileData.weight}}
+                      Kg</a>
+                    <a *ngIf="!personalProfileData.weight||personalProfileData.weight=='null'" class="pink">+Add
+                      Weight</a>
+                  </p>
                   <p>{{personalProfileData.locality}}</p>
                 </div>
                 <div class="columnar">
-                  <p>{{setAge(personalProfileData.birth_date)}} Yrs | {{personalProfileData.birth_date}}</p>
+                  <p>{{setAge(personalProfileData.birth_date)}}Yrs | {{personalProfileData.birth_date}}</p>
                   <p>{{personalProfileData.food_choice}}</p>
                   <p>{{personalProfileData.marital_status}}</p>
                 </div>
@@ -249,12 +255,8 @@
                   <p>{{personalProfileData.about}}</p>
                   <p class="headings">Profile Managed By</p>
                   <p>{{familyProfileData.relation}}</p>
-                  <p class="headings">Special Case</p>
-                  <p>{{
-                  personalProfileData.special_case
-                    ? personalProfileData.special_case
-                    : "Add Detail"
-                }}</p>
+                  <p class="headings" *ngIf="personalProfileData.disability">Special Case</p>
+                  <p>{{ personalProfileData.disabled_part}}</p>
                 </div>
               </div>
             </div>
@@ -281,29 +283,27 @@
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p>{{personalProfileData.degree}} <br> {{personalProfileData.college}}</p>
+                  <p>{{personalProfileData.degree}} <br><a
+                      *ngIf="personalProfileData.college&&personalProfileData.college!='null'">{{personalProfileData.college}}</a>
+                    <a *ngIf="!personalProfileData.college||personalProfileData.college=='null'" class="pink">+Add
+                      College</a>
+                  </p>
                   <p class="headings">{{languageService.profileLang.additional}}</p>
-                  <p>{{
-                  personalProfileData.additional_qualification
-                    ? personalProfileData.additional_qualification
-                    : "Add Detail"
-                }}</p>
+                  <p><a
+                      *ngIf="personalProfileData.additional_qualification&&personalProfileData.additional_qualification!='null'">{{personalProfileData.additional_qualification}}</a>
+                    <a *ngIf="!personalProfileData.additional_qualification||personalProfileData.additional_qualification=='null'"
+                      class="pink">+Add Additional
+                      Qualifications</a>
+                  </p>
                   <p class="headings">{{languageService.profileLang.occupation}}</p>
-                  <p>{{
-                  personalProfileData.occupation
-                    ? personalProfileData.occupation
-                    : "Add Detail"
-                }}</p>
+                  <p>{{personalProfileData.occupation}}</p>
                   <p class="headings">{{languageService.profileLang.designation}}</p>
-                  <p>{{
-                  personalProfileData.profession
-                    ? personalProfileData.profession
-                    : "Add Detail"
-                }} | {{
-                  personalProfileData.company 
-                    ? personalProfileData.company
-                    : "Add Company"
-                }} | {{
+                  <p><a *ngIf="personalProfileData.profession"></a>{{personalProfileData.profession}}
+                    <a *ngIf="!personalProfileData.profession">+Add Detail</a> |
+                    <a *ngIf="personalProfileData.company&&personalProfileData.company!='null'">{{ personalProfileData.company}}
+                    </a>
+                    <a *ngIf="!personalProfileData.company||personalProfileData.company=='null'" class="pink">+Add
+                      Company</a> | {{
                   getIncome(personalProfileData.monthly_income)
                     ? getIncome(personalProfileData.monthly_income)
                     : "Add Salary"
@@ -389,20 +389,17 @@
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p>{{
-                    personalProfileData.manglik
-                      ? personalProfileData.manglik
-                      : "Add Detail"
-                  }}
+                  <p><a
+                      *ngIf="personalProfileData.manglik&&personalProfileData.manglik!='null'">{{personalProfileData.manglik}}</a><a
+                      *ngIf="!personalProfileData.manglik||personalProfileData.manglik=='null'" class="pink">+Add
+                      Manglik Status</a>
                   <p>{{personalProfileData.birth_time ? personalProfileData.birth_time : "Add birth time"}} |
                     {{personalProfileData.birth_date ? personalProfileData.birth_date : "Add birth date"}} |
-                    {{personalProfileData.birth_place ? personalProfileData.birth_place : "Add birth place"}}
+                    <a
+                      *ngIf="personalProfileData.birth_place&&personalProfileData.birth_place!='null'">{{personalProfileData.birth_place}}</a>
+                    <a *ngIf="!personalProfileData.birth_place||personalProfileData.birth_place=='null'"
+                      class="pink">+Add Birth Place</a>
                   </p>
-                  <p class="headings">{{languageService.profileLang.gotra}}</p>
-                  <p>{{ personalProfileData.gotra
-                    ? personalProfileData.gotra
-                    : "Add Gotra"
-                }}</p>
                 </div>
               </div>
             </div>
@@ -445,7 +442,8 @@
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p>{{personalProfileData.email ? personalProfileData.email : familyProfileData.email }}</p>
+                  <p><a *ngIf="personalProfileData.email">{{personalProfileData.email}}</a>
+                    <a *ngIf="!personalProfileData.email" class="pink">+Add Email</a></p>
                   <p class="headings">{{languageService.profileLang.mobile}}</p>
                   <p>{{
                   familyProfileData.mobile
@@ -453,11 +451,9 @@
                     : "Add Detail"
                 }}</p>
                   <p class="headings">{{languageService.profileLang.whatsapp}}</p>
-                  <p>{{
-                  familyProfileData.whats_app_no
-                    ? familyProfileData.whats_app_no
-                    : "Add Detail"
-                }}</p>
+                  <p><a *ngIf="familyProfileData.whats_app_no">{{ familyProfileData.whats_app_no }}</a>
+                    <a *ngIf="!familyProfileData.whats_app_no" class="pink">+Add Whatsapp</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -512,24 +508,36 @@
               <div class="row information">
                 <div class="columnar">
                   <p class="headings">{{languageService.profileLang.aboutFamily}}</p>
-                  <p>{{familyProfileData.about ? familyProfileData.about : "+Add About Family" }}</p>
+                  <p><a
+                      *ngIf="familyProfileData.about&&familyProfileData.about!='null'">{{familyProfileData.about  }}</a>
+                    <a *ngIf="!familyProfileData.about||familyProfileData.about=='null'" class="pink">+Add About
+                      Family</a>
+                  </p>
                   <!-- <p class="headings">{{languageService.profileLang.Mother}}</p> -->
                   <p class="headings">Mother Is</p>
                   <p *ngIf="familyProfileData.mother_status != 'Not Alive'">
-                    {{familyProfileData.occupation_mother ? familyProfileData.occupation_mother : "+Add Mother's Occupation"}}
-                  </p>
+                    <a *ngIf="familyProfileData.occupation_mother&&familyProfileData.occupation_mother!='null'">
+                      {{familyProfileData.occupation_mother}}</a>
+                    <a *ngIf="!familyProfileData.occupation_mother||familyProfileData.occupation_mother=='null'"
+                      class="pink">+Add Mother's Occupation</a></p>
                   <p *ngIf="familyProfileData.mother_status == 'Not Alive'">Not Alive</p>
                   <p class="headings">Father Is</p>
                   <p *ngIf="familyProfileData.father_status != 'Not Alive'">
-                    {{familyProfileData.occupation ? familyProfileData.occupation : "+Add Father's Occupation"}}</p>
+                    <a *ngIf="familyProfileData.occupation&&familyProfileData.occupation!='null'">
+                      {{familyProfileData.occupation}}</a>
+                    <a *ngIf="!familyProfileData.occupation||familyProfileData.occupation=='null'" class="pink">+Add
+                      Father's Occupation</a></p>
                   <p *ngIf="familyProfileData.father_status == 'Not Alive'">Not Alive</p>
                   <!-- <p class="headings">Siblings</p> -->
                   <p class="headings">{{ languageService.profileLang.familyLivingIn}}</p>
-                  <p>{{
-                    familyProfileData.city
-                      ? familyProfileData.city
-                      : "Add Detail"
-                  }}</p>
+                  <p><a *ngIf="familyProfileData.city&&familyProfileData.city!='null'">{{familyProfileData.city}}</a>
+                    <a *ngIf="!familyProfileData.city||familyProfileData.city=='null'" class="pink">+Add Family City</a>
+                  </p>
+                  <p class="headings">{{languageService.profileLang.gotra}}</p>
+                  <p><a
+                      *ngIf="familyProfileData.gotra && familyProfileData.gotra!='null'">{{ familyProfileData.gotra}}</a>
+                    <a *ngIf="!familyProfileData.gotra || familyProfileData.gotra =='null'" class="pink">+Add Gotra</a>
+                  </p>
                 </div>
                 <div class="columnar">
                   <p style="color:white!important">Important Do not remove</p>
@@ -576,18 +584,32 @@
               <div class="row information">
                 <div class="columnar" style="margin-bottom: 0px!important;">
                   <p class="headings">{{ languageService.profileLang.familyType }}:</p>
-                  <p>{{familyProfileData.family_type ? familyProfileData.family_type : "+Add Family Type"}}</p>
+                  <p><a
+                      *ngIf="familyProfileData.family_type&& familyProfileData.family_type!='null'">{{familyProfileData.family_type}}</a>
+                    <a *ngIf="!familyProfileData.family_type|| familyProfileData.family_type=='null'" class="pink">+Add
+                      Family Type(Joint/nuclear)</a>
+                  </p>
                 </div>
                 <div class="columnar" style="margin-bottom: 0px!important;">
                   <p class=" headings">{{languageService.profileLang.familyIncome}}</p>
-                  <p>{{
-                  familyProfileData.family_income
-                    ? familyProfileData.family_income
-                    : "+Add Family Income "
-                }}</p>
+                  <p><a
+                      *ngIf="familyProfileData.family_income&&familyProfileData.family_income!='null'">{{familyProfileData.family_income}}
+                      LPA</a>
+                    <a *ngIf="!familyProfileData.family_income||familyProfileData.family_income=='null'"
+                      class="pink">+Add Family Income</a>
+                  </p>
                 </div>
               </div>
               <div class="row information" style="margin-top: 0px!important;">
+                <div class="columnar" style="margin-top: 0px!important;">
+                  <p class=" headings">{{languageService.profileLang.houseType}}</p>
+                  <p><a
+                      *ngIf="familyProfileData.house_type&&familyProfileData.house_type!='null'">{{familyProfileData.house_type}}
+                      LPA</a>
+                    <a *ngIf="!familyProfileData.house_type||familyProfileData.house_type=='null'" class="pink">+Add
+                      House Type</a>
+                  </p>
+                </div>
                 <div class="columnar" style="margin-top: 0px!important;">
                   <p class="headings">Living With Parents?</p>
                   <p>{{familyProfileData.living_with_parents ? familyProfileData.living_with_parents : "+Add Detail"}}
@@ -734,8 +756,6 @@
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
-          <span class="labelS mat-elevation-z7" [matBadge]="getDetailsLeft('preference')"
-            [matBadgeHidden]="getDetailsLeft('preference') == 0"></span>
           <button class="icon-circular mat-elevation-z7" *ngIf="selectedTab != 2">
             <img src="../../assets/preferencesN.svg" alt="icon" />
           </button>

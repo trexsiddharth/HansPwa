@@ -21,6 +21,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class SubscriptionComponent implements OnInit {
   plans: any = [];
+  plansOnline: any = [];
+  plansPersonlised: any = [];
   show1 = true;
   show2 = false;
   points: any;
@@ -57,8 +59,18 @@ export class SubscriptionComponent implements OnInit {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.get('https://partner.hansmatrimony.com/api/subscription', { headers }).subscribe((res: any) => {
+    this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers }).subscribe((res: any) => {
       this.plans = res;
+      for (let i = 0; i < this.plans.length; i++) {
+        if (this.plans[i].plan_type === "Self Service Plan") {
+          this.plansOnline.push(this.plans[i]);
+        }
+        else {
+          this.plansPersonlised.push(this.plans[i]);
+        }
+      }
+      console.log(this.plansOnline);
+      console.log(this.plansPersonlised);
       this.spinner.hide();
       console.log(this.plans);
     }, (err: any) => {
@@ -73,7 +85,7 @@ export class SubscriptionComponent implements OnInit {
     }
   }
   images = [
-    '../../../assets/Banner1.jpg',
+    '../../../assets/Banner1.jpeg',
     '../../../assets/Banner2.jpeg',
     '../../../assets/Banner3.jpeg',
   ];
@@ -215,6 +227,31 @@ export class SubscriptionComponent implements OnInit {
       credits: this.credits
     };
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
+  }
+  setAmount(index: number, type: number) {
+    if (type === 0) {
+      return this.plansOnline[index].amount - (this.plansOnline[index].amount * this.plansOnline[index].discount / 100);
+    }
+    else {
+      return this.plansPersonlised[index].amount - (this.plansPersonlised[index].amount * this.plansPersonlised[index].discount / 100);
+    }
+  }
+  setContent(index: number, type: number) {
+    if (type == 0) {
+      let content = this.plansOnline[index].content.split(',');
+      return content;
+    }
+    else {
+      let content = this.plansPersonlised[index].content.split(',');
+      return content;
+    }
+  }
+  container(index: number, type: number) {
+    this.price = this.setAmount(index, type);
+    this.credits = (type == 0) ? this.plansOnline[index].contacts : this.plansPersonlised[index].contacts;
+    this.selectedContainer = (type == 0) ? index + 1 : this.plansOnline.length + 1;
+    this.plan = type;
+    this.openTodaysPopupAd();
   }
 
   container1() {

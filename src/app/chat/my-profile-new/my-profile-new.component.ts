@@ -1282,9 +1282,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       };
     }
   }
-  familyDetailsLeft: number;
-  personalDetailsLeft: number;
-  preferenceDetailsLeft: number;
+  familyDetailsLeft: number = 0;
+  personalDetailsLeft: number = 0;
+  preferenceDetailsLeft: number = 0;
+  profileDetails: number = 0;
+  profileCompletionPercent: number = 0;
   getDetailsLeft(a: string) {
     switch (a) {
       case 'personal': return this.personalDetailsLeft;
@@ -1296,49 +1298,54 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   setProfileCalculations() {
+    this.profileDetails = 0;
     this.personalDetailsLeft = 0;
     Object.entries(this.personalProfileData).forEach(
       ([key, value]) => {
-        if ((!value) && key! in [
-          'lat_locality',
-          'disability',
-          'long_locality',
-          'is_premium_interest',
-          'is_premium_interest',
-          'disabled_part',
-          'abroad',
-          'si_event',
-          'unapprove_carousel',
-          'call_back_query',
-          'profiles_sent',
-          'sent_profiles',
-          'photo_score',
-          'pdf_url',
-          'is_premium_interest']
-        ) {
-          this.personalDetailsLeft += 1;
-          console.log(key, value);
+        if (['name', 'birth_date', 'birth_time', 'birth_place', 'college', 'additional_qualification', 'caste', 'religion', 'height', 'weight', 'marital_status', 'manglik'
+          , 'food_choice', 'monthly_income', 'degree', 'company', 'occupation', 'profession', 'working_city', 'locality', 'email'].includes(key)) {
+          if ((!value) || value == "null") {
+            this.personalDetailsLeft += 1;
+          }
+          else {
+            this.profileDetails += 1;
+          }
         }
       }
     );
-    console.log(this.personalDetailsLeft);
     this.familyDetailsLeft = 0;
     Object.entries(this.familyProfileData).forEach(
       ([key, value]) => {
-        // console.log(key, value);
-        if (!value && key! in ['address', 'father_off_addr', 'mother_tongue', 'office_address', 'name', 'relation']) {
-          this.familyDetailsLeft += 1;
+        if (['about', 'occupation_mother', 'gotra', 'occupation', 'family_type', 'family_income', 'city', 'house_type'].includes(key)) {
+          if (!value || value == "null") {
+            this.familyDetailsLeft += 1;
+          }
+          else {
+            this.profileDetails += 1;
+          }
         }
       });
     console.log(this.familyDetailsLeft);
-    this.preferenceDetailsLeft = 0;
-    Object.entries(this.preferenceProfileData).forEach(
-      ([key, value]) => {
-        //console.log(key, value);
-        if (!value && value != 'null' && key! in ['citizenship', 'description', 'caste_no_bar']) {
-          this.preferenceDetailsLeft += 1;
-        }
-      });
+    //this.preferenceDetailsLeft = 0;
+    // Object.entries(this.preferenceProfileData).forEach(
+    //   ([key, value]) => {
+    //     //console.log(key, value);
+    //     if ((key in ['citizenship', 'description', 'caste_no_bar'])) {
+    //       if (value == null) {
+    //         this.preferenceDetailsLeft += 1;
+    //       }
+    //       else {
+    //         this.profileDetails += 1;
+    //       }
+    //     }
+    //   });
+  }
+  setProfileCompletion() {
+    console.log(this.profileDetails);
+    console.log(this.preferenceDetailsLeft);
+    console.log(this.familyDetailsLeft);
+    //console.log(this.preferenceDetailsLeft);
+    this.profileCompletionPercent = Math.ceil((this.profileDetails * 100) / (this.profileDetails + this.personalDetailsLeft + this.familyDetailsLeft));
   }
 
   getUserProfileData() {
@@ -1397,6 +1404,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             //this.setCurrentFamilyValues();
             //this.setCurrentPreferenceValue();
             this.setProfileCalculations();
+            this.setProfileCompletion();
             //this.getAllCaste();
             //this.getAllCastePersonal();
 
