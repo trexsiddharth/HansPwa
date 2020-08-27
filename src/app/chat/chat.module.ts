@@ -22,7 +22,7 @@ import { TodayMessageComponent } from './today-profiles/today-message/today-mess
 import { PersonalizedMessageDialogComponent } from './history-profiles/personalized-message-dialog/personalized-message-dialog.component';
 import { AppDownloadDialogComponent } from './app-download-dialog/app-download-dialog.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { TodaysPaymentPopupComponent } from './today-profiles/todays-payment-popup/todays-payment-popup.component';
+//import { TodaysPaymentPopupComponent } from './today-profiles/todays-payment-popup/todays-payment-popup.component';
 import { RateUsDialogComponent } from './rate-us-dialog/rate-us-dialog.component';
 import { ChatDrawerComponent } from './chat-drawer/chat-drawer.component';
 import { DiscoverComponent } from './discover/discover.component';
@@ -60,7 +60,7 @@ import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.
     TodayMessageComponent,
     PersonalizedMessageDialogComponent,
     AppDownloadDialogComponent,
-    TodaysPaymentPopupComponent,
+    // TodaysPaymentPopupComponent,
     RateUsDialogComponent,
     ChatDrawerComponent,
     DiscoverComponent,
@@ -80,7 +80,7 @@ import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.
     PersonalizedDialogComponent,
     PersonalizedMessageDialogComponent,
     AppDownloadDialogComponent,
-    TodaysPaymentPopupComponent,
+    //TodaysPaymentPopupComponent,
     RateUsDialogComponent,
     ChatDrawerComponent,
     DailyWelcomePopupComponent,

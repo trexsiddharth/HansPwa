@@ -35,6 +35,7 @@ import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
+import { TodaysPaymentPopupComponent } from './chat/today-profiles/todays-payment-popup/todays-payment-popup.component'
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { HansPreloadingStrategyService } from './hans-preloading-strategy.servic
     OfferOneComponent,
     OfferTwoComponent,
     VerifyOtpComponent,
+    TodaysPaymentPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import { HansPreloadingStrategyService } from './hans-preloading-strategy.servic
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxMatIntlTelInputModule, 
+    NgxMatIntlTelInputModule,
     RouterModule,
     Ng5SliderModule
   ],
@@ -69,10 +71,12 @@ import { HansPreloadingStrategyService } from './hans-preloading-strategy.servic
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [TiktokAdsFormComponent,
-  LockdownOffComponent,
-  OfferOneComponent,
-  OfferTwoComponent,
-  VerifyOtpComponent],
+    LockdownOffComponent,
+    OfferOneComponent,
+    OfferTwoComponent,
+    VerifyOtpComponent,
+    TodaysPaymentPopupComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

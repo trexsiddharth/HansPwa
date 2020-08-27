@@ -4,12 +4,12 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { SubscriptionComponent } from './subscription.component';
 import { SubscriptionRoutingModule } from './subscription-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TodaysPaymentPopupComponent } from '../chat/today-profiles/todays-payment-popup/todays-payment-popup.component';
+//import { TodaysPaymentPopupComponent } from '../chat/today-profiles/todays-payment-popup/todays-payment-popup.component';
 
 @NgModule({
   declarations: [
     SubscriptionComponent,
-    TodaysPaymentPopupComponent
+    //TodaysPaymentPopupComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +18,7 @@ import { TodaysPaymentPopupComponent } from '../chat/today-profiles/todays-payme
     NgbModule
   ],
   entryComponents: [
-    TodaysPaymentPopupComponent
+    //TodaysPaymentPopupComponent
   ]
 })
 export class SubscriptionModule { }
