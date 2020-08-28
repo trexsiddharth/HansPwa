@@ -390,7 +390,7 @@ export class ChatDrawerComponent implements OnInit {
         )
         .subscribe(
           (data: any) => {
-            console.log(data.preference);
+            console.log(data.preferences);
             this.preferenceProfileData = data.preferences ? data.preferences : null;
             this.spinner.hide();
             if (data && data.profile) {
@@ -405,6 +405,11 @@ export class ChatDrawerComponent implements OnInit {
               else {
                 this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
               }
+            }
+            if (data.profile.photo) {
+              console.log(data.profile.photo);
+              this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
+              this.itemService.setPhotoStatus(true);
             }
             this.setCurrentPreferenceValue();
             this.specialCase();

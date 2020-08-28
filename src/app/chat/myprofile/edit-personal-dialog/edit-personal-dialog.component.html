@@ -25,7 +25,7 @@
             {{setAge(personalData.birth_date)}}
           </div>
         </div>
-        <div class="row" style="padding-left: 15px;
+        <!-- <div class="row" style="padding-left: 15px;
   margin-top: 1rem;">
           <h6 style="margin:0px">Birth Date:</h6>
           <div class="col-12" style="display: flex;
@@ -52,7 +52,7 @@
               </option>
             </select>
           </div>
-        </div>
+        </div> -->
         <div class="col-12">
           <h6>Locality:</h6>
           <input type="text" class="form-control" id="Locality" [autoCompleteOptions]="autoComplete" matValidateAddress
@@ -88,15 +88,15 @@
         </div>
 
         <div class="row information" style="width: 100%!important;margin: 5px 5px">
-          <div class="col-6">
+          <!-- <div class="col-6">
             <h6>Religion:</h6>
             <select class="form-control" formControlName="Religion" required>
               <option *ngFor="let  option of Religions" [value]="option">
                 {{option}}
               </option>
             </select>
-          </div>
-          <div class="col-6">
+          </div> -->
+          <div class="col-12">
             <h6>Caste</h6>
             <input type="text" class="form-control" formControlName="Castes" required [matAutocomplete]="caste">
             <mat-autocomplete (optionSelected)='casteValidation($event.option.value)' autoActiveFirstOption
@@ -198,11 +198,11 @@
           <input type="email" id="email" class="form-control" formControlName="email">
         </div>
 
-        <div class="col-12">
+        <!-- <div class="col-12">
           <h6>Mobile number</h6>
           <input style="display: inline;" type="number" id="phone" class="form-control" formControlName="phone"
             required>
-        </div>
+        </div> -->
 
         <div class="col-12">
           <h6>Whatsapp number</h6>

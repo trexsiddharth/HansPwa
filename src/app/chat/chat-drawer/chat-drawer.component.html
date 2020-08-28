@@ -106,7 +106,7 @@
     </main>
   </mat-sidenav-content>
   <mat-sidenav id="sidenav" class="drawerSettings" mode="over" position="start" #sidenav>
-    <main class="mainContainer">
+    <main class="mainContainer" *ngIf="preferenceProfileData">
       <!-- <mat-expansion-panel id="prefs" [expanded]="false" (opened)="specialCase()" hideToggle>
       <mat-expansion-panel-header class="rowMore">
         <img src="../../../assets/tabs-icons/family.svg" class="iconImage">

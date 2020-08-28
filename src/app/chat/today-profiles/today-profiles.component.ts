@@ -101,7 +101,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           if (data.hasPhoto === '1') {
             this.itemService.setPhotoStatus(true);
           } else {
-            this.itemService.setPhotoStatus(false);
+            //this.itemService.setPhotoStatus(false);
           }
           // for personalized users
           if (data && data.is_premium && data.is_premium === '1') {
@@ -163,7 +163,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         if (data.hasPhoto === '1') {
           this.itemService.setPhotoStatus(true);
         } else {
-          this.itemService.setPhotoStatus(false);
+          //this.itemService.setPhotoStatus(false);
         }
         // for personalized users
         if (data && data.is_premium && data.is_premium === '1') {
@@ -405,7 +405,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               if (data.hasPhoto === '1') {
                 this.itemService.setPhotoStatus(true);
               } else {
-                this.itemService.setPhotoStatus(false);
+                //this.itemService.setPhotoStatus(false);
               }
               // for personalized users
               if (data && data.is_premium && data.is_premium === '1') {

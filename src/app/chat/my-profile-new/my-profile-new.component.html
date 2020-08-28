@@ -327,7 +327,7 @@
                       Company</a> | <a
                       *ngIf="personalProfileData.monthly_income && personalProfileData.monthly_income!='null'">{{getIncome(personalProfileData.monthly_income)}}
                       LPA</a>
-                    <a *ngIf="personalProfileData.monthly_income|| personalProfileData.monthly_income=='null'"
+                    <a *ngIf="!personalProfileData.monthly_income|| personalProfileData.monthly_income=='null'"
                       class="pink">+Add Income</a>
                   </p>
                   <p class="headings">{{languageService.profileLang.workingCity}}</p>
