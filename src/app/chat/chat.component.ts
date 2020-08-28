@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  AfterViewInit
+  AfterViewInit,
+  OnDestroy
 } from '@angular/core';
 import {
   HttpClient
@@ -52,7 +53,7 @@ import { SubscriptionserviceService } from '../subscriptionservice.service';
   styleUrls: ['./chat.component.css']
 })
 
-export class ChatComponent implements OnInit, AfterViewInit {
+export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   familyTable = {
@@ -200,6 +201,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
     public languageService: LanguageService,
     private activatedRoute: ActivatedRoute
   ) {
+  }
+  ngOnDestroy(): void {
+    if (this.router.url.match('first')) {
+    this.analyticsEvent('First Time User Left');
+    }
   }
 
   ngOnInit() {

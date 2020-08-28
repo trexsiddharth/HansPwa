@@ -125,6 +125,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   authData;
   private fetchedFbProfilePic = null;
 
+  private alreadyExists = false;
+
   /** list of designation filtered by search keyword for option groups */
   public filteredCastes: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
@@ -402,6 +404,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
               localStorage.setItem('id', res.id);
               this.router.navigateByUrl('chat');
             } else {
+              this.alreadyExists = true;
               this.openVerificationDialog(res.is_lead);
             }
             this.spinner.show();
@@ -536,6 +539,13 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   firstStep() {
+
+    if (this.alreadyExists === true) {
+      this.openVerificationDialog(this.authData.is_lead);
+      return;
+    }
+
+
     console.log(this.PageOne.value.email);
     this.errors = [];
     console.log('date', this.PageOne.value.birth_date);
