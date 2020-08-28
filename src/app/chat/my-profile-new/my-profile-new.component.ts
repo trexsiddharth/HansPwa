@@ -1302,8 +1302,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.personalDetailsLeft = 0;
     Object.entries(this.personalProfileData).forEach(
       ([key, value]) => {
-        if (['name', 'birth_date', 'birth_time', 'birth_place', 'college', 'additional_qualification', 'caste', 'religion', 'height', 'weight', 'marital_status', 'manglik'
-          , 'food_choice', 'monthly_income', 'degree', 'company', 'occupation', 'profession', 'working_city', 'locality', 'email'].includes(key)) {
+        if (['name', 'birth_date', 'birth_time', 'birth_place', 'college',
+          'additional_qualification', 'caste', 'religion',
+          'height', 'weight', 'marital_status', 'manglik',
+          'food_choice', 'monthly_income', 'degree',
+          'company', 'occupation', 'profession', 'working_city',
+          'locality', 'email', 'profession', 'locality'].includes(key)) {
           if ((!value) || value == "null") {
             this.personalDetailsLeft += 1;
           }

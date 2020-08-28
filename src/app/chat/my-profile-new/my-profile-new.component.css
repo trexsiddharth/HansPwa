@@ -454,7 +454,7 @@ p{
     display: block;
     position: absolute;
     top:5px;
-    right:80px;
+    right:35%;
     z-index:99999999;
   }
 }
