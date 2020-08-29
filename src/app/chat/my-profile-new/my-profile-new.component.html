@@ -29,7 +29,7 @@
                 (change)="previewBack(backfile.files, index + 1)" />
               <!-- <img (click)="changeProfileImage(index)" id="imgProfile" -->
               <img id="imgProfile"
-                style="width:100%!important; height:32vh;background-color: lightblue;border-radius:15px ;object-fit:cover!important;"
+                style="width:100%!important; height:30vh;background-color: lightblue;border-radius:15px ;object-fit:cover!important;"
                 (error)="onProfileLoadError(personalProfileData.gender, i)" [src]="
                   getProfilesPhoto(
                     personalProfileData.carousel,
@@ -419,7 +419,12 @@
                       *ngIf="personalProfileData.manglik&&personalProfileData.manglik!='null'">{{personalProfileData.manglik}}</a><a
                       *ngIf="!personalProfileData.manglik||personalProfileData.manglik=='null'" class="pink">+Add
                       Manglik Status</a>
-                  <p>{{personalProfileData.birth_time ? personalProfileData.birth_time : "Add birth time"}} |
+                  </p>
+                  <p> <a
+                      *ngIf="personalProfileData.birth_time && personalProfileData.birth_time!='null'">{{personalProfileData.birth_time}}</a>
+                    <a *ngIf="!personalProfileData.birth_time ||personalProfileData.birth_time=='null'"
+                      class="pink">+Add
+                      Birth Time</a> |
                     {{personalProfileData.birth_date ? personalProfileData.birth_date : "Add birth date"}} |
                     <a
                       *ngIf="personalProfileData.birth_place&&personalProfileData.birth_place!='null'">{{personalProfileData.birth_place}}</a>
