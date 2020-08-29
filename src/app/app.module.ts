@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SubscriptionserviceService } from './subscriptionservice.service';
 
 import { ViewCentresComponent } from './view-centres/view-centres.component';
@@ -35,7 +36,7 @@ import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
-import { TodaysPaymentPopupComponent } from './chat/today-profiles/todays-payment-popup/todays-payment-popup.component'
+import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payment-popup.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { TodaysPaymentPopupComponent } from './chat/today-profiles/todays-paymen
     HttpClientModule,
     NgxMatIntlTelInputModule,
     RouterModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    NgbModule
   ],
   providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
   bootstrap: [AppComponent],

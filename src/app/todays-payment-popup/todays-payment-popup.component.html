@@ -14,7 +14,7 @@
       <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="false">
         <ng-template ngbSlide *ngFor="let image of images">
           <div class="picsum-img-wrapper" style="border:0px!important">
-            <img [src]="image" alt="Offers" style="height: 25vh; width: 100%;" />
+            <img [src]="images" alt="Offers" style="height: 25vh; width: 100%;" />
           </div>
         </ng-template>
       </ngb-carousel>

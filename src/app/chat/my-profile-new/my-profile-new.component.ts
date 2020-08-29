@@ -1284,72 +1284,66 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   familyDetailsLeft: number = 0;
   personalDetailsLeft: number = 0;
-  preferenceDetailsLeft: number = 0;
-  profileDetails: number = 0;
   profileCompletionPercent: number = 0;
+  personalDetailsList = [];
+  familyDetailsList = [];
+  totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
   getDetailsLeft(a: string) {
     switch (a) {
       case 'personal': return this.personalDetailsLeft;
         break;
       case 'family': return this.familyDetailsLeft;
         break;
-      case 'preference': return this.preferenceDetailsLeft;
-        break;
     }
   }
   setProfileCalculations() {
-    this.profileDetails = 0;
+    this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',
+      'additional_qualification', 'caste', 'religion',
+      'height', 'weight', 'marital_status', 'manglik',
+      'food_choice', 'monthly_income', 'degree',
+      'company', 'occupation', 'profession', 'working_city',
+      'locality', 'email', 'profession', 'locality', 'whats_app_no'];
+    this.familyDetailsList = ['about', 'occupation_mother', 'gotra', 'occupation',
+      'family_type', 'family_income', 'city', 'house_type'];
+    this.totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
+    let detailsLeft = [];
+    console.log("look Here1");
+    console.log(this.personalDetailsLeft);
+    console.log(this.familyDetailsLeft);
+    console.log(this.personalDetailsList);
+    console.log(this.familyDetailsList)
     this.personalDetailsLeft = 0;
     Object.entries(this.personalProfileData).forEach(
       ([key, value]) => {
-        if (['name', 'birth_date', 'birth_time', 'birth_place', 'college',
-          'additional_qualification', 'caste', 'religion',
-          'height', 'weight', 'marital_status', 'manglik',
-          'food_choice', 'monthly_income', 'degree',
-          'company', 'occupation', 'profession', 'working_city',
-          'locality', 'email', 'profession', 'locality'].includes(key)) {
+        if (this.personalDetailsList.includes(key)) {
           if ((!value) || value == "null") {
             this.personalDetailsLeft += 1;
+            detailsLeft.push(key);
           }
-          else {
-            this.profileDetails += 1;
-          }
+          // this.personalDetailsList.splice(this.personalDetailsList.indexOf(key));
         }
       }
     );
+    // this.personalDetailsLeft += this.personalDetailsList.length;
     this.familyDetailsLeft = 0;
     Object.entries(this.familyProfileData).forEach(
       ([key, value]) => {
-        if (['about', 'occupation_mother', 'gotra', 'occupation', 'family_type', 'family_income', 'city', 'house_type'].includes(key)) {
+        if (this.familyDetailsList.includes(key)) {
           if (!value || value == "null") {
             this.familyDetailsLeft += 1;
+            detailsLeft.push(key);
           }
-          else {
-            this.profileDetails += 1;
-          }
+          // this.familyDetailsList.splice(this.familyDetailsList.indexOf(key));
         }
       });
+    // this.familyDetailsLeft += this.familyDetailsList.length;
+    console.log("look Here2");
+    console.log(this.personalDetailsLeft);
     console.log(this.familyDetailsLeft);
-    //this.preferenceDetailsLeft = 0;
-    // Object.entries(this.preferenceProfileData).forEach(
-    //   ([key, value]) => {
-    //     //console.log(key, value);
-    //     if ((key in ['citizenship', 'description', 'caste_no_bar'])) {
-    //       if (value == null) {
-    //         this.preferenceDetailsLeft += 1;
-    //       }
-    //       else {
-    //         this.profileDetails += 1;
-    //       }
-    //     }
-    //   });
+    console.log(detailsLeft);
   }
   setProfileCompletion() {
-    console.log(this.profileDetails);
-    console.log(this.preferenceDetailsLeft);
-    console.log(this.familyDetailsLeft);
-    //console.log(this.preferenceDetailsLeft);
-    this.profileCompletionPercent = Math.ceil((this.profileDetails * 100) / (this.profileDetails + this.personalDetailsLeft + this.familyDetailsLeft));
+    this.profileCompletionPercent = Math.ceil(((this.totalDetails - this.personalDetailsLeft - this.familyDetailsLeft) * 100) / (this.totalDetails));
   }
 
   getUserProfileData() {

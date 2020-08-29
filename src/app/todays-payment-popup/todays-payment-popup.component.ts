@@ -37,9 +37,9 @@ export class TodaysPaymentPopupComponent implements OnInit {
   oId;
   txnToken;
   images = [
-    '../assets/popupone.png',
-    '../assets/popuptwo.png',
-    '../assets/popupthree.png',
+    '../../../assets/popupone.png',
+    '../../../assets/popuptwo.png',
+    '../../../assets/popupthree.png',
   ];
   showNavigationArrows = false;
   showNavigationIndicators = false;

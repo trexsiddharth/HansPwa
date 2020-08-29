@@ -236,12 +236,20 @@ export class ChatDrawerComponent implements OnInit {
   contactedCount = 0;
   rejectedCount = 0;
   getContactedCount() {
-    let count = JSON.parse(localStorage.getItem('count'));
-    return count.contactedCount
+    if (localStorage.getItem('count')) {
+      let count = JSON.parse(localStorage.getItem('count'));
+      return count.contactedCount
+    }
+    else
+      return 0;
   }
   getRejectedCount() {
-    let count = JSON.parse(localStorage.getItem('count'));
-    return count.rejectedCount;
+    if (localStorage.getItem('count')) {
+      let count = JSON.parse(localStorage.getItem('count'));
+      return count.rejectedCount;
+    }
+    else
+      return 0;
   }
   // this will called only if the user is logged in and will open contacted, rejected etc sections.
   openHistoryProfiles(section: string) {

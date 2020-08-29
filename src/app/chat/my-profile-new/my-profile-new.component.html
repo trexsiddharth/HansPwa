@@ -126,11 +126,14 @@
                     <a *ngIf="!personalProfileData.weight||personalProfileData.weight=='null'" class="pink">+Add
                       Weight</a>
                   </p>
-                  <p><a
-                      *ngIf="personalProfileData.locality&&personalProfileData.locality!='null'">{{personalProfileData.locality}}</a>
-                  </p>
-                  <p><a *ngIf="!personalProfileData.locality||personalProfileData.locality=='null'" class="pink">+Add
+                  <p *ngIf="personalProfileData.family"><a
+                      *ngIf="personalProfileData.family.locality&&personalProfileData.family.locality!='null'">{{personalProfileData.family.locality}}</a>
+                    <a *ngIf="!personalProfileData.family.locality||personalProfileData.family.locality=='null'"
+                      class="pink">+Add
                       Locality</a></p>
+                  <p *ngIf="!personalProfileData.family">
+                    {{familyProfileData.locality}}
+                  </p>
                 </div>
                 <div class="columnar">
                   <p>{{setAge(personalProfileData.birth_date)}}Yrs | {{personalProfileData.birth_date}}</p>
@@ -139,8 +142,9 @@
                     <a *ngIf="!personalProfileData.food_choice||personalProfileData.food_choice=='null'"
                       class="pink">+Add Food Choice</a></p>
                   <p><a
-                      *ngIf="personalProfileData.marital_statuse&&personalProfileData.marital_status!='null'">{{personalProfileData.marital_status}}</a>
-                    <a *ngIf="!personalProfileData.marital_status||personalProfileData.marital_status=='null'">+Add
+                      *ngIf="personalProfileData.marital_status&&personalProfileData.marital_status!='null'">{{personalProfileData.marital_status}}</a>
+                    <a *ngIf="!personalProfileData.marital_status||personalProfileData.marital_status=='null'"
+                      class="pink">+Add
                       Marital Status</a>
                   </p>
                 </div>
@@ -464,8 +468,14 @@
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p><a *ngIf="personalProfileData.email">{{personalProfileData.email}}</a>
-                    <a *ngIf="!personalProfileData.email" class="pink">+Add Email</a></p>
+                  <p *ngIf="personalProfileData.family"><a
+                      *ngIf="personalProfileData.family.email&&personalProfileData.family.email!='null'">{{personalProfileData.family.email}}</a>
+                    <a *ngIf="!personalProfileData.family.email||personalProfileData.family.email=='null'"
+                      class="pink">+Add
+                      email</a></p>
+                  <p *ngIf="!personalProfileData.family">
+                    {{familyProfileData.email}}
+                  </p>
                   <p class="headings">{{languageService.profileLang.mobile}}</p>
                   <p>{{
                   familyProfileData.mobile
@@ -626,8 +636,7 @@
                 <div class="columnar" style="margin-top: 0px!important;">
                   <p class=" headings">{{languageService.profileLang.houseType}}</p>
                   <p><a
-                      *ngIf="familyProfileData.house_type&&familyProfileData.house_type!='null'">{{familyProfileData.house_type}}
-                      LPA</a>
+                      *ngIf="familyProfileData.house_type&&familyProfileData.house_type!='null'">{{familyProfileData.house_type}}</a>
                     <a *ngIf="!familyProfileData.house_type||familyProfileData.house_type=='null'" class="pink">+Add
                       House Type</a>
                   </p>

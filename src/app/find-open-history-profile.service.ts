@@ -6,7 +6,7 @@ import { LockdownOffComponent } from './offers/lockdown-off/lockdown-off.compone
 import { OfferOneComponent } from './offers/offer-one/offer-one.component';
 import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { AppDownloadDialogComponent } from './chat/app-download-dialog/app-download-dialog.component';
-import { TodaysPaymentPopupComponent } from './chat/today-profiles/todays-payment-popup/todays-payment-popup.component';
+import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payment-popup.component';
 import { RateUsDialogComponent } from './chat/rate-us-dialog/rate-us-dialog.component';
 import { MessageDialogComponent } from './chat/message-dialog/message-dialog.component';
 import { NgxNotificationService } from 'ngx-kc-notification';
