@@ -123,6 +123,7 @@
     /* padding:5px; */
     margin:auto;
     overflow-x:hidden;
+    flex:1 1 400px; margin:0%
   }
   .contentArea{
     display:flex;
@@ -164,7 +165,7 @@
     justify-content:center;
   }
   .numOfContacts {
-    padding:0px 3px 0px 3px;
+    padding:3px 3px 0px 3px;
     font-style: normal!important;
     position: absolute;
     top: -1px !important;
@@ -173,7 +174,7 @@
     border-radius: 3px 3px 3px 3px;
     color:white;
     font-weight: 600!important;
-    font-size:0.8rem;
+    font-size:0.75rem;
   }
   ul {
     font-size: 14px;
@@ -385,12 +386,12 @@ p{
     float: right;
     margin-right:29%
   }
-  .contentArea{
+  /* .contentArea{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-  }
+  } */
   .column{
     height:fit-content;
     background:white;
@@ -401,7 +402,7 @@ p{
     /* border: 1px solid rgba(187, 172, 172, 0.253); */
     /* box-shadow: 3px 2px 2px 2px #00000049; */
     box-shadow: 0px 3px 3px 2px #00000049;
-    /* height:30vh; */
+     height:25em!important;
   }
   .columnQ{
     height:fit-content;
@@ -427,16 +428,16 @@ p{
     height:27vh;
   }
   .numOfContacts {
-    padding:0px 3px 0px 3px;
+    padding:3px 3px 0px 3px;
     font-style: normal!important;
     position: absolute;
-    top: -5px !important;
-    right: 10%;
+    top: -4px !important;
+    right: 8%;
     background: #00c2cb;
     border-radius: 3px 3px 3px 3px;
     color:white;
     font-weight: 600!important;
-    font-size:1rem;
+    font-size:0.9rem;
   }
 }
   @media only screen and (max-width: 1024px) {

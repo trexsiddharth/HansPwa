@@ -42,8 +42,7 @@
 
             <div *ngIf="isActive === 'online'" class="list" style="margin-top: 20px;">
                 <div class="row contentArea">
-                    <div class="infoRow" *ngFor="let item  of plansOnline;let i = index"
-                        style="flex:1 1 400px; margin:2%">
+                    <div class="infoRow" *ngFor="let item  of plansOnline;let i = index">
                         <div class="columnP">
                             <div class="row information">
                                 <div class="columnar"
@@ -216,39 +215,37 @@
 
                 <div class="list" *ngIf="isActive === 'personalized'">
                     <div class="row contentArea">
-                        <div class="infoRow" style="flex:1 1 300px!important; margin:0%">
+                        <div class="infoRow" *ngFor="let item of plansPersonlised; let i = index">
                             <div class="column">
                                 <div class="row information">
                                     <div class="columnar"
                                         style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;">
                                         <div style="margin-top:auto;margin-bottom:auto;text-align:center">
                                             <div style="font-size:1.7rem;font-weight:bold;color: #354147 !important;">
-                                                Basic VIP</div>
-                                            <div><a style="font-size: large;">3 Months</a></div><br>
+                                                {{item.plan_name}}</div>
+                                            <div><a style="font-size: large;">{{item.validity}} Months</a></div><br>
                                             <b class=""
-                                                style="font-size: large; color: #00c2cb !important;">₹11000</b><br>
+                                                style="font-size: large; color: #00c2cb !important;">₹{{setAmount(i,1)}}</b><br>
                                             <a style="
                                 text-decoration: line-through;
                                 font-size: medium;  
                                 color: #596a76 !important;
-                              ">₹15000</a>
+                              ">₹{{item.amount}}</a>
                                         </div>
                                     </div>
                                     <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:7% 3% 5% 2%">
+                                        <div class="numOfContacts">
+                                            <a> {{item.contacts}} Contact Numbers</a>
+                                        </div>
                                         <ul style="margin-top:auto;margin-bottom:auto!important">
-                                            <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
-                                            <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
-                                            <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
-                                            <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
-                                            <li>उच्च वर्ग के रिश्ते </li>
-                                            <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                                            <li *ngFor="let content of setContent(i,1)">{{content}}</li>
                                         </ul>
-                                        <button class="buyNow" (click)="container4()">Buy Now</button>
+                                        <button class="buyNow" (click)="container(i,1)">Buy Now</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="infoRow" style="flex:1 1 300px!important; margin:0%">
+                        <!-- <div class="infoRow" style="flex:1 1 300px!important; margin:0%">
                             <div class="column">
                                 <div class="row information">
                                     <div class="columnar"
@@ -331,9 +328,6 @@
                                         </div>
                                     </div>
                                     <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:7% 3% 5% 2%">
-                                        <!-- <div class="numOfContacts">
-                                                        <a> 45 Contact Numbers</a>
-                                                    </div> -->
                                         <ul style="margin-top:auto;margin-bottom:auto!important">
                                             <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
                                             <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
@@ -346,7 +340,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="infoRow" style="margin-bottom:5%">
                         </div>
                     </div>

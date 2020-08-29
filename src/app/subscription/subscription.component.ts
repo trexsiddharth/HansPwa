@@ -242,7 +242,7 @@ export class SubscriptionComponent implements OnInit {
       return content;
     }
     else {
-      let content = this.plansPersonlised[index].content.split(',');
+      let content = this.plansPersonlised[index].content.split(';');
       return content;
     }
   }

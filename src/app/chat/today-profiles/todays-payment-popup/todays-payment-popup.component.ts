@@ -37,9 +37,9 @@ export class TodaysPaymentPopupComponent implements OnInit {
   oId;
   txnToken;
   images = [
-    '../../../assets/popupone.png',
-    '../../../assets/popuptwo.png',
-    '../../../assets/popupthree.png',
+    '../assets/popupone.png',
+    '../assets/popuptwo.png',
+    '../assets/popupthree.png',
   ];
   showNavigationArrows = false;
   showNavigationIndicators = false;
@@ -60,9 +60,13 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers })
       .subscribe(
         (res: any) => {
-          this.plans = res;
+          for (let a of res) {
+            if (a.plan_type === 'Self Service Plan') {
+              this.plans.push(a);
+            }
+          }
+          //this.plans = res;
           console.log(this.plans);
-          //console.log(this.plans[0].content.split(" ")[0]);
         },
         (err: any) => {
           this.subscriptionservice.loadRazorPayScript();
