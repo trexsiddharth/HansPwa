@@ -136,17 +136,22 @@
                   </p>
                 </div>
                 <div class="columnar">
-                  <p>{{setAge(personalProfileData.birth_date)}}Yrs | {{personalProfileData.birth_date}}</p>
-                  <p><a
-                      *ngIf="personalProfileData.food_choice&&personalProfileData.food_choice!='null'">{{personalProfileData.food_choice}}</a>
-                    <a *ngIf="!personalProfileData.food_choice||personalProfileData.food_choice=='null'"
-                      class="pink">+Add Food Choice</a></p>
-                  <p><a
-                      *ngIf="personalProfileData.marital_status&&personalProfileData.marital_status!='null'">{{personalProfileData.marital_status}}</a>
-                    <a *ngIf="!personalProfileData.marital_status||personalProfileData.marital_status=='null'"
-                      class="pink">+Add
-                      Marital Status</a>
-                  </p>
+                  <<<<<<< HEAD <p>{{setAge(personalProfileData.birth_date)}}Yrs | {{personalProfileData.birth_date}}</p>
+                    <p><a
+                        *ngIf="personalProfileData.food_choice&&personalProfileData.food_choice!='null'">{{personalProfileData.food_choice}}</a>
+                      <a *ngIf="!personalProfileData.food_choice||personalProfileData.food_choice=='null'"
+                        class="pink">+Add Food Choice</a></p>
+                    <p><a
+                        *ngIf="personalProfileData.marital_status&&personalProfileData.marital_status!='null'">{{personalProfileData.marital_status}}</a>
+                      <a *ngIf="!personalProfileData.marital_status||personalProfileData.marital_status=='null'"
+                        class="pink">+Add
+                        Marital Status</a>
+                    </p>
+                    =======
+                    <p>{{setAge(personalProfileData.birth_date)}} Yrs | {{personalProfileData.birth_date}}</p>
+                    <p>{{personalProfileData.food_choice}}</p>
+                    <p>{{familyProfileData.marital_status}}</p>
+                    >>>>>>> 8d23a8aba91bd53eb9b819ce14b332ae3aeb592b
                 </div>
               </div>
             </div>
