@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'checkout', component: CustomCheckoutComponent},
   { path: 'picUpload', loadChildren: () => import('./photo-upload/photo-upload.module')
   .then(m => m.PhotoUploadModule)},
-  { path: '**', pathMatch: 'full', redirectTo: '/'}
+  { path: '**', pathMatch: 'full', redirectTo: '/'},
 
 ];
 

@@ -70,7 +70,7 @@ import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.
     OkdialogComponent,
     MyProfilePhotoUploadComponent,
     CustomerSupportComponent,
-    OkdialogCsComponent
+    OkdialogCsComponent,
   ],
   entryComponents: [
     MessageDialogComponent,

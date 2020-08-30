@@ -8,7 +8,7 @@ import { HistoryProfilesDialogComponent } from './history-profiles/history-profi
 import { DiscoverComponent } from './discover/discover.component';
 import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component';
 import { GetcallbackComponent } from './getcallback/getcallback.component';
-import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component'
+import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component';
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
 
 
