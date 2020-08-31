@@ -24,12 +24,12 @@
         <!-- <div class="UpInfo" *ngIf="false"> -->
         <ngb-carousel id="carousel" [showNavigationArrows]="true" [showNavigationIndicators]="true">
           <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
-            <div class="picsum-img-wrapper" style="text-align: center;object-fit:cover!important;">
+            <div class="picsum-img-wrapper" style="text-align: center;">
               <input style="margin: 10px 25%; display: none;" #backfile type="file" id="backfile" accept="image/*"
                 (change)="previewBack(backfile.files, index + 1)" />
               <!-- <img (click)="changeProfileImage(index)" id="imgProfile" -->
               <img id="imgProfile"
-                style="width:100%!important; height:30vh;background-color: lightblue;border-radius:15px ;object-fit:cover!important;"
+                style="width:100%!important; height:30vh;background-color: lightblue;border-radius:15px;object-fit:cover!important;"
                 (error)="onProfileLoadError(personalProfileData.gender, i)" [src]="
                   getProfilesPhoto(
                     personalProfileData.carousel,
