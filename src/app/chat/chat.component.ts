@@ -204,7 +204,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy(): void {
     if (this.router.url.match('first')) {
-    this.analyticsEvent('First Time User Left');
+      this.analyticsEvent('First Time User Left');
     }
   }
 
@@ -333,16 +333,13 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
-    this.openTodaysPopupHere();
+    if (!localStorage.getItem('todaysPopupOpened') || localStorage.getItem('todaysPopupOpened') !== '0') {
+      this.openTodaysPopupHere();
+    }
+    else {
+      localStorage.setItem('todaysPopupOpened', '1');
+    }
   }
-
-  // // get facebook login status
-  // statusChangeCallback(value) {
-  //   console.log(value);
-  //   if (value.status === 'unknown') {
-  //     this.router.navigateByUrl('phone-number');
-  //   }
-  // }
 
   ngAfterViewInit() {
     this.spinner.hide();

@@ -7,11 +7,13 @@ import {
 } from 'ngx-kc-notification';
 
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LanguageService } from '.././language.service';
 import { TodaysPaymentPopupComponent } from '../todays-payment-popup/todays-payment-popup.component'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { type } from 'os';
+
 
 
 @Component({
@@ -51,9 +53,16 @@ export class SubscriptionComponent implements OnInit {
     private breakPointObserver: BreakpointObserver,
     private dialog: MatDialog,
     private ngxNotificationService: NgxNotificationService,
-    public languageService: LanguageService) { }
+    public languageService: LanguageService,
+    public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((data: any) => {
+      if (data) {
+        console.log('look here', data.parameter)
+        this.isActive = (Number(data.parameter) === 0) ? 'online' : 'personalized';
+      }
+    });
     this.subscriptionService.loadRazorPayScript();
     this.innerWidth = window.innerWidth;
     const headers = new HttpHeaders({

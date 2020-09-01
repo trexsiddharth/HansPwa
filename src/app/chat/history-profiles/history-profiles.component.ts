@@ -40,6 +40,7 @@ import { LanguageService } from 'src/app/language.service';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 import { AnalyticsService } from 'src/app/analytics.service';
 import { element } from 'protractor';
+import { TodaysPaymentPopupComponent } from 'src/app/todays-payment-popup/todays-payment-popup.component';
 
 
 
@@ -102,23 +103,23 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     private subscriptionservice: SubscriptionserviceService) { }
 
   async ngOnInit() {
-    if (this.itemService.getPhotoStatus() && this.isNotPaid()) {
+    if (true) {
       this.subscriptionservice.loadRazorPayScript();
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });
-      this.http
-        .get('https://partner.hansmatrimony.com/api/subscription', { headers })
-        .subscribe(
-          (res: any) => {
-            this.plans = res;
-            //this.container1();
-            console.log(this.plans);
-          },
-          (err: any) => {
-            this.subscriptionservice.loadRazorPayScript();
+      this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers }).subscribe((res: any) => {
+        this.plans = res;
+        for (let i = 0; i < this.plans.length; i++) {
+          if (this.plans[i].plan_type === "Self Service Plan") {
+            this.plansOnline.push(this.plans[i]);
           }
-        );
+        }
+        console.log(this.plansOnline);
+        this.spinner.hide();
+      }, (err: any) => {
+        this.spinner.hide();
+      });
 
     }
     // url for the particular section of history
@@ -429,6 +430,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     if (this.wholeData) {
       localStorage.setItem('page_url', JSON.stringify(this.wholeData));
     }
+    localStorage.setItem('todaysPopupOpened', '0');
     this.updateLocalList();
     if (this.type === 'interestReceived') {
       localStorage.setItem('stage', '2');
@@ -1132,100 +1134,54 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   value;
   amount;
   plans: any = [];
-  show1 = true;
-  show2 = false;
-  points: any;
-  formData: any;
+  plansOnline: any = [];
   price: any;
   credits;
   selectedContainer: number;
-  getRazorPay(
-    amt: any,
-    type: any,
-    plan: any,
-    name: any,
-    email: any,
-    phone: any
-  ) {
-    if (plan === 0) {
-      return this.subscriptionservice.payNowT(
-        amt,
-        type,
-        0,
-        name,
-        email,
-        phone,
-        this.credits
-      );
-    } else {
-      return this.subscriptionservice.payNowT(
-        amt,
-        type,
-        1,
-        name,
-        email,
-        phone,
-        this.credits
-      );
-    }
-  }
-  facebookAnalytics(event) {
-    (window as any).fbq('track', event, {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('mobile_number'),
-    });
-    (window as any).fbq('track', '692972151223870', event, {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('mobiler_number'),
-    });
-  }
-  HandlePayment() {
-    if (this.price) {
-      this.subscriptionViewed();
-      if (localStorage.getItem('mobile_number')) {
-        console.log(localStorage.getItem('mobile_number'));
-        this.getRazorPay(
-          this.price,
-          'live',
-          0,
-          '',
-          '',
-          localStorage.getItem('mobile_number')
-        );
-      } else {
-        this.getRazorPay(this.price, 'live', 0, '', '', '');
+
+  openTodaysPopupAd() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.minHeight = '70vh';
+          dialogConfig.disableClose = true;
+        }
       }
-      this.analyticsService.googleAnalytics(
-        'Payement Gateway Opened For ' + this.price
-      );
-
-      this.facebookAnalytics('InitiateCheckout');
-    } else {
-      this.ngxNotificationService.error('Something Went Wrong');
-    }
+    );
+    dialogConfig.data = {
+      plan: this.plan,
+      chooseMethod: true,
+      selectedContainer: this.selectedContainer,
+      price: this.price,
+      credits: this.credits
+    };
+    const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
   }
-  container1() {
-    this.price = '2800';
-    this.credits = '45';
-    this.selectedContainer = 1;
-    console.log('plan 1 selected');
-    this.HandlePayment();
+  setAmount(index: number) {
+    return this.plansOnline[index].amount - (this.plansOnline[index].amount * this.plansOnline[index].discount / 100);
   }
-  container2() {
-    this.price = '4500';
-    this.credits = '90';
-    this.selectedContainer = 2;
-    console.log('plan 1 selected');
-    this.HandlePayment();
+  setContent(index: number) {
+    let content = this.plansOnline[index].content.split(';');
+    return content;
   }
-  container3() {
-    this.price = '8500';
-    this.credits = '45';
-    this.selectedContainer = 3;
-    console.log('plan 1 selected');
-    this.HandlePayment();
+  container(index: number) {
+    this.price = this.setAmount(index);
+    this.credits = this.plansOnline[index].contacts;
+    this.selectedContainer = index + 1;
+    this.plan = 0;
+    this.openTodaysPopupAd();
   }
-
   subscriptionViewed() {
     const formData = new FormData();
     formData.append('mobile', localStorage.getItem('mobile_number'));

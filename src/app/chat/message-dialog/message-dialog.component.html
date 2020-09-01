@@ -1,9 +1,11 @@
 <main *ngIf="type=='yes'">
     <div id="cancel">
-        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg" alt="cancel">
+        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg"
+            alt="cancel">
     </div>
     <div id="lockImage">
-        <img style="width: 50px;border: 1px solid darkgrey;border-radius: 50%;padding: 10px;" src="../../../assets/lock.svg" alt="lock">
+        <img style="width: 50px;border: 1px solid darkgrey;border-radius: 50%;padding: 10px;"
+            src="../../../assets/lock.svg" alt="lock">
     </div>
     <div id="heading">
         <p style="margin-bottom: 20px;font-size: 18px;" class="textAlign">{{languageService.getCurrentLanguage() === 'hindi'
@@ -15,14 +17,17 @@
         </div>
         <div class="col-9" style="margin: auto 0px;">
             <p style="font-weight: bold;font-size: 16px;">{{getName(profile)}}</p>
-            <p>{{languageService.getCurrentLanguage() === 'hindi' ? 'कांटेक्ट नंबर' : 'Contact Number'}}: +91-XXXXXXXXXX</p>
+            <p>{{languageService.getCurrentLanguage() === 'hindi' ? 'कांटेक्ट नंबर' : 'Contact Number'}}: +91-XXXXXXXXXX
+            </p>
             <p>{{languageService.getCurrentLanguage() === 'hindi' ? 'पूरा पता' : 'Address'}}: XXXXXXXXXX</p>
         </div>
     </div>
 
     <div class="row" style="margin-top: 30px;">
         <div class="col-12" style="padding:0px 0px 0px 30px">
-            <img style="width: 30px;border: 1px solid darkgrey;border-radius: 50%;margin-left: 10px" src="../../../assets/logo_192.png" alt="hans logo"><span style="font-size: 18px;margin-left: 10px;"> {{languageService.getCurrentLanguage() === 'hindi' ? 'प्लान के फायदे' : 'Benefits Of Plan'}} </span>
+            <img style="width: 30px;border: 1px solid darkgrey;border-radius: 50%;margin-left: 10px"
+                src="../../../assets/logo_192.png" alt="hans logo"><span style="font-size: 18px;margin-left: 10px;">
+                {{languageService.getCurrentLanguage() === 'hindi' ? 'प्लान के फायदे' : 'Benefits Of Plan'}} </span>
             <ul>
                 <li *ngIf="languageService.getCurrentLanguage() === 'hindi'">
                     <strong>25+</strong> सेंटर्स के <strong>50,000+</strong> रिश्ते
@@ -54,7 +59,8 @@
 
 <main *ngIf="type=='shortlist'">
     <div id="cancel" style="text-align: end;">
-        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelred.svg" alt="cancel">
+        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelred.svg"
+            alt="cancel">
     </div>
     <div class="textAlign">
         <span style="color: rgba(0,0,0,.6);font-size: 18px;">
@@ -62,27 +68,33 @@
         </span>
     </div>
     <div id="heading">
-        <p style="margin-bottom: 20px;font-size: 20px;" class="textAlign" *ngIf="languageService.getCurrentLanguage() === 'hindi'">बिना देखे <span style="font-weight:normal;font-family: sans-serif;">आपको कैसे पसंद करेंगी ?</span></p>
-        <p style="margin-bottom: 20px;font-size: 20px;" class="textAlign" *ngIf="languageService.getCurrentLanguage() === 'english'">Without Seeing You,<span style="font-weight:normal;font-family: sans-serif;">How Can They Like Your Profile ?</span></p>
+        <p style="margin-bottom: 20px;font-size: 20px;" class="textAlign"
+            *ngIf="languageService.getCurrentLanguage() === 'hindi'">बिना देखे <span
+                style="font-weight:normal;font-family: sans-serif;">आपको कैसे पसंद करेंगी ?</span></p>
+        <p style="margin-bottom: 20px;font-size: 20px;" class="textAlign"
+            *ngIf="languageService.getCurrentLanguage() === 'english'">Without Seeing You,<span
+                style="font-weight:normal;font-family: sans-serif;">How Can They Like Your Profile ?</span></p>
     </div>
     <div style="display: flex;justify-content: space-evenly;">
         <div class="textAlign">
             <img class="profilePic" [src]="getProfilePhoto()" alt="profile.name"><br>
             <span>{{profile.name}}</span>
         </div>
-            <span style="font-size: 40px;">❓</span>
-            <div class="textAlign">
-                <img class="profilePic" src="{{selfImage}}" alt="profile.name"><br>
-                <span style="display: block;
+        <span style="font-size: 40px;">❓</span>
+        <div class="textAlign">
+            <img class="profilePic" src="{{selfImage}}" alt="profile.name"><br>
+            <span style="display: block;
                 width: 100px;">{{selfName}}</span>
-            </div>
+        </div>
     </div>
     <div class="textAlign">
-        <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*' (change)="chooseFileForUpload(backfile.files)"/> 
+        <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*'
+            (change)="chooseFileForUpload(backfile.files)" />
         <button (click)="changeProfileImage()" mat-raised-button style="background: #e4105cb8;font-size: 20px;
         font-weight: bolder; width: 90%; 
         margin-top: 20px;">
-            <span style="font-size: 22px;margin-right: 5px;">👆🏻</span>{{languageService.getCurrentLanguage() === 'hindi' ? 'अभी फोटो अपलोड करें' : 'Upload Profile Picture'}}
+            <span
+                style="font-size: 22px;margin-right: 5px;">👆🏻</span>{{languageService.getCurrentLanguage() === 'hindi' ? 'अभी फोटो अपलोड करें' : 'Upload Profile Picture'}}
         </button>
     </div>
 
@@ -90,49 +102,62 @@
 
 <!-- when user chooses shortlist and he doesnt hv his profile pic uploaded -->
 
-<main *ngIf="type=='contacted'">
-    <div id="cancel" style="text-align: end;">
-        <img (click)="closeDialog()" style="width: 40px;margin: 5px 5px 0px 0px;" src="../../../assets/cancelblue.svg" alt="cancel">
+<div *ngIf="type=='contacted'">
+    <!-- New Code starts here -->
+    <div id="offBanner">
+        <img id="offBannerImg" style="width:95px!important;height:95px;" class="circular mat-elevation-z10"
+            [src]="getProfilePhoto()" id="profilePicture"
+            (error)="onLoadProfileError(profile.gender ? profile.gender : '' , 'profilePicture')" alt="profile.name" />
     </div>
-    <div class="textAlign">
-        <img class="profilePicContacted"
-         [src]="getProfilePhoto()" 
-         id="profilePicture"
-         (error) = "onLoadProfileError(profile.gender ? profile.gender : '' , 'profilePicture')"
-         alt="profile.name"><br>
+    <div style="position:relative">
+        <div id="cancel">
+            <img mat-dialog-close style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg"
+                alt="cancel" />
+        </div>
+        <main style="padding-bottom:30px;">
+            <div style="
+        position:relative;
+        height:27vh!important; 
+        width:100%!important; 
+        border-radius: 20px!important;
+        background:white!important;
+        margin:auto;
+        margin-top:5%;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:center;
+        color:black">
+                <div style="display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center" class="text-center">
+                    <p style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;"
+                        *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                        {{profile.name ? profile.name : profile.profile.name}} हमारे VIP सदस्य है </p>
+                    <p style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;"
+                        *ngIf="languageService.getCurrentLanguage() === 'english'">
+                        {{profile.name ? profile.name : profile.profile.name}} Is Our VIP Member.</p>
+                    <p style="font-size:16px;color:rgb(51, 59, 52)!important;"
+                        *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                        इनके रिलेशनशिप मैनेजर से बात करने के लिए अभी <strong>VIP</strong> प्लान में रजिस्टर कराएं </p>
+                    <p style="font-size:16px;color:rgb(51, 59, 52)!important;"
+                        *ngIf="languageService.getCurrentLanguage() === 'english'">
+                        To Contact Their Relationship Manager Buy <strong>VIP</strong> Plan Right Now!!</p>
+                    <p style="margin-top: 15px;margin-bottom: 0px;font-size: 12sp;"
+                        *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                        <strong>VIP</strong> सदस्यता की जानकारी के लिए
+                    </p>
+                    <p style="margin-top: 15px;margin-bottom: 0px;font-size: 12sp;"
+                        *ngIf="languageService.getCurrentLanguage() === 'english'">
+                        For More Information On <strong>VIP</strong> Plans
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="mat-elevation-z10" style="background:#00c2cb" mat-raised-button
+                    (click)="premiumInterest()">{{languageService.getCurrentLanguage() === 'hindi' 
+                    ? 'कॉल बैक रिक्वेस्ट करें ' : 'Request Call Back'}}</button>
+            </div>
+        </main>
     </div>
-    <div class="textAlign" style="color: rgba(0,0,0,.6);;">
-        <p style="margin-top: 15px;" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-            <img style="width: 30px;padding-bottom: 8px;margin-right: 8px;" src="../../../assets/crown.svg"
-             alt="Crown"><strong>{{profile.name ? profile.name : profile.profile.name}}</strong> हमारे <strong>VIP</strong> सदस्य है |
-        </p>
-        <p style="margin-top: 15px;" *ngIf="languageService.getCurrentLanguage() === 'english'">
-            <img style="width: 30px;padding-bottom: 8px;margin-right: 8px;" src="../../../assets/crown.svg"
-             alt="Crown"><strong>{{profile.name ? profile.name : profile.profile.name}}</strong> Is Our <strong>VIP</strong> Member.
-        </p>
-        <p style="margin-top: 15px;" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-            इनके रिलेशनशिप मैनेजर से बात करने के लिए
-        </p>
-        <p style="margin-top: 15px;" *ngIf="languageService.getCurrentLanguage() === 'english'">
-            To Contact Their Relationship Manager
-        </p>
-        <p style="margin-top: 15px;" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-            अभी <strong>VIP</strong> प्लान में रजिस्टर कराएं |
-        </p>
-        <p style="margin-top: 15px;" *ngIf="languageService.getCurrentLanguage() === 'english'">
-            Buy <strong>VIP</strong> Plan Right Now!!
-        </p>
-        <p style="margin-top: 15px;margin-bottom: 0px;font-size: 12sp;" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-            <strong>VIP</strong> सदस्यता की जानकारी के लिए
-        </p>
-        <p style="margin-top: 15px;margin-bottom: 0px;font-size: 12sp;" *ngIf="languageService.getCurrentLanguage() === 'english'">
-            For More Information On <strong>VIP</strong> Plans
-        </p>
-        <button (click)="premiumInterest()" mat-raised-button style="background: #34b7f1;font-size: 20px;
-        color: white;
-    font-weight: bolder; width: 90%;">
-        <img width="30px" src="../../../assets/phone_white.svg" alt="call hans"> {{languageService.getCurrentLanguage() === 'hindi' 
-    ? 'कॉल बैक रिक्वेस्ट करें ' : 'Request Call Back'}}
-    </button>
-    </div>
-</main>
+</div>

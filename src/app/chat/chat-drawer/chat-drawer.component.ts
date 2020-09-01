@@ -30,6 +30,8 @@ export class ChatDrawerComponent implements OnInit {
   currentLanguage;
   gender: string;
   preferenceProfileData: any;
+  personalProfileData: any;
+  familyProfileData: any;
   preferencesForm: FormGroup;
   constructor(public languageService: LanguageService,
     private chatService: ChatServiceService,
@@ -367,6 +369,50 @@ export class ChatDrawerComponent implements OnInit {
       });
     }
   }
+  familyDetailsLeft: number = 0;
+  personalDetailsLeft: number = 0;
+  profileCompletionPercent: number = 0;
+  personalDetailsList = [];
+  familyDetailsList = [];
+  totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
+  setProfileCalculations() {
+    this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',
+      'additional_qualification', 'caste', 'religion',
+      'height', 'weight', 'marital_status', 'manglik',
+      'food_choice', 'monthly_income', 'degree',
+      'company', 'occupation', 'profession', 'working_city',
+      'locality', 'email', 'profession', 'locality', 'whats_app_no'];
+    this.familyDetailsList = ['about', 'occupation_mother', 'gotra', 'occupation',
+      'family_type', 'family_income', 'city', 'house_type'];
+    this.totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
+    let detailsLeft = [];
+    this.personalDetailsLeft = 0;
+    Object.entries(this.personalProfileData).forEach(
+      ([key, value]) => {
+        if (this.personalDetailsList.includes(key)) {
+          if ((!value) || value == "null") {
+            this.personalDetailsLeft += 1;
+            detailsLeft.push(key);
+          }
+        }
+      }
+    );
+    this.familyDetailsLeft = 0;
+    Object.entries(this.familyProfileData).forEach(
+      ([key, value]) => {
+        if (this.familyDetailsList.includes(key)) {
+          if (!value || value == "null") {
+            this.familyDetailsLeft += 1;
+            detailsLeft.push(key);
+          }
+        }
+      });
+  }
+  setProfileCompletion() {
+    this.profileCompletionPercent = Math.ceil(((this.totalDetails - this.personalDetailsLeft - this.familyDetailsLeft) * 100) / (this.totalDetails));
+    localStorage.setItem('profileCompPercent', String(this.profileCompletionPercent));
+    console.log('profileCompPercent set to ', this.profileCompletionPercent);
+  }
   getUserProfileData() {
     if (this.userId || localStorage.getItem('id')) {
       this.spinner.show();
@@ -400,6 +446,8 @@ export class ChatDrawerComponent implements OnInit {
           (data: any) => {
             console.log(data.preferences);
             this.preferenceProfileData = data.preferences ? data.preferences : null;
+            this.personalProfileData = data.profile ? data.profile : null;
+            this.familyProfileData = data.family ? data.family : null;
             this.spinner.hide();
             if (data && data.profile) {
               this.gender = data.profile.gender;
@@ -422,6 +470,8 @@ export class ChatDrawerComponent implements OnInit {
             this.setCurrentPreferenceValue();
             this.specialCase();
             this.getAllCaste();
+            this.setProfileCalculations();
+            this.setProfileCompletion();
           },
           (error: any) => {
             this.spinner.hide();

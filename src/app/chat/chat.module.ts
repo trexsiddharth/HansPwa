@@ -34,6 +34,7 @@ import { OkdialogComponent } from './getcallback/okdialog/okdialog.component';
 import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component';
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
 import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.component';
+import { PersistentMessageComponent } from './today-profiles/persistent-message/persistent-message.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.
     OkdialogComponent,
     MyProfilePhotoUploadComponent,
     CustomerSupportComponent,
-    OkdialogCsComponent
+    OkdialogCsComponent,
+    PersistentMessageComponent
   ],
   entryComponents: [
     MessageDialogComponent,
@@ -80,12 +82,12 @@ import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.
     PersonalizedDialogComponent,
     PersonalizedMessageDialogComponent,
     AppDownloadDialogComponent,
-    //TodaysPaymentPopupComponent,
     RateUsDialogComponent,
     ChatDrawerComponent,
     DailyWelcomePopupComponent,
     OkdialogComponent,
-    OkdialogCsComponent
+    OkdialogCsComponent,
+    PersistentMessageComponent,
   ],
   providers: [
     FindOpenHistoryProfileService,

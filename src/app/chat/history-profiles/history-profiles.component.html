@@ -327,7 +327,7 @@
             border-radius:30px 30px 30px 30px" mat-raised-button (click)="changeProfileImage()">Upload Photos</button>
         </div>
     </main>
-    <!-- <main class="noProfileMain" *ngIf="false"> -->
+    <!-- <main class="noProfileMain" *ngIf="true"> -->
     <main class="noProfileMain" *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()">
         <!-- <div style="position: relative;display: block;margin: 30% auto;">
      <p class="text-center">
@@ -337,19 +337,59 @@
      No Profiles Here
     </p>
     </div>  -->
-        <div style="position: relative;display: block;margin: 3%;margin-bottom:40px">
-            <p class="text-center noProfile">
+        <div style="position: relative;display: block;margin: 2%;margin-bottom:10px">
+            <p class="text-center noProfile" style="margin-bottom:0.4rem">
+                <a style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
+                    visibility and</a><br>
                 Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>
             </p>
             <p class="text-center">
-                <img src="../../../assets/down-arrow.svg" style="width:60px">
+                <img src="../../../assets/down-arrow.svg" style="width:40px">
             </p>
         </div>
-        <div class="plansArea">
-            <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
-                <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
-                    <b>बेसिक प्लान</b><br />
-                    <a>45 कांटेक्टस</a><br />
+        <div class="planArea" style="height:54vh;overflow-y:scroll">
+            <div *ngFor="let item of plansOnline; let i = index">
+                <div class="planrow text-dark"
+                    style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;">
+                    <div class="plancolumn">
+                        <b>{{item.plan_name}} Plan</b><br />
+                        <a>{{item.contacts}} Contacts</a>
+                    </div>
+                    <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+                        <b class="specialCase"
+                            style="font-size: large; color: #5b6d78 !important;vertical-align: middle !important;">₹
+                            {{setAmount(i)}}</b>
+                        <br />
+                        <a style="
+                      text-decoration: line-through;
+                      font-size: medium;
+                      color: #596a76 !important;vertical-align: middle !important;
+                    ">₹ {{item.amount}}</a>
+                        <div class="" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+          ">
+                            <div class="month">
+                                <a>{{item.validity}} months</a>
+                            </div>
+                            <button id="subs" class="btn btn-primary btn-small" (click)="container(i)"
+                                style="vertical-align: middle !important;">
+                                BUY
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="planRow2">
+                    <a style="color:#5b6d78!important">{{setContent(i)}}</a>
+                </div>
+            </div>
+            <!-- <div class="planrow text-dark" *ngFor="let item of plansOnline;let i = index;" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
+                <div class="plancolumn">
+                    <b>{{item.plan_name}} Plan</b><br />
+                     <a>45 कांटेक्टस</a><br />
+                    <a>{{item.contacts}} Contacts</a><br />
                 </div>
                 <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
                     <b>Basic Plan</b><br />
@@ -385,7 +425,7 @@
     border-bottom-left-radius: 0px;
     ">
                         <div class="month">
-                            <a>3 months</a>
+                            <a>3months</a>
                         </div>
                         <button class="btn btn-primary btn-small subs" (click)="container1()"
                             style="vertical-align: middle !important;">
@@ -507,7 +547,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </main>
     <main *ngIf="itemService.getPhotoStatus() && !isNotPaid() && !itemService.getPersonalized()" class="special">

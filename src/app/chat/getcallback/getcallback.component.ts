@@ -56,7 +56,7 @@ export class GetcallbackComponent implements OnInit {
     const interestForm = new FormData();
     interestForm.append('id', localStorage.getItem('id'));
     interestForm.append('is_lead', localStorage.getItem('is_lead'));
-    interestForm.append('query', this.query);
+    interestForm.append('comment', this.query);
 
     this.http.post<any>('https://partner.hansmatrimony.com/api/updateCallBack', interestForm).subscribe(
       data => {

@@ -9,39 +9,48 @@ import { HansPreloadingStrategyService } from './hans-preloading-strategy.servic
 
 
 const routes: Routes = [
-  { path: 'chat',
-  loadChildren: () => import('./chat/chat.module').
-  then(m => m.ChatModule),
-  data: {preload: true}
-},
-{ path: 'fourReg',
-  loadChildren: () => import('./compatibility-form/compatibility-form.module').
-  then(m => m.CompatibilityFormModule),
-  data: {preload: true}
-},
-{ path: 'reg',
-  loadChildren: () => import('./reg/reg.module').
-  then(m => m.RegModule)
-},
-{ path: 'subscription',
-  loadChildren: () => import('./subscription/subscription.module').
-  then(m => m.SubscriptionModule)
-},
-{ path: 'bless',
-  loadChildren: () => import('./bless/bless.module').
-  then(m => m.BlessModule)
-},
-  { path: '',
-  redirectTo: '',
-  pathMatch: 'full', component: NewHomeComponent },
-  { path: 'home', redirectTo: ''},
-  { path: 'viewCentres', component: ViewCentresComponent},
-  { path: 'phone-number', component: PhoneNumberScreenComponent},
-  { path: 'termsCondition', component: TermsAndConditionsComponent},
-  { path: 'checkout', component: CustomCheckoutComponent},
-  { path: 'picUpload', loadChildren: () => import('./photo-upload/photo-upload.module')
-  .then(m => m.PhotoUploadModule)},
-  { path: '**', pathMatch: 'full', redirectTo: '/'}
+  {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat.module').
+      then(m => m.ChatModule),
+    data: { preload: true }
+  },
+  {
+    path: 'fourReg',
+    loadChildren: () => import('./compatibility-form/compatibility-form.module').
+      then(m => m.CompatibilityFormModule),
+    data: { preload: true }
+  },
+  {
+    path: 'reg',
+    loadChildren: () => import('./reg/reg.module').
+      then(m => m.RegModule)
+  },
+  {
+    path: 'subscription/:parameter',
+    loadChildren: () => import('./subscription/subscription.module').
+      then(m => m.SubscriptionModule)
+  },
+  {
+    path: 'bless',
+    loadChildren: () => import('./bless/bless.module').
+      then(m => m.BlessModule)
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full', component: NewHomeComponent
+  },
+  { path: 'home', redirectTo: '' },
+  { path: 'viewCentres', component: ViewCentresComponent },
+  { path: 'phone-number', component: PhoneNumberScreenComponent },
+  { path: 'termsCondition', component: TermsAndConditionsComponent },
+  { path: 'checkout', component: CustomCheckoutComponent },
+  {
+    path: 'picUpload', loadChildren: () => import('./photo-upload/photo-upload.module')
+      .then(m => m.PhotoUploadModule)
+  },
+  { path: '**', pathMatch: 'full', redirectTo: '/' }
 
 ];
 

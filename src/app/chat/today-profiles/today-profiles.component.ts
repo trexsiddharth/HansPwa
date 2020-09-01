@@ -15,8 +15,8 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { ApiwhaAutoreply } from './profile-today-model';
 import { LanguageService } from 'src/app/language.service';
-
-
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { PersistentMessageComponent } from './persistent-message/persistent-message.component'
 @Component({
   selector: 'app-today-profiles',
   templateUrl: './today-profiles.component.html',
@@ -38,7 +38,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   count = 1;
   selfImage;
   selfName;
-  shortListCount = 0;
+
+  shortListCount = -1;
+  rejectedListCount = -1;
+
   section;
   about: any;
   personal;
@@ -54,11 +57,15 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   lastAction;
   showActionAnimation = false;
 
+  //for openning short popups;
+  openedPersistentPopup: boolean = false;
+
   profileIsLoadingSubject = new Subject<string>();
   profileIsLoading$: Observable<string> = this.profileIsLoadingSubject.asObservable().pipe(
     shareReplay()
   );
-
+  userId;
+  userIsLead;
   constructor(private http: HttpClient,
     private spinner: NgxSpinnerService,
     private ngxNotificationService: NgxNotificationService,
@@ -68,7 +75,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     public router: Router,
     private dialog: MatDialog,
     public languageService: LanguageService,
-    public subscriptionService: SubscriptionserviceService) {
+    public subscriptionService: SubscriptionserviceService,
+    private breakPointObserver: BreakpointObserver,) {
   }
 
   @HostListener('scroll', ['$event'])
@@ -88,6 +96,15 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit() {
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
+    this.chatService.authorized.subscribe(
+      data => {
+        if (data) {
+          this.userId = data.id;
+          this.userIsLead = data.isLead;
+          console.log(this.userId, this.userIsLead)
+        }
+      }
+    );
     if (!localStorage.getItem('authData')) {
       this.checkUrl().subscribe(
         data => {
@@ -291,50 +308,80 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         console.log('Tracking ' + event + ' successful');
 
       }
-
     });
-
     // gtag app + web
     (window as any).gtag('event', event, {
       event_callback: () => {
         console.log('Tracking gtag ' + event + ' successful');
       }
     });
-
   }
-
+  persistentDialogOpeningLogic(shareItem, reply: string) {
+    if (reply.toLowerCase() === 'shortlist') {
+      this.shortListCount = (this.shortListCount + 1) % 9;
+    }
+    if (reply === 'NO') {
+      this.rejectedListCount++;
+    }
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+      reply.toLowerCase() === 'yes' && this.type === 'profile') {
+      this.itemService.openTodaysPopupAd();
+    }
+    else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 2) &&
+      ((localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') || (!localStorage.getItem('appInstalled')))) {
+      this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
+    }
+    else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus()
+      && (this.shortListCount === 5) && localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '%. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+    }
+    else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+      reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 8) {
+      this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
+    }
+    else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+      && reply === 'NO' && this.type === 'profile' && this.rejectedListCount % 3 === 1) {
+      this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
+    }
+    else {
+      this.getData(reply);
+    }
+  }
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
     this.stopAnimation();
     this.itemService.setTutorialIndex();
     console.log('shortlist count', this.shortListCount);
+    console.log('rejected count', this.rejectedListCount)
     const modal = document.getElementById('myModal');
+    this.persistentDialogOpeningLogic(this.item, reply);
+    // return; //this is temporary
     if (modal.style.display !== 'none') {
       modal.style.display = 'none';
     }
-    console.log(this.itemService.getCredits(), reply.toLowerCase());
-    console.log(this.type, this.itemService.getPhotoStatus());
+    // console.log(this.itemService.getCredits(), reply.toLowerCase());
+    // console.log(this.type, this.itemService.getPhotoStatus());
 
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-      reply.toLowerCase() === 'yes' && this.type === 'profile') {
-      this.itemService.openTodaysPopupAd();
-    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-      reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus() === false
-      && (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
-      this.openMessageDialog(this.item, reply);
-    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-      reply.toLowerCase() === 'shortlist' && this.type === 'profile'
-      && this.shortListCount !== 0 && this.shortListCount % 3 === 0) {
-      this.shortListCount++;
-      this.itemService.openOfferOne(this.item);
-    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-      reply.toLowerCase() === 'shortlist' && this.type === 'profile'
-      && this.shortListCount !== 0 && this.shortListCount % 5 === 0) {
-      this.shortListCount++;
-      this.itemService.openDownloadAppDialog(this.item);
-    } else {
-      this.getData(reply);
-    }
+    // if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    //   reply.toLowerCase() === 'yes' && this.type === 'profile') {
+    //   this.itemService.openTodaysPopupAd();
+    // } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus() === false
+    //   && (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
+    //   this.openMessageDialog(this.item, reply);
+    // } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile'
+    //   && this.shortListCount !== 0 && this.shortListCount % 3 === 0) {
+    //   this.shortListCount++;
+    //   this.itemService.openOfferOne(this.item);
+    // } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile'
+    //   && this.shortListCount !== 0 && this.shortListCount % 5 === 0) {
+    //   this.shortListCount++;
+    //   this.itemService.openDownloadAppDialog(this.item);
+    // } else {
+    //   this.getData(reply);
+    // }
   }
 
   getData(reply) {
@@ -944,7 +991,35 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       return 'Joint Family';
     }
   }
+  openPersistentDialog(message: string, submessage: string, button: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '70vw';
+          dialogConfig.minHeight = '40vh';
+        }
+      }
+    );
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      message: message,
+      submessage: submessage,
+      button: button,
+      userId: this.userId,
+      userIsLead: this.userIsLead,
+    }
+    const dialogRef = this.dialog.open(PersistentMessageComponent, dialogConfig);
 
+  }
   // setting dynamic about me if users about me is null or na
   setAbout() {
     if (this.item) {
