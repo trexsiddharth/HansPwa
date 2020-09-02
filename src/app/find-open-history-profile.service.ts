@@ -325,6 +325,7 @@ export class FindOpenHistoryProfileService {
         }
       }
     );
+    dialogConfig.id = 'todaysPopup';
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
 
   }

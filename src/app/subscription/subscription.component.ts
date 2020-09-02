@@ -235,6 +235,7 @@ export class SubscriptionComponent implements OnInit {
       price: this.price,
       credits: this.credits
     };
+    dialogConfig.id = 'todaysPopup';
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
   }
   setAmount(index: number, type: number) {

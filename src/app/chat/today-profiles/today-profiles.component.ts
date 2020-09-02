@@ -318,7 +318,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   persistentDialogOpeningLogic(shareItem, reply: string) {
     if (reply.toLowerCase() === 'shortlist') {
-      this.shortListCount = (this.shortListCount + 1) % 9;
+      this.shortListCount = (this.shortListCount + 1) % 12;
     }
     if (reply === 'NO') {
       this.rejectedListCount++;
@@ -332,11 +332,11 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
     }
     else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus()
-      && (this.shortListCount === 5) && localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
-      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '%. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+      && (this.shortListCount === 6) && localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
     }
     else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-      reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 8) {
+      reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 10) {
       this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
     }
     else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
@@ -916,6 +916,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           selfName: this.selfName,
           type: reply.toLowerCase()
         };
+        dialogConfig.id = 'messageDialog';
         const dialogRefShort = this.dialog.open(MessageDialogComponent, dialogConfig);
         dialogRefShort.afterClosed().subscribe(data => {
           console.log(data);
@@ -1010,6 +1011,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }
     );
     dialogConfig.disableClose = true;
+    dialogConfig.id = 'persistentDialog';
     dialogConfig.data = {
       message: message,
       submessage: submessage,

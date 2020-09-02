@@ -25,7 +25,7 @@
     <div *ngFor="let item of plans; let i = index">
       <div class="planrow text-dark"
         style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;">
-        <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+        <div class="plancolumn">
           <b>{{item.plan_name}} Plan</b><br />
           <a>{{item.contacts}} Contacts</a>
         </div>
@@ -39,7 +39,7 @@
             font-size: medium;
             color: #596a76 !important;vertical-align: middle !important;
           ">₹ {{item.amount}}</a>
-          <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+          <div class="" style="
 background-color: #f0f1f0;
 border-radius: 18px;
 border-top-left-radius: 0px;

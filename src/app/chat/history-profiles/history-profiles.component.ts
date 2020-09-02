@@ -1166,6 +1166,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       price: this.price,
       credits: this.credits
     };
+    dialogConfig.id = 'todaysPopup';
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
   }
   setAmount(index: number) {

@@ -22,13 +22,13 @@ import { BreakpointObserver } from '@angular/cdk/layout';
         stagger(100, [
           animate('0.5s', style({ opacity: 0 }))
         ])
-      ], {optional: true}),
+      ], { optional: true }),
       query(':enter', [
         style({ opacity: 0 }),
         stagger(100, [
           animate('0.5s', style({ opacity: 1 }))
         ]),
-      ], {optional: true})
+      ], { optional: true })
     ])
   ])],
   styleUrls: ['./personalized-profiles.component.css']
@@ -52,12 +52,12 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
 
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              private dialog: MatDialog,
-              public notification: NotificationsService, 
-              public itemService: FindOpenHistoryProfileService,
-              private breakPointObserver: BreakpointObserver,
-              private router: Router) {}
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog,
+    public notification: NotificationsService,
+    public itemService: FindOpenHistoryProfileService,
+    private breakPointObserver: BreakpointObserver,
+    private router: Router) { }
 
   ngOnInit() {
     if (localStorage.getItem('premiumProf')) {
@@ -70,7 +70,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
 
   getProfilePhoto(num: any, gen: string): string {
     if (num === null || num === '{}') {
-      if (gen &&  gen === 'Male') {
+      if (gen && gen === 'Male') {
         return '../../assets/male_pic.png';
       } else {
         return '../../assets/female_pic.png';
@@ -84,14 +84,14 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   }
   getImagesCount(num: string) {
     if (num !== '[]' && num && num !== 'null') {
-       const carouselObject: object = JSON.parse(num);
-       if (carouselObject) {
-          const size = Object.keys(carouselObject).length;
-          const arr: any[]  = [];
-          for (let index = 0; index < size; index++) {
-            arr.push(index);
-          }
-          return  arr;
+      const carouselObject: object = JSON.parse(num);
+      if (carouselObject) {
+        const size = Object.keys(carouselObject).length;
+        const arr: any[] = [];
+        for (let index = 0; index < size; index++) {
+          arr.push(index);
+        }
+        return arr;
       }
     } else {
       this.carouselSize = [1];
@@ -131,10 +131,10 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
   setId(index: any) {
     return '#' + index;
   }
-  checkUrl(num: string): Observable < any > {
+  checkUrl(num: string): Observable<any> {
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
           ['fcm_id']: this.notification.getCurrentToken(),
@@ -143,7 +143,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       });
     } else {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
           ['fcm_id']: this.notification.getCurrentToken()
@@ -189,8 +189,8 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       switch (type) {
         case 'Y':
           return 'Owned';
-          case 'N':
-            return 'Rented';
+        case 'N':
+          return 'Rented';
         default:
           break;
       }
@@ -199,25 +199,25 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  LifeStatus( work: string) {
-        if (work) {
-          return work;
-        } else {
-          return '';
-        }
-}
+  LifeStatus(work: string) {
+    if (work) {
+      return work;
+    } else {
+      return '';
+    }
+  }
 
   profileReAnswer(item: any, answer: any, index: any) {
-    console.log('test', this.itemService.getCredits() != null , this.itemService.getCredits().toString() === '0');
+    console.log('test', this.itemService.getCredits() != null, this.itemService.getCredits().toString() === '0');
     if (answer === 'CONTACTED' && this.itemService.getPersonalized() === false) {
       this.openMessageDialog(item, answer);
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-     this.itemService.getPhotoStatus() === false &&  answer === 'SHORTLIST' &&
-     (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
-     this.openMessageDialog(item, answer);
-   } else {
-     this.getData(item.identity_number, answer, index);
-   }
+      this.itemService.getPhotoStatus() === false && answer === 'SHORTLIST' &&
+      (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
+      this.openMessageDialog(item, answer);
+    } else {
+      this.getData(item.identity_number, answer, index);
+    }
   }
 
   getData(id: any, answer: any, index: any) {
@@ -227,7 +227,7 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     reAnswerData.append('id', id);
     reAnswerData.append('TEXT', answer);
     // tslint:disable-next-line: max-line-length
-    return this.http.post < any > ('https://partner.hansmatrimony.com/api/premiumPro', reAnswerData).subscribe(
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumPro', reAnswerData).subscribe(
       (data: any) => {
         console.log(data);
         if (data && data.status === 1) {
@@ -243,38 +243,38 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
       });
   }
 
-   // updates the new data to locally stored data
-   addRemoveNewData(data: any) {
+  // updates the new data to locally stored data
+  addRemoveNewData(data: any) {
     // finding and adding the new element to the locally stored list
     (data as any[]).forEach(
-     element => {
-      const newProfiles =  this.profile.find(
-        item => {
-           return item.identity_number === element.identity_number;
-        });
-      if (!newProfiles) {
-         //  this.profile.push(element);
+      element => {
+        const newProfiles = this.profile.find(
+          item => {
+            return item.identity_number === element.identity_number;
+          });
+        if (!newProfiles) {
+          //  this.profile.push(element);
           this.profile = [element, ...this.profile];
         }
-     }
-   );
+      }
+    );
 
-   // finding and removing the old element from the locally stored list
+    // finding and removing the old element from the locally stored list
 
     this.profile.forEach(
-    (item, index) => {
-     const removeProfile =  (data as any[]).find(
-        element => {
-         return item.identity_number === element.identity_number;
+      (item, index) => {
+        const removeProfile = (data as any[]).find(
+          element => {
+            return item.identity_number === element.identity_number;
+          }
+        );
+        if (!removeProfile) {
+          this.profile.splice(index, 1);
         }
-      );
-     if (!removeProfile) {
-       this.profile.splice(index, 1);
-     }
-    }
-   );
+      }
+    );
     console.log(this.profile);
-}
+  }
 
   openProfileDialog(item: any, ind: any) {
     const dialogConfig = new MatDialogConfig();
@@ -297,8 +297,8 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     );
     dialogConfig.disableClose = true;
     dialogConfig.data = {
-      profile : item,
-      index : ind,
+      profile: item,
+      index: ind,
       type: this.type
     };
     const dialogRef = this.dialog.open(PersonalizedDialogComponent, dialogConfig);
@@ -313,11 +313,11 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
 
   onLoadProfileError(gender: string, id: any) {
     if (gender.toLocaleLowerCase() === 'male') {
-     document.getElementById(id).setAttribute('src', '../../assets/male_pic.png');
-   } else {
-    document.getElementById(id).setAttribute('src', '../../assets/female_pic.png');
-   }
-   }
+      document.getElementById(id).setAttribute('src', '../../assets/male_pic.png');
+    } else {
+      document.getElementById(id).setAttribute('src', '../../assets/female_pic.png');
+    }
+  }
 
   Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
@@ -327,65 +327,65 @@ export class PersonalizedProfilesComponent implements OnInit, AfterViewInit {
     });
 
     // gtag app + web
-    (window as any).gtag('event', category , {
+    (window as any).gtag('event', category, {
       'action': action
     });
   }
   updateProfileList(ans: any, index: any) {
-           switch (ans) {
-          case 'CONTACTED':
-            if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-              this.slideAndOpenProfile(this.profile[index], 1);
-              this.profile.splice(index, 1);
-              this.itemService.changeTab(1);
-            } else {
-              this.ngxNotificationService.error('You Dont have Enough Credits', '',
-                null, {
-                  duration: 4000,
-                  closeButton: true
-                });
-            }
-            break;
-          case 'SHORTLIST':
-            this.profile.splice(index, 1);
-            this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
-              duration: 4000
-            });
-            break;
-          case 'REJECTED':
-            this.profile.splice(index, 1);
-            this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
-              duration: 4000
-            });
-            break;
-          default:
-            break;
+    switch (ans) {
+      case 'CONTACTED':
+        if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+          this.slideAndOpenProfile(this.profile[index], 1);
+          this.profile.splice(index, 1);
+          this.itemService.changeTab(1);
+        } else {
+          this.ngxNotificationService.error('You Dont have Enough Credits', '',
+            null, {
+            duration: 4000,
+            closeButton: true
+          });
         }
-           localStorage.setItem('premiumProf', JSON.stringify(this.profile));
+        break;
+      case 'SHORTLIST':
+        this.profile.splice(index, 1);
+        this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+          duration: 4000
+        });
+        break;
+      case 'REJECTED':
+        this.profile.splice(index, 1);
+        this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
+          duration: 4000
+        });
+        break;
+      default:
+        break;
+    }
+    localStorage.setItem('premiumProf', JSON.stringify(this.profile));
   }
-goToSubscription() {
+  goToSubscription() {
     this.router.navigateByUrl('subscription');
   }
-call(num: any) {
+  call(num: any) {
     window.open('tel:' + num);
     this.panelOpenState = null;
   }
-slideAndOpenProfile(item: any, slide: any) {
+  slideAndOpenProfile(item: any, slide: any) {
     this.itemService.setItem(item);
     this.itemService.changeTab(slide);
   }
-setDate(date: string) {
+  setDate(date: string) {
     const newDate = new Date(date);
     return new Intl.DateTimeFormat('en-AU').format(newDate);
   }
-setHeight(height: any) {
+  setHeight(height: any) {
     if (height && height !== '') {
       return this.Heights[this.Heights1.indexOf(height.toString())];
     } else {
       return '';
     }
   }
-disableForAWhile() {
+  disableForAWhile() {
     if (this.panelOpenState === null) {
       setTimeout(() => {
         this.panelOpenState = -1;
@@ -395,7 +395,7 @@ disableForAWhile() {
       return false;
     }
   }
-setTabNames(tab: any) {
+  setTabNames(tab: any) {
     if (localStorage.getItem('language') === null) {
       localStorage.setItem('language', 'Hindi');
     }
@@ -436,12 +436,12 @@ setTabNames(tab: any) {
         break;
     }
   }
-setAllTabNames() {
+  setAllTabNames() {
     for (let index = 0; index < 5; index++) {
       this.setTabNames(index);
     }
   }
-getNoDataText(type: any) {
+  getNoDataText(type: any) {
     switch (type) {
       case 'contactedProfiles':
         this.noData = '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
@@ -459,7 +459,7 @@ getNoDataText(type: any) {
         break;
     }
   }
-setIncome(value: string): String {
+  setIncome(value: string): String {
     if (value != null) {
       if (Number(value) > 1000) {
         return String((Number(value) / 100000));
@@ -471,129 +471,130 @@ setIncome(value: string): String {
       return '';
     }
   }
-toTitleCase(str) {
+  toTitleCase(str) {
     if (str) {
       return str.replace(
         /\w\S*/g,
         (txt) => {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
-    );
+      );
     } else {
       return '';
     }
-}
-removeBr(str) {
-  let text: string;
-  if (str) {
-    text = this.toTitleCase(str);
-    text = text.replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, ' ');
-    text =  text.replace(/(<|&lt;)Br\s*\/*(>|&gt;)/g, ' ');
-    text =  text.replace('&#039', '\'');
-    return  text.replace('&Amp', '&');
-  } else {
-    return '';
   }
-}
-
-getCredits() {
-  const creditsData = new FormData();
-  creditsData.append('id', localStorage.getItem('id'));
-  creditsData.append('is_lead', localStorage.getItem('is_lead'));
- // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
-   (data: any) => {
-     const points = data.whatsapp_points;
-     this.itemService.setCredits(data.whatsapp_points);
-     console.log('credits', points);
-   },
-  (error: any) => {
-    this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
-    console.log(error);
-    this.spinner.hide();
-  }
- );
-}
-
-openMessageDialog(shareItem, reply: string) {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.hasBackdrop = true;
-  dialogConfig.width = '700px';
-  dialogConfig.disableClose = true;
-  switch (reply.toLowerCase()) {
-    case 'contacted':
-      this.shortListCount++;
-      dialogConfig.data = {
-        profile: shareItem,
-        type: reply.toLowerCase()
-      };
-      const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
-      dialogRefYes.afterClosed().subscribe(
-        data => {
-          if (data && data.request) {
-          this.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
-          }
-        }
-      );
-      break;
-
-    default:
-      break;
-  }
-}
-
-getPersonalizedProfiles() {
-  if (!localStorage.getItem('premiumProf')) {
-  this.spinner.show();
-  }
-  const creditsData = new FormData();
-  creditsData.append('TEXT', 'SHOW');
-  creditsData.append('mobile', localStorage.getItem('mobile_number'));
-
- // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumPro', creditsData).pipe(timeout(12000), retry(2), catchError(e => {
-    throw new Error('Server Timeout ' + e);
-  })).subscribe(
-   (data: any) => {
-    console.log(data);
-    if (data.status === 1) {
-      this.Analytics('personalized section', 'personalized section' , 'personalized clicked');
-      
-      if (!localStorage.getItem('premiumProf')) {
-      this.profile = JSON.parse(data.message);
+  removeBr(str) {
+    let text: string;
+    if (str) {
+      text = this.toTitleCase(str);
+      text = text.replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, ' ');
+      text = text.replace(/(<|&lt;)Br\s*\/*(>|&gt;)/g, ' ');
+      text = text.replace('&#039', '\'');
+      return text.replace('&Amp', '&');
     } else {
-      this.addRemoveNewData(JSON.parse(data.message));
+      return '';
     }
-      localStorage.setItem('premiumProf', data.message);
-      console.log(this.profile);
-      this.spinner.hide();
-    } else {
-      this.profile = null;
-      this.message = data.message;
-      this.spinner.hide();
-    }
-    // if (this.profile.length < 1) {
-    //   this.getNoDataText(link);
-    // }
-    if (this.itemService.getItem()) {
-      const prof: any = this.itemService.getItem();
-      if (prof.profile) {
-        this.panelOpenState = this.profile.findIndex((item) => {
-          return item.profile.name === prof.profile.name;
-        });
-      } else {
-        this.panelOpenState = this.profile.findIndex((item) => {
-          return item.profile.name === prof.name;
-        });
+  }
+
+  getCredits() {
+    const creditsData = new FormData();
+    creditsData.append('id', localStorage.getItem('id'));
+    creditsData.append('is_lead', localStorage.getItem('is_lead'));
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
+      (data: any) => {
+        const points = data.whatsapp_points;
+        this.itemService.setCredits(data.whatsapp_points);
+        console.log('credits', points);
+      },
+      (error: any) => {
+        this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+        console.log(error);
+        this.spinner.hide();
       }
-      this.itemService.setItem(null);
-    }
-   },
-  (error: any) => {
-    this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
-    console.log(error);
-    this.spinner.hide();
+    );
   }
- );
-}
+
+  openMessageDialog(shareItem, reply: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.width = '700px';
+    dialogConfig.disableClose = true;
+    switch (reply.toLowerCase()) {
+      case 'contacted':
+        this.shortListCount++;
+        dialogConfig.data = {
+          profile: shareItem,
+          type: reply.toLowerCase()
+        };
+        dialogConfig.id = 'messageDialog'
+        const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+        dialogRefYes.afterClosed().subscribe(
+          data => {
+            if (data && data.request) {
+              this.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
+            }
+          }
+        );
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  getPersonalizedProfiles() {
+    if (!localStorage.getItem('premiumProf')) {
+      this.spinner.show();
+    }
+    const creditsData = new FormData();
+    creditsData.append('TEXT', 'SHOW');
+    creditsData.append('mobile', localStorage.getItem('mobile_number'));
+
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumPro', creditsData).pipe(timeout(12000), retry(2), catchError(e => {
+      throw new Error('Server Timeout ' + e);
+    })).subscribe(
+      (data: any) => {
+        console.log(data);
+        if (data.status === 1) {
+          this.Analytics('personalized section', 'personalized section', 'personalized clicked');
+
+          if (!localStorage.getItem('premiumProf')) {
+            this.profile = JSON.parse(data.message);
+          } else {
+            this.addRemoveNewData(JSON.parse(data.message));
+          }
+          localStorage.setItem('premiumProf', data.message);
+          console.log(this.profile);
+          this.spinner.hide();
+        } else {
+          this.profile = null;
+          this.message = data.message;
+          this.spinner.hide();
+        }
+        // if (this.profile.length < 1) {
+        //   this.getNoDataText(link);
+        // }
+        if (this.itemService.getItem()) {
+          const prof: any = this.itemService.getItem();
+          if (prof.profile) {
+            this.panelOpenState = this.profile.findIndex((item) => {
+              return item.profile.name === prof.profile.name;
+            });
+          } else {
+            this.panelOpenState = this.profile.findIndex((item) => {
+              return item.profile.name === prof.name;
+            });
+          }
+          this.itemService.setItem(null);
+        }
+      },
+      (error: any) => {
+        this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+        console.log(error);
+        this.spinner.hide();
+      }
+    );
+  }
 }

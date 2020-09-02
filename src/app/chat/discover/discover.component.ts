@@ -52,13 +52,13 @@ import { LanguageService } from 'src/app/language.service';
         stagger(100, [
           animate('0.5s', style({ opacity: 0 }))
         ])
-      ], {optional: true}),
+      ], { optional: true }),
       query(':enter', [
         style({ opacity: 0 }),
         stagger(100, [
           animate('0.5s', style({ opacity: 1 }))
         ]),
-      ], {optional: true})
+      ], { optional: true })
     ])
   ])],
   styleUrls: ['./discover.component.css']
@@ -86,33 +86,33 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   section;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              private dialog: MatDialog,
-              public notification: NotificationsService,
-              public itemService: FindOpenHistoryProfileService,
-              private activatedRoute: ActivatedRoute,
-              private chatService: ChatServiceService,
-              private browserLocation: Location,
-              private languageService: LanguageService,
-              private router: Router) {}
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog,
+    public notification: NotificationsService,
+    public itemService: FindOpenHistoryProfileService,
+    private activatedRoute: ActivatedRoute,
+    private chatService: ChatServiceService,
+    private browserLocation: Location,
+    private languageService: LanguageService,
+    private router: Router) { }
 
   ngOnInit() {
-     // url for the particular section of history
-     this.activatedRoute.paramMap.subscribe(
+    // url for the particular section of history
+    this.activatedRoute.paramMap.subscribe(
       (routeData: any) => {
         console.log(routeData);
-        if ( routeData && routeData.params && routeData.params.section) {
+        if (routeData && routeData.params && routeData.params.section) {
           this.section = routeData.params.section;
         }
       }
     );
 
     // get discover data
-     this.getDiscoveryData();
+    this.getDiscoveryData();
 
-      // if stage is not null set it to null so that when we get back to chat section it opens todays profile only
+    // if stage is not null set it to null so that when we get back to chat section it opens todays profile only
     // back to chat from chat drawer options
-     if (localStorage.getItem('stage')) {
+    if (localStorage.getItem('stage')) {
       localStorage.setItem('stage', null);
     }
   }
@@ -143,11 +143,11 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   }
 
   onLoadProfileError(gender: string, id: any) {
-   if (gender === 'Male') {
-    id.setAttribute('src', '../../assets/male_pic.png');
-  } else {
-    id.setAttribute('src', '../../assets/female_pic.png');
-  }
+    if (gender === 'Male') {
+      id.setAttribute('src', '../../assets/male_pic.png');
+    } else {
+      id.setAttribute('src', '../../assets/female_pic.png');
+    }
   }
   onLoadComplete(id: any) {
     id.setAttribute('src', '../../assets/male_pic.png');
@@ -155,14 +155,14 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   getProfilePhotoLarge(photo: any, carous: any, gen: string, index: string): string {
     if (carous === null || carous === 'null') {
       if (photo === null) {
-      if (gen === 'Male') {
-        return '../../assets/male_pic.png';
+        if (gen === 'Male') {
+          return '../../assets/male_pic.png';
+        } else {
+          return '../../assets/female_pic.png';
+        }
       } else {
-        return '../../assets/female_pic.png';
+        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
       }
-    } else {
-      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
-    }
     } else {
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
@@ -170,20 +170,20 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
       if (carousel[keys[index]].toString().match('jeevansathi')) {
         return carousel[keys[index]];
       } else {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
       }
     }
   }
   getImagesCount(num: string) {
     if (num !== '[]' && num && num !== 'null') {
-       const carouselObject: object = JSON.parse(num);
-       if (carouselObject) {
-          const size = Object.keys(carouselObject).length;
-          const arr: any[]  = [];
-          for (let index = 0; index < size; index++) {
-            arr.push(index);
-          }
-          return  arr;
+      const carouselObject: object = JSON.parse(num);
+      if (carouselObject) {
+        const size = Object.keys(carouselObject).length;
+        const arr: any[] = [];
+        for (let index = 0; index < size; index++) {
+          arr.push(index);
+        }
+        return arr;
       }
     } else {
       this.carouselSize = [1];
@@ -337,7 +337,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   // }
 
 
-// get discover data
+  // get discover data
   getDiscoveryData() {
     const formData = new FormData();
     formData.append('id', localStorage.getItem('id'));
@@ -346,19 +346,19 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     this.http.post('https://partner.hansmatrimony.com/api/getDiscoveryProfiles', formData).pipe(
       timeout(7000), retry(3), catchError(
         err => {
-              throw new Error('Server TimeOut: ' + err);
+          throw new Error('Server TimeOut: ' + err);
         }
       )
     ).subscribe(
       (discoverData: any) => {
-            if (discoverData) {
-              console.log(discoverData);
-              this.profile = [...discoverData];
-              console.log(this.profile);
-              // get personalized profiles
-              this.getPersonalizedProfiles();
-            }
-      } ,
+        if (discoverData) {
+          console.log(discoverData);
+          this.profile = [...discoverData];
+          console.log(this.profile);
+          // get personalized profiles
+          this.getPersonalizedProfiles();
+        }
+      },
       err => {
         this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
       }
@@ -369,32 +369,32 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     const creditsData = new FormData();
     creditsData.append('TEXT', 'SHOW');
     creditsData.append('mobile', localStorage.getItem('mobile_number'));
-   // tslint:disable-next-line: max-line-length
+    // tslint:disable-next-line: max-line-length
     return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumProNew',
-     creditsData).pipe(timeout(12000), retry(2), catchError(e => {
-      throw new Error('Server Timeout ' + e);
-    })).subscribe(
-     (data: any) => {
-      console.log(data);
-      if (data.status === 1) {
-        this.profile = [...this.profile, ...data.message];
-      } else {
-        if (this.profile.length < 1) {
-          this.ngxNotificationService.error(data.message);
+      creditsData).pipe(timeout(12000), retry(2), catchError(e => {
+        throw new Error('Server Timeout ' + e);
+      })).subscribe(
+        (data: any) => {
+          console.log(data);
+          if (data.status === 1) {
+            this.profile = [...this.profile, ...data.message];
+          } else {
+            if (this.profile.length < 1) {
+              this.ngxNotificationService.error(data.message);
+            }
+          }
+          console.log(this.profile);
+          if (this.languageService.getCurrentLanguage() === 'english') {
+            this.title = `Discover (${this.profile.length})`;
+          } else {
+            this.title = `डिस्कवर (${this.profile.length})`;
+          }
+        },
+        (error: any) => {
+          this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+          console.log(error);
         }
-      }
-      console.log(this.profile);
-      if (this.languageService.getCurrentLanguage() === 'english') {
-          this.title = `Discover (${this.profile.length})`;
-        } else {
-          this.title = `डिस्कवर (${this.profile.length})`;
-        }
-     },
-    (error: any) => {
-      this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
-      console.log(error);
-    }
-   );
+      );
   }
 
   getInterestReceivedEventStatus(status): Observable<any> {
@@ -407,53 +407,53 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   // updates the new data to locally stored data
   addRemoveNewData(data: any) {
-    return  new Promise((res) => {
-       // finding and adding the new element to the locally stored list
-       const newProfilesList: any[] = [];
-       (data as any[]).forEach(
+    return new Promise((res) => {
+      // finding and adding the new element to the locally stored list
+      const newProfilesList: any[] = [];
+      (data as any[]).forEach(
         element => {
-         const newProfiles =  this.profile.find(
-           item => {
-             if (item.family) {
-              return item.profile.id === element.profile.id;
-             } else {
-              return item.profile.identity_number === element.profile.identity_number;
-             }
-           });
-         if (!newProfiles) {
+          const newProfiles = this.profile.find(
+            item => {
+              if (item.family) {
+                return item.profile.id === element.profile.id;
+              } else {
+                return item.profile.identity_number === element.profile.identity_number;
+              }
+            });
+          if (!newProfiles) {
             //  this.profile.push(element);
             newProfilesList.push(element);
-           }
+          }
         }
       );
 
-       if (newProfilesList.length > 0) {
+      if (newProfilesList.length > 0) {
         this.profile = [...newProfilesList, ...this.profile];
       }
 
       // finding and removing the old element from the locally stored list
 
-       this.profile.forEach(
-       (item, index) => {
-        const removeProfile =  (data as any[]).find(
-           element => {
-            if (item.family) {
-              return item.profile.id === element.profile.id;
-             } else {
-              return item.profile.identity_number === element.profile.identity_number;
-             }
-           }
-         );
-        if (!removeProfile) {
-          this.profile.splice(index, 1);
+      this.profile.forEach(
+        (item, index) => {
+          const removeProfile = (data as any[]).find(
+            element => {
+              if (item.family) {
+                return item.profile.id === element.profile.id;
+              } else {
+                return item.profile.identity_number === element.profile.identity_number;
+              }
+            }
+          );
+          if (!removeProfile) {
+            this.profile.splice(index, 1);
+          }
         }
-       }
       );
 
-       console.log(this.profile);
+      console.log(this.profile);
       //  this.updateLocalList();
-       res(this.profile);
-      });
+      res(this.profile);
+    });
   }
 
   openContactedProfile(data: any) {
@@ -485,10 +485,10 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
 
 
-checkUrl(num: string): Observable < any > {
+  checkUrl(num: string): Observable<any> {
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
           ['fcm_id']: this.notification.getCurrentToken(),
@@ -497,7 +497,7 @@ checkUrl(num: string): Observable < any > {
       });
     } else {
       // tslint:disable-next-line: max-line-length
-      return this.http.get < any > (' https://partner.hansmatrimony.com/api/auth', {
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
           ['fcm_id']: this.notification.getCurrentToken()
@@ -506,7 +506,7 @@ checkUrl(num: string): Observable < any > {
     }
   }
 
-setMarriageBrothers(value1: any, value2: any) {
+  setMarriageBrothers(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
@@ -522,7 +522,7 @@ setMarriageBrothers(value1: any, value2: any) {
     }
   }
 
-setMarriageSisters(value1: any, value2: any) {
+  setMarriageSisters(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
@@ -538,7 +538,7 @@ setMarriageSisters(value1: any, value2: any) {
     }
   }
 
-LifeStatus(person: string, work: string) {
+  LifeStatus(person: string, work: string) {
     if (person != null && person !== '') {
       if (person.match('Alive')) {
         if (work) {
@@ -554,114 +554,114 @@ LifeStatus(person: string, work: string) {
     }
   }
 
-profileReAnswer(item: any, answer: any, index: any) {
+  profileReAnswer(item: any, answer: any, index: any) {
 
-  // if main kisse pasand hu and credits are zero...on Shortlist  response show offer 2
-  // if (this.itemService.getCredits().toString() === '0'
-  // && answer === 'SHORTLIST') {
-  //     this.itemService.openOfferTwo(item);
-  //     this.getData(item, answer, index);
-  //     return;
-  // }
+    // if main kisse pasand hu and credits are zero...on Shortlist  response show offer 2
+    // if (this.itemService.getCredits().toString() === '0'
+    // && answer === 'SHORTLIST') {
+    //     this.itemService.openOfferTwo(item);
+    //     this.getData(item, answer, index);
+    //     return;
+    // }
 
-  // if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-  //   this.itemService.getPhotoStatus() === false &&
-  //   answer === 'SHORTLIST') {
-  //    this.openMessageDialog(item, answer);
-  //  } else
+    // if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    //   this.itemService.getPhotoStatus() === false &&
+    //   answer === 'SHORTLIST') {
+    //    this.openMessageDialog(item, answer);
+    //  } else
 
-  if (this.itemService.getPersonalized() === true &&
-  answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-    this.ngxNotificationService.warning('You don\'t have enough credits ');
-  } else if (this.itemService.getPersonalized() === false &&
-    answer === 'YES' && !item.family) {
-      this.openMessageDialog(item, 'contacted' );
-   } else if (this.itemService.getPersonalized() === true &&
-   answer === 'YES' && !item.family ) {
-    this.reponseToPremium(item, 'CONTACTED', index);
-   } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-   && answer === 'YES' && this.itemService.getPersonalized() === false) {
-    this.itemService.openTodaysPopupAd();
-   } else {
-     this.reponseToNormal(item, answer, index);
-   }
+    if (this.itemService.getPersonalized() === true &&
+      answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+      this.ngxNotificationService.warning('You don\'t have enough credits ');
+    } else if (this.itemService.getPersonalized() === false &&
+      answer === 'YES' && !item.family) {
+      this.openMessageDialog(item, 'contacted');
+    } else if (this.itemService.getPersonalized() === true &&
+      answer === 'YES' && !item.family) {
+      this.reponseToPremium(item, 'CONTACTED', index);
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+      && answer === 'YES' && this.itemService.getPersonalized() === false) {
+      this.itemService.openTodaysPopupAd();
+    } else {
+      this.reponseToNormal(item, answer, index);
+    }
   }
 
-// getData(item: any, answer: any, index: any) {
-//     this.spinner.show();
-//     this.panelOpenState = null;
-//     const reAnswerData = new FormData();
-//     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
-//     if (item.family) {
-//     reAnswerData.append('id', item.profile.id);
-//     } else {
-//       reAnswerData.append('id', item.profile.identity_number);
-//     }
-//     reAnswerData.append('answer', answer);
-//     if (localStorage.getItem('is_lead')) {
-//       reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
-//     } else {
-//       this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
-//           console.log(res);
-//           reAnswerData.append('is_lead', res.is_lead);
-//           localStorage.setItem('is_lead', res.is_lead);
-//         },
-//         err => {
-//           console.log(err);
-//           this.spinner.hide();
-//         });
-//     }
-//     // tslint:disable-next-line: max-line-length
-//     return this.http.post < any > ('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
-//       (data: any) => {
-//         console.log(data);
-//         // update the count of all sections after response on any profile
-//         if (data && data.count) {
-//           this.itemService.saveCount(data.count);
-//         }
-//         this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer);
-//         // this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
-//         this.getCredits();
-//       }, (error: any) => {
-//         console.log(error);
-//         this.spinner.hide();
-//       });
-//   }
+  // getData(item: any, answer: any, index: any) {
+  //     this.spinner.show();
+  //     this.panelOpenState = null;
+  //     const reAnswerData = new FormData();
+  //     reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
+  //     if (item.family) {
+  //     reAnswerData.append('id', item.profile.id);
+  //     } else {
+  //       reAnswerData.append('id', item.profile.identity_number);
+  //     }
+  //     reAnswerData.append('answer', answer);
+  //     if (localStorage.getItem('is_lead')) {
+  //       reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
+  //     } else {
+  //       this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+  //           console.log(res);
+  //           reAnswerData.append('is_lead', res.is_lead);
+  //           localStorage.setItem('is_lead', res.is_lead);
+  //         },
+  //         err => {
+  //           console.log(err);
+  //           this.spinner.hide();
+  //         });
+  //     }
+  //     // tslint:disable-next-line: max-line-length
+  //     return this.http.post < any > ('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
+  //       (data: any) => {
+  //         console.log(data);
+  //         // update the count of all sections after response on any profile
+  //         if (data && data.count) {
+  //           this.itemService.saveCount(data.count);
+  //         }
+  //         this.Analytics('Profile Reanswered', 'Profile Reanswered From History', answer);
+  //         // this.updateProfileList(answer, localStorage.getItem('mobile_number'), index);
+  //         this.getCredits();
+  //       }, (error: any) => {
+  //         console.log(error);
+  //         this.spinner.hide();
+  //       });
+  //   }
 
-// reponse on normal proffile
-reponseToNormal(item, answer, index) {
-  this.spinner.show();
-  this.panelOpenState = null;
-  const reAnswerData = new FormData();
-  reAnswerData.append('id', localStorage.getItem('id'));
-  if (item.family) {
-  reAnswerData.append('action_id', item.profile.id);
-  } else {
-    reAnswerData.append('action_id', item.profile.identity_number);
-  }
-  reAnswerData.append('action', answer);
-  if (localStorage.getItem('is_lead')) {
-    reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
-  } else {
-    this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+  // reponse on normal proffile
+  reponseToNormal(item, answer, index) {
+    this.spinner.show();
+    this.panelOpenState = null;
+    const reAnswerData = new FormData();
+    reAnswerData.append('id', localStorage.getItem('id'));
+    if (item.family) {
+      reAnswerData.append('action_id', item.profile.id);
+    } else {
+      reAnswerData.append('action_id', item.profile.identity_number);
+    }
+    reAnswerData.append('action', answer);
+    if (localStorage.getItem('is_lead')) {
+      reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
+    } else {
+      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
         console.log(res);
         reAnswerData.append('is_lead', res.is_lead);
         localStorage.setItem('is_lead', res.is_lead);
       },
-      err => {
-        console.log(err);
-        this.spinner.hide();
-      });
-  }
-  // tslint:disable-next-line: max-line-length
-  return this.http.post < any > ('https://partner.hansmatrimony.com/api/saveAction', reAnswerData).subscribe(
-    (response: any) => {
+        err => {
+          console.log(err);
+          this.spinner.hide();
+        });
+    }
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/saveAction', reAnswerData).subscribe(
+      (response: any) => {
         console.log(response);
         if (response && response.status === 1) {
           // update the profile list
           this.updateProfileList(index);
           if (response.count) {
-          this.itemService.saveCount(response.count);
+            this.itemService.saveCount(response.count);
           }
           this.spinner.hide();
           // after reponse update the user credits
@@ -670,56 +670,56 @@ reponseToNormal(item, answer, index) {
           this.ngxNotificationService.error(response.message);
           this.spinner.hide();
         }
-    },
-    err => {
+      },
+      err => {
         this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
         this.spinner.hide();
-    }
-  );
-}
-// reponse on premium profile
-reponseToPremium(item, answer, index) {
-  this.panelOpenState = null;
-  const reAnswerData = new FormData();
-  reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
-  reAnswerData.append('id', item.profile.identity_number);
-  reAnswerData.append('TEXT', answer);
-  // tslint:disable-next-line: max-line-length
-  return this.http.post < any > ('https://partner.hansmatrimony.com/api/premiumProNew', reAnswerData).subscribe(
-    (response: any) => {
-      console.log(response);
-      if (response && response.status === 1) {
-        // update the profile list after response
-        this.updatePremiumProfileList(index);
-        this.spinner.hide();
-        // update the count
-        if (response.count) {
-          this.itemService.saveCount(response.count);
-        }
+      }
+    );
+  }
+  // reponse on premium profile
+  reponseToPremium(item, answer, index) {
+    this.panelOpenState = null;
+    const reAnswerData = new FormData();
+    reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
+    reAnswerData.append('id', item.profile.identity_number);
+    reAnswerData.append('TEXT', answer);
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumProNew', reAnswerData).subscribe(
+      (response: any) => {
+        console.log(response);
+        if (response && response.status === 1) {
+          // update the profile list after response
+          this.updatePremiumProfileList(index);
+          this.spinner.hide();
+          // update the count
+          if (response.count) {
+            this.itemService.saveCount(response.count);
+          }
 
-        this.getCredits();
-      } else {
-        this.ngxNotificationService.error(response.message);
+          this.getCredits();
+        } else {
+          this.ngxNotificationService.error(response.message);
+          this.spinner.hide();
+        }
+      },
+      err => {
+        this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
         this.spinner.hide();
       }
-    },
-    err => {
-      this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
-      this.spinner.hide();
-    }
-  );
-}
+    );
+  }
 
 
 
-Analytics(type: string, category: string, action: string) {
+  Analytics(type: string, category: string, action: string) {
     (window as any).ga('send', 'event', category, action, {
       hitCallback: () => {
         console.log('Tracking ' + type + ' successful');
       }
     });
     // gtag app + web
-    (window as any).gtag('event', category , {
+    (window as any).gtag('event', category, {
       action: action
     });
   }
@@ -727,183 +727,183 @@ Analytics(type: string, category: string, action: string) {
   // update the list after response
   updateProfileList(index) {
     if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-                    // this.slideAndOpenProfile(this.profile[index], 1);
-                    localStorage.setItem('stage', '1');
-                    this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
-                    this.profile.splice(index, 1);
-                    // this.itemService.changeTab(1);
-                  } else {
-                    this.ngxNotificationService.error('You Dont have Enough Credits', '',
-                      null, {
-                        duration: 4000,
-                        closeButton: true
-                      });
-                  }
-  }
-    // update the list after response
-    updatePremiumProfileList(index) {
-      if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-                      // this.slideAndOpenProfile(this.profile[index], 1);
-                      localStorage.setItem('stage', '1');
-                      let shareProfile = this.profile[index];
-                      shareProfile.coming = 'contacted';
-                      localStorage.setItem('open_profile', JSON.stringify(shareProfile));
-                      this.router.navigateByUrl(`chat/open/open-profile`);
-                      this.profile.splice(index, 1);
-                      // this.itemService.changeTab(1);
-                    } else {
-                      this.ngxNotificationService.error('You Dont have Enough Credits', '',
-                        null, {
-                          duration: 4000,
-                          closeButton: true
-                        });
-                    }
+      // this.slideAndOpenProfile(this.profile[index], 1);
+      localStorage.setItem('stage', '1');
+      this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
+      this.profile.splice(index, 1);
+      // this.itemService.changeTab(1);
+    } else {
+      this.ngxNotificationService.error('You Dont have Enough Credits', '',
+        null, {
+        duration: 4000,
+        closeButton: true
+      });
     }
-// updateProfileList(ans: any,
-//    num: any, index: any) {
-//     switch (this.type) {
-//       case 'interestShown':
-//         switch (ans) {
-//           case 'YES':
-//             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-//               this.slideAndOpenProfile(this.profile[index], 1);
-//               this.profile.splice(index, 1);
-//               this.itemService.changeTab(1);
-//             } else {
-//               this.ngxNotificationService.error('You Dont have Enough Credits', '',
-//                 null, {
-//                   duration: 4000,
-//                   closeButton: true
-//                 });
-//             }
-//             break;
-//           case 'SHORTLIST':
-//             this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
-//               duration: 4000
-//             });
-//             break;
-//           case 'NO':
-//             this.profile.splice(index, 1);
-//             this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
-//               duration: 4000
-//             });
-//             break;
-//           default:
-//             break;
-//         }
-//         break;
-//       case 'rejected':
-//         switch (ans) {
-//           case 'YES':
-//             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-//               this.slideAndOpenProfile(this.profile[index], 1);
-//               this.profile.splice(this.profile[index], 1);
-//               this.itemService.changeTab(1);
-//               this.profile.splice(index, 1);
-//             } else {
-//               this.ngxNotificationService.error('You Dont have Enough Credits', '',
-//                 null, {
-//                   duration: 4000,
-//                   closeButton: true
-//                 });
-//             }
-//             break;
-//           case 'SHORTLIST':
-//             // this.slideAndOpenProfile(this.profile[index], 2);
-//             this.profile.splice(index, 1);
-//             // document.querySelectorAll('mat-expansion-panel')[0].scrollIntoView({behavior: 'smooth'});
-//             this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
-//               duration: 4000
-//             });
-//             break;
-//           default:
-//             break;
-//         }
-//         break;
+  }
+  // update the list after response
+  updatePremiumProfileList(index) {
+    if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+      // this.slideAndOpenProfile(this.profile[index], 1);
+      localStorage.setItem('stage', '1');
+      let shareProfile = this.profile[index];
+      shareProfile.coming = 'contacted';
+      localStorage.setItem('open_profile', JSON.stringify(shareProfile));
+      this.router.navigateByUrl(`chat/open/open-profile`);
+      this.profile.splice(index, 1);
+      // this.itemService.changeTab(1);
+    } else {
+      this.ngxNotificationService.error('You Dont have Enough Credits', '',
+        null, {
+        duration: 4000,
+        closeButton: true
+      });
+    }
+  }
+  // updateProfileList(ans: any,
+  //    num: any, index: any) {
+  //     switch (this.type) {
+  //       case 'interestShown':
+  //         switch (ans) {
+  //           case 'YES':
+  //             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+  //               this.slideAndOpenProfile(this.profile[index], 1);
+  //               this.profile.splice(index, 1);
+  //               this.itemService.changeTab(1);
+  //             } else {
+  //               this.ngxNotificationService.error('You Dont have Enough Credits', '',
+  //                 null, {
+  //                   duration: 4000,
+  //                   closeButton: true
+  //                 });
+  //             }
+  //             break;
+  //           case 'SHORTLIST':
+  //             this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+  //               duration: 4000
+  //             });
+  //             break;
+  //           case 'NO':
+  //             this.profile.splice(index, 1);
+  //             this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
+  //               duration: 4000
+  //             });
+  //             break;
+  //           default:
+  //             break;
+  //         }
+  //         break;
+  //       case 'rejected':
+  //         switch (ans) {
+  //           case 'YES':
+  //             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+  //               this.slideAndOpenProfile(this.profile[index], 1);
+  //               this.profile.splice(this.profile[index], 1);
+  //               this.itemService.changeTab(1);
+  //               this.profile.splice(index, 1);
+  //             } else {
+  //               this.ngxNotificationService.error('You Dont have Enough Credits', '',
+  //                 null, {
+  //                   duration: 4000,
+  //                   closeButton: true
+  //                 });
+  //             }
+  //             break;
+  //           case 'SHORTLIST':
+  //             // this.slideAndOpenProfile(this.profile[index], 2);
+  //             this.profile.splice(index, 1);
+  //             // document.querySelectorAll('mat-expansion-panel')[0].scrollIntoView({behavior: 'smooth'});
+  //             this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+  //               duration: 4000
+  //             });
+  //             break;
+  //           default:
+  //             break;
+  //         }
+  //         break;
 
-//         case 'interestReceived':
-//           switch (ans) {
-//             case 'YES':
-//               if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-//                 this.slideAndOpenProfile(this.profile[index], 1);
-//                 this.profile.splice(index, 1);
-//                 this.itemService.changeTab(1);
-//               } else {
-//                 this.ngxNotificationService.error('You Dont have Enough Credits', '',
-//                   null, {
-//                     duration: 4000,
-//                     closeButton: true
-//                   });
-//               }
-//               break;
-//             case 'SHORTLIST':
-//               this.profile.splice(index, 1);
-//               this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
-//                 duration: 4000
-//               });
-//               break;
-//             case 'NO':
-//               this.profile.splice(index, 1);
-//               this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
-//                 duration: 4000
-//               });
-//               break;
-//             default:
-//               break;
-//           }
-//           break;
+  //         case 'interestReceived':
+  //           switch (ans) {
+  //             case 'YES':
+  //               if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+  //                 this.slideAndOpenProfile(this.profile[index], 1);
+  //                 this.profile.splice(index, 1);
+  //                 this.itemService.changeTab(1);
+  //               } else {
+  //                 this.ngxNotificationService.error('You Dont have Enough Credits', '',
+  //                   null, {
+  //                     duration: 4000,
+  //                     closeButton: true
+  //                   });
+  //               }
+  //               break;
+  //             case 'SHORTLIST':
+  //               this.profile.splice(index, 1);
+  //               this.ngxNotificationService.success('Profile Shortlisted Successfully', '', null, {
+  //                 duration: 4000
+  //               });
+  //               break;
+  //             case 'NO':
+  //               this.profile.splice(index, 1);
+  //               this.ngxNotificationService.success('Profile Rejected Successfully', '', null, {
+  //                 duration: 4000
+  //               });
+  //               break;
+  //             default:
+  //               break;
+  //           }
+  //           break;
 
-//           case 'mutual':
-//         switch (ans) {
-//           case 'YES':
-//             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-//               this.slideAndOpenProfile(this.profile[index], 1);
-//               this.profile.splice(index, 1);
-//               this.itemService.changeTab(1);
-//             } else {
-//               this.ngxNotificationService.error('You Dont have Enough Credits', '',
-//                 null, {
-//                   duration: 4000,
-//                   closeButton: true
-//                 });
-//             }
-//             break;
-//           default:
-//             break;
-//         }
-//         break;
-//       default:
-//         break;
-//     }
-//     this.updateLocalList();
-//   }
-goToSubscription() {
+  //           case 'mutual':
+  //         switch (ans) {
+  //           case 'YES':
+  //             if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+  //               this.slideAndOpenProfile(this.profile[index], 1);
+  //               this.profile.splice(index, 1);
+  //               this.itemService.changeTab(1);
+  //             } else {
+  //               this.ngxNotificationService.error('You Dont have Enough Credits', '',
+  //                 null, {
+  //                   duration: 4000,
+  //                   closeButton: true
+  //                 });
+  //             }
+  //             break;
+  //           default:
+  //             break;
+  //         }
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //     this.updateLocalList();
+  //   }
+  goToSubscription() {
     this.router.navigateByUrl('subscription');
   }
-call(index: any) {
-  if (this.profile[index].family) {
-    window.open('tel:' + this.profile[index].family.mobile);
-  } else {
-    this.ngxNotificationService.error('Mobile Number Not Found');
+  call(index: any) {
+    if (this.profile[index].family) {
+      window.open('tel:' + this.profile[index].family.mobile);
+    } else {
+      this.ngxNotificationService.error('Mobile Number Not Found');
+    }
   }
-  }
-slideAndOpenProfile(item: any, slide: any) {
+  slideAndOpenProfile(item: any, slide: any) {
     this.spinner.show();
     this.itemService.setItem(item);
     this.itemService.changeTab(slide);
   }
-setDate(date: string) {
+  setDate(date: string) {
     const newDate = new Date(date);
     return new Intl.DateTimeFormat('en-AU').format(newDate);
   }
-setHeight(height: any) {
+  setHeight(height: any) {
     if (height && height !== '') {
       return this.Heights[this.Heights1.indexOf(height)];
     } else {
       return '';
     }
   }
-disableForAWhile() {
+  disableForAWhile() {
     if (this.panelOpenState === null) {
       setTimeout(() => {
         this.panelOpenState = -1;
@@ -913,7 +913,7 @@ disableForAWhile() {
       return false;
     }
   }
-setTabNames(tab: any) {
+  setTabNames(tab: any) {
     if (localStorage.getItem('language') === null) {
       localStorage.setItem('language', 'Hindi');
     }
@@ -954,12 +954,12 @@ setTabNames(tab: any) {
         break;
     }
   }
-setAllTabNames() {
+  setAllTabNames() {
     for (let index = 0; index < 5; index++) {
       this.setTabNames(index);
     }
   }
-getNoDataText(type: any) {
+  getNoDataText(type: any) {
     switch (type) {
       case 'contactedProfiles':
         this.noData = '☹️ अभी आपने किसी भी रिश्ते को कॉन्टैक्ट नहीं किया है';
@@ -977,7 +977,7 @@ getNoDataText(type: any) {
         break;
     }
   }
-setIncome(value: string): String {
+  setIncome(value: string): String {
     if (value != null) {
       if (Number(value) > 1000) {
         return String((Number(value) / 100000));
@@ -989,82 +989,83 @@ setIncome(value: string): String {
       return '';
     }
   }
-toTitleCase(str) {
+  toTitleCase(str) {
     if (str) {
       return str.replace(
         /\w\S*/g,
         (txt) => {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
-    );
+      );
     } else {
       return '';
     }
-}
-getCredits() {
-  const creditsData = new FormData();
-  creditsData.append('id', localStorage.getItem('id'));
-  creditsData.append('is_lead', localStorage.getItem('is_lead'));
- // tslint:disable-next-line: max-line-length
-  return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
-   (data: any) => {
-     const points = data.whatsapp_points;
-     this.itemService.setCredits(data.whatsapp_points);
-     console.log('credits', points);
-     this.spinner.hide();
-   },
-  (error: any) => {
-    this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
-    console.log(error);
-    this.spinner.hide();
   }
- );
-}
+  getCredits() {
+    const creditsData = new FormData();
+    creditsData.append('id', localStorage.getItem('id'));
+    creditsData.append('is_lead', localStorage.getItem('is_lead'));
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(
+      (data: any) => {
+        const points = data.whatsapp_points;
+        this.itemService.setCredits(data.whatsapp_points);
+        console.log('credits', points);
+        this.spinner.hide();
+      },
+      (error: any) => {
+        this.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+        console.log(error);
+        this.spinner.hide();
+      }
+    );
+  }
 
-openMessageDialog(shareItem, reply: string) {
-  console.log(shareItem);
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.hasBackdrop = true;
-  dialogConfig.width = '700px';
-  dialogConfig.disableClose = true;
-  switch (reply.toLowerCase()) {
-    case 'yes':
-      dialogConfig.data = {
-        profile: shareItem,
-        type: reply.toLowerCase()
-      };
-      break;
+  openMessageDialog(shareItem, reply: string) {
+    console.log(shareItem);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.width = '700px';
+    dialogConfig.disableClose = true;
+    switch (reply.toLowerCase()) {
+      case 'yes':
+        dialogConfig.data = {
+          profile: shareItem,
+          type: reply.toLowerCase()
+        };
+        break;
       case 'contacted':
-      dialogConfig.data = {
-        profile: shareItem,
-        type: reply.toLowerCase()
-      };
-      break;
+        dialogConfig.data = {
+          profile: shareItem,
+          type: reply.toLowerCase()
+        };
+        break;
 
-    default:
-      break;
+      default:
+        break;
 
-  }
-  const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
-  dialogRefYes.afterClosed().subscribe(
-        data => {
-          if (data && data.request) {
+    }
+    dialogConfig.id = 'messageDialog';
+    const dialogRefYes = this.dialog.open(MessageDialogComponent, dialogConfig);
+    dialogRefYes.afterClosed().subscribe(
+      data => {
+        if (data && data.request) {
           this.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
-          }
         }
-      );
-}
-getQualification(degree, education) {
-  return education != null && education !== '' ? education : degree;
+      }
+    );
+  }
+  getQualification(degree, education) {
+    return education != null && education !== '' ? education : degree;
   }
 
-setHouseType(type) {
+  setHouseType(type) {
     if (type) {
       switch (type) {
         case 'Y':
           return 'Owned';
-          case 'N':
-            return 'Rented';
+        case 'N':
+          return 'Rented';
         default:
           break;
       }
