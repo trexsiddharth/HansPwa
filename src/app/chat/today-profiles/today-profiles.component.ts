@@ -39,8 +39,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   selfImage;
   selfName;
 
-  shortListCount = 1;
-  rejectedListCount = -1;
+  shortListCount = 0;
+  rejectedListCount = 0;
+
+  actionCount = -1;
 
   section;
   about: any;
@@ -317,35 +319,69 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   persistentDialogOpeningLogic(shareItem, reply: string) {
-    if (reply.toLowerCase() === 'shortlist') {
-      this.shortListCount = (this.shortListCount + 1) % 12;
-    }
-    if (reply === 'NO') {
-      this.rejectedListCount++;
-    }
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes' && this.type === 'profile') {
       this.itemService.openTodaysPopupAd();
     }
-    else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 2) &&
-      ((localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') || (!localStorage.getItem('appInstalled')))) {
-      this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
-    }
-    else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus()
-      && (this.shortListCount === 6) && localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
-      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
-    }
-    else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-      reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 10) {
-      this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
-    }
-    else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-      && reply === 'NO' && this.type === 'profile' && this.rejectedListCount % 3 === 1) {
-      this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
+    else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
+      this.actionCount++;
+      console.log('action count', this.actionCount)
+      if (this.actionCount % 3 === 0) {
+        if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 0) &&
+          localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+          this.shortListCount = (this.shortListCount + 1) % 3;
+          this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+        }
+        else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 1) &&
+          ((localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') || (!localStorage.getItem('appInstalled')))) {
+          this.shortListCount = (this.shortListCount + 1) % 3;
+          this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
+        }
+        else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+          reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 2) {
+          this.shortListCount = (this.shortListCount + 1) % 3;
+          this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
+        }
+        else if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100
+          && reply === 'NO' && this.type === 'profile' && this.rejectedListCount === 0) {
+          this.rejectedListCount = (this.rejectedListCount + 1) % 2;
+          this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+        }
+        else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+          && reply === 'NO' && this.type === 'profile' && this.rejectedListCount === 1) {
+          this.rejectedListCount = (this.rejectedListCount + 1) % 2;
+          this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
+        }
+        else {
+          console.log('else 1 executed');
+          this.getData(reply);
+        }
+      }
+      else {
+        console.log('else 2 executed');
+        this.getData(reply);
+      }
     }
     else {
+      console.log('else 3 executed');
       this.getData(reply);
     }
+    // else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 2) &&
+    //   ((localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') || (!localStorage.getItem('appInstalled')))) {
+    //   this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
+    // }
+    // else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus()
+    //   && (this.shortListCount === 6) && localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+    //   this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+    // }
+    // else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 10) {
+    //   this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
+    // }
+    // else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+    //   && reply === 'NO' && this.type === 'profile' && this.rejectedListCount % 3 === 1) {
+    //   this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
+    // }
   }
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
@@ -387,7 +423,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   getData(reply) {
     // shortlist count
     console.log(reply);
-    this.setCount(reply);
+    //this.setCount(reply);
     const previousItem = this.item;
     if (!localStorage.getItem('todayProfile')) {
       this.spinner.show();
