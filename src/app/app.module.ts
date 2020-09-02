@@ -54,7 +54,7 @@ import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payme
     OfferOneComponent,
     OfferTwoComponent,
     VerifyOtpComponent,
-    TodaysPaymentPopupComponent
+    TodaysPaymentPopupComponent,
   ],
   imports: [
     BrowserModule,

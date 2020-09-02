@@ -27,7 +27,6 @@
 ::ng-deep #carousel .carousel-indicators{
   /* background-image: url('your-replacement.svg'); */
   position:absolute!important;
-  bottom:-40px!important;
 }
 ::ng-deep #carousel .carousel-indicators li{
   width: 9px!important;
@@ -73,6 +72,7 @@ hr {
 }
 #carousel {
   width: 100%;
+  height: 40vh;
 }
 .back-drop {
   position: absolute;
@@ -82,7 +82,6 @@ hr {
   height: 100vh;
   background: rgb(62, 60, 92);
   background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-  clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
 }
 .accordion-image {
   width: 1.4rem;
@@ -161,10 +160,10 @@ hr {
 .UpInfo{
   position: relative;
   display: flex;
-  height:30vh;
+  height:40vh;
   padding:0px;
   margin-top: 40px!important;
-  margin-bottom: 40px!important;
+  margin-bottom: 0px!important;
   margin-left: 10%!important;
   margin-right: 10%!important;
   border-radius:15px;
@@ -368,7 +367,6 @@ p{
     height: 82vh;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
   }
 }
 
@@ -381,7 +379,6 @@ p{
     height: 105vh;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
   }
 }
 @media (min-height: 815px) {
@@ -393,15 +390,14 @@ p{
     height: 78vh;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 80%, 50% 90%, 50% 90%, 0 80%, 0 0);
   }
   .UpInfo{
     position: relative;
     display: flex;
-    height:30vh;
+    height:40vh;
     padding:0px;
     margin-top: 40px!important;
-    margin-bottom: 40px!important;
+    margin-bottom: 0px!important;
     margin-left: 5%!important;
     margin-right: 5%!important;
     border-radius:15px;
@@ -419,7 +415,6 @@ p{
     height: 65vh !important;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-    clip-path: polygon(100% 0%, 100% 80%, 50% 100%, 50% 100%, 0 80%, 0 0);
   }
 }
 @media (min-width:1024px){
