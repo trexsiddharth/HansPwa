@@ -39,7 +39,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   selfImage;
   selfName;
 
-  shortListCount = -1;
+  shortListCount = 1;
   rejectedListCount = -1;
 
   section;

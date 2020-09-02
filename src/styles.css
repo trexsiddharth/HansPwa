@@ -325,7 +325,7 @@ button:focus{outline:none !important;}
   margin: 0px!important;;
   padding: 0px!important;
 }
-#messageDialog.cdk-overlay-dark-backdrop {
+.cdk-overlay-dark-backdrop {
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75))!important;;
 }
 #rateDialog.mat-dialog-container {

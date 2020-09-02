@@ -333,7 +333,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
-    if (!localStorage.getItem('todaysPopupOpened') || localStorage.getItem('todaysPopupOpened') !== '0') {
+    if (!localStorage.getItem('todaysPopupOpened') || (localStorage.getItem('todaysPopupOpened') && localStorage.getItem('todaysPopupOpened') !== '0')) {
       this.openTodaysPopupHere();
     }
     else {
