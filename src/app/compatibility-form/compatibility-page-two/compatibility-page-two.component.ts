@@ -382,10 +382,15 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.spinner.hide();
           if (this.fourPageService.getUserThrough()) {
             this.updateFormTwoData(firststepdata);
-          } else {
+            if (localStorage.getItem('getListLeadId') !== '1') {
+              window.open('https://partner.hansmatrimony.com/hot-leads');
+            }
+          }
+          //this.ngxNotificationService.success('Registered Successfully');
+          if (!this.fourPageService.getUserThrough()) {
+            this.router.navigateByUrl('chat?first');
             this.analyticsEvent('Four Page Registration Page Two');
           }
-          // this.ngxNotificationService.success('Registered Successfully');
         } else {
           this.fourPageService.formCompleted.emit(false);
           this.spinner.hide();
