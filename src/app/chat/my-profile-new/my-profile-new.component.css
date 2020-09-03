@@ -172,6 +172,7 @@ hr {
 }
 .columnA {
   flex: 50%;
+  height:inherit!important;
 }
 .labelS {
   width:10px!important;

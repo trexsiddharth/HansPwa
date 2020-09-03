@@ -37,6 +37,9 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
 import { element } from 'protractor';
+
+
+declare var FB: any;
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -52,6 +55,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 
   return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
 };
+
 
 @Component({
   selector: 'app-compatibility-form',
@@ -785,7 +789,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     console.log(this.PageOne.value.Relation);
     this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
     this.analyticsEvent('Four Page Registration Page One Gender Changed');
-    // this.openRegisterWith(this.PageOne.value.Relation);
+    this.openRegisterWith(this.PageOne.value.Relation);
     switch (this.PageOne.value.Relation) {
       case 'Brother':
         this.PageOne.patchValue(
@@ -1019,8 +1023,28 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         if (response) {
           if (response.chose === 'facebook') {
             this.analyticsEvent('Registered Through Facebook');
-            (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-              this.statusChangeCallback(response);        // Returns the login status.
+            FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+              // this.statusChangeCallback(response);        // Returns the login status.
+
+              if (response.status !== 'connected') {
+                return FB.login((res: any) => {
+                  alert(`response is ${res}`);
+                  if (res.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    this.getFbData();
+                  } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                  }
+                }, {
+                  scope: 'public_profile,email',
+                  enable_profile_selector: true,
+                  auth_type: 'rerequest',
+                  return_scopes: true
+                });
+              } else {
+                this.getFbData();
+              }
+
             });
           } else if (response.chose === 'truecaller') {
             this.analyticsEvent('Registered Through True Caller');
@@ -1033,20 +1057,26 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   //  get facebook login status
   statusChangeCallback(value) {
-    console.log(value);
-    if (value.status === 'connected') {
-      localStorage.setItem('fb_token', value.authResponse.accessToken);
-      this.getFbData();
-    } else {
-      (window as any).FB.login((response) => {
-        if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
-          this.getFbData();
-        } else {
-          console.log('User cancelled login or did not fully authorize.');
-        }
-      }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location' });
-    }
+    console.log(`value is ${value.status}`);
+    alert(value.status);
+
+    // if (value.status === 'connected') {
+    //   localStorage.setItem('fb_token', value.authResponse.accessToken);
+    //   this.getFbData();
+    // } else {
+    //   FB.login((response) => {
+    //     alert(`response is ${response}`);
+    //     if (response.authResponse) {
+    //       console.log('Welcome!  Fetching your information.... ');
+    //       this.getFbData();
+    //     } else {
+    //       console.log('User cancelled login or did not fully authorize.');
+    //     }
+    //   }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
+    //       enable_profile_selector: true,
+    //        auth_type: 'rerequest',
+    //         return_scopes: true });
+    // }
   }
 
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
@@ -1054,7 +1084,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     console.log('Welcome!  Fetching your information.... ');
 
     // fetch user image
-    (window as any).FB.api('/me/picture',
+    FB.api('/me/picture',
       'GET',
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
@@ -1064,7 +1094,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       });
 
     // fetch user data
-    (window as any).FB.api('/me',
+    FB.api('/me',
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location' }, (response) => {
         console.log(response);
