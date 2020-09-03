@@ -1024,7 +1024,27 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           if (response.chose === 'facebook') {
             this.analyticsEvent('Registered Through Facebook');
             FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-              this.statusChangeCallback(response);        // Returns the login status.
+              // this.statusChangeCallback(response);        // Returns the login status.
+
+              if (response.status !== 'connected') {
+                return FB.login((res: any) => {
+                  alert(`response is ${res}`);
+                  if (res.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    this.getFbData();
+                  } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                  }
+                }, {
+                  scope: 'public_profile,email',
+                  enable_profile_selector: true,
+                  auth_type: 'rerequest',
+                  return_scopes: true
+                });
+              } else {
+                this.getFbData();
+              }
+
             });
           } else if (response.chose === 'truecaller') {
             this.analyticsEvent('Registered Through True Caller');
@@ -1039,23 +1059,24 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   statusChangeCallback(value) {
     console.log(`value is ${value.status}`);
     alert(value.status);
-    if (value.status === 'connected') {
-      localStorage.setItem('fb_token', value.authResponse.accessToken);
-      this.getFbData();
-    } else {
-      FB.login((response) => {
-        alert(`response is ${response}`);
-        if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
-          this.getFbData();
-        } else {
-          console.log('User cancelled login or did not fully authorize.');
-        }
-      }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
-          enable_profile_selector: true,
-           auth_type: 'rerequest',
-            return_scopes: true });
-    }
+
+    // if (value.status === 'connected') {
+    //   localStorage.setItem('fb_token', value.authResponse.accessToken);
+    //   this.getFbData();
+    // } else {
+    //   FB.login((response) => {
+    //     alert(`response is ${response}`);
+    //     if (response.authResponse) {
+    //       console.log('Welcome!  Fetching your information.... ');
+    //       this.getFbData();
+    //     } else {
+    //       console.log('User cancelled login or did not fully authorize.');
+    //     }
+    //   }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
+    //       enable_profile_selector: true,
+    //        auth_type: 'rerequest',
+    //         return_scopes: true });
+    // }
   }
 
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
