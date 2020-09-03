@@ -785,7 +785,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     console.log(this.PageOne.value.Relation);
     this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
     this.analyticsEvent('Four Page Registration Page One Gender Changed');
-    // this.openRegisterWith(this.PageOne.value.Relation);
+    this.openRegisterWith(this.PageOne.value.Relation);
     switch (this.PageOne.value.Relation) {
       case 'Brother':
         this.PageOne.patchValue(
@@ -1033,12 +1033,14 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   //  get facebook login status
   statusChangeCallback(value) {
-    console.log(value);
+    console.log(`value is ${value.status}`);
+    alert(value.status);
     if (value.status === 'connected') {
       localStorage.setItem('fb_token', value.authResponse.accessToken);
       this.getFbData();
     } else {
       (window as any).FB.login((response) => {
+        alert(`response is ${response}`);
         if (response.authResponse) {
           console.log('Welcome!  Fetching your information.... ');
           this.getFbData();
