@@ -1029,6 +1029,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
               if (response.status !== 'connected') {
                 return FB.login((res: any) => {
                   alert(`response is ${res}`);
+                  if (res.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    this.getFbData();
+                  } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                  }
                 }, {
                   scope: 'public_profile,email',
                   enable_profile_selector: true,
