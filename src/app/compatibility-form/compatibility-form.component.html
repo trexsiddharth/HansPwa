@@ -253,13 +253,13 @@
           <app-compatibility-page-two></app-compatibility-page-two>
         </mat-step>
 
-        <mat-step [completed]="formThree" *ngIf="fourPageService.getUserThrough() && !isLeadIsZero">
+        <mat-step *ngIf="fourPageService.getUserThrough() && !isLeadIsZero">
           <!-- <ng-template matStepLabel>
                       Page III
                   </ng-template> -->
           <app-compatibility-page-three></app-compatibility-page-three>
         </mat-step>
-        <mat-step [completed]="formFour" *ngIf="fourPageService.getUserThrough() && !isLeadIsZero">
+        <mat-step  *ngIf="fourPageService.getUserThrough() && !isLeadIsZero">
           <!-- <ng-template matStepLabel>
                     Page IV
                   </ng-template> -->
