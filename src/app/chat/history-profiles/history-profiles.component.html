@@ -279,7 +279,7 @@
 
 </main>
 
-<div *ngIf="!section && profile.length < 1">
+<div *ngIf="!section && profile && profile.length < 1">
     <main *ngIf="itemService.getPersonalized()">
         <div style="position: relative;display: block;margin: 30% auto;">
             <p class="text-center">

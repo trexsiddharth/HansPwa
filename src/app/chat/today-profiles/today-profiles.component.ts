@@ -44,6 +44,32 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
   actionCount = -1;
 
+  shortList =
+    [{
+      'value': 0,
+      'bool': false
+    },
+    {
+      'value': 1,
+      'bool': false
+    },
+    {
+      'value': 2,
+      'bool': false
+    },
+    ];
+  rejectList =
+    [
+      {
+        'value': 0,
+        'bool': false
+      },
+      {
+        'value': 1,
+        'bool': false
+      },
+    ];
+
   section;
   about: any;
   personal;
@@ -318,6 +344,26 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }
     });
   }
+  showShortListPopup(shareItem, i: number) {
+    console.log(i);
+    if (i == 0) {
+      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+    }
+    if (i == 1) {
+      this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
+    }
+    if (i == 2) {
+      this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
+    }
+  }
+  rejectListPopup(shareItem, i: number) {
+    if (i == 0) {
+      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get better matches.', 'Complete Profile');
+    }
+    if (i == 1) {
+      this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
+    }
+  }
   persistentDialogOpeningLogic(shareItem, reply: string) {
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes' && this.type === 'profile') {
@@ -326,46 +372,78 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
       this.actionCount++;
       console.log('action count', this.actionCount)
-      if (this.actionCount % 3 === 0) {
-        if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 0) &&
-          localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
-          this.shortListCount = (this.shortListCount + 1) % 3;
-          this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+      if (this.actionCount % 2 === 0) {
+        if (reply.toLowerCase() === 'shortlist' && this.type === 'profile') {
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+            for (let x of this.shortList) {
+              if (x.value === 0) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          if (!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1')) {
+            for (let x of this.shortList) {
+              if (x.value === 1) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+            for (let x of this.shortList) {
+              if (x.value === 2) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          console.log('Here is the short list array', this.shortList);
+          let v;
+          for (v of this.shortList) {
+            if (v.bool) {
+              this.showShortListPopup(shareItem, v.value);
+              break;
+            }
+          }
+          this.shortList.splice(this.shortList.indexOf(v), 1)
+          this.shortList.push(v);
+          console.log('here is the modified shortlist array', this.shortList);
         }
-        else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 1) &&
-          ((localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') || (!localStorage.getItem('appInstalled')))) {
-          this.shortListCount = (this.shortListCount + 1) % 3;
-          this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
-        }
-        else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-          reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 2) {
-          this.shortListCount = (this.shortListCount + 1) % 3;
-          this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
-        }
-        else if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100
-          && reply === 'NO' && this.type === 'profile' && this.rejectedListCount === 0) {
-          this.rejectedListCount = (this.rejectedListCount + 1) % 2;
-          this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
-        }
-        else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-          && reply === 'NO' && this.type === 'profile' && this.rejectedListCount === 1) {
-          this.rejectedListCount = (this.rejectedListCount + 1) % 2;
-          this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
-        }
-        else {
-          console.log('else 1 executed');
-          this.getData(reply);
+        else if (reply === 'NO' && this.type === 'profile') {
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+            for (let x of this.rejectList) {
+              if (x.value === 0) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+            for (let x of this.rejectList) {
+              if (x.value === 1) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          console.log('Here is the reject list array', this.rejectList);
+          let v;
+          for (v of this.rejectList) {
+            if (v.bool) {
+              this.rejectListPopup(shareItem, v.value);
+              break;
+            }
+          }
+          this.rejectList.splice(this.rejectList.indexOf(v), 1)
+          this.rejectList.push(v);
+          console.log('here is the modified reject list array', this.rejectList);
         }
       }
-      else {
-        console.log('else 2 executed');
-        this.getData(reply);
-      }
     }
-    else {
-      console.log('else 3 executed');
-      this.getData(reply);
-    }
+    console.log('get data called');
+    this.getData(reply);
+
     // else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 2) &&
     //   ((localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') || (!localStorage.getItem('appInstalled')))) {
     //   this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
@@ -387,8 +465,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     // stop the button animation
     this.stopAnimation();
     this.itemService.setTutorialIndex();
-    console.log('shortlist count', this.shortListCount);
-    console.log('rejected count', this.rejectedListCount)
+    // console.log('shortlist count', this.shortListCount);
+    // console.log('rejected count', this.rejectedListCount)
     const modal = document.getElementById('myModal');
     this.persistentDialogOpeningLogic(this.item, reply);
     // return; //this is temporary
@@ -423,7 +501,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   getData(reply) {
     // shortlist count
     console.log(reply);
-    //this.setCount(reply);
+    this.setCount(reply);
     const previousItem = this.item;
     if (!localStorage.getItem('todayProfile')) {
       this.spinner.show();

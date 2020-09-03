@@ -413,6 +413,45 @@ export class ChatDrawerComponent implements OnInit {
     localStorage.setItem('profileCompPercent', String(this.profileCompletionPercent));
     console.log('profileCompPercent set to ', this.profileCompletionPercent);
   }
+  async checkPageThreeDetails() {
+    let famDet = 0;
+    let perDet = 0;
+    let storingObj = {
+      'birth_place': null, 'birth_time': null, 'manglik': null, 'food_choice': null, 'occupation_mother': null, 'occupation': null, 'family_income': null,
+    }
+    let personalDetilsP3 = ['birth_place', 'birth_time', 'manglik', 'food_choice'];
+    let familyDetailsP3 = ['occupation_mother', 'occupation', 'family_income'];
+    Object.entries(this.personalProfileData).forEach(
+      ([key, value]) => {
+        if (personalDetilsP3.includes(key)) {
+          if ((!value) || value === "null" || value === "") {
+            perDet += 1;
+          }
+          else {
+            storingObj[key] = value;
+          }
+        }
+      }
+    );
+    Object.entries(this.familyProfileData).forEach(
+      ([key, value]) => {
+        if (familyDetailsP3.includes(key)) {
+          if (!value || value == "null" || value === "") {
+            famDet += 1;
+          }
+          else {
+            storingObj[key] = value;
+          }
+        }
+      });
+    console.log('CHecking third page details', perDet + famDet);
+    if (perDet + famDet >= 2) {
+      localStorage.setItem('storedData', JSON.stringify(storingObj));
+    }
+    else if (localStorage.getItem('storedData')) {
+      localStorage.removeItem('storedData');
+    }
+  }
   getUserProfileData() {
     if (this.userId || localStorage.getItem('id')) {
       this.spinner.show();
@@ -472,6 +511,7 @@ export class ChatDrawerComponent implements OnInit {
             this.getAllCaste();
             this.setProfileCalculations();
             this.setProfileCompletion();
+            this.checkPageThreeDetails();
           },
           (error: any) => {
             this.spinner.hide();

@@ -27,7 +27,7 @@ export class PersistentMessageComponent implements OnInit {
   };
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
 
-
+  storedData: any;
   constructor(public dialogRef: MatDialogRef<EditPersonalDialogComponent>, @Inject(MAT_DIALOG_DATA) data,
     public router: Router,
     public chatService: ChatServiceService,
@@ -62,10 +62,23 @@ export class PersistentMessageComponent implements OnInit {
     this.getCompleteProfile();
   }
   getCompleteProfile() {
-    if (localStorage.getItem('profileCompPercent')) {
-      if (Number(localStorage.getItem('profileCompPercent')) <= 50 && this.data.button == 'Complete Profile')
-        this.completeProfile = true;
+    if (localStorage.getItem('storedData')) {
+      this.storedData = JSON.parse(localStorage.getItem('storedData'));
+      this.completeProfile = true;
+      this.PageThree.patchValue({
+        BirthPlace: this.storedData.birth_place,
+        BirthTime: this.storedData.birth_time,
+        FoodChoice: this.storedData.food_choice,
+        Mangalik: this.storedData.manglik,
+        FatherStatus: this.storedData.occupation,
+        MotherStatus: this.storedData.occupation_mother,
+        FamilyIncome: this.storedData.family_income,
+      });
     }
+    // if (localStorage.getItem('profileCompPercent')) {
+    //   if (Number(localStorage.getItem('profileCompPercent')) <= 50 && this.data.button == 'Complete Profile')
+    //     this.completeProfile = true;
+    // }
     else {
       this.completeProfile = false;
     }
@@ -161,7 +174,9 @@ export class PersistentMessageComponent implements OnInit {
       return this.http.post('https://partner.hansmatrimony.com/api/formThreeProfile', firststepdata).subscribe((res: any) => {
         console.log('first', res);
         if (res.status === 1) {
-          this.ngxNotificationService.success('Details updated succesfully')
+          this.ngxNotificationService.success('Details updated succesfully');
+          localStorage.removeItem('storedData');
+          this.dialogRef.close();
         } else {
           this.ngxNotificationService.error(res.message);
         }
