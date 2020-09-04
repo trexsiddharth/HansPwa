@@ -444,22 +444,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log('get data called');
     this.getData(reply);
 
-    // else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && (this.shortListCount === 2) &&
-    //   ((localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') || (!localStorage.getItem('appInstalled')))) {
-    //   this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
-    // }
-    // else if (reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus()
-    //   && (this.shortListCount === 6) && localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
-    //   this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
-    // }
-    // else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.shortListCount === 10) {
-    //   this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
-    // }
-    // else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-    //   && reply === 'NO' && this.type === 'profile' && this.rejectedListCount % 3 === 1) {
-    //   this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
-    // }
   }
   getNextMessageOrProfile(reply: string) {
     // stop the button animation

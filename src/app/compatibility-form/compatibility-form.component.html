@@ -1,38 +1,69 @@
 <!-- toolbar  -->
-<mat-toolbar class="fixToolBar">
-  <mat-toolbar-row>
-    <div class="mainDivToolbar">
-      <div style="display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;">
-        <img width="40px" [defaultImage]="'../../assets/logo_72.png'"
-          [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'" [useSrcset]="true"
-          alt="Hans Matrimony">
-        <span style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans
-            Matrimony</strong></span>
+
+
+<main class='pwaSize fixed t-0 b-0 w-full HC overflowY' id="compatibilityStepper" style="margin-top:4%">
+  <mat-toolbar class="fixToolBar">
+    <mat-toolbar-row style="position:relative!important">
+      <div class="mainDivToolbar" style="position:relative; ">
+        <div style="
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;">
+          <img width="75px" [defaultImage]="'../../assets/logo_72.png'"
+            [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'" [useSrcset]="true"
+            alt="Hans Matrimony">
+          <!-- <span
+            style="color: rgba(49, 49, 49, 0.781); margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans
+              Matrimony</strong></span> -->
+        </div>
       </div>
-    </div>
-  </mat-toolbar-row>
+      <div style="width:90px;position:absolute;top:10px; right: 90px;">
+        <p style="position:absolute;color:white;font-size:1rem;font-weight:bold;margin-left:80px">1,00,000+</p>
+        <img
+          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
+          src="https://picsum.photos/id/1027/35/35" alt="">
+        <img
+          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
+          src="https://picsum.photos/id/1027/35/35" alt="">
+        <img
+          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
+          src="https://picsum.photos/id/1027/35/35" alt="">
+        <img
+          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
+          src="https://picsum.photos/id/1027/35/35" alt="">
+        <img
+          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
+          src="https://picsum.photos/id/1027/35/35" alt="">
+      </div>
+    </mat-toolbar-row>
 
-</mat-toolbar>
-
-<main class='pwaSize fixed t-0 b-0 w-full HC overflowY'>
-
+  </mat-toolbar>
   <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
     <div class="container customBackground"
-      style="width:80%;background: white;border-radius: 20px;margin-top: 20px; margin-bottom: 20px;">
+      style="width:80%;background: white;border-radius: 20px;margin-top: 10%; margin-bottom: 20px;">
       <div class="w-full" style="margin-left:auto;margin-right:auto">
 
         <mat-step [stepControl]="PageOne">
           <form [formGroup]="PageOne" style="padding-bottom: 100px;">
             <!-- label name if required -->
             <!-- <ng-template matStepLabel>Page I</ng-template> -->
-            <div class="row">
+            <div class="row" style="margin-top: 8%!important;">
 
               <div class="col-6">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Rishta For</mat-label>
+                <h6>Rishta For</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline" [hideRequiredMarker]="true">
+                  <!-- <mat-label>Rishta For</mat-label> -->
                   <mat-select (selectionChange)="setGender()" #relation formControlName="Relation" required>
                     <mat-option *ngFor="let  option of createProfile" [value]="option">
                       {{option}}
@@ -42,8 +73,9 @@
               </div>
 
               <div class="col-6">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Religion</mat-label>
+                <h6>Religion</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Religion</mat-label> -->
                   <mat-select #relation formControlName="Religion" (selectionChange)="Religion($event)" required>
                     <mat-option *ngFor="let  option of Religions" [value]="option">
                       {{option}}
@@ -58,16 +90,18 @@
               </p>
 
               <div class="col-6">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>First Name</mat-label>
+                <h6>Name</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>First Name</mat-label> -->
                   <input type="text" id="firstName" (change)="inputFieldChanged('firstName')" matInput
                     formControlName="firstName" required>
                 </mat-form-field>
               </div>
 
               <div class="col-6">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Last Name</mat-label>
+                <h6>Last Name</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Last Name</mat-label> -->
                   <input type="text" (change)="inputFieldChanged('lastName')" matInput formControlName="lastName"
                     name="lastName">
                 </mat-form-field>
@@ -77,11 +111,10 @@
                 यहाँ पर कैंडिडेट यानि जिसके लिए रिश्ता देखा जा रहा है उसका नाम लिखे (लड़का या लड़की जो भी है )
               </p>
 
-              <div class="col-md-12" *ngIf="Caste">
-
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-
-                  <mat-label>Caste</mat-label>
+              <div class="col-6" *ngIf="Caste">
+                <h6>Caste</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Caste</mat-label> -->
                   <mat-select id="caste" (selectionChange)="selectFieldChange('Castes')" formControlName="Castes">
                     <mat-option>
                       <ngx-mat-select-search noEntriesFoundLabel="No Caste Found" placeholderLabel="Search Caste..."
@@ -97,26 +130,27 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-12" *ngIf="Caste" style="margin-top: 30px;">
+              <div class="col-6" *ngIf="Caste" style="margin:30px 0px auto 0px;">
                 <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
-                  All Caste Preferred
+                  All Caste<br> Preferred
                 </mat-checkbox>
               </div>
 
               <div class="col-md-12" *ngIf="!hideMobileNumber">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Mobile number</mat-label>
+                <h6>Mobile number</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Mobile number</mat-label> -->
                   <input style="display: inline;" type="number" id="phone" matInput formControlName="phone"
                     (change)="mobileNumberChanged()" required name="phone">
                 </mat-form-field>
               </div>
 
               <div class="col-md-12">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Email<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
+                <h6>Email<code style="color: rgba(0,0,0,.6);">(optional)</code></h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Email<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label> -->
                   <input type="email" (change)="inputFieldChanged('email')" id="email" matInput formControlName="email"
                     name="email">
-
                 </mat-form-field>
               </div>
 
@@ -125,13 +159,13 @@
                 करता हो
               </p>
 
-              <div class="col-md-12">
-
-                <label style="color: #737373; margin-top: 8px;margin-bottom: 10px;">Date Of Birth</label>
+              <div class="col-12" style="margin:0 0 25px 0">
+                <label style="margin:8px 0 10px 10px;font-size:0.97rem;
+                color:rgba(44, 44, 44, 0.842);">Date Of Birth</label>
                 <div class="row" style="margin: 0px; margin-bottom: 8px;display: flex;
                           flex-direction: row;
                           align-items: center;
-                          justify-content: space-between;">
+                          justify-content: center;">
                   <select class="classic" (change)="selectFieldChange('birth_date')" formControlName="birth_date" style="
                             flex: 1;" required name="birth_date">
                     <option *ngFor="let  option of date" [value]="option">
@@ -154,14 +188,13 @@
                     </option>
                   </select>
                 </div>
-
-
               </div>
 
               <div class="col-md-12 matSelect"
                 *ngIf="PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other'">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Gender</mat-label>
+                <h6>Gender</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Gender</mat-label> -->
                   <mat-select formControlName="gender" (selectionChange)="selectFieldChange('gender')" required>
                     <mat-option value="Male">Male</mat-option>
                     <mat-option value="Female">Female</mat-option>
@@ -169,8 +202,21 @@
 
                 </mat-form-field>
               </div>
-              <div class="col-12" *ngIf="!fourPageService.getUserThrough()">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
+              <div class="col-6" *ngIf="!fourPageService.getUserThrough()">
+                <h6>Height</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Height</mat-label> -->
+                  <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height
+                    formControlName="Height" required name="Height">
+                    <mat-option *ngFor="let option of Heights;let i = index" [value]="i">
+                      {{option}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-6" *ngIf="fourPageService.getUserThrough()">
+                <mat-form-field class="full-width fieldFit" appearance="outline">
                   <mat-label>Height</mat-label>
                   <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height
                     formControlName="Height" required name="Height">
@@ -182,31 +228,19 @@
               </div>
 
               <div class="col-6" *ngIf="fourPageService.getUserThrough()">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Height</mat-label>
-                  <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height
-                    formControlName="Height" required name="Height">
-                    <mat-option *ngFor="let option of Heights;let i = index" [value]="i">
-                      {{option}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-
-              <div class="col-6" *ngIf="fourPageService.getUserThrough()">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Weight</mat-label>
+                <h6>Weight</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Weight</mat-label> -->
                   <input type="number" (change)="inputFieldChanged('Weight')" matInput formControlName="Weight" required
                     name="Weight">
                   <span matSuffix>Kg &nbsp;</span>
                 </mat-form-field>
               </div>
 
-              <div class="col-md-12">
-
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-
-                  <mat-label>Marital Status</mat-label>
+              <div class="col-6">
+                <h6>Marital Status</h6>
+                <mat-form-field class="full-width fieldFit" appearance="outline">
+                  <!-- <mat-label>Marital Status</mat-label> -->
                   <mat-select #relation (selectionChange)="selectFieldChange('MaritalStatus')"
                     formControlName="MaritalStatus" required>
                     <mat-option *ngFor="let  option of MaritalStatus" [value]="option">
@@ -220,11 +254,10 @@
                 <mat-checkbox (change)="checkDisable($event)">
                   Physical Disability
                 </mat-checkbox>
-
               </div>
 
               <div class="col-12" *ngIf="isDisable">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
+                <mat-form-field class="full-width fieldFit" appearance="outline">
                   <mat-label>Disabled Part</mat-label>
                   <input type="text" matInput formControlName="disabledPart">
                 </mat-form-field>

@@ -423,6 +423,30 @@ div.mat-select-search-inner input.mat-input-element {
   background: #0c9bf2;
   color: white;
 }
+
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: #f44336!important;
+}
+#compatibilityStepper .mat-horizontal-stepper-header-container{
+  display: none!important ;
+}
+/* #compatibilityStepper .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: white;
+} */
+#compatibilityStepper.mat-form-field-appearance-outline .mat-form-field-invalid .mat-form-field-invalid .mat-form-field-outline-thick{
+  color:red!important;
+   
+}
+#compatibilityStepper .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+  background:#f2f2f2!important;
+  border-radius:11px;
+}
+#compatibilityStepper h6{
+  margin:0px 0px 0px 10px!important;
+  font-size:0.97rem;
+  color:rgba(44, 44, 44, 0.842);
+}
 @media screen and (max-width: 576px) {
   .ht-full {
     margin: 0px;
