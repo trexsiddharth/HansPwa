@@ -384,8 +384,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes' && this.type === 'profile') {
       this.itemService.openTodaysPopupAd();
-    }
-    else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
+    } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
       this.actionCount++;
       console.log('action count', this.actionCount)
       if (this.actionCount % 2 === 0) {
@@ -451,24 +450,24 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               break;
             }
           }
-          this.rejectList.splice(this.rejectList.indexOf(v), 1)
+          this.rejectList.splice(this.rejectList.indexOf(v), 1);
           this.rejectList.push(v);
           console.log('here is the modified reject list array', this.rejectList);
         }
       }
     }
-    console.log('get data called');
-    this.getData(reply);
 
   }
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
     this.stopAnimation();
+    console.log('get data called');
+    this.getData(reply);
     this.itemService.setTutorialIndex();
     // console.log('shortlist count', this.shortListCount);
     // console.log('rejected count', this.rejectedListCount)
-    const modal = document.getElementById('myModal');
     this.persistentDialogOpeningLogic(this.item, reply);
+    const modal = document.getElementById('myModal');
     // return; //this is temporary
     if (modal.style.display !== 'none') {
       modal.style.display = 'none';
