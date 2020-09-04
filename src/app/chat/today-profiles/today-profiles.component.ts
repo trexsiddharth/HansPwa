@@ -634,6 +634,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             this.spinner.hide();
           }
 
+          // stop user response animation
+          this.profileIsLoadingSubject.next(null);
+
           // resets the buttons animation
           this.resetAnimation();
 
