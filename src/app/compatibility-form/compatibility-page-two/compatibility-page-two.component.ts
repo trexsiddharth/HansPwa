@@ -58,7 +58,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   authMobileNumberStatus = false;
   workingCity;
   workplace;
-
+  nextClickedTwo = false;
   // Educational Qualification
 
   HigherEducation: hd[] = [{
@@ -336,6 +336,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   firstStep() {
+    this.nextClickedTwo = true;
     this.errors = [];
     console.log(this.PageTwo.value.Working);
     // if (!this.fourPageService.getUserThrough() &&
@@ -409,7 +410,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.errors.push(control);
         }
       }
-      this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+      //this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
     }
   }
 

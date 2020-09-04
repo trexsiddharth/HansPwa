@@ -18,6 +18,7 @@
             </mat-option>
           </mat-optgroup>
         </mat-select>
+        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -30,7 +31,7 @@
             {{option}}
           </mat-option>
         </mat-select>
-
+        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -50,7 +51,7 @@
             {{option}}
           </mat-option>
         </mat-select>
-
+        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width fieldFit"
@@ -60,6 +61,7 @@
         <!-- <mat-label>Other Designation</mat-label> -->
         <input type="text" (change)="changedDesignation()" matInput formControlName="OtherDesignation"
           name="Designation">
+        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -95,8 +97,8 @@
         <input type="text" matInput id="workingCity" [autoCompleteOptions]="autoComplete" matValidateAddress
           matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChanged()"
           formControlName="Working">
+        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
       </mat-form-field>
-
     </div>
 
 
@@ -108,9 +110,8 @@
           <mat-option value="Yes">Yes</mat-option>
           <mat-option value="No">No</mat-option>
         </mat-select>
-
+        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
       </mat-form-field>
-
     </div>
 
     <div class="col-md-12">
@@ -118,6 +119,7 @@
         <mat-label>About<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
         <textarea rows="5" type="text" matInput formControlName="About" name="About">
                                 </textarea>
+        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
       </mat-form-field>
     </div>
 

@@ -1,6 +1,4 @@
 <!-- toolbar  -->
-
-
 <main class='pwaSize fixed t-0 b-0 w-full HC overflowY' id="compatibilityStepper" style="margin-top:4%">
   <mat-toolbar class="fixToolBar">
     <mat-toolbar-row style="position:relative!important">
@@ -18,33 +16,12 @@
               Matrimony</strong></span> -->
         </div>
       </div>
-      <div style="width:90px;position:absolute;top:10px; right: 90px;">
+      <div *ngIf="photos.length > 1" style="width:90px;position:absolute;top:10px; right: 110px;">
         <p style="position:absolute;color:white;font-size:1rem;font-weight:bold;margin-left:80px">1,00,000+</p>
-        <img
-          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
+        <img *ngFor="let i of photoIndices" style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
           -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
-          src="https://picsum.photos/id/1027/35/35" alt="">
-        <img
-          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
-          src="https://picsum.photos/id/1027/35/35" alt="">
-        <img
-          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
-          src="https://picsum.photos/id/1027/35/35" alt="">
-        <img
-          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
-          src="https://picsum.photos/id/1027/35/35" alt="">
-        <img
-          style="-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);
-          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);border:1px solid #44a1dfd7;width:35px;height:35px;border-radius:50%;"
-          src="https://picsum.photos/id/1027/35/35" alt="">
+          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);width:37px;height:37px;border-radius:50%;" src="{{photos[i]}}"
+          alt="">
       </div>
     </mat-toolbar-row>
 
@@ -69,6 +46,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -81,7 +59,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
-
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -95,6 +73,7 @@
                   <!-- <mat-label>First Name</mat-label> -->
                   <input type="text" id="firstName" (change)="inputFieldChanged('firstName')" matInput
                     formControlName="firstName" required>
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -126,7 +105,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
-
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -142,6 +121,7 @@
                   <!-- <mat-label>Mobile number</mat-label> -->
                   <input style="display: inline;" type="number" id="phone" matInput formControlName="phone"
                     (change)="mobileNumberChanged()" required name="phone">
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -199,7 +179,7 @@
                     <mat-option value="Male">Male</mat-option>
                     <mat-option value="Female">Female</mat-option>
                   </mat-select>
-
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-6" *ngIf="!fourPageService.getUserThrough()">
@@ -212,6 +192,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -224,6 +205,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -234,6 +216,7 @@
                   <input type="number" (change)="inputFieldChanged('Weight')" matInput formControlName="Weight" required
                     name="Weight">
                   <span matSuffix>Kg &nbsp;</span>
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -247,6 +230,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -260,6 +244,7 @@
                 <mat-form-field class="full-width fieldFit" appearance="outline">
                   <mat-label>Disabled Part</mat-label>
                   <input type="text" matInput formControlName="disabledPart">
+                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
 

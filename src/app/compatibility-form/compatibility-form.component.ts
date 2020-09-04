@@ -77,7 +77,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   currentAge: number;
   birthdayValid;
   startDate = new Date(1985, 0, 1);
-
+  nextClickedOne = false;
   // Religion and Caste
   Religions: string[] = ['Hindu', 'Muslim', 'Sikh', 'Christian', 'Buddhist', 'Jain', 'Parsi', 'Jewish', 'Bahai'];
   casteo: Observable<string[]>;
@@ -86,7 +86,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   AllCastes = false;
   profileData;
   isLeadIsZero = false;
-
+  photos = [];
+  photoIndices = [];
   // Height
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4 feet', '4 feet 1 inches', '4 feet 2 inches', '4 feet 3 inches', '4 feet 4 inches', '4 feet 5 inches', '4 feet 6 inches', '4 feet 7 inches', '4 feet 8 inches', '4 feet 9 inches', '4 feet 10 inches', '4 feet 11 inches', '5 feet', '5 feet 1 inches', '5 feet 2 inches', '5 feet 3 inches', '5 feet 4 inches', '5 feet 5 inches', '5 feet 6 inches', '5 feet 7 inches', '5 feet 8 inches', '5 feet 9 inches', '5 feet 10 inches', '5 feet 11 inches', '6 feet', '6 feet 1 inches', '6 feet 2 inches', '6 feet 3 inches', '6 feet 4 inches', '6 feet 5 inches', '6 feet 6 inches', '6 feet 7 inches', '6 feet 8 inches', '6 feet 9 inches', '6 feet 10 inches', '6 feet 11 inches', '7 feet'];
@@ -307,6 +308,27 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
     console.log(this.isLinear);
 
+    this.generateRandomIndices();
+    this.PageOne.get('gender').valueChanges.subscribe(value => {
+      console.log('here is the gender value being sent', value);
+      this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=${value === 'Male' ? 'Female' : 'Male'}`).subscribe((response: any) => {
+        if (response.photos) {
+          this.photos = [];
+          this.photos = response.photos;
+        }
+      }, (error: any) => {
+        console.log('error occurred occurred while fetchignthe photos');
+      });
+    });
+  }
+  generateRandomIndices() {
+    this.photoIndices = [];
+    while (this.photoIndices.length < 5) {
+      let newNum = Math.floor(Math.random() * (20 - 0));
+      if (!(newNum in this.photoIndices)) {
+        this.photoIndices.push(newNum);
+      }
+    }
   }
 
   protected filterCastes() {
@@ -333,6 +355,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   // event on change of input field
   inputFieldChanged(fieldName) {
+    this.generateRandomIndices();
     console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
     switch (fieldName) {
       case 'email':
@@ -539,7 +562,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   firstStep() {
-
+    this.nextClickedOne = true;
     if (this.alreadyExists === true) {
       this.openVerificationDialog(this.authData.is_lead);
       return;
@@ -676,7 +699,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         }
       }
       if (this.errors[0]) {
-        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+        //this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
       }
     }
   }
