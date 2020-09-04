@@ -28,7 +28,7 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable, timer, Subject, of, ReplaySubject } from 'rxjs';
+import { Observable, timer, Subject, of, ReplaySubject, BehaviorSubject } from 'rxjs';
 import { startWith, map, timeout, retry, catchError, switchMap, share, takeUntil } from 'rxjs/operators';
 import { FourPageService } from './four-page.service';
 import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
@@ -137,6 +137,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   /** Subject that emits when the component has been destroyed. */
   protected onDestroy = new Subject<void>();
+
+  // disable btn if user is already registered
+  disableNextSubject = new BehaviorSubject<boolean>(false);
+  disableNext$ = this.disableNextSubject.asObservable();
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -449,6 +453,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           this.authData = res;
           if (res.registered === 1) {
             this.ngxNotificationService.success('Already Registered');
+            this.disableNextSubject.next(true);
             if (this.pollingCount > 0) {
               localStorage.setItem('authData', JSON.stringify(res));
               localStorage.setItem('mobile_number', this.PageOne.value.phone);
@@ -461,10 +466,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             }
             this.spinner.show();
           } else if (res.registered === 2) {
+            this.disableNextSubject.next(false);
             localStorage.setItem('RegisterNumber', number);
             this.ngxNotificationService.info('Please complete the form and update');
             this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
           } else {
+            this.disableNextSubject.next(false);
             localStorage.setItem('RegisterNumber', number);
             // signifies that new user has entered his mobile number.
             this.analyticsEvent('Four Page Registration Page Zero');
