@@ -441,11 +441,15 @@ div.mat-select-search-inner input.mat-input-element {
   color: white;
   background:#f2f2f2!important;
   border-radius:11px;
+  height:2.4rem;
 }
 #compatibilityStepper h6{
-  margin:9px 0px 0px 10px!important;
-  font-size:0.97rem;
+  margin:5px 0px 0px 10px!important;
+  font-size:0.8rem;
   color:rgba(44, 44, 44, 0.842);
+}
+#compatibilityStepper .mat-form-field-subscript-wrapper{
+  margin-top:0px;
 }
 @media screen and (max-width: 576px) {
   .ht-full {
