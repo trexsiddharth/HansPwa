@@ -278,6 +278,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnDestroy(): void {
+    this.chatService.shortList = this.shortList;
+    console.log('setting shortList values in chat service');
+    this.chatService.rejectList = this.rejectList;
+    console.log('setting rejectList values in chat service');
   }
 
   private setProfileLocally() {
@@ -344,7 +348,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }, 10000);
 
   }
-
   analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
