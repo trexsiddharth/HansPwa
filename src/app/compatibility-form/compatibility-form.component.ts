@@ -139,16 +139,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-    private _formBuilder: FormBuilder,
-    private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private matDialog: MatDialog,
-    private breakPointObserver: BreakpointObserver,
-    public languageService: LanguageService,
-    private route: ActivatedRoute,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService) {
+              private _formBuilder: FormBuilder,
+              private router: Router,
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private matDialog: MatDialog,
+              private breakPointObserver: BreakpointObserver,
+              public languageService: LanguageService,
+              private route: ActivatedRoute,
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -238,12 +238,20 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     // for skippable
     this.route.url.subscribe(
       link => {
+        console.log(link);
         if (link && link[0] && link[0].path) {
           console.log(link[0].path);
           this.fourPageService.setSkippable(true);
         }
       }
     );
+
+    if (this.router.url.match('code=')) {
+      var codeIndex = this.router.url.indexOf('code=');
+      var code = this.router.url.substring(codeIndex + 5);
+      console.log(code);
+      this.getFacebookAccessToken(code);
+    }
 
     // get all castes before get the data of the profile
     await this.getAllCaste();
@@ -311,6 +319,20 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
     console.log(this.isLinear);
 
+  }
+
+  getFacebookAccessToken(code) {
+    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&code=${code}`)
+    .subscribe(
+      (response: any) => {
+        console.log(response);
+        alert(`got token ${JSON.stringify(response)}`);
+      },
+      err => {
+        console.log(err);
+        alert('error');
+      }
+    );
   }
 
   protected filterCastes() {
