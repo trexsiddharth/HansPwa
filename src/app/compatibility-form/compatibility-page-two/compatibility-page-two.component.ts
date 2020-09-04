@@ -383,9 +383,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.spinner.hide();
           if (this.fourPageService.getUserThrough()) {
             this.updateFormTwoData(firststepdata);
-            if (localStorage.getItem('getListLeadId') !== '1') {
-              window.open('https://partner.hansmatrimony.com/hot-leads');
-            }
           }
           //this.ngxNotificationService.success('Registered Successfully');
           if (!this.fourPageService.getUserThrough()) {

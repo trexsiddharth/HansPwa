@@ -263,7 +263,7 @@
           </form>
         </mat-step>
 
-        <mat-step [completed]="formTwo">
+        <mat-step [completed]="formTwo" >
           <!-- label name if required -->
           <!-- <ng-template matStepLabel>
                     Page II
@@ -271,24 +271,24 @@
           <app-compatibility-page-two></app-compatibility-page-two>
         </mat-step>
 
-        <mat-step [completed]="formThree" *ngIf="fourPageService.getUserThrough() && !isLeadIsZero">
+        <mat-step *ngIf="fourPageService.getUserThrough()">
           <!-- <ng-template matStepLabel>
                       Page III
                   </ng-template> -->
           <app-compatibility-page-three></app-compatibility-page-three>
         </mat-step>
-        <mat-step [completed]="formFour" *ngIf="fourPageService.getUserThrough() && !isLeadIsZero">
+        <mat-step  *ngIf="fourPageService.getUserThrough()">
           <!-- <ng-template matStepLabel>
                     Page IV
                   </ng-template> -->
           <app-compatibility-photo></app-compatibility-photo>
         </mat-step>
         <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
-        <mat-step *ngIf="fourPageService.getUserThrough() && !isLeadIsZero">
+        <mat-step *ngIf="fourPageService.getUserThrough()">
           <app-compatibility-verify></app-compatibility-verify>
         </mat-step>
         <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
-        <mat-step *ngIf="fourPageService.getUserThrough() && !isLeadIsZero ">
+        <mat-step *ngIf="fourPageService.getUserThrough()">
           <!-- <ng-template matStepLabel  >
                     Page VI
                   </ng-template> -->

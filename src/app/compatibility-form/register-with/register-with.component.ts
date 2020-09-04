@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+declare var FB: any;
+
 @Component({
   selector: 'app-register-with',
   templateUrl: './register-with.component.html',
@@ -14,6 +16,10 @@ selection;
               }
 
   ngOnInit() {
+    this.loadFacebookScript();
+    // this.loadFacebookScript();
+    FB.XFBML.parse();
+    this.checkLoginState();
   }
 
   registerUsing(btnName) {
@@ -23,5 +29,27 @@ selection;
     });
   }
   
+  checkLoginState() {
+    FB.getLoginStatus((response) => {
+      alert(response.status);
+      // tslint:disable-next-line: max-line-length
+      // window.location.href = 'https://www.facebook.com/dialog/oauth?' + 'client_id=' + '449447648971731' + '&redirect_uri=' + 'https://quizzical-spence-a0c256.netlify.app/fourReg' + '&scope=' + 'public_profile,email,name';
+      // tslint:disable-next-line: max-line-length
+      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg`;
+    });
+  }
+
+  loadFacebookScript() {
+    const razor = document.getElementById('razorPay');
+    if (!razor) {
+      const fileName = document.createElement('script');
+      fileName.async = true;
+      fileName.defer = true;
+      fileName.crossOrigin = 'anonymous';
+      fileName.setAttribute('type', 'text/javascript');
+      fileName.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js');
+      document.body.appendChild(fileName);
+    }
+  }
 
 }
