@@ -140,16 +140,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-    private _formBuilder: FormBuilder,
-    private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private matDialog: MatDialog,
-    private breakPointObserver: BreakpointObserver,
-    public languageService: LanguageService,
-    private route: ActivatedRoute,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService) {
+              private _formBuilder: FormBuilder,
+              private router: Router,
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private matDialog: MatDialog,
+              private breakPointObserver: BreakpointObserver,
+              public languageService: LanguageService,
+              private route: ActivatedRoute,
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -344,17 +344,20 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   }
 
   getFacebookAccessToken(code) {
-    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&code=${code}`)
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          alert(`got token ${JSON.stringify(response)}`);
-        },
-        err => {
-          console.log(err);
-          alert('error');
-        }
-      );
+
+    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://localhost:4200/fourReg&code=${code}`)
+    .subscribe(
+      (response: any) => {
+        console.log(response);
+        alert(`got token ${JSON.stringify(response)}`);
+
+        this.getFbDataThroughToken(response.access_token);
+      },
+      err => {
+        console.log(err);
+        alert('error');
+      }
+    );
   }
 
   protected filterCastes() {
@@ -834,7 +837,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     console.log(this.PageOne.value.Relation);
     this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
     this.analyticsEvent('Four Page Registration Page One Gender Changed');
-    this.openRegisterWith(this.PageOne.value.Relation);
+    // this.openRegisterWith(this.PageOne.value.Relation);
     switch (this.PageOne.value.Relation) {
       case 'Brother':
         this.PageOne.patchValue(
@@ -1144,6 +1147,48 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location' }, (response) => {
         console.log(response);
         this.spinner.hide();
+        this.PageOne.patchValue({
+          firstName: response.first_name ? response.first_name : '',
+          lastName: response.last_name ? response.last_name : '',
+          email: response.email ? response.email : '',
+          gender: response.gender ? this.toTitleCase(response.gender) : '',
+          birth_date: response.birthday ? response.birthday.split('/')[1] : '',
+          birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
+          birth_year: response.birthday ? response.birthday.split('/')[2] : ''
+        });
+        // set home town in birth place
+        if (response.hometown && response.hometown.name) {
+          this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
+        }
+        // set home town in birth place
+        if (response.location && response.location.name) {
+          this.fourPageService.facebookLocationUpdated.emit(response.location.name);
+        }
+        // to solve the overlapping issue for new user
+        (document.querySelector('#firstName') as HTMLInputElement).focus();
+      });
+  }
+  getFbDataThroughToken(token) {
+    console.log('Welcome!  Fetching your information.... ');
+
+    // // fetch user image
+    // FB.api(`/${token}/picture`,
+    //   'GET',
+    //   { height: '600', width: '400', redirect: 'false' }, (response) => {
+    //     console.log(response.data.url);
+    //     if (response.data.url) {
+    //       this.fetchedFbProfilePic = response.data.url;
+    //       alert('got profile pic');
+    //     }
+    //   });
+
+    // fetch user data
+    FB.api(`/${token}`,
+      'GET',
+      { fields: 'email,name' }, (response) => {
+        console.log(response);
+        this.spinner.hide();
+        alert(`got profile data ${JSON.stringify(response)}`);
         this.PageOne.patchValue({
           firstName: response.first_name ? response.first_name : '',
           lastName: response.last_name ? response.last_name : '',
