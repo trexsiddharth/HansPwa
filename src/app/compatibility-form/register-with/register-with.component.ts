@@ -35,7 +35,7 @@ selection;
       // tslint:disable-next-line: max-line-length
       // window.location.href = 'https://www.facebook.com/dialog/oauth?' + 'client_id=' + '449447648971731' + '&redirect_uri=' + 'https://quizzical-spence-a0c256.netlify.app/fourReg' + '&scope=' + 'public_profile,email,name';
       // tslint:disable-next-line: max-line-length
-      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://localhost:4200/fourReg`;
+      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg`;
     });
   }
 
