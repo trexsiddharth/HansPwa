@@ -16,8 +16,10 @@ selection;
               }
 
   ngOnInit() {
+    this.loadFacebookScript();
     // this.loadFacebookScript();
     FB.XFBML.parse();
+    this.checkLoginState();
   }
 
   registerUsing(btnName) {
@@ -29,21 +31,21 @@ selection;
   
   checkLoginState() {
     FB.getLoginStatus((response) => {
-      console.log(response);
+      alert(response.status);
     });
   }
 
-  // loadFacebookScript() {
-  //   const razor = document.getElementById('razorPay');
-  //   if (!razor) {
-  //     const fileName = document.createElement('script');
-  //     fileName.async = true;
-  //     fileName.defer = true;
-  //     fileName.crossOrigin = 'anonymous';
-  //     fileName.setAttribute('type', 'text/javascript');
-  //     fileName.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js');
-  //     document.body.appendChild(fileName);
-  //   }
-  // }
+  loadFacebookScript() {
+    const razor = document.getElementById('razorPay');
+    if (!razor) {
+      const fileName = document.createElement('script');
+      fileName.async = true;
+      fileName.defer = true;
+      fileName.crossOrigin = 'anonymous';
+      fileName.setAttribute('type', 'text/javascript');
+      fileName.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js');
+      document.body.appendChild(fileName);
+    }
+  }
 
 }
