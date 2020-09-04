@@ -543,12 +543,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   firstStep() {
-
-    if (this.alreadyExists === true) {
+    console.log(this.alreadyExists);
+    if (this.alreadyExists) {
       this.openVerificationDialog(this.authData.is_lead);
       return;
     }
-
 
     console.log(this.PageOne.value.email);
     this.errors = [];
@@ -789,7 +788,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     console.log(this.PageOne.value.Relation);
     this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
     this.analyticsEvent('Four Page Registration Page One Gender Changed');
-    // this.openRegisterWith(this.PageOne.value.Relation);
+    this.openRegisterWith(this.PageOne.value.Relation);
     switch (this.PageOne.value.Relation) {
       case 'Brother':
         this.PageOne.patchValue(

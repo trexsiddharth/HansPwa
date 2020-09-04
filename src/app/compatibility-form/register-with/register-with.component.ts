@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+declare var FB: any;
+
 @Component({
   selector: 'app-register-with',
   templateUrl: './register-with.component.html',
@@ -14,6 +16,8 @@ selection;
               }
 
   ngOnInit() {
+    // this.loadFacebookScript();
+    FB.XFBML.parse();
   }
 
   registerUsing(btnName) {
@@ -23,5 +27,23 @@ selection;
     });
   }
   
+  checkLoginState() {
+    FB.getLoginStatus((response) => {
+      console.log(response);
+    });
+  }
+
+  // loadFacebookScript() {
+  //   const razor = document.getElementById('razorPay');
+  //   if (!razor) {
+  //     const fileName = document.createElement('script');
+  //     fileName.async = true;
+  //     fileName.defer = true;
+  //     fileName.crossOrigin = 'anonymous';
+  //     fileName.setAttribute('type', 'text/javascript');
+  //     fileName.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js');
+  //     document.body.appendChild(fileName);
+  //   }
+  // }
 
 }

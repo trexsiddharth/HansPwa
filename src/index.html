@@ -125,6 +125,14 @@
       });
     };
   </script>
+  <div id="fb-root"></div>
+  <script>
+    function checkLoginState() {
+FB.getLoginStatus((response) => {
+alert(response.status);
+});
+}
+</script>
   <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script> -->
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </body>
