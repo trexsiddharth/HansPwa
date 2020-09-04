@@ -5,9 +5,9 @@ import { FourPageService } from '../four-page.service';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { Profile } from '../profile';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject, BehaviorSubject } from 'rxjs';
 import { MatSelect } from '@angular/material';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-compatibility-page-five',
@@ -30,6 +30,12 @@ export class CompatibilityPageFiveComponent implements OnInit {
   getcastes: any = [];
   compatibiltyCount;
   castePref: any[];
+
+  // disable buttons after a single click
+  assignBtnSubject = new BehaviorSubject<boolean>(false);
+  assignBtn$ = this.assignBtnSubject.asObservable();
+  approveBtnSubject = new BehaviorSubject<boolean>(false);
+  approveBtn$ = this.approveBtnSubject.asObservable();
 
   /** list of banks filtered by search keyword */
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
@@ -548,6 +554,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
   }
 
   approveProfileApi() {
+    this.approveBtnSubject.next(true);
     const approveData = new FormData();
     approveData.append('id', localStorage.getItem('getListId'));
     approveData.append('temple_id', localStorage.getItem('getListTempleId'));
@@ -574,12 +581,14 @@ export class CompatibilityPageFiveComponent implements OnInit {
         }
       }, err => {
         console.log(err);
+        this.approveBtnSubject.next(false);
         this.ngxNotificationService.error(err.message, 'Not Approved');
       }
     );
   }
 
   completeProfileApi(): Observable<any> {
+    this.assignBtnSubject.next(true);
     const approveData = new FormData();
     approveData.append('id', localStorage.getItem('getListId'));
     approveData.append('assign_by', localStorage.getItem('valueTempleId') ? localStorage.getItem('valueTempleId')
@@ -597,7 +606,12 @@ export class CompatibilityPageFiveComponent implements OnInit {
       : localStorage.getItem('getListId') ? '2' : '1');
     approveData.append('premium_lead', this.checkStatus === true ? '1' : '0');
 
-    return this.http.post('https://partner.hansmatrimony.com/api/completeLead', approveData);
+    return this.http.post('https://partner.hansmatrimony.com/api/completeLead', approveData).pipe(
+      catchError(() => {
+        this.assignBtnSubject.next(false);
+        throw new Error('Something Went Wrong, Try Again Later');
+      })
+    );
   }
 
   getLeadData(): Observable<any> {

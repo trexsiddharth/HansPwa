@@ -26,8 +26,8 @@ body {
     top: 75px;
   }
   .btn-blue, .btn.btn-blue {
-    color: white;
-    background-color: #34b7f1;
+    color: white !important;
+    background-color: #34b7f1 !important;
     font-size: 14px;
     min-width: 120px;
   }
