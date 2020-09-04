@@ -268,7 +268,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     if (this.chatService.rejectList.length > 0) {
       this.rejectList = this.chatService.rejectList;
-      console.log('sortList values found in chat service');
+      console.log('rejectList values found in chat service');
     }
     else {
       this.chatService.rejectList = this.rejectList;
@@ -363,7 +363,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   showShortListPopup(shareItem, i: number) {
     console.log(i);
     if (i == 0) {
-      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+      this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
     }
     if (i == 1) {
       this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
@@ -374,7 +374,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   rejectListPopup(shareItem, i: number) {
     if (i == 0) {
-      this.openPersistentDialog('Complete Your Profile', 'Your Profile is ' + localStorage.getItem('profileCompPercent') + '% complete. Complete your profile and get better matches.', 'Complete Profile');
+      this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
     }
     if (i == 1) {
       this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
@@ -421,7 +421,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               break;
             }
           }
-          this.shortList.splice(this.shortList.indexOf(v), 1)
+          this.shortList.splice(this.shortList.indexOf(v), 1);
           this.shortList.push(v);
           console.log('here is the modified shortlist array', this.shortList);
         }
@@ -654,7 +654,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               value: localStorage.getItem('id'),
               content_name: localStorage.getItem('RegisterNumber'),
             });
-        
+
             (window as any).fbq('track', 'CompleteRegistration', {
               value: localStorage.getItem('id'),
               content_name: localStorage.getItem('RegisterNumber'),
@@ -663,7 +663,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               value: localStorage.getItem('id'),
               content_name: localStorage.getItem('RegisterNumber'),
             });
-            
+
             this.router.navigateByUrl('chat');
           }
 

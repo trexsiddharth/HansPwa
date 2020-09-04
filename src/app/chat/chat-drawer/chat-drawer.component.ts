@@ -710,6 +710,7 @@ export class ChatDrawerComponent implements OnInit {
   }
   openSubscriptionOffer() {
     this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
-    this.itemService.openTodaysPopupAd();
+    //this.itemService.openTodaysPopupAd();
+    this.router.navigateByUrl(`/subscription/${0}`)
   }
 }

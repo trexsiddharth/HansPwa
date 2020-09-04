@@ -270,6 +270,7 @@ hr{
     margin: 10px auto;
     display: block;
     font-size: 1rem;
+    padding:5% 0 5% 0;
     color:rgb(236, 242, 248);padding-right:10px;
 }
 
@@ -302,6 +303,7 @@ hr{
         display: block;
         margin: 10px auto;
         font-size: 1rem;
+        padding:5% 0 5% 0;
         color:rgb(236, 242, 248);padding-right:6px;
     }
 }
@@ -351,6 +353,7 @@ hr{
         margin: 10px auto;
         padding: 4px 0px;
         font-size: 1rem;
+        padding:5% 0 5% 0;
         color:rgb(236, 242, 248);padding-right:6px;
     }
 }
@@ -391,6 +394,7 @@ hr{
         margin: 10px auto;
         padding: 3px 0px;
         font-size: 14px;
+        padding:5% 0 5% 0;
         color:#FFFFFF;padding-right:4px;
     }
     .rowMore{
