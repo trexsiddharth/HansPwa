@@ -8,6 +8,8 @@ export class ChatServiceService {
   contactNumber;
   loginStatus;
   credits;
+  shortList = [];
+  rejectList = [];
   authorized = new EventEmitter<{
     name,
     photo,
@@ -21,7 +23,7 @@ export class ChatServiceService {
     this.contactNumber = contact;
   }
 
-  setSharedProfile(profile: any)  {
+  setSharedProfile(profile: any) {
     this.profileItem = profile;
   }
   getSharedProfile() {
@@ -39,7 +41,7 @@ export class ChatServiceService {
 
     });
     // gtag app + web
-    (window as any).gtag('event', category ,{
+    (window as any).gtag('event', category, {
       'action': action
     });
 

@@ -682,11 +682,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
           } else {
             this.spinner.hide();
-            this.ngxNotificationService.error(res.message);
+            //this.ngxNotificationService.error(res.message);
           }
         }, err => {
           this.spinner.hide();
-          this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+          //this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
           console.log(err);
         });
       }

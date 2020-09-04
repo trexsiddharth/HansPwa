@@ -176,7 +176,8 @@ export class PersistentMessageComponent implements OnInit {
         if (res.status === 1) {
           this.ngxNotificationService.success('Details updated succesfully');
           localStorage.removeItem('storedData');
-          this.dialogRef.close();
+          this.buttonClicked();
+          //this.dialogRef.close();
         } else {
           this.ngxNotificationService.error(res.message);
         }

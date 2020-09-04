@@ -258,6 +258,22 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       }, 100);
     }
+    if (this.chatService.shortList.length > 0) {
+      this.shortList = this.chatService.shortList;
+      console.log('sortList values found in chat service');
+    }
+    else {
+      this.chatService.shortList = this.shortList;
+      console.log('setting shortList values in chat service');
+    }
+    if (this.chatService.rejectList.length > 0) {
+      this.rejectList = this.chatService.rejectList;
+      console.log('sortList values found in chat service');
+    }
+    else {
+      this.chatService.rejectList = this.rejectList;
+      console.log('setting rejectList values in chat service');
+    }
 
   }
 
