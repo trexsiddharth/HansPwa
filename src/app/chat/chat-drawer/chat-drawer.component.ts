@@ -297,8 +297,7 @@ export class ChatDrawerComponent implements OnInit {
   }
   castePreferences: string[] = [];
   specialCase() {
-
-    if (this.preferenceProfileData) {
+    if (this.preferenceProfileData && this.preferenceProfileData.caste) {
       this.castePreferences = this.preferenceProfileData.caste.split(',');
     }
   }

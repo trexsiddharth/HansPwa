@@ -509,7 +509,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   castePreferences: string[] = [];
   specialCase() {
-    this.castePreferences = this.preferenceProfileData.caste.split(',');
+    if (this.preferenceProfileData.caste)
+      this.castePreferences = this.preferenceProfileData.caste.split(',');
     console.log(this.preferenceProfileData.caste);
   }
   changeSelectedTab(event: any) { }
