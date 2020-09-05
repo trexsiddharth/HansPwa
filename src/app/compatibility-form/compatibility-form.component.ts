@@ -282,6 +282,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     );
 
     if (this.router.url.match('code=')) {
+      this.PageOne.patchValue({
+        Relation: 'Myself',
+      });
       var codeIndex = this.router.url.indexOf('code=');
       var code = this.router.url.substring(codeIndex + 5);
       console.log(code);
@@ -1201,7 +1204,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         console.log(response);
         this.spinner.hide();
         this.PageOne.patchValue({
-          Relation: 'Myself',
           firstName: response.first_name ? response.first_name : '',
           lastName: response.last_name ? response.last_name : '',
           email: response.email ? response.email : '',
