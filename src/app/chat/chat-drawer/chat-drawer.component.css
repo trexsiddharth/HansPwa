@@ -269,7 +269,8 @@ hr{
     padding: 8px 0px;
     margin: 10px auto;
     display: block;
-    font-size: 1rem;
+    font-size: 18px!important;
+    font-weight:bold!important;
     padding:5% 0 5% 0;
     color:rgb(236, 242, 248);padding-right:10px;
 }
@@ -302,7 +303,8 @@ hr{
         padding: 4px 0px;
         display: block;
         margin: 10px auto;
-        font-size: 1rem;
+        font-size: 1.2rem!important;
+        font-weight:bold!important;
         padding:5% 0 5% 0;
         color:rgb(236, 242, 248);padding-right:6px;
     }
@@ -352,7 +354,8 @@ hr{
         display: block;
         margin: 10px auto;
         padding: 4px 0px;
-        font-size: 1rem;
+        font-size: 1.1rem!important;
+        font-weight:bold!important;
         padding:5% 0 5% 0;
         color:rgb(236, 242, 248);padding-right:6px;
     }
@@ -393,7 +396,8 @@ hr{
         display: block;
         margin: 10px auto;
         padding: 3px 0px;
-        font-size: 14px;
+        font-size: 0.9rem!important;
+        font-weight:bold!important;
         padding:5% 0 5% 0;
         color:#FFFFFF;padding-right:4px;
     }

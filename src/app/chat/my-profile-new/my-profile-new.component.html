@@ -665,7 +665,11 @@
                 </div>
                 <div class="columnar" style="margin-top: 0px!important;">
                   <p class="headings">Living With Parents?</p>
-                  <p>{{familyProfileData.living_with_parents ? familyProfileData.living_with_parents : "+Add Detail"}}
+                  <p>
+                    <a
+                      *ngIf="familyProfileData.livingWithParents && familyProfileData.livingWithParents !='null'">{{familyProfileData.livingWithParents}}</a>
+                    <a *ngIf="!familyProfileData.livingWithParents||familyProfileData.livingWithParents == 'null'"
+                      class="pink" (click)="setEditIndexFamily(1)">+Add Detail</a>
                   </p>
                 </div>
               </div>

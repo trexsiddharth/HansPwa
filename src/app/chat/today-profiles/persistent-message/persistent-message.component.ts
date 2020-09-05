@@ -191,6 +191,12 @@ export class PersistentMessageComponent implements OnInit {
       this.ngxNotificationService.error('Please fill all the details!');
     }
   }
+  special() {
+    if (localStorage.getItem('storedData')) {
+      localStorage.removeItem('storedData');
+    }
+    this.dialogRef.close();
+  }
   buttonClicked() {
     this.dialogRef.close();
     switch (this.data.button) {

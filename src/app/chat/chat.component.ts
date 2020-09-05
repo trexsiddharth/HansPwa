@@ -238,6 +238,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
               localStorage.setItem('fcm_app', data.params.fcm_app);
             }
           }
+          else if (data.params.first) {
+            console.log('first param found')
+          }
         }
       }
     );

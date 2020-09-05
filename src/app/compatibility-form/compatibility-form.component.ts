@@ -92,6 +92,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   isLeadIsZero = false;
   photos = [];
   photoIndices = [];
+  photosMale = [];
+  photosFemale = [];
   // Height
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4 feet', '4 feet 1 inches', '4 feet 2 inches', '4 feet 3 inches', '4 feet 4 inches', '4 feet 5 inches', '4 feet 6 inches', '4 feet 7 inches', '4 feet 8 inches', '4 feet 9 inches', '4 feet 10 inches', '4 feet 11 inches', '5 feet', '5 feet 1 inches', '5 feet 2 inches', '5 feet 3 inches', '5 feet 4 inches', '5 feet 5 inches', '5 feet 6 inches', '5 feet 7 inches', '5 feet 8 inches', '5 feet 9 inches', '5 feet 10 inches', '5 feet 11 inches', '6 feet', '6 feet 1 inches', '6 feet 2 inches', '6 feet 3 inches', '6 feet 4 inches', '6 feet 5 inches', '6 feet 6 inches', '6 feet 7 inches', '6 feet 8 inches', '6 feet 9 inches', '6 feet 10 inches', '6 feet 11 inches', '7 feet'];
@@ -144,16 +146,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-              private _formBuilder: FormBuilder,
-              private router: Router,
-              public notification: NotificationsService,
-              public fourPageService: FourPageService,
-              private matDialog: MatDialog,
-              private breakPointObserver: BreakpointObserver,
-              public languageService: LanguageService,
-              private route: ActivatedRoute,
-              private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService) {
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    public notification: NotificationsService,
+    public fourPageService: FourPageService,
+    private matDialog: MatDialog,
+    private breakPointObserver: BreakpointObserver,
+    public languageService: LanguageService,
+    private route: ActivatedRoute,
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -185,7 +187,27 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.onDestroy.complete();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
+      if (response.photos) {
+        this.photosMale = response.photos;
+        this.photos = this.photosMale.slice(0, 9);
+      }
+    }, (error: any) => {
+      console.log('error occurred occurred while fetchignthe photos');
+    });
+    this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Female`).subscribe((response: any) => {
+      if (response.photos) {
+        this.photosFemale = [];
+        this.photosFemale = response.photos;
+        this.photos.concat(this.photosFemale.slice(0, 9));
+        console.log(this.photos);
+      }
+    }, (error: any) => {
+      console.log('error occurred occurred while fetchignthe photos');
+    });
+    //console.log(this.photosFemale, this.photosMale, this.photos);
+
     if (localStorage.getItem('RegisterNumber')) {
       this.PageOne.patchValue({
         phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
@@ -259,7 +281,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     }
 
     // get all castes before get the data of the profile
-    await this.getAllCaste();
+    this.getAllCaste();
     this.route.paramMap.subscribe(
       async (route: any) => {
         console.log(route.params);
@@ -324,44 +346,37 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
     console.log(this.isLinear);
 
-    this.generateRandomIndices();
+    this.generateRandomIndices(20);
     this.PageOne.get('gender').valueChanges.subscribe(value => {
-      console.log('here is the gender value being sent', value);
-      this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=${value === 'Male' ? 'Female' : 'Male'}`).subscribe((response: any) => {
-        if (response.photos) {
-          this.photos = [];
-          this.photos = response.photos;
-        }
-      }, (error: any) => {
-        console.log('error occurred occurred while fetchignthe photos');
-      });
+      console.log('here is the gender value being set', value);
+      this.photos = value === 'Male' ? this.photosFemale : this.photosMale;
+      this.generateRandomIndices(20);
     });
   }
-  generateRandomIndices() {
+  generateRandomIndices(j) {
     this.photoIndices = [];
     while (this.photoIndices.length < 5) {
-      let newNum = Math.floor(Math.random() * (20 - 0));
+      let newNum = Math.floor(Math.random() * (j - 0));
       if (!(newNum in this.photoIndices)) {
         this.photoIndices.push(newNum);
       }
     }
   }
-
   getFacebookAccessToken(code) {
 
     this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://localhost:4200/fourReg&code=${code}`)
-    .subscribe(
-      (response: any) => {
-        console.log(response);
-        alert(`got token ${JSON.stringify(response)}`);
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          alert(`got token ${JSON.stringify(response)}`);
 
-        this.getFbDataThroughToken(response.access_token);
-      },
-      err => {
-        console.log(err);
-        alert('error');
-      }
-    );
+          this.getFbDataThroughToken(response.access_token);
+        },
+        err => {
+          console.log(err);
+          alert('error');
+        }
+      );
   }
 
   protected filterCastes() {
@@ -388,7 +403,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   // event on change of input field
   inputFieldChanged(fieldName) {
-    this.generateRandomIndices();
+    this.generateRandomIndices(20);
     console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
     switch (fieldName) {
       case 'email':

@@ -1152,57 +1152,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
   }
-  // getProfilesPhoto(
-  //   num: string, // carousel
-  //   numUnapprove: string, // unapprove_carousel
-  //   num2: string, // photo
-  //   gen: string, // gender
-  //   index: string // index
-  // ): string {
-  //   if (num !== '[]' && num && num !== 'null') {
-  //     const carousel: any = JSON.parse(num);
-  //     ///console.log(carousel);
-  //     this.itemService.setPhotoStatus(true);
-  //     // if an image is present in unapprove_carousel for the particular index.
-  //     // we will give preference to unapprove_carousel first.
-  //     if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
-  //       const carouselUnapproved: any = JSON.parse(numUnapprove);
-  //       //console.log(carouselUnapproved);
-  //       if (carouselUnapproved[index] && Number(index) <= Object.keys(carouselUnapproved).length) {
-  //         return (
-  //           'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
-  //           carouselUnapproved[index]
-  //         );
-  //       } else {
-  //         if (carousel[String(Number(index) - Object.keys(carouselUnapproved).length)]) {
-  //           return (
-  //             'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
-  //             carousel[index]
-  //           );
-  //         } else {
-  //           return '../../assets/empty_profile.jpeg';
-  //         }
-  //       }
-  //     } else {
-  //       if (carousel[index]) {
-  //         return (
-  //           'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
-  //           carousel[index]
-  //         );
-  //       } else {
-  //         return '../../assets/empty_profile.jpeg';
-  //       }
-  //     }
-  //   } else if (num2) {
-  //     return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
-  //   } else {
-  //     if (gen === 'Male') {
-  //       return '../../assets/male_pic.png';
-  //     } else {
-  //       return '../../assets/female_pic.png';
-  //     }
-  //   }
-  // }
   getProfilesPhoto(
     num: string, // carousel
     numUnapprove: string, // unapprove_carousel
@@ -1219,10 +1168,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
         const carouselUnapproved: any = JSON.parse(numUnapprove);
         //console.log(carouselUnapproved);
-        if (Number(index) < 0) {
+        if (carouselUnapproved[index]) {
           return (
             'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
-            carouselUnapproved[String(Number(index) * -1)]
+            carouselUnapproved[index]
           );
         } else {
           if (carousel[index]) {
@@ -1254,6 +1203,57 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
   }
+  // getProfilesPhoto(
+  //   num: string, // carousel
+  //   numUnapprove: string, // unapprove_carousel
+  //   num2: string, // photo
+  //   gen: string, // gender
+  //   index: string // index
+  // ): string {
+  //   if (num !== '[]' && num && num !== 'null') {
+  //     const carousel: any = JSON.parse(num);
+  //     ///console.log(carousel);
+  //     this.itemService.setPhotoStatus(true);
+  //     // if an image is present in unapprove_carousel for the particular index.
+  //     // we will give preference to unapprove_carousel first.
+  //     if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
+  //       const carouselUnapproved: any = JSON.parse(numUnapprove);
+  //       //console.log(carouselUnapproved);
+  //       if (Number(index) < 0) {
+  //         return (
+  //           'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+  //           carouselUnapproved[String(Number(index) * -1)]
+  //         );
+  //       } else {
+  //         if (carousel[index]) {
+  //           return (
+  //             'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+  //             carousel[index]
+  //           );
+  //         } else {
+  //           return '../../assets/empty_profile.jpeg';
+  //         }
+  //       }
+  //     } else {
+  //       if (carousel[index]) {
+  //         return (
+  //           'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+  //           carousel[index]
+  //         );
+  //       } else {
+  //         return '../../assets/empty_profile.jpeg';
+  //       }
+  //     }
+  //   } else if (num2) {
+  //     return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
+  //   } else {
+  //     if (gen === 'Male') {
+  //       return '../../assets/male_pic.png';
+  //     } else {
+  //       return '../../assets/female_pic.png';
+  //     }
+  //   }
+  // }
   onProfileLoadError(gen: string, index) {
     console.log('error occured while loading image, Setting default image');
     const image = document.querySelectorAll('#imgProfile')[index - 1];
@@ -1283,17 +1283,17 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       };
     }
   }
-  familyDetailsLeft: number = 0;
-  personalDetailsLeft: number = 0;
+  familyDetailsLeft: any[] = [];
+  personalDetailsLeft: any[] = [];
   profileCompletionPercent: number = 0;
   personalDetailsList = [];
   familyDetailsList = [];
   totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
   getDetailsLeft(a: string) {
     switch (a) {
-      case 'personal': return this.personalDetailsLeft;
+      case 'personal': return this.personalDetailsLeft.length;
         break;
-      case 'family': return this.familyDetailsLeft;
+      case 'family': return this.familyDetailsLeft.length;
         break;
     }
   }
@@ -1305,7 +1305,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       'company', 'occupation', 'profession', 'working_city',
       'locality', 'email', 'profession', 'locality', 'whats_app_no'];
     this.familyDetailsList = ['about', 'occupation_mother', 'gotra', 'occupation',
-      'family_type', 'family_income', 'city', 'house_type'];
+      'family_type', 'family_income', 'city', 'house_type', 'livingWithParents'];
     this.totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
     let detailsLeft = [];
     console.log("look Here1");
@@ -1313,38 +1313,63 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log(this.familyDetailsLeft);
     console.log(this.personalDetailsList);
     console.log(this.familyDetailsList)
-    this.personalDetailsLeft = 0;
-    Object.entries(this.personalProfileData).forEach(
-      ([key, value]) => {
-        if (this.personalDetailsList.includes(key)) {
-          if ((!value) || value == "null") {
-            this.personalDetailsLeft += 1;
-            detailsLeft.push(key);
-          }
-          // this.personalDetailsList.splice(this.personalDetailsList.indexOf(key));
+    this.personalDetailsLeft = [];
+    // Object.entries(this.personalProfileData).forEach(
+    //   ([key, value]) => {
+    //     if (this.personalDetailsList.includes(key)) {
+    //       if ((!value) || value == "null") {
+    //         this.personalDetailsLeft += 1;
+    //         detailsLeft.push(key);
+    //       }
+    //       // this.personalDetailsList.splice(this.personalDetailsList.indexOf(key));
+    //     }
+    //   }
+    // );
+    // this.personalDetailsLeft += this.personalDetailsList.length;
+    for (let v of this.personalDetailsList) {
+      if (this.personalProfileData.hasOwnProperty(v)) {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] === "null") {
+          this.personalDetailsLeft.push(v);
         }
       }
-    );
-    // this.personalDetailsLeft += this.personalDetailsList.length;
-    this.familyDetailsLeft = 0;
-    Object.entries(this.familyProfileData).forEach(
-      ([key, value]) => {
-        if (this.familyDetailsList.includes(key)) {
-          if (!value || value == "null") {
-            this.familyDetailsLeft += 1;
-            detailsLeft.push(key);
-          }
-          // this.familyDetailsList.splice(this.familyDetailsList.indexOf(key));
+      else {
+        this.personalDetailsLeft.push(v);
+      }
+    }
+    for (let v of this.familyDetailsList) {
+      if (this.familyProfileData.hasOwnProperty(v)) {
+        if (!this.familyProfileData[v] || this.familyProfileData[v] === "null") {
+          this.familyDetailsLeft.push(v);
         }
-      });
+      }
+      else {
+        this.familyDetailsLeft.push(v);
+      }
+    }
+    // this.familyDetailsLeft = 0;
+    // Object.entries(this.familyProfileData).forEach(
+    //   ([key, value]) => {
+    //     if (this.familyDetailsList.includes(key)) {
+    //       if (!value || value == "null") {
+    //         this.familyDetailsLeft += 1;
+    //         detailsLeft.push(key);
+    //       }
+    //       // this.familyDetailsList.splice(this.familyDetailsList.indexOf(key));
+    //     }
+    //   });
     // this.familyDetailsLeft += this.familyDetailsList.length;
+    for (let v of this.personalDetailsLeft) {
+      if (this.familyProfileData.hasOwnProperty(v)) {
+        this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
+      }
+    }
     console.log("look Here2");
     console.log(this.personalDetailsLeft);
     console.log(this.familyDetailsLeft);
     console.log(detailsLeft);
   }
   setProfileCompletion() {
-    this.profileCompletionPercent = Math.ceil(((this.totalDetails - this.personalDetailsLeft - this.familyDetailsLeft) * 100) / (this.totalDetails));
+    this.profileCompletionPercent = Math.ceil(((this.totalDetails - this.personalDetailsLeft.length - this.familyDetailsLeft.length) * 100) / (this.totalDetails));
   }
 
   getUserProfileData() {
@@ -1529,11 +1554,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             this.carouselSize.push(element);
           });
         }
-        if (ucarousel) {
-          Object.keys(ucarousel).forEach((element) => {
-            this.carouselSize.push("-" + element);
-          });
-        }
+        // if (ucarousel) {
+        //   Object.keys(ucarousel).forEach((element) => {
+        //     this.carouselSize.push("-" + element);
+        //   });
+        // }
         console.log(this.carouselSize);
         return this.carouselSize;
       }

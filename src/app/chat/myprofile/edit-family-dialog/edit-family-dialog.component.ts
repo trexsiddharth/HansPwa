@@ -70,7 +70,7 @@ export class EditFamilyDialogComponent implements OnInit {
     familyDataForm.append('family_income', this.familyForm.value.family_income);
     familyDataForm.append('city', this.familyData.city);
     familyDataForm.append('is_lead', localStorage.getItem('is_lead'));
-
+    familyDataForm.append('livingWithParents', this.familyForm.value.livingWithParents);
 
     this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyDataForm).subscribe(
       (data: any) => {

@@ -9,7 +9,7 @@ import { Observable, Subject } from 'rxjs';
 import { NotificationsService } from '../../notifications.service';
 import { ChatServiceService } from '../../chat-service.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
-import { Router, Event } from '@angular/router';
+import { Router, Event, ActivatedRoute } from '@angular/router';
 import { SubscriptionserviceService } from '../../subscriptionservice.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
@@ -104,7 +104,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     private dialog: MatDialog,
     public languageService: LanguageService,
     public subscriptionService: SubscriptionserviceService,
-    private breakPointObserver: BreakpointObserver,) {
+    private breakPointObserver: BreakpointObserver,
+    public activatedRoute: ActivatedRoute) {
   }
 
   @HostListener('scroll', ['$event'])
@@ -274,9 +275,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.rejectList = this.rejectList;
       console.log('setting rejectList values in chat service');
     }
-
   }
-
   ngOnDestroy(): void {
     this.chatService.shortList = this.shortList;
     console.log('setting shortList values in chat service');
@@ -628,7 +627,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
           // data.first_time = 0 -> when user comes for the first time on a day
           // data.first_time = 1 -> it gets 1 once he has seen first profile
-          if (data.first_time === 0) {
+          if (data.first_time === 0 && !this.router.url.match('first')) {
             this.itemService.openWelcomeDialog(this.item.profiles_left);
           }
 
