@@ -191,16 +191,24 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
       if (response.photos) {
         this.photosMale = response.photos;
-        this.photos = this.photosMale.slice(0, 9);
+        for (let v of response.photos) {
+          this.photos.push(v);
+          if (this.photos.length >= 10)
+            break;
+        }
       }
     }, (error: any) => {
-      console.log('error occurred occurred while fetchignthe photos');
+      console.log('error occurred occurred while fetching the photos');
     });
     this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Female`).subscribe((response: any) => {
       if (response.photos) {
         this.photosFemale = [];
         this.photosFemale = response.photos;
-        this.photos.concat(this.photosFemale.slice(0, 9));
+        for (let v of response.photos) {
+          this.photos.push(v);
+          if (this.photos.length >= 20)
+            break;
+        }
         console.log(this.photos);
       }
     }, (error: any) => {
