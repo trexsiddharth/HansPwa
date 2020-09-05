@@ -375,7 +375,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     .subscribe(
       (response: any) => {
         console.log(response);
-        alert(JSON.stringify(response));
+        alert(JSON.stringify(response.data.user_id));
         this.getFbDataThroughToken(response.data.user_id);
       },
       err => {
@@ -1198,7 +1198,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
         console.log(response);
-        alert(JSON.stringify(response));
+        alert(`/${token}` + JSON.stringify(response));
         this.spinner.hide();
         this.PageOne.patchValue({
           Relation: 'Myself',
