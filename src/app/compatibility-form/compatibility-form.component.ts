@@ -341,7 +341,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         }
       }
     );
-
     this.spinner.hide();
     localStorage.setItem('id', '');
     localStorage.setItem('gender', '');

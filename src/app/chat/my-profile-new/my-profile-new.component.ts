@@ -1336,6 +1336,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         this.personalDetailsLeft.push(v);
       }
     }
+    this.familyDetailsLeft = [];
     for (let v of this.familyDetailsList) {
       if (this.familyProfileData.hasOwnProperty(v)) {
         if (!this.familyProfileData[v] || this.familyProfileData[v] === "null") {

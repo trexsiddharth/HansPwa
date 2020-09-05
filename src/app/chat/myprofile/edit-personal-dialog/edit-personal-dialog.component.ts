@@ -293,7 +293,7 @@ export class EditPersonalDialogComponent implements OnInit {
       personalDataForm.append('address', this.personalForm.value.WorkingCity
         ? this.personalForm.value.WorkingCity : this.personalData.working_city);
       personalDataForm.append('email', this.personalForm.value.email
-        ? this.personalForm.value.email : this.personalData.email);
+        ? this.personalForm.value.email : this.personalData.email ? this.personalData.email : this.familyData.email ? this.familyData.email : null);
       personalDataForm.append('mobile', this.personalForm.value.phone
         ? this.personalForm.value.phone : this.familyData.phone);
       personalDataForm.append('whatsapp', this.personalForm.value.Whatsapp ? this.personalForm.value.Whatsapp : this.familyData.mobile);
@@ -370,7 +370,7 @@ export class EditPersonalDialogComponent implements OnInit {
       birth_year: this.personalData.birth_date ? this.years[this.years.indexOf(this.personalData.birth_date.toString().split('-')[0])] : '',
       BirthPlace: this.personalData.birth_place,
       BirthTime: this.personalData.birth_time,
-      email: this.familyData.email ? this.familyData.email : '',
+      email: this.personalData.email ? this.personalData.email : this.familyData.email ? this.familyData.email : '',
       phone: this.familyData.mobile,
       Whatsapp: this.personalData.whats_app_no ? this.personalData.whats_app_no : this.familyData.mobile,
       Castes: this.familyData.caste,

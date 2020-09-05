@@ -369,9 +369,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   showShortListPopup(shareItem, i: number) {
     console.log(i);
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && (this.actionCount % 4 !== 0)) {
-      return;
-    }
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
     }
@@ -383,9 +380,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
   rejectListPopup(shareItem, i: number) {
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && (this.actionCount % 4 !== 0)) {
-      return;
-    }
+    // if ((this.itemService.getCredits() != null && this.itemService.getCredits().toString() !== '0') && (this.actionCount % 4 !== 0)) {
+    //   console.log('return for paid users');
+    //   return;
+    // }
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
     }
@@ -400,6 +398,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
       this.actionCount++;
       console.log('action count', this.actionCount)
+      if ((this.itemService.getCredits() != null && this.itemService.getCredits().toString() !== '0') && (this.actionCount % 4 !== 0)) {
+        console.log('returning for paid users for paid users');
+        return;
+      }
       if (this.actionCount % 2 === 0) {
         if (reply.toLowerCase() === 'shortlist' && this.type === 'profile') {
           if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {

@@ -487,7 +487,7 @@
                   <p *ngIf="personalProfileData.family"><a
                       *ngIf="personalProfileData.family.email&&personalProfileData.family.email!='null'">{{personalProfileData.family.email}}</a>
                     <a *ngIf="!personalProfileData.family.email||personalProfileData.family.email=='null'" class="pink"
-                      (click)="setEditIndex(3)">+Add
+                      (click)="setEditIndex(4)">+Add
                       email</a></p>
                   <p *ngIf="!personalProfileData.family">
                     {{familyProfileData.email}}
@@ -500,7 +500,7 @@
                 }}</p>
                   <p class="headings">{{languageService.profileLang.whatsapp}}</p>
                   <p><a *ngIf="familyProfileData.whats_app_no">{{ familyProfileData.whats_app_no }}</a>
-                    <a *ngIf="!familyProfileData.whats_app_no" class="pink" (click)="setEditIndex(3)">+Add Whatsapp</a>
+                    <a *ngIf="!familyProfileData.whats_app_no" class="pink" (click)="setEditIndex(4)">+Add Whatsapp</a>
                   </p>
                 </div>
               </div>
