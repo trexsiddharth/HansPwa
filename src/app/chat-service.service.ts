@@ -10,6 +10,7 @@ export class ChatServiceService {
   credits;
   shortList = [];
   rejectList = [];
+  actionCount = -1;
   authorized = new EventEmitter<{
     name,
     photo,
@@ -22,7 +23,6 @@ export class ChatServiceService {
   setContactNumber(contact: any) {
     this.contactNumber = contact;
   }
-
   setSharedProfile(profile: any) {
     this.profileItem = profile;
   }

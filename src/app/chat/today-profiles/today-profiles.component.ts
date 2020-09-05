@@ -275,12 +275,22 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.rejectList = this.rejectList;
       console.log('setting rejectList values in chat service');
     }
+    if (this.chatService.actionCount != -1) {
+      this.actionCount = this.chatService.actionCount;
+      console.log('found action count value in chat service');
+    }
+    else {
+      this.chatService.actionCount = this.actionCount;
+      console.log('setting action count value in chat service');
+    }
   }
   ngOnDestroy(): void {
     this.chatService.shortList = this.shortList;
     console.log('setting shortList values in chat service');
     this.chatService.rejectList = this.rejectList;
     console.log('setting rejectList values in chat service');
+    this.chatService.actionCount = this.actionCount;
+    console.log('setting action count value in chat service');
   }
 
   private setProfileLocally() {
