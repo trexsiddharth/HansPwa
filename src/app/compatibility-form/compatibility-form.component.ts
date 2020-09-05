@@ -285,6 +285,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       var codeIndex = this.router.url.indexOf('code=');
       var code = this.router.url.substring(codeIndex + 5);
       console.log(code);
+      alert(code);
       this.getFacebookAccessToken(code);
     }
 
@@ -374,6 +375,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     .subscribe(
       (response: any) => {
         console.log(response);
+        alert(JSON.stringify(response));
         this.getFbDataThroughToken(response.data.user_id);
       },
       err => {
@@ -1196,6 +1198,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
         console.log(response);
+        alert(JSON.stringify(response));
         this.spinner.hide();
         this.PageOne.patchValue({
           Relation: 'Myself',
