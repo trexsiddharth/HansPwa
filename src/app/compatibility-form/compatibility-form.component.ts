@@ -365,13 +365,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.photoIndices = [];
     while (this.photoIndices.length < 5) {
       let newNum = Math.floor(Math.random() * (j - 0));
-      if (!(newNum in this.photoIndices)) {
+      if (!this.photoIndices.includes(newNum)) {
         this.photoIndices.push(newNum);
       }
     }
   }
   getFacebookAccessToken(code) {
-
     this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://localhost:4200/fourReg&code=${code}`)
       .subscribe(
         (response: any) => {

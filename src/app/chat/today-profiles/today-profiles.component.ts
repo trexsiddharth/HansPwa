@@ -344,18 +344,14 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }));
     }
   }
-
   startActionAnimation() {
     if (this.lastAction === 'SHOW') {
       return;
     }
-
     this.showActionAnimation = true;
-
     setTimeout(() => {
       this.showActionAnimation = false;
     }, 10000);
-
   }
   analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
@@ -374,6 +370,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   showShortListPopup(shareItem, i: number) {
     console.log(i);
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && (this.actionCount % 4 !== 0)) {
+      return;
+    }
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
     }
@@ -385,6 +384,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
   rejectListPopup(shareItem, i: number) {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && (this.actionCount % 4 !== 0)) {
+      return;
+    }
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
     }
