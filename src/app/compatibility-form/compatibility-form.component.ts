@@ -1197,7 +1197,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     // fetch user data
 
     this.http.get<any>(`https://graph.facebook.com/v8.0/${userId}/ HTTP/1.1`,
-     {params: {fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'} })
+     {params: {fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
+      access_token: 'EAAGYxS92S9MBAAoKW4SXcVUmEbtknxTaPo6kMpuWZBKJhPZAXZBZAMPW7ceiNwFvBc4OcdxE0APsZCjz8B1Czjq98Rd68e3VOk6iC6R3giU4n3WsSGDuppsuSzpAhszxHZATOTlp4J1svFrpq11xAVeiWZCrBzpZCGuYFIukSWdDtgZDZD'} })
      .subscribe(
        response => {
         alert('http response' + JSON.stringify(response));
