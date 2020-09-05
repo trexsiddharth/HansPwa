@@ -1150,7 +1150,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
         if (response.data.url) {
-          this.fetchedFbProfilePic = response.data.url;
+          this.fetchedFbProfilePic = {
+            url: response.data.url,
+            user_id: null,
+            access_token: null
+          };
         }
       });
 
@@ -1191,7 +1195,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
         if (response.data.url) {
-          this.fetchedFbProfilePic = response.data.url;
+          this.fetchedFbProfilePic = {
+           url: response.data.url,
+           user_id: userId,
+           access_token: token
+          };
         }
       });
 

@@ -390,10 +390,14 @@ export class CompatibilityPhotoComponent implements OnInit {
     this.fourPageService.facebookProfilePicUploaded.subscribe(
       (link) => {
         if (link) {
-          this.imgURL = link;
+          this.imgURL = link.url;
           this.getImage(this.imgURL, 1);
           // get profile pics from facebook
-          this.getFacebookPics();
+          if (!link.access_token) {
+            this.getFacebookPics();
+          } else {
+              this.getFacebookPicsWithToken(link.user_id, link.access_token);
+          }
         }
       }
     );
@@ -546,6 +550,71 @@ export class CompatibilityPhotoComponent implements OnInit {
       }
     });
  }
+
+  // get pics from facebook
+  getFacebookPicsWithToken(userId,token) {
+    this.clickedFacebook = true;
+    // fetch user photos
+    (window as any).FB.api(`/${userId}/albums`,
+    'GET',
+    {fields: 'link,name',
+  access_token: token}, (response) => {
+      console.log('album', response);
+      if (response.data.length > 0) {
+        response.data.forEach(element => {
+          if (element.name === 'प्रोफ़ाइल फ़ोटो' ||
+           element.name === 'Profile Photo' ||
+            element.name === 'Profile photo' ||
+            element.name === 'profile photo' ||
+            (element.name as string).includes('Profile') || (element.name as string).includes('प्रोफ़ाइल')) {
+              if (element.id) {
+                (window as any).FB.api(`/${element.id}/photos`,
+                'GET',
+                {fields: 'link',
+              access_token: token}, (res) => {
+                  console.log('Photos', res);
+                  if (res.data.length > 0) {
+                    res.data.forEach((element, index) => {
+                      if (index < 5) {
+                        if (element && element.id) {
+                          (window as any).FB.api(`/${element.id}/picture`,
+                          'GET',
+                          {redirect: 'false',
+                        access_token: token}, (picRes) => {
+                              console.log(picRes);
+                              if (picRes.data && picRes.data.url) {
+                                switch (index) {
+                                  case 0:
+                                    this.frontfile = picRes.data.url;
+                                    this.getImage(this.frontfile, 2);
+                                    break;
+                                  case 1:
+                                    this.BackimgURL = picRes.data.url;
+                                    this.getImage(this.BackimgURL, 3);
+                                    break;
+                                
+                                  default:
+                                    this.getImage(picRes.data.url, index + 2);
+                                    break;
+                                }
+                              }
+                          });
+                        }
+                      } else {
+                        return;
+                      }
+                    });
+                  }
+                });
+               }
+          }
+        });
+      } else {
+          this.ngxNotificationService.warning('No Facebook Picture Found');
+      }
+    });
+ }
+
 
  // fetch fb current profile pic
  fetchFbCurrentProfilePic() {
