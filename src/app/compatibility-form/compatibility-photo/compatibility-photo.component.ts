@@ -489,13 +489,11 @@ export class CompatibilityPhotoComponent implements OnInit {
   // get pics from facebook
   getFacebookPics() {
     this.clickedFacebook = true;
-    this.spinner.show();
     // fetch user photos
     (window as any).FB.api('/me/albums',
     'GET',
     {fields: 'link,name'}, (response) => {
       console.log('album', response);
-      this.spinner.hide();
       if (response.data.length > 0) {
         response.data.forEach(element => {
           if (element.name === 'प्रोफ़ाइल फ़ोटो' ||

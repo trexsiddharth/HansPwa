@@ -285,7 +285,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       var codeIndex = this.router.url.indexOf('code=');
       var code = this.router.url.substring(codeIndex + 5);
       console.log(code);
-      alert(code);
       this.getFacebookAccessToken(code);
     }
 
@@ -376,7 +375,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       (response: any) => {
         console.log(response);
         const profile = JSON.parse(response.profile);
-        alert(JSON.stringify(profile.data.user_id));
         this.getFbDataThroughToken(profile.data.user_id, response.access_token);
       },
       err => {
@@ -1189,7 +1187,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       'GET',
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
-        alert(`/${userId}/picture` + JSON.stringify(response));
         if (response.data.url) {
           this.fetchedFbProfilePic = response.data.url;
         }
@@ -1202,7 +1199,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
         access_token: token}, (response) => {
         console.log(response);
-        alert(`/${userId}` + JSON.stringify(response));
         this.spinner.hide();
         this.PageOne.patchValue({
           Relation: 'Myself',
