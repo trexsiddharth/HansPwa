@@ -1195,34 +1195,49 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       });
 
     // fetch user data
-    FB.api(`/${userId}`,
-      'GET',
-      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
-        access_token: `449447648971731|${token}`}, (response) => {
-        console.log(response);
-        alert(`/${userId}` + JSON.stringify(response));
-        this.spinner.hide();
-        this.PageOne.patchValue({
-          Relation: 'Myself',
-          firstName: response.first_name ? response.first_name : '',
-          lastName: response.last_name ? response.last_name : '',
-          email: response.email ? response.email : '',
-          gender: response.gender ? this.toTitleCase(response.gender) : '',
-          birth_date: response.birthday ? response.birthday.split('/')[1] : '',
-          birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
-          birth_year: response.birthday ? response.birthday.split('/')[2] : ''
-        });
-        // set home town in birth place
-        if (response.hometown && response.hometown.name) {
-          this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
-        }
-        // set home town in birth place
-        if (response.location && response.location.name) {
-          this.fourPageService.facebookLocationUpdated.emit(response.location.name);
-        }
-        // to solve the overlapping issue for new user
-        (document.querySelector('#firstName') as HTMLInputElement).focus();
-      });
+
+    this.http.get<any>(`https://graph.facebook.com/v8.0/${userId}/ HTTP/1.1`,
+     {params: {fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'} })
+     .subscribe(
+       response => {
+        alert('http response' + JSON.stringify(response));
+       },
+       err => {
+         alert('error');
+       }
+     );
+
+
+
+
+    // FB.api(`/${userId}`,
+    //   'GET',
+    //   { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
+    //     access_token: `449447648971731|${token}`}, (response) => {
+    //     console.log(response);
+    //     alert(`/${userId}` + JSON.stringify(response));
+    //     this.spinner.hide();
+    //     this.PageOne.patchValue({
+    //       Relation: 'Myself',
+    //       firstName: response.first_name ? response.first_name : '',
+    //       lastName: response.last_name ? response.last_name : '',
+    //       email: response.email ? response.email : '',
+    //       gender: response.gender ? this.toTitleCase(response.gender) : '',
+    //       birth_date: response.birthday ? response.birthday.split('/')[1] : '',
+    //       birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
+    //       birth_year: response.birthday ? response.birthday.split('/')[2] : ''
+    //     });
+    //     // set home town in birth place
+    //     if (response.hometown && response.hometown.name) {
+    //       this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
+    //     }
+    //     // set home town in birth place
+    //     if (response.location && response.location.name) {
+    //       this.fourPageService.facebookLocationUpdated.emit(response.location.name);
+    //     }
+    //     // to solve the overlapping issue for new user
+    //     (document.querySelector('#firstName') as HTMLInputElement).focus();
+    //   });
   }
 
   toTitleCase(str) {
