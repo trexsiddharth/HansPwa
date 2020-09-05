@@ -42,7 +42,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   shortListCount = 0;
   rejectedListCount = 0;
 
-  actionCount = -1;
+  actionCount = -2;
 
   shortList =
     [{
@@ -274,7 +274,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.rejectList = this.rejectList;
       console.log('setting rejectList values in chat service');
     }
-    if (this.chatService.actionCount != -1) {
+    if (this.chatService.actionCount != -2) {
       this.actionCount = this.chatService.actionCount;
       console.log('found action count value in chat service');
     }

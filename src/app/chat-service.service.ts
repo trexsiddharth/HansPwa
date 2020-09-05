@@ -10,7 +10,7 @@ export class ChatServiceService {
   credits;
   shortList = [];
   rejectList = [];
-  actionCount = -1;
+  actionCount = -2;
   authorized = new EventEmitter<{
     name,
     photo,
