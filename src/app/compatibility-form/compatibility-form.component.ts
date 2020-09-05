@@ -375,8 +375,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     .subscribe(
       (response: any) => {
         console.log(response);
-        alert(JSON.stringify(response.data.user_id));
-        this.getFbDataThroughToken(response.data.user_id, code);
+        const profile = JSON.parse(response.profile);
+        alert(JSON.stringify(profile.data.user_id));
+        this.getFbDataThroughToken(profile.data.user_id, response.access_token);
       },
       err => {
         console.log(err);
@@ -1199,7 +1200,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     FB.api(`/${userId}`,
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
-        access_token: `EAAGYxS92S9MBAAoKW4SXcVUmEbtknxTaPo6kMpuWZBKJhPZAXZBZAMPW7ceiNwFvBc4OcdxE0APsZCjz8B1Czjq98Rd68e3VOk6iC6R3giU4n3WsSGDuppsuSzpAhszxHZATOTlp4J1svFrpq11xAVeiWZCrBzpZCGuYFIukSWdDtgZDZD`}, (response) => {
+        access_token: token}, (response) => {
         console.log(response);
         alert(`/${userId}` + JSON.stringify(response));
         this.spinner.hide();
