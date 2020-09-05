@@ -118,18 +118,22 @@
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p>{{personalProfileData.religion ? personalProfileData.religion : "Add Religion"}} |
-                    {{personalProfileData.caste ? personalProfileData.caste : "Add Caste"}}</p>
+                  <p>
+                    {{personalProfileData.religion ? personalProfileData.religion : familyProfileData.religion ? familyProfileData.religion : "Add Religion"}}
+                    |
+                    {{personalProfileData.caste ? personalProfileData.caste : familyProfileData.caste ? familyProfileData.caste : "Add Caste"}}
+                  </p>
                   <p>{{getHeight(personalProfileData.height)}} |<a
                       *ngIf="personalProfileData.weight&&personalProfileData.weight!='null'">{{personalProfileData.weight}}
                       Kg</a>
-                    <a *ngIf="!personalProfileData.weight||personalProfileData.weight=='null'" class="pink">+Add
+                    <a *ngIf="!personalProfileData.weight||personalProfileData.weight=='null'" class="pink"
+                      (click)="setEditIndex(0)">+Add
                       Weight</a>
                   </p>
                   <p *ngIf="personalProfileData.family"><a
                       *ngIf="personalProfileData.family.locality&&personalProfileData.family.locality!='null'">{{personalProfileData.family.locality}}</a>
                     <a *ngIf="!personalProfileData.family.locality||personalProfileData.family.locality=='null'"
-                      class="pink">+Add
+                      class="pink" (click)="setEditIndex(0)">+Add
                       Locality</a></p>
                   <p *ngIf="!personalProfileData.family">
                     {{familyProfileData.locality}}
@@ -139,12 +143,12 @@
                   <p>{{setAge(personalProfileData.birth_date)}}Yrs | {{personalProfileData.birth_date}}</p>
                   <p><a
                       *ngIf="personalProfileData.food_choice&&personalProfileData.food_choice!='null'">{{personalProfileData.food_choice}}</a>
-                    <a *ngIf="!personalProfileData.food_choice||personalProfileData.food_choice=='null'"
-                      class="pink">+Add Food Choice</a></p>
+                    <a *ngIf="!personalProfileData.food_choice||personalProfileData.food_choice=='null'" class="pink"
+                      (click)="setEditIndex(0)">+Add Food Choice</a></p>
                   <p><a
                       *ngIf="personalProfileData.marital_status&&personalProfileData.marital_status!='null'">{{personalProfileData.marital_status}}</a>
                     <a *ngIf="!personalProfileData.marital_status||personalProfileData.marital_status=='null'"
-                      class="pink">+Add
+                      class="pink" (click)="setEditIndex(0)">+Add
                       Marital Status</a>
                   </p>
                 </div>
@@ -269,7 +273,8 @@
                 <div class="columnar">
                   <p><a
                       *ngIf="personalProfileData.about&&personalProfileData.about!='null'">{{personalProfileData.about}}</a>
-                    <a *ngIf="!personalProfileData.about||personalProfileData.about=='null'" class="pink">+Add About</a>
+                    <a *ngIf="!personalProfileData.about||personalProfileData.about=='null'" class="pink"
+                      (click)="setEditIndex(1)">+Add About</a>
                   </p>
                   <p class="headings">Profile Managed By</p>
                   <p>{{familyProfileData.relation}}</p>
@@ -303,42 +308,47 @@
                 <div class="columnar">
                   <p><a
                       *ngIf="personalProfileData.degree&&personalProfileData.degree!='null'">{{personalProfileData.degree}}</a>
-                    <a *ngIf="!personalProfileData.degree||personalProfileData.degree=='null'" class="pink">+Add
+                    <a *ngIf="!personalProfileData.degree||personalProfileData.degree=='null'" class="pink"
+                      (click)="setEditIndex(2)">+Add
                       Education</a>
                     <br><a
                       *ngIf="personalProfileData.college&&personalProfileData.college!='null'">{{personalProfileData.college}}</a>
-                    <a *ngIf="!personalProfileData.college||personalProfileData.college=='null'" class="pink">+Add
+                    <a *ngIf="!personalProfileData.college||personalProfileData.college=='null'" class="pink"
+                      (click)="setEditIndex(2)">+Add
                       College</a>
                   </p>
                   <p class="headings">{{languageService.profileLang.additional}}</p>
                   <p><a
                       *ngIf="personalProfileData.additional_qualification&&personalProfileData.additional_qualification!='null'">{{personalProfileData.additional_qualification}}</a>
                     <a *ngIf="!personalProfileData.additional_qualification||personalProfileData.additional_qualification=='null'"
-                      class="pink">+Add Additional
+                      class="pink" (click)="setEditIndex(2)">+Add Additional
                       Qualifications</a>
                   </p>
                   <p class="headings">{{languageService.profileLang.occupation}}</p>
                   <p><a
                       *ngIf="personalProfileData.occupation&& personalProfileData.occupation!='null'">{{personalProfileData.occupation}}</a>
-                    <a *ngIf="!personalProfileData.occupation||personalProfileData.occupation=='null'" class="pink">+Add
+                    <a *ngIf="!personalProfileData.occupation||personalProfileData.occupation=='null'" class="pink"
+                      (click)="setEditIndex(2)">+Add
                       Occupation</a> </p>
                   <p class="headings">{{languageService.profileLang.designation}}</p>
                   <p><a *ngIf="personalProfileData.profession"></a>{{personalProfileData.profession}}
-                    <a *ngIf="!personalProfileData.profession" class="pink">+Add Detail</a> |
+                    <a *ngIf="!personalProfileData.profession" class="pink" (click)="setEditIndex(2)">+Add
+                      Profession</a> |
                     <a *ngIf="personalProfileData.company&&personalProfileData.company!='null'">{{ personalProfileData.company}}
                     </a>
-                    <a *ngIf="!personalProfileData.company||personalProfileData.company=='null'" class="pink">+Add
+                    <a *ngIf="!personalProfileData.company||personalProfileData.company=='null'" class="pink"
+                      (click)="setEditIndex(2)">+Add
                       Company</a> | <a
                       *ngIf="personalProfileData.monthly_income && personalProfileData.monthly_income!='null'">{{getIncome(personalProfileData.monthly_income)}}
                       LPA</a>
                     <a *ngIf="!personalProfileData.monthly_income|| personalProfileData.monthly_income=='null'"
-                      class="pink">+Add Income</a>
+                      class="pink" (click)="setEditIndex(2)">+Add Income</a>
                   </p>
                   <p class="headings">{{languageService.profileLang.workingCity}}</p>
                   <p><a
                       *ngIf="personalProfileData.working_city&& personalProfileData.working_city!='null'">{{personalProfileData.working_city}}</a>
                     <a *ngIf="!personalProfileData.working_city || personalProfileData.working_city=='null'"
-                      class="pink">+Add Working City</a>
+                      class="pink" (click)="setEditIndex(2)">+Add Working City</a>
                   </p>
                 </div>
               </div>
@@ -417,7 +427,8 @@
                 <div class="columnar">
                   <p><a
                       *ngIf="personalProfileData.manglik&&personalProfileData.manglik!='null'">{{personalProfileData.manglik}}</a><a
-                      *ngIf="!personalProfileData.manglik||personalProfileData.manglik=='null'" class="pink">+Add
+                      *ngIf="!personalProfileData.manglik||personalProfileData.manglik=='null'" class="pink"
+                      (click)="setEditIndex(3)">+Add
                       Manglik Status</a>
                   </p>
                   <p> <a
@@ -428,8 +439,8 @@
                     {{personalProfileData.birth_date ? personalProfileData.birth_date : "Add birth date"}} |
                     <a
                       *ngIf="personalProfileData.birth_place&&personalProfileData.birth_place!='null'">{{personalProfileData.birth_place}}</a>
-                    <a *ngIf="!personalProfileData.birth_place||personalProfileData.birth_place=='null'"
-                      class="pink">+Add Birth Place</a>
+                    <a *ngIf="!personalProfileData.birth_place||personalProfileData.birth_place=='null'" class="pink"
+                      (click)="setEditIndex(3)">+Add Birth Place</a>
                   </p>
                 </div>
               </div>
@@ -475,8 +486,8 @@
                 <div class="columnar">
                   <p *ngIf="personalProfileData.family"><a
                       *ngIf="personalProfileData.family.email&&personalProfileData.family.email!='null'">{{personalProfileData.family.email}}</a>
-                    <a *ngIf="!personalProfileData.family.email||personalProfileData.family.email=='null'"
-                      class="pink">+Add
+                    <a *ngIf="!personalProfileData.family.email||personalProfileData.family.email=='null'" class="pink"
+                      (click)="setEditIndex(3)">+Add
                       email</a></p>
                   <p *ngIf="!personalProfileData.family">
                     {{familyProfileData.email}}
@@ -489,7 +500,7 @@
                 }}</p>
                   <p class="headings">{{languageService.profileLang.whatsapp}}</p>
                   <p><a *ngIf="familyProfileData.whats_app_no">{{ familyProfileData.whats_app_no }}</a>
-                    <a *ngIf="!familyProfileData.whats_app_no" class="pink">+Add Whatsapp</a>
+                    <a *ngIf="!familyProfileData.whats_app_no" class="pink" (click)="setEditIndex(3)">+Add Whatsapp</a>
                   </p>
                 </div>
               </div>
@@ -547,7 +558,8 @@
                   <p class="headings">{{languageService.profileLang.aboutFamily}}</p>
                   <p><a
                       *ngIf="familyProfileData.about&&familyProfileData.about!='null'">{{familyProfileData.about  }}</a>
-                    <a *ngIf="!familyProfileData.about||familyProfileData.about=='null'" class="pink">+Add About
+                    <a *ngIf="!familyProfileData.about||familyProfileData.about=='null'" class="pink"
+                      (click)="setEditIndexFamily(1)">+Add About
                       Family</a>
                   </p>
                   <!-- <p class="headings">{{languageService.profileLang.Mother}}</p> -->
@@ -556,24 +568,27 @@
                     <a *ngIf="familyProfileData.occupation_mother&&familyProfileData.occupation_mother!='null'">
                       {{familyProfileData.occupation_mother}}</a>
                     <a *ngIf="!familyProfileData.occupation_mother||familyProfileData.occupation_mother=='null'"
-                      class="pink">+Add Mother's Occupation</a></p>
+                      (click)="setEditIndexFamily(1)" class="pink">+Add Mother's Occupation</a></p>
                   <p *ngIf="familyProfileData.mother_status == 'Not Alive'">Not Alive</p>
                   <p class="headings">Father Is</p>
                   <p *ngIf="familyProfileData.father_status != 'Not Alive'">
                     <a *ngIf="familyProfileData.occupation&&familyProfileData.occupation!='null'">
                       {{familyProfileData.occupation}}</a>
-                    <a *ngIf="!familyProfileData.occupation||familyProfileData.occupation=='null'" class="pink">+Add
+                    <a *ngIf="!familyProfileData.occupation||familyProfileData.occupation=='null'" class="pink"
+                      (click)="setEditIndexFamily(1)">+Add
                       Father's Occupation</a></p>
                   <p *ngIf="familyProfileData.father_status == 'Not Alive'">Not Alive</p>
                   <!-- <p class="headings">Siblings</p> -->
                   <p class="headings">{{ languageService.profileLang.familyLivingIn}}</p>
                   <p><a *ngIf="familyProfileData.city&&familyProfileData.city!='null'">{{familyProfileData.city}}</a>
-                    <a *ngIf="!familyProfileData.city||familyProfileData.city=='null'" class="pink">+Add Family City</a>
+                    <a *ngIf="!familyProfileData.city||familyProfileData.city=='null'" class="pink"
+                      (click)="setEditIndexFamily(1)">+Add Family City</a>
                   </p>
                   <p class="headings">{{languageService.profileLang.gotra}}</p>
                   <p><a
                       *ngIf="familyProfileData.gotra && familyProfileData.gotra!='null'">{{ familyProfileData.gotra}}</a>
-                    <a *ngIf="!familyProfileData.gotra || familyProfileData.gotra =='null'" class="pink">+Add Gotra</a>
+                    <a *ngIf="!familyProfileData.gotra || familyProfileData.gotra =='null'" class="pink"
+                      (click)="setEditIndexFamily(1)">+Add Gotra</a>
                   </p>
                 </div>
                 <div class="columnar">
@@ -623,7 +638,8 @@
                   <p class="headings">{{ languageService.profileLang.familyType }}:</p>
                   <p><a
                       *ngIf="familyProfileData.family_type&& familyProfileData.family_type!='null'">{{familyProfileData.family_type}}</a>
-                    <a *ngIf="!familyProfileData.family_type|| familyProfileData.family_type=='null'" class="pink">+Add
+                    <a *ngIf="!familyProfileData.family_type|| familyProfileData.family_type=='null'" class="pink"
+                      (click)="setEditIndexFamily(1)">+Add
                       Family Type(Joint/nuclear)</a>
                   </p>
                 </div>
@@ -632,8 +648,8 @@
                   <p><a
                       *ngIf="familyProfileData.family_income&&familyProfileData.family_income!='null'">{{familyProfileData.family_income}}
                       LPA</a>
-                    <a *ngIf="!familyProfileData.family_income||familyProfileData.family_income=='null'"
-                      class="pink">+Add Family Income</a>
+                    <a *ngIf="!familyProfileData.family_income||familyProfileData.family_income=='null'" class="pink"
+                      (click)="setEditIndexFamily(1)">+Add Family Income</a>
                   </p>
                 </div>
               </div>
@@ -642,7 +658,8 @@
                   <p class=" headings">{{languageService.profileLang.houseType}}</p>
                   <p><a
                       *ngIf="familyProfileData.house_type&&familyProfileData.house_type!='null'">{{familyProfileData.house_type}}</a>
-                    <a *ngIf="!familyProfileData.house_type||familyProfileData.house_type=='null'" class="pink">+Add
+                    <a *ngIf="!familyProfileData.house_type||familyProfileData.house_type=='null'" class="pink"
+                      (click)="setEditIndexFamily(1)">+Add
                       House Type</a>
                   </p>
                 </div>

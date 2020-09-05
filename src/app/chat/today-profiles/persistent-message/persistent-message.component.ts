@@ -201,7 +201,7 @@ export class PersistentMessageComponent implements OnInit {
       case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${this.data.userId}/${this.data.userIsLead}`);
         break;
       case 'Install App Now': localStorage.setItem('appInstalled', '1');
-        window.open('https://bit.ly/2YQEfbe', '_blank')
+        window.open('https://bit.ly/2YQEfbe', '_self')
         break;
     }
   }

@@ -7,7 +7,7 @@
             </p>
             <p style="color:white;">Select complaint type.....</p>
             <div class="main-card" style="margin-bottom:25px">
-                <select type="text" class="form-control" [(ngModel)]="selectedComplaint" required>
+                <select type="text" [(ngModel)]="selectedComplaint">
                     <option *ngFor="let complaint of complaints" [value]="complaint.name" required>
                         {{complaint.name}}
                     </option>
