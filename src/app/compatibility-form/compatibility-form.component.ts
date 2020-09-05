@@ -371,18 +371,18 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   }
   getFacebookAccessToken(code) {
     this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://localhost:4200/fourReg&code=${code}`)
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          alert(`got token ${JSON.stringify(response)}`);
+    .subscribe(
+      (response: any) => {
+        console.log(response);
+        alert(`got token ${JSON.stringify(response)}`);
 
-          this.getFbDataThroughToken(response.access_token);
-        },
-        err => {
-          console.log(err);
-          alert('error');
-        }
-      );
+        this.getFbDataThroughToken(response.data.user_id);
+      },
+      err => {
+        console.log(err);
+        alert('error');
+      }
+    );
   }
 
   protected filterCastes() {
@@ -1213,7 +1213,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     // fetch user data
     FB.api(`/${token}`,
       'GET',
-      { fields: 'email,name' }, (response) => {
+      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
         console.log(response);
         this.spinner.hide();
         alert(`got profile data ${JSON.stringify(response)}`);
