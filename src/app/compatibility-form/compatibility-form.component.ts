@@ -1195,11 +1195,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       });
 
     // fetch user data
-    FB.api(`/${token}/${userId}`,
+    FB.api(`/${userId}`,
       'GET',
-      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
+      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
+        access_token: token}, (response) => {
         console.log(response);
-        alert(`${token}/${userId}` + JSON.stringify(response));
+        alert(`/${userId}` + JSON.stringify(response));
         this.spinner.hide();
         this.PageOne.patchValue({
           Relation: 'Myself',
