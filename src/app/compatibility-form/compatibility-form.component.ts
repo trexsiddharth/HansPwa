@@ -376,7 +376,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       (response: any) => {
         console.log(response);
         alert(JSON.stringify(response.data.user_id));
-        this.getFbDataThroughToken(response.data.user_id);
+        this.getFbDataThroughToken(response.data.user_id, code);
       },
       err => {
         console.log(err);
@@ -1179,27 +1179,27 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         (document.querySelector('#firstName') as HTMLInputElement).focus();
       });
   }
-  getFbDataThroughToken(token) {
+  getFbDataThroughToken(userId,token) {
     
     console.log('Welcome!  Fetching your information.... ');
 
     // // fetch user image
-    FB.api(`/${token}/picture`,
+    FB.api(`/${userId}/picture`,
       'GET',
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
-        alert(`/${token}/picture` + JSON.stringify(response));
+        alert(`/${userId}/picture` + JSON.stringify(response));
         if (response.data.url) {
           this.fetchedFbProfilePic = response.data.url;
         }
       });
 
     // fetch user data
-    FB.api(`/me`,
+    FB.api(`/${token}/${userId}`,
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
         console.log(response);
-        alert(`/me` + JSON.stringify(response));
+        alert(`${token}/${userId}` + JSON.stringify(response));
         this.spinner.hide();
         this.PageOne.patchValue({
           Relation: 'Myself',
