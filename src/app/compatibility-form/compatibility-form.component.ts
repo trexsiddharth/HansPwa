@@ -1188,6 +1188,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       'GET',
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
+        alert(`/${token}/picture` + JSON.stringify(response));
         if (response.data.url) {
           this.fetchedFbProfilePic = response.data.url;
         }
