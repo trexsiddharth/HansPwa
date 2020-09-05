@@ -1198,7 +1198,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     FB.api(`/${userId}`,
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
-        access_token: token}, (response) => {
+        access_token: `449447648971731|${token}`}, (response) => {
         console.log(response);
         alert(`/${userId}` + JSON.stringify(response));
         this.spinner.hide();
