@@ -95,16 +95,16 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   userId;
   userIsLead;
   constructor(private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private ngxNotificationService: NgxNotificationService,
-    public notification: NotificationsService,
-    public chatService: ChatServiceService,
-    public itemService: FindOpenHistoryProfileService,
-    public router: Router,
-    private dialog: MatDialog,
-    public languageService: LanguageService,
-    public subscriptionService: SubscriptionserviceService,
-    private breakPointObserver: BreakpointObserver,) {
+              private spinner: NgxSpinnerService,
+              private ngxNotificationService: NgxNotificationService,
+              public notification: NotificationsService,
+              public chatService: ChatServiceService,
+              public itemService: FindOpenHistoryProfileService,
+              public router: Router,
+              private dialog: MatDialog,
+              public languageService: LanguageService,
+              public subscriptionService: SubscriptionserviceService,
+              private breakPointObserver: BreakpointObserver,) {
   }
 
   @HostListener('scroll', ['$event'])
@@ -617,6 +617,13 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         if (data.type === 'profile') {
 
           this.type = 'profile';
+
+           // stop user response animation
+
+          if (data.name === this.item.name) {
+            this.profileIsLoadingSubject.next(null);
+           }
+
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             this.item = data.apiwha_autoreply;
             // locally storing the new profile
@@ -633,9 +640,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           if (this.item.photo === null) {
             this.spinner.hide();
           }
-
-          // stop user response animation
-          this.profileIsLoadingSubject.next(null);
 
           // resets the buttons animation
           this.resetAnimation();
