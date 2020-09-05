@@ -62,7 +62,7 @@ export class PersistentMessageComponent implements OnInit {
     this.getCompleteProfile();
   }
   getCompleteProfile() {
-    if (localStorage.getItem('storedData')) {
+    if (localStorage.getItem('storedData') && this.data.button === 'Complete Profile') {
       this.storedData = JSON.parse(localStorage.getItem('storedData'));
       this.completeProfile = true;
       this.PageThree.patchValue({
@@ -192,9 +192,9 @@ export class PersistentMessageComponent implements OnInit {
     }
   }
   special() {
-    if (localStorage.getItem('storedData')) {
-      localStorage.removeItem('storedData');
-    }
+    // if (localStorage.getItem('storedData')) {
+    //   localStorage.removeItem('storedData');
+    // }
     this.dialogRef.close();
   }
   buttonClicked() {
