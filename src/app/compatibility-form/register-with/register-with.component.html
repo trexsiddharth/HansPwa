@@ -19,7 +19,9 @@
           "> <img style="width:15px;margin:2px 0px" src="../../../assets/graph.svg">50% More Matches</div>
             Facebook
         </button> -->
-        <button mat-raised-button type="button" id="viewButton" class="btn" (click)="firstStep()">Facebook</button>
+        <button mat-raised-button type="button" id="viewButton" class="btn" (click)="registerUsing('facebook')"
+            *ngIf="selection === 'Myself'">
+            Facebook</button>
         <p>or</p>
         <button id="truecaller" (click)="registerUsing('truecaller')">
             Phone Number
