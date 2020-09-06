@@ -290,7 +290,8 @@ button:focus{outline:none !important;}
     background: transparent!important;
     /* object-fit:cover!important; */
     /* border-radius: 20px 20px 20px 20px; */
-    background-size: contain!important;;
+    background-size: contain!important;
+    overflow:hidden!important;
   }
 #persistentDialog.mat-dialog-content {
     max-height: 2rem!important;
@@ -452,10 +453,10 @@ div.mat-select-search-inner input.mat-input-element {
   margin-top:0px;
 }
 #specialForm .mat-form-field-wrapper{
-  padding-bottom:0.75rem!important;
+  padding-bottom:1rem!important;
 }
 #specialForm .mat-form-feild{
-  line-height:0.84!important;
+  line-height:1.2!important;
 }
 #specialForm p{
   margin-bottom: 0rem!important;
