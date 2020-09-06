@@ -1131,20 +1131,22 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: max-line-length
       window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&scope=email,public_profile,user_photos,user_gender,user_birthday,user_hometown,user_location`;
     } else {
-      FB.login((response) => {
-        alert(`response is ${response}`);
-        if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
-          this.getFbData();
-        } else {
-          console.log('User cancelled login or did not fully authorize.');
-        }
-      }, {
-        scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
-        enable_profile_selector: true,
-        auth_type: 'rerequest',
-        return_scopes: true
-      });
+      // FB.login((response) => {
+      //   alert(`response is ${response}`);
+      //   if (response.authResponse) {
+      //     console.log('Welcome!  Fetching your information.... ');
+      //     this.getFbData();
+      //   } else {
+      //     console.log('User cancelled login or did not fully authorize.');
+      //   }
+      // }, {
+      //   scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
+      //   enable_profile_selector: true,
+      //   auth_type: 'rerequest',
+      //   return_scopes: true
+      // });
+      localStorage.setItem('fb_token', value.authResponse.accessToken);
+      this.getFbData();
     }
   }
 
