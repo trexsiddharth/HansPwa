@@ -288,14 +288,14 @@ button:focus{outline:none !important;}
     padding: 0px!important;
     position: relative;
     background: transparent!important;
-    object-fit:cover!important;
+    /* object-fit:cover!important; */
     /* border-radius: 20px 20px 20px 20px; */
     background-size: contain!important;;
   }
 #persistentDialog.mat-dialog-content {
-    max-height: 3rem!important;;
-    margin: 0px!important;;
-    padding: 0px!important;;
+    max-height: 2rem!important;
+    margin: 0px!important;
+    padding: 0px!important;
   }
 
 #todaysPopup.mat-dialog-container {
@@ -450,6 +450,18 @@ div.mat-select-search-inner input.mat-input-element {
 }
 #compatibilityStepper .mat-form-field-subscript-wrapper{
   margin-top:0px;
+}
+#specialForm .mat-form-field-wrapper{
+  padding-bottom:0.75rem!important;
+}
+#specialForm .mat-form-feild{
+  line-height:0.84!important;
+}
+#specialForm p{
+  margin-bottom: 0rem!important;
+}
+#specialForm .mat-form-field-appearance-standard .mat-form-field-flex {
+  padding-top: .1em!important;
 }
 @media screen and (max-width: 576px) {
   .ht-full {

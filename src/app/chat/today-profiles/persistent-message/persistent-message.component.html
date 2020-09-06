@@ -45,15 +45,15 @@
     </div>
 </div>
 <div *ngIf="completeProfile">
-    <div id="offBanner">
-        <img id="offBannerImg" class="circular mat-elevation-z10" [src]="imageSrc" />
+    <div id="offBanner2">
+        <img id="offBannerImg2" class="circular2 mat-elevation-z10" [src]="imageSrc" />
     </div>
     <div style="position:relative">
         <div id="cancel">
             <img style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg" alt="cancel"
                 (click)="special()" />
         </div>
-        <main style="padding-bottom:10px;">
+        <main style="padding-bottom:6px;">
             <div style="
         position:relative;
         height:fit-content!important; 
@@ -61,7 +61,7 @@
         border-radius: 20px!important;
         background:white!important;
         margin:auto;
-        margin-top:8%;
+        margin-top:8.5%;
         display:flex;
         flex-direction: row;
         align-items: center;
@@ -71,9 +71,10 @@
             flex-direction: column;
             align-items: center;
             justify-content:center" class="text-center">
-                    <p style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;">
+                    <p
+                        style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;margin-bottom: 0.1rem!important;">
                         {{data.message}}</p>
-                    <p style="font-size:16px;color:rgb(51, 59, 52)!important;">
+                    <p style="font-size:16px;color:rgb(51, 59, 52)!important;margin-bottom: 0.1rem!important;">
                         {{data.submessage}}</p>
                     <form [formGroup]="PageThree" id="specialForm">
                         <div class="row">
