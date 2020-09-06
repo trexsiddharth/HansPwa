@@ -1257,6 +1257,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   callTruecaller() {
     // tslint:disable-next-line: max-line-length
     const randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
+    this.startTruecallerPolling(randomNumber);
     (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 
     setTimeout(() => {
@@ -1265,39 +1266,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         // Truecaller app not present on the device and you redirect the user
         // to your alternate verification page
       } else {
-        this.getUserFromTrueCaller(randomNumber).pipe(
-          catchError(e => {
-            throw new Error('True Caller Not Responding');
-          })
-        )
-          .subscribe(
-            (response) => {
-              this.pollingCount++;
-              console.log(response);
-              if (this.pollingCount < 10) {
-                if (response.status === 1) {
-                  const data = JSON.parse(response.data);
-                  if (data) {
-                    this.setTruecallerData(data);
-                  }
-                  this.stopPolling.next();
-                } else if (response.status !== 0) {
-                  this.ngxNotificationService.error('True Caller Not Responding');
-                  this.stopPolling.next();
-                }
-              } else {
-                this.stopPolling.next();
-              }
-            },
-            err => {
-              this.ngxNotificationService.error('True Caller Not Responding');
-              console.log(err);
-              this.stopPolling.next();
-            }
-          );
-        // Truecaller app present on the device and the profile overlay opens
-        // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
-        // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
+        // testing position above
       }
     }, 600);
   }
@@ -1309,6 +1278,42 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       share(),
       takeUntil(this.stopPolling)
     );
+  }
+
+  startTruecallerPolling(randomNumber) {
+    this.getUserFromTrueCaller(randomNumber).pipe(
+      catchError(e => {
+        throw new Error('True Caller Not Responding');
+      })
+    )
+      .subscribe(
+        (response) => {
+          this.pollingCount++;
+          console.log(response);
+          if (this.pollingCount < 5) {
+            if (response.status === 1) {
+              const data = JSON.parse(response.data);
+              if (data) {
+                this.setTruecallerData(data);
+              }
+              this.stopPolling.next();
+            } else if (response.status !== 0) {
+              this.ngxNotificationService.error('True Caller Not Responding');
+              this.stopPolling.next();
+            }
+          } else {
+            this.stopPolling.next();
+          }
+        },
+        err => {
+          this.ngxNotificationService.error('True Caller Not Responding');
+          console.log(err);
+          this.stopPolling.next();
+        }
+      );
+    // Truecaller app present on the device and the profile overlay opens
+    // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
+    // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
   }
 
   setTruecallerData(data) {
