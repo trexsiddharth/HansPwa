@@ -1098,6 +1098,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     dialogConfig.data = {
       value: selection
     };
+    dialogConfig.id = "registerWith";
     const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (response) => {

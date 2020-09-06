@@ -464,6 +464,12 @@ div.mat-select-search-inner input.mat-input-element {
 #specialForm .mat-form-field-appearance-standard .mat-form-field-flex {
   padding-top: .1em!important;
 }
+#registerWith.mat-dialog-container{
+  border-radius: 15px;
+}
+#registerWith.cdk-overlay-dark-backdrop {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+}
 @media screen and (max-width: 576px) {
   .ht-full {
     margin: 0px;

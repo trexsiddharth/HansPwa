@@ -143,7 +143,7 @@
                 करता हो
               </p>
 
-              <div class="col-12" style="margin:0 0 13px 0">
+              <div class="col-12" style="margin:0 0 -12px 0">
                 <label style="margin:8px 0 10px 0px;font-size:1rem;
                 color:rgba(44, 44, 44, 0.842);">Date Of Birth</label>
                 <div class="row" style="margin: 0px; margin-bottom: 8px;display: flex;
@@ -174,8 +174,9 @@
                 </div>
               </div>
 
-              <div class="col-md-12 matSelect"
-                *ngIf="PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other' || fourPageService.getUserThrough()">
+              <!-- <div class="col-md-12 matSelect"
+                *ngIf="PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other' || fourPageService.getUserThrough()"> -->
+              <div class="col-md-12 matSelect">
                 <!-- <h6>Gender</h6> -->
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label>Gender</mat-label>
