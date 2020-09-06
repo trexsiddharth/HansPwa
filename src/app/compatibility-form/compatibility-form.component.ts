@@ -1126,10 +1126,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     //   localStorage.setItem('fb_token', value.authResponse.accessToken);
     //   this.getFbData();
     // } 
-    
+
     if (value.status !== 'connected') {
       // tslint:disable-next-line: max-line-length
-      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg`;
+      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&scope=email,public_profile,user_photos,user_gender,user_birthday,user_hometown,user_location`;
     } else {
       FB.login((response) => {
         alert(`response is ${response}`);
