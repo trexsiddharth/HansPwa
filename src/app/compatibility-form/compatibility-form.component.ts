@@ -128,7 +128,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   stopPolling = new Subject();
   pollingCount = 0;
   hideMobileNumber = false;
-
+  mainContainerId = 'compatibilityStepper';
   authData;
   private fetchedFbProfilePic = null;
 
@@ -186,7 +186,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.onDestroy.next();
     this.onDestroy.complete();
   }
-
+  ngAfterViewInit() {
+    if (this.fourPageService.getUserThrough()) {
+      this.mainContainerId = 'sd';
+    }
+  }
   ngOnInit() {
     this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
       if (response.photos) {
@@ -374,17 +378,17 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   }
   getFacebookAccessToken(code) {
     this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&code=${code}`)
-    .subscribe(
-      (response: any) => {
-        console.log(response);
-        const profile = JSON.parse(response.profile);
-        this.getFbDataThroughToken(profile.data.user_id, response.access_token);
-      },
-      err => {
-        console.log(err);
-        alert('error');
-      }
-    );
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          const profile = JSON.parse(response.profile);
+          this.getFbDataThroughToken(profile.data.user_id, response.access_token);
+        },
+        err => {
+          console.log(err);
+          alert('error');
+        }
+      );
   }
 
   protected filterCastes() {
@@ -1133,10 +1137,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         } else {
           console.log('User cancelled login or did not fully authorize.');
         }
-      }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
-          enable_profile_selector: true,
-          auth_type: 'rerequest',
-          return_scopes: true});
+      }, {
+        scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
+        enable_profile_selector: true,
+        auth_type: 'rerequest',
+        return_scopes: true
+      });
     }
   }
 
@@ -1185,8 +1191,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         (document.querySelector('#firstName') as HTMLInputElement).focus();
       });
   }
-  getFbDataThroughToken(userId,token) {
-    
+  getFbDataThroughToken(userId, token) {
+
     console.log('Welcome!  Fetching your information.... ');
 
     // // fetch user image
@@ -1196,9 +1202,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         console.log(response.data.url);
         if (response.data.url) {
           this.fetchedFbProfilePic = {
-           url: response.data.url,
-           user_id: userId,
-           access_token: token
+            url: response.data.url,
+            user_id: userId,
+            access_token: token
           };
         }
       });
@@ -1207,8 +1213,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
     FB.api(`/${userId}`,
       'GET',
-      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
-        access_token: token}, (response) => {
+      {
+        fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
+        access_token: token
+      }, (response) => {
         console.log(response);
         this.spinner.hide();
         this.PageOne.patchValue({
