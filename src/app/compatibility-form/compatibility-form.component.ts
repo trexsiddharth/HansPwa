@@ -1280,6 +1280,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     );
   }
 
+  //start true caller polling
   startTruecallerPolling(randomNumber) {
     this.getUserFromTrueCaller(randomNumber).pipe(
       catchError(e => {
