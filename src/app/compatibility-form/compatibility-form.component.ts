@@ -1291,7 +1291,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         (response) => {
           this.pollingCount++;
           console.log(response);
-          if (this.pollingCount < 5) {
+          if (this.pollingCount < 10) {
             if (response.status === 1) {
               const data = JSON.parse(response.data);
               if (data) {
