@@ -1122,10 +1122,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   statusChangeCallback(value) {
     console.log(`value is ${value.status}`);
 
-    if (value.status === 'connected') {
-      localStorage.setItem('fb_token', value.authResponse.accessToken);
-      this.getFbData();
-    } else if (value.status === 'unknown') {
+    // if (value.status === 'connected') {
+    //   localStorage.setItem('fb_token', value.authResponse.accessToken);
+    //   this.getFbData();
+    // } 
+    
+    if (value.status !== 'connected') {
       // tslint:disable-next-line: max-line-length
       window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg`;
     } else {
