@@ -1264,6 +1264,13 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  // show truecaller on clicking mobile field if user has selected to sign up with facebook
+  showTruecallerIfFacebook() {
+    if (this.fetchedFbProfilePic) {
+      this.callTruecaller();
+    }
+  }
+
   callTruecaller() {
     // tslint:disable-next-line: max-line-length
     const randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
