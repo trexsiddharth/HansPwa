@@ -282,6 +282,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     );
 
     if (this.router.url.match('code=')) {
+      this.PageOne.patchValue({
+        Relation: 'Myself',
+      });
       var codeIndex = this.router.url.indexOf('code=');
       var code = this.router.url.substring(codeIndex + 5);
       console.log(code);
@@ -370,13 +373,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     }
   }
   getFacebookAccessToken(code) {
-    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://localhost:4200/fourReg&code=${code}`)
+    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&code=${code}`)
     .subscribe(
       (response: any) => {
         console.log(response);
-        alert(`got token ${JSON.stringify(response)}`);
-
-        this.getFbDataThroughToken(response.data.user_id);
+        const profile = JSON.parse(response.profile);
+        this.getFbDataThroughToken(profile.data.user_id, response.access_token);
       },
       err => {
         console.log(err);
@@ -865,7 +867,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     console.log(this.PageOne.value.Relation);
     this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
     this.analyticsEvent('Four Page Registration Page One Gender Changed');
-    // this.openRegisterWith(this.PageOne.value.Relation);
+    this.openRegisterWith(this.PageOne.value.Relation);
     switch (this.PageOne.value.Relation) {
       case 'Brother':
         this.PageOne.patchValue(
@@ -1100,26 +1102,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           if (response.chose === 'facebook') {
             this.analyticsEvent('Registered Through Facebook');
             FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-              // this.statusChangeCallback(response);        // Returns the login status.
-
-              if (response.status !== 'connected') {
-                return FB.login((res: any) => {
-                  alert(`response is ${res}`);
-                  if (res.authResponse) {
-                    console.log('Welcome!  Fetching your information.... ');
-                    this.getFbData();
-                  } else {
-                    console.log('User cancelled login or did not fully authorize.');
-                  }
-                }, {
-                  scope: 'public_profile,email',
-                  enable_profile_selector: true,
-                  auth_type: 'rerequest',
-                  return_scopes: true
-                });
-              } else {
-                this.getFbData();
-              }
+              this.statusChangeCallback(response);        // Returns the login status.
 
             });
           } else if (response.chose === 'truecaller') {
@@ -1134,25 +1117,27 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   //  get facebook login status
   statusChangeCallback(value) {
     console.log(`value is ${value.status}`);
-    alert(value.status);
 
-    // if (value.status === 'connected') {
-    //   localStorage.setItem('fb_token', value.authResponse.accessToken);
-    //   this.getFbData();
-    // } else {
-    //   FB.login((response) => {
-    //     alert(`response is ${response}`);
-    //     if (response.authResponse) {
-    //       console.log('Welcome!  Fetching your information.... ');
-    //       this.getFbData();
-    //     } else {
-    //       console.log('User cancelled login or did not fully authorize.');
-    //     }
-    //   }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
-    //       enable_profile_selector: true,
-    //        auth_type: 'rerequest',
-    //         return_scopes: true });
-    // }
+    if (value.status === 'connected') {
+      localStorage.setItem('fb_token', value.authResponse.accessToken);
+      this.getFbData();
+    } else if (value.status === 'unknown') {
+      // tslint:disable-next-line: max-line-length
+      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg`;
+    } else {
+      FB.login((response) => {
+        alert(`response is ${response}`);
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          this.getFbData();
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
+          enable_profile_selector: true,
+          auth_type: 'rerequest',
+          return_scopes: true});
+    }
   }
 
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
@@ -1165,7 +1150,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
         if (response.data.url) {
-          this.fetchedFbProfilePic = response.data.url;
+          this.fetchedFbProfilePic = {
+            url: response.data.url,
+            user_id: null,
+            access_token: null
+          };
         }
       });
 
@@ -1196,27 +1185,32 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         (document.querySelector('#firstName') as HTMLInputElement).focus();
       });
   }
-  getFbDataThroughToken(token) {
+  getFbDataThroughToken(userId,token) {
+    
     console.log('Welcome!  Fetching your information.... ');
 
     // // fetch user image
-    // FB.api(`/${token}/picture`,
-    //   'GET',
-    //   { height: '600', width: '400', redirect: 'false' }, (response) => {
-    //     console.log(response.data.url);
-    //     if (response.data.url) {
-    //       this.fetchedFbProfilePic = response.data.url;
-    //       alert('got profile pic');
-    //     }
-    //   });
+    FB.api(`/${userId}/picture`,
+      'GET',
+      { height: '600', width: '400', redirect: 'false' }, (response) => {
+        console.log(response.data.url);
+        if (response.data.url) {
+          this.fetchedFbProfilePic = {
+           url: response.data.url,
+           user_id: userId,
+           access_token: token
+          };
+        }
+      });
 
     // fetch user data
-    FB.api(`/${token}`,
+
+    FB.api(`/${userId}`,
       'GET',
-      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'}, (response) => {
+      { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
+        access_token: token}, (response) => {
         console.log(response);
         this.spinner.hide();
-        alert(`got profile data ${JSON.stringify(response)}`);
         this.PageOne.patchValue({
           firstName: response.first_name ? response.first_name : '',
           lastName: response.last_name ? response.last_name : '',

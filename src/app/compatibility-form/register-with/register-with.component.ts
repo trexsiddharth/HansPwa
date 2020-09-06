@@ -16,10 +16,6 @@ selection;
               }
 
   ngOnInit() {
-    this.loadFacebookScript();
-    // this.loadFacebookScript();
-    FB.XFBML.parse();
-    this.checkLoginState();
   }
 
   registerUsing(btnName) {

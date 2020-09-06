@@ -281,11 +281,11 @@
                   </ng-template> -->
           <app-compatibility-page-three></app-compatibility-page-three>
         </mat-step>
-        <mat-step *ngIf="fourPageService.getUserThrough()">
+        <mat-step>
           <!-- <ng-template matStepLabel>
                     Page IV
                   </ng-template> -->
-          <app-compatibility-photo></app-compatibility-photo>
+          <app-compatibility-photo [hidden]="!fourPageService.getUserThrough()"></app-compatibility-photo>
         </mat-step>
         <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
         <mat-step *ngIf="fourPageService.getUserThrough()">
