@@ -1076,6 +1076,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   // show register with popup
   openRegisterWith(selection) {
+
+    if (selection !== 'Myself') {
+      this.callTruecaller();
+    } else {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
@@ -1117,6 +1121,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         }
       }
     );
+    }
   }
 
   //  get facebook login status
