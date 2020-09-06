@@ -175,7 +175,7 @@
               </div>
 
               <div class="col-md-12 matSelect"
-                *ngIf="PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other'">
+                *ngIf="PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other' || fourPageService.getUserThrough()">
                 <!-- <h6>Gender</h6> -->
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label>Gender</mat-label>
