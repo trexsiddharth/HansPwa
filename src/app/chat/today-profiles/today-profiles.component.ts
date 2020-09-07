@@ -470,14 +470,14 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           console.log('here is the modified reject list array', this.rejectList);
         }
       }
+      console.log('get data called');
+      this.getData(reply);
     }
 
   }
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
     this.stopAnimation();
-    console.log('get data called');
-    this.getData(reply);
     this.itemService.setTutorialIndex();
     // console.log('shortlist count', this.shortListCount);
     // console.log('rejected count', this.rejectedListCount)
