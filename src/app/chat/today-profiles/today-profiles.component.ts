@@ -472,6 +472,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }
       console.log('get data called');
       this.getData(reply);
+    } else {
+      console.log('get data called');
+      this.getData(reply);
     }
 
   }
