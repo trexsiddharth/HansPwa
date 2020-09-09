@@ -1313,7 +1313,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         // Truecaller app not present on the device and you redirect the user
         // to your alternate verification page
         this.truecallerExists = false;
-        this.stopPolling.next();
       } else {
         // testing position above
         this.truecallerExists = true;
