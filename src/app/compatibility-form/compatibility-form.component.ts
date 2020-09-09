@@ -192,37 +192,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       this.mainContainerId = 'sd';
     }
   }
-  ngOnInit() {
-    this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
-      if (response.photos) {
-        this.photosMale = response.photos;
-        for (const v of response.photos) {
-          this.photos.push(v);
-          if (this.photos.length >= 10) {
-            break;
-          }
-        }
-      }
-    }, (error: any) => {
-      console.log('error occurred occurred while fetching the photos');
-    });
-    this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Female`).subscribe((response: any) => {
-      if (response.photos) {
-        this.photosFemale = [];
-        this.photosFemale = response.photos;
-        for (const v of response.photos) {
-          this.photos.push(v);
-          if (this.photos.length >= 20) {
-            break;
-          }
-        }
-        console.log(this.photos);
-      }
-    }, (error: any) => {
-      console.log('error occurred occurred while fetchignthe photos');
-    });
-    // console.log(this.photosFemale, this.photosMale, this.photos);
-
+  async ngOnInit() {
 
     if (localStorage.getItem('RegisterNumber')) {
       this.PageOne.patchValue({
@@ -289,18 +259,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       }
     );
 
-    if (this.router.url.match('code=')) {
-      this.PageOne.patchValue({
-        Relation: 'Myself',
-      });
-      let codeIndex = this.router.url.indexOf('code=');
-      let code = this.router.url.substring(codeIndex + 5);
-      console.log(code);
-      this.getFacebookAccessToken(code);
-    }
-
     // get all castes before get the data of the profile
-    this.getAllCaste();
+    await this.getAllCaste();
     this.route.paramMap.subscribe(
       async (route: any) => {
         console.log(route.params);
@@ -343,6 +303,47 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             this.getProfile();
           }
         }
+
+        if (this.router.url.match('code=')) {
+          this.PageOne.patchValue({
+            Relation: 'Myself',
+          });
+          let codeIndex = this.router.url.indexOf('code=');
+          let code = this.router.url.substring(codeIndex + 5);
+          console.log(code);
+          this.getFacebookAccessToken(code);
+        }
+
+        this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
+          if (response.photos) {
+            this.photosMale = response.photos;
+            for (const v of response.photos) {
+              this.photos.push(v);
+              if (this.photos.length >= 10) {
+                break;
+              }
+            }
+          }
+        }, (error: any) => {
+          console.log('error occurred occurred while fetching the photos');
+        });
+        this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Female`).subscribe((response: any) => {
+          if (response.photos) {
+            this.photosFemale = [];
+            this.photosFemale = response.photos;
+            for (const v of response.photos) {
+              this.photos.push(v);
+              if (this.photos.length >= 20) {
+                break;
+              }
+            }
+            console.log(this.photos);
+          }
+        }, (error: any) => {
+          console.log('error occurred occurred while fetchignthe photos');
+        });
+        // console.log(this.photosFemale, this.photosMale, this.photos);
+    
 
         // when user comes from app to webview four page reg
         if (route.params.appMobile) {
