@@ -382,7 +382,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     }
   }
   getFacebookAccessToken(code) {
-    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://hansmatrimony.com/fourReg&code=${code}`)
+    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&code=${code}`)
       .subscribe(
         (response: any) => {
           console.log(response);
@@ -1166,7 +1166,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
     if (value.status !== 'connected') {
       // tslint:disable-next-line: max-line-length
-      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://hansmatrimony.com/fourReg&scope=email,public_profile,user_photos,user_gender,user_birthday,user_hometown,user_location`;
+      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://quizzical-spence-a0c256.netlify.app/fourReg&scope=email,public_profile,user_photos,user_gender,user_birthday,user_hometown,user_location`;
     } else {
       // FB.login((response) => {
       //   alert(`response is ${response}`);

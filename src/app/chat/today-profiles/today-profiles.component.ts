@@ -30,7 +30,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   points = 0;
   paidStatus;
   exhaustedStatus;
-  type = 'message';
+  type = '';
   button;
   photo;
   carousel;
@@ -122,6 +122,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     //this.itemService.setTutorialIndex();
   }
   ngOnInit() {
+    if (this.router.url.includes('first')) {
+      this.spinner.show('searchingSpinner');
+    }
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
     this.chatService.authorized.subscribe(
@@ -534,6 +537,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         console.log(data);
         this.analyticsEvent(`Response ${reply} On Today's Special Profile`);
 
+        // hide the searching spinner if visible
+        // only visible for first time users
+        this.spinner.hide('searchingSpinner');
+
         if (data && data.get_status_count) {
           this.itemService.saveCount(data.get_status_count);
           this.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
@@ -746,6 +753,11 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }, err => {
         console.log(err);
         this.spinner.hide();
+        
+        // hide the searching spinner if visible
+        // only visible for first time users
+        this.spinner.hide('searchingSpinner');
+
         // stop user response animation
         this.profileIsLoadingSubject.next(null);
         this.ngxNotificationService.error('Something Went Wrong');
