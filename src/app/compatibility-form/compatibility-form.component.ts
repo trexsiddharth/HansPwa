@@ -130,7 +130,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   hideMobileNumber = false;
   mainContainerId = 'compatibilityStepper';
   authData;
-  truecallerExists = true;
+  truecallerExists = false;
   private fetchedFbProfilePic = null;
 
   private alreadyExists = false;
@@ -1312,10 +1312,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       if (document.hasFocus()) {
         // Truecaller app not present on the device and you redirect the user
         // to your alternate verification page
-        this.truecallerExists = false;
       } else {
         // testing position above
-        this.truecallerExists = true;
       }
     }, 600);
   }
@@ -1342,6 +1340,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           console.log(response);
           if (this.pollingCount < 10) {
             if (response.status === 1) {
+              this.truecallerExists = true;
               const data = JSON.parse(response.data);
               if (data) {
                 this.setTruecallerData(data);
@@ -1350,9 +1349,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             } else if (response.status !== 0) {
               this.ngxNotificationService.error('True Caller Not Responding');
               this.stopPolling.next();
+              this.truecallerExists = false;
             }
           } else {
             this.stopPolling.next();
+            this.truecallerExists = false;
           }
         },
         err => {
