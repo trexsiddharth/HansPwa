@@ -132,7 +132,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         if (data) {
           this.userId = data.id;
           this.userIsLead = data.isLead;
-          console.log(this.userId, this.userIsLead)
+          console.log(this.userId, this.userIsLead);
         }
       }
     );
@@ -277,7 +277,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.rejectList = this.rejectList;
       console.log('setting rejectList values in chat service');
     }
-    if (this.chatService.actionCount != -2) {
+    if (this.chatService.actionCount !== -2) {
       this.actionCount = this.chatService.actionCount;
       console.log('found action count value in chat service');
     }
