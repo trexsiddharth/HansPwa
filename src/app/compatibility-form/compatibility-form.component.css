@@ -44,7 +44,7 @@ background-color: rgba(0,0,0,.6) !important;
 }
 .fieldFit{
   height: 45px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 ::ng-deep .mat-hint{
   color: rgba(0,0,0,.6);

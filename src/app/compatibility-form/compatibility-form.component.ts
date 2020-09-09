@@ -147,22 +147,22 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-    private _formBuilder: FormBuilder,
-    private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private matDialog: MatDialog,
-    private breakPointObserver: BreakpointObserver,
-    public languageService: LanguageService,
-    private route: ActivatedRoute,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService) {
+              private _formBuilder: FormBuilder,
+              private router: Router,
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private matDialog: MatDialog,
+              private breakPointObserver: BreakpointObserver,
+              public languageService: LanguageService,
+              private route: ActivatedRoute,
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
-      phone: [localStorage.getItem('RegisterNumber')
+      phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
         , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
@@ -196,10 +196,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
       if (response.photos) {
         this.photosMale = response.photos;
-        for (let v of response.photos) {
+        for (const v of response.photos) {
           this.photos.push(v);
-          if (this.photos.length >= 10)
+          if (this.photos.length >= 10) {
             break;
+          }
         }
       }
     }, (error: any) => {
@@ -209,17 +210,19 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       if (response.photos) {
         this.photosFemale = [];
         this.photosFemale = response.photos;
-        for (let v of response.photos) {
+        for (const v of response.photos) {
           this.photos.push(v);
-          if (this.photos.length >= 20)
+          if (this.photos.length >= 20) {
             break;
+          }
         }
         console.log(this.photos);
       }
     }, (error: any) => {
       console.log('error occurred occurred while fetchignthe photos');
     });
-    //console.log(this.photosFemale, this.photosMale, this.photos);
+    // console.log(this.photosFemale, this.photosMale, this.photos);
+
 
     if (localStorage.getItem('RegisterNumber')) {
       this.PageOne.patchValue({
@@ -290,8 +293,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       this.PageOne.patchValue({
         Relation: 'Myself',
       });
-      var codeIndex = this.router.url.indexOf('code=');
-      var code = this.router.url.substring(codeIndex + 5);
+      let codeIndex = this.router.url.indexOf('code=');
+      let code = this.router.url.substring(codeIndex + 5);
       console.log(code);
       this.getFacebookAccessToken(code);
     }
@@ -371,7 +374,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   generateRandomIndices(j) {
     this.photoIndices = [];
     while (this.photoIndices.length < 5) {
-      let newNum = Math.floor(Math.random() * (j - 0));
+      const newNum = Math.floor(Math.random() * (j - 0));
       if (!this.photoIndices.includes(newNum)) {
         this.photoIndices.push(newNum);
       }
@@ -387,7 +390,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         },
         err => {
           console.log(err);
-          alert('error');
+          this.router.navigateByUrl('fourReg');
         }
       );
   }
@@ -435,6 +438,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       default:
         break;
     }
+    // if profile completed go to next page
+    this.goToNextPage();
   }
   // event on change of select field
   selectFieldChange(fieldName) {
@@ -465,6 +470,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       default:
         break;
     }
+    // if profile completed go to next page
+    this.goToNextPage();
   }
 
 
@@ -498,6 +505,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             localStorage.setItem('RegisterNumber', number);
             this.ngxNotificationService.info('Please complete the form and update');
             this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
+            // if profile completed go to next page
+            this.goToNextPage();
           } else {
             this.disableNextSubject.next(false);
             localStorage.setItem('RegisterNumber', number);
@@ -510,6 +519,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             (window as any).gtag('config', 'G-1ES443XD0F', {
               user_id: number
             });
+            // if profile completed go to next page
+            this.goToNextPage();
           }
         }
         this.spinner.hide();
@@ -518,6 +529,14 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         console.log(err);
       });
     }
+  }
+
+  private goToNextPage() {
+  if (!this.PageOne.valid) {
+        return;
+  }
+  const button = document.querySelector<HTMLButtonElement>('#viewButton');
+  button.click();
   }
 
   openVerificationDialog(isLead: string) {
@@ -626,6 +645,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
   firstStep() {
+    console.log(this.PageOne.value);
+    this.analyticsEvent('Page One Clicked');
     this.nextClickedOne = true;
     if (this.alreadyExists) {
       console.log(this.alreadyExists);
@@ -746,12 +767,15 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
           } else {
             this.spinner.hide();
-            //this.ngxNotificationService.error(res.message);
+            // this.ngxNotificationService.error(res.message);
+            // update basic api status 0
+            this.analyticsEvent(`Page One Error Status 0`);
           }
         }, err => {
           this.spinner.hide();
-          //this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+          // this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
           console.log(err);
+          this.analyticsEvent(`Page One Backend Error`);
         });
       }
     } else {
@@ -763,7 +787,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         }
       }
       if (this.errors[0]) {
-        //this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+        // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+        this.analyticsEvent(`Page One Error ${this.errors[0]}`);
       }
     }
   }
@@ -839,7 +864,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   addSlashes() {
     console.log('sv');
     const newInput = document.getElementById('birthDate');
-    newInput.addEventListener('keydown', function (e) {
+    newInput.addEventListener('keydown', function(e) {
       if (e.which !== 8) {
         const numChars = (e.target as HTMLInputElement).value.length;
         if (numChars === 2 || numChars === 5) {
@@ -866,6 +891,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         Castes: 'All'
       });
     }
+    // if profile completed go to next page
+    this.goToNextPage();
   }
 
   setGender() {
@@ -905,6 +932,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       default:
         break;
     }
+    // if profile completed go to next page
+    this.goToNextPage();
   }
 
 
@@ -1103,7 +1132,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     dialogConfig.data = {
       value: selection
     };
-    dialogConfig.id = "registerWith";
+    dialogConfig.id = 'registerWith';
     const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (response) => {
@@ -1132,7 +1161,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     // if (value.status === 'connected') {
     //   localStorage.setItem('fb_token', value.authResponse.accessToken);
     //   this.getFbData();
-    // } 
+    // }
 
     if (value.status !== 'connected') {
       // tslint:disable-next-line: max-line-length
@@ -1301,7 +1330,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  //start true caller polling
+  // start true caller polling
   startTruecallerPolling(randomNumber) {
     this.getUserFromTrueCaller(randomNumber).pipe(
       catchError(e => {
@@ -1340,10 +1369,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   setTruecallerData(data) {
     this.PageOne.patchValue({
-      firstName: data.name.first,
-      lastName: data.name.last,
-      email: data.onlineIdentities.email,
-      phone: data.phoneNumbers[0]
+      firstName: data.name.first ? data.name.first : '',
+      lastName: data.name.last ? data.name.last : '',
+      email: data.onlineIdentities.email ? data.onlineIdentities.email : '',
+      phone: data.phoneNumbers[0] ? data.phoneNumbers[0] : ''
     });
 
     if (data.phoneNumbers && data.phoneNumbers[0]) {
