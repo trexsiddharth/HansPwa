@@ -130,7 +130,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   hideMobileNumber = false;
   mainContainerId = 'compatibilityStepper';
   authData;
-  truecallerExists = false;
+  truecallerExists = true;
   private fetchedFbProfilePic = null;
 
   private alreadyExists = false;
