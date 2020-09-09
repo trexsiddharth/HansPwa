@@ -285,6 +285,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.actionCount = this.actionCount;
       console.log('setting action count value in chat service');
     }
+
   }
   ngOnDestroy(): void {
     this.chatService.shortList = this.shortList;
@@ -753,7 +754,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }, err => {
         console.log(err);
         this.spinner.hide();
-        
+
         // hide the searching spinner if visible
         // only visible for first time users
         this.spinner.hide('searchingSpinner');
