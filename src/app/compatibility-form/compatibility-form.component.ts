@@ -1382,7 +1382,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       this.hideMobileNumber = false;
     }
 
-    this.fourPageService.facebookProfilePicUploaded.emit(data.avatarUrl);
+    this.fetchedFbProfilePic = {
+      url: data.avatarUrl,
+      user_id: null,
+      access_token: null
+    };
+    this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
   }
 
 
