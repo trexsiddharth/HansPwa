@@ -148,16 +148,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
   constructor(private http: HttpClient, public dialog: MatDialog,
-              private _formBuilder: FormBuilder,
-              private router: Router,
-              public notification: NotificationsService,
-              public fourPageService: FourPageService,
-              private matDialog: MatDialog,
-              private breakPointObserver: BreakpointObserver,
-              public languageService: LanguageService,
-              private route: ActivatedRoute,
-              private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService) {
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    public notification: NotificationsService,
+    public fourPageService: FourPageService,
+    private matDialog: MatDialog,
+    private breakPointObserver: BreakpointObserver,
+    public languageService: LanguageService,
+    private route: ActivatedRoute,
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -345,7 +345,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           console.log('error occurred occurred while fetchignthe photos');
         });
         // console.log(this.photosFemale, this.photosMale, this.photos);
-    
+
 
         // when user comes from app to webview four page reg
         if (route.params.appMobile) {
@@ -373,6 +373,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       this.photos = value === 'Male' ? this.photosFemale : this.photosMale;
       this.generateRandomIndices(20);
     });
+    // this.PageOne.get('Relation').valueChanges.subscribe((value) => {
+    //   this.setGender();
+    // });
   }
   generateRandomIndices(j) {
     this.photoIndices = [];
@@ -535,11 +538,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   }
 
   private goToNextPage() {
-  if (!this.PageOne.valid) {
-        return;
-  }
-  const button = document.querySelector<HTMLButtonElement>('#viewButton');
-  button.click();
+    if (!this.PageOne.valid) {
+      return;
+    }
+    const button = document.querySelector<HTMLButtonElement>('#viewButton');
+    button.click();
   }
 
   openVerificationDialog(isLead: string) {
@@ -864,7 +867,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   addSlashes() {
     console.log('sv');
     const newInput = document.getElementById('birthDate');
-    newInput.addEventListener('keydown', function(e) {
+    newInput.addEventListener('keydown', function (e) {
       if (e.which !== 8) {
         const numChars = (e.target as HTMLInputElement).value.length;
         if (numChars === 2 || numChars === 5) {
@@ -1117,47 +1120,47 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     if (selection !== 'Myself') {
       this.callTruecaller();
     } else {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.hasBackdrop = true;
-    this.breakPointObserver.observe([
-      '(min-width: 1024px)'
-    ]).subscribe(
-      result => {
-        if (result.matches) {
-          console.log('screen is greater than  1024px');
-          dialogConfig.minWidth = '40vw';
-          dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = true;
-        } else {
-          console.log('screen is less than  1024px');
-          dialogConfig.minWidth = '95vw';
-          dialogConfig.maxHeight = '80vh';
-          dialogConfig.disableClose = true;
-        }
-      }
-    );
-    dialogConfig.data = {
-      value: selection
-    };
-    dialogConfig.id = 'registerWith';
-    const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      (response) => {
-        console.log(response);
-        if (response) {
-          if (response.chose === 'facebook') {
-            this.analyticsEvent('Registered Through Facebook');
-            FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-              this.statusChangeCallback(response);        // Returns the login status.
-
-            });
-          } else if (response.chose === 'truecaller') {
-            this.analyticsEvent('Registered Through True Caller');
-            this.callTruecaller();
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.hasBackdrop = true;
+      this.breakPointObserver.observe([
+        '(min-width: 1024px)'
+      ]).subscribe(
+        result => {
+          if (result.matches) {
+            console.log('screen is greater than  1024px');
+            dialogConfig.minWidth = '40vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = true;
+          } else {
+            console.log('screen is less than  1024px');
+            dialogConfig.minWidth = '95vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = true;
           }
         }
-      }
-    );
+      );
+      dialogConfig.data = {
+        value: selection
+      };
+      dialogConfig.id = 'registerWith';
+      const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(
+        (response) => {
+          console.log(response);
+          if (response) {
+            if (response.chose === 'facebook') {
+              this.analyticsEvent('Registered Through Facebook');
+              FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+                this.statusChangeCallback(response);        // Returns the login status.
+
+              });
+            } else if (response.chose === 'truecaller') {
+              this.analyticsEvent('Registered Through True Caller');
+              this.callTruecaller();
+            }
+          }
+        }
+      );
     }
   }
   openChooseFor() {
@@ -1189,6 +1192,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           this.PageOne.patchValue({
             Relation: response.relation,
           });
+          this.setGender();
         }
       }
     );

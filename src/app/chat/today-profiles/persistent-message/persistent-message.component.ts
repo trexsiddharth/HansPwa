@@ -103,21 +103,13 @@ export class PersistentMessageComponent implements OnInit {
     });
     this.personalForm = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      Whatsapp: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(91)?[6-9][0-9]{9}')])],
-      email: [''],
       Weight: [''],
-      MaritalStatus: [''],
-      AnnualIncome: ['', Validators.compose([Validators.max(999)])],
-      Degree: [''],
       Profession: [''],
       OtherProfession: [''],
       College: [''],
       Additional: [''],
-      Occupation: [''],
       Company: [''],
-      WorkingCity: [''],
       Locality: [''],
-      About: ['', Validators.compose([Validators.maxLength(300)])]
     });
   }
   imageSrc = '../../../assets/';
@@ -155,7 +147,7 @@ export class PersistentMessageComponent implements OnInit {
       this.personalProfileData = this.chatService.personalProfileData;
       this.familyProfileData = this.chatService.familyProfileData;
       this.calculateIndex();
-      this.getAllCaste();
+      //this.getAllCaste();
       this.setCurrentValues()
     }
     else {
@@ -163,169 +155,38 @@ export class PersistentMessageComponent implements OnInit {
     }
   }
   calculateIndex() {
-    let a = ['locality', 'weight', 'height'],
-      b = ['about', 'degree', 'college', 'additional_qualification'],
-      c = ['monthly_income', 'occupation', 'profession', 'working_city', 'company'],
-      d = ['email', 'whats_app_no'];
+    let a = ['locality', 'weight', 'profession', 'college', 'additional_qualification'];
+    let detailsLeft = [];
     for (let v of a) {
       if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
-          continue;
-        }
-        else {
-          a.splice(a.indexOf(v), 1);
+        if (!this.personalProfileData[v] || this.personalProfileData[v] === 'null') {
+          detailsLeft.push(v);
         }
       }
-    }
-    for (let v of b) {
-      if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
-          continue;
-        }
-        else {
-          b.splice(b.indexOf(v), 1);
-        }
+      else {
+        detailsLeft.push(v);
       }
     }
-    for (let v of c) {
-      if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
-          continue;
-        }
-        else {
-          c.splice(c.indexOf(v), 1);
-        }
-      }
-    }
-    for (let v of d) {
-      if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
-          continue;
-        }
-        else {
-          d.splice(d.indexOf(v), 1);
-        }
-      }
-    }
-    if (a.length > 0) {
+
+    if (detailsLeft.length > 0) {
       this.detailsDisplayIndexSubject.next(0);
       console.log('index set to 0');
-      console.log(a);
-    }
-    else if (b.length > 0) {
-      this.detailsDisplayIndexSubject.next(1);
-      console.log('index set to 1');
-      console.log(b);
-    }
-    else if (c.length > 0) {
-      this.detailsDisplayIndexSubject.next(2);
-      console.log('index set to 2');
-      console.log(c);
-    }
-    else if (d.length > 0) {
-      this.detailsDisplayIndexSubject.next(3);
-      console.log('index set to 3');
-      console.log(d);
+      console.log(detailsLeft);
     }
     else {
       this.completeProfile = false;
       console.log('index set to null, complete profile set to false');
     }
   }
-  getAllCaste() {
-    this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
-      this.getcastes = res;
-    });
-    if (this.personalForm.get('Castes').value && this.personalForm.get('Castes').value !== '') {
-      this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
-        startWith(''),
-        map(value => this._Castefilter(value))
-      );
-    } else {
-      this.personalForm.patchValue({
-        Castes: ''
-      });
-      this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
-        startWith(''),
-        map(value => this._Castefilter(value))
-      );
-    }
-  }
-
-  private _Castefilter(value: string): string[] {
-    if (value != null) {
-      const filterValue = value.toLowerCase();
-      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
-    } else {
-      const filterValue = 'arora';
-      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
-    }
-  }
-
-  async casteValidation(value) {
-    console.log('caste changed', value);
-    const status = 1;
-    let statusConfirmed;
-    await this.checkCaste(value).then((res: boolean) => {
-      statusConfirmed = res;
-    });
-    console.log('caste changed', statusConfirmed);
-
-    if (statusConfirmed === false) {
-      this.ngxNotificationService.warning('Please choose a caste from the dropdown');
-      this.personalForm.get('Castes').setValue('');
-      return false;
-    }
-    return true;
-
-  }
-  checkCaste(value) {
-    let status = 1;
-    let statusConfirmed = false;
-    this.casteo.forEach(element => {
-      element.forEach(item => {
-        if (value !== '' && item.includes(value) && item.length === value.length) {
-          console.log('confirmed');
-          statusConfirmed = true;
-        } else {
-          status = 0;
-        }
-      });
-    });
-    return new Promise((resolve) => {
-      resolve(statusConfirmed);
-    });
-  }
   setCurrentValues() {
     this.personalForm.patchValue({
       Weight: this.personalProfileData.weight && this.personalProfileData.weight !== 'null' ? this.personalProfileData.weight : "",
-
-      MaritalStatus: this.personalProfileData.marital_status ? this.personalProfileData.marital_status : 'Never Married',
-
-      Whatsapp: this.personalProfileData.whats_app_no ? this.personalProfileData.whats_app_no :
-        this.familyProfileData.whats_app_no ? this.familyProfileData.whats_app_no : '',
-
-      WorkingCity: this.personalProfileData.working_city,
-
-      Locality: this.personalProfileData.locality ? this.personalProfileData.locality : this.familyProfileData.locality ? this.familyProfileData.locality : '',
-
-      Degree: this.personalProfileData.degree ? this.personalProfileData.degree : this.personalProfileData.education,
-
+      Locality: this.personalProfileData.locality ? this.personalProfileData.locality : '',
       Profession: this.personalProfileData.profession ? this.personalProfileData.profession : '',
-
-      College: this.personalProfileData.college ? this.personalProfileData.college : '',
-
-      Additional: this.personalProfileData.additional_qualification ? this.personalProfileData.additional_qualification : '',
-
-      Occupation: this.personalProfileData.occupation === 'Private Company' ? 'Private Job' : this.personalProfileData.occupation,
-
-      Company: this.personalProfileData.company ? this.personalProfileData.company : '',
-
-      AnnualIncome: this.getIncome(this.personalProfileData.monthly_income),
-
-      About: this.personalProfileData.about,
-
-      email: this.personalProfileData.email ? this.personalProfileData.email : this.familyProfileData.email ? this.familyProfileData.email : '',
+      College: this.personalProfileData.college && this.personalProfileData.college != 'null' ? this.personalProfileData.college : '',
+      Additional: this.personalProfileData.additional_qualification && this.personalProfileData.additional_qualification != 'null' ? this.personalProfileData.additional_qualification : '',
+      // email: this.personalProfileData.email && this.personalProfileData.email != 'null' ?
+      //   this.personalProfileData.email : this.familyProfileData.email && this.familyProfileData.email != 'null' ? this.familyProfileData.email : '',
     });
   }
   getIncome(value: number) {
@@ -375,6 +236,7 @@ export class PersistentMessageComponent implements OnInit {
   }
   onSubmit() {
     this.errors = [];
+    console.log(this.personalForm.value);
     if (this.personalForm.valid) {
       const date = this.personalProfileData.birth_date;
       const month = this.month.indexOf(this.personalProfileData.birth_month) + 1;
@@ -387,52 +249,53 @@ export class PersistentMessageComponent implements OnInit {
         personalDataForm.append('id', this.personalProfileData.id);
       }
       personalDataForm.append('temple_id', this.personalProfileData.temple_id);
-      personalDataForm.append('about', this.personalForm.value.About ? this.personalForm.value.About : this.personalProfileData.about);
+      personalDataForm.append('about', this.personalProfileData.about);
       personalDataForm.append('name', this.personalProfileData.name);
       personalDataForm.append('birth_date', year + '-' + month + '-' + date
         ? year + '-' + month + '-' + date : this.personalProfileData.birth_date);
       personalDataForm.append('birth_place', this.personalProfileData.birth_place);
       personalDataForm.append('birth_time', this.personalProfileData.birth_time);
-      personalDataForm.append('marital_status', this.personalForm.value.MaritalStatus
-        ? this.personalForm.value.MaritalStatus : this.personalProfileData.marital_status);
-      personalDataForm.append('manglik', this.personalForm.value.Manglik
-        ? this.personalForm.value.Manglik : this.personalProfileData.manglik);
-      personalDataForm.append('religion', this.personalProfileData.religion ?
-        this.personalProfileData.religion : this.familyProfileData.religion);
+      personalDataForm.append('marital_status', this.personalProfileData.marital_status);
+      personalDataForm.append('manglik', this.personalProfileData.manglik);
+      personalDataForm.append('religion', this.familyProfileData.religion);
       personalDataForm.append('height', this.personalProfileData.height);
+      //from the personalForm
       personalDataForm.append('weight', this.personalForm.value.Weight
         ? this.personalForm.value.Weight : this.personalProfileData.weight);
-      personalDataForm.append('food_choice', this.personalForm.value.Food
-        ? this.personalForm.value.Food : this.personalProfileData.food_choice);
-      personalDataForm.append('caste', this.personalForm.value.Castes
-        ? this.personalForm.value.Castes : this.familyProfileData.caste);
+
+      personalDataForm.append('food_choice', this.personalProfileData.food_choice);
+      personalDataForm.append('caste', this.familyProfileData.caste);
+
+      //from the personalForm
       personalDataForm.append('locality', this.personalForm.value.Locality
         ? this.personalForm.value.Locality : this.familyProfileData.locality);
-      personalDataForm.append('working_city', this.personalForm.value.WorkingCity
-        ? this.personalForm.value.WorkingCity : this.personalProfileData.working_city);
-      personalDataForm.append('degree', this.personalForm.value.Degree
-        ? this.personalForm.value.Degree : this.personalProfileData.degree);
+
+      personalDataForm.append('working_city', this.personalProfileData.working_city);
+      personalDataForm.append('degree', this.personalProfileData.degree);
+
+      //from the personalForm
       personalDataForm.append('college', this.personalForm.value.College
         ? this.personalForm.value.College : this.personalProfileData.college);
-      personalDataForm.append('occupation', this.personalForm.value.Occupation
-        ? this.personalForm.value.Occupation : this.personalProfileData.occupation);
-      personalDataForm.append('annual_income', this.personalForm.value.AnnualIncome
-        ? this.personalForm.value.AnnualIncome : this.personalProfileData.monthly_income);
-      personalDataForm.append('additional_qualification', this.personalForm.value.Additional
-        ? this.personalForm.value.Additional : this.personalProfileData.additional_qualification);
+
+      //from the personalForm
+      personalDataForm.append('occupation', this.personalProfileData.occupation);
+      personalDataForm.append('annual_income', this.personalProfileData.monthly_income);
+      //from the personalForm
+      personalDataForm.append('additional_qualification', this.personalForm.value.Additional ?
+        this.personalForm.value.Additional : this.personalProfileData.additional_qualification);
       personalDataForm.append('company', this.personalForm.value.Company ? this.personalForm.value.Company : this.personalProfileData.company);
       personalDataForm.append('address', this.personalForm.value.WorkingCity
         ? this.personalForm.value.WorkingCity : this.personalProfileData.working_city);
-      personalDataForm.append('email', this.personalForm.value.email
-        ? this.personalForm.value.email : this.personalProfileData.email ? this.personalProfileData.email : this.familyProfileData.email ? this.familyProfileData.email : null);
-      personalDataForm.append('mobile', this.personalForm.value.phone
-        ? this.personalForm.value.phone : this.familyProfileData.phone);
-      personalDataForm.append('whatsapp', this.personalForm.value.Whatsapp ? this.personalForm.value.Whatsapp : this.familyProfileData.mobile);
+
+      personalDataForm.append('email', this.personalProfileData.email ? this.personalProfileData.email : this.familyProfileData.email ? this.familyProfileData.email : null);
+
+      personalDataForm.append('mobile', this.personalProfileData.mobile);
+      personalDataForm.append('whatsapp', this.personalProfileData.whats_app_no ? this.personalProfileData.whats_app_no : this.personalProfileData.mobile);
       personalDataForm.append('profession', this.personalForm.value.Profession !== 'Others'
         ? this.personalForm.value.Profession : this.personalForm.value.OtherProfession
           ? this.personalForm.value.OtherProfession : this.personalProfileData.profession);
-      personalDataForm.append('education', this.personalForm.value.Degree
-        ? this.personalForm.value.Degree : this.personalProfileData.degree);
+
+      personalDataForm.append('education', this.personalProfileData.degree);
       personalDataForm.append('is_lead', localStorage.getItem('is_lead'));
 
       console.log(personalDataForm);

@@ -25,7 +25,8 @@
             flex-direction: column;
             align-items: center;
             justify-content:center" class="text-center">
-                    <p style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;" *ngIf="data.message !== 'Complete Your Profile'">
+                    <p style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;"
+                        *ngIf="data.message !== 'Complete Your Profile'">
                         {{data.message}}</p>
                     <p style="font-size:16px;color:rgb(51, 59, 52)!important;">
                         {{data.submessage}}</p>
@@ -185,40 +186,40 @@
                         {{data.message}}</p>
                     <p style="font-size:16px;color:rgb(51, 59, 52)!important;margin-bottom: 0.1rem!important;">
                         {{data.submessage}}</p>
-                    <form [formGroup]="personalForm">
-                        <div class="row" style="margin: 10px 10px;">
-                            <div *ngIf="(detailsDisplayIndex$ | async)==1" style="width: 100%!important">
-                                <div class="col-12" style="width: 100%!important">
-                                    <mat-form-field class="full-width fieldFit" appearance="standard">
-                                        <mat-label>About</mat-label>
-                                        <textarea matInput maxlength="300" type="text" formControlName="About" required
-                                            rows="7"></textarea>
-                                    </mat-form-field>
+                    <form [formGroup]="personalForm" id="specialForm">
+                        <div class="row">
+                            <div *ngIf="(detailsDisplayIndex$ | async)==0" style="width: 87%!important;margin:auto">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>College:</mat-label>
+                                            <input matInput type="text" formControlName="College">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Additional Qualification:</mat-label>
+                                            <input matInput type="text" formControlName="Additional">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Designation:</mat-label>
+                                            <mat-select #relation formControlName="Profession">
+                                                <mat-option *ngFor="let  option of designations" [value]="option">
+                                                    {{option}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Other Designation:</mat-label>
+                                            <input matInput ype="text" formControlName="OtherProfession"
+                                                name="OtherProfession">
+                                        </mat-form-field>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                    <mat-form-field class="full-width fieldFit" appearance="standard">
-                                        <mat-label>Education:</mat-label>
-                                        <mat-select formControlName="Degree" required>
-                                            <mat-option *ngFor="let item of HigherEducation" [value]="item">{{item}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-12">
-                                    <mat-form-field class="full-width fieldFit" appearance="standard">
-                                        <mat-label>College:</mat-label>
-                                        <input matInput type="text" formControlName="College">
-                                    </mat-form-field>
-                                </div>
-
-                                <div class="col-12">
-                                    <mat-form-field class="full-width fieldFit" appearance="standard">
-                                        <mat-label>Additional Qualifications:</mat-label>
-                                        <input matInput type="text" formControlName="Additional">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div *ngIf="(detailsDisplayIndex$ | async) == 0" style="width: 100%!important">
                                 <div class="col-12">
                                     <mat-form-field class="full-width fieldFit" appearance="standard">
                                         <mat-label>Locality</mat-label>
@@ -228,15 +229,14 @@
                                             (change)="placeChangedLocality()" formControlName="Locality" />
                                     </mat-form-field>
                                 </div>
-                                <div class="row information" style="width: 100%!important;margin: 5px 5px">
-                                    <div class="col-12">
-                                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                                            <mat-label>Weight(in Kg):</mat-label>
-                                            <input matInput type="text" formControlName="Weight" required>
-                                        </mat-form-field>
-                                    </div>
+                                <div class="col-12">
+                                    <mat-form-field class="full-width fieldFit" appearance="standard">
+                                        <mat-label>Weight(in Kg):</mat-label>
+                                        <input matInput type="text" formControlName="Weight" required>
+                                    </mat-form-field>
                                 </div>
-
+                            </div>
+                            <!-- <div *ngIf="(detailsDisplayIndex$ | async) == 0" style="width: 100%!important">
                                 <div class="row information" style="width: 100%!important;margin: 5px 5px">
                                     <div class="col-12">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
@@ -248,9 +248,9 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div *ngIf="(detailsDisplayIndex$ | async) == 2" style="width: 100%!important">
+                            <!-- <div *ngIf="(detailsDisplayIndex$ | async) == 2" style="width: 100%!important">
                                 <div class="col-12">
                                     <mat-form-field class="full-width fieldFit" appearance="standard">
                                         <mat-label>Working City:</mat-label>
@@ -266,16 +266,6 @@
                                             <mat-label>Occupation:</mat-label>
                                             <mat-select #relation formControlName="Occupation" required>
                                                 <mat-option *ngFor="let  option of Occupation" [value]="option">
-                                                    {{option}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col-6">
-                                        <mat-form-field class="full-width fieldFit" appearance="standard">
-                                            <mat-label>Designation:</mat-label>
-                                            <mat-select #relation formControlName="Profession">
-                                                <mat-option *ngFor="let  option of designations" [value]="option">
                                                     {{option}}
                                                 </mat-option>
                                             </mat-select>
@@ -307,15 +297,10 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div *ngIf="(detailsDisplayIndex$ | async) == 3" style="width: 100%!important">
-                                <div class="col-12">
-                                    <mat-form-field class="full-width fieldFit" appearance="standard">
-                                        <mat-label>Email</mat-label>
-                                        <input matInput type="email" id="email" formControlName="email">
-                                    </mat-form-field>
-                                </div>
+                            <!-- <div *ngIf="(detailsDisplayIndex$ | async) == 3" style="width: 100%!important">
+                                
                                 <div class="col-12">
                                     <mat-form-field class="full-width fieldFit" appearance="standard">
                                         <mat-label>Whatsapp number</mat-label>
@@ -323,7 +308,7 @@
                                             formControlName="Whatsapp">
                                     </mat-form-field>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>
