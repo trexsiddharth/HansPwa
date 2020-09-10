@@ -30,7 +30,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   points = 0;
   paidStatus;
   exhaustedStatus;
-  type = 'message';
+  type = '';
   button;
   photo;
   carousel;
@@ -122,6 +122,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     //this.itemService.setTutorialIndex();
   }
   ngOnInit() {
+    if (this.router.url.includes('first')) {
+      this.spinner.show('searchingSpinner');
+    }
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
     this.chatService.authorized.subscribe(
@@ -129,7 +132,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         if (data) {
           this.userId = data.id;
           this.userIsLead = data.isLead;
-          console.log(this.userId, this.userIsLead)
+          console.log(this.userId, this.userIsLead);
         }
       }
     );
@@ -274,7 +277,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.rejectList = this.rejectList;
       console.log('setting rejectList values in chat service');
     }
-    if (this.chatService.actionCount != -2) {
+    if (this.chatService.actionCount !== -2) {
       this.actionCount = this.chatService.actionCount;
       console.log('found action count value in chat service');
     }
@@ -282,6 +285,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.actionCount = this.actionCount;
       console.log('setting action count value in chat service');
     }
+
   }
   ngOnDestroy(): void {
     this.chatService.shortList = this.shortList;
@@ -470,14 +474,17 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           console.log('here is the modified reject list array', this.rejectList);
         }
       }
+      console.log('get data called');
+      this.getData(reply);
+    } else {
+      console.log('get data called');
+      this.getData(reply);
     }
 
   }
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
     this.stopAnimation();
-    console.log('get data called');
-    this.getData(reply);
     this.itemService.setTutorialIndex();
     // console.log('shortlist count', this.shortListCount);
     // console.log('rejected count', this.rejectedListCount)
@@ -530,6 +537,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       data => {
         console.log(data);
         this.analyticsEvent(`Response ${reply} On Today's Special Profile`);
+
+        // hide the searching spinner if visible
+        // only visible for first time users
+        this.spinner.hide('searchingSpinner');
 
         if (data && data.get_status_count) {
           this.itemService.saveCount(data.get_status_count);
@@ -743,6 +754,11 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }, err => {
         console.log(err);
         this.spinner.hide();
+
+        // hide the searching spinner if visible
+        // only visible for first time users
+        this.spinner.hide('searchingSpinner');
+
         // stop user response animation
         this.profileIsLoadingSubject.next(null);
         this.ngxNotificationService.error('Something Went Wrong');
