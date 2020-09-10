@@ -163,7 +163,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
       phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
-        , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{11}')])],
+        , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
