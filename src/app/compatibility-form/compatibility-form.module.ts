@@ -12,6 +12,7 @@ import { FormsMessageDialogComponent } from './forms-message-dialog/forms-messag
 import { CompatibilityVerifyComponent } from './compatibility-verify/compatibility-verify.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
+import { ChooseForComponent } from './choose-for/choose-for.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RegisterWithComponent } from './register-with/register-with.component';
     FormsMessageDialogComponent,
     CompatibilityVerifyComponent,
     ThankYouComponent,
-    RegisterWithComponent
+    RegisterWithComponent,
+    ChooseForComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { RegisterWithComponent } from './register-with/register-with.component';
   ],
   entryComponents: [
     FormsMessageDialogComponent,
-    RegisterWithComponent
+    RegisterWithComponent,
+    ChooseForComponent
   ]
 })
 export class CompatibilityFormModule { }

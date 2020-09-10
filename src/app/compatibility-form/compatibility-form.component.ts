@@ -36,6 +36,7 @@ import { LanguageService } from '../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
+import { ChooseForComponent } from './choose-for/choose-for.component'
 import { element } from 'protractor';
 
 
@@ -144,7 +145,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   disableNextSubject = new BehaviorSubject<boolean>(false);
   disableNext$ = this.disableNextSubject.asObservable();
 
-
+  incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
   constructor(private http: HttpClient, public dialog: MatDialog,
     private _formBuilder: FormBuilder,
     private router: Router,
@@ -190,6 +191,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     if (this.fourPageService.getUserThrough()) {
       this.mainContainerId = 'sd';
     }
+    this.openChooseFor();
   }
   ngOnInit() {
     this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
@@ -798,9 +800,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   }
 
-
-
-
   onDate(event): void {
     console.log(event);
   }
@@ -905,8 +904,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         break;
     }
   }
-
-
   getProfile() {
     this.spinner.show();
     const leadId = localStorage.getItem('getListLeadId');
@@ -952,6 +949,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
       localStorage.setItem('getListTempleId', profileData.profile.temple_id);
     }
+    console.log("look here", profileData.family.father_status, profileData.family.mother_status);
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
 
@@ -972,7 +970,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.userProfile.height = profileData.profile.height;
     this.userProfile.weight = profileData.profile.weight;
     this.userProfile.martialStatus = profileData.profile.marital_status;
-    this.userProfile.annualIncome = profileData.profile.monthly_income;
+    this.userProfile.annualIncome = this.setIncomeVals(profileData.profile.monthly_income);
     if (profileData.family.religion) {
       this.Caste = true;
     }
@@ -991,7 +989,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.userProfile.foodChoice = profileData.profile.food_choice;
     this.userProfile.fatherStatus = profileData.family.father_status;
     this.userProfile.motherStatus = profileData.family.mother_status;
-    this.userProfile.familyIncome = profileData.family.family_income;
+    this.userProfile.familyIncome = this.setIncomeVals(profileData.family.family_income);
     this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
     this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
     this.userProfile.image3 = this.getProfilePhoto(profileData.profile.carousel, '2');
@@ -1004,7 +1002,15 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.fourPageService.getListData.emit(true);
     this.setFormOneData();
   }
-
+  setIncomeVals(income: number) {
+    for (let v of this.incomeCategories) {
+      let vals = v.split('-');
+      if (income > Number(vals[0]) && income < Number(vals[1])) {
+        console.log("look here", v)
+        return v;
+      }
+    }
+  }
   setFormOneData() {
     this.PageOne.patchValue({
       firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
@@ -1114,6 +1120,39 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             this.analyticsEvent('Registered Through True Caller');
             this.callTruecaller();
           }
+        }
+      }
+    );
+  }
+  openChooseFor() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.minWidth = '40vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '95vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    dialogConfig.id = "registerWith";
+    const dialogRef = this.dialog.open(ChooseForComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (response) => {
+        console.log(response);
+        if (response) {
+          this.PageOne.patchValue({
+            Relation: response.relation,
+          });
         }
       }
     );
