@@ -481,7 +481,7 @@ export class ChatDrawerComponent implements OnInit {
           }
         }
       });
-    console.log('CHecking third page details', perDet + famDet);
+    console.log('Checking third page details', perDet + famDet);
     if (perDet + famDet >= 2) {
       localStorage.setItem('storedData', JSON.stringify(storingObj));
     }
@@ -525,6 +525,8 @@ export class ChatDrawerComponent implements OnInit {
             this.personalProfileData = data.profile ? data.profile : null;
             this.familyProfileData = data.family ? data.family : null;
             this.spinner.hide();
+            //setting profile data in chat service for use in popups.
+            this.chatService.setProfileData(this.personalProfileData, this.familyProfileData);
             if (data && data.profile) {
               this.gender = data.profile.gender;
             }

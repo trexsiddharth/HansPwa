@@ -6,6 +6,9 @@ import { ChatServiceService } from 'src/app/chat-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs';
+import { shareReplay, startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-persistent-message',
@@ -18,8 +21,44 @@ export class PersistentMessageComponent implements OnInit {
 
   birthPlace;
   birthPlaceText;
+  errors: any;
+  maritalStaus: string[] = ['Never Married', 'Awaiting Divorce', 'Divorcee', 'Widowed', 'Anulled'];
+  Religions: string[] = ['Hindu', 'Muslim', 'Sikh', 'Christian', 'Buddhist', 'Jain', 'Parsi', 'Jewish', 'Bahai'];
 
-  Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working', 'Not Alive'];
+  foodpreferences: string[] = ['Non-Vegetarian', 'Vegetarian'];
+  // tslint:disable-next-line: max-line-length
+  Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
+  // tslint:disable-next-line: max-line-length
+  Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
+
+  // tslint:disable-next-line: max-line-length
+  HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
+    'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
+    // tslint:disable-next-line: max-line-length
+    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma',
+    'High School', 'Trade School', 'Other'];
+
+  Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
+
+  // tslint:disable-next-line: max-line-length
+  date: string[] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17',
+    '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+  // tslint:disable-next-line: max-line-length
+  month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  years: string[] = [
+    '1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980',
+    '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990',
+    '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000',
+    '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010',
+    '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'
+  ];
+  designations: string[] = [
+    'Owner', 'Manager', 'Sales Manager', 'Accounts Manager', 'Product Manager', 'Software Engineer', 'Engineer', 'Hotel Management', 'Operations Manager', 'Sales Executive', 'Operations Executive',
+    'Accountant', 'Marketing Manager', 'Marketing Executive', 'Chartered Accountant', 'Owner', 'Secretary', 'Company Secretary', 'Telesales Executive', 'Teacher', 'Clerk', 'Office Assistant',
+    'Relationship Manager', 'Computer Operator', 'Chief Executive Officer', 'Chief Marketing Officer', 'Chief Finance Officer', 'Business Development', 'Project Manager',
+    'Program Manager', 'Solution Architect', 'Graphic Designer', 'Content Writer', 'Director', 'Business Analyst', 'Front Office', 'Back office', 'Counselor', 'Event Manager', 'Legal',
+    'Public Relations', 'Others'];
+
   autoComplete = {
     strictBounds: false,
     type: 'geocode',
@@ -27,7 +66,24 @@ export class PersistentMessageComponent implements OnInit {
   };
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
 
+  casteo: Observable<string[]>;
+  getcastes: any = [];
+
   storedData: any;
+
+  pageThreeFilledSubject = new BehaviorSubject<boolean>(false);
+  pageThreeFilled$: Observable<boolean> = this.pageThreeFilledSubject.asObservable().pipe(
+    shareReplay()
+  );
+
+  detailsDisplayIndexSubject = new BehaviorSubject<Number>(0);
+  detailsDisplayIndex$: Observable<Number> = this.detailsDisplayIndexSubject.asObservable().pipe(
+    shareReplay()
+  );
+  personalProfileData: any;
+  familyProfileData: any;
+  personalForm: FormGroup;
+
   constructor(public dialogRef: MatDialogRef<EditPersonalDialogComponent>, @Inject(MAT_DIALOG_DATA) data,
     public router: Router,
     public chatService: ChatServiceService,
@@ -44,6 +100,24 @@ export class PersistentMessageComponent implements OnInit {
       FatherStatus: [''],
       MotherStatus: [''],
       FamilyIncome: ['', Validators.compose([Validators.max(999)])],
+    });
+    this.personalForm = this._formBuilder.group({
+      // tslint:disable-next-line: max-line-length
+      Whatsapp: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(91)?[6-9][0-9]{9}')])],
+      email: [''],
+      Weight: [''],
+      MaritalStatus: [''],
+      AnnualIncome: ['', Validators.compose([Validators.max(999)])],
+      Degree: [''],
+      Profession: [''],
+      OtherProfession: [''],
+      College: [''],
+      Additional: [''],
+      Occupation: [''],
+      Company: [''],
+      WorkingCity: [''],
+      Locality: [''],
+      About: ['', Validators.compose([Validators.maxLength(300)])]
     });
   }
   imageSrc = '../../../assets/';
@@ -75,13 +149,195 @@ export class PersistentMessageComponent implements OnInit {
         FamilyIncome: this.storedData.family_income,
       });
     }
-    // if (localStorage.getItem('profileCompPercent')) {
-    //   if (Number(localStorage.getItem('profileCompPercent')) <= 50 && this.data.button == 'Complete Profile')
-    //     this.completeProfile = true;
-    // }
+    else if (this.chatService.pageThreeFilled && this.data.button === 'Complete Profile') {
+      this.completeProfile = true;
+      this.pageThreeFilledSubject.next(true);
+      this.personalProfileData = this.chatService.personalProfileData;
+      this.familyProfileData = this.chatService.familyProfileData;
+      this.calculateIndex();
+      this.getAllCaste();
+      this.setCurrentValues()
+    }
     else {
       this.completeProfile = false;
     }
+  }
+  calculateIndex() {
+    let a = ['locality', 'weight', 'height'],
+      b = ['about', 'degree', 'college', 'additional_qualification'],
+      c = ['monthly_income', 'occupation', 'profession', 'working_city', 'company'],
+      d = ['email', 'whats_app_no'];
+    for (let v of a) {
+      if (this.personalProfileData.hasOwnProperty(v)) {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
+          continue;
+        }
+        else {
+          a.splice(a.indexOf(v), 1);
+        }
+      }
+    }
+    for (let v of b) {
+      if (this.personalProfileData.hasOwnProperty(v)) {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
+          continue;
+        }
+        else {
+          b.splice(b.indexOf(v), 1);
+        }
+      }
+    }
+    for (let v of c) {
+      if (this.personalProfileData.hasOwnProperty(v)) {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
+          continue;
+        }
+        else {
+          c.splice(c.indexOf(v), 1);
+        }
+      }
+    }
+    for (let v of d) {
+      if (this.personalProfileData.hasOwnProperty(v)) {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] == 'null') {
+          continue;
+        }
+        else {
+          d.splice(d.indexOf(v), 1);
+        }
+      }
+    }
+    if (a.length > 0) {
+      this.detailsDisplayIndexSubject.next(0);
+      console.log('index set to 0');
+      console.log(a);
+    }
+    else if (b.length > 0) {
+      this.detailsDisplayIndexSubject.next(1);
+      console.log('index set to 1');
+      console.log(b);
+    }
+    else if (c.length > 0) {
+      this.detailsDisplayIndexSubject.next(2);
+      console.log('index set to 2');
+      console.log(c);
+    }
+    else if (d.length > 0) {
+      this.detailsDisplayIndexSubject.next(3);
+      console.log('index set to 3');
+      console.log(d);
+    }
+    else {
+      this.completeProfile = false;
+      console.log('index set to null, complete profile set to false');
+    }
+  }
+  getAllCaste() {
+    this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+      this.getcastes = res;
+    });
+    if (this.personalForm.get('Castes').value && this.personalForm.get('Castes').value !== '') {
+      this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value))
+      );
+    } else {
+      this.personalForm.patchValue({
+        Castes: ''
+      });
+      this.casteo = this.personalForm.get('Castes').valueChanges.pipe(
+        startWith(''),
+        map(value => this._Castefilter(value))
+      );
+    }
+  }
+
+  private _Castefilter(value: string): string[] {
+    if (value != null) {
+      const filterValue = value.toLowerCase();
+      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+    } else {
+      const filterValue = 'arora';
+      return this.getcastes.filter(option => option.toLowerCase().includes(filterValue));
+    }
+  }
+
+  async casteValidation(value) {
+    console.log('caste changed', value);
+    const status = 1;
+    let statusConfirmed;
+    await this.checkCaste(value).then((res: boolean) => {
+      statusConfirmed = res;
+    });
+    console.log('caste changed', statusConfirmed);
+
+    if (statusConfirmed === false) {
+      this.ngxNotificationService.warning('Please choose a caste from the dropdown');
+      this.personalForm.get('Castes').setValue('');
+      return false;
+    }
+    return true;
+
+  }
+  checkCaste(value) {
+    let status = 1;
+    let statusConfirmed = false;
+    this.casteo.forEach(element => {
+      element.forEach(item => {
+        if (value !== '' && item.includes(value) && item.length === value.length) {
+          console.log('confirmed');
+          statusConfirmed = true;
+        } else {
+          status = 0;
+        }
+      });
+    });
+    return new Promise((resolve) => {
+      resolve(statusConfirmed);
+    });
+  }
+  setCurrentValues() {
+    this.personalForm.patchValue({
+      Weight: this.personalProfileData.weight && this.personalProfileData.weight !== 'null' ? this.personalProfileData.weight : "",
+
+      MaritalStatus: this.personalProfileData.marital_status ? this.personalProfileData.marital_status : 'Never Married',
+
+      Whatsapp: this.personalProfileData.whats_app_no ? this.personalProfileData.whats_app_no :
+        this.familyProfileData.whats_app_no ? this.familyProfileData.whats_app_no : '',
+
+      WorkingCity: this.personalProfileData.working_city,
+
+      Locality: this.personalProfileData.locality ? this.personalProfileData.locality : this.familyProfileData.locality ? this.familyProfileData.locality : '',
+
+      Degree: this.personalProfileData.degree ? this.personalProfileData.degree : this.personalProfileData.education,
+
+      Profession: this.personalProfileData.profession ? this.personalProfileData.profession : '',
+
+      College: this.personalProfileData.college ? this.personalProfileData.college : '',
+
+      Additional: this.personalProfileData.additional_qualification ? this.personalProfileData.additional_qualification : '',
+
+      Occupation: this.personalProfileData.occupation === 'Private Company' ? 'Private Job' : this.personalProfileData.occupation,
+
+      Company: this.personalProfileData.company ? this.personalProfileData.company : '',
+
+      AnnualIncome: this.getIncome(this.personalProfileData.monthly_income),
+
+      About: this.personalProfileData.about,
+
+      email: this.personalProfileData.email ? this.personalProfileData.email : this.familyProfileData.email ? this.familyProfileData.email : '',
+    });
+  }
+  getIncome(value: number) {
+    if (value != null) {
+      if (value.toString().length >= 6) {
+        return String((Number(value) / 100000));
+      } else if (value.toString().length >= 5) {
+        return String((Number(value) / 10000) * 12);
+      } else {
+        return value;
+      }
+    } else { return ''; }
   }
   setValue(item: string) {
     let vals = item.split('-');
@@ -89,6 +345,24 @@ export class PersistentMessageComponent implements OnInit {
       return "Rs 1+ Crore per year";
     else
       return "Rs. " + vals[0] + " - " + vals[1] + " Lakhs per year"
+  }
+  placeChangedLocality(): void {
+    const place: HTMLInputElement = document.querySelector('#Locality');
+    setTimeout(() => {
+      console.log(place.value);
+      this.personalForm.patchValue({
+        Locality: place.value
+      });
+    }, 500);
+  }
+  placeChangedWorkingcity(): void {
+    const place: HTMLInputElement = document.querySelector('#WorkingCity');
+    setTimeout(() => {
+      console.log(place.value);
+      this.personalForm.patchValue({
+        WorkingCity: place.value
+      });
+    }, 500);
   }
   placeChanged() {
     const birthPlace: HTMLInputElement = document.querySelector('#birthPlace');
@@ -98,6 +372,93 @@ export class PersistentMessageComponent implements OnInit {
         BirthPlace: birthPlace.value
       });
     }, 500);
+  }
+  onSubmit() {
+    this.errors = [];
+    if (this.personalForm.valid) {
+      const date = this.personalProfileData.birth_date;
+      const month = this.month.indexOf(this.personalProfileData.birth_month) + 1;
+      const year = this.personalProfileData.birth_year;
+      console.log(this.personalForm);
+      const personalDataForm = new FormData();
+      if (this.personalProfileData.identity_number) {
+        personalDataForm.append('identity_number', this.personalProfileData.identity_number);
+      } else {
+        personalDataForm.append('id', this.personalProfileData.id);
+      }
+      personalDataForm.append('temple_id', this.personalProfileData.temple_id);
+      personalDataForm.append('about', this.personalForm.value.About ? this.personalForm.value.About : this.personalProfileData.about);
+      personalDataForm.append('name', this.personalProfileData.name);
+      personalDataForm.append('birth_date', year + '-' + month + '-' + date
+        ? year + '-' + month + '-' + date : this.personalProfileData.birth_date);
+      personalDataForm.append('birth_place', this.personalProfileData.birth_place);
+      personalDataForm.append('birth_time', this.personalProfileData.birth_time);
+      personalDataForm.append('marital_status', this.personalForm.value.MaritalStatus
+        ? this.personalForm.value.MaritalStatus : this.personalProfileData.marital_status);
+      personalDataForm.append('manglik', this.personalForm.value.Manglik
+        ? this.personalForm.value.Manglik : this.personalProfileData.manglik);
+      personalDataForm.append('religion', this.personalProfileData.religion ?
+        this.personalProfileData.religion : this.familyProfileData.religion);
+      personalDataForm.append('height', this.personalProfileData.height);
+      personalDataForm.append('weight', this.personalForm.value.Weight
+        ? this.personalForm.value.Weight : this.personalProfileData.weight);
+      personalDataForm.append('food_choice', this.personalForm.value.Food
+        ? this.personalForm.value.Food : this.personalProfileData.food_choice);
+      personalDataForm.append('caste', this.personalForm.value.Castes
+        ? this.personalForm.value.Castes : this.familyProfileData.caste);
+      personalDataForm.append('locality', this.personalForm.value.Locality
+        ? this.personalForm.value.Locality : this.familyProfileData.locality);
+      personalDataForm.append('working_city', this.personalForm.value.WorkingCity
+        ? this.personalForm.value.WorkingCity : this.personalProfileData.working_city);
+      personalDataForm.append('degree', this.personalForm.value.Degree
+        ? this.personalForm.value.Degree : this.personalProfileData.degree);
+      personalDataForm.append('college', this.personalForm.value.College
+        ? this.personalForm.value.College : this.personalProfileData.college);
+      personalDataForm.append('occupation', this.personalForm.value.Occupation
+        ? this.personalForm.value.Occupation : this.personalProfileData.occupation);
+      personalDataForm.append('annual_income', this.personalForm.value.AnnualIncome
+        ? this.personalForm.value.AnnualIncome : this.personalProfileData.monthly_income);
+      personalDataForm.append('additional_qualification', this.personalForm.value.Additional
+        ? this.personalForm.value.Additional : this.personalProfileData.additional_qualification);
+      personalDataForm.append('company', this.personalForm.value.Company ? this.personalForm.value.Company : this.personalProfileData.company);
+      personalDataForm.append('address', this.personalForm.value.WorkingCity
+        ? this.personalForm.value.WorkingCity : this.personalProfileData.working_city);
+      personalDataForm.append('email', this.personalForm.value.email
+        ? this.personalForm.value.email : this.personalProfileData.email ? this.personalProfileData.email : this.familyProfileData.email ? this.familyProfileData.email : null);
+      personalDataForm.append('mobile', this.personalForm.value.phone
+        ? this.personalForm.value.phone : this.familyProfileData.phone);
+      personalDataForm.append('whatsapp', this.personalForm.value.Whatsapp ? this.personalForm.value.Whatsapp : this.familyProfileData.mobile);
+      personalDataForm.append('profession', this.personalForm.value.Profession !== 'Others'
+        ? this.personalForm.value.Profession : this.personalForm.value.OtherProfession
+          ? this.personalForm.value.OtherProfession : this.personalProfileData.profession);
+      personalDataForm.append('education', this.personalForm.value.Degree
+        ? this.personalForm.value.Degree : this.personalProfileData.degree);
+      personalDataForm.append('is_lead', localStorage.getItem('is_lead'));
+
+      console.log(personalDataForm);
+      this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', personalDataForm).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.chatService.getUserProfileData();
+        },
+        (error: any) => {
+          console.log(error);
+          this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+        }
+      );
+      this.dialogRef.close();
+    } else {
+      // tslint:disable-next-line: forin
+      for (const control in this.personalForm.controls) {
+        console.log(this.personalForm.controls[control].value);
+        if (!this.personalForm.controls[control].valid) {
+          this.errors.push(control);
+        }
+      }
+      if (this.errors[0]) {
+        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+      }
+    }
   }
   changed(element: any) {
     console.log(element);
@@ -127,11 +488,8 @@ export class PersistentMessageComponent implements OnInit {
   analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
-
         console.log('Tracking ' + event + ' successful');
-
       }
-
     });
     // gtag app + web
     (window as any).gtag('event', event, {
@@ -178,7 +536,10 @@ export class PersistentMessageComponent implements OnInit {
           if (localStorage.getItem('storedData')) {
             localStorage.removeItem('storedData');
           }
-          //this.buttonClicked();
+          this.chatService.pageThreeFilled = true;
+          this.chatService.getUserProfileData();
+          console.log('pageThreeFilled set to true');
+
           this.dialogRef.close();
         } else {
           this.ngxNotificationService.error(res.message);
@@ -190,12 +551,6 @@ export class PersistentMessageComponent implements OnInit {
     else {
       this.ngxNotificationService.error('Please fill all the details!');
     }
-  }
-  special() {
-    // if (localStorage.getItem('storedData')) {
-    //   localStorage.removeItem('storedData');
-    // }
-    this.dialogRef.close();
   }
   buttonClicked() {
     this.dialogRef.close();
