@@ -18,6 +18,20 @@ main{
     font-family: 'Roboto', sans-serif;
     padding: 20px 0px 3px 0px;
 }
+.buttonn{
+    background: #34b7f1!important;
+    color:white!important;
+}
+.viewButton{
+    background:white!important;
+    color:#34b7f1!important;
+    margin:8px;
+    width:150px;
+    text-align:center;
+    border:1px solid #34b7f1;
+  box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
+  12px 12px 14px rgba(0, 0, 0, 0.2);
+  }
 .btnDiv{
     display: flex;
     flex-direction: column;
@@ -30,7 +44,6 @@ main{
     padding: 5px 30px;
     /* border-radius: 50px; */
     font-size: 1.1rem;
-    color: white;
     font-weight: 500;
 }
 

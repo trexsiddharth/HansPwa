@@ -108,7 +108,6 @@ export class PersistentMessageComponent implements OnInit {
       OtherProfession: [''],
       College: [''],
       Additional: [''],
-      Company: [''],
       Locality: [''],
     });
   }
@@ -180,11 +179,12 @@ export class PersistentMessageComponent implements OnInit {
   }
   setCurrentValues() {
     this.personalForm.patchValue({
-      Weight: this.personalProfileData.weight && this.personalProfileData.weight !== 'null' ? this.personalProfileData.weight : "",
-      Locality: this.personalProfileData.locality ? this.personalProfileData.locality : '',
-      Profession: this.personalProfileData.profession ? this.personalProfileData.profession : '',
-      College: this.personalProfileData.college && this.personalProfileData.college != 'null' ? this.personalProfileData.college : '',
-      Additional: this.personalProfileData.additional_qualification && this.personalProfileData.additional_qualification != 'null' ? this.personalProfileData.additional_qualification : '',
+      Weight: this.personalProfileData.weight && this.personalProfileData.weight !== 'null' ? this.personalProfileData.weight : null,
+      Locality: this.personalProfileData.locality ? this.personalProfileData.locality : null,
+      Profession: this.personalProfileData.profession ? this.personalProfileData.profession : null,
+      OtherProfession: this.personalProfileData.profession ? this.personalProfileData.profession : 'na',
+      College: this.personalProfileData.college && this.personalProfileData.college != 'null' ? this.personalProfileData.college : null,
+      Additional: this.personalProfileData.additional_qualification && this.personalProfileData.additional_qualification != 'null' ? this.personalProfileData.additional_qualification : null,
       // email: this.personalProfileData.email && this.personalProfileData.email != 'null' ?
       //   this.personalProfileData.email : this.familyProfileData.email && this.familyProfileData.email != 'null' ? this.familyProfileData.email : '',
     });
@@ -237,7 +237,16 @@ export class PersistentMessageComponent implements OnInit {
   onSubmit() {
     this.errors = [];
     console.log(this.personalForm.value);
-    if (this.personalForm.valid) {
+    for (const control in this.personalForm.controls) {
+      console.log(this.personalForm.controls[control].value);
+      if (!this.personalForm.controls[control].valid || !this.personalForm.controls[control].value) {
+        this.errors.push(control);
+      }
+    }
+    if (this.errors[0]) {
+      this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+    }
+    else if (this.personalForm.valid) {
       const date = this.personalProfileData.birth_date;
       const month = this.month.indexOf(this.personalProfileData.birth_month) + 1;
       const year = this.personalProfileData.birth_year;
@@ -310,17 +319,6 @@ export class PersistentMessageComponent implements OnInit {
         }
       );
       this.dialogRef.close();
-    } else {
-      // tslint:disable-next-line: forin
-      for (const control in this.personalForm.controls) {
-        console.log(this.personalForm.controls[control].value);
-        if (!this.personalForm.controls[control].valid) {
-          this.errors.push(control);
-        }
-      }
-      if (this.errors[0]) {
-        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
-      }
     }
   }
   changed(element: any) {

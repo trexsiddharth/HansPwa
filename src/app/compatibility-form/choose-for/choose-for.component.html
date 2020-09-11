@@ -1,15 +1,23 @@
 <main>
     <h4 class="heading"> Create Profile For:</h4>
     <div class="text-center btnDiv">
-        <form>
-            <mat-form-field class="full-width fieldFit" appearance="standard">
-                <mat-label>Create Profile For</mat-label>
-                <mat-select [formControl]="Relation">
-                    <mat-option *ngFor="let  option of createProfile" [value]="option">
-                        {{option}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </form>
+        <div class="row">
+            <button mat-raised-button type="button" id="viewButton" class="one btn viewButton"
+                (click)="setValue(0,'one')">{{createProfile[0]}}</button>
+            <button mat-raised-button type="button" id="viewButton" class="six btn viewButton"
+                (click)="setValue(5,'six')">{{createProfile[5]}}</button>
+        </div>
+        <div class="row">
+            <button mat-raised-button type="button" id="" class="four btn viewButton"
+                (click)="setValue(3,'four')">{{createProfile[3]}}</button>
+            <button mat-raised-button type="button" id="viewButton" class="five btn viewButton"
+                (click)="setValue(4,'five')">{{createProfile[4]}}</button>
+        </div>
+        <div class="row">
+            <button mat-raised-button type="button" id="viewButton" class="two btn viewButton"
+                (click)="setValue(1,'two')">{{createProfile[1]}}</button>
+            <button mat-raised-button type="button" id="viewButton" class="three btn viewButton"
+                (click)="setValue(2,'three')">{{createProfile[2]}}</button>
+        </div>
     </div>
 </main>

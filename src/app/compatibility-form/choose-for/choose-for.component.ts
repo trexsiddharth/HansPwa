@@ -19,4 +19,12 @@ export class ChooseForComponent implements OnInit {
       })
     });
   }
+  setValue(index: number, a: string) {
+    let buttonn = document.querySelector('.' + a);
+    buttonn.classList.remove('.viewButton')
+    buttonn.classList.add('.buttonn');
+    setTimeout(() => {
+      this.Relation.patchValue(this.createProfile[index]);
+    }, 20);
+  }
 }
