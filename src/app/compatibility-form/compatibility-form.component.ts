@@ -189,13 +189,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.onDestroy.complete();
   }
   ngAfterViewInit() {
+    if (!this.fourPageService.getUserThrough()) {
+      this.openChooseFor();
+    }
+  }
+  ngAfterViewChecked() {
     if (this.fourPageService.getUserThrough()) {
       this.mainContainerId = 'sd';
     }
-    this.openChooseFor();
   }
   async ngOnInit() {
-
     if (localStorage.getItem('RegisterNumber')) {
       this.PageOne.patchValue({
         phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
