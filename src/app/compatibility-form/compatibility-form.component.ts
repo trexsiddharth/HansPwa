@@ -189,11 +189,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.onDestroy.complete();
   }
   ngAfterViewInit() {
-    setTimeout(() => {
-      if (!this.fourPageService.getUserThrough()) {
-        this.openChooseFor();
-      }
-    }, 1500);
+    // setTimeout(() => {
+    //   if (!this.fourPageService.getUserThrough()) {
+    //     this.openChooseFor();
+    //   }
+    // }, 1500);
   }
   ngAfterViewChecked() {
     if (this.fourPageService.getUserThrough()) {
@@ -319,6 +319,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           let code = this.router.url.substring(codeIndex + 5);
           console.log(code);
           this.getFacebookAccessToken(code);
+        }
+        else {
+          if (!this.fourPageService.getUserThrough()) {
+            this.openChooseFor();
+          }
         }
 
         this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
