@@ -189,9 +189,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.onDestroy.complete();
   }
   ngAfterViewInit() {
-    if (!this.fourPageService.getUserThrough()) {
-      this.openChooseFor();
-    }
+    setTimeout(() => {
+      if (!this.fourPageService.getUserThrough()) {
+        this.openChooseFor();
+      }
+    }, 1500);
   }
   ngAfterViewChecked() {
     if (this.fourPageService.getUserThrough()) {
@@ -1033,7 +1035,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.userProfile.company = profileData.profile.company;
     this.userProfile.college = profileData.profile.college;
     this.userProfile.family = profileData.family;
-
+    this.userProfile.photoScore = profileData.profile.photo_score;
     console.log(this.userProfile);
     this.fourPageService.setProfile(this.userProfile);
     this.fourPageService.getListData.emit(true);
@@ -1047,6 +1049,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         return v;
       }
     }
+    return '100+'
   }
   setFormOneData() {
     this.PageOne.patchValue({

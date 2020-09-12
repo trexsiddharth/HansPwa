@@ -351,7 +351,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       if (this.PageTwo.value.AnnualIncome === "100+") {
         this.PageTwo.value.AnnualIncome = 100;
       }
-      else {
+      else if (this.PageTwo.value.AnnualIncome) {
         const a = this.PageTwo.value.AnnualIncome.split('-');
         this.PageTwo.patchValue({
           AnnualIncome: String((Number(a[0]) + Number(a[1])) / 2)

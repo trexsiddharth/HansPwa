@@ -80,9 +80,9 @@ export class CompatibilityPhotoComponent implements OnInit {
   facebookImageFile5: File;
   facebookImageFile6: File;
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient,
-              public fourPageService: FourPageService,
-              private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService) {
+    public fourPageService: FourPageService,
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService, public itemService: FindOpenHistoryProfileService) {
 
   }
 
@@ -240,7 +240,7 @@ export class CompatibilityPhotoComponent implements OnInit {
     });
   }
 
-// upload facebook image by first downloading it and then uploading it
+  // upload facebook image by first downloading it and then uploading it
   getImage(imageUrl: string, index) {
     this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
       this.base64TrimmedURL = base64Data;
@@ -288,67 +288,67 @@ export class CompatibilityPhotoComponent implements OnInit {
       const imageBlob: Blob = blob;
       const imageName: string = this.generateName();
 
-        // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
-        // our carousel index basically starts from 1 and not 0
+      // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
+      // our carousel index basically starts from 1 and not 0
       switch (index) {
-          case 1:
-            this.facebookImageFile = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile);
-            setTimeout(() => {
-                this.uploadPhoto(this.facebookImageFile, index);
-              }, 200);
-            break;
-          case 2:
-            this.facebookImageFile2 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile2);
-            setTimeout(() => {
-                this.uploadPhoto(this.facebookImageFile2, index);
-              }, 200);
-            break;
-          case 3:
-            this.facebookImageFile3 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile3);
-            setTimeout(() => {
-                this.uploadPhoto(this.facebookImageFile3, index);
-              }, 200);
-            break;
-          case 4:
-            this.facebookImageFile4 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile4);
-            setTimeout(() => {
-                this.uploadPhoto(this.facebookImageFile4, index);
-              }, 200);
-            break;
-          case 5:
-            this.facebookImageFile5 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile5);
-            setTimeout(() => {
-                this.uploadPhoto(this.facebookImageFile5, index);
-              }, 200);
-            break;
-          case 6:
-            this.facebookImageFile6 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile6);
-            setTimeout(() => {
-                this.uploadPhoto(this.facebookImageFile6, index);
-              }, 200);
-            break;
-        
-          default:
-            break;
-        }
+        case 1:
+          this.facebookImageFile = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile, index);
+          }, 200);
+          break;
+        case 2:
+          this.facebookImageFile2 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile2);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile2, index);
+          }, 200);
+          break;
+        case 3:
+          this.facebookImageFile3 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile3);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile3, index);
+          }, 200);
+          break;
+        case 4:
+          this.facebookImageFile4 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile4);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile4, index);
+          }, 200);
+          break;
+        case 5:
+          this.facebookImageFile5 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile5);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile5, index);
+          }, 200);
+          break;
+        case 6:
+          this.facebookImageFile6 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile6);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile6, index);
+          }, 200);
+          break;
+
+        default:
+          break;
+      }
     });
   }
   dataURItoBlob(dataURI: string): Observable<Blob> {
@@ -396,11 +396,16 @@ export class CompatibilityPhotoComponent implements OnInit {
           if (!link.access_token) {
             this.getFacebookPics();
           } else {
-              this.getFacebookPicsWithToken(link.user_id, link.access_token);
+            this.getFacebookPicsWithToken(link.user_id, link.access_token);
           }
         }
       }
     );
+  }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.photoScore = this.fourPageService.profile.photoScore;
+    }, 2000);
   }
   setPhotoData(userProfile: Profile) {
     console.log(userProfile);
@@ -445,22 +450,22 @@ export class CompatibilityPhotoComponent implements OnInit {
 
   analyticsEvent(event) {
     if (!this.fourPageService.getUserThrough()) {
-    (window as any).ga('send', 'event', event, '', {
-      hitCallback: () => {
+      (window as any).ga('send', 'event', event, '', {
+        hitCallback: () => {
 
-        console.log('Tracking ' + event + ' successful');
+          console.log('Tracking ' + event + ' successful');
 
-      }
+        }
 
-    });
+      });
 
-    // gtag app + web
-    (window as any).gtag('event', event, {
-      event_callback: () => {
-        console.log('Tracking gtag ' + event + ' successful');
-      }
-    });
-  }
+      // gtag app + web
+      (window as any).gtag('event', event, {
+        event_callback: () => {
+          console.log('Tracking gtag ' + event + ' successful');
+        }
+      });
+    }
 
   }
 
@@ -495,161 +500,167 @@ export class CompatibilityPhotoComponent implements OnInit {
     this.clickedFacebook = true;
     // fetch user photos
     (window as any).FB.api('/me/albums',
-    'GET',
-    {fields: 'link,name'}, (response) => {
-      console.log('album', response);
-      if (response.data.length > 0) {
-        response.data.forEach(element => {
-          if (element.name === 'प्रोफ़ाइल फ़ोटो' ||
-           element.name === 'Profile Photo' ||
-            element.name === 'Profile photo' ||
-            element.name === 'profile photo' ||
-            (element.name as string).includes('Profile') || (element.name as string).includes('प्रोफ़ाइल')) {
+      'GET',
+      { fields: 'link,name' }, (response) => {
+        console.log('album', response);
+        if (response.data.length > 0) {
+          response.data.forEach(element => {
+            if (element.name === 'प्रोफ़ाइल फ़ोटो' ||
+              element.name === 'Profile Photo' ||
+              element.name === 'Profile photo' ||
+              element.name === 'profile photo' ||
+              (element.name as string).includes('Profile') || (element.name as string).includes('प्रोफ़ाइल')) {
               if (element.id) {
                 (window as any).FB.api(`/${element.id}/photos`,
-                'GET',
-                {fields: 'link'}, (res) => {
-                  console.log('Photos', res);
-                  if (res.data.length > 0) {
-                    res.data.forEach((element, index) => {
-                      if (index < 5) {
-                        if (element && element.id) {
-                          (window as any).FB.api(`/${element.id}/picture`,
-                          'GET',
-                          {redirect: 'false'}, (picRes) => {
-                              console.log(picRes);
-                              if (picRes.data && picRes.data.url) {
-                                switch (index) {
-                                  case 0:
-                                    this.frontfile = picRes.data.url;
-                                    this.getImage(this.frontfile, 2);
-                                    break;
-                                  case 1:
-                                    this.BackimgURL = picRes.data.url;
-                                    this.getImage(this.BackimgURL, 3);
-                                    break;
-                                
-                                  default:
-                                    this.getImage(picRes.data.url, index + 2);
-                                    break;
+                  'GET',
+                  { fields: 'link' }, (res) => {
+                    console.log('Photos', res);
+                    if (res.data.length > 0) {
+                      res.data.forEach((element, index) => {
+                        if (index < 5) {
+                          if (element && element.id) {
+                            (window as any).FB.api(`/${element.id}/picture`,
+                              'GET',
+                              { redirect: 'false' }, (picRes) => {
+                                console.log(picRes);
+                                if (picRes.data && picRes.data.url) {
+                                  switch (index) {
+                                    case 0:
+                                      this.frontfile = picRes.data.url;
+                                      this.getImage(this.frontfile, 2);
+                                      break;
+                                    case 1:
+                                      this.BackimgURL = picRes.data.url;
+                                      this.getImage(this.BackimgURL, 3);
+                                      break;
+
+                                    default:
+                                      this.getImage(picRes.data.url, index + 2);
+                                      break;
+                                  }
                                 }
-                              }
-                          });
+                              });
+                          }
+                        } else {
+                          return;
                         }
-                      } else {
-                        return;
-                      }
-                    });
-                  }
-                });
-               }
-          }
-        });
-      } else {
+                      });
+                    }
+                  });
+              }
+            }
+          });
+        } else {
           this.ngxNotificationService.warning('No Facebook Picture Found');
-      }
-    });
- }
+        }
+      });
+  }
 
   // get pics from facebook
-  getFacebookPicsWithToken(userId,token) {
+  getFacebookPicsWithToken(userId, token) {
     this.clickedFacebook = true;
     // fetch user photos
     (window as any).FB.api(`/${userId}/albums`,
-    'GET',
-    {fields: 'link,name',
-  access_token: token}, (response) => {
-      console.log('album', response);
-      if (response.data.length > 0) {
-        response.data.forEach(element => {
-          if (element.name === 'प्रोफ़ाइल फ़ोटो' ||
-           element.name === 'Profile Photo' ||
-            element.name === 'Profile photo' ||
-            element.name === 'profile photo' ||
-            (element.name as string).includes('Profile') || (element.name as string).includes('प्रोफ़ाइल')) {
+      'GET',
+      {
+        fields: 'link,name',
+        access_token: token
+      }, (response) => {
+        console.log('album', response);
+        if (response.data.length > 0) {
+          response.data.forEach(element => {
+            if (element.name === 'प्रोफ़ाइल फ़ोटो' ||
+              element.name === 'Profile Photo' ||
+              element.name === 'Profile photo' ||
+              element.name === 'profile photo' ||
+              (element.name as string).includes('Profile') || (element.name as string).includes('प्रोफ़ाइल')) {
               if (element.id) {
                 (window as any).FB.api(`/${element.id}/photos`,
-                'GET',
-                {fields: 'link',
-              access_token: token}, (res) => {
-                  console.log('Photos', res);
-                  if (res.data.length > 0) {
-                    res.data.forEach((element, index) => {
-                      if (index < 5) {
-                        if (element && element.id) {
-                          (window as any).FB.api(`/${element.id}/picture`,
-                          'GET',
-                          {redirect: 'false',
-                        access_token: token}, (picRes) => {
-                              console.log(picRes);
-                              if (picRes.data && picRes.data.url) {
-                                switch (index) {
-                                  case 0:
-                                    this.frontfile = picRes.data.url;
-                                    this.getImage(this.frontfile, 2);
-                                    break;
-                                  case 1:
-                                    this.BackimgURL = picRes.data.url;
-                                    this.getImage(this.BackimgURL, 3);
-                                    break;
-                                
-                                  default:
-                                    this.getImage(picRes.data.url, index + 2);
-                                    break;
+                  'GET',
+                  {
+                    fields: 'link',
+                    access_token: token
+                  }, (res) => {
+                    console.log('Photos', res);
+                    if (res.data.length > 0) {
+                      res.data.forEach((element, index) => {
+                        if (index < 5) {
+                          if (element && element.id) {
+                            (window as any).FB.api(`/${element.id}/picture`,
+                              'GET',
+                              {
+                                redirect: 'false',
+                                access_token: token
+                              }, (picRes) => {
+                                console.log(picRes);
+                                if (picRes.data && picRes.data.url) {
+                                  switch (index) {
+                                    case 0:
+                                      this.frontfile = picRes.data.url;
+                                      this.getImage(this.frontfile, 2);
+                                      break;
+                                    case 1:
+                                      this.BackimgURL = picRes.data.url;
+                                      this.getImage(this.BackimgURL, 3);
+                                      break;
+
+                                    default:
+                                      this.getImage(picRes.data.url, index + 2);
+                                      break;
+                                  }
                                 }
-                              }
-                          });
+                              });
+                          }
+                        } else {
+                          return;
                         }
-                      } else {
-                        return;
-                      }
-                    });
-                  }
-                });
-               }
-          }
-        });
-      } else {
-          this.ngxNotificationService.warning('No Facebook Picture Found');
-      }
-    });
- }
-
-
- // fetch fb current profile pic
- fetchFbCurrentProfilePic() {
-    (window as any).FB.api('/me/picture',
-    'GET',
-    {height: '600', width: '400', redirect: 'false'}, (response) => {
-      console.log(response.data.url);
-      if (response.data.url) {
-        this.imgURL = response.data.url;
-        this.getImage(this.imgURL, 1);
-          // get more  profile pics from facebook for second and third places in image grid
-        this.getFacebookPics();
-      }
-    });
- }
-
- // for facebook photos when user has not given permission on first page
- loginToFacebookToGetPhotos() {
-  (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-    console.log(response);
-    if (response.status === 'connected') {
-      localStorage.setItem('fb_token', response.authResponse.accessToken);
-      this.fetchFbCurrentProfilePic();
-    } else {
-      (window as any).FB.login((response) => {
-        if (response.authResponse) {
-         console.log('Welcome!  Fetching your information.... ');
-         this.fetchFbCurrentProfilePic();
+                      });
+                    }
+                  });
+              }
+            }
+          });
         } else {
-         console.log('User cancelled login or did not fully authorize.');
+          this.ngxNotificationService.warning('No Facebook Picture Found');
         }
-    }, {scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location'});
-    }       // Returns the login status.
-  });
- }
+      });
+  }
+
+
+  // fetch fb current profile pic
+  fetchFbCurrentProfilePic() {
+    (window as any).FB.api('/me/picture',
+      'GET',
+      { height: '600', width: '400', redirect: 'false' }, (response) => {
+        console.log(response.data.url);
+        if (response.data.url) {
+          this.imgURL = response.data.url;
+          this.getImage(this.imgURL, 1);
+          // get more  profile pics from facebook for second and third places in image grid
+          this.getFacebookPics();
+        }
+      });
+  }
+
+  // for facebook photos when user has not given permission on first page
+  loginToFacebookToGetPhotos() {
+    (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+      console.log(response);
+      if (response.status === 'connected') {
+        localStorage.setItem('fb_token', response.authResponse.accessToken);
+        this.fetchFbCurrentProfilePic();
+      } else {
+        (window as any).FB.login((response) => {
+          if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            this.fetchFbCurrentProfilePic();
+          } else {
+            console.log('User cancelled login or did not fully authorize.');
+          }
+        }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location' });
+      }       // Returns the login status.
+    });
+  }
 }
 
 

@@ -225,12 +225,14 @@ export class CompatibilityPageFiveComponent implements OnInit {
               });
             } else {
               console.log(data.castes.length);
-              this.castePref = data.castes[0].split(',');
-              data.castes[0].split(',').forEach(element => {
-                if (this.getcastes.indexOf(element)) {
-                  values.push(this.getcastes[this.getcastes.indexOf(element)]);
-                }
-              });
+              if (data.castes[0]) {
+                this.castePref = data.castes[0].split(',');
+                data.castes[0].split(',').forEach(element => {
+                  if (this.getcastes.indexOf(element)) {
+                    values.push(this.getcastes[this.getcastes.indexOf(element)]);
+                  }
+                });
+              }
             }
 
             // if all , check the check box for no caste bar

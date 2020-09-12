@@ -344,27 +344,32 @@ export class CompatibilityPageThreeComponent implements OnInit {
       Gotra: userProfile.gotra,
       FoodChoice: userProfile.foodChoice,
       Mangalik: userProfile.manglik,
-      FatherStatus: this.setValueStatus(userProfile, 1),
-      MotherStatus: this.setValueStatus(userProfile, 2),
+
+      FatherStatus: userProfile.fatherStatus === 'Alive' ? (userProfile.family.occupation && this.Occupation.includes(userProfile.family.occupation) ?
+        userProfile.family.occupation : 'Not Working') : 'Not Working',
+
+      MotherStatus: userProfile.motherStatus === 'Alive' ? (userProfile.family.occupation_mother && this.Occupation.includes(userProfile.family.occupation_mother) ?
+        userProfile.family.occupation_mother : 'Not Working') : 'Not Working',
+
       FamilyIncome: userProfile.familyIncome,
       Locality: userProfile.locality
     });
     console.log(this.PageThree.value)
   }
-  setValueStatus(userProfile: Profile, i: number) {
-    if (i == 1) {
-      if (userProfile.fatherStatus === 'Alive') {
-        return (userProfile.family.occupation ? userProfile.family.occupation : userProfile.fatherStatus);
-      }
-      else return userProfile.fatherStatus;
-    }
-    if (i == 2) {
-      if (userProfile.motherStatus === 'Alive') {
-        return (userProfile.family.occupation_mother ? userProfile.family.occupation_mother : userProfile.motherStatus)
-      }
-      else return userProfile.motherStatus;
-    }
-  }
+  // setValueStatussetValueStatus(userProfile: Profile, i: number) {
+  //   if (i == 1) {
+  //     if (userProfile.fatherStatus === 'Alive') {
+  //       return (userProfile.family.occupation ? userProfile.family.occupation : userProfile.fatherStatus);
+  //     }
+  //     else return userProfile.fatherStatus;
+  //   }
+  //   if (i == 2) {
+  //     if (userProfile.motherStatus === 'Alive') {
+  //       return (userProfile.family.occupation_mother ? userProfile.family.occupation_mother : userProfile.motherStatus)
+  //     }
+  //     else return userProfile.motherStatus;
+  //   }
+  // }
 }
 
 
