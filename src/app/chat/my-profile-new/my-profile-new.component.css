@@ -263,8 +263,8 @@ hr {
 main {
   position: relative;
   top: 0px;
-  overflow: hidden;
-  animation: fadeInUp 1.5s 1!important;
+  overflow: hidden !important;
+  /* animation: fadeInUp 1.5s 1!important; */
 }
 .sections {
   padding: 5px 5px;
@@ -412,7 +412,7 @@ p{
     position: absolute;
     z-index: -999999;
     top: 0px;
-    width: 100%;
+    width: inherit;
     height: 65vh !important;
     background: rgb(62, 60, 92);
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
@@ -440,6 +440,7 @@ p{
     background-size: contain;
     height: 100vh; */
     animation: fadeInUp 1.5s 1;
+    overflow:hidden;
   }
   .labelS {
     width:15px!important;

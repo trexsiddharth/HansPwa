@@ -1,4 +1,3 @@
-
 <main class='pwaSize fixed t-0 b-0 bg-white w-full HC overflowY'>
 
     <div class="container customBackground"
@@ -10,20 +9,20 @@
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>College</mat-label>
-                            <input type="text" matInput formControlName="college" >
+                            <input type="text" matInput formControlName="college">
                         </mat-form-field>
                     </div>
 
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Company</mat-label>
-                            <input type="text" matInput formControlName="company" >
+                            <input type="text" matInput formControlName="company">
                         </mat-form-field>
                     </div>
                     <div class="col-6">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Sisters Married</mat-label>
-                            <mat-select #relation formControlName="sisters_married" >
+                            <mat-select #relation formControlName="sisters_married">
                                 <mat-option *ngFor="let option of Count" [value]="option">
                                     {{option}}
                                 </mat-option>
@@ -33,7 +32,7 @@
                     <div class="col-6">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Sisters Unmarried</mat-label>
-                            <mat-select #relation formControlName="sisters_unmarried" >
+                            <mat-select #relation formControlName="sisters_unmarried">
                                 <mat-option *ngFor="let option of Count" [value]="option">
                                     {{option}}
                                 </mat-option>
@@ -43,7 +42,7 @@
                     <div class="col-6">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Brothers Married</mat-label>
-                            <mat-select #relation formControlName="brothers_married" >
+                            <mat-select #relation formControlName="brothers_married">
                                 <mat-option *ngFor="let option of Count" [value]="option">
                                     {{option}}
                                 </mat-option>
@@ -53,7 +52,7 @@
                     <div class="col-6">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Brothers Unmarried</mat-label>
-                            <mat-select #relation formControlName="brothers_unmarried" >
+                            <mat-select #relation formControlName="brothers_unmarried">
                                 <mat-option *ngFor="let option of Count" [value]="option">
                                     {{option}}
                                 </mat-option>
@@ -63,7 +62,7 @@
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>House Type</mat-label>
-                            <mat-select #relation formControlName="house_type" >
+                            <mat-select #relation formControlName="house_type">
                                 <mat-option *ngFor="let  option of HouseType" [value]="option">
                                     {{option}}
                                 </mat-option>
@@ -73,7 +72,7 @@
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Family Type</mat-label>
-                            <mat-select #relation formControlName="family_type" >
+                            <mat-select #relation formControlName="family_type">
                                 <mat-option *ngFor="let  option of FamilyType" [value]="option">
                                     {{option}}
                                 </mat-option>
@@ -84,14 +83,10 @@
                     <div class="col-md-12">
                         <mat-form-field class="full-width fieldFit" appearance="standard">
                             <mat-label>Family living in:</mat-label>
-                            <input matInput type="text" 
-                            formControlname="family_living_in"
-                            id="familyIn"
-                          [autoCompleteOptions]="autoComplete"
-                          (change)="placeChanged()"
-                             matValidateAddress
-                                matGoogleMapsAutocomplete
-                                 #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" >
+                            <input type="text" matInput matValidateAddress id="familyIn"
+                                [autoCompleteOptions]="autoComplete" (change)="placeChanged()" matGoogleMapsAutocomplete
+                                #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                formControlName="family_living_in">
                         </mat-form-field>
                     </div><br><br><br><br>
                     <div class="col-xs-12 m-t-20"

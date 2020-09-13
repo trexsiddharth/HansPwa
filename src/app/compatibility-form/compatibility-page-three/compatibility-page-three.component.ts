@@ -153,7 +153,7 @@ export class CompatibilityPageThreeComponent implements OnInit {
 
 
   firstStep() {
-    console.log(this.PageThree.value.BirthPlace);
+    console.log(this.PageThree.value);
     if (!this.fourPageService.getUserThrough() && this.isValid(1) === false) {
       this.fourPageService.form3Completed.emit(false);
       return;
@@ -336,7 +336,7 @@ export class CompatibilityPageThreeComponent implements OnInit {
   }
 
   setFormThreeData(userProfile: Profile) {
-    console.log("look here", userProfile);
+    console.log("look here hjhjh", userProfile);
     this.birthPlaceText = userProfile.birthPlace ? userProfile.birthPlace : '';
     this.PageThree.patchValue({
       BirthPlace: userProfile.birthPlace,

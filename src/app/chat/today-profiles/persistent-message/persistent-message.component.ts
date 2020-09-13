@@ -247,9 +247,6 @@ export class PersistentMessageComponent implements OnInit {
       this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
     }
     else if (this.personalForm.valid) {
-      const date = this.personalProfileData.birth_date;
-      const month = this.month.indexOf(this.personalProfileData.birth_month) + 1;
-      const year = this.personalProfileData.birth_year;
       console.log(this.personalForm);
       const personalDataForm = new FormData();
       if (this.personalProfileData.identity_number) {
@@ -260,8 +257,7 @@ export class PersistentMessageComponent implements OnInit {
       personalDataForm.append('temple_id', this.personalProfileData.temple_id);
       personalDataForm.append('about', this.personalProfileData.about);
       personalDataForm.append('name', this.personalProfileData.name);
-      personalDataForm.append('birth_date', year + '-' + month + '-' + date
-        ? year + '-' + month + '-' + date : this.personalProfileData.birth_date);
+      personalDataForm.append('birth_date', this.personalProfileData.birth_date);
       personalDataForm.append('birth_place', this.personalProfileData.birth_place);
       personalDataForm.append('birth_time', this.personalProfileData.birth_time);
       personalDataForm.append('marital_status', this.personalProfileData.marital_status);

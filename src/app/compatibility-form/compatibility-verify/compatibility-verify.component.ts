@@ -95,13 +95,13 @@ export class CompatibilityVerifyComponent implements OnInit {
   };
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-              private _formBuilder: FormBuilder,
-              private router: Router,
-              public notification: NotificationsService,
-              public fourPageService: FourPageService,
-              public languageService: LanguageService,
-              private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService) {
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    public notification: NotificationsService,
+    public fourPageService: FourPageService,
+    public languageService: LanguageService,
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService) {
 
     this.verifyForm = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -122,11 +122,11 @@ export class CompatibilityVerifyComponent implements OnInit {
     // when the remote data gets uploaded
     this.fourPageService.getListData.subscribe(
       (data) => {
-          if (data) {
-            console.log(this.fourPageService.getProfile());
-            this.setData(this.fourPageService.getProfile());
-          }
-      } ,
+        if (data) {
+          console.log(this.fourPageService.getProfile());
+          this.setData(this.fourPageService.getProfile());
+        }
+      },
       err => {
         console.log(err);
       }
@@ -139,7 +139,7 @@ export class CompatibilityVerifyComponent implements OnInit {
 
   // set user data
   setData(profile) {
-    this.verifyForm.setValue({
+    this.verifyForm.patchValue({
       college: profile.college,
       company: profile.company,
       sisters_married: profile.family.married_daughters,
@@ -148,19 +148,19 @@ export class CompatibilityVerifyComponent implements OnInit {
       brothers_unmarried: profile.family.unmarried_sons,
       house_type: profile.family.house_type,
       family_type: profile.family.family_type,
-      family_living_in: profile.family.city,
+      family_living_in: profile.family.city ? profile.family.locality : '',
     });
-}
+  }
 
-placeChanged() {
-  const familyIn: HTMLInputElement = document.querySelector('#familyIn');
-  setTimeout(() => {
-    console.log(familyIn.value);
-    this.verifyForm.patchValue({
-      family_living_in: familyIn.value
-    });
-  }, 500);
-}
+  placeChanged() {
+    const familyIn: HTMLInputElement = document.querySelector('#familyIn');
+    setTimeout(() => {
+      console.log(familyIn.value);
+      this.verifyForm.patchValue({
+        family_living_in: familyIn.value
+      });
+    }, 500);
+  }
 
 
   onAutocompleteSelected(event) {
@@ -256,7 +256,7 @@ placeChanged() {
           console.log(data);
           console.log('Family Deatils Updated successfully');
           if (data.updateFamilyDetails_status === 'Y') {
-          this.updateVerifyFormData(newFamilyForm);
+            this.updateVerifyFormData(newFamilyForm);
           }
         },
         (error: any) => {
@@ -270,7 +270,7 @@ placeChanged() {
 
   updateVerifyFormData(profileData: FormData) {
     this.fourPageService.profile.college = this.verifyForm.value.college;
-    this.fourPageService.profile.company = this.verifyForm.value.company ;
+    this.fourPageService.profile.company = this.verifyForm.value.company;
     this.fourPageService.profile.family.married_daughters = profileData.get('married_daughters').toString();
     this.fourPageService.profile.family.unmarried_daughters = profileData.get('unmarried_daughters').toString();
     this.fourPageService.profile.family.married_sons = profileData.get('married_sons').toString();

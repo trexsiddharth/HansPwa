@@ -216,9 +216,10 @@ export class CompatibilityPageFiveComponent implements OnInit {
           if (data && data.castes) {
             let values = [];
             if (data.castes.length > 1) {
+              console.log('look here', data.castes);
               console.log(data.castes.length);
               this.castePref = data.castes;
-              data.castes.forEach(element => {
+              Array(data.castes).forEach(element => {
                 if (this.getcastes.indexOf(element)) {
                   values.push(this.getcastes[this.getcastes.indexOf(element)]);
                 }
