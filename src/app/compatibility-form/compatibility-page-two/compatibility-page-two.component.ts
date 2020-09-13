@@ -148,7 +148,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     'Event Manager',
     'Legal',
     'Public Relations',
-    'Others'];
+    'Others',
+    'Teacher',
+    'Doctor',
+    'Not Working'];
 
   /** list of education groups filtered by search keyword for option groups */
   public filteredEducationGroups: ReplaySubject<hd[]> = new ReplaySubject<hd[]>(1);
