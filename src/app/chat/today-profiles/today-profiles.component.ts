@@ -5,7 +5,7 @@ import {
 } from 'ngx-kc-notification';
 import { HttpClient } from '@angular/common/http';
 import { timeout, retry, catchError, shareReplay } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { NotificationsService } from '../../notifications.service';
 import { ChatServiceService } from '../../chat-service.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
@@ -17,14 +17,19 @@ import { ApiwhaAutoreply } from './profile-today-model';
 import { LanguageService } from 'src/app/language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersistentMessageComponent } from './persistent-message/persistent-message.component'
+import { SelectionModel } from '@angular/cdk/collections';
+import 'rxjs/add/operator/scan';
 @Component({
   selector: 'app-today-profiles',
   templateUrl: './today-profiles.component.html',
   styleUrls: ['./today-profiles.component.css']
 })
 export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy {
-  item = new ApiwhaAutoreply();
-  item2 = new ApiwhaAutoreply();
+  item;
+
+
+  profileItems: Array<ApiwhaAutoreply> = [];
+
   itemMessage = 'Welcome To Hans Matrimony';
   Data;
   contactNumber;
@@ -60,34 +65,23 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     },
     ];
   rejectList =
-    [
-      {
-        'value': 0,
-        'bool': false
-      },
-      {
-        'value': 1,
-        'bool': false
-      },
+    [{
+      'value': 0,
+      'bool': false
+    },
+    {
+      'value': 1,
+      'bool': false
+    },
     ];
 
   section;
   about: any;
   personal;
   family;
-  selectedTab = 0;
-  // Height
-  // tslint:disable-next-line: max-line-length
-  Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
-  // tslint:disable-next-line: max-line-length
-  Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
-
   // last action
   lastAction;
   showActionAnimation = false;
-
-  //for openning short popups;
-  openedPersistentPopup: boolean = false;
 
   profileIsLoadingSubject = new Subject<string>();
   profileIsLoading$: Observable<string> = this.profileIsLoadingSubject.asObservable().pipe(
@@ -107,31 +101,13 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     public subscriptionService: SubscriptionserviceService,
     private breakPointObserver: BreakpointObserver,) {
   }
-  ret = [];
-  getStackedCardsNumber() {
-    let num = Number(this.item.profiles_left);
-    console.log("look here", this.item.profiles_left);
-    for (let i = 0; i < num; i++) {
-      this.ret.push(i);
-    }
-    console.log('look here', this.ret);
-  }
-  @HostListener('scroll', ['$event'])
-  onScroll(event) {
-    console.log("Scroll Event", document.body.scrollTop);
-    console.log("Scroll Event", window.pageYOffset);
-    // this.onScrollOfMain();
-  }
-  ngAfterViewInit(): void {
-    // this.languageService.setCurrentLanguage('hindi');
+
+  ngAfterViewInit() {
     this.section = document.querySelector('#today-main');
-    //this.HandleStackedCards();
-    // if (localStorage.getItem('todaysSpecialScrollPos')) {
-    //   document.getElementById("main").scrollTo(0, Number(localStorage.getItem('todaysSpecialScrollPos')));
-    // }
-    //this.itemService.setTutorialIndex();
   }
+
   ngOnInit() {
+
     if (this.router.url.includes('first')) {
       this.spinner.show('searchingSpinner');
     }
@@ -146,7 +122,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       }
     );
-
+    //getting and using the authData small tasks.
     if (!localStorage.getItem('authData')) {
       this.checkUrl().subscribe(
         data => {
@@ -159,8 +135,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           }
           if (data.hasPhoto === '1') {
             this.itemService.setPhotoStatus(true);
-          } else {
-            //this.itemService.setPhotoStatus(false);
           }
           // for personalized users
           if (data && data.is_premium && data.is_premium === '1') {
@@ -174,10 +148,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           } else {
             this.itemService.setIsLead(1);
           }
-
-
           // set profile image (circular in top bar)
-
           if (data) {
             this.selfImage = data.photo;
             this.selfName = data.name;
@@ -192,7 +163,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             this.selfImage = '../../assets/avatar.svg';
             this.selfName = 'You';
           }
-
           console.log(text);
           console.log(id);
           localStorage.setItem('id', id);
@@ -221,8 +191,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         }
         if (data.hasPhoto === '1') {
           this.itemService.setPhotoStatus(true);
-        } else {
-          //this.itemService.setPhotoStatus(false);
         }
         // for personalized users
         if (data && data.is_premium && data.is_premium === '1') {
@@ -236,10 +204,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         } else {
           this.itemService.setIsLead(1);
         }
-
-
         // set profile image (circular in top bar)
-
         if (data) {
           this.selfImage = data.photo;
           this.selfName = data.name;
@@ -261,7 +226,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         }
         this.paidStatus = data.paid_status;
         console.log(this.paidStatus);
-
         if (text.match('SHOW')) {
           this.chatService.Analytics('login', 'login', 'logged In');
           this.chatService.setLoginStatus(true);
@@ -272,6 +236,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       }, 100);
     }
+    //just to set up which popup to show.....
     if (this.chatService.shortList.length > 0) {
       this.shortList = this.chatService.shortList;
       console.log('sortList values found in chat service');
@@ -296,8 +261,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.actionCount = this.actionCount;
       console.log('setting action count value in chat service');
     }
-    this.getStackedCardsNumber();
   }
+  // to save the state of which popups are to be shown
   ngOnDestroy(): void {
     this.chatService.shortList = this.shortList;
     console.log('setting shortList values in chat service');
@@ -306,23 +271,19 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     this.chatService.actionCount = this.actionCount;
     console.log('setting action count value in chat service');
   }
-
   private setProfileLocally() {
     this.type = 'profile';
     const data = JSON.parse(localStorage.getItem('todayProfile'));
-    this.item = data.apiwha_autoreply;
+    this.item = data;
+    this.profileItems.push(data.apiwha_autoreply);
+    this.profileItems.push(data.next_profile);
     if (data && data.get_status_count) {
       this.itemService.saveCount(data.get_status_count);
       this.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
     }
-    this.item2 = data.next_profile;
-    console.log(this.item);
+    //console.log(this.item, this.item1);
   }
-
-  // onScrollOfMain() {
-  //   console.log('scrolled' + document.getElementById("content").scrollTop);
-  //   this.itemService.setScroll('todaysSpecialScrollPos', document.getElementById("content").scrollTop);
-  // }
+  //hitting the auth api to get auth data
   checkUrl(): Observable<any> {
     if (localStorage.getItem('fcm_app')) {
       // tslint:disable-next-line: max-line-length
@@ -332,6 +293,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', { params: { ['phone_number']: this.contactNumber, ['fcm_id']: this.notification.getCurrentToken() } });
     }
   }
+  // hitting the sendMessages api to get the next profile or otherwise.
   chatRequest(data): Observable<any> {
     if (data && this.contactNumber && data !== '' && this.contactNumber !== '') {
       // setting profile seen true for locally stored profile
@@ -346,7 +308,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       // last action for action animation
       // this.lastAction = data;
       // this.startActionAnimation();
-
       const myJSON = JSON.stringify(this.Data);
       console.log(myJSON);
 
@@ -384,6 +345,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   showShortListPopup(shareItem, i: number) {
+    return;
     console.log(i);
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
@@ -396,10 +358,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
   rejectListPopup(shareItem, i: number) {
-    // if ((this.itemService.getCredits() != null && this.itemService.getCredits().toString() !== '0') && (this.actionCount % 4 !== 0)) {
-    //   console.log('return for paid users');
-    //   return;
-    // }
+    return;
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
     }
@@ -410,6 +369,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   persistentDialogOpeningLogic(shareItem, reply: string) {
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes' && this.type === 'profile') {
+      return;
       this.itemService.openTodaysPopupAd();
     } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
       this.actionCount++;
@@ -492,43 +452,19 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       console.log('get data called');
       this.getData(reply);
     }
-
   }
   getNextMessageOrProfile(reply: string) {
     // stop the button animation
+    console.log('getNextMessageOrProfile called with response', reply);
     this.stopAnimation();
     this.itemService.setTutorialIndex();
-    // console.log('shortlist count', this.shortListCount);
-    // console.log('rejected count', this.rejectedListCount)
+
     this.persistentDialogOpeningLogic(this.item, reply);
     const modal = document.getElementById('myModal');
-    // return; //this is temporary
+
     if (modal.style.display !== 'none') {
       modal.style.display = 'none';
     }
-    // console.log(this.itemService.getCredits(), reply.toLowerCase());
-    // console.log(this.type, this.itemService.getPhotoStatus());
-
-    // if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-    //   reply.toLowerCase() === 'yes' && this.type === 'profile') {
-    //   this.itemService.openTodaysPopupAd();
-    // } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile' && this.itemService.getPhotoStatus() === false
-    //   && (this.shortListCount === 0 || this.shortListCount % 2 === 0)) {
-    //   this.openMessageDialog(this.item, reply);
-    // } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile'
-    //   && this.shortListCount !== 0 && this.shortListCount % 3 === 0) {
-    //   this.shortListCount++;
-    //   this.itemService.openOfferOne(this.item);
-    // } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-    //   reply.toLowerCase() === 'shortlist' && this.type === 'profile'
-    //   && this.shortListCount !== 0 && this.shortListCount % 5 === 0) {
-    //   this.shortListCount++;
-    //   this.itemService.openDownloadAppDialog(this.item);
-    // } else {
-    //   this.getData(reply);
-    // }
   }
 
   getData(reply) {
@@ -536,13 +472,12 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log(reply);
     this.setCount(reply);
     const previousItem = this.item;
-    this.getStackedCardsNumber();
     if (!localStorage.getItem('todayProfile')) {
       this.spinner.show();
     }
     if (reply !== 'SHOW') {
       if (document.getElementById('profilePic')) {
-        document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
+        //document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
         this.profileIsLoadingSubject.next(reply);
       }
     }
@@ -550,7 +485,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       data => {
         console.log(data);
         this.analyticsEvent(`Response ${reply} On Today's Special Profile`);
-
         // hide the searching spinner if visible
         // only visible for first time users
         this.spinner.hide('searchingSpinner');
@@ -589,7 +523,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           }
         }
 
-
         // if profile_created == 1 ...re hit auth api
         if (data.profile_created && data.profile_created === 1 && localStorage.getItem('is_lead') === '1') {
           this.checkUrl().subscribe(
@@ -603,8 +536,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               }
               if (data.hasPhoto === '1') {
                 this.itemService.setPhotoStatus(true);
-              } else {
-                //this.itemService.setPhotoStatus(false);
               }
               // for personalized users
               if (data && data.is_premium && data.is_premium === '1') {
@@ -651,25 +582,29 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           );
           return;
         }
-
         // if data.type is profile or message
+        //type = profile means that we do have more photos to show to the user
+        //type = message means that we do not have any profiles to show to the user. 
         if (data.type === 'profile') {
-
           this.type = 'profile';
 
-          // stop user response animation
-
+          //stop user response animation
           if (data.name === this.item.name) {
             this.profileIsLoadingSubject.next(null);
           }
-
+          // this is the MOST IMPORTANT PART from the perspective of setting the profiles and maipulation the dom after that
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
-            this.item = data.apiwha_autoreply;
-            // locally storing the new profile
+            // if (JSON.stringify(this.item.next_profile) === JSON.stringify(data.apiwha_autoreply)) {
+            //   console.log('condition satisfied')
+            //   this.item = data;
+            //   //this.profileItems.splice(0, 1);
+            //   this.profileItems.push(data.apiwha_autoreply);
+            // }
+            this.item = data;
+            //this.profileItems.splice(0, 1);
+            this.profileItems.push(data.apiwha_autoreply);
             localStorage.setItem('todayProfile', JSON.stringify(data));
-            this.item2 = data.next_profile;
           }
-
           // data.first_time = 0 -> when user comes for the first time on a day
           // data.first_time = 1 -> it gets 1 once he has seen first profile
           if (data.first_time === 0 && !this.router.url.match('first')) {
@@ -710,16 +645,15 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
             this.router.navigateByUrl('chat');
           }
-
         } else {
           this.type = 'message';
+          this.profileItems = [];
           this.itemMessage = data.apiwha_autoreply;
           localStorage.setItem('todayProfile', '');
           this.setMessageText(data.apiwha_autoreply);
           this.spinner.hide();
           // stop user response animation
           this.profileIsLoadingSubject.next(null);
-
           // if profiles for the day are over
           /*
           rate us dialog to be shown when profiles are ended for the day.
@@ -733,9 +667,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             && this.points > 0) {
             this.itemService.openRateUsDialog();
           }
-
         }
-
+        //completely useless lines of code
         switch (reply) {
           case 'YES':
             if (this.points > 0) {
@@ -759,7 +692,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           // this.itemService.changeTab(1);
         } else {
           if (document.getElementById('profilePic')) {
-            document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
+            //document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
           }
         }
 
@@ -768,11 +701,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }, err => {
         console.log(err);
         this.spinner.hide();
-
         // hide the searching spinner if visible
         // only visible for first time users
         this.spinner.hide('searchingSpinner');
-
         // stop user response animation
         this.profileIsLoadingSubject.next(null);
         this.ngxNotificationService.error('Something Went Wrong');
@@ -780,7 +711,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }
     );
   }
-
   // button 1-> Meri pasand, button-2 -> plan expired, button-3 -> no credits, button-4-> No Compatibilty
   // button-4 -> show more
   setMessageText(text) {
@@ -829,7 +759,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log(this.button);
     this.spinner.hide();
   }
-
+  // to get the credits kinda obvious.
   getCredits() {
     const creditsData = new FormData();
     creditsData.append('id', localStorage.getItem('id'));
@@ -873,97 +803,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }
     );
   }
-
-
-  setAge(birthDate: string) {
-    if (birthDate != null) {
-      return String(Math.floor((Date.now() - new Date(birthDate).getTime()) / (1000 * 60 * 60 * 24 * 365))) + ' Yrs';
-    } else {
-      return '';
-    }
-  }
-
-  setHeight(height: any) {
-    if (height && height !== '') {
-      return this.Heights[this.Heights1.indexOf(height)];
-    } else {
-      return '';
-    }
-  }
-  setIncome(value: string): string {
-    if (value != null) {
-      if (Number(value) > 1000) {
-        return String((Number(value) / 100000));
-      } else {
-        return value;
-      }
-
-    } else {
-      return '';
-    }
-  }
-  toTitleCase(str) {
-    if (str) {
-      return str.replace(
-        /\w\S*/g,
-        (txt) => {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }
-      );
-    } else {
-      return '';
-    }
-  }
-
-  getProfilePhoto(photo: any, carous: any, gen: string, index: string): string {
-    if (carous === null || carous === 'null' || carous === '') {
-      if (photo === null) {
-        setTimeout(() => {
-          // stop user response animation
-          this.profileIsLoadingSubject.next(null);
-        }, 2000);
-        if (gen === 'Male') {
-          return '../../assets/profile.png';
-        } else {
-          return '../../assets/female_pic.png';
-        }
-      } else {
-        return photo;
-      }
-    } else {
-      const carousel: object = JSON.parse(carous);
-      const keys = Object.keys(carousel);
-      // console.log(carousel[index]);
-      return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
-    }
-  }
-  onErrorProfilePhoto(gender, index) {
-    this.spinner.hide();
-    // stop user response animation
-    this.profileIsLoadingSubject.next(null);
-    const imageSrc = document.querySelectorAll('#profilePic')[index];
-    if (gender === 'Male') {
-      imageSrc.setAttribute('src', '../../assets/male_pic.png');
-    } else {
-      imageSrc.setAttribute('src', '../../assets/female_pic.png');
-    }
-  }
-  getImagesCount() {
-    if (this.item && this.item.carousel !== '[]' && this.item.carousel && this.item.carousel !== 'null') {
-      const carouselObject: object = JSON.parse(this.item.carousel);
-      if (carouselObject) {
-        const size = Object.keys(carouselObject).length;
-        const arr: any[] = [];
-        for (let index = 0; index < size; index++) {
-          arr.push(index);
-        }
-        return arr;
-      }
-    } else {
-      this.carouselSize = [1];
-      return this.carouselSize;
-    }
-  }
   // on first image load complete
   onLoadingImage(index) {
     const imageElement: any = document.querySelector('#profilePic');
@@ -1006,63 +845,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       modal.style.display = 'none';
     };
   }
-  setDate(date: string) {
-    const newDate = new Date(date);
-    return new Intl.DateTimeFormat('en-AU').format(newDate);
-  }
-  setManglik(value: string) {
-    if (value === 'No') {
-      return 'Non Manglik';
-    } else {
-      return value;
-    }
-  }
-  setMarriageBrothers(value1: any, value2: any) {
-    if (value1 != null && value1 !== '' && value1 !== 0) {
-      if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
-      } else {
-        return String(Number(value1) + Number(value2)) + ' Brothers';
-      }
-    } else {
-      if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + ' Brothers';
-      } else {
-        return '0 Brothers';
-      }
-    }
-  }
-
-  setMarriageSisters(value1: any, value2: any) {
-    if (value1 != null && value1 !== '' && value1 !== 0) {
-      if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + '| ' + value1 + ' Married';
-      } else {
-        return String(Number(value1) + Number(value2)) + ' Sisters';
-      }
-    } else {
-      if (value2 != null && value2 !== '' && value2 !== 0) {
-        return String(Number(value1) + Number(value2)) + ' Sisters';
-      } else {
-        return '0 Sisters';
-      }
-    }
-  }
-
-  LifeStatus(person: string, work: string, type: string) {
-    if (person != null && person !== '') {
-      if (person.match('Alive')) {
-        if (work) {
-          return `${type} is Alive | ` + work;
-        } else {
-          return `${type} is Alive`;
-        }
-      } else {
-        return `${type} is Dead`;
-      }
-    }
-  }
-
   getProfilesLeft(left: any) {
     console.log(left);
     let value;
@@ -1077,7 +859,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       }
     }
   }
-
+  //this function is not being anywhere
   openMessageDialog(shareItem, reply: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
@@ -1121,22 +903,24 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       case 'shortlist':
         this.shortListCount++;
         break;
-
       default:
         break;
     }
   }
-
-  getQualification(degree, education) {
-    return education != null && education !== '' ? education : degree;
-  }
-
   // scroll down animation button
   scrollDown() {
     console.log('scroll down');
     document.querySelector('#today-main').scrollBy({
       top: 350,
       behavior: 'smooth'
+    });
+  }
+  //function to alow scroll down or up on mobile devices
+  slideDown(i: number) {
+    //console.log('scroll down', i);
+    document.querySelector('#today-main').scrollBy({
+      top: i,
+      behavior: 'smooth',
     });
   }
   // stops animation
@@ -1161,21 +945,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       class2.classList.add(animationClass1);
     }
   }
-
-  houseStatus() {
-    if (this.item.house_type && this.item.house_type.toLowerCase().indexOf('own') !== -1) {
-      return 'Own House';
-    } else {
-      return 'Rented House';
-    }
-  }
-  familyType() {
-    if (this.item.family_type && this.item.family_type.toLowerCase().indexOf('nuclear') !== -1) {
-      return 'Nuclear Family';
-    } else {
-      return 'Joint Family';
-    }
-  }
+  //opens thhe completely dynamic dialog
   openPersistentDialog(message: string, submessage: string, button: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
@@ -1205,723 +975,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     const dialogRef = this.dialog.open(PersistentMessageComponent, dialogConfig);
   }
-
-  // setting dynamic about me if users about me is null or na
-  setAbout() {
-    if (this.item) {
-      const aboutObject = {
-        dob: this.item.birth_date ? `I am ${this.setAge(this.item.birth_date)} old ` : '',
-        caste: this.item.caste ?
-          this.item.caste !== 'All' ? this.item.caste : '' : '',
-        manglik: this.item.manglik ? this.item.manglik : '',
-        gender: this.item.gender ? this.item.gender === 'Male' ? 'boy' : 'girl' : '',
-        locality: this.item.locality ? this.item.locality === 'Visible after Contact' ?
-          '' : ` residing in ${this.item.locality}` : '',
-        qualification: this.item.education ?
-          `. I've completed my ${this.item.education}` : this.item.degree ?
-            `. I've completed my ${this.item.degree}` : '',
-        occupation: this.item.occupation ?
-          this.item.occupation === 'Business/Self-Employed' ?
-            ' and Self-Employed' : this.item.occupation === 'Not Working' ? 'currently not working'
-              : this.item.occupation === 'Doctor' ||
-                this.item.occupation === 'Teacher'
-                ? ` currently working as ${this.item.occupation}` :
-                ` currently working in ${this.item.occupation}` : '',
-        working: this.item.working_city ? this.item.working_city !== 'Not Working'
-          ? this.item.working_city !== 'na' ? `in ${this.item.working_city}` : '' : '' : '',
-        designation: this.item.profession ?
-          this.item.occupation !== 'Not Working' ?
-            this.item.profession !== 'n/a' ? this.item.profession !== 'na' ?
-              ` as ${this.item.profession}` : '' : '' : '' : '',
-      };
-
-      // tslint:disable-next-line: max-line-length
-      return `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.working}.`;
-
-    }
-  }
-  HandleStackedCards() {
-    console.log("the stacked card event is triggered");
-    function stackedCards() {
-
-      var stackedOptions = 'Top'; //Change stacked cards view from 'Bottom', 'Top' or 'None'.
-      var rotate = true; //Activate the elements' rotation for each move on stacked cards.
-      var items = 3; //Number of visible elements when the stacked options are bottom or top.
-      var elementsMargin = 10; //Define the distance of each element when the stacked options are bottom or top.
-      var useOverlays = true; //Enable or disable the overlays for swipe elements.
-      var maxElements; //Total of stacked cards on DOM.
-      var currentPosition = 0; //Keep the position of active stacked card.
-      var velocity = 0.3; //Minimum velocity allowed to trigger a swipe.
-      var topObj; //Keep the swipe top properties.
-      var rightObj; //Keep the swipe right properties.
-      var leftObj; //Keep the swipe left properties.
-      var listElNodesObj; //Keep the list of nodes from stacked cards.
-      var listElNodesWidth; //Keep the stacked cards width.
-      var currentElementObj; //Keep the stacked card element to swipe.
-      var stackedCardsObj;
-      var isFirstTime = true;
-      var elementHeight;
-      var obj;
-      var elTrans;
-
-      obj = document.getElementById('stacked-cards-block');
-      stackedCardsObj = obj.querySelector('.stackedcards-container');
-      listElNodesObj = stackedCardsObj.children;
-
-      topObj = obj.querySelector('.stackedcards-overlay.top');
-      rightObj = obj.querySelector('.stackedcards-overlay.right');
-      leftObj = obj.querySelector('.stackedcards-overlay.left');
-
-      countElements();
-      currentElement();
-      listElNodesWidth = stackedCardsObj.offsetWidth;
-      currentElementObj = listElNodesObj[0];
-      updateUi();
-
-      //Prepare elements on DOM
-      let addMargin = elementsMargin * (items - 1) + 'px';
-
-      if (stackedOptions === "Top") {
-
-        for (let i = items; i < maxElements; i++) {
-          listElNodesObj[i].classList.add('stackedcards-top', 'stackedcards--animatable', 'stackedcards-origin-top');
-        }
-
-        elTrans = elementsMargin * (items - 1);
-
-        stackedCardsObj.style.marginBottom = addMargin;
-
-      } else if (stackedOptions === "Bottom") {
-
-
-        for (let i = items; i < maxElements; i++) {
-          listElNodesObj[i].classList.add('stackedcards-bottom', 'stackedcards--animatable', 'stackedcards-origin-bottom');
-        }
-
-        elTrans = 0;
-
-        stackedCardsObj.style.marginBottom = addMargin;
-
-      } else if (stackedOptions === "None") {
-
-        for (let i = items; i < maxElements; i++) {
-          listElNodesObj[i].classList.add('stackedcards-none', 'stackedcards--animatable');
-        }
-
-        elTrans = 0;
-
-      }
-
-      for (let i = items; i < maxElements; i++) {
-        listElNodesObj[i].style.zIndex = 0;
-        listElNodesObj[i].style.opacity = 0;
-        listElNodesObj[i].style.webkitTransform = 'scale(' + (1 - (items * 0.04)) + ') translateX(0) translateY(' + elTrans + 'px) translateZ(0)';
-        listElNodesObj[i].style.transform = 'scale(' + (1 - (items * 0.04)) + ') translateX(0) translateY(' + elTrans + 'px) translateZ(0)';
-      }
-
-      if (listElNodesObj[currentPosition]) {
-        listElNodesObj[currentPosition].classList.add('stackedcards-active');
-      }
-
-      if (useOverlays) {
-        leftObj.style.transform = 'translateX(0px) translateY(' + elTrans + 'px) translateZ(0px) rotate(0deg)';
-        leftObj.style.webkitTransform = 'translateX(0px) translateY(' + elTrans + 'px) translateZ(0px) rotate(0deg)';
-
-        rightObj.style.transform = 'translateX(0px) translateY(' + elTrans + 'px) translateZ(0px) rotate(0deg)';
-        rightObj.style.webkitTransform = 'translateX(0px) translateY(' + elTrans + 'px) translateZ(0px) rotate(0deg)';
-
-        topObj.style.transform = 'translateX(0px) translateY(' + elTrans + 'px) translateZ(0px) rotate(0deg)';
-        topObj.style.webkitTransform = 'translateX(0px) translateY(' + elTrans + 'px) translateZ(0px) rotate(0deg)';
-
-      } else {
-        leftObj.className = '';
-        rightObj.className = '';
-        topObj.className = '';
-
-        leftObj.classList.add('stackedcards-overlay-hidden');
-        rightObj.classList.add('stackedcards-overlay-hidden');
-        topObj.classList.add('stackedcards-overlay-hidden');
-      }
-
-      //Remove class init
-      setTimeout(function () {
-        obj.classList.remove('init');
-      }, 150);
-
-
-      function backToMiddle() {
-
-        removeNoTransition();
-        transformUi(0, 0, 1, currentElementObj);
-
-        if (useOverlays) {
-          transformUi(0, 0, 0, leftObj);
-          transformUi(0, 0, 0, rightObj);
-          transformUi(0, 0, 0, topObj);
-        }
-
-        setZindex(5);
-
-        if (!(currentPosition >= maxElements)) {
-          //roll back the opacity of second element
-          if ((currentPosition + 1) < maxElements) {
-            listElNodesObj[currentPosition + 1].style.opacity = '.8';
-          }
-        }
-      };
-
-      // Usable functions
-      function countElements() {
-        maxElements = listElNodesObj.length;
-        if (items > maxElements) {
-          items = maxElements;
-        }
-      };
-
-      //Keep the active card.
-      function currentElement() {
-        currentElementObj = listElNodesObj[currentPosition];
-      };
-
-      //Functions to swipe left elements on logic external action.
-      function onActionLeft() {
-        if (!(currentPosition >= maxElements)) {
-          if (useOverlays) {
-            leftObj.classList.remove('no-transition');
-            topObj.classList.remove('no-transition');
-            leftObj.style.zIndex = '8';
-            transformUi(0, 0, 1, leftObj);
-
-          }
-
-          setTimeout(function () {
-            onSwipeLeft();
-            resetOverlayLeft();
-          }, 300);
-        }
-      };
-
-      //Functions to swipe right elements on logic external action.
-      function onActionRight() {
-        if (!(currentPosition >= maxElements)) {
-          if (useOverlays) {
-            rightObj.classList.remove('no-transition');
-            topObj.classList.remove('no-transition');
-            rightObj.style.zIndex = '8';
-            transformUi(0, 0, 1, rightObj);
-          }
-
-          setTimeout(function () {
-            onSwipeRight();
-            resetOverlayRight();
-          }, 300);
-        }
-      };
-
-      //Functions to swipe top elements on logic external action.
-      function onActionTop() {
-        if (!(currentPosition >= maxElements)) {
-          if (useOverlays) {
-            leftObj.classList.remove('no-transition');
-            rightObj.classList.remove('no-transition');
-            topObj.classList.remove('no-transition');
-            topObj.style.zIndex = '8';
-            transformUi(0, 0, 1, topObj);
-          }
-
-          setTimeout(function () {
-            onSwipeTop();
-            resetOverlays();
-          }, 300); //wait animations end
-        }
-      };
-
-      //Swipe active card to left.
-      function onSwipeLeft() {
-        removeNoTransition();
-        transformUi(-1000, 0, 0, currentElementObj);
-        if (useOverlays) {
-          transformUi(-1000, 0, 0, leftObj); //Move leftOverlay
-          transformUi(-1000, 0, 0, topObj); //Move topOverlay
-          resetOverlayLeft();
-        }
-        currentPosition = currentPosition + 1;
-        updateUi();
-        currentElement();
-        setActiveHidden();
-      };
-
-      //Swipe active card to right.
-      function onSwipeRight() {
-        removeNoTransition();
-        transformUi(1000, 0, 0, currentElementObj);
-        if (useOverlays) {
-          transformUi(1000, 0, 0, rightObj); //Move rightOverlay
-          transformUi(1000, 0, 0, topObj); //Move topOverlay
-          resetOverlayRight();
-        }
-
-        currentPosition = currentPosition + 1;
-        updateUi();
-        currentElement();
-        setActiveHidden();
-      };
-
-      //Swipe active card to top.
-      function onSwipeTop() {
-        removeNoTransition();
-        transformUi(0, -1000, 0, currentElementObj);
-        if (useOverlays) {
-          transformUi(0, -1000, 0, leftObj); //Move leftOverlay
-          transformUi(0, -1000, 0, rightObj); //Move rightOverlay
-          transformUi(0, -1000, 0, topObj); //Move topOverlay
-          resetOverlays();
-        }
-
-        currentPosition = currentPosition + 1;
-        updateUi();
-        currentElement();
-        setActiveHidden();
-      };
-
-      //Remove transitions from all elements to be moved in each swipe movement to improve perfomance of stacked cards.
-      function removeNoTransition() {
-        if (listElNodesObj[currentPosition]) {
-
-          if (useOverlays) {
-            leftObj.classList.remove('no-transition');
-            rightObj.classList.remove('no-transition');
-            topObj.classList.remove('no-transition');
-          }
-
-          listElNodesObj[currentPosition].classList.remove('no-transition');
-          listElNodesObj[currentPosition].style.zIndex = 6;
-        }
-
-      };
-
-      //Move the overlay left to initial position.
-      function resetOverlayLeft() {
-        if (!(currentPosition >= maxElements)) {
-          if (useOverlays) {
-            setTimeout(function () {
-
-              if (stackedOptions === "Top") {
-
-                elTrans = elementsMargin * (items - 1);
-
-              } else if (stackedOptions === "Bottom" || stackedOptions === "None") {
-
-                elTrans = 0;
-
-              }
-
-              if (!isFirstTime) {
-
-                leftObj.classList.add('no-transition');
-                topObj.classList.add('no-transition');
-
-              }
-
-              requestAnimationFrame(function () {
-
-                leftObj.style.transform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                leftObj.style.webkitTransform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                leftObj.style.opacity = '0';
-
-                topObj.style.transform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                topObj.style.webkitTransform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                topObj.style.opacity = '0';
-
-              });
-
-            }, 300);
-
-            isFirstTime = false;
-          }
-        }
-      };
-
-      //Move the overlay right to initial position.
-      function resetOverlayRight() {
-        if (!(currentPosition >= maxElements)) {
-          if (useOverlays) {
-            setTimeout(function () {
-
-              if (stackedOptions === "Top") {
-                +2
-
-                elTrans = elementsMargin * (items - 1);
-
-              } else if (stackedOptions === "Bottom" || stackedOptions === "None") {
-
-                elTrans = 0;
-
-              }
-
-              if (!isFirstTime) {
-
-                rightObj.classList.add('no-transition');
-                topObj.classList.add('no-transition');
-
-              }
-
-              requestAnimationFrame(function () {
-
-                rightObj.style.transform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                rightObj.style.webkitTransform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                rightObj.style.opacity = '0';
-
-                topObj.style.transform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                topObj.style.webkitTransform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                topObj.style.opacity = '0';
-
-              });
-
-            }, 300);
-
-            isFirstTime = false;
-          }
-        }
-      };
-
-      //Move the overlays to initial position.
-      function resetOverlays() {
-        if (!(currentPosition >= maxElements)) {
-          if (useOverlays) {
-
-            setTimeout(function () {
-              if (stackedOptions === "Top") {
-
-                elTrans = elementsMargin * (items - 1);
-
-              } else if (stackedOptions === "Bottom" || stackedOptions === "None") {
-
-                elTrans = 0;
-
-              }
-
-              if (!isFirstTime) {
-
-                leftObj.classList.add('no-transition');
-                rightObj.classList.add('no-transition');
-                topObj.classList.add('no-transition');
-
-              }
-
-              requestAnimationFrame(function () {
-
-                leftObj.style.transform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                leftObj.style.webkitTransform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                leftObj.style.opacity = '0';
-
-                rightObj.style.transform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                rightObj.style.webkitTransform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                rightObj.style.opacity = '0';
-
-                topObj.style.transform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                topObj.style.webkitTransform = "translateX(0) translateY(" + elTrans + "px) translateZ(0)";
-                topObj.style.opacity = '0';
-
-              });
-
-            }, 300);	// wait for animations time
-
-            isFirstTime = false;
-          }
-        }
-      };
-
-      function setActiveHidden() {
-        if (!(currentPosition >= maxElements)) {
-          listElNodesObj[currentPosition - 1].classList.remove('stackedcards-active');
-          listElNodesObj[currentPosition - 1].classList.add('stackedcards-hidden');
-          listElNodesObj[currentPosition].classList.add('stackedcards-active');
-        }
-      };
-
-      //Set the new z-index for specific card.
-      function setZindex(zIndex) {
-        if (listElNodesObj[currentPosition]) {
-          listElNodesObj[currentPosition].style.zIndex = zIndex;
-        }
-      };
-
-      // Remove element from the DOM after swipe. To use this method you need to call this function in onSwipeLeft, onSwipeRight and onSwipeTop and put the method just above the variable 'currentPosition = currentPosition + 1'. 
-      //On the actions onSwipeLeft, onSwipeRight and onSwipeTop you need to remove the currentPosition variable (currentPosition = currentPosition + 1) and the function setActiveHidden
-
-      function removeElement() {
-        currentElementObj.remove();
-        if (!(currentPosition >= maxElements)) {
-          listElNodesObj[currentPosition].classList.add('stackedcards-active');
-        }
-      };
-
-      //Add translate X and Y to active card for each frame.
-      function transformUi(moveX, moveY, opacity, elementObj) {
-        requestAnimationFrame(function () {
-          var element = elementObj;
-          let rotateElement;
-          // Function to generate rotate value 
-          function RotateRegulator(value) {
-            if (value / 10 > 15) {
-              return 15;
-            }
-            else if (value / 10 < -15) {
-              return -15;
-            }
-            return value / 10;
-          }
-
-          if (rotate) {
-            rotateElement = RotateRegulator(moveX);
-          } else {
-            rotateElement = 0;
-          }
-
-          if (stackedOptions === "Top") {
-            elTrans = elementsMargin * (items - 1);
-            if (element) {
-              element.style.webkitTransform = "translateX(" + moveX + "px) translateY(" + (moveY + elTrans) + "px) translateZ(0) rotate(" + rotateElement + "deg)";
-              element.style.transform = "translateX(" + moveX + "px) translateY(" + (moveY + elTrans) + "px) translateZ(0) rotate(" + rotateElement + "deg)";
-              element.style.opacity = opacity;
-            }
-          } else if (stackedOptions === "Bottom" || stackedOptions === "None") {
-
-            if (element) {
-              element.style.webkitTransform = "translateX(" + moveX + "px) translateY(" + (moveY) + "px) translateZ(0) rotate(" + rotateElement + "deg)";
-              element.style.transform = "translateX(" + moveX + "px) translateY(" + (moveY) + "px) translateZ(0) rotate(" + rotateElement + "deg)";
-              element.style.opacity = opacity;
-            }
-
-          }
-        });
-      };
-
-      //Action to update all elements on the DOM for each stacked card.
-      function updateUi() {
-        requestAnimationFrame(function () {
-          elTrans = 0;
-          var elZindex = 5;
-          var elScale = 1;
-          var elOpac = 1;
-          var elTransTop = items;
-          var elTransInc = elementsMargin;
-
-          for (let i = currentPosition; i < (currentPosition + items); i++) {
-            if (listElNodesObj[i]) {
-              if (stackedOptions === "Top") {
-
-                listElNodesObj[i].classList.add('stackedcards-top', 'stackedcards--animatable', 'stackedcards-origin-top');
-
-                if (useOverlays) {
-                  leftObj.classList.add('stackedcards-origin-top');
-                  rightObj.classList.add('stackedcards-origin-top');
-                  topObj.classList.add('stackedcards-origin-top');
-                }
-
-                elTrans = elTransInc * elTransTop;
-                elTransTop--;
-
-              } else if (stackedOptions === "Bottom") {
-                listElNodesObj[i].classList.add('stackedcards-bottom', 'stackedcards--animatable', 'stackedcards-origin-bottom');
-
-                if (useOverlays) {
-                  leftObj.classList.add('stackedcards-origin-bottom');
-                  rightObj.classList.add('stackedcards-origin-bottom');
-                  topObj.classList.add('stackedcards-origin-bottom');
-                }
-
-                elTrans = elTrans + elTransInc;
-
-              } else if (stackedOptions === "None") {
-
-                listElNodesObj[i].classList.add('stackedcards-none', 'stackedcards--animatable');
-                elTrans = elTrans + elTransInc;
-
-              }
-
-              listElNodesObj[i].style.transform = 'scale(' + elScale + ') translateX(0) translateY(' + (elTrans - elTransInc) + 'px) translateZ(0)';
-              listElNodesObj[i].style.webkitTransform = 'scale(' + elScale + ') translateX(0) translateY(' + (elTrans - elTransInc) + 'px) translateZ(0)';
-              listElNodesObj[i].style.opacity = elOpac;
-              listElNodesObj[i].style.zIndex = elZindex;
-
-              elScale = elScale - 0.04;
-              elOpac = elOpac - (1 / items);
-              elZindex--;
-            }
-          }
-
-        });
-
-      };
-
-      //Touch events block
-      var element = obj;
-      var startTime;
-      var startX;
-      var startY;
-      var translateX;
-      var translateY;
-      var currentX;
-      var currentY;
-      var touchingElement = false;
-      var timeTaken;
-      var topOpacity;
-      var rightOpacity;
-      var leftOpacity;
-
-      function setOverlayOpacity() {
-
-        topOpacity = (((translateY + (elementHeight) / 2) / 100) * -1);
-        rightOpacity = translateX / 100;
-        leftOpacity = ((translateX / 100) * -1);
-
-
-        if (topOpacity > 1) {
-          topOpacity = 1;
-        }
-
-        if (rightOpacity > 1) {
-          rightOpacity = 1;
-        }
-
-        if (leftOpacity > 1) {
-          leftOpacity = 1;
-        }
-      }
-
-      function gestureStart(evt) {
-        startTime = new Date().getTime();
-
-        startX = evt.changedTouches[0].clientX;
-        startY = evt.changedTouches[0].clientY;
-
-        currentX = startX;
-        currentY = startY;
-
-        setOverlayOpacity();
-
-        touchingElement = true;
-        if (!(currentPosition >= maxElements)) {
-          if (listElNodesObj[currentPosition]) {
-            listElNodesObj[currentPosition].classList.add('no-transition');
-            setZindex(6);
-
-            if (useOverlays) {
-              leftObj.classList.add('no-transition');
-              rightObj.classList.add('no-transition');
-              topObj.classList.add('no-transition');
-            }
-
-            if ((currentPosition + 1) < maxElements) {
-              listElNodesObj[currentPosition + 1].style.opacity = '1';
-            }
-
-            elementHeight = listElNodesObj[currentPosition].offsetHeight / 3;
-          }
-
-        }
-
-      };
-
-      function gestureMove(evt) {
-        currentX = evt.changedTouches[0].pageX;
-        currentY = evt.changedTouches[0].pageY;
-
-        translateX = currentX - startX;
-        translateY = currentY - startY;
-
-        setOverlayOpacity();
-
-        if (!(currentPosition >= maxElements)) {
-          evt.preventDefault();
-          transformUi(translateX, translateY, 1, currentElementObj);
-
-          if (useOverlays) {
-            transformUi(translateX, translateY, topOpacity, topObj);
-
-            if (translateX < 0) {
-              transformUi(translateX, translateY, leftOpacity, leftObj);
-              transformUi(0, 0, 0, rightObj);
-
-            } else if (translateX > 0) {
-              transformUi(translateX, translateY, rightOpacity, rightObj);
-              transformUi(0, 0, 0, leftObj);
-            }
-
-            if (useOverlays) {
-              leftObj.style.zIndex = 8;
-              rightObj.style.zIndex = 8;
-              topObj.style.zIndex = 7;
-            }
-
-          }
-
-        }
-
-      };
-
-      function gestureEnd(evt) {
-
-        if (!touchingElement) {
-          return;
-        }
-
-        translateX = currentX - startX;
-        translateY = currentY - startY;
-
-        timeTaken = new Date().getTime() - startTime;
-
-        touchingElement = false;
-
-        if (!(currentPosition >= maxElements)) {
-          if (translateY < (elementHeight * -1) && translateX > ((listElNodesWidth / 2) * -1) && translateX < (listElNodesWidth / 2)) {  //is Top?
-
-            if (translateY < (elementHeight * -1) || (Math.abs(translateY) / timeTaken > velocity)) { // Did It Move To Top?
-              onSwipeTop();
-            } else {
-              backToMiddle();
-            }
-
-          } else {
-
-            if (translateX < 0) {
-              if (translateX < ((listElNodesWidth / 2) * -1) || (Math.abs(translateX) / timeTaken > velocity)) { // Did It Move To Left?
-                onSwipeLeft();
-              } else {
-                backToMiddle();
-              }
-            } else if (translateX > 0) {
-
-              if (translateX > (listElNodesWidth / 2) && (Math.abs(translateX) / timeTaken > velocity)) { // Did It Move To Right?
-                onSwipeRight();
-              } else {
-                backToMiddle();
-              }
-
-            }
-          }
-        }
-      };
-
-      element.addEventListener('touchstart', gestureStart, false);
-      element.addEventListener('touchmove', gestureMove, false);
-      element.addEventListener('touchend', gestureEnd, false);
-
-      //Add listeners to call global action for swipe cards
-      var buttonLeft = document.querySelector('.left-action');
-      var buttonTop = document.querySelector('.top-action');
-      var buttonRight = document.querySelector('.right-action');
-
-      buttonLeft.addEventListener('click', onActionLeft, false);
-      buttonTop.addEventListener('click', onActionTop, false);
-      buttonRight.addEventListener('click', onActionRight, false);
-
-    }
-    stackedCards();
+  logChoice(event) {
+    this.getNextMessageOrProfile(event.reply);
   }
 }
-
-
-
