@@ -44,6 +44,13 @@ export class TinderUiComponent {
       this.tinderCardsArray = this.tinderCards.toArray();
     })
   };
+  scrollDown() {
+    console.log('scroll down');
+    document.querySelector('#today-main').scrollBy({
+      top: 350,
+      behavior: 'smooth'
+    });
+  }
   userClickedButton(reply) {
     if (!this.cards.length) return false;
     if (reply.toLowerCase() === 'shortlist') {

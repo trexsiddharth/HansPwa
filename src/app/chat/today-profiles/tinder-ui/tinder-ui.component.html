@@ -124,7 +124,7 @@
                         <p class="title" style="margin-left:0px">
                             <span
                                 style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span>
-                            {{item.about ? item.about.length < 30 ? toTitleCase(setAbout()) : toTitleCase(item.about) : toTitleCase(setAbout())}}
+                            {{item.about ? item.about.length < 30 ? toTitleCase(setAbout(item)) : toTitleCase(item.about) : toTitleCase(setAbout(item))}}
                         </p>
                     </div>
                     <div id="personalSection">
