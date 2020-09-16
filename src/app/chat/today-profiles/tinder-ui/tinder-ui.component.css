@@ -14,6 +14,7 @@
     width: 100%;
     text-align: center;
     pointer-events: none;
+    place-items: center!important;
   }
   .tinder--cards {
     display: flex;
@@ -52,9 +53,9 @@
   
   .tinder--status svg {
     transition: all 0.3s ease-in-out;
-    position: absolute;
-    width: 100px;
-    margin-left: -50px;
+    top: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
   }
   
   .tinder--buttons {
@@ -90,10 +91,10 @@
     animation: skewAnimation 1s linear infinite alternate;
 }
 .pinkBack {
-    background: rgba(211,19,174,0.7);
+    background-color: rgba(211, 19, 173, 0.925)!important;
 }
 .greyBack {
-    background: rgba(200,200,200,0.7);
+    background-color: rgba(200, 200, 200, 0.911)!important;
 }
 .blueBack {
     background: rgba(88,209,253,0.7);

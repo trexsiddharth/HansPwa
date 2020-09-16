@@ -107,7 +107,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit() {
-
     if (this.router.url.includes('first')) {
       this.spinner.show('searchingSpinner');
     }
@@ -348,7 +347,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   showShortListPopup(shareItem, i: number) {
-    return;
     console.log(i);
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
@@ -361,7 +359,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
   rejectListPopup(shareItem, i: number) {
-    return;
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
     }
@@ -372,12 +369,13 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   persistentDialogOpeningLogic(shareItem, reply: string) {
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes' && this.type === 'profile') {
-      return;
       this.itemService.openTodaysPopupAd();
     } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
       this.actionCount++;
       console.log('action count', this.actionCount)
       if ((this.itemService.getCredits() != null && this.itemService.getCredits().toString() !== '0') && (this.actionCount % 4 !== 0)) {
+        console.log('get data called');
+        this.getData(reply);
         console.log('returning for paid users for paid users');
         return;
       }
@@ -462,7 +460,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     this.stopAnimation();
     this.itemService.setTutorialIndex();
 
-    this.persistentDialogOpeningLogic(this.item, reply);
+    this.persistentDialogOpeningLogic(this.item.apiwha_autoreply, reply);
     const modal = document.getElementById('myModal');
 
     if (modal.style.display !== 'none') {
@@ -590,31 +588,40 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         //type = message means that we do not have any profiles to show to the user. 
         if (data.type === 'profile') {
           this.type = 'profile';
-
           //stop user response animation
           // if (data.name === this.item.apiwha_autoreply.name) {
           //   this.profileIsLoadingSubject.next(null);
           // }
           // this is the MOST IMPORTANT PART from the perspective of setting the profiles and maipulation the dom after that
-          if (JSON.stringify(data) !== JSON.stringify(this.item)) {
-            // if (JSON.stringify(this.item.next_profile) === JSON.stringify(data.apiwha_autoreply)) {
-            //   console.log('condition satisfied')
-            //   this.item = data;
-            //   //this.profileItems.splice(0, 1);
-            //   this.profileItems.push(data.apiwha_autoreply);
-            // }
-            console.log('wasSetFromLocal', this.wasSetFromLocal);
-            this.item = data;
-            //this.profileItems.splice(0, 1);
-            if (this.wasSetFromLocal) {
-              this.profileItems.push(data.next_profile);
+          if (this.wasSetFromLocal && JSON.stringify(data) === JSON.stringify(this.item)) {
+            console.log('qwerty data set from local was same as that recieved in api; probably case of reload');
+            //case of reload
+            localStorage.setItem('todayProfile', JSON.stringify(data));
+          }
+          else if (this.wasSetFromLocal && JSON.stringify(data) !== JSON.stringify(this.item)) {
+            console.log('qwerty data set from local was NOT same as that recieved in api');
+            if (JSON.stringify(this.item.next_profile) === JSON.stringify(data.apiwha_autoreply)) {
+              if (data.next_profile)
+                this.profileItems.push(data.next_profile);
             }
             else {
+              this.profileItems = [];
               this.profileItems.push(data.apiwha_autoreply);
-              this.profileItems.push(data.next_profile);
-              this.wasSetFromLocal = true;
+              if (data.next_profile)
+                this.profileItems.push(data.next_profile);
             }
+            this.item = data;
             localStorage.setItem('todayProfile', JSON.stringify(data));
+          }
+          else if (!this.wasSetFromLocal) {
+            //case of logged in
+            console.log('qwerty data was NOT set from local ; case of logging in')
+            this.profileItems.push(data.apiwha_autoreply);
+            if (data.next_profile)
+              this.profileItems.push(data.next_profile);
+            this.item = data;
+            localStorage.setItem('todayProfile', JSON.stringify(data));
+            this.wasSetFromLocal = true;
           }
           // data.first_time = 0 -> when user comes for the first time on a day
           // data.first_time = 1 -> it gets 1 once he has seen first profile
@@ -699,14 +706,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         if (this.points > 0 && reply === 'YES') {
           this.itemService.setItem(previousItem);
           localStorage.setItem('visibleAfter', 'true');
-          this.router.navigateByUrl(`chat/open/open-profile/${previousItem.id}`);
-          // this.itemService.changeTab(1);
-        } else {
-          if (document.getElementById('profilePic')) {
-            //document.getElementById('profilePic').scrollIntoView({ behavior: 'smooth' });
-          }
+          this.router.navigateByUrl(`chat/open/open-profile/${previousItem.apiwha_autoreply.id}`);
+          this.itemService.changeTab(1);
         }
-
         this.spinner.hide();
         this.getCredits();
       }, err => {

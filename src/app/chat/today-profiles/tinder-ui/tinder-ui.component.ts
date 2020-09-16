@@ -56,19 +56,25 @@ export class TinderUiComponent {
     if (reply.toLowerCase() === 'shortlist') {
       this.tinderCardsArray[0].nativeElement.style.transform = 'translate(' + this.moveOutWidth + 'px, -100px) rotate(40deg)';
       this.toggleChoiceIndicator(false, true);
+      this.shiftRequired = true;
+      this.transitionInProgress = true;
     } else if (reply.toLowerCase() === 'no') {
       this.tinderCardsArray[0].nativeElement.style.transform = 'translate(-' + this.moveOutWidth + 'px, -100px) rotate(-40deg)';
       this.toggleChoiceIndicator(true, false);
+      this.shiftRequired = true;
+      this.transitionInProgress = true;
     }
     else {
-      this.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px,-5000px) rotate(0deg)';
+      if (!(this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0')) {
+        this.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px,-5000px) rotate(0deg)';
+        this.shiftRequired = true;
+        this.transitionInProgress = true;
+      }
     };
     this.emitChoice(reply);
-    this.shiftRequired = true;
-    this.transitionInProgress = true;
   }
   emitChoice(reply) {
-    console.log('kklliihhklk', reply);
+    console.log('reply recieved is', reply);
     this.choiceMade.emit({
       reply: reply,
     });
