@@ -35,6 +35,7 @@ import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-prof
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
 import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.component';
 import { PersistentMessageComponent } from './today-profiles/persistent-message/persistent-message.component';
+import { TinderUiComponent } from './today-profiles/tinder-ui/tinder-ui.component';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import { PersistentMessageComponent } from './today-profiles/persistent-message/
     MyProfilePhotoUploadComponent,
     CustomerSupportComponent,
     OkdialogCsComponent,
-    PersistentMessageComponent
+    PersistentMessageComponent,
+    TinderUiComponent
   ],
   entryComponents: [
     MessageDialogComponent,
