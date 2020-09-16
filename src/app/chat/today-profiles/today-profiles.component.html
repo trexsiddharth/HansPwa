@@ -8,7 +8,7 @@ text-align: center;
 font-weight: 600;">We are looking for compatible matches for you
 </ngx-spinner>
 
-<app-tinder-ui [cards]="profileItems" (choiceMade)="logChoice($event)"></app-tinder-ui>
+<app-tinder-ui [cards]="profileItems" (choiceMade)="logChoice($event)" *ngIf="type == 'profile'"></app-tinder-ui>
 <!-- <div class="stackedcards-container" *ngIf="item && type == 'profile'"> -->
 <!-- <main id="main1" *ngIf="item && type == 'profile'">
                 <div class="full-width ht-full" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',

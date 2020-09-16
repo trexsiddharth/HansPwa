@@ -82,7 +82,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   // last action
   lastAction;
   showActionAnimation = false;
-
+  wasSetFromLocal: boolean = false;
   profileIsLoadingSubject = new Subject<string>();
   profileIsLoading$: Observable<string> = this.profileIsLoadingSubject.asObservable().pipe(
     shareReplay()
@@ -274,9 +274,12 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   private setProfileLocally() {
     this.type = 'profile';
     const data = JSON.parse(localStorage.getItem('todayProfile'));
-    this.item = data;
-    this.profileItems.push(data.apiwha_autoreply);
-    this.profileItems.push(data.next_profile);
+    if (data) {
+      this.item = data;
+      this.profileItems.push(data.apiwha_autoreply);
+      this.profileItems.push(data.next_profile);
+      this.wasSetFromLocal = true;
+    }
     if (data && data.get_status_count) {
       this.itemService.saveCount(data.get_status_count);
       this.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
@@ -589,9 +592,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           this.type = 'profile';
 
           //stop user response animation
-          if (data.name === this.item.name) {
-            this.profileIsLoadingSubject.next(null);
-          }
+          // if (data.name === this.item.apiwha_autoreply.name) {
+          //   this.profileIsLoadingSubject.next(null);
+          // }
           // this is the MOST IMPORTANT PART from the perspective of setting the profiles and maipulation the dom after that
           if (JSON.stringify(data) !== JSON.stringify(this.item)) {
             // if (JSON.stringify(this.item.next_profile) === JSON.stringify(data.apiwha_autoreply)) {
@@ -600,9 +603,17 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             //   //this.profileItems.splice(0, 1);
             //   this.profileItems.push(data.apiwha_autoreply);
             // }
+            console.log('wasSetFromLocal', this.wasSetFromLocal);
             this.item = data;
             //this.profileItems.splice(0, 1);
-            this.profileItems.push(data.apiwha_autoreply);
+            if (this.wasSetFromLocal) {
+              this.profileItems.push(data.next_profile);
+            }
+            else {
+              this.profileItems.push(data.apiwha_autoreply);
+              this.profileItems.push(data.next_profile);
+              this.wasSetFromLocal = true;
+            }
             localStorage.setItem('todayProfile', JSON.stringify(data));
           }
           // data.first_time = 0 -> when user comes for the first time on a day
