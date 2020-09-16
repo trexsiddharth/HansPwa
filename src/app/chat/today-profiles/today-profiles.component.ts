@@ -460,7 +460,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     this.stopAnimation();
     this.itemService.setTutorialIndex();
 
-    this.persistentDialogOpeningLogic(this.item.apiwha_autoreply, reply);
+    this.persistentDialogOpeningLogic(this.item ? this.item.apiwha_autoreply : this.item, reply);
     const modal = document.getElementById('myModal');
 
     if (modal.style.display !== 'none') {
