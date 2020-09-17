@@ -2,9 +2,9 @@
     <div id="offBanner">
         <img id="offBannerImg" class="circular mat-elevation-z10" [src]="imageSrc" />
     </div>
-    <div style="position:relative">
+    <div style="position:relative" style="padding:0 12px 0 12px;">
         <div id="cancel">
-            <img mat-dialog-close style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg"
+            <img (click)="close()" style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg"
                 alt="cancel" />
         </div>
         <main style="padding-bottom:30px;">
@@ -40,7 +40,7 @@
                     buttonClicked()">{{data.button}}</button>
             </div>
             <!-- <div >
-            <button mat-button mat-dialog-close class="btn-round" (click)="backToChat()">OK</button>
+            <button mat-button (click)="close()" class="btn-round" (click)="backToChat()">OK</button>
         </div> -->
         </main>
     </div>
@@ -49,10 +49,10 @@
     <div id="offBanner2">
         <img id="offBannerImg2" class="circular2 mat-elevation-z10" [src]="imageSrc" />
     </div>
-    <div style="position:relative">
+    <div style="position:relative" style="padding:0 12px 0 12px;">
         <div id="cancel">
             <img style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg" alt="cancel"
-                mat-dialog-close />
+                (click)="close()" />
         </div>
         <main style="padding-bottom:6px;" *ngIf="(pageThreeFilled$ | async) === false">
             <div style="
@@ -160,7 +160,7 @@
                     (click)="firstStep()">{{data.button}}</button>
             </div>
             <!-- <div >
-            <button mat-button mat-dialog-close class="btn-round" (click)="backToChat()">OK</button>
+            <button mat-button (click)="close()" class="btn-round" (click)="backToChat()">OK</button>
         </div> -->
         </main>
         <main style="padding-bottom:6px;" *ngIf="(pageThreeFilled$ | async)">

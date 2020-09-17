@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
+// import { Matpopupaction, MAT_DIALOG_DATA } from '@angular/material';
 import { EditPersonalDialogComponent } from '../../myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { Router } from '@angular/router';
 import { ChatServiceService } from 'src/app/chat-service.service';
@@ -16,9 +16,11 @@ import { shareReplay, startWith, map } from 'rxjs/operators';
   styleUrls: ['./persistent-message.component.css']
 })
 export class PersistentMessageComponent implements OnInit {
-  data: any;
-  PageThree: FormGroup;
 
+  @Input('data') data: any;
+  @Output() popupaction = new EventEmitter();
+
+  PageThree: FormGroup;
   birthPlace;
   birthPlaceText;
   errors: any;
@@ -83,14 +85,14 @@ export class PersistentMessageComponent implements OnInit {
   personalProfileData: any;
   familyProfileData: any;
   personalForm: FormGroup;
-
-  constructor(public dialogRef: MatDialogRef<EditPersonalDialogComponent>, @Inject(MAT_DIALOG_DATA) data,
+  //public popupaction: Matpopupaction<EditPersonalDialogComponent>, @Inject(MAT_DIALOG_DATA) data,
+  constructor(
     public router: Router,
     public chatService: ChatServiceService,
     public _formBuilder: FormBuilder,
     public ngxNotificationService: NgxNotificationService,
     public http: HttpClient) {
-    this.data = data;
+
     this.PageThree = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       BirthPlace: [''],
@@ -166,7 +168,6 @@ export class PersistentMessageComponent implements OnInit {
         detailsLeft.push(v);
       }
     }
-
     if (detailsLeft.length > 0) {
       this.detailsDisplayIndexSubject.next(0);
       console.log('index set to 0');
@@ -314,7 +315,9 @@ export class PersistentMessageComponent implements OnInit {
           this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
         }
       );
-      this.dialogRef.close();
+      this.popupaction.emit({
+        close: true,
+      });
     }
   }
   changed(element: any) {
@@ -397,7 +400,9 @@ export class PersistentMessageComponent implements OnInit {
           this.chatService.getUserProfileData();
           console.log('pageThreeFilled set to true');
 
-          this.dialogRef.close();
+          this.popupaction.emit({
+            close: true,
+          });
         } else {
           this.ngxNotificationService.error(res.message);
         }
@@ -410,7 +415,9 @@ export class PersistentMessageComponent implements OnInit {
     }
   }
   buttonClicked() {
-    this.dialogRef.close();
+    this.popupaction.emit({
+      close: true,
+    });
     switch (this.data.button) {
       case 'Get Membership': this.router.navigateByUrl(`subscription/${1}`);
         break;
@@ -422,5 +429,10 @@ export class PersistentMessageComponent implements OnInit {
         window.open('https://bit.ly/2YQEfbe', '_self')
         break;
     }
+  }
+  close() {
+    this.popupaction.emit({
+      close: true,
+    });
   }
 }

@@ -24,13 +24,16 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow: hidden;
+  }
+  .darkBackground{
+      background-color: #000000af;
   }
   .tinder--card {
     display: inline-block;
     width: 100%;
     height: 95%;
-    background:#ffffff;
+    background:transparent;
     padding-bottom: 10px;
     border-radius: 8px;
     position: absolute;
@@ -39,6 +42,7 @@
     cursor: -webkit-grab;
     cursor: -moz-grab;
     cursor: grab;
+    overflow:scroll;
   }
   .moving.tinder--card {
     transition: none;

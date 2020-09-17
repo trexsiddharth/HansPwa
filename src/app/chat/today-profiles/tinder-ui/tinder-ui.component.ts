@@ -1,7 +1,10 @@
-import { Component, Input, ViewChildren, QueryList, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChildren, QueryList, ElementRef, Renderer2, Output, EventEmitter, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ApiwhaAutoreply } from './../profile-today-model';
 import { FindOpenHistoryProfileService } from '../../../find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
+import { ChatServiceService } from 'src/app/chat-service.service';
 
 @Component({
   selector: 'app-tinder-ui',
@@ -9,9 +12,10 @@ import { LanguageService } from 'src/app/language.service';
   styleUrls: ['./tinder-ui.component.css']
 })
 
-export class TinderUiComponent {
+export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input('cards') cards: Array<ApiwhaAutoreply>;
+  @Input('name') profileName: string;
   @Output() choiceMade = new EventEmitter();
 
   @ViewChildren('tinderCard') tinderCards: QueryList<ElementRef>;
@@ -23,33 +27,213 @@ export class TinderUiComponent {
   transitionInProgress: boolean; // state variable that indicates currently there is transition on-going
   heartVisible: boolean;
   crossVisible: boolean;
-
+  popupdata: any = {};
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4.0"', '4.1"', '4.2"', '4.3"', '4.4"', '4.5"', '4.6"', '4.7"', '4.8"', '4.9"', '4.10"', '4.11"', '5.0', '5.1"', '5.2"', '5.3"', '5.4"', '5.5"', '5.6"', '5.7"', '5.8"', '5.9"', '5.10"', '5.11"', '6.0"', '6.1"', '6.2"', '6.3"', '6.4"', '6.5"', '6.6"', '6.7"', '6.8"', '6.9"', '6.10"', '6.11"', '7.0"'];
   // tslint:disable-next-line: max-line-length
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
+  actionCount = -2;
+
+  shortList =
+    [{ 'value': 0, 'bool': false }, { 'value': 1, 'bool': false }, { 'value': 2, 'bool': false },];
+  rejectList =
+    [{ 'value': 0, 'bool': false }, { 'value': 1, 'bool': false },];
 
   carouselSize;
   constructor(private renderer: Renderer2,
     public itemService: FindOpenHistoryProfileService,
-    public languageService: LanguageService) { // we imported Renderer to be able to alter style's of elements safely
+    public languageService: LanguageService,
+    public chatService: ChatServiceService,) {
+  }
+  userId;
+  userIsLead;
+  // whatToShow = new BehaviorSubject<string[]>(['profile', 'profile']);
+  // whatToShow$: Observable<string[]> = this.whatToShow.asObservable().pipe(
+  //   shareReplay(),
+  // );
+  whatToShow = ['profile', 'profile'];
+
+  ngOnInit(): void {
+    this.chatService.authorized.subscribe(
+      data => {
+        if (data) {
+          this.userId = data.id;
+          this.userIsLead = data.isLead;
+          console.log(this.userId, this.userIsLead);
+        }
+      }
+    );
   }
   ngAfterViewInit() {
     this.moveOutWidth = document.documentElement.clientWidth * 0.5;
     this.tinderCardsArray = this.tinderCards.toArray();
     this.tinderCards.changes.subscribe(() => {
-      // if (this.tinderCards.toArray().length > this.tinderCardsArray.length) {
-      //   this.tinderCardsArray.push(this.tinderCards.toArray()[this.tinderCards.toArray().length - 1]);
-      // }
       this.tinderCardsArray = this.tinderCards.toArray();
-    })
+    });
+    if (this.chatService.shortList.length > 0) {
+      this.shortList = this.chatService.shortList;
+      console.log('sortList values found in chat service');
+    }
+    else {
+      this.chatService.shortList = this.shortList;
+      console.log('setting shortList values in chat service');
+    }
+    if (this.chatService.rejectList.length > 0) {
+      this.rejectList = this.chatService.rejectList;
+      console.log('rejectList values found in chat service');
+    }
+    else {
+      this.chatService.rejectList = this.rejectList;
+      console.log('setting rejectList values in chat service');
+    }
+    if (this.chatService.actionCount !== -2) {
+      this.actionCount = this.chatService.actionCount;
+      console.log('found action count value in chat service');
+    }
+    else {
+      this.chatService.actionCount = this.actionCount;
+      console.log('setting action count value in chat service');
+    }
   };
+  ngOnDestroy(): void {
+    this.chatService.shortList = this.shortList;
+    console.log('setting shortList values in chat service');
+    this.chatService.rejectList = this.rejectList;
+    console.log('setting rejectList values in chat service');
+    this.chatService.actionCount = this.actionCount;
+    console.log('setting action count value in chat service');
+  }
   scrollDown() {
     console.log('scroll down');
-    document.querySelector('#today-main').scrollBy({
+    document.querySelectorAll('#mainTinderUI')[0].scrollBy({
       top: 350,
       behavior: 'smooth'
     });
+  }
+  showShortListPopup(i: number) {
+    console.log(i);
+    if (i == 0) {
+      this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + this.profileName + '!', 'Complete Profile');
+    }
+    if (i == 1) {
+      this.openPersistentDialog('Liked ' + this.profileName + '?', 'Get notified easily if ' + this.profileName + ' likes you back!', 'Install App Now');
+    }
+    if (i == 2) {
+      this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + this.profileName + '.', 'Get Membership');
+    }
+  }
+  rejectListPopup(i: number) {
+    if (i == 0) {
+      this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
+    }
+    if (i == 1) {
+      this.openPersistentDialog('Didn\'t Like ' + this.profileName + '?', 'Become a paid member and get better matches', 'Choose Plan');
+    }
+  }
+  persistentDialogOpeningLogic(reply: string) {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+      reply.toLowerCase() === 'yes') {
+      this.itemService.openTodaysPopupAd();
+    } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
+      this.actionCount++;
+      console.log('action count', this.actionCount)
+      if ((this.itemService.getCredits() != null && this.itemService.getCredits().toString() !== '0') && (this.actionCount % 4 !== 0)) {
+        console.log('get data called');
+        //this.getData(reply);
+        console.log('returning for paid users for paid users');
+        return;
+      }
+      if (this.actionCount % 2 === 0) {
+        if (reply.toLowerCase() === 'shortlist') {
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+            for (let x of this.shortList) {
+              if (x.value === 0) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          if (!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1')) {
+            for (let x of this.shortList) {
+              if (x.value === 1) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+            for (let x of this.shortList) {
+              if (x.value === 2) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          console.log('Here is the short list array', this.shortList);
+          let v;
+          for (v of this.shortList) {
+            if (v.bool) {
+              this.showShortListPopup(v.value);
+              break;
+            }
+          }
+          this.shortList.splice(this.shortList.indexOf(v), 1);
+          this.shortList.push(v);
+          console.log('here is the modified shortlist array', this.shortList);
+        }
+        else if (reply === 'NO') {
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+            for (let x of this.rejectList) {
+              if (x.value === 0) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+            for (let x of this.rejectList) {
+              if (x.value === 1) {
+                x.bool = true;
+                break;
+              }
+            }
+          }
+          console.log('Here is the reject list array', this.rejectList);
+          let v;
+          for (v of this.rejectList) {
+            if (v.bool) {
+              this.rejectListPopup(v.value);
+              break;
+            }
+          }
+          this.rejectList.splice(this.rejectList.indexOf(v), 1);
+          this.rejectList.push(v);
+          console.log('here is the modified reject list array', this.rejectList);
+        }
+      }
+      //this.getData(reply);
+      this.emitChoice(reply);
+    } else {
+      //this.getData(reply);
+      this.emitChoice(reply);
+    }
+  }
+  openPersistentDialog(message: string, submessage: string, button: string) {
+    this.popupdata = {
+      message: message,
+      submessage: submessage,
+      button: button,
+      userId: this.userId,
+      userIsLead: this.userIsLead,
+    }
+    setTimeout(() => {
+      this.whatToShow = ['popup', 'profile'];
+    }, 300);
+  }
+  popupAction(event) {
+    if (event.close) {
+      this.whatToShow = ['profile', 'profile'];
+    }
   }
   userClickedButton(reply) {
     if (!this.cards.length) return false;
@@ -71,7 +255,8 @@ export class TinderUiComponent {
         this.transitionInProgress = true;
       }
     };
-    this.emitChoice(reply);
+    //this.emitChoice(reply);
+    this.persistentDialogOpeningLogic(reply);
   }
   emitChoice(reply) {
     console.log('reply recieved is', reply);
@@ -104,18 +289,13 @@ export class TinderUiComponent {
     let xMulti = event.deltaX * 0.03;
     let yMulti = event.deltaY / 80;
     let rotate = xMulti * yMulti;
-
     this.renderer.setStyle(this.tinderCardsArray[0].nativeElement, 'transform', 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate(' + rotate + 'deg)');
-
     this.shiftRequired = true;
-
   };
-
   handlePanEnd(event) {
     this.toggleChoiceIndicator(false, false);
     if (!this.cards.length) return;
     this.renderer.removeClass(this.tinderCardsArray[0].nativeElement, 'moving');
-
     let keep = Math.abs(event.deltaX) < 100 || Math.abs(event.velocityX) < 1.0;
     if (keep) {
       this.renderer.setStyle(this.tinderCardsArray[0].nativeElement, 'transform', '');

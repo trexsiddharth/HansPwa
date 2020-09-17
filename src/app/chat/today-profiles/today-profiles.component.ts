@@ -101,11 +101,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     public subscriptionService: SubscriptionserviceService,
     private breakPointObserver: BreakpointObserver,) {
   }
-
   ngAfterViewInit() {
     this.section = document.querySelector('#today-main');
   }
-
   ngOnInit() {
     if (this.router.url.includes('first')) {
       this.spinner.show('searchingSpinner');
@@ -334,9 +332,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
-
         console.log('Tracking ' + event + ' successful');
-
       }
     });
     // gtag app + web
@@ -460,14 +456,14 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     this.stopAnimation();
     this.itemService.setTutorialIndex();
 
-    this.persistentDialogOpeningLogic(this.item ? this.item.apiwha_autoreply : this.item, reply);
+    //this.persistentDialogOpeningLogic(this.item ? this.item.apiwha_autoreply : this.item, reply);
+    console.log('get data called');
+    this.getData(reply);
     const modal = document.getElementById('myModal');
-
     if (modal.style.display !== 'none') {
       modal.style.display = 'none';
     }
   }
-
   getData(reply) {
     // shortlist count
     console.log(reply);
@@ -626,7 +622,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           // data.first_time = 0 -> when user comes for the first time on a day
           // data.first_time = 1 -> it gets 1 once he has seen first profile
           if (data.first_time === 0 && !this.router.url.match('first')) {
-            this.itemService.openWelcomeDialog(this.item.profiles_left);
+            this.itemService.openWelcomeDialog(this.item.apiwha_autoreply.profiles_left);
           }
 
           // if photo is null
