@@ -11,8 +11,6 @@ import { timeout, retry, catchError, takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
-import { trigger, transition, animate, style } from '@angular/animations'
-import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-chat-drawer',
