@@ -204,7 +204,7 @@
         [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="getScrollData()">
         <div *ngFor="let item of profile;let i = index">
             <div class="historyProfile" [id]="i">
-                <img class="historyImage" #profilePic
+                <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'}" #profilePic
                     [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
                     (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
                     alt="profile picture">

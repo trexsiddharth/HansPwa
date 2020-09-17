@@ -240,15 +240,15 @@ hr{
   }
 .rowMore{
     width:100%;
-    padding-top:5px;
-    padding-bottom:5px;
+    padding-top:12px;
+    padding-bottom:12px;
     color: #4a5d6a;
     font-size:1rem ;
     position: relative;
     display: flex;
-        flex-direction: row;
-        align-items: center;
-        background-color: white;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
         border: none;
 }
 .btnImage{

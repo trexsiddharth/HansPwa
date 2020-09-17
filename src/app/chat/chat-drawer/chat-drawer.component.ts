@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { timeout, retry, catchError, takeUntil } from 'rxjs/operators';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { trigger, transition, animate, style } from '@angular/animations'
@@ -33,6 +33,7 @@ export class ChatDrawerComponent implements OnInit {
   personalProfileData: any;
   familyProfileData: any;
   preferencesForm: FormGroup;
+  disableSave = true;
   constructor(public languageService: LanguageService,
     private chatService: ChatServiceService,
     private spinner: NgxSpinnerService,
@@ -50,7 +51,7 @@ export class ChatDrawerComponent implements OnInit {
       age_min: [''],
       age_max: [''],
       income_min: [''],
-      income_max: [''],
+      income_max: ['', Validators.compose([Validators.maxLength(4)])],
       caste_pref: [''],
       manglik_pref: [''],
       occupation: [''],
@@ -60,7 +61,6 @@ export class ChatDrawerComponent implements OnInit {
       marital_status: [''],
       working: [''],
     });
-
   }
   getcastes: any = [];
   searchedCaste = '';
@@ -191,15 +191,8 @@ export class ChatDrawerComponent implements OnInit {
   innerWidth: any;
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    this.languageService.setProfileLanguage();
-    this.currentLanguage = localStorage.getItem('language');
-    // set already selected language in toggle
-    if (localStorage.getItem('language') === 'hindi') {
-      this.langCheck = false;
-    } else {
-      this.langCheck = true;
-    }
 
+    this.disableSave = true;
     // user authorized
     this.chatService.authorized.subscribe(
       data => {
@@ -212,6 +205,23 @@ export class ChatDrawerComponent implements OnInit {
         }
       }
     );
+  }
+  ngAfterViewInit() {
+
+    // set already selected language in toggle
+    setTimeout(() => {
+      if (localStorage.getItem('language') === 'hindi') {
+        this.langCheck = false;
+      } else {
+        this.langCheck = true;
+      }
+    }, 2000)
+    //document.querySelector('#saveButtonPrefs').setAttribute('display', 'none');
+    this.preferencesForm.valueChanges.subscribe(() => {
+      this.disableSave = false;
+      console.log('value change event triggered', this.disableSave);
+    });
+
   }
   ngOnDestroy() {
     this._onDestroy.next();

@@ -124,7 +124,8 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   rejectListPopup(i: number) {
     if (i == 0) {
-      this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
+      // this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
+      this.openPersistentDialog('Didn\'t Like ' + this.profileName + '?', 'Become a paid member and get better matches', 'Choose Plan');
     }
     if (i == 1) {
       this.openPersistentDialog('Didn\'t Like ' + this.profileName + '?', 'Become a paid member and get better matches', 'Choose Plan');

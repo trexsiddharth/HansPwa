@@ -238,7 +238,7 @@
                 </div>
                 <div class="col-5">
                   <h6 style="display: inline-block">Income Max(in LPA):</h6>
-                  <input type="text" class="form-control" formControlName="income_max" required>
+                  <input type="text" maxLength="4" class="form-control" formControlName="income_max" required>
                 </div>
                 <div *ngIf="preferencesForm.value.income_min >= preferencesForm.value.income_max">
                   <p style="color:red!important;font-size: 10px;">*Income Max cannot be less than Income Min</p>
@@ -338,9 +338,10 @@
           </button> -->
             </div>
           </div>
-          <div class="row infoRow" style="margin:10px;position:absolute; top:-1px; right:-3px;z-index:9999999999">
+          <div #saveButtonPrefs class="row infoRow"
+            style="margin:10px;position:absolute; top:-1px; right:-3px;z-index:9999999999">
             <div style="text-align: center; width: 100%;">
-              <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
+              <button [style.opacity]="disableSave ? '0':'1'" type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
                           color: white;
                           width:100%;
                           /* padding: 5px 40px; */

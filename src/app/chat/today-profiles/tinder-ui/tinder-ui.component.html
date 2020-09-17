@@ -19,7 +19,7 @@
     <div [ngClass]="{'greyBack' : crossVisible , 'pinkBack' : heartVisible, 'tinder--cards':true}">
         <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let item of cards; let i = index"
             [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 40 * i + 'px)', opacity: (cards.length-i)/cards.length+0.1}">
-            <main id="mainTinderUI" *ngIf="(whatToShow[i]) === 'profile'">
+            <main id="mainTinderUI">
                 <!-- <div class="full-width ht-full" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',
                 'greyBack': (profileIsLoading$ | async) === 'NO',
                 'blueBack': (profileIsLoading$ | async) === 'YES' }" style="position: absolute;
@@ -39,47 +39,53 @@
                         src="../../../assets/phone_white.svg" alt="hans logo">
                 </div> -->
                 <div id="profileImageDiv">
-                    <ngb-carousel style="outline: none;">
-                        <ng-template ngbSlide *ngFor="let i of getImagesCount(item); let index = index">
-                            <img id="profilePic" class="img-fluid"
-                                (click)="openImageModal(item.carousel,item.photo,item.name,index)"
-                                [src]="getProfilePhoto(item.photo,item.carousel,item.gender,index)"
-                                (load)="onLoadingImage(index)" (error)="onErrorProfilePhoto(item.gender, index)"
-                                alt={{item.name}}>
-                        </ng-template>
-                    </ngb-carousel>
-                    <div id="imageContent">
-                        <div class="full-width">
-                            <div style="width: 80%;">
-                                <span style="font-weight: bold;font-size: 18px;">
-                                    {{toTitleCase(item.name)}}
-                                </span><br>
-                                <span style="font-size: 14px;">{{item.religion}} {{item.religion ? '|' : ''}}
-                                    {{item.caste}}
-                                </span><br>
-                                <span style="font-size: 14px;">
-                                    {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? item.city : '' : item.city ? item.city : '' : ''}}
-                                    {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? '|' : '' : '|' : ''}}
-                                    {{setHeight(item.height)}}
-                                </span> <br>
-                                <span style="font-size: 14px;">
-                                    {{setIncome(item.monthly_income)}} Lakh per year
-                                </span>
-                            </div>
-                            <div style="position: absolute;
-                       top: -10px;right: 10px;
-                       border-radius: 10px;
-                       padding: 0px 10px;
-                       background-color: #FE39C7;">{{setAge(item.birth_date)}}
-                            </div>
-                            <div style="position: absolute;
-                      top: 25px;right: 25px;">
-                                <img width="20px" src="../../../assets/tabs-icons/shield.svg" alt="verified profile">
+                    <app-persistent-message [data]="popupdata" (popupaction)="popupAction($event)"
+                        *ngIf="(whatToShow[i]) === 'popup'">
+                    </app-persistent-message>
+                    <div [hidden]="(whatToShow[i]) !== 'profile'">
+                        <ngb-carousel style="outline: none;">
+                            <ng-template ngbSlide *ngFor="let i of getImagesCount(item); let index = index">
+                                <img id="profilePic" class="img-fluid"
+                                    (click)="openImageModal(item.carousel,item.photo,item.name,index)"
+                                    [src]="getProfilePhoto(item.photo,item.carousel,item.gender,index)"
+                                    (load)="onLoadingImage(index)" (error)="onErrorProfilePhoto(item.gender, index)"
+                                    alt={{item.name}}>
+                            </ng-template>
+                        </ngb-carousel>
+                        <div id="imageContent">
+                            <div class="full-width">
+                                <div style="width: 80%;">
+                                    <span style="font-weight: bold;font-size: 18px;">
+                                        {{toTitleCase(item.name)}}
+                                    </span><br>
+                                    <span style="font-size: 14px;">{{item.religion}} {{item.religion ? '|' : ''}}
+                                        {{item.caste}}
+                                    </span><br>
+                                    <span style="font-size: 14px;">
+                                        {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? item.city : '' : item.city ? item.city : '' : ''}}
+                                        {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? '|' : '' : '|' : ''}}
+                                        {{setHeight(item.height)}}
+                                    </span> <br>
+                                    <span style="font-size: 14px;">
+                                        {{setIncome(item.monthly_income)}} Lakh per year
+                                    </span>
+                                </div>
+                                <div style="position: absolute;
+                           top: -10px;right: 10px;
+                           border-radius: 10px;
+                           padding: 0px 10px;
+                           background-color: #FE39C7;">{{setAge(item.birth_date)}}
+                                </div>
+                                <div style="position: absolute;
+                          top: 25px;right: 25px;">
+                                    <img width="20px" src="../../../assets/tabs-icons/shield.svg"
+                                        alt="verified profile">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <section id="content" style="
+                <section [hidden]="!((whatToShow[0]) === 'profile'&&(whatToShow[1]) === 'profile')" id="content" style="
                 position: relative;
                 margin: -120px 10px 0px;
                 border-top-right-radius: 20px;
@@ -321,9 +327,6 @@
                     </div>
                 </section>
             </main>
-            <app-persistent-message [data]="popupdata" (popupaction)="popupAction($event)"
-                *ngIf="(whatToShow[i]) === 'popup'">
-            </app-persistent-message>
         </div>
         <div id="answerButtons" *ngIf="(whatToShow[0]) === 'profile'">
             <div class="down-arrow" (click)="scrollDown()" style="background-color: #50ed9d;

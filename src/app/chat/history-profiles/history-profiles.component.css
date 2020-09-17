@@ -8,7 +8,11 @@ section{
 .paddingToSection {
     padding: 70px 30px 100px !important;
 }
-
+.blurEffect{
+    filter: blur(8px);
+   -webkit-filter: blur(8px);
+   overflow:hidden;
+}
 /* // only for explicit view */
 .mainBack {
     background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);

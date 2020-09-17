@@ -87,7 +87,7 @@
     outline: 0;
   }
   main{
-    padding-bottom: 300px;
+    padding-bottom: 15px;
     overflow-y: auto;
 }
 
@@ -434,9 +434,9 @@
     } */
     .tinder--card {
         display: inline-block;
-        width: 40%;
+        width: 36%;
         height: 90%;
-        background: #FFFFFF;
+        background: transparent;
         padding-bottom: 40px;
         border-radius: 8px;
         overflow: auto;

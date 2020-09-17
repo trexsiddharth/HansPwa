@@ -288,7 +288,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       localStorage.setItem('mobile_number', this.currentUrl);
       console.log(this.currentUrl);
     }
-
+    if (this.router.url.match('first')) {
+      this.languageService.setCurrentLanguage('english');
+    }
     if (localStorage.getItem('mobile_number')) {
       this.chatServivce.setContactNumber(localStorage.getItem('mobile_number'));
       this.currentContact = localStorage.getItem('mobile_number');
