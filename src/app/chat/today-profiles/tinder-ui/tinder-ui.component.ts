@@ -5,7 +5,7 @@ import { LanguageService } from 'src/app/language.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { ChatServiceService } from 'src/app/chat-service.service';
-
+import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-tinder-ui',
   templateUrl: './tinder-ui.component.html',
@@ -43,7 +43,8 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private renderer: Renderer2,
     public itemService: FindOpenHistoryProfileService,
     public languageService: LanguageService,
-    public chatService: ChatServiceService,) {
+    public chatService: ChatServiceService,
+    private deviceService: DeviceDetectorService) {
   }
   userId;
   userIsLead;
@@ -52,7 +53,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   //   shareReplay(),
   // );
   whatToShow = ['profile', 'profile'];
-
+  isMobile = false;
   ngOnInit(): void {
     this.chatService.authorized.subscribe(
       data => {
@@ -63,6 +64,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     );
+    this.isMobile = this.deviceService.isMobile();
   }
   ngAfterViewInit() {
     this.moveOutWidth = document.documentElement.clientWidth * 0.5;
@@ -114,12 +116,15 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(i);
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + this.profileName + '!', 'Complete Profile');
+      return;
     }
-    if (i == 1) {
+    if (i == 1 && this.isMobile) {
       this.openPersistentDialog('Liked ' + this.profileName + '?', 'Get notified easily if ' + this.profileName + ' likes you back!', 'Install App Now');
+      return;
     }
-    if (i == 2) {
+    if (i == 2 || !this.isMobile) {
       this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + this.profileName + '.', 'Get Membership');
+      return;
     }
   }
   rejectListPopup(i: number) {
@@ -141,6 +146,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       if ((this.itemService.getCredits() != null && this.itemService.getCredits().toString() !== '0') && (this.actionCount % 4 !== 0)) {
         console.log('get data called');
         //this.getData(reply);
+        this.emitChoice(reply);
         console.log('returning for paid users for paid users');
         return;
       }
@@ -154,7 +160,8 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
               }
             }
           }
-          if (!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1')) {
+          if ((!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') &&
+            localStorage.getItem('appInstalled') !== '1'))) {
             for (let x of this.shortList) {
               if (x.value === 1) {
                 x.bool = true;

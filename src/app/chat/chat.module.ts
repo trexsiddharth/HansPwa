@@ -36,7 +36,7 @@ import { CustomerSupportComponent } from './customer-support/customer-support.co
 import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.component';
 import { PersistentMessageComponent } from './today-profiles/persistent-message/persistent-message.component';
 import { TinderUiComponent } from './today-profiles/tinder-ui/tinder-ui.component';
-
+import { DeviceDetectorService } from 'ngx-device-detector';
 @NgModule({
   imports: [
     CommonModule,
@@ -95,6 +95,7 @@ import { TinderUiComponent } from './today-profiles/tinder-ui/tinder-ui.componen
     FindOpenHistoryProfileService,
     ChatServiceService,
     MyProfileService,
+    DeviceDetectorService
   ],
 })
 export class ChatModule { }
