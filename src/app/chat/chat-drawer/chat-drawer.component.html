@@ -127,26 +127,26 @@
               font-weight: bold;
                font-size: 1.2rem;">{{languageService.profileLang.preference}}</h5>
         </div>
-        <div class="row" style="margin:5px;">
-          <div>
-            <p [ngClass]="{'prefsNarrow':!isWide, 'prefsOk':isWide, 'topText':true}"><a
-                [ngClass]="{'numNarrow':!isWide, 'numOk':isWide}">
-                {{countProfiles$.source._value}}</a>Profiles per<br>day!</p>
-          </div>
-          <p *ngIf="(disableSave$ | async) === false"  class="btn" style="background-color: #34b7f1;
-                          color: white!important;
-                          width:50%;
-                          /* padding: 5px 40px; */
-                          margin-top:2px;
-                          margin-bottom:2px;
-                          font-size: 0.75rem;
-                          font-weight: bold;
-                          " (click)="onSubmitPreferences()">SAVE</p>
-          <p *ngIf="(disableSave$ | async) === true" class="recomend">Widen filters to see more matches per
-            day</p>
-        </div>
 
         <form [formGroup]="preferencesForm">
+          <div class="row" style="margin:5px;">
+            <div>
+              <p [ngClass]="{'prefsNarrow':!isWide, 'prefsOk':isWide, 'topText':true}"><a
+                  [ngClass]="{'numNarrow':!isWide, 'numOk':isWide}">
+                  {{countProfiles$.source._value}}</a>Profiles per<br>day!</p>
+            </div>
+            <p *ngIf="(disableSave$ | async) === false"  class="btn" style="background-color: #34b7f1;
+                            color: white!important;
+                            width:50%;
+                            /* padding: 5px 40px; */
+                            margin-top:2px;
+                            margin-bottom:2px;
+                            font-size: 0.75rem;
+                            font-weight: bold;
+                            " (click)="onSubmitPreferences()">SAVE</p>
+            <p *ngIf="(disableSave$ | async) === true" class="recomend">Widen filters to see more matches per
+              day</p>
+          </div>
           <div class="row infoRow" style="margin-top:20px">
             <!-- <div class="column" *ngIf="editIndexPrefs != 0">
             <div class="circular2 mat-elevation-z10" (click)="setEditIndexPrefs()">
