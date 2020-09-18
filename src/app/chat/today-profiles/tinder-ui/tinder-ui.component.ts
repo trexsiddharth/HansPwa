@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { ChatServiceService } from 'src/app/chat-service.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tinder-ui',
   templateUrl: './tinder-ui.component.html',
@@ -42,7 +43,8 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     public itemService: FindOpenHistoryProfileService,
     public languageService: LanguageService,
     public chatService: ChatServiceService,
-    private deviceService: DeviceDetectorService) {
+    private deviceService: DeviceDetectorService,
+    private router: Router) {
   }
   userId;
   userIsLead;
@@ -65,7 +67,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isMobile = this.deviceService.isMobile();
   }
   showTinderAnimation() {
-    if (this.itemService.getTutorialIndex() == -1) {
+    if (this.router.url.match('first')) {
       this.tinderCardsArray[0].nativeElement.classList.add('rotateAnimation');
       this.heartVisible = true;
       setTimeout(() => {
