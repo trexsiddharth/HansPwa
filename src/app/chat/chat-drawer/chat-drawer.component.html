@@ -133,9 +133,10 @@
             <div>
               <p [ngClass]="{'prefsNarrow':!isWide, 'prefsOk':isWide, 'topText':true}"><a
                   [ngClass]="{'numNarrow':!isWide, 'numOk':isWide}">
-                  {{countProfiles$.source._value}}</a>Profiles per<br>day!</p>
+                  {{countProfiles}}</a>Profiles per<br>day!</p>
             </div>
-            <p *ngIf="(disableSave$ | async) === false"  class="btn" style="background-color: #34b7f1;
+            <div class="topText" style="width:50%;justify-content:flex-end;">
+              <p *ngIf="(disableSave$ | async) === true" class="btn" style="background-color: #34b7f1;
                             color: white!important;
                             width:50%;
                             /* padding: 5px 40px; */
@@ -144,8 +145,9 @@
                             font-size: 0.75rem;
                             font-weight: bold;
                             " (click)="onSubmitPreferences()">SAVE</p>
-            <p *ngIf="(disableSave$ | async) === true" class="recomend">Widen filters to see more matches per
-              day</p>
+              <p *ngIf="(disableSave$ | async) === false" class="recomend">Widen filters to see more matches per
+                day</p>
+            </div>
           </div>
           <div class="row infoRow" style="margin-top:20px">
             <!-- <div class="column" *ngIf="editIndexPrefs != 0">
@@ -235,9 +237,7 @@
               <div class="row information">
                 <div class="col-5">
                   <h6 style="display: inline-block;">Marital Status:</h6>
-                  <select type="text" class="form-control" 
-                  (change)="changed()"
-                  formControlName="marital_status">
+                  <select type="text" class="form-control" (change)="changed()" formControlName="marital_status">
                     <option *ngFor="let item of MaritalStatus" [value]="item">{{
                   item
                 }}</option>
@@ -359,7 +359,7 @@
           </button> -->
             </div>
           </div>
-          <div class="topText" style="position:relative;width: 100%;justify-content: center;">
+          <div class="topText" style="position:relative;width: 100%;justify-content: center;margin-top:30px;">
             <button class="btn" mat-raised-button style="position:relative;background-color: #34b7f1;
                           color: white!important;
                           width:90%;

@@ -63,15 +63,16 @@ export class ChatDrawerComponent implements OnInit {
 
   disableSave = new BehaviorSubject<boolean>(true);
   disableSave$: Observable<boolean>;
-
+  firstTime = true;
   getcastes: any = [];
   searchedCaste = '';
   searchCaste = new FormControl();
   searchCasteText = new FormControl();
   isAllCastePref = false;
   isWide = true;
-  countProfiles = new BehaviorSubject<number>(0);
-  countProfiles$: Observable<number> = this.countProfiles.asObservable();
+  // countProfiles = new BehaviorSubject<number>(0);
+  // countProfiles$: Observable<number> = this.countProfiles.asObservable();
+  countProfiles = 0;
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<
     string[]
   >(1);
@@ -208,18 +209,9 @@ export class ChatDrawerComponent implements OnInit {
     this.innerWidth = window.innerWidth;
     //this.disableSave.next(true);
     // user authorized
-
-
     this.disableSave$ = this.disableSave.asObservable().pipe(
       shareReplay()
     );
-
-    // this.preferencesForm.valueChanges.subscribe(() => {
-    //   this.disableSave.next(true);
-    //   this.getCountOfRishtey();
-    //   console.log('value change event triggered');
-    // });
-
     this.chatService.authorized.subscribe(
       data => {
         if (data) {
@@ -237,7 +229,7 @@ export class ChatDrawerComponent implements OnInit {
 
     this.disableSave$.subscribe(
       (res: boolean) => {
-          console.log(res);
+        console.log(res);
       }
     );
   }
@@ -246,8 +238,6 @@ export class ChatDrawerComponent implements OnInit {
     console.log('changed');
     this.disableSave.next(false);
   }
-
-  
   ngAfterViewInit() {
     // set already selected language in toggle
     setTimeout(() => {
@@ -257,11 +247,24 @@ export class ChatDrawerComponent implements OnInit {
         this.langCheck = true;
       }
     }, 2000)
+    this.changed();
     //document.querySelector('#saveButtonPrefs').setAttribute('display', 'none');
   }
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
+  }
+  subscribetochanges() {
+    this.preferencesForm.valueChanges.subscribe(() => {
+      if (this.firstTime) {
+        this.firstTime = false;
+      }
+      else {
+        this.disableSave.next(true);
+      }
+      this.getCountOfRishtey();
+      console.log('value change event triggered');
+    });
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -289,7 +292,7 @@ export class ChatDrawerComponent implements OnInit {
       if (response.count) {
         console.log(response);
         this.isWide = true;
-        this.countProfiles.next(response.count);
+        this.countProfiles = response.count;
         this.setCurrentPreferenceValue(response.preference);
       }
     }, (err: any) => {
@@ -315,8 +318,11 @@ export class ChatDrawerComponent implements OnInit {
 
     this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form).subscribe((response: any) => {
       if (response.count) {
-        this.countProfiles.next(response.count);
-        if (response.count < 5) this.isWide = false;
+        this.countProfiles = response.count;
+        if (response.count < 5) {
+          this.isWide = false;
+          this.disableSave.next(true);
+        }
         else this.isWide = true;
       }
     }, (err: any) => {
@@ -462,6 +468,7 @@ export class ChatDrawerComponent implements OnInit {
         marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter'
       });
     }
+    this.subscribetochanges();
   }
   setProfileCalculations() {
     this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',
@@ -687,6 +694,7 @@ export class ChatDrawerComponent implements OnInit {
       this.preferenceProfileData.mother_tongue
     );
     newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
+    newPrefForm.append('matchesCount', String(this.countProfiles));
 
     this.http
       .post(
