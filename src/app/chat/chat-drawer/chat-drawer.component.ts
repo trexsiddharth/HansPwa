@@ -695,7 +695,6 @@ export class ChatDrawerComponent implements OnInit {
     );
     newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
     newPrefForm.append('matchesCount', String(this.countProfiles));
-
     this.http
       .post(
         'https://partner.hansmatrimony.com/api/updatePreferencesDetails',
@@ -705,6 +704,8 @@ export class ChatDrawerComponent implements OnInit {
         (data: any) => {
           console.log(data);
           console.log('Preference Details updated successfully');
+          this.changed();
+          this.sidenav.close();
           this.getUserProfileData();
         },
         (error: any) => {

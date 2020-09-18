@@ -9,8 +9,8 @@ section{
     padding: 70px 30px 100px !important;
 }
 .blurEffect{
-    filter: blur(8px);
-   -webkit-filter: blur(8px);
+    filter: blur(20px);
+   -webkit-filter: blur(20px);
    overflow:hidden;
 }
 /* // only for explicit view */
