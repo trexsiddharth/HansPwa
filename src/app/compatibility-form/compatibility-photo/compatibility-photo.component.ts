@@ -431,10 +431,6 @@ export class CompatibilityPhotoComponent implements OnInit {
       console.log(userProfile);
       if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
         return this.ngxNotificationService.error('Select Image 1');
-      } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
-        return this.ngxNotificationService.error('Select Image 2');
-      } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
-        return this.ngxNotificationService.error('Select Image 3');
       } else if (userProfile.photoScore < 1) {
         return this.ngxNotificationService.error('Give a score');
       } else if (!localStorage.getItem('getListId') || !localStorage.getItem('getListMobile')) {
@@ -446,6 +442,11 @@ export class CompatibilityPhotoComponent implements OnInit {
     } else {
       this.skip(0);
     }
+    // else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
+    //   return this.ngxNotificationService.error('Select Image 2');
+    // } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
+    //   return this.ngxNotificationService.error('Select Image 3');
+    // } 
   }
 
   analyticsEvent(event) {

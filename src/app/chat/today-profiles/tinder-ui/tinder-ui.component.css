@@ -454,6 +454,13 @@
         background-image: linear-gradient(0deg, white,transparent);
         margin-top: 50px;
     } */
+    .tinder--status svg {
+        transition: all 0.3s ease-in-out;
+        top: 50%;
+        right: 50%;
+        transform: translate(-115%,-50%);
+        position:absolute;
+      }
     .tinder--card {
         display: inline-block;
         width: 36%;

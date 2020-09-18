@@ -542,6 +542,14 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       return 'Rented House';
     }
   }
+  setVerifiedAt(a) {
+    if (a.includes('Hans Matrimony')) {
+      return 'Hans Matrimony Office';
+    }
+    else {
+      return a;
+    }
+  }
   // setting dynamic about me if users about me is null or na
   setAbout(item) {
     if (item) {
