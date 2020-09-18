@@ -18,22 +18,6 @@ import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dial
   styleUrls: ['./chat-drawer.component.css'],
 })
 export class ChatDrawerComponent implements OnInit {
-  @Input() drawerReference: MatSidenav;
-  prefsRef: MatSidenav;
-  username;
-  userpic = '../../../assets/logo_192.png';
-  userId;
-  userIsLead;
-  langCheck;
-  currentLanguage;
-  gender: string;
-  preferenceProfileData: any;
-  personalProfileData: any;
-  familyProfileData: any;
-  preferencesForm: FormGroup;
-  disableSave = false;
-  //disableSave = new BehaviorSubject<boolean>(true);
-  //disableSave$: Observable<boolean> = this.disableSave.asObservable().pipe(shareReplay());
   constructor(public languageService: LanguageService,
     private chatService: ChatServiceService,
     private spinner: NgxSpinnerService,
@@ -62,6 +46,24 @@ export class ChatDrawerComponent implements OnInit {
       working: [''],
     });
   }
+  @Input() drawerReference: MatSidenav;
+  prefsRef: MatSidenav;
+  username;
+  userpic = '../../../assets/logo_192.png';
+  userId;
+  userIsLead;
+  langCheck;
+  currentLanguage;
+  gender: string;
+  preferenceProfileData: any;
+  personalProfileData: any;
+  familyProfileData: any;
+  preferencesForm: FormGroup;
+  // disableSave = false;
+
+  disableSave = new BehaviorSubject<boolean>(true);
+  disableSave$: Observable<boolean>;
+
   getcastes: any = [];
   searchedCaste = '';
   searchCaste = new FormControl();
@@ -192,10 +194,32 @@ export class ChatDrawerComponent implements OnInit {
   ];
   innerWidth: any;
   @ViewChild('sidenavPrefs', { static: true }) public sidenav: MatSidenav;
+  contactedCount = 0;
+  rejectedCount = 0;
+  castePreferences: string[] = [];
+  prevEventLength: number = 0;
+  familyDetailsLeft = [];
+  personalDetailsLeft = [];
+  profileCompletionPercent = 0;
+  personalDetailsList = [];
+  familyDetailsList = [];
+  totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
   ngOnInit() {
     this.innerWidth = window.innerWidth;
     //this.disableSave.next(true);
     // user authorized
+
+
+    this.disableSave$ = this.disableSave.asObservable().pipe(
+      shareReplay()
+    );
+
+    // this.preferencesForm.valueChanges.subscribe(() => {
+    //   this.disableSave.next(true);
+    //   this.getCountOfRishtey();
+    //   console.log('value change event triggered');
+    // });
+
     this.chatService.authorized.subscribe(
       data => {
         if (data) {
@@ -210,7 +234,20 @@ export class ChatDrawerComponent implements OnInit {
     if (this.router.url.match('first')) {
       this.sidenav.open();
     }
+
+    this.disableSave$.subscribe(
+      (res: boolean) => {
+          console.log(res);
+      }
+    );
   }
+
+  changed() {
+    console.log('changed');
+    this.disableSave.next(false);
+  }
+
+  
   ngAfterViewInit() {
     // set already selected language in toggle
     setTimeout(() => {
@@ -221,11 +258,6 @@ export class ChatDrawerComponent implements OnInit {
       }
     }, 2000)
     //document.querySelector('#saveButtonPrefs').setAttribute('display', 'none');
-    this.preferencesForm.valueChanges.subscribe(() => {
-      this.disableSave = true;
-      this.getCountOfRishtey();
-      console.log('value change event triggered');
-    });
   }
   ngOnDestroy() {
     this._onDestroy.next();
@@ -291,8 +323,6 @@ export class ChatDrawerComponent implements OnInit {
       console.log('Getting count failed');
     })
   }
-  contactedCount = 0;
-  rejectedCount = 0;
   getContactedCount() {
     if (localStorage.getItem('count')) {
       let count = JSON.parse(localStorage.getItem('count'));
@@ -351,7 +381,6 @@ export class ChatDrawerComponent implements OnInit {
     //document.querySelector('#sidenav').toggle();
     this.itemService.setChangePrefsClicked(true);
   }
-  castePreferences: string[] = [];
   specialCase() {
     if (this.preferenceProfileData && this.preferenceProfileData.caste) {
       this.castePreferences = this.preferenceProfileData.caste.split(',');
@@ -382,7 +411,6 @@ export class ChatDrawerComponent implements OnInit {
       this.searchCaste.setValue(['']);
     }
   }
-  prevEventLength: number = 0;
   casteSelectionChanged(event) {
     console.log(event);
     if (event.value.length > this.prevEventLength) {
@@ -435,12 +463,6 @@ export class ChatDrawerComponent implements OnInit {
       });
     }
   }
-  familyDetailsLeft = [];
-  personalDetailsLeft = [];
-  profileCompletionPercent = 0;
-  personalDetailsList = [];
-  familyDetailsList = [];
-  totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
   setProfileCalculations() {
     this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',
       'additional_qualification', 'caste', 'religion',
