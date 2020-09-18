@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  OnDestroy
+  OnDestroy, ViewChild
 } from '@angular/core';
 import {
   HttpClient
@@ -25,7 +25,7 @@ import {
   InstallPromptService
 } from '../install-prompt.service';
 import {
-  MatDialog,
+  MatDialog, MatSidenav,
 } from '@angular/material';
 
 import {
@@ -55,6 +55,7 @@ import { SubscriptionserviceService } from '../subscriptionservice.service';
 
 export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;
 
   familyTable = {
     id: '',
@@ -209,7 +210,6 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.route.paramMap.subscribe(
       (data: any) => {
         if (data) {
@@ -290,6 +290,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.router.url.match('first')) {
       this.languageService.setCurrentLanguage('english');
+      this.sidenav.toggle();
     }
     if (localStorage.getItem('mobile_number')) {
       this.chatServivce.setContactNumber(localStorage.getItem('mobile_number'));

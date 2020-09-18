@@ -51,6 +51,54 @@ main{
     padding-bottom: 100px;
     font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif!important;
 }
+.hidden{
+  display: none;
+  pointer-events: none;
+}
+  .prefsNarrow{
+    color:rgba(201, 83, 83, 0.76)!important;
+  }
+  .prefsOk{
+    color:rgba(86, 173, 86, 0.822)!important;
+  }
+  .topText{
+    width:100%;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+  }
+  .numNarrow{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    font-size:36px;
+    font-weight:bold;
+    background: rgba(207, 81, 81, 0.295);
+  }
+  .numOk{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    font-size:36px;
+    font-weight:bold;
+    background: rgba(102, 202, 102, 0.315) ;
+  }
+  .recomend{
+    background:rgba(131, 131, 247, 0.158);
+    color:rgba(44, 44, 252, 0.863)!important;
+    font-size:12px;
+    font-weight:bold;
+    border-radius: 5px;
+  }
 .infoRow{
     display: flex;
     flex-wrap: wrap;

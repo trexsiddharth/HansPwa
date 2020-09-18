@@ -7,9 +7,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
-import { timeout, retry, catchError, takeUntil } from 'rxjs/operators';
+import { timeout, retry, catchError, takeUntil, shareReplay } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 
 @Component({
@@ -31,7 +31,9 @@ export class ChatDrawerComponent implements OnInit {
   personalProfileData: any;
   familyProfileData: any;
   preferencesForm: FormGroup;
-  disableSave = true;
+  disableSave = false;
+  //disableSave = new BehaviorSubject<boolean>(true);
+  //disableSave$: Observable<boolean> = this.disableSave.asObservable().pipe(shareReplay());
   constructor(public languageService: LanguageService,
     private chatService: ChatServiceService,
     private spinner: NgxSpinnerService,
@@ -65,7 +67,9 @@ export class ChatDrawerComponent implements OnInit {
   searchCaste = new FormControl();
   searchCasteText = new FormControl();
   isAllCastePref = false;
-
+  isWide = true;
+  countProfiles = new BehaviorSubject<number>(0);
+  countProfiles$: Observable<number> = this.countProfiles.asObservable();
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<
     string[]
   >(1);
@@ -187,10 +191,10 @@ export class ChatDrawerComponent implements OnInit {
     'Anulled',
   ];
   innerWidth: any;
+  @ViewChild('sidenavPrefs', { static: true }) public sidenav: MatSidenav;
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-
-    this.disableSave = true;
+    //this.disableSave.next(true);
     // user authorized
     this.chatService.authorized.subscribe(
       data => {
@@ -203,9 +207,11 @@ export class ChatDrawerComponent implements OnInit {
         }
       }
     );
+    if (this.router.url.match('first')) {
+      this.sidenav.open();
+    }
   }
   ngAfterViewInit() {
-
     // set already selected language in toggle
     setTimeout(() => {
       if (localStorage.getItem('language') === 'hindi') {
@@ -216,10 +222,10 @@ export class ChatDrawerComponent implements OnInit {
     }, 2000)
     //document.querySelector('#saveButtonPrefs').setAttribute('display', 'none');
     this.preferencesForm.valueChanges.subscribe(() => {
-      this.disableSave = false;
-      console.log('value change event triggered', this.disableSave);
+      this.disableSave = true;
+      this.getCountOfRishtey();
+      console.log('value change event triggered');
     });
-
   }
   ngOnDestroy() {
     this._onDestroy.next();
@@ -242,6 +248,48 @@ export class ChatDrawerComponent implements OnInit {
 
   onImageLoadError() {
     this.userpic = '../../../assets/logo_192.png';
+  }
+  getRecomendedFilters() {
+    let form = new FormData();
+    form.append('id', this.userId);
+    form.append('is_lead', this.userIsLead);
+    this.http.post('https://partner.hansmatrimony.com/api/getRecommendedPreferences', form).subscribe((response: any) => {
+      if (response.count) {
+        console.log(response);
+        this.isWide = true;
+        this.countProfiles.next(response.count);
+        this.setCurrentPreferenceValue(response.preference);
+      }
+    }, (err: any) => {
+      console.log('Getting preferences failed');
+    });
+  }
+  getCountOfRishtey() {
+    console.log('getCountOfRishtey called');
+    let form = new FormData();
+    form.append('id', this.userId);
+    form.append('is_lead', this.userIsLead);
+    form.append('age_min', this.preferencesForm.value.age_min);
+    form.append('age_max', this.preferencesForm.value.age_max);
+    form.append('height_min', String(48 + this.Heights.indexOf(this.preferencesForm.value.height_min)));
+    form.append('height_max', String(48 + this.Heights.indexOf(this.preferencesForm.value.height_max)));
+    form.append('income_min', this.preferencesForm.value.income_min);
+    form.append('income_max', this.preferencesForm.value.income_max);
+    form.append('religion', this.preferencesForm.value.religion);
+    form.append('caste', this.preferencesForm.value.caste_pref);
+    form.append('food_choice', this.preferencesForm.value.food_choice);
+    form.append('manglik', this.preferencesForm.value.manglik_pref);
+    form.append('marital_status', this.preferencesForm.value.marital_status);
+
+    this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form).subscribe((response: any) => {
+      if (response.count) {
+        this.countProfiles.next(response.count);
+        if (response.count < 5) this.isWide = false;
+        else this.isWide = true;
+      }
+    }, (err: any) => {
+      console.log('Getting count failed');
+    })
   }
   contactedCount = 0;
   rejectedCount = 0;
@@ -351,11 +399,24 @@ export class ChatDrawerComponent implements OnInit {
       duration: 2000,
     });
   }
-  setCurrentPreferenceValue() {
+  setCurrentPreferenceValue(preferences: any) {
     //console.log(this.personalProfileData);
-
-    if (this.preferenceProfileData) {
-
+    if (preferences) {
+      this.preferencesForm.patchValue({
+        food_choice: preferences.food_choice,
+        age_min: preferences.age_min,
+        age_max: preferences.age_max,
+        income_min: preferences.income_min,
+        income_max: preferences.income_max,
+        caste_pref: preferences.caste,
+        manglik_pref: preferences.manglik,
+        religion: preferences.religion,
+        height_min: this.getHeight(preferences.height_min),
+        height_max: this.getHeight(preferences.height_max),
+        marital_status: preferences.marital_status,
+      });
+    }
+    else if (this.preferenceProfileData) {
       this.preferencesForm.patchValue({
         food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
         age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
@@ -365,10 +426,8 @@ export class ChatDrawerComponent implements OnInit {
         caste_pref: this.preferenceProfileData.caste ? this.preferenceProfileData.caste : 'All',
         manglik_pref: this.preferenceProfileData.manglik ? this.preferenceProfileData.manglik : 'Doesn\'t Matter',
         occupation: this.preferenceProfileData.occupation ? this.preferenceProfileData.occupation : 'Doesn\'t Matter',
-
         working: (this.preferenceProfileData.working === 'na' || this.preferenceProfileData.working === undefined)
           ? 'Doesn\'t Matter' : this.preferenceProfileData.working,
-
         religion: this.preferenceProfileData.religion,
         height_min: this.getHeight(this.preferenceProfileData.height_min),
         height_max: this.getHeight(this.preferenceProfileData.height_max),
@@ -399,18 +458,6 @@ export class ChatDrawerComponent implements OnInit {
     console.log(this.personalDetailsList);
     console.log(this.familyDetailsList)
     this.personalDetailsLeft = [];
-    // Object.entries(this.personalProfileData).forEach(
-    //   ([key, value]) => {
-    //     if (this.personalDetailsList.includes(key)) {
-    //       if ((!value) || value == "null") {
-    //         this.personalDetailsLeft += 1;
-    //         detailsLeft.push(key);
-    //       }
-    //       // this.personalDetailsList.splice(this.personalDetailsList.indexOf(key));
-    //     }
-    //   }
-    // );
-    // this.personalDetailsLeft += this.personalDetailsList.length;
     for (let v of this.personalDetailsList) {
       if (this.personalProfileData.hasOwnProperty(v)) {
         if (!this.personalProfileData[v] || this.personalProfileData[v] === "null") {
@@ -431,18 +478,6 @@ export class ChatDrawerComponent implements OnInit {
         this.familyDetailsLeft.push(v);
       }
     }
-    // this.familyDetailsLeft = 0;
-    // Object.entries(this.familyProfileData).forEach(
-    //   ([key, value]) => {
-    //     if (this.familyDetailsList.includes(key)) {
-    //       if (!value || value == "null") {
-    //         this.familyDetailsLeft += 1;
-    //         detailsLeft.push(key);
-    //       }
-    //       // this.familyDetailsList.splice(this.familyDetailsList.indexOf(key));
-    //     }
-    //   });
-    // this.familyDetailsLeft += this.familyDetailsList.length;
     for (let v of this.personalDetailsLeft) {
       if (this.familyProfileData.hasOwnProperty(v)) {
         this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
@@ -553,12 +588,13 @@ export class ChatDrawerComponent implements OnInit {
               this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
               this.itemService.setPhotoStatus(true);
             }
-            this.setCurrentPreferenceValue();
+            this.setCurrentPreferenceValue(null);
             this.specialCase();
             this.getAllCaste();
             this.setProfileCalculations();
             this.setProfileCompletion();
             this.checkPageThreeDetails();
+            setTimeout(() => { this.getCountOfRishtey() }, 2000);
           },
           (error: any) => {
             this.spinner.hide();

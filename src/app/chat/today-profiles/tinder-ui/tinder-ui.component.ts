@@ -19,9 +19,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() choiceMade = new EventEmitter();
 
   @ViewChildren('tinderCard') tinderCards: QueryList<ElementRef>;
-
   tinderCardsArray: Array<ElementRef>;
-
   moveOutWidth: number; // value in pixels that a card needs to travel to dissapear from screen
   shiftRequired: boolean; // state variable that indicates we need to remove the top card of the stack
   transitionInProgress: boolean; // state variable that indicates currently there is transition on-going
@@ -66,6 +64,25 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     );
     this.isMobile = this.deviceService.isMobile();
   }
+  showTinderAnimation() {
+    if (this.itemService.getTutorialIndex() == -1) {
+      this.tinderCardsArray[0].nativeElement.classList.add('rotateAnimation');
+      this.heartVisible = true;
+      setTimeout(() => {
+        this.tinderCardsArray[0].nativeElement.classList.remove('rotateAnimation');
+        this.heartVisible = false;
+        this.showOppAnima();
+      }, 2000);
+    }
+  }
+  showOppAnima() {
+    this.tinderCardsArray[0].nativeElement.classList.add('oppositeRotate');
+    this.crossVisible = true;
+    setTimeout(() => {
+      this.tinderCardsArray[0].nativeElement.classList.remove('oppositeRotate');
+      this.crossVisible = false;
+    }, 2000);
+  }
   ngAfterViewInit() {
     this.moveOutWidth = document.documentElement.clientWidth * 0.5;
     this.tinderCardsArray = this.tinderCards.toArray();
@@ -96,6 +113,9 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.chatService.actionCount = this.actionCount;
       console.log('setting action count value in chat service');
     }
+    setTimeout(() => {
+      this.showTinderAnimation();
+    }, 2000)
   };
   ngOnDestroy(): void {
     this.chatService.shortList = this.shortList;
@@ -122,7 +142,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.openPersistentDialog('Liked ' + this.profileName + '?', 'Get notified easily if ' + this.profileName + ' likes you back!', 'Install App Now');
       return;
     }
-    if (i == 2 || !this.isMobile) {
+    else if (i == 2) {
       this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + this.profileName + '.', 'Get Membership');
       return;
     }

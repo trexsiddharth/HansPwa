@@ -187,7 +187,29 @@
      align-items: center;
      justify-content: center;
 }
+.rotateAnimation{
+    animation: rotation 2s infinite linear;
+}
+@keyframes rotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(35deg);
+    }
+}
+.oppositeRotate{
+    animation: opprotation 2s infinite linear;
+}
 
+@keyframes opprotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(-35deg);
+    }
+}
 .buttonImage{
     width: 30px;
 }

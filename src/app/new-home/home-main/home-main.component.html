@@ -1,8 +1,7 @@
-
 <!-- first container -->
 
 <ng-container>
-    <div id = container1>
+    <div id=container1>
         <div style="position: absolute;" class="imageOneGradient">
         </div>
         <div style="position: absolute;bottom: 0px;text-align: center;" class="imageOneGradient2">
@@ -11,29 +10,29 @@
             justify-content: space-evenly;
             flex-direction: column;
              align-items: center;">
-             <span style="font-size: 18px;font-weight: bold;text-shadow:  2px 1px black;;">
-                {{languageService.homeLang.familyTogether}}
-             </span>
-                <button mat-raised-button class="registerBtn"  
-                [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
-                *ngIf="homeService.getLoginStatus()==false">
-                {{languageService.homeLang.freeRegister}}
+                <span style="font-size: 18px;font-weight: bold;text-shadow:  2px 1px black;;">
+                    {{languageService.homeLang.familyTogether}}
+                </span>
+                <button mat-raised-button class="registerBtn" [routerLink]="['/fourReg']"
+                    routerLinkActive="router-link-active" *ngIf="homeService.getLoginStatus()==false">
+                    {{languageService.homeLang.freeRegister}}
                 </button>
-                <button mat-raised-button class="rishteBtn" [routerLink]="['/chat']" routerLinkActive="router-link-active" *ngIf="homeService.getLoginStatus()">
+                <button mat-raised-button class="rishteBtn" [routerLink]="['/chat']"
+                    routerLinkActive="router-link-active" *ngIf="homeService.getLoginStatus()">
                     {{languageService.homeLang.rishteDekhein}}
-                    </button>
+                </button>
                 <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
             </div>
         </div>
-         <div class="mainBackImage">
-         </div>
+        <div class="mainBackImage">
+        </div>
     </div>
 </ng-container>
 
 <!-- 2nd container -->
 
 <ng-container>
-    <div class="imageTwoGradient">
+    <!-- <div class="imageTwoGradient">
         <mat-card class="featureCard" style="background-image: linear-gradient(0deg,#F5A513 , #F7CB67);
         color: #070973; text-align: center;">
             <mat-card-title style="font-weight: bold;font-size: 20px;">
@@ -73,7 +72,56 @@
                         <img width="35%" src="../../../assets/home-icons/25+ temples.svg" alt="image">
                     </mat-card-content>
         </mat-card>
-</div>
+</div> -->
+    <div class="list">
+        <div class="row contentArea">
+            <div class="infoRow" style="flex:1 1 500px!important;">
+                <div class="column">
+                    <div class="row information">
+                        <div class="columnar">
+                            <div class="row">
+                                <p><strong>{{languageService.homeLang.moreThan}}</strong><br>
+                                    {{languageService.homeLang.chooseFrom}}</p>
+                            </div>
+                            <div class="row SpCard">
+                                <img width="100%" src="../../../assets/1.svg" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="infoRow" style="flex:1 1 500px!important;">
+                <div class="column">
+                    <div class="row information">
+                        <div class="columnar">
+                            <div class="row">
+                                <p><strong>{{languageService.homeLang.manyMatchmakers}}</strong><br>
+                                    {{languageService.homeLang.helpingHands}}</p>
+                            </div>
+                            <div class="row SpCard">
+                                <img width="100%" src="../../../assets/2.svg" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="infoRow" style="flex:1 1 500px!important;">
+                <div class="column">
+                    <div class="row information">
+                        <div class="columnar">
+                            <div class="row">
+                                <p><strong>{{languageService.homeLang.manyTemple}}</strong><br>
+                                    {{languageService.homeLang.verificationCenters}}</p>
+                            </div>
+                            <div class="row SpCard">
+                                <img style="object-fit:cover" src="../../../assets/3.svg" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </ng-container>
 
 <!-- 3rd container -->
@@ -81,7 +129,7 @@
 <ng-container>
     <div class="headingThree">
         <div>
-            <span style="font-weight: bold;color: white;font-size: 20px;">
+            <span style="font-weight: bold;color: white;font-size: 20px;font-family:'Allura'!important">
                 {{languageService.homeLang.offlineCentres}}
             </span>
         </div>
@@ -89,53 +137,55 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;">
-            <a [routerLink]="['/viewCentres']" routerLinkActive="router-link-active"  style="color: yellowgreen;text-decoration: none;">
+            <a [routerLink]="['/viewCentres']" routerLinkActive="router-link-active"
+                style="color: yellowgreen;text-decoration: none;">
                 {{languageService.homeLang.showMore}}
             </a>
         </div>
     </div>
+
     <div class="imageThreeGradient">
-        
-    <div class="innerHoriz">
-        <div class="innerThree">
-        <mat-card class="featureCard2">
-            <img class="feature2Img" 
-            src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/shiv_sai_dhaam_300.jpeg"  alt="Shiv Sai Dham Mandir"> 
-        </mat-card>
-        <span style="color: white;font-size: 16px;height: 30%;">{{languageService.homeLang.shivTemple}}</span>
-    </div>
+        <div class="innerHoriz">
+            <div class="innerThree">
+                <mat-card class="featureCard2">
+                    <img class="feature2Img"
+                        src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/shiv_sai_dhaam_300.jpeg"
+                        alt="Shiv Sai Dham Mandir">
+                </mat-card>
+                <span style="color: white;font-size: 16px;height: 30%;">{{languageService.homeLang.shivTemple}}</span>
+            </div>
 
-    <div class="innerThree">
-        <mat-card class="featureCard2"> 
-            <img class="feature2Img" src="
-            https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/sanathan_dharm_300.jpeg" alt="Sanathan Dharam Mandir"> 
-        </mat-card>
-        <span style="color: white;font-size: 16px;">{{languageService.homeLang.sanatanTemple}}</span>
-    </div>
+            <div class="innerThree">
+                <mat-card class="featureCard2">
+                    <img class="feature2Img" src="
+            https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/sanathan_dharm_300.jpeg"
+                        alt="Sanathan Dharam Mandir">
+                </mat-card>
+                <span style="color: white;font-size: 16px;">{{languageService.homeLang.sanatanTemple}}</span>
+            </div>
 
-    <div class="innerThree">
-        <mat-card class="featureCard2"> 
-            <img class="feature2Img" 
-            src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/lakshmi_narayan_300.jpeg" alt="Lakshmi Narayan Mandir"> 
-        </mat-card>
-        <span style="color: white;font-size: 16px;">{{languageService.homeLang.lakshmiTemple}}</span>
+            <div class="innerThree">
+                <mat-card class="featureCard2">
+                    <img class="feature2Img"
+                        src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/lakshmi_narayan_300.jpeg"
+                        alt="Lakshmi Narayan Mandir">
+                </mat-card>
+                <span style="color: white;font-size: 16px;">{{languageService.homeLang.lakshmiTemple}}</span>
+            </div>
+        </div>
+        <div class="button3 btnRightPad">
+            <button class="registerBtn " style="background-color: #0C9BF2;" [routerLink]="['/fourReg']"
+                routerLinkActive="router-link-active" mat-raised-button *ngIf="homeService.getLoginStatus()==false">
+                {{languageService.homeLang.freeRegister}}
+            </button>
+            <button class="rishteBtn " style="background-color: #0C9BF2;" [routerLink]="['/chat']"
+                routerLinkActive="router-link-active" mat-raised-button *ngIf="homeService.getLoginStatus()">
+                {{languageService.homeLang.rishteDekhein}}
+            </button>
+            <br>
+            <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
+        </div>
     </div>
-</div>
-    <div class="button3 btnRightPad">
-        <button class="registerBtn " style="background-color: #0C9BF2;"
-        [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
-         mat-raised-button *ngIf="homeService.getLoginStatus()==false">
-            {{languageService.homeLang.freeRegister}}
-        </button>
-        <button class="rishteBtn " style="background-color: #0C9BF2;"
-        [routerLink]="['/chat']" routerLinkActive="router-link-active"
-         mat-raised-button *ngIf="homeService.getLoginStatus()">
-         {{languageService.homeLang.rishteDekhein}}
-        </button>
-        <br>
-        <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
-    </div>
-</div>
 </ng-container>
 
 <!-- 4rth container -->
@@ -147,44 +197,46 @@
         </span>
         <div class="feature4">
             <div class="testimonial">
-                <img class="testimonialImage" 
-                src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review1_600.jpg" alt="Reviews">
+                <img class="testimonialImage"
+                    src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review1_600.jpg" alt="Reviews">
                 <div class="testimonialGradient">
                     <span>
                         Kaushik & Anushka
                     </span><br>
                     <span>
-                        I loved their events which are systematically organized and gives one time to meet a number of matches at the same time. We met at one such event and I recommend their services to everyone.
+                        I loved their events which are systematically organized and gives one time to meet a number of
+                        matches at the same time. We met at one such event and I recommend their services to everyone.
                     </span>
                 </div>
             </div>
 
             <div class="testimonial">
-                <img class="testimonialImage" 
-                src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review2_600.jpg" alt="Reviews">
+                <img class="testimonialImage"
+                    src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review2_600.jpg" alt="Reviews">
                 <div class="testimonialGradient">
                     <span>
                         Sahil & Salony
                     </span><br>
                     <span>
-                        I met the love of my Life through Hans Matrimony. I'm so happy and I could not thank them much. Its so unique concept like who would have thought they would find their life partner on Chat.
+                        I met the love of my Life through Hans Matrimony. I'm so happy and I could not thank them much.
+                        Its so unique concept like who would have thought they would find their life partner on Chat.
                     </span>
                 </div>
             </div>
 
             <div class="testimonial">
-                <img class="testimonialImage" 
-                src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/photography_600.jpg" alt="Reviews">
+                <img class="testimonialImage"
+                    src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/photography_600.jpg" alt="Reviews">
                 <div class="testimonialGradient">
                     <span>
                         Lakshay & Priya
                     </span><br>
                     <span>
                         Hans Matrimony is by far the best matrimonial
-                            service.
-                            Aprajita and her team of matchmakers sieved through thousands of profiles to find me my perfect
-                            match.
-                            I wish them all the best and highly recommend their services.
+                        service.
+                        Aprajita and her team of matchmakers sieved through thousands of profiles to find me my perfect
+                        match.
+                        I wish them all the best and highly recommend their services.
                     </span>
                 </div>
             </div>
@@ -201,9 +253,7 @@
             text-align: start;">
             #1 {{languageService.homeLang.matchmakingApp}}
         </p>
-        <div id="playBtn"
-        (click)="openPlaystore()"
-        >
+        <div id="playBtn" (click)="openPlaystore()">
             <span style="color: #D313AE;border-right: 1px solid #D313AE;
             align-self: center;
             font-weight: bold;
@@ -222,17 +272,15 @@
             <span style="color: white;
             align-self: center;
             font-weight: bold;
-            padding-right: 20px;" 
-            [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
-            *ngIf="homeService.getLoginStatus()==false">
+            padding-right: 20px;" [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
+                *ngIf="homeService.getLoginStatus()==false">
                 {{languageService.homeLang.freeRegister}}
             </span>
             <span style="color: white;
             align-self: center;
             font-weight: bold;
-            padding-right: 20px;" 
-            [routerLink]="['/chat']" routerLinkActive="router-link-active"
-            *ngIf="homeService.getLoginStatus()">
+            padding-right: 20px;" [routerLink]="['/chat']" routerLinkActive="router-link-active"
+                *ngIf="homeService.getLoginStatus()">
                 {{languageService.homeLang.rishteDekhein}}
             </span>
         </div>
@@ -253,93 +301,96 @@
             </span>
         </div>
 
-        <div id="footerDiv1" >
-            <div id="footerDiv2" >
+        <div id="footerDiv1">
+            <div id="footerDiv2">
 
-            <div>
-                <ul>
-                    <span style="color: darkgrey;font-weight: bold;font-size: 16px;">COMPANY</span>
-                    <li>
-                    About us
-                    </li>
-                    <li>
-                        Our Services
+                <div>
+                    <ul>
+                        <span style="color: darkgrey;font-weight: bold;font-size: 16px;">COMPANY</span>
+                        <li>
+                            About us
                         </li>
                         <li>
-                           Information
-                            </li>
-                            <li>
-                                About us
-                                </li>
-                </ul>
-            </div>
-
-            <div>
-                <ul>
-                    <span style="color: darkgrey;font-weight: bold;font-size: 16px;">USEFUL LINKS</span>
-                    <li>
-                    Help & Support
-                    </li>
-                    <li>
-                        Chat with us
+                            Our Services
                         </li>
                         <li>
-                           Contact us
-                            </li>
-                </ul>
-            </div>
-
-            <div>
-                <ul>
-                    <span style="color: darkgrey;font-weight: bold;font-size: 16px;">BROWSE MATRIMONIAL PROFILES</span>
-                    <li>
-                    Religion
-                    </li>
-                    <li>
-                        Caste
+                            Information
                         </li>
                         <li>
-                           Country
-                            </li>
-                            <li>
-                                Cities
-                                 </li>
-                </ul>
+                            About us
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul>
+                        <span style="color: darkgrey;font-weight: bold;font-size: 16px;">USEFUL LINKS</span>
+                        <li>
+                            Help & Support
+                        </li>
+                        <li>
+                            Chat with us
+                        </li>
+                        <li>
+                            Contact us
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <ul>
+                        <span style="color: darkgrey;font-weight: bold;font-size: 16px;">BROWSE MATRIMONIAL
+                            PROFILES</span>
+                        <li>
+                            Religion
+                        </li>
+                        <li>
+                            Caste
+                        </li>
+                        <li>
+                            Country
+                        </li>
+                        <li>
+                            Cities
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div id="iconSet">
-            <a href="https://www.facebook.com/HansMatrimony/">
-                <i class="fa fa-facebook iconFooter"></i>
+            <div id="iconSet">
+                <a href="https://www.facebook.com/HansMatrimony/">
+                    <i class="fa fa-facebook iconFooter"></i>
                 </a>
                 <a href="https://twitter.com/HansMatrimony">
-                  <i class="fa fa-twitter iconFooter"></i>
-                  </a>
-                  <a href="https://www.instagram.com/hansmatrimony/">
+                    <i class="fa fa-twitter iconFooter"></i>
+                </a>
+                <a href="https://www.instagram.com/hansmatrimony/">
                     <i class="fa fa-instagram iconFooter"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/company/hansmatrimony">
-                      <i class="fa fa-linkedin iconFooter"></i>
-                      </a>
-                      <a href="https://www.tiktok.com/@hansmatrimony?lang=en">
-                        <img style="width: 54px; height: 60px;padding: 15px;"  src="../assets/tiktok.png">
-                        </a>
-        </div>
+                </a>
+                <a href="https://www.linkedin.com/company/hansmatrimony">
+                    <i class="fa fa-linkedin iconFooter"></i>
+                </a>
+                <a href="https://www.tiktok.com/@hansmatrimony?lang=en">
+                    <img style="width: 54px; height: 60px;padding: 15px;" src="../assets/tiktok.png">
+                </a>
+            </div>
         </div>
 
         <hr style="background-color: white;">
 
-       <p id="bottomText">
-            <a style="color: white;" href="#">Success Stories &nbsp;| &nbsp;</a> 
-           <a style="color: white;" href="#">Careers &nbsp;| &nbsp;</a> <a style="color: white;" href="#">Payment Options &nbsp;| &nbsp;</a>
-           <a style="color: white;" href="#">Terms & Conditions &nbsp;| &nbsp;</a> <a style="color: white;" href="#">Privacy Policy</a>
-       </p>
+        <p id="bottomText">
+            <a style="color: white;" href="#">Success Stories &nbsp;| &nbsp;</a>
+            <a style="color: white;" href="#">Careers &nbsp;| &nbsp;</a> <a style="color: white;" href="#">Payment
+                Options &nbsp;| &nbsp;</a>
+            <a style="color: white;" href="#">Terms & Conditions &nbsp;| &nbsp;</a> <a style="color: white;"
+                href="#">Privacy Policy</a>
+        </p>
 
-       <p style="text-align: center;
+        <p style="text-align: center;
        color: white;
        font-size: 12px;
        margin-bottom: 0px;
        margin-top: 0px;">
-        Copyright @ 2020 hansmatrimony.com
-       </p>
+            Copyright @ 2020 hansmatrimony.com
+        </p>
     </footer>
 </ng-container>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewHomeService } from '../new-home.service';
 import { LanguageService } from 'src/app/language.service';
+//import { DragScrollComponent } from 'ngx-drag-scroll';
 
 @Component({
   selector: 'app-home-main',
@@ -10,14 +11,12 @@ import { LanguageService } from 'src/app/language.service';
 export class HomeMainComponent implements OnInit {
 
   constructor(public homeService: NewHomeService,
-              public languageService: LanguageService) { }
+    public languageService: LanguageService) { }
 
   ngOnInit() {
 
   }
-
   openPlaystore() {
     window.open('https://play.google.com/store/apps/details?id=com.twango.me');
   }
-
 }

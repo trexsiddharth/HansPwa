@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { SubscriptionserviceService } from 'src/app/subscriptionservice.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { ChatServiceService } from 'src/app/chat-service.service';
 
 @Component({
   selector: 'app-today-message',
@@ -9,101 +11,131 @@ import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile
   styleUrls: ['./today-message.component.css']
 })
 export class TodayMessageComponent implements OnInit, OnDestroy {
-@Input() messageData;
-@Input() button = '0';
-seconds = 60;
-minutes = 59;
-hour = 9;
-month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July',
- 'August', 'September', 'October', 'November', 'December'];
-
+  @Input() messageData;
+  @Input() button = '0';
+  seconds = 60;
+  minutes = 59;
+  hour = 9;
+  month: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July',
+    'August', 'September', 'October', 'November', 'December'];
+  isMobile = false;
+  buttonText = '';
   constructor(public router: Router,
-              public itemService: FindOpenHistoryProfileService,
-              public subscriptionService: SubscriptionserviceService ) {
-              }
+    public itemService: FindOpenHistoryProfileService,
+    public subscriptionService: SubscriptionserviceService,
+    private deviceService: DeviceDetectorService,
+    public chatService: ChatServiceService) {
+  }
   ngOnDestroy(): void {
     localStorage.setItem('saveTimer', `${new Date()}`);
   }
-
+  userId;
+  userIsLead;
   ngOnInit() {
     this.getDifferenceInTime();
+    this.isMobile = this.deviceService.isMobile();
+    this.chatService.authorized.subscribe(
+      data => {
+        if (data) {
+          this.userId = data.id;
+          this.userIsLead = data.isLead;
+          console.log(this.userId, this.userIsLead);
+        }
+      }
+    );
+    if (this.isMobile && (!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') &&
+      localStorage.getItem('appInstalled') !== '1'))) {
+      this.buttonText = 'Install App';
+    }
+    else if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+      this.buttonText = 'Complete Profile';
+    }
   }
-    callHans() {
-      window.open('tel:9697989697');
+  openWhatever() {
+    switch (this.buttonText) {
+      case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${this.userId}/${this.userIsLead}`);
+        break;
+      case 'Install App': localStorage.setItem('appInstalled', '1');
+        window.open('https://bit.ly/2YQEfbe', '_self')
+        break;
     }
-    getMessage() {
-      return this.messageData;
-    }
-    showPlan() {
+  }
+  callHans() {
+    window.open('tel:9697989697');
+  }
+  getMessage() {
+    return this.messageData;
+  }
+  showPlan() {
     this.router.navigateByUrl('subscription');
-    }
-    showLikedProfile() {
-      this.itemService.changeTab(2);
-    }
-    showProfilesLikedMe() {
-      this.itemService.changeTab(3);
-    }
-    goToVip() {
-      this.itemService.changeTab(4);
-    }
-    buyPlan(plan: any) {
-      this.router.navigateByUrl('subscription');
-    }
+  }
+  showLikedProfile() {
+    this.itemService.changeTab(2);
+  }
+  showProfilesLikedMe() {
+    this.itemService.changeTab(3);
+  }
+  goToVip() {
+    this.itemService.changeTab(4);
+  }
+  buyPlan(plan: any) {
+    this.router.navigateByUrl('subscription');
+  }
 
-    setTimer() {
-      console.log(this.seconds);
-      const timer = setInterval(() => {
-       this.seconds = this.seconds - 1;
-       if (this.hour !== 0 && this.minutes !== 0 &&  this.seconds === -1) {
+  setTimer() {
+    console.log(this.seconds);
+    const timer = setInterval(() => {
+      this.seconds = this.seconds - 1;
+      if (this.hour !== 0 && this.minutes !== 0 && this.seconds === -1) {
         this.seconds = 60;
         this.minutes = this.minutes - 1;
-       } else if (this.hour !== 0 && this.minutes === 0 &&  this.seconds === -1) {
+      } else if (this.hour !== 0 && this.minutes === 0 && this.seconds === -1) {
         this.seconds = 60;
         this.minutes = 59;
         this.hour -= 1;
-       }  else if (this.hour === 0 && this.minutes !== 0 &&  this.seconds === -1) {
+      } else if (this.hour === 0 && this.minutes !== 0 && this.seconds === -1) {
         this.seconds = 60;
         this.minutes -= 1;
-       } else if (this.hour === 0 && this.minutes === 0 && this.seconds === 0) {
-          clearInterval(timer);
-       }
-     }, 1000);
-    }
-
-    getDifferenceInTime() {
-      const todaysDate = new Date().getDate() === 31 ? 1 : new Date().getDate() + 1 ;
-      const todaysMonth = todaysDate === 1 ? new Date().getMonth() + 1 : new Date().getMonth();
-      const todaysYear = new Date().getFullYear();
-      const nextDay = `${todaysDate} ${this.month[todaysMonth]} ${todaysYear} 00:00:00`;
-      console.log(nextDay);
-      const date1: any = new Date(nextDay);
-      const date2: any = new Date();
-      const res = Math.abs(date1 - date2) / 1000;
-
-
-         // get total days between two dates
-      let days = Math.floor(res / 86400);
-      console.log('<br>Difference (Days): ' + days);
-
-         // get hours
-      let hours = Math.floor(res / 3600) % 24;
-      console.log('<br>Difference (Hours): ' + hours);
-
-         // get minutes
-      let minute = Math.floor(res / 60) % 60;
-      console.log('<br>Difference (Minutes): ' + minute);
-
-         // get seconds
-      let second = res % 60;
-      console.log('<br>Difference (Seconds): ' + second);
-
-      this.hour = hours;
-      this.minutes = minute;
-      this.seconds = Math.floor(second);
-      this.setTimer();
+      } else if (this.hour === 0 && this.minutes === 0 && this.seconds === 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
   }
 
-    goToDiscover() {
-      this.itemService.changeTab(1);
-    }
+  getDifferenceInTime() {
+    const todaysDate = new Date().getDate() === 31 ? 1 : new Date().getDate() + 1;
+    const todaysMonth = todaysDate === 1 ? new Date().getMonth() + 1 : new Date().getMonth();
+    const todaysYear = new Date().getFullYear();
+    const nextDay = `${todaysDate} ${this.month[todaysMonth]} ${todaysYear} 00:00:00`;
+    console.log(nextDay);
+    const date1: any = new Date(nextDay);
+    const date2: any = new Date();
+    const res = Math.abs(date1 - date2) / 1000;
+
+
+    // get total days between two dates
+    let days = Math.floor(res / 86400);
+    console.log('<br>Difference (Days): ' + days);
+
+    // get hours
+    let hours = Math.floor(res / 3600) % 24;
+    console.log('<br>Difference (Hours): ' + hours);
+
+    // get minutes
+    let minute = Math.floor(res / 60) % 60;
+    console.log('<br>Difference (Minutes): ' + minute);
+
+    // get seconds
+    let second = res % 60;
+    console.log('<br>Difference (Seconds): ' + second);
+
+    this.hour = hours;
+    this.minutes = minute;
+    this.seconds = Math.floor(second);
+    this.setTimer();
+  }
+
+  goToDiscover() {
+    this.itemService.changeTab(1);
+  }
 }

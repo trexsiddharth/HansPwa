@@ -24,4 +24,9 @@
             Profiles
         </p>
     </button>
+    <button *ngIf="buttonText" mat-raised-button class="discoverDiv mat-elevation-z15" (click)="openWhatever()">
+        <p style="font-size: 1.5rem;font-family: sans-serif;">
+            {{buttonText}}
+        </p>
+    </button>
 </main>
