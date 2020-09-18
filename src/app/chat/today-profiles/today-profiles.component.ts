@@ -799,8 +799,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         }
 
         // update profile left count
-        data ? this.getProfilesLeft(this.item.profiles_left)
+        if (this.item) {
+          data ?  this.getProfilesLeft(this.item.profiles_left)
           : this.ngxNotificationService.error('Profiles Left Not Found');
+        }
 
         this.spinner.hide();
 
