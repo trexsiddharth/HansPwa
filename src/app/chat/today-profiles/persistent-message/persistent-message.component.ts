@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { shareReplay, startWith, map } from 'rxjs/operators';
+import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 
 @Component({
   selector: 'app-persistent-message',
@@ -77,7 +78,6 @@ export class PersistentMessageComponent implements OnInit {
   pageThreeFilled$: Observable<boolean> = this.pageThreeFilledSubject.asObservable().pipe(
     shareReplay()
   );
-
   detailsDisplayIndexSubject = new BehaviorSubject<Number>(0);
   detailsDisplayIndex$: Observable<Number> = this.detailsDisplayIndexSubject.asObservable().pipe(
     shareReplay()
@@ -85,13 +85,15 @@ export class PersistentMessageComponent implements OnInit {
   personalProfileData: any;
   familyProfileData: any;
   personalForm: FormGroup;
+  familyForm: FormGroup;
   //public popupaction: Matpopupaction<EditPersonalDialogComponent>, @Inject(MAT_DIALOG_DATA) data,
   constructor(
     public router: Router,
     public chatService: ChatServiceService,
     public _formBuilder: FormBuilder,
     public ngxNotificationService: NgxNotificationService,
-    public http: HttpClient) {
+    public http: HttpClient,
+    public itemService: FindOpenHistoryProfileService) {
 
     this.PageThree = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -111,6 +113,14 @@ export class PersistentMessageComponent implements OnInit {
       College: [''],
       Additional: [''],
       Locality: [''],
+      Company: [''],
+    });
+    this.familyForm = this._formBuilder.group({
+      family_city: [''],
+      gotra: [''],
+      livingWithParents: [''],
+      house_type: [''],
+      family_type: [''],
     });
   }
   imageSrc = '../../../assets/';
@@ -149,15 +159,16 @@ export class PersistentMessageComponent implements OnInit {
       this.familyProfileData = this.chatService.familyProfileData;
       this.calculateIndex();
       //this.getAllCaste();
-      this.setCurrentValues()
     }
     else {
       this.completeProfile = false;
     }
   }
   calculateIndex() {
-    let a = ['locality', 'weight', 'profession', 'college', 'additional_qualification'];
+    let a = ['locality', 'weight', 'profession', 'college', 'additional_qualification', 'company'];
+    let b = ['gotra', 'city', 'house_type', 'family_type', 'livingWithParents']
     let detailsLeft = [];
+    let detailsLeftFam = [];
     for (let v of a) {
       if (this.personalProfileData.hasOwnProperty(v)) {
         if (!this.personalProfileData[v] || this.personalProfileData[v] === 'null') {
@@ -168,8 +179,24 @@ export class PersistentMessageComponent implements OnInit {
         detailsLeft.push(v);
       }
     }
-    if (detailsLeft.length > 0) {
+    for (let v of b) {
+      if (this.familyProfileData.hasOwnProperty(v)) {
+        if (!this.familyProfileData[v] || this.familyProfileData[v] === 'null') {
+          detailsLeftFam.push(v);
+        }
+      }
+      else {
+        detailsLeftFam.push(v);
+      }
+    }
+    if (detailsLeft.length > 1) {
       this.detailsDisplayIndexSubject.next(0);
+      console.log('index set to 0');
+      console.log(detailsLeft);
+      this.setCurrentValues();
+    }
+    else if (detailsLeftFam.length > 1) {
+      this.detailsDisplayIndexSubject.next(1);
       console.log('index set to 0');
       console.log(detailsLeft);
     }
@@ -186,8 +213,17 @@ export class PersistentMessageComponent implements OnInit {
       OtherProfession: this.personalProfileData.profession ? this.personalProfileData.profession : 'na',
       College: this.personalProfileData.college && this.personalProfileData.college != 'null' ? this.personalProfileData.college : null,
       Additional: this.personalProfileData.additional_qualification && this.personalProfileData.additional_qualification != 'null' ? this.personalProfileData.additional_qualification : null,
-      // email: this.personalProfileData.email && this.personalProfileData.email != 'null' ?
-      //   this.personalProfileData.email : this.familyProfileData.email && this.familyProfileData.email != 'null' ? this.familyProfileData.email : '',
+      Company: this.personalProfileData.company && this.personalProfileData.company != 'null' ? this.personalProfileData.company : null,
+    });
+  }
+  setCurrentFamilyValues() {
+    this.familyForm.patchValue({
+      family_city: this.familyProfileData.city && this.familyProfileData.city != 'null' ? this.familyProfileData.city : null,
+      gotra: this.familyProfileData.gotra && this.familyProfileData.gotra != 'null' ? this.familyProfileData.gotra : null,
+      livingWithParents: this.familyProfileData.livingWithParents && this.familyProfileData.livingWithParents
+        ? this.familyProfileData.livingWithParents : null,
+      house_type: this.familyProfileData.house_type && this.familyProfileData.house_type != 'null' ? this.familyProfileData.house_type : null,
+      family_type: this.familyProfileData.family_type && this.familyProfileData.family_type != 'null' ? this.familyProfileData.family_type : null,
     });
   }
   getIncome(value: number) {
@@ -223,6 +259,15 @@ export class PersistentMessageComponent implements OnInit {
       console.log(place.value);
       this.personalForm.patchValue({
         WorkingCity: place.value
+      });
+    }, 500);
+  }
+  placeChangedFamilyCity(): void {
+    const place: HTMLInputElement = document.querySelector('#FamliyCity');
+    setTimeout(() => {
+      console.log(place.value);
+      this.familyForm.patchValue({
+        family_city: place.value
       });
     }, 500);
   }
@@ -319,6 +364,57 @@ export class PersistentMessageComponent implements OnInit {
         close: true,
       });
     }
+  }
+  onSubmitFamily() {
+    this.errors = [];
+    console.log(this.familyForm);
+    for (const control in this.familyForm.controls) {
+      //console.log(this.familyForm.controls[control].value);
+      if (!this.familyForm.controls[control].valid || !this.familyForm.controls[control].value) {
+        this.errors.push(control);
+      }
+    }
+    if (this.errors[0]) {
+      this.ngxNotificationService.error('Fill the ' + this.errors[0] + 'detail');
+    }
+    else if (this.familyForm.valid) {
+      const familyDataForm = new FormData();
+      familyDataForm.append('identity_number', this.familyProfileData.identity_number);
+      familyDataForm.append('id', this.familyProfileData.id);
+      familyDataForm.append('temple_id', this.familyProfileData.temple_id);
+      familyDataForm.append('family_type', this.familyForm.value.family_type);
+      familyDataForm.append('house_type', this.familyForm.value.house_type);
+      familyDataForm.append('about', this.familyProfileData.about);
+      familyDataForm.append('occupation_father', this.familyProfileData.occupation);
+      familyDataForm.append('occupation_mother', this.familyProfileData.occupation_mother);
+      familyDataForm.append('father_status', this.familyProfileData.father_status);
+      familyDataForm.append('mother_status', this.familyProfileData.mother_status);
+      familyDataForm.append('married_sons', this.familyProfileData.married_sons);
+      familyDataForm.append('unmarried_sons', this.familyProfileData.unmarried_sons);
+      familyDataForm.append('married_daughters', this.familyProfileData.married_daughters);
+      familyDataForm.append('unmarried_daughters', this.familyProfileData.unmarried_daughters);
+      familyDataForm.append('gotra', this.familyForm.value.gotra);
+      familyDataForm.append('family_income', this.familyProfileData.family_income);
+      familyDataForm.append('city', this.familyForm.value.city);
+      familyDataForm.append('is_lead', localStorage.getItem('is_lead'));
+      familyDataForm.append('livingWithParents', this.familyForm.value.livingWithParents);
+
+      this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyDataForm).subscribe(
+        (data: any) => {
+          console.log(data);
+          localStorage.setItem('profileCompPercent', '100');
+          this.chatService.getUserProfileData();
+        },
+        (error: any) => {
+          console.log(error);
+          this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+        }
+      );
+      this.popupaction.emit({
+        close: true,
+      });
+    }
+
   }
   changed(element: any) {
     console.log(element);
@@ -423,7 +519,7 @@ export class PersistentMessageComponent implements OnInit {
         break;
       case 'Choose Plan': this.router.navigateByUrl(`subscription/${0}`);
         break;
-      case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${this.data.userId}/${this.data.userIsLead}`);
+      case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${localStorage.getItem('id')}/${localStorage.getItem('is_lead')}`);
         break;
       case 'Install App Now': localStorage.setItem('appInstalled', '1');
         window.open('https://bit.ly/2YQEfbe', '_self')
@@ -431,8 +527,55 @@ export class PersistentMessageComponent implements OnInit {
     }
   }
   close() {
+    if (!this.itemService.getPhotoStatus() && this.imgURL) {
+      this.itemService.setPhotoStatus(true);
+    }
     this.popupaction.emit({
       close: true,
+    });
+  }
+  imgURL;
+  changeProfileImage() {
+    document.querySelector<HTMLInputElement>('#backfile').click();
+  }
+  chooseFileForUpload(files) {
+    if (files.length === 0) {
+      return;
+    } else {
+      const mimeType = files[0].type;
+      if (mimeType.match(/image\/*/) == null) {
+        alert('Only images are supported.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        // use backimgurl to set image
+        // this.BackimgURL = reader.result;
+        this.uploadPhoto(files[0]);
+      };
+    }
+  }
+  uploadPhoto(data) {
+    const uploadData = new FormData();
+    uploadData.append('id', localStorage.getItem('id'));
+    uploadData.append('index', '1');
+    uploadData.append('image', data);
+    uploadData.append('is_lead', localStorage.getItem('is_lead'));
+
+    return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe((suc: any) => {
+      console.log('photos', suc);
+      if (suc.pic_upload_status === 'Y') {
+        console.log('Image Upload successful');
+        this.ngxNotificationService.success('Photo Uploaded Succesfully!');
+        //this.itemService.setPhotoStatus(true);
+        this.imgURL = suc.profile_pic_url;
+      } else {
+        this.ngxNotificationService.error('Photo Upload Unsuccessful!');
+      }
+    }, err => {
+      this.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
+      console.log(err);
     });
   }
 }

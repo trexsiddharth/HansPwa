@@ -34,7 +34,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   actionCount = -2;
 
   shortList =
-    [{ 'value': 0, 'bool': false }, { 'value': 1, 'bool': false }, { 'value': 2, 'bool': false },];
+    [{ 'value': 1, 'bool': false }, { 'value': 2, 'bool': false },];
   rejectList =
     [{ 'value': 0, 'bool': false }, { 'value': 1, 'bool': false },];
 
@@ -174,28 +174,31 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       if (this.actionCount % 2 === 0) {
         if (reply.toLowerCase() === 'shortlist') {
-          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
-            for (let x of this.shortList) {
-              if (x.value === 0) {
-                x.bool = true;
-                break;
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 95) {
+            this.showShortListPopup(0);
+            // for (let x of this.shortList) {
+            //   if (x.value === 0) {
+            //     x.bool = true;
+            //     break;
+            //   }
+            // }
+          }
+          else {
+            if ((!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') &&
+              localStorage.getItem('appInstalled') !== '1'))) {
+              for (let x of this.shortList) {
+                if (x.value === 1) {
+                  x.bool = true;
+                  break;
+                }
               }
             }
-          }
-          if ((!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') &&
-            localStorage.getItem('appInstalled') !== '1'))) {
-            for (let x of this.shortList) {
-              if (x.value === 1) {
-                x.bool = true;
-                break;
-              }
-            }
-          }
-          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-            for (let x of this.shortList) {
-              if (x.value === 2) {
-                x.bool = true;
-                break;
+            if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+              for (let x of this.shortList) {
+                if (x.value === 2) {
+                  x.bool = true;
+                  break;
+                }
               }
             }
           }
@@ -212,33 +215,12 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
           console.log('here is the modified shortlist array', this.shortList);
         }
         else if (reply === 'NO') {
-          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
-            for (let x of this.rejectList) {
-              if (x.value === 0) {
-                x.bool = true;
-                break;
-              }
-            }
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 95) {
+            this.rejectListPopup(0);
           }
-          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-            for (let x of this.rejectList) {
-              if (x.value === 1) {
-                x.bool = true;
-                break;
-              }
-            }
+          else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+            this.rejectListPopup(1);
           }
-          console.log('Here is the reject list array', this.rejectList);
-          let v;
-          for (v of this.rejectList) {
-            if (v.bool) {
-              this.rejectListPopup(v.value);
-              break;
-            }
-          }
-          this.rejectList.splice(this.rejectList.indexOf(v), 1);
-          this.rejectList.push(v);
-          console.log('here is the modified reject list array', this.rejectList);
         }
       }
       //this.getData(reply);

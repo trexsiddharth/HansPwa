@@ -209,7 +209,6 @@
                     [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
                     (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
                     alt="profile picture">
-
                 <div style="position: absolute;top: -15px;
             right: -20px;" *ngIf="item.family == null">
                     <button mat-fab id="premiumProfIcon">
@@ -218,6 +217,21 @@
                 </div>
 
                 <div class="historyDetails">
+                    <p *ngIf="type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'" style="display: flex!important;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-size: 1.0rem;
+                font-weight: bold;
+                color: white;
+                position: absolute;
+                top: -170px;
+                width: 100%!important;">
+                        Upgrade to see
+                        who
+                        likes you</p>
                     <span>
                         {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
                     </span><br>

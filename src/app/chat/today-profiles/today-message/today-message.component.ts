@@ -53,7 +53,7 @@ export class TodayMessageComponent implements OnInit, OnDestroy {
   }
   openWhatever() {
     switch (this.buttonText) {
-      case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${this.userId}/${this.userIsLead}`);
+      case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${localStorage.getItem('id')}/${localStorage.getItem('is_lead')}`);
         break;
       case 'Install App': localStorage.setItem('appInstalled', '1');
         window.open('https://bit.ly/2YQEfbe', '_self')
