@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { timeout, retry, catchError } from 'rxjs/operators';
 import { FindOpenHistoryProfileService } from './find-open-history-profile.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,9 @@ export class ChatServiceService {
 
   constructor(public http: HttpClient,
     public itemService: FindOpenHistoryProfileService) { }
+
+  shouldHitSendMessages = new BehaviorSubject<boolean>(false);
+  shouldHitSendMessages$: Observable<boolean> = this.shouldHitSendMessages.asObservable();
 
   setProfileData(a: any, b: any) {
     this.personalProfileData = a;
@@ -115,5 +119,11 @@ export class ChatServiceService {
     } else {
       console.log('Couln\'t get profiledata');
     }
+  }
+  setShouldHitSendMessagesToTrue() {
+    this.shouldHitSendMessages.next(true);
+  }
+  setShouldHitSendMessagesToFalse() {
+    this.shouldHitSendMessages.next(false);
   }
 }

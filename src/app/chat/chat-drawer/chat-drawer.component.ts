@@ -707,6 +707,7 @@ export class ChatDrawerComponent implements OnInit {
           this.changed();
           this.sidenav.close();
           this.getUserProfileData();
+          this.chatService.setShouldHitSendMessagesToTrue();
         },
         (error: any) => {
           console.log(error);

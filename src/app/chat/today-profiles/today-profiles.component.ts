@@ -27,7 +27,6 @@ import 'rxjs/add/operator/scan';
 export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy {
   item;
 
-
   profileItems: Array<ApiwhaAutoreply> = [];
 
   itemMessage = 'Welcome To Hans Matrimony';
@@ -103,6 +102,13 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   ngAfterViewInit() {
     this.section = document.querySelector('#today-main');
+    this.chatService.shouldHitSendMessages$.subscribe((val) => {
+      console.log('shouldHitSendMessages emitted', val);
+      if (val) {
+        console.log('get data called  because shouldHitSendMessages emitted', val);
+        this.getData('SHOW');
+      }
+    })
   }
   ngOnInit() {
     if (this.router.url.includes('first')) {
@@ -469,6 +475,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log(reply);
     this.setCount(reply);
     const previousItem = this.item;
+    this.chatService.setShouldHitSendMessagesToFalse();
     if (!localStorage.getItem('todayProfile')) {
       this.spinner.show();
     }
@@ -800,8 +807,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
         // update profile left count
         if (this.item) {
-          data ?  this.getProfilesLeft(this.item.profiles_left)
-          : this.ngxNotificationService.error('Profiles Left Not Found');
+          data ? this.getProfilesLeft(this.item.profiles_left)
+            : this.ngxNotificationService.error('Profiles Left Not Found');
         }
 
         this.spinner.hide();
