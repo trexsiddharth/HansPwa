@@ -15,9 +15,9 @@ p{
 }
 .mainHead{
     color: white;
-    font-size: 2.8rem;
+    font-size: 1.9rem;
     font-weight: bold;
-    text-shadow: 2px 2px 10px white;
+    /* text-shadow: 2px 2px 10px white; */
     font-family: sans-serif;
     text-align: center;
 }
@@ -36,7 +36,11 @@ p{
     margin-top: -90px;
     display: block;
     margin-left: 38%;
-    width: 80px;
+    width: 75px;
+    height:75px;
+    border-radius:50%;
+    padding:15px;
+    background:#4ADEE4;
 }
 .timerDiv{
     text-align: center;
@@ -55,14 +59,14 @@ p{
 }
 .discoverDiv{
     color: white;
+    padding: 12px 10px;
+    box-shadow: 12px 12px 14px rgba(0, 0, 0, 0.2);
     background-color: #4ADEE4;
     text-align: center;
-    border-radius: 50px;
-    padding: 20px 10px;
-    width: 80%;
-    display: block;
-    margin: 20px auto 0px;
-    box-shadow: 0px 8px 10px 10px #0000003b!important;
+    /* border-radius: 50px; */
+    width: 60%;
+    margin: 40px auto 0px;
+    border-radius:7px;
 }
 
 @media screen and (max-width: 370px) {

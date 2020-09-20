@@ -43,20 +43,18 @@ export class TodayMessageComponent implements OnInit, OnDestroy {
         }
       }
     );
-    if (this.isMobile && (!localStorage.getItem('appInstalled') || (localStorage.getItem('appInstalled') &&
-      localStorage.getItem('appInstalled') !== '1'))) {
-      this.buttonText = 'Install App';
-    }
-    else if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+    if (Number(localStorage.getItem('profileCompPercent')) < 100) {
       this.buttonText = 'Complete Profile';
+    }
+    else {
+      this.buttonText = 'See More';
     }
   }
   openWhatever() {
     switch (this.buttonText) {
       case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${localStorage.getItem('id')}/${localStorage.getItem('is_lead')}`);
         break;
-      case 'Install App': localStorage.setItem('appInstalled', '1');
-        window.open('https://bit.ly/2YQEfbe', '_self')
+      case 'See More': this.goToDiscover();
         break;
     }
   }
