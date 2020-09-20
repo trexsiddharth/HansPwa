@@ -32,6 +32,9 @@ export class ChatServiceService {
   shouldHitSendMessages = new BehaviorSubject<boolean>(false);
   shouldHitSendMessages$: Observable<boolean> = this.shouldHitSendMessages.asObservable();
 
+  opensidenav = new BehaviorSubject<boolean>(false);
+  opensidenav$: Observable<boolean> = this.opensidenav.asObservable();
+
   setProfileData(a: any, b: any) {
     this.personalProfileData = a;
     this.familyProfileData = b;
@@ -125,5 +128,11 @@ export class ChatServiceService {
   }
   setShouldHitSendMessagesToFalse() {
     this.shouldHitSendMessages.next(false);
+  }
+  opensidenavTrue() {
+    this.opensidenav.next(true);
+  }
+  opensidenavFalse() {
+    this.opensidenav.next(false);
   }
 }

@@ -123,9 +123,23 @@
             <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="sidenav.toggle()" alt="BACK" />
 
           </div>
-          <h5 style="margin: auto 20px;
+          <h5 style="margin: auto 0px auto 20px;
               font-weight: bold;
                font-size: 1.2rem;">{{languageService.profileLang.preference}}</h5>
+          <div class="topText" style="position: relative;
+          width: 25%;
+          justify-content: flex-end;
+          right: -40px!important;">
+            <p *ngIf="(disableSave$ | async) === true" class="btn" style="background-color: #34b7f1;
+                          color: white!important;
+                          width:100%;
+                          /* padding: 5px 40px; */
+                          margin-top:2px;
+                          margin-bottom:2px;
+                          font-size: 0.75rem;
+                          font-weight: bold;
+                          " (click)="onSubmitPreferences()">SAVE</p>
+          </div>
         </div>
 
         <form [formGroup]="preferencesForm">
@@ -135,19 +149,30 @@
                   [ngClass]="{'numNarrow':!isWide, 'numOk':isWide}">
                   {{countProfiles}}</a>Profiles per<br>day!</p>
             </div>
-            <div class="topText" style="width:50%;justify-content:flex-end;">
-              <p *ngIf="(disableSave$ | async) === true" class="btn" style="background-color: #34b7f1;
+            <div class="topText" style="position:relative;width: 54%;justify-content: center;margin-top: 4%;">
+              <button class="btn" mat-raised-button style="position:relative;background-color: #34b7f1;
                             color: white!important;
-                            width:50%;
-                            /* padding: 5px 40px; */
+                            width:100%;
+                            height:40px;
                             margin-top:2px;
                             margin-bottom:2px;
-                            font-size: 0.75rem;
+                            font-size: 0.9rem;
                             font-weight: bold;
-                            " (click)="onSubmitPreferences()">SAVE</p>
-              <p *ngIf="(disableSave$ | async) === false" class="recomend">Widen filters to see more matches per
-                day</p>
+                            box-shadow: 12px 12px 14px rgba(0, 0, 0, 0.2);
+                            " (click)="getRecomendedFilters()">
+                <div class="topText" style="width:100%!important;height:18px;position: relative;top:-15px;background: white!important; 
+                font-size:11px;color:#34b7f1!important;
+                box-shadow:5px 2px 2px rgba(0, 0, 0, 0.2);word-break:break">
+                  Get
+                  {{countRecomended}}
+                  Profiles Per
+                  Day</div><a style="position:relative;top:-15px">Recomended Filters</a>
+              </button>
             </div>
+          </div>
+          <div class="topText" style="width:100%;justify-content:center;margin-top:10%">
+            <p class="recomend">Widen filters to see more matches per
+              day</p>
           </div>
           <div class="row infoRow" style="margin-top:20px">
             <!-- <div class="column" *ngIf="editIndexPrefs != 0">
@@ -243,12 +268,21 @@
                 }}</option>
                   </select>
                 </div>
-                <div class="col-5">
+                <!-- <div class="col-5">
                   <h6 style="display: inline-block;">Food Choice:</h6>
                   <select type="text" class="form-control" formControlName="food_choice">
                     <option *ngFor="let item of Foodpreferences" [value]="item">{{
                   item
                 }}</option>
+                  </select>
+                </div> -->
+                <div class="col-5" *ngIf="preferenceProfileData && preferenceProfileData.manglik">
+                  <h6 style="display: inline-block;">Manglik :</h6>
+                  <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
+                    [(ngModel)]="preferenceProfileData.manglik" required>
+                    <option *ngFor="let item of Mangalika" [value]="item">{{
+                    item
+                  }}</option>
                   </select>
                 </div>
               </div>
@@ -283,15 +317,7 @@
                     </option>
                   </select>
                 </div> -->
-                <div class="col-10" *ngIf="preferenceProfileData && preferenceProfileData.manglik">
-                  <h6 style="display: inline-block;">Manglik :</h6>
-                  <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
-                    [(ngModel)]="preferenceProfileData.manglik" required>
-                    <option *ngFor="let item of Mangalika" [value]="item">{{
-                    item
-                  }}</option>
-                  </select>
-                </div>
+
               </div>
               <!-- <div class="row information">
             <div class="col-10">
@@ -359,26 +385,7 @@
           </button> -->
             </div>
           </div>
-          <div class="topText" style="position:relative;width: 100%;justify-content: center;margin-top:30px;">
-            <button class="btn" mat-raised-button style="position:relative;background-color: #34b7f1;
-                          color: white!important;
-                          width:90%;
-                          /* padding: 5px 40px; */
-                          margin-top:2px;
-                          margin-bottom:2px;
-                          font-size: 0.9rem;
-                          font-weight: bold;box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
-12px 12px 14px rgba(0, 0, 0, 0.2);
-                          " (click)="getRecomendedFilters()">
-              <div class="topText" style="width:60%!important;height:16px;position:absolute;top:-9px;background: white!important; 
-              font-size:10px;color:#34b7f1!important;
-              box-shadow:5px 2px 2px rgba(0, 0, 0, 0.2);">
-                Get
-                10-15
-                Profiles Per
-                Day</div>Use Recomended Preferences
-            </button>
-          </div>
+
           <!-- <div style="text-align:center;color:#4a5d6a">or</div> -->
           <!-- <div class="topText" style="width: 100%;justify-content: center;">
             <button class="btn" mat-raised-button style="background-color: #54585a34;

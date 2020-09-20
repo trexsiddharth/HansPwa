@@ -159,6 +159,11 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   persistentDialogOpeningLogic(reply: string) {
+    if (this.actionCount === -2) {
+      setTimeout(() => {
+        this.chatService.opensidenavTrue();
+      }, 3000)
+    }
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes') {
       this.itemService.openTodaysPopupAd();

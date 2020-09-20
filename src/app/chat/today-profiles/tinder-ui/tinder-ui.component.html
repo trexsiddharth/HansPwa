@@ -17,7 +17,8 @@
     </div>
     <!-- <div class="tinder--cards" (pan)="handlePan($event)" (panend)="handlePanEnd($event)"> -->
     <div [ngClass]="{'greyBack' : crossVisible , 'pinkBack' : heartVisible, 'tinder--cards':true}">
-        <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let item of cards; let i = index"
+        <div #tinderCard (scroll)="itemService.setTutorialIndex()" class="tinder--card" (transitionend)="handleShift()"
+            *ngFor="let item of cards; let i = index"
             [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 40 * i + 'px)', opacity: (cards.length-i)/cards.length+0.1}">
             <main id="mainTinderUI">
                 <!-- <div class="full-width ht-full" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',

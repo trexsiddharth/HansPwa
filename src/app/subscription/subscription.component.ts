@@ -57,12 +57,18 @@ export class SubscriptionComponent implements OnInit {
     public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((data: any) => {
-      if (data) {
-        console.log('look here', data.parameter)
-        this.isActive = (Number(data.parameter) === 0) ? 'online' : 'personalized';
-      }
-    });
+    // this.activatedRoute.params.subscribe((data: any) => {
+    //   if (data) {
+    //     console.log('look here', data.parameter)
+    //     this.isActive = (Number(data.parameter) === 0) ? 'online' : 'personalized';
+    //   }
+    // });
+    if (this.router.url.match('1')) {
+      this.isActive = 'personalized';
+    }
+    else {
+      this.isActive = 'online';
+    }
     this.subscriptionService.loadRazorPayScript();
     this.innerWidth = window.innerWidth;
     const headers = new HttpHeaders({

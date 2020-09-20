@@ -27,7 +27,7 @@ const routes: Routes = [
       then(m => m.RegModule)
   },
   {
-    path: 'subscription/:parameter',
+    path: 'subscription',
     loadChildren: () => import('./subscription/subscription.module').
       then(m => m.SubscriptionModule)
   },

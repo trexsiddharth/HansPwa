@@ -46,7 +46,6 @@ import {
 import { LanguageService } from '../language.service';
 import { SubscriptionserviceService } from '../subscriptionservice.service';
 
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -290,7 +289,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.router.url.match('first')) {
       this.languageService.setCurrentLanguage('english');
-      this.sidenav.toggle();
+      //this.sidenav.toggle();
     }
     if (localStorage.getItem('mobile_number')) {
       this.chatServivce.setContactNumber(localStorage.getItem('mobile_number'));
@@ -345,6 +344,12 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       localStorage.setItem('todaysPopupOpened', '1');
     }
+    this.chatServivce.opensidenav$.subscribe((val) => {
+      if (val) {
+        this.sidenav.open();
+        this.chatServivce.opensidenavFalse();
+      }
+    })
   }
 
   ngAfterViewInit() {

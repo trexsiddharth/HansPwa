@@ -73,6 +73,7 @@ export class ChatDrawerComponent implements OnInit {
   // countProfiles = new BehaviorSubject<number>(0);
   // countProfiles$: Observable<number> = this.countProfiles.asObservable();
   countProfiles = 0;
+  countRecomended = -1;
   public filteredCastesMulti: ReplaySubject<string[]> = new ReplaySubject<
     string[]
   >(1);
@@ -224,7 +225,7 @@ export class ChatDrawerComponent implements OnInit {
       }
     );
     if (this.router.url.match('first')) {
-      this.sidenav.open();
+      //this.sidenav.open();
     }
 
     this.disableSave$.subscribe(
@@ -232,6 +233,12 @@ export class ChatDrawerComponent implements OnInit {
         console.log(res);
       }
     );
+    this.chatService.opensidenav$.subscribe((val) => {
+      if (val) {
+        this.sidenav.open();
+        this.chatService.opensidenavFalse();
+      }
+    })
   }
 
   changed() {
@@ -258,6 +265,9 @@ export class ChatDrawerComponent implements OnInit {
     this.preferencesForm.valueChanges.subscribe(() => {
       if (this.firstTime) {
         this.firstTime = false;
+      }
+      else if (this.preferencesForm.value.income_max <= this.preferencesForm.value.income_min) {
+        this.disableSave.next(false);
       }
       else {
         this.disableSave.next(true);
@@ -292,8 +302,14 @@ export class ChatDrawerComponent implements OnInit {
       if (response.count) {
         console.log(response);
         this.isWide = true;
-        this.countProfiles = response.count;
-        this.setCurrentPreferenceValue(response.preference);
+        if (this.countRecomended != -1) {
+          this.countProfiles = response.count;
+          this.countRecomended = response.count;
+          this.setCurrentPreferenceValue(response.preference);
+        }
+        else {
+          this.countRecomended = response.count;
+        }
       }
     }, (err: any) => {
       console.log('Getting preferences failed');
@@ -321,7 +337,7 @@ export class ChatDrawerComponent implements OnInit {
         this.countProfiles = response.count;
         if (response.count < 5) {
           this.isWide = false;
-          this.disableSave.next(true);
+          //this.disableSave.next(true);
         }
         else this.isWide = true;
       }
@@ -623,7 +639,9 @@ export class ChatDrawerComponent implements OnInit {
             this.setProfileCalculations();
             this.setProfileCompletion();
             this.checkPageThreeDetails();
-            setTimeout(() => { this.getCountOfRishtey() }, 2000);
+            if (this.countRecomended == -1) {
+              setTimeout(() => { this.getCountOfRishtey(); this.getRecomendedFilters() }, 2000);
+            }
           },
           (error: any) => {
             this.spinner.hide();
@@ -704,8 +722,9 @@ export class ChatDrawerComponent implements OnInit {
         (data: any) => {
           console.log(data);
           console.log('Preference Details updated successfully');
-          this.changed();
+          //this.changed();
           this.sidenav.close();
+          this.disableSave.next(false);
           this.getUserProfileData();
           this.chatService.setShouldHitSendMessagesToTrue();
         },
@@ -827,6 +846,6 @@ export class ChatDrawerComponent implements OnInit {
   openSubscriptionOffer() {
     this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
     //this.itemService.openTodaysPopupAd();
-    this.router.navigateByUrl(`/subscription/${0}`)
+    this.router.navigateByUrl(`/subscription`)
   }
 }

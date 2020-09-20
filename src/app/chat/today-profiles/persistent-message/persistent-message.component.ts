@@ -515,9 +515,9 @@ export class PersistentMessageComponent implements OnInit {
       close: true,
     });
     switch (this.data.button) {
-      case 'Get Membership': this.router.navigateByUrl(`subscription/${1}`);
+      case 'Get Membership': this.router.navigateByUrl(`subscription?1=`);
         break;
-      case 'Choose Plan': this.router.navigateByUrl(`subscription/${0}`);
+      case 'Choose Plan': this.router.navigateByUrl(`subscription?0=`);
         break;
       case 'Complete Profile': this.router.navigateByUrl(`/chat/my-profile-new/${localStorage.getItem('id')}/${localStorage.getItem('is_lead')}`);
         break;
