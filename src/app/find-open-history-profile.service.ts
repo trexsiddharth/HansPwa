@@ -12,9 +12,6 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { DailyWelcomePopupComponent } from './chat/daily-welcome-popup/daily-welcome-popup.component';
-import { stat } from 'fs';
-import { setTimeout } from 'timers';
-
 
 @Injectable({
   providedIn: 'root'
@@ -217,7 +214,7 @@ export class FindOpenHistoryProfileService {
     }
   }
   saveDailyCount(count: any) {
-    this.profileCount.dailyCount = count;
+    this.profileCount.dailyCount = count + 1;
   }
 
   getOtherProfiles() {

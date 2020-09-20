@@ -114,6 +114,7 @@ export class PersistentMessageComponent implements OnInit {
       Additional: [''],
       Locality: [''],
       Company: [''],
+      Email: ['', Validators.email],
     });
     this.familyForm = this._formBuilder.group({
       family_city: [''],
@@ -121,6 +122,7 @@ export class PersistentMessageComponent implements OnInit {
       livingWithParents: [''],
       house_type: [''],
       family_type: [''],
+      about: [''],
     });
   }
   imageSrc = '../../../assets/';
@@ -165,8 +167,8 @@ export class PersistentMessageComponent implements OnInit {
     }
   }
   calculateIndex() {
-    let a = ['locality', 'weight', 'profession', 'college', 'additional_qualification', 'company'];
-    let b = ['gotra', 'city', 'house_type', 'family_type', 'livingWithParents']
+    let a = ['locality', 'weight', 'profession', 'college', 'additional_qualification', 'company', 'email'];
+    let b = ['gotra', 'city', 'house_type', 'family_type', 'livingWithParents', 'about'];
     let detailsLeft = [];
     let detailsLeftFam = [];
     for (let v of a) {
@@ -214,6 +216,7 @@ export class PersistentMessageComponent implements OnInit {
       College: this.personalProfileData.college && this.personalProfileData.college != 'null' ? this.personalProfileData.college : null,
       Additional: this.personalProfileData.additional_qualification && this.personalProfileData.additional_qualification != 'null' ? this.personalProfileData.additional_qualification : null,
       Company: this.personalProfileData.company && this.personalProfileData.company != 'null' ? this.personalProfileData.company : null,
+      Email: this.personalProfileData.email && this.personalProfileData.email != 'null' ? this.personalProfileData.email : null,
     });
   }
   setCurrentFamilyValues() {
@@ -224,6 +227,7 @@ export class PersistentMessageComponent implements OnInit {
         ? this.familyProfileData.livingWithParents : null,
       house_type: this.familyProfileData.house_type && this.familyProfileData.house_type != 'null' ? this.familyProfileData.house_type : null,
       family_type: this.familyProfileData.family_type && this.familyProfileData.family_type != 'null' ? this.familyProfileData.family_type : null,
+      about: this.familyProfileData.about && this.familyProfileData.about != 'null' ? this.familyProfileData.about : null,
     });
   }
   getIncome(value: number) {
@@ -338,8 +342,7 @@ export class PersistentMessageComponent implements OnInit {
       personalDataForm.append('address', this.personalForm.value.WorkingCity
         ? this.personalForm.value.WorkingCity : this.personalProfileData.working_city);
 
-      personalDataForm.append('email', this.personalProfileData.email ? this.personalProfileData.email : this.familyProfileData.email ? this.familyProfileData.email : null);
-
+      personalDataForm.append('email', this.personalForm.value.Email);
       personalDataForm.append('mobile', this.personalProfileData.mobile);
       personalDataForm.append('whatsapp', this.personalProfileData.whats_app_no ? this.personalProfileData.whats_app_no : this.personalProfileData.mobile);
       personalDataForm.append('profession', this.personalForm.value.Profession !== 'Others'
@@ -384,7 +387,7 @@ export class PersistentMessageComponent implements OnInit {
       familyDataForm.append('temple_id', this.familyProfileData.temple_id);
       familyDataForm.append('family_type', this.familyForm.value.family_type);
       familyDataForm.append('house_type', this.familyForm.value.house_type);
-      familyDataForm.append('about', this.familyProfileData.about);
+      familyDataForm.append('about', this.familyForm.value.about);
       familyDataForm.append('occupation_father', this.familyProfileData.occupation);
       familyDataForm.append('occupation_mother', this.familyProfileData.occupation_mother);
       familyDataForm.append('father_status', this.familyProfileData.father_status);
@@ -570,6 +573,7 @@ export class PersistentMessageComponent implements OnInit {
         this.ngxNotificationService.success('Photo Uploaded Succesfully!');
         //this.itemService.setPhotoStatus(true);
         this.imgURL = suc.profile_pic_url;
+        this.imageSrc = suc.profile_pic_url;
       } else {
         this.ngxNotificationService.error('Photo Upload Unsuccessful!');
       }

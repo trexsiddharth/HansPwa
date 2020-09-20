@@ -123,13 +123,14 @@
             <img src="../../assets/left-arrow-key.svg" style="width:100%" (click)="sidenav.toggle()" alt="BACK" />
 
           </div>
-          <h5 style="margin: auto 0px auto 20px;
+          <h5 style="margin: auto 20px;
               font-weight: bold;
                font-size: 1.2rem;">{{languageService.profileLang.preference}}</h5>
-          <div class="topText" style="position: relative;
+          <div class="topText" style="position: absolute;
           width: 25%;
           justify-content: flex-end;
-          right: -40px!important;">
+          right: 10px!important;
+          top:5px;">
             <p *ngIf="(disableSave$ | async) === true" class="btn" style="background-color: #34b7f1;
                           color: white!important;
                           width:100%;
@@ -144,12 +145,15 @@
 
         <form [formGroup]="preferencesForm">
           <div class="row" style="margin:5px;">
-            <div>
+            <div class="col-6" style="display: flex;
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+            align-items: flex-end;">
               <p [ngClass]="{'prefsNarrow':!isWide, 'prefsOk':isWide, 'topText':true}"><a
                   [ngClass]="{'numNarrow':!isWide, 'numOk':isWide}">
                   {{countProfiles}}</a>Profiles per<br>day!</p>
             </div>
-            <div class="topText" style="position:relative;width: 54%;justify-content: center;margin-top: 4%;">
+            <div class="col-6 topText" style="position:relative;width: 54%;justify-content: center;margin-top: 4%;">
               <button class="btn" mat-raised-button style="position:relative;background-color: #34b7f1;
                             color: white!important;
                             width:100%;

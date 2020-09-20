@@ -116,13 +116,15 @@
             <div class="labelSetting">
               <span style="position:absolute;right:-5px;top:-5px" class="labelS mat-elevation-z7" [matBadge]="'!'"
                 matBadgeSize="small" [matBadgeHidden]="itemService.getDiscoverClicked()"></span>
-              <img class="tabImage" src="../../assets/tabs-icons/discover-white.svg" alt="icon"
+              <img class="tabImage" style="width:55px" src="../../assets/people.png" alt="icon"
                 *ngIf="selectedTab !== 1">
-              <img class="tabImage" src="../../assets/tabs-icons/search.svg" alt="icon" *ngIf="selectedTab === 1">
+              <img class="tabImage" style="width:55px" src="../../assets/peopleBlue.png" alt="icon"
+                *ngIf="selectedTab === 1">
             </div>
             <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
-              style="font-size:small">{{languageService.profileLang.discover}}</a>
-            <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.discover}}</a>
+              style="font-size:small; position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'english'"
+              style="position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
           </ng-template>
 
           <ng-template matTabContent>

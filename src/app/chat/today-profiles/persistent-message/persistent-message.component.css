@@ -65,6 +65,7 @@
     height: 2rem;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
   
   #offBannerImg {
