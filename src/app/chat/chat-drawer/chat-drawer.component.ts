@@ -335,6 +335,7 @@ export class ChatDrawerComponent implements OnInit {
     this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form).subscribe((response: any) => {
       if (response.count) {
         this.countProfiles = response.count;
+        this.chatService.countOfRishtey = response.count;
         if (response.count < 5) {
           this.isWide = false;
           //this.disableSave.next(true);

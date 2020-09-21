@@ -133,7 +133,12 @@ export class PersistentMessageComponent implements OnInit {
         break;
       case 'Choose Plan': this.imageSrc += 'unlockprime.png';
         break;
-      case 'Complete Profile': this.imageSrc += 'profileincomplete.png';
+      case 'Complete Profile': if (this.chatService.imgSRC.value) {
+        this.imgURL = this.imageSrc = this.chatService.imgSRC.value;
+      }
+      else {
+        this.imageSrc += 'profileincomplete.png';
+      }
         break;
       case 'Install App Now': this.imageSrc += 'bell.png';
         break;
@@ -201,6 +206,7 @@ export class PersistentMessageComponent implements OnInit {
       this.detailsDisplayIndexSubject.next(1);
       console.log('index set to 0');
       console.log(detailsLeft);
+      this.setCurrentFamilyValues();
     }
     else {
       this.completeProfile = false;
@@ -293,7 +299,7 @@ export class PersistentMessageComponent implements OnInit {
         this.errors.push(control);
       }
     }
-    if (this.errors[0]) {
+    if (this.errors[0] && this.errors[0] != 'Email') {
       this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
     }
     else if (this.personalForm.valid) {
@@ -377,7 +383,7 @@ export class PersistentMessageComponent implements OnInit {
         this.errors.push(control);
       }
     }
-    if (this.errors[0]) {
+    if (this.errors[0] && this.errors[0] != 'about' && this.errors[0] != 'gotra') {
       this.ngxNotificationService.error('Fill the ' + this.errors[0] + 'detail');
     }
     else if (this.familyForm.valid) {
@@ -572,8 +578,8 @@ export class PersistentMessageComponent implements OnInit {
         console.log('Image Upload successful');
         this.ngxNotificationService.success('Photo Uploaded Succesfully!');
         //this.itemService.setPhotoStatus(true);
-        this.imgURL = suc.profile_pic_url;
-        this.imageSrc = suc.profile_pic_url;
+        this.imgURL = this.imageSrc = suc.profile_pic_url;
+        this.chatService.imgSRC.next(suc.profile_pic_url);
       } else {
         this.ngxNotificationService.error('Photo Upload Unsuccessful!');
       }

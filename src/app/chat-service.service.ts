@@ -35,6 +35,11 @@ export class ChatServiceService {
   opensidenav = new BehaviorSubject<boolean>(false);
   opensidenav$: Observable<boolean> = this.opensidenav.asObservable();
 
+  imgSRC = new BehaviorSubject<string>(null);
+  imgSRC$: Observable<string> = this.imgSRC.asObservable();
+
+  countOfRishtey = 0;
+
   setProfileData(a: any, b: any) {
     this.personalProfileData = a;
     this.familyProfileData = b;

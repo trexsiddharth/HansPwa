@@ -350,6 +350,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
         this.chatServivce.opensidenavFalse();
       }
     })
+    this.chatServivce.imgSRC$.subscribe((val) => {
+      this.photo = val;
+    });
   }
 
   ngAfterViewInit() {

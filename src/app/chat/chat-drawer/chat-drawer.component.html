@@ -145,7 +145,7 @@
 
         <form [formGroup]="preferencesForm">
           <div class="row" style="margin:5px;">
-            <div class="col-6" style="display: flex;
+            <div class="col-5" style="display: flex;
             flex-direction: column-reverse;
             justify-content: flex-start;
             align-items: flex-end;">
@@ -153,11 +153,11 @@
                   [ngClass]="{'numNarrow':!isWide, 'numOk':isWide}">
                   {{countProfiles}}</a>Profiles per<br>day!</p>
             </div>
-            <div class="col-6 topText" style="position:relative;width: 54%;justify-content: center;margin-top: 4%;">
-              <button class="btn" mat-raised-button style="position:relative;background-color: #34b7f1;
+            <div class="col-7 topText" style="position:relative;width: 54%;justify-content: center;margin-top: 4%;">
+              <button class="btn" mat-raised-button style="position:relative;background-color: #4ADEE4;
                             color: white!important;
                             width:100%;
-                            height:40px;
+                            height:fit-content;
                             margin-top:2px;
                             margin-bottom:2px;
                             font-size: 0.9rem;
@@ -170,11 +170,13 @@
                   Get
                   {{countRecomended}}
                   Profiles Per
-                  Day</div><a style="position:relative;top:-15px">Recomended Filters</a>
+                  Day</div><a
+                  style="position:relative;top:-15px;display:flex;flex-direction:column;align-items: center;justify-content: center;">Recomended
+                  Filters</a>
               </button>
             </div>
           </div>
-          <div class="topText" style="width:100%;justify-content:center;margin-top:10%">
+          <div class="topText" style="width:100%;justify-content:center;margin-top:10%;text-align: center;">
             <p class="recomend">Widen filters to see more matches per
               day</p>
           </div>

@@ -11,7 +11,7 @@ import { ChatServiceService } from 'src/app/chat-service.service';
   styleUrls: ['./today-message.component.css']
 })
 export class TodayMessageComponent implements OnInit, OnDestroy {
-  @Input() messageData;
+  @Input('messageData') messageData: string;
   @Input() button = '0';
   seconds = 60;
   minutes = 59;
@@ -31,7 +31,14 @@ export class TodayMessageComponent implements OnInit, OnDestroy {
   }
   userId;
   userIsLead;
+  whatever = false;
   ngOnInit() {
+    if (this.messageData.includes('We have already shared some *profiles* with you')) {
+      this.whatever = true;
+    }
+    else {
+      this.whatever = false;
+    }
     this.getDifferenceInTime();
     this.isMobile = this.deviceService.isMobile();
     this.chatService.authorized.subscribe(

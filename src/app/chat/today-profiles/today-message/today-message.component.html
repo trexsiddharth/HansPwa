@@ -1,13 +1,27 @@
 <main>
     <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
-        <h1 class="mainHead">
-            There are not enough matches for you
-        </h1>
-        <div class="container workingDiv">
-            <img class="circularTick" src="../../../../assets/new icons/sad-face.svg" alt="green tick">
-            <p style="margin-top: 20px;">
-                Please widen your preferences or come back after 2 days
-            </p>
+        <div *ngIf="whatever">
+            <h1 class="mainHead">
+                Well Done!
+            </h1>
+            <div class="container workingDiv">
+                <img class="circularTick" src="../../../../assets/new icons/green_circular_white_tick.svg"
+                    alt="green tick">
+                <p style="margin-top: 20px;">
+                    Our matchmakers are working on your profile
+                </p>
+            </div>
+        </div>
+        <div *ngIf="!whatever">
+            <h1 class="mainHead">
+                There are not enough matches for you
+            </h1>
+            <div class="container workingDiv">
+                <img class="circularTick" src="../../../../assets/new icons/sad-face.svg" alt="green tick">
+                <p style="margin-top: 20px;">
+                    Please widen your preferences or come back tomorrow
+                </p>
+            </div>
         </div>
         <div class="container timerDiv">
             <p>
@@ -22,15 +36,17 @@
                 {{buttonText}}
             </p>
         </button>
-        <div class="container timerDiv" style="margin-top:13%">
-            <p>
-                To see more profiles per day
-            </p>
+        <div *ngIf="chatService.countOfRishtey < 10">
+            <div class="container timerDiv" style="margin-top:13%">
+                <p>
+                    To see more profiles per day
+                </p>
+            </div>
+            <button mat-raised-button class="discoverDiv" style="margin-top: 0px;">
+                <p style="font-size: 1.2rem;font-family: sans-serif;font-weight: 600;">
+                    Widen Preferences
+                </p>
+            </button>
         </div>
-        <button *ngIf="buttonText" mat-raised-button class="discoverDiv">
-            <p style="font-size: 1.2rem;font-family: sans-serif;font-weight: 600;">
-                Widen Preferences
-            </p>
-        </button>
     </div>
 </main>
