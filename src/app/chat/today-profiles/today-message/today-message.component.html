@@ -41,7 +41,8 @@
                 To see more profiles per day
             </p>
         </div>
-        <button *ngIf="chatService.countOfRishtey < 15" mat-raised-button class="discoverDiv" style="margin-top: 0px;">
+        <button *ngIf="chatService.countOfRishtey < 15" (click)="chatService.opensidenavTrue()" mat-raised-button
+            class="discoverDiv" style="margin-top: 0px;">
             <p style="font-size: 1.2rem;font-family: sans-serif;font-weight: 600;">
                 Widen Preferences
             </p>
