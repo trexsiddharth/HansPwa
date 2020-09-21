@@ -56,9 +56,11 @@ main{
   pointer-events: none;
 }
   .prefsNarrow{
+    font-size:0.9rem;
     color:rgba(201, 83, 83, 0.76)!important;
   }
   .prefsOk{
+    font-size:0.9rem;
     color:#4adfe4fd!important;
   }
   .topText{
