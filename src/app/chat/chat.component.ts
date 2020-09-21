@@ -182,7 +182,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   currentTab;
   profilesCompletedStatus = false;
   timerMain;
-  photo = '../../assets/avatar.svg';
+  photo = '';
   lockdownCount = 0;
 
 
@@ -209,6 +209,10 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('profile_photo')) {
+      console.log('hamburger photo set');
+      this.photo = localStorage.getItem('profile_photo');
+    }
     this.route.paramMap.subscribe(
       (data: any) => {
         if (data) {
@@ -322,7 +326,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     // user authorized
     this.chatServivce.authorized.subscribe(
       data => {
-        if (data) {
+        if (data.photo) {
           this.setProfileImage(data.photo);
         }
       }
@@ -351,7 +355,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
     this.chatServivce.imgSRC$.subscribe((val) => {
-      this.photo = val;
+      if (val) {
+        this.photo = val;
+      }
     });
   }
 
@@ -467,7 +473,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   setProfileImage(image) {
     if (image) {
       this.photo = image;
-    } else {
+    }
+    else {
       this.photo = '../../assets/avatar.svg';
     }
   }

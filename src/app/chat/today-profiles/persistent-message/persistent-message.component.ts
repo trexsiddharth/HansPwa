@@ -136,6 +136,9 @@ export class PersistentMessageComponent implements OnInit {
       case 'Complete Profile': if (this.chatService.imgSRC.value) {
         this.imgURL = this.imageSrc = this.chatService.imgSRC.value;
       }
+      else if (localStorage.getItem('profile_photo')) {
+        this.imgURL = this.imageSrc = localStorage.getItem('profile_photo');
+      }
       else {
         this.imageSrc += 'profileincomplete.png';
       }
@@ -202,10 +205,10 @@ export class PersistentMessageComponent implements OnInit {
       console.log(detailsLeft);
       this.setCurrentValues();
     }
-    else if (detailsLeftFam.length > 1) {
+    else if (detailsLeftFam.length > 2) {
       this.detailsDisplayIndexSubject.next(1);
-      console.log('index set to 0');
-      console.log(detailsLeft);
+      console.log('index set to 1');
+      console.log(detailsLeftFam);
       this.setCurrentFamilyValues();
     }
     else {
@@ -580,6 +583,7 @@ export class PersistentMessageComponent implements OnInit {
         //this.itemService.setPhotoStatus(true);
         this.imgURL = this.imageSrc = suc.profile_pic_url;
         this.chatService.imgSRC.next(suc.profile_pic_url);
+        localStorage.setItem('profile_photo', suc.profile_pic_url);
       } else {
         this.ngxNotificationService.error('Photo Upload Unsuccessful!');
       }

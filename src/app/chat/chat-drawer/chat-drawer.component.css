@@ -59,7 +59,7 @@ main{
     color:rgba(201, 83, 83, 0.76)!important;
   }
   .prefsOk{
-    color:rgba(86, 173, 86, 0.822)!important;
+    color:#4adfe4fd!important;
   }
   .topText{
     width:100%;
@@ -90,7 +90,7 @@ main{
     border-radius:50%;
     font-size:36px;
     font-weight:bold;
-    background: rgba(102, 202, 102, 0.315) ;
+    background: #4adfe449 ;
   }
   .recomend{
     background:rgba(131, 131, 247, 0.158);

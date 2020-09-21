@@ -159,10 +159,10 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   persistentDialogOpeningLogic(reply: string) {
-    if (this.actionCount === -2) {
+    if (this.actionCount === -2 && this.router.url.match('first')) {
       setTimeout(() => {
         this.chatService.opensidenavTrue();
-      }, 3000)
+      }, 1500)
     }
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes') {
@@ -284,6 +284,10 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   toggleChoiceIndicator(cross, heart) {
     this.crossVisible = cross;
     this.heartVisible = heart;
+    setTimeout(() => {
+      this.crossVisible = false;
+      this.heartVisible = false;
+    }, 600);
   };
   handleShift() {
     this.transitionInProgress = false;

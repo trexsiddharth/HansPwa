@@ -33,11 +33,11 @@ export class TodayMessageComponent implements OnInit, OnDestroy {
   userIsLead;
   whatever = false;
   ngOnInit() {
-    if (this.messageData.includes('We have already shared some *profiles* with you')) {
-      this.whatever = true;
+    if (this.messageData.toLowerCase().includes('2')) {
+      this.whatever = false;
     }
     else {
-      this.whatever = false;
+      this.whatever = true;
     }
     this.getDifferenceInTime();
     this.isMobile = this.deviceService.isMobile();

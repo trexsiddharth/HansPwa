@@ -161,7 +161,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               id: data.id,
               isLead: data.is_lead
             });
-            localStorage.setItem('profile_photo', data.photo);
+            if (data.photo) {
+              localStorage.setItem('profile_photo', data.photo);
+            }
           } else {
             this.selfImage = '../../assets/avatar.svg';
             this.selfName = 'You';
@@ -217,7 +219,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             id: data.id,
             isLead: data.is_lead
           });
-          localStorage.setItem('profile_photo', data.photo);
+          if (data.photo) {
+            localStorage.setItem('profile_photo', data.photo);
+          }
         } else {
           this.selfImage = '../../assets/avatar.svg';
           this.selfName = 'You';
@@ -563,7 +567,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
                   id: data.id,
                   isLead: data.is_lead
                 });
-                localStorage.setItem('profile_photo', data.photo);
+                if (data.photo) {
+                  localStorage.setItem('profile_photo', data.photo);
+                }
               } else {
                 this.selfImage = '../../assets/avatar.svg';
                 this.selfName = 'You';
