@@ -106,17 +106,7 @@
                     <p style="font-size:16px;color:rgb(51, 59, 52)!important;margin:1.7rem 0 0.5rem 0!important;">
                         {{data.submessage}}</p>
                     <div *ngIf="!(itemService.getPhotoStatus())">
-                        <div *ngIf="!imgURL" (click)="changeProfileImage()" style="height:5vh!important;  
-                            width:15vh;
-                            border-radius: 10px!important;
-                            background:#00c2cb!important;
-                            margin:auto;
-                            display:flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content:center;
-                            font-size:0.9rem;
-                            color:white;">
+                        <div *ngIf="!imgURL" (click)="changeProfileImage()" class="uploadPhotoBtn">
                             <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile"
                                 accept='image/*' (change)="chooseFileForUpload(backfile.files)" />
                             Upload Photo
@@ -229,17 +219,7 @@
                     <p style="font-size:16px;color:rgb(51, 59, 52)!important;margin:1.7rem 0 0.5rem 0!important;">
                         {{data.submessage}}</p>
                     <div *ngIf="!(itemService.getPhotoStatus())">
-                        <div *ngIf="!imgURL" (click)="changeProfileImage()" style="height:5vh!important;  
-                        width:15vh;
-                        border-radius: 10px!important;
-                        background:#00c2cb!important;
-                        margin:auto;
-                        display:flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content:center;
-                        font-size:0.9rem;
-                        color:white;">
+                        <div *ngIf="!imgURL" (click)="changeProfileImage()" class="uploadPhotoBtn">
                             <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile"
                                 accept='image/*' (change)="chooseFileForUpload(backfile.files)" />
                             Upload Photo

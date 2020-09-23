@@ -21,6 +21,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationsService } from '../../notifications.service';
+import { ChatServiceService } from '../../chat-service.service';
 
 import {
   MatDialog, MatAutocompleteDefaultOptions,
@@ -173,7 +174,8 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
     public notification: NotificationsService,
     public fourPageService: FourPageService,
-    private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
+    private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
+    public chatService: ChatServiceService) {
     this.PageTwo = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
       Qualification: ['', Validators.compose([Validators.required])],
@@ -377,7 +379,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
 
-
+      if (!this.fourPageService.getUserThrough()) {
+        this.router.navigateByUrl('chat?first');
+      }
       // tslint:disable-next-line: max-line-length
       return this.http.post('https://partner.hansmatrimony.com/api/formTwoProfile', firststepdata).subscribe((res: any) => {
         console.log('first', res);
@@ -389,7 +393,8 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           }
           //this.ngxNotificationService.success('Registered Successfully');
           if (!this.fourPageService.getUserThrough()) {
-            this.router.navigateByUrl('chat?first');
+            this.chatService.formTwoCompleted.next(true);
+            //this.router.navigateByUrl('chat?first');
             this.analyticsEvent('Four Page Registration Page Two');
           }
         } else {

@@ -188,7 +188,8 @@
      justify-content: center;
 }
 .rotateAnimation{
-    animation: rotation 2s infinite linear;
+    /* animation: rotation 2s infinite linear; */
+    transform: translateX(-200);
 }
 @keyframes rotation {
     from {

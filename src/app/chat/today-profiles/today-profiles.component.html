@@ -743,6 +743,11 @@ font-weight: 600;">We are looking for compatible matches for you
     <img class="actionAnimation" *ngIf="lastAction==='SHORTLIST'" src="../../../assets/heartwhite.svg" alt="पसंद है">
     <img class="actionAnimation" *ngIf="lastAction==='NO'" src="../../../assets/closewhite.svg" alt="नापसंद है">
 </div> -->
-
-<app-today-message [messageData]="itemMessage" [button]="button" *ngIf="type == 'message'">
+<div class="tinder--card ht-full" *ngIf="type == 'message' && showPopup">
+    <div id="profileImageDiv">
+        <app-persistent-message [data]="popupdata" (popupaction)="popupAction($event)">
+        </app-persistent-message>
+    </div>
+</div>
+<app-today-message [messageData]="itemMessage" [button]="button" *ngIf="type == 'message' && !showPopup">
 </app-today-message>

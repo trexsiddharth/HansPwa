@@ -88,6 +88,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   );
   userId;
   userIsLead;
+  popupdata = {};
+  showPopup = false;
   constructor(private http: HttpClient,
     private spinner: NgxSpinnerService,
     private ngxNotificationService: NgxNotificationService,
@@ -241,7 +243,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           }
           this.getNextMessageOrProfile('SHOW');
         }
-      }, 100);
+      }, 1000);
     }
     //just to set up which popup to show.....
     if (this.chatService.shortList.length > 0) {
@@ -675,6 +677,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         } else {
           this.type = 'message';
           this.profileItems = [];
+          if (Number(localStorage.getItem('profileCompPercent')) < 90) {
+            this.openPersistentDialogNew();
+          }
           this.itemMessage = data.apiwha_autoreply;
           localStorage.setItem('todayProfile', '');
           this.setMessageText(data.apiwha_autoreply);
@@ -780,6 +785,26 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     console.log(this.button);
     this.spinner.hide();
+  }
+  popupAction(event) {
+    if (event.close) {
+      this.showPopup = false;
+    }
+    setTimeout(() => {
+      if (Number(localStorage.getItem('profileCompPercent')) < 90) {
+        this.openPersistentDialogNew();
+      }
+    }, 100)
+  }
+  openPersistentDialogNew() {
+    this.popupdata = {
+      message: 'Complete Your Profile',
+      submessage: 'Complete your profile and get better matches.',
+      button: 'Complete Profile',
+      userId: this.userId,
+      userIsLead: this.userIsLead,
+    }
+    this.showPopup = true;
   }
   // to get the credits kinda obvious.
   getCredits() {

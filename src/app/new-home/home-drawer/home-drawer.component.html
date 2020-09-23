@@ -8,62 +8,62 @@
             </div>
             <div style="
             padding: 10px 30px;">
-            <img width="40px" class="profileImage" [defaultImage]="'../../assets/logo_192.png'" 
-                            [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_384.png 1000w'" 
-                             [useSrcset]="true" alt="profile picture" *ngIf="homeService.getProfilePic() == null">
+                <img width="40px" class="profileImage" [defaultImage]="'../../assets/logo_192.png'"
+                    [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_384.png 1000w'" [useSrcset]="true"
+                    alt="profile picture" *ngIf="homeService.getProfilePic() == null">
 
-                             <img class="profileImage" [src]="homeService.getProfilePic()" alt="profile picture" *ngIf="homeService.getProfilePic()" >
+                <img class="profileImage" [src]="homeService.getProfilePic()" alt="profile picture"
+                    *ngIf="homeService.getProfilePic()">
             </div>
-            </div>
-            </ng-container>
+        </div>
+    </ng-container>
 
-            <ng-container>
-                <div style="padding: 20px 40px; font-size: 16px;font-weight: bold;">
-                    
-                    <button class="btn drawerBtn" [routerLink]="['/fourReg']" routerLinkActive="router-link-active" 
-                    *ngIf="homeService.getLoginStatus() == false">
-                        <img width="40px" src="../../../assets/note.svg" alt="register">  
-                        <span style="padding-top: 4.5px; color: #070973;
+    <ng-container>
+        <div style="padding: 20px 40px; font-size: 16px;font-weight: bold;">
+
+            <button class="btn drawerBtn" [routerLink]="['/fourReg']" routerLinkActive="router-link-active"
+                *ngIf="homeService.getLoginStatus() == false">
+                <img width="40px" src="../../../assets/note.svg" alt="register">
+                <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.registerFree}}</span>
-                    </button>
+            </button>
 
-                    <button class="btn drawerBtn" [routerLink]="['/phone-number']" routerLinkActive="router-link-active" 
-                    *ngIf="homeService.getLoginStatus() == false">
-                        <img width="40px" src="../../../assets/password.svg" alt="settings icon">  
-                        <span style="padding-top: 4.5px; color: #070973;
+            <button class="btn drawerBtn" [routerLink]="['/phone-number']" routerLinkActive="router-link-active"
+                *ngIf="homeService.getLoginStatus() == false">
+                <img width="40px" src="../../../assets/password.svg" alt="settings icon">
+                <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.login}}</span>
-                    </button>
+            </button>
 
-                    <button class="btn drawerBtn" [routerLink]="['/subscription']" routerLinkActive="router-link-active" >
-                        <img width="40px" src="../../../assets/contract.svg" alt="settings icon">  
-                        <span style="padding-top: 4.5px; color: #070973;
+            <button class="btn drawerBtn" [routerLink]="['subscription']" routerLinkActive="router-link-active">
+                <img width="40px" src="../../../assets/contract.svg" alt="settings icon">
+                <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.subscription}}</span>
-                    </button>
+            </button>
 
-                    <button class="btn drawerBtn" (click)="logout()"
-                    *ngIf="homeService.getLoginStatus()">
-                        <img width="40px" src="../../../assets/log_out.svg" alt="settings icon">  
-                        <span style="padding-top: 4.5px; color: #070973;
+            <button class="btn drawerBtn" (click)="logout()" *ngIf="homeService.getLoginStatus()">
+                <img width="40px" src="../../../assets/log_out.svg" alt="settings icon">
+                <span style="padding-top: 4.5px; color: #070973;
                         margin-left: 10px;">&nbsp;&nbsp; {{languageService.homeLang.logout}}</span>
-                    </button>
-                </div>
-            </ng-container>
+            </button>
+        </div>
+    </ng-container>
 
-            <ng-container>
+    <ng-container>
 
-                <div class="drawerButtonSection">
-                        <button mat-raised-button style="background-color: transparent;
+        <div class="drawerButtonSection">
+            <button mat-raised-button style="background-color: transparent;
                         border-radius: 100px;border: 1px solid #1AA0F2;
                         width: 100%;
                         padding: 10px 0px;
                         font-size: 16px;
                         font-weight: bold;
-                        color: #070973;"
-                        (click)="openBlog()">
-                           <img class="btnImage" src="../../../assets/settings.svg" alt="settings icon">  {{languageService.homeLang.ourBlog}}
-                        </button>
+                        color: #070973;" (click)="openBlog()">
+                <img class="btnImage" src="../../../assets/settings.svg" alt="settings icon">
+                {{languageService.homeLang.ourBlog}}
+            </button>
 
-                        <button mat-raised-button style="background-color: #FAC8F1;
+            <button mat-raised-button style="background-color: #FAC8F1;
                         border-radius: 100px;border: 1px solid #1AA0F2;
                         width: 100%;
                         margin-top: 10px;
@@ -71,10 +71,10 @@
                         font-weight: bold;
                         padding: 10px 0px;
                         color: #070973;">
-                           <img class="btnImage" src="../../../assets/couplehearts.svg" alt="couple hearts">
-                           {{languageService.homeLang.vipMatchmaking}}
-                        </button>
-                </div>
+                <img class="btnImage" src="../../../assets/couplehearts.svg" alt="couple hearts">
+                {{languageService.homeLang.vipMatchmaking}}
+            </button>
+        </div>
 
-            </ng-container>
+    </ng-container>
 </main>

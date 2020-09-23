@@ -19,6 +19,28 @@ main{
     margin: 20px;
     position: relative;
 }
+.tinder--cards {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .tinder--card {
+    /* transform:translateY(20px); */
+    display: inline-block;
+    height: 98%;
+    background: #ffffff;;
+    padding-bottom: 10px;
+    border-radius: 8px;
+    position: absolute;
+    will-change: transform;
+    transition: all 0.3s ease-in-out;
+    overflow:scroll;
+  }
 #profilePic{
     width: 100%;
     height: 75vh;

@@ -364,7 +364,7 @@ export class PersistentMessageComponent implements OnInit {
       console.log(personalDataForm);
       this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', personalDataForm).subscribe(
         (data: any) => {
-          console.log(data);
+          console.log('qwerty', data);
           this.chatService.getUserProfileData();
         },
         (error: any) => {
@@ -414,7 +414,7 @@ export class PersistentMessageComponent implements OnInit {
       this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyDataForm).subscribe(
         (data: any) => {
           console.log(data);
-          localStorage.setItem('profileCompPercent', '100');
+          //localStorage.setItem('profileCompPercent', '100');
           this.chatService.getUserProfileData();
         },
         (error: any) => {

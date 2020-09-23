@@ -37,7 +37,7 @@ export class ChatServiceService {
 
   imgSRC = new BehaviorSubject<string>(null);
   imgSRC$: Observable<string> = this.imgSRC.asObservable();
-
+  formTwoCompleted = new BehaviorSubject<boolean>(false);
   countOfRishtey = 0;
 
   setProfileData(a: any, b: any) {
@@ -83,6 +83,55 @@ export class ChatServiceService {
   getCredits() {
     return this.credits;
   }
+  familyDetailsLeft: any[] = [];
+  personalDetailsLeft: any[] = [];
+  profileCompletionPercent: number = 0;
+  personalDetailsList = [];
+  familyDetailsList = [];
+  totalDetails = 0;
+  setProfileCalculations() {
+    this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',
+      'additional_qualification', 'caste', 'religion',
+      'height', 'weight', 'marital_status', 'manglik',
+      'food_choice', 'monthly_income', 'degree',
+      'company', 'occupation', 'profession', 'working_city',
+      'locality', 'email', 'profession', 'locality', 'whats_app_no'];
+    this.familyDetailsList = ['about', 'occupation_mother', 'gotra', 'occupation',
+      'family_type', 'family_income', 'city', 'house_type', 'livingWithParents'];
+    this.totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
+    this.personalDetailsLeft = [];
+    this.familyDetailsLeft = [];
+    for (let v of this.personalDetailsList) {
+      if (this.personalProfileData.hasOwnProperty(v)) {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] === "null") {
+          this.personalDetailsLeft.push(v);
+        }
+      }
+      else this.personalDetailsLeft.push(v);
+    }
+    for (let v of this.familyDetailsList) {
+      if (this.familyProfileData.hasOwnProperty(v)) {
+        if (!this.familyProfileData[v] || this.familyProfileData[v] === "null") {
+          this.familyDetailsLeft.push(v);
+        }
+      }
+      else {
+        this.familyDetailsLeft.push(v);
+      }
+    }
+    for (let v of this.personalDetailsLeft) {
+      if (this.familyProfileData.hasOwnProperty(v)) {
+        this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
+      }
+    }
+    console.log(this.personalDetailsLeft);
+    console.log(this.familyDetailsLeft);
+  }
+  setProfileCompletion() {
+    this.profileCompletionPercent = Math.ceil(((this.totalDetails - this.personalDetailsLeft.length - this.familyDetailsLeft.length) * 100) / (this.totalDetails));
+    localStorage.setItem('profileCompPercent', String(this.profileCompletionPercent));
+    console.log('profile completion percent set from chat service');
+  }
   getUserProfileData() {
     if (localStorage.getItem('id')) {
       const myprofileData = new FormData();
@@ -115,7 +164,8 @@ export class ChatServiceService {
 
             //setting profile data in chat service for use in popups.
             this.setProfileData(this.personalProfileData, this.familyProfileData);
-
+            this.setProfileCalculations();
+            this.setProfileCompletion();
             if (data.profile.photo) {
               this.itemService.setPhotoStatus(true);
             }

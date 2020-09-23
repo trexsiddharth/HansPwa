@@ -48,10 +48,6 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   userId;
   userIsLead;
-  // whatToShow = new BehaviorSubject<string[]>(['profile', 'profile']);
-  // whatToShow$: Observable<string[]> = this.whatToShow.asObservable().pipe(
-  //   shareReplay(),
-  // );
   whatToShow = ['profile', 'profile'];
   isMobile = false;
   ngOnInit(): void {
@@ -68,22 +64,26 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   showTinderAnimation() {
     if (this.router.url.match('first')) {
-      this.tinderCardsArray[0].nativeElement.classList.add('rotateAnimation');
-      this.heartVisible = true;
+      this.tinderCardsArray[0].nativeElement.style.transform = 'translate(200px, -15px) rotate(20deg)';
+      // this.tinderCardsArray[0].nativeElement.classList.add('rotateAnimation');
+      //this.heartVisible = true;
       setTimeout(() => {
-        this.tinderCardsArray[0].nativeElement.classList.remove('rotateAnimation');
+        this.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px,0px) rotate(0deg)';
+        // this.tinderCardsArray[0].nativeElement.classList.remove('rotateAnimation');
         this.heartVisible = false;
-        this.showOppAnima();
-      }, 2000);
+        setTimeout(() => { this.showOppAnima() }, 1000);
+      }, 1500);
     }
   }
   showOppAnima() {
-    this.tinderCardsArray[0].nativeElement.classList.add('oppositeRotate');
-    this.crossVisible = true;
+    this.tinderCardsArray[0].nativeElement.style.transform = 'translate(-200px,15px) rotate(-20deg)';
+    // this.tinderCardsArray[0].nativeElement.classList.add('oppositeRotate');
+    //this.crossVisible = true;
     setTimeout(() => {
-      this.tinderCardsArray[0].nativeElement.classList.remove('oppositeRotate');
+      this.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px, 0px) rotate(0deg)';
+      // this.tinderCardsArray[0].nativeElement.classList.remove('oppositeRotate');
       this.crossVisible = false;
-    }, 2000);
+    }, 1500);
   }
   ngAfterViewInit() {
     this.moveOutWidth = document.documentElement.clientWidth * 0.5;
@@ -117,7 +117,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     setTimeout(() => {
       this.showTinderAnimation();
-    }, 2000)
+    }, 3000)
   };
   ngOnDestroy(): void {
     this.chatService.shortList = this.shortList;
