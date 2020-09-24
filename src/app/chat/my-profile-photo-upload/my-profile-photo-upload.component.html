@@ -1,4 +1,4 @@
-<main class="special">
+<main class="special" *ngIf="personalProfileData">
     <div>
         <img src="../../assets/left-arrow-key.svg" class="backArrow" (click)="backTomyProfile()" alt="BACK" />
     </div>
@@ -8,120 +8,121 @@
     <div class="container" style="height:70vh; position:relative">
         <div class="photoSection">
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #first type="file" id="first" accept="image/*"
-                    (change)="previewBack(first.files, 1)" />
-                <img (click)="first.click()" id="imgProfile1"
+                <!-- <input style="margin: 10px 25%; display: none;" #first type="file" id="first" accept="image/*"
+                    (change)="previewBack(first.files, 1)" /> -->
+                <img (click)="openPhotoUploadCrop(1)" id="imgProfile1"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 1)
                       " alt="image 1" />
-                <div class="circular2" style="padding: 10px !important;" (click)="first.click()">
+                <!-- <div class="circular2" style="padding: 10px !important;" (click)="first.click()"> -->
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(1)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #second type="file" id="second" accept="image/*"
-                    (change)="previewBack(second.files, 2)" />
-                <img (click)="second.click()" id="imgProfile2"
+                <!-- <input style="margin: 10px 25%; display: none;" #second type="file" id="second" accept="image/*"
+                    (change)="previewBack(second.files, 2)" /> -->
+                <img (click)="openPhotoUploadCrop(2)" id="imgProfile2"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 2)
                       " alt="image 2" />
-                <div class="circular2" style="padding: 10px !important;" (click)="second.click()">
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(2)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
         </div>
         <div class=" photoSection">
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #third type="file" id="third" accept="image/*"
-                    (change)="previewBack(third.files, 3)" />
-                <img (click)="third.click()" id="imgProfile3"
+                <!-- <input style="margin: 10px 25%; display: none;" #third type="file" id="third" accept="image/*"
+                    (change)="previewBack(third.files, 3)" /> -->
+                <img (click)="openPhotoUploadCrop(3)" id="imgProfile3"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 3)
                       " alt="image 3" />
-                <div class="circular2" style="padding: 10px !important;" (click)="third.click()">
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(3)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #fourth type="file" id="fourth" accept="image/*"
-                    (change)="previewBack(fourth.files, 4)" />
-                <img (click)="fourth.click()" id="imgProfile4"
+                <!-- <input style="margin: 10px 25%; display: none;" #fourth type="file" id="fourth" accept="image/*"
+                    (change)="previewBack(fourth.files, 4)" /> -->
+                <img (click)="openPhotoUploadCrop(4)" id="imgProfile4"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 4)
                       " alt="image 4" />
-                <div class="circular2" style="padding: 10px !important;" (click)="fourth.click()">
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(4)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
         </div>
         <div class="photoSection">
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #fifth type="file" id="fifth" accept="image/*"
-                    (change)="previewBack(fifth.files, 5)" />
-                <img (click)="fifth.click()" id="imgProfile5"
+                <!-- <input style="margin: 10px 25%; display: none;" #fifth type="file" id="fifth" accept="image/*"
+                    (change)="previewBack(fifth.files, 5)" /> -->
+                <img (click)="openPhotoUploadCrop(5)" id="imgProfile5"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 5)
                       " alt="image 5" />
-                <div class="circular2" style="padding: 10px !important;" (click)="fifth.click()">
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(5)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #sixth type="file" id="sixth" accept="image/*"
-                    (change)="previewBack(sixth.files, 6)" />
-                <img (click)="sixth.click()" id="imgProfile6"
+                <!-- <input style="margin: 10px 25%; display: none;" #sixth type="file" id="sixth" accept="image/*"
+                    (change)="previewBack(sixth.files, 6)" /> -->
+                <img (click)="openPhotoUploadCrop(6)" id="imgProfile6"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 6)
                       " alt="image 6" />
-                <div class="circular2" style="padding: 10px !important;" (click)="sixth.click()">
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(6)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
         </div>
         <div class="photoSection" *ngIf="carouselSize > 6">
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #seventh type="file" id="seventh" accept="image/*"
-                    (change)="previewBack(seventh.files, 7)" />
-                <img (click)="seventh.click()" id="imgProfile7"
+                <!-- <input style="margin: 10px 25%; display: none;" #seventh type="file" id="seventh" accept="image/*"
+                    (change)="previewBack(seventh.files, 7)" /> -->
+                <img (click)="openPhotoUploadCrop(7)" id="imgProfile7"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 7)
                       " alt="image 7" />
-                <div class="circular2" style="padding: 10px !important;" (click)="seventh.click()">
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(7)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>
             <div class="col">
-                <input style="margin: 10px 25%; display: none;" #eighth type="file" id="eighth" accept="image/*"
-                    (change)="previewBack(eighth.files, 8)" />
-                <img (click)="eighth.click()" id="imgProfile8"
+                <!-- <input style="margin: 10px 25%; display: none;" #eighth type="file" id="eighth" accept="image/*"
+                    (change)="previewBack(eighth.files, 8)" /> -->
+                <img (click)="openPhotoUploadCrop(8)" id="imgProfile8"
                     style="width:100%!important;height:100%!important;" [src]="
                         getProfilesPhoto(
                           personalProfileData.carousel,
                           personalProfileData.unapprove_carousel,
                           personalProfileData.photo , 8)
                       " alt="image 8" />
-                <div class="circular2" style="padding: 10px !important;" (click)="eighth.click()">
+                <div class="circular2" style="padding: 10px !important;" (click)="openPhotoUploadCrop(8)">
                     <img style="width: 100%;" src="../../../assets/editN.svg" alt="edit" />
                 </div>
             </div>

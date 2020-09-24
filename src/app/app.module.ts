@@ -37,6 +37,8 @@ import { OfferTwoComponent } from './offers/offer-two/offer-two.component';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
 import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payment-popup.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { PhotoUploadCropComponent } from './photo-upload-crop/photo-upload-crop.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payme
     OfferTwoComponent,
     VerifyOtpComponent,
     TodaysPaymentPopupComponent,
+    PhotoUploadCropComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payme
     NgxMatIntlTelInputModule,
     RouterModule,
     Ng5SliderModule,
-    NgbModule
+    NgbModule,
+    ImageCropperModule
   ],
   providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
   bootstrap: [AppComponent],
@@ -78,6 +82,7 @@ import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payme
     OfferTwoComponent,
     VerifyOtpComponent,
     TodaysPaymentPopupComponent,
+    PhotoUploadCropComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -249,7 +249,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   }
 
   getBase64ImageFromURL(url: string): Observable<string> {
-    return Observable.create((observer: Observer<string>) => {
+    return new Observable((observer: Observer<string>) => {
       // create an image object
       const img = new Image();
       img.crossOrigin = 'Anonymous';
@@ -352,7 +352,7 @@ export class CompatibilityPhotoComponent implements OnInit {
     });
   }
   dataURItoBlob(dataURI: string): Observable<Blob> {
-    return Observable.create((observer: Observer<Blob>) => {
+    return new Observable((observer: Observer<Blob>) => {
       const byteString: string = window.atob(dataURI);
       const arrayBuffer: ArrayBuffer = new ArrayBuffer(byteString.length);
       const int8Array: Uint8Array = new Uint8Array(arrayBuffer);

@@ -4,6 +4,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { timeout, retry, catchError } from 'rxjs/operators';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { PhotoUploadCropComponent } from 'src/app/photo-upload-crop/photo-upload-crop.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 @Component({
   selector: 'app-my-profile-photo-upload',
   templateUrl: './my-profile-photo-upload.component.html',
@@ -15,7 +18,9 @@ export class MyProfilePhotoUploadComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public spinner: NgxSpinnerService,
     public http: HttpClient,
-    public ngxNotificationService: NgxNotificationService) { }
+    public ngxNotificationService: NgxNotificationService,
+    public breakPointObserver: BreakpointObserver,
+    private dialog: MatDialog,) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((routeData: any) => {
@@ -194,5 +199,33 @@ export class MyProfilePhotoUploadComponent implements OnInit {
     } else {
       this.ngxNotificationService.error('No user found');
     }
+  }
+  openPhotoUploadCrop(index: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.minWidth = '40vw';
+          dialogConfig.minHeight = '10vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.minHeight = '10vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    dialogConfig.id = 'photoUploadCrop';
+    const dialogRef = this.dialog.open(PhotoUploadCropComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      //this.uploadPhoto(data, 1);
+      console.log('data recieved in the photo upload component', data);
+      this.uploadPhoto(data, index);
+    });
   }
 }

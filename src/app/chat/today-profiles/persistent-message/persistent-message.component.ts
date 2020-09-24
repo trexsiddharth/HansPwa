@@ -10,6 +10,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { shareReplay, startWith, map } from 'rxjs/operators';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { PhotoUploadCropComponent } from 'src/app/photo-upload-crop/photo-upload-crop.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-persistent-message',
@@ -93,7 +96,9 @@ export class PersistentMessageComponent implements OnInit {
     public _formBuilder: FormBuilder,
     public ngxNotificationService: NgxNotificationService,
     public http: HttpClient,
-    public itemService: FindOpenHistoryProfileService) {
+    public itemService: FindOpenHistoryProfileService,
+    public breakPointObserver: BreakpointObserver,
+    public dialog: MatDialog) {
 
     this.PageThree = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -550,25 +555,25 @@ export class PersistentMessageComponent implements OnInit {
   changeProfileImage() {
     document.querySelector<HTMLInputElement>('#backfile').click();
   }
-  chooseFileForUpload(files) {
-    if (files.length === 0) {
-      return;
-    } else {
-      const mimeType = files[0].type;
-      if (mimeType.match(/image\/*/) == null) {
-        alert('Only images are supported.');
-        return;
-      }
-      const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-      reader.onload = (_event) => {
-        // use backimgurl to set image
-        // this.BackimgURL = reader.result;
-        this.uploadPhoto(files[0]);
-      };
-    }
-  }
-  uploadPhoto(data) {
+  // chooseFileForUpload(files) {
+  //   if (files.length === 0) {
+  //     return;
+  //   } else {
+  //     const mimeType = files[0].type;
+  //     if (mimeType.match(/image\/*/) == null) {
+  //       alert('Only images are supported.');
+  //       return;
+  //     }
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(files[0]);
+  //     reader.onload = (_event) => {
+  //       // use backimgurl to set image
+  //       // this.BackimgURL = reader.result;
+  //       this.uploadPhoto(files[0]);
+  //     };
+  //   }
+  // }
+  uploadPhoto(data, index) {
     const uploadData = new FormData();
     uploadData.append('id', localStorage.getItem('id'));
     uploadData.append('index', '1');
@@ -590,6 +595,34 @@ export class PersistentMessageComponent implements OnInit {
     }, err => {
       this.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
       console.log(err);
+    });
+  }
+  openPhotoUploadCrop(index: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.minWidth = '40vw';
+          dialogConfig.minHeight = '10vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.minHeight = '10vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    dialogConfig.id = 'photoUploadCrop';
+    const dialogRef = this.dialog.open(PhotoUploadCropComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      //this.uploadPhoto(data, 1);
+      console.log('data recieved in the photo upload component', data);
+      this.uploadPhoto(data, index);
     });
   }
 }
