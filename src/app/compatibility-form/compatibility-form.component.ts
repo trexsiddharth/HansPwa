@@ -778,7 +778,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             localStorage.setItem('id', res.id);
             localStorage.setItem('gender', this.PageOne.value.gender);
             localStorage.setItem('mobile_number', this.PageOne.value.phone);
-
+            if (res.isAssignToOnline) {
+              localStorage.setItem('isAssignToOnline', res.isAssignToOnline);
+              this.fourPageService.showApproveBtn = true;
+            }
             // if facebook profile pic is fetched
             if (this.fetchedFbProfilePic) {
               setTimeout(() => {

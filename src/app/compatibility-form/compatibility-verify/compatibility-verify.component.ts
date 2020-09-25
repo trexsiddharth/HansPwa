@@ -87,12 +87,14 @@ export class CompatibilityVerifyComponent implements OnInit {
   HouseType: string[] = ['Owned', 'Rented', 'Leased'];
   familyData;
 
+  showApproveBtn = false;
   // for only getting the autocomplete predictions
   autoComplete = {
     strictBounds: false,
     type: 'geocode',
     fields: ['name']
   };
+
 
   constructor(private http: HttpClient, public dialog: MatDialog,
     private _formBuilder: FormBuilder,
@@ -118,7 +120,6 @@ export class CompatibilityVerifyComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // when the remote data gets uploaded
     this.fourPageService.getListData.subscribe(
       (data) => {
@@ -148,7 +149,7 @@ export class CompatibilityVerifyComponent implements OnInit {
       brothers_unmarried: profile.family.unmarried_sons,
       house_type: profile.family.house_type,
       family_type: profile.family.family_type,
-      family_living_in: profile.family.city ? profile.family.locality : '',
+      family_living_in: profile.family.city ? profile.family.city : '',
     });
   }
 
@@ -279,6 +280,60 @@ export class CompatibilityVerifyComponent implements OnInit {
     this.fourPageService.profile.family.house_type = profileData.get('house_type') ? profileData.get('house_type').toString() : '';
     this.fourPageService.profile.family.family_type = profileData.get('family_type') ? profileData.get('family_type').toString() : '';
     console.log(this.fourPageService.getProfile());
+  }
+  clearHistory() {
+    localStorage.setItem('getListId', '');
+    localStorage.setItem('getListLeadId', '');
+    localStorage.setItem('mobile_number', '');
+    localStorage.setItem('id', '');
+  }
+  approveProfileApi() {
+    this.fourPageService.showApproveBtn = false;
+    const approveData = new FormData();
+    approveData.append('id', localStorage.getItem('getListId'));
+    approveData.append('temple_id', localStorage.getItem('getListTempleId'));
+    approveData.append('photo_score', this.fourPageService.getProfile().photoScore.toString());
+    approveData.append('is_approve', '1');
+
+    this.http.post('https://partner.hansmatrimony.com/api/ApproveProfile', approveData).subscribe(
+      (data: any) => {
+        console.log(data);
+        if (data.status === '1') {
+
+          if (localStorage.getItem('fourthParam')) {
+            if (localStorage.getItem('fifthParam') === '1') {
+              if (localStorage.getItem('fourthParam') === '0')
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
+              else
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+            }
+            else {
+              if (localStorage.getItem('fourthParam') === '0')
+                window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
+              else
+                window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+            }
+          }
+          //this is old logic , not changing this
+          // if (localStorage.getItem('getListMobile')) { // mode 3
+          //   window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+          // } else if (localStorage.getItem('getListId')) { // mode 2
+          //   window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+          // }
+
+          this.clearHistory();
+        } else {
+          if (data.message) {
+            this.ngxNotificationService.error(data.message);
+          } else {
+            this.ngxNotificationService.error('Not Approved');
+          }
+        }
+      }, err => {
+        console.log(err);
+        this.ngxNotificationService.error(err.message, 'Not Approved');
+      }
+    );
   }
 }
 
