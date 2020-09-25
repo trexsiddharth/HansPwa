@@ -1065,7 +1065,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         return v;
       }
     }
-    return '100+'
+    if (income === 0)
+      return '0-2.5'
+    else
+      return '100+'
   }
   setFormOneData() {
     this.PageOne.patchValue({
