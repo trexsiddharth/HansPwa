@@ -154,29 +154,55 @@ export class PersistentMessageComponent implements OnInit {
     this.getCompleteProfile();
   }
   getCompleteProfile() {
-    if (localStorage.getItem('storedData') && this.data.button === 'Complete Profile') {
-      this.storedData = JSON.parse(localStorage.getItem('storedData'));
-      this.completeProfile = true;
-      this.PageThree.patchValue({
-        BirthPlace: this.storedData.birth_place,
-        BirthTime: this.storedData.birth_time,
-        FoodChoice: this.storedData.food_choice,
-        Mangalik: this.storedData.manglik,
-        FatherStatus: this.storedData.occupation,
-        MotherStatus: this.storedData.occupation_mother,
-        FamilyIncome: this.storedData.family_income,
-      });
-    }
-    else if (this.chatService.pageThreeFilled && this.data.button === 'Complete Profile') {
-      this.completeProfile = true;
-      this.pageThreeFilledSubject.next(true);
-      this.personalProfileData = this.chatService.personalProfileData;
-      this.familyProfileData = this.chatService.familyProfileData;
-      this.calculateIndex();
-      //this.getAllCaste();
+    if (this.data.showIndex) {
+      if (this.data.showIndex === 10) {//page three popup to be shown
+        this.completeProfile = true;
+        console.log('qwerty showing page three popup');
+      }
+      else if (this.data.showIndex === 20) {//show second popup
+        this.completeProfile = true;
+        this.pageThreeFilledSubject.next(true);
+        this.personalProfileData = this.chatService.personalProfileData;
+        this.familyProfileData = this.chatService.familyProfileData;
+        this.detailsDisplayIndexSubject.next(0);
+        console.log('qwerty index set to 0');
+        this.setCurrentValues();
+      }
+      else if (this.data.showIndex === 30) {
+        this.completeProfile = true;
+        this.pageThreeFilledSubject.next(true);
+        this.personalProfileData = this.chatService.personalProfileData;
+        this.familyProfileData = this.chatService.familyProfileData;
+        this.detailsDisplayIndexSubject.next(1);
+        console.log('qwerty index set to 1');
+        this.setCurrentFamilyValues();
+      }
     }
     else {
-      this.completeProfile = false;
+      if (localStorage.getItem('storedData') && this.data.button === 'Complete Profile') {
+        this.storedData = JSON.parse(localStorage.getItem('storedData'));
+        this.completeProfile = true;
+        this.PageThree.patchValue({
+          BirthPlace: this.storedData.birth_place,
+          BirthTime: this.storedData.birth_time,
+          FoodChoice: this.storedData.food_choice,
+          Mangalik: this.storedData.manglik,
+          FatherStatus: this.storedData.occupation,
+          MotherStatus: this.storedData.occupation_mother,
+          FamilyIncome: this.storedData.family_income,
+        });
+      }
+      else if (this.chatService.pageThreeFilled && this.data.button === 'Complete Profile') {
+        this.completeProfile = true;
+        this.pageThreeFilledSubject.next(true);
+        this.personalProfileData = this.chatService.personalProfileData;
+        this.familyProfileData = this.chatService.familyProfileData;
+        this.calculateIndex();
+        //this.getAllCaste();
+      }
+      else {
+        this.completeProfile = false;
+      }
     }
   }
   calculateIndex() {

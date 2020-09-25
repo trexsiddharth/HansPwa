@@ -677,7 +677,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         } else {
           this.type = 'message';
           this.profileItems = [];
-          if (Number(localStorage.getItem('profileCompPercent')) < 90) {
+          if (Number(localStorage.getItem('profileCompPercent')) < 90 && this.showIndex < 40) {
             this.openPersistentDialogNew();
           }
           this.itemMessage = data.apiwha_autoreply;
@@ -789,13 +789,18 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   popupAction(event) {
     if (event.close) {
       this.showPopup = false;
+      this.showIndex += 10;
     }
     setTimeout(() => {
-      if (Number(localStorage.getItem('profileCompPercent')) < 90) {
+      if (Number(localStorage.getItem('profileCompPercent')) < 90 && this.showIndex < 40) {
         this.openPersistentDialogNew();
+      }
+      else {
+        this.showIndex = 10;
       }
     }, 100)
   }
+  showIndex = 10;
   openPersistentDialogNew() {
     this.popupdata = {
       message: 'Complete Your Profile',
@@ -803,6 +808,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       button: 'Complete Profile',
       userId: this.userId,
       userIsLead: this.userIsLead,
+      showIndex: this.showIndex,
     }
     this.showPopup = true;
   }
