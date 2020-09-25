@@ -179,7 +179,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       if (this.actionCount % 2 === 0) {
         if (reply.toLowerCase() === 'shortlist') {
-          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 95) {
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 90) {
             this.showShortListPopup(0);
             // for (let x of this.shortList) {
             //   if (x.value === 0) {
@@ -220,7 +220,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
           console.log('here is the modified shortlist array', this.shortList);
         }
         else if (reply === 'NO') {
-          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 95) {
+          if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 90) {
             this.rejectListPopup(0);
           }
           else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {

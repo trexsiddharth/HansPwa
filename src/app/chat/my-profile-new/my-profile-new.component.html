@@ -306,9 +306,11 @@
               </div>
               <div class="row information">
                 <div class="columnar">
-                  <p><a
-                      *ngIf="personalProfileData.degree&&personalProfileData.degree!='null'">{{personalProfileData.degree}}</a>
-                    <a *ngIf="!personalProfileData.degree||personalProfileData.degree=='null'" class="pink"
+                  <p><a *ngIf="(personalProfileData.degree&&personalProfileData.degree!='null') ||
+                      (personalProfileData.education&&personalProfileData.education!='null')">{{personalProfileData.degree ? 
+                        personalProfileData.degree : personalProfileData.education}}</a>
+                    <a *ngIf="(!personalProfileData.degree||personalProfileData.degree=='null') &&
+                    (!personalProfileData.education || personalProfileData.education =='null')" class="pink"
                       (click)="setEditIndex(2)">+Add
                       Education</a>
                     <br><a
