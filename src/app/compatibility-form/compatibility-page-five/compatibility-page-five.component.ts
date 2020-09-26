@@ -523,7 +523,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
                     }
                     else if (localStorage.getItem('fifthParam') === '2') {
                       window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
-                        '&temple_id=' + localStorage.getItem('getListTempleId'));
+                        '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
                     }
                     else {
                       if (localStorage.getItem('fourthParam') === '0')

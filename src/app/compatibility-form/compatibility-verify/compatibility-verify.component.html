@@ -91,8 +91,9 @@
                     </div><br><br><br><br>
                     <div class="col-xs-12 m-t-20"
                         style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-                        <button mat-raised-button type="button" matStepperNext class="btn-primary"
-                            (click)="onSubmitPersonal()">Next</button>
+                        <button mat-raised-button
+                            *ngIf="fourPageService.getUserThrough() && !fourPageService.showApproveBtn" type="button"
+                            matStepperNext class="btn-primary" (click)="onSubmitPersonal()">Next</button>
                         <button style="margin-left: 10px;" class="btn btn-blue" mat-raised-button
                             *ngIf="fourPageService.getUserThrough() && fourPageService.showApproveBtn"
                             (click)="approveProfileApi()">Approve</button>
