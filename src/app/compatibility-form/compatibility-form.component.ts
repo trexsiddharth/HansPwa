@@ -314,6 +314,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListSource', route.params.source);
           }
+          if (route.params.extra) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('extra', route.params.extra);
+          }
           if (route.params.id) {
             setTimeout(() => { this.getProfile(); }, 3000);
           }
