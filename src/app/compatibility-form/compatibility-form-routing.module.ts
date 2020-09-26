@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'skip', component: CompatibilityFormComponent },
   { path: ':id/:leadId/:templeId', component: CompatibilityFormComponent },
   { path: ':id/:leadId/:templeId/:fourthParam/:fifthParam', component: CompatibilityFormComponent },
-  { path: ':mobile/:leadId/:templeId/:enqDate/:source', component: CompatibilityFormComponent },
+  { path: ':mobile/:leadId/:templeId/:enqDate/:source/:extra', component: CompatibilityFormComponent },
 ];
 
 @NgModule({
