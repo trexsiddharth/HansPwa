@@ -307,11 +307,22 @@ export class CompatibilityVerifyComponent implements OnInit {
               else
                 window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
             }
+            else if (localStorage.getItem('fifthParam') === '2') {
+              window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
+                '&temple_id=' + localStorage.getItem('getListTempleId'));
+            }
             else {
               if (localStorage.getItem('fourthParam') === '0')
                 window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
               else
                 window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+            }
+          }
+          else {
+            if (localStorage.getItem('getListMobile')) { // mode 3
+              window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+            } else if (localStorage.getItem('getListId')) { // mode 2
+              window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
             }
           }
           //this is old logic , not changing this

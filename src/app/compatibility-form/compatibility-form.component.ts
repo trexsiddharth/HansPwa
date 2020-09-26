@@ -315,7 +315,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             localStorage.setItem('getListSource', route.params.source);
           }
           if (route.params.id) {
-            this.getProfile();
+            setTimeout(() => { this.getProfile(); }, 3000);
           }
         }
 
@@ -614,7 +614,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         this.fourPageService.setAllCastes(this.getcastes);
         if (this.getcastes) {
           // load the initial caste list
-          this.filteredCastes.next((this.getcastes as string[]).slice(0, 100));
+          this.filteredCastes.next((this.getcastes as string[]).slice(0, this.getcastes.length));
 
           // listen for search field value changes
           this.PageOne.controls.CasteCtrl.valueChanges
@@ -778,10 +778,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             localStorage.setItem('id', res.id);
             localStorage.setItem('gender', this.PageOne.value.gender);
             localStorage.setItem('mobile_number', this.PageOne.value.phone);
-            if (res.isAssignToOnline) {
-              localStorage.setItem('isAssignToOnline', res.isAssignToOnline);
-              this.fourPageService.showApproveBtn = true;
-            }
+            // if (res.isAssignToOnline) {
+            //   localStorage.setItem('isAssignToOnline', res.isAssignToOnline);
+            //   this.fourPageService.showApproveBtn = true;
+            // }
             // if facebook profile pic is fetched
             if (this.fetchedFbProfilePic) {
               setTimeout(() => {
@@ -1030,7 +1030,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       this.Caste = true;
     }
     this.userProfile.religion = profileData.family.religion;
-    this.userProfile.caste = profileData.family.caste;
+    this.userProfile.caste = profileData.caste ? profileData.caste : profileData.family.caste;
     this.userProfile.manglik = profileData.profile.manglik;
     this.userProfile.locality = profileData.family.locality;
     this.userProfile.qualification = profileData.profile.degree;
@@ -1060,15 +1060,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   setIncomeVals(income: number) {
     for (let v of this.incomeCategories) {
       let vals = v.split('-');
-      if (income > Number(vals[0]) && income < Number(vals[1])) {
+      if (income >= Number(vals[0]) && income <= Number(vals[1])) {
         console.log("look here", v)
         return v;
       }
     }
-    if (income === 0)
-      return '0-2.5'
-    else
+    if (income === 100)
       return '100+'
+    else
+      return '0-2.5'
+
   }
   setFormOneData() {
     this.PageOne.patchValue({

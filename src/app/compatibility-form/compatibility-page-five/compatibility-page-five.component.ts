@@ -80,6 +80,10 @@ export class CompatibilityPageFiveComponent implements OnInit {
       this.getLeadData().subscribe(
         value => {
           console.log(value);
+          if (value.assign_to !== 'online') {
+            localStorage.setItem('isAssignToOnline', '1');
+            this.fourPageService.showApproveBtn = true;
+          }
           if (value.status === '1') {
 
             const assignToName = this.allTemples.find(
@@ -565,11 +569,13 @@ export class CompatibilityPageFiveComponent implements OnInit {
                   window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
               }
             }
-            // if (localStorage.getItem('getListMobile')) { // mode 3
-            //   window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-            // } else if (localStorage.getItem('getListId')) { // mode 2
-            //   window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
-            // }
+            else {
+              if (localStorage.getItem('getListMobile')) { // mode 3
+                window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+              } else if (localStorage.getItem('getListId')) { // mode 2
+                window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+              }
+            }
           } else {
             this.ngxNotificationService.error(data.message, 'Not Approved');
           }
