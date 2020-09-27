@@ -761,7 +761,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
-
+        if (this.isLeadIsZero)
+          firststepdata.append('is_lead', '0');
         // tslint:disable-next-line: max-line-length
         return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(
           (res: any) => {
