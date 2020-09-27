@@ -288,6 +288,7 @@ export class CompatibilityVerifyComponent implements OnInit {
     localStorage.setItem('id', '');
   }
   approveProfileApi() {
+    this.onSubmitPersonal();
     this.fourPageService.showApproveBtn = false;
     const approveData = new FormData();
     approveData.append('id', localStorage.getItem('getListId'));
@@ -376,6 +377,92 @@ export class CompatibilityVerifyComponent implements OnInit {
         this.ngxNotificationService.error(err.message, 'Not Approved');
       }
     );
+  }
+  validate(userProfile: Profile) {
+    console.log(userProfile);
+    if (userProfile.name === null || userProfile.name === '') {
+      return this.ngxNotificationService.error('Enter Name');
+    } else if (userProfile.mobile === null || userProfile.mobile === '') {
+      return this.ngxNotificationService.error('Enter Mobile Number');
+    } else if (userProfile.relation === null || userProfile.relation === '') {
+      return this.ngxNotificationService.error('Select Relation');
+    } else if (userProfile.gender === null || userProfile.gender === '') {
+      return this.ngxNotificationService.error('Select Gender');
+    } else if (userProfile.dob === null || userProfile.dob === '') {
+      return this.ngxNotificationService.error('Enter D.O.B');
+    } else if (userProfile.height === null || userProfile.height === '') {
+      return this.ngxNotificationService.error('Select Height');
+    } else if (userProfile.weight === null || userProfile.weight === '') {
+      return this.ngxNotificationService.error('Enter Weight');
+    } else if (userProfile.martialStatus === null || userProfile.martialStatus === '') {
+      return this.ngxNotificationService.error('Select Marital Status');
+    } else if (userProfile.annualIncome === null || userProfile.annualIncome === '') {
+      return this.ngxNotificationService.error('Enter Annual Income');
+    } else if (userProfile.religion === null || userProfile.religion === '') {
+      return this.ngxNotificationService.error('Select Religion');
+    } else if (userProfile.caste === null || userProfile.caste === '') {
+      return this.ngxNotificationService.error('Select Caste');
+    } else if (userProfile.qualification === null || userProfile.qualification === '') {
+      return this.ngxNotificationService.error('Select Qualification');
+    } else if (userProfile.occupation === null || userProfile.occupation === '') {
+      return this.ngxNotificationService.error('Select Occupation');
+    } else if (userProfile.designation === null || userProfile.designation === '') {
+      return this.ngxNotificationService.error('Enter Designation');
+    } else if (userProfile.occupation !== 'Not Working' && userProfile.workingCity === null || userProfile.workingCity === '') {
+      return this.ngxNotificationService.error('Enter Working City');
+    } else if (userProfile.manglik === null || userProfile.manglik === '') {
+      return this.ngxNotificationService.error('Select Manglik Status');
+    } else if (userProfile.locality === null || userProfile.locality === '') {
+      return this.ngxNotificationService.error('Enter Locality');
+    } else if (userProfile.about === null || userProfile.about === '') {
+      return this.ngxNotificationService.error('Enter About');
+    } else if (userProfile.birthPlace === null || userProfile.birthPlace === '') {
+      return this.ngxNotificationService.error('Enter Birth Place');
+    } else if (userProfile.foodChoice === null || userProfile.foodChoice === '') {
+      return this.ngxNotificationService.error('Select Food Choice');
+    } else if (userProfile.fatherStatus === null || userProfile.fatherStatus === '') {
+      return this.ngxNotificationService.error('Select Father Status');
+    } else if (userProfile.motherStatus === null || userProfile.motherStatus === '') {
+      return this.ngxNotificationService.error('Select Mother Status');
+    } else if (userProfile.familyIncome === null || userProfile.familyIncome === '') {
+      return this.ngxNotificationService.error('Enter Family Income');
+    } else if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
+      return this.ngxNotificationService.error('Select Image 1');
+    }
+    // } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
+    //   return this.ngxNotificationService.error('Select Image 2');
+    // } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
+    //   return this.ngxNotificationService.error('Select Image 3');
+    // }
+    else if (!userProfile.college || userProfile.college === '') {
+      return this.ngxNotificationService.error('Enter College Name');
+    } else if (!userProfile.company || userProfile.company === '') {
+      return this.ngxNotificationService.error('Enter Company Name');
+    } else if (userProfile.fatherStatus !== 'Not Alive' && userProfile.fatherStatus !== 'Not Working' &&
+      userProfile.family.occupation === null || userProfile.family.occupation === '') {
+      return this.ngxNotificationService.error('Select Father Occupation');
+    } else if (userProfile.motherStatus !== 'Not Alive' && userProfile.motherStatus !== 'Not Working' &&
+      userProfile.family.occupation_mother === null || userProfile.family.occupation_mother === '') {
+      return this.ngxNotificationService.error('Select Mother Occupation');
+    } else if (userProfile.family.married_daughters == null) {
+      return this.ngxNotificationService.error('Select Married Sisters');
+    } else if (userProfile.family.unmarried_daughters == null) {
+      return this.ngxNotificationService.error('Select Un Married Sisters');
+    } else if (userProfile.family.married_sons == null) {
+      return this.ngxNotificationService.error('Select Married Brothers');
+    } else if (userProfile.family.unmarried_sons == null) {
+      return this.ngxNotificationService.error('Select Un Married Brothers');
+    } else if (!userProfile.family.house_type || userProfile.family.house_type === '') {
+      return this.ngxNotificationService.error('Select House Type');
+    } else if (!userProfile.family.family_type || userProfile.family.family_type === '') {
+      return this.ngxNotificationService.error('Select Family Type');
+    } else if (!userProfile.family.city || userProfile.family.city === '') {
+      return this.ngxNotificationService.error('Enter Family Living In');
+    } else if (userProfile.photoScore < 1) {
+      return this.ngxNotificationService.error('Give a score');
+    } else {
+      this.approveProfileApi();
+    }
   }
 }
 
