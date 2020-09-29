@@ -434,9 +434,9 @@ export class CompatibilityVerifyComponent implements OnInit {
     // } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
     //   return this.ngxNotificationService.error('Select Image 3');
     // }
-    else if (!userProfile.college || userProfile.college === '') {
+    else if (!(userProfile.college || userProfile.college === '') && this.verifyForm.controls['college'].invalid) {
       return this.ngxNotificationService.error('Enter College Name');
-    } else if (!userProfile.company || userProfile.company === '') {
+    } else if ((!userProfile.company || userProfile.company === '') && this.verifyForm.controls['company'].invalid) {
       return this.ngxNotificationService.error('Enter Company Name');
     } else if (userProfile.fatherStatus !== 'Not Alive' && userProfile.fatherStatus !== 'Not Working' &&
       userProfile.family.occupation === null || userProfile.family.occupation === '') {
@@ -452,11 +452,11 @@ export class CompatibilityVerifyComponent implements OnInit {
       return this.ngxNotificationService.error('Select Married Brothers');
     } else if (userProfile.family.unmarried_sons == null) {
       return this.ngxNotificationService.error('Select Un Married Brothers');
-    } else if (!userProfile.family.house_type || userProfile.family.house_type === '') {
+    } else if ((!userProfile.family.house_type || userProfile.family.house_type === '') && this.verifyForm.controls['house_type'].invalid) {
       return this.ngxNotificationService.error('Select House Type');
-    } else if (!userProfile.family.family_type || userProfile.family.family_type === '') {
+    } else if ((!userProfile.family.family_type || userProfile.family.family_type === '') && this.verifyForm.controls['family_type'].invalid) {
       return this.ngxNotificationService.error('Select Family Type');
-    } else if (!userProfile.family.city || userProfile.family.city === '') {
+    } else if ((!userProfile.family.city || userProfile.family.city === '') && this.verifyForm.controls['family_living_in'].invalid) {
       return this.ngxNotificationService.error('Enter Family Living In');
     } else if (userProfile.photoScore < 1) {
       return this.ngxNotificationService.error('Give a score');
