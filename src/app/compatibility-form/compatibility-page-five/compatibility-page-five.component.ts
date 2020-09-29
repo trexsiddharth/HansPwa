@@ -80,14 +80,17 @@ export class CompatibilityPageFiveComponent implements OnInit {
       this.getLeadData().subscribe(
         value => {
           console.log(value);
+          if (value && value.data && value.data.assign_to ) {
+        
           if (value.data.assign_to != "online") {
             localStorage.setItem('isAssignToOnline', '1');
             this.fourPageService.showApproveBtn = true;
           }
-          else if (value.data.assign_to == "online") {
+          else if ( value.data.assign_to == "online") {
             this.fourPageService.showApproveBtn = false;
           }
           console.log(' this.fourPageService.showApproveBtn set to', this.fourPageService.showApproveBtn, value.data.assign_to)
+        }
           if (value.status === '1') {
 
             const assignToName = this.allTemples.find(
