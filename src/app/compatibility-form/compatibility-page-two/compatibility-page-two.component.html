@@ -1,6 +1,9 @@
 <form [formGroup]="PageTwo">
-  <div class="row">
-
+  <div class="row" style="padding-top:40px">
+    <button class="backBtn" matStepperPrevious *ngIf="!fourPageService.getUserThrough()">
+      <img src="../../assets/backN.svg" class="backArrow" alt="BACK">
+      <p style="margin:auto 0 auto 5px">Back</p>
+    </button>
     <div class="col-md-12">
       <!-- <h6>Qualification</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard">
@@ -125,13 +128,13 @@
 
     <div class="col-xs-12 m-t-20"
       style="margin-top: 10px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-      <button mat-raised-button type="button" id="viewButton2" style="margin-right: 10px;" matStepperPrevious
-        class="btn">Back</button>
+      <button *ngIf="fourPageService.getUserThrough()" mat-raised-button type="button" id="viewButton2"
+        style="margin-right: 10px;" matStepperPrevious class="btn">Back</button>
       <button mat-raised-button type="button" id="skipBtn" matStepperNext class="btn" (click)="skip()"
         *ngIf="fourPageService.getSkippable()">Skip</button>
       <button type="button" id="viewButton2" mat-raised-button matStepperNext class="btn" (click)="firstStep()"><a
-          *ngIf="!fourPageService.getUserThrough()">See
-          Matching Profiles</a><a *ngIf="fourPageService.getUserThrough()">Next</a></button>
+          *ngIf="!fourPageService.getUserThrough()">See Profiles</a><a
+          *ngIf="fourPageService.getUserThrough()">Next</a></button>
     </div>
     <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
                       Great! Thanks for letting us know about yourself.

@@ -11,7 +11,24 @@
   height: 45px;
   margin-bottom: 1rem;
 }
-
+.backBtn{
+  border:0px;
+  background:transparent;
+  position:absolute;
+  z-index:999999;
+  /* width:1.6rem; */
+  height:2rem;
+  top:10%;
+  left:30px;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+}
+.backArrow{
+  width:20px;
+  margin:1%;
+}
 .impNote {
   margin: 5px 0px;
   padding-right: 15px;
