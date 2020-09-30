@@ -39,7 +39,8 @@ import { HansPreloadingStrategyService } from './hans-preloading-strategy.servic
 import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payment-popup.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PhotoUploadCropComponent } from './photo-upload-crop/photo-upload-crop.component';
-
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { KundaliComponent } from './new-home/kundali/kundali.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { PhotoUploadCropComponent } from './photo-upload-crop/photo-upload-crop.
     VerifyOtpComponent,
     TodaysPaymentPopupComponent,
     PhotoUploadCropComponent,
+    KundaliComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ import { PhotoUploadCropComponent } from './photo-upload-crop/photo-upload-crop.
     RouterModule,
     Ng5SliderModule,
     NgbModule,
-    ImageCropperModule
+    ImageCropperModule,
+    CarouselModule
   ],
   providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
   bootstrap: [AppComponent],

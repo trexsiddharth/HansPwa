@@ -24,14 +24,15 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/.well-known/assetlinks.json",
-              "src/firebase-messaging-sw.js"                
+              "src/firebase-messaging-sw.js"
             ],
             "styles": [
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
               "node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -96,14 +97,15 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/.well-known/assetlinks",
-              "src/firebase-messaging-sw.js",
+              "src/firebase-messaging-sw.js"
             ],
             "styles": [
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           }
         },
         "lint": {

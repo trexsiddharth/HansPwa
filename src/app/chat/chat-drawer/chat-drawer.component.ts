@@ -44,6 +44,9 @@ export class ChatDrawerComponent implements OnInit {
       height_max: [''],
       marital_status: [''],
       working: [''],
+      country: [''],
+      state: [''],
+      city: [''],
     });
   }
   @Input() drawerReference: MatSidenav;

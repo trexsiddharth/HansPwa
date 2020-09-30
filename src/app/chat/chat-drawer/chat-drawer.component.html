@@ -336,6 +336,36 @@
               </mat-select>
             </div>
           </div> -->
+              <!-- <div class="row information">
+                <h6 class="col-10">Working City:</h6><br>
+                <div class="col-3" style="padding:4px!important;">
+                  <select type="text" class="form-control text-sm" (change)="selected('country')"
+                    formControlName="country" required name="country" aria-placeholder="country">
+                    <option value="" disabled selected hidden>Country...</option>
+                    <option *ngFor="let  option of countries | async" [value]="option">
+                      {{option}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding:4px!important;">
+                  <select type="text" class="form-control text-sm" (change)="selected('state')" formControlName="state"
+                    required name="state">
+                    <option value="" disabled selected hidden>State...</option>
+                    <option *ngFor="let  option of state | async" [value]="option">
+                      {{option}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding:4px!important;">
+                  <select type="text" class="form-control text-sm" (change)="selected('city')" formControlName="city"
+                    required name="city">
+                    <option value="" disabled selected hidden>City...</option>
+                    <option *ngFor="let  option of cities| async" [value]="option">
+                      {{option}}
+                    </option>
+                  </select>
+                </div>
+              </div> -->
               <div class="row information">
                 <div class="col-10">
                   <h6>Caste</h6>

@@ -1,0 +1,192 @@
+<main class="content">
+    <div class="topnav" id="myTopnav">
+        <div class="navbar-brand active">
+            <img width="50px" [defaultImage]="'../../assets/logo_72.png'"
+                [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'" [useSrcset]="true"
+                alt="Hans Matrimony">
+            <span
+                style="width:70px!important;margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans
+                    Matrimony</strong></span>
+        </div>
+        <a href="home">Home</a>
+        <a href="javascript:void(0);" (click)="downloadApp()">Download App</a>
+        <!-- <a href="#about">About</a> -->
+        <a href="chat/getcallback/">Contact Matchmaker</a>
+        <a href="javascript:void(0);" class="icon" (click)="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <div class="rowN" *ngIf="!(gotRes$ | async)">
+        <p class="special-font topText">Rishtey Nahi</p>
+        <p class="special-font topText">Jode Dilo Ko Bhi!</p>
+        <p class="topText" style="font-size:1.9rem"> Kundali Matching</p>
+    </div>
+    <div class="mainBackImage" *ngIf="!(gotRes$ | async)">
+        <form [formGroup]="kundaliForm">
+            <div class="rowM">
+                <div class="column">
+                    <div class="details">
+                        <div class="col">
+                            <p style="font-size:1.3rem;margin:2% 0 1% 0"> Enter Boy's Details</p>
+                        </div>
+                        <div class="col">
+                            <h6>Name</h6>
+                            <input class="form-control" formControlName="BoyName" type="text">
+                        </div>
+                        <div class="col">
+                            <h6>Birth Date</h6>
+                            <div class="special">
+                                <select class="form-control classic" formControlName="BoyBirthDate">
+                                    <option *ngFor="let item of date" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <select class="form-control classic" formControlName="BoyBirthMonth">
+                                    <option *ngFor="let item of month" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <select class="form-control classic" formControlName="BoyBirthYear">
+                                    <option *ngFor="let item of years" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Birth Time</h6>
+                            <input min="00:00:00" max="24:59:59" type="time" class="form-control"
+                                formControlName="BoyBirthTime">
+                        </div>
+                        <div class="col">
+                            <h6>Birth Place</h6>
+                            <input class="form-control" type="text" id="BoyBirthPlace"
+                                [autoCompleteOptions]="autoComplete" matValidateAddress matGoogleMapsAutocomplete
+                                #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                (change)="placeChanged('BoyBirthPlace')" formControlName="BoyBirthPlace">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="details">
+                        <div class="col">
+                            <p style="font-size:1.3rem;margin:2% 0 1% 0"> Enter Girls's Details</p>
+                        </div>
+                        <div class="col">
+                            <h6>Name</h6>
+                            <input class="form-control" formControlName="GirlName" type="text">
+                        </div>
+                        <div class="col">
+                            <h6>Birth Date</h6>
+                            <div class="special">
+                                <select class="form-control classic" formControlName="GirlBirthDate">
+                                    <option *ngFor="let item of date" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <select class="form-control classic" formControlName="GirlBirthMonth">
+                                    <option *ngFor="let item of month" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <select class="form-control classic" formControlName="GirlBirthYear">
+                                    <option *ngFor="let item of years" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Birth Time</h6>
+                            <input min="00:00:00" max="24:59:59" type="time" class="form-control"
+                                formControlName="GirlBirthTime">
+                        </div>
+                        <div class="col">
+                            <h6>Birth Place</h6>
+                            <input class="form-control" type="text" id="GirlBirthPlace"
+                                [autoCompleteOptions]="autoComplete" matValidateAddress matGoogleMapsAutocomplete
+                                #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                (change)="placeChanged('GirlBirthPlace')" formControlName="GirlBirthPlace">
+                        </div>
+                    </div>
+                </div>
+                <button mat-raised-button type="button" id="viewButton" class="btn"
+                    (click)="onSubmit()">Continue</button>
+            </div>
+        </form>
+    </div>
+    <div class="mainBack" *ngIf="(gotRes$ | async)">
+        <h5 class="text-shadow" style="color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">Details of Boy and Girl
+        </h5>
+        <div class="rowO">
+            <table>
+                <tr style="background: transparent!important;">
+                    <th> </th>
+                    <th>Name</th>
+                    <th>Birth Date</th>
+                    <th>Birth Time</th>
+                    <th>Birth Place</th>
+                </tr>
+                <tr>
+                    <td>Boy</td>
+                    <td>{{kundaliForm.value.BoyName}}</td>
+                    <td>{{kundaliForm.value.BoyBirthDate}}/
+                        {{kundaliForm.value.BoyBirthMonth}}/
+                        {{kundaliForm.value.BoyBirthYear}}</td>
+                    <td>{{kundaliForm.value.BoyBirthTime}}</td>
+                    <td>{{kundaliForm.value.BoyBirthPlace}}</td>
+                </tr>
+                <tr>
+                    <td>Girl</td>
+                    <td>{{kundaliForm.value.GirlName}}</td>
+                    <td>{{kundaliForm.value.GirlBirthDate}}/
+                        {{kundaliForm.value.GirlBirthMonth}}/
+                        {{kundaliForm.value.GirlBirthYear}}</td>
+                    <td>{{kundaliForm.value.GirlBirthTime}}</td>
+                    <td>{{kundaliForm.value.GirlBirthPlace}}</td>
+                </tr>
+            </table>
+        </div>
+        <h5 class="text-shadow" style="margin-top:30px;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
+            Guna Milan
+        </h5>
+        <div class="rowO">
+            <table>
+                <thead>
+                    <tr style="background: transparent!important;">
+                        <th>Guna</th>
+                        <th>Boy</th>
+                        <th>Girl</th>
+                        <th>Maximum Points</th>
+                        <th>Points Obtained</th>
+                    </tr>
+                </thead>
+                <tbody [innerHTML]="transformYourHtml(HTMLResponse)">
+                </tbody>
+            </table>
+        </div>
+        <div class="row" style="background:transparent!important;width:90vw">
+            <div class="" style="width:68%">
+                <h5 class="text-shadow" style="margin-top:30px;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
+                    Horoscope Matching results
+                </h5>
+                <div class="card">
+                    <ul>
+                        <li>
+                            Ashtkoot Matching between Boy and Girl is<strong>{{points}} / 36</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="" style="width:30%">
+                <h5 class="text-shadow" style="margin-top:30px;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
+                    Obtained Points
+                </h5>
+                <div class="card">
+                    <p><a style="font-size: 3.5rem;font-weight: bold;color:rgba(18, 110, 196, 0.877)">{{points}}</a><a
+                            style="font-size: 1.5rem;font-weight: bold;color:rgba(18, 110, 196, 0.664)">/36</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

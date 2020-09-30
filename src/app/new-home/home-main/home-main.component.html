@@ -32,18 +32,18 @@
 <!-- 2nd container -->
 
 <ng-container>
-    <div class="imageTwoGradient">
+    <!-- <div class="imageTwoGradient">
         <mat-card class="featureCard" style="background-image: linear-gradient(0deg,#F5A513 , #F7CB67);
         color: #070973; text-align: center;">
             <mat-card-title style="font-weight: bold;font-size: 20px;">
-                {{languageService.homeLang.moreThan}}
-            </mat-card-title>
-            <mat-card-subtitle style="color: #070973;font-size: 16px;margin-bottom: 0px;">
-                {{languageService.homeLang.chooseFrom}}
-            </mat-card-subtitle>
-            <mat-card-content>
-                <img width="35%" src="../../../assets/home-icons/50000.svg" alt="image">
-            </mat-card-content>
+                    {{languageService.homeLang.moreThan}}
+                    </mat-card-title>
+                    <mat-card-subtitle style="color: #070973;font-size: 16px;margin-bottom: 0px;">
+                    {{languageService.homeLang.chooseFrom}}
+                    </mat-card-subtitle>
+                    <mat-card-content>
+                        <img width="35%" src="../../../assets/home-icons/50000.svg" alt="image">
+                    </mat-card-content>
 
         </mat-card>
 
@@ -51,27 +51,76 @@
         color: #C1FA25;text-align: center;">
             <mat-card-title style="font-weight: bold;font-size: 20px;">
                 {{languageService.homeLang.manyMatchmakers}}
-            </mat-card-title>
-            <mat-card-subtitle style="color: #C1FA25;font-size: 16px;margin-bottom: 0px;">
+                </mat-card-title>
+                <mat-card-subtitle style="color: #C1FA25;font-size: 16px;margin-bottom: 0px;">
                 {{languageService.homeLang.helpingHands}}
-            </mat-card-subtitle>
-            <mat-card-content>
-                <img width="35%" src="../../../assets/home-icons/10000+ Mtchmakers.svg" alt="image">
-            </mat-card-content>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <img width="35%" src="../../../assets/home-icons/10000+ Mtchmakers.svg" alt="image">
+                </mat-card-content>
         </mat-card>
 
         <mat-card class="featureCard" style="background-image: linear-gradient(0deg,#F5A513 , #F7CB67);
         color: #070973; text-align: center;">
             <mat-card-title style="font-weight: bold;font-size: 20px;">
-                {{languageService.homeLang.manyTemple}}
-            </mat-card-title>
-            <mat-card-subtitle style="color: #070973;font-size: 16px;margin-bottom: 0px;">
-                {{languageService.homeLang.verificationCenters}}
-            </mat-card-subtitle>
-            <mat-card-content>
-                <img width="35%" src="../../../assets/home-icons/25+ temples.svg" alt="image">
-            </mat-card-content>
+                    {{languageService.homeLang.manyTemple}}
+                    </mat-card-title>
+                    <mat-card-subtitle style="color: #070973;font-size: 16px;margin-bottom: 0px;">
+                    {{languageService.homeLang.verificationCenters}}
+                    </mat-card-subtitle>
+                    <mat-card-content>
+                        <img width="35%" src="../../../assets/home-icons/25+ temples.svg" alt="image">
+                    </mat-card-content>
         </mat-card>
+</div> -->
+    <div class="list">
+        <div class="row contentArea">
+            <div class="infoRow" style="flex:1 1 500px!important;">
+                <div class="column">
+                    <div class="row information">
+                        <div class="columnar">
+                            <div class="row">
+                                <p><strong>{{languageService.homeLang.moreThan}}</strong><br>
+                                    {{languageService.homeLang.chooseFrom}}</p>
+                            </div>
+                            <div class="row SpCard">
+                                <img width="100%" src="../../../assets/1.svg" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="infoRow" style="flex:1 1 500px!important;">
+                <div class="column">
+                    <div class="row information">
+                        <div class="columnar">
+                            <div class="row">
+                                <p><strong>{{languageService.homeLang.manyMatchmakers}}</strong><br>
+                                    {{languageService.homeLang.helpingHands}}</p>
+                            </div>
+                            <div class="row SpCard">
+                                <img width="100%" src="../../../assets/2.svg" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="infoRow" style="flex:1 1 500px!important;">
+                <div class="column">
+                    <div class="row information">
+                        <div class="columnar">
+                            <div class="row">
+                                <p><strong>{{languageService.homeLang.manyTemple}}</strong><br>
+                                    {{languageService.homeLang.verificationCenters}}</p>
+                            </div>
+                            <div class="row SpCard">
+                                <img style="width:65%;margin:auto" src="../../../assets/3.svg" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </ng-container>
 
@@ -80,7 +129,8 @@
 <ng-container>
     <div class="headingThree">
         <div>
-            <span style="font-weight: bold;color: white;font-size: 20px;">
+            <span class="special-font text-shadow"
+                style="font-weight: bold;color: white;font-size: 30px;font-family:'Allura'!important">
                 {{languageService.homeLang.offlineCentres}}
             </span>
         </div>
@@ -94,36 +144,41 @@
             </a>
         </div>
     </div>
-    <div class="imageThreeGradient">
-
-        <div class="innerHoriz">
-            <div class="innerThree">
-                <mat-card class="featureCard2">
-                    <img class="feature2Img"
-                        src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/shiv_sai_dhaam_300.jpeg"
-                        alt="Shiv Sai Dham Mandir">
-                </mat-card>
-                <span style="color: white;font-size: 16px;height: 30%;">{{languageService.homeLang.shivTemple}}</span>
-            </div>
-
-            <div class="innerThree">
-                <mat-card class="featureCard2">
-                    <img class="feature2Img" src="
-            https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/sanathan_dharm_300.jpeg"
-                        alt="Sanathan Dharam Mandir">
-                </mat-card>
-                <span style="color: white;font-size: 16px;">{{languageService.homeLang.sanatanTemple}}</span>
-            </div>
-
-            <div class="innerThree">
-                <mat-card class="featureCard2">
-                    <img class="feature2Img"
-                        src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/lakshmi_narayan_300.jpeg"
-                        alt="Lakshmi Narayan Mandir">
-                </mat-card>
-                <span style="color: white;font-size: 16px;">{{languageService.homeLang.lakshmiTemple}}</span>
-            </div>
-        </div>
+    <div class="carousel-div">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">{{languageService.homeLang.shivTemple}}</span>
+                    <mat-card class="featureCard2">
+                        <img class="feature2Img"
+                            src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/shiv_sai_dhaam_300.jpeg"
+                            alt="Shiv Sai Dham Mandir">
+                    </mat-card>
+                </div>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">{{languageService.homeLang.sanatanTemple}}</span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img" src="
+                    https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/sanathan_dharm_300.jpeg"
+                            alt="Sanathan Dharam Mandir">
+                    </mat-card>
+                </div>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">{{languageService.homeLang.lakshmiTemple}}</span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img"
+                            src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/lakshmi_narayan_300.jpeg"
+                            alt="Lakshmi Narayan Mandir">
+                    </mat-card>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+    <!-- <div class="imageThreeGradient">
         <div class="button3 btnRightPad">
             <button class="registerBtn " style="background-color: #0C9BF2;" [routerLink]="['/fourReg']"
                 routerLinkActive="router-link-active" mat-raised-button *ngIf="homeService.getLoginStatus()==false">
@@ -136,6 +191,36 @@
             <br>
             <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
         </div>
+    </div> -->
+</ng-container>
+<ng-container>
+    <div class="list">
+        <div class="row contentArea">
+            <div class="infoRow">
+                <div class="column">
+                    <div class="row information">
+                        <div class="columnar">
+                            <div class="row" style="margin-bottom: 6rem!important;">
+                                <p class="special-font text-shadow" style="font-weight: bold;font-size: 35px;">
+                                    Introducing Android App</p>
+                            </div>
+                            <div class="row SpCardApp">
+                                <img id="image" width="100%" src="../../../assets/4.svg" alt="image">
+                                <p style="color:rgba(36, 34, 34, 0.925)">Get Notified Everytime Someone Likes You</p>
+                                <div class="row appDownload" (click)="openPlaystore()">
+                                    <div class=" col-4">
+                                        <img width="60px" src="../../../assets/playstore-new.svg" alt="">
+                                    </div>
+                                    <div class="col-7">
+                                        Download The Mobile App
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </ng-container>
 
@@ -143,68 +228,88 @@
 
 <ng-container>
     <div id="container4">
-        <span style="font-weight: bold;font-size: 20px;;">
+        <span class="special-font text-shadow" style="font-weight: bold;font-size: 35px;">
             {{languageService.homeLang.joinHearts}}
         </span>
-        <div class="feature4">
-            <div class="testimonial">
-                <img class="testimonialImage"
-                    src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review1_600.jpg" alt="Reviews">
-                <div class="testimonialGradient">
-                    <span>
-                        Kaushik & Anushka
-                    </span><br>
-                    <span>
-                        I loved their events which are systematically organized and gives one time to meet a number of
-                        matches at the same time. We met at one such event and I recommend their services to everyone.
-                    </span>
+        <owl-carousel-o [options]="customOptions">
+            <ng-template class="slide" carouselSlide>
+                <div class="testimonial">
+                    <div class="testimonialGradient">
+                        <img class="testimonialImage"
+                            src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review1_600.jpg"
+                            alt="Reviews">
+                        <span class="testimonial-names">
+                            Kaushik &nbsp;<img src="../../../assets/heart-pink.svg" style="width:20px;"> &nbsp;Anushka
+                        </span><br>
+                        <span class="testimonial-text">
+                            I loved their events which are systematically organized and gives one time to meet a
+                            number of
+                            matches at the same time. We met at one such event and I recommend their services to
+                            everyone.
+                        </span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="testimonial">
-                <img class="testimonialImage"
-                    src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review2_600.jpg" alt="Reviews">
-                <div class="testimonialGradient">
-                    <span>
-                        Sahil & Salony
-                    </span><br>
-                    <span>
-                        I met the love of my Life through Hans Matrimony. I'm so happy and I could not thank them much.
-                        Its so unique concept like who would have thought they would find their life partner on Chat.
-                    </span>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="testimonial">
+                    <div class="testimonialGradient">
+                        <img class="testimonialImage"
+                            src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/Review2_600.jpg"
+                            alt="Reviews">
+                        <span class="testimonial-names">
+                            Sahil&nbsp;<img src="../../../assets/heart-pink.svg" style="width:20px;">&nbsp;Salony
+                        </span><br>
+                        <span class="testimonial-text">
+                            I met the love of my Life through Hans Matrimony. I'm so happy and I could not thank
+                            them much.
+                            Its so unique concept like who would have thought they would find their life partner on
+                            Chat.
+                        </span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="testimonial">
-                <img class="testimonialImage"
-                    src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/photography_600.jpg" alt="Reviews">
-                <div class="testimonialGradient">
-                    <span>
-                        Lakshay & Priya
-                    </span><br>
-                    <span>
-                        Hans Matrimony is by far the best matrimonial
-                        service.
-                        Aprajita and her team of matchmakers sieved through thousands of profiles to find me my perfect
-                        match.
-                        I wish them all the best and highly recommend their services.
-                    </span>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="testimonial">
+                    <div class="testimonialGradient">
+                        <img class="testimonialImage"
+                            src="https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/photography_600.jpg"
+                            alt="Reviews">
+                        <span class="testimonial-names">
+                            Lakshay &nbsp;<img src="../../../assets/heart-pink.svg" style="width:20px;"> &nbsp;Priya
+                        </span><br>
+                        <span class="testimonial-text">
+                            Hans Matrimony is by far the best matrimonial
+                            service.
+                            Aprajita and her team of matchmakers sieved through thousands of profiles to find me my
+                            perfect
+                            match.
+                            I highly recommend their services.
+                        </span>
+                    </div>
                 </div>
-            </div>
-
-        </div>
+            </ng-template>
+        </owl-carousel-o>
     </div>
 </ng-container>
 
 <!-- 5th container -->
-
 <ng-container>
     <div id="container5">
-        <p style="font-weight: bold;font-size: 20px;color: #070973;
-            text-align: start;">
+        <p>Now Stay Connected of The</p>
+        <p class="special-font text-shadow" style="font-weight: bold;font-size:35px;color: #ffffff;
+            text-align: center;">
             #1 {{languageService.homeLang.matchmakingApp}}
         </p>
-        <div id="playBtn" (click)="openPlaystore()">
+        <p>Anytime & Anywhere</p>
+        <div class="row appDownload2" (click)="openPlaystore()">
+            <div class="col-4 newApp">
+                <img width="60px" src="../../../assets/playstore-new.svg" alt="">
+            </div>
+            <div class="col-7" style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                Download The Mobile App
+            </div>
+        </div>
+        <!-- <div id="playBtn" (click)="openPlaystore()">
             <span style="color: #D313AE;border-right: 1px solid #D313AE;
             align-self: center;
             font-weight: bold;
@@ -212,9 +317,9 @@
                 {{languageService.homeLang.getOnPhone}}
             </span>
             <img style="width: 20px;margin-left: 10px;" src="../../assets/playstore.svg" alt="playstore app">
-        </div>
+        </div> -->
 
-        <div style="position: relative; margin-top: 10px;border-radius: 10px;background-color: #D313AE;
+        <!-- <div style="position: relative; margin-top: 10px;border-radius: 10px;background-color: #D313AE;
         display: flex;
         flex-direction: row;
         margin-bottom: 50px;
@@ -240,6 +345,7 @@
     <div style="background-color: #070673;text-align: center;
     height: 40px;padding-top: 8px;">
         <img width="30px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="show more">
+    </div> -->
     </div>
 </ng-container>
 
@@ -329,11 +435,10 @@
         <hr style="background-color: white;">
 
         <p id="bottomText">
-            <a style="color: white;" href="#">Success Stories &nbsp;| &nbsp;</a>
-            <a style="color: white;" href="#">Careers &nbsp;| &nbsp;</a> <a style="color: white;" href="#">Payment
+            <a href="#">Success Stories &nbsp;| &nbsp;</a>
+            <a href="#">Careers &nbsp;| &nbsp;</a> <a href="#">Payment
                 Options &nbsp;| &nbsp;</a>
-            <a style="color: white;" href="#">Terms & Conditions &nbsp;| &nbsp;</a> <a style="color: white;"
-                href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions &nbsp;| &nbsp;</a> <a style="color: white;" href="#">Privacy Policy</a>
         </p>
 
         <p style="text-align: center;
