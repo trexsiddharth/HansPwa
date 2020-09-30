@@ -300,8 +300,13 @@ export class CompatibilityVerifyComponent implements OnInit {
       (data: any) => {
         console.log(data);
         if (data.status === '1') {
-
-          if (localStorage.getItem('fourthParam')) {
+          if (localStorage.getItem('redParam')) {
+            if (localStorage.getItem('redParam') === '0')
+              window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
+            else
+              window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
+          }
+          else if (localStorage.getItem('fourthParam')) {
             if (localStorage.getItem('fifthParam') === '1') {
               if (localStorage.getItem('fourthParam') === '0')
                 window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);

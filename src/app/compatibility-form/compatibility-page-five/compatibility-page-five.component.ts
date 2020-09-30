@@ -80,17 +80,17 @@ export class CompatibilityPageFiveComponent implements OnInit {
       this.getLeadData().subscribe(
         value => {
           console.log(value);
-          if (value && value.data && value.data.assign_to ) {
-        
-          if (value.data.assign_to != "online") {
-            localStorage.setItem('isAssignToOnline', '1');
-            this.fourPageService.showApproveBtn = true;
+          if (value && value.data && value.data.assign_to) {
+
+            if (value.data.assign_to != "online") {
+              localStorage.setItem('isAssignToOnline', '1');
+              this.fourPageService.showApproveBtn = true;
+            }
+            else if (value.data.assign_to == "online") {
+              this.fourPageService.showApproveBtn = false;
+            }
+            console.log(' this.fourPageService.showApproveBtn set to', this.fourPageService.showApproveBtn, value.data.assign_to)
           }
-          else if ( value.data.assign_to == "online") {
-            this.fourPageService.showApproveBtn = false;
-          }
-          console.log(' this.fourPageService.showApproveBtn set to', this.fourPageService.showApproveBtn, value.data.assign_to)
-        }
           if (value.status === '1') {
 
             const assignToName = this.allTemples.find(
@@ -521,7 +521,13 @@ export class CompatibilityPageFiveComponent implements OnInit {
                 console.log(data);
                 if (data.status === '1') {
                   this.clearHistory();
-                  if (localStorage.getItem('fourthParam')) {
+                  if (localStorage.getItem('redParam')) {
+                    if (localStorage.getItem('redParam') === '0')
+                      window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
+                    else
+                      window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
+                  }
+                  else if (localStorage.getItem('fourthParam')) {
                     if (localStorage.getItem('fifthParam') === '1') {
                       if (localStorage.getItem('fourthParam') === '0')
                         window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
@@ -604,7 +610,13 @@ export class CompatibilityPageFiveComponent implements OnInit {
         (data: any) => {
           console.log(data);
           if (data.status === '1') {
-            if (localStorage.getItem('fourthParam')) {
+            if (localStorage.getItem('redParam')) {
+              if (localStorage.getItem('redParam') === '0')
+                window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
+              else
+                window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
+            }
+            else if (localStorage.getItem('fourthParam')) {
               if (localStorage.getItem('fifthParam') === '1') {
                 if (localStorage.getItem('fourthParam') === '0')
                   window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
@@ -685,7 +697,13 @@ export class CompatibilityPageFiveComponent implements OnInit {
       (data: any) => {
         console.log(data);
         if (data.status === '1') {
-          if (localStorage.getItem('fourthParam')) {
+          if (localStorage.getItem('redParam')) {
+            if (localStorage.getItem('redParam') === '0')
+              window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
+            else
+              window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
+          }
+          else if (localStorage.getItem('fourthParam')) {
             if (localStorage.getItem('fifthParam') === '1') {
               if (localStorage.getItem('fourthParam') === '0')
                 window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
