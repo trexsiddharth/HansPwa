@@ -306,8 +306,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('fifthParam', route.params.fifthParam);
           }
-          if (route.param.redParam) {
-            localStorage.setItem('redParam', route.param.redParam);
+          if (route.params.redParam) {
+            localStorage.setItem('redParam', route.params.redParam);
           }
           if (route.params.enqDate) {
             this.fourPageService.setUserThrough(true);
