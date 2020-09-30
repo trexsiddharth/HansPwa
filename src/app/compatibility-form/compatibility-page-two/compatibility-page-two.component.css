@@ -14,12 +14,13 @@
 .backBtn{
   border:0px;
   background:transparent;
-  position:absolute;
-  z-index:999999;
+  /* position:absolute;
+  z-index:999999; */
   /* width:1.6rem; */
   height:2rem;
-  top:10%;
-  left:30px;
+  /* top:10%;
+  left:30px; */
+  margin-right: 10px;
   display: flex;
   flex-direction:row;
   align-items: center;
@@ -51,7 +52,7 @@
   color: white;
   padding-left: 40px;
   padding-right: 40px;
-box-shadow: -12px -12px 12px 0 rgba(255, 255, 255, 1),
+box-shadow: 
 12px 12px 12px rgba(0, 0, 0, 0.2);
 }
 #skipBtn{
