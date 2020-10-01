@@ -23,7 +23,22 @@
 .drawerSettings{
 width: 25%;
 }
-
+.rishteBtn{
+    position:absolute;
+    top:20px;
+    right:12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2px 2px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #D313AE;
+    z-index:1;
+}
 .row{
     padding: 0px;
     margin: 0px;
@@ -98,5 +113,23 @@ width: 25%;
     .drawerImg{
         width: 20px;
         margin: 0px;
+    }
+}
+@media (min-width:1024px){
+    .rishteBtn{
+        position:absolute;
+        top:20px;
+        right:40px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 2px 7px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: bold;
+        background-color: #d346b7;
+        z-index:1;
     }
 }

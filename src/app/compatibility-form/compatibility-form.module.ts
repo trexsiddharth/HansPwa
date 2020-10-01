@@ -13,7 +13,7 @@ import { CompatibilityVerifyComponent } from './compatibility-verify/compatibili
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
 import { ChooseForComponent } from './choose-for/choose-for.component';
-
+import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { ChooseForComponent } from './choose-for/choose-for.component';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    CompatibilityFormRoutingModule
+    CompatibilityFormRoutingModule,
+    NgxMatIntlTelInputModule
   ],
   providers: [
     FourPageService

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NewHomeService } from '../new-home.service';
 
 @Component({
   selector: 'app-kundali',
@@ -22,7 +23,8 @@ export class KundaliComponent implements OnInit {
   gotRes$ = this.gotRes.asObservable();
   HTMLResponse: any;
   constructor(private form_builder: FormBuilder, private http: HttpClient,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    public homeService: NewHomeService) {
     this.kundaliForm = this.form_builder.group({
       BoyBirthDate: ['', Validators.required],
       BoyBirthMonth: ['', Validators.required],
@@ -39,6 +41,12 @@ export class KundaliComponent implements OnInit {
     });
   }
   ngOnInit() {
+    if (this.homeService.points != -1) {
+      this.HTMLResponse = this.homeService.HTMLResponse;
+      this.points = this.homeService.points;
+      this.kundaliForm = this.homeService.kundaliForm;
+      this.gotRes.next(true);
+    }
   }
   downloadApp() {
     window.open('https://bit.ly/2YQEfbe', '_self');
@@ -104,6 +112,10 @@ export class KundaliComponent implements OnInit {
           this.HTMLResponse = this.HTMLResponse.split('li').join('td');
           console.log(this.HTMLResponse);
           this.gotRes.next(true);
+          setTimeout(() => {
+            let ele = document.getElementById('pointsDiv');
+            ele.scrollIntoView({ behavior: 'smooth' });
+          }, 1000);
         }
       });
     }

@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,16 @@ export class NewHomeService {
   private drawerInstance;
 
   constructor() { }
-
+  points = -1;
+  HTMLResponse: any;
+  kundaliForm: FormGroup;
   getLoginStatus() {
-   if (localStorage.getItem('mobile_number') && localStorage.getItem('mobile_number') !== '') {
+    if (localStorage.getItem('mobile_number') && localStorage.getItem('mobile_number') !== '') {
       this.loggedInNumber = localStorage.getItem('mobile_number');
       return true;
-   } else {
-     return false;
-   }
+    } else {
+      return false;
+    }
   }
   getLoggedInNumber() {
     return this.loggedInNumber;
@@ -25,7 +28,7 @@ export class NewHomeService {
 
   getProfilePic() {
     if (localStorage.getItem('profile_photo') && localStorage.getItem('profile_photo') !== '') {
-        return localStorage.getItem('profile_photo');
+      return localStorage.getItem('profile_photo');
     } else {
       return null;
     }
@@ -34,7 +37,7 @@ export class NewHomeService {
   saveLoggedProfilePic(imgUrl: string) {
     this.loggedInProfilePic = imgUrl;
   }
-  getLoggedProfilePic(){
+  getLoggedProfilePic() {
     return this.loggedInProfilePic;
   }
 

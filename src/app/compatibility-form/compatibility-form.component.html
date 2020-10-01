@@ -132,8 +132,12 @@
                 <!-- <h6>Mobile number</h6> -->
                 <mat-form-field class="full-width fieldFit" (click)="showTruecallerIfFacebook()" appearance="standard">
                   <mat-label>Mobile number</mat-label>
-                  <input style="display: inline;" [disabled]="hideMobileNumber" type="number" id="phone" matInput
-                    formControlName="phone" (change)="mobileNumberChanged()" required name="phone">
+                  <ngx-mat-intl-tel-input matInput style="display: inline;" [disabled]="hideMobileNumber"
+                    [preferredCountries]="['in']" [enablePlaceholder]="true" [enableSearch]="true" name="phone"
+                    type="tel" formControlName="phone" id="phone" (change)="mobileNumberChanged()" required>
+                  </ngx-mat-intl-tel-input>
+                  <!-- <input style="display: inline;" [disabled]="hideMobileNumber" type="number" id="phone" matInput
+                    formControlName="phone" (change)="mobileNumberChanged()" required name="phone"> -->
                   <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>

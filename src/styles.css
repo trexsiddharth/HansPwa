@@ -143,6 +143,9 @@ body {
    text-align: center;
    margin: 0px 20px;
 }
+#landingPageForm .mat-select-value{
+  color: #000000!important;
+}
 .mat-tab-label-container{
   background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
   padding: 0px 0px 0px 20px;

@@ -33,6 +33,8 @@ export class FindOpenHistoryProfileService {
 
   tutorialIndex = -1;
 
+  compatibilityLookingFor = '';
+  compatibilityGender = '';
   constructor(
     private dialog: MatDialog,
     private breakPointObserver: BreakpointObserver,

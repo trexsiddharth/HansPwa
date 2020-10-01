@@ -38,6 +38,7 @@ import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
 import { ChooseForComponent } from './choose-for/choose-for.component'
 import { element } from 'protractor';
+import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
 
 
 declare var FB: any;
@@ -157,14 +158,17 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     public languageService: LanguageService,
     private route: ActivatedRoute,
     private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService,
+    private itemService: FindOpenHistoryProfileService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
+      // phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
+      // , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])],
       phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
-        , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])],
+        , Validators.compose([Validators.required])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
@@ -336,7 +340,17 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           this.getFacebookAccessToken(code);
         }
         else {
-          if (!this.fourPageService.getUserThrough()) {
+          if (this.itemService.compatibilityGender) {
+            this.PageOne.patchValue({
+              gender: this.itemService.compatibilityGender,
+            });
+          }
+          if (this.itemService.compatibilityLookingFor) {
+            this.PageOne.patchValue({
+              Relation: this.itemService.compatibilityLookingFor,
+            });
+          }
+          else if (!this.fourPageService.getUserThrough()) {
             this.openChooseFor();
           }
         }

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NewHomeService } from './new-home.service';
 import { LanguageService } from '../language.service';
 
@@ -8,26 +8,25 @@ import { LanguageService } from '../language.service';
   styleUrls: ['./new-home.component.css']
 })
 export class NewHomeComponent implements OnInit {
-  langCheck = false;
+  // langCheck = false;
 
   constructor(public homeService: NewHomeService, public languageService: LanguageService) { }
- 
+
 
   ngOnInit() {
-    console.log(this.languageService.getCurrentLanguage());
-
+    // console.log(this.languageService.getCurrentLanguage());
     // lang check is used to set the selected language as user language once user logs in.
     // it will be only set if user changes the language from the current language to other language.
-    if (!localStorage.getItem('language')) {
-      localStorage.setItem('language', 'english');
-      this.langCheck = true;
-    }
-    if (localStorage.getItem('language') === 'english') {
-      this.langCheck = true;
-    } else if (localStorage.getItem('language')  === 'hindi')  {
-      this.langCheck = false;
-    }
-    this.languageService.setHomeLang(localStorage.getItem('language'));
+    // if (!localStorage.getItem('language')) {
+    //   localStorage.setItem('language', 'english');
+    //   this.langCheck = true;
+    // }
+    // if (localStorage.getItem('language') === 'english') {
+    //   this.langCheck = true;
+    // } else if (localStorage.getItem('language')  === 'hindi')  {
+    //   this.langCheck = false;
+    // }
+    // this.languageService.setHomeLang(localStorage.getItem('language'));
   }
 
   sendWhatsAppLink() {
@@ -53,7 +52,7 @@ export class NewHomeComponent implements OnInit {
       value: localStorage.getItem('id'),
       content_name: localStorage.getItem('mobile_number'),
     });
-    (window as any).fbq('track', '692972151223870' , 'Contact', {
+    (window as any).fbq('track', '692972151223870', 'Contact', {
       value: localStorage.getItem('id'),
       content_name: localStorage.getItem('mobiler_number'),
     });

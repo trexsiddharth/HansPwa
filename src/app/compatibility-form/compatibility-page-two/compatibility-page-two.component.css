@@ -12,19 +12,16 @@
   margin-bottom: 1rem;
 }
 .backBtn{
-  border:0px;
-  background:transparent;
-  /* position:absolute;
-  z-index:999999; */
-  /* width:1.6rem; */
-  height:2rem;
-  /* top:10%;
-  left:30px; */
-  margin-right: 75px;
-  display: flex;
-  flex-direction:row;
-  align-items: center;
-  justify-content: center;
+  border: 0px;
+  background: transparent;
+    height: 2rem;
+    margin-right: 115px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+    padding-left: inherit;
 }
 .backArrow{
   width:20px;

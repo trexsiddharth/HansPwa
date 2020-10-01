@@ -1,7 +1,6 @@
-  <mat-sidenav-container class="mainContainer">
-    <mat-sidenav id="sidenav" class="drawerSettings" mode="over"
-     position="end" 
-     (opened)="homeService.saveDrawerInstance(sidenav)" #sidenav>
+<mat-sidenav-container class="mainContainer">
+    <mat-sidenav id="sidenav" class="drawerSettings" mode="over" position="start"
+        (opened)="homeService.saveDrawerInstance(sidenav)" #sidenav>
         <app-home-drawer></app-home-drawer>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -9,38 +8,70 @@
         <mat-toolbar class="fixToolBar">
             <mat-toolbar-row class="toolBarRow">
                 <div class="mainDivToolbar">
-                    <div style="display: flex;
+                    <!-- <div style="display: flex;
                     flex-direction: row;
                     align-items: center;
                     justify-content: center;">
-                        <img width="40px" [defaultImage]="'../../assets/logo_72.png'" 
-                            [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'" 
-                             [useSrcset]="true" alt="Hans Matrimony">
-                        <span style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans Matrimony</strong></span>
-                    </div>
+                        <img width="40px" [defaultImage]="'../../assets/logo_72.png'"
+                            [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'"
+                            [useSrcset]="true" alt="Hans Matrimony">
+                        <span
+                            style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans
+                                Matrimony</strong></span>
+                    </div> -->
                     <div>
-                       <span style="font-size: 18px;">हिं <mat-slide-toggle  [checked]="langCheck" (change)="langChanged($event)">En</mat-slide-toggle></span>
-                        <img class="drawerImg" (click)="sidenav.toggle()" src="../../assets/menu.svg" alt="menu">
+                        <!-- <span style="font-size: 18px;">हिं <mat-slide-toggle [checked]="langCheck"
+                                (change)="langChanged($event)">En</mat-slide-toggle></span> -->
+                        <a href="javascript:void(0);" style="color: white;" class="icon" (click)="sidenav.toggle()">
+                            <i class="fa fa-bars"></i>
+                            <span class="toolText" *ngIf="homeService.getLoginStatus()==false"><a
+                                    style="color: white;text-decoration: none;" [routerLink]="['/phone-number']"
+                                    routerLinkActive="router-link-active">{{languageService.homeLang.login}}</a></span>
+                            <span class="toolText" *ngIf="homeService.getLoginStatus()"><a
+                                    style="color: white;text-decoration: none;" [routerLink]="['/chat']"
+                                    routerLinkActive="router-link-active">{{languageService.homeLang.rishteDekhein}}</a></span>
+                        </a>
+                        <!-- <img class="drawerImg" (click)="sidenav.toggle()" src="../../assets/menu.svg" alt="menu"> -->
                     </div>
+                    <button mat-raised-button class="rishteBtn">
+                        <img width="20px" src="../../assets/playstore_white.svg" alt="">
+                        Get The App Now
+                    </button>
                 </div>
-              </mat-toolbar-row>
-            
-              <mat-toolbar-row class="toolBarRow">
-                  <div class="row toolBarRow2">
-                 
-                <div class="col-4 t-c b-r" style="padding: 0px;">
-                    <span class="toolText"><a style="color: white;text-decoration: none;" href="https://play.google.com/store/apps/details?id=com.twango.me"> {{languageService.homeLang.downloadApp}}</a></span>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row class="toolBarRow">
+                <div class="row toolBarRow2" style="border-bottom: 2px solid cornsilk!important;">
+
+                    <!-- <div class="col-4 t-c b-r" style="padding: 0px;">
+                        <span class="toolText"><a style="color: white;text-decoration: none;"
+                                href="https://play.google.com/store/apps/details?id=com.twango.me">
+                                {{languageService.homeLang.downloadApp}}</a></span>
+                    </div> -->
+                    <div class="t-c b-l" style="margin:auto">
+                        <img style="position:absolute; bottom:-30px;left:50%;margin-left:-36px" width="72px"
+                            [defaultImage]="'../../assets/logo_72.png'"
+                            [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'"
+                            [useSrcset]="true" alt="Hans Matrimony">
+                        <!-- <span
+                            style="color: white; margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;"><strong>Hans
+                                Matrimony</strong></span> -->
+                    </div>
+                    <!-- <div class="col-4 t-c ">
+                        <img style="width: 25px;" (click)="sendWhatsAppLink()" src="../../assets/whatsapp-white.svg"
+                            alt="whatsapp share">
+                    </div> -->
+                    <!-- <div class="col-4 t-c b-l" style="padding: 0px;">
+                        <span class="toolText" *ngIf="homeService.getLoginStatus()==false"><a
+                                style="color: white;text-decoration: none;" [routerLink]="['/phone-number']"
+                                routerLinkActive="router-link-active">{{languageService.homeLang.login}}</a></span>
+                        <span class="toolText" *ngIf="homeService.getLoginStatus()"><a
+                                style="color: white;text-decoration: none;" [routerLink]="['/chat']"
+                                routerLinkActive="router-link-active">{{languageService.homeLang.rishteDekhein}}</a></span>
+                    </div> -->
                 </div>
-                <div class="col-4 t-c ">
-                    <img style="width: 25px;" (click)="sendWhatsAppLink()" src="../../assets/whatsapp-white.svg" alt="whatsapp share">
-                </div>
-                <div class="col-4 t-c b-l" style="padding: 0px;">
-                    <span class="toolText" *ngIf="homeService.getLoginStatus()==false"><a style="color: white;text-decoration: none;" [routerLink]="['/phone-number']" routerLinkActive="router-link-active">{{languageService.homeLang.login}}</a></span>
-                    <span class="toolText" *ngIf="homeService.getLoginStatus()"><a style="color: white;text-decoration: none;" [routerLink]="['/chat']" routerLinkActive="router-link-active">{{languageService.homeLang.rishteDekhein}}</a></span>
-                </div>
-            </div>
-              </mat-toolbar-row>
-           
+            </mat-toolbar-row>
+
         </mat-toolbar>
 
         <!-- home main -->
@@ -48,4 +79,4 @@
         <app-home-main></app-home-main>
 
     </mat-sidenav-content>
-  </mat-sidenav-container>
+</mat-sidenav-container>

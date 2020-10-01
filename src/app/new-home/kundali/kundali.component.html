@@ -21,7 +21,7 @@
         <p class="special-font topText">Jode Dilo Ko Bhi!</p>
         <p class="topText" style="font-size:1.9rem"> Kundali Matching</p>
     </div>
-    <div class="mainBackImage" *ngIf="!(gotRes$ | async)">
+    <div class="mainBackImage" style="margin-bottom:12rem">
         <form [formGroup]="kundaliForm">
             <div class="rowM">
                 <div class="column">
@@ -115,7 +115,7 @@
             </div>
         </form>
     </div>
-    <div class="mainBack" *ngIf="(gotRes$ | async)">
+    <div class="mainBack" *ngIf="(gotRes$ | async)" style="margin-bottom:3rem">
         <h5 class="text-shadow" style="color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">Details of Boy and Girl
         </h5>
         <div class="rowO">
@@ -150,15 +150,15 @@
         <h5 class="text-shadow" style="margin-top:30px;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
             Guna Milan
         </h5>
-        <div class="rowO">
+        <div class="rowO" style="max-width:92vw; overflow-x: scroll;">
             <table>
                 <thead>
                     <tr style="background: transparent!important;">
                         <th>Guna</th>
                         <th>Boy</th>
                         <th>Girl</th>
-                        <th>Maximum Points</th>
                         <th>Points Obtained</th>
+                        <th>Maximum Points</th>
                     </tr>
                 </thead>
                 <tbody [innerHTML]="transformYourHtml(HTMLResponse)">
@@ -173,18 +173,18 @@
                 <div class="card">
                     <ul>
                         <li>
-                            Ashtkoot Matching between Boy and Girl is<strong>{{points}} / 36</strong>
+                            Ashtkoot Matching between Boy and Girl is&nbsp;<strong>{{points}} / 36</strong>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="" style="width:30%">
+            <div id="pointsDiv" style="width:30%">
                 <h5 class="text-shadow" style="margin-top:30px;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
                     Obtained Points
                 </h5>
                 <div class="card">
-                    <p><a style="font-size: 3.5rem;font-weight: bold;color:rgba(18, 110, 196, 0.877)">{{points}}</a><a
-                            style="font-size: 1.5rem;font-weight: bold;color:rgba(18, 110, 196, 0.664)">/36</a></p>
+                    <p><a style="font-size: 2.5rem;font-weight: bold;color:rgba(18, 110, 196, 0.877)">{{points}}</a><a
+                            style="font-size: 1.2rem;font-weight: bold;color:rgba(18, 110, 196, 0.664)">/36</a></p>
                 </div>
             </div>
         </div>
