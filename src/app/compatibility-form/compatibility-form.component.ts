@@ -1098,7 +1098,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
       lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] ?
         this.userProfile.name.split(' ')[1] : '' : '',
-      phone: this.userProfile.mobile,
+      phone: this.setMobileNumber(this.userProfile.mobile),
       email: this.userProfile.email,
       Relation: this.userProfile.relation,
       gender: this.userProfile.gender,
@@ -1111,6 +1111,15 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
     });
+  }
+  setMobileNumber(number: string) {
+    console.log('qwerty', number);
+    if (number[0] != '+') {
+      console.log('+91' + number);
+      return '+91' + number;
+    }
+    else
+      return number;
   }
   getMonthString(month: string) {
     switch (month) {
