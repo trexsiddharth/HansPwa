@@ -52,6 +52,7 @@ box-shadow: 0px 14px 12px 1px rgba(0,0,0,0.75);
     justify-content: center;
     flex-wrap: wrap;
     padding: 0 2%;
+    margin:auto;
 }  
   .column {
     flex: 1 1 50%;
@@ -202,10 +203,16 @@ box-shadow: 0px 14px 12px 1px rgba(0,0,0,0.75);
 .headingThree {
     display: flex;
     flex-direction: row;
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    justify-content: center;
+}
+/* .headingThree {
+    display: flex;
+    flex-direction: row;
     padding: 20px 10% 20px 20%;
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
     justify-content: space-between;
-}
+} */
 .infoGraphic{
     width: 360px;
     position: absolute;
@@ -316,6 +323,7 @@ box-shadow: 0px 14px 12px 1px rgba(0,0,0,0.75);
     justify-content: center;
 }
 .appDownload{
+    width:87%;
     display: flex;
     flex-direction: row;
     border:2px solid #5552ff;
@@ -324,9 +332,11 @@ box-shadow: 0px 14px 12px 1px rgba(0,0,0,0.75);
     color:#5552ff;
     font-weight:bold;
     font-size:1rem;
-    margin:0 4% 10% 4%;
+    margin:0 4% 8% 4%;
+    cursor: pointer;
 }
 .appDownload2{
+    width:80%;
     display: flex;
     flex-direction: row;
     /* height:90px;
@@ -337,7 +347,8 @@ box-shadow: 0px 14px 12px 1px rgba(0,0,0,0.75);
     color:#ffff ff;
     font-weight:bold;
     font-size:1rem;
-    margin:0 6% 8% 6%;
+    margin:0 auto 8% auto;
+    cursor: pointer;
 }
 .newApp{
     background:#ffffff!important;
@@ -358,7 +369,8 @@ box-shadow: 0px 14px 12px 1px rgba(0,0,0,0.75);
     justify-content: center;
 }
 .special-font{
-    font-family: 'Allura';
+    font-family: 'Poppins';
+    font-size:1.5rem!important;
 }
 .SpCardApp{
     position: relative;
@@ -531,13 +543,6 @@ li{
         flex-flow: row;
     }
 
-    .headingThree {
-        display: flex;
-        flex-direction: row;padding: 20px 20px 20px 40px;
-        background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
-        justify-content: space-between;
-    }
-
     .innerThree{
         width: 50%;
         height: 100%;
@@ -671,12 +676,12 @@ li{
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
     flex-flow: row;
 }
-.headingThree {
+/* .headingThree {
     display: flex;
     flex-direction: row;padding: 20px 20px 20px 40px;
     background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
     justify-content: space-between;
-}
+} */
 .innerThree{
     width: 50%;
     height: 100%;
@@ -758,5 +763,39 @@ li{
         justify-content: center;
         flex-wrap: wrap;
         padding: 0 2%;
+        margin:auto;
     } 
+    .appDownload{
+        width:52%;
+        display: flex;
+        flex-direction: row;
+        border:2px solid #5552ff;
+        border-radius:10px;
+        background-color: white;
+        color:#5552ff;
+        font-weight:bold;
+        font-size:1rem;
+        margin:0 4% 8% 4%;
+        cursor: pointer;
+    }
+    .appDownload2{
+        
+        width:47%;
+        display: flex;
+        flex-direction: row;
+        /* height:90px;
+        width: 250px; */
+        border:2px solid #ffffff;
+        border-radius:10px;
+        background-color:transparent;
+        color:#ffff ff;
+        font-weight:bold;
+        font-size:1rem;
+        margin:0 auto 8% auto;
+        cursor: pointer;
+    }
+    .special-font{
+        font-family: 'Poppins';
+        font-size:2rem!important;
+    }
 }

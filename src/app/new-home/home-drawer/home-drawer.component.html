@@ -2,12 +2,12 @@
     <ng-container>
         <div class="profilePicSection">
             <div style="width: 100%;background-color: #83C9F4;">
-                <p style="margin: 0px;padding: 10px 0px;text-align: center;font-weight: bold;font-size: 20px;">
+                <p style="margin: 0px;padding: 10px 0px;text-align: center;font-weight: bold;font-size: 18px;">
                     {{languageService.homeLang.myprofile}}
                 </p>
             </div>
             <div style="
-            padding: 10px 30px;">
+            padding: 10px 30px;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                 <img width="40px" class="profileImage" [defaultImage]="'../../assets/logo_192.png'"
                     [lazyLoad]="'../../assets/logo_192.png 600w, ../../assets/logo_384.png 1000w'" [useSrcset]="true"
                     alt="profile picture" *ngIf="homeService.getProfilePic() == null">

@@ -50,8 +50,10 @@ width: 25%;
     box-shadow: 1px 1px 1px #707070;
 }
 .toolText{
+    font-family: 'Poppins';
+    margin:5px 0px 5px 13px;
     color: white;
-    font-size: 20px;
+    font-size: 1.4rem;
 }
 .mainDivToolbar{
     display: flex;
@@ -131,5 +133,8 @@ width: 25%;
         font-weight: bold;
         background-color: #d346b7;
         z-index:1;
+    }
+    .menu-icon{
+        margin-left:13px;
     }
 }

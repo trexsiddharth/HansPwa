@@ -280,7 +280,7 @@ export class LanguageService {
         this.homeLang.downloadApp = 'डाउनलोड करें';
         this.homeLang.login = 'लॉगिन करें';
         this.homeLang.rishteDekhein = 'रिश्ते देखें';
-        this.homeLang.familyTogether = 'हम परिवारों को जोड़ते है...';
+        this.homeLang.familyTogether = '50+ मंदिरों से सत्यापित मिलान';
         this.homeLang.freeRegister = 'रजिस्टर करें नि: शुल्क';
         this.homeLang.moreThan = '50,000 से अधिक प्रोफाइल';
         this.homeLang.chooseFrom = 'रिश्तों में से चुनिए अपनी पसंद';
@@ -307,7 +307,7 @@ export class LanguageService {
         this.homeLang.downloadApp = 'Download App';
         this.homeLang.login = 'Log In';
         this.homeLang.rishteDekhein = 'View Profiles';
-        this.homeLang.familyTogether = 'We Bring Families Together...';
+        this.homeLang.familyTogether = 'Verified matches from 50+ Temples';
         this.homeLang.freeRegister = 'Register For Free';
         this.homeLang.moreThan = 'More Than 50,000 Profiles';
         this.homeLang.chooseFrom = 'To Choose From';

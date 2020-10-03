@@ -176,19 +176,9 @@
 <ng-container>
     <div class="headingThree">
         <div>
-            <span class="special-font text-shadow"
-                style="font-weight: bold;color: white;font-size: 30px;font-family:'Allura'!important">
+            <span class="special-font text-shadow" style="font-weight: bold;color: white;font-size: 30px;">
                 {{languageService.homeLang.offlineCentres}}
             </span>
-        </div>
-        <div style="display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;">
-            <a [routerLink]="['/viewCentres']" routerLinkActive="router-link-active"
-                style="color: yellowgreen;text-decoration: none;">
-                {{languageService.homeLang.showMore}}
-            </a>
         </div>
     </div>
     <div class="carousel-div">
@@ -224,6 +214,15 @@
                 </div>
             </ng-template>
         </owl-carousel-o>
+        <div style="display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;">
+            <a [routerLink]="['/viewCentres']" routerLinkActive="router-link-active"
+                style="color:white;text-decoration: none;font-size: 1.2rem;font-weight: bold;">
+                {{languageService.homeLang.showMore}}
+            </a>
+        </div>
     </div>
     <!-- <div class="imageThreeGradient">
         <div class="button3 btnRightPad">
@@ -254,11 +253,13 @@
                             <div class="row SpCardApp">
                                 <img id="image" width="100%" src="../../../assets/4.svg" alt="image">
                                 <p style="color:rgba(36, 34, 34, 0.925)">Get Notified Everytime Someone Likes You</p>
-                                <div class="row appDownload" (click)="openPlaystore()">
+                                <div class="row appDownload btn" (click)="openPlaystore()">
                                     <div class=" col-4">
-                                        <img width="60px" src="../../../assets/playstore-new.svg" alt="">
+                                        <img width="45px" style="margin:10px" src="../../../assets/playstore-new.svg"
+                                            alt="">
                                     </div>
-                                    <div class="col-7">
+                                    <div class="col-7"
+                                        style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
                                         Download The Mobile App
                                     </div>
                                 </div>
@@ -275,15 +276,15 @@
 <ng-container>
     <div class="mainBack">
         <form [formGroup]="kundaliForm">
-            <div class="row" style="margin-bottom: 6rem!important;">
+            <div class="row" style="margin-bottom: 4rem!important;">
                 <p class="special-font text-shadow" style="width:100%;font-weight: bold;font-size: 45px;">
-                    Kundali Matching</p><br>
-                <p style="width:100%;font-weight: bold;font-size: 20px;">Enter {{currentGender}} Details</p>
+                    Free Kundali Matching</p><br>
+                <p style="width:100%;font-weight: bold;font-size: 23px;">Enter {{currentGender}} Details</p>
             </div>
             <div class="rowM">
-                <img class="mat-elevatino-z8"
+                <!-- <img class="mat-elevatino-z8"
                     style="position:absolute;top:-45px;margin-left:-28px;width:76px;left: 50%;"
-                    src="../../../assets/logo_144.png" alt="">
+                    src="../../../assets/logo_144.png" alt=""> -->
                 <div class="column" *ngIf="!(BoyDetailsFilled$ | async)">
                     <div class="details">
                         <!-- <div class="col">
@@ -452,7 +453,7 @@
         <p>Anytime & Anywhere</p>
         <div class="row appDownload2" (click)="openPlaystore()">
             <div class="col-4 newApp">
-                <img width="60px" src="../../../assets/playstore-new.svg" alt="">
+                <img width="45px" style="margin:10px" src="../../../assets/playstore-new.svg" alt="">
             </div>
             <div class="col-7" style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
                 Download The Mobile App

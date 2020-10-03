@@ -46,6 +46,10 @@ export class KundaliComponent implements OnInit {
       this.points = this.homeService.points;
       this.kundaliForm = this.homeService.kundaliForm;
       this.gotRes.next(true);
+      setTimeout(() => {
+        let ele = document.getElementById('pointsDiv');
+        ele.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
     }
   }
   downloadApp() {
