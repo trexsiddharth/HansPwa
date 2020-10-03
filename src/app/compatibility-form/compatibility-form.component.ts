@@ -281,7 +281,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             localStorage.setItem('getListId', route.params.id);
           } else if (route.params.mobile) {
             this.PageOne.patchValue({
-              phone: route.params.mobile
+              phone: this.setMobileNumber(route.params.mobile)
             });
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListMobile', route.params.mobile);
