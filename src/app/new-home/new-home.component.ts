@@ -46,7 +46,9 @@ export class NewHomeComponent implements OnInit {
       this.languageService.setHomeLang('hindi');
     }
   }
-
+  openPlaystore() {
+    window.open('https://play.google.com/store/apps/details?id=com.twango.me');
+  }
   facebookAnalytics() {
     (window as any).fbq('track', 'Contact', {
       value: localStorage.getItem('id'),
