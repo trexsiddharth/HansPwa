@@ -1,6 +1,10 @@
 {
   "configVersion": 1,
+<<<<<<< HEAD
   "timestamp": 1601784639501,
+=======
+  "timestamp": 1601737738006,
+>>>>>>> 71d75cde34b3b0f55ee3dc8eb82c81978163eeb8
   "index": "/index.html",
   "assetGroups": [
     {
@@ -20,8 +24,8 @@
         "/7-es5.105c25994960af30eac6.js",
         "/8-es2015.ad5af2fc2c6a76bda161.js",
         "/8-es5.ad5af2fc2c6a76bda161.js",
-        "/9-es2015.3665f77469f31be64887.js",
-        "/9-es5.3665f77469f31be64887.js",
+        "/9-es2015.df411daad536e10fb42e.js",
+        "/9-es5.df411daad536e10fb42e.js",
         "/common-es2015.391ab5cb55aed379c431.js",
         "/common-es5.391ab5cb55aed379c431.js",
         "/favicon.ico",
@@ -32,9 +36,9 @@
         "/manifest.webmanifest",
         "/polyfills-es2015.34906a5f002ccde5c8ac.js",
         "/polyfills-es5.7cfbe60d591e0b8ad282.js",
-        "/runtime-es2015.81e0bdad4712f93010bd.js",
-        "/runtime-es5.81e0bdad4712f93010bd.js",
-        "/styles.84b04a1749254c43a2c2.css"
+        "/runtime-es2015.4750b35014b36c23b0ea.js",
+        "/runtime-es5.4750b35014b36c23b0ea.js",
+        "/styles.f1ab2d251ebda6a4739f.css"
       ],
       "patterns": []
     },
@@ -45,7 +49,6 @@
       "urls": [
         "/GothamRounded-Book.2033c152fc99ddec25d1.woff",
         "/GothamRounded-Book.c5159f60ee2b71329202.woff2",
-        "/assets/.gitkeep",
         "/assets/1.svg",
         "/assets/2.svg",
         "/assets/3.svg",
@@ -497,11 +500,10 @@
     "/7-es5.105c25994960af30eac6.js": "34445abbc71e35faabfa856fdaa69cd872cd8ad8",
     "/8-es2015.ad5af2fc2c6a76bda161.js": "71f9329eec040b076e9de87ca55d94b57dc60bab",
     "/8-es5.ad5af2fc2c6a76bda161.js": "e1e91057f2fddd83130932dbcb764afd4d22c432",
-    "/9-es2015.3665f77469f31be64887.js": "bf2bca2f2bb74f5a8325736db6944bd68032b238",
-    "/9-es5.3665f77469f31be64887.js": "0bb751cafef3b7f67b2df039a4e737e30f98e9cb",
+    "/9-es2015.df411daad536e10fb42e.js": "494deea9f607e4f1434e2f91a4955b82f68426f6",
+    "/9-es5.df411daad536e10fb42e.js": "0adc9df77f3feb6f873d84ca75c3cb54ef12b5b1",
     "/GothamRounded-Book.2033c152fc99ddec25d1.woff": "bf9f809a41fcee841a745f8e7142bbe34c5dfb3c",
     "/GothamRounded-Book.c5159f60ee2b71329202.woff2": "dafc996100011ef39a813ad8ea9ef0e4ca786640",
-    "/assets/.gitkeep": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/assets/1.svg": "2debe00d26298b918e5e6b1511771b7fe563953a",
     "/assets/2.svg": "703130a1b9a599ac919c9a374fc3e4e398425753",
     "/assets/3.svg": "049fb27f61c12bcbb98210ac9ffa1f222750e49e",
@@ -926,17 +928,23 @@
     "/cover_hans.f53eda28df7a9ca45b9f.png": "42a51f56d311539c191e0b9509a3254d68f6b3f8",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
+<<<<<<< HEAD
     "/index.html": "317fefbc831cd9ef47287e6f9ce8bb037d53c233",
     "/main-es2015.160692c1e2ba801ec05f.js": "8465d146763c642d9deaba9eac4679b48e08ef5c",
     "/main-es5.160692c1e2ba801ec05f.js": "6a70da0625419f5b7c1523005b6f2800b2740c8a",
+=======
+    "/index.html": "41e7dc9a9c4ea6e17adf3fcea7c44296559cc3b3",
+    "/main-es2015.3896f604caf6d1d98845.js": "5829e7c4ac21b08346cc38a9b8c7072863496adc",
+    "/main-es5.3896f604caf6d1d98845.js": "547c42b5e7134825e6b2c215293b8077b3383308",
+>>>>>>> 71d75cde34b3b0f55ee3dc8eb82c81978163eeb8
     "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
     "/owl.video.play.4a37f8008959c75f619b.png": "c0d64356ec2758cb280d183b4829c923e5ff61e5",
     "/polyfills-es2015.34906a5f002ccde5c8ac.js": "298a7975e035f20254580f7df181e5afac1df141",
     "/polyfills-es5.7cfbe60d591e0b8ad282.js": "689055ffa1167f075fd60e3ea329b414c7080ace",
-    "/runtime-es2015.81e0bdad4712f93010bd.js": "ae64673aa34b4717a332744b0089d010a90ca873",
-    "/runtime-es5.81e0bdad4712f93010bd.js": "ab095e752eea0df5209cbb9f7b71d4546c0af065",
+    "/runtime-es2015.4750b35014b36c23b0ea.js": "876de887356329e06c60068164fba3d644e0a04f",
+    "/runtime-es5.4750b35014b36c23b0ea.js": "3952264d37205449890e7887bcb0f86264a3ceaf",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
-    "/styles.84b04a1749254c43a2c2.css": "e893f37c75a3e0fa779124f94fa9afdbbd6664e0"
+    "/styles.f1ab2d251ebda6a4739f.css": "59fcf48926fe1b7b2df998b7bd2bea28173a4f3e"
   },
   "navigationUrls": [
     {
