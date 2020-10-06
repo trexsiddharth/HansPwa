@@ -326,7 +326,7 @@
                                 (change)="placeChanged('BoyBirthPlace')" formControlName="BoyBirthPlace">
                         </div>
                         <button mat-raised-button type="button" id="viewButton" class="btn" (click)="detailsFilled()"
-                            *ngIf="!(BoyDetailsFilled$ | async)">Continue</button>
+                            *ngIf="!(BoyDetailsFilled$ | async)">Enter Girls Details</button>
                     </div>
                 </div>
                 <div class="column" *ngIf="(BoyDetailsFilled$ | async)">
@@ -368,7 +368,7 @@
                                 (change)="placeChanged('GirlBirthPlace')" formControlName="GirlBirthPlace">
                         </div>
                         <button mat-raised-button type="button" id="viewButton" class="btn" (click)="onSubmit()"
-                            *ngIf="(BoyDetailsFilled$ | async)">Submit</button>
+                            *ngIf="(BoyDetailsFilled$ | async)">See Kundali Score</button>
                     </div>
                 </div>
             </div>

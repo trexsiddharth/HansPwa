@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NewHomeService } from '../new-home.service';
 
@@ -40,17 +40,23 @@ export class KundaliComponent implements OnInit {
       GirlName: ['', Validators.required],
     });
   }
+  showContinueBtn = new BehaviorSubject<boolean>(true);
+  showContinueBtn$: Observable<boolean> = this.showContinueBtn.asObservable();
   ngOnInit() {
     if (this.homeService.points != -1) {
       this.HTMLResponse = this.homeService.HTMLResponse;
       this.points = this.homeService.points;
       this.kundaliForm = this.homeService.kundaliForm;
       this.gotRes.next(true);
+      this.showContinueBtn.next(false);
       setTimeout(() => {
         let ele = document.getElementById('pointsDiv');
         ele.scrollIntoView({ behavior: 'smooth' });
       }, 500);
     }
+    this.kundaliForm.valueChanges.subscribe(() => {
+      this.showContinueBtn.next(true);
+    })
   }
   downloadApp() {
     window.open('https://bit.ly/2YQEfbe', '_self');

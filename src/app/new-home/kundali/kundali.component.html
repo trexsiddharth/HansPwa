@@ -110,8 +110,8 @@
                         </div>
                     </div>
                 </div>
-                <button mat-raised-button type="button" id="viewButton" class="btn"
-                    (click)="onSubmit()">Continue</button>
+                <button mat-raised-button type="button" id="viewButton" class="btn" (click)="onSubmit()"
+                    *ngIf="(showContinueBtn$|async)">Continue</button>
             </div>
         </form>
     </div>
