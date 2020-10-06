@@ -4,12 +4,12 @@ import { LanguageService } from 'src/app/language.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChatServiceService } from 'src/app/chat-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
-import { timeout, retry, catchError, takeUntil, shareReplay } from 'rxjs/operators';
+import { timeout, retry, catchError, takeUntil, shareReplay, map, startWith } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, observable, Observable, ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 
 @Component({
@@ -209,6 +209,108 @@ export class ChatDrawerComponent implements OnInit {
   personalDetailsList = [];
   familyDetailsList = [];
   totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
+
+
+  //Variables for city filter:
+  allCountries: any = [];
+  allStates: any = [];
+  states: Observable<any[]>;
+  allCities: any = [];
+  cities: Observable<any[]>;
+  searchCityText = new FormControl();
+  searchStateText = new FormControl();
+  countries: Observable<any[]>;
+  subsToValueChangeForCityFilter() {
+    console.log('subscribed for all values for city filter');
+    this.countries = this.preferencesForm.get('country').valueChanges.pipe(
+      startWith(''),
+      map(value => this._CountryOrStatefilter(value, 0))
+    );
+    this.states = this.searchStateText.valueChanges.pipe(
+      startWith(''),
+      map(value => this._CountryOrStatefilter(value, 1))
+    );
+    this.cities = this.searchCityText.valueChanges.pipe(
+      startWith(''),
+      map(value => this._Cityfilter(value))
+    );
+  }
+  //filters for coutry,state and city.
+  // what === 0 country, what === 1 state,
+  private _CountryOrStatefilter(value: string, what: number): string[] {
+    if (value) {
+      const filterValue = value.toLowerCase();
+      if (what === 0)
+        return this.allCountries.filter(option => option.name.toLowerCase().includes(filterValue));
+      else
+        return this.allStates.filter(option => option.name.toLowerCase().includes(filterValue));
+    }
+  }
+  private _Cityfilter(value: string): string[] {
+    if (value) {
+      const filterValue = value.toLowerCase();
+      return this.allCities.filter(option => option.toLowerCase().includes(filterValue));
+    }
+  }
+  countrySelected(value) {
+    this.chatService.selected_country = this.search(value, 0);
+    let params = new HttpParams().set("country_id", this.chatService.selected_country.id)
+    this.http.get('https://partner.hansmatrimony.com/api/getState', { params: params }).subscribe((response: any) => {
+      console.log(response);
+      this.allStates = response;
+      if (!this.preferencesForm.value.state) {
+        console.log('Qwerty123');
+        this.preferencesForm.patchValue({
+          state: this.preferenceProfileData.pref_state.split(","),
+        });
+      }
+    });
+  }
+  stateSelectionChanged(event) {
+    console.log('qwerty', event);
+    let curState = this.search(event[0], 1);
+    this.chatService.selected_states += curState.name;
+    this.chatService.selected_states_id += curState.id;
+    // this.preferencesForm.patchValue({
+    //   state: [curState, ...this.preferencesForm.value.state],
+    // })
+    let params = new HttpParams().set('country_id', this.chatService.selected_country.id).set('state_id', curState.id);
+    this.http.get('https://partner.hansmatrimony.com/api/getCity', { params: params }).subscribe((response: any) => {
+      console.log(response);
+      if (this.allCities.length == 0)
+        this.allCities = response;
+      else
+        this.allCities.concat(response);
+      console.log(this.allCities)
+    });
+  }
+  citySelectionChanged(value) {
+    console.log('Qwerty123', value);
+    this.chatService.selected_cities += value;
+  }
+  search(value: string, what: number) {
+    for (let item of (what === 0 ? this.allCountries : this.allStates)) {
+      if (item.name === value) {
+        return item;
+      }
+    }
+  }
+  //for handling of city and state chips.
+  //what === 0 state, what === 1 city
+  onRemoved(topping: string, what: number) {
+    const toppings = (what === 0 ? this.preferencesForm.value.state : this.preferencesForm.value.city) as string[];
+    this.remove(toppings, topping);
+    if (what === 0)
+      this.preferencesForm.value.state.setValue(toppings);
+    else
+      this.preferencesForm.value.city.setValue(toppings); // To trigger change detection
+  }
+  private remove<T>(array: T[], toRemove: T): void {
+    const index = array.indexOf(toRemove);
+    if (index !== -1) {
+      array.splice(index, 1);
+    }
+  }
   ngOnInit() {
     this.innerWidth = window.innerWidth;
     //this.disableSave.next(true);
@@ -241,7 +343,8 @@ export class ChatDrawerComponent implements OnInit {
         this.sidenav.open();
         this.chatService.opensidenavFalse();
       }
-    })
+    });
+    this.subsToValueChangeForCityFilter();
   }
 
   changed() {
@@ -334,6 +437,11 @@ export class ChatDrawerComponent implements OnInit {
     form.append('food_choice', this.preferencesForm.value.food_choice);
     form.append('manglik', this.preferencesForm.value.manglik_pref);
     form.append('marital_status', this.preferencesForm.value.marital_status);
+    form.append('pref_country', this.chatService.selected_country.name);
+    form.append('pref_country_id', this.chatService.selected_country.id);
+    form.append('pref_state', this.chatService.selected_states);
+    form.append('pref_state_id', this.chatService.selected_states_id);
+    form.append('pref_city', this.chatService.selected_cities);
 
     this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form).subscribe((response: any) => {
       if (response.count) {
@@ -454,7 +562,10 @@ export class ChatDrawerComponent implements OnInit {
     });
   }
   setCurrentPreferenceValue(preferences: any) {
-    //console.log(this.personalProfileData);
+    console.log('Qwerty123', this.preferenceProfileData)
+    //this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(",");
+    // this.personalProfileData.pref_city = this.personalProfileData.pref_city.split(",");
+    // console.log("Qwerty", this.personalProfileData.pref_city.split(","), this.preferenceProfileData.pref_state.split(","));
     if (preferences) {
       this.preferencesForm.patchValue({
         food_choice: preferences.food_choice,
@@ -468,6 +579,9 @@ export class ChatDrawerComponent implements OnInit {
         height_min: this.getHeight(preferences.height_min),
         height_max: this.getHeight(preferences.height_max),
         marital_status: preferences.marital_status,
+        country: preferences.pref_country,
+        state: preferences.pref_state ? preferences.pref_state : [],
+        city: preferences.pref_city ? preferences.pref_city : [],
       });
     }
     else if (this.preferenceProfileData) {
@@ -485,7 +599,10 @@ export class ChatDrawerComponent implements OnInit {
         religion: this.preferenceProfileData.religion,
         height_min: this.getHeight(this.preferenceProfileData.height_min),
         height_max: this.getHeight(this.preferenceProfileData.height_max),
-        marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter'
+        marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter',
+        country: this.preferenceProfileData.pref_country,
+        state: this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state : [],
+        city: this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city : [],
       });
     }
     this.subscribetochanges();
@@ -594,6 +711,7 @@ export class ChatDrawerComponent implements OnInit {
         'is_lead',
         this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
       );
+      myprofileData.append('show_country', '1');
       // tslint:disable-next-line: max-line-length
       return this.http
         .post<any>(
@@ -637,6 +755,27 @@ export class ChatDrawerComponent implements OnInit {
               this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
               this.itemService.setPhotoStatus(true);
             }
+
+            if (data.country)
+              this.allCountries = data.country;
+
+            if (this.preferenceProfileData.pref_city) {
+              this.preferenceProfileData.pref_city = this.preferenceProfileData.pref_city.split(",");
+            }
+            if (this.preferenceProfileData.pref_state) {
+              this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(",");
+            }
+            this.allStates = this.preferenceProfileData.pref_state;
+            this.allCities = this.preferenceProfileData.pref_city;
+            this.countrySelected(this.preferenceProfileData.pref_country);
+            this.chatService.selected_cities = this.preferenceProfileData.pref_city.join(",");
+            this.chatService.selected_states = this.preferenceProfileData.pref_state.join(",");
+            console.log('Qwerty12345', this.preferenceProfileData.pref_state);
+            setTimeout(() => {
+              for (let item of this.preferenceProfileData.pref_state) {
+                this.chatService.selected_states_id += this.search(item, 1).id;
+              }
+            }, 2000);
             this.setCurrentPreferenceValue(null);
             this.specialCase();
             this.getAllCaste();

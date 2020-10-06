@@ -63,7 +63,8 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isMobile = this.deviceService.isMobile();
   }
   showTinderAnimation() {
-    if (this.router.url.match('first')) {
+    if (!localStorage.getItem('shownTinderAniamtion')) {
+      localStorage.setItem('shownTinderAniamtion', '1');
       this.tinderCardsArray[0].nativeElement.style.transform = 'translate(200px, -15px) rotate(20deg)';
       // this.tinderCardsArray[0].nativeElement.classList.add('rotateAnimation');
       //this.heartVisible = true;

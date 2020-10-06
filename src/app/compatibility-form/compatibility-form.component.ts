@@ -349,6 +349,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
             this.PageOne.patchValue({
               Relation: this.itemService.compatibilityLookingFor,
             });
+            this.setGender();
           }
           else if (!this.fourPageService.getUserThrough()) {
             this.openChooseFor();
