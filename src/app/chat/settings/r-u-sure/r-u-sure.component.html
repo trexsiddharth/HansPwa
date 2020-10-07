@@ -35,9 +35,9 @@
                 <form [formGroup]="deleteForm">
                     <mat-form-field class="full-width fieldFit" appearance="outline">
                         <mat-label>Registered Mobile Number</mat-label>
-                        <ngx-mat-intl-tel-input matInput style="display: inline;" [disabled]="hideMobileNumber"
-                            [preferredCountries]="['in']" [enablePlaceholder]="true" [enableSearch]="true" name="phone"
-                            type="tel" formControlName="number" id="phone" (change)="numberChanged()" required>
+                        <ngx-mat-intl-tel-input matInput [preferredCountries]="['in']" [enablePlaceholder]="true"
+                            [enableSearch]="true" name="phone" type="tel" formControlName="number" id="phone"
+                            (change)="numberChanged()" required>
                         </ngx-mat-intl-tel-input>
                         <mat-error *ngIf="deleteForm.invalid">*this field is required</mat-error>
                         <mat-error *ngIf="numberInvalid">*this is not your registered number</mat-error>
