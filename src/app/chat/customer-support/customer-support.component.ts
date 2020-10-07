@@ -24,7 +24,7 @@ export class CustomerSupportComponent implements OnInit {
   ngOnInit() {
     this.getAllComplaints();
   }
-  query: string = "I'm had a few issues in my profile or related to hans matrimony services so please give me a call back regarding the same.";
+  query: string = "I had a few issues in my profile or related to Hans Matrimony Services so please give me a call back regarding the same.";
   complaints: any;
   selectedComplaint: any;
   backToChat() {

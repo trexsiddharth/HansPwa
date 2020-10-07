@@ -6,9 +6,9 @@
             font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important">Contact Customer Support
             </p>
             <p style="color:white;">Select complaint type.....</p>
-            <div class="main-card" style="margin-bottom:25px">
+            <div class="main-card" style="margin-bottom:25px;width:80%;">
                 <select type="text" [(ngModel)]="selectedComplaint"
-                    style="width:80%;margin:1%;border:0px solid white; background:white">
+                    style="width:100%;margin:1%;border:0px solid white; background:white">
                     <option *ngFor="let complaint of complaints" [value]="complaint.name" required>
                         {{complaint.name}}
                     </option>

@@ -1,3 +1,9 @@
+option{
+  font-size:0.8rem;
+  max-width:95%;
+  overflow: hidden;
+  word-break: break-all;
+}
 .backArrow {
     position: absolute;
     z-index: 999999;

@@ -60,9 +60,18 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers })
       .subscribe(
         (res: any) => {
-          for (let a of res) {
-            if (a.plan_type === 'Self Service Plan') {
-              this.plans.push(a);
+          if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') == '1') {
+            for (let a of res) {
+              if (a.plan_type === 'Self Service Plan') {
+                this.plans.push(a);
+              }
+            }
+          }
+          else {
+            for (let a of res) {
+              if (a.plan_type === 'Self Service Plan' && a.plan_name != "Re-Marriage") {
+                this.plans.push(a);
+              }
             }
           }
           //this.plans = res;

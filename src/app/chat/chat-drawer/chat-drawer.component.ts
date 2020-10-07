@@ -768,6 +768,9 @@ export class ChatDrawerComponent implements OnInit {
             if (this.preferenceProfileData.pref_state) {
               this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(",");
             }
+            if (this.personalProfileData.marital_status != 'Never Married') {
+              localStorage.setItem('showRemarrigePlan', '1');
+            }
             this.allStates = this.preferenceProfileData.pref_state;
             this.allCities = this.preferenceProfileData.pref_city;
             this.countrySelected(this.preferenceProfileData.pref_country);
