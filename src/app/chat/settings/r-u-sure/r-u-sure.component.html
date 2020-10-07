@@ -1,0 +1,69 @@
+<div id="offBanner">
+    <img id="offBannerImg" src="../../../assets/remove.svg" />
+</div>
+<div style="position:relative">
+    <!-- <div class="circular">
+        <img style="width:100%" src="../../../assets/tabs-icons/phone arrowWhite.png" alt="heart">
+    </div> -->
+    <main>
+        <div style="
+    position:relative;
+    height:50vh!important; 
+    width:100%!important; 
+    border-radius: 20px!important;
+    background:white!important;
+    margin:auto;
+    margin-top:2%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    color:black">
+            <div style="display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:center" class="text-center">
+                <p style="font-size:15px;font-weight:400;color:rgb(51, 59, 52)!important;">
+                    Are you sure you want to delete your profile? If you have any problems regarding our platform you
+                    may consider contacting our
+                    <a style="color:blue" (click)="customerSupport()">customer support</a> or <a style="color:blue"
+                        (click)="getCallBack()">hiring a matchmaker</a> for
+                    better experience on our platform. </p>
+                <p style="font-size:15px;font-weight:400;color:rgb(51, 59, 52)!important;">
+                    If you still want to delete your profile enter your registered mobile number below for confirmation:
+                </p>
+                <form [formGroup]="deleteForm">
+                    <mat-form-field class="full-width fieldFit" appearance="outline">
+                        <mat-label>Registered Mobile Number</mat-label>
+                        <ngx-mat-intl-tel-input matInput style="display: inline;" [disabled]="hideMobileNumber"
+                            [preferredCountries]="['in']" [enablePlaceholder]="true" [enableSearch]="true" name="phone"
+                            type="tel" formControlName="number" id="phone" (change)="numberChanged()" required>
+                        </ngx-mat-intl-tel-input>
+                        <mat-error *ngIf="deleteForm.invalid">*this field is required</mat-error>
+                        <mat-error *ngIf="numberInvalid">*this is not your registered number</mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+            <!-- <div style="display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:center" class="text-center">
+                <form [formGroup]="deleteForm">
+                    <mat-form-field class="full-width fieldFit" appearance="outline">
+                        <mat-label>Registered Mobile Number</mat-label>
+                        <input type="number" id="firstName" (change)="numberChanged()" matInput formControlName="number"
+                            required>
+                        <mat-error *ngIf="deleteForm.invalid">*this field is required</mat-error>
+                        <mat-error *ngIf="numberInvalid">this is not your registered number</mat-error>
+                    </mat-form-field>
+                </form>
+            </div> -->
+        </div>
+        <div class="text-center">
+            <button mat-dialog-close class="SpecialCase">Cancel</button>
+            <button class="SpecialCase1" (click)="deleteProfile()">Delete My Profile</button>
+        </div>
+        <!-- <div >
+        <button mat-button mat-dialog-close class="btn-round" (click)="backToChat()">OK</button>
+    </div> -->
+    </main>

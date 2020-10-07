@@ -10,6 +10,7 @@ import { MyProfileNewComponent } from './my-profile-new/my-profile-new.component
 import { GetcallbackComponent } from './getcallback/getcallback.component';
 import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component';
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,11 @@ const routes: Routes = [
     // this is used for routing through chat drawer
     path: 'getcallback/',
     component: GetcallbackComponent
+  },
+  {
+    // this is used for routing through chat drawer
+    path: 'settings/',
+    component: SettingsComponent
   },
   {
     // this is used for routing through chat drawer

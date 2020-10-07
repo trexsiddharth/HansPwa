@@ -37,6 +37,9 @@ import { OkdialogCsComponent } from './customer-support/okdialog-cs/okdialog-cs.
 import { PersistentMessageComponent } from './today-profiles/persistent-message/persistent-message.component';
 import { TinderUiComponent } from './today-profiles/tinder-ui/tinder-ui.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { SettingsComponent } from './settings/settings.component';
+import { RUSureComponent } from './settings/r-u-sure/r-u-sure.component';
+import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,6 +48,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
     AngularMaterialModule,
     InfiniteScrollModule,
     Ng5SliderModule,
+    NgxMatIntlTelInputModule
   ],
   declarations: [
     ChatComponent,
@@ -74,7 +78,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
     CustomerSupportComponent,
     OkdialogCsComponent,
     PersistentMessageComponent,
-    TinderUiComponent
+    TinderUiComponent,
+    SettingsComponent,
+    RUSureComponent
   ],
   entryComponents: [
     MessageDialogComponent,
@@ -90,6 +96,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
     OkdialogComponent,
     OkdialogCsComponent,
     PersistentMessageComponent,
+    RUSureComponent,
   ],
   providers: [
     FindOpenHistoryProfileService,

@@ -78,11 +78,11 @@
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Hire a Matchmaker</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">मैचमेकर से बात करे</span>
         </button>
-        <!-- <button class="rowMore">
+        <button class="rowMore" (click)="settings()">
           <img src="../../../assets/tabs-icons/settings.svg" class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Settings</span>
           <span *ngIf="languageService.getCurrentLanguage()==='hindi'">सेटींग॒स</span>
-        </button> -->
+        </button>
         <button class="rowMore" (click)="logout()">
           <img src="../../../assets/tabs-icons/logout.svg" class="iconImage">
           <span *ngIf="languageService.getCurrentLanguage()==='english'">Logout</span>

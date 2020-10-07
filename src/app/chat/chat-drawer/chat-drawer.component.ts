@@ -506,6 +506,9 @@ export class ChatDrawerComponent implements OnInit {
   customerSupport() {
     this.router.navigateByUrl('chat/customer-support/');
   }
+  settings() {
+    this.router.navigateByUrl('chat/settings/');
+  }
   getCallBack() {
     this.router.navigateByUrl('chat/getcallback/');
   }
