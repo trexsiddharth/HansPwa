@@ -143,6 +143,9 @@ body {
    text-align: center;
    margin: 0px 20px;
 }
+#history-tabs .mat-tab-label{
+  display:none;
+}
 #landingPageForm .mat-select-value{
   color: #000000!important;
 }

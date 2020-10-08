@@ -168,19 +168,20 @@
               <img class="tabImage" src="../../assets/tabs-icons/heart-like-white.svg" alt="icon"
                 *ngIf="selectedTab !== 3">
               <img class="tabImage" src="../../assets/tabs-icons/heart.svg" alt="icon" *ngIf="selectedTab === 3 ">
-              <span class="tabCount">
+              <!-- <span class="tabCount">
                 {{itemService.getShortlistNumber()}}
-              </span>
+              </span> -->
             </p>
-            <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+            <!-- <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
               style="font-size:small">{{languageService.profileLang.yourLikes}}</a>
-            <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.yourLikes}}</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.yourLikes}}</a> -->
             <!-- {{itemService.getShortlistedCount()}} -->
+            <a style="font-size:small">History</a>
           </ng-template>
           <ng-template matTabContent>
             <div>
               <div class=' w-full ht-full'>
-                <app-history-profiles [type]="tabType"></app-history-profiles>
+                <app-history-section></app-history-section>
               </div>
             </div>
           </ng-template>

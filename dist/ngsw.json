@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1602096334528,
+  "timestamp": 1602162137099,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -18,8 +18,8 @@
         "/2-es5.d24c0d3e09d7e42a9b0f.js",
         "/7-es2015.105c25994960af30eac6.js",
         "/7-es5.105c25994960af30eac6.js",
-        "/8-es2015.3727743f20d1cf82d994.js",
-        "/8-es5.3727743f20d1cf82d994.js",
+        "/8-es2015.6262c1973df69fb540ca.js",
+        "/8-es5.6262c1973df69fb540ca.js",
         "/9-es2015.69e806a41e2619eeac36.js",
         "/9-es5.69e806a41e2619eeac36.js",
         "/common-es2015.391ab5cb55aed379c431.js",
@@ -32,9 +32,9 @@
         "/manifest.webmanifest",
         "/polyfills-es2015.34906a5f002ccde5c8ac.js",
         "/polyfills-es5.7cfbe60d591e0b8ad282.js",
-        "/runtime-es2015.18019c5573be955c7ab5.js",
-        "/runtime-es5.18019c5573be955c7ab5.js",
-        "/styles.84b04a1749254c43a2c2.css"
+        "/runtime-es2015.2372bada9f98928bf17f.js",
+        "/runtime-es5.2372bada9f98928bf17f.js",
+        "/styles.4a9bb2066ccf1e16cbb9.css"
       ],
       "patterns": []
     },
@@ -365,6 +365,8 @@
         "/assets/rupee.svg",
         "/assets/scale.svg",
         "/assets/scss/modules/_fonts.scss",
+        "/assets/search-history-white.svg",
+        "/assets/search-history.svg",
         "/assets/search.svg",
         "/assets/searchN.svg",
         "/assets/settings.svg",
@@ -497,8 +499,8 @@
     "/2-es5.d24c0d3e09d7e42a9b0f.js": "384fd3fabdf57a74ceb2ba220ad25739ec741c58",
     "/7-es2015.105c25994960af30eac6.js": "5eba8eaf0f73b37b1fbab7d64e938b7425c1418f",
     "/7-es5.105c25994960af30eac6.js": "34445abbc71e35faabfa856fdaa69cd872cd8ad8",
-    "/8-es2015.3727743f20d1cf82d994.js": "2fe264f5c2a2e58d43b36cc0e670a40c45b562ca",
-    "/8-es5.3727743f20d1cf82d994.js": "9cc7237e026c5b697c07a4d6237248b29c382af6",
+    "/8-es2015.6262c1973df69fb540ca.js": "7857afdf6b9ba4eaf776d903a29551344053fea0",
+    "/8-es5.6262c1973df69fb540ca.js": "f3fd828eab73c6d830e0791d4fbac638db7c95b3",
     "/9-es2015.69e806a41e2619eeac36.js": "b9ff262fd8708f1fb6e09ab1226b51001b098eb1",
     "/9-es5.69e806a41e2619eeac36.js": "86a68e9735229016d18b7673eb4794e8caf03eee",
     "/GothamRounded-Book.2033c152fc99ddec25d1.woff": "bf9f809a41fcee841a745f8e7142bbe34c5dfb3c",
@@ -823,6 +825,8 @@
     "/assets/rupee.svg": "9f62ed355d58f02b0c7aaa7b7a5f03233da5081e",
     "/assets/scale.svg": "6214de11afe5a2416fa4c88fd4874d3e405fb958",
     "/assets/scss/modules/_fonts.scss": "deda0e5b51323560050581f80f361755d2f1fe2a",
+    "/assets/search-history-white.svg": "88d574d55d2a2a4d82f8da3f417f1cf450e391c2",
+    "/assets/search-history.svg": "64825a8766f38d4336fe20f7b6bf766e8e879e16",
     "/assets/search.svg": "440c2a0240c575882b667d2aa30f970e17969c45",
     "/assets/searchN.svg": "15ce964b0c70431c1f15a353a2190cb2fe271417",
     "/assets/settings.svg": "0999e34bfa24d2174e79b13f762d54d4db55619f",
@@ -930,17 +934,17 @@
     "/cover_hans.f53eda28df7a9ca45b9f.png": "42a51f56d311539c191e0b9509a3254d68f6b3f8",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/firebase-messaging-sw.js": "9b4714e5bbfbf6e791f79e62e7fb1ba3ed5c1698",
-    "/index.html": "11da5560fa8c37885ed9352997ba15e7a3e6e285",
+    "/index.html": "459471432dfde6ef07aba568bb2b43c68f925adb",
     "/main-es2015.f0052a86e9ee0e899b53.js": "8d226259d23cb1b24d7ce100df07ac3983879646",
     "/main-es5.f0052a86e9ee0e899b53.js": "11e2bc35fa3df7323e50ed382aa0d02aba3cc93c",
     "/manifest.webmanifest": "9a527247b172300d060dcdfc493d4d53b546e769",
     "/owl.video.play.4a37f8008959c75f619b.png": "c0d64356ec2758cb280d183b4829c923e5ff61e5",
     "/polyfills-es2015.34906a5f002ccde5c8ac.js": "298a7975e035f20254580f7df181e5afac1df141",
     "/polyfills-es5.7cfbe60d591e0b8ad282.js": "689055ffa1167f075fd60e3ea329b414c7080ace",
-    "/runtime-es2015.18019c5573be955c7ab5.js": "49a722307bc1172903447085952b075f44b6307c",
-    "/runtime-es5.18019c5573be955c7ab5.js": "633f7438b4dbd2e556ee448a74b7a7a04a36a461",
+    "/runtime-es2015.2372bada9f98928bf17f.js": "a5ffe6d0bd7bc851c7bb4757d20d2a6536a47993",
+    "/runtime-es5.2372bada9f98928bf17f.js": "37e21c14eb3d5d03db79be57d77f5992fa182681",
     "/star.ab1ebaef802c15a69469.png": "fec3e42924af891e36529a54084144ed187bf35a",
-    "/styles.84b04a1749254c43a2c2.css": "e893f37c75a3e0fa779124f94fa9afdbbd6664e0"
+    "/styles.4a9bb2066ccf1e16cbb9.css": "2322cd9fe91392c4ff842dbc1a3ec1e26f0616a0"
   },
   "navigationUrls": [
     {

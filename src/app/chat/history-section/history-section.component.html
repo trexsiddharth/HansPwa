@@ -1,0 +1,93 @@
+<div>
+    <div class="top-bar">
+        <div class="search-area" *ngIf="(searchActivated$|async)">
+            <div class="col">
+                <img src="../../../assets/clear.svg" class="fa fa-close" (click)="toggleSearch()"
+                    style="font-size:30px;color:black;position:absolute;right:20px;top:-10px">
+                <input type="text" class="custom form-control" placeholder="Search" [formControl]="searchControl">
+            </div>
+            <!-- <div class="col col-2" style="background:#e7e7e7">
+                close
+            </div> -->
+        </div>
+        <div class="row btn-row" style="display:flex;flex-direction: row;align-items: center;justify-content: center;">
+            <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':(searchActivated$|async)}"
+                (click)="toggleSearch()">
+                <img width="25px" src="../../../assets/search-history.svg" alt="" *ngIf="! (searchActivated$|async)">
+                <img width="25px" src="../../../assets/search-history-white.svg" alt=""
+                    *ngIf="(searchActivated$|async)">
+            </button>
+            <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 0}"
+                (click)="setSelectedIndex(0)">
+                Contacted
+            </button>
+            <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 1}"
+                (click)="setSelectedIndex(1)">
+                Shortlisted
+            </button>
+            <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 2}"
+                (click)="setSelectedIndex(2)">
+                Rejected
+            </button>
+        </div>
+    </div>
+    <mat-tab-group id="history-tabs" class="matGroup" [(selectedIndex)]="selectedTab"
+        (selectedIndexChange)="changeSelectedTab($event)">
+        <!-- // contacted -->
+        <mat-tab id="contacted">
+            <!-- <ng-template mat-tab-label>
+                <img width="30px" src="../../assets/thumbs-up-blue.svg" alt="icon">
+                {{itemService.getContactedCount()}}
+            </ng-template> -->
+            <ng-template matTabContent>
+                <!-- <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                    {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                </button> -->
+                <div class='col'>
+                    <app-history-profiles [type]="tabType"></app-history-profiles>
+                </div>
+            </ng-template>
+        </mat-tab>
+        <!-- // liked by me -->
+        <mat-tab id="melike">
+            <!-- <ng-template mat-tab-label>
+                <p class="labelSetting">
+                    <img class="tabImage" src="../../assets/tabs-icons/heart-like-white.svg" alt="icon"
+                        *ngIf="selectedTab !== 1">
+                    <img class="tabImage" src="../../assets/tabs-icons/heart.svg" alt="icon" *ngIf="selectedTab === 1 ">
+                    <span class="tabCount">
+                        {{itemService.getShortlistNumber()}}
+                    </span>
+                </p>
+                <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+                    style="font-size:small">{{languageService.profileLang.yourLikes}}</a>
+                <a
+                    *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.yourLikes}}</a> -->
+            <!-- {{itemService.getShortlistedCount()}} -->
+            <!-- </ng-template> -->
+            <ng-template matTabContent>
+                <div>
+                    <div class='col'>
+                        <app-history-profiles [type]="tabType"></app-history-profiles>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-tab>
+        <!-- // rejected-->
+        <mat-tab id="rejected">
+            <!-- <ng-template mat-tab-label>
+                {{itemService.getRejectedCount()}}
+            </ng-template> -->
+            <ng-template matTabContent>
+                <div>
+                    <!-- <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                    </button> -->
+                    <div class='col'>
+                        <app-history-profiles [type]="tabType"></app-history-profiles>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>
