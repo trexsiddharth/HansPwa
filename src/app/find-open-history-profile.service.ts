@@ -243,14 +243,14 @@ export class FindOpenHistoryProfileService {
   getContactedCount() {
     let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
-      'कॉंटैक्टेड ( ' + count.contactedCount + ' )'
-      : 'Contacted ( ' + count.contactedCount + ' )';
+      'कॉंटैक्टेड(' + count.contactedCount + ')'
+      : 'Contacted(' + count.contactedCount + ')';
   }
   getShortlistedCount() {
     let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
-      'मेरी पसंद ( ' + count.shortlistCount + ' )'
-      : 'Shortlisted ( ' + count.shortlistCount + ' )';
+      'मेरी पसंद(' + count.shortlistCount + ')'
+      : 'Shortlisted(' + count.shortlistCount + ')';
   }
   getShortedCount() {
     let count = JSON.parse(localStorage.getItem('count'));
@@ -261,8 +261,8 @@ export class FindOpenHistoryProfileService {
   getRejectedCount() {
     let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
-      'रीजेकटेड ( ' + count.rejectedCount + ' )'
-      : 'Rejected ( ' + count.rejectedCount + ' )';
+      'रीजेकटेड(' + count.rejectedCount + ')'
+      : 'Rejected(' + count.rejectedCount + ')';
   }
   getMutualCount() {
     return localStorage.getItem('language') === 'hindi' ?

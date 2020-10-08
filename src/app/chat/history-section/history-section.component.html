@@ -1,16 +1,14 @@
 <div>
     <div class="top-bar">
         <div class="search-area" *ngIf="(searchActivated$|async)">
-            <div class="col">
+            <div class="col" style="padding:3.5% 2%">
                 <img src="../../../assets/clear.svg" class="fa fa-close" (click)="toggleSearch()"
-                    style="font-size:30px;color:black;position:absolute;right:20px;top:-10px">
-                <input type="text" class="custom form-control" placeholder="Search" [formControl]="searchControl">
+                    style="font-size:30px;color:black;position:absolute;right:1%;top:4px">
+                <input type="text" class="custom form-control" placeholder="Search by name, religion, city..."
+                    [formControl]="searchControl">
             </div>
-            <!-- <div class="col col-2" style="background:#e7e7e7">
-                close
-            </div> -->
         </div>
-        <div class="row btn-row" style="display:flex;flex-direction: row;align-items: center;justify-content: center;">
+        <div class="row btn-row" *ngIf="!(searchActivated$|async)">
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':(searchActivated$|async)}"
                 (click)="toggleSearch()">
                 <img width="25px" src="../../../assets/search-history.svg" alt="" *ngIf="! (searchActivated$|async)">
@@ -19,20 +17,38 @@
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 0}"
                 (click)="setSelectedIndex(0)">
-                Contacted
+                {{itemService.getContactedCount()}}
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 1}"
                 (click)="setSelectedIndex(1)">
-                Shortlisted
+                {{itemService.getShortlistedCount()}}
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 2}"
                 (click)="setSelectedIndex(2)">
-                Rejected
+                {{itemService.getRejectedCount()}}
             </button>
         </div>
     </div>
-    <mat-tab-group id="history-tabs" class="matGroup" [(selectedIndex)]="selectedTab"
-        (selectedIndexChange)="changeSelectedTab($event)">
+    <div class="search-results" *ngIf="(searchActivated$|async)">
+        <div class="profiles" *ngFor="let profile of profiles;let i = index">
+            <div class="column" style="width:20%">
+                <img class="circular" src="../../../assets/male_pic.png" alt="profilePhoto">
+            </div>
+            <div class="column" style="width:55%;justify-content: end;
+            align-items: end;padding:2%">
+                <p style="font-size:1rem;font-weight:bold;">{{profile.name}}</p>
+                <p style="font-size:0.8rem;">{{profile.height}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>
+                <p style="font-size:0.8rem;">{{profile.caste}}&nbsp;|&nbsp;{{profile.religion}}</p>
+                <p style="font-size:0.8rem;">{{profile.working_city}}&nbsp;|&nbsp;{{profile.monthly_income}}LPA</p>
+            </div>
+            <div class="column" style="width:20%; border-radius: 5px;"
+                [ngStyle]="{'background-color':getColor(profile.type)}">
+                <a style="font-size:0.7rem;font-weight:bold;color:aliceblue">{{profile.type}}</a>
+            </div>
+        </div>
+    </div>
+    <mat-tab-group [hidden]="(searchActivated$|async)" id="history-tabs" class="matGroup"
+        [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)">
         <!-- // contacted -->
         <mat-tab id="contacted">
             <!-- <ng-template mat-tab-label>
