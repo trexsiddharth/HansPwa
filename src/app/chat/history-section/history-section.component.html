@@ -31,19 +31,25 @@
     </div>
     <div class="search-results" *ngIf="(searchActivated$|async)">
         <div class="profiles" *ngFor="let profile of profiles;let i = index">
-            <div class="column" style="width:20%">
-                <img class="circular" src="../../../assets/male_pic.png" alt="profilePhoto">
+            <div class="column" style="width:20%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type)">
+                <img class="circular" src="{{profile.photo}}" alt="photo" origin="anonymous">
             </div>
             <div class="column" style="width:55%;justify-content: end;
-            align-items: end;padding:2%">
+            align-items: end;padding:2%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type)">
                 <p style="font-size:1rem;font-weight:bold;">{{profile.name}}</p>
                 <p style="font-size:0.8rem;">{{profile.height}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>
                 <p style="font-size:0.8rem;">{{profile.caste}}&nbsp;|&nbsp;{{profile.religion}}</p>
                 <p style="font-size:0.8rem;">{{profile.working_city}}&nbsp;|&nbsp;{{profile.monthly_income}}LPA</p>
+                <p style="border-radius: 5px;" [ngStyle]="{'background-color':getColor(profile.type)}"
+                    (click)="getUserProfileData(profile.is_lead,profile.id,profile.type)">
+                    <a
+                        style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{profile.type}}</a>
+                </p>
             </div>
             <div class="column" style="width:20%; border-radius: 5px;"
-                [ngStyle]="{'background-color':getColor(profile.type)}">
-                <a style="font-size:0.7rem;font-weight:bold;color:aliceblue">{{profile.type}}</a>
+                (click)="getUserProfileData(profile.is_lead,profile.id,profile.type)">
+                <i class="fa fa-phone"
+                    style="font-size:2.7rem!important;font-weight:bold;color:rgba(36, 35, 35, 0.918);"></i>
             </div>
         </div>
     </div>

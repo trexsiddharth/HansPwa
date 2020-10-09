@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { catchError, debounceTime, retry, timeout } from 'rxjs/operators';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
 import { DataFilteringService } from '../data-filtering.service';
@@ -21,7 +22,8 @@ export class HistorySectionComponent implements OnInit {
   constructor(public itemService: FindOpenHistoryProfileService,
     public languageService: LanguageService,
     private http: HttpClient,
-    public dataFiltering: DataFilteringService) { }
+    public dataFiltering: DataFilteringService,
+    public router: Router) { }
 
   ngOnInit() {
     this.getHistoryData();
@@ -68,5 +70,38 @@ export class HistorySectionComponent implements OnInit {
   }
   getColor(type: string) {
     return type === 'REJECT' ? 'rgba(248, 73, 73, 0.849)' : type === 'SHORTLIST' ? 'rgba(22, 182, 22, 0.788)' : 'rgba(35, 131, 221, 0.89)';
+  }
+  getUserProfileData(is_lead: string, id: string, type: string) {
+    const myprofileData = new FormData();
+    myprofileData.append('id', id);
+    myprofileData.append('is_lead', is_lead);
+    // tslint:disable-next-line: max-line-length
+    return this.http
+      .post<any>(
+        'https://partner.hansmatrimony.com/api/getProfile',
+        myprofileData
+      )
+      .pipe(
+        timeout(7000),
+        retry(2),
+        catchError((e) => {
+          throw new Error('Server Timeout ' + e);
+        })
+      )
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          // section from which user is going
+          if (type === 'SHORTLIST') data.coming = 'interestShown';
+          else if (type === 'REJECT') data.coming = 'rejected';
+          else if (type === 'CONTACT') data.coming = 'contacted';
+          localStorage.setItem('open_profile', JSON.stringify(data));
+          // navigate to HISTORY PROFILE DIALOG COMPONENT
+          this.router.navigateByUrl('chat/open/open-profile');
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 }
