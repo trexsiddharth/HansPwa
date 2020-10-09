@@ -205,7 +205,7 @@
         <div *ngFor="let item of profile;let i = index">
             <div class="historyProfile" [id]="i">
                 <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0'}" #profilePic
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}" #profilePic
                     [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
                     (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
                     alt="profile picture">
@@ -218,7 +218,7 @@
 
                 <div class="historyDetails">
                     <p *ngIf="type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0'" style="display: flex!important;
+                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()" style="display: flex!important;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
@@ -250,15 +250,16 @@
                     padding: 20px;
                      border-radius: 10px;"
                         *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0') && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()) && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
                         <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
                     </button>
 
                     <button mat-raised-button class="btn" (click)="profileReAnswer(item,'YES',i)" style="background-color: #58D1FD;
                 margin-top: 20px;
                 padding: 20px;
-                 border-radius: 10px;" *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0')&&type !== 'contacted'">
+                 border-radius: 10px;"
+                        *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'contacted'">
                         <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
                     </button>
 
@@ -267,7 +268,7 @@
                 padding: 20px;
                  border-radius: 10px;"
                         *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
-                        null && itemService.getCredits().toString() == '0')&&type == 'contacted' && item.family && itemService.getPersonalized() == false">
+                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && item.family && itemService.getPersonalized() == false">
                         <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
                     </button>
 
@@ -276,7 +277,7 @@
                 padding: 20px 10px;
                  border-radius: 10px;"
                         *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0')&&type == 'contacted' && itemService.getPersonalized()">
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && itemService.getPersonalized()">
                         <img width="30px" src="../../../assets/comment.svg" alt="contact profile">
                     </button>
 
@@ -284,7 +285,7 @@
                 padding: 20px;
                  border-radius: 10px;"
                         *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
-                        null && itemService.getCredits().toString() == '0')&&type !== 'interestShown' && type !== 'interestReceived'  && type !== 'contacted' && type !== 'mutual'">
+                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'interestShown' && type !== 'interestReceived'  && type !== 'contacted' && type !== 'mutual'">
                         <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
                     </button>
 
