@@ -3,7 +3,7 @@
         <div class="search-area" *ngIf="(searchActivated$|async)">
             <div class="col" style="padding:3.5% 2%">
                 <img src="../../../assets/clear.svg" class="fa fa-close" (click)="toggleSearch()"
-                    style="font-size:30px;color:black;position:absolute;right:1%;top:4px">
+                    style="font-size:30px;color:black;position:absolute;right:1%;top:9%">
                 <input type="text" class="custom form-control" placeholder="Search by name, religion, city..."
                     [formControl]="searchControl">
             </div>
@@ -37,19 +37,19 @@
             <div class="column" style="width:55%;justify-content: end;
             align-items: end;padding:2%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type)">
                 <p style="font-size:1rem;font-weight:bold;">{{profile.name}}</p>
-                <p style="font-size:0.8rem;">{{profile.height}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>
+                <p style="font-size:0.8rem;">{{getHeight(profile.height)}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>
                 <p style="font-size:0.8rem;">{{profile.caste}}&nbsp;|&nbsp;{{profile.religion}}</p>
                 <p style="font-size:0.8rem;">{{profile.working_city}}&nbsp;|&nbsp;{{profile.monthly_income}}LPA</p>
                 <p style="border-radius: 5px;" [ngStyle]="{'background-color':getColor(profile.type)}"
                     (click)="getUserProfileData(profile.is_lead,profile.id,profile.type)">
                     <a
-                        style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{profile.type}}</a>
+                        style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{profile.type}}ED</a>
                 </p>
             </div>
             <div class="column" style="width:20%; border-radius: 5px;"
                 (click)="getUserProfileData(profile.is_lead,profile.id,profile.type)">
                 <i class="fa fa-phone"
-                    style="font-size:2.7rem!important;font-weight:bold;color:rgba(36, 35, 35, 0.918);"></i>
+                    style="font-size:2.2rem!important;font-weight:bold;color:rgba(36, 35, 35, 0.918);"></i>
             </div>
         </div>
     </div>

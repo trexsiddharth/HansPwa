@@ -76,14 +76,41 @@ export class SubscriptionComponent implements OnInit {
     });
     this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers }).subscribe((res: any) => {
       this.plans = res;
-      for (let i = 0; i < this.plans.length; i++) {
-        if (this.plans[i].plan_type === "Self Service Plan") {
-          this.plansOnline.push(this.plans[i]);
-        }
-        else {
-          this.plansPersonlised.push(this.plans[i]);
+      if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') == '1') {
+        for (let i = 0; i < this.plans.length; i++) {
+          if (this.plans[i].plan_type === "Self Service Plan") {
+            this.plansOnline.push(this.plans[i]);
+          }
+          else {
+            this.plansPersonlised.push(this.plans[i]);
+          }
         }
       }
+      else {
+        for (let i = 0; i < this.plans.length; i++) {
+          if (this.plans[i].plan_name != "Re-Marriage" && this.plans[i].plan_name != 'Re-Marriage Deluxe') {
+            if (this.plans[i].plan_type === "Self Service Plan") {
+              this.plansOnline.push(this.plans[i]);
+            }
+            else {
+              this.plansPersonlised.push(this.plans[i]);
+            }
+          }
+        }
+        // for (let a of res) {
+        //   if (a.plan_type === 'Self Service Plan' && a.plan_name != "Re-Marriage") {
+        //     this.plans.push(a);
+        //   }
+        // }
+      }
+      // for (let i = 0; i < this.plans.length; i++) {
+      //   if (this.plans[i].plan_type === "Self Service Plan") {
+      //     this.plansOnline.push(this.plans[i]);
+      //   }
+      //   else {
+      //     this.plansPersonlised.push(this.plans[i]);
+      //   }
+      // }
       console.log(this.plansOnline);
       console.log(this.plansPersonlised);
       this.spinner.hide();

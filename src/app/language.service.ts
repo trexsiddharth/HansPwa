@@ -286,7 +286,7 @@ export class LanguageService {
         this.homeLang.chooseFrom = 'रिश्तों में से चुनिए अपनी पसंद';
         this.homeLang.manyMatchmakers = '1000+ मैचमेकर्स';
         this.homeLang.helpingHands = 'जो आपको रिश्ते चुनने में मदद करेंगे';
-        this.homeLang.manyTemple = '25+ मंदिरो';
+        this.homeLang.manyTemple = '50+ मंदिरो';
         this.homeLang.verificationCenters = 'में वेरिफिकेशन सेंटर्स';
         this.homeLang.offlineCentres = 'ऑफलाइन केन्द्र नेटवर्क';
         this.homeLang.showMore = 'सभी देखें';
@@ -313,7 +313,7 @@ export class LanguageService {
         this.homeLang.chooseFrom = 'To Choose From';
         this.homeLang.manyMatchmakers = '1000+ Matchmakers';
         this.homeLang.helpingHands = 'Who Will Help In Finding A Perfect Match ';
-        this.homeLang.manyTemple = '25+ Temples';
+        this.homeLang.manyTemple = '50+ Temples';
         this.homeLang.verificationCenters = 'Verification Centres';
         this.homeLang.offlineCentres = 'Offline Centres Network';
         this.homeLang.showMore = 'Show More';
