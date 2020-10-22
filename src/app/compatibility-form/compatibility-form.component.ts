@@ -3,6 +3,8 @@ import {
   Component,
   OnInit,
   OnDestroy,
+  AfterViewInit,
+  AfterViewChecked,
 } from '@angular/core';
 
 import {
@@ -36,7 +38,7 @@ import { LanguageService } from '../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
-import { ChooseForComponent } from './choose-for/choose-for.component'
+import { ChooseForComponent } from './choose-for/choose-for.component';
 import { element } from 'protractor';
 import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
 
@@ -66,7 +68,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 
 
-export class CompatibilityFormComponent implements OnInit, OnDestroy {
+export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
 
   time = {
     hour: 13,
@@ -149,17 +151,17 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
   constructor(private http: HttpClient, public dialog: MatDialog,
-    private _formBuilder: FormBuilder,
-    private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private matDialog: MatDialog,
-    private breakPointObserver: BreakpointObserver,
-    public languageService: LanguageService,
-    private route: ActivatedRoute,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService,
-    private itemService: FindOpenHistoryProfileService) {
+              private _formBuilder: FormBuilder,
+              private router: Router,
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private matDialog: MatDialog,
+              private breakPointObserver: BreakpointObserver,
+              public languageService: LanguageService,
+              private route: ActivatedRoute,
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService,
+              private itemService: FindOpenHistoryProfileService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -167,7 +169,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
       lastName: [''],
       // phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
       // , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])],
-      phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
+      phone: ['132'
         , Validators.compose([Validators.required])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
@@ -198,6 +200,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     //     this.openChooseFor();
     //   }
     // }, 1500);
+
+
   }
   ngAfterViewChecked() {
     if (this.fourPageService.getUserThrough()) {
@@ -205,15 +209,27 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     }
   }
   async ngOnInit() {
+
     if (localStorage.getItem('RegisterNumber')) {
-      this.PageOne.patchValue({
-        phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
-      });
-      this.hideMobileNumber = true;
+
+      this.PageOne.controls.phone.setValue(localStorage.getItem('RegisterNumber'));
+
+      setTimeout(() => {
+        const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
+        if (countryBtn) {
+            countryBtn.disabled = true;
+          }
+        this.PageOne.controls.phone.disable();
+        }, 1000);
+
+      // this.hideMobileNumber = true;
       console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
+
+
     localStorage.clear();
     this.languageService.setRegisterLang();
+
 
     this.fourPageService.formCompleted.subscribe(
       (complete: boolean) => {
@@ -312,6 +328,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           }
           if (route.params.redParam) {
             localStorage.setItem('redParam', route.params.redParam);
+            this.fourPageService.showApproveBtn = true;
           }
           if (route.params.enqDate) {
             this.fourPageService.setUserThrough(true);
@@ -334,12 +351,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
           this.PageOne.patchValue({
             Relation: 'Myself',
           });
-          let codeIndex = this.router.url.indexOf('code=');
-          let code = this.router.url.substring(codeIndex + 5);
+          const codeIndex = this.router.url.indexOf('code=');
+          const code = this.router.url.substring(codeIndex + 5);
           console.log(code);
           this.getFacebookAccessToken(code);
-        }
-        else {
+        } else {
           if (this.itemService.compatibilityGender) {
             this.PageOne.patchValue({
               gender: this.itemService.compatibilityGender,
@@ -350,8 +366,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
               Relation: this.itemService.compatibilityLookingFor,
             });
             this.setGender();
-          }
-          else if (!this.fourPageService.getUserThrough()) {
+          } else if (!this.fourPageService.getUserThrough()) {
             this.openChooseFor();
           }
         }
@@ -779,8 +794,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
 
 
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
-        if (this.isLeadIsZero)
+        if (this.isLeadIsZero) {
           firststepdata.append('is_lead', '0');
+        }
         // tslint:disable-next-line: max-line-length
         return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(
           (res: any) => {
@@ -911,7 +927,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
   addSlashes() {
     console.log('sv');
     const newInput = document.getElementById('birthDate');
-    newInput.addEventListener('keydown', function (e) {
+    newInput.addEventListener('keydown', function(e) {
       if (e.which !== 8) {
         const numChars = (e.target as HTMLInputElement).value.length;
         if (numChars === 2 || numChars === 5) {
@@ -1027,7 +1043,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
       localStorage.setItem('getListTempleId', profileData.profile.temple_id);
     }
-    console.log("look here", profileData.family.father_status, profileData.family.mother_status);
+    console.log('look here', profileData.family.father_status, profileData.family.mother_status);
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
 
@@ -1081,17 +1097,18 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     this.setFormOneData();
   }
   setIncomeVals(income: number) {
-    for (let v of this.incomeCategories) {
-      let vals = v.split('-');
+    for (const v of this.incomeCategories) {
+      const vals = v.split('-');
       if (income >= Number(vals[0]) && income <= Number(vals[1])) {
-        console.log("look here", v)
+        console.log('look here', v);
         return v;
       }
     }
-    if (income === 100)
-      return '100+'
-    else
-      return '0-2.5'
+    if (income === 100) {
+      return '100+';
+    } else {
+      return '0-2.5';
+    }
 
   }
   setFormOneData() {
@@ -1118,9 +1135,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     if (number[0] != '+') {
       console.log('+91' + number);
       return '+91' + number;
-    }
-    else
+    } else {
       return number;
+    }
   }
   getMonthString(month: string) {
     switch (month) {
@@ -1241,7 +1258,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
         }
       }
     );
-    dialogConfig.id = "registerWith";
+    dialogConfig.id = 'registerWith';
     const dialogRef = this.dialog.open(ChooseForComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (response) => {
@@ -1478,7 +1495,15 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy {
     });
 
     if (data.phoneNumbers && data.phoneNumbers[0]) {
-      this.hideMobileNumber = true;
+      
+      setTimeout(() => {
+        const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
+        if (countryBtn) {
+            countryBtn.disabled = true;
+          }
+        this.PageOne.controls.phone.disable();
+        }, 1000);
+
       this.mobileNumberChanged();
     } else {
       this.hideMobileNumber = false;

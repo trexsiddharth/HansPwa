@@ -97,13 +97,13 @@ export class CompatibilityVerifyComponent implements OnInit {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog,
-    private _formBuilder: FormBuilder,
-    private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    public languageService: LanguageService,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService) {
+              private _formBuilder: FormBuilder,
+              private router: Router,
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              public languageService: LanguageService,
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService) {
 
     this.verifyForm = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -301,68 +301,66 @@ export class CompatibilityVerifyComponent implements OnInit {
         console.log(data);
         if (data.status === '1') {
           if (localStorage.getItem('redParam')) {
-            if (localStorage.getItem('redParam') === '0')
+            if (localStorage.getItem('redParam') === '0') {
               window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
-            else
+            } else if (localStorage.getItem('redParam') === 'pending_profile') {
+              window.open('https://partner.hansmatrimony.com/profile_approval/getFreeUserProfile', '_top', null, true);
+            } else {
               window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
-          }
-          else if (localStorage.getItem('fourthParam')) {
-            if (localStorage.getItem('fifthParam') === '1') {
-              if (localStorage.getItem('fourthParam') === '0')
-                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
-              else
-                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
             }
-            else if (localStorage.getItem('fifthParam') === '2') {
+          } else if (localStorage.getItem('fourthParam')) {
+            if (localStorage.getItem('fifthParam') === '1') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
+              } else {
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            } else if (localStorage.getItem('fifthParam') === '2') {
               window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
                 '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
-            }
-            else if (localStorage.getItem('fifthParam') === '3') {
-              if (localStorage.getItem('fourthParam') === '0')
+            } else if (localStorage.getItem('fifthParam') === '3') {
+              if (localStorage.getItem('fourthParam') === '0') {
                 window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-              else
+              } else {
                 window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-            }
-            else if (localStorage.getItem('fifthParam') === '4') {
-              if (localStorage.getItem('fourthParam') === '0')
+              }
+            } else if (localStorage.getItem('fifthParam') === '4') {
+              if (localStorage.getItem('fourthParam') === '0') {
                 window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-              else
+              } else {
                 window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
 
-            }
-            else if (localStorage.getItem('fifthParam') === '5') {
-              if (localStorage.getItem('fourthParam') === '0')
+            } else if (localStorage.getItem('fifthParam') === '5') {
+              if (localStorage.getItem('fourthParam') === '0') {
                 window.open('https://partner.hansmatrimony.com/subscriptionSeens', '_top', null, true);
-              else
+              } else {
                 window.open('https://partner.hansmatrimony.com/subscriptionSeens?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-            }
-            else {
-              if (localStorage.getItem('fourthParam') === '0')
+              }
+            } else {
+              if (localStorage.getItem('fourthParam') === '0') {
                 window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
-              else
+              } else {
                 window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
             }
-          }
-          else if (localStorage.getItem('extra')) {
+          } else if (localStorage.getItem('extra')) {
             if (localStorage.getItem('extra') === '2') {
               window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=1&temple_id=' +
                 localStorage.getItem('getListTempleId'), '_top', null, true);
-            }
-            else if (localStorage.getItem('extra') === '3') {
+            } else if (localStorage.getItem('extra') === '3') {
               window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-            }
-            else if (localStorage.getItem('extra') === '4') {
+            } else if (localStorage.getItem('extra') === '4') {
               window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
             }
-          }
-          else {
+          } else {
             if (localStorage.getItem('getListMobile')) { // mode 3
               window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
             } else if (localStorage.getItem('getListId')) { // mode 2
               window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
             }
           }
-          //this is old logic , not changing this
+          // this is old logic , not changing this
           // if (localStorage.getItem('getListMobile')) { // mode 3
           //   window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
           // } else if (localStorage.getItem('getListId')) { // mode 2
@@ -433,15 +431,9 @@ export class CompatibilityVerifyComponent implements OnInit {
       return this.ngxNotificationService.error('Enter Family Income');
     } else if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
       return this.ngxNotificationService.error('Select Image 1');
-    }
-    // } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
-    //   return this.ngxNotificationService.error('Select Image 2');
-    // } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
-    //   return this.ngxNotificationService.error('Select Image 3');
-    // }
-    else if (!(userProfile.college || userProfile.college === '') && this.verifyForm.controls['college'].invalid) {
+    } else if (!(userProfile.college || userProfile.college === '') && this.verifyForm.controls.college.invalid) {
       return this.ngxNotificationService.error('Enter College Name');
-    } else if ((!userProfile.company || userProfile.company === '') && this.verifyForm.controls['company'].invalid) {
+    } else if ((!userProfile.company || userProfile.company === '') && this.verifyForm.controls.company.invalid) {
       return this.ngxNotificationService.error('Enter Company Name');
     } else if (userProfile.fatherStatus !== 'Not Alive' && userProfile.fatherStatus !== 'Not Working' &&
       userProfile.family.occupation === null || userProfile.family.occupation === '') {
@@ -457,11 +449,11 @@ export class CompatibilityVerifyComponent implements OnInit {
       return this.ngxNotificationService.error('Select Married Brothers');
     } else if (userProfile.family.unmarried_sons == null) {
       return this.ngxNotificationService.error('Select Un Married Brothers');
-    } else if ((!userProfile.family.house_type || userProfile.family.house_type === '') && this.verifyForm.controls['house_type'].invalid) {
+    } else if ((!userProfile.family.house_type || userProfile.family.house_type === '') && this.verifyForm.controls.house_type.invalid) {
       return this.ngxNotificationService.error('Select House Type');
-    } else if ((!userProfile.family.family_type || userProfile.family.family_type === '') && this.verifyForm.controls['family_type'].invalid) {
+    } else if ((!userProfile.family.family_type || userProfile.family.family_type === '') && this.verifyForm.controls.family_type.invalid) {
       return this.ngxNotificationService.error('Select Family Type');
-    } else if ((!userProfile.family.city || userProfile.family.city === '') && this.verifyForm.controls['family_living_in'].invalid) {
+    } else if ((!userProfile.family.city || userProfile.family.city === '') && this.verifyForm.controls.family_living_in.invalid) {
       return this.ngxNotificationService.error('Enter Family Living In');
     } else if (userProfile.photoScore < 1) {
       return this.ngxNotificationService.error('Give a score');

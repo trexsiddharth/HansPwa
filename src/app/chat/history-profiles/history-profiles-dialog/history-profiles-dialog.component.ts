@@ -33,16 +33,16 @@ export class HistoryProfilesDialogComponent implements OnInit {
   title;
   personalizedUser = false;
   constructor(private http: HttpClient,
-    private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService,
-    public notification: NotificationsService,
-    public itemService: FindOpenHistoryProfileService,
-    public languageService: LanguageService,
-    private browserLocation: Location,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private breakPointObserver: BreakpointObserver,
-    private dialog: MatDialog
+              private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService,
+              public notification: NotificationsService,
+              public itemService: FindOpenHistoryProfileService,
+              public languageService: LanguageService,
+              private browserLocation: Location,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private breakPointObserver: BreakpointObserver,
+              private dialog: MatDialog
   ) {
   }
 
@@ -368,7 +368,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
   }
 
   onLoadProfileError(gender: string) {
-    let image = document.querySelector('#profilePic');
+    const image = document.querySelector('#profilePic');
     if (gender === 'Male') {
       image.setAttribute('src', '../../assets/male_pic.png');
     } else {
@@ -517,7 +517,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
     const dialogRef = this.dialog.open(PersonalizedMessageDialogComponent, dialogConfig);
   }
 
-  //setting dynamic about me if users about me is null or na
+  // setting dynamic about me if users about me is null or na
   setAbout() {
     if (this.item) {
       const aboutObject = {
@@ -550,6 +550,21 @@ export class HistoryProfilesDialogComponent implements OnInit {
       return `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.working}.`;
 
     }
+  }
+
+   getPhoneNumbers(): string {
+    if (this.item == null) {
+      return 'Visible After Contact';
+    }
+
+    if (this.item.family && this.item.family.mobile) {
+        return `${this.item.family.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
+    } else if (this.item.profile && this.item.profile.mobile) {
+      return `${this.item.profile.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
+    } else {
+      return 'Visible After Contact';
+    }
+
   }
 
 }

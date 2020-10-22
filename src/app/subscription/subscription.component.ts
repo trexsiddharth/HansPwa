@@ -46,15 +46,15 @@ export class SubscriptionComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(private http: HttpClient,
-    private subscriptionService: SubscriptionserviceService,
-    private spinner: NgxSpinnerService,
-    private browserLocation: Location,
-    private router: Router,
-    private breakPointObserver: BreakpointObserver,
-    private dialog: MatDialog,
-    private ngxNotificationService: NgxNotificationService,
-    public languageService: LanguageService,
-    public activatedRoute: ActivatedRoute) { }
+              private subscriptionService: SubscriptionserviceService,
+              private spinner: NgxSpinnerService,
+              private browserLocation: Location,
+              private router: Router,
+              private breakPointObserver: BreakpointObserver,
+              private dialog: MatDialog,
+              private ngxNotificationService: NgxNotificationService,
+              public languageService: LanguageService,
+              public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     // this.activatedRoute.params.subscribe((data: any) => {

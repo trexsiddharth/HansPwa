@@ -28,10 +28,12 @@ export class HistorySectionComponent implements OnInit {
   ngOnInit() {
     this.getHistoryData();
     this.searchControl.valueChanges.pipe(debounceTime(400)).subscribe(search => {
-      this.profiles = this.dataFiltering.filterPosts(this.searchControl.value);
+      console.log(search);
+      this.profiles = this.dataFiltering.filterPosts((search as string).toLowerCase());
     });
   }
   profiles: any;
+  
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"',
     '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"',
     '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"']
@@ -42,9 +44,10 @@ export class HistorySectionComponent implements OnInit {
     let params = new HttpParams().set('is_lead', localStorage.getItem('is_lead')).set("id", localStorage.getItem('id'))
     this.http.get('https://partner.hansmatrimony.com/api/getHisotry', { params: params }).subscribe((response: any) => {
       console.log('response of getHistory  api', response);
-      let allProfiles = response.contact[0];
-      allProfiles = allProfiles.concat(response.shortlist[0]);
-      allProfiles = allProfiles.concat(response.reject[0]);
+      let allProfiles: any[] = [];
+      allProfiles = allProfiles.concat(response.history.contact);
+      allProfiles = allProfiles.concat(response.history.shortlist);
+      allProfiles = allProfiles.concat(response.history.reject);
       console.log(allProfiles);
       this.dataFiltering.setPostList(allProfiles);
     });

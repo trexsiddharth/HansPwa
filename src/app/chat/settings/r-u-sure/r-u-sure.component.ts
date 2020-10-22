@@ -13,10 +13,10 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 export class RUSureComponent implements OnInit {
 
   constructor(public router: Router,
-    public formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<RUSureComponent>,
-    private http: HttpClient,
-    private ngxNotificationService: NgxNotificationService) {
+              public formBuilder: FormBuilder,
+              public dialogRef: MatDialogRef<RUSureComponent>,
+              private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService) {
     this.deleteForm = this.formBuilder.group({
       // number: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])]
       number: ['', Validators.compose([Validators.required])]
@@ -38,8 +38,7 @@ export class RUSureComponent implements OnInit {
     if (String(this.deleteForm.value.number) != String(this.regNumber)) {
       console.log('number invalid');
       this.numberInvalid = true;
-    }
-    else {
+    } else {
       console.log('number valid');
       this.numberInvalid = false;
     }
@@ -56,23 +55,22 @@ export class RUSureComponent implements OnInit {
   backToChat() {
     this.dialogRef.close();
     // this.backToProfiles.emit('chatbot');
-    this.router.navigateByUrl("/chat");
+    this.router.navigateByUrl('/chat');
   }
   deleteProfile() {
+    console.log(this.deleteForm.value.number, this.regNumber);
     if (this.deleteForm.valid && String(this.deleteForm.value.number) === String(this.regNumber)) {
       this.numberInvalid = false;
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append('mobile', this.deleteForm.value.number);
       this.http.post('https://partner.hansmatrimony.com/api/deleteProfileAPI', formData).subscribe((response: any) => {
         if (response.status === '1') {
           this.ngxNotificationService.success('Profile Deleted Successfully!');
           this.logout();
-        }
-        else if (response.status === '0') {
+        } else if (response.status === '0') {
           this.ngxNotificationService.error('Some error occurred....Try after some time');
           this.backToChat();
-        }
-        else {
+        } else {
           this.ngxNotificationService.error(response.message);
           this.backToChat();
         }
@@ -83,7 +81,7 @@ export class RUSureComponent implements OnInit {
     }
   }
   logout() {
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     localStorage.clear();
     localStorage.setItem('language', lang);
     this.dialogRef.close();

@@ -204,8 +204,10 @@ border-top-right-radius: 20px;
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
                     <span
-                        class="title">{{item.family ? item.family.mobile ? item.family.mobile :
-                     'Visible After Yes' : item.profile.whatsapp ? item.profile.whatsapp : 'Visible After Yes'  }}</span>
+                        class="title">
+                        {{getPhoneNumbers()}}
+                    </span>
+                     
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">

@@ -47,9 +47,9 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
 
   constructor(private http: HttpClient, public fourPageService: FourPageService,
-    private ngxNotificationService: NgxNotificationService,
-    private formBuilder: FormBuilder,
-    private router: Router) {
+              private ngxNotificationService: NgxNotificationService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
     this.pageFive = this.formBuilder.group({
       searchCaste: (null),
       searchCasteText: (null),
@@ -82,14 +82,13 @@ export class CompatibilityPageFiveComponent implements OnInit {
           console.log(value);
           if (value && value.data && value.data.assign_to) {
 
-            if (value.data.assign_to != "online") {
+            if (value.data.assign_to != 'online') {
               localStorage.setItem('isAssignToOnline', '1');
               this.fourPageService.showApproveBtn = true;
-            }
-            else if (value.data.assign_to == "online") {
+            } else if (value.data.assign_to == 'online') {
               this.fourPageService.showApproveBtn = false;
             }
-            console.log(' this.fourPageService.showApproveBtn set to', this.fourPageService.showApproveBtn, value.data.assign_to)
+            console.log(' this.fourPageService.showApproveBtn set to', this.fourPageService.showApproveBtn, value.data.assign_to);
           }
           if (value.status === '1') {
 
@@ -225,7 +224,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
           console.log(data);
           // set initial selection
           if (data && data.castes) {
-            let values = [];
+            const values = [];
             if (data.castes.length > 1) {
               console.log('look here', data.castes);
               console.log(data.castes.length);
@@ -310,7 +309,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
     console.log(event);
     console.log(event.value[0]);
 
-    let values = [];
+    const values = [];
     event.value.forEach(element => {
       if (this.getcastes.indexOf(element)) {
         values.push(this.getcastes[this.getcastes.indexOf(element)]);
@@ -522,61 +521,64 @@ export class CompatibilityPageFiveComponent implements OnInit {
                 if (data.status === '1') {
                   this.clearHistory();
                   if (localStorage.getItem('redParam')) {
-                    if (localStorage.getItem('redParam') === '0')
+                    if (localStorage.getItem('redParam') === '0') {
                       window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
-                    else
+                    } else if (localStorage.getItem('redParam') === 'pending_profile') {
+                        window.open('https://partner.hansmatrimony.com/profile_approval/getFreeUserProfile', '_top', null, true);
+                      } else {
                       window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
-                  }
-                  else if (localStorage.getItem('fourthParam')) {
+ }
+                  } else if (localStorage.getItem('fourthParam')) {
                     if (localStorage.getItem('fifthParam') === '1') {
-                      if (localStorage.getItem('fourthParam') === '0')
+                      if (localStorage.getItem('fourthParam') === '0') {
                         window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
-                      else
+                      }
+                      else {
                         window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-                    }
-                    else if (localStorage.getItem('fifthParam') === '2') {
+                      }
+                    } else if (localStorage.getItem('fifthParam') === '2') {
                       window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
                         '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
-                    }
-                    else if (localStorage.getItem('fifthParam') === '3') {
-                      if (localStorage.getItem('fourthParam') === '0')
+                    } else if (localStorage.getItem('fifthParam') === '3') {
+                      if (localStorage.getItem('fourthParam') === '0') {
                         window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-                      else
+                      }
+                      else {
                         window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-                    }
-                    else if (localStorage.getItem('fifthParam') === '4') {
-                      if (localStorage.getItem('fourthParam') === '0')
+                      }
+                    } else if (localStorage.getItem('fifthParam') === '4') {
+                      if (localStorage.getItem('fourthParam') === '0') {
                         window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-                      else
+                      }
+                      else {
                         window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                      }
 
-                    }
-                    else if (localStorage.getItem('fifthParam') === '5') {
-                      if (localStorage.getItem('fourthParam') === '0')
+                    } else if (localStorage.getItem('fifthParam') === '5') {
+                      if (localStorage.getItem('fourthParam') === '0') {
                         window.open('https://partner.hansmatrimony.com/subscriptionSeens', '_top', null, true);
-                      else
+                      }
+                      else {
                         window.open('https://partner.hansmatrimony.com/subscriptionSeens?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-                    }
-                    else {
-                      if (localStorage.getItem('fourthParam') === '0')
+                      }
+                    } else {
+                      if (localStorage.getItem('fourthParam') === '0') {
                         window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
-                      else
+                      }
+                      else {
                         window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                      }
                     }
-                  }
-                  else if (localStorage.getItem('extra')) {
+                  } else if (localStorage.getItem('extra')) {
                     if (localStorage.getItem('extra') === '2') {
                       window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=1&temple_id=' +
                         localStorage.getItem('getListTempleId'), '_top', null, true);
-                    }
-                    else if (localStorage.getItem('extra') === '3') {
+                    } else if (localStorage.getItem('extra') === '3') {
                       window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-                    }
-                    else if (localStorage.getItem('extra') === '4') {
+                    } else if (localStorage.getItem('extra') === '4') {
                       window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
                     }
-                  }
-                  else {
+                  } else {
                     if (localStorage.getItem('getListMobile')) { // mode 3
                       window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
                     } else if (localStorage.getItem('getListId')) { // mode 2
@@ -611,61 +613,63 @@ export class CompatibilityPageFiveComponent implements OnInit {
           console.log(data);
           if (data.status === '1') {
             if (localStorage.getItem('redParam')) {
-              if (localStorage.getItem('redParam') === '0')
+              if (localStorage.getItem('redParam') === '0') {
                 window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
-              else
-                window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
-            }
-            else if (localStorage.getItem('fourthParam')) {
-              if (localStorage.getItem('fifthParam') === '1') {
-                if (localStorage.getItem('fourthParam') === '0')
-                  window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
-                else
-                  window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-              }
-              else if (localStorage.getItem('fifthParam') === '2') {
-                window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
-                  '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
-              }
-              else if (localStorage.getItem('fifthParam') === '3') {
-                if (localStorage.getItem('fourthParam') === '0')
-                  window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-                else
-                  window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-              }
-              else if (localStorage.getItem('fifthParam') === '4') {
-                if (localStorage.getItem('fourthParam') === '0')
-                  window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-                else
-                  window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-
-              }
-              else if (localStorage.getItem('fifthParam') === '5') {
-                if (localStorage.getItem('fourthParam') === '0')
-                  window.open('https://partner.hansmatrimony.com/subscriptionSeens', '_top', null, true);
-                else
-                  window.open('https://partner.hansmatrimony.com/subscriptionSeens?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
               }
               else {
-                if (localStorage.getItem('fourthParam') === '0')
-                  window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
-                else
-                  window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
               }
-            }
-            else if (localStorage.getItem('extra')) {
+            } else if (localStorage.getItem('fourthParam')) {
+              if (localStorage.getItem('fifthParam') === '1') {
+                if (localStorage.getItem('fourthParam') === '0') {
+                  window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
+                }
+                else {
+                  window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                }
+              } else if (localStorage.getItem('fifthParam') === '2') {
+                window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
+                  '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
+              } else if (localStorage.getItem('fifthParam') === '3') {
+                if (localStorage.getItem('fourthParam') === '0') {
+                  window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+                }
+                else {
+                  window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                }
+              } else if (localStorage.getItem('fifthParam') === '4') {
+                if (localStorage.getItem('fourthParam') === '0') {
+                  window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+                }
+                else {
+                  window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                }
+
+              } else if (localStorage.getItem('fifthParam') === '5') {
+                if (localStorage.getItem('fourthParam') === '0') {
+                  window.open('https://partner.hansmatrimony.com/subscriptionSeens', '_top', null, true);
+                }
+                else {
+                  window.open('https://partner.hansmatrimony.com/subscriptionSeens?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                }
+              } else {
+                if (localStorage.getItem('fourthParam') === '0') {
+                  window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
+                }
+                else {
+                  window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+                }
+              }
+            } else if (localStorage.getItem('extra')) {
               if (localStorage.getItem('extra') === '2') {
                 window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=1&temple_id=' +
                   localStorage.getItem('getListTempleId'), '_top', null, true);
-              }
-              else if (localStorage.getItem('extra') === '3') {
+              } else if (localStorage.getItem('extra') === '3') {
                 window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-              }
-              else if (localStorage.getItem('extra') === '4') {
+              } else if (localStorage.getItem('extra') === '4') {
                 window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
               }
-            }
-            else {
+            } else {
               if (localStorage.getItem('getListMobile')) { // mode 3
                 window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
               } else if (localStorage.getItem('getListId')) { // mode 2
@@ -698,49 +702,55 @@ export class CompatibilityPageFiveComponent implements OnInit {
         console.log(data);
         if (data.status === '1') {
           if (localStorage.getItem('redParam')) {
-            if (localStorage.getItem('redParam') === '0')
+            if (localStorage.getItem('redParam') === '0') {
               window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
-            else
-              window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
-          }
-          else if (localStorage.getItem('fourthParam')) {
-            if (localStorage.getItem('fifthParam') === '1') {
-              if (localStorage.getItem('fourthParam') === '0')
-                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
-              else
-                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-            }
-            else if (localStorage.getItem('fifthParam') === '2') {
-              window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
-                '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
-            }
-            else if (localStorage.getItem('fifthParam') === '3') {
-              if (localStorage.getItem('fourthParam') === '0')
-                window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-              else
-                window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-            }
-            else if (localStorage.getItem('fifthParam') === '4') {
-              if (localStorage.getItem('fourthParam') === '0')
-                window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
-              else
-                window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
-
-            }
-            else if (localStorage.getItem('fifthParam') === '5') {
-              if (localStorage.getItem('fourthParam') === '0')
-                window.open('https://partner.hansmatrimony.com/subscriptionSeens', '_top', null, true);
-              else
-                window.open('https://partner.hansmatrimony.com/subscriptionSeens?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
             }
             else {
-              if (localStorage.getItem('fourthParam') === '0')
+              window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
+            }
+          } else if (localStorage.getItem('fourthParam')) {
+            if (localStorage.getItem('fifthParam') === '1') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
+              }
+              else {
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            } else if (localStorage.getItem('fifthParam') === '2') {
+              window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
+                '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
+            } else if (localStorage.getItem('fifthParam') === '3') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+              }
+              else {
+                window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            } else if (localStorage.getItem('fifthParam') === '4') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+              }
+              else {
+                window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+
+            } else if (localStorage.getItem('fifthParam') === '5') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/subscriptionSeens', '_top', null, true);
+              }
+              else {
+                window.open('https://partner.hansmatrimony.com/subscriptionSeens?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            } else {
+              if (localStorage.getItem('fourthParam') === '0') {
                 window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
-              else
+              }
+              else {
                 window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
             }
           }
-          //this is old logic , not changing this
+          // this is old logic , not changing this
           // if (localStorage.getItem('getListMobile')) { // mode 3
           //   window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
           // } else if (localStorage.getItem('getListId')) { // mode 2

@@ -10,6 +10,7 @@ font-weight: 600;">We are looking for compatible matches for you
 
 <app-tinder-ui [cards]="profileItems" [name]="item.apiwha_autoreply.name" (choiceMade)="logChoice($event)"
     *ngIf="type == 'profile'"></app-tinder-ui>
+    
 <!-- <div class="stackedcards-container" *ngIf="item && type == 'profile'"> -->
 <!-- <main id="main1" *ngIf="item && type == 'profile'">
                 <div class="full-width ht-full" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',

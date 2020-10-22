@@ -19,16 +19,16 @@ import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dial
 })
 export class ChatDrawerComponent implements OnInit {
   constructor(public languageService: LanguageService,
-    private chatService: ChatServiceService,
-    private spinner: NgxSpinnerService,
-    private http: HttpClient,
-    private ngxNotificationService: NgxNotificationService,
-    public router: Router,
-    private _formBuilder: FormBuilder,
-    public itemService: FindOpenHistoryProfileService,
-    public activatedRoute: ActivatedRoute,
-    public snackbar: MatSnackBar,
-    public matDialog: MatDialog,
+              private chatService: ChatServiceService,
+              private spinner: NgxSpinnerService,
+              private http: HttpClient,
+              private ngxNotificationService: NgxNotificationService,
+              public router: Router,
+              private _formBuilder: FormBuilder,
+              public itemService: FindOpenHistoryProfileService,
+              public activatedRoute: ActivatedRoute,
+              public snackbar: MatSnackBar,
+              public matDialog: MatDialog,
   ) {
     this.preferencesForm = this._formBuilder.group({
       food_choice: [''],
@@ -187,8 +187,8 @@ export class ChatDrawerComponent implements OnInit {
     'Vegetarian',
   ];
   Working: string[] = ['Working', 'Not Working', 'Doesn\'t Matter'];
-  //Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Doesn\'t Matter',
-  //'Defence', 'Civil Services'];
+  // Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt Job', 'Doctor', 'Teacher', 'Doesn\'t Matter',
+  // 'Defence', 'Civil Services'];
   MaritalStatus: string[] = [
     'Doesn\'t Matter',
     'Never Married',
@@ -202,7 +202,7 @@ export class ChatDrawerComponent implements OnInit {
   contactedCount = 0;
   rejectedCount = 0;
   castePreferences: string[] = [];
-  prevEventLength: number = 0;
+  prevEventLength = 0;
   familyDetailsLeft = [];
   personalDetailsLeft = [];
   profileCompletionPercent = 0;
@@ -211,7 +211,7 @@ export class ChatDrawerComponent implements OnInit {
   totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
 
 
-  //Variables for city filter:
+  // Variables for city filter:
   allCountries: any = [];
   allStates: any = [];
   states: Observable<any[]>;
@@ -235,15 +235,17 @@ export class ChatDrawerComponent implements OnInit {
       map(value => this._Cityfilter(value))
     );
   }
-  //filters for coutry,state and city.
+  // filters for coutry,state and city.
   // what === 0 country, what === 1 state,
   private _CountryOrStatefilter(value: string, what: number): string[] {
     if (value) {
       const filterValue = value.toLowerCase();
-      if (what === 0)
+      if (what === 0) {
         return this.allCountries.filter(option => option.name.toLowerCase().includes(filterValue));
-      else
+      }
+      else {
         return this.allStates.filter(option => option.name.toLowerCase().includes(filterValue));
+      }
     }
   }
   private _Cityfilter(value: string): string[] {
@@ -254,34 +256,36 @@ export class ChatDrawerComponent implements OnInit {
   }
   countrySelected(value) {
     this.chatService.selected_country = this.search(value, 0);
-    let params = new HttpParams().set("country_id", this.chatService.selected_country.id)
-    this.http.get('https://partner.hansmatrimony.com/api/getState', { params: params }).subscribe((response: any) => {
+    const params = new HttpParams().set('country_id', this.chatService.selected_country.id);
+    this.http.get('https://partner.hansmatrimony.com/api/getState', { params }).subscribe((response: any) => {
       console.log(response);
       this.allStates = response;
       if (!this.preferencesForm.value.state) {
         console.log('Qwerty123');
         this.preferencesForm.patchValue({
-          state: this.preferenceProfileData.pref_state.split(","),
+          state: this.preferenceProfileData.pref_state.split(','),
         });
       }
     });
   }
   stateSelectionChanged(event) {
     console.log('qwerty', event);
-    let curState = this.search(event[0], 1);
+    const curState = this.search(event[0], 1);
     this.chatService.selected_states += curState.name;
     this.chatService.selected_states_id += curState.id;
     // this.preferencesForm.patchValue({
     //   state: [curState, ...this.preferencesForm.value.state],
     // })
-    let params = new HttpParams().set('country_id', this.chatService.selected_country.id).set('state_id', curState.id);
-    this.http.get('https://partner.hansmatrimony.com/api/getCity', { params: params }).subscribe((response: any) => {
+    const params = new HttpParams().set('country_id', this.chatService.selected_country.id).set('state_id', curState.id);
+    this.http.get('https://partner.hansmatrimony.com/api/getCity', { params }).subscribe((response: any) => {
       console.log(response);
-      if (this.allCities.length == 0)
+      if (this.allCities.length == 0) {
         this.allCities = response;
-      else
+      }
+      else {
         this.allCities.concat(response);
-      console.log(this.allCities)
+      }
+      console.log(this.allCities);
     });
   }
   citySelectionChanged(value) {
@@ -289,21 +293,23 @@ export class ChatDrawerComponent implements OnInit {
     this.chatService.selected_cities += value;
   }
   search(value: string, what: number) {
-    for (let item of (what === 0 ? this.allCountries : this.allStates)) {
+    for (const item of (what === 0 ? this.allCountries : this.allStates)) {
       if (item.name === value) {
         return item;
       }
     }
   }
-  //for handling of city and state chips.
-  //what === 0 state, what === 1 city
+  // for handling of city and state chips.
+  // what === 0 state, what === 1 city
   onRemoved(topping: string, what: number) {
     const toppings = (what === 0 ? this.preferencesForm.value.state : this.preferencesForm.value.city) as string[];
     this.remove(toppings, topping);
-    if (what === 0)
+    if (what === 0) {
       this.preferencesForm.value.state.setValue(toppings);
-    else
-      this.preferencesForm.value.city.setValue(toppings); // To trigger change detection
+    }
+    else {
+      this.preferencesForm.value.city.setValue(toppings);
+    } // To trigger change detection
   }
   private remove<T>(array: T[], toRemove: T): void {
     const index = array.indexOf(toRemove);
@@ -313,7 +319,7 @@ export class ChatDrawerComponent implements OnInit {
   }
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    //this.disableSave.next(true);
+    // this.disableSave.next(true);
     // user authorized
     this.disableSave$ = this.disableSave.asObservable().pipe(
       shareReplay()
@@ -330,7 +336,7 @@ export class ChatDrawerComponent implements OnInit {
       }
     );
     if (this.router.url.match('first')) {
-      //this.sidenav.open();
+      // this.sidenav.open();
     }
 
     this.disableSave$.subscribe(
@@ -359,9 +365,9 @@ export class ChatDrawerComponent implements OnInit {
       } else {
         this.langCheck = true;
       }
-    }, 2000)
+    }, 2000);
     this.changed();
-    //document.querySelector('#saveButtonPrefs').setAttribute('display', 'none');
+    // document.querySelector('#saveButtonPrefs').setAttribute('display', 'none');
   }
   ngOnDestroy() {
     this._onDestroy.next();
@@ -371,11 +377,9 @@ export class ChatDrawerComponent implements OnInit {
     this.preferencesForm.valueChanges.subscribe(() => {
       if (this.firstTime) {
         this.firstTime = false;
-      }
-      else if (this.preferencesForm.value.income_max <= this.preferencesForm.value.income_min) {
+      } else if (this.preferencesForm.value.income_max <= this.preferencesForm.value.income_min) {
         this.disableSave.next(false);
-      }
-      else {
+      } else {
         this.disableSave.next(true);
       }
       this.getCountOfRishtey();
@@ -401,7 +405,7 @@ export class ChatDrawerComponent implements OnInit {
     this.userpic = '../../../assets/logo_192.png';
   }
   getRecomendedFilters() {
-    let form = new FormData();
+    const form = new FormData();
     form.append('id', this.userId);
     form.append('is_lead', this.userIsLead);
     this.http.post('https://partner.hansmatrimony.com/api/getRecommendedPreferences', form).subscribe((response: any) => {
@@ -412,8 +416,7 @@ export class ChatDrawerComponent implements OnInit {
           this.countProfiles = response.count;
           this.countRecomended = response.count;
           this.setCurrentPreferenceValue(response.preference);
-        }
-        else {
+        } else {
           this.countRecomended = response.count;
         }
       }
@@ -423,7 +426,7 @@ export class ChatDrawerComponent implements OnInit {
   }
   getCountOfRishtey() {
     console.log('getCountOfRishtey called');
-    let form = new FormData();
+    const form = new FormData();
     form.append('id', this.userId);
     form.append('is_lead', this.userIsLead);
     form.append('age_min', this.preferencesForm.value.age_min);
@@ -449,29 +452,28 @@ export class ChatDrawerComponent implements OnInit {
         this.chatService.countOfRishtey = response.count;
         if (response.count < 5) {
           this.isWide = false;
-          //this.disableSave.next(true);
-        }
-        else this.isWide = true;
+          // this.disableSave.next(true);
+        } else { this.isWide = true; }
       }
     }, (err: any) => {
       console.log('Getting count failed');
-    })
+    });
   }
   getContactedCount() {
     if (localStorage.getItem('count')) {
-      let count = JSON.parse(localStorage.getItem('count'));
-      return count.contactedCount
-    }
-    else
+      const count = JSON.parse(localStorage.getItem('count'));
+      return count.contactedCount;
+    } else {
       return 0;
+    }
   }
   getRejectedCount() {
     if (localStorage.getItem('count')) {
-      let count = JSON.parse(localStorage.getItem('count'));
+      const count = JSON.parse(localStorage.getItem('count'));
       return count.rejectedCount;
-    }
-    else
+    } else {
       return 0;
+    }
   }
   // this will called only if the user is logged in and will open contacted, rejected etc sections.
   openHistoryProfiles(section: string) {
@@ -493,7 +495,7 @@ export class ChatDrawerComponent implements OnInit {
 
   logout() {
     this.analyticsEvent('User Clicked Logout From Chat Drawer');
-    let lang = localStorage.getItem('language');
+    const lang = localStorage.getItem('language');
     localStorage.clear();
     localStorage.setItem('language', lang);
     this.drawerReference.toggle();
@@ -514,8 +516,8 @@ export class ChatDrawerComponent implements OnInit {
   }
 
   setEditIndexPrefs() {
-    //this.prefsRef.toggle();
-    //document.querySelector('#sidenav').toggle();
+    // this.prefsRef.toggle();
+    // document.querySelector('#sidenav').toggle();
     this.itemService.setChangePrefsClicked(true);
   }
   specialCase() {
@@ -553,20 +555,21 @@ export class ChatDrawerComponent implements OnInit {
     if (event.value.length > this.prevEventLength) {
       this.showSnackBar(`Added Successfully`, '');
       this.searchCasteText.setValue('');
-    }
-    else if (event.value.length < this.prevEventLength) {
+    } else if (event.value.length < this.prevEventLength) {
       this.showSnackBar(` Removed Successfully`, '');
     }
+    this.disableSave.next(true);
     this.prevEventLength = event.value.length;
   }
+
   showSnackBar(msg: string, action: string) {
     this.snackbar.open(msg, action, {
       duration: 2000,
     });
   }
   setCurrentPreferenceValue(preferences: any) {
-    console.log('Qwerty123', this.preferenceProfileData)
-    //this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(",");
+    console.log('Qwerty123', this.preferenceProfileData);
+    // this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(",");
     // this.personalProfileData.pref_city = this.personalProfileData.pref_city.split(",");
     // console.log("Qwerty", this.personalProfileData.pref_city.split(","), this.preferenceProfileData.pref_state.split(","));
     if (preferences) {
@@ -586,8 +589,7 @@ export class ChatDrawerComponent implements OnInit {
         state: preferences.pref_state ? preferences.pref_state : [],
         city: preferences.pref_city ? preferences.pref_city : [],
       });
-    }
-    else if (this.preferenceProfileData) {
+    } else if (this.preferenceProfileData) {
       this.preferencesForm.patchValue({
         food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
         age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
@@ -620,39 +622,37 @@ export class ChatDrawerComponent implements OnInit {
     this.familyDetailsList = ['about', 'occupation_mother', 'gotra', 'occupation',
       'family_type', 'family_income', 'city', 'house_type', 'livingWithParents'];
     this.totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
-    let detailsLeft = [];
-    console.log("look Here1");
+    const detailsLeft = [];
+    console.log('look Here1');
     console.log(this.personalDetailsLeft);
     console.log(this.familyDetailsLeft);
     console.log(this.personalDetailsList);
-    console.log(this.familyDetailsList)
+    console.log(this.familyDetailsList);
     this.personalDetailsLeft = [];
-    for (let v of this.personalDetailsList) {
+    for (const v of this.personalDetailsList) {
       if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] === "null") {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] === 'null') {
           this.personalDetailsLeft.push(v);
         }
-      }
-      else {
+      } else {
         this.personalDetailsLeft.push(v);
       }
     }
-    for (let v of this.familyDetailsList) {
+    for (const v of this.familyDetailsList) {
       if (this.familyProfileData.hasOwnProperty(v)) {
-        if (!this.familyProfileData[v] || this.familyProfileData[v] === "null") {
+        if (!this.familyProfileData[v] || this.familyProfileData[v] === 'null') {
           this.familyDetailsLeft.push(v);
         }
-      }
-      else {
+      } else {
         this.familyDetailsLeft.push(v);
       }
     }
-    for (let v of this.personalDetailsLeft) {
+    for (const v of this.personalDetailsLeft) {
       if (this.familyProfileData.hasOwnProperty(v)) {
         this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
       }
     }
-    console.log("look Here2");
+    console.log('look Here2');
     console.log(this.personalDetailsLeft);
     console.log(this.familyDetailsLeft);
     console.log(detailsLeft);
@@ -665,18 +665,17 @@ export class ChatDrawerComponent implements OnInit {
   async checkPageThreeDetails() {
     let famDet = 0;
     let perDet = 0;
-    let storingObj = {
-      'birth_place': null, 'birth_time': null, 'manglik': null, 'food_choice': null, 'occupation_mother': null, 'occupation': null, 'family_income': null,
-    }
-    let personalDetilsP3 = ['birth_place', 'birth_time', 'manglik', 'food_choice'];
-    let familyDetailsP3 = ['occupation_mother', 'occupation', 'family_income'];
+    const storingObj = {
+      birth_place: null, birth_time: null, manglik: null, food_choice: null, occupation_mother: null, occupation: null, family_income: null,
+    };
+    const personalDetilsP3 = ['birth_place', 'birth_time', 'manglik', 'food_choice'];
+    const familyDetailsP3 = ['occupation_mother', 'occupation', 'family_income'];
     Object.entries(this.personalProfileData).forEach(
       ([key, value]) => {
         if (personalDetilsP3.includes(key)) {
-          if ((!value) || value === "null" || value === "") {
+          if ((!value) || value === 'null' || value === '') {
             perDet += 1;
-          }
-          else {
+          } else {
             storingObj[key] = value;
           }
         }
@@ -685,10 +684,9 @@ export class ChatDrawerComponent implements OnInit {
     Object.entries(this.familyProfileData).forEach(
       ([key, value]) => {
         if (familyDetailsP3.includes(key)) {
-          if (!value || value == "null" || value === "") {
+          if (!value || value == 'null' || value === '') {
             famDet += 1;
-          }
-          else {
+          } else {
             storingObj[key] = value;
           }
         }
@@ -696,8 +694,7 @@ export class ChatDrawerComponent implements OnInit {
     console.log('Checking third page details', perDet + famDet);
     if (perDet + famDet >= 2) {
       localStorage.setItem('storedData', JSON.stringify(storingObj));
-    }
-    else if (localStorage.getItem('storedData')) {
+    } else if (localStorage.getItem('storedData')) {
       localStorage.removeItem('storedData');
     }
   }
@@ -738,7 +735,7 @@ export class ChatDrawerComponent implements OnInit {
             this.personalProfileData = data.profile ? data.profile : null;
             this.familyProfileData = data.family ? data.family : null;
             this.spinner.hide();
-            //setting profile data in chat service for use in popups.
+            // setting profile data in chat service for use in popups.
             this.chatService.setProfileData(this.personalProfileData, this.familyProfileData);
             if (data && data.profile) {
               this.gender = data.profile.gender;
@@ -747,38 +744,41 @@ export class ChatDrawerComponent implements OnInit {
               this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
             }
             if (this.gender === 'Female') {
-              if (this.preferenceProfileData.occupation)
+              if (this.preferenceProfileData.occupation) {
                 this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
+              }
               else {
                 this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
               }
             }
-            if (data.profile.photo) {
+            if (data.profile && data.profile.photo) {
               console.log(data.profile.photo);
               this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
               this.itemService.setPhotoStatus(true);
             }
 
-            if (data.country)
+            if (data.country) {
               this.allCountries = data.country;
+            }
 
-            if (this.preferenceProfileData.pref_city) {
-              this.preferenceProfileData.pref_city = this.preferenceProfileData.pref_city.split(",");
+            if (this.preferenceProfileData && this.preferenceProfileData.pref_city) {
+              this.preferenceProfileData.pref_city = this.preferenceProfileData.pref_city.split(',');
             }
-            if (this.preferenceProfileData.pref_state) {
-              this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(",");
+            if (this.preferenceProfileData && this.preferenceProfileData.pref_state) {
+              this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(',');
             }
-            if (this.personalProfileData.marital_status != 'Never Married') {
+            if (this.preferenceProfileData && this.personalProfileData.marital_status != 'Never Married') {
               localStorage.setItem('showRemarrigePlan', '1');
             }
             this.allStates = this.preferenceProfileData.pref_state;
             this.allCities = this.preferenceProfileData.pref_city;
             this.countrySelected(this.preferenceProfileData.pref_country);
-            this.chatService.selected_cities = this.preferenceProfileData.pref_city.join(",");
-            this.chatService.selected_states = this.preferenceProfileData.pref_state.join(",");
-            console.log('Qwerty12345', this.preferenceProfileData.pref_state);
+            this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
+            this.chatService.selected_states = this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
+
+
             setTimeout(() => {
-              for (let item of this.preferenceProfileData.pref_state) {
+              for (const item of this.preferenceProfileData.pref_state) {
                 this.chatService.selected_states_id += this.search(item, 1).id;
               }
             }, 2000);
@@ -789,7 +789,7 @@ export class ChatDrawerComponent implements OnInit {
             this.setProfileCompletion();
             this.checkPageThreeDetails();
             if (this.countRecomended == -1) {
-              setTimeout(() => { this.getCountOfRishtey(); this.getRecomendedFilters() }, 2000);
+              setTimeout(() => { this.getCountOfRishtey(); this.getRecomendedFilters(); }, 2000);
             }
           },
           (error: any) => {
@@ -803,17 +803,19 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
   onSubmitPreferences() {
-    //this.editIndexPrefs = -1;
+    // this.editIndexPrefs = -1;
     console.log('preference Data to update');
     console.log(this.preferenceProfileData);
     console.log(this.preferenceProfileData.religion);
-    if (Array.isArray(this.preferenceProfileData.religion))
+    if (Array.isArray(this.preferenceProfileData.religion)) {
       this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
+    }
 
     this.preferenceProfileData.caste = this.castePreferences.join(',');
 
-    if (this.gender === "Female" && Array.isArray(this.preferenceProfileData.occupation))
+    if (this.gender === 'Female' && Array.isArray(this.preferenceProfileData.occupation)) {
       this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
+    }
 
     const newPrefForm = new FormData();
     newPrefForm.append(
@@ -871,7 +873,7 @@ export class ChatDrawerComponent implements OnInit {
         (data: any) => {
           console.log(data);
           console.log('Preference Details updated successfully');
-          //this.changed();
+          // this.changed();
           this.sidenav.close();
           this.disableSave.next(false);
           this.getUserProfileData();
@@ -899,7 +901,7 @@ export class ChatDrawerComponent implements OnInit {
           this.preferenceProfileData.caste &&
           this.preferenceProfileData.caste !== 'null'
         ) {
-          let values = [];
+          const values = [];
           this.preferenceProfileData.caste.split(',').forEach((element) => {
             console.log(element);
             if (this.getcastes.indexOf(element)) {
@@ -972,12 +974,12 @@ export class ChatDrawerComponent implements OnInit {
   openPreferenceDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.minWidth = "50vw";
-      dialogConfig.maxWidth = "50vw";
+      dialogConfig.minWidth = '50vw';
+      dialogConfig.maxWidth = '50vw';
     } else {
-      dialogConfig.minWidth = "100vw";
+      dialogConfig.minWidth = '100vw';
     }
-    dialogConfig.minHeight = "100vh";
+    dialogConfig.minHeight = '100vh';
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
@@ -994,7 +996,7 @@ export class ChatDrawerComponent implements OnInit {
   }
   openSubscriptionOffer() {
     this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
-    //this.itemService.openTodaysPopupAd();
-    this.router.navigateByUrl(`/subscription`)
+    // this.itemService.openTodaysPopupAd();
+    this.router.navigateByUrl(`/subscription`);
   }
 }
