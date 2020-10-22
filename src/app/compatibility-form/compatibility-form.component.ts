@@ -135,6 +135,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   mainContainerId = 'compatibilityStepper';
   authData;
   truecallerExists = false;
+  disabledPhoneNumber;
   private fetchedFbProfilePic = null;
 
   private alreadyExists = false;
@@ -213,6 +214,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (localStorage.getItem('RegisterNumber')) {
 
       this.PageOne.controls.phone.setValue(localStorage.getItem('RegisterNumber'));
+      this.disabledPhoneNumber = localStorage.getItem('RegisterNumber');
 
       setTimeout(() => {
         const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
@@ -721,15 +723,21 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
     console.log('year', this.PageOne.value.birth_year);
 
+    const phoneNumber = this.PageOne.value.phone ? this.PageOne.value.phone : this.disabledPhoneNumber ? this.disabledPhoneNumber : null;
 
-    if (this.PageOne.value.phone &&
-      this.PageOne.value.phone.toString().length < 10 ||
-      this.PageOne.value.phone.toString().length > 13
-      || this.PageOne.value.phone.invalid) {
+    if (phoneNumber != null) {
+      if (phoneNumber.toString().length < 10 ||
+      phoneNumber.toString().length > 13
+      || this.PageOne.value.phone) {
       console.log(this.PageOne.value.phone);
       this.ngxNotificationService.error('Enter A Valid Mobile Number');
       return;
     }
+    } else {
+      this.ngxNotificationService.error('Enter A Valid Mobile Number');
+      return;
+    }
+    
 
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
@@ -738,7 +746,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       const year = this.PageOne.value.birth_year;
       console.log(date + '-' + month + '-' + year);
       const firststepdata = new FormData();
-      firststepdata.append('mobile', this.PageOne.value.phone);
+      firststepdata.append('mobile', phoneNumber);
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') !== '1') {
         firststepdata.append('id', localStorage.getItem('getListId'));
         firststepdata.append('identity_number', this.profileData.profile.identity_number);
@@ -816,7 +824,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             this.spinner.hide();
             localStorage.setItem('id', res.id);
             localStorage.setItem('gender', this.PageOne.value.gender);
-            localStorage.setItem('mobile_number', this.PageOne.value.phone);
+            localStorage.setItem('mobile_number', phoneNumber);
             // if (res.isAssignToOnline) {
             //   localStorage.setItem('isAssignToOnline', res.isAssignToOnline);
             //   this.fourPageService.showApproveBtn = true;
@@ -1495,15 +1503,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     });
 
     if (data.phoneNumbers && data.phoneNumbers[0]) {
-      
+
+      this.disabledPhoneNumber = data.phoneNumbers[0];
       setTimeout(() => {
         const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
         if (countryBtn) {
             countryBtn.disabled = true;
           }
+        
         this.PageOne.controls.phone.disable();
         }, 1000);
-
       this.mobileNumberChanged();
     } else {
       this.hideMobileNumber = false;
