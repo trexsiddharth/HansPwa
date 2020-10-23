@@ -411,7 +411,7 @@ export class FindOpenHistoryProfileService {
   }
 
   // rate us pop up
-  openRateUsDialog() {
+  openRateUsDialog(forFreeUser: boolean = false) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
@@ -432,6 +432,7 @@ export class FindOpenHistoryProfileService {
       }
     );
     dialogConfig.id = 'rateDialog';
+    dialogConfig.data = forFreeUser;
     const dialogRef = this.dialog.open(RateUsDialogComponent, dialogConfig);
   }
 

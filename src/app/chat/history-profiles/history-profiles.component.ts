@@ -16,7 +16,8 @@ import {
 } from 'ngx-spinner';
 import {
   Observable,
-  from
+  from,
+  BehaviorSubject
 } from 'rxjs';
 import {
   NotificationsService
@@ -41,6 +42,7 @@ import { SubscriptionserviceService } from 'src/app/subscriptionservice.service'
 import { AnalyticsService } from 'src/app/analytics.service';
 import { element } from 'protractor';
 import { TodaysPaymentPopupComponent } from 'src/app/todays-payment-popup/todays-payment-popup.component';
+import { shareReplay } from 'rxjs/operators';
 
 
 
@@ -66,6 +68,20 @@ import { TodaysPaymentPopupComponent } from 'src/app/todays-payment-popup/todays
 })
 export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
+  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
+              private spinner: NgxSpinnerService,
+              private dialog: MatDialog,
+              public notification: NotificationsService,
+              public itemService: FindOpenHistoryProfileService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private browserLocation: Location,
+              private analyticsService: AnalyticsService,
+              private chatService: ChatServiceService,
+              public languageService: LanguageService,
+              private breakPointObserver: BreakpointObserver,
+              private subscriptionservice: SubscriptionserviceService) { }
+
 
   profile: any[] = [];
   wholeData;
@@ -86,21 +102,23 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   scrollFlag = false;
   title;
   section;
-  popupOpened: boolean = false;
+  popupOpened = false;
+  // subscriptions offers
+  plan = 0;
+  benefit;
+  value;
+  amount;
+  plans: any = [];
+  plansOnline: any = [];
+  price: any;
+  credits;
+  selectedContainer: number;
+  profileViewersList = new BehaviorSubject<any[]>([]);
+  profileViewersList$: Observable<any> = this.profileViewersList.asObservable().pipe(
+    shareReplay()
+  );
 
-  constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
-    private spinner: NgxSpinnerService,
-    private dialog: MatDialog,
-    public notification: NotificationsService,
-    public itemService: FindOpenHistoryProfileService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private browserLocation: Location,
-    private analyticsService: AnalyticsService,
-    private chatService: ChatServiceService,
-    public languageService: LanguageService,
-    private breakPointObserver: BreakpointObserver,
-    private subscriptionservice: SubscriptionserviceService) { }
+  selectedTab = 0;
 
   async ngOnInit() {
     if (true) {
@@ -111,7 +129,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers }).subscribe((res: any) => {
         this.plans = res;
         for (let i = 0; i < this.plans.length; i++) {
-          if (this.plans[i].plan_type === "Self Service Plan") {
+          if (this.plans[i].plan_type === 'Self Service Plan') {
             this.plansOnline.push(this.plans[i]);
           }
         }
@@ -202,6 +220,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       case 'interestReceived':
         this.scrollLink = 'interestReceived';
         this.getHistorydata('interestReceived');
+        this.getProfileViewers();
         break;
       case 'rejected':
         this.scrollLink = 'rejectedProfiles';
@@ -232,6 +251,103 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       });
     }
   }
+  setSelectedIndex(tabNumber: number) {
+    this.selectedTab = tabNumber;
+  }
+
+  private getProfileViewers() {
+    const formData = new FormData();
+    formData.append('id', localStorage.getItem('id'));
+    formData.append('is_lead', localStorage.getItem('is_lead'));
+    this.http.post('https://partner.hansmatrimony.com/api/showViewedProfile', formData).subscribe(
+      (response: any) => {
+          console.log(response);
+          if (response) {
+            this.profileViewersList.next(response);
+          }
+      },
+      err => {
+        this.ngxNotificationService.error('Something Went Wrong');
+      }
+    );
+  }
+  reponseToNormal(item, answer, index) {
+    this.spinner.show();
+    this.panelOpenState = null;
+    const reAnswerData = new FormData();
+    reAnswerData.append('id', localStorage.getItem('id'));
+    if (item.family) {
+      reAnswerData.append('action_id', item.profile.id);
+    } else {
+      reAnswerData.append('action_id', item.profile.identity_number);
+    }
+    reAnswerData.append('action', answer);
+    if (localStorage.getItem('is_lead')) {
+      reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
+    } else {
+      this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+        console.log(res);
+        reAnswerData.append('is_lead', res.is_lead);
+        localStorage.setItem('is_lead', res.is_lead);
+      },
+        err => {
+          console.log(err);
+          this.spinner.hide();
+        });
+    }
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/saveAction', reAnswerData).subscribe(
+      (response: any) => {
+        console.log(response);
+        if (response && response.status === 1) {
+          // update the profile list
+          this.updateViewerList(index, answer);
+          if (response.count) {
+            this.itemService.saveCount(response.count);
+          }
+          this.spinner.hide();
+          // after reponse update the user credits
+          this.getCredits();
+        } else {
+          this.ngxNotificationService.error(response.message);
+          this.spinner.hide();
+        }
+      },
+      err => {
+        this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+        this.spinner.hide();
+      }
+    );
+  }
+
+    // update the list after response
+    updateViewerList(index, answer) {
+      let list = [];
+      this.profileViewersList$.subscribe(response => list = response ? response : [] );
+      switch (answer) {
+        case 'YES':
+          if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+            // this.slideAndOpenProfile(this.profile[index], 1);
+            localStorage.setItem('stage', '1');
+            this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
+            list.splice(index, 1);
+            this.profileViewersList.next(list);
+            // this.itemService.changeTab(1);
+          } else {
+            this.ngxNotificationService.error('You Dont have Enough Credits', '',
+              null, {
+              duration: 4000,
+              closeButton: true
+            });
+          }
+          break;
+
+        default:
+          list.splice(index, 1);
+          this.profileViewersList.next(list);
+          break;
+      }
+    }
   goBack() {
     this.browserLocation.back();
     // console.log("sonorvnerun")
@@ -244,9 +360,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   isNotPaid() {
     if (this.itemService.getCredits() && this.itemService.getCredits().toString() === '0') {
       return true;
-    }
-    else {
-      return false
+    } else {
+      return false;
     }
   }
   // user photo upload
@@ -423,7 +538,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     );
   }
   openProfileDialog(item: any, ind: any) {
-    //setting the index in local strorage to use in scrollIntoView later
+    // setting the index in local strorage to use in scrollIntoView later
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() == '0' && this.type === 'interestReceived') {
       return;
     }
@@ -564,7 +679,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
 
       // finding and removing the old element from the locally stored list
-      let removableProfiles = [];
+      const removableProfiles = [];
       this.profile.forEach(
         (item, index) => {
           console.log(item.profile.id, index);
@@ -1130,16 +1245,6 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
     }
   }
-  //subscriptions offers
-  plan = 0;
-  benefit;
-  value;
-  amount;
-  plans: any = [];
-  plansOnline: any = [];
-  price: any;
-  credits;
-  selectedContainer: number;
 
   openTodaysPopupAd() {
     const dialogConfig = new MatDialogConfig();
@@ -1175,7 +1280,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     return this.plansOnline[index].amount - (this.plansOnline[index].amount * this.plansOnline[index].discount / 100);
   }
   setContent(index: number) {
-    let content = this.plansOnline[index].content.split(';');
+    const content = this.plansOnline[index].content.split(';');
     return content;
   }
   container(index: number) {

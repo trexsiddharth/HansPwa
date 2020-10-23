@@ -1,0 +1,36 @@
+
+    
+    <div class="mainDiv">
+        <img style="width: 2rem;
+        border-radius: 100px;
+        border: 1px solid #737373;
+        position: absolute;
+        right: 10px;
+        margin-top: 10px;" src="../../../../assets/clear.svg" alt="close dialog"
+        (click)="closeDialog()">
+    
+        <div class="text-center" >
+            <img style="margin-top: 30px;
+            background-color: #c8c8c8;
+            border-radius: 100px;
+            padding: 20px;
+            width: 80px;" src="../../../../assets/new icons/delete.svg" alt="stars">
+        </div>
+
+        <p id="firstLine" style="margin-top: 20px;">
+            Are you sure you want to delete photo?
+        </p>
+        
+        <div class="bottomDiv">
+            <button mat-raised-button
+            (click)="deletePhoto()"
+             class="delBtn">
+                Delete
+            </button>
+            <button mat-raised-button
+            (click)="closeDialog()"
+             class="rateBtn">
+                Cancel
+            </button>
+            </div>
+        </div>

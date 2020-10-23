@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgxNotificationService } from 'ngx-kc-notification';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rate-us-dialog',
@@ -11,13 +12,26 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 })
 export class RateUsDialogComponent implements OnInit {
 
+showForFreeUser = new BehaviorSubject<boolean>(false);
+showForFreeUser$: Observable<boolean> = this.showForFreeUser.asObservable();
+
   constructor(private http: HttpClient,
               private spinner: NgxSpinnerService,
               private ngxNotification: NgxNotificationService,
               public dialogRef: MatDialogRef<RateUsDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) { }
+              @Inject(MAT_DIALOG_DATA) public data) {
+                if (data) {
+                  if (data === true) {
+                    this.showForFreeUser.next(true);
+                  }
+                }
+               }
 
   ngOnInit() {
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 
   openPlayStore() {

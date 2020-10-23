@@ -28,7 +28,7 @@
 #firstLine {
     color: #4A5D6A;
     font-size: 1.5rem;
-    font-family: 'Roboto';
+    font-family: 'Roboto',sans-serif;
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -38,7 +38,7 @@
 #secondLine {
     color: #4A5D6A;
     font-size: 1.5rem;
-    font-family: 'Roboto';
+    font-family: 'Roboto',sans-serif;
     text-align: center;
 }
 .stars {
@@ -54,6 +54,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+}
+#smallTC{
+    color: #4A5D6A;
+    font-size: 0.6rem;
+    font-family: 'Roboto',sans-serif;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 .rateBtn{
     background-image: linear-gradient(90deg, #566EE8, #4FB0E5);

@@ -90,17 +90,20 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   userIsLead;
   popupdata = {};
   showPopup = false;
+  showConfetti = new BehaviorSubject<boolean>(false);
+  showConfetti$: Observable<boolean> = this.showConfetti.asObservable();
+
   constructor(private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private ngxNotificationService: NgxNotificationService,
-    public notification: NotificationsService,
-    public chatService: ChatServiceService,
-    public itemService: FindOpenHistoryProfileService,
-    public router: Router,
-    private dialog: MatDialog,
-    public languageService: LanguageService,
-    public subscriptionService: SubscriptionserviceService,
-    private breakPointObserver: BreakpointObserver,) {
+              private spinner: NgxSpinnerService,
+              private ngxNotificationService: NgxNotificationService,
+              public notification: NotificationsService,
+              public chatService: ChatServiceService,
+              public itemService: FindOpenHistoryProfileService,
+              public router: Router,
+              private dialog: MatDialog,
+              public languageService: LanguageService,
+              public subscriptionService: SubscriptionserviceService,
+              private breakPointObserver: BreakpointObserver,) {
   }
   ngAfterViewInit() {
     this.section = document.querySelector('#today-main');
@@ -270,6 +273,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.actionCount = this.actionCount;
       console.log('setting action count value in chat service');
     }
+
+    
+
   }
   // to save the state of which popups are to be shown
   ngOnDestroy(): void {
@@ -674,6 +680,15 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
 
             this.router.navigateByUrl('chat');
           }
+
+          // show confetti gif for the gifted profile with mobile number.
+          if (data && data.apiwha_autoreply.mobile !== 'Visible after Contact') {
+            this.showConfetti.next(true);
+            setTimeout(() => {
+              this.showConfetti.next(false);
+            }, 3000);
+          }
+
         } else {
           this.type = 'message';
           this.profileItems = [];
@@ -698,6 +713,11 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             && data.is_rated === 0
             && this.points > 0) {
             this.itemService.openRateUsDialog();
+          } else if (data.type === 'message'
+          && data.buttons === 'History'
+          && data.get_status_count.TPL === 0
+          && data.is_rated === 0) {
+            this.itemService.openRateUsDialog(true);
           }
         }
         //completely useless lines of code

@@ -10,6 +10,15 @@ font-weight: 600;">We are looking for compatible matches for you
 
 <app-tinder-ui [cards]="profileItems" [name]="item.apiwha_autoreply.name" (choiceMade)="logChoice($event)"
     *ngIf="type == 'profile'"></app-tinder-ui>
+
+    <img 
+    *ngIf="(showConfetti$ | async)"
+    style="display: block;position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    top: 0;"
+    src="../../../assets/images/confetti 2.gif" alt="confetti">
     
 <!-- <div class="stackedcards-container" *ngIf="item && type == 'profile'"> -->
 <!-- <main id="main1" *ngIf="item && type == 'profile'">

@@ -41,6 +41,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { RUSureComponent } from './settings/r-u-sure/r-u-sure.component';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { HistorySectionComponent } from './history-section/history-section.component';
+import { AskDeleteDialogComponent } from './my-profile-photo-upload/ask-delete-dialog/ask-delete-dialog.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -82,7 +83,8 @@ import { HistorySectionComponent } from './history-section/history-section.compo
     TinderUiComponent,
     SettingsComponent,
     RUSureComponent,
-    HistorySectionComponent
+    HistorySectionComponent,
+    AskDeleteDialogComponent
   ],
   entryComponents: [
     MessageDialogComponent,
@@ -99,6 +101,7 @@ import { HistorySectionComponent } from './history-section/history-section.compo
     OkdialogCsComponent,
     PersistentMessageComponent,
     RUSureComponent,
+    AskDeleteDialogComponent
   ],
   providers: [
     FindOpenHistoryProfileService,

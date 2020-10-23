@@ -5,6 +5,21 @@ section{
     animation: fadeInUp 1.5s 1;
 }
 
+.btn-tabs{
+    background:#e7e7e7;
+    width: 48%;
+    border-radius:6px;
+    color:#a3a2a2;
+    font-weight:bold;
+}
+.btn-tabs-active{
+    background:#49b9e6;
+    margin:1.5%;
+    border-radius:6px;
+    color:white;
+    font-weight:bold;
+}
+
 .paddingToSection {
     padding: 70px 30px 100px !important;
 }

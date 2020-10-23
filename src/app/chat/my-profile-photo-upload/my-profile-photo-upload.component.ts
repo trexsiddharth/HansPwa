@@ -7,6 +7,7 @@ import { timeout, retry, catchError } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { PhotoUploadCropComponent } from 'src/app/photo-upload-crop/photo-upload-crop.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AskDeleteDialogComponent } from './ask-delete-dialog/ask-delete-dialog.component';
 @Component({
   selector: 'app-my-profile-photo-upload',
   templateUrl: './my-profile-photo-upload.component.html',
@@ -15,12 +16,20 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 export class MyProfilePhotoUploadComponent implements OnInit {
 
   constructor(public router: Router,
-    private activatedRoute: ActivatedRoute,
-    public spinner: NgxSpinnerService,
-    public http: HttpClient,
-    public ngxNotificationService: NgxNotificationService,
-    public breakPointObserver: BreakpointObserver,
-    private dialog: MatDialog,) { }
+              private activatedRoute: ActivatedRoute,
+              public spinner: NgxSpinnerService,
+              public http: HttpClient,
+              public ngxNotificationService: NgxNotificationService,
+              public breakPointObserver: BreakpointObserver,
+              private dialog: MatDialog) { }
+  public message: string;
+  userId: any;
+  userIsLead: any;
+  suc: any = [];
+  BackimgURL;
+  carouselSize;
+  personalProfileData: any;
+  backimagePath;
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((routeData: any) => {
@@ -38,14 +47,44 @@ export class MyProfilePhotoUploadComponent implements OnInit {
     // this.router.navigateByUrl(`chat/my-profile-new/${this.userId}/${this.userIsLead}`);
     window.history.back();
   }
-  public message: string;
-  userId: any;
-  userIsLead: any;
-  suc: any = [];
-  BackimgURL;
-  carouselSize;
-  personalProfileData: any;
-  backimagePath;
+
+  deletePhoto(index: number) {
+      const currentImg = this.getProfilesPhotoName(this.personalProfileData.carousel,
+        this.personalProfileData.unapprove_carousel,
+        this.personalProfileData.photo, index);
+
+      if (currentImg) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.hasBackdrop = true;
+      this.breakPointObserver.observe([
+        '(min-width: 1024px)'
+      ]).subscribe(
+        result => {
+          if (result.matches) {
+            console.log('screen is greater than  1024px');
+            dialogConfig.minWidth = '30vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = false;
+          } else {
+            console.log('screen is less than  1024px');
+            dialogConfig.minWidth = '96vw';
+            dialogConfig.maxHeight = '80vh';
+            dialogConfig.disableClose = false;
+          }
+        }
+      );
+      dialogConfig.id = 'askDelete';
+      dialogConfig.data = currentImg;
+      const dialogRef = this.dialog.open(AskDeleteDialogComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(
+        (response: any) => {
+            if (response) {
+              this.getUserProfileData();
+            }
+        }
+      );
+        }
+  }
 
   getProfilesPhoto(
     num: string, // carousel
@@ -87,18 +126,56 @@ export class MyProfilePhotoUploadComponent implements OnInit {
       }
     } else if (num2) {
       return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
-    }
-    else {
+    } else {
       return '../../../assets/plus.svg';
 
     }
   }
+  getProfilesPhotoName(
+    num: string, // carousel
+    numUnapprove: string, // unapprove_carousel
+    num2: string, // photo
+    index: number // index
+  ): string {
+    if (num !== '[]' && num && num !== 'null') {
+      const carousel: any = JSON.parse(num);
+      // if an image is present in unapprove_carousel for the particular index.
+      // we will give preference to unapprove_carousel first.
+      if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
+        const carouselUnapproved: any = JSON.parse(numUnapprove);
+        if (carouselUnapproved[index]) {
+          return (
+            carouselUnapproved[index]
+          );
+        } else {
+          if (carousel[index]) {
+            return (
+              carousel[index]
+            );
+          } else {
+            return null;
+          }
+        }
+      } else {
+        if (carousel[index]) {
+          return (
+            carousel[index]
+          );
+        } else {
+          return null;
+
+        }
+      }
+    } else {
+      return null;
+    }
+  }
   getCarouselCount() {
-    let num = this.personalProfileData.carousel;
+    const num = this.personalProfileData.carousel;
     if (num !== '[]' && num && num !== 'null') {
       const carousel: object = JSON.parse(num);
       if (carousel) {
-        let size = Object.keys(carousel);
+        const size = Object.keys(carousel);
         console.log(size.length);
         return this.carouselSize = size.length;
       }
@@ -144,7 +221,7 @@ export class MyProfilePhotoUploadComponent implements OnInit {
           console.log('photos', suc);
           if (this.suc.pic_upload_status === 'Y') {
             this.spinner.hide();
-            console.log("photo upload successful")
+            console.log('photo upload successful');
             document.querySelector('#imgProfile' + String(index)).setAttribute('src', this.suc.profile_pic_url);
             this.ngxNotificationService.success('Photo Uploaded Succesfully!');
           } else {
@@ -223,7 +300,7 @@ export class MyProfilePhotoUploadComponent implements OnInit {
     dialogConfig.id = 'photoUploadCrop';
     const dialogRef = this.dialog.open(PhotoUploadCropComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      //this.uploadPhoto(data, 1);
+      // this.uploadPhoto(data, 1);
       console.log('data recieved in the photo upload component', data);
       this.uploadPhoto(data, index);
     });
