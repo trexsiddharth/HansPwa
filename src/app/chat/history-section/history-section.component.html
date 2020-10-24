@@ -17,11 +17,11 @@
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 0}"
                 (click)="setSelectedIndex(0)">
-                {{itemService.getContactedCount()}}
+                {{itemService.getShortlistedCount()}}
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 1}"
                 (click)="setSelectedIndex(1)">
-                {{itemService.getShortlistedCount()}}
+                {{itemService.getContactedCount()}}
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 2}"
                 (click)="setSelectedIndex(2)">

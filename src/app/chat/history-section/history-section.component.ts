@@ -13,7 +13,7 @@ import { DataFilteringService } from '../data-filtering.service';
   styleUrls: ['./history-section.component.css']
 })
 export class HistorySectionComponent implements OnInit {
-  selectedTab = 1;
+  selectedTab = 0;
   tabType = "interestShown";
   currentTab;
   searchControl = new FormControl();
@@ -57,11 +57,11 @@ export class HistorySectionComponent implements OnInit {
     this.currentTab = event;
     switch (event) {
       case 0:
-        this.tabType = 'contacted';
-        break;
-      case 1:
         this.tabType = 'interestShown';
         // this.changeToHistory();
+        break;
+      case 1:
+        this.tabType = 'contacted';
         break;
       case 2:
         this.tabType = 'rejected';
