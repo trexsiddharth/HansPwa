@@ -4,7 +4,7 @@
       <img src="../../assets/backN.svg" class="backArrow" alt="BACK">
       <p style="margin:auto 0 auto 5px">Back</p>
     </button> -->
-    <div class="col-12">
+    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
       <!-- <h6>Qualification</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Qualification</mat-label>
@@ -25,7 +25,7 @@
       </mat-form-field>
     </div>
 
-    <div class="col-12">
+    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
       <!-- <h6>Occupation</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Occupation</mat-label>
@@ -38,7 +38,7 @@
       </mat-form-field>
     </div>
 
-    <div class="col-12" *ngIf="fourPageService.getUserThrough()">
+    <div c[ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="fourPageService.getUserThrough()">
       <!-- <h6>Designation</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard"
         *ngIf="PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' ">
@@ -72,7 +72,7 @@
       जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |
     </p>
 
-    <div class="col-12">
+    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
       <!-- <h6>Yearly Income In Lakhs</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Yearly Income In Lakhs</mat-label>
@@ -93,7 +93,7 @@
       अगर लड़का /लड़की की सालाना इनकम 10 लाख है तोह यहाँ सिर्फ 10 भरे ।
     </p>
 
-    <div class="col-12" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
+    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
       <!-- <h6>Working City</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Working City</mat-label>
