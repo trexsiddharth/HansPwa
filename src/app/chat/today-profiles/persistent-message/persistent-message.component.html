@@ -292,11 +292,13 @@
                                             <input matInput type="text" formControlName="Email">
                                         </mat-form-field>
                                     </div>
-                                    <div class="col-12" *ngIf="personalProfileData.gender == 'Female'">
+                                    <div class="col-12" *ngIf="personalProfileData.gender == 'Female'" >
                                         <!-- <h6>Wish to go abroad?</h6> -->
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                           <mat-label>Wish to go abroad?</mat-label>
-                                          <mat-select formControlName="abroad">
+                                          <mat-select
+                                          [disabled]="personalProfileData.gender == 'Male'"
+                                           formControlName="abroad">
                                             <mat-option value="Yes">Yes</mat-option>
                                             <mat-option value="No">No</mat-option>
                                           </mat-select>
