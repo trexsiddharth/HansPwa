@@ -242,8 +242,7 @@ export class ChatDrawerComponent implements OnInit {
       const filterValue = value.toLowerCase();
       if (what === 0) {
         return this.allCountries.filter(option => option.name.toLowerCase().includes(filterValue));
-      }
-      else {
+      } else {
         return this.allStates.filter(option => option.name.toLowerCase().includes(filterValue));
       }
     }
@@ -256,7 +255,7 @@ export class ChatDrawerComponent implements OnInit {
   }
   countrySelected(value) {
     this.chatService.selected_country = this.search(value, 0);
-    const params = new HttpParams().set('country_id', this.chatService.selected_country.id);
+    const params = new HttpParams().set('country_id', this.chatService.selected_country ? this.chatService.selected_country.id : null);
     this.http.get('https://partner.hansmatrimony.com/api/getState', { params }).subscribe((response: any) => {
       console.log(response);
       this.allStates = response;
@@ -281,8 +280,7 @@ export class ChatDrawerComponent implements OnInit {
       console.log(response);
       if (this.allCities.length == 0) {
         this.allCities = response;
-      }
-      else {
+      } else {
         this.allCities.concat(response);
       }
       console.log(this.allCities);
@@ -306,8 +304,7 @@ export class ChatDrawerComponent implements OnInit {
     this.remove(toppings, topping);
     if (what === 0) {
       this.preferencesForm.value.state.setValue(toppings);
-    }
-    else {
+    } else {
       this.preferencesForm.value.city.setValue(toppings);
     } // To trigger change detection
   }
@@ -440,8 +437,8 @@ export class ChatDrawerComponent implements OnInit {
     form.append('food_choice', this.preferencesForm.value.food_choice);
     form.append('manglik', this.preferencesForm.value.manglik_pref);
     form.append('marital_status', this.preferencesForm.value.marital_status);
-    form.append('pref_country', this.chatService.selected_country.name);
-    form.append('pref_country_id', this.chatService.selected_country.id);
+    form.append('pref_country', this.chatService.selected_country ? this.chatService.selected_country.name : '');
+    form.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
     form.append('pref_state', this.chatService.selected_states);
     form.append('pref_state_id', this.chatService.selected_states_id);
     form.append('pref_city', this.chatService.selected_cities);
@@ -629,29 +626,38 @@ export class ChatDrawerComponent implements OnInit {
     console.log(this.personalDetailsList);
     console.log(this.familyDetailsList);
     this.personalDetailsLeft = [];
-    for (const v of this.personalDetailsList) {
-      if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] === 'null') {
+    if (this.personalProfileData) {
+      for (const v of this.personalDetailsList) {
+        if (this.personalProfileData.hasOwnProperty(v)) {
+          if (!this.personalProfileData[v] || this.personalProfileData[v] === 'null') {
+            this.personalDetailsLeft.push(v);
+          }
+        } else {
           this.personalDetailsLeft.push(v);
         }
-      } else {
-        this.personalDetailsLeft.push(v);
       }
     }
-    for (const v of this.familyDetailsList) {
-      if (this.familyProfileData.hasOwnProperty(v)) {
-        if (!this.familyProfileData[v] || this.familyProfileData[v] === 'null') {
+
+    if (this.familyDetailsList) {
+      for (const v of this.familyDetailsList) {
+        if (this.familyProfileData && this.familyProfileData.hasOwnProperty(v)) {
+          if (!this.familyProfileData[v] || this.familyProfileData[v] === 'null') {
+            this.familyDetailsLeft.push(v);
+          }
+        } else {
           this.familyDetailsLeft.push(v);
         }
-      } else {
-        this.familyDetailsLeft.push(v);
       }
     }
+
+    if (this.personalDetailsLeft) {
     for (const v of this.personalDetailsLeft) {
-      if (this.familyProfileData.hasOwnProperty(v)) {
+      if (this.familyProfileData && this.familyProfileData.hasOwnProperty(v)) {
         this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
       }
     }
+   }
+
     console.log('look Here2');
     console.log(this.personalDetailsLeft);
     console.log(this.familyDetailsLeft);
@@ -670,6 +676,9 @@ export class ChatDrawerComponent implements OnInit {
     };
     const personalDetilsP3 = ['birth_place', 'birth_time', 'manglik', 'food_choice'];
     const familyDetailsP3 = ['occupation_mother', 'occupation', 'family_income'];
+    if (this.personalProfileData && this.familyProfileData) {
+      
+    
     Object.entries(this.personalProfileData).forEach(
       ([key, value]) => {
         if (personalDetilsP3.includes(key)) {
@@ -691,6 +700,7 @@ export class ChatDrawerComponent implements OnInit {
           }
         }
       });
+    }
     console.log('Checking third page details', perDet + famDet);
     if (perDet + famDet >= 2) {
       localStorage.setItem('storedData', JSON.stringify(storingObj));
@@ -745,9 +755,8 @@ export class ChatDrawerComponent implements OnInit {
             }
             if (this.gender === 'Female') {
               if (this.preferenceProfileData.occupation) {
-                this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
-              }
-              else {
+                this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
+              } else {
                 this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
               }
             }
@@ -761,6 +770,9 @@ export class ChatDrawerComponent implements OnInit {
               this.allCountries = data.country;
             }
 
+            if (this.preferenceProfileData) {
+
+
             if (this.preferenceProfileData && this.preferenceProfileData.pref_city) {
               this.preferenceProfileData.pref_city = this.preferenceProfileData.pref_city.split(',');
             }
@@ -770,9 +782,9 @@ export class ChatDrawerComponent implements OnInit {
             if (this.preferenceProfileData && this.personalProfileData.marital_status != 'Never Married') {
               localStorage.setItem('showRemarrigePlan', '1');
             }
-            this.allStates = this.preferenceProfileData.pref_state;
-            this.allCities = this.preferenceProfileData.pref_city;
-            this.countrySelected(this.preferenceProfileData.pref_country);
+            this.allStates = this.preferenceProfileData ? this.preferenceProfileData.pref_state : '';
+            this.allCities = this.preferenceProfileData ? this.preferenceProfileData.pref_city : '';
+            this.countrySelected(this.preferenceProfileData ? this.preferenceProfileData.pref_country : '');
             this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
             this.chatService.selected_states = this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
 
@@ -782,6 +794,8 @@ export class ChatDrawerComponent implements OnInit {
                 this.chatService.selected_states_id += this.search(item, 1).id;
               }
             }, 2000);
+
+          }
             this.setCurrentPreferenceValue(null);
             this.specialCase();
             this.getAllCaste();

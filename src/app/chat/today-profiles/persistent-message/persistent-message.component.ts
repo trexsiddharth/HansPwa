@@ -330,15 +330,21 @@ export class PersistentMessageComponent implements OnInit {
   }
 
   onSubmit() {
+
+    if (this.personalProfileData && this.personalProfileData.gender === 'Male') {
+      this.personalForm.controls.abroad.disable();
+    }
+
     this.errors = [];
     console.log(this.personalForm.value);
     for (const control in this.personalForm.controls) {
       console.log(this.personalForm.controls[control].value);
+      console.log('disabled control', this.personalForm.controls[control].disabled);
       if (!this.personalForm.controls[control].valid || !this.personalForm.controls[control].value) {
         this.errors.push(control);
       }
     }
-    if (this.errors[0] && this.errors[0] != 'Email') {
+    if (this.errors[0] && this.errors[0] != 'Email' && this.errors[0] !== 'abroad' ) {
       this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
     }
     else if (this.personalForm.valid) {
@@ -388,7 +394,7 @@ export class PersistentMessageComponent implements OnInit {
         ? this.personalForm.value.WorkingCity : this.personalProfileData.working_city);
 
       personalDataForm.append('email', this.personalForm.value.Email);
-      personalDataForm.append('abroad', this.personalForm.value.abroad);
+      personalDataForm.append('abroad', this.personalForm.value.abroad ? this.personalForm.value.abroad  : '');
       personalDataForm.append('mobile', this.personalProfileData.mobile);
       personalDataForm.append('whatsapp', this.personalProfileData.whats_app_no ? this.personalProfileData.whats_app_no : this.personalProfileData.mobile);
       personalDataForm.append('profession', this.personalForm.value.Profession !== 'Others'
