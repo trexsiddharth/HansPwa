@@ -206,7 +206,13 @@ export class CompatibilityVerifyComponent implements OnInit {
           (data: any) => {
             console.log(data);
             if (data.updatePerosnalDetails_status === 'Y') {
+              this.fourPageService.profile.college = this.verifyForm.value.college;
+              this.fourPageService.profile.company = this.verifyForm.value.company;
               this.onSubmitFamily();
+            } else {
+              this.ngxNotificationService.error(
+                'Something Went Wrong, Try Again Later'
+              );
             }
           },
           (error: any) => {
@@ -258,6 +264,10 @@ export class CompatibilityVerifyComponent implements OnInit {
           console.log('Family Deatils Updated successfully');
           if (data.updateFamilyDetails_status === 'Y') {
             this.updateVerifyFormData(newFamilyForm);
+          } else {
+            this.ngxNotificationService.error(
+              'Something Went Wrong, Try Again Later'
+            );
           }
         },
         (error: any) => {
