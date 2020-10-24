@@ -61,8 +61,6 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
     this.isMobile = this.deviceService.isMobile();
-
-    this.persistentDialogOpeningLogic('Shortlist');
   }
   showTinderAnimation() {
     if (!localStorage.getItem('shownTinderAniamtion')) {
@@ -143,23 +141,23 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + this.setName(this.profileName) + '!', 'Complete Profile');
       return;
     }
-    if (i == 1 && this.isMobile) {
-      this.openPersistentDialog('Liked ' + this.setName(this.profileName) + '?', 'Get notified easily if ' + this.setName(this.profileName) + ' likes you back!', 'Install App Now');
-      return;
-    }
-    else if (i == 2) {
-      this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + this.setName(this.profileName) + '.', 'Get Membership');
-      return;
-    }
+    // if (i == 1 && this.isMobile) {
+    //   this.openPersistentDialog('Liked ' + this.setName(this.profileName) + '?', 'Get notified easily if ' + this.setName(this.profileName) + ' likes you back!', 'Install App Now');
+    //   return;
+    // }
+    // else if (i == 2) {
+    //   this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + this.setName(this.profileName) + '.', 'Get Membership');
+    //   return;
+    // }
   }
   rejectListPopup(i: number) {
     if (i == 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
       // this.openPersistentDialog('Didn\'t Like ' + this.profileName + '?', 'Become a paid member and get better matches', 'Choose Plan');
     }
-    if (i == 1) {
-      this.openPersistentDialog('Didn\'t Like ' + this.setName(this.profileName) + '?', 'Become a paid member and get better matches', 'Choose Plan');
-    }
+    // if (i == 1) {
+    //   this.openPersistentDialog('Didn\'t Like ' + this.setName(this.profileName) + '?', 'Become a paid member and get better matches', 'Choose Plan');
+    // }
   }
   persistentDialogOpeningLogic(reply: string) {
     if (this.actionCount === -2 && this.router.url.match('first')) {
