@@ -61,6 +61,8 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
     this.isMobile = this.deviceService.isMobile();
+
+    this.persistentDialogOpeningLogic('Shortlist');
   }
   showTinderAnimation() {
     if (!localStorage.getItem('shownTinderAniamtion')) {
@@ -292,7 +294,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   };
   handleShift() {
     this.transitionInProgress = false;
-    this.toggleChoiceIndicator(false, false)
+    this.toggleChoiceIndicator(false, false);
     if (this.shiftRequired) {
       this.shiftRequired = false;
       this.cards.shift();

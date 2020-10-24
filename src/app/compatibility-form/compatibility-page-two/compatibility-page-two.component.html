@@ -105,7 +105,7 @@
     </div>
 
 
-    <div class="col-md-12" *ngIf="fourPageService.profile.gender === 'Female'">
+    <div class="col-md-12" *ngIf="fourPageService.profile.gender === 'Female' && fourPageService.getUserThrough() ">
       <!-- <h6>Wish to go abroad?</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Wish to go abroad?</mat-label>
@@ -117,7 +117,7 @@
       </mat-form-field>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="fourPageService.getUserThrough() ">
       <mat-form-field class="full-width" style="margin-top: 25px;" appearance="standard">
         <mat-label>About<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
         <textarea rows="5" type="text" matInput formControlName="About" name="About">

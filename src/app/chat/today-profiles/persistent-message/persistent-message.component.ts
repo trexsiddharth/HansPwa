@@ -109,6 +109,7 @@ export class PersistentMessageComponent implements OnInit {
       FatherStatus: [''],
       MotherStatus: [''],
       FamilyIncome: ['', Validators.compose([Validators.max(999)])],
+      About: ('')
     });
     this.personalForm = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -120,6 +121,7 @@ export class PersistentMessageComponent implements OnInit {
       Locality: [''],
       Company: [''],
       Email: ['', Validators.email],
+      abroad: ('')
     });
     this.familyForm = this._formBuilder.group({
       family_city: [''],
@@ -181,6 +183,7 @@ export class PersistentMessageComponent implements OnInit {
     else {
       if (localStorage.getItem('storedData') && this.data.button === 'Complete Profile') {
         this.storedData = JSON.parse(localStorage.getItem('storedData'));
+        console.log(this.chatService.personalProfileData);
         this.completeProfile = true;
         this.PageThree.patchValue({
           BirthPlace: this.storedData.birth_place,
@@ -190,6 +193,7 @@ export class PersistentMessageComponent implements OnInit {
           FatherStatus: this.storedData.occupation,
           MotherStatus: this.storedData.occupation_mother,
           FamilyIncome: this.storedData.family_income,
+          About: this.chatService.personalProfileData.about
         });
       }
       else if (this.chatService.pageThreeFilled && this.data.button === 'Complete Profile') {
@@ -324,6 +328,7 @@ export class PersistentMessageComponent implements OnInit {
       });
     }, 500);
   }
+
   onSubmit() {
     this.errors = [];
     console.log(this.personalForm.value);
@@ -383,6 +388,7 @@ export class PersistentMessageComponent implements OnInit {
         ? this.personalForm.value.WorkingCity : this.personalProfileData.working_city);
 
       personalDataForm.append('email', this.personalForm.value.Email);
+      personalDataForm.append('abroad', this.personalForm.value.abroad);
       personalDataForm.append('mobile', this.personalProfileData.mobile);
       personalDataForm.append('whatsapp', this.personalProfileData.whats_app_no ? this.personalProfileData.whats_app_no : this.personalProfileData.mobile);
       personalDataForm.append('profession', this.personalForm.value.Profession !== 'Others'
@@ -527,6 +533,7 @@ export class PersistentMessageComponent implements OnInit {
         firststepdata.append('occupation_mother', this.PageThree.value.MotherStatus);
       }
       firststepdata.append('family_income', this.PageThree.value.FamilyIncome);
+      firststepdata.append('about', this.PageThree.value.About);
       // tslint:disable-next-line: max-line-length
       return this.http.post('https://partner.hansmatrimony.com/api/formThreeProfile', firststepdata).subscribe((res: any) => {
         console.log('first', res);
