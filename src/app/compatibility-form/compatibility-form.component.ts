@@ -80,6 +80,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   PageOne: FormGroup;
   PageTwo: FormGroup;
 
+
   // birth date
   birthDate: any;
   currentAge: number;
@@ -127,6 +128,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   long;
   isDisable = false;
   isAllCastePref = false;
+
 
   // stop true caller polling
   stopPolling = new Subject();
@@ -595,11 +597,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   private goToNextPage() {
-    if (!this.PageOne.valid) {
-      return;
-    }
-    const button = document.querySelector<HTMLButtonElement>('#viewButton');
-    button.click();
+    // if (!this.PageOne.valid) {
+    //   return;
+    // }
+    // const button = document.querySelector<HTMLButtonElement>('#viewButton');
+    // button.click();
   }
 
   openVerificationDialog(isLead: string) {
@@ -1525,6 +1527,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     };
     this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
   }
+
 
 
 }

@@ -4,6 +4,8 @@ import {
   ViewChild,
   OnDestroy,
   ElementRef,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -195,6 +197,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         if (status) {
           if (!fourPageService.getProfile().about) {
             this.setAbout();
+          }
+          if (!fourPageService.getUserThrough()) {
+            this.firstStep();
           }
         }
       }
@@ -627,6 +632,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: max-line-length
       About: `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.OtherDesignation} ${aboutObject.working}.`
     });
+
   }
   setFormOneData(userProfile: Profile) {
     this.workplace = userProfile.workingCity ? userProfile.workingCity : '';
