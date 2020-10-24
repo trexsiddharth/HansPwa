@@ -70,6 +70,12 @@
     left: 0;
     right: 0;
   }
+
+  .contactShown{
+    border-radius: 10px;
+    background-color: rgba(88, 209, 253, 0.2);
+    padding: 10px 0px !important;
+}
   
   /* .tinder--buttons button {
     border-radius: 50%;

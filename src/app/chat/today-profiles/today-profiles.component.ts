@@ -130,6 +130,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       }
     );
+
     //getting and using the authData small tasks.
     if (!localStorage.getItem('authData')) {
       this.checkUrl().subscribe(
@@ -273,8 +274,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.chatService.actionCount = this.actionCount;
       console.log('setting action count value in chat service');
     }
-
-    
 
   }
   // to save the state of which popups are to be shown
@@ -686,6 +685,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
             this.showConfetti.next(true);
             setTimeout(() => {
               this.showConfetti.next(false);
+              this.itemService.shownConfetti.emit(true);
             }, 3000);
           }
 

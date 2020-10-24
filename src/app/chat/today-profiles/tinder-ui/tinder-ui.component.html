@@ -140,7 +140,7 @@
                             </span>
                         </div>
 
-                        <div class="row field">
+                        <div class="row field" id="contactedSection"  [ngClass]="{'contactShown': (itemService.shownConfetti | async) }">
                             <div class="col-6">
                                 <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
                                 <span class="title">{{item.mobile}}</span>

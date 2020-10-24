@@ -29,6 +29,8 @@ export class FindOpenHistoryProfileService {
   countUpdated = new EventEmitter();
   setTab = new EventEmitter();
 
+  shownConfetti = new EventEmitter();
+
   popupOpen: boolean = false;
 
   tutorialIndex = -1;

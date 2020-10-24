@@ -40,11 +40,11 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
 
   carouselSize;
   constructor(private renderer: Renderer2,
-    public itemService: FindOpenHistoryProfileService,
-    public languageService: LanguageService,
-    public chatService: ChatServiceService,
-    private deviceService: DeviceDetectorService,
-    private router: Router) {
+              public itemService: FindOpenHistoryProfileService,
+              public languageService: LanguageService,
+              public chatService: ChatServiceService,
+              private deviceService: DeviceDetectorService,
+              private router: Router) {
   }
   userId;
   userIsLead;
@@ -61,6 +61,21 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
     this.isMobile = this.deviceService.isMobile();
+
+    this.itemService.shownConfetti.subscribe(
+      (response: boolean) => {
+        console.log('shown confetti request', response);
+        if (response) {
+            console.log('shown confetti');
+            setTimeout(() => {
+                document.getElementById('contactedSection').scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center'
+                });
+            }, 1000);
+          }
+      }
+    );
   }
   showTinderAnimation() {
     if (!localStorage.getItem('shownTinderAniamtion')) {
