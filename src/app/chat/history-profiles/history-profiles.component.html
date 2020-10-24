@@ -262,22 +262,37 @@
 
                 <div class="historyButtons">
 
+                    <!-- <button mat-raised-button class="btn" (click)="profileReAnswer(item,'NO',i)" style="background-color: #C8C8C8;
+                    padding: 20px;
+                     border-radius: 10px;"
+                        *ngIf="!(type==='interestReceived' &&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()) && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
+                        <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
+                    </button> -->
+
                     <button mat-raised-button class="btn" (click)="profileReAnswer(item,'NO',i)" style="background-color: #C8C8C8;
                     padding: 20px;
                      border-radius: 10px;"
-                        *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()) && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
+                        *ngIf="type !='interestReceived' && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
                         <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
                     </button>
 
-                    <button mat-raised-button class="btn" (click)="profileReAnswer(item,'YES',i)" style="background-color: #58D1FD;
+                    <!-- <button mat-raised-button class="btn" (click)="profileReAnswer(item,'YES',i)" style="background-color: #58D1FD;
                 margin-top: 20px;
                 padding: 20px;
                  border-radius: 10px;"
                         *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
                 null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'contacted'">
                         <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
-                    </button>
+                    </button> -->
+
+                    <button mat-raised-button class="btn" (click)="profileReAnswer(item,'YES',i)" style="background-color: #58D1FD;
+                    margin-top: 20px;
+                    padding: 20px;
+                     border-radius: 10px;"
+                            *ngIf="type !== 'contacted'">
+                            <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+                        </button>
 
                     <button mat-raised-button class="btn" (click)="call(i)" style="background-color: #58D1FD;
                 margin-top: 20px;
@@ -684,12 +699,12 @@
 
                 <div class="historyButtons">
 
-                    <button mat-raised-button class="btn" (click)="reponseToNormal(item,'NO',i)" style="background-color: #C8C8C8;
+                    <!-- <button mat-raised-button class="btn" (click)="reponseToNormal(item,'NO',i)" style="background-color: #C8C8C8;
                     padding: 20px;
                      border-radius: 10px;"
                         >
                         <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
-                    </button>
+                    </button> -->
 
                     <button mat-raised-button class="btn" (click)="reponseToNormal(item,'YES',i)" style="background-color: #58D1FD;
                 margin-top: 20px;
@@ -698,11 +713,11 @@
                         <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
                     </button>
 
-                    <button mat-raised-button class="btn" (click)="reponseToNormal(item,'SHORTLIST',i)" style="background-color: #D313AE;margin-top: 20px;
+                    <!-- <button mat-raised-button class="btn" (click)="reponseToNormal(item,'SHORTLIST',i)" style="background-color: #D313AE;margin-top: 20px;
                 padding: 20px;
                  border-radius: 10px;">
                         <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
-                    </button>
+                    </button> -->
 
                 </div>
             </div>

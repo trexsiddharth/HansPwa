@@ -272,6 +272,17 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     );
   }
   reponseToNormal(item, answer, index) {
+
+    if (this.itemService.getPersonalized() === true &&
+      answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+      this.ngxNotificationService.warning('You don\'t have enough credits ');
+      return;
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+      && answer === 'YES' && !this.popupOpened) {
+      this.itemService.openTodaysPopupAd();
+      return;
+    }
+
     this.spinner.show();
     this.panelOpenState = null;
     const reAnswerData = new FormData();
