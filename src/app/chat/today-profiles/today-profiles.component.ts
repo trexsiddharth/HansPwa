@@ -717,8 +717,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           && data.buttons === 'History'
           && (data.get_status_count.TPL === 0 || data.get_status_count.TPL === '0')
           && data.is_rated === 0) {
-
-            this.itemService.openRateUsDialog(true);
+              // rate us for free users
+            // this.itemService.openRateUsDialog(true);
           }
         }
         //completely useless lines of code

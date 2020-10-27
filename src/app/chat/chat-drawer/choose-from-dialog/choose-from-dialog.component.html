@@ -12,11 +12,48 @@
         width: 110px;" src="../../../../assets/new icons/word_icon.svg" alt="world">
     </div>
     <p id="firstLine" style="margin-top: 20px;">
-        Rate us 5 stars to get 3 contacts for free
+        Choose from anywhere in the world
     </p>
 
-    <p id="smallTC">
-        T&C apply - 1 gift profile contact per day
-    </p>
+    <div class="planArea" style="height:54vh;overflow-y:scroll">
+        <div *ngFor="let item of plansOnline; let i = index">
+            <div class="planrow text-dark"
+                style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;">
+                <div class="plancolumn">
+                    <b>{{item.plan_name}} Plan</b><br />
+                    <a>{{item.contacts}} Contacts</a>
+                </div>
+                <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+                    <b class="specialCase"
+                        style="font-size: large; color: #5b6d78 !important;vertical-align: middle !important;">₹
+                        {{setAmount(i)}}</b>
+                    <br />
+                    <a style="
+                  text-decoration: line-through;
+                  font-size: medium;
+                  color: #596a76 !important;vertical-align: middle !important;
+                ">₹ {{item.amount}}</a>
+                    <div class="" style="
+      background-color: #f0f1f0;
+      border-radius: 18px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      ">
+                        <div class="month">
+                            <a>{{item.validity}} months</a>
+                        </div>
+                        <button id="subs" class="btn btn-primary btn-small" (click)="container(i)"
+                            style="vertical-align: middle !important;">
+                            BUY
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="planRow2">
+                <a style="color:#5b6d78!important">{{setContent(i)}}. Choose any location in the world.</a>
+            </div>
+        </div>
+       
+    </div>
     
     </div>

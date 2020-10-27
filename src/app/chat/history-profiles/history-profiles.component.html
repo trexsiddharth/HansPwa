@@ -249,8 +249,8 @@
                         who
                         likes you</p>
 
-                        <div *ngIf="type==='interestReceived' && itemService.getCredits() != 
-                        null && itemService.getCredits().toString() != '0' && itemService.getPersonalized()">  
+                        <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
+                        null && itemService.getCredits().toString() != '0')  || type == 'contacted' || type == 'rejected' || type == 'interestShown'">  
                     <span>
                         {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
                     </span><br>
@@ -693,8 +693,8 @@
                         Upgrade to see
                         who
                         likes you</p>
-                        <div *ngIf="type==='interestReceived' && itemService.getCredits() != 
-                        null && itemService.getCredits().toString() != '0' && itemService.getPersonalized()">
+                        <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
+                        null && itemService.getCredits().toString() != '0') || type == 'contacted' || type == 'rejected' || type == 'interestShown'">
                     <span>
                         {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
                     </span><br>

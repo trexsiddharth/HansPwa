@@ -993,24 +993,53 @@ export class ChatDrawerComponent implements OnInit {
 
   }
   countryClicked() {
-    this.openChooseFromAnyWhereDialog();
+    console.log('Country Clicked');
+    const authData = JSON.parse(localStorage.getItem('authData'));
+    if (authData.paid_status !== 'Paid') {
+      const countryId: HTMLInputElement = document.querySelector('#countryId');
+      this.searchStateText.disable();
+      this.searchCityText.disable();
+      countryId.blur();
+      this.openChooseFromAnyWhereDialog();
+      return;
+    }
+  }
+
+  stateClicked() {
+    console.log('State Clicked');
+    const authData = JSON.parse(localStorage.getItem('authData'));
+    if (authData.paid_status !== 'Paid') {
+      this.searchStateText.disable();
+      this.searchCityText.disable();
+      const countryId: HTMLInputElement = document.querySelector('#stateId');
+      countryId.blur();
+      this.openChooseFromAnyWhereDialog();
+      return;
+    }
+  }
+
+  cityClicked() {
+    console.log('City Clicked');
+    const authData = JSON.parse(localStorage.getItem('authData'));
+    if (authData.paid_status !== 'Paid') {
+      const countryId: HTMLInputElement = document.querySelector('#cityId');
+      countryId.blur();
+      this.openChooseFromAnyWhereDialog();
+      return;
+    }
   }
   openChooseFromAnyWhereDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
       dialogConfig.minWidth = '30vw';
+      dialogConfig.maxWidth = '40vw';
       dialogConfig.minHeight = '80vh';
     } else {
       dialogConfig.minWidth = '90vw';
       dialogConfig.minHeight = '90vh';
     }
-    
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
-    dialogConfig.data = {
-      preferencesDetails: this.preferenceProfileData,
-      editIndex: 100,
-    };
     const dialogRef = this.matDialog.open(
       ChooseFromDialogComponent,
       dialogConfig

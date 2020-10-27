@@ -369,10 +369,10 @@
                   </select>
                 </div>
               </div> -->
-              <div class="row information" (click)="countryClicked()">
+              <div class="row information">
                 <div class="col-10">
                   <h6>Country:</h6>
-                  <input type="text" class="form-control" formControlName="country" [matAutocomplete]="country">
+                  <input type="text" id="countryId" (click)="countryClicked()" class="form-control" formControlName="country" [matAutocomplete]="country">
                   <mat-autocomplete (optionSelected)='countrySelected($event.option.value)' autoActiveFirstOption
                     #country="matAutocomplete">
                     <mat-option *ngFor="let country of countries | async" [value]="country.name" required>
@@ -384,7 +384,7 @@
               <div class="row information" *ngIf="preferencesForm.value.country">
                 <div class="col-10">
                   <h6>State:</h6>
-                  <mat-select type="text" class="form-control" [multiple]="true"
+                  <mat-select id="stateId" type="text" (click)="stateClicked()" class="form-control" [multiple]="true"
                     (selectionChange)="stateSelectionChanged($event.value)" formControlName="state" #multiSelect>
                     <mat-option>
                       <ngx-mat-select-search noEntriesFoundLabel="No States Found" placeholderLabel="Search States..."
@@ -414,10 +414,10 @@
               <div class="row information" *ngIf="preferencesForm.value.state">
                 <div class="col-10">
                   <h6>City:</h6>
-                  <mat-select type="text" class="form-control" [multiple]="true"
+                  <mat-select id="cityId" type="text" (click)="cityClicked()" class="form-control" [multiple]="true"
                     (selectionChange)="citySelectionChanged($event.value)" formControlName="city" #multiSelect>
                     <mat-option>
-                      <ngx-mat-select-search noEntriesFoundLabel="No cities Found" placeholderLabel="Search cities..."
+                      <ngx-mat-select-search id="citySearch" noEntriesFoundLabel="No cities Found" placeholderLabel="Search cities..."
                         [formControl]="searchCityText">
                         <mat-icon ngxMatSelectSearchClear>close</mat-icon>
                       </ngx-mat-select-search>
