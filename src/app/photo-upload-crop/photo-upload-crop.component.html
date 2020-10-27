@@ -1,5 +1,5 @@
 <div class="container"
-    style="background: #ffffff;padding:1%;border-radius:20px!important;color:rgba(43, 39, 39, 0.774)">
+    style="background: #ffffff;padding:1%;border-radius:20px!important;color:rgba(43, 39, 39, 0.774);overflow: hidden;">
     <div class="row" style="margin-top: 5%;" *ngIf="!(croppedImage$ | async)">
         <div class="text-center col-md-12">
             <input style="margin: 10px 25%; display: none;" #file type="file" id="file" accept="image/*"
@@ -7,7 +7,7 @@
             <button class="uploadPhotoBtn" (click)="file.click()">Choose File</button>
         </div>
     </div>
-    <div class="row" style="margin-top: 5%;">
+    <div class="row" style="margin-top: 2%;">
         <div class="text-center col-md-8">
             <h5 *ngIf="(croppedImage$ | async)">Image Preview</h5>
             <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
@@ -18,11 +18,13 @@
         <div class="text-center col-md-4" *ngIf="(croppedImage$ | async)">
             <h5> Cropped Image Preview</h5>
             <img [src]="croppedImage$ | async" />
-        </div>
-    </div>
-    <div class="row" style="margin-top: 5%;" *ngIf="(croppedImage$ | async)">
-        <div class="text-center col-md-12">
-            <button class="uploadPhotoBtn" style="width:100px;" (click)="closeDialog()">Done</button>
+
+            <div class="row" style="margin-top: 5%;" *ngIf="(croppedImage$ | async)">
+                <div class="text-center col-md-12">
+                    <button class="uploadPhotoBtn" style="width:100px;" (click)="closeDialog()">Done</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

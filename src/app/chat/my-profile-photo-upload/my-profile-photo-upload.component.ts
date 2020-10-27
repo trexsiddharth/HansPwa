@@ -286,13 +286,15 @@ export class MyProfilePhotoUploadComponent implements OnInit {
       result => {
         if (result.matches) {
           console.log('screen is greater than  1024px');
-          dialogConfig.minWidth = '40vw';
+          dialogConfig.minWidth = '70vw';
           dialogConfig.minHeight = '10vh';
+          dialogConfig.maxHeight = '90vh';
           dialogConfig.disableClose = false;
         } else {
           console.log('screen is less than  1024px');
           dialogConfig.minWidth = '90vw';
           dialogConfig.minHeight = '10vh';
+          dialogConfig.maxHeight = '90vh';
           dialogConfig.disableClose = true;
         }
       }

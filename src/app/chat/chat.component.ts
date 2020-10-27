@@ -668,7 +668,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
         this.analyticsEvent('Today\'s Special Section Visited');
         this.changeToBot();
         if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-          this.itemService.openTodaysPopupAd();
+          // this.itemService.openTodaysPopupAd();
         }
 
         break;

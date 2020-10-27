@@ -293,7 +293,7 @@ main{
         position: fixed;
         width: 90%;
         background-color: transparent;
-        z-index: 99999;
+        z-index: 999;
         bottom: 0px;
         background-image: linear-gradient(0deg, white,transparent);
     }
@@ -306,7 +306,7 @@ main{
         position: relative;
         width: 100%;
         background-color: transparent;
-        z-index: 99999;
+        z-index: 999;
         bottom: 0px;
         background-image: linear-gradient(0deg, white,transparent);
         margin-top: 10px;

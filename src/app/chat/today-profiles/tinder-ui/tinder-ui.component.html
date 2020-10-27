@@ -178,6 +178,14 @@
                                 <span class="title">{{item.weight}} Kg</span>
                             </div>
                         </div>
+
+                        <div class="row field" *ngIf="item.marital_status === 'Divorcee'">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../../assets/birthplace.svg"
+                                    alt="marital status">
+                                <span class="title">{{item.children}}</span>
+                            </div>
+                        </div>
                     </div>
                     <div id="careerSection">
                         <div style="display: flex;

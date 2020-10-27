@@ -251,6 +251,14 @@ border-top-right-radius: 20px;
                 </div>
             </div>
 
+            <div class="row field" *ngIf="item.profile.marital_status === 'Divorcee'">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../../assets/birthplace.svg"
+                        alt="marital status">
+                    <span class="title">{{item.profile.children}}</span>
+                </div>
+            </div>
+
 
         </div>
 
