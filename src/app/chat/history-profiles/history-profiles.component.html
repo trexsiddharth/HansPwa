@@ -248,6 +248,9 @@
                         Upgrade to see
                         who
                         likes you</p>
+
+                        <div *ngIf="type==='interestReceived' && itemService.getCredits() != 
+                        null && itemService.getCredits().toString() != '0' && itemService.getPersonalized()">  
                     <span>
                         {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
                     </span><br>
@@ -258,6 +261,8 @@
                         {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
                         | {{setIncome(item.profile.monthly_income)}} LPA
                     </span>
+
+                </div>
                 </div>
 
                 <div class="historyButtons">
@@ -688,6 +693,8 @@
                         Upgrade to see
                         who
                         likes you</p>
+                        <div *ngIf="type==='interestReceived' && itemService.getCredits() != 
+                        null && itemService.getCredits().toString() != '0' && itemService.getPersonalized()">
                     <span>
                         {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
                     </span><br>
@@ -698,6 +705,8 @@
                         {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
                         | {{setIncome(item.profile.monthly_income)}} LPA
                     </span>
+
+                </div>
                 </div>
 
                 <div class="historyButtons">
