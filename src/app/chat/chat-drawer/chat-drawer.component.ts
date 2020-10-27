@@ -64,7 +64,7 @@ export class ChatDrawerComponent implements OnInit {
   preferencesForm: FormGroup;
   // disableSave = false;
 
-  disableSave = new BehaviorSubject<boolean>(true);
+  disableSave = new Subject<boolean>();
   disableSave$: Observable<boolean>;
   firstTime = true;
   getcastes: any = [];
@@ -338,7 +338,7 @@ export class ChatDrawerComponent implements OnInit {
 
     this.disableSave$.subscribe(
       (res: boolean) => {
-        console.log(res);
+        console.log('save btn', res);
       }
     );
     this.chatService.opensidenav$.subscribe((val) => {
@@ -831,6 +831,7 @@ export class ChatDrawerComponent implements OnInit {
       this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
     }
 
+    this.disableSave.next(false);
     const newPrefForm = new FormData();
     newPrefForm.append(
       'identity_number',
@@ -889,15 +890,20 @@ export class ChatDrawerComponent implements OnInit {
           console.log('Preference Details updated successfully');
           // this.changed();
           this.sidenav.close();
-          this.disableSave.next(false);
           this.getUserProfileData();
           this.chatService.setShouldHitSendMessagesToTrue();
+
+          // added here cause save btn keeps enabling due to valuesChanges observer applied to the form. -> subscribetochanges()
+          setTimeout(() => {
+            this.disableSave.next(false);
+          }, 1000);
         },
         (error: any) => {
           console.log(error);
           this.ngxNotificationService.error(
             'Something Went Wrong, Try Again Later'
           );
+          this.disableSave.next(false);
         }
       );
   }

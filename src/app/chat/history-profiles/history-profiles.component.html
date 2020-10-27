@@ -333,7 +333,8 @@
 
 </main>
 
-<div *ngIf="!section && profile && profile.length < 1 && selectedTab == 0">
+<div *ngIf="(!section && profile && profile.length < 1 && selectedTab == 0) 
+|| ((profileViewersList$ | async) && (profileViewersList$ | async).length < 1 && selectedTab == 1) ">
     <main *ngIf="itemService.getPersonalized()">
         <div style="position: relative;display: block;margin: 30% auto;">
             <p class="text-center">
@@ -393,8 +394,10 @@
     </div>  -->
         <div style="position: relative;display: block;margin: 2%;margin-bottom:10px">
             <p class="text-center noProfile" style="margin-bottom:0.4rem">
-                <a style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
+                <a *ngIf="selectedTab == 0" style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
                     visibility and</a><br>
+                    <a *ngIf="selectedTab == 1" style="font-size:1.1rem">You have no viewers so far. Become our prime member to boost you profile
+                        visibility and</a><br>
                 Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>
             </p>
             <p class="text-center">

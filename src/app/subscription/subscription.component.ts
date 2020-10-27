@@ -76,7 +76,7 @@ export class SubscriptionComponent implements OnInit {
     });
     this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers }).subscribe((res: any) => {
       this.plans = res;
-      if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') == '1') {
+      if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') === '1') {
         for (let i = 0; i < this.plans.length; i++) {
           if (this.plans[i].plan_type === "Self Service Plan") {
             this.plansOnline.push(this.plans[i]);

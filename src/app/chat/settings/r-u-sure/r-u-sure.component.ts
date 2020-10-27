@@ -19,7 +19,7 @@ export class RUSureComponent implements OnInit {
               private ngxNotificationService: NgxNotificationService) {
     this.deleteForm = this.formBuilder.group({
       // number: ['', Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])]
-      number: ['', Validators.compose([Validators.required])]
+      number: ['123', Validators.compose([Validators.required])]
 
     });
   }

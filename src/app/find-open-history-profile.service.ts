@@ -254,6 +254,12 @@ export class FindOpenHistoryProfileService {
       'मेरी पसंद(' + count.shortlistCount + ')'
       : 'Shortlisted(' + count.shortlistCount + ')';
   }
+  getYourLikesCount() {
+    let count = JSON.parse(localStorage.getItem('count'));
+    return localStorage.getItem('language') === 'hindi' ?
+      'मेरी पसंद(' + count.shortlistCount + ')'
+      : 'Your Likes(' + count.shortlistCount + ')';
+  }
   getShortedCount() {
     let count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?

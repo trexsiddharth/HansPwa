@@ -131,6 +131,9 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         for (let i = 0; i < this.plans.length; i++) {
           if (this.plans[i].plan_type === 'Self Service Plan') {
             this.plansOnline.push(this.plans[i]);
+            if (!localStorage.getItem('showRemarrigePlan')) {
+               this.plansOnline =  (this.plansOnline as []).filter((item: any) => !(item.plan_name as string).includes('Re-Marriage'));
+            }
           }
         }
         console.log(this.plansOnline);
