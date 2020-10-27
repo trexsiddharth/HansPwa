@@ -729,8 +729,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
     if (phoneNumber != null) {
       if (phoneNumber.toString().length < 10 ||
-      phoneNumber.toString().length > 14
-      || this.PageOne.value.phone) {
+      phoneNumber.toString().length > 14) {
       console.log(this.PageOne.value.phone);
       this.ngxNotificationService.error('Enter A Valid Mobile Number');
       return;

@@ -42,6 +42,8 @@ import { RUSureComponent } from './settings/r-u-sure/r-u-sure.component';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { HistorySectionComponent } from './history-section/history-section.component';
 import { AskDeleteDialogComponent } from './my-profile-photo-upload/ask-delete-dialog/ask-delete-dialog.component';
+import { ChooseFromDialogComponent } from './chat-drawer/choose-from-dialog/choose-from-dialog.component';
+import { ChooseForComponent } from '../compatibility-form/choose-for/choose-for.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -84,7 +86,8 @@ import { AskDeleteDialogComponent } from './my-profile-photo-upload/ask-delete-d
     SettingsComponent,
     RUSureComponent,
     HistorySectionComponent,
-    AskDeleteDialogComponent
+    AskDeleteDialogComponent,
+    ChooseFromDialogComponent
   ],
   entryComponents: [
     MessageDialogComponent,
@@ -101,7 +104,8 @@ import { AskDeleteDialogComponent } from './my-profile-photo-upload/ask-delete-d
     OkdialogCsComponent,
     PersistentMessageComponent,
     RUSureComponent,
-    AskDeleteDialogComponent
+    AskDeleteDialogComponent,
+    ChooseFromDialogComponent
   ],
   providers: [
     FindOpenHistoryProfileService,

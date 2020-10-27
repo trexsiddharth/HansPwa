@@ -11,6 +11,7 @@ import { timeout, retry, catchError, takeUntil, shareReplay, map, startWith } fr
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, observable, Observable, ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
+import { ChooseFromDialogComponent } from './choose-from-dialog/choose-from-dialog.component';
 
 @Component({
   selector: 'app-chat-drawer',
@@ -991,15 +992,19 @@ export class ChatDrawerComponent implements OnInit {
     });
 
   }
-  openPreferenceDialog() {
+  countryClicked() {
+    this.openChooseFromAnyWhereDialog();
+  }
+  openChooseFromAnyWhereDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.minWidth = '50vw';
-      dialogConfig.maxWidth = '50vw';
+      dialogConfig.minWidth = '30vw';
+      dialogConfig.minHeight = '80vh';
     } else {
-      dialogConfig.minWidth = '100vw';
+      dialogConfig.minWidth = '90vw';
+      dialogConfig.minHeight = '90vh';
     }
-    dialogConfig.minHeight = '100vh';
+    
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
@@ -1007,7 +1012,7 @@ export class ChatDrawerComponent implements OnInit {
       editIndex: 100,
     };
     const dialogRef = this.matDialog.open(
-      EditPreferenceDialogComponent,
+      ChooseFromDialogComponent,
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((res) => {
