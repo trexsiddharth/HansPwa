@@ -38,7 +38,7 @@
       </mat-form-field>
     </div>
 
-    <div c[ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="fourPageService.getUserThrough()">
+    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="fourPageService.getUserThrough()">
       <!-- <h6>Designation</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard"
         *ngIf="PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' ">

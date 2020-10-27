@@ -109,6 +109,7 @@
         overflow-y: hidden;
         /* padding: 2%;  */
         margin: 1%;
+        padding-left: 80px;
         -ms-overflow-style: none!important;  
         scrollbar-width: none!important; 
     }
