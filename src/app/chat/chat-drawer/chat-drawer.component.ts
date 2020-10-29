@@ -31,25 +31,9 @@ export class ChatDrawerComponent implements OnInit {
               public snackbar: MatSnackBar,
               public matDialog: MatDialog,
   ) {
-    this.preferencesForm = this._formBuilder.group({
-      food_choice: [''],
-      age_min: [''],
-      age_max: [''],
-      income_min: [''],
-      income_max: ['', Validators.compose([Validators.maxLength(4)])],
-      caste_pref: [''],
-      manglik_pref: [''],
-      occupation: [''],
-      religion: [''],
-      height_min: [''],
-      height_max: [''],
-      marital_status: [''],
-      working: [''],
-      country: [''],
-      state: [''],
-      city: [''],
-    });
   }
+
+  authData;
   @Input() drawerReference: MatSidenav;
   prefsRef: MatSidenav;
   username;
@@ -215,9 +199,13 @@ export class ChatDrawerComponent implements OnInit {
   // Variables for city filter:
   allCountries: any = [];
   allStates: any = [];
-  states: Observable<any[]>;
+  statesSubject = new BehaviorSubject<any>([]);
+  states: Observable<any[]> = this.statesSubject.asObservable().pipe(
+    shareReplay()
+  );
   allCities: any = [];
-  cities: Observable<any[]>;
+  citiesSubject = new BehaviorSubject<any>([]);
+  cities: Observable<any[]> = this.citiesSubject.asObservable();
   searchCityText = new FormControl();
   searchStateText = new FormControl();
   countries: Observable<any[]>;
@@ -226,14 +214,6 @@ export class ChatDrawerComponent implements OnInit {
     this.countries = this.preferencesForm.get('country').valueChanges.pipe(
       startWith(''),
       map(value => this._CountryOrStatefilter(value, 0))
-    );
-    this.states = this.searchStateText.valueChanges.pipe(
-      startWith(''),
-      map(value => this._CountryOrStatefilter(value, 1))
-    );
-    this.cities = this.searchCityText.valueChanges.pipe(
-      startWith(''),
-      map(value => this._Cityfilter(value))
     );
   }
   // filters for coutry,state and city.
@@ -244,14 +224,20 @@ export class ChatDrawerComponent implements OnInit {
       if (what === 0) {
         return this.allCountries.filter(option => option.name.toLowerCase().includes(filterValue));
       } else {
-        return this.allStates.filter(option => option.name.toLowerCase().includes(filterValue));
+        const states =  this.allStates.filter(option => option.name.toLowerCase().includes(filterValue));
+        this.statesSubject.next(states);
       }
+    } else {
+      this.statesSubject.next(this.allStates.slice());
     }
   }
-  private _Cityfilter(value: string): string[] {
+  private _Cityfilter(value: string) {
     if (value) {
       const filterValue = value.toLowerCase();
-      return this.allCities.filter(option => option.toLowerCase().includes(filterValue));
+      const city = this.allCities.filter(option => option.toLowerCase().includes(filterValue));
+      this.citiesSubject.next(city);
+    } else {
+      this.citiesSubject.next(this.allCities.slice());
     }
   }
   countrySelected(value) {
@@ -260,12 +246,46 @@ export class ChatDrawerComponent implements OnInit {
     this.http.get('https://partner.hansmatrimony.com/api/getState', { params }).subscribe((response: any) => {
       console.log(response);
       this.allStates = response;
+      this.statesSubject.next(response);
+
+      this.searchStateText.valueChanges.pipe(
+        takeUntil(this._onDestroy),
+      ).subscribe(
+        change => {
+              console.log(change);
+              this._CountryOrStatefilter(change, 1);
+        }
+      );
       if (!this.preferencesForm.value.state) {
         console.log('Qwerty123');
         this.preferencesForm.patchValue({
           state: this.preferenceProfileData.pref_state.split(','),
         });
       }
+    });
+  }
+
+  getCitiesFromState(countryId: any, stateId: any) {
+    const params = new HttpParams().set('country_id', countryId).set('state_id', stateId);
+    this.http.get('https://partner.hansmatrimony.com/api/getCity', { params }).subscribe((response: any) => {
+      console.log(response);
+      if (this.allCities.length === 0) {
+        this.allCities = response;
+        this.citiesSubject.next(response);
+      } else {
+        this.allCities.concat(response);
+        this.citiesSubject.next(this.allCities);
+      }
+      console.log(this.allCities);
+
+      this.searchCityText.valueChanges.pipe(
+        takeUntil(this._onDestroy),
+      ).subscribe(
+        change => {
+              console.log(change);
+              this._Cityfilter(change);
+        }
+      );
     });
   }
   stateSelectionChanged(event) {
@@ -282,7 +302,7 @@ export class ChatDrawerComponent implements OnInit {
       if (this.allCities.length == 0) {
         this.allCities = response;
       } else {
-        this.allCities.concat(response);
+        this.allCities = this.allCities.concat(response);
       }
       console.log(this.allCities);
     });
@@ -316,7 +336,40 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
   ngOnInit() {
+
     this.innerWidth = window.innerWidth;
+
+
+
+    this.preferencesForm = this._formBuilder.group({
+      food_choice: [''],
+      age_min: [''],
+      age_max: [''],
+      income_min: [''],
+      income_max: ['', Validators.compose([Validators.maxLength(4)])],
+      caste_pref: [''],
+      manglik_pref: [''],
+      occupation: [''],
+      religion: [''],
+      height_min: [''],
+      height_max: [''],
+      marital_status: [''],
+      working: [''],
+      country: [''],
+      state: [''],
+      city: [''],
+    });
+    this.chatService.authDataUpdated.subscribe(
+      (response: boolean) => {
+        if (response) {
+          if (localStorage.getItem('authData')) {
+            this.authData = JSON.parse(localStorage.getItem('authData'));
+          }
+        }
+      }
+    );
+    
+
     // this.disableSave.next(true);
     // user authorized
     this.disableSave$ = this.disableSave.asObservable().pipe(
@@ -584,11 +637,13 @@ export class ChatDrawerComponent implements OnInit {
         height_max: this.getHeight(preferences.height_max),
         marital_status: preferences.marital_status,
         country: preferences.pref_country,
-        state: preferences.pref_state ? preferences.pref_state : [],
+        state: preferences.pref_state ? (preferences.pref_state as string[]) : [],
         city: preferences.pref_city ? preferences.pref_city : [],
       });
     } else if (this.preferenceProfileData) {
       this.preferencesForm.patchValue({
+        state: this.preferenceProfileData.pref_state ? (this.preferenceProfileData.pref_state as string[]) : [],
+        city: this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city : [],
         food_choice: this.preferenceProfileData.food_choice ? this.preferenceProfileData.food_choice : 'Doesn\'t Matter',
         age_min: this.preferenceProfileData.age_min ? this.preferenceProfileData.age_min : '18',
         age_max: this.preferenceProfileData.age_max ? this.preferenceProfileData.age_max : '70',
@@ -603,9 +658,7 @@ export class ChatDrawerComponent implements OnInit {
         height_min: this.getHeight(this.preferenceProfileData.height_min),
         height_max: this.getHeight(this.preferenceProfileData.height_max),
         marital_status: this.preferenceProfileData.marital_status ? this.preferenceProfileData.marital_status : 'Doesn\'t Matter',
-        country: this.preferenceProfileData.pref_country,
-        state: this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state : [],
-        city: this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city : [],
+        country: this.preferenceProfileData.pref_country
       });
     }
     this.subscribetochanges();
@@ -678,8 +731,8 @@ export class ChatDrawerComponent implements OnInit {
     const personalDetilsP3 = ['birth_place', 'birth_time', 'manglik', 'food_choice'];
     const familyDetailsP3 = ['occupation_mother', 'occupation', 'family_income'];
     if (this.personalProfileData && this.familyProfileData) {
-      
-    
+
+
     Object.entries(this.personalProfileData).forEach(
       ([key, value]) => {
         if (personalDetilsP3.includes(key)) {
@@ -774,23 +827,37 @@ export class ChatDrawerComponent implements OnInit {
             if (this.preferenceProfileData) {
 
 
-            if (this.preferenceProfileData && this.preferenceProfileData.pref_city) {
-              this.preferenceProfileData.pref_city = this.preferenceProfileData.pref_city.split(',');
-            }
-            if (this.preferenceProfileData && this.preferenceProfileData.pref_state) {
-              this.preferenceProfileData.pref_state = this.preferenceProfileData.pref_state.split(',');
-            }
-            if (this.preferenceProfileData && this.personalProfileData.marital_status != 'Never Married') {
+              if (this.preferenceProfileData.pref_state) {
+                if ((this.preferenceProfileData.pref_state as string).includes(',')) {
+                this.preferenceProfileData.pref_state = (this.preferenceProfileData.pref_state as string).split(',');
+                } else {
+                  this.preferenceProfileData.pref_state = [this.preferenceProfileData.pref_state];
+                }
+                console.log('pref_states', this.preferenceProfileData.pref_state);
+              }
+
+              if (this.preferenceProfileData.pref_city) {
+                if ((this.preferenceProfileData.pref_city as string).includes(',')) {
+                this.preferenceProfileData.pref_city = (this.preferenceProfileData.pref_city as string).split(',');
+                } else {
+                  this.preferenceProfileData.pref_city = [this.preferenceProfileData.pref_city];
+                }
+                console.log('pref_cities', this.preferenceProfileData.pref_city);
+              }
+
+              if (this.preferenceProfileData && this.personalProfileData.marital_status !== 'Never Married') {
               localStorage.setItem('showRemarrigePlan', '1');
             }
-            this.allStates = this.preferenceProfileData ? this.preferenceProfileData.pref_state : '';
-            this.allCities = this.preferenceProfileData ? this.preferenceProfileData.pref_city : '';
-            this.countrySelected(this.preferenceProfileData ? this.preferenceProfileData.pref_country : '');
-            this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
-            this.chatService.selected_states = this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
+              this.allStates = this.preferenceProfileData ? this.preferenceProfileData.pref_state : '';
+              this.allCities = this.preferenceProfileData ? this.preferenceProfileData.pref_city : '';
+              this.countrySelected(this.preferenceProfileData ? this.preferenceProfileData.pref_country : '');
+              this.getCitiesFromState(this.preferenceProfileData ? this.preferenceProfileData.pref_country_id : '',
+              this.preferenceProfileData ? this.preferenceProfileData.pref_state_id : '');
+              this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
+              this.chatService.selected_states = this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
 
 
-            setTimeout(() => {
+              setTimeout(() => {
               for (const item of this.preferenceProfileData.pref_state) {
                 this.chatService.selected_states_id += this.search(item, 1).id;
               }
@@ -994,11 +1061,8 @@ export class ChatDrawerComponent implements OnInit {
   }
   countryClicked() {
     console.log('Country Clicked');
-    const authData = JSON.parse(localStorage.getItem('authData'));
-    if (authData.paid_status !== 'Paid') {
+    if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#countryId');
-      this.searchStateText.disable();
-      this.searchCityText.disable();
       countryId.blur();
       this.openChooseFromAnyWhereDialog();
       return;
@@ -1007,10 +1071,7 @@ export class ChatDrawerComponent implements OnInit {
 
   stateClicked() {
     console.log('State Clicked');
-    const authData = JSON.parse(localStorage.getItem('authData'));
-    if (authData.paid_status !== 'Paid') {
-      this.searchStateText.disable();
-      this.searchCityText.disable();
+    if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#stateId');
       countryId.blur();
       this.openChooseFromAnyWhereDialog();
@@ -1020,8 +1081,7 @@ export class ChatDrawerComponent implements OnInit {
 
   cityClicked() {
     console.log('City Clicked');
-    const authData = JSON.parse(localStorage.getItem('authData'));
-    if (authData.paid_status !== 'Paid') {
+    if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#cityId');
       countryId.blur();
       this.openChooseFromAnyWhereDialog();
@@ -1052,5 +1112,29 @@ export class ChatDrawerComponent implements OnInit {
     this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
     // this.itemService.openTodaysPopupAd();
     this.router.navigateByUrl(`/subscription`);
+  }
+
+  showMoreCity() {
+    const cityStyle: any = document.querySelector('#cityStyle');
+    const cityStyleBtn: any = document.querySelector('#cityStyleBtn');
+    if (cityStyleBtn.textContent.includes('See More')) {
+      cityStyleBtn.textContent = '<- See Less';
+      cityStyle.style.height = 'auto';
+    } else {
+      cityStyleBtn.textContent = ' See More ->';
+      cityStyle.style.height = '100px';
+    }
+  }
+
+  showMoreCaste() {
+    const casteStyle: any = document.querySelector('#casteStyle');
+    const casteStyleBtn: any = document.querySelector('#casteStyleBtn');
+    if (casteStyleBtn.textContent.includes('See More')) {
+      casteStyleBtn.textContent = '<- See Less';
+      casteStyle.style.height = 'auto';
+    } else {
+      casteStyleBtn.textContent = ' See More ->';
+      casteStyle.style.height = '100px';
+    }
   }
 }

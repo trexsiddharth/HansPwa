@@ -5,6 +5,15 @@
     <div class="text-center topheader">
         <span class="">Upload Photos</span>
     </div>
+    <div class="text-center" *ngIf="getCarouselCount() < 3">
+        <button class="btn" 
+        style="color: white;
+        background-color: #34b7f1;"
+         mat-raised-button
+         (click)="checKAndUploadFromFacebook()">
+            Upload From Facebook
+        </button>
+    </div>
     <div class="container" style="height:70vh; position:relative">
         <div class="photoSection">
             <div class="col">

@@ -137,6 +137,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         data => {
           console.log(data);
           localStorage.setItem('authData', JSON.stringify(data));
+          this.chatService.authDataUpdated.emit(true);
           const text: string = data.apiwha_autoreply;
           const id = data.id;
           if (data && data.get_status_count) {
@@ -194,6 +195,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     } else {
       setTimeout(() => {
         const data = JSON.parse(localStorage.getItem('authData'));
+        this.chatService.authDataUpdated.emit(true);
         console.log(data);
         const text: string = data.apiwha_autoreply;
         const id = data.id;

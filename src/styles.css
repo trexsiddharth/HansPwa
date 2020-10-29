@@ -289,7 +289,8 @@ body {
 
 }
 
-button:focus{outline:none !important;}
+button:focus{outline:none !important;
+box-shadow: none !important;}
 
 .mat-raised-button {
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important;

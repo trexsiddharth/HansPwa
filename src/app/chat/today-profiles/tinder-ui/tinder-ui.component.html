@@ -53,6 +53,13 @@
                                     alt={{item.name}}>
                             </ng-template>
                         </ngb-carousel>
+                        <div id="imageTopBanner" *ngIf="item.mobile !== 'Visible after Contact'">
+                            <img  
+                            style="position: absolute;
+                            left: 10px;"
+                            src="../../../../assets/new icons/badge.svg" alt="banner badge">
+                            <img width="200px" src="../../../../assets/new icons/gift_profile_label.svg" alt="gift banner">
+                        </div>
                         <div id="imageContent">
                             <div class="full-width">
                                 <div style="width: 80%;">

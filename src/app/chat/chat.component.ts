@@ -35,7 +35,8 @@ import {
   timeout,
   retry,
   catchError,
-  min
+  min,
+  shareReplay
 } from 'rxjs/operators';
 import {
   FindOpenHistoryProfileService
@@ -459,14 +460,14 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
           ['phone_number']: num,
           ['fcm_app']: localStorage.getItem('fcm_app')
         }
-      });
+      }).pipe(shareReplay());
     } else {
       // tslint:disable-next-line: max-line-length
       return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', {
         params: {
           ['phone_number']: num,
         }
-      });
+      }).pipe(shareReplay());
     }
   }
 

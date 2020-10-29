@@ -39,11 +39,20 @@
   color:white!important;
 }
 ::ng-deep .mat-chip-list-wrapper{
-  margin:5px 27px 5px 27px!important; 
+  margin:5px 0px 5px !important; 
 }
 ::ng-deep .mat-chip.mat-standard-chip {
   background-color: #34b7f1!important;
   color: #ffffff!important;
+}
+.row {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.col-5 {
+  padding: 0;
+  margin: 0 5px;
 }
 .text-sm{
   font-size:0.7rem!important  ;

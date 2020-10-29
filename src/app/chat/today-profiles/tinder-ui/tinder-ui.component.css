@@ -422,6 +422,18 @@
         vertical-align:middle
     
     }
+    #imageTopBanner {
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        right: 0;
+        margin-top: 10px;
+        padding: 0px 0px 10px;
+        color: white;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: flex-end;
+    }
 
     #imageContent{
         width: 100%;
@@ -494,6 +506,18 @@
         bottom: 0px;
         background-image: linear-gradient(0deg, white,transparent);
         animation: fadeInUp 3.5s 1;
+    }
+    #imageTopBanner {
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        right: 0;
+        margin-top: 10px;
+        padding: 0px 0px 10px;
+        color: white;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: flex-end;
     }
     #imageContent{
         width: 100%;

@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatServiceService {
+  authDataUpdated = new EventEmitter<boolean>();
   profileItem;
   contactNumber;
   loginStatus;
