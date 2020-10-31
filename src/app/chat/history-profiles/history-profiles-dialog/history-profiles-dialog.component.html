@@ -22,7 +22,7 @@
                     (click)="openImageModal(item.profile.carousel,item.profile.photo,item.profile.name,index)"
                     (error)="onLoadProfileError(item.profile.gender,index)"
                     [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)"
-                    alt="item.profile.name">
+                    alt="profile image">
             </ng-template>
         </ngb-carousel>
 
@@ -32,7 +32,7 @@
             <div class="full-width">
                 <div style="width: 80%;">
                     <span style="font-weight: bold;font-size: 18px;">
-                        {{toTitleCase(item.profile.name)}}
+                        {{setName(toTitleCase(item.profile.name))}}
                     </span><br>
                     <span style="font-size: 14px;">
                         {{item.family ? item.family.religion : item.profile.family}}
@@ -183,7 +183,6 @@ border-top-right-radius: 20px;
             <p class="title" style="margin-left:0px">
                 <span
                     style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;text-transform: capitalize;">{{languageService.profileLang.hello}},</span>
-                {{languageService.profileLang.myself}}{{item.profile.name}},
                 {{(!item.profile.about || item.profile.about == 'Na' || item.profile.about =='na') ? setAbout() : item.profile.about}}
             </p>
         </div>

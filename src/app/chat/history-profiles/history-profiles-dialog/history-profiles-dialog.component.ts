@@ -67,7 +67,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
                 if (this.profile) {
                   this.item = JSON.parse(this.profile);
                   console.log(this.item);
-                  this.title = `${this.item.profile.name}'s Profile`;
+                  this.title = `${this.setName(this.toTitleCase(this.item.profile.name))}'s Profile`;
 
                   // section from which user is coming
                   this.type = this.item.coming;
@@ -205,7 +205,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
           (data: any) => {
             console.log(data);
             this.item = data;
-            this.title = data.profile.name + `'s Profile`;
+            this.title = this.setName(this.toTitleCase(data.profile.name)) + `'s Profile`;
             this.type = 'contacted';
             this.spinner.hide();
 
@@ -427,20 +427,17 @@ export class HistoryProfilesDialogComponent implements OnInit {
 
   //    }
   //  }
-  setName(value: string, type: any): string {
-    if (type === 1) {
-      if (value != null) {
-        if (value.split(' ')) {
-          const name = value.split(' ');
-          return name[0];
-        } else {
-          return value;
-        }
-      } else {
-        return '';
+
+  setName(name: string): string {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+      let a = name.split(' ');
+      if (a[0] && a[1]) {
+        return a[0][0] + ' ' + a[1];
+      } else if (a[0]) {
+        return a[0][0];
       }
     } else {
-      return value;
+      return name;
     }
   }
 

@@ -17,15 +17,17 @@
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 0}"
                 (click)="setSelectedIndex(0)">
-                {{itemService.getYourLikesCount()}}
+                <img width="25px" src="../../../assets/heartwhite.svg" alt="liked">
+                {{itemService.getCountOnlyShortlist()}}
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 1}"
                 (click)="setSelectedIndex(1)">
-                {{itemService.getContactedCount()}}
+                <img width="25px" src="../../../assets/phone_white.svg" alt="contacted">
+                {{itemService.getCountOnlyContacted()}}
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 2}"
                 (click)="setSelectedIndex(2)">
-                {{itemService.getRejectedCount()}}
+                <img width="22px" src="../../../assets/closewhite.svg" alt="rejected">{{itemService.getCountOnlyRejected()}}
             </button>
         </div>
     </div>

@@ -277,11 +277,17 @@ export class FindOpenHistoryProfileService {
       'दोनो को पसंद'
       : 'Mutual Like';
   }
+  getCountOnlyContacted() {
+    return this.profileCount.contactedCount;
+  }
   getCountOnlyShortlist() {
     return this.profileCount.shortlistCount;
   }
   getCountOnlyShorted() {
     return this.profileCount.shortedCount;
+  }
+  getCountOnlyRejected() {
+    return this.profileCount.rejectedCount;
   }
   // lockdown popup
   openLockdownAd() {

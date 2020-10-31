@@ -1,9 +1,13 @@
 .top-bar{
   background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
 }
+.row {
+    margin: 0;
+}
 .btn-tabs{
     background:#e7e7e7;
     margin:1%;
+    width: 100%;
     border-radius:6px;
     color:#a3a2a2;
     font-weight:bold;
@@ -42,12 +46,8 @@
     justify-content: space-evenly;
     overflow-x: scroll;
     overflow-y: hidden;
-    /* padding: 2%;  */
-    margin: 1%;
-    padding-left: 150px;
-    padding-right: 50px;
     -ms-overflow-style: none!important;  
-    scrollbar-width: none!important; 
+    scrollbar-width: none!important;
 }
 .btn-row::-webkit-scrollbar {
     display: none!important;
@@ -91,6 +91,7 @@
     align-items: center;
     justify-content: center;
 }
+
 /* .row{
     width:100%;
     margin:auto;
@@ -103,18 +104,15 @@
 
   @media (max-width: 350px) {
     .btn-row{
-        display: flex;
-        flex-flow: column;
-        flex-direction: row;
-        justify-content: space-evenly;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        /* padding: 2%;  */
-        margin: 1%;
-        padding-left: 150px;
-         padding-right: 50px;
-        -ms-overflow-style: none!important;  
-        scrollbar-width: none!important; 
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none!important;  
+    scrollbar-width: none!important;
     }
     .btn-tabs{
         background:#e7e7e7;
