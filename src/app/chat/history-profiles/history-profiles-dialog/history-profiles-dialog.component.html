@@ -20,7 +20,7 @@
             <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index">
                 <img id="profilePic"
                     (click)="openImageModal(item.profile.carousel,item.profile.photo,item.profile.name,index)"
-                    (error)="onLoadProfileError(item.profile.gender)"
+                    (error)="onLoadProfileError(item.profile.gender,index)"
                     [src]="getProfilePhotoLarge(item.profile.photo,item.profile.carousel,item.profile.gender,i)"
                     alt="item.profile.name">
             </ng-template>

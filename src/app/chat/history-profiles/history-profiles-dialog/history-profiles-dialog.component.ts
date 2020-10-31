@@ -367,8 +367,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
   }
 
-  onLoadProfileError(gender: string) {
-    const image = document.querySelector('#profilePic');
+  onLoadProfileError(gender: string,index) {
+    const image = document.querySelectorAll('#profilePic')[index];
     if (gender === 'Male') {
       image.setAttribute('src', '../../assets/male_pic.png');
     } else {
