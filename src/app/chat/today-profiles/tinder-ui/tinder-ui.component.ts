@@ -611,12 +611,10 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
+      } else if (a[0]) {
+        return a[0][0];
       }
-      else {
-        return a[0][0] + ' ' + a[1];
-      }
-    }
-    else {
+    } else {
       return name;
     }
   }

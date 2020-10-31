@@ -487,6 +487,9 @@ div.mat-select-search-inner input.mat-input-element {
 #registerWith.cdk-overlay-dark-backdrop {
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
 }
+#fourRegMobile .country-selector {
+  opacity: 1 !important;
+}
 @media screen and (max-width: 576px) {
   .ht-full {
     margin: 0px;

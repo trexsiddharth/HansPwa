@@ -406,8 +406,9 @@ export class ChatDrawerComponent implements OnInit {
 
   changed() {
     console.log('changed');
-    this.disableSave.next(false);
+    this.disableSave.next(true);
   }
+  
   ngAfterViewInit() {
     // set already selected language in toggle
     setTimeout(() => {
@@ -417,7 +418,7 @@ export class ChatDrawerComponent implements OnInit {
         this.langCheck = true;
       }
     }, 2000);
-    this.changed();
+    // this.changed();
     // document.querySelector('#saveButtonPrefs').setAttribute('display', 'none');
   }
   ngOnDestroy() {
@@ -609,6 +610,9 @@ export class ChatDrawerComponent implements OnInit {
     } else if (event.value.length < this.prevEventLength) {
       this.showSnackBar(` Removed Successfully`, '');
     }
+    if (this.isAllCastePref) { // if no caste bar is selected and user stil adds a few castes to list
+      this.isAllCastePref = false;
+    }
     this.disableSave.next(true);
     this.prevEventLength = event.value.length;
   }
@@ -624,6 +628,7 @@ export class ChatDrawerComponent implements OnInit {
     // this.personalProfileData.pref_city = this.personalProfileData.pref_city.split(",");
     // console.log("Qwerty", this.personalProfileData.pref_city.split(","), this.preferenceProfileData.pref_state.split(","));
     if (preferences) {
+      this.castePreferences = preferences.caste.split(',');
       this.preferencesForm.patchValue({
         food_choice: preferences.food_choice,
         age_min: preferences.age_min,

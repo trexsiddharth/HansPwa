@@ -128,14 +128,13 @@
                 </mat-checkbox>
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-12 " id="fourRegMobile">
                 <!-- <h6>Mobile number</h6> -->
                 <mat-form-field class="full-width fieldFit" 
                 (click)="showTruecallerIfFacebook()"
                  appearance="standard">
-                  <mat-label>Mobile number</mat-label>
 
-                  <ngx-mat-intl-tel-input  style="display: inline;"
+                  <ngx-mat-intl-tel-input   style="display: inline;"
                     [preferredCountries]="['in']" [enablePlaceholder]="true" [enableSearch]="true" name="phone"
                     type="tel" formControlName="phone" id="phone" (change)="mobileNumberChanged()" #phone required>
                   </ngx-mat-intl-tel-input>
@@ -146,6 +145,7 @@
 
                 </mat-form-field>
               </div>
+              
 
               <app-compatibility-page-two *ngIf="!fourPageService.getUserThrough()"></app-compatibility-page-two>
 

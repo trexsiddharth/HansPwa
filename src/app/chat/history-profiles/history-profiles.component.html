@@ -252,7 +252,7 @@
                         <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
                         null && itemService.getCredits().toString() != '0')  || type == 'contacted' || type == 'rejected' || type == 'interestShown'">  
                     <span>
-                        {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
+                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
                     </span><br>
                     <span>
                         {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}
@@ -399,7 +399,9 @@
     </div>  -->
         <div style="position: relative;display: block;margin: 2%;margin-bottom:10px">
             <p class="text-center noProfile" style="margin-bottom:0.4rem">
-                <a *ngIf="selectedTab == 0" style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
+                <a *ngIf="selectedTab == 0 && type == 'contacted'" style="font-size:1.1rem">You have not contacted anybody so far. Become our prime member to boost you profile
+                    visibility and</a><br>
+                <a *ngIf="selectedTab == 0 && type == 'interestReceived'" style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
                     visibility and</a><br>
                     <a *ngIf="selectedTab == 1" style="font-size:1.1rem">You have no viewers so far. Become our prime member to boost you profile
                         visibility and</a><br>
@@ -696,7 +698,7 @@
                         <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
                         null && itemService.getCredits().toString() != '0') || type == 'contacted' || type == 'rejected' || type == 'interestShown'">
                     <span>
-                        {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
+                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
                     </span><br>
                     <span>
                         {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}

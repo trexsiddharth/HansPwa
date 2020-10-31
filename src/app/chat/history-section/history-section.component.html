@@ -32,7 +32,9 @@
     <div class="search-results" *ngIf="(searchActivated$|async)">
         <div class="profiles" *ngFor="let profile of profiles;let i = index">
             <div class="column" style="width:20%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type,i)">
-                <img class="circular" src="{{profile.photo}}" alt="photo" origin="anonymous">
+                <img id="searchImage" class="circular" src="{{profile.photo}}"
+                (error)='setPlaceholderImage(i, profile.gender)'
+                 alt="photo" origin="anonymous">
             </div>
             <div class="column" style="width:55%;justify-content: end;
             align-items: end;padding:2%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type,i)">

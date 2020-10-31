@@ -568,14 +568,14 @@
                   <p class="headings">Mother Is</p>
                   <p *ngIf="familyProfileData.mother_status != 'Not Alive'">
                     <a *ngIf="familyProfileData.occupation_mother&&familyProfileData.occupation_mother!='null'">
-                      {{familyProfileData.occupation_mother}}</a>
+                      {{familyProfileData.mother_status &&  familyProfileData.mother_status !== 'Not Alive ' ? familyProfileData.mother_status + ' |' : ''}} {{familyProfileData.occupation_mother}}</a>
                     <a *ngIf="!familyProfileData.occupation_mother||familyProfileData.occupation_mother=='null'"
                       (click)="setEditIndexFamily(1)" class="pink">+Add Mother's Occupation</a></p>
                   <p *ngIf="familyProfileData.mother_status == 'Not Alive'">Not Alive</p>
                   <p class="headings">Father Is</p>
                   <p *ngIf="familyProfileData.father_status != 'Not Alive'">
                     <a *ngIf="familyProfileData.occupation&&familyProfileData.occupation!='null'">
-                      {{familyProfileData.occupation}}</a>
+                      {{familyProfileData.father_status &&  familyProfileData.father_status !== 'Not Alive ' ? familyProfileData.father_status + ' |' : ''}} {{familyProfileData.occupation}}</a>
                     <a *ngIf="!familyProfileData.occupation||familyProfileData.occupation=='null'" class="pink"
                       (click)="setEditIndexFamily(1)">+Add
                       Father's Occupation</a></p>

@@ -19,18 +19,18 @@ export class HistorySectionComponent implements OnInit {
               public dataFiltering: DataFilteringService,
               public router: Router) { }
   selectedTab = 0;
-  tabType = "interestShown";
+  tabType = 'interestShown';
   currentTab;
   searchControl = new FormControl();
   searchActivated = new BehaviorSubject<boolean>(false);
   searchActivated$: Observable<boolean> = this.searchActivated.asObservable();
   profiles: any;
-  
+
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"',
     '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"',
-    '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"']
+    '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70',
-    '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84',];
+    '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', ];
 
   ngOnInit() {
     this.getHistoryData();
@@ -41,8 +41,8 @@ export class HistorySectionComponent implements OnInit {
   }
 
   getHistoryData() {
-    let params = new HttpParams().set('is_lead', localStorage.getItem('is_lead')).set("id", localStorage.getItem('id'))
-    this.http.get('https://partner.hansmatrimony.com/api/getHisotry', { params: params }).subscribe((response: any) => {
+    const params = new HttpParams().set('is_lead', localStorage.getItem('is_lead')).set('id', localStorage.getItem('id'));
+    this.http.get('https://partner.hansmatrimony.com/api/getHisotry', { params }).subscribe((response: any) => {
       console.log('response of getHistory  api', response);
       let allProfiles: any[] = [];
       allProfiles = allProfiles.concat(response.history.contact);
@@ -83,7 +83,7 @@ export class HistorySectionComponent implements OnInit {
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
   }
-  getUserProfileData(is_lead: string, id: string, type: string,index: any) {
+  getUserProfileData(is_lead: string, id: string, type: string, index: any) {
     const myprofileData = new FormData();
     myprofileData.append('id', id);
     myprofileData.append('is_lead', is_lead);
@@ -104,16 +104,16 @@ export class HistorySectionComponent implements OnInit {
         (data: any) => {
           console.log(data);
           // section from which user is going
-          if (type === 'SHORTLIST') data.coming = 'interestShown';
-          else if (type === 'REJECT') data.coming = 'rejected';
-          else if (type === 'CONTACT') data.coming = 'contacted';
+          if (type === 'SHORTLIST') { data.coming = 'interestShown'; }
+          else if (type === 'REJECT') { data.coming = 'rejected'; }
+          else if (type === 'CONTACT') { data.coming = 'contacted'; }
           localStorage.setItem('open_profile', JSON.stringify(data));
            // setting the index in local strorage to use in scrollIntoView later
-   
+
           localStorage.setItem('index', String(index));
           localStorage.setItem('todaysPopupOpened', '0');
           localStorage.setItem('stage', '4');
-   
+
           // navigate to HISTORY PROFILE DIALOG COMPONENT
           this.router.navigateByUrl('chat/open/open-profile');
         },
@@ -121,5 +121,14 @@ export class HistorySectionComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  setPlaceholderImage(index: any, gender: any) {
+    const imageView: any = document.querySelectorAll('#searchImage')[index];
+    if (gender === 'Male') {
+      imageView.setAttribute('src', '../../assets/male_pic.png');
+    } else {
+      imageView.setAttribute('src', '../../assets/female_pic.png');
+    }
   }
 }

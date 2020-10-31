@@ -493,20 +493,17 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       return this.carouselSize;
     }
   }
-  setName(value: string, type: any): string {
-    if (type === 1) {
-      if (value != null) {
-        if (value.split(' ')) {
-          const name = value.split(' ');
-          return name[0];
-        } else {
-          return value;
-        }
-      } else {
-        return '';
+
+  setName(name: string): string {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+      let a = name.split(' ');
+      if (a[0] && a[1]) {
+        return a[0][0] + ' ' + a[1];
+      } else if (a[0]) {
+        return a[0][0];
       }
     } else {
-      return value;
+      return name;
     }
   }
 

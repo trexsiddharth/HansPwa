@@ -1085,7 +1085,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.userProfile.occupation = profileData.profile.occupation;
     this.userProfile.designation = profileData.profile.profession;
     this.userProfile.workingCity = profileData.profile.working_city;
+    
     this.userProfile.about = profileData.profile.about;
+
     this.userProfile.birthPlace = profileData.profile.birth_place;
     this.userProfile.birthTime = profileData.profile.birth_time;
     this.userProfile.gotra = profileData.family.gotra;

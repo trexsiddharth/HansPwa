@@ -648,6 +648,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   setAgeIfNan(value: string) {
+    console.log(value);
     if (value && value.toLowerCase().includes('i am nan')) {
       return value.replace('NaN', `${this.setAge(this.fourPageService.getProfile().dob)}`);
     } else {

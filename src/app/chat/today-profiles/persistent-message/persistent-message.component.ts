@@ -317,7 +317,7 @@ export class PersistentMessageComponent implements OnInit {
       this.familyForm.patchValue({
         family_city: place.value
       });
-    }, 500);
+    }, 200);
   }
   placeChanged() {
     const birthPlace: HTMLInputElement = document.querySelector('#birthPlace');
@@ -326,7 +326,7 @@ export class PersistentMessageComponent implements OnInit {
       this.PageThree.patchValue({
         BirthPlace: birthPlace.value
       });
-    }, 500);
+    }, 200);
   }
 
   onSubmit() {
@@ -450,14 +450,14 @@ export class PersistentMessageComponent implements OnInit {
       familyDataForm.append('unmarried_daughters', this.familyProfileData.unmarried_daughters);
       familyDataForm.append('gotra', this.familyForm.value.gotra);
       familyDataForm.append('family_income', this.familyProfileData.family_income);
-      familyDataForm.append('city', this.familyForm.value.city);
+      familyDataForm.append('city', this.familyForm.value.family_city);
       familyDataForm.append('is_lead', localStorage.getItem('is_lead'));
       familyDataForm.append('livingWithParents', this.familyForm.value.livingWithParents);
 
       this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyDataForm).subscribe(
         (data: any) => {
           console.log(data);
-          //localStorage.setItem('profileCompPercent', '100');
+          // localStorage.setItem('profileCompPercent', '100');
           this.chatService.getUserProfileData();
         },
         (error: any) => {
