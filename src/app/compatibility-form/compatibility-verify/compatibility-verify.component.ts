@@ -189,6 +189,8 @@ export class CompatibilityVerifyComponent implements OnInit {
 
       personalProfileDataForm.append('id', id);
       personalProfileDataForm.append('is_lead', leadId);
+      personalProfileDataForm.append('identity_number', localStorage.getItem('getListIdentity'));
+      personalProfileDataForm.append('temple_id', localStorage.getItem('getListTemple'));
 
       personalProfileDataForm.append(
         'college', this.verifyForm.value.college);
@@ -245,6 +247,8 @@ export class CompatibilityVerifyComponent implements OnInit {
 
     newFamilyForm.append('id', id);
     newFamilyForm.append('is_lead', leadId);
+    newFamilyForm.append('identity_number', localStorage.getItem('getListIdentity'));
+    newFamilyForm.append('temple_id', localStorage.getItem('getListTemple'));
     newFamilyForm.append('family_type', this.verifyForm.value.family_type);
     newFamilyForm.append('house_type', this.verifyForm.value.house_type);
     newFamilyForm.append('married_sons', this.verifyForm.value.brothers_married);
@@ -264,6 +268,10 @@ export class CompatibilityVerifyComponent implements OnInit {
           console.log('Family Deatils Updated successfully');
           if (data.updateFamilyDetails_status === 'Y') {
             this.updateVerifyFormData(newFamilyForm);
+
+            if (this.fourPageService.getUserThrough() && this.fourPageService.showApproveBtn) {
+              this.validate(this.fourPageService.profile);
+            }
           } else {
             this.ngxNotificationService.error(
               'Something Went Wrong, Try Again Later'

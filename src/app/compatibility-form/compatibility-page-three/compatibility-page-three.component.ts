@@ -188,11 +188,13 @@ export class CompatibilityPageThreeComponent implements OnInit {
         personalFormData.append('identity_number', localStorage.getItem('getListIdentity'));
         personalFormData.append('temple_id', localStorage.getItem('getListTemple'));
 
+        console.log('personal', personalFormData.get('birth_place'));
+
         return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', personalFormData).subscribe(
           (response: any) => {
             if (response.updatePerosnalDetails_status === 'Y') {
 
-                this.updateFormThreeData(personalFormData);
+                this.updateFormThreePersonalData(personalFormData);
 
                 familyFormData.append('father_status', this.PageThree.value.FatherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
                 familyFormData.append('mother_status', this.PageThree.value.MotherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
@@ -208,11 +210,13 @@ export class CompatibilityPageThreeComponent implements OnInit {
                 familyFormData.append('identity_number', localStorage.getItem('getListIdentity'));
                 familyFormData.append('temple_id', localStorage.getItem('getListTemple'));
 
+                console.log('family', this.PageThree.value);
+
                 return this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyFormData).subscribe(
                 (response: any) => {
 
                   if (response.updateFamilyDetails_status === 'Y') {
-                    this.updateFormThreeData(familyFormData);
+                    this.updateFormThreeFamilyData(familyFormData);
                   } else {
                     this.fourPageService.form3Completed.emit(false);
                     this.spinner.hide();
@@ -388,6 +392,7 @@ export class CompatibilityPageThreeComponent implements OnInit {
     this.fourPageService.profile.gotra = profileData.get('gotra') ? profileData.get('gotra').toString() : '';
     this.fourPageService.profile.foodChoice = profileData.get('food_choice') ?
       profileData.get('food_choice').toString() : '';
+
     this.fourPageService.profile.manglik = profileData.get('manglik') ? profileData.get('manglik').toString()
       : '';
     this.fourPageService.profile.fatherStatus = profileData.get('father_status') ?
@@ -409,6 +414,47 @@ export class CompatibilityPageThreeComponent implements OnInit {
       profileData.get('locality').toString() : '';
     console.log(this.fourPageService.getProfile());
   }
+
+  updateFormThreePersonalData(profileData: FormData) {
+    this.fourPageService.profile.birthPlace = profileData.get('birth_place') ?
+      profileData.get('birth_place').toString() : '';
+    this.fourPageService.profile.birthTime = profileData.get('birth_time') ?
+      profileData.get('birth_time').toString() : '';
+
+    this.fourPageService.profile.gotra = profileData.get('gotra') ? profileData.get('gotra').toString() : '';
+
+    this.fourPageService.profile.foodChoice = profileData.get('food_choice') ?
+      profileData.get('food_choice').toString() : '';
+
+    this.fourPageService.profile.manglik = profileData.get('manglik') ? profileData.get('manglik').toString()
+      : '';
+    
+    console.log(this.fourPageService.getProfile());
+  }
+
+  updateFormThreeFamilyData(profileData: FormData) {
+    this.fourPageService.profile.fatherStatus = profileData.get('father_status') ?
+      profileData.get('father_status').toString() : '';
+
+    this.fourPageService.profile.motherStatus = profileData.get('mother_status') ?
+      profileData.get('mother_status').toString() : '';
+
+    this.fourPageService.profile.family.occupation = profileData.get('occupation_father') ?
+      profileData.get('occupation_father').toString() : 'Not Working';
+
+    this.fourPageService.profile.family.occupation_mother = profileData.get('occupation_mother') ?
+      profileData.get('occupation_mother').toString() : 'Not Working';
+
+    this.fourPageService.profile.familyIncome = profileData.get('family_income') ?
+      profileData.get('family_income').toString() : '';
+
+    this.fourPageService.profile.locality = profileData.get('locality') ?
+      profileData.get('locality').toString() : '';
+
+    console.log(this.fourPageService.getProfile());
+  }
+
+  
 
   setFormThreeData(userProfile: Profile) {
     console.log("look here hjhjh", userProfile);

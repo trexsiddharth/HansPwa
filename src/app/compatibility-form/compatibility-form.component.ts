@@ -811,6 +811,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           (res: any) => {
             console.log('first', res);
             this.spinner.hide();
+            this.fourPageService.updateFormOneData(firststepdata);
           }, err => {
             this.spinner.hide();
             this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
