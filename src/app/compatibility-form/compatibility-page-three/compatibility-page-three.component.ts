@@ -75,9 +75,9 @@ export class CompatibilityPageThreeComponent implements OnInit {
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, private _formBuilder: FormBuilder, private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageThree = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
       BirthPlace: [''],
@@ -167,6 +167,80 @@ export class CompatibilityPageThreeComponent implements OnInit {
           FamilyIncome: String((Number(a[0]) + Number(a[1])) / 2)
         });
       }
+
+      if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
+      && this.fourPageService.getUserThrough()) {
+        const personalFormData = new FormData();
+        const familyFormData = new FormData();
+
+        personalFormData.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
+        personalFormData.append('birth_place', this.PageThree.value.BirthPlace);
+  
+        if (this.PageThree.value.BirthTime) {
+          personalFormData.append('birth_time', this.PageThree.value.BirthTime);
+        }
+        personalFormData.append('food_choice', this.PageThree.value.FoodChoice);
+        personalFormData.append('manglik', this.PageThree.value.Mangalik ?
+          this.PageThree.value.Mangalik === 'Don\'t Know' ? 'Anshik Manglik' : this.PageThree.value.Mangalik : '');
+        personalFormData.append('gotra', this.PageThree.value.Gotra);
+
+        personalFormData.append('is_lead', localStorage.getItem('getListLeadId'));
+        personalFormData.append('identity_number', localStorage.getItem('getListIdentity'));
+        personalFormData.append('temple_id', localStorage.getItem('getListTemple'));
+
+        return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', personalFormData).subscribe(
+          (response: any) => {
+            if (response.updatePerosnalDetails_status === 'Y') {
+
+                this.updateFormThreeData(personalFormData);
+
+                familyFormData.append('father_status', this.PageThree.value.FatherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
+                familyFormData.append('mother_status', this.PageThree.value.MotherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
+                if (this.PageThree.value.FatherStatus !== 'Not Alive') {
+                familyFormData.append('occupation_father', this.PageThree.value.FatherStatus);
+              }
+                if (this.PageThree.value.MotherStatus !== 'Not Alive') {
+                familyFormData.append('occupation_mother', this.PageThree.value.MotherStatus);
+              }
+                familyFormData.append('family_income', this.PageThree.value.FamilyIncome);
+                familyFormData.append('locality', this.PageThree.value.Locality);
+                familyFormData.append('is_lead', localStorage.getItem('getListLeadId'));
+                familyFormData.append('identity_number', localStorage.getItem('getListIdentity'));
+                familyFormData.append('temple_id', localStorage.getItem('getListTemple'));
+
+                return this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyFormData).subscribe(
+                (response: any) => {
+
+                  if (response.updateFamilyDetails_status === 'Y') {
+                    this.updateFormThreeData(familyFormData);
+                  } else {
+                    this.fourPageService.form3Completed.emit(false);
+                    this.spinner.hide();
+                    this.ngxNotificationService.error(response.message);
+                  }
+
+                },
+                err => {
+                  this.fourPageService.form3Completed.emit(false);
+                  this.spinner.hide();
+                  this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
+                  console.log(err);
+                }
+              );
+            } else {
+              this.fourPageService.form3Completed.emit(false);
+              this.spinner.hide();
+              this.ngxNotificationService.error(response.message);
+            }
+          }, err => {
+            this.fourPageService.form3Completed.emit(false);
+            this.spinner.hide();
+            this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
+            console.log(err);
+          }
+        );
+      } else {
+
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
       firststepdata.append('birth_place', this.PageThree.value.BirthPlace);
@@ -215,6 +289,7 @@ export class CompatibilityPageThreeComponent implements OnInit {
         this.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
         console.log(err);
       });
+    }
     }
 
   }

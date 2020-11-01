@@ -349,13 +349,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     this.nextClickedTwo = true;
     this.errors = [];
     console.log(this.PageTwo.value.Working);
-    // if (!this.fourPageService.getUserThrough() &&
-    //  this.PageTwo.value.Occupation !== 'Not Working' &&
-    // this.workingCity == null
-    // || this.workingCity === '') {
-    //   this.ngxNotificationService.error('Select A Valid Working City');
-    //   return;
-    // }
 
     if (this.PageTwo.valid) {
       if (this.PageTwo.value.AnnualIncome === "100+") {
@@ -387,6 +380,37 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       if (!this.fourPageService.getUserThrough()) {
         this.router.navigateByUrl('chat?first');
       }
+
+      if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
+      && this.fourPageService.getUserThrough()) {
+        
+        firststepdata.append('is_lead', localStorage.getItem('getListLeadId'));
+        firststepdata.append('identity_number', localStorage.getItem('getListIdentity'));
+        firststepdata.append('temple_id', localStorage.getItem('getListTemple'));
+
+        return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(
+          (response: any) => {
+            if (response.updatePerosnalDetails_status === 'Y') {
+              this.spinner.hide();
+              if (this.fourPageService.getUserThrough()) {
+                this.updateFormTwoData(firststepdata);
+              }
+            } else {
+              this.fourPageService.formCompleted.emit(false);
+              this.spinner.hide();
+              this.ngxNotificationService.error(response.error_message ? response.error_message : 'Something went wrong');
+            }
+          },
+          err => {
+            this.fourPageService.formCompleted.emit(false);
+            this.spinner.hide();
+            this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+            console.log(err);
+          }
+        );
+
+      } else {
+
       // tslint:disable-next-line: max-line-length
       return this.http.post('https://partner.hansmatrimony.com/api/formTwoProfile', firststepdata).subscribe((res: any) => {
         console.log('first', res);
@@ -413,6 +437,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
         console.log(err);
       });
+    }
     } else {
       // tslint:disable-next-line: forin
       for (const control in this.PageTwo.controls) {
