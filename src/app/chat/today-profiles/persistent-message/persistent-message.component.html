@@ -244,13 +244,13 @@
                                     <div class="col-6">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Additional Qualification:</mat-label>
-                                            <input matInput type="text" formControlName="Additional" required>
+                                            <input matInput (change)="changed('additional')" type="text" formControlName="Additional" required>
                                         </mat-form-field>
                                     </div>
                                     <div class="col-6">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Designation:</mat-label>
-                                            <mat-select formControlName="Profession" required>
+                                            <mat-select (selectionChange)="changed('designation')" formControlName="Profession" required>
                                                 <mat-option *ngFor="let  option of designations" [value]="option">
                                                     {{option}}
                                                 </mat-option>
@@ -260,7 +260,7 @@
                                     <div class="col-6">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Company:</mat-label>
-                                            <input matInput type="text" formControlName="Company" required>
+                                            <input matInput (change)="changed('company')" type="text" formControlName="Company" required>
                                         </mat-form-field>
                                     </div>
                                     <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
@@ -283,20 +283,20 @@
                                     <div class="col-12">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Weight(in Kg):</mat-label>
-                                            <input matInput type="text" formControlName="Weight" required>
+                                            <input matInput (change)="changed('Weight')" type="text" formControlName="Weight" required>
                                         </mat-form-field>
                                     </div>
                                     <div class="col-12">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Email:</mat-label>
-                                            <input matInput type="text" formControlName="Email">
+                                            <input matInput (change)="changed('Email')" type="text" formControlName="Email">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-12" *ngIf="personalProfileData.gender == 'Female'" >
                                         <!-- <h6>Wish to go abroad?</h6> -->
                                         <mat-form-field class="full-width fieldFit" appearance="standard" >
                                           <mat-label>Wish to go abroad?</mat-label>
-                                          <mat-select formControlName="abroad">
+                                          <mat-select (selectionChange)="changed('Abroad')" formControlName="abroad">
                                             <mat-option value="Yes">Yes</mat-option>
                                             <mat-option value="No">No</mat-option>
                                           </mat-select>
@@ -318,7 +318,7 @@
                                     <div class="col-6">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Family Type:</mat-label>
-                                            <mat-select formControlName="family_type" required>
+                                            <mat-select (selectionChange)="changed('Family Type')" formControlName="family_type" required>
                                                 <mat-option value="Nuclear">Nuclear</mat-option>
                                                 <mat-option value="Joint">Joint</mat-option>
                                             </mat-select>
@@ -327,7 +327,7 @@
                                     <div class="col-6">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>House Type:</mat-label>
-                                            <mat-select formControlName="house_type" required>
+                                            <mat-select (selectionChange)="changed('House Type')" formControlName="house_type" required>
                                                 <mat-option value="Owned">Owned</mat-option>
                                                 <mat-option value="Rented">Rented</mat-option>
                                                 <mat-option value="Leased">Leased</mat-option>
@@ -337,7 +337,7 @@
                                     <div class="col-12">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Living With Parents:</mat-label>
-                                            <mat-select formControlName="livingWithParents" required>
+                                            <mat-select (selectionChange)="changed('Living With')" formControlName="livingWithParents" required>
                                                 <mat-option value="Yes">Yes</mat-option>
                                                 <mat-option value="No">No</mat-option>
                                             </mat-select>
@@ -346,7 +346,7 @@
                                     <div class="col-12">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Family Living In:</mat-label>
-                                            <input matInput type="text" id="FamliyCity"
+                                            <input (change)="changed('Family Living In')" matInput type="text" id="FamliyCity"
                                                 [autoCompleteOptions]="autoComplete" matValidateAddress
                                                 matGoogleMapsAutocomplete
                                                 #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
@@ -357,13 +357,13 @@
                                     <div class="col-12">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>Gotra:</mat-label>
-                                            <input matInput type="text" formControlName="gotra">
+                                            <input (change)="changed('Gotra')" matInput type="text" formControlName="gotra">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-12">
                                         <mat-form-field class="full-width fieldFit" appearance="standard">
                                             <mat-label>About Family:</mat-label>
-                                            <input matInput type="text" formControlName="about">
+                                            <input (change)="changed('About Family')" matInput type="text" formControlName="about">
                                         </mat-form-field>
                                     </div>
                                 </div>

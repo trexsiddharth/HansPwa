@@ -13,6 +13,7 @@ import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { PhotoUploadCropComponent } from 'src/app/photo-upload-crop/photo-upload-crop.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AnalyticsService } from 'src/app/analytics.service';
 
 @Component({
   selector: 'app-persistent-message',
@@ -299,6 +300,7 @@ export class PersistentMessageComponent implements OnInit {
       this.personalForm.patchValue({
         Locality: place.value
       });
+      this.analyticsEvent('Complete Profile Working City Changed');
     }, 500);
   }
   placeChangedWorkingcity(): void {
@@ -308,6 +310,7 @@ export class PersistentMessageComponent implements OnInit {
       this.personalForm.patchValue({
         WorkingCity: place.value
       });
+      this.analyticsEvent('Complete Profile Working City Changed');
     }, 500);
   }
   placeChangedFamilyCity(): void {
@@ -317,6 +320,7 @@ export class PersistentMessageComponent implements OnInit {
       this.familyForm.patchValue({
         family_city: place.value
       });
+      this.analyticsEvent('Complete Profile Family City Changed');
     }, 200);
   }
   placeChanged() {
@@ -326,6 +330,7 @@ export class PersistentMessageComponent implements OnInit {
       this.PageThree.patchValue({
         BirthPlace: birthPlace.value
       });
+      this.analyticsEvent('Complete Profile Birth Place Changed');
     }, 200);
   }
 
@@ -475,24 +480,34 @@ export class PersistentMessageComponent implements OnInit {
     console.log(element);
     switch (element) {
       case 'bTime':
-        this.analyticsEvent('Four Page Registration Page Birth Time Changed');
+        this.analyticsEvent('Complete Profile Birth Time Changed');
         break;
       case 'food':
-        this.analyticsEvent('Four Page Registration Page Three Food Choice Changed');
+        this.analyticsEvent('Complete Profile Food Choice Changed');
         break;
       case 'manglik':
-        this.analyticsEvent('Four Page Registration Page Three Manglik Status Changed');
+        this.analyticsEvent('Complete Profile Manglik Status Changed');
         break;
       case 'fstatus':
-        this.analyticsEvent('Four Page Registration Page Three Father Status Changed');
+        this.analyticsEvent('Complete Profile Father Status Changed');
         break;
       case 'mstatus':
-        this.analyticsEvent('Four Page Registration Page Three Mother Status Changed');
+        this.analyticsEvent('Complete Profile  Mother Status Changed');
         break;
       case 'Fincome':
-        this.analyticsEvent('Four Page Registration Page Three Family Income Changed');
+        this.analyticsEvent('Complete Profile Family Income Changed');
+        break;
+      case 'additional':
+        this.analyticsEvent('Complete Profile Additional Changed');
+        break;
+      case 'designation':
+        this.analyticsEvent('Complete Profile Designation Changed');
+        break;
+      case 'company':
+        this.analyticsEvent('Complete Profile Company Changed');
         break;
       default:
+        this.analyticsEvent(`Complete Profile ${element} Changed`);
         break;
     }
   }
