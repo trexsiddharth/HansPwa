@@ -314,7 +314,7 @@ export class CompatibilityVerifyComponent implements OnInit {
     approveData.append('photo_score', this.fourPageService.getProfile().photoScore.toString());
     if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
     && this.fourPageService.getUserThrough()) {
-      approveData.append('is_key', '0');
+      approveData.append('is_key', 'yes');
     }
     approveData.append('is_approve', '1');
 
