@@ -809,9 +809,10 @@ export class ChatDrawerComponent implements OnInit {
             if (data && data.profile) {
               this.gender = data.profile.gender;
             }
-            if (this.preferenceProfileData) {
+            if (this.preferenceProfileData && this.preferenceProfileData.religion) {
               this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
             }
+
             if (this.gender === 'Female') {
               if (this.preferenceProfileData.occupation) {
                 this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');

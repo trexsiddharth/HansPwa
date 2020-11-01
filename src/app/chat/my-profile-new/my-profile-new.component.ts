@@ -1415,7 +1415,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               console.log('Photo status set to true');
               this.itemService.setPhotoStatus(true);
             }
-            this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
+            if (this.preferenceProfileData.religion) {
+              this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
+            }
+            
             if (this.personalProfileData.gender === "Female") {
               if (this.preferenceProfileData.occupation)
                 this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
