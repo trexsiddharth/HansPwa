@@ -312,6 +312,10 @@ export class CompatibilityVerifyComponent implements OnInit {
     approveData.append('id', localStorage.getItem('getListId'));
     approveData.append('temple_id', localStorage.getItem('getListTempleId'));
     approveData.append('photo_score', this.fourPageService.getProfile().photoScore.toString());
+    if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
+    && this.fourPageService.getUserThrough()) {
+      approveData.append('is_key', '0');
+    }
     approveData.append('is_approve', '1');
 
     this.http.post('https://partner.hansmatrimony.com/api/ApproveProfile', approveData).subscribe(
