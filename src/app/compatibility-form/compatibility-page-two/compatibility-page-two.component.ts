@@ -386,7 +386,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         
         firststepdata.append('is_lead', localStorage.getItem('getListLeadId'));
         firststepdata.append('identity_number', localStorage.getItem('getListIdentity'));
-        firststepdata.append('temple_id', localStorage.getItem('getListTempleId'));
+        firststepdata.append('temple_id', localStorage.getItem('getListTemple'));
 
         return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(
           (response: any) => {

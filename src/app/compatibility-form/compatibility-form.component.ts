@@ -1058,6 +1058,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.userProfile.mobile = profileData.family.mobile;
 
     localStorage.setItem('getListIdentity', profileData.profile.identity_number);
+    localStorage.setItem('getListTemple', profileData.profile.temple_id);
 
     localStorage.setItem('getListMobile', profileData.family.mobile ? profileData.family.mobile : '');
 
