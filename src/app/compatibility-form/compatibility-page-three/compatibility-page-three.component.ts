@@ -186,7 +186,7 @@ export class CompatibilityPageThreeComponent implements OnInit {
 
         personalFormData.append('is_lead', localStorage.getItem('getListLeadId'));
         personalFormData.append('identity_number', localStorage.getItem('getListIdentity'));
-        personalFormData.append('temple_id', localStorage.getItem('getListTemple'));
+        personalFormData.append('temple_id', localStorage.getItem('getListTempleId'));
 
         console.log('personal', personalFormData.get('birth_place'));
 
@@ -208,7 +208,7 @@ export class CompatibilityPageThreeComponent implements OnInit {
                 familyFormData.append('locality', this.PageThree.value.Locality);
                 familyFormData.append('is_lead', localStorage.getItem('getListLeadId'));
                 familyFormData.append('identity_number', localStorage.getItem('getListIdentity'));
-                familyFormData.append('temple_id', localStorage.getItem('getListTemple'));
+                familyFormData.append('temple_id', localStorage.getItem('getListTempleId'));
 
                 console.log('family', this.PageThree.value);
 
