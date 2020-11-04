@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { catchError, debounceTime, retry, timeout } from 'rxjs/operators';
+import { AnalyticsService } from 'src/app/analytics.service';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
 import { DataFilteringService } from '../data-filtering.service';
@@ -16,6 +17,7 @@ export class HistorySectionComponent implements OnInit {
   constructor(public itemService: FindOpenHistoryProfileService,
               public languageService: LanguageService,
               private http: HttpClient,
+              private analyticsService: AnalyticsService,
               public dataFiltering: DataFilteringService,
               public router: Router) { }
   selectedTab = 0;
@@ -72,10 +74,28 @@ export class HistorySectionComponent implements OnInit {
   }
   setSelectedIndex(tabNumber: number) {
     this.selectedTab = tabNumber;
+
+    switch (tabNumber) {
+      case 0:
+        this.analyticsService.googleAnalytics('History Shortlist Visited');
+        break;
+
+        case 1:
+        this.analyticsService.googleAnalytics('History Contact Visited');
+        break;
+
+        case 2:
+          this.analyticsService.googleAnalytics('History Reject Visited');
+          break;
+    
+      default:
+        break;
+    }
   }
   toggleSearch() {
     this.searchControl.patchValue('');
     this.searchActivated.next(!this.searchActivated.value);
+    this.analyticsService.googleAnalytics('History Search Visited');
   }
   getColor(type: string) {
     return type === 'REJECT' ? 'rgba(248, 73, 73, 0.849)' : type === 'SHORTLIST' ? 'rgba(22, 182, 22, 0.788)' : 'rgba(35, 131, 221, 0.89)';
@@ -113,6 +133,8 @@ export class HistorySectionComponent implements OnInit {
           localStorage.setItem('index', String(index));
           localStorage.setItem('todaysPopupOpened', '0');
           localStorage.setItem('stage', '4');
+
+          this.analyticsService.googleAnalytics(`${type} Profile Visited From History Search`);
 
           // navigate to HISTORY PROFILE DIALOG COMPONENT
           this.router.navigateByUrl('chat/open/open-profile');

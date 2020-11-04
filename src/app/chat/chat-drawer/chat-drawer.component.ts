@@ -357,7 +357,9 @@ export class ChatDrawerComponent implements OnInit {
       working: [''],
       country: [''],
       state: [''],
+      states_free: (null),
       city: [''],
+      cities_free: (null)
     });
     this.chatService.authDataUpdated.subscribe(
       (response: boolean) => {
@@ -834,6 +836,10 @@ export class ChatDrawerComponent implements OnInit {
 
 
               if (this.preferenceProfileData.pref_state) {
+                if (this.authData.paid_status !== 'Paid') {
+                  this.preferencesForm.controls.states_free.setValue(this.preferenceProfileData.pref_state);
+                }
+
                 if ((this.preferenceProfileData.pref_state as string).includes(',')) {
                 this.preferenceProfileData.pref_state = (this.preferenceProfileData.pref_state as string).split(',');
                 } else {
@@ -843,6 +849,10 @@ export class ChatDrawerComponent implements OnInit {
               }
 
               if (this.preferenceProfileData.pref_city) {
+                if (this.authData.paid_status !== 'Paid') {
+                  this.preferencesForm.controls.cities_free.setValue(this.preferenceProfileData.pref_city);
+                }
+
                 if ((this.preferenceProfileData.pref_city as string).includes(',')) {
                 this.preferenceProfileData.pref_city = (this.preferenceProfileData.pref_city as string).split(',');
                 } else {
@@ -890,7 +900,7 @@ export class ChatDrawerComponent implements OnInit {
       this.ngxNotificationService.error('No user found');
     }
   }
-  onSubmitPreferences() {
+onSubmitPreferences() {
     // this.editIndexPrefs = -1;
     console.log('preference Data to update');
     console.log(this.preferenceProfileData);
@@ -981,7 +991,7 @@ export class ChatDrawerComponent implements OnInit {
         }
       );
   }
-  getAllCaste() {
+getAllCaste() {
     this.http
       .get('https://partner.hansmatrimony.com/api/getAllCaste')
       .subscribe((res: any) => {
@@ -1037,7 +1047,7 @@ export class ChatDrawerComponent implements OnInit {
       this.getcastes.filter((bank) => bank.toLowerCase().indexOf(search) > -1)
     );
   }
-  langChanged(event) {
+langChanged(event) {
     console.log(event.checked);
     if (event.checked) {
       localStorage.setItem('language', 'english');
@@ -1047,7 +1057,7 @@ export class ChatDrawerComponent implements OnInit {
       this.languageService.setCurrentLanguage('hindi');
     }
   }
-  analyticsEvent(event) {
+analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
 
@@ -1065,17 +1075,21 @@ export class ChatDrawerComponent implements OnInit {
     });
 
   }
-  countryClicked() {
+countryClicked() {
     console.log('Country Clicked');
     if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#countryId');
+      const statesFreeId: HTMLInputElement = document.querySelector('#statesFreeId');
+      const citiesFreeId: HTMLInputElement = document.querySelector('#citiesFreeId');
       countryId.blur();
+      statesFreeId.blur();
+      citiesFreeId.blur();
       this.openChooseFromAnyWhereDialog();
       return;
     }
   }
 
-  stateClicked() {
+stateClicked() {
     console.log('State Clicked');
     if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#stateId');
@@ -1085,7 +1099,7 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
 
-  cityClicked() {
+cityClicked() {
     console.log('City Clicked');
     if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#cityId');
@@ -1094,7 +1108,7 @@ export class ChatDrawerComponent implements OnInit {
       return;
     }
   }
-  openChooseFromAnyWhereDialog() {
+openChooseFromAnyWhereDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
       dialogConfig.minWidth = '30vw';
@@ -1114,13 +1128,13 @@ export class ChatDrawerComponent implements OnInit {
       this.getUserProfileData();
     });
   }
-  openSubscriptionOffer() {
+openSubscriptionOffer() {
     this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
     // this.itemService.openTodaysPopupAd();
     this.router.navigateByUrl(`/subscription`);
   }
 
-  showMoreCity() {
+showMoreCity() {
     const cityStyle: any = document.querySelector('#cityStyle');
     const cityStyleBtn: any = document.querySelector('#cityStyleBtn');
     if (cityStyleBtn.textContent.includes('See More')) {
@@ -1132,7 +1146,7 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
 
-  showMoreCaste() {
+showMoreCaste() {
     const casteStyle: any = document.querySelector('#casteStyle');
     const casteStyleBtn: any = document.querySelector('#casteStyleBtn');
     if (casteStyleBtn.textContent.includes('See More')) {

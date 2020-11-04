@@ -174,10 +174,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
 
   constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
-    public chatService: ChatServiceService) {
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
+              public chatService: ChatServiceService) {
     this.PageTwo = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
       Qualification: ['', Validators.compose([Validators.required])],
@@ -309,11 +309,12 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     );
   }
   setValue(item: string) {
-    let vals = item.split('-');
-    if (vals[0] == "100+")
-      return "Rs 1+ Crore per year";
-    else
-      return "Rs. " + vals[0] + " - " + vals[1] + " Lakhs per year"
+    const vals = item.split('-');
+    if (vals[0] === '100+') {
+      return 'Rs 1+ Crore per year';
+    } else {
+      return 'Rs. ' + vals[0] + ' - ' + vals[1] + ' Lakhs per year';
+    }
   }
 
   protected filterDesignation() {
@@ -351,10 +352,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     console.log(this.PageTwo.value.Working);
 
     if (this.PageTwo.valid) {
-      if (this.PageTwo.value.AnnualIncome === "100+") {
+      if (this.PageTwo.value.AnnualIncome === '100+') {
         this.PageTwo.value.AnnualIncome = 100;
-      }
-      else if (this.PageTwo.value.AnnualIncome) {
+      } else if (this.PageTwo.value.AnnualIncome) {
         const a = this.PageTwo.value.AnnualIncome.split('-');
         this.PageTwo.patchValue({
           AnnualIncome: String((Number(a[0]) + Number(a[1])) / 2)
@@ -383,7 +383,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
       if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
       && this.fourPageService.getUserThrough()) {
-        
+
         firststepdata.append('is_lead', localStorage.getItem('getListLeadId'));
         firststepdata.append('identity_number', localStorage.getItem('getListIdentity'));
         firststepdata.append('temple_id', localStorage.getItem('getListTemple'));
@@ -420,10 +420,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           if (this.fourPageService.getUserThrough()) {
             this.updateFormTwoData(firststepdata);
           }
-          //this.ngxNotificationService.success('Registered Successfully');
+          // this.ngxNotificationService.success('Registered Successfully');
           if (!this.fourPageService.getUserThrough()) {
             this.chatService.formTwoCompleted.next(true);
-            //this.router.navigateByUrl('chat?first');
+            // this.router.navigateByUrl('chat?first');
             this.analyticsEvent('Four Page Registration Page Two');
           }
         } else {
@@ -445,7 +445,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.errors.push(control);
         }
       }
-      //this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+      // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
     }
   }
 
@@ -626,7 +626,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       caste: this.fourPageService.getProfile().caste ?
         this.fourPageService.getProfile().caste !== 'All' ? this.fourPageService.getProfile().caste : '' : '',
       manglik: this.fourPageService.getProfile().manglik ? this.fourPageService.getProfile().manglik : '',
-      gender: this.fourPageService.getProfile().gender ? this.fourPageService.getProfile().gender === 'Male' ? 'boy' : 'girl' : '',
+      gender: this.fourPageService.getProfile().gender ? this.fourPageService.getProfile().gender === 'Male' ? 'man' : 'woman' : '',
       locality: this.fourPageService.getProfile().locality ? ` residing in ${this.fourPageService.getProfile().locality}` : '',
       qualification: this.PageTwo.value.Qualification ? `. I've completed my ${this.PageTwo.value.Qualification}` : '',
       occupation: this.PageTwo.value.Occupation ?

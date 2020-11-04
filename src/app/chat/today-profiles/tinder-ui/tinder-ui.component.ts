@@ -567,7 +567,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
         caste: item.caste ?
           item.caste !== 'All' ? item.caste : '' : '',
         manglik: item.manglik ? item.manglik : '',
-        gender: item.gender ? item.gender === 'Male' ? 'boy' : 'girl' : '',
+        gender: item.gender ? item.gender === 'Male' ? 'man' : 'woman' : '',
         locality: item.locality ? item.locality === 'Visible after Contact' ?
           '' : ` residing in ${item.locality}` : '',
         qualification: item.education ?

@@ -382,6 +382,15 @@
                 </div>
               </div>
 
+
+              <div class="row information" *ngIf="preferencesForm.value.country && authData.paid_status != 'Paid'">
+                <div class="col-12">
+                  <h6 style="display: inline-block">State:</h6>
+                  <input type="text" id="statesFreeId" (click)="countryClicked()" class="form-control" formControlName="states_free" >
+                </div>
+              </div>
+
+
               <div class="row information" *ngIf="preferencesForm.value.country && authData.paid_status == 'Paid'">
                 <div class="col-12">
                   <h6>State:</h6>
@@ -412,6 +421,15 @@
                   </mat-select-trigger>
                 </div>
               </div>
+
+              <div class="row information" *ngIf="preferencesForm.value.country && authData.paid_status != 'Paid'">
+                <div class="col-12">
+                  <h6 style="display: inline-block">City:</h6>
+                  <input type="text" id="citiesFreeId" (click)="countryClicked()" class="form-control" formControlName="cities_free" >
+                </div>
+              </div>
+
+
               <div class="row information" *ngIf="preferencesForm.value.state && authData.paid_status == 'Paid'">
                 <div class="col-12">
                   <h6>City:</h6>
