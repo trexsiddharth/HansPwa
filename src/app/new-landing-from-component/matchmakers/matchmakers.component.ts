@@ -39,6 +39,7 @@ export class MatchMakers implements OnInit {
       center: true,
       dots: true,
       autoWidth: true,
+      margin:80,
       // merge: true,
       // mergeFit: true,
       responsive: {

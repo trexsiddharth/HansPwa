@@ -94,11 +94,14 @@ li{
         margin-top:80px;
     }
     .logo{
-        width:16vw;
+        width:20vw;
         height:auto;
     }
     .logo-text{
-        width:16vw;
+        width:20vw;
         height:auto;
+    }
+    h2{
+        font-size:30px;
     }
 }

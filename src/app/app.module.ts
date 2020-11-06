@@ -52,6 +52,7 @@ import { AppFooter } from './new-landing-from-component/footer/footer';
 import { MatchMakers } from './new-landing-from-component/matchmakers/matchmakers.component';
 import { Testimonials } from './new-landing-from-component/testimonials/testimonials.component';
 import { TestimonialCards } from './new-landing-from-component/testimonials/testimonial-cards/testimonial-cards.component';
+import { HowItWorks } from './new-landing-from-component/howItWorks/how-it-works.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,8 @@ import { TestimonialCards } from './new-landing-from-component/testimonials/test
     AppFooter,
     MatchMakers,
     Testimonials,
-    TestimonialCards
+    TestimonialCards,
+    HowItWorks
   ],
   imports: [
     BrowserModule,

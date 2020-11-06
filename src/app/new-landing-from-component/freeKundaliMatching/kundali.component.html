@@ -49,7 +49,7 @@
                                         {{item}}
                                     </option>
                                 </select>
-                                <br>
+                                
                                 </div>
                               </div>
                             </div>
@@ -85,31 +85,43 @@
                           <h6>Name</h6>
                           <input class="form-control" formControlName="GirlName" type="text">
                       </div>
+                      <br>
                       <div class="col">
                           <h6>Birth Date</h6>
-                          <div class="special">
-                              <select class="form-control classic" formControlName="GirlBirthDate">
-                                  <option *ngFor="let item of date" [value]="item">
-                                      {{item}}
-                                  </option>
-                              </select>
-                              <select class="form-control classic" formControlName="GirlBirthMonth">
-                                  <option *ngFor="let item of month" [value]="item">
-                                      {{item}}
-                                  </option>
-                              </select>
-                              <select class="form-control classic" formControlName="GirlBirthYear">
-                                  <option *ngFor="let item of years" [value]="item">
-                                      {{item}}
-                                  </option>
-                              </select>
+                          
+                          <div class="container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <select class="form-control classic" formControlName="GirlBirthDate">
+                                        <option *ngFor="let item of date" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control classic" formControlName="GirlBirthMonth">
+                                        <option *ngFor="let item of month" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control classic" formControlName="GirlBirthYear">
+                                        <option *ngFor="let item of years" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                           </div>
+                          <br>
                       </div>
                       <div class="col">
                           <h6>Birth Time</h6>
                           <input min="00:00:00" max="24:59:59" type="time" class="form-control"
                               formControlName="GirlBirthTime">
                       </div>
+                      <br>
                       <div class="col">
                           <h6>Birth Place</h6>
                           <input class="form-control" type="text" id="GirlBirthPlace"
@@ -117,6 +129,7 @@
                               #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
                               (change)="placeChanged('GirlBirthPlace')" formControlName="GirlBirthPlace">
                       </div>
+                      <br>
                       <div class="d-flex justify-content-center">
                         <button mat-raised-button type="button" id="viewButton" class="btn" (click)="onSubmit()"
                           *ngIf="(BoyDetailsFilled$ | async)">See Kundali Score</button>

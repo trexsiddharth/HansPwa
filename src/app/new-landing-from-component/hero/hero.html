@@ -38,6 +38,7 @@
                     <div class="content">
                         <h2><span style="font-weight:bold">Verified</span> matches from <br> <span style="font-weight:bold">50+ Temples</span>
                         </h2>
+                        
                         <hr>
                         <div class="container">
                             <div class="row">
@@ -56,12 +57,10 @@
                                                     <button class="down" ngbDropdownToggle></button>
                                                     <div class="dropdown-menu" ngbDropdownMenu>
                                                     <button #myself (click)="mySelf(myself.id)" id="myself" ngbDropdownItem>Myself</button>
-                                                    <button #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
-                                                    <button #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
-                                                    <button #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
-                                                    <button #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
-                                                    <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
-                                                    <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
+                                                    <button *ngIf="groom" #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
+                                                    <button *ngIf="bride" #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
+                                                    <button  *ngIf="bride" #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
+                                                    <button *ngIf="groom" #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
                                                     <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
                                                     </div>
                                                 </div>
@@ -86,8 +85,8 @@
                 </div>
                   <div *ngIf="smallScreen" class="col-md-6">
                     <div class="content">
-                        <h1 style="text-align:center;" ><span style="font-weight:bold">Verified</span> matches from <br> <span style="font-weight:bold">50+ Temples</span>
-                        </h1>
+                        <h2 style="text-align:center;" ><span style="font-weight:bold">Verified</span> matches from <br> <span style="font-weight:bold">50+ Temples</span>
+                        </h2>
                         <hr>
                         <div class="container">
                             <div class="row">

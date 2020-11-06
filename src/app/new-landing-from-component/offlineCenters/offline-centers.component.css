@@ -5,9 +5,6 @@ h1{
     margin-bottom:60px;
     font-family:'Poppins', sans-serif;
 }
-p{
-    font-weight:normal;
-}
 .match-makers{
     overflow-x:hidden;
 }
@@ -35,6 +32,14 @@ p{
     justify-content: center;
     align-items:center;
     /* width:100%; */
+}
+
+.center{
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    transform: scale(1.15);
+    z-index:3000;
+    border:1px solid black;
 }
 p{
     text-align:center;

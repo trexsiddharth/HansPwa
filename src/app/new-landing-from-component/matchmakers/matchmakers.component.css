@@ -9,6 +9,11 @@
 .slide{
     padding:20px;
 }
+.active{
+    webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    transform: scale(1.25);
+}
 .featureCard2{
     width: 95%;
     height: auto;

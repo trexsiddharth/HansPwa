@@ -31,15 +31,17 @@ export class Hero implements OnInit {
       window.open('https://play.google.com/store/apps/details?id=com.twango.me', '_blank');
     }
     goToCompatibility(){
-      if (this.bride) {
+      if (this.bride===true) {
         this.itemService.compatibilityGender = 'Male';
       }
-      else{
+      if(this.groom===true){
         this.itemService.compatibilityGender = 'Female';
       }
-      if (this.optionsForm.value.For) {
+      
+      if(this.name){
         this.itemService.compatibilityLookingFor = this.name;
       }
+      
       this.router.navigateByUrl('/fourReg');
     }
     groomToggle(){
@@ -59,8 +61,9 @@ export class Hero implements OnInit {
       this.name=document.getElementById(id).innerHTML;
     }
     ngOnInit() {
+      this.mobileScreen();
       if (localStorage.getItem('gender')) {
-        this.mobileScreen();
+        
         let gender = localStorage.getItem('gender');
         if (gender === "Female") {
           this.currentGender = "Girl's";
@@ -76,11 +79,13 @@ export class Hero implements OnInit {
         }
       }
     }
-    private resize(){
+    public resize(){
         this.innerWidth = window.innerWidth;
+        console.log(this.innerWidth);
+        
         return this.innerWidth
     }
-    private mobileScreen() {
+    public mobileScreen() {
         window.onload = this.resize;
         window.onresize = this.resize;
         
