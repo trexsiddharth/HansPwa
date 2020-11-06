@@ -1,0 +1,382 @@
+<div *ngIf="!completeProfile">
+    <div id="offBanner2">
+        <img id="offBannerImg" [style.padding]="imgURL ? '0px':'14px'" class="mat-elevation-z7" style="position: absolute;
+        bottom: -20px;
+        margin: auto;
+        z-index: 10;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border: 0px;
+        padding: 14px;
+        border-radius: 50%;
+        overflow: auto;
+        height: 64px;
+        width: 64px;
+        background-color: rgb(0, 194, 203) !important;" [src]="imageSrc" />
+    </div>
+    <div style="position:relative">
+        <div id="cancel">
+            <img (click)="close()" style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg"
+                alt="cancel" />
+        </div>
+        <main style="padding-bottom:30px;">
+            <div style="
+        position:relative;
+        height:29vh!important; 
+        width:100%!important; 
+        border-radius: 20px!important;
+        background:white!important;
+        margin:auto;
+        margin-top:2%;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:center;
+        color:black;padding:4%">
+                <div style="display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center" class="text-center">
+                    <p style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;"
+                        *ngIf="data.message !== 'Complete Your Profile'">
+                        {{data.message}}</p>
+                    <p style="font-size:16px;color:rgb(51, 59, 52)!important;">
+                        {{data.submessage}}</p>
+
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="mat-elevation-z10 btn-lg"
+                    style="background:#00c2cb;font-size:1.2rem;padding:2% 2%;font-weight:bold;" mat-raised-button
+                    (click)="
+                    buttonClicked()">{{data.button}}</button>
+            </div>
+        </main>
+    </div>
+</div>
+<div *ngIf="completeProfile">
+    <div id="offBanner2">
+        <img id="offBannerImg2" [style.padding]="imgURL ? '0px':'14px'" class="mat-elevation-z10" style="position: absolute;
+        bottom: -20px;
+        margin: auto;
+        z-index: 10;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border: 0px;
+        padding: 14px;
+        border-radius: 50%;
+        overflow: auto;
+        height: 64px;
+        width: 64px;
+        background-color: rgb(0, 194, 203) !important;" [src]="imageSrc" />
+    </div>
+    <div style="position:relative">
+        <div id="cancel">
+            <img style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg" alt="cancel"
+                (click)="close()" />
+        </div>
+        <main style="padding-bottom:6px;" *ngIf="(pageThreeFilled$ | async) === false">
+            <div style="
+        position:relative;
+        height:fit-content!important; 
+        width:100%!important; 
+        border-radius: 20px!important;
+        background:white!important;
+        margin:auto;
+        margin-top:8.5%;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:center;
+        color:black">
+                <div style="display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center" class="text-center">
+                    <!-- <p
+                        style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;margin-bottom: 0.1rem!important;">
+                        {{data.message}}</p> -->
+                    <p style="font-size:16px;color:rgb(51, 59, 52)!important;margin:1.7rem 0 0.5rem 0!important;">
+                        {{data.submessage}}</p>
+                    <div *ngIf="!(itemService.getPhotoStatus())">
+                        <div *ngIf="!imgURL" (click)="openPhotoUploadCrop(1)" class="uploadPhotoBtn">
+                            <!-- <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile"
+                                accept='image/*' (change)="chooseFileForUpload(backfile.files)" /> -->
+                            Upload Photo
+                        </div>
+                    </div>
+                    <form [formGroup]="PageThree" id="specialForm">
+                        <div class="row" style="padding:9px">
+                            <div class="col-6">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                    <mat-label>Birth Place</mat-label>
+                                    <input type="text" matInput matValidateAddress id="birthPlace"
+                                        [autoCompleteOptions]="autoComplete" (change)="placeChanged()"
+                                        matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                        formControlName="BirthPlace">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6" style="padding-left: 0px;">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                    <mat-label>Birth Time<code style="color: rgba(0,0,0,.6);">(optional)</code>
+                                    </mat-label>
+                                    <input matInput id="BirthTime" (change)="changed('bTime')" type="time"
+                                        placeholder="Choose a time" formControlName="BirthTime">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 mt-10">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                    <mat-label>Food Choice</mat-label>
+                                    <mat-select (selectionChange)="changed('food')" formControlName="FoodChoice">
+                                        <mat-option value="Vegetarian">Vegetarian</mat-option>
+                                        <mat-option value="Non-Vegetarian">Non-Vegetarian</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 matSelect mt-10">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                    <mat-label>Manglik Status</mat-label>
+                                    <mat-select (selectionChange)="changed('manglik')" formControlName="Mangalik">
+                                        <mat-option value="Manglik">Manglik</mat-option>
+                                        <mat-option value="Non-Manglik">Non-Manglik</mat-option>
+                                        <mat-option value="Anshik Manglik">Anshik Manglik</mat-option>
+                                        <mat-option value="Anshik Manglik">Don't Know</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                    <mat-label>Father's Status</mat-label>
+                                    <mat-select formControlName="FatherStatus" (selectionChange)="changed('fstatus')">
+                                        <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                    <mat-label>Mother's Status</mat-label>
+                                    <mat-select formControlName="MotherStatus" (selectionChange)="changed('mstatus')">
+                                        <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                    <mat-label>Family's Annual Income in LPA</mat-label>
+                                    <mat-select name="FamilyIncome" formControlName="FamilyIncome"
+                                        (selectionChange)="changed('Fincome')">
+                                        <mat-option *ngFor="let item of incomeCategories" [value]="item">
+                                            {{setValue(item)}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width fieldFit" appearance="standard">
+                                  <mat-label>About</mat-label>
+                                  <textarea rows="3" type="text" matInput 
+                                  formControlName="About" name="About">
+                                                          </textarea>
+                                </mat-form-field>
+                              </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="mat-elevation-z10 btn-lg"
+                    style="background:#00c2cb;font-size:1.1rem;padding:2% 2%;margin-bottom:13px;" mat-raised-button
+                    (click)="firstStep()">{{data.button}}</button>
+            </div>
+            <!-- <div >
+            <button mat-button (click)="close()" class="btn-round" (click)="backToChat()">OK</button>
+        </div> -->
+        </main>
+
+        <main style="padding-bottom:6px;" *ngIf="(pageThreeFilled$ | async)">
+            <div style="
+        position:relative;
+        height:fit-content!important; 
+        width:100%!important; 
+        border-radius: 20px!important;
+        background:white!important;
+        margin:auto;
+        margin-top:8.5%;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:center;
+        color:black">
+                <div style="display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center" class="text-center">
+                    <!-- <p
+                        style="font-size:20px;font-weight:bold;color:rgb(51, 59, 52)!important;margin-bottom: 0.1rem!important;">
+                        {{data.message}}</p> -->
+                    <p style="font-size:16px;color:rgb(51, 59, 52)!important;margin:1.7rem 0 0.5rem 0!important;">
+                        {{data.submessage}}</p>
+                    <div *ngIf="!(itemService.getPhotoStatus())">
+                        <div *ngIf="!imgURL" (click)="openPhotoUploadCrop(1)" class="uploadPhotoBtn">
+                            <!-- <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile"
+                                accept='image/*' (change)="chooseFileForUpload(backfile.files)" /> -->
+                            Upload Photo
+                        </div>
+                    </div>
+                    <form *ngIf="(detailsDisplayIndex$ | async)==0" [formGroup]="personalForm" id="specialForm">
+                        <div class="row">
+                            <div style="width: 87%!important;margin:auto">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>College:</mat-label>
+                                            <input matInput type="text" formControlName="College" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Additional Qualification:</mat-label>
+                                            <input matInput (change)="changed('additional')" type="text" formControlName="Additional" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Designation:</mat-label>
+                                            <mat-select (selectionChange)="changed('designation')" formControlName="Profession" required>
+                                                <mat-option *ngFor="let  option of designations" [value]="option">
+                                                    {{option}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Company:</mat-label>
+                                            <input matInput (change)="changed('company')" type="text" formControlName="Company" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12" *ngIf="personalForm.value.Profession === 'Others'">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Other Designation:</mat-label>
+                                            <input matInput ype="text" formControlName="OtherProfession"
+                                                name="OtherProfession">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Locality</mat-label>
+                                            <input matInput type="text" id="Locality"
+                                                [autoCompleteOptions]="autoComplete" matValidateAddress
+                                                matGoogleMapsAutocomplete
+                                                #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                                (change)="placeChangedLocality()" formControlName="Locality" required />
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Weight(in Kg):</mat-label>
+                                            <input matInput (change)="changed('Weight')" type="text" formControlName="Weight" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Email:</mat-label>
+                                            <input matInput (change)="changed('Email')" type="text" formControlName="Email">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12" *ngIf="personalProfileData.gender == 'Female'" >
+                                        <!-- <h6>Wish to go abroad?</h6> -->
+                                        <mat-form-field class="full-width fieldFit" appearance="standard" >
+                                          <mat-label>Wish to go abroad?</mat-label>
+                                          <mat-select (selectionChange)="changed('Abroad')" formControlName="abroad">
+                                            <mat-option value="Yes">Yes</mat-option>
+                                            <mat-option value="No">No</mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="mat-elevation-z10 btn-lg"
+                                style="background:#00c2cb;font-size:1.1rem;padding:2% 2%;margin-bottom:13px;"
+                                mat-raised-button (click)="onSubmit()">{{data.button}}</button>
+                        </div>
+                    </form>
+                    <form *ngIf="(detailsDisplayIndex$ | async)==1" [formGroup]="familyForm" id="specialForm">
+                        <div class="row">
+                            <div style="width: 87%!important;margin:auto">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Family Type:</mat-label>
+                                            <mat-select (selectionChange)="changed('Family Type')" formControlName="family_type" required>
+                                                <mat-option value="Nuclear">Nuclear</mat-option>
+                                                <mat-option value="Joint">Joint</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>House Type:</mat-label>
+                                            <mat-select (selectionChange)="changed('House Type')" formControlName="house_type" required>
+                                                <mat-option value="Owned">Owned</mat-option>
+                                                <mat-option value="Rented">Rented</mat-option>
+                                                <mat-option value="Leased">Leased</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Living With Parents:</mat-label>
+                                            <mat-select (selectionChange)="changed('Living With')" formControlName="livingWithParents" required>
+                                                <mat-option value="Yes">Yes</mat-option>
+                                                <mat-option value="No">No</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Family Living In:</mat-label>
+                                            <input (change)="changed('Family Living In')" matInput type="text" id="FamliyCity"
+                                                [autoCompleteOptions]="autoComplete" matValidateAddress
+                                                matGoogleMapsAutocomplete
+                                                #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                                (change)="placeChangedFamilyCity()" formControlName="family_city"
+                                                required />
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>Gotra:</mat-label>
+                                            <input (change)="changed('Gotra')" matInput type="text" formControlName="gotra">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                                            <mat-label>About Family:</mat-label>
+                                            <input (change)="changed('About Family')" matInput type="text" formControlName="about">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="mat-elevation-z10 btn-lg"
+                                style="background:#00c2cb;font-size:1.1rem;padding:2% 2%;margin-bottom:13px;"
+                                mat-raised-button (click)="onSubmitFamily()">{{data.button}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

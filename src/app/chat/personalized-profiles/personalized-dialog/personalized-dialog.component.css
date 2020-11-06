@@ -1,0 +1,224 @@
+::ng-deep .mat-dialog-container{
+    background-color: white;
+    padding: 0px;
+    border-radius: 10px;
+}
+::ng-deep .mat-dialog-content{
+    max-height: 79vh;
+    margin: 0px;
+    padding: 0px;
+}
+
+::ng-deep .cdk-overlay-dark-backdrop{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+}
+
+::ng-deep .carousel-indicators{
+    bottom: 60px !important;
+}
+
+#cancel{
+    position: absolute;
+    z-index: 99999999;
+    right: 0;
+    top: -5px;
+}
+
+.historyProfile{
+    width: 100%;
+    height: 70%;
+    border-radius: 20px;
+    position: relative;
+}
+
+.historyDetails{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    background-image: linear-gradient(0deg,black,transparent);
+    word-break: break-word;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 15px 35px 15px 10px;
+    border-radius: 10px;
+    }
+
+#profileImage{
+    width: 30vw;
+    height: 70vh;
+    border-radius: 5px;
+}
+
+#answerButtons{
+    display: flex;
+    justify-content: space-evenly;
+    position: sticky;
+    top: 54vh;
+    margin-top: 20px;
+    bottom: 10px;
+    z-index: 99999;
+    background-image: linear-gradient(0deg, white,transparent);
+}
+#setRejectBtn{
+    width: 70px;
+    height: 70px;
+    color: grey;
+    background: #C8C8C8;
+    margin-bottom: 10px;
+}
+#setCallBtn{
+    width: 70px;
+    height: 70px;
+    color: green;
+    background: #58D1FD;
+    margin-bottom: 10px;
+}
+#setShortlistBtn{
+    width: 70px;
+    height: 70px;
+    color: red;
+    background: #D313AE;
+    margin-bottom: 10px;
+}
+
+.buttonImage{
+    width: 40px;
+}
+#verified{
+    background-color: #50ed9d;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+    margin: 0px;
+}
+#controlledBy{
+    margin: 0px;
+    background-color: #ACDFFF;
+    display: flex;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+    justify-content: space-evenly;
+}
+
+#aboutSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #FAC8F1; color: #707070;
+        border-radius: 5px;
+}
+
+#personalSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #9533B5E5;
+        border-radius: 5px;
+}
+.field{
+    margin-top: 10px;
+}
+.title{
+    width: 100%;
+    color: #C8C8C8;
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#careerSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #CA58FD;
+        border-radius: 5px;
+}
+
+#horoscopeSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #070973;
+        border-radius: 5px;
+}
+
+#familySection{
+    margin-top: 20px; 
+        padding: 15px 15px 150px;
+        border: 1px solid #58D1FD;
+        border-radius: 5px;
+}
+
+.highlightedValue{
+    background-color: #C4E9F8;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+@media (max-width: 350px) {
+    .historyDetails{
+        position: absolute;
+        bottom: 0px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 25px;
+        border-radius: 10px;
+        }
+        #answerButtons{
+            display: flex;
+            justify-content: space-evenly;
+            position: sticky;
+            top: 59vh !important;
+            margin-top: 20px;
+            bottom: 10px;
+            z-index: 99999;
+            background-image: linear-gradient(0deg, white,transparent);
+        }
+        #profileImage{
+            width: 100vw;
+            height: 50vh !important;
+            border-radius: 5px;
+        }
+}
+
+@media (max-width: 575px) {
+    .historyDetails{
+        position: absolute;
+        bottom: 0px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 35px 15px 10px;
+        border-radius: 10px;
+        }
+        #answerButtons{
+            display: flex;
+            justify-content: space-evenly;
+            position: sticky;
+            top: 65vh;
+            margin-top: 20px;
+            bottom: 10px;
+            z-index: 99999;
+            background-image: linear-gradient(0deg, white,transparent);
+        }
+        #profileImage{
+            width: 100vw;
+            height: 55vh !important;
+            border-radius: 5px;
+        }
+}
+@media (min-width: 1024px){
+
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: initial;
+        top: 35vh;
+        margin-top: 20px;
+        bottom: 10px;
+        z-index: 99999;
+        background-image: linear-gradient(0deg, white,transparent);
+    }
+
+}

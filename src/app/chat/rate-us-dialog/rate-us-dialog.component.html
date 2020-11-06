@@ -1,0 +1,62 @@
+<div class="mainDiv" *ngIf="!(showForFreeUser$ | async)">
+<div class="topImg">
+    <img width="60px" src="../../../assets/new icons/gift.svg" alt="gift">
+</div>
+<p id="firstLine">
+    Give us 5 <img width="30px" style="margin: -5px 2px 0px;" src="../../../assets/new icons/star_green.svg" alt="star"> and
+</p>
+<p id="secondLine">
+    get 3 contacts Free!
+</p>
+
+<div class="text-center stars" 
+(click)="openPlayStore()">
+    <img width="35px" *ngFor="let item of [1,2,3,4,5]" src="../../../assets/new icons/star_green.svg" alt="star">
+</div>
+
+<div class="bottomDiv">
+    <img width="45px" 
+    (click)="openPlayStore()"
+    src="../../../assets/new icons/playstore.svg" alt="playstore">
+    <button mat-raised-button
+    (click)="openPlayStore()"
+     class="rateBtn">
+        Rate us
+    </button>
+</div>
+</div>
+
+<!-- //for free user -->
+
+<div class="mainDiv" *ngIf="(showForFreeUser$ | async)">
+    <img style="width: 2rem;
+    border-radius: 100px;
+    border: 1px solid #737373;
+    position: absolute;
+    right: 10px;
+    margin-top: 10px;" src="../../../assets/clear.svg" alt="close dialog"
+    (click)="closeDialog()">
+
+    <div class="text-center" >
+        <img style="margin-top: 30px;
+        width: 110px;" src="../../../assets/new icons/rate5star.svg" alt="stars">
+    </div>
+    <p id="firstLine" style="margin-top: 20px;">
+        Rate us 5 stars to get 3 contacts for free
+    </p>
+
+    <p id="smallTC">
+        T&C apply - 1 gift profile contact per day
+    </p>
+    
+    <div class="bottomDiv">
+        <img width="45px" 
+        (click)="openPlayStore()"
+        src="../../../assets/new icons/playstore.svg" alt="playstore">
+        <button mat-raised-button
+        (click)="openPlayStore()"
+         class="rateBtn">
+            Rate us
+        </button>
+    </div>
+    </div>

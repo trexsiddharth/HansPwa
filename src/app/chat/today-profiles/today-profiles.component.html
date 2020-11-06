@@ -1,0 +1,763 @@
+<ngx-spinner name="searchingSpinner" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#58D1FD"
+    type="ball-spin-clockwise-fade" [fullScreen]="true">
+    <p style="color: white;
+font-family: sans-serif;
+font-size: 1rem;
+margin-top: 100px;
+text-align: center;
+font-weight: 600;">We are looking for compatible matches for you
+</ngx-spinner>
+
+<app-tinder-ui [cards]="profileItems" [name]="item.apiwha_autoreply.name" (choiceMade)="logChoice($event)"
+    *ngIf="type == 'profile'"></app-tinder-ui>
+
+    <img 
+    *ngIf="(showConfetti$ | async)"
+    style="display: block;position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    top: 0;"
+    src="../../../assets/images/confetti 2.gif" alt="confetti">
+    
+<!-- <div class="stackedcards-container" *ngIf="item && type == 'profile'"> -->
+<!-- <main id="main1" *ngIf="item && type == 'profile'">
+                <div class="full-width ht-full" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',
+                'greyBack': (profileIsLoading$ | async) === 'NO',
+                'blueBack': (profileIsLoading$ | async) === 'YES' }" style="position: absolute;
+                z-index: 1;
+                height: 100%;
+                text-align: center;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                top: 0;">
+                    <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'SHORTLIST'"
+                        src="../../../assets/heartwhite.svg" alt="hans logo">
+                    <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'NO'"
+                        src="../../../assets/closewhite.svg" alt="hans logo">
+                    <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'YES'"
+                        src="../../../assets/phone_white.svg" alt="hans logo">
+                </div>
+
+                <div id="profileImageDiv">
+                    <ngb-carousel style="outline: none;">
+                        <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
+                            <img id="profilePic" class="img-fluid"
+                                (click)="openImageModal(item.carousel,item.photo,item.name,index)"
+                                [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)"
+                                (load)="onLoadingImage(index)" (error)="onErrorProfilePhoto(item.gender, index)"
+                                alt={{item.name}}>
+                        </ng-template>
+                    </ngb-carousel>
+                    <div id="imageContent">
+                        <div class="full-width">
+                            <div style="width: 80%;">
+                                <span style="font-weight: bold;font-size: 18px;">
+                                    {{toTitleCase(item.name)}}
+                                </span><br>
+                                <span style="font-size: 14px;">{{item.religion}} {{item.religion ? '|' : ''}}
+                                    {{item.caste}}
+                                </span><br>
+                                <span style="font-size: 14px;">
+                                    {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? item.city : '' : item.city ? item.city : '' : ''}}
+                                    {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? '|' : '' : '|' : ''}}
+                                    {{setHeight(item.height)}}
+                                </span> <br>
+                                <span style="font-size: 14px;">
+                                    {{setIncome(item.monthly_income)}} Lakh per year
+                                </span>
+                            </div>
+                            <div style="position: absolute;
+                       top: -10px;right: 10px;
+                       border-radius: 10px;
+                       padding: 0px 10px;
+                       background-color: #FE39C7;">{{setAge(item.birth_date)}}
+                            </div>
+
+                            <div style="position: absolute;
+                      top: 25px;right: 25px;">
+                                <img width="20px" src="../../../assets/tabs-icons/shield.svg" alt="verified profile">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <section id="content" style="
+                position: relative;
+                margin: -120px 10px 0px;
+                border-top-right-radius: 20px;
+                  border-top-left-radius: 20px;
+                  padding: 0px 10px 100px;
+                  background-color: white;
+                  overflow-y: auto;
+                  box-shadow: 1px 1px 5px #9ADCF0, -1px -1px 5px #9ADCF0;">
+
+
+                    <div class="row field">
+                        <div class="col-6">
+                            <img class="titleImage" src="../../../assets/tabs-icons/shield.svg" alt="verified at">
+                            <span class="title">{{languageService.profileLang.verifiedAt}}</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="title">{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row field">
+                        <div class="col-6">
+                            <img class="titleImage" src="../../../assets/tabs-icons/personal.svg" alt="managedBy">
+                            <span class="title">
+                                {{languageService.profileLang.managedBy}}
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <span class="title">
+                                {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div id="aboutSection">
+                        <u class="titleHeading">
+                            {{languageService.profileLang.about}}
+                        </u>
+                        <p class="title" style="margin-left:0px">
+                            <span
+                                style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span>
+                            {{item.about ? item.about.length < 30 ? toTitleCase(setAbout()) : toTitleCase(item.about) : toTitleCase(setAbout())}}
+                        </p>
+                    </div>
+                    <div id="personalSection">
+                        <div style="display: flex;
+                        justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.personalizedDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
+                                <span class="title">{{item.mobile}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/location-dark.svg"
+                                    alt="location">
+                                <span
+                                    class="title">{{item.locality ? item.locality : item.city ? item.city : ''}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Religion.svg" alt="caste">
+                                <span class="title">{{item.religion}} {{item.religion ? '|' : ''}} {{item.caste}}
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Marital Status.svg"
+                                    alt="marital status">
+                                <span class="title">{{item.marital_status}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Food Choice.svg"
+                                    alt="food choice">
+                                <span class="title">{{item.food_choice}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Weight.svg" alt="weight">
+                                <span class="title">{{item.weight}} Kg</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="careerSection">
+                        <div style="display: flex;
+                        justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.careerDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Occupation.svg" alt="occupation">
+                                <span class="title">{{item.occupation}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Designation.svg"
+                                    alt="designation">
+                                <span class="title">{{item.profession}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
+                                <span class="title">{{setIncome(item.monthly_income)}} Lakh per year</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Graduation.svg" alt="education">
+                                <span class="title">{{item.degree ? item.degree : item.education}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Schooling.svg" alt="college">
+                                <span class="title">{{toTitleCase(item.college)}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="working">
+                                <span class="title">{{item.working_city}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="horoscopeSection">
+                        <div style="display: flex;justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.horoscopeDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/DOB.svg" alt="birth date">
+                                <span class="title">{{item.birth_date | date}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
+                                <span class="title">{{item.birth_time}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/workingCity.svg"
+                                    alt="birth place">
+                                <span class="title">{{item.birth_place}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
+                                <span class="title">{{setManglik(item.manglik)}}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div id="familySection">
+                        <div style="display: flex;justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.familyDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Sister.svg" alt="Sisters">
+                                <span
+                                    class="title">{{setMarriageSisters(item.unmarried_daughters,item.married_daughters)}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Brother.svg" alt="Brothers">
+                                <span
+                                    class="title">{{setMarriageBrothers( item.unmarried_sons,item.married_sons)}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
+                                <span
+                                    class="title">{{LifeStatus(item.mother_status,item.occupation_mother, 'Mother')}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
+                                <span class="title">{{LifeStatus(item.father_status,item.occupation, 'Father')}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/swastika.svg" alt="Gotra">
+                                <span class="title">{{item.gotra}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Family Type.svg"
+                                    alt="Father Type">
+                                <span class="title">{{familyType()}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/familyIn.svg"
+                                    alt="Family Living In">
+                                <span
+                                    class="title">{{item.city ? item.city : item.locality ? item.locality : ''}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">
+                                <span class="title">{{houseStatus()}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
+                                <span class="title">{{setIncome(item.family_income)}} Lakh per year</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </main> -->
+
+<!-- <div id="answerButtons" *ngIf="!(profileIsLoading$ | async) && (item||item1)"> -->
+<!-- <div id="answerButtons" *ngIf="false">
+        <div class="down-arrow" (click)="scrollDown()" style="background-color: #50ed9d;
+                      float: right;display: flex;
+                      align-items: center;
+                      position: fixed;
+                      border-radius: 100px;
+                      z-index: 999999999;
+                      margin-top: 74vh!important;
+                      box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+                      justify-content: center;">
+            <img width="32px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+        </div>
+        <div class="t-c blur" style="margin-top: 10px;position:relative">
+            <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
+                <img class="handAnimation" src="../../../assets/HandDown.png">
+            </div>
+            <div class="left-action">
+                 <button (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
+            background: #C8C8C8;">
+                <button class="setButtons" mat-fab style="color: grey;
+            background: #C8C8C8;">
+                    <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                </button></div><br>
+            <div class="tip2" *ngIf="itemService.getTutorialIndex()!=-1">
+                <span><strong>Reject</strong></span>
+            </div>
+        </div>
+        <div class="t-c" style="position:relative">
+            <div class="tip" style="left:-30px;" *ngIf="itemService.getTutorialIndex()!=-1">
+                <img class="handAnimation" src="../../../assets/HandDown.png">
+            </div>
+            <div class="top-action">
+                <button (click)="getNextMessageOrProfile('YES')" class="setButtonsCenter" mat-fab style="color: green;
+            background: #58D1FD;" aria-label="Example icon-button with a heart icon">
+                    <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
+                        alt="कांटेक्ट करें">
+                </button></div><br>
+            <div class="tip2" *ngIf="itemService.getTutorialIndex()!=-1">
+                <span style="color:#58D1FD!important"><strong>Contact</strong></span>
+            </div>
+        </div>
+
+        <div class="t-c" style="margin-top: 10px;position:relative">
+            <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
+                <img class="handAnimation" src="../../../assets/HandDown.png">
+            </div>
+            <div class="right-action">
+                <button (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtons right-action" mat-fab style="color: red;
+            background: #D313AE;
+            margin-bottom: 10px;" aria-label="Example icon-button with a heart icon">
+                <button class="setButtons right-action" mat-fab style="color: red;
+            background: #D313AE;
+            margin-bottom: 10px;" aria-label="Example icon-button with a heart icon">
+                    <img class="buttonImageCenter animateButtonImageCenter" src="../../../assets/heartwhite.svg"
+                        alt="पसंद है">
+                </button></div><br>
+            <div class="tip2" style="top:75px!important;left:-13px!important"
+                *ngIf="itemService.getTutorialIndex()!=-1">
+                <span style="color:#D313AE!important"><strong>Like</strong></span>
+            </div>
+        </div>
+    </div> -->
+
+
+<!-- <main id="main" *ngIf="item && type == 'profile'">
+    <div class="full-width ht-full" *ngIf="profileIsLoading$ | async" [ngClass]="{'pinkBack': (profileIsLoading$ | async) === 'SHORTLIST',
+    'greyBack': (profileIsLoading$ | async) === 'NO',
+    'blueBack': (profileIsLoading$ | async) === 'YES' }" style="position: absolute;
+    z-index: 1;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 0;">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'SHORTLIST'"
+            src="../../../assets/heartwhite.svg" alt="hans logo">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'NO'"
+            src="../../../assets/closewhite.svg" alt="hans logo">
+        <img width="100px" class="rotationAnimation" *ngIf="(profileIsLoading$ | async) === 'YES'"
+            src="../../../assets/phone_white.svg" alt="hans logo">
+    </div>
+
+    <div id="profileImageDiv">
+        <ngb-carousel style="outline: none;">
+            <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
+                <img id="profilePic" class="img-fluid"
+                    (click)="openImageModal(item.carousel,item.photo,item.name,index)"
+                    [src]="getProfilePhoto(item.photo,item.carousel,item.gender,i)" (load)="onLoadingImage(index)"
+                    (error)="onErrorProfilePhoto(item.gender, index)" alt={{item.name}}>
+            </ng-template>
+        </ngb-carousel>
+
+        <div id="imageContent">
+            <div class="full-width">
+                <div style="width: 80%;">
+                    <span style="font-weight: bold;font-size: 18px;">
+                        {{toTitleCase(item.name)}}
+                    </span><br>
+                    <span style="font-size: 14px;">{{item.religion}} {{item.religion ? '|' : ''}} {{item.caste}}
+                    </span><br>
+                    <span style="font-size: 14px;">
+                        {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? item.city : '' : item.city ? item.city : '' : ''}}
+                        {{item.working_city ? item.working_city === 'na' || item.working_city === 'NA' || item.working_city === 'Na' ? item.city ? '|' : '' : '|' : ''}}
+                        {{setHeight(item.height)}}
+                    </span> <br>
+                    <span style="font-size: 14px;">
+                        {{setIncome(item.monthly_income)}} Lakh per year
+                    </span>
+                </div>
+                <div style="position: absolute;
+           top: -10px;right: 10px;
+           border-radius: 10px;
+           padding: 0px 10px;
+           background-color: #FE39C7;">{{setAge(item.birth_date)}}
+                </div>
+
+                <div style="position: absolute;
+          top: 25px;right: 25px;">
+                    <img width="20px" src="../../../assets/tabs-icons/shield.svg" alt="verified profile">
+                </div>
+            </div>
+
+
+            <div class="down-arrow" (click)="scrollDown()" style="background-color: #50ed9d;
+          float: right;display: flex;
+          align-items: center;
+          position: fixed;
+          border-radius: 100px;
+          z-index: 999999999;
+          margin-top: 82vh!important;
+          box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+          justify-content: center;">
+                <img width="32px" src="../../../assets/keyboard_arrow_down-white-18dp.svg" alt="arrow">
+            </div>
+        </div>
+
+
+    </div>
+
+    <section id="content" style="
+    position: relative;
+    margin: -120px 10px 0px;
+    border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      padding: 0px 10px 100px;
+      background-color: white;
+      overflow-y: auto;
+      box-shadow: 1px 1px 5px #9ADCF0, -1px -1px 5px #9ADCF0;">
+
+        <div id="answerButtons" *ngIf="!(profileIsLoading$ | async)">
+            <div class="t-c" style="margin-top: 10px;position:relative">
+                <div class="tip" style="left:-30px;" *ngIf="itemService.getTutorialIndex()!=-1">
+                    <img class="handAnimation" src="../../../assets/HandDown.png">
+                </div>
+                <button (click)="getNextMessageOrProfile('YES')" class="setButtons" mat-fab style="color: green;
+                background: #58D1FD;" aria-label="Example icon-button with a heart icon">
+                    <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
+                        alt="कांटेक्ट करें">
+                </button><br>
+                <div class="tip2" *ngIf="itemService.getTutorialIndex()!=-1">
+                    <span style="color:#58D1FD!important"><strong>Contact</strong></span>
+                </div>
+            </div>
+            <div class="t-c" style="position:relative">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
+                    <img class="handAnimation" src="../../../assets/HandDown.png">
+                </div>
+                <button (click)="getNextMessageOrProfile('SHORTLIST')" class="setButtonsCenter" mat-fab style="color: red;
+                background: #D313AE;
+                margin-bottom: 10px;" aria-label="Example icon-button with a heart icon">
+                    <img class="buttonImageCenter animateButtonImageCenter" src="../../../assets/heartwhite.svg"
+                        alt="पसंद है">
+                </button><br>
+                <div class="tip2" style="top:75px!important;left:-13px!important"
+                    *ngIf="itemService.getTutorialIndex()!=-1">
+                    <span style="color:#D313AE!important"><strong>Like</strong></span>
+                </div>
+            </div>
+            <div class="t-c blur" style="margin-top: 10px;position:relative">
+                <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
+                    <img class="handAnimation" src="../../../assets/HandDown.png">
+                </div>
+                <button (click)="getNextMessageOrProfile('NO')" class="setButtons" mat-fab style="color: grey;
+                background: #C8C8C8;">
+                    <img class="buttonImage" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                </button><br>
+                <div class="tip2" *ngIf="itemService.getTutorialIndex()!=-1">
+                    <span><strong>Reject</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/tabs-icons/shield.svg" alt="verified at">
+                <span class="title">{{languageService.profileLang.verifiedAt}}</span>
+            </div>
+            <div class="col-6">
+                <span class="title">{{item.facebook ? item.facebook : 'Hans Matrimony Office'}}</span>
+            </div>
+        </div>
+
+        <div class="row field">
+            <div class="col-6">
+                <img class="titleImage" src="../../../assets/tabs-icons/personal.svg" alt="managedBy">
+                <span class="title">
+                    {{languageService.profileLang.managedBy}}
+                </span>
+            </div>
+            <div class="col-6">
+                <span class="title">
+                    {{item.relation ? item.relation : item.gender == 'Male' ? 'Mother' : 'Father' }}
+                </span>
+            </div>
+        </div>
+
+        <div id="aboutSection">
+            <u class="titleHeading">
+                {{languageService.profileLang.about}}
+            </u>
+            <p class="title" style="margin-left:0px">
+                <span
+                    style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span>
+                {{item.about ? item.about.length < 30 ? toTitleCase(setAbout()) : toTitleCase(item.about) : toTitleCase(setAbout())}}
+            </p>
+        </div>
+
+        <div id="personalSection">
+            <div style="display: flex;
+            justify-content: space-between;">
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.personalizedDetails}}
+                    </u>
+                </span>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
+                    <span class="title">{{item.mobile}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
+                    <span class="title">{{item.locality ? item.locality : item.city ? item.city : ''}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Religion.svg" alt="caste">
+                    <span class="title">{{item.religion}} {{item.religion ? '|' : ''}} {{item.caste}} </span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
+                    <span class="title">{{item.marital_status}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Food Choice.svg" alt="food choice">
+                    <span class="title">{{item.food_choice}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Weight.svg" alt="weight">
+                    <span class="title">{{item.weight}} Kg</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="careerSection">
+            <div style="display: flex;
+            justify-content: space-between;">
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.careerDetails}}
+                    </u>
+                </span>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Occupation.svg" alt="occupation">
+                    <span class="title">{{item.occupation}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Designation.svg" alt="designation">
+                    <span class="title">{{item.profession}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
+                    <span class="title">{{setIncome(item.monthly_income)}} Lakh per year</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Graduation.svg" alt="education">
+                    <span class="title">{{item.degree ? item.degree : item.education}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Schooling.svg" alt="college">
+                    <span class="title">{{toTitleCase(item.college)}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="working">
+                    <span class="title">{{item.working_city}}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="horoscopeSection">
+            <div style="display: flex;justify-content: space-between;">
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.horoscopeDetails}}
+                    </u>
+                </span>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/DOB.svg" alt="birth date">
+                    <span class="title">{{item.birth_date | date}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
+                    <span class="title">{{item.birth_time}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="birth place">
+                    <span class="title">{{item.birth_place}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
+                    <span class="title">{{setManglik(item.manglik)}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="familySection">
+            <div style="display: flex;justify-content: space-between;">
+                <span class="titleHeading">
+                    <u>
+                        {{languageService.profileLang.familyDetails}}
+                    </u>
+                </span>
+            </div>
+
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Sister.svg" alt="Sisters">
+                    <span class="title">{{setMarriageSisters(item.unmarried_daughters,item.married_daughters)}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Brother.svg" alt="Brothers">
+                    <span class="title">{{setMarriageBrothers( item.unmarried_sons,item.married_sons)}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
+                    <span class="title">{{LifeStatus(item.mother_status,item.occupation_mother, 'Mother')}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
+                    <span class="title">{{LifeStatus(item.father_status,item.occupation, 'Father')}}</span>
+                </div>
+            </div>
+
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/swastika.svg" alt="Gotra">
+                    <span class="title">{{item.gotra}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/Family Type.svg" alt="Father Type">
+                    <span class="title">{{familyType()}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/familyIn.svg" alt="Family Living In">
+                    <span class="title">{{item.city ? item.city : item.locality ? item.locality : ''}}</span>
+                </div>
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">
+                    <span class="title">{{houseStatus()}}</span>
+                </div>
+            </div>
+
+            <div class="row field">
+                <div class="col-6">
+                    <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
+                    <span class="title">{{setIncome(item.family_income)}} Lakh per year</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main> -->
+
+<!-- <div class="actionAnimationDiv ht-full" *ngIf="showActionAnimation">
+    <img class="actionAnimation" *ngIf="lastAction==='YES'" src="../../../assets/phone_white.svg" alt="कांटेक्ट करें">
+    <img class="actionAnimation" *ngIf="lastAction==='SHORTLIST'" src="../../../assets/heartwhite.svg" alt="पसंद है">
+    <img class="actionAnimation" *ngIf="lastAction==='NO'" src="../../../assets/closewhite.svg" alt="नापसंद है">
+</div> -->
+<div class="tinder--card ht-full" *ngIf="type == 'message' && showPopup">
+    <div id="profileImageDiv">
+        <app-persistent-message [data]="popupdata" (popupaction)="popupAction($event)">
+        </app-persistent-message>
+    </div>
+</div>
+<app-today-message [messageData]="itemMessage" [button]="button" *ngIf="type == 'message' && !showPopup">
+</app-today-message>

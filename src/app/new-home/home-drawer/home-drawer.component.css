@@ -1,0 +1,72 @@
+
+::ng-deep .mat-drawer{
+    background-color: white;
+}
+main{
+    background-color: white;
+    height: 100%;
+}
+.profilePicSection{
+    background-color: #E5F3F8;
+    position: relative;
+    color: white;
+}
+.profileImage{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin:auto;
+}
+.imageName{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    background-image: linear-gradient(0deg, #95ADB7,transparent);
+}
+
+.drawerButtonSection{
+    width: 100%;
+     position: absolute;
+     bottom: 0px;
+     padding: 0px 20px 30px;
+     background-color: white;
+}
+
+.btnImage{
+    float: left;
+    margin-left: 20px;
+    width: 35px;
+    margin-right: 5px;
+}
+
+.drawerBtn{
+    padding: 0px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.drawerBtn:focus{
+    box-shadow: none;
+}
+
+@media screen and (max-height: 720px){
+
+    .drawerButtonSection{
+        width: 100%; 
+        position: relative;
+        padding: 0px 20px 30px;
+        background-color: white;
+    }
+    .btnImage{
+        float: left;
+        width: 35px;
+        margin-right: 5px;
+    }
+}

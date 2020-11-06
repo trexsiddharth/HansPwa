@@ -1,0 +1,54 @@
+<div class="match-makers">
+    <div class="d-flex justify-content-center">
+        <h1>Matchmakers</h1>
+    </div>
+    <!-- <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+              <img src="{{ slide.img }}" alt="" width="100%">
+        </div>
+    </ngx-slick-carousel> -->
+    <div class="carousel-div">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.shivTemple}} -->
+                    </span>
+                    <mat-card class="featureCard2">
+                        <img class="feature2Img"
+                            src="../../../assets/carousel/image1.jpg"
+                            alt="Shiv Sai Dham Mandir">
+                    </mat-card>
+                </div>
+                
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.sanatanTemple}} -->
+                    </span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img" src="
+                        ../../../assets/carousel/image1.jpg"
+                            alt="Sanathan Dharam Mandir">
+                    </mat-card>
+                </div>
+                
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.lakshmiTemple}} -->
+                    </span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img"
+                            src="../../../assets/carousel/image1.jpg"
+                            alt="Lakshmi Narayan Mandir">
+                    </mat-card>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div>

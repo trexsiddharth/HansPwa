@@ -1,0 +1,77 @@
+<main *ngIf="profile">
+  
+    <div style="padding-top: 30px;">
+      <div [@listAnimation]="profile.length">
+
+
+    <!-- // new design  -->
+
+      <section>
+          <div class="historyProfile"  *ngFor="let item of profile;let i = index">
+              <img class="historyImage" #profilePic id="profilePic"
+              [src]="getProfilePhoto(item.carousel,item.gender ? item.gender : '')" 
+              (click)="openProfileDialog(item,i)"
+              (error)="onLoadProfileError(item.gender ? item.gender : '' ,'profilePic')"
+              alt="profile picture">
+  
+              <div class="historyDetails">
+                  <span>
+                      {{item.name}} | {{setAge(item.birth_date)}}
+                  </span><br>
+                  <span>
+                      {{item.working_city}} | {{setHeight(item.height)}} 
+                      | {{item.religion}}, {{item.caste}} | {{item.occupation}}
+                      | {{setIncome(item.monthly_income)}} LPA
+                  </span>
+              </div>
+  
+              <div class="historyButtons">
+  
+                  <button mat-raised-button class="btn" 
+                  (click)="profileReAnswer(item,'REJECTED',i)"
+                  style="background-color: #C8C8C8;
+                      padding: 20px;
+                       border-radius: 10px;"  *ngIf="type !== 'rejected'">
+                      <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
+                  </button>
+  
+                  <button mat-raised-button  class="btn" 
+                  (click)="profileReAnswer(item,'CONTACTED',i)"
+                  style="background-color: #58D1FD;
+                  margin-top: 20px;
+                  padding: 20px;
+                   border-radius: 10px;"  *ngIf="type !== 'contacted'">
+                  <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+              </button>
+  
+                  <button mat-raised-button  class="btn"
+                  (click)="profileReAnswer(item,'SHORTLIST',i)"
+                   style="background-color: #D313AE;margin-top: 20px;
+                  padding: 20px;
+                   border-radius: 10px;" *ngIf="type !== 'interestShown'">
+                      <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
+                  </button>
+  
+              </div>
+              <hr>
+          </div>
+      </section>
+    </div>
+  </div>
+  </main>
+    <!-- // end of new design -->
+
+
+   <div style="text-align:center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;" *ngIf="profile==null">
+    <h5  *ngIf="message != null">
+      {{message}}
+    </h5>
+   </div>
+    
+  
+  

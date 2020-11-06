@@ -1,0 +1,11 @@
+[
+{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.twango.me",
+      "sha256_cert_fingerprints":
+      ["3F:C6:6E:98:D3:AC:73:6C:D7:57:B0:58:C2:3E:EE:C0:06:13:E7:62:F9:99:C0:8D:E0:2E:2A:68:F4:F1:08:F9"]
+    }
+}
+]

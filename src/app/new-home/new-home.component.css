@@ -1,0 +1,140 @@
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+    background-color: #C8C8C8;
+}
+::ng-deep .mat-slide-toggle-thumb {
+    background-color: #c8c8c8;
+}
+::ng-deep .mat-slide-toggle-bar {
+    background-color: white;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+    background-color: white;
+}
+.mainContainer{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #555;
+}
+.toolBarRow{
+    padding: 0px;
+    height: auto;
+}
+
+.drawerSettings{
+width: 25%;
+}
+.rishteBtn{
+    position:absolute;
+    top:20px;
+    right:12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2px 2px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #D313AE;
+    z-index:1;
+}
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+.fixToolBar{
+    width: 100% ;
+    position: fixed; 
+    z-index:2;
+    box-shadow: 1px 1px 1px #707070;
+}
+.toolText{
+    font-family: 'Poppins';
+    margin:5px 0px 5px 13px;
+    color: white;
+    font-size: 1.4rem;
+}
+.mainDivToolbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    background-color: #0C9BF2;
+    align-items: center;
+    width: 100%;
+}
+.toolBarRow2{
+    background-color: #0C9BF2;
+    padding: 0px 0px 10px;
+    margin-top: -10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+.b-r{
+    border-right: 1px solid white;
+}
+
+.b-l {
+    border-left: 1px solid white;  
+}
+
+.drawerImg{
+    width: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+@media (max-width: 1024px) {
+    .drawerSettings{
+        width: 35%;
+        }
+    .toolBarRow2{
+            background-color: #0C9BF2;
+            padding: 10px 0px;
+            width: 100%;
+        }
+}
+
+@media (max-width: 576px) {
+    .toolText{
+        color: white;
+        font-size: 18px;
+    }
+    .drawerSettings{
+        width: 70%;
+        }
+}
+
+@media (max-width: 350px) {
+    .toolText{
+        color: white;
+        font-size: 16px;
+    }
+    .drawerImg{
+        width: 20px;
+        margin: 0px;
+    }
+}
+@media (min-width:1024px){
+    .rishteBtn{
+        position:absolute;
+        top:20px;
+        right:40px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 2px 7px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: bold;
+        background-color: #d346b7;
+        z-index:1;
+    }
+    .menu-icon{
+        margin-left:13px;
+    }
+}

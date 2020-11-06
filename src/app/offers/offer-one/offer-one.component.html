@@ -1,0 +1,65 @@
+<main *ngIf="data">
+    <div class="t-c topDiv">
+        <img id="profileImage" [src]="getProfilePhoto()" alt="profle image">
+        <button style="color: #737373;
+         position: absolute;
+         border-radius: 100%;
+         right: 10px;
+         display: flex;
+         flex-direction: column;
+         padding: 10px;
+         background-color: #c8c8c8;
+         border: none;
+         align-items: center;
+         justify-content: center;
+         top: 0px;"
+         (click)="closeDialog()">
+            <mat-icon style="color: white;">close</mat-icon>
+        </button>
+        <p class="contentText" style="margin-top: -55px;">
+            {{data.data.name}}
+        </p>
+    </div>
+
+    <div class="t-c">
+        <p class="contentText" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+            देर किस बात की ? इन्हे अभी कॉल करें
+        </p>
+        <p class="contentText" *ngIf="languageService.getCurrentLanguage() === 'english'">
+            Why Wait? Call Now!!
+        </p>
+    </div>
+
+    <div class="t-c" style="margin-top: 25px;">
+        <p class="contentText" [innerHTML]="generateRandom()">
+            <mat-icon style="color: #58d1fd;
+            vertical-align: middle;
+            height: 40px;
+            font-size: 40px;">call</mat-icon>
+        </p>
+    </div>
+
+    <div>
+        <div class="t-c">
+            <button [routerLink]="['/subscription']" routerLinkActive="router-link-active"
+             (click)="closeDialog()"  class="btn" style="background: #D313AE;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 10px 50px;
+            border-radius: 10px;
+            margin: 20px 0px" mat-raised-button>
+                {{languageService.getCurrentLanguage() === 'hindi' ? 'मेम्बरशिप चुनें' : 'Buy Plan'}}  
+            </button>
+        </div>
+    </div>
+
+    <div class="t-c">
+        <p class="contentText" style="margin: 0px;" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+            अभी <span style="color: #58d1fd;font-family: sans-serif;font-size: 1.5rem;">50%</span> की बचत करें 
+        </p>
+        <p class="contentText" style="margin: 0px;" *ngIf="languageService.getCurrentLanguage() === 'english'">
+            Save <span style="color: #58d1fd;font-family: sans-serif;font-size: 1.5rem;">50%</span> On Plans Now!!
+        </p>
+    </div>
+</main>

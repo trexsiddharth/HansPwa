@@ -1,0 +1,450 @@
+<ng-container>
+    <main class="back-ground">
+        <div class="matIconDiv" style="position: absolute;
+                z-index: 99999999999;
+                left:10px;
+                cursor:pointer" (click)="goBack()">
+            <!-- <mat-icon style="color: white;width:50px!important">keyboard_backspace</mat-icon> -->
+            <img style="width:25px" src="../../assets/left-arrow-key.svg" alt="BACK" />
+        </div>
+        <main id="back2">
+            <div class="t-c spcase">
+                <ngb-carousel id="carousel" *ngIf="images" [showNavigationArrows]="true"
+                    [showNavigationIndicators]="true">
+                    <ng-template ngbSlide *ngFor="let image of images">
+                        <div class="picsum-img-wrapper" style="border:0px!important">
+                            <img [src]="image" alt="Offers" style=" width: 100%; border-radius:15px" />
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+            </div>
+            <div class="t-c buttonsDiv" style="width: 100%;margin-top: 20px;">
+                <button class="buttonOnline" (click)="toggleOnline()">
+                    <div class="icon-circular mat-elevation-z7"
+                        [ngClass]="{activeBut: isActive === 'online' , inactive: isActive !== 'online'}"
+                        style="padding: 14px !important;">
+                        <img *ngIf="isActive != 'online'" src="../../assets/wifi-connection.svg" alt="icon" />
+                        <img *ngIf="isActive == 'online'" src="../../assets/wifi-connectionW.svg" alt="icon" /></div>
+                    <a style="color:white!important;
+                    font-size:14px;font-weight:bold!important">Self-Service Plans</a>
+                </button>
+                <button class="buttonPersonalised" (click)="togglePersonalized()">
+                    <div class="icon-circular mat-elevation-z7"
+                        [ngClass]="{activeBut: isActive !=='online', inactive: isActive === 'online' }"
+                        style="padding: 14px !important;">
+                        <img *ngIf="isActive == 'online'" src="../../assets/preferencesN.svg" alt="icon" />
+                        <img *ngIf="isActive != 'online'" src="../../assets/preferencesNW.svg" alt="icon" />
+                    </div>
+                    <a style="color:white!important;
+                    font-size:14px;font-weight:bold!important">Personalised Plans</a>
+                </button>
+            </div>
+
+
+            <div *ngIf="isActive === 'online'" class="list" style="margin-top: 20px;">
+                <div class="row contentArea">
+                    <div class="infoRow" *ngFor="let item  of plansOnline;let i = index">
+                        <div class="columnP">
+                            <div class="row information">
+                                <div class="columnar"
+                                    style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;text-align:center">
+                                    <div style="margin-top:auto;margin-bottom:auto">
+                                        <div style="font-size:1.3rem;color: #354147 !important;">
+                                            {{item.plan_name}}</div>
+                                        <div style="font-size:1.1rem;margin-bottom:8px" class=""><a>{{item.validity}}
+                                                Months</a></div>
+                                        <b style="font-size: 1.2rem; color: #00c2cb !important;">₹
+                                            {{setAmount(i,0)}}</b><br>
+                                        <a style="
+                text-decoration: line-through;
+                font-size: 1.1rem;
+                color: #596a76 !important;
+              ">₹ {{item.amount}}</a>
+                                    </div>
+                                </div>
+                                <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:3% 1% 3% 1%">
+                                    <div class="numOfContacts">
+                                        <a> {{item.contacts}} Contact Numbers</a>
+                                    </div>
+                                    <ul style="margin-top:auto;margin-bottom:auto!important">
+                                        <!-- <li>हर रिश्ते का पूरा पता</li>
+                                        <li>4 रिश्ते हर रोज़</li>
+                                        <li>25+ सेंटर्स के 50,000+ रिश्ते </li> -->
+                                        <li *ngFor="let content of setContent(i,0)">
+                                            {{content}}
+                                        </li>
+                                    </ul>
+                                    <button class="buyNow" (click)="container(i,0)">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="infoRow" style="flex:1 1 500px; margin:2%">
+                        <div class="columnP">
+                            <div class="row information">
+                                <div class="columnar"
+                                    style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;">
+                                    <div style="margin-top:auto;margin-bottom:auto">
+                                        <div style="font-size:1.7rem;font-weight:bold;color: #354147 !important;">
+                                            सुप्रीम</div>
+                                        <div class="" style="font-size: large;"><a>3 महीने</a></div><br>
+                                        <b class="" style="font-size: large; color: #00c2cb !important;">₹ 4500</b><br>
+                                        <a style="
+                    text-decoration: line-through;
+                    font-size: medium;
+                    color: #596a76 !important;
+                  ">₹ 9000</a>
+                                    </div>
+                                </div>
+                                <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:3% 1% 3% 1%">
+                                    <div class="numOfContacts">
+                                        <a> 90 Contact Numbers</a>
+                                    </div>
+                                    <ul style="margin-top:auto;margin-bottom:auto!important">
+                                        <li>हर रिश्ते का पूरा पता</li>
+                                        <li>4 रिश्ते हर रोज़ </li>
+                                        <li>उच्च वर्ग के रिश्ते</li>
+                                        <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर
+                                            रेस्पॉन्स)</li>
+                                        <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                                    </ul>
+                                    <button class="buyNow" (click)="container2()">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoRow" style="flex:1 1 500px; margin:2%">
+                        <div class="columnP">
+                            <div class="row information">
+                                <div class="columnar"
+                                    style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;">
+                                    <div style="margin-top:auto;margin-bottom:auto;text-align:center">
+                                        <div class=""
+                                            style="font-size:1.7rem;font-weight:bold;color: #354147 !important;">
+                                            कुंडली स्पेशल
+                                        </div>
+                                        <div class="" style="font-size: large;"><a>3 महीने</a></div><br>
+                                        <b class="" style="font-size: large; color: #00c2cb !important;">₹7500</b><br>
+                                        <a style="
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 15000</a>
+                                    </div>
+                                </div>
+                                <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:3% 1% 3% 1%">
+                                    <div class="numOfContacts">
+                                        <a> 90 Contact Numbers</a>
+                                    </div>
+                                    <ul style="margin-top:auto;margin-bottom:auto!important">
+                                        <li>हर एक प्रोफाइल के साथ उसका कुंडली का मैचिंग स्कोर भी </li>
+                                        <li>हर रिश्ते का पूरा पता</li>
+                                        <li>4 रिश्ते हर रोज़ </li>
+                                        <li>वेबसाइट पर प्रोफाइल का "Visibility Boost" (बेसिक प्लान से ३ गुना बेहतर
+                                            रेस्पॉन्स)</li>
+                                        <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                                    </ul>
+                                    <button class="buyNow" (click)="container3()">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="infoRow" style="margin-bottom:8%;">
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="isActive === 'personalized'" style="padding-top: 20px;padding-bottom: 20px;">
+                <div class="row" style="display:flex;flex-wrap:wrap;justify-content: center;padding:0 8% 0 8%">
+                    <div class="infoRow1" style="flex:1 1 180px; margin:2%">
+                        <div class="columnQ">
+                            <div class="row"
+                                style="text-align: center;display:flex;flex-direction:row;align-items:center;">
+                                <h6 class="icon-circular" style="
+                                position:absolute;
+                                left:-15px;
+                                display: inline-block;
+                                background: #5552fd; 
+                                color: rgb(253, 251, 251);
+                                font-size:2.8rem;
+                                font-weight:1000!important;">
+                                    1</h6>
+                                <img class="personalizedOfferImage" src="../../assets/personalMatchmaker.svg"
+                                    alt="VIP Benefits1">
+                                <!-- <a style="font-size: 18px;margin:auto">पर्सनल मैचमेकर पाएं</a> -->
+                                <a style="font-size: 14px;margin:auto">Get a Personal Matchmaker</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoRow1" style="flex:1 1 180px; margin:2%">
+                        <div class="columnQ">
+                            <div class="row"
+                                style="text-align: center;display:flex;flex-direction:row;align-items:center;">
+                                <h6 class="icon-circular" style="position:absolute;
+                                left:-15px;display: inline-block;
+                                background: #5552fd; 
+                                color: rgb(252, 249, 249);
+                                font-size:2.8rem;
+                                font-weight:1000!important;">
+                                    2</h6>
+                                <img class="personalizedOfferImage" src="../../assets/vipRishte.svg"
+                                    alt="VIP Benefits1">
+                                <!-- <a style="font-size: 18px;margin:auto">पाएं सारे VIP रिश्ते</a> -->
+                                <a style="font-size: 14px;margin:auto">Get all VIP Profiles</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoRow1" style="flex:1 1 180px; margin:2%">
+                        <div class="columnQ">
+                            <div class="row"
+                                style="text-align: center;display:flex;flex-direction:row;align-items:center;">
+                                <h6 class="icon-circular" style="position:absolute;
+                                left:-15px;display: inline-block;
+                                background: #5552fd; 
+                                color: rgb(252, 249, 249);
+                                font-size:2.8rem;
+                                font-weight:1000!important;">
+                                    3</h6>
+                                <img class="personalizedOfferImage" style="width:37px"
+                                    src="../../assets/familyMeeting.svg" alt="VIP Benefits1">
+                                <!-- <a style="font-size: 18px;margin:auto">फैमिली मुलाकात<br>हमारे हॉल में FREE</a> -->
+                                <a style="font-size: 14px;margin:auto">Family Meetings<br> in our hall for FREE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list" *ngIf="isActive === 'personalized'">
+                    <div class="row contentArea">
+                        <div class="infoRow" *ngFor="let item of plansPersonlised; let i = index">
+                            <div class="column">
+                                <div class="row information">
+                                    <div class="columnar"
+                                        style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;">
+                                        <div style="margin-top:auto;margin-bottom:auto;text-align:center">
+                                            <div style="font-size:1.4rem;color: #354147 !important;">
+                                                {{item.plan_name}}</div>
+                                            <div><a style="font-size: 1.2rem;">{{item.validity}} Months</a></div><br>
+                                            <b class=""
+                                                style="font-size: large; color: #00c2cb !important;">₹{{setAmount(i,1)}}</b><br>
+                                            <a style="
+                                text-decoration: line-through;
+                                font-size: medium;  
+                                color: #596a76 !important;
+                              ">₹{{item.amount}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:7% 3% 5% 2%">
+                                        <div class="numOfContacts">
+                                            <a> {{item.contacts}} Contact Numbers</a>
+                                        </div>
+                                        <ul style="margin-top:auto;margin-bottom:auto!important">
+                                            <li *ngFor="let content of setContent(i,1)">{{content}}</li>
+                                        </ul>
+                                        <button class="buyNow" (click)="container(i,1)">Buy Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="infoRow" style="flex:1 1 300px!important; margin:0%">
+                            <div class="column">
+                                <div class="row information">
+                                    <div class="columnar"
+                                        style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;">
+                                        <div style="margin-top:auto;margin-bottom:auto;text-align:center">
+                                            <div style="font-size:1.7rem;font-weight:bold;color: #354147 !important;">
+                                                Premium 6</div>
+                                            <div><a style="font-size: large;">6 Months</a></div><br>
+                                            <b class=""
+                                                style="font-size: large; color: #00c2cb !important;">₹17000</b><br>
+                                            <a style="
+                                text-decoration: line-through;
+                                font-size: medium;  
+                                color: #596a76 !important;
+                              ">₹21000</a>
+                                        </div>
+                                    </div>
+                                    <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:7% 3% 5% 2%">
+                                        <ul style="margin-top:auto;margin-bottom:auto!important">
+                                            <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                            <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                            <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                            <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                            <li>उच्च वर्ग के रिश्ते </li>
+                                            <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                                        </ul>
+                                        <button class="buyNow" (click)="container5()">Buy Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="infoRow" style="flex:1 1 300px!important; margin:0%">
+                            <div class="column">
+                                <div class="row information">
+                                    <div class="columnar"
+                                        style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;">
+                                        <div style="margin-top:auto;margin-bottom:auto;text-align:center">
+                                            <div style="font-size:1.7rem;font-weight:bold;color: #354147 !important;">
+                                                Premium 12</div>
+                                            <div><a style="font-size: large;">12 Months</a></div><br>
+                                            <b class=""
+                                                style="font-size: large; color: #00c2cb !important;">₹25000</b><br>
+                                            <a style="
+                                text-decoration: line-through;
+                                font-size: medium;  
+                                color: #596a76 !important;
+                              ">₹41000</a>
+                                        </div>
+                                    </div>
+                                    <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:7% 3% 5% 2%">
+                                        <ul style="margin-top:auto;margin-bottom:auto!important">
+                                            <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                            <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                            <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                            <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                            <li>उच्च वर्ग के रिश्ते </li>
+                                            <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                                        </ul>
+                                        <button class="buyNow" (click)="container6()">Buy Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="infoRow" style="flex:1 1 300px!important; margin:0%">
+                            <div class="column">
+                                <div class="row information">
+                                    <div class="columnar"
+                                        style="background:rgba(226, 223, 223, 0.699);border-radius:20px 0 0 20px;">
+                                        <div style="margin-top:auto;margin-bottom:auto;text-align:center">
+                                            <div style="font-size:1.7rem;font-weight:bold;color: #354147 !important;">
+                                                Deluxe NRI</div>
+                                            <div><a style="font-size: large;">24 Months</a></div><br>
+                                            <b class=""
+                                                style="font-size: large; color: #00c2cb !important;">₹31000</b><br>
+                                            <a style="
+                                text-decoration: line-through;
+                                font-size: medium;  
+                                color: #596a76 !important;
+                              ">₹51000</a>
+                                        </div>
+                                    </div>
+                                    <div class="columnar" style="border-radius:0px 20px 20px 0px;padding:7% 3% 5% 2%">
+                                        <ul style="margin-top:auto;margin-bottom:auto!important">
+                                            <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                            <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                            <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                            <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                            <li>उच्च वर्ग के रिश्ते </li>
+                                            <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                                        </ul>
+                                        <button class="buyNow" (click)="container7()">Buy Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="infoRow" style="margin-bottom:5%">
+                        </div>
+                    </div>
+                    <!-- <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-evenly;">
+
+                        <div (click)="container5()" id="container5"
+                            [ngClass]="{planItem: selectedContainer != 5 , planItemSelected: selectedContainer === 5 }">
+                            <button id="button5" (click)="container5()" class="planHeader">
+                                <p class="planHeaderText">छोटा VIP प्लान</p>
+                                <p class="planSubHeaderText">
+                                    3 महीने
+                                </p>
+                            </button>
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
+                            <div class="amnt">
+                                <p> <del>₹15000</del></p>
+                                <p>₹11000</p>
+                            </div>
+                        </div>
+
+                        <div (click)="container6()" id="container6"
+                            [ngClass]="{planItem: selectedContainer !=6 , planItemSelected: selectedContainer === 6}">
+                            <button id="button6" (click)="container6()" class="planHeader">
+                                <p class="planHeaderText">प्रीमियम 6</p>
+                                <p class="planSubHeaderText">
+                                    6 महीने
+                                </p>
+                            </button>
+
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
+                            <div class="amnt">
+                                <p> <del>₹21000</del></p>
+                                <p>₹17000</p>
+                            </div>
+                        </div>
+
+
+                        <div (click)="container7()" id="container7"
+                            [ngClass]="{planItem: selectedContainer != 7, planItemSelected: selectedContainer === 7 }">
+                            <button id="button7" (click)="container7()" class="planHeader">
+                                <p class="planHeaderText">प्रीमियम 12</p>
+                                <p class="planSubHeaderText">
+                                    12 महीने
+                                </p>
+                            </button>
+
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
+
+                            <div class="amnt">
+                                <p> <del>₹41000</del></p>
+                                <p>₹25000</p>
+                            </div>
+                        </div>
+
+
+                        <div (click)="container8()" id="container8"
+                            [ngClass]="{planItem: selectedContainer != 8 , planItemSelected: selectedContainer === 8 }">
+                            <button id="button8" (click)="container8()" class="planHeader">
+                                <p class="planHeaderText">डीलक्स NRI</p>
+                                <p class="planSubHeaderText">
+                                    24 महीने
+                                </p>
+                            </button>
+
+                            <ul>
+                                <li>मैचमेकर द्वारा मैचिंग प्रोफाइल</li>
+                                <li>हर हफ्ते 2-4 परिवारों से आपके रिश्ते की बात </li>
+                                <li>परिवारों से मीटिंग व मीटिंग के बाद का अपडेट</li>
+                                <li>VIP मेंबर्स से फ्री कॉन्टेक्ट</li>
+                                <li>उच्च वर्ग के रिश्ते </li>
+                                <li>25+ सेंटर्स के 50,000+ रिश्ते</li>
+                            </ul>
+
+                            <div class="amnt">
+                                <p> <del>₹51000</del></p>
+                                <p>₹31000</p>
+                            </div>
+                        </div>
+
+                    </div> -->
+                </div>
+            </div>
+        </main>
+    </main>
+</ng-container>

@@ -1,0 +1,32 @@
+<main>
+    <h4 class="heading"> Easy Sign Up With</h4>
+    <div class="text-center btnDiv">
+        <!-- <button id="facebook" (click)="registerUsing('facebook')" *ngIf="selection === 'Myself'" mat-raised-button>
+            <div style="font-weight: 600 !important;
+            font-size: 13px;
+            position: absolute;
+            left:6%;
+            height:24px!important;
+            object-fit:cover;
+            top: -18px !important;
+            background: #4fdcef;
+            color: white;
+            padding: 2px ;
+            border-radius: 3px 3px 3px 3px;
+            display:flex;
+            flex-direction: row;
+            align-items: center;justify-content:center;
+          "> <img style="width:15px;margin:2px 0px" src="../../../assets/graph.svg">50% More Matches</div>
+            Facebook
+        </button> -->
+        <button mat-raised-button type="button" id="viewButton" class="btn" (click)="registerUsing('facebook')"
+            *ngIf="selection === 'Myself'">
+            Facebook</button>
+        <p>or</p>
+        <button id="truecaller" (click)="registerUsing('truecaller')">
+            Phone Number
+        </button>
+    </div>
+
+
+</main>

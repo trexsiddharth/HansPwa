@@ -1,0 +1,140 @@
+
+            <form  [formGroup]="pageFive">
+                <div class="row">
+                  <div class="col-md-12">
+                  <mat-label style="color: black;">Preferred Castes</mat-label>
+                  <mat-select 
+                  type="text"
+                  class="form-control"  
+                  [multiple]="true" 
+                  (selectionChange)="casteSelectionChanged($event)"
+                  formControlName="searchCaste"
+                  #multiSelect
+                   required >
+                   <mat-option>
+                    <ngx-mat-select-search 
+                    noEntriesFoundLabel="No Castes Found" 
+                    placeholderLabel="Search Castes..."
+                    formControlName="searchCasteText"></ngx-mat-select-search>
+                   </mat-option>
+                          <mat-option *ngFor="let name of filteredCastesMulti | async" [value]="name" required>
+                            {{name}}
+                          </mat-option>
+                  </mat-select>
+                  </div>
+
+                  <p *ngIf="compatibiltyCount" class="t-c"
+                   style="display: inline-block; font-size: 1.4em;margin: 20px auto;">
+                    Profiles Available : {{compatibiltyCount}}<br>
+                    <span *ngIf="compatibiltyCount < 100">
+                          Pitch For All Caste
+                    </span>
+                    <span *ngIf="compatibiltyCount > 100">
+                          Good To Go With The Castes
+                    </span>
+                  </p>
+
+                  <div class="col-md-12" style="margin-top: 20px;">
+                    <mat-checkbox
+                    formControlName="allCaste"
+                     (change)="checkAllCastePref($event)">No Caste Bar</mat-checkbox>
+                  </div>
+
+                      <div class="col-md-12">
+                        <mat-form-field  class="full-width fieldFit" appearance="standard">
+                            <mat-label style="color: black;">Alternate Mobile Number</mat-label>
+                            <input style="display: inline;" type="number" id="phone" matInput formControlName="phone" >
+                        </mat-form-field>
+                    </div>
+
+                      <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label style="color: black;">Enquiry Date</mat-label>
+                            <input type="date"  name="enqDate" matInput formControlName="enq_date" id="enqDate">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                            <mat-label style="color: black;">Follow Up Call-On</mat-label>
+                            <input type="date"  name="follow" matInput formControlName="follow_date" id="follow">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                        
+                            <mat-label style="color: black;">Source</mat-label>
+                            <mat-select  #source formControlName="source" >
+                                    <mat-option *ngFor="let  option of sources" [value]="option">
+                                            {{option}}
+                                    </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-6" style="margin-top:20px">
+                        <h6>
+                          Assign to:
+                        </h6>
+                        <mat-checkbox (change)="assignToTemple($event)" [checked]="templeChecked">Temple</mat-checkbox>
+
+                          <mat-checkbox (change)="assignToModerator($event)" [checked]="moderatorChecked">Moderator</mat-checkbox>
+                          </div>
+
+                      <div class="col-6">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                        
+                            <mat-label style="color: black;">Select</mat-label>
+                            <mat-select  #assignTo formControlName="assign_to">
+                                    <mat-option *ngFor="let  option of fullList" [value]="option.name">
+                                            {{option.name}}
+                                    </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard">
+                        
+                            <mat-label style="color: black;">Interest Level Of Lead</mat-label>
+                            <mat-select  #interest formControlName="interest" >
+                                    <mat-option *ngFor="let  option of interestLevel" [value]="option">
+                                            {{option}}
+                                    </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-12">
+                        <mat-form-field class="full-width fieldFit" appearance="standard" >
+                          <mat-label style="color: black;">Comments</mat-label>
+                          <input type="text"  matInput formControlName="comments" required name="Designation">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-12" style="margin-top:20px">
+                      <mat-checkbox (change)="checkStat($event)">Premium Leads</mat-checkbox>
+                      </div>
+
+                      <div sclass="row"  style="margin-top:20px; margin-bottom:20px;text-align: center;width: 100%;">
+                      <button class="btn btn-blue" mat-raised-button color="warn" 
+                      id="photoBtn" 
+                      [disabled]="assignBtn$ | async"
+                       *ngIf="fourPageService.getUserThrough()" 
+                      (click)="checkForPhoto('0')">Assign</button>
+                      <button style="margin-left: 10px;" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn" 
+                      [disabled]="approveBtn$ | async" 
+                      *ngIf="fourPageService.getUserThrough()"
+                       (click)="checkForPhoto('1')">Assign and Approve</button><br>
+                      <button style="margin-top: 10px;" class="btn btn-blue" mat-raised-button color="warn" id="photoBtn"  *ngIf="fourPageService.getUserThrough()" (click)="sendPhotoLink()">Send Photo Link</button>
+                      </div>  
+
+                    <p class="impNote">
+                      अगर सभी डिटेल्स नहीं भरी है तो <strong>Complete</strong> बटन पर क्लिक कर लीजिये।
+                      अगर सभी डिटेल्स भर ली  हैं तो <strong>Complete and Approve</strong>> पर क्लिक कीजिये  ।
+                    </p>
+                </div>
+           </form> 
+       
+

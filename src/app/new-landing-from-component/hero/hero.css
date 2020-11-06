@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+.hero{
+    font-family:'Poppins';
+}
+.mobile-screen-center{
+    text-align: center;
+}
+.logo-holder{
+    margin-left:20px;
+}
+span{
+    font-family:'Poppins';
+}
+button{
+    outline:none;
+    border:none;
+    border-radius:10px;
+}
+.logo{
+    width:8.05vw;
+    height:auto;
+}
+.logo-text{
+    width:8.4vw;
+    height:auto;
+}
+.googleplay{
+    width:140px;
+    height:54px;
+    cursor:pointer;
+}
+li{
+    margin-right:40px;
+    font-weight:600;
+    list-style:none;
+}
+.illustration{
+    width:100%;
+    height:auto;
+}
+.groom-btn{
+    width:120px;
+    height:50px;
+    border:none;
+    background-color:#24ADD8;
+    border-radius:10px;
+    color:white;
+}
+.bride-btn{
+    width:120px;
+    height:50px;
+    border:none;
+    background-color:#EBF7FC;
+    border-radius:10px;
+    color:black;
+}
+.myself-btn{
+    width:120px;
+    height:50px;
+    border:none;
+    background-color:#24ADD8;
+    border-radius:10px;
+    color:white;
+}
+.down{
+    border:none;
+    border-radius:5px;
+
+}
+.register-btn{
+    width:230px;
+    height:50px;
+    border:none;
+    margin-top:20px;
+    background-color:#24ADD8;
+    border-radius:10px;
+    color:white;
+}
+@media only screen and (min-width:768px){
+    .content {
+        position: absolute;
+        left: 35%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    .logo-holder{
+        margin-left:60px;
+    }
+}
+@media only screen and (max-width:767px){
+    .content {
+        justify-content:center;
+        margin-top:80px;
+    }
+    .logo{
+        width:16vw;
+        height:auto;
+    }
+    .logo-text{
+        width:16vw;
+        height:auto;
+    }
+}

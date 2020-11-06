@@ -1,0 +1,157 @@
+::ng-deep .carousel-indicators{
+    bottom: 60px !important;
+}
+::ng-deep .mat-menu-panel {
+    background: white;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+    background-color: #C8C8C8;
+}
+::ng-deep .mat-slide-toggle-thumb {
+    background-color: #c8c8c8;
+}
+::ng-deep .mat-slide-toggle-bar {
+    background-color: #c8c8c8
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+    background-color: #4A5D6A
+}
+.mainDiv {
+    width: 100vw;
+    height: auto;
+    background-image: none;
+}
+main {
+    position: relative;
+    top: 0px;
+    background-color: white;
+}
+.sections{
+    padding: 5px 20px;
+    color: #6f6f6f;
+}
+.sectionTitle{
+    /* color: #0C9BF2; */
+    color: #58d1fd;
+    font-size: 18px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.topBar {
+    color: #4A5D6A;
+    background-color: white;
+    height: 50px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+}
+.menuItems{
+    color: black;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+.labelText{
+    font-weight: bold;
+    font-size: 16px;
+    color: #C8C8C8;
+    margin-right: 0.5rem;
+}
+.editPencil{
+    float: right;
+    width: 25px;
+}
+.row{
+    padding: 0px;
+}
+.col-6, .col-12{
+    margin: 10px 0px 0px ;
+    text-transform: capitalize;
+   
+}
+.iconSize{
+    width: 30px;
+}
+
+.boxText{
+font-size: 18px;
+}
+.boxBtn {
+    font-size: 16px;
+    font-weight: bold;
+}
+#pinkSide{
+    text-align: end;
+                    margin: 0px;
+                    position: relative;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-start;
+                    justify-content: flex-end;
+}
+#blueSide{
+    text-align: start;
+                    color: #0C9BF2;
+                    font-weight: bold;
+                    margin: 0px;
+                    display: flex;
+                    flex-direction: row-reverse;
+                    align-items: flex-start;
+                    justify-content: flex-end;
+}
+.navigationPanel{
+    position: fixed;bottom: 0px ;
+        width: 100%;
+        z-index: 999;
+        display: flex;
+        flex-direction: row; 
+        justify-content: space-evenly;
+        background-color: white;
+        border-top: 1px solid #707070;
+        box-shadow: 0px -3px 1px lightgrey;
+        padding: 5px 0px;
+        color: #707070;
+}
+.navigationIcons{
+    width: 30px;
+}
+
+@media (max-width: 350px){
+    .boxText{
+        font-size: 14px;
+        }
+
+        .boxBtn{
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .navigationIcons{
+            width: 20px;
+        }
+}
+
+@media (min-width: 1024px){
+    .mainDiv {
+        width: 100vw;
+        height: auto;
+        background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
+        background-size: contain;
+    }
+    .navigationPanel{
+        position: fixed;bottom: 0px ;
+            width: 40%;
+            z-index: 999;
+            display: flex;
+            flex-direction: row; 
+            justify-content: space-evenly;
+            background-color: white;
+            padding: 5px 0px;
+    }
+
+}

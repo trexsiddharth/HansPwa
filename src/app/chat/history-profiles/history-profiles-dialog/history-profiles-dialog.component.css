@@ -1,0 +1,400 @@
+main{
+    padding-bottom: 200px;
+}
+.toolBar {
+    background-color: white;
+    color: #4A5D6A;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    position: fixed;
+    z-index: 999999;
+}
+#profileImageDiv{
+    margin: 0px 20px;
+    position: relative;
+    padding-top: 80px;
+}
+.titleText {
+    font-size: 1rem;
+}
+.contactShown{
+    border-radius: 10px;
+    background-color: rgba(88, 209, 253, 0.2);
+    padding: 10px 0px !important;
+}
+#profilePic{
+    width: 100%;
+    height: 75vh;
+    border-radius: 10px;
+}
+::ng-deep .carousel-indicators{
+    bottom: 80px !important;
+}
+::ng-deep .mat-card-image{
+    margin: 0px;
+}
+
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.col-6{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px;
+}
+
+#imageContent{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 100px;
+    padding: 0px 10px 10px;
+    color: white;
+    background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.setButtons{
+    width: 60px;
+     height: 60px;
+     margin-bottom: 10px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     
+}
+
+.setButtonsCenter{
+    width: 70px;
+     height: 70px;
+     margin-bottom: 10px;
+      display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+}
+
+.buttonImage{
+    width: 30px;
+}
+.buttonImageCenter{
+    width: 40px;
+}
+
+.animateButtonImage{
+    animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+}
+.animateButtonImageCenter{
+    animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+}
+
+.titleHeading{
+    color: #4A5D6A;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-weight: bold;
+    
+}
+
+#aboutSection{
+    margin-top: 20px; 
+}
+
+#personalSection{
+    margin-top: 20px; 
+}
+.field{
+    margin-top: 10px;
+}
+.titleImage {
+   width: 25px;
+}
+.title{
+    width: 100%;
+    color: #4A5D6A;
+    margin-left: 1rem;
+    font-size: 14px;
+}
+.titleGrey{
+    width: 100%;
+    color: grey;
+    font-size: 14px;
+}
+
+
+#careerSection{
+    margin-top: 20px; 
+}
+
+#horoscopeSection{
+    margin-top: 20px; 
+}
+
+#familySection{
+    margin-top: 20px; 
+}
+.highlightedValue{
+    background-color: #C4E9F8;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+@-webkit-keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+@keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+
+@keyframes scale-in-out-image {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 30px;
+    }
+}
+
+@keyframes scale-in-out-image-center {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 40px;
+    }
+}
+
+@media (max-width: 350px){
+    .titleImage {
+        width: 20px;
+     }
+    .title{
+        width: 100%;
+        color: #4A5D6A;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+    .titleGrey{
+        width: 100%;
+        color: grey;
+        font-size: 14px;
+    }
+  
+
+    .setButtons{
+        width: 50px;
+         height: 50px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .setButtonsCenter{
+        width: 60px;
+         height: 60px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .buttonImage{
+        width: 20px;
+    }
+    .buttonImageCenter{
+        width: 30px;
+    }
+
+    @keyframes scale-in-out-image {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 20px;
+        }
+    }
+
+    @keyframes scale-in-out-image-center {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .down-arrow{
+        right: 0px;
+        -webkit-animation: 2s arrow infinite ease;
+        animation: 2s arrow infinite ease;
+        vertical-align:middle
+    
+    }
+
+    #imageContent{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 100px;
+        padding: 0px 10px 10px;
+        color: white;
+        background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: fixed;
+        width: 90%;
+        background-color: transparent;
+        z-index: 999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+    }
+}
+
+@media (min-width: 1024px){
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: relative;
+        width: 100%;
+        background-color: transparent;
+        z-index: 999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+        margin-top: 10px;
+    }
+
+}
+
+
+
+
+    /* modal */
+
+    /* Style the Image Used to Trigger the Modal */
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      #myImg:hover {opacity: 0.7;}
+      
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+      }
+      
+      /* Modal Content (Image) */
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+      }
+      
+      /* Caption of Modal Image (Image Text) - Same Width as the Image */
+      #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+      }
+      
+      /* Add Animation - Zoom in the Modal */
+      .modal-content, #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+      }
+      
+      @keyframes zoom {
+        from {transform:scale(0)}
+        to {transform:scale(1)}
+      }
+      
+      /* The Close Button */
+      #closeModal {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      
+      #closeModal:hover,
+      #closeModal:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      /* 100% Image Width on Smaller Screens */
+      @media only screen and (max-width: 700px){
+        .modal-content {
+          width: 100%;
+        }
+      }

@@ -1,0 +1,130 @@
+<div class="kundali">
+    <div class="d-flex justify-content-center">
+        <h1>Free Kundali Matching</h1>
+    </div>
+
+    <div class="mainBack" style="z-index:-1!important">
+      <div class="d-flex justify-content-center">
+        <form [formGroup]="kundaliForm">
+              <div class="d-flex justify-content-center">
+                <h3>Enter {{currentGender}} Details</h3>
+          </div>
+          <br>
+          <div class="rowM">
+              <!-- <img class="mat-elevatino-z8"
+                  style="position:absolute;top:-45px;margin-left:-28px;width:76px;left: 50%;"
+                  src="../../../assets/logo_144.png" alt=""> -->
+              <div class="column1" *ngIf="!(BoyDetailsFilled$ | async)">
+                  <div class="details">
+                      <!-- <div class="col">
+                          <p style="font-size:1.3rem;margin:2% 0 1% 0"> Enter Boy's Details</p>
+                      </div> -->
+                      <div class="col">
+                          <h6>Name</h6>
+                          <input class="form-control" formControlName="BoyName" type="text">
+                      </div>
+                      <br>
+                      <div class="col">
+                          <h6>Birth Date</h6>
+                          
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-4">
+                                  <select class="form-control classic" formControlName="BoyBirthDate">
+                                    <option *ngFor="let item of date" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                                </div>
+                                <div class="col-4">
+                                  <select class="form-control classic" formControlName="BoyBirthMonth">
+                                    <option *ngFor="let item of month" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                                </div>
+                                <div class="col-4">
+                                  <select class="form-control classic" formControlName="BoyBirthYear">
+                                    <option *ngFor="let item of years" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <br>
+                                </div>
+                              </div>
+                            </div>
+                              
+                              
+                              
+                          
+                      </div>
+                      <br>
+                      <div class="col">
+                          <h6>Birth Time</h6>
+                          <input min="00:00:00" max="24:59:59" type="time" class="form-control"
+                              formControlName="BoyBirthTime">
+                      </div>
+                      <br>
+                      <div class="col">
+                          <h6>Birth Place</h6>
+                          <input class="form-control" type="text" id="BoyBirthPlace"
+                              [autoCompleteOptions]="autoComplete" matValidateAddress matGoogleMapsAutocomplete
+                              #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                              (change)="placeChanged('BoyBirthPlace')" formControlName="BoyBirthPlace">
+                      </div>
+                      <br>
+                      <div class="d-flex justify-content-center">
+                        <button mat-raised-button type="button" id="viewButton" class="btn" (click)="detailsFilled()"
+                          *ngIf="!(BoyDetailsFilled$ | async)">Enter Girls Details</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="column1" *ngIf="(BoyDetailsFilled$ | async)">
+                  <div class="details">
+                      <div class="col">
+                          <h6>Name</h6>
+                          <input class="form-control" formControlName="GirlName" type="text">
+                      </div>
+                      <div class="col">
+                          <h6>Birth Date</h6>
+                          <div class="special">
+                              <select class="form-control classic" formControlName="GirlBirthDate">
+                                  <option *ngFor="let item of date" [value]="item">
+                                      {{item}}
+                                  </option>
+                              </select>
+                              <select class="form-control classic" formControlName="GirlBirthMonth">
+                                  <option *ngFor="let item of month" [value]="item">
+                                      {{item}}
+                                  </option>
+                              </select>
+                              <select class="form-control classic" formControlName="GirlBirthYear">
+                                  <option *ngFor="let item of years" [value]="item">
+                                      {{item}}
+                                  </option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col">
+                          <h6>Birth Time</h6>
+                          <input min="00:00:00" max="24:59:59" type="time" class="form-control"
+                              formControlName="GirlBirthTime">
+                      </div>
+                      <div class="col">
+                          <h6>Birth Place</h6>
+                          <input class="form-control" type="text" id="GirlBirthPlace"
+                              [autoCompleteOptions]="autoComplete" matValidateAddress matGoogleMapsAutocomplete
+                              #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                              (change)="placeChanged('GirlBirthPlace')" formControlName="GirlBirthPlace">
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <button mat-raised-button type="button" id="viewButton" class="btn" (click)="onSubmit()"
+                          *ngIf="(BoyDetailsFilled$ | async)">See Kundali Score</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+      </div>
+  </div>
+</div>

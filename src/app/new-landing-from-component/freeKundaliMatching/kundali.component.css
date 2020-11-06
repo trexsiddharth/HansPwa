@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+.kundali{
+    margin-top:5.2vw;
+    font-family:'Poppins', sans-serif;
+}
+h1{
+    font-weight:600;
+    font-family:'Poppins', sans-serif;
+}
+form{ 
+    margin-top:20px;
+    background: #ECF7FC;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding:20px;
+    height:auto;
+    width:481px;
+    /* margin-left:20px; */
+}
+button{
+    width: 160.61px;
+    height: 37.98px;
+    background: #24ADD8;
+    border-radius: 7px;
+    border:none;
+    color:white;
+    font-weight:600;
+    border-radius:7px;
+}
+p{
+    font-weight:600;
+}
+input{
+    margin-bottom:10px;
+}
+@media only screen and (max-width: 575px){
+    .kundali{
+        margin-top:15vw;
+        font-family:'Poppins', sans-serif;
+    }
+    h1{
+        font-weight:600;
+        font-size:5.5vw;
+    }
+    form{ 
+        margin-top:20px;
+        background: #ECF7FC;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        padding:20px;
+        height:auto;
+        width:360px;
+    }
+    button{
+        width: 180.61px;
+        height: 41.98px;
+        background: #24ADD8;
+        border-radius: 7px;
+        border:none;
+        color:white;
+        font-weight:600;
+        border-radius:7px;
+    }
+}
+@media only screen and (min-width:576px){
+    h1{
+        font-weight:600;
+        margin-bottom:60px;
+        font-size:4.5vw;
+    }
+    button{
+        width: 180.61px;
+        height: 41.98px;
+        background: #24ADD8;
+        border-radius: 7px;
+        border:none;
+        color:white;
+        font-weight:600;
+        border-radius:7px;
+    }
+}
+@media only screen and (min-width: 768px){
+   
+}
+@media only screen and (min-width: 992px){
+    
+}
+@media only screen and (min-width: 1200px){
+   h2{
+       font-size:3vw;
+   }
+   h1{
+    font-size:2.5vw;
+   }
+}

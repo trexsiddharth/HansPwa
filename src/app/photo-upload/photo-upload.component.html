@@ -1,0 +1,54 @@
+<main>
+    <form>
+        <div class="row" style="margin-top:20px">
+            <div class="col-md-12 text-center" style="margin: 0px auto">
+              <p id="heading">Multiple Pictures can be Uploaded</p>
+        </div>
+         </div>
+      <div class="row"  style="margin:20px auto">
+        <div class="col-12 text-center" style="margin: 0px auto">
+            <img [src]="imgURL" 
+            (click)="dfile.click()"
+                class="imgSet">
+            <br>
+          <div>
+              <input style="display: none;"  #dfile type="file" id="dfile" accept='image/*' (change)="preview(dfile.files,1)"  />
+                              
+          </div>
+        </div>
+      </div>
+        
+        <div class="row" style="margin:40px auto">
+        <div class="col-12 text-center" style="margin: 0px auto">
+            <img [src]="frontfile"
+            (click)="fontfile.click()"
+             class="imgSet">
+            <br>
+          <div>
+              <input style="display: none;"  #fontfile type="file" id="fontfile" accept='image/*' (change)="previewfront(fontfile.files,2)"  />
+                             
+          </div>
+        </div>
+      </div>
+    
+      <div class="row" style="margin:40px auto">
+        <div class="col-12 text-center" style="margin: 0px auto">
+            <img [src]="BackimgURL" 
+            (click)="backfile.click()"
+            class="imgSet">
+            <br>
+          <div>
+              <input style="display: none;"  #backfile type="file" id="backfile" accept='image/*' (change)="previewBack(backfile.files,3)"  />
+                            
+          </div>
+      </div>
+    
+      </div>
+      
+      <div sclass="row"  style="margin-top:20px; margin-bottom:20px;">
+          <div class="col-12 t-c" >
+            <button type="button" style="background-color: #0c9bf2;color: white;" class="btn " mat-raised-button  id="photoBtn"    (click)="skip()">Please Click to Proceed</button>
+          </div>
+       </div> 
+    </form>
+</main>

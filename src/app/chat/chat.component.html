@@ -1,0 +1,257 @@
+<mat-sidenav-container class="bg-white" style="width: 100vw; position:fixed;overflow: hidden;">
+  <mat-sidenav
+   id="sidenav" (openedChange)="drawerPosition($event)" class="drawerSettings" mode="over" position="start"
+    #sidenav>
+    <app-chat-drawer [drawerReference]="sidenav"></app-chat-drawer>
+  </mat-sidenav>
+  <mat-sidenav-content class="sideNavContent" (click)="itemService.setTutorialIndex()">
+    <div class="whiteBox"></div>
+    <div class="blueBox"></div>
+    <div class="whitBoxLeft"></div>
+    <div class="whitBoxRight"></div>
+
+    <div class="mainBack">
+
+
+      <div style="position: absolute;
+    top: 0px;
+    width: 100vw;
+    height: 100px">
+
+        <div class="circular2 mat-elevation-z12" style="
+          font-size: 14px;
+          display: flex;
+          z-index: 99999999999;
+          flex-direction: row;
+          align-items: center;" (click)="openContactedProfiles()">
+          <mat-icon style="width: 15px;
+            height: 15px; 
+            color: white;">call</mat-icon>{{itemService.getCredits()}}
+          <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"
+            [matBadgeHidden]="itemService.getcontactedPhoneClicked()"></span>
+        </div>
+
+        <div class="menuIcon" (click)="sidenav.toggle()">
+          <img id="myProfImage" (click)="itemService.setTutorialIndex()" (error)="onImageLoadError()" [src]="photo"
+            alt="profile pic" (click)="itemService.setdrawerBadgeClicked(true)">
+          <div class="smallMenuImage">
+            <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"
+              [matBadgeHidden]="itemService.getdrawerBadgeClicked()"></span>
+            <mat-icon style="font-size: 14px;
+        color: #D39BBE;
+        width: 14px;
+        height: 14px;">menu</mat-icon>
+          </div>
+          <!-- <div class="tip" *ngIf="itemService.getTutorialIndex()!=-1">
+            <img id="move" src="../../../assets/handUp.svg">
+            <span>Click Here for more options</span>
+          </div> -->
+        </div>
+      </div>
+
+      <mat-tab-group id="mainLabels" class="matGroup" [(selectedIndex)]="selectedTab"
+        (selectedIndexChange)="changeSelectedTab($event)">
+
+        <mat-tab id="today" data-wow-duration="3000ms" data-wow-delay="0ms" style="z-index: 99999999999999;">
+
+          <ng-template mat-tab-label>
+            <span class="labelSetting" [matBadge]="itemService.getDailyNumber()"
+              [matBadgeHidden]="itemService.getDailyNumber() < '1'">
+              <img class="tabImage" src="../../assets/tabs-icons/calender-white.svg" alt="icon"
+                *ngIf="selectedTab && selectedTab != 0">
+              <img class="tabImage" src="../../assets/tabs-icons/calendar.svg" alt="icon"
+                *ngIf="!selectedTab || selectedTab == 0 ">
+            </span>
+            <!-- {{itemService.getDailyCount()}} -->
+            <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+              style="font-size:small">{{languageService.profileLang.todaysSpecial}}</a>
+            <a
+              *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.todaysSpecial}}</a>
+          </ng-template>
+          <div class="w-full ht-full" id="today-main" (scroll)="itemService.setTutorialIndex()">
+            <app-today-profiles></app-today-profiles>
+          </div>
+        </mat-tab>
+
+        <!-- // contacted-->
+        <!-- <mat-tab  id="contacted">
+               <ng-template mat-tab-label>
+                 <img width="30px" src="../../assets/thumbs-up-blue.svg" alt="icon">
+                   {{itemService.getContactedCount()}}
+               </ng-template>
+ 
+                 <ng-template matTabContent>
+                   <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                     {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                 </button>
+                     <div class='mainBody  w-full bg-white ht-full setBotUi'>
+                              <app-history-profiles [type]="tabType"></app-history-profiles>
+                </div>
+             </ng-template>
+             </mat-tab> -->
+
+        <!-- // personalized profiles-->
+        <!-- <mat-tab *ngIf="itemService.getIsLead() == '0'">  -->
+        <!-- <mat-tab> 
+               <ng-template mat-tab-label>
+                 <img width="30px" src="../../assets/tabs-icons/discover-white.svg" alt="icon" *ngIf="selectedTab !== 1"> 
+           <img width="30px" src="../../assets/tabs-icons/discover-dark.svg" alt="icon" *ngIf="selectedTab === 1 ">
+                   {{itemService.getOtherProfiles()}}
+                   Discover
+               </ng-template>
+               <ng-template matTabContent>
+               <div>
+                 <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                   {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+               </button>
+                   <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                            <app-personalized-profiles [type]="tabType" ></app-personalized-profiles>
+                  </div>
+              </div>
+           </ng-template>
+           </mat-tab> -->
+
+        <!-- // discover-->
+        <mat-tab id="discover">
+          <ng-template mat-tab-label>
+            <div class="labelSetting">
+              <span style="position:absolute;right:-5px;top:-5px" class="labelS mat-elevation-z7" [matBadge]="'!'"
+                matBadgeSize="small" [matBadgeHidden]="itemService.getDiscoverClicked()"></span>
+              <img class="tabImage" style="width:55px" src="../../assets/people.png" alt="icon"
+                *ngIf="selectedTab !== 1">
+              <img class="tabImage" style="width:55px" src="../../assets/peopleBlue.png" alt="icon"
+                *ngIf="selectedTab === 1">
+            </div>
+            <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+              style="font-size:small; position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'english'"
+              style="position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
+          </ng-template>
+
+          <ng-template matTabContent>
+            <div>
+              <div class='w-full ht-full'>
+                <app-discover></app-discover>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+
+        <!-- // liked me  -->
+        <mat-tab id="likeme">
+          <ng-template mat-tab-label>
+            <span class="labelSetting" [matBadge]="itemService.getShortedNumber()"
+              [matBadgeHidden]="itemService.getShortedNumber() < '1'">
+              <img class="tabImage" src="../../assets/tabs-icons/likes-you-heart-white.svg" alt="icon"
+                *ngIf="selectedTab !==2">
+              <img class="tabImage" src="../../assets/tabs-icons/heart in heart.svg" alt="icon"
+                *ngIf="selectedTab === 2 ">
+            </span>
+            <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+              style="font-size:0.775rem">{{languageService.profileLang.likesYou}}</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.likesYou}}</a>
+          </ng-template>
+
+          <ng-template matTabContent>
+            <div>
+              <div class=' w-full ht-full'>
+                <app-history-profiles [type]="tabType"></app-history-profiles>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+
+
+        <!-- // liked by me -->
+        <mat-tab id="melike">
+          <ng-template mat-tab-label>
+            <p class="labelSetting">
+              <img class="tabImage" src="../../assets/History.svg" alt="icon" *ngIf="selectedTab !== 3">
+              <img class="tabImage" src="../../assets/Hisotry-blue.svg" alt="icon" *ngIf="selectedTab === 3 ">
+              <!-- <span class="tabCount">
+                {{itemService.getShortlistNumber()}}
+              </span> -->
+            </p>
+            <!-- <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+              style="font-size:small">{{languageService.profileLang.yourLikes}}</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.yourLikes}}</a> -->
+            <!-- {{itemService.getShortlistedCount()}} -->
+            <a style="font-size:small">History</a>
+          </ng-template>
+          <ng-template matTabContent>
+            <div>
+              <div class=' w-full ht-full'>
+                <app-history-section></app-history-section>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+
+        <!-- // mutual liking -->
+        <!-- <mat-tab  id="mutual">
+               <ng-template mat-tab-label>
+                 {{itemService.getMutualCount()}}
+               </ng-template>
+ 
+               <ng-template matTabContent>
+               <div>
+                 <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                   {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+               </button>
+                   <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                            <app-history-profiles [type]="tabType"></app-history-profiles>
+                  </div>
+              </div>
+           </ng-template>
+           </mat-tab> -->
+        <!-- // rejected-->
+        <!-- <mat-tab id="rejected">
+               <ng-template mat-tab-label>
+                 {{itemService.getRejectedCount()}}
+               </ng-template>
+ 
+                 <ng-template matTabContent>
+                 <div>
+                   <button (click)="goToSubs()" id="creditButton" mat-raised-button>
+                     {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
+                 </button>
+                     <div class='mainBody  w-full bg-white ht-full setBotUi' >
+                              <app-history-profiles [type]="tabType"></app-history-profiles>
+                    </div>
+                </div>
+             </ng-template>
+             </mat-tab> -->
+      </mat-tab-group>
+
+
+      <div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- The Close Button -->
+          <a id="closeModal">&times;</a>
+
+          <!-- Modal Content (The Image) -->
+          <img class="modal-content" id="img01">
+
+          <!-- Modal Caption (Image Text) -->
+          <h4 id="caption"></h4>
+        </div>
+
+      </div>
+
+      <!-- <div>
+  <div class="w-full bg-white ht-full" style="background-size: cover;" *ngIf="history=='myprofile'">
+           <app-user-profile (backToProfiles)="changeToBot()" [personalProfileData]="profileData" [familyProfileData]="familyData" [preferenceProfileData]="preferenceData"></app-user-profile>
+ </div>
+ </div> -->
+
+      <div>
+        <div class='mainBody  w-full bg-white ht-full' style="margin-top: 30px;" *ngIf="history=='connection_error'">
+          <app-connection-error></app-connection-error>
+        </div>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

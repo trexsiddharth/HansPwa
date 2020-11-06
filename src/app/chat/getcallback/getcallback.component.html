@@ -1,0 +1,26 @@
+<div class="mainBack">
+    <main>
+        <div class="text-center">
+            <img src="../../assets/left-arrow-key.svg" class="backArrow" (click)="backToChat()" alt="BACK" />
+            <p style="color:white;font-size: 25px; font-weight: 700;
+            font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important">Talk to a Matchmaker for
+                Upgradation</p>
+            <!-- <div class="circular mat-elevation-z10">
+                <img src="../../../assets/supportN.svg" style="width:45px" alt="heart">
+            </div> -->
+            <div class="main-card">
+                <textarea style="border:0px!important;" id="" cols="30" rows="9"
+                    placeholder="Describe your query here......" [(ngModel)]="query"></textarea>
+            </div>
+        </div>
+        <div style="position: relative;
+        display:flex;
+        margin-top:20%!important;
+        flex-direction: row;
+        align-items: center;
+        justify-content:center;">
+            <button class="SpecialCase butn-special" mat-raised-button (click)="getCallback()">Request A
+                Callback</button>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,398 @@
+main{
+    padding-bottom: 300px;
+    overflow-y: auto;
+}
+
+.rotationAnimation {
+    animation: skewAnimation 1s linear infinite alternate;
+}
+.pinkBack {
+    background: rgba(211,19,174,0.7);
+}
+.greyBack {
+    background: rgba(200,200,200,0.7);
+}
+.blueBack {
+    background: rgba(88,209,253,0.7);
+}
+#profileImageDiv{
+    margin: 20px;
+    position: relative;
+}
+.tinder--cards {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .tinder--card {
+    /* transform:translateY(20px); */
+    display: inline-block;
+    height: 98%;
+    background: #ffffff;;
+    padding-bottom: 250px;
+    border-radius: 8px;
+    position: absolute;
+    will-change: transform;
+    transition: all 0.3s ease-in-out;
+    overflow:scroll;
+  }
+#profilePic{
+    width: 100%;
+    height: 75vh;
+    border-radius: 10px;
+}
+::ng-deep .carousel-indicators{
+    bottom: 80px !important;
+}
+::ng-deep .mat-card-image{
+    margin: 0px;
+}
+
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+
+.col-6{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px;
+}
+
+
+.setButtons{
+    width: 60px;
+     height: 60px;
+     margin-bottom: 10px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     
+}
+.tip{
+    z-index:9999999999999999!important;
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    top:-130px;
+    left:-20px;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+    color:white!important;
+    width:100px;
+    border-radius:15px;
+}
+.tip2{
+    position:absolute;
+    display:flex;
+    top:65px;
+    left:-20px;
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    background:transparent;
+    color:rgba(36, 35, 35, 0.705)!important;
+    width:100px;
+    border-radius:15px;
+}
+.handAnimation{
+    width:65px;position:absolute; bottom:-70px;
+    -webkit-animation: 2s arrow infinite ease;
+    animation: 2s arrow infinite ease;
+    vertical-align:middle;
+}
+.setButtonsCenter{
+    width: 70px;
+     height: 70px;
+     margin-bottom: 10px;
+      display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+}
+
+.buttonImage{
+    width: 30px;
+}
+.buttonImageCenter{
+    width: 40px;
+}
+
+.animateButtonImage{
+    animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+}
+.animateButtonImageCenter{
+    animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+}
+
+.titleHeading{
+    color: #4A5D6A;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-weight: bold;
+    
+}
+
+#aboutSection{
+    margin-top: 20px; 
+}
+
+#personalSection{
+    margin-top: 20px; 
+}
+.field{
+    margin-top: 10px;
+}
+.titleImage {
+   width: 20px;
+}
+.title{
+    width: 100%;
+    color: #4A5D6A;
+    margin-left: 1rem;
+    font-size: 14px;
+}
+.titleGrey{
+    width: 100%;
+    color: grey;
+    font-size: 14px;
+}
+
+#careerSection{
+    margin-top: 20px; 
+}
+
+#horoscopeSection{
+    margin-top: 20px; 
+}
+
+#familySection{
+    margin-top: 20px; 
+}
+.highlightedValue{
+    background-color: #C4E9F8;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.actionAnimationDiv {
+    height: 100%;
+    position: absolute;
+    z-index: 999999;
+    text-align: center;
+    animation: actionOnProfile 1s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+}
+
+.actionAnimation{
+    width: 100px;
+}
+
+
+@-webkit-keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+@keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+
+@keyframes scale-in-out-image {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 30px;
+    }
+}
+
+@keyframes scale-in-out-image-center {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 40px;
+    }
+}
+
+@media (max-width: 350px){
+    .titleImage {
+        width: 20px;
+     }
+    .title{
+        width: 100%;
+        color: #4A5D6A;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+    .titleGrey{
+        width: 100%;
+        color: grey;
+        font-size: 14px;
+    }
+  
+
+    .setButtons{
+        width: 50px;
+         height: 50px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .setButtonsCenter{
+        width: 60px;
+         height: 60px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .buttonImage{
+        width: 20px;
+    }
+    .buttonImageCenter{
+        width: 30px;
+    }
+
+    @keyframes scale-in-out-image {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 20px;
+        }
+    }
+
+    @keyframes scale-in-out-image-center {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .down-arrow{
+        right: 0px;
+        -webkit-animation: 2s arrow infinite ease;
+        animation: 2s arrow infinite ease;
+        vertical-align:middle
+    
+    }
+
+    #imageContent{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 100px;
+        padding: 0px 10px 10px;
+        color: white;
+        background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: fixed;
+        width: 100%;
+        background-color: transparent;
+        z-index: 99999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+        animation: fadeInUp 3.5s 1;
+    }
+}
+
+@media (min-width: 1024px){
+    /* #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: relative;
+        width: 100%;
+        background-color: transparent;
+        z-index: 99999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+        margin-top: 50px;
+    } */
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        margin:auto;
+        position: fixed;
+        width: 35%;
+        background-color: transparent;
+        z-index: 99999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+        animation: fadeInUp 3.5s 1;
+    }
+    #imageContent{
+        width: 100%;
+        position: absolute;
+        bottom: 0%;
+        margin-bottom: 100px;
+        padding: 0px 10px 10px;
+        color: white;
+        background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+    #profilePic{
+        width: 100%;
+        height: 90vh;
+        border-radius: 10px;
+    }
+}

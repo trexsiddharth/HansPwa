@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#64e5ff"/>
+      <stop offset="1" stop-color="#00a8ff"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_3029" data-name="Group 3029" transform="translate(-556 -1578)">
+    <circle id="Ellipse_61" data-name="Ellipse 61" class="cls-1" cx="25" cy="25" r="25" transform="translate(556 1578)"/>
+    <path id="briefcase-alt" class="cls-2" d="M27.5,8.5H23V7a4.5,4.5,0,0,0-4.5-4.5h-3A4.5,4.5,0,0,0,11,7V8.5H6.5A4.5,4.5,0,0,0,2,13V26.5A4.5,4.5,0,0,0,6.5,31h21A4.5,4.5,0,0,0,32,26.5V13A4.5,4.5,0,0,0,27.5,8.5ZM14,7a1.5,1.5,0,0,1,1.5-1.5h3A1.5,1.5,0,0,1,20,7V8.5H14ZM29,26.5A1.5,1.5,0,0,1,27.5,28H6.5A1.5,1.5,0,0,1,5,26.5V18.25a31.9,31.9,0,0,0,4.5,1.41v.885a1.5,1.5,0,0,0,3,0V20.23a34.5,34.5,0,0,0,4.5.315,34.5,34.5,0,0,0,4.5-.315v.315a1.5,1.5,0,0,0,3,0V19.66A31.905,31.905,0,0,0,29,18.25Zm0-11.535a30.585,30.585,0,0,1-4.5,1.5V16a1.5,1.5,0,0,0-3,0v1.11a30.165,30.165,0,0,1-9,0V16a1.5,1.5,0,0,0-3,0v.495A30.585,30.585,0,0,1,5,15V13a1.5,1.5,0,0,1,1.5-1.5h21A1.5,1.5,0,0,1,29,13Z" transform="translate(564 1586.5)"/>
+  </g>
+</svg>

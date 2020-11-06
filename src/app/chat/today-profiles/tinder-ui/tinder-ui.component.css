@@ -1,0 +1,539 @@
+.tinder {
+    width: 140%;
+    height: 100%;
+    overflow: scroll;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .tinder--status {
+    position: absolute;
+    top: 40%;
+    margin-top: -30px;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    place-items: center!important;
+  }
+  .tinder--cards {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .darkBackground{
+      background-color: #000000af;
+  }
+  .tinder--card {
+    display: inline-block;
+    width: 100%;
+    height: 95%;
+    background: #ffffff;;
+    padding-bottom: 10px;
+    border-radius: 8px;
+    position: absolute;
+    will-change: transform;
+    transition: all 0.3s ease-in-out;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+    overflow:scroll;
+  }
+  .moving.tinder--card {
+    transition: none;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+  }
+  
+  .tinder--status > div {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .tinder--status svg {
+    transition: all 0.3s ease-in-out;
+    top: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+  }
+  
+  .tinder--buttons {
+    position: absolute;
+    flex: 0 0 100px;
+    text-align: center;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+  }
+
+  .contactShown{
+    border-radius: 10px;
+    background-color: rgba(88, 209, 253, 0.2);
+    padding: 10px 0px !important;
+}
+  
+  /* .tinder--buttons button {
+    border-radius: 50%;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    background: #FFFFFF;
+    display: inline-block;
+    padding-top: 10px;
+    margin: 0 12px;
+  } */
+  
+  .tinder--buttons button:focus {
+    outline: 0;
+  }
+  main{
+    padding-bottom: 15px;
+    overflow-y: auto;
+}
+
+.rotationAnimation {
+    animation: skewAnimation 1s linear infinite alternate;
+}
+.pinkBack {
+    background-color: rgba(211, 19, 173, 0.925)!important;
+}
+.greyBack {
+    background-color: rgba(200, 200, 200, 0.911)!important;
+}
+.blueBack {
+    background: rgba(88,209,253,0.7);
+}
+#profileImageDiv{
+    margin: 20px;
+    position: relative;
+}
+#profilePic{
+    width: 100%;
+    height: 75vh;
+    border-radius: 10px;
+}
+::ng-deep .carousel-indicators{
+    bottom: 80px !important;
+}
+::ng-deep .mat-card-image{
+    margin: 0px;
+}
+
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+
+.col-6{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px;
+}
+
+
+.setButtons{
+    width: 60px;
+     height: 60px;
+     margin-bottom: 10px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     
+}
+.tip{
+    z-index:9999999999999999!important;
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    top:-130px;
+    left:-20px;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+    color:white!important;
+    width:100px;
+    border-radius:15px;
+}
+.tip2{
+    position:absolute;
+    display:flex;
+    top:65px;
+    left:-20px;
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    background:transparent;
+    color:rgba(36, 35, 35, 0.705)!important;
+    width:100px;
+    border-radius:15px;
+}
+.handAnimation{
+    width:65px;position:absolute; bottom:-70px;
+    -webkit-animation: 2s arrow infinite ease;
+    animation: 2s arrow infinite ease;
+    vertical-align:middle;
+}
+.setButtonsCenter{
+    width: 70px;
+     height: 70px;
+     margin-bottom: 10px;
+      display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+}
+.rotateAnimation{
+    /* animation: rotation 2s infinite linear; */
+    transform: translateX(-200);
+}
+@keyframes rotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(35deg);
+    }
+}
+.oppositeRotate{
+    animation: opprotation 2s infinite linear;
+}
+
+@keyframes opprotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(-35deg);
+    }
+}
+.buttonImage{
+    width: 30px;
+}
+.buttonImageCenter{
+    width: 40px;
+}
+
+.animateButtonImage{
+    animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+}
+.animateButtonImageCenter{
+    animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -webkit-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -moz-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -o-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    -ms-animation: scale-in-out-image-center 0.8s ease-in 10s infinite alternate-reverse;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+}
+
+.titleHeading{
+    color: #4A5D6A;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-weight: bold;
+    
+}
+
+#aboutSection{
+    margin-top: 20px; 
+}
+
+#personalSection{
+    margin-top: 20px; 
+}
+.field{
+    margin-top: 10px;
+}
+.titleImage {
+   width: 20px;
+}
+.title{
+    width: 100%;
+    color: #4A5D6A;
+    margin-left: 1rem;
+    font-size: 14px;
+}
+.titleGrey{
+    width: 100%;
+    color: grey;
+    font-size: 14px;
+}
+
+#careerSection{
+    margin-top: 20px; 
+}
+
+#horoscopeSection{
+    margin-top: 20px; 
+}
+
+#familySection{
+    margin-top: 20px; 
+}
+.highlightedValue{
+    background-color: #C4E9F8;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.actionAnimationDiv {
+    height: 100%;
+    position: absolute;
+    z-index: 999999;
+    text-align: center;
+    animation: actionOnProfile 1s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+}
+
+.actionAnimation{
+    width: 100px;
+}
+
+
+@-webkit-keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+@keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+
+@keyframes scale-in-out-image {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 30px;
+    }
+}
+
+@keyframes scale-in-out-image-center {
+    from {
+        width: 20px;
+    }
+    to{
+        width: 40px;
+    }
+}
+
+@media (max-width: 350px){
+    .titleImage {
+        width: 20px;
+     }
+    .title{
+        width: 100%;
+        color: #4A5D6A;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+    .titleGrey{
+        width: 100%;
+        color: grey;
+        font-size: 14px;
+    }
+  
+
+    .setButtons{
+        width: 50px;
+         height: 50px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .setButtonsCenter{
+        width: 60px;
+         height: 60px;
+         margin-bottom: 10px;
+          display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+    }
+    .buttonImage{
+        width: 20px;
+    }
+    .buttonImageCenter{
+        width: 30px;
+    }
+
+    @keyframes scale-in-out-image {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 20px;
+        }
+    }
+
+    @keyframes scale-in-out-image-center {
+        from {
+            width: 10px;
+        }
+        to{
+            width: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .down-arrow{
+        right: 0px;
+        -webkit-animation: 2s arrow infinite ease;
+        animation: 2s arrow infinite ease;
+        vertical-align:middle
+    
+    }
+    #imageTopBanner {
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        right: 0;
+        margin-top: 10px;
+        padding: 0px 0px 10px;
+        color: white;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: flex-end;
+    }
+
+    #imageContent{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 100px;
+        padding: 0px 10px 10px;
+        color: white;
+        background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: fixed;
+        width: 100%;
+        background-color: transparent;
+        z-index: 99999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+        animation: fadeInUp 3.5s 1;
+    }
+}
+
+@media (min-width: 1024px){
+    /* #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        position: relative;
+        width: 100%;
+        background-color: transparent;
+        z-index: 99999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+        margin-top: 50px;
+    } */
+    .tinder--status svg {
+        transition: all 0.3s ease-in-out;
+        top: 50%;
+        right: 50%;
+        transform: translate(-115%,-50%);
+        position:absolute;
+      }
+    .tinder--card {
+        display: inline-block;
+        width: 36%;
+        height: 90%;
+        background: #ffffff;
+        padding-bottom: 40px;
+        border-radius: 8px;
+        overflow: auto;
+        position: absolute;
+        will-change: transform;
+        transition: all 0.3s ease-in-out;
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+        cursor: grab;
+      }
+    #answerButtons{
+        display: flex;
+        justify-content: space-evenly;
+        margin:auto;
+        position: fixed;
+        width: 35%;
+        background-color: transparent;
+        z-index: 99999;
+        bottom: 0px;
+        background-image: linear-gradient(0deg, white,transparent);
+        animation: fadeInUp 3.5s 1;
+    }
+    #imageTopBanner {
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        right: 0;
+        margin-top: 10px;
+        padding: 0px 0px 10px;
+        color: white;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: flex-end;
+    }
+    #imageContent{
+        width: 100%;
+        position: absolute;
+        bottom: 0%;
+        margin-bottom: 100px;
+        padding: 0px 10px 10px;
+        color: white;
+        background-image: linear-gradient(0deg, black, rgba(0,0,0,0.02));
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+    #profilePic{
+        width: 100%;
+        height: 90vh;
+        border-radius: 10px;
+    }
+}

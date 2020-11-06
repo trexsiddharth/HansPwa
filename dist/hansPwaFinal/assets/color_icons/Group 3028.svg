@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#64e5ff"/>
+      <stop offset="1" stop-color="#00a8ff"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_3028" data-name="Group 3028" transform="translate(-559 -1344)">
+    <circle id="Ellipse_60" data-name="Ellipse 60" class="cls-1" cx="25" cy="25" r="25" transform="translate(559 1344)"/>
+    <path id="graduation-hat" class="cls-2" d="M30.274,12.6l-1.429-.786h0L15.987,4.666h-.157a1.515,1.515,0,0,0-.271-.086h-.529a1.672,1.672,0,0,0-.286.086h-.157L1.727,11.81a1.429,1.429,0,0,0,0,2.486l3.558,1.972V23.04a4.286,4.286,0,0,0,4.286,4.286H21a4.286,4.286,0,0,0,4.286-4.286V16.267l2.858-1.6v4.086a1.429,1.429,0,0,0,2.858,0V13.838a1.429,1.429,0,0,0-.729-1.243ZM22.43,23.04A1.429,1.429,0,0,1,21,24.469H9.571A1.429,1.429,0,0,1,8.143,23.04V17.853l6.444,3.572.214.086h.129a1.429,1.429,0,0,0,.357,0h0a1.429,1.429,0,0,0,.357,0h.129a.672.672,0,0,0,.214-.086l6.444-3.572Zm-7.144-4.486L5.371,13.038l9.916-5.515L25.2,13.038Z" transform="translate(567.996 1353.42)"/>
+  </g>
+</svg>

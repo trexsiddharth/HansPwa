@@ -1,0 +1,397 @@
+section{
+    padding: 20px 30px 200px;
+    overflow: scroll;
+    height: 100vh;
+    animation: fadeInUp 1.5s 1;
+}
+
+.btn-tabs{
+    background:#e7e7e7;
+    width: 48%;
+    border-radius:6px;
+    color:#a3a2a2;
+    font-weight:bold;
+}
+.btn-tabs-active{
+    background:#49b9e6;
+    margin:1.5%;
+    border-radius:6px;
+    color:white;
+    font-weight:bold;
+}
+
+.paddingToSection {
+    padding: 70px 30px 100px !important;
+}
+.blurEffect{
+    filter: blur(20px);
+   -webkit-filter: blur(20px);
+   overflow:hidden;
+}
+/* // only for explicit view */
+.mainBack {
+    background-image: url(https://hansmatrimony.s3.ap-south-1.amazonaws.com/webImages/1024+white.jpg);
+    background-size: contain;
+}
+
+.toolBar {
+    background-color: white;
+    color: #4A5D6A;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    position: fixed;
+    z-index: 999999;
+}
+
+.titleText {
+    font-size: 1rem;
+}
+
+.noProfileMain{
+    margin-top: 0px!important;
+    background-size: contain;
+    width:100vw;
+    height: 100vh;
+    display: block;
+    position: relative;
+
+    animation: fadeInUp 1.5s 1;
+}
+.noProfile{
+    color: white;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+.planRow2 {
+    background:#f0f1f0;
+    height: auto;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    margin: 0% 1% 4% 1%;
+    padding:0 3% 0 3%!important;
+    border-radius: 0 0 15px 15px;
+    font-size:15px;
+  }
+
+span{
+    text-transform: capitalize;
+}
+
+#premiumProfIcon{
+    background: orange;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+}
+
+.historyProfile{
+    width: 30vw;
+    height: 64vh;
+    border-radius: 20px;
+    position: relative;
+}
+.historyImage{
+    width: 100%;
+    height: 64vh;
+    border-radius: 10px;
+    object-fit: fill;
+}
+.historyDetails{
+width: 100%;
+position: absolute;
+bottom: 0px;
+background-image: linear-gradient(0deg,black,transparent);
+word-break: break-word;
+color: white;
+font-size: 1rem;
+font-weight: bold;
+padding: 15px 35px 15px 10px;
+border-radius: 10px;
+}
+.historyButtons{
+    display: flex;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    bottom: 35px;
+    right: -20px;
+}
+
+#profileImage{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+#answerButtons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    z-index: 99999;
+    bottom: 0px;
+    background-image: linear-gradient(0deg, white,transparent);
+}
+.buttonImage{
+    width: 40px;
+}
+#verified{
+    background-color: #47C337;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+}
+#controlledBy{
+    background-color: #ACDFFF;
+    display: flex;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+    justify-content: space-evenly;
+}
+
+#aboutSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #FAC8F1; color: #707070;
+        border-radius: 5px;
+}
+
+#personalSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #9533B5E5;
+        border-radius: 5px;
+}
+.field{
+    margin-top: 10px;
+}
+.title{
+    width: 100%;
+    color: #C8C8C8;
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#careerSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #CA58FD;
+        border-radius: 5px;
+}
+
+#horoscopeSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #070973;
+        border-radius: 5px;
+}
+
+#familySection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #58D1FD;
+        border-radius: 5px;
+}
+
+@media (min-width:1024px){
+    .noProfileMain{
+        margin-top: 0px!important;
+        overflow: auto;
+        width: 100%;
+        background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+        padding: 50px 10px 0px;
+        background-size: contain;
+        height: 100vh;
+        display: block;
+        position: relative;
+        animation: fadeInUp 1.5s 1;
+    }
+}
+
+@media (max-width: 350px) {
+    .historyDetails{
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 25px;
+        border-radius: 10px;
+        }
+        .historyProfile{
+            width: 100%;
+            height: 70%;
+            border-radius: 20px;
+            position: relative;
+        }
+        .historyImage{
+            width: 100%;
+            height: 55vh;
+            border-radius: 10px;
+            object-fit: fill;
+        }
+        .titleText {
+            font-size: 14px;
+        }
+}
+
+@media (max-width: 575px) {
+    .historyDetails{
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 35px 15px 10px;
+        border-radius: 10px;
+        }
+        .historyProfile{
+            width: 100%;
+            height: 70%;
+            border-radius: 20px;
+            position: relative;
+        }
+        .historyImage{
+            width: 100%;
+            height: 55vh;
+            border-radius: 10px;
+            object-fit: fill;
+        }
+        .titleText {
+            font-size: 14px;
+        }
+        /* // only for explicit view */
+    .mainBack {
+    background-image: none;
+}
+}
+.circular {
+    position: absolute;
+    top:-40px;
+    padding: 20px;
+    width: 90px;
+    height: 90px;
+    border: 0px;
+    background-color:#00c2cb;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+.special{
+    height: 100vh;
+    overflow: auto;
+    width: 100%;
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    padding: 50px 10px 0px;
+    animation: fadeInUp 1.5s 1;
+    background-size: contain;
+}
+.SpecialCase{
+    font-size:2.3rem!important;
+}
+  a{
+    color: white !important;
+  }
+  b {
+    color: white;
+  }
+  .plansArea {
+    margin-top:0px;
+    position: relative;
+    z-index: 0;
+    padding: 30px 10px 10px 10px !important;
+    background:white!important;
+    object-fit:cover;
+    margin: 10px 5px 10px 5px;
+    border-radius:15px;
+    overflow-y: scroll!important;
+  }
+  .planrow {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin: 3% 1% 0% 1%;
+  }
+  .plancolumn {
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+    flex: 50%;
+    display: inline-block;
+    vertical-align: middle!important;
+  }
+  #subs {
+    position: absolute;
+    z-index: 1000 !important;
+    right: 5.5%;
+    top: 32%;
+    vertical-align: middle !important;
+    background: #ff39c4;
+    border:0px;
+  }
+  .month {
+    font-weight: 500;
+    padding:0px 3px 0px 3px;
+    font-style: normal!important;
+    font-size:0.8rem;
+    position: absolute;
+    top: -11px !important;
+    right: 5%;
+    background: #00c2cb;
+    border-radius: 3px 3px 3px 3px;
+  }
+  
+  @media (max-width: 575px) {
+    .plancolumn {
+      padding-top: 0.8rem;
+      padding-bottom: 0rem;
+      padding-left: 0.8rem;
+      font-size: 1.2rem;
+      flex: 40%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .SpecialCase{
+        font-size:1.9rem!important;
+    }
+  }
+  @media (max-width: 375px) {
+    .plancolumn {
+      padding-top: 0.8rem;
+      padding-bottom: 0rem;
+      padding-left: 0.8rem;
+      font-size: 0.9rem !important;
+      flex: 40%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .subs{
+      position: absolute;
+      right: 5.5%;
+      top: 25%;
+      vertical-align: middle !important;
+      background: #5552ff;
+    }
+    .SpecialCase {
+      font-size: 1.4rem !important;
+    }
+  }

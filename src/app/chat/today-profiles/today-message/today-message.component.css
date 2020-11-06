@@ -1,0 +1,82 @@
+main{
+    height: 100vh;
+    overflow: auto;
+    width: 100%;
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    padding: 50px 10px 0px;
+}
+.row{
+    margin: 0px;
+    padding: 0px;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.mainHead{
+    color: white;
+    font-size: 1.9rem;
+    font-weight: bold;
+    /* text-shadow: 2px 2px 10px white; */
+    font-family: sans-serif;
+    text-align: center;
+}
+.workingDiv{
+    background-color: white;
+    color: black;
+    display: block;
+    position: relative;
+    margin-top: 60px;
+    border-radius: 15px;
+    padding: 50px 10px 20px;
+    text-align: center;
+}
+.circularTick{
+    position: relative;
+    margin-top: -90px;
+    display: block;
+    margin-left: 38%;
+    width: 75px;
+    height:75px;
+    border-radius:50%;
+    padding:15px;
+    background:#4ADEE4;
+}
+.timerDiv{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.timer {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+.timerDiv span {
+    font-size: 1.8rem;
+}
+.discoverDiv{
+    color: white;
+    padding: 12px 10px;
+    box-shadow: 12px 12px 14px rgba(0, 0, 0, 0.2);
+    background-color: #4ADEE4;
+    text-align: center;
+    /* border-radius: 50px; */
+    width: 60%;
+    margin: 40px auto 0px;
+    border-radius:7px;
+}
+
+@media screen and (max-width: 370px) {
+    main{
+        padding: 20px 10px 0px;
+    }
+    .workingDiv{
+        margin-top: 40px;
+    }
+    .discoverDiv{
+        padding: 10px 10px;
+    }
+}

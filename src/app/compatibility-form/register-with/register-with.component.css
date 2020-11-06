@@ -1,0 +1,61 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+/* ::ng-deep .mat-dialog-container{
+    border-radius: 15px;
+}
+::ng-deep .cdk-overlay-dark-backdrop {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+  } */
+main{
+    border-radius: 15px;
+    background-color: white;
+}
+.heading {
+    color: #353635d7;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px 0px 3px 0px;
+}
+.btnDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto 30px auto; 
+    color:rgba(0, 0, 0, 0.685)
+}
+.btnDiv button {
+    padding: 5px 30px;
+    /* border-radius: 50px; */
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 500;
+}
+
+#facebook {
+    background-color: #1266c6;
+    padding:9px 32px!important;
+    border-radius: 5px!important;
+    display:flex;
+    flex-direction: row;
+    align-items: center;justify-content:center;
+}
+#truecaller {
+    text-decoration:underline;
+    background:transparent;
+    padding:8px 14px!important;
+    border-radius: 5px!important;
+    border:0px;
+    color: rgba(92, 90, 90, 0.788);
+}
+#viewButton{
+    font-weight: 600;
+    background: #34b7f1;
+    color: #fffefe;
+    padding-left: 40px;
+    padding-right: 40px;
+  box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
+  12px 12px 14px rgba(0, 0, 0, 0.2);
+  }

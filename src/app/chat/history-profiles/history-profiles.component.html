@@ -1,0 +1,748 @@
+<!-- <main class="noProfileMain"
+    *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized() && !section">
+     <div style="position: relative;display: block;margin: 30% auto;">
+     <p class="text-center">
+         <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
+     </p>
+    <p class="text-center noProfile">
+     No Profiles Here
+    </p> 
+    </div>
+    <div style="position: relative;display: block;margin: 3%;margin-bottom:40px">
+        <p class="text-center noProfile">
+            Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>
+        </p>
+        <p class="text-center">
+            <img src="../../../assets/down-arrow.svg" style="width:60px">
+        </p>
+    </div>
+    <div class="plansArea">
+        <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
+            <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                <b>बेसिक प्लान</b><br />
+                <a>45 कांटेक्टस</a><br />
+            </div>
+            <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+                <b>Basic Plan</b><br />
+                <a>45 Contacts</a><br />
+            </div>
+            <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+                <b class="specialCase" style="font-size: large; color: #5b6d78 !important;">₹2800</b>
+                <br />
+                <a style="
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 5500</a>
+
+                <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+                background-color: #f0f1f0;
+                border-radius: 18px;
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+            ">
+                    <div class="month">
+                        <a>3 महीने</a>
+                    </div>
+                    <button class="btn btn-primary btn-small subs" (click)="container1()"
+                        style="vertical-align: middle !important;">
+                        BUY
+                    </button>
+                </div>
+                <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+    background-color: #f0f1f0;
+    border-radius: 18px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    ">
+                    <div class="month">
+                        <a>3 months</a>
+                    </div>
+                    <button class="btn btn-primary btn-small subs" (click)="container1()"
+                        style="vertical-align: middle !important;">
+                        BUY
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="planrow" style="background-color: #00c2cb; border-radius: 18px; margin-top: 0px;">
+            <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                <div style="
+                font-weight: 500 !important;
+                position: absolute;
+                top: -15px !important;
+                left: 8%;
+                background: #ff39c4;
+                color: white;
+                padding: 2px 2px 2px 2px;
+                border-radius: 3px 3px 3px 3px;
+              ">
+                    Bestseller
+                </div>
+                <b>सुप्रीम प्लान</b><br />
+                <a>90 कांटेक्टस</a><br />
+            </div>
+            <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+                <div style="
+                font-weight: 300 !important;
+                position: absolute;
+                top: -15px !important;
+                left: 8%;
+                font-size:small;
+                background: #ff39c4;
+                color: white;
+                padding: 1px 1px 1px 1px;
+                border-radius: 2px 2px 2px 2px;
+              ">
+                    Bestseller
+                </div>
+                <b>Supreme Plan</b><br />
+                <a>90 Contacts</a><br />
+            </div>
+            <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+                <b class="specialCase" Style=" font-size: large;color: #5b6d78 !important; ">₹5500</b><br />
+                <a style="
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 8500</a><br />
+                <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                    <div class="month">
+                        <a>6 महीने</a>
+                    </div>
+                    <button class="btn btn-primary btn-small subs" (click)="container2()">
+                        BUY
+                    </button>
+                </div>
+                <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                    <div class="month">
+                        <a>6 months</a>
+                    </div>
+                    <button class="btn btn-primary btn-small subs" (click)="container2()">
+                        BUY
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 0px;">
+            <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                <b>कुंडली प्लान</b><br />
+                <a>45 कांटेक्टस</a><br />
+            </div>
+            <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+                <b>Kundali Plan</b><br />
+                <a>45 Contacts</a><br />
+            </div>
+            <div class="plancolumn" style="background-color: #f0f1f0;">
+                <b class="specialCase" style="font-size: large; color: #596a76 !important;">₹8500</b><br />
+                <a style="
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 9100</a>
+                <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                    <div class="month">
+                        <a>6 महीने</a>
+                    </div>
+                    <button class="btn btn-primary btn-small subs" (click)="container3()">
+                        BUY
+                    </button>
+                </div>
+                <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                    <div class="month">
+                        <a>6 months</a>
+                    </div>
+                    <button class="btn btn-primary btn-small subs" (click)="container3()">
+                        BUY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main> -->
+<main [ngClass]="{'mainBack': section}">
+    <mat-toolbar class="toolBar" *ngIf="section">
+        <div style="display: flex;
+        flex-direction: row;
+        align-items: center;">
+            <button mat-icon-button (click)="goBack()" class="example-icon"
+                aria-label="Example icon-button with menu icon">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <span class="titleText">{{title}}</span>
+        </div>
+        <button class="example-icon titleText" style="color: #4A5D6A; background-color: white;border: none;"
+            aria-label="Example icon-button with share icon">
+            <span>
+                {{languageService.profileLang.credits}}
+            </span>
+            <span class="titleText">{{this.itemService.getCredits()}}</span>
+        </button>
+    </mat-toolbar>
+
+  <div *ngIf="type && type == 'interestReceived'" class="text-center">
+    <button class="btn btn-tabs" 
+    (click)="setSelectedIndex(0)"
+    [ngClass]="{'btn-tabs-active':selectedTab === 0}">
+    Liked Me
+</button>
+
+<button  class="btn btn-tabs" 
+(click)="setSelectedIndex(1)"
+[ngClass]="{'btn-tabs-active':selectedTab === 1}">
+    Profile Viewers
+</button>
+  </div>
+
+
+    <section *ngIf="profile.length > 0 && selectedTab == 0" [ngClass]="{'ht-full': section, 'paddingToSection' : section}" infiniteScroll
+        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="getScrollData()">
+        <div *ngFor="let item of profile;let i = index">
+            <div class="historyProfile" [id]="i">
+                <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}" #profilePic
+                    [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
+                    (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
+                    alt="profile picture">
+                <div style="position: absolute;top: -15px;
+            right: -20px;" *ngIf="item.family == null">
+                    <button mat-fab id="premiumProfIcon">
+                        <img width="30px" src="../../../assets/king.svg" alt="premium profile">
+                    </button>
+                </div>
+
+                <div class="historyDetails">
+                    <p *ngIf="type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()" style="display: flex!important;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-size: 1.0rem;
+                font-weight: bold;
+                color: white;
+                position: absolute;
+                top: -170px;
+                width: 100%!important;">
+                        Upgrade to see
+                        who
+                        likes you</p>
+
+                        <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
+                        null && itemService.getCredits().toString() != '0')  || type == 'contacted' || type == 'rejected' || type == 'interestShown'">  
+                    <span>
+                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
+                    </span><br>
+                    <span>
+                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}
+                        | {{setHeight(item.profile.height)}}
+                        | {{item.family ? item.family.religion : item.profile.religion}},
+                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
+                        | {{setIncome(item.profile.monthly_income)}} LPA
+                    </span>
+
+                </div>
+                </div>
+
+                <div class="historyButtons">
+
+                    <!-- <button mat-raised-button class="btn" (click)="profileReAnswer(item,'NO',i)" style="background-color: #C8C8C8;
+                    padding: 20px;
+                     border-radius: 10px;"
+                        *ngIf="!(type==='interestReceived' &&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()) && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
+                        <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
+                    </button> -->
+
+                    <button mat-raised-button class="btn" (click)="profileReAnswer(item,'NO',i)" style="background-color: #C8C8C8;
+                    padding: 20px;
+                     border-radius: 10px;"
+                        *ngIf="type !='interestReceived' && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'">
+                        <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
+                    </button>
+
+                    <!-- <button mat-raised-button class="btn" (click)="profileReAnswer(item,'YES',i)" style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;"
+                        *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'contacted'">
+                        <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+                    </button> -->
+
+                    <button mat-raised-button class="btn" (click)="profileReAnswer(item,'YES',i)" style="background-color: #58D1FD;
+                    margin-top: 20px;
+                    padding: 20px;
+                     border-radius: 10px;"
+                            *ngIf="type !== 'contacted'">
+                            <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+                        </button>
+
+                    <button mat-raised-button class="btn" (click)="call(i)" style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;"
+                        *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
+                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && item.family && itemService.getPersonalized() == false">
+                        <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+                    </button>
+
+                    <button mat-raised-button class="btn" (click)="openPersonalizedMessageDialog(item)" style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px 10px;
+                 border-radius: 10px;"
+                        *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && itemService.getPersonalized()">
+                        <img width="30px" src="../../../assets/comment.svg" alt="contact profile">
+                    </button>
+
+                    <button mat-raised-button class="btn" (click)="profileReAnswer(item,'SHORTLIST',i)" style="background-color: #D313AE;margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;"
+                        *ngIf="!(type==='interestReceived'&&itemService.getCredits() != 
+                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'interestShown' && type !== 'interestReceived'  && type !== 'contacted' && type !== 'mutual'">
+                        <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
+                    </button>
+
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <mat-spinner *ngIf="smallSpinner" style="margin: 0px auto;" [diameter]="30"></mat-spinner>
+
+    </section>
+    <!-- <ngx-spinner  bdColor = "transparent" size = "small" color = "#58D1FD" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white"></ngx-spinner> -->
+
+
+</main>
+
+<div *ngIf="(!section && profile && profile.length < 1 && selectedTab == 0) 
+|| ((profileViewersList$ | async) && (profileViewersList$ | async).length < 1 && selectedTab == 1) ">
+    <main *ngIf="itemService.getPersonalized()">
+        <div style="position: relative;display: block;margin: 30% auto;">
+            <p class="text-center">
+                <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
+            </p>
+            <p class="text-center noProfile">
+                No Profiles Here
+            </p>
+        </div>
+    </main>
+    <main *ngIf="!itemService.getPhotoStatus()" class="special noProfileMain">
+        <!-- <main *ngIf="true" class="special"> -->
+        <div style="height:45vh!important; 
+    width:85%!important; 
+    border-radius: 20px!important;
+    background:white!important;
+    margin:auto;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center">
+            <img src="../../../assets/plus.svg" style="width:60%">
+        </div>
+        <div class="text-center" style="margin:10px 0px 0px 0px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center">
+            <p style="font-size: 1.2rem;">Please upload pictures so people can see your profile</p>
+        </div>
+        <div c style="position: relative;
+        display:flex;margin-top: 7%;
+        flex-direction: row;
+        align-items: center;
+        justify-content:center">
+            <input style="margin: 10px 25%;display: none;" #backfile type="file" id="backfile" accept='image/*'
+                (change)="chooseFileForUpload(backfile.files)" />
+            <button class="SpecialCase" style="position:absolute;
+            height:80px;
+            background:#00c2cb!important; 
+            width:80%!important; 
+            color:rgb(255, 255, 255);
+            margin-top: 2%;
+            border:0px!important;
+            border-radius:30px 30px 30px 30px" mat-raised-button (click)="changeProfileImage()">Upload Photos</button>
+        </div>
+    </main>
+    <!-- <main class="noProfileMain" *ngIf="true"> -->
+    <main class="noProfileMain" *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()">
+        <!-- <div style="position: relative;display: block;margin: 30% auto;">
+     <p class="text-center">
+         <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
+     </p>
+    <p class="text-center noProfile">
+     No Profiles Here
+    </p>
+    </div>  -->
+        <div style="position: relative;display: block;margin: 2%;margin-bottom:10px">
+            <p class="text-center noProfile" style="margin-bottom:0.4rem">
+                <a *ngIf="selectedTab == 0 && type == 'interestShown'" style="font-size:1.1rem">You have not liked anyone so far. Become our prime member to boost you profile
+                    visibility and</a><br>
+                <a *ngIf="selectedTab == 0 && type == 'contacted'" style="font-size:1.1rem">You have not contacted anyone so far. Become our prime member to boost you profile
+                    visibility and</a><br>
+                <a *ngIf="selectedTab == 0 && type == 'interestReceived'" style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
+                    visibility and</a><br>
+                    <a *ngIf="selectedTab == 1" style="font-size:1.1rem">You have no viewers so far. Become our prime member to boost you profile
+                        visibility and</a><br>
+                Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>
+            </p>
+            <p class="text-center">
+                <img src="../../../assets/down-arrow.svg" style="width:40px">
+            </p>
+        </div>
+        <div class="planArea" style="height:54vh;overflow-y:scroll">
+            <div *ngFor="let item of plansOnline; let i = index">
+                <div class="planrow text-dark"
+                    style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;">
+                    <div class="plancolumn">
+                        <b>{{item.plan_name}} Plan</b><br />
+                        <a>{{item.contacts}} Contacts</a>
+                    </div>
+                    <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+                        <b class="specialCase"
+                            style="font-size: large; color: #5b6d78 !important;vertical-align: middle !important;">₹
+                            {{setAmount(i)}}</b>
+                        <br />
+                        <a style="
+                      text-decoration: line-through;
+                      font-size: medium;
+                      color: #596a76 !important;vertical-align: middle !important;
+                    ">₹ {{item.amount}}</a>
+                        <div class="" style="
+          background-color: #f0f1f0;
+          border-radius: 18px;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+          ">
+                            <div class="month">
+                                <a>{{item.validity}} months</a>
+                            </div>
+                            <button id="subs" class="btn btn-primary btn-small" (click)="container(i)"
+                                style="vertical-align: middle !important;">
+                                BUY
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="planRow2">
+                    <a style="color:#5b6d78!important">{{setContent(i)}}</a>
+                </div>
+            </div>
+            <!-- <div class="planrow text-dark" *ngFor="let item of plansOnline;let i = index;" style="background-color: #00c2cb; border-radius: 18px; margin-top: 2%;">
+                <div class="plancolumn">
+                    <b>{{item.plan_name}} Plan</b><br />
+                     <a>45 कांटेक्टस</a><br />
+                    <a>{{item.contacts}} Contacts</a><br />
+                </div>
+                <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+                    <b>Basic Plan</b><br />
+                    <a>45 Contacts</a><br />
+                </div>
+                <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+                    <b class="specialCase" style="font-size: large; color: #5b6d78 !important;">₹2800</b>
+                    <br />
+                    <a style="
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 5500</a>
+
+                    <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+                background-color: #f0f1f0;
+                border-radius: 18px;
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+            ">
+                        <div class="month">
+                            <a>3 महीने</a>
+                        </div>
+                        <button class="btn btn-primary btn-small subs" (click)="container1()"
+                            style="vertical-align: middle !important;">
+                            BUY
+                        </button>
+                    </div>
+                    <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+    background-color: #f0f1f0;
+    border-radius: 18px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    ">
+                        <div class="month">
+                            <a>3months</a>
+                        </div>
+                        <button class="btn btn-primary btn-small subs" (click)="container1()"
+                            style="vertical-align: middle !important;">
+                            BUY
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="planrow" style="background-color: #00c2cb; border-radius: 18px; margin-top: 0px;">
+                <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                    <div style="
+                font-weight: 500 !important;
+                position: absolute;
+                top: -15px !important;
+                left: 8%;
+                background: #ff39c4;
+                color: white;
+                padding: 2px 2px 2px 2px;
+                border-radius: 3px 3px 3px 3px;
+              ">
+                        Bestseller
+                    </div>
+                    <b>सुप्रीम प्लान</b><br />
+                    <a>90 कांटेक्टस</a><br />
+                </div>
+                <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+                    <div style="
+                font-weight: 300 !important;
+                position: absolute;
+                top: -15px !important;
+                left: 8%;
+                font-size:small;
+                background: #ff39c4;
+                color: white;
+                padding: 1px 1px 1px 1px;
+                border-radius: 2px 2px 2px 2px;
+              ">
+                        Bestseller
+                    </div>
+                    <b>Supreme Plan</b><br />
+                    <a>90 Contacts</a><br />
+                </div>
+                <div class="plancolumn" style="background-color: #f0f1f0; color: #5b6d78 !important;">
+                    <b class="specialCase" Style=" font-size: large;color: #5b6d78 !important; ">₹5500</b><br />
+                    <a style="
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 8500</a><br />
+                    <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                        <div class="month">
+                            <a>6 महीने</a>
+                        </div>
+                        <button class="btn btn-primary btn-small subs" (click)="container2()">
+                            BUY
+                        </button>
+                    </div>
+                    <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                        <div class="month">
+                            <a>6 months</a>
+                        </div>
+                        <button class="btn btn-primary btn-small subs" (click)="container2()">
+                            BUY
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="planrow text-dark" style="background-color: #00c2cb; border-radius: 18px; margin-top: 0px;">
+                <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'hindi'">
+                    <b>कुंडली प्लान</b><br />
+                    <a>45 कांटेक्टस</a><br />
+                </div>
+                <div class="plancolumn" *ngIf="languageService.getCurrentLanguage() === 'english'">
+                    <b>Kundali Plan</b><br />
+                    <a>45 Contacts</a><br />
+                </div>
+                <div class="plancolumn" style="background-color: #f0f1f0;">
+                    <b class="specialCase" style="font-size: large; color: #596a76 !important;">₹8500</b><br />
+                    <a style="
+                text-decoration: line-through;
+                font-size: medium;
+                color: #596a76 !important;
+              ">₹ 9100</a>
+                    <div class="" *ngIf="languageService.getCurrentLanguage() === 'hindi'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                        <div class="month">
+                            <a>6 महीने</a>
+                        </div>
+                        <button class="btn btn-primary btn-small subs" (click)="container3()">
+                            BUY
+                        </button>
+                    </div>
+                    <div class="" *ngIf="languageService.getCurrentLanguage() === 'english'" style="
+            background-color: #f0f1f0;
+            border-radius: 18px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          ">
+                        <div class="month">
+                            <a>6 months</a>
+                        </div>
+                        <button class="btn btn-primary btn-small subs" (click)="container3()">
+                            BUY
+                        </button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </main>
+    <main *ngIf="itemService.getPhotoStatus() && !isNotPaid() && !itemService.getPersonalized()" class="special">
+        <p class="text-center noProfile" style="margin-bottom:0.4rem">
+            <a style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
+                visibility and</a><br>
+            Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>
+        </p>
+        <div style="
+    position:relative;
+    height:40vh!important; 
+    width:80%!important; 
+    border-radius: 20px!important;
+    background:white!important;
+    margin:auto;
+    margin-top:10%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    color:black">
+            <div class="circular">
+                <img src="../../../assets/tabs-icons/heart-like-white.svg" alt="heart">
+            </div>
+            <div style="display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:center" class="text-center">
+                <p style="font-size:30px;font-weight:500;margin:auto!important;color:rgb(51, 59, 52)!important;">Get
+                    Your
+                    <a style="font-weight:bold!important;
+                color:rgb(51, 59, 52)!important;
+                ">Personal Matchmaker</a></p>
+            </div>
+        </div>
+        <div style="position: relative;" class="text-center">
+            <button class="SpecialCase" style="position: relative;;
+            margin:auto;
+    height:80px;
+    background:#00c2cb!important; 
+    width:87%!important; 
+    color:rgb(255, 255, 255);
+    margin-top: 10%;
+    border:0px!important;
+    border-radius:30px 30px 30px 30px" mat-raised-button (click)="goToSubscription()">Upgrade Now</button>
+        </div>
+    </main>
+</div>
+
+<div *ngIf="(profileViewersList$ | async) && (profileViewersList$ | async).length > 0 && selectedTab == 1">
+   
+    <section [ngClass]="{'ht-full': section, 'paddingToSection' : section}" infiniteScroll
+        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="getScrollData()">
+        <div *ngFor="let item of (profileViewersList$ | async);let i = index">
+            <div class="historyProfile" [id]="i">
+                <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}" #profilePic
+                    [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
+                    (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
+                    alt="profile picture">
+                <div style="position: absolute;top: -15px;
+            right: -20px;" *ngIf="item.family == null">
+                    <button mat-fab id="premiumProfIcon">
+                        <img width="30px" src="../../../assets/king.svg" alt="premium profile">
+                    </button>
+                </div>
+
+                <div class="historyDetails">
+                    <p *ngIf="type==='interestReceived'&&itemService.getCredits() != 
+                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()" style="display: flex!important;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-size: 1.0rem;
+                font-weight: bold;
+                color: white;
+                position: absolute;
+                top: -170px;
+                width: 100%!important;">
+                        Upgrade to see
+                        who
+                        viewed your profile</p>
+                        <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
+                        null && itemService.getCredits().toString() != '0') || type == 'contacted' || type == 'rejected' || type == 'interestShown'">
+                    <span>
+                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
+                    </span><br>
+                    <span>
+                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}
+                        | {{setHeight(item.profile.height)}}
+                        | {{item.family ? item.family.religion : item.profile.religion}},
+                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
+                        | {{setIncome(item.profile.monthly_income)}} LPA
+                    </span>
+
+                </div>
+                </div>
+
+                <div class="historyButtons">
+
+                    <!-- <button mat-raised-button class="btn" (click)="reponseToNormal(item,'NO',i)" style="background-color: #C8C8C8;
+                    padding: 20px;
+                     border-radius: 10px;"
+                        >
+                        <img width="20px" src="../../../assets/closewhite.svg" alt="reject profile">
+                    </button> -->
+
+                    <button mat-raised-button class="btn" (click)="reponseToNormal(item,'YES',i)" style="background-color: #58D1FD;
+                margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;">
+                        <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+                    </button>
+
+                    <!-- <button mat-raised-button class="btn" (click)="reponseToNormal(item,'SHORTLIST',i)" style="background-color: #D313AE;margin-top: 20px;
+                padding: 20px;
+                 border-radius: 10px;">
+                        <img width="20px" src="../../../assets/heartwhite.svg" alt="shortlist profile">
+                    </button> -->
+
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <mat-spinner *ngIf="smallSpinner" style="margin: 0px auto;" [diameter]="30"></mat-spinner>
+
+    </section>
+
+</div>
+

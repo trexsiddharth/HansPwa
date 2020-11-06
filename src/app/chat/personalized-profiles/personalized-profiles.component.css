@@ -1,0 +1,175 @@
+
+  /* // new design  */
+
+  section{
+    padding: 20px 30px 150px;
+}
+
+span{
+    text-transform: capitalize;
+}
+
+.historyProfile{
+    width: 30vw;
+    height: 64vh;
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 30px;
+}
+.historyImage{
+    width: 100%;
+    height: 64vh;
+    border-radius: 10px;
+    object-fit: fill;
+}
+.historyDetails{
+position: absolute;
+bottom: 0px;
+width: 100%;
+background-image: linear-gradient(0deg,black,transparent);
+word-break: break-word;
+color: white;
+font-size: 1rem;
+font-weight: bold;
+padding: 15px 35px 15px 10px;
+border-radius: 10px;
+}
+.historyButtons{
+    display: flex;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    bottom: 35px;
+    right: -20px;
+}
+
+#profileImage{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+#answerButtons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    z-index: 99999;
+    bottom: 0px;
+    background-image: linear-gradient(0deg, white,transparent);
+}
+.buttonImage{
+    width: 40px;
+}
+#verified{
+    background-color: #47C337;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+}
+#controlledBy{
+    background-color: #ACDFFF;
+    display: flex;
+    border-radius: 5px;color: white;
+    padding: 10px 0px;
+    justify-content: space-evenly;
+}
+
+#aboutSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #FAC8F1; color: #707070;
+        border-radius: 5px;
+}
+
+#personalSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #FAC8F1;
+        border-radius: 5px;
+}
+.field{
+    margin-top: 10px;
+}
+.title{
+    width: 100%;
+    color: #C8C8C8;
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#careerSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #CA58FD;
+        border-radius: 5px;
+}
+
+#horoscopeSection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #070973;
+        border-radius: 5px;
+}
+
+#familySection{
+    margin-top: 20px; 
+        padding: 15px 15px;
+        border: 1px solid #58D1FD;
+        border-radius: 5px;
+}
+
+@media (max-width: 350px) {
+    .historyDetails{
+        position: absolute;
+        bottom: 20px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 25px;
+        border-radius: 10px;
+        }
+        .historyProfile{
+            width: 100%;
+            height: 70%;
+            border-radius: 20px;
+            position: relative;
+        }
+        .historyImage{
+            width: 100%;
+            height: 55vh;
+            border-radius: 10px;
+            object-fit: fill;
+        }
+}
+
+@media (max-width: 575px) {
+    .historyDetails{
+        position: absolute;
+        bottom: 20px;
+        background-image: linear-gradient(0deg,black,transparent);
+        word-break: break-word;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 15px 35px 15px 10px;
+        border-radius: 10px;
+        }
+        .historyProfile{
+            width: 100%;
+            height: 70%;
+            border-radius: 20px;
+            position: relative;
+        }
+        .historyImage{
+            width: 100%;
+            height: 55vh;
+            border-radius: 10px;
+            object-fit: fill;
+        }
+}

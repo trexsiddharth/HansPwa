@@ -1,0 +1,39 @@
+<div style="width: 100vw;height: 100vh;">
+    <div class="container-fluid" style="height: 50%;position: fixed;top: 0px ;padding: 0px;">
+        <div class="containerOne" style="text-align: center;">
+                <img src="../../assets/logo_144.png" alt="">
+                <h2 style="color: white;font-weight: bolder;margin-top: 10px;">Hans Matrimony</h2>
+        </div>
+    
+    </div>
+    <div class="container-fluid " style="height: 50%;background: white;position: fixed;bottom: 0px;">
+            <form  [formGroup]="phoneNumber">
+                <div class=" containerTwo full-width">
+                    <mat-form-field class="short-width" appearance="standard" style="margin-right: 10px;
+                    margin-left: 10px;">
+                        <mat-label style="color: black;">Enter Mobile Number</mat-label>
+                        <ngx-mat-intl-tel-input matInput
+                        [preferredCountries]="['in']"
+                        [enablePlaceholder]="true"
+                        [enableSearch]="true"
+                        name="phone"
+                        type="tel"
+                        formControlName="phone" #phone></ngx-mat-intl-tel-input>
+                    </mat-form-field>
+                    <img (click)="submitPhone()" src="../../assets/next.svg" class="submitImage" alt="submit">
+                    <!-- <img (click)="try()" src="../../assets/next.svg" class="submitImage" alt="submit"> -->
+                    </div>
+
+                    <div class="text-center">
+                        <!-- facebook login -->
+                        <!-- <div class="fb-login-button" scope='public_profile,email' data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="true" data-use-continue-as="false" data-width=""></div> -->
+                        <!-- <button type="button" class="btn" (click)="submitLogin()">Login with facebook</button> -->
+                    </div>
+                        </form>
+                        
+                        
+                        
+    
+        </div>
+</div>
+

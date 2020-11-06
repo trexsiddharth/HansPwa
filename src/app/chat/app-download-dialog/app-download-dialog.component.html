@@ -1,0 +1,57 @@
+<main >
+    <div class="t-c topDiv">
+        <div style="position: relative;display: inline-block;">
+            <img id="profileImage" [src]="getProfilePhoto()" alt="profle image">
+            <img style="width: 30px;
+            position: absolute;
+            bottom: 80px;
+            right: 0px;" src="../../../assets/playstore.svg" alt="google playstore">
+        </div>
+        
+        <button style="color: #737373;
+         font-size: 35px;
+         font-weight: bold; 
+         position: absolute;
+         right: 10px;
+         top: 0px;"
+         (click)="closeDialog()">
+            X
+        </button>
+        <p class="contentText boldText" style="margin-top: -55px;">
+            {{data.data.name}}
+        </p>
+    </div>
+
+    <div class="t-c">
+        <p class="contentText">
+            को आपकी पसंद उनके <span class="boldText">APP</span> पर भेज दी गयी है
+        </p>
+    </div>
+
+    <div class="t-c">
+        
+        <p class="contentText">
+            जब {{data.data.name}} आपको <span class="boldText">पसंद</span> करें तो 
+        </p>
+        <img width="40px" src="../../../assets/heartsdarkpink.svg" alt="hearts">
+        <p class="contentText">
+            <span class="boldText"> नोटिफिकेशन</span> तुरंत अपने <span class="boldText">APP</span> पर पाएं
+        </p>
+    </div>
+
+    <div>
+        <div class="t-c">
+            <button [routerLink]="['/subscription']" routerLinkActive="router-link-active"
+             (click)="openPlaystore()"  class="btn" style="background: #D313AE;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 50px;
+            border-radius: 10px;
+            margin: 20px 0px" mat-raised-button>
+                <img width="30px" src="../../../assets/playstore_white.svg" alt="google playstore"> 
+                &nbsp; | &nbsp; अभी APP डाउनलोड करें 
+            </button>
+        </div>
+    </div>
+</main>

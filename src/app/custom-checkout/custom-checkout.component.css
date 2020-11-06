@@ -1,0 +1,46 @@
+::ng-deep body{
+    background-image:none;
+    background-color: white;
+}
+mat-card {
+    background: white;
+    color: black;
+    width: 90%;
+    margin: 20px auto;
+}
+mat-card-title {
+    font-size: 20px;
+}
+::ng-deep .mat-form-field-ripple {
+    background-color:#34b7f1;
+    height: 1px;
+}
+::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline{
+    background-color: #34b7f1;
+    height: 1px;
+}
+mat-label{
+    color: black;
+}
+.btnHover:hover{
+    background: #34b7f1;
+    color: white;
+}
+.btnPaymentType{
+    text-align: start;
+width: 100%
+}
+.btnPaymentType:hover{
+    background: #34b7f1;
+    color: white;
+}
+.paymentImage{
+    width: 40px
+}
+.paytype{
+    margin-left: 10px;
+    font-weight: bolder;
+}
+hr{
+    margin: 0px;
+}
