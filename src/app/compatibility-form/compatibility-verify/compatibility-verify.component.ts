@@ -177,6 +177,7 @@ export class CompatibilityVerifyComponent implements OnInit {
     console.log('location of family', e);
   }
   onSubmitPersonal() {
+
     console.log(this.verifyForm.value);
     // console.log(this.verifyForm.valid);
     this.errors = [];
@@ -307,7 +308,6 @@ export class CompatibilityVerifyComponent implements OnInit {
   }
   approveProfileApi() {
     this.onSubmitPersonal();
-    this.fourPageService.showApproveBtn = false;
     const approveData = new FormData();
     approveData.append('id', localStorage.getItem('getListId'));
     approveData.append('auth_temp', localStorage.getItem('getListTempleId'));
@@ -388,7 +388,8 @@ export class CompatibilityVerifyComponent implements OnInit {
           // } else if (localStorage.getItem('getListId')) { // mode 2
           //   window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
           // }
-
+          
+          this.fourPageService.showApproveBtn = false;
           this.clearHistory();
         } else {
           if (data.message) {

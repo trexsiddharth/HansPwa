@@ -30,8 +30,8 @@ import {
 } from '@angular/material/';
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';
-import { ReplaySubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { map, shareReplay, startWith, takeUntil } from 'rxjs/operators';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -172,6 +172,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     fields: ['name']
   };
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
+  workingCitySubject = new BehaviorSubject<string[]>([]);
+  workingCities: Observable<any[]> = this.workingCitySubject.asObservable().pipe(shareReplay());
+
 
   constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
               public notification: NotificationsService,
@@ -195,12 +198,8 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     fourPageService.pageOneUpdated.subscribe(
       status => {
         if (status) {
-          if (!fourPageService.getProfile().about) {
             this.setAbout();
-          }
-          if (!fourPageService.getUserThrough()) {
             this.firstStep();
-          }
         }
       }
     );
@@ -268,6 +267,28 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.PageTwo.get('Working').valueChanges
+    .pipe(takeUntil(this.onDestroy))
+    .subscribe(() => {
+      this.workingCityFilter();
+    });
+  }
+
+  private workingCityFilter() {
+    console.log(this.PageTwo.value.Working);
+    if (this.PageTwo.value.Working) {
+      this.http.get<string[]>(`https://partner.hansmatrimony.com/api/getCities?search_city=${this.PageTwo.value.Working}`)
+      .subscribe(
+        (response: string[]) => {
+          console.log(response);
+          this.workingCitySubject.next(response);
+        },
+        err => {
+            console.log(err);
+        }
+      );
+    }
   }
 
   protected copyEducationGroups(educationGroups: hd[]) {
@@ -350,16 +371,22 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     this.nextClickedTwo = true;
     this.errors = [];
     console.log(this.PageTwo.value.Working);
+    let incomeCalc;
 
     if (this.PageTwo.valid) {
       if (this.PageTwo.value.AnnualIncome === '100+') {
-        this.PageTwo.value.AnnualIncome = 100;
+        incomeCalc = 100;
       } else if (this.PageTwo.value.AnnualIncome) {
         const a = this.PageTwo.value.AnnualIncome.split('-');
-        this.PageTwo.patchValue({
-          AnnualIncome: String((Number(a[0]) + Number(a[1])) / 2)
-        });
+        incomeCalc = String((Number(a[0]) + Number(a[1])) / 2);
       }
+
+      if (!this.workingCity) {
+        this.PageTwo.controls.Working.setValue(null);
+        this.ngxNotificationService.error('Select Valid Working City');
+        return;
+      }
+
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
       firststepdata.append('mobile', localStorage.getItem('mobile_number')
@@ -371,15 +398,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         ? this.PageTwo.value.Designation : this.PageTwo.value.OtherDesignation ?
           this.PageTwo.value.OtherDesignation : this.PageTwo.value.Designation);
 
-      firststepdata.append('annual_income', this.PageTwo.value.AnnualIncome);
+      firststepdata.append('annual_income', incomeCalc);
 
       firststepdata.append('working_city', this.PageTwo.value.Working);
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
-
-      if (!this.fourPageService.getUserThrough()) {
-        this.router.navigateByUrl('chat?first');
-      }
 
       if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
       && this.fourPageService.getUserThrough()) {
@@ -419,11 +442,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.spinner.hide();
           if (this.fourPageService.getUserThrough()) {
             this.updateFormTwoData(firststepdata);
-          }
-          // this.ngxNotificationService.success('Registered Successfully');
-          if (!this.fourPageService.getUserThrough()) {
+          } else {
             this.chatService.formTwoCompleted.next(true);
-            // this.router.navigateByUrl('chat?first');
+            this.router.navigateByUrl('chat?first');
             this.analyticsEvent('Four Page Registration Page Two');
           }
         } else {
@@ -470,19 +491,24 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   placeChanged() {
-    const workingCity: HTMLInputElement = document.querySelector('#workingCity');
     setTimeout(() => {
-      console.log(workingCity.value);
-      this.PageTwo.patchValue({
-        Working: workingCity.value
-      });
-      this.setAbout();
-      this.analyticsEvent('Four Page Registration Page Two Working City Changed');
-      if (this.PageTwo.valid) {
+      if (!this.workingCity) {
+        this.PageTwo.controls.Working.setValue(null);
+        this.ngxNotificationService.error('Select Valid Working City');
+      }
+    }, 500);
+  }
+
+  workingCityChanged(value) {
+   console.log('selected working city', value);
+   this.workingCity = value;
+
+   this.setAbout();
+   this.analyticsEvent('Four Page Registration Page Two Working City Changed');
+   if (this.PageTwo.valid) {
         this.fourPageService.formCompleted.emit(true);
         this.fourPageService.formTwoGroup.emit(this.PageTwo);
       }
-    }, 500);
   }
 
   changedQualification() {
