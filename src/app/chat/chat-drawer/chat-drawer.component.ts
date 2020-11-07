@@ -461,12 +461,12 @@ export class ChatDrawerComponent implements OnInit {
   getRecomendedFilters() {
     const form = new FormData();
     form.append('id', this.userId);
-    form.append('is_lead', this.userIsLead);
+    form.append('is_lead', localStorage.getItem('is_lead'));
     this.http.post('https://partner.hansmatrimony.com/api/getRecommendedPreferences', form).subscribe((response: any) => {
       if (response.count) {
         console.log(response);
         this.isWide = true;
-        if (this.countRecomended != -1) {
+        if (this.countRecomended !== -1) {
           this.countProfiles = response.count;
           this.countRecomended = response.count;
           this.setCurrentPreferenceValue(response.preference);
@@ -482,7 +482,7 @@ export class ChatDrawerComponent implements OnInit {
     console.log('getCountOfRishtey called');
     const form = new FormData();
     form.append('id', this.userId);
-    form.append('is_lead', this.userIsLead);
+    form.append('is_lead', localStorage.getItem('is_lead'));
     form.append('age_min', this.preferencesForm.value.age_min);
     form.append('age_max', this.preferencesForm.value.age_max);
     form.append('height_min', String(48 + this.Heights.indexOf(this.preferencesForm.value.height_min)));

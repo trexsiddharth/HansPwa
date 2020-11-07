@@ -43,7 +43,9 @@ export class EditPersonalDialogComponent implements OnInit {
   HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
     'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
     // tslint:disable-next-line: max-line-length
-    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other'];
+    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School','12th', 'Trade School', 'Other'];
+
+
 
   Occupation: string[] = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working'];
 
@@ -109,11 +111,11 @@ export class EditPersonalDialogComponent implements OnInit {
     'Public Relations',
     'Others'];
   constructor(private http: HttpClient,
-    public languageService: LanguageService,
-    public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data,
-    private _formBuilder: FormBuilder,
-    private ngxNotificationService: NgxNotificationService
+              public languageService: LanguageService,
+              public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) data,
+              private _formBuilder: FormBuilder,
+              private ngxNotificationService: NgxNotificationService
   ) {
     this.data = data;
 

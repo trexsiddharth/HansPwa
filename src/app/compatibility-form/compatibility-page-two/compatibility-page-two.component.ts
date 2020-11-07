@@ -696,6 +696,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       Working: userProfile.workingCity,
       About: this.setAgeIfNan(userProfile.about)
     });
+
+    if (userProfile.workingCity) {
+      this.workingCity = userProfile.workingCity;
+    }
   }
 
   setAgeIfNan(value: string) {

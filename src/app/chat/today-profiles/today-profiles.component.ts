@@ -817,12 +817,12 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     setTimeout(() => {
       if (Number(localStorage.getItem('profileCompPercent')) < 90 && this.showIndex < 40) {
         this.openPersistentDialogNew();
-      }
-      else {
+      } else {
         this.showIndex = 10;
       }
     }, 100)
   }
+  
   showIndex = 10;
   openPersistentDialogNew() {
     this.popupdata = {
