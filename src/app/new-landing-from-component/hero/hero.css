@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 .hero{
     font-family:'Poppins';
+    overflow-x: hidden;
 }
 .mobile-screen-center{
     text-align: center;
@@ -77,6 +78,27 @@ li{
     color:white;
 }
 @media only screen and (min-width:768px){
+    .stripes{
+        position:absolute;
+        left:4.5%;
+        top:27%;
+    }
+    .stripes2{
+        position:absolute;
+        left:40%;
+        bottom:-15%;
+    }
+    .stripes3{
+        position:absolute;
+        left:50%;
+        top:45%;
+    }
+    .vector-bottom{
+        position:absolute;
+        bottom: -20%;
+        width: 100px;
+        height:100px;
+    }
     .content {
         position: absolute;
         left: 35%;
@@ -89,6 +111,29 @@ li{
     }
 }
 @media only screen and (max-width:767px){
+    .stripes{
+        position:absolute;
+        width:50px;
+        height:50px;
+        left:0%;
+        top:27%;
+    }
+    .stripes2{
+        position:absolute;
+        width:50px;
+        height:50px;
+        right:0%;
+        top:10%;
+    }
+    .stripes3{
+        display:none;
+    }
+    .vector-bottom{
+        position:absolute;
+        bottom: 20%;
+        width: 50px;
+        height:50px;
+    }
     .content {
         justify-content:center;
         margin-top:80px;
@@ -102,6 +147,6 @@ li{
         height:auto;
     }
     h2{
-        font-size:30px;
+        font-size:24px;
     }
 }

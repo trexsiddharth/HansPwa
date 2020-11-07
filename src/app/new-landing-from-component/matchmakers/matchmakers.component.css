@@ -6,26 +6,6 @@
    margin-right:0px;
    overflow-x:hidden;
 }
-.slide{
-    padding:20px;
-}
-.active{
-    webkit-transform: scale(1.25);
-    -moz-transform: scale(1.25);
-    transform: scale(1.25);
-}
-.featureCard2{
-    width: 95%;
-    height: auto;
-    border-radius: 20px;
-    overflow: hidden;
-    padding: 0px;
-    object-fit: cover;
-}
-.feature2Img{
-    width: 100%;
-    height: 100%;
-}
 /* .temple-card{
     height:45vh;
     overflow:hidden;
@@ -57,6 +37,10 @@ h1{
 } */
 
 @media only screen and (max-width: 575px){
+    img{
+        border-radius:20px;
+        padding:20px;
+    }
     h1{
         font-weight:600;
         margin-bottom:60px;
@@ -69,6 +53,10 @@ h1{
     }
 }
 @media only screen and (min-width:576px){
+    img{
+        border-radius:20px;
+        padding:20px;
+    }
     .slide{
         padding:20px;
         -webkit-transform: scale(1.35);
@@ -87,32 +75,26 @@ h1{
     }
 }
 @media only screen and (min-width: 768px){
+    img{
+        border-radius:10px;
+    }
     h1{
         font-weight:600;
         margin-bottom:60px;
         font-size:5.5vw;
     }
-    .slick-center {
-        -webkit-transform: scale(0.75);
-        -moz-transform: scale(0.75);
-        transform: scale(0.75);
-    }
    
 }
 @media only screen and (min-width: 992px){
-    .slick-center {
-        -webkit-transform: scale(0.75);
-        -moz-transform: scale(0.75);
-        transform: scale(0.75);
+    img{
+        border-radius:10px;
     }
 }
 @media only screen and (min-width: 1200px){
    h1{
        font-size:3vw;
    }
-   .slick-center {
-    -webkit-transform: scale(0.75);
-    -moz-transform: scale(0.75);
-    transform: scale(0.75);
-}
+   img{
+       border-radius:10px;
+   }
 }

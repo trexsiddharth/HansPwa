@@ -53,6 +53,7 @@ import { MatchMakers } from './new-landing-from-component/matchmakers/matchmaker
 import { Testimonials } from './new-landing-from-component/testimonials/testimonials.component';
 import { TestimonialCards } from './new-landing-from-component/testimonials/testimonial-cards/testimonial-cards.component';
 import { HowItWorks } from './new-landing-from-component/howItWorks/how-it-works.component';
+import { CustomBg } from './new-landing-from-component/custom-bg/custom-bg';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +83,8 @@ import { HowItWorks } from './new-landing-from-component/howItWorks/how-it-works
     MatchMakers,
     Testimonials,
     TestimonialCards,
-    HowItWorks
+    HowItWorks,
+    CustomBg
   ],
   imports: [
     BrowserModule,

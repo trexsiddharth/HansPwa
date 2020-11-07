@@ -12,7 +12,9 @@
 @keyframes ani2{
     100%{opacity:1;}
 }
-
+button{
+    box-shadow:10px 10px 10px 2px lightgrey;
+}
 div,h1,button,h2,h3{
     font-family:'Poppins', sans-serif;
 }
