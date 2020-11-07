@@ -383,9 +383,12 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   persistentDialogOpeningLogic(shareItem, reply: string) {
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
-      reply.toLowerCase() === 'yes' && this.type === 'profile') {
-      this.itemService.openTodaysPopupAd();
-    } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
+      reply.toLowerCase() === 'yes' && this.type === 'profile' && this.itemService.isPersonalized) {
+      this.ngxNotificationService.warning('You have zero credits left for the week' );
+    } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
+    reply.toLowerCase() === 'yes' && this.type === 'profile') {
+    this.itemService.openTodaysPopupAd();
+  } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
       this.actionCount++;
       console.log('action count', this.actionCount)
       if ((this.itemService.getCredits() != null && this.itemService.getCredits().toString() !== '0') && (this.actionCount % 4 !== 0)) {
