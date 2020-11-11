@@ -13,6 +13,10 @@ import { NewHomeService } from 'src/app/new-home/new-home.service';
 })
 
 export class Kundali implements OnInit {
+  public appear:boolean;
+  mobileScreen:boolean;
+  private innerWidth: number;
+  private mobileBreakpoint = 600;
   autoComplete = {
     strictBounds: false,
     type: 'geocode',
@@ -59,6 +63,8 @@ export class Kundali implements OnInit {
     })
   }
   ngOnInit() {
+    window.addEventListener('scroll', this.scroll, true);
+    this.detectMobileScreen();
     if (localStorage.getItem('gender')) {
 
       let gender = localStorage.getItem('gender');
@@ -76,6 +82,23 @@ export class Kundali implements OnInit {
       }
     }
   }
+  scroll = (event): void => {
+    this.scrollAppear();
+  };
+  scrollAppear(){
+     let left = document.querySelector('.kundali-text');
+     let right = document.querySelector('.kundali-form');
+     let leftPosition = left.getBoundingClientRect().top;
+     let rightPosition = right.getBoundingClientRect().top;
+     let screenPosition = window.innerHeight;
+     
+     if(leftPosition<screenPosition){
+        this.appear=true;
+     
+     }else if(leftPosition>screenPosition){
+        this.appear=false;
+     }
+    }
   placeChanged(str: string) {
     const city: HTMLInputElement = document.querySelector('#' + str);
     setTimeout(() => {
@@ -155,4 +178,17 @@ export class Kundali implements OnInit {
           console.log('form invalid');
         }
       }
+      private resize(){
+        this.innerWidth = window.innerWidth;
+        return this.innerWidth
+    }
+    private detectMobileScreen() {
+        window.onload = this.resize;
+      window.onresize = this.resize;
+    if (this.resize() < this.mobileBreakpoint) {
+      this.mobileScreen=true
+    } else {
+      this.mobileScreen=false
+    }
+  }
 }

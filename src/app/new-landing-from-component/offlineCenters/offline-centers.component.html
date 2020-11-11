@@ -1,6 +1,9 @@
 <div class="match-makers">
     <div class="d-flex justify-content-center">
-        <h1>Offline Centers Network</h1>
+        <h1>Offline Centers Network
+            <hr class="one">
+        <hr class="two">
+        </h1>
     </div>
     <!-- <ngx-slick-carousel class="carousel" 
                         #slickModal="slick-carousel"                  
@@ -51,7 +54,53 @@
                 </div>
                 <p>Shree Sanatan Dharam Mandir</p>
             </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.shivTemple}} -->
+                    </span>
+                    <mat-card class="featureCard2">
+                        <img class="feature2Img"
+                            src="../../../assets/offlineCenters/center1.jpg"
+                            alt="Shiv Sai Dham Mandir">
+                    </mat-card>
+                </div>
+                <p>Shree Shiv Sai Dham Mandir</p>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.sanatanTemple}} -->
+                    </span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img" src="
+                        ../../../assets/offlineCenters/center2.jpg"
+                            alt="Sanathan Dharam Mandir">
+                    </mat-card>
+                </div>
+                <p>Shree Lakshmi Narayan Mandir</p>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.lakshmiTemple}} -->
+                    </span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img"
+                            src="../../../assets/offlineCenters/center3.jpg"
+                            alt="Lakshmi Narayan Mandir">
+                    </mat-card>
+                </div>
+                <p>Shree Sanatan Dharam Mandir</p>
+            </ng-template>
         </owl-carousel-o>
+        <!-- <div class="owl-nav">
+            <button class="owl-prev">prevs</button>
+            <button class="owl-next">nexts</button>
+        </div> -->
+        <div class="d-flex justify-content-center">
+            <button [routerLink]="['/viewCentres']" routerLinkActive="router-link-active" >Show More</button>
+        </div>
         <!-- <div style="display: flex;
         flex-direction: column;
         align-items: center;

@@ -1,12 +1,20 @@
-<h2  class="wrapper-text" >How it <span style="color:#24ADD8" >Works</span></h2>
+<div class="d-flex justify-content-center ">
+    <div class="how">
+        <h2>How it <span style="color:#24ADD8" >Works</span>
+            <hr class="one">
+            <hr class="two">
+        </h2>
+    </div>
+    
+</div>
 <div class="container">
     <div class="row">
         <div *ngIf="!iPhone5" class="col-1"></div>
-        <div class="col-5 left"><img class="img-fluid img-left" src="{{works[0].image}}"></div>
+        <div class="col-5 left"><img (scroll)="scrollAppear()" [class.left-appear]="appear" class="img-fluid img-left left-animate" src="{{works[0].image}}"></div>
         <div class="col-1">
             <div class="join"></div>
         </div>
-        <div class="col-5 right">
+        <div (scroll)="scrollAppear()" [class.right-appear]="rightAppear" class="col-5 right">
             <h3>{{works[0].header}}</h3>
             <p >Join our platform easily by providing your basic details either online or offline at the temple centres.</p>
         </div>
@@ -14,9 +22,9 @@
     <div class="row ">
         <div *ngIf="!iPhone5" class="col-1"></div>
         <div class="col-5 left">
-            <div class="right-text">
-                <h3 >{{works[1].header}}</h3>
-            <p >Profiles are verified by the matchmakers at  hans matrimony temple centres to give you the best profiles possible</p>
+            <div (scroll)="scrollAppear()" [class.left-appear]="appear1" class="right-text left-animate1">
+                <h3 >{{works[2].header}}</h3>
+            <p>Our matchmakers help you get personalised matches, verified at temples.They will share profiles on a daily/weekly basis as per your  preferences</p>
             </div>
         </div>
           
@@ -24,32 +32,32 @@
         <div class="col-1">
             <div class="join"></div>
         </div>
-        <div class="col-5">
-            <img class="img-right" src="{{works[1].image}}">
+        <div (scroll)="scrollAppear()" [class.right-appear]="rightAppear1" class="right1 col-5">
+            <img class="img-right" src="{{works[2].image}}">
         </div>
     </div>
     <div class="row">
         <div *ngIf="!iPhone5" class="col-1"></div>
-        <div class="col-5 left">
-            <img class="img-fluid img-left" src="{{works[2].image}}">
+        <div  class="col-5 left">
+            <img (scroll)="scrollAppear()" [class.left-appear]="appear2" class="img-fluid img-left left-animate2" src="{{works[3].image}}">
         </div>
           
           
         <div class="col-1">
             <div class="join"></div>
         </div>
-        <div class="col-5">
+        <div (scroll)="scrollAppear()" [class.right-appear]="rightAppear2" class="col-5 right2">
             
-            <h3>{{works[2].header}}</h3>
-            <p >Contact our matchmakers to get your personalised matches anytime. Our matchmakers will share profiles on a daily/weekly basis as per your  preferences</p>
+            <h3>{{works[3].header}}</h3>
+            <p >Choose your perfect matches and contact them by becoming our prime member in just a single tap.</p>
         </div>
     </div>
     <div class="row">
         <div *ngIf="!iPhone5" class="col-1"></div>
-        <div class="col-5 left">
-            <div class="right-text">
-                <h3>{{works[3].header}}</h3>
-            <p>Choose your perfect matches and contact them by becoming our prime member in just a single tap. </p>
+        <div (scroll)="scrollAppear()" [class.left-appear]="appear3" class="col-5 left-animate3 bottom">
+            <div  class="right-text ">
+                <h3>{{works[4].header}}</h3>
+            <p>We at Hans Matrimony are dedicated to help you find your life partner. Sign up and leave the hassle to us</p>
             </div>
         </div>
           
@@ -57,11 +65,11 @@
         <div class="col-1">
             <div class="join"></div>
         </div>
-        <div class="col-5">
-            <img class="img-right" src="{{works[3].image}}">
+        <div (scroll)="scrollAppear()" [class.right-appear]="rightAppear3" class="right3 col-5">
+            <img class="img-right" src="{{works[4].image}}">
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div *ngIf="!iPhone5" class="col-1"></div>
         <div style="margin-left:-18px;" class="col-5">
             <img class="img-fluid img-left" src="{{works[4].image}}">
@@ -71,14 +79,14 @@
         <div  class="col-1">
             <div class="join"></div>
         </div>
-        <div class="col-5">
+        <div (scroll)="scrollAppear()" [class.right-appear]="rightAppear" class="right col-5">
             
             <h3>{{works[4].header}}</h3>
             <p >We at Hans Matrimony are dedicated to help you find your life partner. Sign up and leave the hassle to us</p>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="d-flex justify-content-center">
-    <button (click)="goToCompatibility()" >Register For Free</button>
+    <button class="bn" (scroll)="scrollAppear()" [class.left-appear]="btnA" (click)="goToCompatibility()" >Register For Free</button>
 </div>
   

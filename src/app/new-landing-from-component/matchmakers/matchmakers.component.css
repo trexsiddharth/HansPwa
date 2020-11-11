@@ -5,7 +5,17 @@
    margin-left:0px;
    margin-right:0px;
    overflow-x:hidden;
+   /* background-image:url('../../../assets/carousel/bg.svg');
+   background-size:cover; */
 }
+h1{
+    background-image:url('../../../assets/sparkles/sparkles.svg');
+    background-size: cover;
+}
+/* .owl-item.ng-tns-c16-4.ng-trigger.ng-trigger-autoHeight.ng-star-inserted.active.center {
+    transform: scale(0.75);
+} */
+
 /* .temple-card{
     height:45vh;
     overflow:hidden;
@@ -37,6 +47,14 @@ h1{
 } */
 
 @media only screen and (max-width: 575px){
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
     img{
         border-radius:20px;
         padding:20px;
@@ -91,6 +109,26 @@ h1{
     }
 }
 @media only screen and (min-width: 1200px){
+    .owl-carousel.owl-drag .owl-item {
+        -webkit-transform: scale(0.95);
+        -moz-transform: scale(0.75);
+        transform: scale(0.75);
+    }
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
+    .match-makers{
+        font-family:'Poppins', sans-serif;
+        margin-top:10vw;
+        margin-left:0px;
+        margin-right:0px;
+        overflow-x:hidden;
+     }
    h1{
        font-size:3vw;
    }

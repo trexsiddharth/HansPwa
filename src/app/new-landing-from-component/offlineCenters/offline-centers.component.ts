@@ -36,8 +36,11 @@ export class OfflineCenters implements OnInit {
       loop: true,
       autoplay: true,
       center: true,
-      dots: true,
+      dots: false,
       autoWidth: true,
+      nav:true,
+      navText: [`<img src='../../../assets/offlineCenters/arrowLeft.svg'>`,`<img  src='../../../assets/offlineCenters/arrowRight.svg'>`],
+      margin:40,
       // merge: true,
       // mergeFit: true,
       responsive: {

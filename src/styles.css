@@ -2,7 +2,9 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import 'assets/scss/modules/_fonts.scss';
 
-
+::-webkit-scrollbar{
+  display:none;
+}
 html, body { height: 100%; }
 body {
     margin: 0; font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 

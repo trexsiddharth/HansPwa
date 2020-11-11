@@ -2,10 +2,32 @@
 .kundali{
     margin-top:5.2vw;
     font-family:'Poppins', sans-serif;
+    overflow-x:hidden;
+    padding-bottom:20px;
+}
+.kundali-text{
+    opacity:0;
+    transform:translateY(300px);
+    transition:1s all ease-in-out;
+}
+.kundali-form{
+    opacity:0;
+    transform:translateY(200px);
+    transition:0.5s all ease-in-out;
+}
+.appear{
+    opacity:1;
+    transform:translate(0px);
+}
+.text-center{
+    text-align:center;
 }
 h1{
     font-weight:600;
     font-family:'Poppins', sans-serif;
+}
+h2{
+    font-weight:bolder;
 }
 form{ 
     margin-top:20px;
@@ -27,9 +49,9 @@ button{
     font-weight:600;
     border-radius:7px;
 }
-p{
+/* p{
     font-weight:600;
-}
+} */
 input{
     margin-bottom:10px;
 }
@@ -38,9 +60,22 @@ input{
         margin-top:15vw;
         font-family:'Poppins', sans-serif;
     }
+    .p-holder{
+        padding:0px 20px;
+    }
     h1{
         font-weight:600;
         font-size:5.5vw;
+    }
+    h3{
+        font-size:4.5vw;
+        font-weight:bold; 
+    }
+    h2{
+        font-size:28px;
+    }
+    p{
+        font-size:14px;
     }
     form{ 
         margin-top:20px;
@@ -61,8 +96,14 @@ input{
         font-weight:600;
         border-radius:7px;
     }
+    .kundali-text{
+        margin-top:10px;
+    }
 }
 @media only screen and (min-width:576px){
+    .kundali-text{
+        margin-top:10px;
+       }
     h1{
         font-weight:600;
         margin-bottom:60px;
@@ -80,9 +121,15 @@ input{
     }
 }
 @media only screen and (min-width: 768px){
+    .kundali-text{
+        margin-top:100px;
+       }
    
 }
 @media only screen and (min-width: 992px){
+    .kundali-text{
+        margin-top:100px;
+       }
     
 }
 @media only screen and (min-width: 1200px){
@@ -91,5 +138,8 @@ input{
    }
    h1{
     font-size:2.5vw;
+   }
+   .kundali-text{
+    margin-top:150px;
    }
 }

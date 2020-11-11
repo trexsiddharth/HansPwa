@@ -4,6 +4,9 @@
     margin-top:5.2vw;
     overflow-x:hidden;
 }
+.imgbox{
+    z-index:-1;
+}
 h4{
     font-family:'Poppins', sans-serif;
 }
@@ -31,6 +34,8 @@ h1{
     color:black;
     font-size:3.5vw;
     font-family:'Poppins', sans-serif;
+    background-image:url('../../../assets/sparkles/sparkles.svg');
+    background-size: cover;
 }
 h2{
     font-family:'Poppins', sans-serif;
@@ -41,6 +46,7 @@ h4{
 }
 .footer-bottom{
     background-image: url('../../../assets/footer/footer.jpg');
+    z-index:100;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -145,6 +151,9 @@ p{
     }
 }
 @media only screen and (min-width: 768px){
+    .links{
+        display:flex;
+    }
     h1{
         font-weight:bolder;
         color:black;

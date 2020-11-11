@@ -1,13 +1,17 @@
-<div class="hero">
-    <img class="vector-bottom" src="../../../assets/hero/VectorBottom.svg" alt="">
+<div @fade class="hero">
+    
+    <div id="vectors">
+    <img src="../../../assets/hero/VectorBottom.svg" alt="" class="vector-bottom">
     <img src="../../../assets/hero/stripes.svg" alt="" class="stripes">
-    <img src="../../../assets/hero/stripes2.svg" alt="" class="stripes2">
-    <img src="../../../assets/hero/stripes3.svg" alt="" class="stripes3">
+    <img id="o" src="../../../assets/hero/stripes2.svg" alt="" class="stripes2">
+    <img id="t" src="../../../assets/hero/stripes3.svg" alt="" class="stripes3">
+    </div>
+    
      <!-- <app-main-nav></app-main-nav> -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
             <a class="navbar-brand" href="#">
                 <div class="logo-holder">
-                    <img class="logo mr-3 img-fluid" src="../../../assets/hero/logo.svg" alt="">
+                    <img class="logo mr-3 img-fluid" src="../../../assets/hero/logoOld.png" alt="">
                     <img class="logo-text" src="../../../assets/hero/text.svg" alt="">
                 </div>
             </a>
@@ -26,16 +30,19 @@
                   <a class="nav-link" href="contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
+                    <a class="nav-link" [routerLink]="['/phone-number']"
+                    routerLinkActive="router-link-active" href="login">Login</a>
                 </li>
                 <li class="nav-item">
                     <a (click)="downloadApp()" >
                         <img class="googleplay" src="../../../assets/newAppIllustrations/googleplay.jpg" alt="">
                     </a>
                 </li>
+                
               </ul>
             </div>
-          </nav>
+          </nav> -->
+          <navBar></navBar>
           <div class="container">
             
               <div class="row">
@@ -49,7 +56,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <p>Searching a</p>
-                                    <div class="d-flex">
+                                    <div class="d-flex button-holder">
                                         <button (click)="groomToggle()" [class.groom-btn]="groom" [class.bride-btn]="bride" >Groom</button>
                                         <button (click)="brideToggle()" [class.groom-btn]="bride" [class.bride-btn]="groom">Bride</button>
                                     </div>
@@ -57,18 +64,20 @@
                                 <div class="col-6">
                                     <p>For</p>
                                     <div class="d-flex">
+                                       <div class="dr-bt">
                                         <button type="button" class="myself-btn">{{name}}</button>
-                                                <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-                                                    <button class="down" ngbDropdownToggle></button>
-                                                    <div class="dropdown-menu" ngbDropdownMenu>
-                                                    <button #myself (click)="mySelf(myself.id)" id="myself" ngbDropdownItem>Myself</button>
-                                                    <button *ngIf="groom" #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
-                                                    <button *ngIf="bride" #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
-                                                    <button  *ngIf="bride" #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
-                                                    <button *ngIf="groom" #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
-                                                    <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
-                                                    </div>
-                                                </div>
+                                        <div class="btn-group dropup" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                                            <button class="down" ngbDropdownToggle></button>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                            <button #myself (click)="mySelf(myself.id)" id="myself" ngbDropdownItem>Myself</button>
+                                            <button *ngIf="groom" #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
+                                            <button *ngIf="bride" #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
+                                            <button  *ngIf="bride" #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
+                                            <button *ngIf="groom" #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
+                                            <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
+                                            </div>
+                                        </div>
+                                       </div>
 
                                     </div>
                                 </div>
@@ -85,49 +94,64 @@
                   <div *ngIf="!smallScreen" class="col-md-6">
                       <img class="illustration img-fluid" src="../../../assets/hero/illsvg.svg" alt="">
                   </div>
-                  <div *ngIf="smallScreen" class="col-md-6">
-                    <img class="illustration img-fluid" src="../../../assets/hero/illsvg.svg" alt="">
+                </div> 
                 </div>
-                  <div *ngIf="smallScreen" class="col-md-6">
-                    <div class="content">
-                        <h2 style="text-align:center;" ><span style="font-weight:bold">Verified</span> matches from <br> <span style="font-weight:bold">50+ Temples</span>
-                        </h2>
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p>Searching a</p>
-                                    <div class="d-flex">
-                                        <button (click)="groomToggle()" [class.groom-btn]="groom">Groom</button>
-                                        <button (click)="brideToggle()" [class.groom-btn]="bride">Bride</button>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <p>For</p>
-                                    <div class="d-flex">
-                                        <button type="button" class="myself-btn">{{name}}</button>
-                                                <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-                                                    <button class="down" ngbDropdownToggle></button>
-                                                    <div class="dropdown-menu" ngbDropdownMenu>
-                                                    <button #myself (click)="mySelf(myself.id)" id="myself" ngbDropdownItem>Myself</button>
-                                                    <button #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
-                                                    <button #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
-                                                    <button #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
-                                                    <button #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
-                                                    <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
-                                                    </div>
-                                                </div>
-
-                                    </div>
-                            </div>
-                        </div>
+                  <div class="mobileScreen" >
+                    <div *ngIf="smallScreen" >
                         <div class="d-flex justify-content-center">
-                            <button (click)="goToCompatibility()"
-                            routerLinkActive="router-link-active" 
-                            class="register-btn">Register For Free</button>
+                            <img class="illustration img-fluid" src="../../../assets/hero/illsvg.svg" alt="">
                         </div>
                     </div>
+                      <div *ngIf="smallScreen">
+                        <div>
+                            <h2 style="text-align:center;" ><span style="font-weight:bold">Verified</span> matches from <br> <span style="font-weight:bold">50+ Temples</span>
+                            </h2>
+                            <hr>
+                            <div class="d-flex justify-content-center">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-1"></div>
+                                        <div class="col-5">
+                                            <p>Searching a</p>
+                                            <div class="d-flex btn-holder">
+                                                <button (click)="groomToggle()" [class.groom-btn]="groom">Groom</button>
+                                                <button (click)="brideToggle()" [class.groom-btn]="bride">Bride</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            
+                                                <p id="paragraph" >For</p>
+                                                                                  
+                                            <div class="d-flex justify-content-center">
+                                                
+                                                <div class="dr-bt">
+                                                    <button type="button" class="myself-btn">{{name}}</button>
+                                                        <div class="btn-group" placement="top" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                                                            <button class="down" ngbDropdownToggle></button>
+                                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                            <button #myself (click)="mySelf(myself.id)" id="myself" ngbDropdownItem>Myself</button>
+                                                            <button #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
+                                                            <button #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
+                                                            <button #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
+                                                            <button #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
+                                                            <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
+                                                            </div>
+                                                        </div>
+                                                </div>
+        
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button (click)="goToCompatibility()"
+                                    routerLinkActive="router-link-active" 
+                                    class="register-btn">Register For Free</button>
+                                </div>
+                            </div>
+                            </div>
+                      </div>
                   </div>
-              </div>
-          </div>
-    </div>  
+                  </div>
+         
+     
+</div>

@@ -3,31 +3,113 @@
         <app-feature-cards [features]="feature"></app-feature-cards>
     </div>
 </div> -->
-<div @fade class="d-flex justify-content-center features">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="d-flex justify-content-center">
-                    <img src="../../../assets/featuresIllustrations/illustration1.jpg" alt="">
+<div id="us" class="whyus">
+   <div class="why-us-header">
+    <!-- <img src="../../../assets/featuresIllustrations/sparkle1.jpg" alt="" class="sparkles sparkle1">
+    <img src="../../../assets/featuresIllustrations/sparkle2.jpg" alt="" class="sparkles sparkle2">
+    <img src="../../../assets/featuresIllustrations/sparkle3.jpg" alt="" class="sparkles sparkle3">
+    <img src="../../../assets/featuresIllustrations/sparkle4.jpg" alt="" class="sparkles sparkle4"> -->
+    <div class="d-flex justify-content-center">
+        <div class="header">
+            <h1 style="font-weight: bold;">
+            
+                Why  <span style="color:#24ADD8" >Us?</span> 
+                <hr class="one">
+                <hr class="two">
+            </h1>
+        </div>
+        <!-- <img id="y" src="../../../assets/featuresIllustrations/whyusheader.png" alt=""> -->
+    </div>
+   </div>
+    <div *ngIf="!mobileScreen" @fade class="d-flex justify-content-center features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 feature-card-container">
+                    <div class="feature-card-holder">
+                        <div class="d-flex justify-content-center">
+                            <img src="../../../assets/featuresIllustrations/ill1.jpg" alt="">
+                        </div>
+                        <p>More than <span style="font-weight:bolder">50,000 </span>
+                             <br>suitable matches </p>
+                    </div>
                 </div>
-                <p>Verified matches from <br><span style="font-weight:bold">50+ temples</span> in india </p>
-            </div>
-            <div class="col-md-4">
-                <div class="d-flex justify-content-center">
-                    <img src="../../../assets/featuresIllustrations/illustration2.jpg" alt="">
+                <div class="col-md-4 feature-card-container">
+                   <div class="feature-card-holder">
+                    <div class="d-flex justify-content-center">
+                        <img src="../../../assets/featuresIllustrations/ill2.svg" alt="">
+                    </div>
+                    <p>Get Your <span style="font-weight:bolder">Personal Matchmaker</span>
+                        
+                       <br>from 1000+Matchmakers </p>
+                   </div>
                 </div>
-                <p>More than <span style="font-weight:bold">50,000 </span>
-                     <br>suitable matches </p>
-            </div>
-            <div class="col-md-4">
-                <div class="d-flex justify-content-center">
-                    <img src="../../../assets/featuresIllustrations/illustration3.jpg" alt="">
+                <div class="col-md-4 feature-card-container ">
+                    <div class="feature-card-holder">
+                        <div class="d-flex justify-content-center">
+                            <img src="../../../assets/featuresIllustrations/ill3.jpg" alt="">
+                        </div>
+                        <p>Verified matches from <br><span style="font-weight:bolder">50+ temples</span> in india </p>
+                    </div>
                 </div>
-                <p>Get Your <span style="font-weight:bold">Personal Matchmaker</span>
-                    
-                   <br>from 1000+Matchmakers </p>
             </div>
         </div>
     </div>
+    <div *ngIf="mobileScreen"  class="carousel-div">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.sanatanTemple}} -->
+                    </span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img" src="
+                        ../../../assets/featuresIllustrations/ill2.svg"
+                            alt="Sanathan Dharam Mandir">
+                    </mat-card>
+                </div>
+                <p>Get Your <span style="font-weight:bolder">Personal Matchmaker</span>
+                        
+                    <br>from 1000+Matchmakers </p>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+
+                    <div class="temple-card text-shadow">
+                        <span class="temple-name">
+                            <!-- {{languageService.homeLang.shivTemple}} -->
+                        </span>
+                        <mat-card class="featureCard2">
+                            <img class="feature2Img"
+                                src="../../../assets/featuresIllustrations/ill1.jpg"
+                                alt="Shiv Sai Dham Mandir">
+                        </mat-card>
+                    </div>
+                    <p>More than <span style="font-weight:bolder">50,000 </span>
+                        <br>suitable matches </p>
+            </ng-template>
+            <ng-template class="slide" carouselSlide>
+                <div class="temple-card text-shadow">
+                    <span class="temple-name">
+                        <!-- {{languageService.homeLang.lakshmiTemple}} -->
+                    </span>
+                    <mat-card class=" featureCard2">
+                        <img class="feature2Img"
+                            src="../../../assets/featuresIllustrations/ill3.jpg"
+                            alt="Lakshmi Narayan Mandir">
+                    </mat-card>
+                </div>
+                <p>Verified matches from <br><span style="font-weight:bolder">50+ temples</span> in india </p>
+            </ng-template>
+        </owl-carousel-o>
+        <!-- <div style="display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;">
+            <a [routerLink]="['/viewCentres']" routerLinkActive="router-link-active"
+                style="color:white;text-decoration: none;font-size: 1.2rem;font-weight: bold;">
+                {{languageService.homeLang.showMore}}
+            </a>
+        </div> -->
+    </div>
 </div>
+
     

@@ -4,16 +4,33 @@ h1{
     font-weight:bolder;
     margin-bottom:60px;
     font-family:'Poppins', sans-serif;
+    background-image:url('../../../assets/sparkles/sparkles.svg');
+    background-size: cover;
 }
 .match-makers{
     overflow-x:hidden;
+    /* background-image:url('../../../assets/offlineCenters/bg.jpg'); */
+    background-size:cover;
 }
-
+.prev{
+  
+}
+.owl-next{
+    background-color:transparent;
+    width:30px;
+}
+button{
+    border:none;
+    font-family:'Poppins', sans-serif;
+    padding:10px;
+    border-radius:10px;
+    margin-top:20px;
+}
 .slide{
     padding:20px;
 }
 .featureCard2{
-    width: 95%;
+    width: 80%;
     height: auto;
     border-radius: 20px;
     overflow: hidden;
@@ -46,6 +63,22 @@ p{
     margin-top:20px;
 }
 @media only screen and (max-width: 575px){
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
+    .featureCard2{
+        width: 80%;
+        height: auto;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 0px;
+        object-fit: cover;
+    }
     h1{
         font-weight:600;
         margin-bottom:60px;
@@ -141,6 +174,14 @@ p{
      }
 }
 @media only screen and (min-width: 1200px){
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
    h1{
        font-size:2.5vw;
        margin-bottom:60px;
@@ -161,7 +202,7 @@ p{
 }
 .match-makers{
     font-family:'Poppins', sans-serif;
-    margin-top:10vw;
+    margin-top:2vw;
     margin-left:0px;
     margin-right:0px;
  }

@@ -18,8 +18,12 @@ export class MatchMakers implements OnInit {
       loop: true,
       autoplay: true,
       center:true,
-      dots: true,
-      margin:80,
+      dots: false,
+      nav:true,
+      navText: [`<img src='../../../assets/offlineCenters/arrowLeft.svg'>`,`<img  src='../../../assets/offlineCenters/arrowRight.svg'>`],
+      // items:6,
+      // margin:80,
+      // nav:true,
       responsive: {
         0: {
           items: 1,

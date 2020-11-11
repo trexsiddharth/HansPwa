@@ -5,13 +5,15 @@
 }
 
 .testimonials{
-    margin-top:18.625vw;
+    margin-top:8vw;
     font-family:'Poppins', sans-serif;
 }
 h1{
     margin-bottom:20px;
     font-weight:bolder;
     font-family:'Poppins', sans-serif;
+    background-image:url('../../../assets/sparkles/sparkles.svg');
+    background-size: cover;
 }
 .container{
     margin:6.25vw 20px;

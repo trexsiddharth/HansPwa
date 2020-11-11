@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormBuilder } from '@angular/forms';
+import { FormGroup,FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { fade, landing } from '../animations.js';
+import * as AOS from 'aos';
 @Component({
     selector: 'hero',
     templateUrl: './hero.html',
-    styleUrls: ['./hero.css']
+    styleUrls: ['./hero.css'],
+    animations:[
+      fade,landing
+    ]
 })
 
 export class Hero implements OnInit {
+  mode = new FormControl('over');
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
     name:string="Myself";
     info:any=[];
     bride:boolean=true;
@@ -17,7 +24,7 @@ export class Hero implements OnInit {
     isCollapsed:boolean;
     smallScreen: boolean;
     private innerWidth: number;
-    private mobileBreakpoint = 768;
+    private mobileBreakpoint = 1025;
     currentGender = "Boy's";
     constructor(public router: Router,private form_builder: FormBuilder,private itemService: FindOpenHistoryProfileService) {
         this.isCollapsed=true;
@@ -57,10 +64,10 @@ export class Hero implements OnInit {
     getName(){
     }
     mySelf(id){
-      console.log(document.getElementById(id).innerHTML);
       this.name=document.getElementById(id).innerHTML;
     }
     ngOnInit() {
+      AOS.init();
       this.mobileScreen();
       if (localStorage.getItem('gender')) {
         

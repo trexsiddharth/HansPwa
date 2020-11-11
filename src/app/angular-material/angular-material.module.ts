@@ -26,7 +26,7 @@ import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
      // important !!! AIzaSyCU-ZHkKEBJgfbcotGjEqrsU6C2aB9tDj4 // old api
   AgmCoreModule.forRoot({
     apiKey: 
-    'AIzaSyDw0R0Hb_DiVfM0VgZLBr9ZwjowFwu8RSY',
+    'AIzaSyDxD0PlzfG7pAEDY0-p8vPbXKDgjCKFj1o',
     libraries: ['places']
   }),
   MatGoogleMapsAutocompleteModule.forRoot(),

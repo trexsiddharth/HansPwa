@@ -33,7 +33,7 @@ export const works = [
         details1:"Profiles are verified by the matchmakers at",
         details2:"hans matrimony temple centres to give you the",
         details3:" best profiles possible",
-        image:'../../assets/howItWorksIllustrations/illustration2.jpg',
+        image:'../../assets/howItWorksIllustrations/illustration4.jpg',
         flex:"row-reverse"
     },
     {   
@@ -51,7 +51,7 @@ export const works = [
         header:"Contact profiles you like",
         details1:"Choose your perfect matches and contact them by",
         details2:"becoming our prime member in just a single tap.",
-        image:'../../assets/howItWorksIllustrations/illustration4.jpg',
+        image:'../../assets/howItWorksIllustrations/illustration2.jpg',
         flex:"row-reverse"
     },
     {   
