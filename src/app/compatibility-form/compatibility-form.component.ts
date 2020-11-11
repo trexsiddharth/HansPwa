@@ -207,11 +207,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
   }
   ngAfterViewChecked() {
-    if (this.fourPageService.getUserThrough()) {
-      this.mainContainerId = 'sd';
-    }
+  
   }
   async ngOnInit() {
+    
 
     if (localStorage.getItem('RegisterNumber')) {
 
@@ -244,9 +243,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     );
     this.fourPageService.formTwoGroup.subscribe(
       (formGroup) => {
-        console.log(formGroup);
         if (formGroup) {
-          console.log(formGroup);
           this.PageTwo = formGroup;
         }
       }
@@ -398,7 +395,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
                 break;
               }
             }
-            console.log(this.photos);
           }
         }, (error: any) => {
           console.log('error occurred occurred while fetchignthe photos');
@@ -435,6 +431,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     // this.PageOne.get('Relation').valueChanges.subscribe((value) => {
     //   this.setGender();
     // });
+
+    if (this.fourPageService.getUserThrough()) {
+      this.mainContainerId = 'sd';
+    }
+
   }
   generateRandomIndices(j) {
     this.photoIndices = [];
@@ -1089,7 +1090,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.userProfile.occupation = profileData.profile.occupation;
     this.userProfile.designation = profileData.profile.profession;
     this.userProfile.workingCity = profileData.profile.working_city;
-    
     this.userProfile.about = profileData.profile.about;
 
     this.userProfile.birthPlace = profileData.profile.birth_place;

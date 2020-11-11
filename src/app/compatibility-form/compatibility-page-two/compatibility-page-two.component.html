@@ -106,7 +106,8 @@
     <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Working City</mat-label>
-      <input type="text" matInput id="workingCity" (change)="placeChanged()" formControlName="Working" [matAutocomplete]="Working">
+      <input type="text" matInput formControlName="Working"
+       id="workingCity" (change)="placeChanged()" [matAutocomplete]="Working">
       <mat-autocomplete (optionSelected)='workingCityChanged($event.option.value)' autoActiveFirstOption
         #Working="matAutocomplete">
         <mat-option *ngFor="let cities of workingCities | async" [value]="cities" required>

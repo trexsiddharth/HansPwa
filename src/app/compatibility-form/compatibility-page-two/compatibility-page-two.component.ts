@@ -181,19 +181,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
               public fourPageService: FourPageService,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
               public chatService: ChatServiceService) {
-    this.PageTwo = this.formBuilder.group({
-      // tslint:disable-next-line: max-line-length
-      Qualification: ['', Validators.compose([Validators.required])],
-      QualificationCtrl: [''],
-      Occupation: ['', Validators.compose([Validators.required])],
-      Designation: [''],
-      DesignationCtrl: [''],
-      OtherDesignation: [''],
-      AnnualIncome: ['', Validators.compose([Validators.required])],
-      Working: ['', Validators.compose([Validators.required])],
-      About: [''],
-      abroad: ['']
-    });
 
     fourPageService.pageOneUpdated.subscribe(
       status => {
@@ -211,12 +198,26 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.PageTwo = this.formBuilder.group({
+      // tslint:disable-next-line: max-line-length
+      Qualification: ['', Validators.compose([Validators.required])],
+      QualificationCtrl: [''],
+      Occupation: ['', Validators.compose([Validators.required])],
+      Designation: [''],
+      DesignationCtrl: [''],
+      OtherDesignation: [''],
+      AnnualIncome: ['', Validators.compose([Validators.required])],
+      Working: ['', Validators.compose([Validators.required])],
+      About: [''],
+      abroad: ['']
+    });
+
     // if user can pass through is true
     this.fourPageService.userThroughStatusUpdated.subscribe(
       (status: boolean) => {
         if (status) {
           if (this.PageTwo) {
-            console.log('user get through', status, this.PageTwo);
+            console.log('user get through', status);
             this.fourPageService.formTwoGroup.emit(this.PageTwo);
           }
         }
@@ -254,6 +255,13 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         this.filterDesignation();
       });
 
+    this.PageTwo.get('Working').valueChanges
+    .pipe(takeUntil(this.onDestroy))
+    .subscribe(() => {
+      this.workingCityFilter();
+    });
+
+
 
     // if user can get through and profile data has been retrieved
     this.fourPageService.getListData.subscribe(
@@ -267,12 +275,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         }
       }
     );
-
-    this.PageTwo.get('Working').valueChanges
-    .pipe(takeUntil(this.onDestroy))
-    .subscribe(() => {
-      this.workingCityFilter();
-    });
   }
 
   private workingCityFilter() {
@@ -729,11 +731,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   // change PageTwo Form with no required fields
   setFormForGetUserThrough() {
     this.PageTwo = this.formBuilder.group({
-      // tslint:disable-next-line: max-line-length
       Qualification: [''],
       QualificationCtrl: [''],
       Occupation: [''],
       Designation: [''],
+      DesignationCtrl: [''],
       OtherDesignation: [''],
       AnnualIncome: ['', Validators.max(999)],
       Working: [''],
@@ -748,6 +750,19 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.filterEducationGroups();
       });
+
+          // listen for search field value changes
+    this.PageTwo.controls.DesignationCtrl.valueChanges
+    .pipe(takeUntil(this.onDestroy))
+    .subscribe(() => {
+      this.filterDesignation();
+    });
+
+    this.PageTwo.get('Working').valueChanges
+  .pipe(takeUntil(this.onDestroy))
+  .subscribe(() => {
+    this.workingCityFilter();
+  });
   }
 
 }
