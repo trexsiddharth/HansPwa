@@ -5,6 +5,7 @@
     overflow-y: hidden;
     padding-bottom:20px;
     height:100%;
+    width:100%;
 }
 .mobileScreen{
     width: 100%;
@@ -12,10 +13,14 @@
 }
 .illustration{
     margin-top:-20px;
+    object-fit: contain;
 }
 .button-holder{
-    background-color:#EBF7FC;
+    background-color:lightgray;
     border-radius:10px;
+}
+.btn{
+    background-color:lightgray;
 }
 button:hover{
     color:black;
@@ -25,7 +30,7 @@ button:hover{
     background-color:#EBF7FC;
 } */
 .dr-bt{
-    background-color:#EBF7FC;
+    background-color:lightgray;
     border-radius:10px;
     /* z-index:100; */
 }
@@ -103,7 +108,7 @@ li{
     width:200px;
     height:40px;
     border:none;
-    background-color:#EBF7FC;
+    background-color:lightgray;
     border-radius:10px;
     color:black;
 }
@@ -119,6 +124,7 @@ li{
     border:none;
     border-radius:5px;
     width:40px;
+    background-color:lightgray;
 }
 .register-btn{
     width:250px;
@@ -129,7 +135,17 @@ li{
     border-radius:10px;
     color:white;
 }
+@media only screen and (min-width:1600px){
+    .illustration{{
+        width:1000px;
+        height:1000px;
+    }}
+    
+}
 @media only screen and (min-width:768px){
+    .illustration{
+        width:100%;
+    }
     .stripes{
         position:absolute;
         left:4.5%;
@@ -163,6 +179,10 @@ li{
     }
 }
 @media only screen and (max-width:767px){
+    button:hover{
+        color:black;
+        box-shadow:10px 10px 10px 2px lightgrey;
+    }
     .illustration{
         width:80%;
         height:auto;
@@ -182,7 +202,7 @@ li{
         width:100px;
         height:35px;
         border:none;
-        background-color:#EBF7FC;
+        background-color:lightgray;
         border-radius:10px;
         color:black;
     }
@@ -204,7 +224,7 @@ li{
         color:white;
     }
     .btn-holder{
-        background-color:#EBF7FC;
+        background-color:lightgray;
         border-radius:10px;
     }
     .stripes{
@@ -244,5 +264,86 @@ li{
     }
     h2{
         font-size:20px;
+    }
+}
+@media only screen and (max-width:380px){
+    .groom-btn{
+        width:75px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .bride-btn{
+        width:75px;
+        height:35px;
+        border:none;
+        background-color:lightgray;
+        border-radius:10px;
+        color:black;
+    }
+    .myself-btn{
+        width:75px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .register-btn{
+        width:200px;
+        height:35px;
+        border:none;
+        margin-top:20px;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .btn-holder{
+        background-color:lightgray;
+        border-radius:10px;
+    }
+}
+@media only screen and (max-width:330px){
+    button{
+        font-size:10px;
+    }
+    .groom-btn{
+        width:50px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .bride-btn{
+        width:50px;
+        height:35px;
+        border:none;
+        background-color:lightgray;
+        border-radius:10px;
+        color:black;
+    }
+    .myself-btn{
+        width:50px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .register-btn{
+        width:200px;
+        height:35px;
+        border:none;
+        margin-top:20px;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .btn-holder{
+        background-color:lightgray;
+        border-radius:10px;
     }
 }

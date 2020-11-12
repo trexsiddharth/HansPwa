@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div *ngIf="!iPhone5" class="col-1"></div>
-        <div class="col-5 left"><img (scroll)="scrollAppear()" [class.left-appear]="appear" class="img-fluid img-left left-animate" src="{{works[0].image}}"></div>
+        <div class="col-5 left"><img (scroll)="scrollAppear()" [class.left-appear]="appear" class="img-fluid img-left left-animate" src="{{works[0].image}}" alt="hansmatrimony-how-it-works-illustration1"></div>
         <div class="col-1">
             <div class="join"></div>
         </div>
@@ -33,13 +33,13 @@
             <div class="join"></div>
         </div>
         <div (scroll)="scrollAppear()" [class.right-appear]="rightAppear1" class="right1 col-5">
-            <img class="img-right" src="{{works[2].image}}">
+            <img class="img-right" src="{{works[2].image}} " alt="hansmatrimony-how-it-works-illustration2" >
         </div>
     </div>
     <div class="row">
         <div *ngIf="!iPhone5" class="col-1"></div>
         <div  class="col-5 left">
-            <img (scroll)="scrollAppear()" [class.left-appear]="appear2" class="img-fluid img-left left-animate2" src="{{works[3].image}}">
+            <img (scroll)="scrollAppear()" [class.left-appear]="appear2" class="img-fluid img-left left-animate2" src="{{works[3].image}}"  alt="hansmatrimony-how-it-works-illustration3">
         </div>
           
           
@@ -55,7 +55,7 @@
     <div class="row">
         <div *ngIf="!iPhone5" class="col-1"></div>
         <div (scroll)="scrollAppear()" [class.left-appear]="appear3" class="col-5 left-animate3 bottom">
-            <div  class="right-text ">
+            <div class="right-text ">
                 <h3>{{works[4].header}}</h3>
             <p>We at Hans Matrimony are dedicated to help you find your life partner. Sign up and leave the hassle to us</p>
             </div>
@@ -63,10 +63,10 @@
           
           
         <div class="col-1">
-            <div class="join"></div>
+            <div class="join iPhone5Join"></div>
         </div>
         <div (scroll)="scrollAppear()" [class.right-appear]="rightAppear3" class="right3 col-5">
-            <img class="img-right" src="{{works[4].image}}">
+            <img class="img-right" src="{{works[4].image}}" alt="hansmatrimony-how-it-works-illustration4" >
         </div>
     </div>
     <!-- <div class="row">

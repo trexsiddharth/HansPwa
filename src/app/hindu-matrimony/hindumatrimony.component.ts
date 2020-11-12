@@ -12,7 +12,7 @@ export class HinduMatrimonyComponent implements OnInit {
     private titleService:Title,
     private meta:Meta
   ) {
-      this.titleService.setTitle('');
+      this.titleService.setTitle('Hindu Matrimony | Hindu Matrimony Site | Hans Matrimony');
       this.meta.addTag({name:'title',content:'Hindu Matrimony | Hindu Matrimony Site | Hans Matrimony'});
       this.meta.addTag({name:'description',content:'Find your ideal Gujarati Brides / Grooms for Matrimony on Hans Matrimony. We provide millions of verified profiles and the Safe & Secured Gujarati Matrimony Site. Register FREE.'});
       this.meta.addTag({name:'Keywords',content:'Hindu Matrimony, Hindu Matrimony Site'})

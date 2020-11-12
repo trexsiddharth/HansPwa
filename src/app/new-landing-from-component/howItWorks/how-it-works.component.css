@@ -101,25 +101,11 @@ h3{
     font-weight:600;
 }
 @media only screen and (max-width: 330px){
-    
-    /* .right-appear{
-        opacity:1;
-        transform:translate(0px);
-    }
-    .left-appear{
-        opacity:1;
-        transform:translate(0px);
-    } */
     .left{
         border-right:1px dashed #24ADD8;
         margin-left:4px;
-        opacity:0;
+        opacity:1;
     }
-    /* .right{
-        opacity:0;
-        transform:translateY(20px);
-        transition:2s all ease-in-out;
-    } */
     button{
         margin-bottom:100px;
         width: 200px;
@@ -171,6 +157,9 @@ h3{
     .googleplay{
         height:80px;
         width:200px;
+    }
+    .iPhone5Join{
+        margin-left:-4.5vw !important;
     }
     
 }

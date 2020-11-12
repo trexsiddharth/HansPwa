@@ -1,13 +1,15 @@
 .logo{
-    width:8.05vw;
+    width:5vw;
     height:auto;
 }
 .logo-text{
-    width:8.4vw;
+    width:10vw;
     height:auto;
+    margin-left:10px;
 }
 .logo-holder{
     margin-left:25px;
+    margin-top:5px;
 }
 .line1 {
   width: 30px;
@@ -62,16 +64,19 @@ nav {
       display:none;
     }
     .logo-holder{
-        z-index:100;
-        margin-top:15px;
+      position: absolute;
+     
+      top: 33%;
+    
     }
     .logo{
-        width:20vw;
+        width:15vw;
         height:auto;
     }
     .logo-text{
-        width:20vw;
+        width:30vw;
         height:auto;
+        margin-left:5px;
     }
     .line {
       width: 30px;
@@ -119,6 +124,7 @@ nav {
     } */
     .nav-links li a {
       font-size: 20px;
+      text-align:center;
     }
     .nav-links li:nth-child(1) {
       transition: all 0.5s ease 0.2s;

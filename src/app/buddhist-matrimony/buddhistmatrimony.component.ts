@@ -11,7 +11,7 @@ export class BuddhistMatrimonyComponent implements OnInit {
     private titleService:Title,
     private meta:Meta
   ) {
-      this.titleService.setTitle('');
+      this.titleService.setTitle('Buddhist Matrimony | Buddhist Matrimony Site | Hans Matrimony');
       this.meta.addTag({name:'title',content:'Buddhist Matrimony | Buddhist Matrimony Site | Hans Matrimony'});
       this.meta.addTag({name:'description',content:'Find your ideal Buddhist Brides / Grooms for Matrimony on Hans Matrimony. We provide millions of verified profiles and the Safe & Secured Buddhist Matrimony Site. Register FREE.'});
       this.meta.addTag({name:'Keywords',content:'Buddhist Matrimony, Buddhist Matrimony Site'})

@@ -66,20 +66,26 @@ export const works = [
 export const testimonials = [
     {
         id:1,
-        title:"Akshay & Riya",
-        paragraph:"Libero gravida egestas quam orci. Vulputate volutpat, sed sagittis, amet arcu amet quam scelerisque. Mi commodo vitae at eleifend aenean. Placerat tempor viverra platea nec leo integer senectus",
-        image:"../../assets/testimonials/image1.jpg"
+        title:"Manav & Sakshi",
+        paragraph:"There were a lot of marriage proposal at that time, but finding the right one was difficult. I Signed up on hans. I liked a profile there and today she is my wife. I’m thankful to hans to help me find my soulmate",
+        image:"../../assets/testimonials/testimonial1.png"
     },
     {
-        id:1,
+        id:2,
         title:"Lakshay & Priya",
-        paragraph:"Libero gravida egestas quam orci. Vulputate volutpat, sed sagittis, amet arcu amet quam scelerisque. Mi commodo vitae at eleifend aenean. Placerat tempor viverra platea nec leo integer senectus.",
-        image:"../../assets/testimonials/image1.jpg"
+        paragraph:"Thanks to Hans, i got my perfect match and now we are happily married. I will suggest everyone to be patient and Hans will definitely bring a good way for you.",
+        image:"../../assets/testimonials/testimonial2.png"
     },
     {
-        id:1,
-        title:"Akash & Rina",
-        paragraph:"Libero gravida egestas quam orci. Vulputate volutpat, sed sagittis, amet arcu amet quam scelerisque. Mi commodo vitae at eleifend aenean. Placerat tempor viverra platea nec leo integer senectus.",
-        image:"../../assets/testimonials/image1.jpg"
+        id:3,
+        title:"Dhawal & Pooja",
+        paragraph:"After investing 3 years to find the perfect one for me traditionally, I landed to hans matrimony to continue my hunt. And the one I had been looking outside was waiting for me on this platform. Thanks you hans!",
+        image:"../../assets/testimonials/testimonial3.png"
+    },
+    {
+        id:4,
+        title:"Gunjon & raghav",
+        paragraph:"Would like to thank Hans Matrimony for finding a perfect partner for me. I was looking for a good match since last 6 months over multiple matrimonial sites however my wishes have been fulfilled by you.",
+        image:"../../assets/testimonials/testimonial4.png"
     }
 ]

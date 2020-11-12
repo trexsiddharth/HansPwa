@@ -29,8 +29,6 @@ export class Testimonials implements OnInit {
     
     constructor() {
         this.testimonials = testimonials;
-        console.log(this.testimonials);
-        
     }
     
 
@@ -67,8 +65,6 @@ export class Testimonials implements OnInit {
     private adjustsslidesToShow() {
         window.onload = this.resize;
       window.onresize = this.resize;
-    
-    console.log(this.resize());
     
     if (this.resize() <= this.mobileBreakpoint) {
       return 1

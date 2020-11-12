@@ -88,8 +88,6 @@ export class Hero implements OnInit {
     }
     public resize(){
         this.innerWidth = window.innerWidth;
-        console.log(this.innerWidth);
-        
         return this.innerWidth
     }
     public mobileScreen() {
@@ -102,7 +100,5 @@ export class Hero implements OnInit {
     } else {
       this.smallScreen=false
     }
-    console.log(this.smallScreen);
-    
   }
 }

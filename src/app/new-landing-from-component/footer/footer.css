@@ -70,6 +70,9 @@ p{
     font-size:1.2vw;
 }
 @media only screen and (max-width: 575px){
+    .links{
+        display:none;
+    }
     .app-footer{
         font-family:'Poppins', sans-serif;
     }
@@ -231,5 +234,32 @@ p{
     .googleplay{
         width:16vw;
         height:6vw;
+    }
+}
+@media only screen and (min-width: 1601px){
+    h1{
+        font-weight:bolder;
+        color:black;
+        font-size:3.5vw;
+    }
+    h4{
+        font-weight:600;
+        font-size:1.5vw;
+    }
+    .blended-col{
+        position:relative;
+        left:0px;
+    }
+    .blended-col-right{
+        position:relative;
+        right:0px;
+    }
+    .imgbox img{
+        width:600px;
+        height:600px;
+    }
+    .googleplay{
+        width:22vw;
+        height:8vw;
     }
 }
