@@ -292,7 +292,7 @@ export class ChatDrawerComponent implements OnInit {
     console.log('qwerty', event);
     const curState = this.search(event[0], 1);
     this.chatService.selected_states += curState.name;
-    this.chatService.selected_states_id += curState.id;
+    this.chatService.selected_states_id.push(curState.id);
     // this.preferencesForm.patchValue({
     //   state: [curState, ...this.preferencesForm.value.state],
     // })
@@ -322,14 +322,24 @@ export class ChatDrawerComponent implements OnInit {
   // what === 0 state, what === 1 city
   onRemoved(topping: string, what: number) {
     const toppings = (what === 0 ? this.preferencesForm.value.state : this.preferencesForm.value.city) as string[];
+
     this.remove(toppings, topping);
     if (what === 0) {
-      this.preferencesForm.value.state.setValue(toppings);
+      this.preferencesForm.controls.state.setValue(toppings);
+
+      console.log(this.preferencesForm.value.state, this.chatService.selected_states_id);
     } else {
       this.preferencesForm.value.city.setValue(toppings);
     } // To trigger change detection
   }
   private remove<T>(array: T[], toRemove: T): void {
+    const index = array.indexOf(toRemove);
+    if (index !== -1) {
+      array.splice(index, 1);
+      this.chatService.selected_states_id.splice(index, 1);
+    }
+  }
+  private removeId(array: any[], toRemove: any): void {
     const index = array.indexOf(toRemove);
     if (index !== -1) {
       array.splice(index, 1);
@@ -497,7 +507,7 @@ export class ChatDrawerComponent implements OnInit {
     form.append('pref_country', this.chatService.selected_country ? this.chatService.selected_country.name : '');
     form.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
     form.append('pref_state', this.chatService.selected_states);
-    form.append('pref_state_id', this.chatService.selected_states_id);
+    form.append('pref_state_id', this.chatService.selected_states_id.join(','));
     form.append('pref_city', this.chatService.selected_cities);
 
     this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form).subscribe((response: any) => {
@@ -871,13 +881,12 @@ export class ChatDrawerComponent implements OnInit {
               this.preferenceProfileData ? this.preferenceProfileData.pref_state_id : '');
               this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
               this.chatService.selected_states = this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
+                
 
+              
+              this.chatService.selected_states_id = this.preferenceProfileData.pref_state_id.split(',');
 
-              setTimeout(() => {
-              for (const item of this.preferenceProfileData.pref_state) {
-                this.chatService.selected_states_id += this.search(item, 1).id;
-              }
-            }, 2000);
+              console.log('current state ids are', this.chatService.selected_states_id );
 
           }
             this.setCurrentPreferenceValue(null);
@@ -901,35 +910,42 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
 onSubmitPreferences() {
+
+  console.log('pref_country', this.preferencesForm.value.country);
+  console.log('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
+  console.log('pref_state', this.preferencesForm.value.state);
+  console.log('pref_state_id', this.chatService.selected_states_id);
+  console.log('pref_city', this.preferencesForm.value.city);
+
     // this.editIndexPrefs = -1;
-    console.log('preference Data to update');
-    console.log(this.preferenceProfileData);
-    console.log(this.preferenceProfileData.religion);
-    if (Array.isArray(this.preferenceProfileData.religion)) {
+  console.log('preference Data to update');
+  console.log(this.preferenceProfileData);
+  console.log(this.preferenceProfileData.religion);
+  if (Array.isArray(this.preferenceProfileData.religion)) {
       this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
     }
 
-    this.preferenceProfileData.caste = this.castePreferences.join(',');
+  this.preferenceProfileData.caste = this.castePreferences.join(',');
 
-    if (this.gender === 'Female' && Array.isArray(this.preferenceProfileData.occupation)) {
+  if (this.gender === 'Female' && Array.isArray(this.preferenceProfileData.occupation)) {
       this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
     }
 
-    this.disableSave.next(false);
-    const newPrefForm = new FormData();
-    newPrefForm.append(
+  this.disableSave.next(false);
+  const newPrefForm = new FormData();
+  newPrefForm.append(
       'identity_number',
       this.preferenceProfileData.identity_number
     );
-    newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
-    newPrefForm.append('id', this.preferenceProfileData.id);
-    newPrefForm.append('caste', this.preferenceProfileData.caste);
-    newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
-    newPrefForm.append(
+  newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
+  newPrefForm.append('id', this.preferenceProfileData.id);
+  newPrefForm.append('caste', this.preferenceProfileData.caste);
+  newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
+  newPrefForm.append(
       'marital_status', this.preferencesForm.value.marital_status ?
       this.preferencesForm.value.marital_status : this.preferenceProfileData.marital_status
     );
-    if (this.gender === 'Male') {
+  if (this.gender === 'Male') {
       newPrefForm.append('working', this.preferencesForm.value.working
         ? this.preferencesForm.value.working : this.preferenceProfileData.working);
       newPrefForm.append('occupation', 'na');
@@ -938,32 +954,38 @@ onSubmitPreferences() {
         ? this.preferencesForm.value.occupation : this.preferenceProfileData.occupation);
       newPrefForm.append('working', 'na');
     }
-    newPrefForm.append('religion', this.preferenceProfileData.religion);
-    newPrefForm.append('food_choice', this.preferencesForm.value.food_choice ?
+  newPrefForm.append('religion', this.preferenceProfileData.religion);
+  newPrefForm.append('food_choice', this.preferencesForm.value.food_choice ?
       this.preferencesForm.value.food_choice : this.preferenceProfileData.food_choice);
 
-    newPrefForm.append('description', this.preferenceProfileData.description);
-    newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
+  newPrefForm.append('description', this.preferenceProfileData.description);
+  newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
       this.preferencesForm.value.income_min : this.preferenceProfileData.income_min);
-    newPrefForm.append('income_max', this.preferencesForm.value.income_max ?
+  newPrefForm.append('income_max', this.preferencesForm.value.income_max ?
       this.preferencesForm.value.income_max : this.preferenceProfileData.income_max);
-    newPrefForm.append('height_min', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
+  newPrefForm.append('height_min', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
       ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
       : this.preferenceProfileData.height_min);
-    newPrefForm.append('height_max', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
+  newPrefForm.append('height_max', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
       ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
       : this.preferenceProfileData.height_max);
-    newPrefForm.append('age_min', this.preferencesForm.value.age_min ?
+  newPrefForm.append('age_min', this.preferencesForm.value.age_min ?
       this.preferencesForm.value.age_min : this.preferenceProfileData.age_min);
-    newPrefForm.append('age_max', this.preferencesForm.value.age_max ?
+  newPrefForm.append('age_max', this.preferencesForm.value.age_max ?
       this.preferencesForm.value.age_max : this.preferenceProfileData.age_max);
-    newPrefForm.append(
+  newPrefForm.append(
       'mother_tongue',
       this.preferenceProfileData.mother_tongue
     );
-    newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
-    newPrefForm.append('matchesCount', String(this.countProfiles));
-    this.http
+  newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
+  newPrefForm.append('matchesCount', String(this.countProfiles));
+
+  newPrefForm.append('pref_country', this.preferencesForm.value.country);
+  newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
+  newPrefForm.append('pref_state', this.preferencesForm.value.state);
+  newPrefForm.append('pref_state_id', this.chatService.selected_states_id.join(','));
+  newPrefForm.append('pref_city', this.preferencesForm.value.city);
+  this.http
       .post(
         'https://partner.hansmatrimony.com/api/updatePreferencesDetails',
         newPrefForm

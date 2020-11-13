@@ -562,8 +562,20 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     this.updateLocalList();
     if (this.type === 'interestReceived') {
       localStorage.setItem('stage', '2');
-    } else if (this.type === 'interestShown') {
+    } else if (this.type === 'interestShown' || this.type === 'rejected' || this.type === 'contacted') {
       localStorage.setItem('stage', '3');
+      switch (this.type) {
+        case 'rejected':
+          localStorage.setItem('selectedType', '2');
+          break;
+
+          case 'contacted':
+            localStorage.setItem('selectedType', '1');
+            break;
+      
+        default:
+          break;
+      }
     }
     if (item) {
       // section from which user is going

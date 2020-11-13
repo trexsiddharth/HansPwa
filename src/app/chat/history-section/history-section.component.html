@@ -40,7 +40,7 @@
             </div>
             <div class="column" style="width:55%;justify-content: end;
             align-items: end;padding:2%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type,i)">
-                <p style="font-size:1rem;font-weight:bold;">{{profile.name}}</p>
+                <p style="font-size:1rem;font-weight:bold;">{{setName(profile.name)}}</p>
                 <p style="font-size:0.8rem;">{{getHeight(profile.height)}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>
                 <p style="font-size:0.8rem;">{{profile.caste}}&nbsp;|&nbsp;{{profile.religion}}</p>
                 <p style="font-size:0.8rem;">{{profile.working_city}}&nbsp;|&nbsp;{{profile.monthly_income}}LPA</p>

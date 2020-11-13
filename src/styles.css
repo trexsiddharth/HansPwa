@@ -490,6 +490,9 @@ div.mat-select-search-inner input.mat-input-element {
 #fourRegMobile .country-selector {
   opacity: 1 !important;
 }
+#mainMobile .country-selector {
+  opacity: 1 !important;
+}
 @media screen and (max-width: 576px) {
   .ht-full {
     margin: 0px;

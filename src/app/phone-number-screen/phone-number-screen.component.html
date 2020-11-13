@@ -6,16 +6,21 @@
         </div>
     
     </div>
-    <div class="container-fluid " style="height: 50%;background: white;position: fixed;bottom: 0px;">
+    <div class="container-fluid " 
+    id="mainMobile"
+    style="height: 50%;background: white;position: fixed;bottom: 0px;">
             <form  [formGroup]="phoneNumber">
                 <div class=" containerTwo full-width">
                     <mat-form-field class="short-width" appearance="standard" style="margin-right: 10px;
                     margin-left: 10px;">
-                        <mat-label style="color: black;">Enter Mobile Number</mat-label>
+                        <h6 style="color: black;">Enter Mobile Number</h6>
                         <ngx-mat-intl-tel-input matInput
+                        style="display: block;
+                        height: 50px;"
                         [preferredCountries]="['in']"
                         [enablePlaceholder]="true"
                         [enableSearch]="true"
+                        id="phone"
                         name="phone"
                         type="tel"
                         formControlName="phone" #phone></ngx-mat-intl-tel-input>

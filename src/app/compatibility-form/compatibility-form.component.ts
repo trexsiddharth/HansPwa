@@ -783,6 +783,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       firststepdata.append('disability', this.isDisable ? 'yes' : null);
       firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
 
+      if (localStorage.getItem('getListSource')) {
+        firststepdata.append('channel', localStorage.getItem('getListSource'));
+      } else {
+        firststepdata.append('channel', 'Web');
+      }
+
 
       this.lat ? firststepdata.append('lat', this.lat)
         : firststepdata.append('lat', '');
@@ -801,6 +807,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       console.log('marital_status', this.PageOne.value.MaritalStatus);
       console.log('religion', this.PageOne.value.Religion);
       console.log('caste', this.PageOne.value.Castes);
+      
 
 
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {

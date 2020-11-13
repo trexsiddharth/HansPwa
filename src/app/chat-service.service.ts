@@ -44,7 +44,7 @@ export class ChatServiceService {
   selected_country: any;
   selected_states: string = '';
   selected_cities: string = '';
-  selected_states_id: string = '';
+  selected_states_id: string[] = [];
   setProfileData(a: any, b: any) {
     this.personalProfileData = a;
     this.familyProfileData = b;

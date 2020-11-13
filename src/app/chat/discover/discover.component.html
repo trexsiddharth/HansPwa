@@ -32,7 +32,7 @@
 
                 <div class="historyDetails">
                     <span>
-                        {{item.profile.name}} | {{setAge(item.profile.birth_date)}}
+                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
                     </span><br>
                     <span>
                         {{item.profile.working_city ? item.profile.working_city : item.family ? item.family.city : ''}}

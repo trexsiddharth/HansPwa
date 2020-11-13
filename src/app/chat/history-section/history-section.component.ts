@@ -27,6 +27,7 @@ export class HistorySectionComponent implements OnInit {
   searchActivated = new BehaviorSubject<boolean>(false);
   searchActivated$: Observable<boolean> = this.searchActivated.asObservable();
   profiles: any;
+  authData;
 
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"',
     '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"',
@@ -40,6 +41,7 @@ export class HistorySectionComponent implements OnInit {
       console.log(search);
       this.profiles = this.dataFiltering.filterPosts((search as string).toLowerCase());
     });
+    this.authData = JSON.parse(localStorage.getItem('authData'));
   }
 
   getHistoryData() {
@@ -52,6 +54,10 @@ export class HistorySectionComponent implements OnInit {
       allProfiles = allProfiles.concat(response.history.reject);
       console.log(allProfiles);
       this.dataFiltering.setPostList(allProfiles);
+
+      if (localStorage.getItem('selectedType')) {
+        this.selectedTab = Number(localStorage.getItem('selectedType'));
+      }
     });
   }
   changeSelectedTab(event: any) {
@@ -151,6 +157,20 @@ export class HistorySectionComponent implements OnInit {
       imageView.setAttribute('src', '../../assets/male_pic.png');
     } else {
       imageView.setAttribute('src', '../../assets/female_pic.png');
+    }
+  }
+
+  setName(name: string): string {
+    if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0'
+    || this.authData.paid_status !== 'Paid')) {
+      let a = name.split(' ');
+      if (a[0] && a[1]) {
+        return a[0][0] + ' ' + a[1];
+      } else if (a[0]) {
+        return a[0][0];
+      }
+    } else {
+      return name;
     }
   }
 }
