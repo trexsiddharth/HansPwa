@@ -57,12 +57,9 @@ nav {
     font-size: 50px;
     color: #ae5fce;
   }
-
   
   @media screen and (max-width: 768px) {
-    .hamburger1{
-      display:none;
-    }
+    
     .logo-holder{
       position: absolute;
      

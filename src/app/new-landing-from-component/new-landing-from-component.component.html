@@ -1,6 +1,83 @@
-<div class="new-landing">
-<hero></hero>
-<custom-bg></custom-bg>
-<testimonials></testimonials>
-<app-footer></app-footer>
-</div>
+<mat-sidenav-container>
+    <mat-sidenav  [(opened)]="opened" position="end"> 
+      <ul class="drawer-links" >
+          <div>
+            <div class="logo-drawer" >
+                <div class="d-flex justify-content-center">
+                    <li>
+                        <img src="../../assets/hero/logoOld.png" alt="" class="img-fluid">
+                    </li>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <li>
+                        <img src="../../assets/hero/text.svg" alt="" class="img-fluid">
+                    </li>
+                </div>
+            </div>
+            <div class="drawer-links-list">
+                <li>
+                    <a href="" [routerLink]="['/kundaliMatching']" routerLinkActive="router-link-active" >Kundali Matching</a>
+                </li>
+                <li>
+                    <a href="">Subscription</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="">Login</a>
+                </li>
+                <li>
+                    <a href=""><img style="margin-left:-10px;" (click)="downloadApp()" class="googleplay" src="../../assets/newAppIllustrations/googleplay.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href=""><button (click)="goToCompatibility()" >Register For Free</button></a>
+                </li>
+            </div>
+          </div>
+      </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <nav>
+            <div class="hamburger">
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+            <div class="d-flex">
+                <div class="logo-holder">
+                    <img class="logo img-fluid" src="../../../assets/hero/logoOld.png" alt="hansmatrimony-logo">
+                    <img class="logo-text"  src="../../../assets/hero/text.svg" alt="hansmatrimony-logo-text">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Subscription</a></li>
+                    <li><a mdbPageScroll href="#kundali">Kundali Matching</a></li>
+                    <li><a [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="login">Login</a></li>
+                    <li><a href="#">
+                      <img (click)="downloadApp()" class="googleplay" src="../../../assets/newAppIllustrations/googleplay.jpg" alt="hansmatrimony-app-download-button">
+                    </a>
+                    </li>
+                    
+                    <li>
+                      <div  (click)="opened=!opened" class="hamburger1">
+                        <div class="line1"></div>
+                        <div class="line1"></div>
+                        <div class="line1"></div>
+                      </div>
+                    </li>
+          
+                    
+                  </ul>
+                 
+                    
+                  
+            </div>
+            
+          </nav>
+        <hero></hero>
+        <app-features></app-features>
+        <how-it-works></how-it-works>
+        <offline-centers></offline-centers>
+        <matchmakers></matchmakers>
+        <kundali id="kundali"></kundali>
+        <testimonials></testimonials>
+        <app-footer></app-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

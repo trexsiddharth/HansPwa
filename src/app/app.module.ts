@@ -63,6 +63,7 @@ import { ChristianMatrimonyComponent } from './christian-matrimony/christianmatr
 import { BuddhistMatrimonyComponent } from './buddhist-matrimony/buddhistmatrimony.component';
 import { JainMatrimonyComponent } from './jain-matrimony/jainmatrimony.component';
 import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.component';
+import { SidebarModule } from 'ng-sidebar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,7 +119,8 @@ import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.com
     Ng5SliderModule,
     NgbModule,
     ImageCropperModule,
-    CarouselModule
+    CarouselModule,
+    SidebarModule.forRoot()
   ],
   providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
   bootstrap: [AppComponent],
