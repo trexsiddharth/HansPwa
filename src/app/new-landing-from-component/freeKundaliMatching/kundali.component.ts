@@ -92,10 +92,10 @@ export class Kundali implements OnInit {
      let rightPosition = right.getBoundingClientRect().top;
      let screenPosition = window.innerHeight;
      
-     if(leftPosition<screenPosition){
+     if(rightPosition<=screenPosition){
         this.appear=true;
      
-     }else if(leftPosition>screenPosition){
+     }else if(rightPosition>screenPosition){
         this.appear=false;
      }
     }

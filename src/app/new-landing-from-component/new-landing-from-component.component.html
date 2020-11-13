@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-    <mat-sidenav  [(opened)]="opened" position="end"> 
+    <mat-sidenav [(opened)]="opened" position="end"> 
       <ul class="drawer-links" >
           <div>
             <div class="logo-drawer" >
@@ -19,7 +19,7 @@
                     <a href="" [routerLink]="['/kundaliMatching']" routerLinkActive="router-link-active" >Kundali Matching</a>
                 </li>
                 <li>
-                    <a href="">Subscription</a>
+                    <a [routerLink]="['/subscription']" routerLinkActive="router-link-active" href="">Subscription</a>
                 </li>
                 <li>
                   <a [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="">Login</a>
@@ -47,7 +47,7 @@
                     <img class="logo-text"  src="../../../assets/hero/text.svg" alt="hansmatrimony-logo-text">
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#">Subscription</a></li>
+                    <li><a [routerLink]="['/subscription']" routerLinkActive="router-link-active" href="#">Subscription</a></li>
                     <li><a mdbPageScroll href="#kundali">Kundali Matching</a></li>
                     <li><a [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="login">Login</a></li>
                     <li><a href="#">

@@ -8,12 +8,12 @@
 .kundali-text{
     opacity:0;
     transform:translateY(300px);
-    transition:1s all ease-in-out;
+    transition:0.8s all ease-in-out;
 }
 .kundali-form{
     opacity:0;
     transform:translateY(200px);
-    transition:0.5s all ease-in-out;
+    transition:0.7s all ease-in-out;
 }
 .appear{
     opacity:1;
