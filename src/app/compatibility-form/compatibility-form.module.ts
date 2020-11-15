@@ -14,7 +14,9 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { RegisterWithComponent } from './register-with/register-with.component';
 import { ChooseForComponent } from './choose-for/choose-for.component';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
-
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { Testimonials } from './testimonials/testimonials.component';
+import { ChoiceListComponent } from '../choice-list/choice-list.component';
 @NgModule({
   declarations: [
     CompatibilityFormComponent,
@@ -26,13 +28,16 @@ import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
     CompatibilityVerifyComponent,
     ThankYouComponent,
     RegisterWithComponent,
-    ChooseForComponent
+    ChooseForComponent,
+    Testimonials,
+    ChoiceListComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     CompatibilityFormRoutingModule,
-    NgxMatIntlTelInputModule
+    NgxMatIntlTelInputModule,
+    CarouselModule
   ],
   providers: [
     FourPageService

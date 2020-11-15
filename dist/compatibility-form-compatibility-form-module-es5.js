@@ -22,6 +22,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["compatibility-form-compatibility-form-module"], {
   /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/choice-list/choice-list.component.html":
+  /*!**********************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/choice-list/choice-list.component.html ***!
+    \**********************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppChoiceListChoiceListComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"desktop\">\n    <div class=\"container\">\n        <div style=\"margin-bottom: 20px;\" class=\"row\">\n            <div class=\"col-md-2 d-flex justify-content-center\">\n                <div (click)=\"toggleBoy()\" class=\"choice-card\">\n                    <img  style=\"width: 100%;\" src=\"../../assets/choices/choice1.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                            <button class=\"view\" >View</button>\n                         \n                         \n                             <button class=\"contact\">Contact</button>\n                         \n                    </div>\n                </div>\n            </div>\n            <div class=\"col-md-2 d-flex justify-content-center\">\n                <div (click)=\"toggleBoy()\" class=\"choice-card\">\n                    <img style=\"width: 100%;\" src=\"../../assets/choices/choice2.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                        <button class=\"view\" >View</button>\n                     \n                     \n                         <button class=\"contact\">Contact</button>\n                     \n                </div>\n                </div>\n            </div>\n            <div class=\"col-md-2 d-flex justify-content-center\">\n                <div (click)=\"toggleGirl()\" class=\"choice-card\">\n                    <img style=\"width: 100%;\"  src=\"../../assets/choices/choice3.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                        <button class=\"view\" >View</button>\n                     \n                     \n                         <button class=\"contact\">Contact</button>\n                     \n                </div>\n                </div>\n            </div>\n            <div class=\"col-md-2 d-flex justify-content-center\">\n                <div (click)=\"toggleGirl()\" class=\"choice-card\">\n                    <img style=\"width: 100%;\"  src=\"../../assets/choices/choice4.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                        <button class=\"view\" >View</button>\n                     \n                     \n                         <button class=\"contact\">Contact</button>\n                     \n                </div>\n                    \n                </div>\n            </div>\n            <div class=\"col-md-2 d-flex justify-content-center\">\n                <div (click)=\"toggleBoy()\" class=\"choice-card\">\n                    <img style=\"width: 100%;\"  src=\"../../assets/choices/choice5.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                        <button class=\"view\" >View</button>\n                     \n                     \n                         <button class=\"contact\">Contact</button>\n                     \n                </div>\n                </div>\n            </div>\n            <div class=\"col-md-2 d-flex justify-content-center\">\n                <div (click)=\"toggleBoy()\" class=\"choice-card\">\n                    <img style=\"width: 100%;\"  src=\"../../assets/choices/choice6.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                        <button class=\"view\" >View</button>\n                     \n                     \n                         <button class=\"contact\">Contact</button>\n                     \n                </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"mobileScreen\">\n        <div class=\"screen-row\">\n            \n                <div class=\"choice-card\">\n                    <img  style=\"width: 100%;\" src=\"../../assets/choices/choice1.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                            <button class=\"view\" >View</button>\n                         \n                         \n                             <button class=\"contact\">Contact</button>\n                         \n                    </div>\n                </div>\n            \n            \n                <div class=\"choice-card\">\n                    <img  style=\"width: 100%;\" src=\"../../assets/choices/choice2.png\" alt=\"\">\n                    <div class=\"btn-holder\">\n                        \n                            <button class=\"view\" >View</button>\n                         \n                         \n                             <button class=\"contact\">Contact</button>\n                         \n                    </div>\n            </div>\n        \n    </div>\n    <div class=\"screen-row\">\n            \n        <div class=\"choice-card\">\n            <img  style=\"width: 100%;\" src=\"../../assets/choices/choice3.png\" alt=\"\">\n            <div class=\"btn-holder\">\n                \n                    <button class=\"view\" >View</button>\n                 \n                 \n                     <button class=\"contact\">Contact</button>\n                 \n            </div>\n        </div>\n    \n    \n        <div class=\"choice-card\">\n            <img  style=\"width: 100%;\" src=\"../../assets/choices/choice4.png\" alt=\"\">\n            <div class=\"btn-holder\">\n                \n                    <button class=\"view\" >View</button>\n                 \n                 \n                     <button class=\"contact\">Contact</button>\n                 \n            </div>\n    </div>\n\n</div>\n<div class=\"screen-row\">\n            \n    <div class=\"choice-card\">\n        <img  style=\"width: 100%;\" src=\"../../assets/choices/choice5.png\" alt=\"\">\n        <div class=\"btn-holder\">\n            \n                <button class=\"view\" >View</button>\n             \n             \n                 <button class=\"contact\">Contact</button>\n             \n        </div>\n    </div>\n\n\n    <div class=\"choice-card\">\n        <img  style=\"width: 100%;\" src=\"../../assets/choices/choice6.png\" alt=\"\">\n        <div class=\"btn-holder\">\n            \n                <button class=\"view\" >View</button>\n             \n             \n                 <button class=\"contact\">Contact</button>\n             \n        </div>\n</div>\n\n</div>\n</div>\n<button class=\"register\">\n    Register For Free\n</button>";
+    /***/
+  },
+
+  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/compatibility-form/choose-for/choose-for.component.html":
   /*!***************************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/compatibility-form/choose-for/choose-for.component.html ***!
@@ -57,7 +77,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<!-- toolbar  -->\r\n<main class='pwaSize fixed t-0 b-0 w-full HC overflowY' [id]=\"mainContainerId\" style=\"margin-top:4%\">\r\n  <mat-toolbar class=\"fixToolBar\">\r\n    <mat-toolbar-row style=\"position:relative!important\">\r\n      <div class=\"mainDivToolbar\" style=\"position:relative; \">\r\n        <div style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            align-items: center;\r\n            justify-content: center;\">\r\n          <img width=\"75px\" [defaultImage]=\"'../../assets/logo_72.png'\"\r\n            [lazyLoad]=\"'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'\" [useSrcset]=\"true\"\r\n            alt=\"Hans Matrimony\">\r\n          <!-- <span\r\n            style=\"color: rgba(49, 49, 49, 0.781); margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;\"><strong>Hans\r\n              Matrimony</strong></span> -->\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"photos.length > 1\" style=\"width:90px;position:absolute;top:10px; right: 150px;\">\r\n        <!-- <p style=\"position:absolute;color:white;font-size:1rem;font-weight:bold;margin-left:80px\">1,00,000+</p> -->\r\n        <img *ngFor=\"let i of photoIndices\" style=\"-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);\r\n          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);\r\n          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);width:37px;height:37px;border-radius:50%;margin:6px;\"\r\n          src=\"{{photos[i]}}\" alt=\"\">\r\n      </div>\r\n\r\n      <p *ngIf=\"photos.length > 1\"\r\n        style=\"position:absolute;color:rgba(34, 33, 33, 0.692);font-size:1rem;top:48px;right:25px\">\r\n        +1,00,000 more</p>\r\n    </mat-toolbar-row>\r\n\r\n  </mat-toolbar>\r\n  <mat-horizontal-stepper labelPosition=\"bottom\" [linear]=\"isLinear\" #stepper>\r\n    <div class=\"container customBackground\"\r\n      style=\"width:80%;background: white;border-radius: 20px;margin-top: 10%; margin-bottom: 20px;\">\r\n      <div class=\"w-full\" style=\"margin-left:auto;margin-right:auto\">\r\n\r\n        <mat-step [stepControl]=\"PageOne\">\r\n          <form [formGroup]=\"PageOne\" style=\"padding-bottom: 100px;\">\r\n            <!-- label name if required -->\r\n            <!-- <ng-template matStepLabel>Page I</ng-template> -->\r\n            <div class=\"row\" style=\"margin-top: 8%!important;\">\r\n\r\n              <div class=\"col-6\">\r\n                <!-- <h6>Rishta For</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\" [hideRequiredMarker]=\"true\">\r\n                  <mat-label>Create Profile For</mat-label>\r\n                  <mat-select (selectionChange)=\"setGender()\" #relation formControlName=\"Relation\" required>\r\n                    <mat-option *ngFor=\"let  option of createProfile\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n              <div class=\"col-6\">\r\n                <!-- <h6>Gender</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Gender</mat-label>\r\n                  <mat-select formControlName=\"gender\" (selectionChange)=\"selectFieldChange('gender')\" required>\r\n                    <mat-option value=\"Male\">Male</mat-option>\r\n                    <mat-option value=\"Female\">Female</mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                आप जिस कस्टमर से फ़ोन पर बात कर रहे हैं वो किसके लिए रिश्ता देख रहे हैं ये भरे ।\r\n              </p>\r\n\r\n              <div class=\"col-6\">\r\n                <!-- <h6>Name</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>First Name</mat-label>\r\n                  <input type=\"text\" id=\"firstName\" (change)=\"inputFieldChanged('firstName')\" matInput\r\n                    formControlName=\"firstName\" required>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\">\r\n                <!-- <h6>Last Name</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Last Name</mat-label>\r\n                  <input type=\"text\" (change)=\"inputFieldChanged('lastName')\" matInput formControlName=\"lastName\"\r\n                    name=\"lastName\">\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                यहाँ पर कैंडिडेट यानि जिसके लिए रिश्ता देखा जा रहा है उसका नाम लिखे (लड़का या लड़की जो भी है )\r\n              </p>\r\n              <div class=\"col-12\">\r\n                <!-- <h6>Religion</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Religion</mat-label>\r\n                  <mat-select #relation formControlName=\"Religion\" (selectionChange)=\"Religion($event)\" required>\r\n                    <mat-option *ngFor=\"let  option of Religions\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n              <div class=\"col-6\" *ngIf=\"Caste\">\r\n                <!-- <h6>Caste</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Caste</mat-label>\r\n                  <mat-select id=\"caste\" (selectionChange)=\"selectFieldChange('Castes')\" formControlName=\"Castes\">\r\n                    <mat-option>\r\n                      <ngx-mat-select-search noEntriesFoundLabel=\"No Caste Found\" placeholderLabel=\"Search Caste...\"\r\n                        formControlName=\"CasteCtrl\">\r\n                        <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n                      </ngx-mat-select-search>\r\n                    </mat-option>\r\n                    <mat-option *ngFor=\"let  option of filteredCastes | async\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\" *ngIf=\"Caste\" style=\"margin:39px 0px auto 0px;\">\r\n                <mat-checkbox [checked]=\"isAllCastePref\" (change)=\"checkAllCastePref($event)\">\r\n                  <a style=\"font-size:1rem;color:rgba(44, 44, 44, 0.842)\">All Caste Preferred</a>\r\n                </mat-checkbox>\r\n              </div>\r\n\r\n              <div class=\"col-md-12 \" id=\"fourRegMobile\">\r\n                <!-- <h6>Mobile number</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" \r\n                (click)=\"showTruecallerIfFacebook()\"\r\n                 appearance=\"standard\">\r\n\r\n                  <ngx-mat-intl-tel-input   style=\"display: inline;\"\r\n                    [preferredCountries]=\"['in']\" [enablePlaceholder]=\"true\" [enableSearch]=\"true\" name=\"phone\"\r\n                    type=\"tel\" formControlName=\"phone\" id=\"phone\" (change)=\"mobileNumberChanged()\" #phone required>\r\n                  </ngx-mat-intl-tel-input>\r\n\r\n                  <!-- <input style=\"display: inline;\" [disabled]=\"hideMobileNumber\" type=\"number\" id=\"phone\" matInput\r\n                    formControlName=\"phone\" (change)=\"mobileNumberChanged()\" required name=\"phone\"> -->\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n\r\n                </mat-form-field>\r\n              </div>\r\n              \r\n\r\n              <app-compatibility-page-two *ngIf=\"!fourPageService.getUserThrough()\"></app-compatibility-page-two>\r\n\r\n              <div class=\"col-md-12\" *ngIf=\"fourPageService.getUserThrough()\">\r\n                <!-- <h6>Email<code style=\"color: rgba(0,0,0,.6);\">(optional)</code></h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Email<code style=\"color: rgba(0,0,0,.6);\">(optional)</code></mat-label>\r\n                  <input type=\"email\" (change)=\"inputFieldChanged('email')\" id=\"email\" matInput formControlName=\"email\"\r\n                    name=\"email\">\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                ईमेल optional है पर Customer से ईमेल लेने की जरूर कोशिश करे। घर में किसी का भी ईमेल मांग ले जो भी यूज़\r\n                करता हो\r\n              </p>\r\n\r\n              <div class=\"col-12\" style=\"margin:0 0 -12px 0\">\r\n                <label style=\"margin:8px 0 10px 0px;font-size:1rem;\r\n                color:rgba(44, 44, 44, 0.842);\">Date Of Birth</label>\r\n                <div class=\"row\" style=\"margin: 0px; margin-bottom: 8px;display: flex;\r\n                          flex-direction: row;\r\n                          align-items: center;\r\n                          justify-content: center;\">\r\n                  <select class=\"classic\" (change)=\"selectFieldChange('birth_date')\" formControlName=\"birth_date\" style=\"\r\n                            flex: 1;\" required name=\"birth_date\">\r\n                    <option *ngFor=\"let  option of date\" [value]=\"option\">\r\n                      {{option}}\r\n                    </option>\r\n                  </select>\r\n\r\n                  <select class=\"classic\" (change)=\"selectFieldChange('birth_month')\" formControlName=\"birth_month\"\r\n                    style=\"margin-left: 10px;\r\n                              flex: 1;\" required name=\"birth_month\">\r\n                    <option *ngFor=\"let  option of month\" [value]=\"option\">\r\n                      {{option}}\r\n                    </option>\r\n                  </select>\r\n\r\n                  <select class=\"classic\" (change)=\"selectFieldChange('birth_year')\" formControlName=\"birth_year\" style=\"margin-left: 10px;\r\n                              flex: 1;\" required name=\"birth_year\">\r\n                    <option *ngFor=\"let  option of years\" [value]=\"option\">\r\n                      {{option}}\r\n                    </option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n\r\n              <!-- <div class=\"col-md-12 matSelect\"\r\n                *ngIf=\"PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other' || fourPageService.getUserThrough()\"> -->\r\n\r\n              <div class=\"col-6\" *ngIf=\"!fourPageService.getUserThrough()\">\r\n                <!-- <h6>Height</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Height</mat-label>\r\n                  <mat-select matNativeControl (selectionChange)=\"selectFieldChange('Height')\" #height\r\n                    formControlName=\"Height\" required name=\"Height\">\r\n                    <mat-option *ngFor=\"let option of Heights;let i = index\" [value]=\"i\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\" *ngIf=\"fourPageService.getUserThrough()\">\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Height</mat-label>\r\n                  <mat-select matNativeControl (selectionChange)=\"selectFieldChange('Height')\" #height\r\n                    formControlName=\"Height\" required name=\"Height\">\r\n                    <mat-option *ngFor=\"let option of Heights;let i = index\" [value]=\"i\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\" *ngIf=\"fourPageService.getUserThrough()\">\r\n                <!-- <h6>Weight</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Weight</mat-label>\r\n                  <input type=\"number\" (change)=\"inputFieldChanged('Weight')\" matInput formControlName=\"Weight\" required\r\n                    name=\"Weight\">\r\n                  <span matSuffix>Kg &nbsp;</span>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\">\r\n                <!-- <h6>Marital Status</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Marital Status</mat-label>\r\n                  <mat-select #relation (selectionChange)=\"selectFieldChange('MaritalStatus')\"\r\n                    formControlName=\"MaritalStatus\" required>\r\n                    <mat-option *ngFor=\"let  option of MaritalStatus\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-12\" style=\"margin-top: 20px;\">\r\n                <mat-checkbox (change)=\"checkDisable($event)\">\r\n                  <a style=\"font-size:1rem;color:rgba(44, 44, 44, 0.842)\">Differently Abled?</a>\r\n                </mat-checkbox>\r\n              </div>\r\n\r\n              <div class=\"col-12\" *ngIf=\"isDisable\">\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Differently Abled Part</mat-label>\r\n                  <input type=\"text\" matInput formControlName=\"disabledPart\">\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-xs-12 m-t-20\"\r\n              *ngIf=\"fourPageService.getUserThrough()\"\r\n                style=\"margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;\">\r\n                <button mat-raised-button type=\"button\" id=\"viewButton\" [disabled]=\"disableNext$ | async\" matStepperNext\r\n                  class=\"btn\" (click)=\"firstStep()\">Next</button>\r\n              </div>\r\n\r\n              <div class=\"col-xs-12 m-t-20\"\r\n              *ngIf=\"!fourPageService.getUserThrough()\"\r\n                style=\"margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;\">\r\n                <button mat-raised-button type=\"button\" id=\"viewButton\" [disabled]=\"disableNext$ | async\"\r\n                  class=\"btn\" (click)=\"firstStep()\">See Profiles</button>\r\n              </div>\r\n\r\n              <!-- <p *ngIf=\"!fourPageService.getUserThrough()\" class=\"impNoteMain\">\r\n                            Your journey to find your perfect match begins now!\r\n                          </p> -->\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                डिटेल्स भरने के बाद इस बटन पर जरूर क्लिक करे |\r\n              </p>\r\n            </div>\r\n          </form>\r\n        </mat-step>\r\n\r\n        <mat-step [completed]=\"formTwo\" *ngIf=\"fourPageService.getUserThrough()\">\r\n          <!-- label name if required -->\r\n          <!-- <ng-template matStepLabel>\r\n                    Page II\r\n                </ng-template> -->\r\n          <app-compatibility-page-two></app-compatibility-page-two>\r\n        </mat-step>\r\n\r\n        <mat-step *ngIf=\"fourPageService.getUserThrough()\">\r\n          <!-- <ng-template matStepLabel>\r\n                      Page III\r\n                  </ng-template> -->\r\n          <app-compatibility-page-three></app-compatibility-page-three>\r\n        </mat-step>\r\n        <mat-step>\r\n          <!-- <ng-template matStepLabel>\r\n                    Page IV\r\n                  </ng-template> -->\r\n          <app-compatibility-photo [hidden]=\"!fourPageService.getUserThrough()\"></app-compatibility-photo>\r\n        </mat-step>\r\n        <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->\r\n        <mat-step *ngIf=\"fourPageService.getUserThrough()\">\r\n          <app-compatibility-verify></app-compatibility-verify>\r\n        </mat-step>\r\n        <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->\r\n        <mat-step *ngIf=\"fourPageService.getUserThrough() && !fourPageService.showApproveBtn\">\r\n          <!-- <ng-template matStepLabel  >\r\n                    Page VI\r\n                  </ng-template> -->\r\n          <app-compatibility-page-five></app-compatibility-page-five>\r\n        </mat-step>\r\n\r\n      </div>\r\n    </div>\r\n  </mat-horizontal-stepper>\r\n\r\n\r\n</main>";
+    __webpack_exports__["default"] = "<!-- toolbar  -->\r\n<div *ngIf=\"mobileScreen\" >\r\n  <a class=\"d-flex justify-content-center\" href=\"/fourReg/#register\"><button [routerLink]=\"['/fourReg']\" routerLinkActive=\"router-link-active\" *ngIf=\"auto\" class=\"register-btn d-flex justify-content-center\" >Register For Free</button></a>\r\n</div>\r\n<div class=\"d-flex justify-content-center\">\r\n  <div class=\"topBorder\">\r\n  \r\n  </div>\r\n</div>\r\n<main  class='pwaSize fixed t-0 b-0 w-full HC overflowY' [id]=\"mainContainerId\" style=\"margin-top:4%\">\r\n  <mat-toolbar id=\"register\" class=\"fixToolBar\">\r\n    <mat-toolbar-row style=\"position:relative!important\">\r\n      <div class=\"mainDivToolbar\" style=\"position:relative; \">\r\n        <div style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            align-items: center;\r\n            justify-content: center;\">\r\n          <!-- <img width=\"75px\" [defaultImage]=\"'../../assets/logo_72.png'\"\r\n            [lazyLoad]=\"'../../assets/logo_192.png 600w, ../../assets/logo_192.png 1000w'\" [useSrcset]=\"true\"\r\n            alt=\"Hans Matrimony\"> -->\r\n          <!-- <span\r\n            style=\"color: rgba(49, 49, 49, 0.781); margin-left: 10px;font-size: 16sp;font-weight: bold;font-size: 18px;\"><strong>Hans\r\n              Matrimony</strong></span> -->\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"photos.length > 1\" style=\"width:90px;position:absolute;top:10px; right: 150px;\">\r\n        <!-- <p style=\"position:absolute;color:white;font-size:1rem;font-weight:bold;margin-left:80px\">1,00,000+</p> -->\r\n        <img *ngFor=\"let i of photoIndices\" style=\"-webkit-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);\r\n          -moz-box-shadow: 0px 0px 8px 2px rgba(68,161,223,1);\r\n          box-shadow: 0px 0px 5px 2px rgba(68,161,223,1);width:37px;height:37px;border-radius:50%;margin:6px;\"\r\n          src=\"{{photos[i]}}\" alt=\"\">\r\n      </div>\r\n\r\n      <p *ngIf=\"photos.length > 1\"\r\n        style=\"position:absolute;color:rgba(34, 33, 33, 0.692);font-size:1rem;top:48px;right:25px\">\r\n        +1,00,000 more</p>\r\n    </mat-toolbar-row>\r\n\r\n  </mat-toolbar>\r\n  <mat-horizontal-stepper labelPosition=\"bottom\" [linear]=\"isLinear\" #stepper>\r\n    <div class=\"container customBackground\"\r\n      style=\"width:80%;background: white;border-radius: 20px;margin-top: 10%; margin-bottom: 20px;\">\r\n      <div class=\"w-full\" style=\"margin-left:auto;margin-right:auto\">\r\n\r\n        <mat-step [stepControl]=\"PageOne\">\r\n          <form [formGroup]=\"PageOne\" style=\"padding-bottom: 100px;\">\r\n            <!-- label name if required -->\r\n            <!-- <ng-template matStepLabel>Page I</ng-template> -->\r\n            <div class=\"row\" style=\"margin-top: 8%!important;\">\r\n\r\n              <div class=\"col-6\">\r\n                <!-- <h6>Rishta For</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\" [hideRequiredMarker]=\"true\">\r\n                  <mat-label>Create Profile For</mat-label>\r\n                  <mat-select (selectionChange)=\"setGender()\" #relation formControlName=\"Relation\" required>\r\n                    <mat-option *ngFor=\"let  option of createProfile\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n              <div class=\"col-6\">\r\n                <!-- <h6>Gender</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Gender</mat-label>\r\n                  <mat-select formControlName=\"gender\" (selectionChange)=\"selectFieldChange('gender')\" required>\r\n                    <mat-option value=\"Male\">Male</mat-option>\r\n                    <mat-option value=\"Female\">Female</mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                आप जिस कस्टमर से फ़ोन पर बात कर रहे हैं वो किसके लिए रिश्ता देख रहे हैं ये भरे ।\r\n              </p>\r\n\r\n              <div [ngClass]=\"{'col-12': !secondName , 'col-6': secondName }\">\r\n                <!-- <h6>Name</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\"  appearance=\"standard\">\r\n                  <mat-label>First Name</mat-label>\r\n                  <input  type=\"text\" id=\"firstName\" (change)=\"inputFieldChanged('firstName')\" matInput\r\n                    formControlName=\"firstName\" required>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div *ngIf=\"secondName\" class=\"col-6\">\r\n                <!-- <h6>Last Name</h6> -->\r\n                <mat-form-field  appearance=\"standard\">\r\n                  <mat-label>Last Name</mat-label>\r\n                  <input type=\"text\" (change)=\"inputFieldChanged('lastName')\" matInput formControlName=\"lastName\"\r\n                    name=\"lastName\">\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                यहाँ पर कैंडिडेट यानि जिसके लिए रिश्ता देखा जा रहा है उसका नाम लिखे (लड़का या लड़की जो भी है )\r\n              </p>\r\n              <div [class.col-12]=\"!Caste\" [class.col-6]=\"Caste\">\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Religion</mat-label>\r\n                  <mat-select #relation formControlName=\"Religion\" (selectionChange)=\"Religion($event)\" required>\r\n                    <mat-option *ngFor=\"let  option of Religions\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n              <div class=\"col-6\" *ngIf=\"Caste\">\r\n                <!-- <h6>Caste</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Caste</mat-label>\r\n                  <mat-select id=\"caste\" (selectionChange)=\"selectFieldChange('Castes')\" formControlName=\"Castes\">\r\n                    <mat-option>\r\n                      <ngx-mat-select-search noEntriesFoundLabel=\"No Caste Found\" placeholderLabel=\"Search Caste...\"\r\n                        formControlName=\"CasteCtrl\">\r\n                        <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n                      </ngx-mat-select-search>\r\n                    </mat-option>\r\n                    <mat-option *ngFor=\"let  option of filteredCastes | async\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\" *ngIf=\"Caste\" style=\"margin:39px 0px auto 0px;\">\r\n                <mat-checkbox [checked]=\"isAllCastePref\" (change)=\"checkAllCastePref($event)\">\r\n                  <a style=\"font-size:1rem;color:rgba(44, 44, 44, 0.842)\">All Caste Preferred</a>\r\n                </mat-checkbox>\r\n              </div>\r\n\r\n              <div class=\"col-md-12 \" id=\"fourRegMobile\">\r\n                <!-- <h6>Mobile number</h6> -->\r\n                <mat-form-field style=\"background-color:rgba(206, 206, 206, 0.2);margin-top:25px;\" class=\"full-width fieldFit\" \r\n                (click)=\"showTruecallerIfFacebook()\"\r\n                 appearance=\"standard\">\r\n\r\n                  <ngx-mat-intl-tel-input   style=\"display: inline;\"\r\n                    [preferredCountries]=\"['in']\" [enablePlaceholder]=\"true\" [enableSearch]=\"true\" name=\"phone\"\r\n                    type=\"tel\" formControlName=\"phone\" id=\"phone\" (change)=\"mobileNumberChanged()\" #phone required>\r\n                  </ngx-mat-intl-tel-input>\r\n\r\n                  <!-- <input style=\"display: inline;\" [disabled]=\"hideMobileNumber\" type=\"number\" id=\"phone\" matInput\r\n                    formControlName=\"phone\" (change)=\"mobileNumberChanged()\" required name=\"phone\"> -->\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n\r\n                </mat-form-field>\r\n              </div>\r\n              \r\n\r\n              <app-compatibility-page-two *ngIf=\"!fourPageService.getUserThrough()\"></app-compatibility-page-two>\r\n\r\n              <div class=\"col-md-12\" *ngIf=\"fourPageService.getUserThrough()\">\r\n                <!-- <h6>Email<code style=\"color: rgba(0,0,0,.6);\">(optional)</code></h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Email<code style=\"color: rgba(0,0,0,.6);\">(optional)</code></mat-label>\r\n                  <input type=\"email\" (change)=\"inputFieldChanged('email')\" id=\"email\" matInput formControlName=\"email\"\r\n                    name=\"email\">\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                ईमेल optional है पर Customer से ईमेल लेने की जरूर कोशिश करे। घर में किसी का भी ईमेल मांग ले जो भी यूज़\r\n                करता हो\r\n              </p>\r\n\r\n              <div class=\"col-12\" style=\"margin:0 0 -12px 0\">\r\n                <label>Date Of Birth</label>\r\n                <div class=\"row\">\r\n                  <select  (change)=\"selectFieldChange('birth_date')\" formControlName=\"birth_date\" style=\"\r\n                            flex: 1;\" required name=\"birth_date\">\r\n                    <option *ngFor=\"let  option of date\" [value]=\"option\">\r\n                      {{option}}\r\n                    </option>\r\n                  </select>\r\n\r\n                  <select (change)=\"selectFieldChange('birth_month')\" formControlName=\"birth_month\"\r\n                    style=\"margin-left: 10px;\r\n                              flex: 1;\" required name=\"birth_month\">\r\n                    <option *ngFor=\"let  option of month\" [value]=\"option\">\r\n                      {{option}}\r\n                    </option>\r\n                  </select>\r\n\r\n                  <select (change)=\"selectFieldChange('birth_year')\" formControlName=\"birth_year\" style=\"margin-left: 10px;\r\n                              flex: 1;\" required name=\"birth_year\">\r\n                    <option *ngFor=\"let  option of years\" [value]=\"option\">\r\n                      {{option}}\r\n                    </option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n\r\n              <!-- <div class=\"col-md-12 matSelect\"\r\n                *ngIf=\"PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other' || fourPageService.getUserThrough()\"> -->\r\n\r\n              <div class=\"col-6\" *ngIf=\"!fourPageService.getUserThrough() && showHeight\">\r\n                <!-- <h6>Height</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Height</mat-label>\r\n                  <mat-select matNativeControl (selectionChange)=\"selectFieldChange('Height')\" #height\r\n                    formControlName=\"Height\" required name=\"Height\">\r\n                    <mat-option *ngFor=\"let option of Heights;let i = index\" [value]=\"i\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\" *ngIf=\"fourPageService.getUserThrough() && showHeight\">\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Height</mat-label>\r\n                  <mat-select matNativeControl (selectionChange)=\"selectFieldChange('Height')\" #height\r\n                    formControlName=\"Height\" required name=\"Height\">\r\n                    <mat-option *ngFor=\"let option of Heights;let i = index\" [value]=\"i\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\" *ngIf=\"fourPageService.getUserThrough()\">\r\n                <!-- <h6>Weight</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Weight</mat-label>\r\n                  <input type=\"number\" (change)=\"inputFieldChanged('Weight')\" matInput formControlName=\"Weight\" required\r\n                    name=\"Weight\">\r\n                  <span matSuffix>Kg &nbsp;</span>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-6\" *ngIf=\"showHeight\">\r\n                <!-- <h6>Marital Status</h6> -->\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Marital Status</mat-label>\r\n                  <mat-select #relation (selectionChange)=\"selectFieldChange('MaritalStatus')\"\r\n                    formControlName=\"MaritalStatus\" required>\r\n                    <mat-option *ngFor=\"let  option of MaritalStatus\" [value]=\"option\">\r\n                      {{option}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-12\" style=\"margin-top: 20px;\">\r\n                <mat-checkbox (change)=\"checkDisable($event)\">\r\n                  <a style=\"font-size:1rem;color:rgba(44, 44, 44, 0.842)\">Differently Abled?</a>\r\n                </mat-checkbox>\r\n              </div>\r\n\r\n              <div class=\"col-12\" *ngIf=\"isDisable\">\r\n                <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n                  <mat-label>Differently Abled Part</mat-label>\r\n                  <input type=\"text\" matInput formControlName=\"disabledPart\">\r\n                  <mat-error *ngIf=\"PageOne.invalid && nextClickedOne\">*this field is required</mat-error>\r\n                </mat-form-field>\r\n              </div>\r\n\r\n              <div class=\"col-xs-12 m-t-20\"\r\n              *ngIf=\"fourPageService.getUserThrough()\"\r\n                style=\"margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;\">\r\n                <button mat-raised-button type=\"button\" id=\"viewButton\" [disabled]=\"disableNext$ | async\" matStepperNext\r\n                  class=\"btn\" (click)=\"firstStep()\">Next</button>\r\n              </div>\r\n\r\n              <div class=\"col-xs-12 m-t-20\"\r\n              *ngIf=\"!fourPageService.getUserThrough()\"\r\n                style=\"margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;\">\r\n                <button mat-raised-button type=\"button\" id=\"viewButton\" [disabled]=\"disableNext$ | async\"\r\n                  class=\"btn\" (click)=\"firstStep()\">See Profiles</button>\r\n              </div>\r\n\r\n              <!-- <p *ngIf=\"!fourPageService.getUserThrough()\" class=\"impNoteMain\">\r\n                            Your journey to find your perfect match begins now!\r\n                          </p> -->\r\n              <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n                डिटेल्स भरने के बाद इस बटन पर जरूर क्लिक करे |\r\n              </p>\r\n            </div>\r\n          </form>\r\n        </mat-step>\r\n\r\n        <mat-step [completed]=\"formTwo\" *ngIf=\"fourPageService.getUserThrough()\">\r\n          <!-- label name if required -->\r\n          <!-- <ng-template matStepLabel>\r\n                    Page II\r\n                </ng-template> -->\r\n          <app-compatibility-page-two></app-compatibility-page-two>\r\n        </mat-step>\r\n\r\n        <mat-step *ngIf=\"fourPageService.getUserThrough()\">\r\n          <!-- <ng-template matStepLabel>\r\n                      Page III\r\n                  </ng-template> -->\r\n          <app-compatibility-page-three></app-compatibility-page-three>\r\n        </mat-step>\r\n        <mat-step>\r\n          <!-- <ng-template matStepLabel>\r\n                    Page IV\r\n                  </ng-template> -->\r\n          <app-compatibility-photo [hidden]=\"!fourPageService.getUserThrough()\"></app-compatibility-photo>\r\n        </mat-step>\r\n        <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->\r\n        <mat-step *ngIf=\"fourPageService.getUserThrough()\">\r\n          <app-compatibility-verify></app-compatibility-verify>\r\n        </mat-step>\r\n        <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->\r\n        <mat-step *ngIf=\"fourPageService.getUserThrough() && !fourPageService.showApproveBtn\">\r\n          <!-- <ng-template matStepLabel  >\r\n                    Page VI\r\n                  </ng-template> -->\r\n          <app-compatibility-page-five></app-compatibility-page-five>\r\n        </mat-step>\r\n\r\n      </div>\r\n    </div>\r\n  </mat-horizontal-stepper>\r\n\r\n  \r\n</main>\r\n<div id=\"us\" class=\"whyus\">\r\n  <div class=\"why-us-header\">\r\n   <div class=\"d-flex justify-content-center\">\r\n       <div class=\"header\">\r\n           <h1 style=\"font-weight: bold;\">\r\n           \r\n               Why  <span style=\"color:#24ADD8\" >Us?</span> \r\n               <hr class=\"one\">\r\n               <hr class=\"two\">\r\n           </h1>\r\n       </div>\r\n   </div>\r\n  </div>\r\n   <div *ngIf=\"!mobileScreen\" @fade class=\"d-flex justify-content-center features\">\r\n       <div class=\"container\">\r\n           <div class=\"row\">\r\n               <div class=\"col-md-4 feature-card-container\">\r\n                   <div class=\"feature-card-holder\">\r\n                       <div class=\"d-flex justify-content-center\">\r\n                           <img src=\"../../../assets/featuresIllustrations/ill1.jpg\" alt=\"hansmatrimony-features-illustration1\">\r\n                       </div>\r\n                       <p>More than <span style=\"font-weight:bolder\">50,000 </span>\r\n                            <br>suitable matches </p>\r\n                   </div>\r\n               </div>\r\n               <div class=\"col-md-4 feature-card-container\">\r\n                  <div class=\"feature-card-holder\">\r\n                   <div class=\"d-flex justify-content-center\">\r\n                       <img src=\"../../../assets/featuresIllustrations/ill2.svg\" alt=\"hansmatrimony-features-illustration2\">\r\n                   </div>\r\n                   <p>Get Your <span style=\"font-weight:bolder\">Personal Matchmaker</span>\r\n                       \r\n                      <br>from 1000+Matchmakers </p>\r\n                  </div>\r\n               </div>\r\n               <div class=\"col-md-4 feature-card-container \">\r\n                   <div class=\"feature-card-holder\">\r\n                       <div class=\"d-flex justify-content-center\">\r\n                           <img src=\"../../../assets/featuresIllustrations/ill3.jpg\" alt=\"hansmatrimony-features-illustration3\">\r\n                       </div>\r\n                       <p>Verified matches from <br><span style=\"font-weight:bolder\">50+ temples</span> in india </p>\r\n                   </div>\r\n               </div>\r\n           </div>\r\n       </div>\r\n   </div>\r\n   <div *ngIf=\"mobileScreen\"  class=\"carousel-div\">\r\n       <owl-carousel-o [options]=\"customOptions\">\r\n           <ng-template class=\"slide\" carouselSlide>\r\n               <div class=\"temple-card text-shadow\">\r\n                   <span class=\"temple-name\">\r\n                       <!-- {{languageService.homeLang.sanatanTemple}} -->\r\n                   </span>\r\n                   <mat-card class=\" featureCard2\">\r\n                       <img class=\"feature2Img\" src=\"\r\n                       ../../../assets/featuresIllustrations/ill2.svg\"\r\n                           alt=\"hansmatrimony-features-illustration2\">\r\n                   </mat-card>\r\n               </div>\r\n               <p>Get Your <span style=\"font-weight:bolder\">Personal Matchmaker</span>\r\n                       \r\n                   <br>from 1000+Matchmakers </p>\r\n           </ng-template>\r\n           <ng-template class=\"slide\" carouselSlide>\r\n\r\n                   <div class=\"temple-card text-shadow\">\r\n                       <span class=\"temple-name\">\r\n                       </span>\r\n                       <mat-card class=\"featureCard2\">\r\n                           <img class=\"feature2Img\"\r\n                               src=\"../../../assets/featuresIllustrations/ill1.jpg\"\r\n                               alt=\"hansmatrimony-features-illustration1\">\r\n                       </mat-card>\r\n                   </div>\r\n                   <p>More than <span style=\"font-weight:bolder\">50,000 </span>\r\n                       <br>suitable matches </p>\r\n           </ng-template>\r\n           <ng-template class=\"slide\" carouselSlide>\r\n               <div class=\"temple-card text-shadow\">\r\n                   <span class=\"temple-name\">\r\n                   </span>\r\n                   <mat-card class=\" featureCard2\">\r\n                       <img class=\"feature2Img\"\r\n                           src=\"../../../assets/featuresIllustrations/ill3.jpg\"\r\n                           alt=\"hansmatrimony-features-illustration3\">\r\n                   </mat-card>\r\n               </div>\r\n               <p>Verified matches from <br><span style=\"font-weight:bolder\">50+ temples</span> in india </p>\r\n           </ng-template>\r\n       </owl-carousel-o>\r\n   </div>\r\n</div>\r\n<testimonials></testimonials>\r\n<app-choice-list></app-choice-list>\r\n";
     /***/
   },
 
@@ -117,7 +137,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<form [formGroup]=\"PageTwo\">\r\n  <div class=\"row\" style=\"padding-left: 20px;padding-right: 20px;\" [ngStyle]=\"{'padding-top': fourPageService.getUserThrough() ? '40px' : '0px'}\">\r\n    <!-- <button class=\"btn\" matStepperPrevious *ngIf=\"!fourPageService.getUserThrough()\">\r\n      <img src=\"../../assets/backN.svg\" class=\"backArrow\" alt=\"BACK\">\r\n      <p style=\"margin:auto 0 auto 5px\">Back</p>\r\n    </button> -->\r\n    <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\">\r\n      <!-- <h6>Qualification</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Qualification</mat-label>\r\n        <mat-select (selectionChange)=\"changedQualification()\" matInput formControlName=\"Qualification\">\r\n          <mat-option>\r\n            <ngx-mat-select-search noEntriesFoundLabel=\"No Qualification Found\"\r\n              placeholderLabel=\"Search Qualification...\" formControlName=\"QualificationCtrl\">\r\n              <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n            </ngx-mat-select-search>\r\n          </mat-option>\r\n          <mat-optgroup *ngFor=\"let group of filteredEducationGroups | async\" [label]=\"group.group\">\r\n            <mat-option *ngFor=\"let name of group.names\" [value]=\"name\">\r\n              {{name}}\r\n            </mat-option>\r\n          </mat-optgroup>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\">\r\n      <!-- <h6>Occupation</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Occupation</mat-label>\r\n        <mat-select #relation formControlName=\"Occupation\" (selectionChange)=\"changedOccupation()\">\r\n          <mat-option *ngFor=\"let  option of Occupation\" [value]=\"option\">\r\n            {{option}}\r\n          </mat-option>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\" *ngIf=\"fourPageService.getUserThrough()\">\r\n      <!-- <h6>Designation</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\"\r\n        *ngIf=\"PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' \">\r\n        <mat-label>Designation</mat-label>\r\n        <mat-select #relation formControlName=\"Designation\" (selectionChange)=\"changedDesignation()\">\r\n          <mat-option>\r\n            <ngx-mat-select-search noEntriesFoundLabel=\"No Designation Found\" placeholderLabel=\"Search Designation...\"\r\n              formControlName=\"DesignationCtrl\">\r\n              <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n            </ngx-mat-select-search>\r\n          </mat-option>\r\n          <mat-option *ngFor=\"let  option of filteredDesignations | async\" [value]=\"option\">\r\n            {{option}}\r\n          </mat-option>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field class=\"full-width fieldFit\"\r\n        *ngIf=\"PageTwo.value.Designation === 'Others' && PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working'\"\r\n        appearance=\"standard\">\r\n        <!-- <h6>Other Designation</h6> -->\r\n        <mat-label>Other Designation</mat-label>\r\n        <input type=\"text\" (change)=\"changedDesignation()\" matInput formControlName=\"OtherDesignation\"\r\n          name=\"Designation\">\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n      जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |\r\n    </p>\r\n\r\n    <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\">\r\n      <!-- <h6>Yearly Income In Lakhs</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Yearly Income In Lakhs</mat-label>\r\n        <mat-select formControlName=\"AnnualIncome\" (selectionChange)=\"incomeChanged($event)\">\r\n          <mat-option *ngFor=\"let item of incomeCategories\" [value]=\"item\">\r\n            {{setValue(item)}}\r\n          </mat-option>\r\n        </mat-select>\r\n        <!-- <input type=\"number\" (change)=\"incomeChanged()\" matInput formControlName=\"AnnualIncome\" name=\"AnnualIncome\">\r\n                          <span matSuffix>Lakh Per Year &nbsp;</span> -->\r\n        <mat-error class=\"full-width\" style=\"margin-bottom: 10px;\" *ngIf=\"PageTwo.get('AnnualIncome').invalid\"> eg. 8\r\n          <span style=\"margin-left: 80%;\">LPA &nbsp;</span></mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n\r\n    <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n      अगर लड़का /लड़की की सालाना इनकम 10 लाख है तोह यहाँ सिर्फ 10 भरे ।\r\n    </p>\r\n\r\n    <!-- <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\" *ngIf=\"PageTwo.value.Occupation !== 'Not Working'\">\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Working City</mat-label>\r\n        <input type=\"text\" matInput id=\"workingCity\" [autoCompleteOptions]=\"autoComplete\" matValidateAddress\r\n          matGoogleMapsAutocomplete #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChanged()\"\r\n          formControlName=\"Working\">\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div> -->\r\n\r\n    <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\" *ngIf=\"PageTwo.value.Occupation !== 'Not Working'\">\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Working City</mat-label>\r\n      <input type=\"text\" matInput id=\"workingCity\" (change)=\"placeChanged()\" formControlName=\"Working\" [matAutocomplete]=\"Working\">\r\n      <mat-autocomplete (optionSelected)='workingCityChanged($event.option.value)' autoActiveFirstOption\r\n        #Working=\"matAutocomplete\">\r\n        <mat-option *ngFor=\"let cities of workingCities | async\" [value]=\"cities\" required>\r\n          {{cities}}\r\n        </mat-option>\r\n      </mat-autocomplete>\r\n    </mat-form-field>\r\n    </div>\r\n\r\n\r\n    <div class=\"col-12\" *ngIf=\"fourPageService.profile.gender === 'Female' && fourPageService.getUserThrough() \">\r\n      <!-- <h6>Wish to go abroad?</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Wish to go abroad?</mat-label>\r\n        <mat-select formControlName=\"abroad\" (selectionChange)=\"changedAbroad()\">\r\n          <mat-option value=\"Yes\">Yes</mat-option>\r\n          <mat-option value=\"No\">No</mat-option>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"col-12\" *ngIf=\"fourPageService.getUserThrough() \">\r\n      <mat-form-field class=\"full-width\" style=\"margin-top: 25px;\" appearance=\"standard\">\r\n        <mat-label>About<code style=\"color: rgba(0,0,0,.6);\">(optional)</code></mat-label>\r\n        <textarea rows=\"5\" type=\"text\" matInput formControlName=\"About\" name=\"About\">\r\n                                </textarea>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"col-xs-12 m-t-20\" style=\"margin-top: 10px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;display: flex;\r\n      flex-direction:row;\r\n      align-items: center;\r\n      justify-content: center;\"\r\n      *ngIf=\"fourPageService.getUserThrough()\"\r\n      >\r\n      <button class=\"backBtn\" matStepperPrevious *ngIf=\"!fourPageService.getUserThrough()\">\r\n        <img src=\"../../assets/backN.svg\" class=\"backArrow\" alt=\"BACK\">\r\n        <p style=\"margin:auto 0 auto 5px\">Back</p>\r\n      </button>\r\n      <button *ngIf=\"fourPageService.getUserThrough()\" mat-raised-button type=\"button\" id=\"viewButton2\"\r\n        style=\"margin-right: 10px;\" matStepperPrevious class=\"btn\">Back</button>\r\n      <button mat-raised-button type=\"button\" id=\"skipBtn\" matStepperNext class=\"btn\" (click)=\"skip()\"\r\n        *ngIf=\"fourPageService.getSkippable()\">Skip</button>\r\n      <button type=\"button\" id=\"viewButton2\" mat-raised-button matStepperNext class=\"btn\" (click)=\"firstStep()\"><a\r\n          *ngIf=\"!fourPageService.getUserThrough()\">See Profiles</a><a\r\n          *ngIf=\"fourPageService.getUserThrough()\">Next</a></button>\r\n    </div>\r\n    <!-- <p *ngIf=\"!fourPageService.getUserThrough()\" class=\"impNoteMain\">\r\n                      Great! Thanks for letting us know about yourself.\r\n                    </p> -->\r\n    <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n      डिटेल्स भरने के बाद इस बटन पर जरूर क्लिक करे |\r\n    </p>\r\n  </div>\r\n</form>";
+    __webpack_exports__["default"] = "<form [formGroup]=\"PageTwo\">\r\n  <div class=\"row\" [ngStyle]=\"{'padding-top': fourPageService.getUserThrough() ? '40px' : '0px'}\">\r\n    <!-- <button class=\"btn\" matStepperPrevious *ngIf=\"!fourPageService.getUserThrough()\">\r\n      <img src=\"../../assets/backN.svg\" class=\"backArrow\" alt=\"BACK\">\r\n      <p style=\"margin:auto 0 auto 5px\">Back</p>\r\n    </button> -->\r\n    <div [ngClass]=\"{'col-12': !showOccupation , 'col-6': showOccupation}\" \r\n    [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough()}\">\r\n      <!-- <h6>Qualification</h6> -->\r\n      <mat-form-field style=\"margin-bottom: 25px;\" class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Qualification</mat-label>\r\n        <mat-select (selectionChange)=\"changedQualification()\" matInput formControlName=\"Qualification\">\r\n          <mat-option>\r\n            <ngx-mat-select-search noEntriesFoundLabel=\"No Qualification Found\"\r\n              placeholderLabel=\"Search Qualification...\" formControlName=\"QualificationCtrl\">\r\n              <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n            </ngx-mat-select-search>\r\n          </mat-option>\r\n          <mat-optgroup *ngFor=\"let group of filteredEducationGroups | async\" [label]=\"group.group\">\r\n            <mat-option *ngFor=\"let name of group.names\" [value]=\"name\">\r\n              {{name}}\r\n            </mat-option>\r\n          </mat-optgroup>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div *ngIf=\"showOccupation\" [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\">\r\n      <!-- <h6>Occupation</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Occupation</mat-label>\r\n        <mat-select #relation formControlName=\"Occupation\" (selectionChange)=\"changedOccupation()\">\r\n          <mat-option *ngFor=\"let  option of Occupation\" [value]=\"option\">\r\n            {{option}}\r\n          </mat-option>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\" *ngIf=\"fourPageService.getUserThrough()\">\r\n      <!-- <h6>Designation</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\"\r\n        *ngIf=\"PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' \">\r\n        <mat-label>Designation</mat-label>\r\n        <mat-select #relation formControlName=\"Designation\" (selectionChange)=\"changedDesignation()\">\r\n          <mat-option>\r\n            <ngx-mat-select-search noEntriesFoundLabel=\"No Designation Found\" placeholderLabel=\"Search Designation...\"\r\n              formControlName=\"DesignationCtrl\">\r\n              <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n            </ngx-mat-select-search>\r\n          </mat-option>\r\n          <mat-option *ngFor=\"let  option of filteredDesignations | async\" [value]=\"option\">\r\n            {{option}}\r\n          </mat-option>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field class=\"full-width fieldFit\"\r\n        *ngIf=\"PageTwo.value.Designation === 'Others' && PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working'\"\r\n        appearance=\"standard\">\r\n        <!-- <h6>Other Designation</h6> -->\r\n        <mat-label>Other Designation</mat-label>\r\n        <input type=\"text\" (change)=\"changedDesignation()\" matInput formControlName=\"OtherDesignation\"\r\n          name=\"Designation\">\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n      जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |\r\n    </p>\r\n\r\n    <div [ngClass]=\"{'col-12': !showWorkingCity , 'col-6': showWorkingCity}\" \r\n    [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\">\r\n      <!-- <h6>Yearly Income In Lakhs</h6> -->\r\n      <mat-form-field style=\"margin-bottom: 25px;\" *ngIf=\"showYearlyIncome\" class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Yearly Income In Lakhs</mat-label>\r\n        <mat-select formControlName=\"AnnualIncome\" (selectionChange)=\"incomeChanged($event)\">\r\n          <mat-option *ngFor=\"let item of incomeCategories\" [value]=\"item\">\r\n            {{setValue(item)}}\r\n          </mat-option>\r\n        </mat-select>\r\n        <!-- <input type=\"number\" (change)=\"incomeChanged()\" matInput formControlName=\"AnnualIncome\" name=\"AnnualIncome\">\r\n                          <span matSuffix>Lakh Per Year &nbsp;</span> -->\r\n        <mat-error class=\"full-width\" style=\"margin-bottom: 10px;\" *ngIf=\"PageTwo.get('AnnualIncome').invalid\"> eg. 8\r\n          <span style=\"margin-left: 80%;\">LPA &nbsp;</span></mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n\r\n    <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n      अगर लड़का /लड़की की सालाना इनकम 10 लाख है तोह यहाँ सिर्फ 10 भरे ।\r\n    </p>\r\n\r\n    <!-- <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\" *ngIf=\"PageTwo.value.Occupation !== 'Not Working'\">\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Working City</mat-label>\r\n        <input type=\"text\" matInput id=\"workingCity\" [autoCompleteOptions]=\"autoComplete\" matValidateAddress\r\n          matGoogleMapsAutocomplete #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChanged()\"\r\n          formControlName=\"Working\">\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div> -->\r\n\r\n    <div [ngClass]=\"{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }\" *ngIf=\"PageTwo.value.Occupation !== 'Not Working' && showWorkingCity\">\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Working City</mat-label>\r\n      <input type=\"text\" matInput id=\"workingCity\" (change)=\"placeChanged()\" formControlName=\"Working\" [matAutocomplete]=\"Working\">\r\n      <mat-autocomplete (optionSelected)='workingCityChanged($event.option.value)' autoActiveFirstOption\r\n        #Working=\"matAutocomplete\">\r\n        <mat-option *ngFor=\"let cities of workingCities | async\" [value]=\"cities\" required>\r\n          {{cities}}\r\n        </mat-option>\r\n      </mat-autocomplete>\r\n    </mat-form-field>\r\n    </div>\r\n\r\n\r\n    <div class=\"col-12\" *ngIf=\"fourPageService.profile.gender === 'Female' && fourPageService.getUserThrough() \">\r\n      <!-- <h6>Wish to go abroad?</h6> -->\r\n      <mat-form-field class=\"full-width fieldFit\" appearance=\"standard\">\r\n        <mat-label>Wish to go abroad?</mat-label>\r\n        <mat-select formControlName=\"abroad\" (selectionChange)=\"changedAbroad()\">\r\n          <mat-option value=\"Yes\">Yes</mat-option>\r\n          <mat-option value=\"No\">No</mat-option>\r\n        </mat-select>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"col-12\" *ngIf=\"fourPageService.getUserThrough() \">\r\n      <mat-form-field class=\"full-width\" style=\"margin-top: 25px;\" appearance=\"standard\">\r\n        <mat-label>About<code style=\"color: rgba(0,0,0,.6);\">(optional)</code></mat-label>\r\n        <textarea rows=\"5\" type=\"text\" matInput formControlName=\"About\" name=\"About\">\r\n                                </textarea>\r\n        <mat-error *ngIf=\"PageTwo.invalid && nextClickedTwo\">*this field is required</mat-error>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"col-xs-12 m-t-20\" style=\"margin-top: 10px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;display: flex;\r\n      flex-direction:row;\r\n      align-items: center;\r\n      justify-content: center;\"\r\n      *ngIf=\"fourPageService.getUserThrough()\"\r\n      >\r\n      <button class=\"backBtn\" matStepperPrevious *ngIf=\"!fourPageService.getUserThrough()\">\r\n        <img src=\"../../assets/backN.svg\" class=\"backArrow\" alt=\"BACK\">\r\n        <p style=\"margin:auto 0 auto 5px\">Back</p>\r\n      </button>\r\n      <button *ngIf=\"fourPageService.getUserThrough()\" mat-raised-button type=\"button\" id=\"viewButton2\"\r\n        style=\"margin-right: 10px;\" matStepperPrevious class=\"btn\">Back</button>\r\n      <button mat-raised-button type=\"button\" id=\"skipBtn\" matStepperNext class=\"btn\" (click)=\"skip()\"\r\n        *ngIf=\"fourPageService.getSkippable()\">Skip</button>\r\n      <button type=\"button\" id=\"viewButton2\" mat-raised-button matStepperNext class=\"btn\" (click)=\"firstStep()\"><a\r\n          *ngIf=\"!fourPageService.getUserThrough()\">See Profiles</a><a\r\n          *ngIf=\"fourPageService.getUserThrough()\">Next</a></button>\r\n    </div>\r\n    <!-- <p *ngIf=\"!fourPageService.getUserThrough()\" class=\"impNoteMain\">\r\n                      Great! Thanks for letting us know about yourself.\r\n                    </p> -->\r\n    <p *ngIf=\"fourPageService.getUserThrough()\" class=\"impNote\">\r\n      डिटेल्स भरने के बाद इस बटन पर जरूर क्लिक करे |\r\n    </p>\r\n  </div>\r\n</form>";
     /***/
   },
 
@@ -202,6 +222,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/compatibility-form/testimonials/testimonials.component.html":
+  /*!*******************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/compatibility-form/testimonials/testimonials.component.html ***!
+    \*******************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppCompatibilityFormTestimonialsTestimonialsComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"testimonials\">\r\n    <div class=\"d-flex justify-content-center\">\r\n        <h1>\r\n            Happy <span style=\"color:#4EB7E6\">Clients</span>\r\n            <hr class=\"one\">\r\n        <hr class=\"two\">\r\n        </h1>\r\n        \r\n    </div>\r\n    <div class=\"carousel-div\">\r\n        <owl-carousel-o [options]=\"customOptions\">\r\n            <ng-template class=\"slide\" carouselSlide>\r\n                <div class=\"container mx-4\">\r\n                    <div style=\"position:relative\" class=\"row\">\r\n                        <div class=\"col-4\">\r\n                            <img \r\n                            id=\"testimonialImage\"\r\n                            src=\"{{testimonials[0].image}}\"\r\n                            alt=\"hansmatrimony-success-stories-image-2\"\r\n                            >\r\n                        </div>\r\n                        <div class=\"col-8\">\r\n                            <div>\r\n                                <img class=\"comma\" src=\"../../../assets/testimonials/comma.svg\" alt=\"hansmatrimony-success-stories-image-3\">\r\n                                <div class=\"testimonial-text\">\r\n                                    <h2>{{testimonials[0].title}}</h2>\r\n                                    <p>{{testimonials[0].paragraph}}</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n            <ng-template class=\"slide\" carouselSlide>\r\n                <div class=\"container mx-4\">\r\n                    <div style=\"position:relative\" class=\"row\">\r\n                        <div class=\"col-4\">\r\n                            <img  id=\"testimonialImage\" src=\"{{testimonials[1].image}}\">\r\n                        </div>\r\n                        <div class=\"col-8\">\r\n                            <div>\r\n                                <img class=\"comma\" src=\"../../../assets/testimonials/comma.svg\" alt=\"hansmatrimony-success-stories-image-4\">\r\n                                <div class=\"testimonial-text\">\r\n                                    <h2>{{testimonials[1].title}}</h2>\r\n                                    <p>{{testimonials[1].paragraph}}</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                \r\n            </ng-template>\r\n            <ng-template class=\"slide\" carouselSlide>\r\n                <div class=\"container mx-4\">\r\n                    <div style=\"position:relative\" class=\"row\">\r\n                        <div class=\"col-4\">\r\n                            <img  id=\"testimonialImage\" src=\"{{testimonials[2].image}}\">\r\n                        </div>\r\n                        <div class=\"col-8\">\r\n                            <div>\r\n                                <img class=\"comma\" src=\"../../../assets/testimonials/comma.svg\" alt=\"hansmatrimony-success-stories-image-2\">\r\n                                <div class=\"testimonial-text\">\r\n                                    <h2>{{testimonials[2].title}}</h2>\r\n                                    <p>{{testimonials[2].paragraph}}</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n            <ng-template class=\"slide\" carouselSlide>\r\n                <div class=\"container mx-4\">\r\n                    <div style=\"position:relative\" class=\"row\">\r\n                        <div class=\"col-4\">\r\n                            <img  id=\"testimonialImage\" src=\"{{testimonials[3].image}}\" alt=\"hansmatrimony-success-stories-image-3\">\r\n                        </div>\r\n                        <div class=\"col-8\">\r\n                            <div>\r\n                                <img class=\"comma\" src=\"../../../assets/testimonials/comma.svg\" alt=\"hansmatrimony-success-stories-image-4\">\r\n                                <div class=\"testimonial-text\">\r\n                                    <h2>{{testimonials[3].title}}</h2>\r\n                                    <p>{{testimonials[3].paragraph}}</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n        </owl-carousel-o>\r\n    </div>\r\n    \r\n</div>";
+    /***/
+  },
+
+  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/compatibility-form/thank-you/thank-you.component.html":
   /*!*************************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/compatibility-form/thank-you/thank-you.component.html ***!
@@ -218,6 +258,107 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     __webpack_exports__["default"] = "<div class=\"mainBack\">\r\n    <main class=\"special\">\r\n        <div class=\"text-center\">\r\n            <span class=\"topheader\">Thank You</span><br>\r\n            <span style=\"color:white!important; font-size:18px\">For Registering With Us</span>\r\n        </div>\r\n        <div class=\"cardMiddle\">\r\n            <div class=\"circular\">\r\n                <img style=\"width:100%\" src=\"../../../assets/new icons/green_circular_white_tick.svg\" alt=\"heart\">\r\n            </div>\r\n            <div style=\"display:flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content:center\" class=\"text-center\">\r\n                <p style=\"font-size:19px;font-weight:450;margin:auto!important;color:rgb(51, 59, 52)!important;\">\r\n                    Contacts have been added to your Account Succesfully!</p>\r\n            </div>\r\n        </div>\r\n        <div style=\"position: relative;\r\n        height:80px;\r\n        margin-top: 5%;\r\n        display:flex;\r\n        flex-direction: row;\r\n        align-items: center;\r\n        justify-content:center;\">\r\n            <button class=\"SpecialCase\" style=\"position:absolute;\r\n            margin:auto;\r\n    height:100%;\r\n    background:#00c2cb!important; \r\n    /* width:87%!important;  */\r\n    color:rgb(255, 255, 255);\r\n    margin-top:20px;\r\n    border:0px!important;\r\n    border-radius:30px 30px 30px 30px\" mat-raised-button (click)=\"goToChat()\">View Profiles Now</button>\r\n        </div>\r\n    </main>\r\n</div>";
+    /***/
+  },
+
+  /***/
+  "./src/app/choice-list/choice-list.component.css":
+  /*!*******************************************************!*\
+    !*** ./src/app/choice-list/choice-list.component.css ***!
+    \*******************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppChoiceListChoiceListComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "button{\r\n    width:79px;\r\n    height:22px;\r\n    border:none;\r\n    outline:none;\r\n    border-radius:5px;\r\n    color:white;\r\n    font-size:10px;\r\n}\r\n.btn-holder{\r\n    display: flex;\r\n}\r\n.view{\r\n    background-color:#4EB7E6;\r\n    margin-right:5px;\r\n}\r\n.contact{\r\n    background-color:#77BF64;\r\n}\r\n.choice-card{\r\n    width:157px;\r\n}\r\n@media only screen and (min-width: 768px){\r\n   .mobileScreen{\r\n       display: none;\r\n   }\r\n}\r\n@media only screen and (max-width: 767px){\r\n    .desktop{\r\n        display:none;\r\n    }\r\n    .screen-row{\r\n        display:flex;\r\n        justify-content: space-evenly;\r\n        margin-bottom:20px;\r\n    }\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hvaWNlLWxpc3QvY2hvaWNlLWxpc3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFVBQVU7SUFDVixXQUFXO0lBQ1gsV0FBVztJQUNYLFlBQVk7SUFDWixpQkFBaUI7SUFDakIsV0FBVztJQUNYLGNBQWM7QUFDbEI7QUFDQTtJQUNJLGFBQWE7QUFDakI7QUFDQTtJQUNJLHdCQUF3QjtJQUN4QixnQkFBZ0I7QUFDcEI7QUFDQTtJQUNJLHdCQUF3QjtBQUM1QjtBQUNBO0lBQ0ksV0FBVztBQUNmO0FBQ0E7R0FDRztPQUNJLGFBQWE7R0FDakI7QUFDSDtBQUNBO0lBQ0k7UUFDSSxZQUFZO0lBQ2hCO0lBQ0E7UUFDSSxZQUFZO1FBQ1osNkJBQTZCO1FBQzdCLGtCQUFrQjtJQUN0QjtBQUNKIiwiZmlsZSI6InNyYy9hcHAvY2hvaWNlLWxpc3QvY2hvaWNlLWxpc3QuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImJ1dHRvbntcclxuICAgIHdpZHRoOjc5cHg7XHJcbiAgICBoZWlnaHQ6MjJweDtcclxuICAgIGJvcmRlcjpub25lO1xyXG4gICAgb3V0bGluZTpub25lO1xyXG4gICAgYm9yZGVyLXJhZGl1czo1cHg7XHJcbiAgICBjb2xvcjp3aGl0ZTtcclxuICAgIGZvbnQtc2l6ZToxMHB4O1xyXG59XHJcbi5idG4taG9sZGVye1xyXG4gICAgZGlzcGxheTogZmxleDtcclxufVxyXG4udmlld3tcclxuICAgIGJhY2tncm91bmQtY29sb3I6IzRFQjdFNjtcclxuICAgIG1hcmdpbi1yaWdodDo1cHg7XHJcbn1cclxuLmNvbnRhY3R7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiM3N0JGNjQ7XHJcbn1cclxuLmNob2ljZS1jYXJke1xyXG4gICAgd2lkdGg6MTU3cHg7XHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA3NjhweCl7XHJcbiAgIC5tb2JpbGVTY3JlZW57XHJcbiAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICB9XHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjdweCl7XHJcbiAgICAuZGVza3RvcHtcclxuICAgICAgICBkaXNwbGF5Om5vbmU7XHJcbiAgICB9XHJcbiAgICAuc2NyZWVuLXJvd3tcclxuICAgICAgICBkaXNwbGF5OmZsZXg7XHJcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XHJcbiAgICAgICAgbWFyZ2luLWJvdHRvbToyMHB4O1xyXG4gICAgfVxyXG59Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/choice-list/choice-list.component.ts":
+  /*!******************************************************!*\
+    !*** ./src/app/choice-list/choice-list.component.ts ***!
+    \******************************************************/
+
+  /*! exports provided: ChoiceListComponent */
+
+  /***/
+  function srcAppChoiceListChoiceListComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ChoiceListComponent", function () {
+      return ChoiceListComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+
+    var ChoiceListComponent = /*#__PURE__*/function () {
+      function ChoiceListComponent() {
+        _classCallCheck(this, ChoiceListComponent);
+
+        this.gender = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.boy = false;
+        this.girl = false;
+      }
+
+      _createClass(ChoiceListComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }, {
+        key: "toggleBoy",
+        value: function toggleBoy() {
+          this.boy = true;
+          this.girl = false;
+          this.selectGender();
+        }
+      }, {
+        key: "toggleGirl",
+        value: function toggleGirl() {
+          this.boy = false;
+          this.girl = true;
+          this.selectGender();
+        }
+      }, {
+        key: "selectGender",
+        value: function selectGender() {
+          this.gender.emit(this.boy);
+        }
+      }]);
+
+      return ChoiceListComponent;
+    }();
+
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()], ChoiceListComponent.prototype, "gender", void 0);
+    ChoiceListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-choice-list',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./choice-list.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/choice-list/choice-list.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./choice-list.component.css */
+      "./src/app/choice-list/choice-list.component.css"))["default"]]
+    })], ChoiceListComponent);
     /***/
   },
 
@@ -452,7 +593,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".fixToolBar {\r\n  background-color: #ffffff;\r\n}\r\n.textRegister {\r\n    font-weight:bolder;\r\n    padding-top:1rem;\r\n    text-align: center;\r\n     color: #285fdd\r\n}\r\nmain{\r\n  font-family: 'Gotham Rounded Book',Roboto, \"Helvetica Neue\", sans-serif !important; \r\n  background: url('bgicon.png') no-repeat center !important;\r\n  background-size: cover;\r\n}\r\n.mat-stepper-horizontal{\r\n  background-color: white !important;\r\n}\r\ninput.form-control.ng-invalid.ng-touched{\r\n  border: 1px solid red;\r\n}\r\nselect.form-control.ng-invalid.ng-touched{\r\n  border: 1px solid red;\r\n}\r\n::ng-deep .mat-step-label{\r\n  color: black !important;\r\n}\r\n::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{\r\n  background-color: #34b7f1 !important;\r\n  }\r\n::ng-deep .mat-stepper-horizontal-line {\r\n    border-top-color:black !important;\r\n    width: 80%;\r\n  }\r\n::ng-deep .mat-step-icon {\r\nbackground-color: rgba(0,0,0,.6) !important;\r\n}\r\n::ng-deep .mat-select-value {\r\n    color: black !important;\r\n}\r\n::ng-deep .mat-checkbox-inner-container{\r\n  border: 1px solid black;\r\n}\r\n.fieldFit{\r\n  height: 45px;\r\n  margin-bottom: 0.6rem;\r\n}\r\n::ng-deep .mat-hint{\r\n  color: rgba(0,0,0,.6);\r\n  padding-bottom: 5px;\r\n}\r\n.impNote {\r\n  margin: 5px 0px;\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  color: #737373;\r\n  font-size: 0.85rem;\r\n}\r\n.impNoteMain {\r\n  margin: 0px;\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  color: #737373;\r\n  font-size: 0.85rem;\r\n  text-align: center;\r\n  letter-spacing: 2px;\r\n  line-height: 25px;\r\n}\r\n.matSelect{\r\n  margin-top: 10px;\r\n}\r\n#viewButton{\r\n  background: #34b7f1;\r\n  color: white;\r\n  padding-left: 40px;\r\n  padding-right: 40px;\r\nbox-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),\r\n12px 12px 14px rgba(0, 0, 0, 0.2);\r\n}\r\n.customBackground{\r\n  border-radius: 10px;\r\n  padding: 5px;\r\n  background: white;\r\n  box-shadow: -12px -12px 12px 0 rgba(0, 0, 0, 0.1),\r\n12px 12px 12px 0 rgba(0, 0, 0, 0.1);\r\n}\r\n@media (max-width: 1920px) {\r\nmain {\r\n    height: 100%;\r\n    overflow: auto;\r\n    }\r\n    select {\r\n\r\n        /* styling */\r\n        background-color: white;\r\n        border-radius: 4px;\r\n        display: inline-block;\r\n        font: inherit;\r\n        padding: 5px 30px 5px 3px;\r\n      \r\n        /* reset */\r\n      \r\n        margin: 0;\r\n        box-sizing: border-box;\r\n        -webkit-appearance: none;\r\n        -moz-appearance: none;\r\n      }\r\n      \r\n      \r\n      /* arrows */\r\n      \r\n      .classic {\r\n        background-image:\r\n          linear-gradient(45deg, transparent 50%, blue 50%),\r\n          linear-gradient(135deg, blue 50%, transparent 50%),\r\n          linear-gradient(to right, white, skyblue);\r\n        background-position:\r\n          calc(100% - 20px) calc(1em + 2px),\r\n          calc(100% - 15px) calc(1em + 2px),\r\n          100% 0;\r\n        background-size:\r\n          5px 5px,\r\n          5px 5px,\r\n          2.5em 2.5em;\r\n        background-repeat: no-repeat;\r\n        border: 1px solid #c8c8c8;\r\n        /* background:#f2f2f2 */\r\n      }\r\n      \r\n      .classic:focus {\r\n        background-image:\r\n          linear-gradient(45deg, white 50%, transparent 50%),\r\n          linear-gradient(135deg, transparent 50%, white 50%),\r\n          linear-gradient(to right, white, gray);\r\n        background-position:\r\n          calc(100% - 15px) 1em,\r\n          calc(100% - 20px) 1em,\r\n          100% 0;\r\n        background-size:\r\n          5px 5px,\r\n          5px 5px,\r\n          2.5em 2.5em;\r\n        background-repeat: no-repeat;\r\n        border-color: grey;\r\n        outline: 0;\r\n        /* background:#f2f2f2 */\r\n      }\r\n      .customBackground{\r\n        border-radius: 10px;\r\n        padding: 5px;\r\n        background: white;\r\n        box-shadow: -12px -12px 12px 0 rgba(0, 0, 0, 0.03),\r\n      12px 12px 12px 0 rgba(0, 0, 0, 0.1);\r\n      }\r\n}\r\n\r\n  \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcGF0aWJpbGl0eS1mb3JtL2NvbXBhdGliaWxpdHktZm9ybS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQXlCO0FBQzNCO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGtCQUFrQjtLQUNqQjtBQUNMO0FBQ0E7RUFDRSxrRkFBa0Y7RUFDbEYseURBQW9FO0VBQ3BFLHNCQUFzQjtBQUN4QjtBQUNBO0VBQ0Usa0NBQWtDO0FBQ3BDO0FBQ0E7RUFDRSxxQkFBcUI7QUFDdkI7QUFDQTtFQUNFLHFCQUFxQjtBQUN2QjtBQUNBO0VBQ0UsdUJBQXVCO0FBQ3pCO0FBQ0E7RUFDRSxvQ0FBb0M7RUFDcEM7QUFDQTtJQUNFLGlDQUFpQztJQUNqQyxVQUFVO0VBQ1o7QUFDRjtBQUNBLDJDQUEyQztBQUMzQztBQUVBO0lBQ0ksdUJBQXVCO0FBQzNCO0FBRUE7RUFDRSx1QkFBdUI7QUFDekI7QUFDQTtFQUNFLFlBQVk7RUFDWixxQkFBcUI7QUFDdkI7QUFDQTtFQUNFLHFCQUFxQjtFQUNyQixtQkFBbUI7QUFDckI7QUFFQTtFQUNFLGVBQWU7RUFDZixtQkFBbUI7RUFDbkIsa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxrQkFBa0I7QUFDcEI7QUFDQTtFQUNFLFdBQVc7RUFDWCxtQkFBbUI7RUFDbkIsa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixpQkFBaUI7QUFDbkI7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjtBQUVBO0VBQ0UsbUJBQW1CO0VBQ25CLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsbUJBQW1CO0FBQ3JCO2lDQUNpQztBQUNqQztBQUNBO0VBQ0UsbUJBQW1CO0VBQ25CLFlBQVk7RUFDWixpQkFBaUI7RUFDakI7bUNBQ2lDO0FBQ25DO0FBRUE7QUFDQTtJQUNJLFlBQVk7SUFDWixjQUFjO0lBQ2Q7SUFDQTs7UUFFSSxZQUFZO1FBQ1osdUJBQXVCO1FBQ3ZCLGtCQUFrQjtRQUNsQixxQkFBcUI7UUFDckIsYUFBYTtRQUNiLHlCQUF5Qjs7UUFFekIsVUFBVTs7UUFFVixTQUFTO1FBR1Qsc0JBQXNCO1FBQ3RCLHdCQUF3QjtRQUN4QixxQkFBcUI7TUFDdkI7OztNQUdBLFdBQVc7O01BRVg7UUFDRTs7O21EQUcyQztRQUMzQzs7O2dCQUdRO1FBQ1I7OztxQkFHYTtRQUNiLDRCQUE0QjtRQUM1Qix5QkFBeUI7UUFDekIsdUJBQXVCO01BQ3pCOztNQUVBO1FBQ0U7OztnREFHd0M7UUFDeEM7OztnQkFHUTtRQUNSOzs7cUJBR2E7UUFDYiw0QkFBNEI7UUFDNUIsa0JBQWtCO1FBQ2xCLFVBQVU7UUFDVix1QkFBdUI7TUFDekI7TUFDQTtRQUNFLG1CQUFtQjtRQUNuQixZQUFZO1FBQ1osaUJBQWlCO1FBQ2pCO3lDQUNpQztNQUNuQztBQUNOIiwiZmlsZSI6InNyYy9hcHAvY29tcGF0aWJpbGl0eS1mb3JtL2NvbXBhdGliaWxpdHktZm9ybS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZpeFRvb2xCYXIge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XHJcbn1cclxuLnRleHRSZWdpc3RlciB7XHJcbiAgICBmb250LXdlaWdodDpib2xkZXI7XHJcbiAgICBwYWRkaW5nLXRvcDoxcmVtO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgIGNvbG9yOiAjMjg1ZmRkXHJcbn1cclxubWFpbntcclxuICBmb250LWZhbWlseTogJ0dvdGhhbSBSb3VuZGVkIEJvb2snLFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmICFpbXBvcnRhbnQ7IFxyXG4gIGJhY2tncm91bmQ6IHVybCguLi8uLi9hc3NldHMvYmdpY29uLnBuZykgbm8tcmVwZWF0IGNlbnRlciAhaW1wb3J0YW50O1xyXG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XHJcbn1cclxuLm1hdC1zdGVwcGVyLWhvcml6b250YWx7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGUgIWltcG9ydGFudDtcclxufVxyXG5pbnB1dC5mb3JtLWNvbnRyb2wubmctaW52YWxpZC5uZy10b3VjaGVke1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkIHJlZDtcclxufVxyXG5zZWxlY3QuZm9ybS1jb250cm9sLm5nLWludmFsaWQubmctdG91Y2hlZHtcclxuICBib3JkZXI6IDFweCBzb2xpZCByZWQ7XHJcbn1cclxuOjpuZy1kZWVwIC5tYXQtc3RlcC1sYWJlbHtcclxuICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcclxufVxyXG46Om5nLWRlZXAgLm1hdC1zdGVwLWhlYWRlciAubWF0LXN0ZXAtaWNvbi1zZWxlY3RlZCwgLm1hdC1zdGVwLWhlYWRlciAubWF0LXN0ZXAtaWNvbi1zdGF0ZS1kb25lLCAubWF0LXN0ZXAtaGVhZGVyIC5tYXQtc3RlcC1pY29uLXN0YXRlLWVkaXR7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzM0YjdmMSAhaW1wb3J0YW50O1xyXG4gIH1cclxuICA6Om5nLWRlZXAgLm1hdC1zdGVwcGVyLWhvcml6b250YWwtbGluZSB7XHJcbiAgICBib3JkZXItdG9wLWNvbG9yOmJsYWNrICFpbXBvcnRhbnQ7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gIH1cclxuOjpuZy1kZWVwIC5tYXQtc3RlcC1pY29uIHtcclxuYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLDAsMCwuNikgIWltcG9ydGFudDtcclxufVxyXG5cclxuOjpuZy1kZWVwIC5tYXQtc2VsZWN0LXZhbHVlIHtcclxuICAgIGNvbG9yOiBibGFjayAhaW1wb3J0YW50O1xyXG59XHJcblxyXG46Om5nLWRlZXAgLm1hdC1jaGVja2JveC1pbm5lci1jb250YWluZXJ7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgYmxhY2s7XHJcbn1cclxuLmZpZWxkRml0e1xyXG4gIGhlaWdodDogNDVweDtcclxuICBtYXJnaW4tYm90dG9tOiAwLjZyZW07XHJcbn1cclxuOjpuZy1kZWVwIC5tYXQtaGludHtcclxuICBjb2xvcjogcmdiYSgwLDAsMCwuNik7XHJcbiAgcGFkZGluZy1ib3R0b206IDVweDtcclxufVxyXG5cclxuLmltcE5vdGUge1xyXG4gIG1hcmdpbjogNXB4IDBweDtcclxuICBwYWRkaW5nLXJpZ2h0OiAxNXB4O1xyXG4gIHBhZGRpbmctbGVmdDogMTVweDtcclxuICBjb2xvcjogIzczNzM3MztcclxuICBmb250LXNpemU6IDAuODVyZW07XHJcbn1cclxuLmltcE5vdGVNYWluIHtcclxuICBtYXJnaW46IDBweDtcclxuICBwYWRkaW5nLXJpZ2h0OiAxNXB4O1xyXG4gIHBhZGRpbmctbGVmdDogMTVweDtcclxuICBjb2xvcjogIzczNzM3MztcclxuICBmb250LXNpemU6IDAuODVyZW07XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGxldHRlci1zcGFjaW5nOiAycHg7XHJcbiAgbGluZS1oZWlnaHQ6IDI1cHg7XHJcbn1cclxuXHJcbi5tYXRTZWxlY3R7XHJcbiAgbWFyZ2luLXRvcDogMTBweDtcclxufVxyXG5cclxuI3ZpZXdCdXR0b257XHJcbiAgYmFja2dyb3VuZDogIzM0YjdmMTtcclxuICBjb2xvcjogd2hpdGU7XHJcbiAgcGFkZGluZy1sZWZ0OiA0MHB4O1xyXG4gIHBhZGRpbmctcmlnaHQ6IDQwcHg7XHJcbmJveC1zaGFkb3c6IC0xMnB4IC0xMnB4IDE0cHggMCByZ2JhKDI1NSwgMjU1LCAyNTUsIDEpLFxyXG4xMnB4IDEycHggMTRweCByZ2JhKDAsIDAsIDAsIDAuMik7XHJcbn1cclxuLmN1c3RvbUJhY2tncm91bmR7XHJcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcclxuICBwYWRkaW5nOiA1cHg7XHJcbiAgYmFja2dyb3VuZDogd2hpdGU7XHJcbiAgYm94LXNoYWRvdzogLTEycHggLTEycHggMTJweCAwIHJnYmEoMCwgMCwgMCwgMC4xKSxcclxuMTJweCAxMnB4IDEycHggMCByZ2JhKDAsIDAsIDAsIDAuMSk7XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiAxOTIwcHgpIHtcclxubWFpbiB7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBvdmVyZmxvdzogYXV0bztcclxuICAgIH1cclxuICAgIHNlbGVjdCB7XHJcblxyXG4gICAgICAgIC8qIHN0eWxpbmcgKi9cclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XHJcbiAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgICAgIGZvbnQ6IGluaGVyaXQ7XHJcbiAgICAgICAgcGFkZGluZzogNXB4IDMwcHggNXB4IDNweDtcclxuICAgICAgXHJcbiAgICAgICAgLyogcmVzZXQgKi9cclxuICAgICAgXHJcbiAgICAgICAgbWFyZ2luOiAwOyAgICAgIFxyXG4gICAgICAgIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDtcclxuICAgICAgICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgICAgICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcclxuICAgICAgICAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7XHJcbiAgICAgICAgLW1vei1hcHBlYXJhbmNlOiBub25lO1xyXG4gICAgICB9XHJcbiAgICAgIFxyXG4gICAgICBcclxuICAgICAgLyogYXJyb3dzICovXHJcbiAgICAgIFxyXG4gICAgICAuY2xhc3NpYyB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1pbWFnZTpcclxuICAgICAgICAgIGxpbmVhci1ncmFkaWVudCg0NWRlZywgdHJhbnNwYXJlbnQgNTAlLCBibHVlIDUwJSksXHJcbiAgICAgICAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBibHVlIDUwJSwgdHJhbnNwYXJlbnQgNTAlKSxcclxuICAgICAgICAgIGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgd2hpdGUsIHNreWJsdWUpO1xyXG4gICAgICAgIGJhY2tncm91bmQtcG9zaXRpb246XHJcbiAgICAgICAgICBjYWxjKDEwMCUgLSAyMHB4KSBjYWxjKDFlbSArIDJweCksXHJcbiAgICAgICAgICBjYWxjKDEwMCUgLSAxNXB4KSBjYWxjKDFlbSArIDJweCksXHJcbiAgICAgICAgICAxMDAlIDA7XHJcbiAgICAgICAgYmFja2dyb3VuZC1zaXplOlxyXG4gICAgICAgICAgNXB4IDVweCxcclxuICAgICAgICAgIDVweCA1cHgsXHJcbiAgICAgICAgICAyLjVlbSAyLjVlbTtcclxuICAgICAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xyXG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkICNjOGM4Yzg7XHJcbiAgICAgICAgLyogYmFja2dyb3VuZDojZjJmMmYyICovXHJcbiAgICAgIH1cclxuICAgICAgXHJcbiAgICAgIC5jbGFzc2ljOmZvY3VzIHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWltYWdlOlxyXG4gICAgICAgICAgbGluZWFyLWdyYWRpZW50KDQ1ZGVnLCB3aGl0ZSA1MCUsIHRyYW5zcGFyZW50IDUwJSksXHJcbiAgICAgICAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCB0cmFuc3BhcmVudCA1MCUsIHdoaXRlIDUwJSksXHJcbiAgICAgICAgICBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsIHdoaXRlLCBncmF5KTtcclxuICAgICAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOlxyXG4gICAgICAgICAgY2FsYygxMDAlIC0gMTVweCkgMWVtLFxyXG4gICAgICAgICAgY2FsYygxMDAlIC0gMjBweCkgMWVtLFxyXG4gICAgICAgICAgMTAwJSAwO1xyXG4gICAgICAgIGJhY2tncm91bmQtc2l6ZTpcclxuICAgICAgICAgIDVweCA1cHgsXHJcbiAgICAgICAgICA1cHggNXB4LFxyXG4gICAgICAgICAgMi41ZW0gMi41ZW07XHJcbiAgICAgICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcclxuICAgICAgICBib3JkZXItY29sb3I6IGdyZXk7XHJcbiAgICAgICAgb3V0bGluZTogMDtcclxuICAgICAgICAvKiBiYWNrZ3JvdW5kOiNmMmYyZjIgKi9cclxuICAgICAgfVxyXG4gICAgICAuY3VzdG9tQmFja2dyb3VuZHtcclxuICAgICAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gICAgICAgIHBhZGRpbmc6IDVweDtcclxuICAgICAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICAgICAgICBib3gtc2hhZG93OiAtMTJweCAtMTJweCAxMnB4IDAgcmdiYSgwLCAwLCAwLCAwLjAzKSxcclxuICAgICAgMTJweCAxMnB4IDEycHggMCByZ2JhKDAsIDAsIDAsIDAuMSk7XHJcbiAgICAgIH1cclxufVxyXG5cclxuICAiXX0= */";
+    __webpack_exports__["default"] = "@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');\r\n.fixToolBar {\r\n  background-color: #ffffff;\r\n}\r\na{\r\n  width:100%;\r\n}\r\n.register-btn {\r\n  position:fixed;\r\n  bottom:0;\r\n  z-index:100;\r\n  width:80%;\r\n  height:50px;\r\n  color:white;\r\n  text-align:center;\r\n  align-items:center;\r\n  border:none;\r\n  outline:none;\r\n  background-color: #4EB7E6;\r\n  border-radius:8px;\r\n}\r\n.whyus{\r\n    margin-top:100px;\r\n    width:100%;\r\n}\r\n.sparkles{\r\n    height:16px;\r\n    width:11px;\r\n}\r\n#y{\r\n    width:200px;\r\n    height:200px;\r\n}\r\n/* .feature-card-container:hover .feature-card-holder{\r\n    filter:blur(20px);\r\n    transform:scale(0.9);\r\n    opacity:0.5;\r\n} */\r\n.feature-card-container .feature-card-holder:hover{\r\n    -webkit-filter:blur(0px);\r\n            filter:blur(0px);\r\n    transform:scale(1.1);\r\n    opacity:1;\r\n}\r\n.feature-card-container .feature-card-holder{\r\n    border-radius:10px;\r\n    padding:10px;\r\n    transition:0.5s;\r\n}\r\n.header{\r\n    background-size: cover;\r\n}\r\ndiv,.row,.col{\r\n    margin:0;\r\n    top:0;\r\n    padding:0;\r\n}\r\n.slide{\r\n    background-color:transparent; \r\n}\r\n.carousel-div{\r\n    margin-top:40px;\r\n}\r\n.featureCard2{\r\n    width: 80%;\r\n    height: auto;\r\n    overflow: hidden;\r\n    padding: 0px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    background-color:transparent;\r\n    border:none;\r\n    box-shadow:none;\r\n}\r\n.feature2Img{\r\n    width: 80%;\r\n    height: 80%;\r\n}\r\n.feture2Img:hover{\r\n    -webkit-animation:big 3s 1;\r\n            animation:big 3s 1;\r\n}\r\n@-webkit-keyframes big{\r\n    25% {\r\n        transform: scale(1.5);\r\n      }\r\n      50% {\r\n        transform: scale(1.25);\r\n      }\r\n      75% {\r\n        transform: scale(2);\r\n      }\r\n      100% {\r\n        transform:scale(1.75);\r\n      }\r\n}\r\n@keyframes big{\r\n    25% {\r\n        transform: scale(1.5);\r\n      }\r\n      50% {\r\n        transform: scale(1.25);\r\n      }\r\n      75% {\r\n        transform: scale(2);\r\n      }\r\n      100% {\r\n        transform:scale(1.75);\r\n      }\r\n}\r\n.temple-card{\r\n    /* height:45vh; */\r\n    overflow:hidden;\r\n    display:flex;\r\n    flex-direction:column;\r\n    justify-content: center;\r\n    align-items:center;\r\n    /* width:100%; */\r\n}\r\n.feature-card-container{\r\n\r\n}\r\n.feature-card-holder{\r\n    \r\n}\r\n.wrapper-text p{\r\n    opacity: 0;\r\n}\r\n.wrapper-text{\r\n    opacity: 0;\r\n    -webkit-animation:ani2 1s ease-out forwards;\r\n            animation:ani2 1s ease-out forwards;\r\n}\r\n.wrapper-text p{\r\n    -webkit-animation:ani2 0.75s ease-out 3s forwards;\r\n            animation:ani2 0.75s ease-out 3s forwards;\r\n}\r\n.container{\r\n    margin-top:50px;\r\n}\r\n@media only screen and (max-width: 575px){\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    img{\r\n        width:200px;\r\n        height:200px;\r\n    }\r\n    p{\r\n        margin-top:20px;\r\n        font-weight:500;\r\n        text-align:center;\r\n        font-size:15px;\r\n        font-family:'Poppins', sans-serif;\r\n    }\r\n    h1{\r\n        font-size:24px;\r\n    }\r\n}\r\n@media only screen and (min-width: 576px){\r\n    \r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    img{\r\n        width:250px;\r\n        height:250px;\r\n    }\r\n    p{\r\n        margin-top:20px;\r\n        font-weight:500;\r\n        text-align:center;\r\n        font-size:15px;\r\n        font-family:'Poppins', sans-serif;\r\n    }\r\n}\r\n@media only screen and (min-width: 768px){\r\n    img{\r\n        width:200px;\r\n        height:200px;\r\n    }\r\n    p{\r\n        margin-top:20px;\r\n        font-weight:500;\r\n        text-align:center;\r\n        font-size:15px;\r\n        font-family:'Poppins', sans-serif;\r\n    }\r\n}\r\n@media only screen and (min-width: 992px){\r\n    \r\n    img{\r\n        width:300px;\r\n        height:300px;\r\n    }\r\n    p{\r\n        margin-top:20px;\r\n        font-weight:500;\r\n        text-align:center;\r\n        font-size:15px;\r\n        font-family:'Poppins', sans-serif;\r\n    }\r\n}\r\n@media only screen and (min-width: 1200px){\r\n    img{\r\n        width:370px;\r\n        height:370px;\r\n    }\r\n    p{\r\n        margin-top:20px;\r\n        text-align:center;\r\n        font-weight:500;\r\n    }\r\n}\r\nmain{\r\n  margin-top:20px;\r\n  border-radius:8px;\r\n  background: #FFFFFF;\r\n  border-top:11px solid #CECECE;\r\n  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n}\r\n.textRegister {\r\n    font-weight:bolder;\r\n    padding-top:1rem;\r\n    text-align: center;\r\n     color: #285fdd\r\n}\r\n.form-appear{\r\n  -webkit-animation: appear 2s 1;\r\n          animation: appear 2s 1;\r\n}\r\n/* ::ng-deep .mat-select-content{\r\n  width:2000px;\r\n  background-color: red;\r\n  font-size: 10px;   \r\n} */\r\n@-webkit-keyframes appear {\r\n  0% {\r\n    opacity:0;\r\n  }\r\n  50% {\r\n    opacity:0.5;\r\n  }\r\n  75% {\r\n    opacity:0.75;\r\n  }\r\n  100% {\r\n    opacity:1;\r\n  }\r\n}\r\n@keyframes appear {\r\n  0% {\r\n    opacity:0;\r\n  }\r\n  50% {\r\n    opacity:0.5;\r\n  }\r\n  75% {\r\n    opacity:0.75;\r\n  }\r\n  100% {\r\n    opacity:1;\r\n  }\r\n}\r\nmain{\r\n  font-family: 'Gotham Rounded Book',Roboto, \"Helvetica Neue\", sans-serif !important; \r\n  background: url('bgicon.png') no-repeat center !important;\r\n  background-size: cover;\r\n}\r\n::ng-deep .mat-stepper-horizontal{\r\n  background-color: white !important;\r\n}\r\ninput.form-control.ng-invalid.ng-touched{\r\n  border: 1px solid red;\r\n}\r\ninput{\r\n  background-color:rgba(206, 206, 206, 0.2);\r\n  padding:10px 5px;\r\n  border:none;\r\n  margin-right:10px;\r\n}\r\n::ng-deep .mat-form-field-label{\r\n  padding-top:10px;\r\n  padding-left:10px;\r\n}\r\nselect.form-control.ng-invalid.ng-touched{\r\n  border: 1px solid red;\r\n}\r\nselect.form-control{\r\n  border: none !important;\r\n}\r\n::ng-deep .mat-step-label{\r\n  color: black !important;\r\n}\r\n::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{\r\n  background-color: #34b7f1 !important;\r\n  }\r\n::ng-deep .mat-form-field-underline {\r\n    display: none !important;\r\n}\r\n::ng-deep .mat-form-field-flex{\r\n   border:none !important;\r\n   margin:0 !important;\r\n   padding:0 !important;\r\n}\r\n::ng-deep .mat-select-value {\r\n    color: black !important;\r\n    background-color:rgba(206, 206, 206, 0.2);\r\n    padding:10px 5px;\r\n    align-items: center !important;\r\n    border:none;\r\n}\r\n::ng-deep .mat-checkbox-inner-container{\r\n  border: 1px solid black;\r\n}\r\n.fieldFit{\r\n  height: 45px;\r\n  margin-bottom: 0.6rem;\r\n}\r\n::ng-deep .mat-hint{\r\n  color: rgba(0,0,0,.6);\r\n  padding-bottom: 5px;\r\n}\r\n.impNote {\r\n  margin: 5px 0px;\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  color: #737373;\r\n  font-size: 0.85rem;\r\n}\r\n.impNoteMain {\r\n  margin: 0px;\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  color: #737373;\r\n  font-size: 0.85rem;\r\n  text-align: center;\r\n  letter-spacing: 2px;\r\n  line-height: 25px;\r\n}\r\n.matSelect{\r\n  margin-top: 10px;\r\n}\r\n#viewButton{\r\n  background: #34b7f1;\r\n  color: white;\r\n  padding-left: 40px;\r\n  padding-right: 40px;\r\nbox-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),\r\n12px 12px 14px rgba(0, 0, 0, 0.2);\r\n}\r\n.customBackground{\r\n  border-radius: 10px;\r\n  padding: 5px;\r\n  background: white;\r\n  box-shadow: -12px -12px 12px 0 rgba(0, 0, 0, 0.1),\r\n12px 12px 12px 0 rgba(0, 0, 0, 0.1);\r\n}\r\n@media (max-width: 1920px) {\r\n\r\n    select {\r\n\r\n        /* styling */\r\n        background-color: rgba(206, 206, 206, 0.2);\r\n        color:black;\r\n        border-radius: 4px;\r\n        display: inline-block;\r\n        font: inherit;\r\n        padding: 5px 30px 5px 3px;\r\n      \r\n        /* reset */\r\n      \r\n        margin: 0;      \r\n        -webkit-box-sizing: border-box;\r\n        -moz-box-sizing: border-box;\r\n        border:none;\r\n        outline: none;\r\n        -webkit-appearance: none;\r\n        -moz-appearance: none;\r\n      }\r\n      \r\n      \r\n      /* arrows */\r\n      \r\n      .classic {\r\n        background-image:\r\n          linear-gradient(45deg, transparent 50%, blue 50%),\r\n          linear-gradient(135deg, blue 50%, transparent 50%),\r\n          linear-gradient(to right, white, skyblue);\r\n        background-position:\r\n          calc(100% - 20px) calc(1em + 2px),\r\n          calc(100% - 15px) calc(1em + 2px),\r\n          100% 0;\r\n        background-size:\r\n          5px 5px,\r\n          5px 5px,\r\n          2.5em 2.5em;\r\n        background-repeat: no-repeat;\r\n        border: 1px solid #c8c8c8;\r\n        /* background:#f2f2f2 */\r\n      }\r\n      \r\n      .classic:focus {\r\n        background-image:\r\n          linear-gradient(45deg, white 50%, transparent 50%),\r\n          linear-gradient(135deg, transparent 50%, white 50%),\r\n          linear-gradient(to right, white, gray);\r\n        background-position:\r\n          calc(100% - 15px) 1em,\r\n          calc(100% - 20px) 1em,\r\n          100% 0;\r\n        background-size:\r\n          5px 5px,\r\n          5px 5px,\r\n          2.5em 2.5em;\r\n        background-repeat: no-repeat;\r\n        border-color: grey;\r\n        outline: 0;\r\n        /* background:#f2f2f2 */\r\n      }\r\n      .customBackground{\r\n        border-radius: 10px;\r\n        padding: 5px;\r\n        background: white;\r\n        box-shadow: -12px -12px 12px 0 rgba(0, 0, 0, 0.03),\r\n      12px 12px 12px 0 rgba(0, 0, 0, 0.1);\r\n      }\r\n}\r\n\r\n  \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcGF0aWJpbGl0eS1mb3JtL2NvbXBhdGliaWxpdHktZm9ybS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHFGQUFxRjtBQUNyRjtFQUNFLHlCQUF5QjtBQUMzQjtBQUNBO0VBQ0UsVUFBVTtBQUNaO0FBQ0E7RUFDRSxjQUFjO0VBQ2QsUUFBUTtFQUNSLFdBQVc7RUFDWCxTQUFTO0VBQ1QsV0FBVztFQUNYLFdBQVc7RUFDWCxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLFdBQVc7RUFDWCxZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGlCQUFpQjtBQUNuQjtBQUNBO0lBQ0ksZ0JBQWdCO0lBQ2hCLFVBQVU7QUFDZDtBQUNBO0lBQ0ksV0FBVztJQUNYLFVBQVU7QUFDZDtBQUNBO0lBQ0ksV0FBVztJQUNYLFlBQVk7QUFDaEI7QUFDQTs7OztHQUlHO0FBQ0g7SUFDSSx3QkFBZ0I7WUFBaEIsZ0JBQWdCO0lBQ2hCLG9CQUFvQjtJQUNwQixTQUFTO0FBQ2I7QUFDQTtJQUNJLGtCQUFrQjtJQUNsQixZQUFZO0lBQ1osZUFBZTtBQUNuQjtBQUNBO0lBQ0ksc0JBQXNCO0FBQzFCO0FBQ0E7SUFDSSxRQUFRO0lBQ1IsS0FBSztJQUNMLFNBQVM7QUFDYjtBQUNBO0lBQ0ksNEJBQTRCO0FBQ2hDO0FBQ0E7SUFDSSxlQUFlO0FBQ25CO0FBQ0E7SUFDSSxVQUFVO0lBQ1YsWUFBWTtJQUNaLGdCQUFnQjtJQUNoQixZQUFZO0lBQ1osb0JBQWlCO09BQWpCLGlCQUFpQjtJQUNqQiw0QkFBNEI7SUFDNUIsV0FBVztJQUNYLGVBQWU7QUFDbkI7QUFDQTtJQUNJLFVBQVU7SUFDVixXQUFXO0FBQ2Y7QUFDQTtJQUNJLDBCQUFrQjtZQUFsQixrQkFBa0I7QUFDdEI7QUFDQTtJQUNJO1FBQ0kscUJBQXFCO01BQ3ZCO01BQ0E7UUFDRSxzQkFBc0I7TUFDeEI7TUFDQTtRQUNFLG1CQUFtQjtNQUNyQjtNQUNBO1FBQ0UscUJBQXFCO01BQ3ZCO0FBQ047QUFiQTtJQUNJO1FBQ0kscUJBQXFCO01BQ3ZCO01BQ0E7UUFDRSxzQkFBc0I7TUFDeEI7TUFDQTtRQUNFLG1CQUFtQjtNQUNyQjtNQUNBO1FBQ0UscUJBQXFCO01BQ3ZCO0FBQ047QUFDQTtJQUNJLGlCQUFpQjtJQUNqQixlQUFlO0lBQ2YsWUFBWTtJQUNaLHFCQUFxQjtJQUNyQix1QkFBdUI7SUFDdkIsa0JBQWtCO0lBQ2xCLGdCQUFnQjtBQUNwQjtBQUVBOztBQUVBO0FBQ0E7O0FBRUE7QUFHQTtJQUNJLFVBQVU7QUFDZDtBQUNBO0lBQ0ksVUFBVTtJQUNWLDJDQUFtQztZQUFuQyxtQ0FBbUM7QUFDdkM7QUFDQTtJQUNJLGlEQUF5QztZQUF6Qyx5Q0FBeUM7QUFDN0M7QUFDQTtJQUNJLGVBQWU7QUFDbkI7QUFDQTtJQUNJO1FBQ0ksd0JBQXdCO0lBQzVCO0lBQ0E7UUFDSSw0QkFBNEI7UUFDNUIsZUFBZTtRQUNmLGdCQUFnQjtJQUNwQjtJQUNBO1FBQ0ksV0FBVztRQUNYLFlBQVk7SUFDaEI7SUFDQTtRQUNJLGVBQWU7UUFDZixlQUFlO1FBQ2YsaUJBQWlCO1FBQ2pCLGNBQWM7UUFDZCxpQ0FBaUM7SUFDckM7SUFDQTtRQUNJLGNBQWM7SUFDbEI7QUFDSjtBQUNBOztJQUVJO1FBQ0ksd0JBQXdCO0lBQzVCO0lBQ0E7UUFDSSw0QkFBNEI7UUFDNUIsZUFBZTtRQUNmLGdCQUFnQjtJQUNwQjtJQUNBO1FBQ0ksV0FBVztRQUNYLFlBQVk7SUFDaEI7SUFDQTtRQUNJLGVBQWU7UUFDZixlQUFlO1FBQ2YsaUJBQWlCO1FBQ2pCLGNBQWM7UUFDZCxpQ0FBaUM7SUFDckM7QUFDSjtBQUNBO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsWUFBWTtJQUNoQjtJQUNBO1FBQ0ksZUFBZTtRQUNmLGVBQWU7UUFDZixpQkFBaUI7UUFDakIsY0FBYztRQUNkLGlDQUFpQztJQUNyQztBQUNKO0FBQ0E7O0lBRUk7UUFDSSxXQUFXO1FBQ1gsWUFBWTtJQUNoQjtJQUNBO1FBQ0ksZUFBZTtRQUNmLGVBQWU7UUFDZixpQkFBaUI7UUFDakIsY0FBYztRQUNkLGlDQUFpQztJQUNyQztBQUNKO0FBQ0E7SUFDSTtRQUNJLFdBQVc7UUFDWCxZQUFZO0lBQ2hCO0lBQ0E7UUFDSSxlQUFlO1FBQ2YsaUJBQWlCO1FBQ2pCLGVBQWU7SUFDbkI7QUFDSjtBQUVBO0VBQ0UsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsNkJBQTZCO0VBQzdCLDJDQUEyQztBQUM3QztBQUNBO0lBQ0ksa0JBQWtCO0lBQ2xCLGdCQUFnQjtJQUNoQixrQkFBa0I7S0FDakI7QUFDTDtBQUNBO0VBQ0UsOEJBQXNCO1VBQXRCLHNCQUFzQjtBQUN4QjtBQUNBOzs7O0dBSUc7QUFDSDtFQUNFO0lBQ0UsU0FBUztFQUNYO0VBQ0E7SUFDRSxXQUFXO0VBQ2I7RUFDQTtJQUNFLFlBQVk7RUFDZDtFQUNBO0lBQ0UsU0FBUztFQUNYO0FBQ0Y7QUFiQTtFQUNFO0lBQ0UsU0FBUztFQUNYO0VBQ0E7SUFDRSxXQUFXO0VBQ2I7RUFDQTtJQUNFLFlBQVk7RUFDZDtFQUNBO0lBQ0UsU0FBUztFQUNYO0FBQ0Y7QUFFQTtFQUNFLGtGQUFrRjtFQUNsRix5REFBb0U7RUFDcEUsc0JBQXNCO0FBQ3hCO0FBQ0E7RUFDRSxrQ0FBa0M7QUFDcEM7QUFDQTtFQUNFLHFCQUFxQjtBQUN2QjtBQUNBO0VBQ0UseUNBQXlDO0VBQ3pDLGdCQUFnQjtFQUNoQixXQUFXO0VBQ1gsaUJBQWlCO0FBQ25CO0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0FBQ25CO0FBQ0E7RUFDRSxxQkFBcUI7QUFDdkI7QUFDQTtFQUNFLHVCQUF1QjtBQUN6QjtBQUNBO0VBQ0UsdUJBQXVCO0FBQ3pCO0FBQ0E7RUFDRSxvQ0FBb0M7RUFDcEM7QUFDQTtJQUNFLHdCQUF3QjtBQUM1QjtBQUNBO0dBQ0csc0JBQXNCO0dBQ3RCLG1CQUFtQjtHQUNuQixvQkFBb0I7QUFDdkI7QUFDQTtJQUNJLHVCQUF1QjtJQUN2Qix5Q0FBeUM7SUFDekMsZ0JBQWdCO0lBQ2hCLDhCQUE4QjtJQUM5QixXQUFXO0FBQ2Y7QUFFQTtFQUNFLHVCQUF1QjtBQUN6QjtBQUNBO0VBQ0UsWUFBWTtFQUNaLHFCQUFxQjtBQUN2QjtBQUNBO0VBQ0UscUJBQXFCO0VBQ3JCLG1CQUFtQjtBQUNyQjtBQUVBO0VBQ0UsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsY0FBYztFQUNkLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsV0FBVztFQUNYLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGlCQUFpQjtBQUNuQjtBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCO0FBRUE7RUFDRSxtQkFBbUI7RUFDbkIsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixtQkFBbUI7QUFDckI7aUNBQ2lDO0FBQ2pDO0FBQ0E7RUFDRSxtQkFBbUI7RUFDbkIsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQjttQ0FDaUM7QUFDbkM7QUFFQTs7SUFFSTs7UUFFSSxZQUFZO1FBQ1osMENBQTBDO1FBQzFDLFdBQVc7UUFDWCxrQkFBa0I7UUFDbEIscUJBQXFCO1FBQ3JCLGFBQWE7UUFDYix5QkFBeUI7O1FBRXpCLFVBQVU7O1FBRVYsU0FBUztRQUNULDhCQUE4QjtRQUM5QiwyQkFBMkI7UUFDM0IsV0FBVztRQUNYLGFBQWE7UUFDYix3QkFBd0I7UUFDeEIscUJBQXFCO01BQ3ZCOzs7TUFHQSxXQUFXOztNQUVYO1FBQ0U7OzttREFHMkM7UUFDM0M7OztnQkFHUTtRQUNSOzs7cUJBR2E7UUFDYiw0QkFBNEI7UUFDNUIseUJBQXlCO1FBQ3pCLHVCQUF1QjtNQUN6Qjs7TUFFQTtRQUNFOzs7Z0RBR3dDO1FBQ3hDOzs7Z0JBR1E7UUFDUjs7O3FCQUdhO1FBQ2IsNEJBQTRCO1FBQzVCLGtCQUFrQjtRQUNsQixVQUFVO1FBQ1YsdUJBQXVCO01BQ3pCO01BQ0E7UUFDRSxtQkFBbUI7UUFDbkIsWUFBWTtRQUNaLGlCQUFpQjtRQUNqQjt5Q0FDaUM7TUFDbkM7QUFDTiIsImZpbGUiOiJzcmMvYXBwL2NvbXBhdGliaWxpdHktZm9ybS9jb21wYXRpYmlsaXR5LWZvcm0uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgdXJsKCdodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PVBvcHBpbnM6d2dodEAzMDAmZGlzcGxheT1zd2FwJyk7XHJcbi5maXhUb29sQmFyIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xyXG59XHJcbmF7XHJcbiAgd2lkdGg6MTAwJTtcclxufVxyXG4ucmVnaXN0ZXItYnRuIHtcclxuICBwb3NpdGlvbjpmaXhlZDtcclxuICBib3R0b206MDtcclxuICB6LWluZGV4OjEwMDtcclxuICB3aWR0aDo4MCU7XHJcbiAgaGVpZ2h0OjUwcHg7XHJcbiAgY29sb3I6d2hpdGU7XHJcbiAgdGV4dC1hbGlnbjpjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6Y2VudGVyO1xyXG4gIGJvcmRlcjpub25lO1xyXG4gIG91dGxpbmU6bm9uZTtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNEVCN0U2O1xyXG4gIGJvcmRlci1yYWRpdXM6OHB4O1xyXG59XHJcbi53aHl1c3tcclxuICAgIG1hcmdpbi10b3A6MTAwcHg7XHJcbiAgICB3aWR0aDoxMDAlO1xyXG59XHJcbi5zcGFya2xlc3tcclxuICAgIGhlaWdodDoxNnB4O1xyXG4gICAgd2lkdGg6MTFweDtcclxufVxyXG4jeXtcclxuICAgIHdpZHRoOjIwMHB4O1xyXG4gICAgaGVpZ2h0OjIwMHB4O1xyXG59XHJcbi8qIC5mZWF0dXJlLWNhcmQtY29udGFpbmVyOmhvdmVyIC5mZWF0dXJlLWNhcmQtaG9sZGVye1xyXG4gICAgZmlsdGVyOmJsdXIoMjBweCk7XHJcbiAgICB0cmFuc2Zvcm06c2NhbGUoMC45KTtcclxuICAgIG9wYWNpdHk6MC41O1xyXG59ICovXHJcbi5mZWF0dXJlLWNhcmQtY29udGFpbmVyIC5mZWF0dXJlLWNhcmQtaG9sZGVyOmhvdmVye1xyXG4gICAgZmlsdGVyOmJsdXIoMHB4KTtcclxuICAgIHRyYW5zZm9ybTpzY2FsZSgxLjEpO1xyXG4gICAgb3BhY2l0eToxO1xyXG59XHJcbi5mZWF0dXJlLWNhcmQtY29udGFpbmVyIC5mZWF0dXJlLWNhcmQtaG9sZGVye1xyXG4gICAgYm9yZGVyLXJhZGl1czoxMHB4O1xyXG4gICAgcGFkZGluZzoxMHB4O1xyXG4gICAgdHJhbnNpdGlvbjowLjVzO1xyXG59XHJcbi5oZWFkZXJ7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xyXG59XHJcbmRpdiwucm93LC5jb2x7XHJcbiAgICBtYXJnaW46MDtcclxuICAgIHRvcDowO1xyXG4gICAgcGFkZGluZzowO1xyXG59XHJcbi5zbGlkZXtcclxuICAgIGJhY2tncm91bmQtY29sb3I6dHJhbnNwYXJlbnQ7IFxyXG59XHJcbi5jYXJvdXNlbC1kaXZ7XHJcbiAgICBtYXJnaW4tdG9wOjQwcHg7XHJcbn1cclxuLmZlYXR1cmVDYXJkMntcclxuICAgIHdpZHRoOiA4MCU7XHJcbiAgICBoZWlnaHQ6IGF1dG87XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgcGFkZGluZzogMHB4O1xyXG4gICAgb2JqZWN0LWZpdDogY292ZXI7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOnRyYW5zcGFyZW50O1xyXG4gICAgYm9yZGVyOm5vbmU7XHJcbiAgICBib3gtc2hhZG93Om5vbmU7XHJcbn1cclxuLmZlYXR1cmUySW1ne1xyXG4gICAgd2lkdGg6IDgwJTtcclxuICAgIGhlaWdodDogODAlO1xyXG59XHJcbi5mZXR1cmUySW1nOmhvdmVye1xyXG4gICAgYW5pbWF0aW9uOmJpZyAzcyAxO1xyXG59XHJcbkBrZXlmcmFtZXMgYmlne1xyXG4gICAgMjUlIHtcclxuICAgICAgICB0cmFuc2Zvcm06IHNjYWxlKDEuNSk7XHJcbiAgICAgIH1cclxuICAgICAgNTAlIHtcclxuICAgICAgICB0cmFuc2Zvcm06IHNjYWxlKDEuMjUpO1xyXG4gICAgICB9XHJcbiAgICAgIDc1JSB7XHJcbiAgICAgICAgdHJhbnNmb3JtOiBzY2FsZSgyKTtcclxuICAgICAgfVxyXG4gICAgICAxMDAlIHtcclxuICAgICAgICB0cmFuc2Zvcm06c2NhbGUoMS43NSk7XHJcbiAgICAgIH1cclxufVxyXG4udGVtcGxlLWNhcmR7XHJcbiAgICAvKiBoZWlnaHQ6NDV2aDsgKi9cclxuICAgIG92ZXJmbG93OmhpZGRlbjtcclxuICAgIGRpc3BsYXk6ZmxleDtcclxuICAgIGZsZXgtZGlyZWN0aW9uOmNvbHVtbjtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gICAgYWxpZ24taXRlbXM6Y2VudGVyO1xyXG4gICAgLyogd2lkdGg6MTAwJTsgKi9cclxufVxyXG5cclxuLmZlYXR1cmUtY2FyZC1jb250YWluZXJ7XHJcblxyXG59XHJcbi5mZWF0dXJlLWNhcmQtaG9sZGVye1xyXG4gICAgXHJcbn1cclxuXHJcblxyXG4ud3JhcHBlci10ZXh0IHB7XHJcbiAgICBvcGFjaXR5OiAwO1xyXG59XHJcbi53cmFwcGVyLXRleHR7XHJcbiAgICBvcGFjaXR5OiAwO1xyXG4gICAgYW5pbWF0aW9uOmFuaTIgMXMgZWFzZS1vdXQgZm9yd2FyZHM7XHJcbn1cclxuLndyYXBwZXItdGV4dCBwe1xyXG4gICAgYW5pbWF0aW9uOmFuaTIgMC43NXMgZWFzZS1vdXQgM3MgZm9yd2FyZHM7XHJcbn1cclxuLmNvbnRhaW5lcntcclxuICAgIG1hcmdpbi10b3A6NTBweDtcclxufVxyXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDU3NXB4KXtcclxuICAgIGhyLm9uZXtcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgYmxhY2s7XHJcbiAgICB9XHJcbiAgICBoci50d297XHJcbiAgICAgICAgYm9yZGVyOjAuOHB4IHNvbGlkIGxpZ2h0Z3JheTtcclxuICAgICAgICBtYXJnaW4tbGVmdDo1cHg7XHJcbiAgICAgICAgbWFyZ2luLXRvcDotMTVweDtcclxuICAgIH1cclxuICAgIGltZ3tcclxuICAgICAgICB3aWR0aDoyMDBweDtcclxuICAgICAgICBoZWlnaHQ6MjAwcHg7XHJcbiAgICB9XHJcbiAgICBwe1xyXG4gICAgICAgIG1hcmdpbi10b3A6MjBweDtcclxuICAgICAgICBmb250LXdlaWdodDo1MDA7XHJcbiAgICAgICAgdGV4dC1hbGlnbjpjZW50ZXI7XHJcbiAgICAgICAgZm9udC1zaXplOjE1cHg7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6J1BvcHBpbnMnLCBzYW5zLXNlcmlmO1xyXG4gICAgfVxyXG4gICAgaDF7XHJcbiAgICAgICAgZm9udC1zaXplOjI0cHg7XHJcbiAgICB9XHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA1NzZweCl7XHJcbiAgICBcclxuICAgIGhyLm9uZXtcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgYmxhY2s7XHJcbiAgICB9XHJcbiAgICBoci50d297XHJcbiAgICAgICAgYm9yZGVyOjAuOHB4IHNvbGlkIGxpZ2h0Z3JheTtcclxuICAgICAgICBtYXJnaW4tbGVmdDo1cHg7XHJcbiAgICAgICAgbWFyZ2luLXRvcDotMTVweDtcclxuICAgIH1cclxuICAgIGltZ3tcclxuICAgICAgICB3aWR0aDoyNTBweDtcclxuICAgICAgICBoZWlnaHQ6MjUwcHg7XHJcbiAgICB9XHJcbiAgICBwe1xyXG4gICAgICAgIG1hcmdpbi10b3A6MjBweDtcclxuICAgICAgICBmb250LXdlaWdodDo1MDA7XHJcbiAgICAgICAgdGV4dC1hbGlnbjpjZW50ZXI7XHJcbiAgICAgICAgZm9udC1zaXplOjE1cHg7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6J1BvcHBpbnMnLCBzYW5zLXNlcmlmO1xyXG4gICAgfVxyXG59XHJcbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNzY4cHgpe1xyXG4gICAgaW1ne1xyXG4gICAgICAgIHdpZHRoOjIwMHB4O1xyXG4gICAgICAgIGhlaWdodDoyMDBweDtcclxuICAgIH1cclxuICAgIHB7XHJcbiAgICAgICAgbWFyZ2luLXRvcDoyMHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OjUwMDtcclxuICAgICAgICB0ZXh0LWFsaWduOmNlbnRlcjtcclxuICAgICAgICBmb250LXNpemU6MTVweDtcclxuICAgICAgICBmb250LWZhbWlseTonUG9wcGlucycsIHNhbnMtc2VyaWY7XHJcbiAgICB9XHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA5OTJweCl7XHJcbiAgICBcclxuICAgIGltZ3tcclxuICAgICAgICB3aWR0aDozMDBweDtcclxuICAgICAgICBoZWlnaHQ6MzAwcHg7XHJcbiAgICB9XHJcbiAgICBwe1xyXG4gICAgICAgIG1hcmdpbi10b3A6MjBweDtcclxuICAgICAgICBmb250LXdlaWdodDo1MDA7XHJcbiAgICAgICAgdGV4dC1hbGlnbjpjZW50ZXI7XHJcbiAgICAgICAgZm9udC1zaXplOjE1cHg7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6J1BvcHBpbnMnLCBzYW5zLXNlcmlmO1xyXG4gICAgfVxyXG59XHJcbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMTIwMHB4KXtcclxuICAgIGltZ3tcclxuICAgICAgICB3aWR0aDozNzBweDtcclxuICAgICAgICBoZWlnaHQ6MzcwcHg7XHJcbiAgICB9XHJcbiAgICBwe1xyXG4gICAgICAgIG1hcmdpbi10b3A6MjBweDtcclxuICAgICAgICB0ZXh0LWFsaWduOmNlbnRlcjtcclxuICAgICAgICBmb250LXdlaWdodDo1MDA7XHJcbiAgICB9XHJcbn1cclxuXHJcbm1haW57XHJcbiAgbWFyZ2luLXRvcDoyMHB4O1xyXG4gIGJvcmRlci1yYWRpdXM6OHB4O1xyXG4gIGJhY2tncm91bmQ6ICNGRkZGRkY7XHJcbiAgYm9yZGVyLXRvcDoxMXB4IHNvbGlkICNDRUNFQ0U7XHJcbiAgYm94LXNoYWRvdzogMHB4IDRweCA0cHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcclxufVxyXG4udGV4dFJlZ2lzdGVyIHtcclxuICAgIGZvbnQtd2VpZ2h0OmJvbGRlcjtcclxuICAgIHBhZGRpbmctdG9wOjFyZW07XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICAgY29sb3I6ICMyODVmZGRcclxufVxyXG4uZm9ybS1hcHBlYXJ7XHJcbiAgYW5pbWF0aW9uOiBhcHBlYXIgMnMgMTtcclxufVxyXG4vKiA6Om5nLWRlZXAgLm1hdC1zZWxlY3QtY29udGVudHtcclxuICB3aWR0aDoyMDAwcHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xyXG4gIGZvbnQtc2l6ZTogMTBweDsgICBcclxufSAqL1xyXG5Aa2V5ZnJhbWVzIGFwcGVhciB7XHJcbiAgMCUge1xyXG4gICAgb3BhY2l0eTowO1xyXG4gIH1cclxuICA1MCUge1xyXG4gICAgb3BhY2l0eTowLjU7XHJcbiAgfVxyXG4gIDc1JSB7XHJcbiAgICBvcGFjaXR5OjAuNzU7XHJcbiAgfVxyXG4gIDEwMCUge1xyXG4gICAgb3BhY2l0eToxO1xyXG4gIH1cclxufVxyXG5cclxubWFpbntcclxuICBmb250LWZhbWlseTogJ0dvdGhhbSBSb3VuZGVkIEJvb2snLFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmICFpbXBvcnRhbnQ7IFxyXG4gIGJhY2tncm91bmQ6IHVybCguLi8uLi9hc3NldHMvYmdpY29uLnBuZykgbm8tcmVwZWF0IGNlbnRlciAhaW1wb3J0YW50O1xyXG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XHJcbn1cclxuOjpuZy1kZWVwIC5tYXQtc3RlcHBlci1ob3Jpem9udGFse1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XHJcbn1cclxuaW5wdXQuZm9ybS1jb250cm9sLm5nLWludmFsaWQubmctdG91Y2hlZHtcclxuICBib3JkZXI6IDFweCBzb2xpZCByZWQ7XHJcbn1cclxuaW5wdXR7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjpyZ2JhKDIwNiwgMjA2LCAyMDYsIDAuMik7XHJcbiAgcGFkZGluZzoxMHB4IDVweDtcclxuICBib3JkZXI6bm9uZTtcclxuICBtYXJnaW4tcmlnaHQ6MTBweDtcclxufVxyXG46Om5nLWRlZXAgLm1hdC1mb3JtLWZpZWxkLWxhYmVse1xyXG4gIHBhZGRpbmctdG9wOjEwcHg7XHJcbiAgcGFkZGluZy1sZWZ0OjEwcHg7XHJcbn1cclxuc2VsZWN0LmZvcm0tY29udHJvbC5uZy1pbnZhbGlkLm5nLXRvdWNoZWR7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgcmVkO1xyXG59XHJcbnNlbGVjdC5mb3JtLWNvbnRyb2x7XHJcbiAgYm9yZGVyOiBub25lICFpbXBvcnRhbnQ7XHJcbn1cclxuOjpuZy1kZWVwIC5tYXQtc3RlcC1sYWJlbHtcclxuICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcclxufVxyXG46Om5nLWRlZXAgLm1hdC1zdGVwLWhlYWRlciAubWF0LXN0ZXAtaWNvbi1zZWxlY3RlZCwgLm1hdC1zdGVwLWhlYWRlciAubWF0LXN0ZXAtaWNvbi1zdGF0ZS1kb25lLCAubWF0LXN0ZXAtaGVhZGVyIC5tYXQtc3RlcC1pY29uLXN0YXRlLWVkaXR7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzM0YjdmMSAhaW1wb3J0YW50O1xyXG4gIH1cclxuICA6Om5nLWRlZXAgLm1hdC1mb3JtLWZpZWxkLXVuZGVybGluZSB7XHJcbiAgICBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7XHJcbn1cclxuOjpuZy1kZWVwIC5tYXQtZm9ybS1maWVsZC1mbGV4e1xyXG4gICBib3JkZXI6bm9uZSAhaW1wb3J0YW50O1xyXG4gICBtYXJnaW46MCAhaW1wb3J0YW50O1xyXG4gICBwYWRkaW5nOjAgIWltcG9ydGFudDtcclxufVxyXG46Om5nLWRlZXAgLm1hdC1zZWxlY3QtdmFsdWUge1xyXG4gICAgY29sb3I6IGJsYWNrICFpbXBvcnRhbnQ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOnJnYmEoMjA2LCAyMDYsIDIwNiwgMC4yKTtcclxuICAgIHBhZGRpbmc6MTBweCA1cHg7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyICFpbXBvcnRhbnQ7XHJcbiAgICBib3JkZXI6bm9uZTtcclxufVxyXG5cclxuOjpuZy1kZWVwIC5tYXQtY2hlY2tib3gtaW5uZXItY29udGFpbmVye1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkIGJsYWNrO1xyXG59XHJcbi5maWVsZEZpdHtcclxuICBoZWlnaHQ6IDQ1cHg7XHJcbiAgbWFyZ2luLWJvdHRvbTogMC42cmVtO1xyXG59XHJcbjo6bmctZGVlcCAubWF0LWhpbnR7XHJcbiAgY29sb3I6IHJnYmEoMCwwLDAsLjYpO1xyXG4gIHBhZGRpbmctYm90dG9tOiA1cHg7XHJcbn1cclxuXHJcbi5pbXBOb3RlIHtcclxuICBtYXJnaW46IDVweCAwcHg7XHJcbiAgcGFkZGluZy1yaWdodDogMTVweDtcclxuICBwYWRkaW5nLWxlZnQ6IDE1cHg7XHJcbiAgY29sb3I6ICM3MzczNzM7XHJcbiAgZm9udC1zaXplOiAwLjg1cmVtO1xyXG59XHJcbi5pbXBOb3RlTWFpbiB7XHJcbiAgbWFyZ2luOiAwcHg7XHJcbiAgcGFkZGluZy1yaWdodDogMTVweDtcclxuICBwYWRkaW5nLWxlZnQ6IDE1cHg7XHJcbiAgY29sb3I6ICM3MzczNzM7XHJcbiAgZm9udC1zaXplOiAwLjg1cmVtO1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBsZXR0ZXItc3BhY2luZzogMnB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAyNXB4O1xyXG59XHJcblxyXG4ubWF0U2VsZWN0e1xyXG4gIG1hcmdpbi10b3A6IDEwcHg7XHJcbn1cclxuXHJcbiN2aWV3QnV0dG9ue1xyXG4gIGJhY2tncm91bmQ6ICMzNGI3ZjE7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG4gIHBhZGRpbmctbGVmdDogNDBweDtcclxuICBwYWRkaW5nLXJpZ2h0OiA0MHB4O1xyXG5ib3gtc2hhZG93OiAtMTJweCAtMTJweCAxNHB4IDAgcmdiYSgyNTUsIDI1NSwgMjU1LCAxKSxcclxuMTJweCAxMnB4IDE0cHggcmdiYSgwLCAwLCAwLCAwLjIpO1xyXG59XHJcbi5jdXN0b21CYWNrZ3JvdW5ke1xyXG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbiAgcGFkZGluZzogNXB4O1xyXG4gIGJhY2tncm91bmQ6IHdoaXRlO1xyXG4gIGJveC1zaGFkb3c6IC0xMnB4IC0xMnB4IDEycHggMCByZ2JhKDAsIDAsIDAsIDAuMSksXHJcbjEycHggMTJweCAxMnB4IDAgcmdiYSgwLCAwLCAwLCAwLjEpO1xyXG59XHJcblxyXG5AbWVkaWEgKG1heC13aWR0aDogMTkyMHB4KSB7XHJcblxyXG4gICAgc2VsZWN0IHtcclxuXHJcbiAgICAgICAgLyogc3R5bGluZyAqL1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjA2LCAyMDYsIDIwNiwgMC4yKTtcclxuICAgICAgICBjb2xvcjpibGFjaztcclxuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XHJcbiAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgICAgIGZvbnQ6IGluaGVyaXQ7XHJcbiAgICAgICAgcGFkZGluZzogNXB4IDMwcHggNXB4IDNweDtcclxuICAgICAgXHJcbiAgICAgICAgLyogcmVzZXQgKi9cclxuICAgICAgXHJcbiAgICAgICAgbWFyZ2luOiAwOyAgICAgIFxyXG4gICAgICAgIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDtcclxuICAgICAgICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgICAgICAgYm9yZGVyOm5vbmU7XHJcbiAgICAgICAgb3V0bGluZTogbm9uZTtcclxuICAgICAgICAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7XHJcbiAgICAgICAgLW1vei1hcHBlYXJhbmNlOiBub25lO1xyXG4gICAgICB9XHJcbiAgICAgIFxyXG4gICAgICBcclxuICAgICAgLyogYXJyb3dzICovXHJcbiAgICAgIFxyXG4gICAgICAuY2xhc3NpYyB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1pbWFnZTpcclxuICAgICAgICAgIGxpbmVhci1ncmFkaWVudCg0NWRlZywgdHJhbnNwYXJlbnQgNTAlLCBibHVlIDUwJSksXHJcbiAgICAgICAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBibHVlIDUwJSwgdHJhbnNwYXJlbnQgNTAlKSxcclxuICAgICAgICAgIGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgd2hpdGUsIHNreWJsdWUpO1xyXG4gICAgICAgIGJhY2tncm91bmQtcG9zaXRpb246XHJcbiAgICAgICAgICBjYWxjKDEwMCUgLSAyMHB4KSBjYWxjKDFlbSArIDJweCksXHJcbiAgICAgICAgICBjYWxjKDEwMCUgLSAxNXB4KSBjYWxjKDFlbSArIDJweCksXHJcbiAgICAgICAgICAxMDAlIDA7XHJcbiAgICAgICAgYmFja2dyb3VuZC1zaXplOlxyXG4gICAgICAgICAgNXB4IDVweCxcclxuICAgICAgICAgIDVweCA1cHgsXHJcbiAgICAgICAgICAyLjVlbSAyLjVlbTtcclxuICAgICAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xyXG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkICNjOGM4Yzg7XHJcbiAgICAgICAgLyogYmFja2dyb3VuZDojZjJmMmYyICovXHJcbiAgICAgIH1cclxuICAgICAgXHJcbiAgICAgIC5jbGFzc2ljOmZvY3VzIHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWltYWdlOlxyXG4gICAgICAgICAgbGluZWFyLWdyYWRpZW50KDQ1ZGVnLCB3aGl0ZSA1MCUsIHRyYW5zcGFyZW50IDUwJSksXHJcbiAgICAgICAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCB0cmFuc3BhcmVudCA1MCUsIHdoaXRlIDUwJSksXHJcbiAgICAgICAgICBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsIHdoaXRlLCBncmF5KTtcclxuICAgICAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOlxyXG4gICAgICAgICAgY2FsYygxMDAlIC0gMTVweCkgMWVtLFxyXG4gICAgICAgICAgY2FsYygxMDAlIC0gMjBweCkgMWVtLFxyXG4gICAgICAgICAgMTAwJSAwO1xyXG4gICAgICAgIGJhY2tncm91bmQtc2l6ZTpcclxuICAgICAgICAgIDVweCA1cHgsXHJcbiAgICAgICAgICA1cHggNXB4LFxyXG4gICAgICAgICAgMi41ZW0gMi41ZW07XHJcbiAgICAgICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcclxuICAgICAgICBib3JkZXItY29sb3I6IGdyZXk7XHJcbiAgICAgICAgb3V0bGluZTogMDtcclxuICAgICAgICAvKiBiYWNrZ3JvdW5kOiNmMmYyZjIgKi9cclxuICAgICAgfVxyXG4gICAgICAuY3VzdG9tQmFja2dyb3VuZHtcclxuICAgICAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gICAgICAgIHBhZGRpbmc6IDVweDtcclxuICAgICAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICAgICAgICBib3gtc2hhZG93OiAtMTJweCAtMTJweCAxMnB4IDAgcmdiYSgwLCAwLCAwLCAwLjAzKSxcclxuICAgICAgMTJweCAxMnB4IDEycHggMCByZ2JhKDAsIDAsIDAsIDAuMSk7XHJcbiAgICAgIH1cclxufVxyXG5cclxuICAiXX0= */";
     /***/
   },
 
@@ -611,6 +752,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var CompatibilityFormComponent = /*#__PURE__*/function () {
       function CompatibilityFormComponent(http, dialog, _formBuilder, router, notification, fourPageService, matDialog, breakPointObserver, languageService, route, ngxNotificationService, spinner, itemService) {
+        var _this3 = this;
+
         _classCallCheck(this, CompatibilityFormComponent);
 
         this.http = http;
@@ -626,6 +769,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.ngxNotificationService = ngxNotificationService;
         this.spinner = spinner;
         this.itemService = itemService;
+        this.auto = false;
+        this.mobileBreakpoint = 768;
+        this.secondName = false;
+        this.showHeight = false;
         this.time = {
           hour: 13,
           minute: 30
@@ -682,6 +829,33 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.disableNextSubject = new rxjs__WEBPACK_IMPORTED_MODULE_10__["BehaviorSubject"](false);
         this.disableNext$ = this.disableNextSubject.asObservable();
         this.incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
+        this.customOptions = {
+          loop: true,
+          autoplay: this.auto,
+          center: true,
+          // nav:true,
+          dots: true,
+          // navText:["<p style= `background-color:black;`>h</p>","<p>b</p>"],
+          autoWidth: true,
+          // merge: true,
+          // mergeFit: true,
+          responsive: {
+            0: {
+              items: 1
+            },
+            600: {
+              items: 1
+            },
+            1000: {
+              items: 3
+            }
+          }
+        };
+
+        this.scroll = function (event) {
+          _this3.scrollAppear();
+        };
+
         this.PageOne = this._formBuilder.group({
           // tslint:disable-next-line: max-line-length
           firstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
@@ -730,15 +904,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
         }
       }, {
+        key: "scrollAppear",
+        value: function scrollAppear() {
+          var whyUs = document.querySelector('.whyus');
+          var position = whyUs.getBoundingClientRect().top;
+          var screenPosition = window.innerHeight;
+          console.log(position, screenPosition);
+
+          if (position < screenPosition - 300) {
+            this.auto = true;
+            console.log(this.auto);
+          } else if (position > screenPosition - 300) {
+            this.auto = false;
+            console.log(this.auto);
+          }
+        }
+      }, {
+        key: "resize",
+        value: function resize() {
+          this.innerWidth = window.innerWidth;
+          return this.innerWidth;
+        }
+      }, {
+        key: "detectMobileScreen",
+        value: function detectMobileScreen() {
+          window.onload = this.resize;
+          window.onresize = this.resize;
+
+          if (this.resize() < this.mobileBreakpoint) {
+            this.mobileScreen = true;
+          } else {
+            this.mobileScreen = false;
+          }
+        }
+      }, {
         key: "ngOnInit",
         value: function ngOnInit() {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var _this3 = this;
+            var _this4 = this;
 
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
+                    this.detectMobileScreen();
+                    window.addEventListener('scroll', this.scroll, true);
+
                     if (localStorage.getItem('RegisterNumber')) {
                       this.PageOne.controls.phone.setValue(localStorage.getItem('RegisterNumber'));
                       this.disabledPhoneNumber = localStorage.getItem('RegisterNumber');
@@ -749,7 +960,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                           countryBtn.disabled = true;
                         }
 
-                        _this3.PageOne.controls.phone.disable();
+                        _this4.PageOne.controls.phone.disable();
                       }, 1000); // this.hideMobileNumber = true;
 
                       console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
@@ -759,7 +970,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     this.languageService.setRegisterLang();
                     this.fourPageService.formCompleted.subscribe(function (complete) {
                       if (complete === true) {
-                        _this3.formTwo = true;
+                        _this4.formTwo = true;
                       }
                     });
                     this.fourPageService.formTwoGroup.subscribe(function (formGroup) {
@@ -767,18 +978,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                       if (formGroup) {
                         console.log(formGroup);
-                        _this3.PageTwo = formGroup;
+                        _this4.PageTwo = formGroup;
                       }
                     });
                     this.fourPageService.form3Completed.subscribe(function (complete) {
                       if (complete === true) {
-                        _this3.formThree = true;
+                        _this4.formThree = true;
                       }
                     });
                     this.fourPageService.form4Completed.subscribe(function (complete) {
                       if (complete === true) {
-                        _this3.formFour = true;
-                        console.log('formFour', _this3.formFour);
+                        _this4.formFour = true;
+                        console.log('formFour', _this4.formFour);
                       }
                     }); // for team user we will make page non linear from page two...because page one details are compulsory
 
@@ -786,11 +997,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       console.log(makeLinear);
 
                       if (makeLinear === true) {
-                        _this3.isLinear = false;
+                        _this4.isLinear = false;
 
-                        _this3.fourPageService.setUserThrough(true);
+                        _this4.fourPageService.setUserThrough(true);
 
-                        console.log(_this3.isLinear);
+                        console.log(_this4.isLinear);
                       }
                     }); // for skippable
 
@@ -800,17 +1011,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       if (link && link[0] && link[0].path) {
                         console.log(link[0].path);
 
-                        _this3.fourPageService.setSkippable(true);
+                        _this4.fourPageService.setSkippable(true);
                       }
                     }); // get all castes before get the data of the profile
 
-                    _context2.next = 11;
+                    _context2.next = 13;
                     return this.getAllCaste();
 
-                  case 11:
+                  case 13:
                     this.route.paramMap.subscribe(function (route) {
-                      return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                        var _this4 = this;
+                      return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                        var _this5 = this;
 
                         var codeIndex, code;
                         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -881,7 +1092,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                                   if (route.params.id) {
                                     setTimeout(function () {
-                                      _this4.getProfile();
+                                      _this5.getProfile();
                                     }, 3000);
                                   }
                                 }
@@ -913,7 +1124,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                                 this.http.get("https://partner.hansmatrimony.com/api/getPhotos?gender=Male").subscribe(function (response) {
                                   if (response.photos) {
-                                    _this4.photosMale = response.photos;
+                                    _this5.photosMale = response.photos;
 
                                     var _iterator = _createForOfIteratorHelper(response.photos),
                                         _step;
@@ -922,9 +1133,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                       for (_iterator.s(); !(_step = _iterator.n()).done;) {
                                         var v = _step.value;
 
-                                        _this4.photos.push(v);
+                                        _this5.photos.push(v);
 
-                                        if (_this4.photos.length >= 10) {
+                                        if (_this5.photos.length >= 10) {
                                           break;
                                         }
                                       }
@@ -939,8 +1150,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                 });
                                 this.http.get("https://partner.hansmatrimony.com/api/getPhotos?gender=Female").subscribe(function (response) {
                                   if (response.photos) {
-                                    _this4.photosFemale = [];
-                                    _this4.photosFemale = response.photos;
+                                    _this5.photosFemale = [];
+                                    _this5.photosFemale = response.photos;
 
                                     var _iterator2 = _createForOfIteratorHelper(response.photos),
                                         _step2;
@@ -949,9 +1160,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
                                         var v = _step2.value;
 
-                                        _this4.photos.push(v);
+                                        _this5.photos.push(v);
 
-                                        if (_this4.photos.length >= 20) {
+                                        if (_this5.photos.length >= 20) {
                                           break;
                                         }
                                       }
@@ -961,7 +1172,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                       _iterator2.f();
                                     }
 
-                                    console.log(_this4.photos);
+                                    console.log(_this5.photos);
                                   }
                                 }, function (error) {
                                   console.log('error occurred occurred while fetchignthe photos');
@@ -996,14 +1207,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     this.generateRandomIndices(20);
                     this.PageOne.get('gender').valueChanges.subscribe(function (value) {
                       console.log('here is the gender value being set', value);
-                      _this3.photos = value === 'Male' ? _this3.photosFemale : _this3.photosMale;
+                      _this4.photos = value === 'Male' ? _this4.photosFemale : _this4.photosMale;
 
-                      _this3.generateRandomIndices(20);
+                      _this4.generateRandomIndices(20);
                     }); // this.PageOne.get('Relation').valueChanges.subscribe((value) => {
                     //   this.setGender();
                     // });
 
-                  case 21:
+                  case 23:
                   case "end":
                     return _context2.stop();
                 }
@@ -1027,17 +1238,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getFacebookAccessToken",
         value: function getFacebookAccessToken(code) {
-          var _this5 = this;
+          var _this6 = this;
 
           this.http.get("https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://hansmatrimony.com/fourReg&code=".concat(code)).subscribe(function (response) {
             console.log(response);
             var profile = JSON.parse(response.profile);
 
-            _this5.getFbDataThroughToken(profile.data.user_id, response.access_token);
+            _this6.getFbDataThroughToken(profile.data.user_id, response.access_token);
           }, function (err) {
             console.log(err);
 
-            _this5.router.navigateByUrl('fourReg');
+            _this6.router.navigateByUrl('fourReg');
           });
         }
       }, {
@@ -1073,6 +1284,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "inputFieldChanged",
         value: function inputFieldChanged(fieldName) {
+          this.secondName = true;
+          console.log(this.secondName);
           this.generateRandomIndices(20);
           console.log("".concat(fieldName, " changed"), this.PageOne.value[fieldName]);
 
@@ -1137,6 +1350,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             default:
               break;
+          }
+
+          if (this.PageOne.value.birth_date && this.PageOne.value.birth_month && this.PageOne.value.birth_year) {
+            this.showHeight = true;
+            console.log(this.showHeight);
           } // if profile completed go to next page
 
 
@@ -1146,7 +1364,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "mobileNumberChanged",
         value: function mobileNumberChanged() {
-          var _this6 = this;
+          var _this7 = this;
 
           if (localStorage.getItem('getListId') === null || localStorage.getItem('getListId') === '') {
             var _params;
@@ -1161,61 +1379,61 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               console.log(res);
 
               if (res) {
-                _this6.authData = res;
+                _this7.authData = res;
 
                 if (res.registered === 1) {
-                  _this6.ngxNotificationService.success('Already Registered');
+                  _this7.ngxNotificationService.success('Already Registered');
 
-                  _this6.disableNextSubject.next(true);
+                  _this7.disableNextSubject.next(true);
 
-                  if (_this6.pollingCount > 0 && _this6.truecallerExists) {
+                  if (_this7.pollingCount > 0 && _this7.truecallerExists) {
                     localStorage.setItem('authData', JSON.stringify(res));
-                    localStorage.setItem('mobile_number', _this6.PageOne.value.phone);
+                    localStorage.setItem('mobile_number', _this7.PageOne.value.phone);
                     localStorage.setItem('is_lead', res.is_lead);
                     localStorage.setItem('id', res.id);
 
-                    _this6.router.navigateByUrl('chat');
+                    _this7.router.navigateByUrl('chat');
                   } else {
-                    _this6.alreadyExists = true;
+                    _this7.alreadyExists = true;
 
-                    _this6.openVerificationDialog(res.is_lead);
+                    _this7.openVerificationDialog(res.is_lead);
                   }
 
-                  _this6.spinner.show();
+                  _this7.spinner.show();
                 } else if (res.registered === 2) {
-                  _this6.disableNextSubject.next(false);
+                  _this7.disableNextSubject.next(false);
 
                   localStorage.setItem('RegisterNumber', number);
 
-                  _this6.ngxNotificationService.info('Please complete the form and update');
+                  _this7.ngxNotificationService.info('Please complete the form and update');
 
-                  _this6.analyticsEvent('Four Page Registration Page One Mobile Number Changed'); // if profile completed go to next page
+                  _this7.analyticsEvent('Four Page Registration Page One Mobile Number Changed'); // if profile completed go to next page
 
 
-                  _this6.goToNextPage();
+                  _this7.goToNextPage();
                 } else {
-                  _this6.disableNextSubject.next(false);
+                  _this7.disableNextSubject.next(false);
 
                   localStorage.setItem('RegisterNumber', number); // signifies that new user has entered his mobile number.
 
-                  _this6.analyticsEvent('Four Page Registration Page Zero');
+                  _this7.analyticsEvent('Four Page Registration Page Zero');
 
                   console.log('New User');
 
-                  _this6.analyticsEvent('Four Page Registration Page One Mobile Number Changed'); // gtag app + web
+                  _this7.analyticsEvent('Four Page Registration Page One Mobile Number Changed'); // gtag app + web
 
 
                   window.gtag('config', 'G-1ES443XD0F', {
                     user_id: number
                   }); // if profile completed go to next page
 
-                  _this6.goToNextPage();
+                  _this7.goToNextPage();
                 }
               }
 
-              _this6.spinner.hide();
+              _this7.spinner.hide();
             }, function (err) {
-              _this6.spinner.hide();
+              _this7.spinner.hide();
 
               console.log(err);
             });
@@ -1232,7 +1450,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openVerificationDialog",
         value: function openVerificationDialog(isLead) {
-          var _this7 = this;
+          var _this8 = this;
 
           var dialogConfig = new _angular_material___WEBPACK_IMPORTED_MODULE_9__["MatDialogConfig"]();
           dialogConfig.hasBackdrop = true;
@@ -1257,15 +1475,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           dialogRef.afterClosed().subscribe(function (data) {
             if (data) {
               if (data.success === 'verified') {
-                localStorage.setItem('mobile_number', _this7.PageOne.value.phone);
+                localStorage.setItem('mobile_number', _this8.PageOne.value.phone);
                 localStorage.setItem('is_lead', data.is_lead);
 
-                if (_this7.authData) {
-                  localStorage.setItem('authData', JSON.stringify(_this7.authData));
-                  localStorage.setItem('id', _this7.authData.id);
+                if (_this8.authData) {
+                  localStorage.setItem('authData', JSON.stringify(_this8.authData));
+                  localStorage.setItem('id', _this8.authData.id);
                 }
 
-                _this7.router.navigateByUrl('chat');
+                _this8.router.navigateByUrl('chat');
               } else {
                 return;
               }
@@ -1275,40 +1493,40 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAllCaste",
         value: function getAllCaste() {
-          var _this8 = this;
+          var _this9 = this;
 
           return new Promise(function (res, rej) {
-            _this8.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe(function (res) {
-              _this8.getcastes = [].concat(_toConsumableArray(res), ['All']);
+            _this9.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe(function (res) {
+              _this9.getcastes = [].concat(_toConsumableArray(res), ['All']);
 
-              _this8.fourPageService.setAllCastes(_this8.getcastes);
+              _this9.fourPageService.setAllCastes(_this9.getcastes);
 
-              if (_this8.getcastes) {
+              if (_this9.getcastes) {
                 // load the initial caste list
-                _this8.filteredCastes.next(_this8.getcastes.slice(0, _this8.getcastes.length)); // listen for search field value changes
+                _this9.filteredCastes.next(_this9.getcastes.slice(0, _this9.getcastes.length)); // listen for search field value changes
 
 
-                _this8.PageOne.controls.CasteCtrl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["takeUntil"])(_this8.onDestroy)).subscribe(function () {
-                  _this8.filterCastes();
+                _this9.PageOne.controls.CasteCtrl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["takeUntil"])(_this9.onDestroy)).subscribe(function () {
+                  _this9.filterCastes();
                 });
               }
             });
 
-            if (_this8.PageOne.get('Castes').value && _this8.PageOne.get('Castes').value !== '') {
-              _this8.casteo = _this8.PageOne.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["map"])(function (value) {
-                return _this8._Castefilter(value);
+            if (_this9.PageOne.get('Castes').value && _this9.PageOne.get('Castes').value !== '') {
+              _this9.casteo = _this9.PageOne.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["map"])(function (value) {
+                return _this9._Castefilter(value);
               }));
             } else {
-              _this8.PageOne.patchValue({
+              _this9.PageOne.patchValue({
                 Castes: ''
               });
 
-              _this8.casteo = _this8.PageOne.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["map"])(function (value) {
-                return _this8._Castefilter(value);
+              _this9.casteo = _this9.PageOne.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["map"])(function (value) {
+                return _this9._Castefilter(value);
               }));
             }
 
-            res(_this8.getcastes);
+            res(_this9.getcastes);
           });
         }
       }, {
@@ -1339,7 +1557,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "firstStep",
         value: function firstStep() {
-          var _this9 = this;
+          var _this10 = this;
 
           console.log(this.PageOne.value);
           this.analyticsEvent('Page One Clicked');
@@ -1432,13 +1650,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(function (res) {
                 console.log('first', res);
 
-                _this9.spinner.hide();
+                _this10.spinner.hide();
 
-                _this9.fourPageService.updateFormOneData(firststepdata);
+                _this10.fourPageService.updateFormOneData(firststepdata);
               }, function (err) {
-                _this9.spinner.hide();
+                _this10.spinner.hide();
 
-                _this9.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+                _this10.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
 
                 console.log(err);
               });
@@ -1448,39 +1666,39 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 console.log('first', res);
 
                 if (res.status === 1) {
-                  _this9.spinner.hide();
+                  _this10.spinner.hide();
 
                   localStorage.setItem('id', res.id);
-                  localStorage.setItem('gender', _this9.PageOne.value.gender);
+                  localStorage.setItem('gender', _this10.PageOne.value.gender);
                   localStorage.setItem('mobile_number', phoneNumber); // if (res.isAssignToOnline) {
                   //   localStorage.setItem('isAssignToOnline', res.isAssignToOnline);
                   //   this.fourPageService.showApproveBtn = true;
                   // }
                   // if facebook profile pic is fetched
 
-                  if (_this9.fetchedFbProfilePic) {
+                  if (_this10.fetchedFbProfilePic) {
                     setTimeout(function () {
-                      _this9.fourPageService.facebookProfilePicUploaded.emit(_this9.fetchedFbProfilePic);
+                      _this10.fourPageService.facebookProfilePicUploaded.emit(_this10.fetchedFbProfilePic);
                     }, 200);
                   }
 
-                  _this9.fourPageService.updateFormOneData(firststepdata);
+                  _this10.fourPageService.updateFormOneData(firststepdata);
 
-                  _this9.analyticsEvent('Four Page Registration Page One');
+                  _this10.analyticsEvent('Four Page Registration Page One');
                 } else {
-                  _this9.spinner.hide(); // this.ngxNotificationService.error(res.message);
+                  _this10.spinner.hide(); // this.ngxNotificationService.error(res.message);
                   // update basic api status 0
 
 
-                  _this9.analyticsEvent("Page One Error Status 0");
+                  _this10.analyticsEvent("Page One Error Status 0");
                 }
               }, function (err) {
-                _this9.spinner.hide(); // this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+                _this10.spinner.hide(); // this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
 
 
                 console.log(err);
 
-                _this9.analyticsEvent("Page One Backend Error");
+                _this10.analyticsEvent("Page One Backend Error");
               });
             }
           } else {
@@ -1649,7 +1867,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getProfile",
         value: function getProfile() {
-          var _this10 = this;
+          var _this11 = this;
 
           this.spinner.show();
           var leadId = localStorage.getItem('getListLeadId');
@@ -1664,19 +1882,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             throw new Error('Server Timeout ' + e);
           })).subscribe(function (data) {
             console.log(data);
-            _this10.profileData = data;
+            _this11.profileData = data;
 
-            if (_this10.fourPageService.userThroughGetList) {
-              _this10.setProfileValues(data);
+            if (_this11.fourPageService.userThroughGetList) {
+              _this11.setProfileValues(data);
             }
 
-            _this10.spinner.hide();
+            _this11.spinner.hide();
           }, function (error) {
-            _this10.spinner.hide();
+            _this11.spinner.hide();
 
             console.log(error);
 
-            _this10.ngxNotificationService.error('Something Went Wrong');
+            _this11.ngxNotificationService.error('Something Went Wrong');
           });
         }
       }, {
@@ -1885,7 +2103,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openRegisterWith",
         value: function openRegisterWith(selection) {
-          var _this11 = this;
+          var _this12 = this;
 
           if (selection !== 'Myself') {
             this.callTruecaller();
@@ -1915,16 +2133,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               if (response) {
                 if (response.chose === 'facebook') {
-                  _this11.analyticsEvent('Registered Through Facebook');
+                  _this12.analyticsEvent('Registered Through Facebook');
 
                   FB.getLoginStatus(function (response) {
-                    _this11.statusChangeCallback(response); // Returns the login status.
+                    _this12.statusChangeCallback(response); // Returns the login status.
 
                   });
                 } else if (response.chose === 'truecaller') {
-                  _this11.analyticsEvent('Registered Through True Caller');
+                  _this12.analyticsEvent('Registered Through True Caller');
 
-                  _this11.callTruecaller();
+                  _this12.callTruecaller();
                 }
               }
             });
@@ -1933,7 +2151,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openChooseFor",
         value: function openChooseFor() {
-          var _this12 = this;
+          var _this13 = this;
 
           var dialogConfig = new _angular_material___WEBPACK_IMPORTED_MODULE_9__["MatDialogConfig"]();
           dialogConfig.hasBackdrop = true;
@@ -1956,11 +2174,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(response);
 
             if (response) {
-              _this12.PageOne.patchValue({
+              _this13.PageOne.patchValue({
                 Relation: response.relation
               });
 
-              _this12.setGender();
+              _this13.setGender();
             }
           });
         } //  get facebook login status
@@ -1999,7 +2217,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getFbData",
         value: function getFbData() {
-          var _this13 = this;
+          var _this14 = this;
 
           console.log('Welcome!  Fetching your information.... '); // fetch user image
 
@@ -2011,7 +2229,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(response.data.url);
 
             if (response.data.url) {
-              _this13.fetchedFbProfilePic = {
+              _this14.fetchedFbProfilePic = {
                 url: response.data.url,
                 user_id: null,
                 access_token: null
@@ -2021,61 +2239,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           FB.api('/me', 'GET', {
             fields: 'email, address, first_name, gender, last_name, birthday, hometown,location'
-          }, function (response) {
-            console.log(response);
-
-            _this13.spinner.hide();
-
-            _this13.PageOne.patchValue({
-              firstName: response.first_name ? response.first_name : '',
-              lastName: response.last_name ? response.last_name : '',
-              email: response.email ? response.email : '',
-              gender: response.gender ? _this13.toTitleCase(response.gender) : '',
-              birth_date: response.birthday ? response.birthday.split('/')[1] : '',
-              birth_month: response.birthday ? _this13.getMonthString(response.birthday.split('/')[0]) : '',
-              birth_year: response.birthday ? response.birthday.split('/')[2] : ''
-            }); // set home town in birth place
-
-
-            if (response.hometown && response.hometown.name) {
-              _this13.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
-            } // set home town in birth place
-
-
-            if (response.location && response.location.name) {
-              _this13.fourPageService.facebookLocationUpdated.emit(response.location.name);
-            } // to solve the overlapping issue for new user
-
-
-            document.querySelector('#firstName').focus();
-          });
-        }
-      }, {
-        key: "getFbDataThroughToken",
-        value: function getFbDataThroughToken(userId, token) {
-          var _this14 = this;
-
-          console.log('Welcome!  Fetching your information.... '); // // fetch user image
-
-          FB.api("/".concat(userId, "/picture"), 'GET', {
-            height: '600',
-            width: '400',
-            redirect: 'false'
-          }, function (response) {
-            console.log(response.data.url);
-
-            if (response.data.url) {
-              _this14.fetchedFbProfilePic = {
-                url: response.data.url,
-                user_id: userId,
-                access_token: token
-              };
-            }
-          }); // fetch user data
-
-          FB.api("/".concat(userId), 'GET', {
-            fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
-            access_token: token
           }, function (response) {
             console.log(response);
 
@@ -2099,6 +2262,61 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             if (response.location && response.location.name) {
               _this14.fourPageService.facebookLocationUpdated.emit(response.location.name);
+            } // to solve the overlapping issue for new user
+
+
+            document.querySelector('#firstName').focus();
+          });
+        }
+      }, {
+        key: "getFbDataThroughToken",
+        value: function getFbDataThroughToken(userId, token) {
+          var _this15 = this;
+
+          console.log('Welcome!  Fetching your information.... '); // // fetch user image
+
+          FB.api("/".concat(userId, "/picture"), 'GET', {
+            height: '600',
+            width: '400',
+            redirect: 'false'
+          }, function (response) {
+            console.log(response.data.url);
+
+            if (response.data.url) {
+              _this15.fetchedFbProfilePic = {
+                url: response.data.url,
+                user_id: userId,
+                access_token: token
+              };
+            }
+          }); // fetch user data
+
+          FB.api("/".concat(userId), 'GET', {
+            fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
+            access_token: token
+          }, function (response) {
+            console.log(response);
+
+            _this15.spinner.hide();
+
+            _this15.PageOne.patchValue({
+              firstName: response.first_name ? response.first_name : '',
+              lastName: response.last_name ? response.last_name : '',
+              email: response.email ? response.email : '',
+              gender: response.gender ? _this15.toTitleCase(response.gender) : '',
+              birth_date: response.birthday ? response.birthday.split('/')[1] : '',
+              birth_month: response.birthday ? _this15.getMonthString(response.birthday.split('/')[0]) : '',
+              birth_year: response.birthday ? response.birthday.split('/')[2] : ''
+            }); // set home town in birth place
+
+
+            if (response.hometown && response.hometown.name) {
+              _this15.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
+            } // set home town in birth place
+
+
+            if (response.location && response.location.name) {
+              _this15.fourPageService.facebookLocationUpdated.emit(response.location.name);
             } // to solve the overlapping issue for new user
 
 
@@ -2141,52 +2359,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getUserFromTrueCaller",
         value: function getUserFromTrueCaller(requestId) {
-          var _this15 = this;
+          var _this16 = this;
 
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_10__["timer"])(1, 3000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["switchMap"])(function () {
-            return _this15.http.get("https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=".concat(requestId));
+            return _this16.http.get("https://partner.hansmatrimony.com/api/getTrueCallerResponse?requestId=".concat(requestId));
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["retry"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["share"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["takeUntil"])(this.stopPolling));
         } // start true caller polling
 
       }, {
         key: "startTruecallerPolling",
         value: function startTruecallerPolling(randomNumber) {
-          var _this16 = this;
+          var _this17 = this;
 
           this.getUserFromTrueCaller(randomNumber).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["catchError"])(function (e) {
             throw new Error('True Caller Not Responding');
           })).subscribe(function (response) {
-            _this16.pollingCount++;
+            _this17.pollingCount++;
             console.log(response);
 
-            if (_this16.pollingCount < 10) {
+            if (_this17.pollingCount < 10) {
               if (response.status === 1) {
-                _this16.truecallerExists = true;
+                _this17.truecallerExists = true;
                 var data = JSON.parse(response.data);
 
                 if (data) {
-                  _this16.setTruecallerData(data);
+                  _this17.setTruecallerData(data);
                 }
 
-                _this16.stopPolling.next();
+                _this17.stopPolling.next();
               } else if (response.status !== 0) {
-                _this16.ngxNotificationService.error('True Caller Not Responding');
+                _this17.ngxNotificationService.error('True Caller Not Responding');
 
-                _this16.stopPolling.next();
+                _this17.stopPolling.next();
 
-                _this16.truecallerExists = false;
+                _this17.truecallerExists = false;
               }
             } else {
-              _this16.stopPolling.next();
+              _this17.stopPolling.next();
 
-              _this16.truecallerExists = false;
+              _this17.truecallerExists = false;
             }
           }, function (err) {
-            _this16.ngxNotificationService.error('True Caller Not Responding');
+            _this17.ngxNotificationService.error('True Caller Not Responding');
 
             console.log(err);
 
-            _this16.stopPolling.next();
+            _this17.stopPolling.next();
           }); // Truecaller app present on the device and the profile overlay opens
           // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
           // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
@@ -2194,7 +2412,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setTruecallerData",
         value: function setTruecallerData(data) {
-          var _this17 = this;
+          var _this18 = this;
 
           this.PageOne.patchValue({
             firstName: data.name.first ? data.name.first : '',
@@ -2212,7 +2430,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 countryBtn.disabled = true;
               }
 
-              _this17.PageOne.controls.phone.disable();
+              _this18.PageOne.controls.phone.disable();
             }, 1000);
             this.mobileNumberChanged();
           } else {
@@ -2394,14 +2612,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var ngx_mat_intl_tel_input__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
     /*! ngx-mat-intl-tel-input */
     "./node_modules/ngx-mat-intl-tel-input/fesm2015/ngx-mat-intl-tel-input.js");
+    /* harmony import */
+
+
+    var ngx_owl_carousel_o__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+    /*! ngx-owl-carousel-o */
+    "./node_modules/ngx-owl-carousel-o/fesm2015/ngx-owl-carousel-o.js");
+    /* harmony import */
+
+
+    var _testimonials_testimonials_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+    /*! ./testimonials/testimonials.component */
+    "./src/app/compatibility-form/testimonials/testimonials.component.ts");
+    /* harmony import */
+
+
+    var _choice_list_choice_list_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+    /*! ../choice-list/choice-list.component */
+    "./src/app/choice-list/choice-list.component.ts");
 
     var CompatibilityFormModule = function CompatibilityFormModule() {
       _classCallCheck(this, CompatibilityFormModule);
     };
 
     CompatibilityFormModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_compatibility_form_component__WEBPACK_IMPORTED_MODULE_4__["CompatibilityFormComponent"], _compatibility_page_two_compatibility_page_two_component__WEBPACK_IMPORTED_MODULE_5__["CompatibilityPageTwoComponent"], _compatibility_page_three_compatibility_page_three_component__WEBPACK_IMPORTED_MODULE_6__["CompatibilityPageThreeComponent"], _compatibility_photo_compatibility_photo_component__WEBPACK_IMPORTED_MODULE_7__["CompatibilityPhotoComponent"], _compatibility_page_five_compatibility_page_five_component__WEBPACK_IMPORTED_MODULE_10__["CompatibilityPageFiveComponent"], _forms_message_dialog_forms_message_dialog_component__WEBPACK_IMPORTED_MODULE_11__["FormsMessageDialogComponent"], _compatibility_verify_compatibility_verify_component__WEBPACK_IMPORTED_MODULE_12__["CompatibilityVerifyComponent"], _thank_you_thank_you_component__WEBPACK_IMPORTED_MODULE_13__["ThankYouComponent"], _register_with_register_with_component__WEBPACK_IMPORTED_MODULE_14__["RegisterWithComponent"], _choose_for_choose_for_component__WEBPACK_IMPORTED_MODULE_15__["ChooseForComponent"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_material_angular_material_module__WEBPACK_IMPORTED_MODULE_3__["AngularMaterialModule"], _compatibility_form_routing_module__WEBPACK_IMPORTED_MODULE_8__["CompatibilityFormRoutingModule"], ngx_mat_intl_tel_input__WEBPACK_IMPORTED_MODULE_16__["NgxMatIntlTelInputModule"]],
+      declarations: [_compatibility_form_component__WEBPACK_IMPORTED_MODULE_4__["CompatibilityFormComponent"], _compatibility_page_two_compatibility_page_two_component__WEBPACK_IMPORTED_MODULE_5__["CompatibilityPageTwoComponent"], _compatibility_page_three_compatibility_page_three_component__WEBPACK_IMPORTED_MODULE_6__["CompatibilityPageThreeComponent"], _compatibility_photo_compatibility_photo_component__WEBPACK_IMPORTED_MODULE_7__["CompatibilityPhotoComponent"], _compatibility_page_five_compatibility_page_five_component__WEBPACK_IMPORTED_MODULE_10__["CompatibilityPageFiveComponent"], _forms_message_dialog_forms_message_dialog_component__WEBPACK_IMPORTED_MODULE_11__["FormsMessageDialogComponent"], _compatibility_verify_compatibility_verify_component__WEBPACK_IMPORTED_MODULE_12__["CompatibilityVerifyComponent"], _thank_you_thank_you_component__WEBPACK_IMPORTED_MODULE_13__["ThankYouComponent"], _register_with_register_with_component__WEBPACK_IMPORTED_MODULE_14__["RegisterWithComponent"], _choose_for_choose_for_component__WEBPACK_IMPORTED_MODULE_15__["ChooseForComponent"], _testimonials_testimonials_component__WEBPACK_IMPORTED_MODULE_18__["Testimonials"], _choice_list_choice_list_component__WEBPACK_IMPORTED_MODULE_19__["ChoiceListComponent"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_material_angular_material_module__WEBPACK_IMPORTED_MODULE_3__["AngularMaterialModule"], _compatibility_form_routing_module__WEBPACK_IMPORTED_MODULE_8__["CompatibilityFormRoutingModule"], ngx_mat_intl_tel_input__WEBPACK_IMPORTED_MODULE_16__["NgxMatIntlTelInputModule"], ngx_owl_carousel_o__WEBPACK_IMPORTED_MODULE_17__["CarouselModule"]],
       providers: [_four_page_service__WEBPACK_IMPORTED_MODULE_9__["FourPageService"]],
       entryComponents: [_forms_message_dialog_forms_message_dialog_component__WEBPACK_IMPORTED_MODULE_11__["FormsMessageDialogComponent"], _register_with_register_with_component__WEBPACK_IMPORTED_MODULE_14__["RegisterWithComponent"], _choose_for_choose_for_component__WEBPACK_IMPORTED_MODULE_15__["ChooseForComponent"]]
     })], CompatibilityFormModule);
@@ -2551,7 +2787,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "ngOnInit",
         value: function ngOnInit() {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-            var _this18 = this;
+            var _this19 = this;
 
             return regeneratorRuntime.wrap(function _callee3$(_context3) {
               while (1) {
@@ -2575,28 +2811,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                         if (value && value.data && value.data.assign_to) {
                           if (value.data.assign_to != 'online') {
                             localStorage.setItem('isAssignToOnline', '1');
-                            _this18.fourPageService.showApproveBtn = true;
+                            _this19.fourPageService.showApproveBtn = true;
                           } else if (value.data.assign_to == 'online') {
-                            _this18.fourPageService.showApproveBtn = false;
+                            _this19.fourPageService.showApproveBtn = false;
                           }
 
-                          console.log(' this.fourPageService.showApproveBtn set to', _this18.fourPageService.showApproveBtn, value.data.assign_to);
+                          console.log(' this.fourPageService.showApproveBtn set to', _this19.fourPageService.showApproveBtn, value.data.assign_to);
                         }
 
                         if (value.status === '1') {
-                          var assignToName = _this18.allTemples.find(function (element) {
+                          var assignToName = _this19.allTemples.find(function (element) {
                             return element.temple_id === value.data.assign_to;
                           });
 
                           if (assignToName) {
                             if (assignToName.role === 0) {
-                              _this18.templeChecked = true;
+                              _this19.templeChecked = true;
                             } else if (assignToName.role === 5) {
-                              _this18.moderatorChecked = true;
+                              _this19.moderatorChecked = true;
                             }
                           }
 
-                          var assignByName = _this18.allTemples.find(function (element) {
+                          var assignByName = _this19.allTemples.find(function (element) {
                             return element.temple_id === value.data.assign_by;
                           });
 
@@ -2607,7 +2843,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                             localStorage.setItem('valueTempleId', assignByName.temple_id);
                           }
 
-                          _this18.pageFive.patchValue({
+                          _this19.pageFive.patchValue({
                             phone: value.data.alt_mobile,
                             assign_to: assignToName ? assignToName.name : '',
                             interest: value.data.speed,
@@ -2616,9 +2852,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                             enq_date: value.data.enquiry_date ? value.data.enquiry_date : value.data.created_at.split(' ')[0]
                           });
 
-                          console.log(_this18.pageFive.value);
+                          console.log(_this19.pageFive.value);
                         } else {
-                          _this18.ngxNotificationService.error(value.message);
+                          _this19.ngxNotificationService.error(value.message);
                         }
                       });
                     }
@@ -2641,12 +2877,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAssignToList",
         value: function getAssignToList() {
-          var _this19 = this;
+          var _this20 = this;
 
           return new Promise(function (resolve) {
-            _this19.http.get('https://partner.hansmatrimony.com/api/leads/getAllTemples').subscribe(function (data) {
-              _this19.allTemples = data.all_temples;
-              _this19.fullList = data.all_temples;
+            _this20.http.get('https://partner.hansmatrimony.com/api/leads/getAllTemples').subscribe(function (data) {
+              _this20.allTemples = data.all_temples;
+              _this20.fullList = data.all_temples;
               resolve(data);
             });
           });
@@ -2678,7 +2914,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "assignToTemple",
         value: function assignToTemple(event) {
-          var _this20 = this;
+          var _this21 = this;
 
           console.log(event.checked);
 
@@ -2688,7 +2924,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.fullList = [];
             this.allTemples.forEach(function (temples) {
               if (temples.role === 0) {
-                _this20.fullList.push(temples);
+                _this21.fullList.push(temples);
               }
             });
           } else if (event.checked === false && this.moderatorChecked === false) {
@@ -2698,7 +2934,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "assignToModerator",
         value: function assignToModerator(event) {
-          var _this21 = this;
+          var _this22 = this;
 
           console.log(event.checked);
 
@@ -2708,7 +2944,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.fullList = [];
             this.allTemples.forEach(function (temples) {
               if (temples.role === 5 || temples.role === 7) {
-                _this21.fullList.push(temples);
+                _this22.fullList.push(temples);
               }
             });
           } else if (event.checked === false && this.templeChecked === false) {
@@ -2724,7 +2960,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAllCaste",
         value: function getAllCaste(caste) {
-          var _this22 = this;
+          var _this23 = this;
 
           if (this.fourPageService.getAllCastes()) {
             this.getcastes = this.fourPageService.getAllCastes();
@@ -2740,20 +2976,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 if (data.castes.length > 1) {
                   console.log('look here', data.castes);
                   console.log(data.castes.length);
-                  _this22.castePref = data.castes;
+                  _this23.castePref = data.castes;
                   Array(data.castes).forEach(function (element) {
-                    if (_this22.getcastes.indexOf(element)) {
-                      values.push(_this22.getcastes[_this22.getcastes.indexOf(element)]);
+                    if (_this23.getcastes.indexOf(element)) {
+                      values.push(_this23.getcastes[_this23.getcastes.indexOf(element)]);
                     }
                   });
                 } else {
                   console.log(data.castes.length);
 
                   if (data.castes[0]) {
-                    _this22.castePref = data.castes[0].split(',');
+                    _this23.castePref = data.castes[0].split(',');
                     data.castes[0].split(',').forEach(function (element) {
-                      if (_this22.getcastes.indexOf(element)) {
-                        values.push(_this22.getcastes[_this22.getcastes.indexOf(element)]);
+                      if (_this23.getcastes.indexOf(element)) {
+                        values.push(_this23.getcastes[_this23.getcastes.indexOf(element)]);
                       }
                     });
                   }
@@ -2761,27 +2997,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
                 if (values.includes('All')) {
-                  _this22.pageFive.patchValue({
+                  _this23.pageFive.patchValue({
                     allCaste: true
                   });
                 } // set caste dropdown values
 
 
-                _this22.pageFive.patchValue({
+                _this23.pageFive.patchValue({
                   searchCaste: values
                 });
 
                 if (data.count) {
-                  _this22.compatibiltyCount = data.count;
+                  _this23.compatibiltyCount = data.count;
                 }
               } // load the initial bank list
 
 
-              _this22.filteredCastesMulti.next(_this22.getcastes.slice()); // listen for search field value changes
+              _this23.filteredCastesMulti.next(_this23.getcastes.slice()); // listen for search field value changes
 
 
-              _this22.pageFive.controls.searchCasteText.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["takeUntil"])(_this22.onDestroy)).subscribe(function () {
-                _this22.filterCasteMulti();
+              _this23.pageFive.controls.searchCasteText.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["takeUntil"])(_this23.onDestroy)).subscribe(function () {
+                _this23.filterCasteMulti();
               });
             });
           } else {
@@ -2791,14 +3027,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAllCasteList",
         value: function getAllCasteList() {
-          var _this23 = this;
+          var _this24 = this;
 
           this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe(function (res) {
-            _this23.getcastes = [].concat(_toConsumableArray(res), ['All']);
+            _this24.getcastes = [].concat(_toConsumableArray(res), ['All']);
 
-            _this23.fourPageService.setAllCastes(_this23.getcastes);
+            _this24.fourPageService.setAllCastes(_this24.getcastes);
 
-            _this23.getAllCaste(null);
+            _this24.getAllCaste(null);
           });
         }
       }, {
@@ -2826,14 +3062,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "casteSelectionChanged",
         value: function casteSelectionChanged(event) {
-          var _this24 = this;
+          var _this25 = this;
 
           console.log(event);
           console.log(event.value[0]);
           var values = [];
           event.value.forEach(function (element) {
-            if (_this24.getcastes.indexOf(element)) {
-              values.push(_this24.getcastes[_this24.getcastes.indexOf(element)]);
+            if (_this25.getcastes.indexOf(element)) {
+              values.push(_this25.getcastes[_this25.getcastes.indexOf(element)]);
             }
           }); // set caste dropdown values
 
@@ -2979,61 +3215,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "approveUser",
         value: function approveUser() {
-          var _this25 = this;
-
-          if (!localStorage.getItem('getListId')) {
-            this.getProfileId().subscribe(function (data) {
-              console.log(data);
-
-              if (data && data.status === '1') {
-                localStorage.setItem('getListId', data.id);
-
-                _this25.completeProfileApi().subscribe(function (data) {
-                  console.log(data);
-
-                  if (data.status === '1') {
-                    _this25.approveProfileApi();
-                  } else {
-                    if (data.message) {
-                      _this25.ngxNotificationService.error(data.message);
-                    } else {
-                      _this25.ngxNotificationService.error('Not Approved');
-                    }
-                  }
-                }, function (err) {
-                  console.log(err);
-
-                  _this25.ngxNotificationService.error(err.message, 'Not Approved');
-                });
-              }
-            }, function (err) {
-              _this25.ngxNotificationService.error('Something Went Wrong With Lead Id');
-
-              console.log(err);
-            });
-          } else {
-            this.completeProfileApi().subscribe(function (data) {
-              console.log(data);
-
-              if (data.status === '1') {
-                _this25.approveProfileApi();
-              } else {
-                if (data.message) {
-                  _this25.ngxNotificationService.error(data.message);
-                } else {
-                  _this25.ngxNotificationService.error('Not Approved');
-                }
-              }
-            }, function (err) {
-              console.log(err);
-
-              _this25.ngxNotificationService.error(err.message, 'Not Approved');
-            });
-          }
-        }
-      }, {
-        key: "completeUser",
-        value: function completeUser() {
           var _this26 = this;
 
           if (!localStorage.getItem('getListId')) {
@@ -3047,7 +3228,62 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   console.log(data);
 
                   if (data.status === '1') {
-                    _this26.clearHistory();
+                    _this26.approveProfileApi();
+                  } else {
+                    if (data.message) {
+                      _this26.ngxNotificationService.error(data.message);
+                    } else {
+                      _this26.ngxNotificationService.error('Not Approved');
+                    }
+                  }
+                }, function (err) {
+                  console.log(err);
+
+                  _this26.ngxNotificationService.error(err.message, 'Not Approved');
+                });
+              }
+            }, function (err) {
+              _this26.ngxNotificationService.error('Something Went Wrong With Lead Id');
+
+              console.log(err);
+            });
+          } else {
+            this.completeProfileApi().subscribe(function (data) {
+              console.log(data);
+
+              if (data.status === '1') {
+                _this26.approveProfileApi();
+              } else {
+                if (data.message) {
+                  _this26.ngxNotificationService.error(data.message);
+                } else {
+                  _this26.ngxNotificationService.error('Not Approved');
+                }
+              }
+            }, function (err) {
+              console.log(err);
+
+              _this26.ngxNotificationService.error(err.message, 'Not Approved');
+            });
+          }
+        }
+      }, {
+        key: "completeUser",
+        value: function completeUser() {
+          var _this27 = this;
+
+          if (!localStorage.getItem('getListId')) {
+            this.getProfileId().subscribe(function (data) {
+              console.log(data);
+
+              if (data && data.status === '1') {
+                localStorage.setItem('getListId', data.id);
+
+                _this27.completeProfileApi().subscribe(function (data) {
+                  console.log(data);
+
+                  if (data.status === '1') {
+                    _this27.clearHistory();
 
                     if (localStorage.getItem('redParam')) {
                       if (localStorage.getItem('redParam') === '0') {
@@ -3114,16 +3350,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     // }
 
                   } else {
-                    _this26.ngxNotificationService.error(data.message, 'Not Approved');
+                    _this27.ngxNotificationService.error(data.message, 'Not Approved');
                   }
                 }, function (err) {
                   console.log(err);
 
-                  _this26.ngxNotificationService.error(err.message, 'Not Approved');
+                  _this27.ngxNotificationService.error(err.message, 'Not Approved');
                 });
               }
             }, function (err) {
-              _this26.ngxNotificationService.error('Something Went Wrong With Lead Id');
+              _this27.ngxNotificationService.error('Something Went Wrong With Lead Id');
 
               console.log(err);
             });
@@ -3190,21 +3426,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
                 }
               } else {
-                _this26.ngxNotificationService.error(data.message, 'Not Approved');
+                _this27.ngxNotificationService.error(data.message, 'Not Approved');
               }
 
-              _this26.clearHistory();
+              _this27.clearHistory();
             }, function (err) {
               console.log(err);
 
-              _this26.ngxNotificationService.error(err.message, 'Not Approved');
+              _this27.ngxNotificationService.error(err.message, 'Not Approved');
             });
           }
         }
       }, {
         key: "approveProfileApi",
         value: function approveProfileApi() {
-          var _this27 = this;
+          var _this28 = this;
 
           this.approveBtnSubject.next(true);
           var approveData = new FormData();
@@ -3264,26 +3500,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               // }
 
 
-              _this27.clearHistory();
+              _this28.clearHistory();
             } else {
               if (data.message) {
-                _this27.ngxNotificationService.error(data.message);
+                _this28.ngxNotificationService.error(data.message);
               } else {
-                _this27.ngxNotificationService.error('Not Approved');
+                _this28.ngxNotificationService.error('Not Approved');
               }
             }
           }, function (err) {
             console.log(err);
 
-            _this27.approveBtnSubject.next(false);
+            _this28.approveBtnSubject.next(false);
 
-            _this27.ngxNotificationService.error(err.message, 'Not Approved');
+            _this28.ngxNotificationService.error(err.message, 'Not Approved');
           });
         }
       }, {
         key: "completeProfileApi",
         value: function completeProfileApi() {
-          var _this28 = this;
+          var _this29 = this;
 
           this.assignBtnSubject.next(true);
           var approveData = new FormData();
@@ -3300,7 +3536,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           approveData.append('mode', localStorage.getItem('enqDate') ? '3' : localStorage.getItem('getListId') ? '2' : '1');
           approveData.append('premium_lead', this.checkStatus === true ? '1' : '0');
           return this.http.post('https://partner.hansmatrimony.com/api/completeLead', approveData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function () {
-            _this28.assignBtnSubject.next(false);
+            _this29.assignBtnSubject.next(false);
 
             throw new Error('Something Went Wrong, Try Again Later');
           }));
@@ -3316,7 +3552,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "sendPhotoLink",
         value: function sendPhotoLink() {
-          var _this29 = this;
+          var _this30 = this;
 
           if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId') && localStorage.getItem('getListMobile')) {
             var formData = new FormData();
@@ -3328,15 +3564,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 console.log(data);
 
                 if (data.status === 1) {
-                  _this29.ngxNotificationService.success('Link Shared Successfully');
+                  _this30.ngxNotificationService.success('Link Shared Successfully');
                 }
               } else {
-                _this29.ngxNotificationService.error('SomeThing Went Wrong');
+                _this30.ngxNotificationService.error('SomeThing Went Wrong');
               }
             }, function (err) {
               console.log(err);
 
-              _this29.ngxNotificationService.error('SomeThing Went Wrong');
+              _this30.ngxNotificationService.error('SomeThing Went Wrong');
             });
           }
         }
@@ -3530,17 +3766,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(CompatibilityPageThreeComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this30 = this;
+          var _this31 = this;
 
           this.fourPageService.getListData.subscribe(function () {
             if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
-              _this30.setFormThreeData(_this30.fourPageService.getProfile());
+              _this31.setFormThreeData(_this31.fourPageService.getProfile());
             }
           }); // set home town in birth place from facebook
 
           this.fourPageService.facebookHomeTownUpdated.subscribe(function (res) {
             if (res) {
-              _this30.PageThree.patchValue({
+              _this31.PageThree.patchValue({
                 BirthPlace: res
               });
             }
@@ -3549,11 +3785,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "skip",
         value: function skip() {
-          var _this31 = this;
+          var _this32 = this;
 
           this.fourPageService.form3Completed.emit(true);
           setTimeout(function () {
-            _this31.analyticsEvent('Skipped through Four Page Registration Page Three');
+            _this32.analyticsEvent('Skipped through Four Page Registration Page Three');
           }, 100);
         }
       }, {
@@ -3596,7 +3832,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "firstStep",
         value: function firstStep() {
-          var _this32 = this;
+          var _this33 = this;
 
           console.log(this.PageThree.value);
 
@@ -3632,57 +3868,57 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               console.log('personal', personalFormData.get('birth_place'));
               return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', personalFormData).subscribe(function (response) {
                 if (response.updatePerosnalDetails_status === 'Y') {
-                  _this32.updateFormThreePersonalData(personalFormData);
+                  _this33.updateFormThreePersonalData(personalFormData);
 
-                  familyFormData.append('father_status', _this32.PageThree.value.FatherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
-                  familyFormData.append('mother_status', _this32.PageThree.value.MotherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
+                  familyFormData.append('father_status', _this33.PageThree.value.FatherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
+                  familyFormData.append('mother_status', _this33.PageThree.value.MotherStatus !== 'Not Alive' ? 'Alive' : 'Not Alive');
 
-                  if (_this32.PageThree.value.FatherStatus !== 'Not Alive') {
-                    familyFormData.append('occupation_father', _this32.PageThree.value.FatherStatus);
+                  if (_this33.PageThree.value.FatherStatus !== 'Not Alive') {
+                    familyFormData.append('occupation_father', _this33.PageThree.value.FatherStatus);
                   }
 
-                  if (_this32.PageThree.value.MotherStatus !== 'Not Alive') {
-                    familyFormData.append('occupation_mother', _this32.PageThree.value.MotherStatus);
+                  if (_this33.PageThree.value.MotherStatus !== 'Not Alive') {
+                    familyFormData.append('occupation_mother', _this33.PageThree.value.MotherStatus);
                   }
 
-                  familyFormData.append('family_income', _this32.PageThree.value.FamilyIncome);
-                  familyFormData.append('locality', _this32.PageThree.value.Locality);
+                  familyFormData.append('family_income', _this33.PageThree.value.FamilyIncome);
+                  familyFormData.append('locality', _this33.PageThree.value.Locality);
                   familyFormData.append('is_lead', localStorage.getItem('getListLeadId'));
                   familyFormData.append('identity_number', localStorage.getItem('getListIdentity'));
                   familyFormData.append('temple_id', localStorage.getItem('getListTemple'));
-                  console.log('family', _this32.PageThree.value);
-                  return _this32.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyFormData).subscribe(function (response) {
+                  console.log('family', _this33.PageThree.value);
+                  return _this33.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyFormData).subscribe(function (response) {
                     if (response.updateFamilyDetails_status === 'Y') {
-                      _this32.updateFormThreeFamilyData(familyFormData);
+                      _this33.updateFormThreeFamilyData(familyFormData);
                     } else {
-                      _this32.fourPageService.form3Completed.emit(false);
+                      _this33.fourPageService.form3Completed.emit(false);
 
-                      _this32.spinner.hide();
+                      _this33.spinner.hide();
 
-                      _this32.ngxNotificationService.error(response.message);
+                      _this33.ngxNotificationService.error(response.message);
                     }
                   }, function (err) {
-                    _this32.fourPageService.form3Completed.emit(false);
+                    _this33.fourPageService.form3Completed.emit(false);
 
-                    _this32.spinner.hide();
+                    _this33.spinner.hide();
 
-                    _this32.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
+                    _this33.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
 
                     console.log(err);
                   });
                 } else {
-                  _this32.fourPageService.form3Completed.emit(false);
+                  _this33.fourPageService.form3Completed.emit(false);
 
-                  _this32.spinner.hide();
+                  _this33.spinner.hide();
 
-                  _this32.ngxNotificationService.error(response.message);
+                  _this33.ngxNotificationService.error(response.message);
                 }
               }, function (err) {
-                _this32.fourPageService.form3Completed.emit(false);
+                _this33.fourPageService.form3Completed.emit(false);
 
-                _this32.spinner.hide();
+                _this33.spinner.hide();
 
-                _this32.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
+                _this33.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
 
                 console.log(err);
               });
@@ -3716,27 +3952,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 console.log('first', res);
 
                 if (res.status === 1) {
-                  _this32.spinner.hide();
+                  _this33.spinner.hide();
 
-                  if (_this32.fourPageService.getUserThrough()) {
-                    _this32.updateFormThreeData(firststepdata);
+                  if (_this33.fourPageService.getUserThrough()) {
+                    _this33.updateFormThreeData(firststepdata);
                   } else {
-                    _this32.analyticsEvent('Four Page Registration Page Three');
+                    _this33.analyticsEvent('Four Page Registration Page Three');
                   } // this.ngxNotificationService.success('Registered Successfully');
 
                 } else {
-                  _this32.fourPageService.form3Completed.emit(false);
+                  _this33.fourPageService.form3Completed.emit(false);
 
-                  _this32.spinner.hide();
+                  _this33.spinner.hide();
 
-                  _this32.ngxNotificationService.error(res.message);
+                  _this33.ngxNotificationService.error(res.message);
                 }
               }, function (err) {
-                _this32.fourPageService.form3Completed.emit(false);
+                _this33.fourPageService.form3Completed.emit(false);
 
-                _this32.spinner.hide();
+                _this33.spinner.hide();
 
-                _this32.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
+                _this33.ngxNotificationService.error('SomeThing Went Wrong,Please try again AfterSome time!');
 
                 console.log(err);
               });
@@ -3769,29 +4005,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChanged",
         value: function placeChanged(type) {
-          var _this33 = this;
+          var _this34 = this;
 
           if (type === 'birth') {
             var birthPlace = document.querySelector('#birthPlace');
             setTimeout(function () {
               console.log(birthPlace.value);
 
-              _this33.PageThree.patchValue({
+              _this34.PageThree.patchValue({
                 BirthPlace: birthPlace.value
               });
 
-              _this33.analyticsEvent('Four Page Registration Page Three Birth Place Changed');
+              _this34.analyticsEvent('Four Page Registration Page Three Birth Place Changed');
             }, 200);
           } else {
             var locality = document.querySelector('#locality');
             setTimeout(function () {
               console.log(locality.value);
 
-              _this33.PageThree.patchValue({
+              _this34.PageThree.patchValue({
                 Locality: locality.value
               });
 
-              _this33.analyticsEvent('Four Page Registration Page Three Locality Changed');
+              _this34.analyticsEvent('Four Page Registration Page Three Locality Changed');
             }, 500);
           }
         } // tslint:disable-next-line: no-shadowed-variable
@@ -4070,7 +4306,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var CompatibilityPageTwoComponent = /*#__PURE__*/function () {
       function CompatibilityPageTwoComponent(http, dialog, formBuilder, router, notification, fourPageService, ngxNotificationService, spinner, chatService) {
-        var _this34 = this;
+        var _this35 = this;
 
         _classCallCheck(this, CompatibilityPageTwoComponent);
 
@@ -4083,6 +4319,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.ngxNotificationService = ngxNotificationService;
         this.spinner = spinner;
         this.chatService = chatService;
+        this.showOccupation = false;
+        this.showYearlyIncome = false;
+        this.showWorkingCity = false;
         this.errors = [];
         this.authMobileNumberStatus = false;
         this.nextClickedTwo = false; // Educational Qualification
@@ -4159,9 +4398,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         });
         fourPageService.pageOneUpdated.subscribe(function (status) {
           if (status) {
-            _this34.setAbout();
+            _this35.setAbout();
 
-            _this34.firstStep();
+            _this35.firstStep();
           }
         });
       }
@@ -4175,22 +4414,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this35 = this;
+          var _this36 = this;
 
           // if user can pass through is true
           this.fourPageService.userThroughStatusUpdated.subscribe(function (status) {
             if (status) {
-              if (_this35.PageTwo) {
-                console.log('user get through', status, _this35.PageTwo);
+              if (_this36.PageTwo) {
+                console.log('user get through', status, _this36.PageTwo);
 
-                _this35.fourPageService.formTwoGroup.emit(_this35.PageTwo);
+                _this36.fourPageService.formTwoGroup.emit(_this36.PageTwo);
               }
             }
           }); // location from facebook
 
           this.fourPageService.facebookLocationUpdated.subscribe(function (res) {
             if (res) {
-              _this35.PageTwo.patchValue({
+              _this36.PageTwo.patchValue({
                 Working: res
               });
             }
@@ -4199,34 +4438,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.filteredEducationGroups.next(this.copyEducationGroups(this.HigherEducation)); // listen for search field value changes
 
           this.PageTwo.controls.QualificationCtrl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["takeUntil"])(this.onDestroy)).subscribe(function () {
-            _this35.filterEducationGroups();
+            _this36.filterEducationGroups();
           }); // load the initial designation list
 
           this.filteredDesignations.next(this.designations.slice()); // listen for search field value changes
 
           this.PageTwo.controls.DesignationCtrl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["takeUntil"])(this.onDestroy)).subscribe(function () {
-            _this35.filterDesignation();
+            _this36.filterDesignation();
           }); // if user can get through and profile data has been retrieved
 
           this.fourPageService.getListData.subscribe(function () {
             if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
-              console.log(_this35.fourPageService.getProfile());
+              console.log(_this36.fourPageService.getProfile());
 
-              _this35.setFormForGetUserThrough();
+              _this36.setFormForGetUserThrough();
 
               if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
-                _this35.fourPageService.makeLinear.emit(true);
+                _this36.fourPageService.makeLinear.emit(true);
               }
             }
           });
           this.PageTwo.get('Working').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["takeUntil"])(this.onDestroy)).subscribe(function () {
-            _this35.workingCityFilter();
+            _this36.workingCityFilter();
           });
         }
       }, {
         key: "workingCityFilter",
         value: function workingCityFilter() {
-          var _this36 = this;
+          var _this37 = this;
 
           console.log(this.PageTwo.value.Working);
 
@@ -4234,7 +4473,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.http.get("https://partner.hansmatrimony.com/api/getCities?search_city=".concat(this.PageTwo.value.Working)).subscribe(function (response) {
               console.log(response);
 
-              _this36.workingCitySubject.next(response);
+              _this37.workingCitySubject.next(response);
             }, function (err) {
               console.log(err);
             });
@@ -4329,17 +4568,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "skip",
         value: function skip() {
-          var _this37 = this;
+          var _this38 = this;
 
           this.fourPageService.formCompleted.emit(true);
           setTimeout(function () {
-            _this37.analyticsEvent('Skipped through Four Page Registration Page Two');
+            _this38.analyticsEvent('Skipped through Four Page Registration Page Two');
           }, 100);
         }
       }, {
         key: "firstStep",
         value: function firstStep() {
-          var _this38 = this;
+          var _this39 = this;
 
           this.nextClickedTwo = true;
           this.errors = [];
@@ -4378,24 +4617,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               firststepdata.append('temple_id', localStorage.getItem('getListTemple'));
               return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(function (response) {
                 if (response.updatePerosnalDetails_status === 'Y') {
-                  _this38.spinner.hide();
+                  _this39.spinner.hide();
 
-                  if (_this38.fourPageService.getUserThrough()) {
-                    _this38.updateFormTwoData(firststepdata);
+                  if (_this39.fourPageService.getUserThrough()) {
+                    _this39.updateFormTwoData(firststepdata);
                   }
                 } else {
-                  _this38.fourPageService.formCompleted.emit(false);
+                  _this39.fourPageService.formCompleted.emit(false);
 
-                  _this38.spinner.hide();
+                  _this39.spinner.hide();
 
-                  _this38.ngxNotificationService.error(response.error_message ? response.error_message : 'Something went wrong');
+                  _this39.ngxNotificationService.error(response.error_message ? response.error_message : 'Something went wrong');
                 }
               }, function (err) {
-                _this38.fourPageService.formCompleted.emit(false);
+                _this39.fourPageService.formCompleted.emit(false);
 
-                _this38.spinner.hide();
+                _this39.spinner.hide();
 
-                _this38.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+                _this39.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
 
                 console.log(err);
               });
@@ -4405,30 +4644,30 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 console.log('first', res);
 
                 if (res.status === 1) {
-                  _this38.spinner.hide();
+                  _this39.spinner.hide();
 
-                  if (_this38.fourPageService.getUserThrough()) {
-                    _this38.updateFormTwoData(firststepdata);
+                  if (_this39.fourPageService.getUserThrough()) {
+                    _this39.updateFormTwoData(firststepdata);
                   } else {
-                    _this38.chatService.formTwoCompleted.next(true);
+                    _this39.chatService.formTwoCompleted.next(true);
 
-                    _this38.router.navigateByUrl('chat?first');
+                    _this39.router.navigateByUrl('chat?first');
 
-                    _this38.analyticsEvent('Four Page Registration Page Two');
+                    _this39.analyticsEvent('Four Page Registration Page Two');
                   }
                 } else {
-                  _this38.fourPageService.formCompleted.emit(false);
+                  _this39.fourPageService.formCompleted.emit(false);
 
-                  _this38.spinner.hide();
+                  _this39.spinner.hide();
 
-                  _this38.ngxNotificationService.error(res.message);
+                  _this39.ngxNotificationService.error(res.message);
                 }
               }, function (err) {
-                _this38.fourPageService.formCompleted.emit(false);
+                _this39.fourPageService.formCompleted.emit(false);
 
-                _this38.spinner.hide();
+                _this39.spinner.hide();
 
-                _this38.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+                _this39.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
 
                 console.log(err);
               });
@@ -4463,13 +4702,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChanged",
         value: function placeChanged() {
-          var _this39 = this;
+          var _this40 = this;
 
           setTimeout(function () {
-            if (!_this39.workingCity) {
-              _this39.PageTwo.controls.Working.setValue(null);
+            if (!_this40.workingCity) {
+              _this40.PageTwo.controls.Working.setValue(null);
 
-              _this39.ngxNotificationService.error('Select Valid Working City');
+              _this40.ngxNotificationService.error('Select Valid Working City');
             }
           }, 500);
         }
@@ -4489,6 +4728,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "changedQualification",
         value: function changedQualification() {
+          this.showOccupation = !this.showOccupation;
           console.log('changed Qualification');
           this.analyticsEvent('Four Page Registration Page Two Qualification Changed');
 
@@ -4503,6 +4743,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "changedOccupation",
         value: function changedOccupation() {
           console.log('changed Occupation');
+
+          if (this.PageTwo.value.Occupation != 'Not Working') {
+            this.showYearlyIncome = !this.showYearlyIncome;
+          } else if (this.PageTwo.value.Occupation == 'Not Working') {
+            this.showWorkingCity = !this.showWorkingCity;
+            this.showYearlyIncome = false;
+          }
+
           this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
 
           switch (this.PageTwo.value.Occupation) {
@@ -4588,6 +4836,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "incomeChanged",
         value: function incomeChanged(val) {
           console.log('changed yearly income');
+          this.showWorkingCity = !this.showWorkingCity;
           console.log(this.PageTwo.value.AnnualIncome);
           this.analyticsEvent('Four Page Registration Page Two Annual Income Changed');
 
@@ -4704,7 +4953,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setFormForGetUserThrough",
         value: function setFormForGetUserThrough() {
-          var _this40 = this;
+          var _this41 = this;
 
           this.PageTwo = this.formBuilder.group({
             // tslint:disable-next-line: max-line-length
@@ -4721,7 +4970,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.setFormOneData(this.fourPageService.getProfile()); // listen for search field value changes
 
           this.PageTwo.controls.QualificationCtrl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["takeUntil"])(this.onDestroy)).subscribe(function () {
-            _this40.filterEducationGroups();
+            _this41.filterEducationGroups();
           });
         }
       }]);
@@ -4904,7 +5153,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "preview",
         value: function preview(files, index) {
-          var _this41 = this;
+          var _this42 = this;
 
           if (files.length === 0) {
             return;
@@ -4922,14 +5171,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.readAsDataURL(files[0]);
 
             reader.onload = function (_event) {
-              _this41.uploadPhoto(_this41.imagePath, index);
+              _this42.uploadPhoto(_this42.imagePath, index);
             };
           }
         }
       }, {
         key: "previewFull",
         value: function previewFull(files, index) {
-          var _this42 = this;
+          var _this43 = this;
 
           if (files.length === 0) {
             return;
@@ -4948,9 +5197,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.readAsDataURL(files[0]);
 
             reader.onload = function (_event) {
-              _this42.fullimgURL = reader.result;
+              _this43.fullimgURL = reader.result;
 
-              _this42.uploadPhoto(_this42.fullimagePath, index); // console.log(this.fullimgURL);
+              _this43.uploadPhoto(_this43.fullimagePath, index); // console.log(this.fullimgURL);
 
             };
           }
@@ -4958,7 +5207,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "previewfront",
         value: function previewfront(files, index) {
-          var _this43 = this;
+          var _this44 = this;
 
           if (files.length === 0) {
             return;
@@ -4977,14 +5226,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.readAsDataURL(files[0]);
 
             reader.onload = function (_event) {
-              _this43.uploadPhoto(_this43.frontimagePath, index);
+              _this44.uploadPhoto(_this44.frontimagePath, index);
             };
           }
         }
       }, {
         key: "previewBack",
         value: function previewBack(files, index) {
-          var _this44 = this;
+          var _this45 = this;
 
           if (files.length === 0) {
             return;
@@ -5002,14 +5251,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.readAsDataURL(files[0]);
 
             reader.onload = function (_event) {
-              _this44.uploadPhoto(_this44.backimagePath, index);
+              _this45.uploadPhoto(_this45.backimagePath, index);
             };
           }
         }
       }, {
         key: "uploadPhoto",
         value: function uploadPhoto(data, index) {
-          var _this45 = this;
+          var _this46 = this;
 
           console.log(index);
           var photoBtn = document.getElementById('photoBtn');
@@ -5026,52 +5275,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(function (suc) {
-            _this45.suc = suc;
+            _this46.suc = suc;
 
-            if (_this45.suc.pic_upload_status === 'Y') {
+            if (_this46.suc.pic_upload_status === 'Y') {
               console.log('photos', suc);
 
-              _this45.spinner.hide();
+              _this46.spinner.hide();
 
-              if (!_this45.clickedFacebook) {
-                _this45.ngxNotificationService.success('Photo Uploaded Succesfully!');
+              if (!_this46.clickedFacebook) {
+                _this46.ngxNotificationService.success('Photo Uploaded Succesfully!');
               }
 
               photoBtn.disabled = false;
 
               switch (index) {
                 case 1:
-                  _this45.imgURL = _this45.suc.profile_pic_url;
-                  _this45.fourPageService.profile.image1 = _this45.suc.profile_pic_url;
+                  _this46.imgURL = _this46.suc.profile_pic_url;
+                  _this46.fourPageService.profile.image1 = _this46.suc.profile_pic_url;
 
-                  if (!_this45.frontfile && _this45.fourPageService.getUserThrough()) {
-                    _this45.uploadPhoto(data, 2);
+                  if (!_this46.frontfile && _this46.fourPageService.getUserThrough()) {
+                    _this46.uploadPhoto(data, 2);
                   }
 
-                  if (!_this45.BackimgURL && _this45.fourPageService.getUserThrough()) {
-                    _this45.uploadPhoto(data, 3);
+                  if (!_this46.BackimgURL && _this46.fourPageService.getUserThrough()) {
+                    _this46.uploadPhoto(data, 3);
                   }
 
-                  _this45.analyticsEvent('Image One Uploaded on Four Page Registration Page Four');
+                  _this46.analyticsEvent('Image One Uploaded on Four Page Registration Page Four');
 
                   break;
 
                 case 2:
-                  _this45.frontfile = _this45.suc.profile_pic_url;
-                  _this45.fourPageService.profile.image2 = _this45.suc.profile_pic_url;
+                  _this46.frontfile = _this46.suc.profile_pic_url;
+                  _this46.fourPageService.profile.image2 = _this46.suc.profile_pic_url;
 
-                  _this45.analyticsEvent('Image Two Uploaded on Four Page Registration Page Four');
+                  _this46.analyticsEvent('Image Two Uploaded on Four Page Registration Page Four');
 
                   break;
 
                 case 3:
-                  _this45.BackimgURL = _this45.suc.profile_pic_url;
-                  _this45.fourPageService.profile.image3 = _this45.suc.profile_pic_url;
+                  _this46.BackimgURL = _this46.suc.profile_pic_url;
+                  _this46.fourPageService.profile.image3 = _this46.suc.profile_pic_url;
 
-                  _this45.analyticsEvent('Image Three Uploaded on Four Page Registration Page Four');
+                  _this46.analyticsEvent('Image Three Uploaded on Four Page Registration Page Four');
 
-                  if (_this45.fourPageService.profile.photoScore > 1) {
-                    _this45.fourPageService.form4Completed.emit(true);
+                  if (_this46.fourPageService.profile.photoScore > 1) {
+                    _this46.fourPageService.form4Completed.emit(true);
                   }
 
                   break;
@@ -5080,14 +5329,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   break;
               }
             } else {
-              _this45.spinner.hide();
+              _this46.spinner.hide();
 
-              _this45.ngxNotificationService.error('Photo Upload Unsuccessful!');
+              _this46.ngxNotificationService.error('Photo Upload Unsuccessful!');
             }
           }, function (err) {
-            _this45.spinner.hide();
+            _this46.spinner.hide();
 
-            _this45.ngxNotificationService.error('Photo could not be Uploaded!');
+            _this46.ngxNotificationService.error('Photo could not be Uploaded!');
 
             console.log(err);
           });
@@ -5096,18 +5345,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getImage",
         value: function getImage(imageUrl, index) {
-          var _this46 = this;
+          var _this47 = this;
 
           this.getBase64ImageFromURL(imageUrl).subscribe(function (base64Data) {
-            _this46.base64TrimmedURL = base64Data;
+            _this47.base64TrimmedURL = base64Data;
 
-            _this46.createBlobImageFileAndShow(index);
+            _this47.createBlobImageFileAndShow(index);
           });
         }
       }, {
         key: "getBase64ImageFromURL",
         value: function getBase64ImageFromURL(url) {
-          var _this47 = this;
+          var _this48 = this;
 
           return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
             // create an image object
@@ -5118,7 +5367,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (!img.complete) {
               // This will call another method that will create image from url
               img.onload = function () {
-                observer.next(_this47.getBase64Image(img));
+                observer.next(_this48.getBase64Image(img));
                 observer.complete();
               };
 
@@ -5126,7 +5375,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 observer.error(err);
               };
             } else {
-              observer.next(_this47.getBase64Image(img));
+              observer.next(_this48.getBase64Image(img));
               observer.complete();
             }
           });
@@ -5149,73 +5398,73 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "createBlobImageFileAndShow",
         value: function createBlobImageFileAndShow(index) {
-          var _this48 = this;
+          var _this49 = this;
 
           this.dataURItoBlob(this.base64TrimmedURL).subscribe(function (blob) {
             var imageBlob = blob;
 
-            var imageName = _this48.generateName(); // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
+            var imageName = _this49.generateName(); // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
             // our carousel index basically starts from 1 and not 0
 
 
             switch (index) {
               case 1:
-                _this48.facebookImageFile = new File([imageBlob], imageName, {
+                _this49.facebookImageFile = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this48.generatedImage = window.URL.createObjectURL(_this48.facebookImageFile);
+                _this49.generatedImage = window.URL.createObjectURL(_this49.facebookImageFile);
                 setTimeout(function () {
-                  _this48.uploadPhoto(_this48.facebookImageFile, index);
+                  _this49.uploadPhoto(_this49.facebookImageFile, index);
                 }, 200);
                 break;
 
               case 2:
-                _this48.facebookImageFile2 = new File([imageBlob], imageName, {
+                _this49.facebookImageFile2 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this48.generatedImage = window.URL.createObjectURL(_this48.facebookImageFile2);
+                _this49.generatedImage = window.URL.createObjectURL(_this49.facebookImageFile2);
                 setTimeout(function () {
-                  _this48.uploadPhoto(_this48.facebookImageFile2, index);
+                  _this49.uploadPhoto(_this49.facebookImageFile2, index);
                 }, 200);
                 break;
 
               case 3:
-                _this48.facebookImageFile3 = new File([imageBlob], imageName, {
+                _this49.facebookImageFile3 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this48.generatedImage = window.URL.createObjectURL(_this48.facebookImageFile3);
+                _this49.generatedImage = window.URL.createObjectURL(_this49.facebookImageFile3);
                 setTimeout(function () {
-                  _this48.uploadPhoto(_this48.facebookImageFile3, index);
+                  _this49.uploadPhoto(_this49.facebookImageFile3, index);
                 }, 200);
                 break;
 
               case 4:
-                _this48.facebookImageFile4 = new File([imageBlob], imageName, {
+                _this49.facebookImageFile4 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this48.generatedImage = window.URL.createObjectURL(_this48.facebookImageFile4);
+                _this49.generatedImage = window.URL.createObjectURL(_this49.facebookImageFile4);
                 setTimeout(function () {
-                  _this48.uploadPhoto(_this48.facebookImageFile4, index);
+                  _this49.uploadPhoto(_this49.facebookImageFile4, index);
                 }, 200);
                 break;
 
               case 5:
-                _this48.facebookImageFile5 = new File([imageBlob], imageName, {
+                _this49.facebookImageFile5 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this48.generatedImage = window.URL.createObjectURL(_this48.facebookImageFile5);
+                _this49.generatedImage = window.URL.createObjectURL(_this49.facebookImageFile5);
                 setTimeout(function () {
-                  _this48.uploadPhoto(_this48.facebookImageFile5, index);
+                  _this49.uploadPhoto(_this49.facebookImageFile5, index);
                 }, 200);
                 break;
 
               case 6:
-                _this48.facebookImageFile6 = new File([imageBlob], imageName, {
+                _this49.facebookImageFile6 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this48.generatedImage = window.URL.createObjectURL(_this48.facebookImageFile6);
+                _this49.generatedImage = window.URL.createObjectURL(_this49.facebookImageFile6);
                 setTimeout(function () {
-                  _this48.uploadPhoto(_this48.facebookImageFile6, index);
+                  _this49.uploadPhoto(_this49.facebookImageFile6, index);
                 }, 200);
                 break;
 
@@ -5260,25 +5509,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this49 = this;
+          var _this50 = this;
 
           this.fourPageService.getListData.subscribe(function () {
             if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
-              _this49.setPhotoData(_this49.fourPageService.getProfile());
+              _this50.setPhotoData(_this50.fourPageService.getProfile());
             }
           }); // set current profile picture from facebook
 
           this.fourPageService.facebookProfilePicUploaded.subscribe(function (link) {
             if (link) {
-              _this49.imgURL = link.url;
+              _this50.imgURL = link.url;
 
-              _this49.getImage(_this49.imgURL, 1); // get profile pics from facebook
+              _this50.getImage(_this50.imgURL, 1); // get profile pics from facebook
 
 
               if (!link.access_token) {
-                _this49.getFacebookPics();
+                _this50.getFacebookPics();
               } else {
-                _this49.getFacebookPicsWithToken(link.user_id, link.access_token);
+                _this50.getFacebookPicsWithToken(link.user_id, link.access_token);
               }
             }
           });
@@ -5286,10 +5535,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterViewInit",
         value: function ngAfterViewInit() {
-          var _this50 = this;
+          var _this51 = this;
 
           setTimeout(function () {
-            _this50.photoScore = _this50.fourPageService.profile.photoScore;
+            _this51.photoScore = _this51.fourPageService.profile.photoScore;
           }, 2000);
         }
       }, {
@@ -5387,7 +5636,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getFacebookPics",
         value: function getFacebookPics() {
-          var _this51 = this;
+          var _this52 = this;
 
           this.clickedFacebook = true; // fetch user photos
 
@@ -5411,78 +5660,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                             if (element && element.id) {
                               window.FB.api("/".concat(element.id, "/picture"), 'GET', {
                                 redirect: 'false'
-                              }, function (picRes) {
-                                console.log(picRes);
-
-                                if (picRes.data && picRes.data.url) {
-                                  switch (index) {
-                                    case 0:
-                                      _this51.frontfile = picRes.data.url;
-
-                                      _this51.getImage(_this51.frontfile, 2);
-
-                                      break;
-
-                                    case 1:
-                                      _this51.BackimgURL = picRes.data.url;
-
-                                      _this51.getImage(_this51.BackimgURL, 3);
-
-                                      break;
-
-                                    default:
-                                      _this51.getImage(picRes.data.url, index + 2);
-
-                                      break;
-                                  }
-                                }
-                              });
-                            }
-                          } else {
-                            return;
-                          }
-                        });
-                      }
-                    });
-                  }
-                }
-              });
-            } else {
-              _this51.ngxNotificationService.warning('No Facebook Picture Found');
-            }
-          });
-        } // get pics from facebook
-
-      }, {
-        key: "getFacebookPicsWithToken",
-        value: function getFacebookPicsWithToken(userId, token) {
-          var _this52 = this;
-
-          this.clickedFacebook = true; // fetch user photos
-
-          window.FB.api("/".concat(userId, "/albums"), 'GET', {
-            fields: 'link,name',
-            access_token: token
-          }, function (response) {
-            console.log('album', response);
-
-            if (response.data.length > 0) {
-              response.data.forEach(function (element) {
-                if (element.name === 'प्रोफ़ाइल फ़ोटो' || element.name === 'Profile Photo' || element.name === 'Profile photo' || element.name === 'profile photo' || element.name.includes('Profile') || element.name.includes('प्रोफ़ाइल')) {
-                  if (element.id) {
-                    window.FB.api("/".concat(element.id, "/photos"), 'GET', {
-                      fields: 'link',
-                      access_token: token
-                    }, function (res) {
-                      console.log('Photos', res);
-
-                      if (res.data.length > 0) {
-                        res.data.forEach(function (element, index) {
-                          if (index < 5) {
-                            if (element && element.id) {
-                              window.FB.api("/".concat(element.id, "/picture"), 'GET', {
-                                redirect: 'false',
-                                access_token: token
                               }, function (picRes) {
                                 console.log(picRes);
 
@@ -5523,12 +5700,84 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               _this52.ngxNotificationService.warning('No Facebook Picture Found');
             }
           });
+        } // get pics from facebook
+
+      }, {
+        key: "getFacebookPicsWithToken",
+        value: function getFacebookPicsWithToken(userId, token) {
+          var _this53 = this;
+
+          this.clickedFacebook = true; // fetch user photos
+
+          window.FB.api("/".concat(userId, "/albums"), 'GET', {
+            fields: 'link,name',
+            access_token: token
+          }, function (response) {
+            console.log('album', response);
+
+            if (response.data.length > 0) {
+              response.data.forEach(function (element) {
+                if (element.name === 'प्रोफ़ाइल फ़ोटो' || element.name === 'Profile Photo' || element.name === 'Profile photo' || element.name === 'profile photo' || element.name.includes('Profile') || element.name.includes('प्रोफ़ाइल')) {
+                  if (element.id) {
+                    window.FB.api("/".concat(element.id, "/photos"), 'GET', {
+                      fields: 'link',
+                      access_token: token
+                    }, function (res) {
+                      console.log('Photos', res);
+
+                      if (res.data.length > 0) {
+                        res.data.forEach(function (element, index) {
+                          if (index < 5) {
+                            if (element && element.id) {
+                              window.FB.api("/".concat(element.id, "/picture"), 'GET', {
+                                redirect: 'false',
+                                access_token: token
+                              }, function (picRes) {
+                                console.log(picRes);
+
+                                if (picRes.data && picRes.data.url) {
+                                  switch (index) {
+                                    case 0:
+                                      _this53.frontfile = picRes.data.url;
+
+                                      _this53.getImage(_this53.frontfile, 2);
+
+                                      break;
+
+                                    case 1:
+                                      _this53.BackimgURL = picRes.data.url;
+
+                                      _this53.getImage(_this53.BackimgURL, 3);
+
+                                      break;
+
+                                    default:
+                                      _this53.getImage(picRes.data.url, index + 2);
+
+                                      break;
+                                  }
+                                }
+                              });
+                            }
+                          } else {
+                            return;
+                          }
+                        });
+                      }
+                    });
+                  }
+                }
+              });
+            } else {
+              _this53.ngxNotificationService.warning('No Facebook Picture Found');
+            }
+          });
         } // fetch fb current profile pic
 
       }, {
         key: "fetchFbCurrentProfilePic",
         value: function fetchFbCurrentProfilePic() {
-          var _this53 = this;
+          var _this54 = this;
 
           window.FB.api('/me/picture', 'GET', {
             height: '600',
@@ -5538,12 +5787,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(response.data.url);
 
             if (response.data.url) {
-              _this53.imgURL = response.data.url;
+              _this54.imgURL = response.data.url;
 
-              _this53.getImage(_this53.imgURL, 1); // get more  profile pics from facebook for second and third places in image grid
+              _this54.getImage(_this54.imgURL, 1); // get more  profile pics from facebook for second and third places in image grid
 
 
-              _this53.getFacebookPics();
+              _this54.getFacebookPics();
             }
           });
         } // for facebook photos when user has not given permission on first page
@@ -5551,7 +5800,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "loginToFacebookToGetPhotos",
         value: function loginToFacebookToGetPhotos() {
-          var _this54 = this;
+          var _this55 = this;
 
           window.FB.getLoginStatus(function (response) {
             console.log(response);
@@ -5559,13 +5808,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (response.status === 'connected') {
               localStorage.setItem('fb_token', response.authResponse.accessToken);
 
-              _this54.fetchFbCurrentProfilePic();
+              _this55.fetchFbCurrentProfilePic();
             } else {
               window.FB.login(function (response) {
                 if (response.authResponse) {
                   console.log('Welcome!  Fetching your information.... ');
 
-                  _this54.fetchFbCurrentProfilePic();
+                  _this55.fetchFbCurrentProfilePic();
                 } else {
                   console.log('User cancelled login or did not fully authorize.');
                 }
@@ -5793,14 +6042,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(CompatibilityVerifyComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this55 = this;
+          var _this56 = this;
 
           // when the remote data gets uploaded
           this.fourPageService.getListData.subscribe(function (data) {
             if (data) {
-              console.log(_this55.fourPageService.getProfile());
+              console.log(_this56.fourPageService.getProfile());
 
-              _this55.setData(_this55.fourPageService.getProfile());
+              _this56.setData(_this56.fourPageService.getProfile());
             }
           }, function (err) {
             console.log(err);
@@ -5830,13 +6079,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChanged",
         value: function placeChanged() {
-          var _this56 = this;
+          var _this57 = this;
 
           var familyIn = document.querySelector('#familyIn');
           setTimeout(function () {
             console.log(familyIn.value);
 
-            _this56.verifyForm.patchValue({
+            _this57.verifyForm.patchValue({
               family_living_in: familyIn.value
             });
           }, 500);
@@ -5859,7 +6108,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmitPersonal",
         value: function onSubmitPersonal() {
-          var _this57 = this;
+          var _this58 = this;
 
           console.log(this.verifyForm.value); // console.log(this.verifyForm.valid);
 
@@ -5882,17 +6131,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               console.log(data);
 
               if (data.updatePerosnalDetails_status === 'Y') {
-                _this57.fourPageService.profile.college = _this57.verifyForm.value.college;
-                _this57.fourPageService.profile.company = _this57.verifyForm.value.company;
+                _this58.fourPageService.profile.college = _this58.verifyForm.value.college;
+                _this58.fourPageService.profile.company = _this58.verifyForm.value.company;
 
-                _this57.onSubmitFamily();
+                _this58.onSubmitFamily();
               } else {
-                _this57.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+                _this58.ngxNotificationService.error('Something Went Wrong, Try Again Later');
               }
             }, function (error) {
               console.log(error);
 
-              _this57.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+              _this58.ngxNotificationService.error('Something Went Wrong, Try Again Later');
             });
           } else {
             for (var control in this.verifyForm.controls) {
@@ -5911,7 +6160,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmitFamily",
         value: function onSubmitFamily() {
-          var _this58 = this;
+          var _this59 = this;
 
           var newFamilyForm = new FormData();
           var leadId = localStorage.getItem('getListLeadId');
@@ -5934,18 +6183,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log('Family Deatils Updated successfully');
 
             if (data.updateFamilyDetails_status === 'Y') {
-              _this58.updateVerifyFormData(newFamilyForm);
+              _this59.updateVerifyFormData(newFamilyForm);
 
-              if (_this58.fourPageService.getUserThrough() && _this58.fourPageService.showApproveBtn) {
-                _this58.validate(_this58.fourPageService.profile);
+              if (_this59.fourPageService.getUserThrough() && _this59.fourPageService.showApproveBtn) {
+                _this59.validate(_this59.fourPageService.profile);
               }
             } else {
-              _this58.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+              _this59.ngxNotificationService.error('Something Went Wrong, Try Again Later');
             }
           }, function (error) {
             console.log(error);
 
-            _this58.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+            _this59.ngxNotificationService.error('Something Went Wrong, Try Again Later');
           });
         }
       }, {
@@ -5973,7 +6222,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "approveProfileApi",
         value: function approveProfileApi() {
-          var _this59 = this;
+          var _this60 = this;
 
           this.onSubmitPersonal();
           var approveData = new FormData();
@@ -6056,20 +6305,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               // }
 
 
-              _this59.fourPageService.showApproveBtn = false;
+              _this60.fourPageService.showApproveBtn = false;
 
-              _this59.clearHistory();
+              _this60.clearHistory();
             } else {
               if (data.message) {
-                _this59.ngxNotificationService.error(data.message);
+                _this60.ngxNotificationService.error(data.message);
               } else {
-                _this59.ngxNotificationService.error('Not Approved');
+                _this60.ngxNotificationService.error('Not Approved');
               }
             }
           }, function (err) {
             console.log(err);
 
-            _this59.ngxNotificationService.error(err.message, 'Not Approved');
+            _this60.ngxNotificationService.error(err.message, 'Not Approved');
           });
         }
       }, {
@@ -6561,6 +6810,152 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       /*! ./register-with.component.css */
       "./src/app/compatibility-form/register-with/register-with.component.css"))["default"]]
     }), tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"]))], RegisterWithComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/compatibility-form/testimonials/testimonials.component.css":
+  /*!****************************************************************************!*\
+    !*** ./src/app/compatibility-form/testimonials/testimonials.component.css ***!
+    \****************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppCompatibilityFormTestimonialsTestimonialsComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');\r\n\r\n.testimonials{\r\n    overflow-x:hidden;\r\n}\r\n\r\n.testimonials{\r\n    margin-top:8vw;\r\n    font-family:'Poppins', sans-serif;\r\n}\r\n\r\nh1{\r\n    margin-bottom:20px;\r\n    font-weight:bolder;\r\n    font-family:'Poppins', sans-serif;\r\n    background-image:url('sparkles.svg');\r\n    background-size: cover;\r\n}\r\n\r\n.container{\r\n    margin:6.25vw 20px;\r\n}\r\n\r\n/* #testimonial-image{\r\n    width:15.625vw;\r\n    height:21.875vw;\r\n    position:relative;\r\n    right:8vw;\r\n    bottom:7.8125vw;\r\n    border-radius:10px;\r\n} */\r\n\r\nh2{\r\n    font-size:1.75vw;\r\n    font-family:'Poppins', sans-serif;\r\n}\r\n\r\np{\r\n    font-size:1vw;\r\n}\r\n\r\n@media only screen and (max-width: 575px){\r\n    .testimonial-text{\r\n        margin-left:10px;\r\n    }\r\n    h1{\r\n        font-size:18px;\r\n    }\r\n    h2{\r\n        font-size:14px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:10px;\r\n        font-weight:500;\r\n    }\r\n    #testimonialImage{\r\n        width:150px;\r\n        height: 210px;\r\n        position:relative;\r\n        bottom:3vw;\r\n        right:19vw\r\n    }\r\n    .row{\r\n        width:250px;\r\n        height:270px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        border-radius:10px;\r\n        margin-left:auto;\r\n        margin-right:auto;\r\n    }\r\n    .comma{\r\n        width:30px;\r\n        height:40px;\r\n        margin-bottom:10px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n}\r\n\r\n@media only screen and (min-width: 576px){\r\n    .container{\r\n        margin-top:80px;\r\n    }\r\n    #testimonialImage{\r\n        width:150px;\r\n        height: 210px;\r\n        position:relative;\r\n        bottom:3vw;\r\n        right:14vw;\r\n    }\r\n    .row{\r\n        width:250px;\r\n        height:250px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        margin-left:auto;;\r\n        margin-right:auto;\r\n        border-radius:10px;\r\n    }\r\n    .testimonial-image{\r\n        width:131px;\r\n        height:184px;\r\n        position:relative;\r\n        right:13vw;\r\n        bottom:8vw;\r\n    }\r\n    h1{\r\n        font-size:18px;\r\n    }\r\n    h2{\r\n        font-size:14px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:10px;\r\n        font-weight:500;\r\n    }\r\n    .comma{\r\n        width:20px;\r\n        height:29px;\r\n        margin-bottom:10px;\r\n        margin-left:15px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    \r\n}\r\n\r\n@media only screen and (min-width: 720px){\r\n    #testimonialImage{\r\n        width:150px;\r\n        height: 210px;\r\n        position:relative;\r\n        bottom:3vw;\r\n        right:10vw;\r\n    }\r\n    .container{\r\n        margin-top:80px;\r\n        /* margin-left:auto;\r\n        margin-right:auto; */\r\n    }\r\n    .row{\r\n        width:250px;\r\n        height:280px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        margin-left:40px;\r\n        margin-right:40px;\r\n        border-radius:10px;\r\n    }\r\n    .testimonial-image{\r\n        width:131px;\r\n        height:184px;\r\n        position:relative;\r\n        right:10vw;\r\n        bottom:8vw;\r\n    }\r\n    h1{\r\n        font-size:18px;\r\n    }\r\n    h2{\r\n        font-size:14px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:10px;\r\n        font-weight:500;\r\n    }\r\n    .comma{\r\n        width:20px;\r\n        height:29px;\r\n        margin-bottom:10px;\r\n        margin-left:15px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    \r\n}\r\n\r\n@media only screen and (min-width: 768px){\r\n    #testimonialImage{\r\n        width:150px;\r\n        height: 210px;\r\n        position:relative;\r\n        bottom:3vw;\r\n        right:10vw;\r\n    }\r\n    .container{\r\n        margin-top:80px;\r\n        /* margin-left:auto;\r\n        margin-right:auto; */\r\n    }\r\n    .row{\r\n        width:250px;\r\n        height:270px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        margin-left:40px;\r\n        margin-right:40px;\r\n        border-radius:10px;\r\n    }\r\n    .testimonial-image{\r\n        width:131px;\r\n        height:184px;\r\n        position:relative;\r\n        right:10vw;\r\n        bottom:8vw;\r\n    }\r\n    h1{\r\n        font-size:18px;\r\n    }\r\n    h2{\r\n        font-size:14px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:10px;\r\n        font-weight:500;\r\n    }\r\n    .comma{\r\n        width:20px;\r\n        height:29px;\r\n        margin-bottom:10px;\r\n        margin-left:15px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n}\r\n\r\n@media only screen and (min-width: 992px){\r\n    #testimonialImage{\r\n        width:150px;\r\n        height: 210px;\r\n        position:relative;\r\n        bottom:3vw;\r\n        right:8vw;\r\n    }\r\n    .container{\r\n        margin-top:80px;\r\n        /* margin-left:auto;\r\n        margin-right:auto; */\r\n    }\r\n    .row{\r\n        width:250px;\r\n        height:220px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        margin-left:40px;\r\n        margin-right:40px;\r\n        border-radius:10px;\r\n    }\r\n    .testimonial-image{\r\n        width:131px;\r\n        height:184px;\r\n        position:relative;\r\n        right:8vw;\r\n        bottom:5vw;\r\n    }\r\n    h1{\r\n        font-size:18px;\r\n    }\r\n    h2{\r\n        font-size:14px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:10px;\r\n        font-weight:500;\r\n    }\r\n    .comma{\r\n        width:20px;\r\n        height:29px;\r\n        margin-bottom:10px;\r\n        margin-left:15px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    \r\n}\r\n\r\n@media only screen and (min-width: 1024px){\r\n    .container{\r\n        margin-top:80px;\r\n        /* margin-left:auto;\r\n        margin-right:auto; */\r\n    }\r\n    .row{\r\n        width:250px;\r\n        height:300px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        margin-left:40px;\r\n        margin-right:40px;\r\n        border-radius:10px;\r\n    }\r\n    .testimonial-image{\r\n        width:140px;\r\n        height:196px;\r\n        position:relative;\r\n        right:8vw;\r\n        bottom:5vw;\r\n    }\r\n    h1{\r\n        font-weight:600;\r\n        margin-bottom:60px;\r\n        font-size:4.5vw;\r\n    }\r\n    h2{\r\n        font-size:18px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:12px;\r\n        font-weight:500;\r\n    }\r\n    .comma{\r\n        width:20px;\r\n        height:29px;\r\n        margin-bottom:10px;\r\n        margin-left:15px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    \r\n}\r\n\r\n@media only screen and (min-width: 1200px){\r\n    #testimonialImage{\r\n        width:100px;\r\n        height: 150px;\r\n        position:relative;\r\n        bottom:3vw;\r\n        right:10vw;\r\n    }\r\n    .container{\r\n        margin-top:80px;\r\n        /* margin-left:auto;\r\n        margin-right:auto; */\r\n    }\r\n    .row{\r\n        width:400px;\r\n        height:330px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        margin-left:40px;\r\n        margin-right:40px;\r\n        border-radius:10px;\r\n    }\r\n    #testimonialImage{\r\n        width:200px;\r\n        height: 280px;\r\n        position:relative;\r\n        bottom:3vw;\r\n        right:6vw\r\n    }\r\n    h1{\r\n        font-weight:600;\r\n        margin-bottom:60px;\r\n        font-size:3.2vw;\r\n    }\r\n    h2{\r\n        font-size:32px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:14px;\r\n        font-weight:400;\r\n    }\r\n    .comma{\r\n        width:40px;\r\n        height:50px;\r\n        margin-bottom:10px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    \r\n}\r\n\r\n@media only screen and (min-width: 1600px){\r\n    .container{\r\n        margin-top:80px;\r\n        /* margin-left:auto;\r\n        margin-right:auto; */\r\n    }\r\n    .row{\r\n        width:400px;\r\n        height:450px;\r\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n        margin-left:40px;\r\n        margin-right:40px;\r\n        border-radius:10px;\r\n    }\r\n    .testimonial-image{\r\n        width:300px;\r\n        height:420px;\r\n        position:relative;\r\n        right:14vw;\r\n        bottom:5vw;\r\n    }\r\n    h1{\r\n        font-weight:600;\r\n        margin-bottom:60px;\r\n        font-size:3.7vw;\r\n    }\r\n    h2{\r\n        font-size:32px;\r\n        font-weight:bolder;\r\n    }\r\n    p{\r\n        font-size:12px;\r\n        font-weight:500;\r\n    }\r\n    .comma{\r\n        width:40px;\r\n        height:50px;\r\n        margin-bottom:10px;\r\n        margin-left:15px;\r\n    }\r\n    hr.one{\r\n        border:0.8px solid black;\r\n    }\r\n    hr.two{\r\n        border:0.8px solid lightgray;\r\n        margin-left:5px;\r\n        margin-top:-15px;\r\n    }\r\n    \r\n    \r\n    \r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcGF0aWJpbGl0eS1mb3JtL3Rlc3RpbW9uaWFscy90ZXN0aW1vbmlhbHMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxxRkFBcUY7O0FBRXJGO0lBQ0ksaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksY0FBYztJQUNkLGlDQUFpQztBQUNyQzs7QUFDQTtJQUNJLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsaUNBQWlDO0lBQ2pDLG9DQUE2RDtJQUM3RCxzQkFBc0I7QUFDMUI7O0FBQ0E7SUFDSSxrQkFBa0I7QUFDdEI7O0FBQ0E7Ozs7Ozs7R0FPRzs7QUFDSDtJQUNJLGdCQUFnQjtJQUNoQixpQ0FBaUM7QUFDckM7O0FBQ0E7SUFDSSxhQUFhO0FBQ2pCOztBQUNBO0lBQ0k7UUFDSSxnQkFBZ0I7SUFDcEI7SUFDQTtRQUNJLGNBQWM7SUFDbEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxlQUFlO0lBQ25CO0lBQ0E7UUFDSSxXQUFXO1FBQ1gsYUFBYTtRQUNiLGlCQUFpQjtRQUNqQixVQUFVO1FBQ1Y7SUFDSjtJQUNBO1FBQ0ksV0FBVztRQUNYLFlBQVk7UUFDWiwyQ0FBMkM7UUFDM0Msa0JBQWtCO1FBQ2xCLGdCQUFnQjtRQUNoQixpQkFBaUI7SUFDckI7SUFDQTtRQUNJLFVBQVU7UUFDVixXQUFXO1FBQ1gsa0JBQWtCO0lBQ3RCO0lBQ0E7UUFDSSx3QkFBd0I7SUFDNUI7SUFDQTtRQUNJLDRCQUE0QjtRQUM1QixlQUFlO1FBQ2YsZ0JBQWdCO0lBQ3BCO0FBQ0o7O0FBQ0E7SUFDSTtRQUNJLGVBQWU7SUFDbkI7SUFDQTtRQUNJLFdBQVc7UUFDWCxhQUFhO1FBQ2IsaUJBQWlCO1FBQ2pCLFVBQVU7UUFDVixVQUFVO0lBQ2Q7SUFDQTtRQUNJLFdBQVc7UUFDWCxZQUFZO1FBQ1osMkNBQTJDO1FBQzNDLGdCQUFnQjtRQUNoQixpQkFBaUI7UUFDakIsa0JBQWtCO0lBQ3RCO0lBQ0E7UUFDSSxXQUFXO1FBQ1gsWUFBWTtRQUNaLGlCQUFpQjtRQUNqQixVQUFVO1FBQ1YsVUFBVTtJQUNkO0lBQ0E7UUFDSSxjQUFjO0lBQ2xCO0lBQ0E7UUFDSSxjQUFjO1FBQ2Qsa0JBQWtCO0lBQ3RCO0lBQ0E7UUFDSSxjQUFjO1FBQ2QsZUFBZTtJQUNuQjtJQUNBO1FBQ0ksVUFBVTtRQUNWLFdBQVc7UUFDWCxrQkFBa0I7UUFDbEIsZ0JBQWdCO0lBQ3BCO0lBQ0E7UUFDSSx3QkFBd0I7SUFDNUI7SUFDQTtRQUNJLDRCQUE0QjtRQUM1QixlQUFlO1FBQ2YsZ0JBQWdCO0lBQ3BCOztBQUVKOztBQUNBO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsYUFBYTtRQUNiLGlCQUFpQjtRQUNqQixVQUFVO1FBQ1YsVUFBVTtJQUNkO0lBQ0E7UUFDSSxlQUFlO1FBQ2Y7NEJBQ29CO0lBQ3hCO0lBQ0E7UUFDSSxXQUFXO1FBQ1gsWUFBWTtRQUNaLDJDQUEyQztRQUMzQyxnQkFBZ0I7UUFDaEIsaUJBQWlCO1FBQ2pCLGtCQUFrQjtJQUN0QjtJQUNBO1FBQ0ksV0FBVztRQUNYLFlBQVk7UUFDWixpQkFBaUI7UUFDakIsVUFBVTtRQUNWLFVBQVU7SUFDZDtJQUNBO1FBQ0ksY0FBYztJQUNsQjtJQUNBO1FBQ0ksY0FBYztRQUNkLGtCQUFrQjtJQUN0QjtJQUNBO1FBQ0ksY0FBYztRQUNkLGVBQWU7SUFDbkI7SUFDQTtRQUNJLFVBQVU7UUFDVixXQUFXO1FBQ1gsa0JBQWtCO1FBQ2xCLGdCQUFnQjtJQUNwQjtJQUNBO1FBQ0ksd0JBQXdCO0lBQzVCO0lBQ0E7UUFDSSw0QkFBNEI7UUFDNUIsZUFBZTtRQUNmLGdCQUFnQjtJQUNwQjs7QUFFSjs7QUFDQTtJQUNJO1FBQ0ksV0FBVztRQUNYLGFBQWE7UUFDYixpQkFBaUI7UUFDakIsVUFBVTtRQUNWLFVBQVU7SUFDZDtJQUNBO1FBQ0ksZUFBZTtRQUNmOzRCQUNvQjtJQUN4QjtJQUNBO1FBQ0ksV0FBVztRQUNYLFlBQVk7UUFDWiwyQ0FBMkM7UUFDM0MsZ0JBQWdCO1FBQ2hCLGlCQUFpQjtRQUNqQixrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLFdBQVc7UUFDWCxZQUFZO1FBQ1osaUJBQWlCO1FBQ2pCLFVBQVU7UUFDVixVQUFVO0lBQ2Q7SUFDQTtRQUNJLGNBQWM7SUFDbEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxlQUFlO0lBQ25CO0lBQ0E7UUFDSSxVQUFVO1FBQ1YsV0FBVztRQUNYLGtCQUFrQjtRQUNsQixnQkFBZ0I7SUFDcEI7SUFDQTtRQUNJLHdCQUF3QjtJQUM1QjtJQUNBO1FBQ0ksNEJBQTRCO1FBQzVCLGVBQWU7UUFDZixnQkFBZ0I7SUFDcEI7QUFDSjs7QUFDQTtJQUNJO1FBQ0ksV0FBVztRQUNYLGFBQWE7UUFDYixpQkFBaUI7UUFDakIsVUFBVTtRQUNWLFNBQVM7SUFDYjtJQUNBO1FBQ0ksZUFBZTtRQUNmOzRCQUNvQjtJQUN4QjtJQUNBO1FBQ0ksV0FBVztRQUNYLFlBQVk7UUFDWiwyQ0FBMkM7UUFDM0MsZ0JBQWdCO1FBQ2hCLGlCQUFpQjtRQUNqQixrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLFdBQVc7UUFDWCxZQUFZO1FBQ1osaUJBQWlCO1FBQ2pCLFNBQVM7UUFDVCxVQUFVO0lBQ2Q7SUFDQTtRQUNJLGNBQWM7SUFDbEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxlQUFlO0lBQ25CO0lBQ0E7UUFDSSxVQUFVO1FBQ1YsV0FBVztRQUNYLGtCQUFrQjtRQUNsQixnQkFBZ0I7SUFDcEI7SUFDQTtRQUNJLHdCQUF3QjtJQUM1QjtJQUNBO1FBQ0ksNEJBQTRCO1FBQzVCLGVBQWU7UUFDZixnQkFBZ0I7SUFDcEI7O0FBRUo7O0FBRUE7SUFDSTtRQUNJLGVBQWU7UUFDZjs0QkFDb0I7SUFDeEI7SUFDQTtRQUNJLFdBQVc7UUFDWCxZQUFZO1FBQ1osMkNBQTJDO1FBQzNDLGdCQUFnQjtRQUNoQixpQkFBaUI7UUFDakIsa0JBQWtCO0lBQ3RCO0lBQ0E7UUFDSSxXQUFXO1FBQ1gsWUFBWTtRQUNaLGlCQUFpQjtRQUNqQixTQUFTO1FBQ1QsVUFBVTtJQUNkO0lBQ0E7UUFDSSxlQUFlO1FBQ2Ysa0JBQWtCO1FBQ2xCLGVBQWU7SUFDbkI7SUFDQTtRQUNJLGNBQWM7UUFDZCxrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxlQUFlO0lBQ25CO0lBQ0E7UUFDSSxVQUFVO1FBQ1YsV0FBVztRQUNYLGtCQUFrQjtRQUNsQixnQkFBZ0I7SUFDcEI7SUFDQTtRQUNJLHdCQUF3QjtJQUM1QjtJQUNBO1FBQ0ksNEJBQTRCO1FBQzVCLGVBQWU7UUFDZixnQkFBZ0I7SUFDcEI7O0FBRUo7O0FBQ0E7SUFDSTtRQUNJLFdBQVc7UUFDWCxhQUFhO1FBQ2IsaUJBQWlCO1FBQ2pCLFVBQVU7UUFDVixVQUFVO0lBQ2Q7SUFDQTtRQUNJLGVBQWU7UUFDZjs0QkFDb0I7SUFDeEI7SUFDQTtRQUNJLFdBQVc7UUFDWCxZQUFZO1FBQ1osMkNBQTJDO1FBQzNDLGdCQUFnQjtRQUNoQixpQkFBaUI7UUFDakIsa0JBQWtCO0lBQ3RCO0lBQ0E7UUFDSSxXQUFXO1FBQ1gsYUFBYTtRQUNiLGlCQUFpQjtRQUNqQixVQUFVO1FBQ1Y7SUFDSjtJQUNBO1FBQ0ksZUFBZTtRQUNmLGtCQUFrQjtRQUNsQixlQUFlO0lBQ25CO0lBQ0E7UUFDSSxjQUFjO1FBQ2Qsa0JBQWtCO0lBQ3RCO0lBQ0E7UUFDSSxjQUFjO1FBQ2QsZUFBZTtJQUNuQjtJQUNBO1FBQ0ksVUFBVTtRQUNWLFdBQVc7UUFDWCxrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLHdCQUF3QjtJQUM1QjtJQUNBO1FBQ0ksNEJBQTRCO1FBQzVCLGVBQWU7UUFDZixnQkFBZ0I7SUFDcEI7O0FBRUo7O0FBQ0E7SUFDSTtRQUNJLGVBQWU7UUFDZjs0QkFDb0I7SUFDeEI7SUFDQTtRQUNJLFdBQVc7UUFDWCxZQUFZO1FBQ1osMkNBQTJDO1FBQzNDLGdCQUFnQjtRQUNoQixpQkFBaUI7UUFDakIsa0JBQWtCO0lBQ3RCO0lBQ0E7UUFDSSxXQUFXO1FBQ1gsWUFBWTtRQUNaLGlCQUFpQjtRQUNqQixVQUFVO1FBQ1YsVUFBVTtJQUNkO0lBQ0E7UUFDSSxlQUFlO1FBQ2Ysa0JBQWtCO1FBQ2xCLGVBQWU7SUFDbkI7SUFDQTtRQUNJLGNBQWM7UUFDZCxrQkFBa0I7SUFDdEI7SUFDQTtRQUNJLGNBQWM7UUFDZCxlQUFlO0lBQ25CO0lBQ0E7UUFDSSxVQUFVO1FBQ1YsV0FBVztRQUNYLGtCQUFrQjtRQUNsQixnQkFBZ0I7SUFDcEI7SUFDQTtRQUNJLHdCQUF3QjtJQUM1QjtJQUNBO1FBQ0ksNEJBQTRCO1FBQzVCLGVBQWU7UUFDZixnQkFBZ0I7SUFDcEI7Ozs7QUFJSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBhdGliaWxpdHktZm9ybS90ZXN0aW1vbmlhbHMvdGVzdGltb25pYWxzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IHVybCgnaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1Qb3BwaW5zOndnaHRAMzAwJmRpc3BsYXk9c3dhcCcpO1xyXG5cclxuLnRlc3RpbW9uaWFsc3tcclxuICAgIG92ZXJmbG93LXg6aGlkZGVuO1xyXG59XHJcblxyXG4udGVzdGltb25pYWxze1xyXG4gICAgbWFyZ2luLXRvcDo4dnc7XHJcbiAgICBmb250LWZhbWlseTonUG9wcGlucycsIHNhbnMtc2VyaWY7XHJcbn1cclxuaDF7XHJcbiAgICBtYXJnaW4tYm90dG9tOjIwcHg7XHJcbiAgICBmb250LXdlaWdodDpib2xkZXI7XHJcbiAgICBmb250LWZhbWlseTonUG9wcGlucycsIHNhbnMtc2VyaWY7XHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOnVybCgnLi4vLi4vLi4vYXNzZXRzL3NwYXJrbGVzL3NwYXJrbGVzLnN2ZycpO1xyXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcclxufVxyXG4uY29udGFpbmVye1xyXG4gICAgbWFyZ2luOjYuMjV2dyAyMHB4O1xyXG59ICAgIFxyXG4vKiAjdGVzdGltb25pYWwtaW1hZ2V7XHJcbiAgICB3aWR0aDoxNS42MjV2dztcclxuICAgIGhlaWdodDoyMS44NzV2dztcclxuICAgIHBvc2l0aW9uOnJlbGF0aXZlO1xyXG4gICAgcmlnaHQ6OHZ3O1xyXG4gICAgYm90dG9tOjcuODEyNXZ3O1xyXG4gICAgYm9yZGVyLXJhZGl1czoxMHB4O1xyXG59ICovXHJcbmgye1xyXG4gICAgZm9udC1zaXplOjEuNzV2dztcclxuICAgIGZvbnQtZmFtaWx5OidQb3BwaW5zJywgc2Fucy1zZXJpZjtcclxufVxyXG5we1xyXG4gICAgZm9udC1zaXplOjF2dztcclxufVxyXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDU3NXB4KXtcclxuICAgIC50ZXN0aW1vbmlhbC10ZXh0e1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OjEwcHg7XHJcbiAgICB9XHJcbiAgICBoMXtcclxuICAgICAgICBmb250LXNpemU6MThweDtcclxuICAgIH1cclxuICAgIGgye1xyXG4gICAgICAgIGZvbnQtc2l6ZToxNHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OmJvbGRlcjtcclxuICAgIH1cclxuICAgIHB7XHJcbiAgICAgICAgZm9udC1zaXplOjEwcHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6NTAwO1xyXG4gICAgfVxyXG4gICAgI3Rlc3RpbW9uaWFsSW1hZ2V7XHJcbiAgICAgICAgd2lkdGg6MTUwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAyMTBweDtcclxuICAgICAgICBwb3NpdGlvbjpyZWxhdGl2ZTtcclxuICAgICAgICBib3R0b206M3Z3O1xyXG4gICAgICAgIHJpZ2h0OjE5dndcclxuICAgIH1cclxuICAgIC5yb3d7XHJcbiAgICAgICAgd2lkdGg6MjUwcHg7XHJcbiAgICAgICAgaGVpZ2h0OjI3MHB4O1xyXG4gICAgICAgIGJveC1zaGFkb3c6IDBweCA0cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czoxMHB4O1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OmF1dG87XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OmF1dG87XHJcbiAgICB9XHJcbiAgICAuY29tbWF7XHJcbiAgICAgICAgd2lkdGg6MzBweDtcclxuICAgICAgICBoZWlnaHQ6NDBweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOjEwcHg7XHJcbiAgICB9XHJcbiAgICBoci5vbmV7XHJcbiAgICAgICAgYm9yZGVyOjAuOHB4IHNvbGlkIGJsYWNrO1xyXG4gICAgfVxyXG4gICAgaHIudHdve1xyXG4gICAgICAgIGJvcmRlcjowLjhweCBzb2xpZCBsaWdodGdyYXk7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6NXB4O1xyXG4gICAgICAgIG1hcmdpbi10b3A6LTE1cHg7XHJcbiAgICB9XHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA1NzZweCl7XHJcbiAgICAuY29udGFpbmVye1xyXG4gICAgICAgIG1hcmdpbi10b3A6ODBweDtcclxuICAgIH1cclxuICAgICN0ZXN0aW1vbmlhbEltYWdle1xyXG4gICAgICAgIHdpZHRoOjE1MHB4O1xyXG4gICAgICAgIGhlaWdodDogMjEwcHg7XHJcbiAgICAgICAgcG9zaXRpb246cmVsYXRpdmU7XHJcbiAgICAgICAgYm90dG9tOjN2dztcclxuICAgICAgICByaWdodDoxNHZ3O1xyXG4gICAgfVxyXG4gICAgLnJvd3tcclxuICAgICAgICB3aWR0aDoyNTBweDtcclxuICAgICAgICBoZWlnaHQ6MjUwcHg7XHJcbiAgICAgICAgYm94LXNoYWRvdzogMHB4IDRweCA0cHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcclxuICAgICAgICBtYXJnaW4tbGVmdDphdXRvOztcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6YXV0bztcclxuICAgICAgICBib3JkZXItcmFkaXVzOjEwcHg7XHJcbiAgICB9XHJcbiAgICAudGVzdGltb25pYWwtaW1hZ2V7XHJcbiAgICAgICAgd2lkdGg6MTMxcHg7XHJcbiAgICAgICAgaGVpZ2h0OjE4NHB4O1xyXG4gICAgICAgIHBvc2l0aW9uOnJlbGF0aXZlO1xyXG4gICAgICAgIHJpZ2h0OjEzdnc7XHJcbiAgICAgICAgYm90dG9tOjh2dztcclxuICAgIH1cclxuICAgIGgxe1xyXG4gICAgICAgIGZvbnQtc2l6ZToxOHB4O1xyXG4gICAgfVxyXG4gICAgaDJ7XHJcbiAgICAgICAgZm9udC1zaXplOjE0cHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6Ym9sZGVyO1xyXG4gICAgfVxyXG4gICAgcHtcclxuICAgICAgICBmb250LXNpemU6MTBweDtcclxuICAgICAgICBmb250LXdlaWdodDo1MDA7XHJcbiAgICB9XHJcbiAgICAuY29tbWF7XHJcbiAgICAgICAgd2lkdGg6MjBweDtcclxuICAgICAgICBoZWlnaHQ6MjlweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOjEwcHg7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6MTVweDtcclxuICAgIH1cclxuICAgIGhyLm9uZXtcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgYmxhY2s7XHJcbiAgICB9XHJcbiAgICBoci50d297XHJcbiAgICAgICAgYm9yZGVyOjAuOHB4IHNvbGlkIGxpZ2h0Z3JheTtcclxuICAgICAgICBtYXJnaW4tbGVmdDo1cHg7XHJcbiAgICAgICAgbWFyZ2luLXRvcDotMTVweDtcclxuICAgIH1cclxuICAgIFxyXG59XHJcbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNzIwcHgpe1xyXG4gICAgI3Rlc3RpbW9uaWFsSW1hZ2V7XHJcbiAgICAgICAgd2lkdGg6MTUwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAyMTBweDtcclxuICAgICAgICBwb3NpdGlvbjpyZWxhdGl2ZTtcclxuICAgICAgICBib3R0b206M3Z3O1xyXG4gICAgICAgIHJpZ2h0OjEwdnc7XHJcbiAgICB9XHJcbiAgICAuY29udGFpbmVye1xyXG4gICAgICAgIG1hcmdpbi10b3A6ODBweDtcclxuICAgICAgICAvKiBtYXJnaW4tbGVmdDphdXRvO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDphdXRvOyAqL1xyXG4gICAgfVxyXG4gICAgLnJvd3tcclxuICAgICAgICB3aWR0aDoyNTBweDtcclxuICAgICAgICBoZWlnaHQ6MjgwcHg7XHJcbiAgICAgICAgYm94LXNoYWRvdzogMHB4IDRweCA0cHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcclxuICAgICAgICBtYXJnaW4tbGVmdDo0MHB4O1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDo0MHB4O1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6MTBweDtcclxuICAgIH1cclxuICAgIC50ZXN0aW1vbmlhbC1pbWFnZXtcclxuICAgICAgICB3aWR0aDoxMzFweDtcclxuICAgICAgICBoZWlnaHQ6MTg0cHg7XHJcbiAgICAgICAgcG9zaXRpb246cmVsYXRpdmU7XHJcbiAgICAgICAgcmlnaHQ6MTB2dztcclxuICAgICAgICBib3R0b206OHZ3O1xyXG4gICAgfVxyXG4gICAgaDF7XHJcbiAgICAgICAgZm9udC1zaXplOjE4cHg7XHJcbiAgICB9XHJcbiAgICBoMntcclxuICAgICAgICBmb250LXNpemU6MTRweDtcclxuICAgICAgICBmb250LXdlaWdodDpib2xkZXI7XHJcbiAgICB9XHJcbiAgICBwe1xyXG4gICAgICAgIGZvbnQtc2l6ZToxMHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OjUwMDtcclxuICAgIH1cclxuICAgIC5jb21tYXtcclxuICAgICAgICB3aWR0aDoyMHB4O1xyXG4gICAgICAgIGhlaWdodDoyOXB4O1xyXG4gICAgICAgIG1hcmdpbi1ib3R0b206MTBweDtcclxuICAgICAgICBtYXJnaW4tbGVmdDoxNXB4O1xyXG4gICAgfVxyXG4gICAgaHIub25le1xyXG4gICAgICAgIGJvcmRlcjowLjhweCBzb2xpZCBibGFjaztcclxuICAgIH1cclxuICAgIGhyLnR3b3tcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgbGlnaHRncmF5O1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OjVweDtcclxuICAgICAgICBtYXJnaW4tdG9wOi0xNXB4O1xyXG4gICAgfVxyXG4gICAgXHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA3NjhweCl7XHJcbiAgICAjdGVzdGltb25pYWxJbWFnZXtcclxuICAgICAgICB3aWR0aDoxNTBweDtcclxuICAgICAgICBoZWlnaHQ6IDIxMHB4O1xyXG4gICAgICAgIHBvc2l0aW9uOnJlbGF0aXZlO1xyXG4gICAgICAgIGJvdHRvbTozdnc7XHJcbiAgICAgICAgcmlnaHQ6MTB2dztcclxuICAgIH1cclxuICAgIC5jb250YWluZXJ7XHJcbiAgICAgICAgbWFyZ2luLXRvcDo4MHB4O1xyXG4gICAgICAgIC8qIG1hcmdpbi1sZWZ0OmF1dG87XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OmF1dG87ICovXHJcbiAgICB9XHJcbiAgICAucm93e1xyXG4gICAgICAgIHdpZHRoOjI1MHB4O1xyXG4gICAgICAgIGhlaWdodDoyNzBweDtcclxuICAgICAgICBib3gtc2hhZG93OiAwcHggNHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OjQwcHg7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OjQwcHg7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czoxMHB4O1xyXG4gICAgfVxyXG4gICAgLnRlc3RpbW9uaWFsLWltYWdle1xyXG4gICAgICAgIHdpZHRoOjEzMXB4O1xyXG4gICAgICAgIGhlaWdodDoxODRweDtcclxuICAgICAgICBwb3NpdGlvbjpyZWxhdGl2ZTtcclxuICAgICAgICByaWdodDoxMHZ3O1xyXG4gICAgICAgIGJvdHRvbTo4dnc7XHJcbiAgICB9XHJcbiAgICBoMXtcclxuICAgICAgICBmb250LXNpemU6MThweDtcclxuICAgIH1cclxuICAgIGgye1xyXG4gICAgICAgIGZvbnQtc2l6ZToxNHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OmJvbGRlcjtcclxuICAgIH1cclxuICAgIHB7XHJcbiAgICAgICAgZm9udC1zaXplOjEwcHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6NTAwO1xyXG4gICAgfVxyXG4gICAgLmNvbW1he1xyXG4gICAgICAgIHdpZHRoOjIwcHg7XHJcbiAgICAgICAgaGVpZ2h0OjI5cHg7XHJcbiAgICAgICAgbWFyZ2luLWJvdHRvbToxMHB4O1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OjE1cHg7XHJcbiAgICB9XHJcbiAgICBoci5vbmV7XHJcbiAgICAgICAgYm9yZGVyOjAuOHB4IHNvbGlkIGJsYWNrO1xyXG4gICAgfVxyXG4gICAgaHIudHdve1xyXG4gICAgICAgIGJvcmRlcjowLjhweCBzb2xpZCBsaWdodGdyYXk7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6NXB4O1xyXG4gICAgICAgIG1hcmdpbi10b3A6LTE1cHg7XHJcbiAgICB9XHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA5OTJweCl7XHJcbiAgICAjdGVzdGltb25pYWxJbWFnZXtcclxuICAgICAgICB3aWR0aDoxNTBweDtcclxuICAgICAgICBoZWlnaHQ6IDIxMHB4O1xyXG4gICAgICAgIHBvc2l0aW9uOnJlbGF0aXZlO1xyXG4gICAgICAgIGJvdHRvbTozdnc7XHJcbiAgICAgICAgcmlnaHQ6OHZ3O1xyXG4gICAgfVxyXG4gICAgLmNvbnRhaW5lcntcclxuICAgICAgICBtYXJnaW4tdG9wOjgwcHg7XHJcbiAgICAgICAgLyogbWFyZ2luLWxlZnQ6YXV0bztcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6YXV0bzsgKi9cclxuICAgIH1cclxuICAgIC5yb3d7XHJcbiAgICAgICAgd2lkdGg6MjUwcHg7XHJcbiAgICAgICAgaGVpZ2h0OjIyMHB4O1xyXG4gICAgICAgIGJveC1zaGFkb3c6IDBweCA0cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6NDBweDtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6NDBweDtcclxuICAgICAgICBib3JkZXItcmFkaXVzOjEwcHg7XHJcbiAgICB9XHJcbiAgICAudGVzdGltb25pYWwtaW1hZ2V7XHJcbiAgICAgICAgd2lkdGg6MTMxcHg7XHJcbiAgICAgICAgaGVpZ2h0OjE4NHB4O1xyXG4gICAgICAgIHBvc2l0aW9uOnJlbGF0aXZlO1xyXG4gICAgICAgIHJpZ2h0Ojh2dztcclxuICAgICAgICBib3R0b206NXZ3O1xyXG4gICAgfVxyXG4gICAgaDF7XHJcbiAgICAgICAgZm9udC1zaXplOjE4cHg7XHJcbiAgICB9XHJcbiAgICBoMntcclxuICAgICAgICBmb250LXNpemU6MTRweDtcclxuICAgICAgICBmb250LXdlaWdodDpib2xkZXI7XHJcbiAgICB9XHJcbiAgICBwe1xyXG4gICAgICAgIGZvbnQtc2l6ZToxMHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OjUwMDtcclxuICAgIH1cclxuICAgIC5jb21tYXtcclxuICAgICAgICB3aWR0aDoyMHB4O1xyXG4gICAgICAgIGhlaWdodDoyOXB4O1xyXG4gICAgICAgIG1hcmdpbi1ib3R0b206MTBweDtcclxuICAgICAgICBtYXJnaW4tbGVmdDoxNXB4O1xyXG4gICAgfVxyXG4gICAgaHIub25le1xyXG4gICAgICAgIGJvcmRlcjowLjhweCBzb2xpZCBibGFjaztcclxuICAgIH1cclxuICAgIGhyLnR3b3tcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgbGlnaHRncmF5O1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OjVweDtcclxuICAgICAgICBtYXJnaW4tdG9wOi0xNXB4O1xyXG4gICAgfVxyXG4gICAgXHJcbn1cclxuXHJcbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMTAyNHB4KXtcclxuICAgIC5jb250YWluZXJ7XHJcbiAgICAgICAgbWFyZ2luLXRvcDo4MHB4O1xyXG4gICAgICAgIC8qIG1hcmdpbi1sZWZ0OmF1dG87XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OmF1dG87ICovXHJcbiAgICB9XHJcbiAgICAucm93e1xyXG4gICAgICAgIHdpZHRoOjI1MHB4O1xyXG4gICAgICAgIGhlaWdodDozMDBweDtcclxuICAgICAgICBib3gtc2hhZG93OiAwcHggNHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OjQwcHg7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OjQwcHg7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czoxMHB4O1xyXG4gICAgfVxyXG4gICAgLnRlc3RpbW9uaWFsLWltYWdle1xyXG4gICAgICAgIHdpZHRoOjE0MHB4O1xyXG4gICAgICAgIGhlaWdodDoxOTZweDtcclxuICAgICAgICBwb3NpdGlvbjpyZWxhdGl2ZTtcclxuICAgICAgICByaWdodDo4dnc7XHJcbiAgICAgICAgYm90dG9tOjV2dztcclxuICAgIH1cclxuICAgIGgxe1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OjYwMDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOjYwcHg7XHJcbiAgICAgICAgZm9udC1zaXplOjQuNXZ3O1xyXG4gICAgfVxyXG4gICAgaDJ7XHJcbiAgICAgICAgZm9udC1zaXplOjE4cHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6Ym9sZGVyO1xyXG4gICAgfVxyXG4gICAgcHtcclxuICAgICAgICBmb250LXNpemU6MTJweDtcclxuICAgICAgICBmb250LXdlaWdodDo1MDA7XHJcbiAgICB9XHJcbiAgICAuY29tbWF7XHJcbiAgICAgICAgd2lkdGg6MjBweDtcclxuICAgICAgICBoZWlnaHQ6MjlweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOjEwcHg7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6MTVweDtcclxuICAgIH1cclxuICAgIGhyLm9uZXtcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgYmxhY2s7XHJcbiAgICB9XHJcbiAgICBoci50d297XHJcbiAgICAgICAgYm9yZGVyOjAuOHB4IHNvbGlkIGxpZ2h0Z3JheTtcclxuICAgICAgICBtYXJnaW4tbGVmdDo1cHg7XHJcbiAgICAgICAgbWFyZ2luLXRvcDotMTVweDtcclxuICAgIH1cclxuICAgIFxyXG59XHJcbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMTIwMHB4KXtcclxuICAgICN0ZXN0aW1vbmlhbEltYWdle1xyXG4gICAgICAgIHdpZHRoOjEwMHB4O1xyXG4gICAgICAgIGhlaWdodDogMTUwcHg7XHJcbiAgICAgICAgcG9zaXRpb246cmVsYXRpdmU7XHJcbiAgICAgICAgYm90dG9tOjN2dztcclxuICAgICAgICByaWdodDoxMHZ3O1xyXG4gICAgfVxyXG4gICAgLmNvbnRhaW5lcntcclxuICAgICAgICBtYXJnaW4tdG9wOjgwcHg7XHJcbiAgICAgICAgLyogbWFyZ2luLWxlZnQ6YXV0bztcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6YXV0bzsgKi9cclxuICAgIH1cclxuICAgIC5yb3d7XHJcbiAgICAgICAgd2lkdGg6NDAwcHg7XHJcbiAgICAgICAgaGVpZ2h0OjMzMHB4O1xyXG4gICAgICAgIGJveC1zaGFkb3c6IDBweCA0cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6NDBweDtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6NDBweDtcclxuICAgICAgICBib3JkZXItcmFkaXVzOjEwcHg7XHJcbiAgICB9XHJcbiAgICAjdGVzdGltb25pYWxJbWFnZXtcclxuICAgICAgICB3aWR0aDoyMDBweDtcclxuICAgICAgICBoZWlnaHQ6IDI4MHB4O1xyXG4gICAgICAgIHBvc2l0aW9uOnJlbGF0aXZlO1xyXG4gICAgICAgIGJvdHRvbTozdnc7XHJcbiAgICAgICAgcmlnaHQ6NnZ3XHJcbiAgICB9XHJcbiAgICBoMXtcclxuICAgICAgICBmb250LXdlaWdodDo2MDA7XHJcbiAgICAgICAgbWFyZ2luLWJvdHRvbTo2MHB4O1xyXG4gICAgICAgIGZvbnQtc2l6ZTozLjJ2dztcclxuICAgIH1cclxuICAgIGgye1xyXG4gICAgICAgIGZvbnQtc2l6ZTozMnB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OmJvbGRlcjtcclxuICAgIH1cclxuICAgIHB7XHJcbiAgICAgICAgZm9udC1zaXplOjE0cHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6NDAwO1xyXG4gICAgfVxyXG4gICAgLmNvbW1he1xyXG4gICAgICAgIHdpZHRoOjQwcHg7XHJcbiAgICAgICAgaGVpZ2h0OjUwcHg7XHJcbiAgICAgICAgbWFyZ2luLWJvdHRvbToxMHB4O1xyXG4gICAgfVxyXG4gICAgaHIub25le1xyXG4gICAgICAgIGJvcmRlcjowLjhweCBzb2xpZCBibGFjaztcclxuICAgIH1cclxuICAgIGhyLnR3b3tcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgbGlnaHRncmF5O1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OjVweDtcclxuICAgICAgICBtYXJnaW4tdG9wOi0xNXB4O1xyXG4gICAgfVxyXG4gICAgXHJcbn1cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxNjAwcHgpe1xyXG4gICAgLmNvbnRhaW5lcntcclxuICAgICAgICBtYXJnaW4tdG9wOjgwcHg7XHJcbiAgICAgICAgLyogbWFyZ2luLWxlZnQ6YXV0bztcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6YXV0bzsgKi9cclxuICAgIH1cclxuICAgIC5yb3d7XHJcbiAgICAgICAgd2lkdGg6NDAwcHg7XHJcbiAgICAgICAgaGVpZ2h0OjQ1MHB4O1xyXG4gICAgICAgIGJveC1zaGFkb3c6IDBweCA0cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6NDBweDtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6NDBweDtcclxuICAgICAgICBib3JkZXItcmFkaXVzOjEwcHg7XHJcbiAgICB9XHJcbiAgICAudGVzdGltb25pYWwtaW1hZ2V7XHJcbiAgICAgICAgd2lkdGg6MzAwcHg7XHJcbiAgICAgICAgaGVpZ2h0OjQyMHB4O1xyXG4gICAgICAgIHBvc2l0aW9uOnJlbGF0aXZlO1xyXG4gICAgICAgIHJpZ2h0OjE0dnc7XHJcbiAgICAgICAgYm90dG9tOjV2dztcclxuICAgIH1cclxuICAgIGgxe1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OjYwMDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOjYwcHg7XHJcbiAgICAgICAgZm9udC1zaXplOjMuN3Z3O1xyXG4gICAgfVxyXG4gICAgaDJ7XHJcbiAgICAgICAgZm9udC1zaXplOjMycHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6Ym9sZGVyO1xyXG4gICAgfVxyXG4gICAgcHtcclxuICAgICAgICBmb250LXNpemU6MTJweDtcclxuICAgICAgICBmb250LXdlaWdodDo1MDA7XHJcbiAgICB9XHJcbiAgICAuY29tbWF7XHJcbiAgICAgICAgd2lkdGg6NDBweDtcclxuICAgICAgICBoZWlnaHQ6NTBweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOjEwcHg7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6MTVweDtcclxuICAgIH1cclxuICAgIGhyLm9uZXtcclxuICAgICAgICBib3JkZXI6MC44cHggc29saWQgYmxhY2s7XHJcbiAgICB9XHJcbiAgICBoci50d297XHJcbiAgICAgICAgYm9yZGVyOjAuOHB4IHNvbGlkIGxpZ2h0Z3JheTtcclxuICAgICAgICBtYXJnaW4tbGVmdDo1cHg7XHJcbiAgICAgICAgbWFyZ2luLXRvcDotMTVweDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgXHJcbiAgICBcclxufSJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/compatibility-form/testimonials/testimonials.component.ts":
+  /*!***************************************************************************!*\
+    !*** ./src/app/compatibility-form/testimonials/testimonials.component.ts ***!
+    \***************************************************************************/
+
+  /*! exports provided: Testimonials */
+
+  /***/
+  function srcAppCompatibilityFormTestimonialsTestimonialsComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "Testimonials", function () {
+      return Testimonials;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _assets_Data_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../../assets/Data/data */
+    "./src/assets/Data/data.js");
+
+    var Testimonials = /*#__PURE__*/function () {
+      function Testimonials() {
+        _classCallCheck(this, Testimonials);
+
+        this.slidesToShow = 3;
+        this.mobileBreakpoint = 600;
+        this.slides = [{
+          img: "http://placehold.it/350x150/000000"
+        }, {
+          img: "http://placehold.it/350x150/111111"
+        }, {
+          img: "http://placehold.it/350x150/333333"
+        }];
+        this.slideConfig = {
+          "slidesToShow": this.adjustsslidesToShow(),
+          "slidesToScroll": this.adjustsslidesToShow(),
+          "center": true,
+          "autoplay": true,
+          "dots": true
+        };
+        this.customOptions = {
+          loop: true,
+          autoplay: true,
+          center: true,
+          dots: true,
+          // merge: true,
+          // mergeFit: true,
+          margin: 120,
+          responsive: {
+            0: {
+              items: 1
+            },
+            576: {
+              items: 2
+            },
+            600: {
+              items: 2
+            },
+            1000: {
+              items: 3
+            }
+          }
+        };
+        this.testimonials = _assets_Data_data__WEBPACK_IMPORTED_MODULE_2__["testimonials"];
+      }
+
+      _createClass(Testimonials, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.adjustsslidesToShow();
+        }
+      }, {
+        key: "resize",
+        value: function resize() {
+          this.innerWidth = window.innerWidth;
+          return this.innerWidth;
+        }
+      }, {
+        key: "adjustsslidesToShow",
+        value: function adjustsslidesToShow() {
+          window.onload = this.resize;
+          window.onresize = this.resize;
+
+          if (this.resize() <= this.mobileBreakpoint) {
+            return 1;
+          } else if (this.resize() <= 768) {
+            return 2;
+          } else {
+            return 2;
+          }
+        }
+      }]);
+
+      return Testimonials;
+    }();
+
+    Testimonials = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'testimonials',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./testimonials.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/compatibility-form/testimonials/testimonials.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./testimonials.component.css */
+      "./src/app/compatibility-form/testimonials/testimonials.component.css"))["default"]]
+    })], Testimonials);
     /***/
   },
 

@@ -8,6 +8,9 @@
    /* background-image:url('../../../assets/carousel/bg.svg');
    background-size:cover; */
 }
+p{
+    text-align:center;
+}
 h1{
     background-image:url('../../../assets/sparkles/sparkles.svg');
     background-size: cover;

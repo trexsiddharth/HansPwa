@@ -84,7 +84,7 @@ export const testimonials = [
     },
     {
         id:4,
-        title:"Gunjon & raghav",
+        title:"Gunjan & Raghav",
         paragraph:"Would like to thank Hans Matrimony for finding a perfect partner for me. I was looking for a good match since last 6 months over multiple matrimonial sites however my wishes have been fulfilled by you.",
         image:"../../assets/testimonials/testimonial4.png"
     }

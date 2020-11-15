@@ -55,7 +55,9 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   @ViewChild('otpModal', { static: false }) private otpModal: any;
-
+  showOccupation: boolean = false;
+  showYearlyIncome: boolean = false;
+  showWorkingCity: boolean = false;
   PageTwo: FormGroup;
   errors: string[] = [];
   authMobileNumberStatus = false;
@@ -512,6 +514,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   changedQualification() {
+    this.showOccupation=!this.showOccupation;
     console.log('changed Qualification');
     this.analyticsEvent('Four Page Registration Page Two Qualification Changed');
     if (this.PageTwo.valid) {
@@ -522,6 +525,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   changedOccupation() {
     console.log('changed Occupation');
+    if(this.PageTwo.value.Occupation!='Not Working')
+    {this.showYearlyIncome=!this.showYearlyIncome}
+    else if(this.PageTwo.value.Occupation=='Not Working')
+    {this.showWorkingCity=!this.showWorkingCity;this.showYearlyIncome=false;}
     this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
 
     switch (this.PageTwo.value.Occupation) {
@@ -592,6 +599,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   incomeChanged(val) {
     console.log('changed yearly income');
+    this.showWorkingCity=!this.showWorkingCity;
     console.log(this.PageTwo.value.AnnualIncome);
     this.analyticsEvent('Four Page Registration Page Two Annual Income Changed');
     if (this.PageTwo.valid) {

@@ -5,6 +5,9 @@
 ::-webkit-scrollbar{
   display:none;
 }
+html {
+  scroll-behavior: smooth;
+}
 html, body { height: 100%; }
 body {
     margin: 0; font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
