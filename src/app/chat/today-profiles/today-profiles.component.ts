@@ -673,15 +673,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
               content_name: localStorage.getItem('RegisterNumber'),
             });
 
-            (window as any).fbq('track', 'CompleteRegistration', {
-              value: localStorage.getItem('id'),
-              content_name: localStorage.getItem('RegisterNumber'),
-            });
-            (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
-              value: localStorage.getItem('id'),
-              content_name: localStorage.getItem('RegisterNumber'),
-            });
-
             this.router.navigateByUrl('chat');
           }
 

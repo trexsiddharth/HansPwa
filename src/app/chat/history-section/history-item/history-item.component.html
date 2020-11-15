@@ -1,0 +1,47 @@
+ <div class="search-results" *ngIf="listItem" >
+            <div class="column" style="flex-grow: 1">
+                <img id="searchImage" class="circular" 
+                (click)="getUserProfileData()"
+                src="{{listItem.photo}}"
+                (error)='setPlaceholderImage()'
+                 alt="photo" origin="anonymous">
+            </div>
+            <div class="column" style="flex: 2;justify-content: end;
+            align-items: end;padding:2%;color: black;"
+            (click)="getUserProfileData()">
+                <p style="font-size:1rem;font-weight:bold;text-transform: capitalize;">{{setName(listItem.name)}}</p>
+                <p style="font-size:0.8rem;">{{getHeight(listItem.height)}}&nbsp;|&nbsp;{{listItem.age}}Yrs</p>
+                <p style="font-size:0.8rem;">{{listItem.religion}}&nbsp;|&nbsp;{{listItem.caste}}</p>
+                <p style="font-size:0.8rem;">{{listItem.working_city}}&nbsp;|&nbsp;{{listItem.monthly_income}}LPA</p>
+                <p style="border-radius: 5px;" [ngStyle]="{'background-color':getColor(listItem.type)}"
+                    (click)="getUserProfileData()">
+                    <a
+                        style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{listItem.type}}ED</a>
+                </p>
+            </div>
+            <div class="columnLast" style="flex: 1;border-radius: 5px;">
+
+                    <button (click)="sendAction('YES')" 
+                    class="setButtons" mat-fab style="color: green;
+                background: #58D1FD;" aria-label="Example icon-button with a heart icon">
+                    <img width="20px" src="../../../assets/phone_white.svg"
+                        alt="कांटेक्ट करें">
+                </button>
+
+                <button (click)="sendAction('SHORTLIST')" 
+                *ngIf="listItem.type == 'REJECT'"
+                class="setButtons" mat-fab style="color: red;
+                background: #D313AE;" aria-label="Example icon-button with a heart icon">
+                    <img width="20px" src="../../../assets/heartwhite.svg"
+                        alt="पसंद है">
+                </button>
+
+                <button (click)="sendAction('NO')" 
+                *ngIf="listItem.type == 'SHORTLIST'"
+                class="setButtons" mat-fab style="color: grey;
+                background: #C8C8C8;">
+                        <img width="20px" src="../../../assets/closewhite.svg" alt="नापसंद है">
+                    </button>
+
+            </div>
+    </div>

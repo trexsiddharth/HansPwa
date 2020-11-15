@@ -1,5 +1,5 @@
 <div>
-    <div class="top-bar">
+    <div class="top-bar" *ngIf="historyDataList$|async">
         <div class="search-area" *ngIf="(searchActivated$|async)">
             <div class="col" style="padding:3.5% 2%">
                 <img src="../../../assets/clear.svg" class="fa fa-close" (click)="toggleSearch()"
@@ -8,7 +8,7 @@
                     [formControl]="searchControl">
             </div>
         </div>
-        <div class="row btn-row" *ngIf="!(searchActivated$|async)">
+        <div class="top-bar row btn-row" *ngIf="!(searchActivated$|async)">
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':(searchActivated$|async)}"
                 (click)="toggleSearch()">
                 <img width="25px" src="../../../assets/search-history.svg" alt="" *ngIf="! (searchActivated$|async)">
@@ -33,27 +33,25 @@
     </div>
     <div class="search-results" *ngIf="(searchActivated$|async)">
         <div class="profiles" *ngFor="let profile of profiles;let i = index">
-            <div class="column" style="width:20%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type,i)">
+            <div class="column" style="width:20%" (click)="getUserProfileData(profile,i)">
                 <img id="searchImage" class="circular" src="{{profile.photo}}"
                 (error)='setPlaceholderImage(i, profile.gender)'
                  alt="photo" origin="anonymous">
             </div>
             <div class="column" style="width:55%;justify-content: end;
-            align-items: end;padding:2%" (click)="getUserProfileData(profile.is_lead,profile.id,profile.type,i)">
+            align-items: end;padding:2%" (click)="getUserProfileData(profile,i)">
                 <p style="font-size:1rem;font-weight:bold;">{{setName(profile.name)}}</p>
                 <p style="font-size:0.8rem;">{{getHeight(profile.height)}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>
-                <p style="font-size:0.8rem;">{{profile.caste}}&nbsp;|&nbsp;{{profile.religion}}</p>
+                <p style="font-size:0.8rem;">{{profile.religion}}&nbsp;|&nbsp;{{profile.caste}}</p>
                 <p style="font-size:0.8rem;">{{profile.working_city}}&nbsp;|&nbsp;{{profile.monthly_income}}LPA</p>
                 <p style="border-radius: 5px;" [ngStyle]="{'background-color':getColor(profile.type)}"
-                    (click)="getUserProfileData(profile.is_lead,profile.id,profile.type,i)">
+                    (click)="getUserProfileData(profile,i)">
                     <a
                         style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{profile.type}}ED</a>
                 </p>
             </div>
             <div class="column" style="width:20%; border-radius: 5px;"
-                (click)="getUserProfileData(profile.is_lead,profile.id,profile.type,i)">
-                <i class="fa fa-phone"
-                    style="font-size:2.2rem!important;font-weight:bold;color:rgba(36, 35, 35, 0.918);"></i>
+                (click)="getUserProfileData(profile,i)">
             </div>
         </div>
     </div>
@@ -70,7 +68,14 @@
                     {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                 </button> -->
                 <div class='col'>
-                    <app-history-profiles [type]="tabType"></app-history-profiles>
+                    <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
+                    <div  *ngFor="let item of (historyShortlistList$|async);let i = index">
+                        <app-history-item [listItem]="item"
+                        [itemIndex]="i"
+                         [authData]="authData"
+                         (actionTaken)="sendResponse($event)"
+                         ></app-history-item>
+                        </div>
                 </div>
             </ng-template>
         </mat-tab>
@@ -94,7 +99,13 @@
             <ng-template matTabContent>
                 <div>
                     <div class='col'>
-                        <app-history-profiles [type]="tabType"></app-history-profiles>
+                        <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
+                        <div *ngFor="let item of (historyContactList$|async);let i = index">
+                        <app-history-item [listItem]="item"
+                        [itemIndex]="i"
+                         [authData]="authData"
+                         (actionTaken)="sendResponse($event)"></app-history-item>
+                        </div>
                     </div>
                 </div>
             </ng-template>
@@ -110,7 +121,13 @@
                         {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
                     </button> -->
                     <div class='col'>
-                        <app-history-profiles [type]="tabType"></app-history-profiles>
+                        <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
+                        <div *ngFor="let item of (historyRejectList$|async);let i = index">
+                            <app-history-item [listItem]="item" 
+                            [itemIndex]="i"
+                            [authData]="authData"
+                            (actionTaken)="sendResponse($event)"></app-history-item>
+                            </div>
                     </div>
                 </div>
             </ng-template>

@@ -446,6 +446,15 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
             this.updateFormTwoData(firststepdata);
           } else {
             this.chatService.formTwoCompleted.next(true);
+            (window as any).fbq('track', 'CompleteRegistration', {
+              value: localStorage.getItem('id'),
+              content_name: localStorage.getItem('RegisterNumber'),
+            });
+            (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
+              value: localStorage.getItem('id'),
+              content_name: localStorage.getItem('RegisterNumber'),
+            });
+            
             this.router.navigateByUrl('chat?first');
             this.analyticsEvent('Four Page Registration Page Two');
           }
