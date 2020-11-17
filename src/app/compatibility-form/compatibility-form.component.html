@@ -108,7 +108,7 @@
                 </mat-form-field>
               </div>
               <div *ngIf="Caste" class="col-1"></div>
-              <div class="col-6" *ngIf="Caste">
+              <div class="col-6" *ngIf="Caste && !showCaste">
                 <!-- <h6>Caste</h6> -->
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label>Caste</mat-label>
@@ -125,13 +125,19 @@
                   </mat-select>
                   <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
+                
+              </div>
+              <div class="col-6" *ngIf="showCaste" style="margin:39px 0px auto 0px;">
+                <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
+                  <a style="font-size:1rem;color:rgba(44, 44, 44, 0.842)">Don't Know Caste</a>
+                </mat-checkbox>
               </div>
 
-              <!-- <div class="col-6" *ngIf="Caste" style="margin:39px 0px auto 0px;">
+              <div class="col-6" *ngIf="Caste && !showCaste" style="margin:39px 0px auto 0px;">
                 <mat-checkbox [checked]="isAllCastePref" (change)="checkAllCastePref($event)">
-                  <a style="font-size:1rem;color:rgba(44, 44, 44, 0.842)">All Caste Preferred</a>
+                  <a style="font-size:1rem;color:rgba(44, 44, 44, 0.842)">Don't Know Caste</a>
                 </mat-checkbox>
-              </div> -->
+              </div>
 
               <div class="col-md-12 " id="fourRegMobile">
                 <!-- <h6>Mobile number</h6> -->

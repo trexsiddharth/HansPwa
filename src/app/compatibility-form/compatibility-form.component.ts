@@ -77,6 +77,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   private mobileBreakpoint = 768;
   public secondName:boolean = false;
   public showHeight:boolean = false;
+  public showCaste:boolean = false;
   time = {
     hour: 13,
     minute: 30
@@ -1279,6 +1280,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   checkAllCastePref(event) {
     console.log(event.checked);
     this.isAllCastePref = event.checked;
+    if(event.checked){
+      this.showCaste=true;
+    }else{
+      this.showCaste=false;
+    }
   }
 
   // show register with popup
