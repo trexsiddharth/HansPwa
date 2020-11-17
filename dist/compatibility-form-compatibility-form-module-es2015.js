@@ -959,11 +959,11 @@ let CompatibilityFormComponent = class CompatibilityFormComponent {
         }
     }
     goToNextPage() {
-        // if (!this.PageOne.valid) {
-        //   return;
-        // }
-        // const button = document.querySelector<HTMLButtonElement>('#viewButton');
-        // button.click();
+        if (!this.PageOne.valid) {
+            return;
+        }
+        const button = document.querySelector('#viewButton');
+        button.click();
     }
     openVerificationDialog(isLead) {
         const dialogConfig = new _angular_material___WEBPACK_IMPORTED_MODULE_9__["MatDialogConfig"]();

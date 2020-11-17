@@ -1463,11 +1463,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }, {
         key: "goToNextPage",
-        value: function goToNextPage() {// if (!this.PageOne.valid) {
-          //   return;
-          // }
-          // const button = document.querySelector<HTMLButtonElement>('#viewButton');
-          // button.click();
+        value: function goToNextPage() {
+          if (!this.PageOne.valid) {
+            return;
+          }
+
+          var button = document.querySelector('#viewButton');
+          button.click();
         }
       }, {
         key: "openVerificationDialog",

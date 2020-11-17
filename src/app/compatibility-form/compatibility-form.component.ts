@@ -670,11 +670,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   private goToNextPage() {
-    // if (!this.PageOne.valid) {
-    //   return;
-    // }
-    // const button = document.querySelector<HTMLButtonElement>('#viewButton');
-    // button.click();
+    if (!this.PageOne.valid) {
+      return;
+    }
+    const button = document.querySelector<HTMLButtonElement>('#viewButton');
+    button.click();
   }
 
   openVerificationDialog(isLead: string) {
