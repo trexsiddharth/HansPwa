@@ -7,6 +7,11 @@ button{
     color:white;
     font-size:10px;
 }
+h1{
+    font-weight:bolder;
+    background-image:url('../../assets/sparkles/sparkles.svg');
+    background-size: cover;
+}
 hr.one{
     border:0.8px solid black;
 }
@@ -38,7 +43,7 @@ hr.two{
 }
 @media only screen and (max-width: 767px){
     h1{
-        font-size:18px;
+        font-size:24px;
     }
     .desktop{
         display:none;
