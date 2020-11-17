@@ -251,11 +251,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     
     if(position<screenPosition-300){
       this.auto=true;
-      console.log(this.auto);
-    }else if(position>screenPosition-300){
-     this.auto=false;
-     console.log(this.auto);
-     }
+    }else if(position>screenPosition){
+      this.auto=true;
+    }
   }
     private resize(){
         this.innerWidth = window.innerWidth;

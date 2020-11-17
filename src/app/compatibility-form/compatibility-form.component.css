@@ -3,7 +3,7 @@
   background-color: #ffffff;
 }
 .compatibility-form-holder{
-  background-color: black;
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #DCF1FA 100%);
 }
 .logo{
   width:186px;
@@ -222,11 +222,8 @@ div,.row,.col{
     }
 }
 
-main{
-  border-radius:8px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top:-10px;
+.fixToolBar {
+  background-color: #ffffff;
 }
 .textRegister {
     font-weight:bolder;
@@ -234,55 +231,19 @@ main{
     text-align: center;
      color: #285fdd
 }
-.form-appear{
-  animation: appear 2s 1;
-}
-/* ::ng-deep .mat-select-content{
-  width:2000px;
-  background-color: red;
-  font-size: 10px;   
-} */
-@keyframes appear {
-  0% {
-    opacity:0;
-  }
-  50% {
-    opacity:0.5;
-  }
-  75% {
-    opacity:0.75;
-  }
-  100% {
-    opacity:1;
-  }
-}
-
 main{
   font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
-  background: url(../../assets/bgicon.png) no-repeat center !important;
   background-size: cover;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-::ng-deep .mat-stepper-horizontal{
+.mat-stepper-horizontal{
   background-color: white !important;
 }
 input.form-control.ng-invalid.ng-touched{
   border: 1px solid red;
 }
-input{
-  background-color:rgba(206, 206, 206, 0.2);
-  padding:10px 5px;
-  border:none;
-  margin-right:10px;
-}
-::ng-deep .mat-form-field-label{
-  padding-top:10px;
-  padding-left:10px;
-}
 select.form-control.ng-invalid.ng-touched{
   border: 1px solid red;
-}
-select.form-control{
-  border: none !important;
 }
 ::ng-deep .mat-step-label{
   color: black !important;
@@ -290,20 +251,16 @@ select.form-control{
 ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{
   background-color: #34b7f1 !important;
   }
-  ::ng-deep .mat-form-field-underline {
-    display: none !important;
+  ::ng-deep .mat-stepper-horizontal-line {
+    border-top-color:black !important;
+    width: 80%;
+  }
+::ng-deep .mat-step-icon {
+background-color: rgba(0,0,0,.6) !important;
 }
-::ng-deep .mat-form-field-flex{
-   border:none !important;
-   margin:0 !important;
-   padding:0 !important;
-}
+
 ::ng-deep .mat-select-value {
     color: black !important;
-    background-color:rgba(206, 206, 206, 0.2);
-    padding:10px 5px;
-    align-items: center !important;
-    border:none;
 }
 
 ::ng-deep .mat-checkbox-inner-container{
@@ -357,12 +314,14 @@ box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
 }
 
 @media (max-width: 1920px) {
-
+main {
+    height: 100%;
+    overflow: auto;
+    }
     select {
 
         /* styling */
-        background-color: rgba(206, 206, 206, 0.2);
-        color:black;
+        background-color: white;
         border-radius: 4px;
         display: inline-block;
         font: inherit;
@@ -373,8 +332,7 @@ box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
         margin: 0;      
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        border:none;
-        outline: none;
+        box-sizing: border-box;
         -webkit-appearance: none;
         -moz-appearance: none;
       }

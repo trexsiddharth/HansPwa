@@ -80,7 +80,7 @@
                 आप जिस कस्टमर से फ़ोन पर बात कर रहे हैं वो किसके लिए रिश्ता देख रहे हैं ये भरे ।
               </p>
 
-              <div class="col-12">
+              <div class='col-6'>
                 <!-- <h6>Name</h6> -->
                 <mat-form-field class="full-width fieldFit"  appearance="standard">
                   <mat-label>First Name</mat-label>
@@ -89,7 +89,7 @@
                   <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>
-              <div *ngIf="secondName" class="col-12">
+              <div *ngIf="secondName" class="col-6">
                 <!-- <h6>Last Name</h6> -->
                 <mat-form-field  class="full-width fieldFit" appearance="standard">
                   <mat-label>Last Name</mat-label>
@@ -139,11 +139,12 @@
 
               <div class="col-md-12 " id="fourRegMobile">
                 <!-- <h6>Mobile number</h6> -->
-                <mat-form-field style="background-color:rgba(206, 206, 206, 0.2);margin-top:25px;" class="full-width fieldFit" 
+                <!-- style="background-color:rgba(206, 206, 206, 0.2);margin-top:25px;" -->
+                <mat-form-field  class="full-width fieldFit" 
                 (click)="showTruecallerIfFacebook()"
                  appearance="standard">
 
-                  <ngx-mat-intl-tel-input   style="display: inline;"
+                  <ngx-mat-intl-tel-input  
                     [preferredCountries]="['in']" [enablePlaceholder]="true" [enableSearch]="true" name="phone"
                     type="tel" formControlName="phone" id="phone" (change)="mobileNumberChanged()" #phone required>
                   </ngx-mat-intl-tel-input> 
@@ -172,14 +173,14 @@
               <div class="col-12" style="margin:0 0 -12px 0">
                 <label>Date Of Birth</label>
                 <div class="row">
-                  <select  (change)="selectFieldChange('birth_date')" formControlName="birth_date" style="
+                  <select class="classic"   (change)="selectFieldChange('birth_date')" formControlName="birth_date" style="
                             flex: 1;" required name="birth_date">
                     <option *ngFor="let  option of date" [value]="option">
                       {{option}}
                     </option>
                   </select>
 
-                  <select (change)="selectFieldChange('birth_month')" formControlName="birth_month"
+                  <select class="classic" (change)="selectFieldChange('birth_month')" formControlName="birth_month"
                     style="margin-left: 10px;
                               flex: 1;" required name="birth_month">
                     <option *ngFor="let  option of month" [value]="option">
@@ -187,7 +188,7 @@
                     </option>
                   </select>
 
-                  <select (change)="selectFieldChange('birth_year')" formControlName="birth_year" style="margin-left: 10px;
+                  <select class="classic" (change)="selectFieldChange('birth_year')" formControlName="birth_year" style="margin-left: 10px;
                               flex: 1;" required name="birth_year">
                     <option *ngFor="let  option of years" [value]="option">
                       {{option}}
