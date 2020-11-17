@@ -246,13 +246,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   scrollAppear(){
     let whyUs = document.querySelector('.whyus');
     let position = whyUs.getBoundingClientRect().top;
+    let form = document.querySelector('.form-position');
+    let formPosition = form.getBoundingClientRect().top;
     let screenPosition = window.innerHeight;
     console.log(position,screenPosition);
     
-    if(position<screenPosition-300){
+    if(position<screenPosition){
       this.auto=true;
-    }else if(position>screenPosition){
-      this.auto=true;
+    }
+    else if(formPosition<screenPosition+500){
+      this.auto=false;
     }
   }
     private resize(){

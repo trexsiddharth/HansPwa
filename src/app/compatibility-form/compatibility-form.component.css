@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 .fixToolBar {
   background-color: #ffffff;
+  overflow-x:hidden;
 }
 .compatibility-form-holder{
   background-image: linear-gradient(180deg, #FFFFFF 0%, #DCF1FA 100%);
+  overflow-x:hidden;
 }
 .logo{
   width:186px;
@@ -133,6 +135,9 @@ div,.row,.col{
     margin-top:50px;
 }
 @media only screen and (max-width: 575px){
+  #tool-bar{
+    right:40px;
+  }
   h2{
     font-size:18px;
     font-weight:bold;
@@ -162,7 +167,9 @@ div,.row,.col{
     }
 }
 @media only screen and (min-width: 576px){
-    
+  #tool-bar{
+    right:40px;
+  }
     hr.one{
         border:0.8px solid black;
     }
@@ -184,6 +191,9 @@ div,.row,.col{
     }
 }
 @media only screen and (min-width: 768px){
+  #tool-bar{
+    right:250px;
+  }
     img{
         width:200px;
         height:200px;
@@ -238,6 +248,9 @@ main{
 }
 .mat-stepper-horizontal{
   background-color: white !important;
+}
+::ng-deep .mat-horizontal-content-container{
+  height:630px;
 }
 input.form-control.ng-invalid.ng-touched{
   border: 1px solid red;
