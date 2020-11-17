@@ -37,6 +37,9 @@ hr.two{
    }
 }
 @media only screen and (max-width: 767px){
+    h1{
+        font-size:18px;
+    }
     .desktop{
         display:none;
     }
