@@ -270,6 +270,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     } else {
       this.mobileScreen=false
     }
+    console.log(this.mobileScreen);
+    
     }
   async ngOnInit() {
     this.detectMobileScreen();

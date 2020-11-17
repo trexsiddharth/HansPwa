@@ -30,6 +30,7 @@ a{
   outline:none;
   background-color: #4EB7E6;
   border-radius:8px;
+  margin-top:20px;
 }
 .whyus{
     margin-top:100px;
@@ -136,7 +137,7 @@ div,.row,.col{
 }
 @media only screen and (max-width: 575px){
   #tool-bar{
-    right:40px;
+    right:120px;
   }
   h2{
     font-size:18px;
@@ -168,7 +169,7 @@ div,.row,.col{
 }
 @media only screen and (min-width: 576px){
   #tool-bar{
-    right:40px;
+    right:80px;
   }
     hr.one{
         border:0.8px solid black;
@@ -221,6 +222,9 @@ div,.row,.col{
     }
 }
 @media only screen and (min-width: 1200px){
+  #tool-bar{
+    right:160px;
+  }
     img{
         width:370px;
         height:370px;
@@ -250,7 +254,7 @@ main{
   background-color: white !important;
 }
 ::ng-deep .mat-horizontal-content-container{
-  height:630px;
+  height:660px;
 }
 input.form-control.ng-invalid.ng-touched{
   border: 1px solid red;
