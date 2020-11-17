@@ -17,6 +17,7 @@ import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Testimonials } from './testimonials/testimonials.component';
 import { ChoiceListComponent } from '../choice-list/choice-list.component';
+import { TestimonialCards } from './testimonials/testimonial-cards/testimonial-cards.component';
 @NgModule({
   declarations: [
     CompatibilityFormComponent,
@@ -30,7 +31,8 @@ import { ChoiceListComponent } from '../choice-list/choice-list.component';
     RegisterWithComponent,
     ChooseForComponent,
     Testimonials,
-    ChoiceListComponent
+    ChoiceListComponent,
+    TestimonialCards
   ],
   imports: [
     CommonModule,

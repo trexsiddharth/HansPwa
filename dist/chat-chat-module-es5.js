@@ -2083,7 +2083,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<main [ngClass]=\"{'mainBack': section}\">\r\n    <mat-toolbar class=\"toolBar\" *ngIf=\"section\">\r\n        <div style=\"display: flex;\r\n        flex-direction: row;\r\n        align-items: center;\">\r\n            <button mat-icon-button (click)=\"goBack()\" class=\"example-icon\"\r\n                aria-label=\"Example icon-button with menu icon\">\r\n                <mat-icon>arrow_back</mat-icon>\r\n            </button>\r\n            <span class=\"titleText\">{{title}}</span>\r\n        </div>\r\n        <button mat-icon-button class=\"example-icon\" aria-label=\"Example icon-button with share icon\">\r\n            <mat-icon>call</mat-icon>\r\n            <span class=\"titleText\">{{this.itemService.getCredits()}}</span>\r\n        </button>\r\n    </mat-toolbar>\r\n    <section [ngClass]=\"{'ht-full': section,\r\n     'paddingToSection' : section}\" *ngIf=\"profile.length > 0\">\r\n        <div *ngFor=\"let item of profile;let i = index\">\r\n            <div class=\"historyProfile\">\r\n                <img class=\"historyImage\" #profilePic\r\n                    [src]=\"getProfilePhoto(item,item.profile.photo,item.profile.gender)\"\r\n                    (click)=\"openProfileDialog(item,i)\" (error)=\"onLoadProfileError(item.profile.gender,profilePic)\"\r\n                    alt=\"profile picture\">\r\n\r\n                <div style=\"position: absolute;top: -15px;\r\n            right: -20px;\" *ngIf=\"item.family == null\">\r\n                    <button mat-fab id=\"premiumProfIcon\">\r\n                        <img width=\"30px\" src=\"../../../assets/king.svg\" alt=\"premium profile\">\r\n                    </button>\r\n                </div>\r\n\r\n                <div class=\"historyDetails\">\r\n                    <span>\r\n                        {{item.profile.name}} | {{setAge(item.profile.birth_date)}}\r\n                    </span><br>\r\n                    <span>\r\n                        {{item.profile.working_city ? item.profile.working_city : item.family ? item.family.city : ''}}\r\n                        | {{setHeight(item.profile.height)}}\r\n                        | {{item.family ? item.family.religion : item.profile.religion}},\r\n                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}\r\n                        | {{setIncome(item.profile.monthly_income)}} LPA\r\n                    </span>\r\n                </div>\r\n\r\n                <div class=\"historyButtons\">\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" \r\n                (click)=\"profileReAnswer(item,'NO',i)\"\r\n                style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"  *ngIf=\"type !== 'rejected' && type !== 'contacted' && type !== 'discover'\">\r\n                    <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\">\r\n                        <img *ngIf=\"item.family != null\" width=\"20px\" src=\"../../../assets/phone_white.svg\"\r\n                            alt=\"contact profile\">\r\n                        <img *ngIf=\"item.family == null\" width=\"27px\" src=\"../../../assets/message.svg\"\r\n                            alt=\"message profile\">\r\n                    </button>\r\n\r\n                    <!-- <button mat-raised-button  class=\"btn\" \r\n                (click)=\"call(i)\"\r\n                style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"  *ngIf=\"type == 'contacted' && item.family && itemService.getPersonalized() == false\">\r\n                <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n            </button> -->\r\n\r\n                    <!-- <button mat-raised-button  class=\"btn\" \r\n                (click)=\"openPersonalizedMessageDialog(item)\"\r\n                style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px 10px;\r\n                 border-radius: 10px;\"  *ngIf=\"type == 'contacted' && itemService.getPersonalized()\">\r\n                <img width=\"30px\" src=\"../../../assets/comment.svg\" alt=\"contact profile\">\r\n            </button> -->\r\n\r\n                    <!-- <button mat-raised-button  class=\"btn\"\r\n                (click)=\"profileReAnswer(item,'SHORTLIST',i)\"\r\n                 style=\"background-color: #D313AE;margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\" *ngIf=\"type !== 'interestShown'  && type !== 'contacted' && type !== 'discover'\">\r\n                    <img width=\"20px\" src=\"../../../assets/heartwhite.svg\" alt=\"shortlist profile\">\r\n                </button> -->\r\n\r\n                </div>\r\n            </div>\r\n            <hr>\r\n        </div>\r\n\r\n        <mat-spinner *ngIf=\"smallSpinner\" style=\"margin: 0px auto;\" [diameter]=\"30\"></mat-spinner>\r\n\r\n    </section>\r\n    <!-- <ngx-spinner  bdColor = \"transparent\" size = \"small\" color = \"#58D1FD\" type = \"square-jelly-box\" [fullScreen] = \"false\"><p style=\"color: white\"></ngx-spinner> -->\r\n\r\n\r\n</main>\r\n\r\n<main class=\"noProfileMain\" *ngIf=\"!section && profile.length < 1\">\r\n    <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n        <p class=\"text-center\">\r\n            <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n        </p>\r\n        <p class=\"text-center noProfile\">\r\n            No Profiles Here\r\n        </p>\r\n    </div>\r\n</main>";
+    __webpack_exports__["default"] = "<main [ngClass]=\"{'mainBack': section}\">\r\n    <mat-toolbar class=\"toolBar\" *ngIf=\"section\">\r\n        <div style=\"display: flex;\r\n        flex-direction: row;\r\n        align-items: center;\">\r\n            <button mat-icon-button (click)=\"goBack()\" class=\"example-icon\"\r\n                aria-label=\"Example icon-button with menu icon\">\r\n                <mat-icon>arrow_back</mat-icon>\r\n            </button>\r\n            <span class=\"titleText\">{{title}}</span>\r\n        </div>\r\n        <button mat-icon-button class=\"example-icon\" aria-label=\"Example icon-button with share icon\">\r\n            <mat-icon>call</mat-icon>\r\n            <span class=\"titleText\">{{this.itemService.getCredits()}}</span>\r\n        </button>\r\n    </mat-toolbar>\r\n    <section [ngClass]=\"{'ht-full': section,\r\n     'paddingToSection' : section}\" *ngIf=\"profile.length > 0\">\r\n        <div *ngFor=\"let item of profile;let i = index\">\r\n            <div class=\"historyProfile\">\r\n                <img class=\"historyImage\" #profilePic\r\n                    [src]=\"getProfilePhoto(item,item.profile.photo,item.profile.gender)\"\r\n                    (click)=\"openProfileDialog(item,i)\" (error)=\"onLoadProfileError(item.profile.gender,profilePic)\"\r\n                    alt=\"profile picture\">\r\n\r\n                <div style=\"position: absolute;top: -15px;\r\n            right: -20px;\" *ngIf=\"item.family == null\">\r\n                    <button mat-fab id=\"premiumProfIcon\">\r\n                        <img width=\"30px\" src=\"../../../assets/king.svg\" alt=\"premium profile\">\r\n                    </button>\r\n                </div>\r\n\r\n                <div class=\"historyDetails\">\r\n                    <span>\r\n                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}\r\n                    </span><br>\r\n                    <span>\r\n                        {{item.profile.working_city ? item.profile.working_city : item.family ? item.family.city : ''}}\r\n                        | {{setHeight(item.profile.height)}}\r\n                        | {{item.family ? item.family.religion : item.profile.religion}},\r\n                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}\r\n                        | {{setIncome(item.profile.monthly_income)}} LPA\r\n                    </span>\r\n                </div>\r\n\r\n                <div class=\"historyButtons\">\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" \r\n                (click)=\"profileReAnswer(item,'NO',i)\"\r\n                style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"  *ngIf=\"type !== 'rejected' && type !== 'contacted' && type !== 'discover'\">\r\n                    <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\">\r\n                        <img *ngIf=\"item.family != null\" width=\"20px\" src=\"../../../assets/phone_white.svg\"\r\n                            alt=\"contact profile\">\r\n                        <img *ngIf=\"item.family == null\" width=\"27px\" src=\"../../../assets/message.svg\"\r\n                            alt=\"message profile\">\r\n                    </button>\r\n\r\n                    <!-- <button mat-raised-button  class=\"btn\" \r\n                (click)=\"call(i)\"\r\n                style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"  *ngIf=\"type == 'contacted' && item.family && itemService.getPersonalized() == false\">\r\n                <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n            </button> -->\r\n\r\n                    <!-- <button mat-raised-button  class=\"btn\" \r\n                (click)=\"openPersonalizedMessageDialog(item)\"\r\n                style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px 10px;\r\n                 border-radius: 10px;\"  *ngIf=\"type == 'contacted' && itemService.getPersonalized()\">\r\n                <img width=\"30px\" src=\"../../../assets/comment.svg\" alt=\"contact profile\">\r\n            </button> -->\r\n\r\n                    <!-- <button mat-raised-button  class=\"btn\"\r\n                (click)=\"profileReAnswer(item,'SHORTLIST',i)\"\r\n                 style=\"background-color: #D313AE;margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\" *ngIf=\"type !== 'interestShown'  && type !== 'contacted' && type !== 'discover'\">\r\n                    <img width=\"20px\" src=\"../../../assets/heartwhite.svg\" alt=\"shortlist profile\">\r\n                </button> -->\r\n\r\n                </div>\r\n            </div>\r\n            <hr>\r\n        </div>\r\n\r\n        <mat-spinner *ngIf=\"smallSpinner\" style=\"margin: 0px auto;\" [diameter]=\"30\"></mat-spinner>\r\n\r\n    </section>\r\n    <!-- <ngx-spinner  bdColor = \"transparent\" size = \"small\" color = \"#58D1FD\" type = \"square-jelly-box\" [fullScreen] = \"false\"><p style=\"color: white\"></ngx-spinner> -->\r\n\r\n\r\n</main>\r\n\r\n<main class=\"noProfileMain\" *ngIf=\"!section && profile.length < 1\">\r\n    <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n        <p class=\"text-center\">\r\n            <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n        </p>\r\n        <p class=\"text-center noProfile\">\r\n            No Profiles Here\r\n        </p>\r\n    </div>\r\n</main>";
     /***/
   },
 
@@ -2163,7 +2163,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<!-- <main class=\"noProfileMain\"\r\n    *ngIf=\"itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized() && !section\">\r\n     <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n     <p class=\"text-center\">\r\n         <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n     </p>\r\n    <p class=\"text-center noProfile\">\r\n     No Profiles Here\r\n    </p> \r\n    </div>\r\n    <div style=\"position: relative;display: block;margin: 3%;margin-bottom:40px\">\r\n        <p class=\"text-center noProfile\">\r\n            Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>\r\n        </p>\r\n        <p class=\"text-center\">\r\n            <img src=\"../../../assets/down-arrow.svg\" style=\"width:60px\">\r\n        </p>\r\n    </div>\r\n    <div class=\"plansArea\">\r\n        <div class=\"planrow text-dark\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 2%;\">\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                <b>बेसिक प्लान</b><br />\r\n                <a>45 कांटेक्टस</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                <b>Basic Plan</b><br />\r\n                <a>45 Contacts</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                <b class=\"specialCase\" style=\"font-size: large; color: #5b6d78 !important;\">₹2800</b>\r\n                <br />\r\n                <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 5500</a>\r\n\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n                background-color: #f0f1f0;\r\n                border-radius: 18px;\r\n                border-top-left-radius: 0px;\r\n                border-bottom-left-radius: 0px;\r\n            \">\r\n                    <div class=\"month\">\r\n                        <a>3 महीने</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                        style=\"vertical-align: middle !important;\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n    background-color: #f0f1f0;\r\n    border-radius: 18px;\r\n    border-top-left-radius: 0px;\r\n    border-bottom-left-radius: 0px;\r\n    \">\r\n                    <div class=\"month\">\r\n                        <a>3 months</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                        style=\"vertical-align: middle !important;\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"planrow\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                <div style=\"\r\n                font-weight: 500 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 2px 2px 2px 2px;\r\n                border-radius: 3px 3px 3px 3px;\r\n              \">\r\n                    Bestseller\r\n                </div>\r\n                <b>सुप्रीम प्लान</b><br />\r\n                <a>90 कांटेक्टस</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                <div style=\"\r\n                font-weight: 300 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                font-size:small;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 1px 1px 1px 1px;\r\n                border-radius: 2px 2px 2px 2px;\r\n              \">\r\n                    Bestseller\r\n                </div>\r\n                <b>Supreme Plan</b><br />\r\n                <a>90 Contacts</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                <b class=\"specialCase\" Style=\" font-size: large;color: #5b6d78 !important; \">₹5500</b><br />\r\n                <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 8500</a><br />\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 महीने</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 months</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"planrow text-dark\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                <b>कुंडली प्लान</b><br />\r\n                <a>45 कांटेक्टस</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                <b>Kundali Plan</b><br />\r\n                <a>45 Contacts</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" style=\"background-color: #f0f1f0;\">\r\n                <b class=\"specialCase\" style=\"font-size: large; color: #596a76 !important;\">₹8500</b><br />\r\n                <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 9100</a>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 महीने</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 months</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main> -->\r\n<main [ngClass]=\"{'mainBack': section}\">\r\n    <mat-toolbar class=\"toolBar\" *ngIf=\"section\">\r\n        <div style=\"display: flex;\r\n        flex-direction: row;\r\n        align-items: center;\">\r\n            <button mat-icon-button (click)=\"goBack()\" class=\"example-icon\"\r\n                aria-label=\"Example icon-button with menu icon\">\r\n                <mat-icon>arrow_back</mat-icon>\r\n            </button>\r\n            <span class=\"titleText\">{{title}}</span>\r\n        </div>\r\n        <button class=\"example-icon titleText\" style=\"color: #4A5D6A; background-color: white;border: none;\"\r\n            aria-label=\"Example icon-button with share icon\">\r\n            <span>\r\n                {{languageService.profileLang.credits}}\r\n            </span>\r\n            <span class=\"titleText\">{{this.itemService.getCredits()}}</span>\r\n        </button>\r\n    </mat-toolbar>\r\n\r\n  <div *ngIf=\"type && type == 'interestReceived'\" class=\"text-center\">\r\n    <button class=\"btn btn-tabs\" \r\n    (click)=\"setSelectedIndex(0)\"\r\n    [ngClass]=\"{'btn-tabs-active':selectedTab === 0}\">\r\n    Liked Me\r\n</button>\r\n\r\n<button  class=\"btn btn-tabs\" \r\n(click)=\"setSelectedIndex(1)\"\r\n[ngClass]=\"{'btn-tabs-active':selectedTab === 1}\">\r\n    Profile Viewers\r\n</button>\r\n  </div>\r\n\r\n\r\n    <section *ngIf=\"profile.length > 0 && selectedTab == 0\" [ngClass]=\"{'ht-full': section, 'paddingToSection' : section}\" infiniteScroll\r\n        [infiniteScrollDistance]=\"2\" [infiniteScrollThrottle]=\"50\" [scrollWindow]=\"false\" (scrolled)=\"getScrollData()\">\r\n        <div *ngFor=\"let item of profile;let i = index\">\r\n            <div class=\"historyProfile\" [id]=\"i\">\r\n                <img [ngClass]=\"{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}\" #profilePic\r\n                    [src]=\"getProfilePhoto(item,item.profile.photo,item.profile.gender)\"\r\n                    (click)=\"openProfileDialog(item,i)\" (error)=\"onLoadProfileError(item.profile.gender,profilePic)\"\r\n                    alt=\"profile picture\">\r\n                <div style=\"position: absolute;top: -15px;\r\n            right: -20px;\" *ngIf=\"item.family == null\">\r\n                    <button mat-fab id=\"premiumProfIcon\">\r\n                        <img width=\"30px\" src=\"../../../assets/king.svg\" alt=\"premium profile\">\r\n                    </button>\r\n                </div>\r\n\r\n                <div class=\"historyDetails\">\r\n                    <p *ngIf=\"type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()\" style=\"display: flex!important;\r\n                flex-direction: row;\r\n                align-items: center;\r\n                justify-content: center;\r\n                text-align: center;\r\n                font-size: 1.0rem;\r\n                font-weight: bold;\r\n                color: white;\r\n                position: absolute;\r\n                top: -170px;\r\n                width: 100%!important;\">\r\n                        Upgrade to see\r\n                        who\r\n                        likes you</p>\r\n\r\n                        <div *ngIf=\"(type==='interestReceived' && itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() != '0')  || type == 'contacted' || type == 'rejected' || type == 'interestShown'\">  \r\n                    <span>\r\n                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}\r\n                    </span><br>\r\n                    <span>\r\n                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}\r\n                        | {{setHeight(item.profile.height)}}\r\n                        | {{item.family ? item.family.religion : item.profile.religion}},\r\n                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}\r\n                        | {{setIncome(item.profile.monthly_income)}} LPA\r\n                    </span>\r\n\r\n                </div>\r\n                </div>\r\n\r\n                <div class=\"historyButtons\">\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'NO',i)\" style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived' &&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()) && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'\">\r\n                        <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                    </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'NO',i)\" style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                        *ngIf=\"type !='interestReceived' && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'\">\r\n                        <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                    </button>\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'contacted'\">\r\n                        <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                    </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                    margin-top: 20px;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                            *ngIf=\"type !== 'contacted'\">\r\n                            <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                        </button>\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"call(i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && item.family && itemService.getPersonalized() == false\">\r\n                        <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                    </button>\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"openPersonalizedMessageDialog(item)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px 10px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && itemService.getPersonalized()\">\r\n                        <img width=\"30px\" src=\"../../../assets/comment.svg\" alt=\"contact profile\">\r\n                    </button>\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'SHORTLIST',i)\" style=\"background-color: #D313AE;margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'interestShown' && type !== 'interestReceived'  && type !== 'contacted' && type !== 'mutual'\">\r\n                        <img width=\"20px\" src=\"../../../assets/heartwhite.svg\" alt=\"shortlist profile\">\r\n                    </button>\r\n\r\n                </div>\r\n            </div>\r\n            <hr>\r\n        </div>\r\n\r\n        <mat-spinner *ngIf=\"smallSpinner\" style=\"margin: 0px auto;\" [diameter]=\"30\"></mat-spinner>\r\n\r\n    </section>\r\n    <!-- <ngx-spinner  bdColor = \"transparent\" size = \"small\" color = \"#58D1FD\" type = \"square-jelly-box\" [fullScreen] = \"false\"><p style=\"color: white\"></ngx-spinner> -->\r\n\r\n\r\n</main>\r\n\r\n<div *ngIf=\"(!section && profile && profile.length < 1 && selectedTab == 0) \r\n|| ((profileViewersList$ | async) && (profileViewersList$ | async).length < 1 && selectedTab == 1) \">\r\n    <main *ngIf=\"itemService.getPersonalized()\">\r\n        <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n            <p class=\"text-center\">\r\n                <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n            </p>\r\n            <p class=\"text-center noProfile\">\r\n                No Profiles Here\r\n            </p>\r\n        </div>\r\n    </main>\r\n    <main *ngIf=\"!itemService.getPhotoStatus()\" class=\"special noProfileMain\">\r\n        <!-- <main *ngIf=\"true\" class=\"special\"> -->\r\n        <div style=\"height:45vh!important; \r\n    width:85%!important; \r\n    border-radius: 20px!important;\r\n    background:white!important;\r\n    margin:auto;\r\n    display:flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content:center\">\r\n            <img src=\"../../../assets/plus.svg\" style=\"width:60%\">\r\n        </div>\r\n        <div class=\"text-center\" style=\"margin:10px 0px 0px 0px;\r\n    display:flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content:center\">\r\n            <p style=\"font-size: 1.2rem;\">Please upload pictures so people can see your profile</p>\r\n        </div>\r\n        <div c style=\"position: relative;\r\n        display:flex;margin-top: 7%;\r\n        flex-direction: row;\r\n        align-items: center;\r\n        justify-content:center\">\r\n            <input style=\"margin: 10px 25%;display: none;\" #backfile type=\"file\" id=\"backfile\" accept='image/*'\r\n                (change)=\"chooseFileForUpload(backfile.files)\" />\r\n            <button class=\"SpecialCase\" style=\"position:absolute;\r\n            height:80px;\r\n            background:#00c2cb!important; \r\n            width:80%!important; \r\n            color:rgb(255, 255, 255);\r\n            margin-top: 2%;\r\n            border:0px!important;\r\n            border-radius:30px 30px 30px 30px\" mat-raised-button (click)=\"changeProfileImage()\">Upload Photos</button>\r\n        </div>\r\n    </main>\r\n    <!-- <main class=\"noProfileMain\" *ngIf=\"true\"> -->\r\n    <main class=\"noProfileMain\" *ngIf=\"itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()\">\r\n        <!-- <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n     <p class=\"text-center\">\r\n         <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n     </p>\r\n    <p class=\"text-center noProfile\">\r\n     No Profiles Here\r\n    </p>\r\n    </div>  -->\r\n        <div style=\"position: relative;display: block;margin: 2%;margin-bottom:10px\">\r\n            <p class=\"text-center noProfile\" style=\"margin-bottom:0.4rem\">\r\n                <a *ngIf=\"selectedTab == 0 && type == 'interestShown'\" style=\"font-size:1.1rem\">You have not liked anyone so far. Become our prime member to boost you profile\r\n                    visibility and</a><br>\r\n                <a *ngIf=\"selectedTab == 0 && type == 'contacted'\" style=\"font-size:1.1rem\">You have not contacted anyone so far. Become our prime member to boost you profile\r\n                    visibility and</a><br>\r\n                <a *ngIf=\"selectedTab == 0 && type == 'interestReceived'\" style=\"font-size:1.1rem\">You have no likes so far. Become our prime member to boost you profile\r\n                    visibility and</a><br>\r\n                    <a *ngIf=\"selectedTab == 1\" style=\"font-size:1.1rem\">You have no viewers so far. Become our prime member to boost you profile\r\n                        visibility and</a><br>\r\n                Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>\r\n            </p>\r\n            <p class=\"text-center\">\r\n                <img src=\"../../../assets/down-arrow.svg\" style=\"width:40px\">\r\n            </p>\r\n        </div>\r\n        <div class=\"planArea\" style=\"height:54vh;overflow-y:scroll\">\r\n            <div *ngFor=\"let item of plansOnline; let i = index\">\r\n                <div class=\"planrow text-dark\"\r\n                    style=\"background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;\">\r\n                    <div class=\"plancolumn\">\r\n                        <b>{{item.plan_name}} Plan</b><br />\r\n                        <a>{{item.contacts}} Contacts</a>\r\n                    </div>\r\n                    <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                        <b class=\"specialCase\"\r\n                            style=\"font-size: large; color: #5b6d78 !important;vertical-align: middle !important;\">₹\r\n                            {{setAmount(i)}}</b>\r\n                        <br />\r\n                        <a style=\"\r\n                      text-decoration: line-through;\r\n                      font-size: medium;\r\n                      color: #596a76 !important;vertical-align: middle !important;\r\n                    \">₹ {{item.amount}}</a>\r\n                        <div class=\"\" style=\"\r\n          background-color: #f0f1f0;\r\n          border-radius: 18px;\r\n          border-top-left-radius: 0px;\r\n          border-bottom-left-radius: 0px;\r\n          \">\r\n                            <div class=\"month\">\r\n                                <a>{{item.validity}} months</a>\r\n                            </div>\r\n                            <button id=\"subs\" class=\"btn btn-primary btn-small\" (click)=\"container(i)\"\r\n                                style=\"vertical-align: middle !important;\">\r\n                                BUY\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"planRow2\">\r\n                    <a style=\"color:#5b6d78!important\">{{setContent(i)}}</a>\r\n                </div>\r\n            </div>\r\n            <!-- <div class=\"planrow text-dark\" *ngFor=\"let item of plansOnline;let i = index;\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 2%;\">\r\n                <div class=\"plancolumn\">\r\n                    <b>{{item.plan_name}} Plan</b><br />\r\n                     <a>45 कांटेक्टस</a><br />\r\n                    <a>{{item.contacts}} Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                    <b>Basic Plan</b><br />\r\n                    <a>45 Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                    <b class=\"specialCase\" style=\"font-size: large; color: #5b6d78 !important;\">₹2800</b>\r\n                    <br />\r\n                    <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 5500</a>\r\n\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n                background-color: #f0f1f0;\r\n                border-radius: 18px;\r\n                border-top-left-radius: 0px;\r\n                border-bottom-left-radius: 0px;\r\n            \">\r\n                        <div class=\"month\">\r\n                            <a>3 महीने</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                            style=\"vertical-align: middle !important;\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n    background-color: #f0f1f0;\r\n    border-radius: 18px;\r\n    border-top-left-radius: 0px;\r\n    border-bottom-left-radius: 0px;\r\n    \">\r\n                        <div class=\"month\">\r\n                            <a>3months</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                            style=\"vertical-align: middle !important;\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"planrow\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                    <div style=\"\r\n                font-weight: 500 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 2px 2px 2px 2px;\r\n                border-radius: 3px 3px 3px 3px;\r\n              \">\r\n                        Bestseller\r\n                    </div>\r\n                    <b>सुप्रीम प्लान</b><br />\r\n                    <a>90 कांटेक्टस</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                    <div style=\"\r\n                font-weight: 300 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                font-size:small;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 1px 1px 1px 1px;\r\n                border-radius: 2px 2px 2px 2px;\r\n              \">\r\n                        Bestseller\r\n                    </div>\r\n                    <b>Supreme Plan</b><br />\r\n                    <a>90 Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                    <b class=\"specialCase\" Style=\" font-size: large;color: #5b6d78 !important; \">₹5500</b><br />\r\n                    <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 8500</a><br />\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 महीने</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 months</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"planrow text-dark\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                    <b>कुंडली प्लान</b><br />\r\n                    <a>45 कांटेक्टस</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                    <b>Kundali Plan</b><br />\r\n                    <a>45 Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" style=\"background-color: #f0f1f0;\">\r\n                    <b class=\"specialCase\" style=\"font-size: large; color: #596a76 !important;\">₹8500</b><br />\r\n                    <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 9100</a>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 महीने</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 months</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div> -->\r\n        </div>\r\n    </main>\r\n    <main *ngIf=\"itemService.getPhotoStatus() && !isNotPaid() && !itemService.getPersonalized()\" class=\"special\">\r\n        <p class=\"text-center noProfile\" style=\"margin-bottom:0.4rem\">\r\n            <a style=\"font-size:1.1rem\">You have no likes so far. Become our prime member to boost you profile\r\n                visibility and</a><br>\r\n            Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>\r\n        </p>\r\n        <div style=\"\r\n    position:relative;\r\n    height:40vh!important; \r\n    width:80%!important; \r\n    border-radius: 20px!important;\r\n    background:white!important;\r\n    margin:auto;\r\n    margin-top:10%;\r\n    display:flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content:center;\r\n    color:black\">\r\n            <div class=\"circular\">\r\n                <img src=\"../../../assets/tabs-icons/heart-like-white.svg\" alt=\"heart\">\r\n            </div>\r\n            <div style=\"display:flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content:center\" class=\"text-center\">\r\n                <p style=\"font-size:30px;font-weight:500;margin:auto!important;color:rgb(51, 59, 52)!important;\">Get\r\n                    Your\r\n                    <a style=\"font-weight:bold!important;\r\n                color:rgb(51, 59, 52)!important;\r\n                \">Personal Matchmaker</a></p>\r\n            </div>\r\n        </div>\r\n        <div style=\"position: relative;\" class=\"text-center\">\r\n            <button class=\"SpecialCase\" style=\"position: relative;;\r\n            margin:auto;\r\n    height:80px;\r\n    background:#00c2cb!important; \r\n    width:87%!important; \r\n    color:rgb(255, 255, 255);\r\n    margin-top: 10%;\r\n    border:0px!important;\r\n    border-radius:30px 30px 30px 30px\" mat-raised-button (click)=\"goToSubscription()\">Upgrade Now</button>\r\n        </div>\r\n    </main>\r\n</div>\r\n\r\n<div *ngIf=\"(profileViewersList$ | async) && (profileViewersList$ | async).length > 0 && selectedTab == 1\">\r\n   \r\n    <section [ngClass]=\"{'ht-full': section, 'paddingToSection' : section}\" infiniteScroll\r\n        [infiniteScrollDistance]=\"2\" [infiniteScrollThrottle]=\"50\" [scrollWindow]=\"false\" (scrolled)=\"getScrollData()\">\r\n        <div *ngFor=\"let item of (profileViewersList$ | async);let i = index\">\r\n            <div class=\"historyProfile\" [id]=\"i\">\r\n                <img [ngClass]=\"{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}\" #profilePic\r\n                    [src]=\"getProfilePhoto(item,item.profile.photo,item.profile.gender)\"\r\n                    (click)=\"openProfileDialog(item,i)\" (error)=\"onLoadProfileError(item.profile.gender,profilePic)\"\r\n                    alt=\"profile picture\">\r\n                <div style=\"position: absolute;top: -15px;\r\n            right: -20px;\" *ngIf=\"item.family == null\">\r\n                    <button mat-fab id=\"premiumProfIcon\">\r\n                        <img width=\"30px\" src=\"../../../assets/king.svg\" alt=\"premium profile\">\r\n                    </button>\r\n                </div>\r\n\r\n                <div class=\"historyDetails\">\r\n                    <p *ngIf=\"type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()\" style=\"display: flex!important;\r\n                flex-direction: row;\r\n                align-items: center;\r\n                justify-content: center;\r\n                text-align: center;\r\n                font-size: 1.0rem;\r\n                font-weight: bold;\r\n                color: white;\r\n                position: absolute;\r\n                top: -170px;\r\n                width: 100%!important;\">\r\n                        Upgrade to see\r\n                        who\r\n                        viewed your profile</p>\r\n                        <div *ngIf=\"(type==='interestReceived' && itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() != '0') || type == 'contacted' || type == 'rejected' || type == 'interestShown'\">\r\n                    <span>\r\n                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}\r\n                    </span><br>\r\n                    <span>\r\n                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}\r\n                        | {{setHeight(item.profile.height)}}\r\n                        | {{item.family ? item.family.religion : item.profile.religion}},\r\n                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}\r\n                        | {{setIncome(item.profile.monthly_income)}} LPA\r\n                    </span>\r\n\r\n                </div>\r\n                </div>\r\n\r\n                <div class=\"historyButtons\">\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"reponseToNormal(item,'NO',i)\" style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                        >\r\n                        <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                    </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"reponseToNormal(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\">\r\n                        <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                    </button>\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"reponseToNormal(item,'SHORTLIST',i)\" style=\"background-color: #D313AE;margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\">\r\n                        <img width=\"20px\" src=\"../../../assets/heartwhite.svg\" alt=\"shortlist profile\">\r\n                    </button> -->\r\n\r\n                </div>\r\n            </div>\r\n            <hr>\r\n        </div>\r\n\r\n        <mat-spinner *ngIf=\"smallSpinner\" style=\"margin: 0px auto;\" [diameter]=\"30\"></mat-spinner>\r\n\r\n    </section>\r\n\r\n</div>\r\n\r\n";
+    __webpack_exports__["default"] = "<!-- <main class=\"noProfileMain\"\r\n    *ngIf=\"itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized() && !section\">\r\n     <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n     <p class=\"text-center\">\r\n         <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n     </p>\r\n    <p class=\"text-center noProfile\">\r\n     No Profiles Here\r\n    </p> \r\n    </div>\r\n    <div style=\"position: relative;display: block;margin: 3%;margin-bottom:40px\">\r\n        <p class=\"text-center noProfile\">\r\n            Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>\r\n        </p>\r\n        <p class=\"text-center\">\r\n            <img src=\"../../../assets/down-arrow.svg\" style=\"width:60px\">\r\n        </p>\r\n    </div>\r\n    <div class=\"plansArea\">\r\n        <div class=\"planrow text-dark\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 2%;\">\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                <b>बेसिक प्लान</b><br />\r\n                <a>45 कांटेक्टस</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                <b>Basic Plan</b><br />\r\n                <a>45 Contacts</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                <b class=\"specialCase\" style=\"font-size: large; color: #5b6d78 !important;\">₹2800</b>\r\n                <br />\r\n                <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 5500</a>\r\n\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n                background-color: #f0f1f0;\r\n                border-radius: 18px;\r\n                border-top-left-radius: 0px;\r\n                border-bottom-left-radius: 0px;\r\n            \">\r\n                    <div class=\"month\">\r\n                        <a>3 महीने</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                        style=\"vertical-align: middle !important;\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n    background-color: #f0f1f0;\r\n    border-radius: 18px;\r\n    border-top-left-radius: 0px;\r\n    border-bottom-left-radius: 0px;\r\n    \">\r\n                    <div class=\"month\">\r\n                        <a>3 months</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                        style=\"vertical-align: middle !important;\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"planrow\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                <div style=\"\r\n                font-weight: 500 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 2px 2px 2px 2px;\r\n                border-radius: 3px 3px 3px 3px;\r\n              \">\r\n                    Bestseller\r\n                </div>\r\n                <b>सुप्रीम प्लान</b><br />\r\n                <a>90 कांटेक्टस</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                <div style=\"\r\n                font-weight: 300 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                font-size:small;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 1px 1px 1px 1px;\r\n                border-radius: 2px 2px 2px 2px;\r\n              \">\r\n                    Bestseller\r\n                </div>\r\n                <b>Supreme Plan</b><br />\r\n                <a>90 Contacts</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                <b class=\"specialCase\" Style=\" font-size: large;color: #5b6d78 !important; \">₹5500</b><br />\r\n                <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 8500</a><br />\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 महीने</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 months</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"planrow text-dark\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                <b>कुंडली प्लान</b><br />\r\n                <a>45 कांटेक्टस</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                <b>Kundali Plan</b><br />\r\n                <a>45 Contacts</a><br />\r\n            </div>\r\n            <div class=\"plancolumn\" style=\"background-color: #f0f1f0;\">\r\n                <b class=\"specialCase\" style=\"font-size: large; color: #596a76 !important;\">₹8500</b><br />\r\n                <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 9100</a>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 महीने</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n                <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                    <div class=\"month\">\r\n                        <a>6 months</a>\r\n                    </div>\r\n                    <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                        BUY\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main> -->\r\n<main [ngClass]=\"{'mainBack': section}\">\r\n    <mat-toolbar class=\"toolBar\" *ngIf=\"section\">\r\n        <div style=\"display: flex;\r\n        flex-direction: row;\r\n        align-items: center;\">\r\n            <button mat-icon-button (click)=\"goBack()\" class=\"example-icon\"\r\n                aria-label=\"Example icon-button with menu icon\">\r\n                <mat-icon>arrow_back</mat-icon>\r\n            </button>\r\n            <span class=\"titleText\">{{title}}</span>\r\n        </div>\r\n        <button class=\"example-icon titleText\" style=\"color: #4A5D6A; background-color: white;border: none;\"\r\n            aria-label=\"Example icon-button with share icon\">\r\n            <span>\r\n                {{languageService.profileLang.credits}}\r\n            </span>\r\n            <span class=\"titleText\">{{this.itemService.getCredits()}}</span>\r\n        </button>\r\n    </mat-toolbar>\r\n\r\n  <div *ngIf=\"type && type == 'interestReceived'\" class=\"text-center\">\r\n    <button class=\"btn btn-tabs\" \r\n    (click)=\"setSelectedIndex(0)\"\r\n    [ngClass]=\"{'btn-tabs-active':selectedTab === 0}\">\r\n    Liked Me\r\n</button>\r\n\r\n<button  class=\"btn btn-tabs\" \r\n(click)=\"setSelectedIndex(1)\"\r\n[ngClass]=\"{'btn-tabs-active':selectedTab === 1}\">\r\n    Viewed me\r\n</button>\r\n  </div>\r\n\r\n\r\n    <section *ngIf=\"profile.length > 0 && selectedTab == 0\" [ngClass]=\"{'ht-full': section, 'paddingToSection' : section}\" infiniteScroll\r\n        [infiniteScrollDistance]=\"2\" [infiniteScrollThrottle]=\"50\" [scrollWindow]=\"false\" (scrolled)=\"getScrollData()\">\r\n        <div *ngFor=\"let item of profile;let i = index\">\r\n            <div class=\"historyProfile\" [id]=\"i\">\r\n                <img [ngClass]=\"{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}\" #profilePic\r\n                    [src]=\"getProfilePhoto(item,item.profile.photo,item.profile.gender)\"\r\n                    (click)=\"openProfileDialog(item,i)\" (error)=\"onLoadProfileError(item.profile.gender,profilePic)\"\r\n                    alt=\"profile picture\">\r\n                <div style=\"position: absolute;top: -15px;\r\n            right: -20px;\" *ngIf=\"item.family == null\">\r\n                    <button mat-fab id=\"premiumProfIcon\">\r\n                        <img width=\"30px\" src=\"../../../assets/king.svg\" alt=\"premium profile\">\r\n                    </button>\r\n                </div>\r\n\r\n                <div class=\"historyDetails\">\r\n                    <p *ngIf=\"type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()\" style=\"display: flex!important;\r\n                flex-direction: row;\r\n                align-items: center;\r\n                justify-content: center;\r\n                text-align: center;\r\n                font-size: 1.0rem;\r\n                font-weight: bold;\r\n                color: white;\r\n                position: absolute;\r\n                top: -170px;\r\n                width: 100%!important;\">\r\n                        Upgrade to see\r\n                        who\r\n                        likes you</p>\r\n\r\n                        <div *ngIf=\"(type==='interestReceived' && itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() != '0')  || type == 'contacted' || type == 'rejected' || type == 'interestShown'\">  \r\n                    <span>\r\n                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}\r\n                    </span><br>\r\n                    <span>\r\n                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}\r\n                        | {{setHeight(item.profile.height)}}\r\n                        | {{item.family ? item.family.religion : item.profile.religion}},\r\n                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}\r\n                        | {{setIncome(item.profile.monthly_income)}} LPA\r\n                    </span>\r\n\r\n                </div>\r\n                </div>\r\n\r\n                <div class=\"historyButtons\">\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'NO',i)\" style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived' &&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()) && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'\">\r\n                        <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                    </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'NO',i)\" style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                        *ngIf=\"type !='interestReceived' && type !== 'rejected' && type !== 'contacted' && type !== 'mutual'\">\r\n                        <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                    </button>\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'contacted'\">\r\n                        <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                    </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                    margin-top: 20px;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                            *ngIf=\"type !== 'contacted'\">\r\n                            <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                        </button>\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"call(i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && item.family && itemService.getPersonalized() == false\">\r\n                        <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                    </button>\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"openPersonalizedMessageDialog(item)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px 10px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type == 'contacted' && itemService.getPersonalized()\">\r\n                        <img width=\"30px\" src=\"../../../assets/comment.svg\" alt=\"contact profile\">\r\n                    </button>\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"profileReAnswer(item,'SHORTLIST',i)\" style=\"background-color: #D313AE;margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\"\r\n                        *ngIf=\"!(type==='interestReceived'&&itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized())&&type !== 'interestShown' && type !== 'interestReceived'  && type !== 'contacted' && type !== 'mutual'\">\r\n                        <img width=\"20px\" src=\"../../../assets/heartwhite.svg\" alt=\"shortlist profile\">\r\n                    </button>\r\n\r\n                </div>\r\n            </div>\r\n            <hr>\r\n        </div>\r\n\r\n        <mat-spinner *ngIf=\"smallSpinner\" style=\"margin: 0px auto;\" [diameter]=\"30\"></mat-spinner>\r\n\r\n    </section>\r\n    <!-- <ngx-spinner  bdColor = \"transparent\" size = \"small\" color = \"#58D1FD\" type = \"square-jelly-box\" [fullScreen] = \"false\"><p style=\"color: white\"></ngx-spinner> -->\r\n\r\n\r\n</main>\r\n\r\n<div *ngIf=\"(!section && profile && profile.length < 1 && selectedTab == 0) \r\n|| ((profileViewersList$ | async) && (profileViewersList$ | async).length < 1 && selectedTab == 1) \">\r\n    <main *ngIf=\"itemService.getPersonalized()\">\r\n        <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n            <p class=\"text-center\">\r\n                <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n            </p>\r\n            <p class=\"text-center noProfile\">\r\n                No Profiles Here\r\n            </p>\r\n        </div>\r\n    </main>\r\n    <main *ngIf=\"!itemService.getPhotoStatus()\" class=\"special noProfileMain\">\r\n        <!-- <main *ngIf=\"true\" class=\"special\"> -->\r\n        <div style=\"height:45vh!important; \r\n    width:85%!important; \r\n    border-radius: 20px!important;\r\n    background:white!important;\r\n    margin:auto;\r\n    display:flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content:center\">\r\n            <img src=\"../../../assets/plus.svg\" style=\"width:60%\">\r\n        </div>\r\n        <div class=\"text-center\" style=\"margin:10px 0px 0px 0px;\r\n    display:flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content:center\">\r\n            <p style=\"font-size: 1.2rem;\">Please upload pictures so people can see your profile</p>\r\n        </div>\r\n        <div c style=\"position: relative;\r\n        display:flex;margin-top: 7%;\r\n        flex-direction: row;\r\n        align-items: center;\r\n        justify-content:center\">\r\n            <input style=\"margin: 10px 25%;display: none;\" #backfile type=\"file\" id=\"backfile\" accept='image/*'\r\n                (change)=\"chooseFileForUpload(backfile.files)\" />\r\n            <button class=\"SpecialCase\" style=\"position:absolute;\r\n            height:80px;\r\n            background:#00c2cb!important; \r\n            width:80%!important; \r\n            color:rgb(255, 255, 255);\r\n            margin-top: 2%;\r\n            border:0px!important;\r\n            border-radius:30px 30px 30px 30px\" mat-raised-button (click)=\"changeProfileImage()\">Upload Photos</button>\r\n        </div>\r\n    </main>\r\n    <!-- <main class=\"noProfileMain\" *ngIf=\"true\"> -->\r\n    <main class=\"noProfileMain\" *ngIf=\"itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()\">\r\n        <!-- <div style=\"position: relative;display: block;margin: 30% auto;\">\r\n     <p class=\"text-center\">\r\n         <img width=\"80px\" src=\"../../../assets/new icons/sad-face.svg\" alt=\"no data\">\r\n     </p>\r\n    <p class=\"text-center noProfile\">\r\n     No Profiles Here\r\n    </p>\r\n    </div>  -->\r\n        <div style=\"position: relative;display: block;margin: 2%;margin-bottom:10px\">\r\n            <p class=\"text-center noProfile\" style=\"margin-bottom:0.4rem\">\r\n                <a *ngIf=\"selectedTab == 0 && type == 'interestShown'\" style=\"font-size:1.1rem\">You have not liked anyone so far. Become our prime member to boost you profile\r\n                    visibility and</a><br>\r\n                <a *ngIf=\"selectedTab == 0 && type == 'contacted'\" style=\"font-size:1.1rem\">You have not contacted anyone so far. Become our prime member to boost you profile\r\n                    visibility and</a><br>\r\n                <a *ngIf=\"selectedTab == 0 && type == 'interestReceived'\" style=\"font-size:1.1rem\">You have no likes so far. Become our prime member to boost you profile\r\n                    visibility and</a><br>\r\n                    <a *ngIf=\"selectedTab == 1\" style=\"font-size:1.1rem\">You have no viewers so far. Become our prime member to boost you profile\r\n                        visibility and</a><br>\r\n                Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>\r\n            </p>\r\n            <p class=\"text-center\">\r\n                <img src=\"../../../assets/down-arrow.svg\" style=\"width:40px\">\r\n            </p>\r\n        </div>\r\n        <div class=\"planArea\" style=\"height:54vh;overflow-y:scroll\">\r\n            <div *ngFor=\"let item of plansOnline; let i = index\">\r\n                <div class=\"planrow text-dark\"\r\n                    style=\"background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;\">\r\n                    <div class=\"plancolumn\">\r\n                        <b>{{item.plan_name}} Plan</b><br />\r\n                        <a>{{item.contacts}} Contacts</a>\r\n                    </div>\r\n                    <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                        <b class=\"specialCase\"\r\n                            style=\"font-size: large; color: #5b6d78 !important;vertical-align: middle !important;\">₹\r\n                            {{setAmount(i)}}</b>\r\n                        <br />\r\n                        <a style=\"\r\n                      text-decoration: line-through;\r\n                      font-size: medium;\r\n                      color: #596a76 !important;vertical-align: middle !important;\r\n                    \">₹ {{item.amount}}</a>\r\n                        <div class=\"\" style=\"\r\n          background-color: #f0f1f0;\r\n          border-radius: 18px;\r\n          border-top-left-radius: 0px;\r\n          border-bottom-left-radius: 0px;\r\n          \">\r\n                            <div class=\"month\">\r\n                                <a>{{item.validity}} months</a>\r\n                            </div>\r\n                            <button id=\"subs\" class=\"btn btn-primary btn-small\" (click)=\"container(i)\"\r\n                                style=\"vertical-align: middle !important;\">\r\n                                BUY\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"planRow2\">\r\n                    <a style=\"color:#5b6d78!important\">{{setContent(i)}}</a>\r\n                </div>\r\n            </div>\r\n            <!-- <div class=\"planrow text-dark\" *ngFor=\"let item of plansOnline;let i = index;\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 2%;\">\r\n                <div class=\"plancolumn\">\r\n                    <b>{{item.plan_name}} Plan</b><br />\r\n                     <a>45 कांटेक्टस</a><br />\r\n                    <a>{{item.contacts}} Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                    <b>Basic Plan</b><br />\r\n                    <a>45 Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                    <b class=\"specialCase\" style=\"font-size: large; color: #5b6d78 !important;\">₹2800</b>\r\n                    <br />\r\n                    <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 5500</a>\r\n\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n                background-color: #f0f1f0;\r\n                border-radius: 18px;\r\n                border-top-left-radius: 0px;\r\n                border-bottom-left-radius: 0px;\r\n            \">\r\n                        <div class=\"month\">\r\n                            <a>3 महीने</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                            style=\"vertical-align: middle !important;\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n    background-color: #f0f1f0;\r\n    border-radius: 18px;\r\n    border-top-left-radius: 0px;\r\n    border-bottom-left-radius: 0px;\r\n    \">\r\n                        <div class=\"month\">\r\n                            <a>3months</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container1()\"\r\n                            style=\"vertical-align: middle !important;\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"planrow\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                    <div style=\"\r\n                font-weight: 500 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 2px 2px 2px 2px;\r\n                border-radius: 3px 3px 3px 3px;\r\n              \">\r\n                        Bestseller\r\n                    </div>\r\n                    <b>सुप्रीम प्लान</b><br />\r\n                    <a>90 कांटेक्टस</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                    <div style=\"\r\n                font-weight: 300 !important;\r\n                position: absolute;\r\n                top: -15px !important;\r\n                left: 8%;\r\n                font-size:small;\r\n                background: #ff39c4;\r\n                color: white;\r\n                padding: 1px 1px 1px 1px;\r\n                border-radius: 2px 2px 2px 2px;\r\n              \">\r\n                        Bestseller\r\n                    </div>\r\n                    <b>Supreme Plan</b><br />\r\n                    <a>90 Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" style=\"background-color: #f0f1f0; color: #5b6d78 !important;\">\r\n                    <b class=\"specialCase\" Style=\" font-size: large;color: #5b6d78 !important; \">₹5500</b><br />\r\n                    <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 8500</a><br />\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 महीने</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 months</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container2()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"planrow text-dark\" style=\"background-color: #00c2cb; border-radius: 18px; margin-top: 0px;\">\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\">\r\n                    <b>कुंडली प्लान</b><br />\r\n                    <a>45 कांटेक्टस</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\">\r\n                    <b>Kundali Plan</b><br />\r\n                    <a>45 Contacts</a><br />\r\n                </div>\r\n                <div class=\"plancolumn\" style=\"background-color: #f0f1f0;\">\r\n                    <b class=\"specialCase\" style=\"font-size: large; color: #596a76 !important;\">₹8500</b><br />\r\n                    <a style=\"\r\n                text-decoration: line-through;\r\n                font-size: medium;\r\n                color: #596a76 !important;\r\n              \">₹ 9100</a>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 महीने</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"\" *ngIf=\"languageService.getCurrentLanguage() === 'english'\" style=\"\r\n            background-color: #f0f1f0;\r\n            border-radius: 18px;\r\n            border-top-left-radius: 0px;\r\n            border-bottom-left-radius: 0px;\r\n          \">\r\n                        <div class=\"month\">\r\n                            <a>6 months</a>\r\n                        </div>\r\n                        <button class=\"btn btn-primary btn-small subs\" (click)=\"container3()\">\r\n                            BUY\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div> -->\r\n        </div>\r\n    </main>\r\n    <main *ngIf=\"itemService.getPhotoStatus() && !isNotPaid() && !itemService.getPersonalized()\" class=\"special\">\r\n        <p class=\"text-center noProfile\" style=\"margin-bottom:0.4rem\">\r\n            <a style=\"font-size:1.1rem\">You have no likes so far. Become our prime member to boost you profile\r\n                visibility and</a><br>\r\n            Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>\r\n        </p>\r\n        <div style=\"\r\n    position:relative;\r\n    height:40vh!important; \r\n    width:80%!important; \r\n    border-radius: 20px!important;\r\n    background:white!important;\r\n    margin:auto;\r\n    margin-top:10%;\r\n    display:flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content:center;\r\n    color:black\">\r\n            <div class=\"circular\">\r\n                <img src=\"../../../assets/tabs-icons/heart-like-white.svg\" alt=\"heart\">\r\n            </div>\r\n            <div style=\"display:flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content:center\" class=\"text-center\">\r\n                <p style=\"font-size:30px;font-weight:500;margin:auto!important;color:rgb(51, 59, 52)!important;\">Get\r\n                    Your\r\n                    <a style=\"font-weight:bold!important;\r\n                color:rgb(51, 59, 52)!important;\r\n                \">Personal Matchmaker</a></p>\r\n            </div>\r\n        </div>\r\n        <div style=\"position: relative;\" class=\"text-center\">\r\n            <button class=\"SpecialCase\" style=\"position: relative;;\r\n            margin:auto;\r\n    height:80px;\r\n    background:#00c2cb!important; \r\n    width:87%!important; \r\n    color:rgb(255, 255, 255);\r\n    margin-top: 10%;\r\n    border:0px!important;\r\n    border-radius:30px 30px 30px 30px\" mat-raised-button (click)=\"goToSubscription()\">Upgrade Now</button>\r\n        </div>\r\n    </main>\r\n</div>\r\n\r\n<div *ngIf=\"(profileViewersList$ | async) && (profileViewersList$ | async).length > 0 && selectedTab == 1\">\r\n   \r\n    <section [ngClass]=\"{'ht-full': section, 'paddingToSection' : section}\" infiniteScroll\r\n        [infiniteScrollDistance]=\"2\" [infiniteScrollThrottle]=\"50\" [scrollWindow]=\"false\" (scrolled)=\"getScrollData()\">\r\n        <div *ngFor=\"let item of (profileViewersList$ | async);let i = index\">\r\n            <div class=\"historyProfile\" [id]=\"i\">\r\n                <img [ngClass]=\"{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}\" #profilePic\r\n                    [src]=\"getProfilePhoto(item,item.profile.photo,item.profile.gender)\"\r\n                    (click)=\"openProfileDialog(item,i)\" (error)=\"onLoadProfileError(item.profile.gender,profilePic)\"\r\n                    alt=\"profile picture\">\r\n                <div style=\"position: absolute;top: -15px;\r\n            right: -20px;\" *ngIf=\"item.family == null\">\r\n                    <button mat-fab id=\"premiumProfIcon\">\r\n                        <img width=\"30px\" src=\"../../../assets/king.svg\" alt=\"premium profile\">\r\n                    </button>\r\n                </div>\r\n\r\n                <div class=\"historyDetails\">\r\n                    <p *ngIf=\"type==='interestReceived'&&itemService.getCredits() != \r\n                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()\" style=\"display: flex!important;\r\n                flex-direction: row;\r\n                align-items: center;\r\n                justify-content: center;\r\n                text-align: center;\r\n                font-size: 1.0rem;\r\n                font-weight: bold;\r\n                color: white;\r\n                position: absolute;\r\n                top: -170px;\r\n                width: 100%!important;\">\r\n                        Upgrade to see\r\n                        who\r\n                        viewed your profile</p>\r\n                        <div *ngIf=\"(type==='interestReceived' && itemService.getCredits() != \r\n                        null && itemService.getCredits().toString() != '0') || type == 'contacted' || type == 'rejected' || type == 'interestShown'\">\r\n                    <span>\r\n                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}\r\n                    </span><br>\r\n                    <span>\r\n                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}\r\n                        | {{setHeight(item.profile.height)}}\r\n                        | {{item.family ? item.family.religion : item.profile.religion}},\r\n                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}\r\n                        | {{setIncome(item.profile.monthly_income)}} LPA\r\n                    </span>\r\n\r\n                </div>\r\n                </div>\r\n\r\n                <div class=\"historyButtons\">\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"reponseToNormal(item,'NO',i)\" style=\"background-color: #C8C8C8;\r\n                    padding: 20px;\r\n                     border-radius: 10px;\"\r\n                        >\r\n                        <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"reject profile\">\r\n                    </button> -->\r\n\r\n                    <button mat-raised-button class=\"btn\" (click)=\"reponseToNormal(item,'YES',i)\" style=\"background-color: #58D1FD;\r\n                margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\">\r\n                        <img width=\"20px\" src=\"../../../assets/phone_white.svg\" alt=\"contact profile\">\r\n                    </button>\r\n\r\n                    <!-- <button mat-raised-button class=\"btn\" (click)=\"reponseToNormal(item,'SHORTLIST',i)\" style=\"background-color: #D313AE;margin-top: 20px;\r\n                padding: 20px;\r\n                 border-radius: 10px;\">\r\n                        <img width=\"20px\" src=\"../../../assets/heartwhite.svg\" alt=\"shortlist profile\">\r\n                    </button> -->\r\n\r\n                </div>\r\n            </div>\r\n            <hr>\r\n        </div>\r\n\r\n        <mat-spinner *ngIf=\"smallSpinner\" style=\"margin: 0px auto;\" [diameter]=\"30\"></mat-spinner>\r\n\r\n    </section>\r\n\r\n</div>\r\n\r\n";
     /***/
   },
 
@@ -2188,6 +2188,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/chat/history-section/history-item/history-item.component.html":
+  /*!*********************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/chat/history-section/history-item/history-item.component.html ***!
+    \*********************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppChatHistorySectionHistoryItemHistoryItemComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = " <div class=\"search-results\" *ngIf=\"listItem\" >\r\n            <div class=\"column\" style=\"flex-grow: 1\">\r\n                <img id=\"searchImage\" class=\"circular\" \r\n                (click)=\"getUserProfileData()\"\r\n                src=\"{{listItem.photo}}\"\r\n                (error)='setPlaceholderImage()'\r\n                 alt=\"photo\" origin=\"anonymous\">\r\n            </div>\r\n            <div class=\"column\" style=\"flex: 2;justify-content: end;\r\n            align-items: end;padding:2%;color: black;\"\r\n            (click)=\"getUserProfileData()\">\r\n                <p style=\"font-size:1rem;font-weight:bold;text-transform: capitalize;\">{{setName(listItem.name)}}</p>\r\n                <p style=\"font-size:0.8rem;\">{{getHeight(listItem.height)}}&nbsp;|&nbsp;{{listItem.age}}Yrs</p>\r\n                <p style=\"font-size:0.8rem;\">{{listItem.religion}}&nbsp;|&nbsp;{{listItem.caste}}</p>\r\n                <p style=\"font-size:0.8rem;\">{{listItem.working_city}}&nbsp;|&nbsp;{{listItem.monthly_income}}LPA</p>\r\n                <p style=\"border-radius: 5px;\" [ngStyle]=\"{'background-color':getColor(listItem.type)}\"\r\n                    (click)=\"getUserProfileData()\">\r\n                    <a\r\n                        style=\"font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px\">{{listItem.type}}ED</a>\r\n                </p>\r\n            </div>\r\n            <div class=\"columnLast\" style=\"flex: 1;border-radius: 5px;\">\r\n\r\n                    <button (click)=\"sendAction('YES')\" \r\n                    class=\"setButtons\" mat-fab style=\"color: green;\r\n                background: #58D1FD;\" aria-label=\"Example icon-button with a heart icon\">\r\n                    <img width=\"20px\" src=\"../../../assets/phone_white.svg\"\r\n                        alt=\"कांटेक्ट करें\">\r\n                </button>\r\n\r\n                <button (click)=\"sendAction('SHORTLIST')\" \r\n                *ngIf=\"listItem.type == 'REJECT'\"\r\n                class=\"setButtons\" mat-fab style=\"color: red;\r\n                background: #D313AE;\" aria-label=\"Example icon-button with a heart icon\">\r\n                    <img width=\"20px\" src=\"../../../assets/heartwhite.svg\"\r\n                        alt=\"पसंद है\">\r\n                </button>\r\n\r\n                <button (click)=\"sendAction('NO')\" \r\n                *ngIf=\"listItem.type == 'SHORTLIST'\"\r\n                class=\"setButtons\" mat-fab style=\"color: grey;\r\n                background: #C8C8C8;\">\r\n                        <img width=\"20px\" src=\"../../../assets/closewhite.svg\" alt=\"नापसंद है\">\r\n                    </button>\r\n\r\n            </div>\r\n    </div>";
+    /***/
+  },
+
+  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/chat/history-section/history-section.component.html":
   /*!***********************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/chat/history-section/history-section.component.html ***!
@@ -2203,7 +2223,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div>\r\n    <div class=\"top-bar\">\r\n        <div class=\"search-area\" *ngIf=\"(searchActivated$|async)\">\r\n            <div class=\"col\" style=\"padding:3.5% 2%\">\r\n                <img src=\"../../../assets/clear.svg\" class=\"fa fa-close\" (click)=\"toggleSearch()\"\r\n                    style=\"font-size:30px;color:black;position:absolute;right:1%;top:9%\">\r\n                <input type=\"text\" class=\"custom form-control\" placeholder=\"Search by name, religion, city...\"\r\n                    [formControl]=\"searchControl\">\r\n            </div>\r\n        </div>\r\n        <div class=\"row btn-row\" *ngIf=\"!(searchActivated$|async)\">\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':(searchActivated$|async)}\"\r\n                (click)=\"toggleSearch()\">\r\n                <img width=\"25px\" src=\"../../../assets/search-history.svg\" alt=\"\" *ngIf=\"! (searchActivated$|async)\">\r\n                <img width=\"25px\" src=\"../../../assets/search-history-white.svg\" alt=\"\"\r\n                    *ngIf=\"(searchActivated$|async)\">\r\n            </button>\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':selectedTab === 0}\"\r\n                (click)=\"setSelectedIndex(0)\">\r\n                <img width=\"25px\" src=\"../../../assets/heartwhite.svg\" alt=\"liked\">\r\n                {{itemService.getCountOnlyShortlist()}}\r\n            </button>\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':selectedTab === 1}\"\r\n                (click)=\"setSelectedIndex(1)\">\r\n                <img width=\"25px\" src=\"../../../assets/phone_white.svg\" alt=\"contacted\">\r\n                {{itemService.getCountOnlyContacted()}}\r\n            </button>\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':selectedTab === 2}\"\r\n                (click)=\"setSelectedIndex(2)\">\r\n                <img width=\"22px\" src=\"../../../assets/closewhite.svg\" alt=\"rejected\">{{itemService.getCountOnlyRejected()}}\r\n            </button>\r\n        </div>\r\n    </div>\r\n    <div class=\"search-results\" *ngIf=\"(searchActivated$|async)\">\r\n        <div class=\"profiles\" *ngFor=\"let profile of profiles;let i = index\">\r\n            <div class=\"column\" style=\"width:20%\" (click)=\"getUserProfileData(profile.is_lead,profile.id,profile.type,i)\">\r\n                <img id=\"searchImage\" class=\"circular\" src=\"{{profile.photo}}\"\r\n                (error)='setPlaceholderImage(i, profile.gender)'\r\n                 alt=\"photo\" origin=\"anonymous\">\r\n            </div>\r\n            <div class=\"column\" style=\"width:55%;justify-content: end;\r\n            align-items: end;padding:2%\" (click)=\"getUserProfileData(profile.is_lead,profile.id,profile.type,i)\">\r\n                <p style=\"font-size:1rem;font-weight:bold;\">{{profile.name}}</p>\r\n                <p style=\"font-size:0.8rem;\">{{getHeight(profile.height)}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>\r\n                <p style=\"font-size:0.8rem;\">{{profile.caste}}&nbsp;|&nbsp;{{profile.religion}}</p>\r\n                <p style=\"font-size:0.8rem;\">{{profile.working_city}}&nbsp;|&nbsp;{{profile.monthly_income}}LPA</p>\r\n                <p style=\"border-radius: 5px;\" [ngStyle]=\"{'background-color':getColor(profile.type)}\"\r\n                    (click)=\"getUserProfileData(profile.is_lead,profile.id,profile.type,i)\">\r\n                    <a\r\n                        style=\"font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px\">{{profile.type}}ED</a>\r\n                </p>\r\n            </div>\r\n            <div class=\"column\" style=\"width:20%; border-radius: 5px;\"\r\n                (click)=\"getUserProfileData(profile.is_lead,profile.id,profile.type,i)\">\r\n                <i class=\"fa fa-phone\"\r\n                    style=\"font-size:2.2rem!important;font-weight:bold;color:rgba(36, 35, 35, 0.918);\"></i>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <mat-tab-group [hidden]=\"(searchActivated$|async)\" id=\"history-tabs\" class=\"matGroup\"\r\n        [(selectedIndex)]=\"selectedTab\" (selectedIndexChange)=\"changeSelectedTab($event)\">\r\n        <!-- // contacted -->\r\n        <mat-tab id=\"contacted\">\r\n            <!-- <ng-template mat-tab-label>\r\n                <img width=\"30px\" src=\"../../assets/thumbs-up-blue.svg\" alt=\"icon\">\r\n                {{itemService.getContactedCount()}}\r\n            </ng-template> -->\r\n            <ng-template matTabContent>\r\n                <!-- <button (click)=\"goToSubs()\" id=\"creditButton\" mat-raised-button>\r\n                    {{languageService.profileLang.credits}}: {{itemService.getCredits()}}\r\n                </button> -->\r\n                <div class='col'>\r\n                    <app-history-profiles [type]=\"tabType\"></app-history-profiles>\r\n                </div>\r\n            </ng-template>\r\n        </mat-tab>\r\n        <!-- // liked by me -->\r\n        <mat-tab id=\"melike\">\r\n            <!-- <ng-template mat-tab-label>\r\n                <p class=\"labelSetting\">\r\n                    <img class=\"tabImage\" src=\"../../assets/tabs-icons/heart-like-white.svg\" alt=\"icon\"\r\n                        *ngIf=\"selectedTab !== 1\">\r\n                    <img class=\"tabImage\" src=\"../../assets/tabs-icons/heart.svg\" alt=\"icon\" *ngIf=\"selectedTab === 1 \">\r\n                    <span class=\"tabCount\">\r\n                        {{itemService.getShortlistNumber()}}\r\n                    </span>\r\n                </p>\r\n                <a *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\"\r\n                    style=\"font-size:small\">{{languageService.profileLang.yourLikes}}</a>\r\n                <a\r\n                    *ngIf=\"languageService.getCurrentLanguage() === 'english'\">{{languageService.profileLang.yourLikes}}</a> -->\r\n            <!-- {{itemService.getShortlistedCount()}} -->\r\n            <!-- </ng-template> -->\r\n            <ng-template matTabContent>\r\n                <div>\r\n                    <div class='col'>\r\n                        <app-history-profiles [type]=\"tabType\"></app-history-profiles>\r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n        </mat-tab>\r\n        <!-- // rejected-->\r\n        <mat-tab id=\"rejected\">\r\n            <!-- <ng-template mat-tab-label>\r\n                {{itemService.getRejectedCount()}}\r\n            </ng-template> -->\r\n            <ng-template matTabContent>\r\n                <div>\r\n                    <!-- <button (click)=\"goToSubs()\" id=\"creditButton\" mat-raised-button>\r\n                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}\r\n                    </button> -->\r\n                    <div class='col'>\r\n                        <app-history-profiles [type]=\"tabType\"></app-history-profiles>\r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n        </mat-tab>\r\n    </mat-tab-group>\r\n</div>";
+    __webpack_exports__["default"] = "<div>\r\n    <div class=\"top-bar\" *ngIf=\"historyDataList$|async\">\r\n        <div class=\"search-area\" *ngIf=\"(searchActivated$|async)\">\r\n            <div class=\"col\" style=\"padding:3.5% 2%\">\r\n                <img src=\"../../../assets/clear.svg\" class=\"fa fa-close\" (click)=\"toggleSearch()\"\r\n                    style=\"font-size:30px;color:black;position:absolute;right:1%;top:9%\">\r\n                <input type=\"text\" class=\"custom form-control\" placeholder=\"Search by name, religion, city...\"\r\n                    [formControl]=\"searchControl\">\r\n            </div>\r\n        </div>\r\n        <div class=\"top-bar row btn-row\" *ngIf=\"!(searchActivated$|async)\">\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':(searchActivated$|async)}\"\r\n                (click)=\"toggleSearch()\">\r\n                <img width=\"25px\" src=\"../../../assets/search-history.svg\" alt=\"\" *ngIf=\"! (searchActivated$|async)\">\r\n                <img width=\"25px\" src=\"../../../assets/search-history-white.svg\" alt=\"\"\r\n                    *ngIf=\"(searchActivated$|async)\">\r\n            </button>\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':selectedTab === 0}\"\r\n                (click)=\"setSelectedIndex(0)\">\r\n                <img width=\"25px\" src=\"../../../assets/heartwhite.svg\" alt=\"liked\">\r\n                {{itemService.getCountOnlyShortlist()}}\r\n            </button>\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':selectedTab === 1}\"\r\n                (click)=\"setSelectedIndex(1)\">\r\n                <img width=\"25px\" src=\"../../../assets/phone_white.svg\" alt=\"contacted\">\r\n                {{itemService.getCountOnlyContacted()}}\r\n            </button>\r\n            <button class=\"btn btn-tabs\" [ngClass]=\"{'btn-tabs-active':selectedTab === 2}\"\r\n                (click)=\"setSelectedIndex(2)\">\r\n                <img width=\"22px\" src=\"../../../assets/closewhite.svg\" alt=\"rejected\">{{itemService.getCountOnlyRejected()}}\r\n            </button>\r\n        </div>\r\n    </div>\r\n    <div class=\"search-results\" *ngIf=\"(searchActivated$|async)\">\r\n        <div class=\"profiles\" *ngFor=\"let profile of profiles;let i = index\">\r\n            <div class=\"column\" style=\"width:20%\" (click)=\"getUserProfileData(profile,i)\">\r\n                <img id=\"searchImage\" class=\"circular\" src=\"{{profile.photo}}\"\r\n                (error)='setPlaceholderImage(i, profile.gender)'\r\n                 alt=\"photo\" origin=\"anonymous\">\r\n            </div>\r\n            <div class=\"column\" style=\"width:55%;justify-content: end;\r\n            align-items: end;padding:2%\" (click)=\"getUserProfileData(profile,i)\">\r\n                <p style=\"font-size:1rem;font-weight:bold;\">{{setName(profile.name)}}</p>\r\n                <p style=\"font-size:0.8rem;\">{{getHeight(profile.height)}}&nbsp;|&nbsp;{{profile.age}}Yrs</p>\r\n                <p style=\"font-size:0.8rem;\">{{profile.religion}}&nbsp;|&nbsp;{{profile.caste}}</p>\r\n                <p style=\"font-size:0.8rem;\">{{profile.working_city}}&nbsp;|&nbsp;{{profile.monthly_income}}LPA</p>\r\n                <p style=\"border-radius: 5px;\" [ngStyle]=\"{'background-color':getColor(profile.type)}\"\r\n                    (click)=\"getUserProfileData(profile,i)\">\r\n                    <a\r\n                        style=\"font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px\">{{profile.type}}ED</a>\r\n                </p>\r\n            </div>\r\n            <div class=\"column\" style=\"width:20%; border-radius: 5px;\"\r\n                (click)=\"getUserProfileData(profile,i)\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <mat-tab-group [hidden]=\"(searchActivated$|async)\" id=\"history-tabs\" class=\"matGroup\"\r\n        [(selectedIndex)]=\"selectedTab\" (selectedIndexChange)=\"changeSelectedTab($event)\">\r\n        <!-- // contacted -->\r\n        <mat-tab id=\"contacted\">\r\n            <!-- <ng-template mat-tab-label>\r\n                <img width=\"30px\" src=\"../../assets/thumbs-up-blue.svg\" alt=\"icon\">\r\n                {{itemService.getContactedCount()}}\r\n            </ng-template> -->\r\n            <ng-template matTabContent>\r\n                <!-- <button (click)=\"goToSubs()\" id=\"creditButton\" mat-raised-button>\r\n                    {{languageService.profileLang.credits}}: {{itemService.getCredits()}}\r\n                </button> -->\r\n                <div class='col'>\r\n                    <!-- <app-history-profiles [type]=\"tabType\"></app-history-profiles> -->\r\n                    <div  *ngFor=\"let item of (historyShortlistList$|async);let i = index\">\r\n                        <app-history-item [listItem]=\"item\"\r\n                        [itemIndex]=\"i\"\r\n                         [authData]=\"authData\"\r\n                         (actionTaken)=\"sendResponse($event)\"\r\n                         ></app-history-item>\r\n                        </div>\r\n                </div>\r\n            </ng-template>\r\n        </mat-tab>\r\n        <!-- // liked by me -->\r\n        <mat-tab id=\"melike\">\r\n            <!-- <ng-template mat-tab-label>\r\n                <p class=\"labelSetting\">\r\n                    <img class=\"tabImage\" src=\"../../assets/tabs-icons/heart-like-white.svg\" alt=\"icon\"\r\n                        *ngIf=\"selectedTab !== 1\">\r\n                    <img class=\"tabImage\" src=\"../../assets/tabs-icons/heart.svg\" alt=\"icon\" *ngIf=\"selectedTab === 1 \">\r\n                    <span class=\"tabCount\">\r\n                        {{itemService.getShortlistNumber()}}\r\n                    </span>\r\n                </p>\r\n                <a *ngIf=\"languageService.getCurrentLanguage() === 'hindi'\"\r\n                    style=\"font-size:small\">{{languageService.profileLang.yourLikes}}</a>\r\n                <a\r\n                    *ngIf=\"languageService.getCurrentLanguage() === 'english'\">{{languageService.profileLang.yourLikes}}</a> -->\r\n            <!-- {{itemService.getShortlistedCount()}} -->\r\n            <!-- </ng-template> -->\r\n            <ng-template matTabContent>\r\n                <div>\r\n                    <div class='col'>\r\n                        <!-- <app-history-profiles [type]=\"tabType\"></app-history-profiles> -->\r\n                        <div *ngFor=\"let item of (historyContactList$|async);let i = index\">\r\n                        <app-history-item [listItem]=\"item\"\r\n                        [itemIndex]=\"i\"\r\n                         [authData]=\"authData\"\r\n                         (actionTaken)=\"sendResponse($event)\"></app-history-item>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n        </mat-tab>\r\n        <!-- // rejected-->\r\n        <mat-tab id=\"rejected\">\r\n            <!-- <ng-template mat-tab-label>\r\n                {{itemService.getRejectedCount()}}\r\n            </ng-template> -->\r\n            <ng-template matTabContent>\r\n                <div>\r\n                    <!-- <button (click)=\"goToSubs()\" id=\"creditButton\" mat-raised-button>\r\n                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}\r\n                    </button> -->\r\n                    <div class='col'>\r\n                        <!-- <app-history-profiles [type]=\"tabType\"></app-history-profiles> -->\r\n                        <div *ngFor=\"let item of (historyRejectList$|async);let i = index\">\r\n                            <app-history-item [listItem]=\"item\" \r\n                            [itemIndex]=\"i\"\r\n                            [authData]=\"authData\"\r\n                            (actionTaken)=\"sendResponse($event)\"></app-history-item>\r\n                            </div>\r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n        </mat-tab>\r\n    </mat-tab-group>\r\n</div>";
     /***/
   },
 
@@ -2223,7 +2243,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"mainDiv\">\r\n\r\n  <main *ngIf=\"personalProfileData\" class=\"fixed ht-full t-0 b-0 HC main special\">\r\n    <span class=\"back-drop\" style=\"position:fixed;top:0px;\"></span>\r\n    <div class=\"row parentTop\">\r\n      <div>\r\n        <img src=\"../../assets/left-arrow-key.svg\" class=\"backArrow\" (click)=\"backToChat()\" alt=\"BACK\" />\r\n      </div>\r\n      <div class=\"UploadInfo\" *ngIf=\"!itemService.getPhotoStatus()\" (click)=\"changeProfileImageNew()\">\r\n        <!-- <div class=\"UploadInfo\" *ngIf=\"true\" (click)=\"changeProfileImageNew()\"> -->\r\n        <div class=\"columnA\" id=\"carousel\">\r\n          <input style=\"margin: 10px 25%;display: none;\" #backfileNew type=\"file\" id=\"backfileNew\" accept='image/*'\r\n            (change)=\"chooseFileForUploadNew(backfileNew.files)\" />\r\n          <span style=\"position:relative;font-weight:200;\">\r\n            <p><b style=\"font-weight:600!important\">Upload</b> your photo and get a <b\r\n                style=\"font-weight:600!important\">Verification Badge</b></p>\r\n          </span>\r\n        </div>\r\n        <div class=\"columnA\">\r\n          <img src=\"../../../assets/sunburst.svg\" style=\"vertical-align: middle;width:110px;margin-top:2px\">\r\n        </div>\r\n      </div>\r\n      <div class=\"UpInfo\" *ngIf=\"itemService.getPhotoStatus()\">\r\n        <!-- <div class=\"UpInfo\" *ngIf=\"false\"> -->\r\n        <ngb-carousel id=\"carousel\" [showNavigationArrows]=\"true\" [showNavigationIndicators]=\"true\">\r\n          <ng-template ngbSlide *ngFor=\"let i of getImagesCount(); let index = index\">\r\n            <div class=\"picsum-img-wrapper\" style=\"text-align: center;\">\r\n              <input style=\"margin: 10px 25%; display: none;\" #backfile type=\"file\" id=\"backfile\" accept=\"image/*\"\r\n                (change)=\"previewBack(backfile.files, index + 1)\" />\r\n              <!-- <img (click)=\"changeProfileImage(index)\" id=\"imgProfile\" -->\r\n              <img id=\"imgProfile\"\r\n                style=\"width:100%!important; height:40vh; background-color: lightblue;border-radius:15px ;\"\r\n                (error)=\"onProfileLoadError(personalProfileData.gender, i)\" [src]=\"\r\n                  getProfilesPhoto(\r\n                    personalProfileData.carousel,\r\n                    personalProfileData.unapprove_carousel,\r\n                    personalProfileData.photo,\r\n                    personalProfileData.gender,\r\n                    i\r\n                  )\r\n                \" alt=\"slide 1\" />\r\n            </div>\r\n          </ng-template>\r\n        </ngb-carousel>\r\n        <!-- <div class=\"circular2\" style=\"padding: 10px !important;\" *ngIf=\"itemService.getPhotoStatus()\">\r\n          <img (click)=\"addProfileImage(getCarouselCount())\" style=\"width: 100%;\" src=\"../../../assets/editN.svg\"\r\n            alt=\"edit\" />\r\n        </div> -->\r\n        <div class=\"circular2\" style=\"padding: 10px !important;\" *ngIf=\"itemService.getPhotoStatus()\">\r\n          <img (click)=\"openPhotoUpload()\" style=\"width: 100%;\" src=\"../../../assets/editN.svg\" alt=\"edit\" />\r\n        </div>\r\n      </div>\r\n      <!-- <div class=\"circular\" *ngIf=\"itemService.getPhotoStatus()\">\r\n        <ngb-carousel id=\"carousel\" [showNavigationArrows]=\"true\" [showNavigationIndicators]=\"true\">\r\n          <ng-template ngbSlide *ngFor=\"let i of getImagesCount(); let index = index\">\r\n            <div class=\"picsum-img-wrapper\" style=\"text-align: center;\">\r\n              <input style=\"margin: 10px 25%; display: none;\" #backfile type=\"file\" id=\"backfile\" accept=\"image/*\"\r\n                (change)=\"previewBack(backfile.files, index + 1)\" />\r\n              <img (click)=\"changeProfileImage(index)\" id=\"imgProfile\"\r\n                style=\"width: 100%; height:35vh;background-color: lightblue;\"\r\n                (error)=\"onProfileLoadError(personalProfileData.gender, i)\" [src]=\"\r\n                  getProfilesPhoto(\r\n                    personalProfileData.carousel,\r\n                    personalProfileData.photo,\r\n                    personalProfileData.gender,\r\n                    i\r\n                  )\r\n                \" alt=\"slide 1\" />\r\n            </div>\r\n          </ng-template>\r\n        </ngb-carousel>\r\n      </div> -->\r\n      <!-- <div class=\"circular2\" style=\"padding: 10px !important;\" *ngIf=\"itemService.getPhotoStatus()\">\r\n        <img (click)=\"addProfileImage(getCarouselCount())\" style=\"width: 100%;\" src=\"../../../assets/editN.svg\"\r\n          alt=\"edit\" />\r\n      </div> -->\r\n      <div style=\"\r\n          position: relative;\r\n          color: white;\r\n          padding: 7px 7px;\r\n          width: 100%;\r\n          text-align: center;\r\n          z-index: 999;\r\n        \">\r\n        <span style=\"\r\n            font-weight: bold;\r\n            font-size: 17px;\r\n            text-transform: capitalize;\r\n          \">\r\n          {{ personalProfileData.name }},\r\n          {{ setAge(personalProfileData.birth_date)}}</span><br />\r\n        <a style=\"font-size:15px\">Profile Completion Percent : {{profileCompletionPercent}}%</a>\r\n      </div>\r\n    </div>\r\n    <mat-tab-group [(selectedIndex)]=\"selectedTab\" (selectedIndexChange)=\"changeSelectedTab($event)\"\r\n      id=\"myprofMatTabGroup\">\r\n      <mat-tab>\r\n        <ng-template mat-tab-label>\r\n          <span class=\"labelS mat-elevation-z7\" [matBadge]=\"getDetailsLeft('personal')\"\r\n            [matBadgeHidden]=\"getDetailsLeft('personal') == 0\"></span>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab && selectedTab != 0\"\r\n            style=\"padding: 14px !important;\">\r\n            <img src=\"../../assets/personalN.svg\" alt=\"icon\" />\r\n          </button>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"!selectedTab || selectedTab == 0\"\r\n            style=\"background: #4adee4 !important; padding: 14px !important;\">\r\n            <img src=\"../../assets/personalNW.svg\" alt=\"icon\" />\r\n          </button>\r\n          <a style=\"font-size:small\">{{languageService.profileLang.personal}}</a>\r\n        </ng-template>\r\n        <form [formGroup]=\"personalForm\">\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p>{{personalProfileData.name}}</p>\r\n                <img (click)=\"setEditIndex(0)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p>\r\n                    {{personalProfileData.religion ? personalProfileData.religion : familyProfileData.religion ? familyProfileData.religion : \"Add Religion\"}}\r\n                    |\r\n                    {{personalProfileData.caste ? personalProfileData.caste : familyProfileData.caste ? familyProfileData.caste : \"Add Caste\"}}\r\n                  </p>\r\n                  <p>{{getHeight(personalProfileData.height)}} |<a\r\n                      *ngIf=\"personalProfileData.weight&&personalProfileData.weight!='null'\">{{personalProfileData.weight}}\r\n                      Kg</a>\r\n                    <a *ngIf=\"!personalProfileData.weight||personalProfileData.weight=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(0)\">+Add\r\n                      Weight</a>\r\n                  </p>\r\n                  <p *ngIf=\"personalProfileData.family\"><a\r\n                      *ngIf=\"personalProfileData.family.locality&&personalProfileData.family.locality!='null'\">{{personalProfileData.family.locality}}</a>\r\n                    <a *ngIf=\"!personalProfileData.family.locality||personalProfileData.family.locality=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(0)\">+Add\r\n                      Locality</a></p>\r\n                  <p *ngIf=\"!personalProfileData.family\">\r\n                    {{familyProfileData.locality}}\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\">\r\n                  <p>{{setAge(personalProfileData.birth_date)}}Yrs | {{personalProfileData.birth_date}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.food_choice&&personalProfileData.food_choice!='null'\">{{personalProfileData.food_choice}}</a>\r\n                    <a *ngIf=\"!personalProfileData.food_choice||personalProfileData.food_choice=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(0)\">+Add Food Choice</a></p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.marital_status&&personalProfileData.marital_status!='null'\">{{personalProfileData.marital_status}}</a>\r\n                    <a *ngIf=\"!personalProfileData.marital_status||personalProfileData.marital_status=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(0)\">+Add\r\n                      Marital Status</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal==0\">\r\n              <div class=\"col-12\">\r\n                <h6>{{languageService.profileLang.name}}</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"name\" required />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Age : {{ setAge(personalProfileData.birth_date) }}</h6>\r\n              </div>\r\n              <label style=\"margin-left:15px;\">Birth Date:</label>\r\n              <div class=\"col-12\" style=\"\r\n                    display: flex;\r\n                    flex-direction: row;\r\n                    align-items: center;\r\n                    justify-content: center;\r\n                  \">\r\n                <select class=\" form-control\" formControlName=\"birth_date\" style=\"border: 1px solid black;\" required\r\n                  name=\"birth_date\">\r\n                  <option *ngFor=\"let option of date\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n\r\n                <select class=\" form-control\" formControlName=\"birth_month\"\r\n                  style=\"border: 1px solid black; margin-left: 10px;\" required name=\"birth_month\">\r\n                  <option *ngFor=\"let option of month\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n\r\n                <select class=\" form-control\" formControlName=\"birth_year\"\r\n                  style=\"border: 1px solid black; margin-left: 10px;\" required name=\"birth_year\">\r\n                  <option *ngFor=\"let option of years\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6>Weight:</h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"Weight\" required />\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6>Height:</h6>\r\n                  <select type=\"text\" class=\"form-control\" formControlName=\"Height\" required>\r\n                    <option *ngFor=\"let item of Heights\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-5\">\r\n                  <h6>Religion:</h6>\r\n                  <select class=\"form-control\" formControlName=\"Religion\" required>\r\n                    <option *ngFor=\"let option of Religions\" [value]=\"option\">\r\n                      {{ option }}\r\n                    </option>\r\n                  </select>\r\n                </div>\r\n\r\n                <div class=\"col-7\">\r\n                  <h6>Caste</h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"Castes\" required [matAutocomplete]=\"caste\" />\r\n                  <mat-autocomplete (optionSelected)=\"casteValidation($event.option.value)\" autoActiveFirstOption\r\n                    #caste=\"matAutocomplete\">\r\n                    <mat-option *ngFor=\"let name of casteo | async\" [value]=\"name\" required>\r\n                      {{ name }}\r\n                    </mat-option>\r\n                  </mat-autocomplete>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\" col-6\">\r\n                  <h6>Marital Status:</h6>\r\n                  <select class=\"form-control\" formControlName=\"MaritalStatus\" required>\r\n                    <option *ngFor=\"let item of MaritalStatus\" [value]=\"item\">{{ item }}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6>Food Choice:</h6>\r\n                  <select class=\"form-control\" formControlName=\"Food\" required>\r\n                    <option *ngFor=\"let item of Foodpreferences\" [value]=\"item\">{{ item }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n               <div class=\"col-12\" style=\"margin-bottom: 10px;\">\r\n                <h6>Locality:</h6>\r\n                <input type=\"text\" class=\"form-control\" \r\n                matValidateAddress \r\n                matGoogleMapsAutocomplete\r\n                #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (onAutocompleteSelected)=\"\r\n                onAutocompleteSelected($event, 'Locality')\"\r\n                (onLocationSelected)=\"onLocationSelected($event, 'Locality')\"\r\n                required formControlName=\"Locality\" />\r\n              </div> \r\n              <div class=\"col-12\" style=\"margin-bottom: 10px;\">\r\n                <h6>Locality:</h6>\r\n                <input type=\"text\" class=\"form-control\" id=\"Locality\" [autoCompleteOptions]=\"autoComplete\"\r\n                  matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\"\r\n                  (change)=\"placeChangedLocality()\" formControlName=\"Locality\" />\r\n              </div>\r\n\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 0\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p>{{languageService.profileLang.aboutMe}}</p>\r\n                <img (click)=\"setEditIndex(1)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.about&&personalProfileData.about!='null'\">{{personalProfileData.about}}</a>\r\n                    <a *ngIf=\"!personalProfileData.about||personalProfileData.about=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(1)\">+Add About</a>\r\n                  </p>\r\n                  <p class=\"headings\">Profile Managed By</p>\r\n                  <p>{{familyProfileData.relation}}</p>\r\n                  <p class=\"headings\" *ngIf=\"personalProfileData.disability\">Special Case</p>\r\n                  <p>{{ personalProfileData.disabled_part}}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal == 1\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p>{{languageService.profileLang.aboutMe}}</p>\r\n              </div>\r\n              <h6>(max 300 words)</h6>\r\n              <textarea style=\"margin-bottom:10px\" cols=\"30\" rows=\"5\" class=\"form-control\" maxlength=\"300\"\r\n                type=\"textarea\" formControlName=\"About\" required></textarea>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 1\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/educationN.svg\" />\r\n                <p>{{languageService.profileLang.careerDetails}}</p>\r\n                <img (click)=\"setEditIndex(2)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p><a *ngIf=\"(personalProfileData.degree&&personalProfileData.degree!='null') ||\r\n                      (personalProfileData.education&&personalProfileData.education!='null')\">{{personalProfileData.degree ? \r\n                        personalProfileData.degree : personalProfileData.education}}</a>\r\n                    <a *ngIf=\"(!personalProfileData.degree||personalProfileData.degree=='null') &&\r\n                    (!personalProfileData.education || personalProfileData.education =='null')\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      Education</a>\r\n                    <br><a\r\n                      *ngIf=\"personalProfileData.college&&personalProfileData.college!='null'\">{{personalProfileData.college}}</a>\r\n                    <a *ngIf=\"!personalProfileData.college||personalProfileData.college=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      College</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.additional}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.additional_qualification&&personalProfileData.additional_qualification!='null'\">{{personalProfileData.additional_qualification}}</a>\r\n                    <a *ngIf=\"!personalProfileData.additional_qualification||personalProfileData.additional_qualification=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(2)\">+Add Additional\r\n                      Qualifications</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.occupation}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.occupation&& personalProfileData.occupation!='null'\">{{personalProfileData.occupation}}</a>\r\n                    <a *ngIf=\"!personalProfileData.occupation||personalProfileData.occupation=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      Occupation</a> </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.designation}}</p>\r\n                  <p><a *ngIf=\"personalProfileData.profession\"></a>{{personalProfileData.profession}}\r\n                    <a *ngIf=\"!personalProfileData.profession\" class=\"pink\" (click)=\"setEditIndex(2)\">+Add\r\n                      Profession</a> |\r\n                    <a *ngIf=\"personalProfileData.company&&personalProfileData.company!='null'\">{{ personalProfileData.company}}\r\n                    </a>\r\n                    <a *ngIf=\"!personalProfileData.company||personalProfileData.company=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      Company</a> | <a\r\n                      *ngIf=\"personalProfileData.monthly_income && personalProfileData.monthly_income!='null'\">{{getIncome(personalProfileData.monthly_income)}}\r\n                      LPA</a>\r\n                    <a *ngIf=\"!personalProfileData.monthly_income|| personalProfileData.monthly_income=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(2)\">+Add Income</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.workingCity}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.working_city&& personalProfileData.working_city!='null'\">{{personalProfileData.working_city}}</a>\r\n                    <a *ngIf=\"!personalProfileData.working_city || personalProfileData.working_city=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(2)\">+Add Working City</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal == 2\">\r\n              <div class=\"col-12\">\r\n                <h6>Education:</h6>\r\n                <select class=\"form-control\" formControlName=\"Degree\" required>\r\n                  <option *ngFor=\"let item of HigherEducation\" [value]=\"item\">{{ item }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>College:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"College\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Additional Qualifications:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"Additional\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Occupation:</h6>\r\n                <select #relation class=\"form-control\" formControlName=\"Occupation\" required>\r\n                  <option *ngFor=\"let option of Occupation\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Designation:</h6>\r\n                <select #relation class=\"form-control\" formControlName=\"Profession\">\r\n                  <option *ngFor=\"let option of designations\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\" *ngIf=\"personalForm.value.Profession === 'Others'\">\r\n                <h6>Other Designation:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"OtherProfession\" name=\"OtherProfession\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Company:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"Company\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Annual Income In Lakhs:</h6>\r\n                <input type=\"text\" pattern=\"\\d*\" maxlength=\"3\" class=\"form-control\" formControlName=\"AnnualIncome\"\r\n                  required />\r\n              </div>\r\n              <div class=\"col-12\" style=\"margin-bottom: 10px;\">\r\n                <h6>Working City:</h6>\r\n                <input type=\"text\" #input class=\"form-control\" matValidateAddress formControlName=\"WorkingCity\"\r\n                  matGoogleMapsAutocomplete #matGoogleMapsAutocomplete3=\"matGoogleMapsAutocomplete\"\r\n                  (onAutocompleteSelected)=\"\r\n                    onAutocompleteSelected($event, 'Working')\r\n                  \" (onLocationSelected)=\"\r\n                    onLocationSelected($event, 'Working')\r\n                  \" required /> \r\n                <input type=\"text\" class=\"form-control\" id=\"WorkingCity\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChangedWorkingcity()\"\r\n                  formControlName=\"WorkingCity\" />\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 2\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/horoscopeN.svg\" />\r\n                <p>{{languageService.profileLang.horoscope}}</p>\r\n                <img (click)=\"setEditIndex(3)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.manglik&&personalProfileData.manglik!='null'\">{{personalProfileData.manglik}}</a><a\r\n                      *ngIf=\"!personalProfileData.manglik||personalProfileData.manglik=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(3)\">+Add\r\n                      Manglik Status</a>\r\n                  </p>\r\n                  <p> <a\r\n                      *ngIf=\"personalProfileData.birth_time && personalProfileData.birth_time!='null'\">{{personalProfileData.birth_time}}</a>\r\n                    <a *ngIf=\"!personalProfileData.birth_time ||personalProfileData.birth_time=='null'\"\r\n                      class=\"pink\">+Add\r\n                      Birth Time</a> |\r\n                    {{personalProfileData.birth_date ? personalProfileData.birth_date : \"Add birth date\"}} |\r\n                    <a\r\n                      *ngIf=\"personalProfileData.birth_place&&personalProfileData.birth_place!='null'\">{{personalProfileData.birth_place}}</a>\r\n                    <a *ngIf=\"!personalProfileData.birth_place||personalProfileData.birth_place=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(3)\">+Add Birth Place</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal==3\">\r\n              <div class=\"col-12\">\r\n                <h6>Birth Place</h6>\r\n            <input type=\"text\" class=\"form-control\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete2=\"matGoogleMapsAutocomplete\" (onAutocompleteSelected)=\"\r\n                    onAutocompleteSelected($event, 'Birth')\r\n                  \" (onLocationSelected)=\"onLocationSelected($event, 'Birth')\" formControlName=\"BirthPlace\" /> \r\n                <input type=\"text\" class=\"form-control\" id=\"BirthPlace\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChangedBirthPlace()\" required\r\n                  formControlName=\"BirthPlace\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Manglik:</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"Manglik\" required>\r\n                  <option value=\"Manglik\">Manglik</option>\r\n                  <option value=\"Non-Manglik\">Non-Manglik</option>\r\n                  <option value=\"Anshik Manglik\">Anshik Manglik</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Time of Birth</h6>\r\n                <input class=\"form-control\" id=\"BirthTime\" type=\"time\" placeholder=\"Choose a time\"\r\n                  formControlName=\"BirthTime\" />\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 3\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/phoneNN.svg\" />\r\n                <p>{{languageService.profileLang.contact}}</p>\r\n                <img (click)=\"setEditIndex(4)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p *ngIf=\"personalProfileData.family\"><a\r\n                      *ngIf=\"personalProfileData.family.email&&personalProfileData.family.email!='null'\">{{personalProfileData.family.email}}</a>\r\n                    <a *ngIf=\"!personalProfileData.family.email||personalProfileData.family.email=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(4)\">+Add\r\n                      email</a></p>\r\n                  <p *ngIf=\"!personalProfileData.family\">\r\n                    {{familyProfileData.email}}\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.mobile}}</p>\r\n                  <p>{{\r\n                  familyProfileData.mobile\r\n                    ? familyProfileData.mobile\r\n                    : \"Add Detail\"\r\n                }}</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.whatsapp}}</p>\r\n                  <p><a *ngIf=\"familyProfileData.whats_app_no\">{{ familyProfileData.whats_app_no }}</a>\r\n                    <a *ngIf=\"!familyProfileData.whats_app_no\" class=\"pink\" (click)=\"setEditIndex(4)\">+Add Whatsapp</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal==4\">\r\n              <div class=\"col-12\">\r\n                <h6>Email</h6>\r\n                <input type=\"email\" id=\"email\" class=\"form-control\" formControlName=\"email\" required />\r\n              </div>\r\n\r\n              <div class=\"col-12\">\r\n                <h6>Mobile number</h6>\r\n                <input style=\"display: inline;\" type=\"number\" id=\"phone\" class=\"form-control\" formControlName=\"phone\"\r\n                  required />\r\n              </div>\r\n\r\n              <div class=\"col-12\">\r\n                <h6>Whatsapp number</h6>\r\n                <input style=\"display: inline;\" type=\"number\" class=\"form-control\" formControlName=\"Whatsapp\" />\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 4\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\" style=\"margin-bottom:20px\">\r\n          </div>\r\n        </form>\r\n      </mat-tab>\r\n      <mat-tab>\r\n        <ng-template mat-tab-label>\r\n          <span class=\"labelS mat-elevation-z7\" [matBadge]=\"getDetailsLeft('family')\"\r\n            [matBadgeHidden]=\"getDetailsLeft('family') == 0\"></span>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab != 1\">\r\n            <img src=\"../../assets/familyN.svg\" alt=\"icon\" />\r\n          </button>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab == 1\"\r\n            style=\"background: #4adee4 !important;\">\r\n            <img src=\"../../assets/familyNW.svg\" alt=\"icon\" />\r\n          </button>\r\n          <a style=\"font-size:small\">{{languageService.profileLang.family}}</a>\r\n        </ng-template>\r\n        <form (ngSubmit)=\"onSubmitFamily()\" #familyForm=\"ngForm\">\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/familyN.svg\" />\r\n                <p>{{languageService.profileLang.familyDetails}}</p>\r\n                <img (click)=\"setEditIndexFamily(1)\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                  alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\">{{languageService.profileLang.aboutFamily}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.about&&familyProfileData.about!='null'\">{{familyProfileData.about  }}</a>\r\n                    <a *ngIf=\"!familyProfileData.about||familyProfileData.about=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add About\r\n                      Family</a>\r\n                  </p>\r\n                  <!-- <p class=\"headings\">{{languageService.profileLang.Mother}}</p> -->\r\n                  <p class=\"headings\">Mother Is</p>\r\n                  <p *ngIf=\"familyProfileData.mother_status != 'Not Alive'\">\r\n                    <a *ngIf=\"familyProfileData.occupation_mother&&familyProfileData.occupation_mother!='null'\">\r\n                      {{familyProfileData.mother_status &&  familyProfileData.mother_status !== 'Not Alive ' ? familyProfileData.mother_status + ' |' : ''}} {{familyProfileData.occupation_mother}}</a>\r\n                    <a *ngIf=\"!familyProfileData.occupation_mother||familyProfileData.occupation_mother=='null'\"\r\n                      (click)=\"setEditIndexFamily(1)\" class=\"pink\">+Add Mother's Occupation</a></p>\r\n                  <p *ngIf=\"familyProfileData.mother_status == 'Not Alive'\">Not Alive</p>\r\n                  <p class=\"headings\">Father Is</p>\r\n                  <p *ngIf=\"familyProfileData.father_status != 'Not Alive'\">\r\n                    <a *ngIf=\"familyProfileData.occupation&&familyProfileData.occupation!='null'\">\r\n                      {{familyProfileData.father_status &&  familyProfileData.father_status !== 'Not Alive ' ? familyProfileData.father_status + ' |' : ''}} {{familyProfileData.occupation}}</a>\r\n                    <a *ngIf=\"!familyProfileData.occupation||familyProfileData.occupation=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add\r\n                      Father's Occupation</a></p>\r\n                  <p *ngIf=\"familyProfileData.father_status == 'Not Alive'\">Not Alive</p>\r\n                  <!-- <p class=\"headings\">Siblings</p> -->\r\n                  <p class=\"headings\">{{ languageService.profileLang.familyLivingIn}}</p>\r\n                  <p><a *ngIf=\"familyProfileData.city&&familyProfileData.city!='null'\">{{familyProfileData.city}}</a>\r\n                    <a *ngIf=\"!familyProfileData.city||familyProfileData.city=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add Family City</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.gotra}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.gotra && familyProfileData.gotra!='null'\">{{ familyProfileData.gotra}}</a>\r\n                    <a *ngIf=\"!familyProfileData.gotra || familyProfileData.gotra =='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add Gotra</a>\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\">\r\n                  <p style=\"color:white!important\">Important Do not remove</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/familyN.svg\" />\r\n                <!-- <p>{{languageService.profileLang.siblings}}</p> -->\r\n                Siblings\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\"headings\">{{languageService.profileLang.sisters}} : </p>\r\n                  <p>{{\r\n                    setMarriageSisters(\r\n                      familyProfileData.unmarried_daughters,\r\n                      familyProfileData.married_daughters\r\n                    )\r\n                  }}</p>\r\n                </div>\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\"headings\">{{languageService.profileLang.brothers}} : </p>\r\n                  <p>{{\r\n                    setMarriageBrothers(\r\n                      familyProfileData.unmarried_sons,\r\n                      familyProfileData.married_sons\r\n                    )\r\n                  }}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/familyN.svg\" />\r\n                <!-- <p>{{languageService.profileLang.siblings}}</p> -->\r\n                Lifestyle\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\" style=\"margin-bottom: 0px!important;\">\r\n                  <p class=\"headings\">{{ languageService.profileLang.familyType }}:</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.family_type&& familyProfileData.family_type!='null'\">{{familyProfileData.family_type}}</a>\r\n                    <a *ngIf=\"!familyProfileData.family_type|| familyProfileData.family_type=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add\r\n                      Family Type(Joint/nuclear)</a>\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\" style=\"margin-bottom: 0px!important;\">\r\n                  <p class=\" headings\">{{languageService.profileLang.familyIncome}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.family_income&&familyProfileData.family_income!='null'\">{{familyProfileData.family_income}}\r\n                      LPA</a>\r\n                    <a *ngIf=\"!familyProfileData.family_income||familyProfileData.family_income=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add Family Income</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\" style=\"margin-top: 0px!important;\">\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\" headings\">{{languageService.profileLang.houseType}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.house_type&&familyProfileData.house_type!='null'\">{{familyProfileData.house_type}}</a>\r\n                    <a *ngIf=\"!familyProfileData.house_type||familyProfileData.house_type=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add\r\n                      House Type</a>\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\"headings\">Living With Parents?</p>\r\n                  <p>\r\n                    <a\r\n                      *ngIf=\"familyProfileData.livingWithParents && familyProfileData.livingWithParents !='null'\">{{familyProfileData.livingWithParents}}</a>\r\n                    <a *ngIf=\"!familyProfileData.livingWithParents||familyProfileData.livingWithParents == 'null'\"\r\n                      class=\"pink\" (click)=\"setEditIndexFamily(1)\">+Add Detail</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"column\" *ngIf=\"editIndexFamily == 1\">\r\n              <div class=\"col-12\">\r\n                <h6>Gotra:</h6>\r\n                <input type=\"text\" class=\"form-control\" name=\"gotra\" [(ngModel)]=\"familyProfileData.gotra\" required />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">House Type :</h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"house_type\" [(ngModel)]=\"familyProfileData.house_type\"\r\n                  required>\r\n                  <option *ngFor=\"let item of HouseType\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Family Living In:</h6>\r\n                <input type=\"text\" class=\"form-control\" name=\"city\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\"\r\n                  (onAutocompleteSelected)=\"onAutocompleteSelectedFamily($event)\"\r\n                  (onLocationSelected)=\"onLocationSelectedFamily($event)\" [(ngModel)]=\"familyProfileData.city\" />\r\n                <input id=\"familyLivingIn\" type=\"text\" class=\"form-control\" [autoCompleteOptions]=\"autoComplete\"\r\n                  name=\"city\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChangedFamily()\"\r\n                  value=\"{{familyProfileData.city}}\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>About Family: (max 300 words)</h6>\r\n                <input class=\"form-control\" maxlength=\"300\" type=\"text\" name=\"about\"\r\n                  [(ngModel)]=\"familyProfileData.about\" required />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">\r\n                  Father's Occupation :\r\n                </h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"father_occupation\"\r\n                  [(ngModel)]=\"familyProfileData.occupation\" required>\r\n                  <option *ngFor=\"let item of Occupation\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">\r\n                  Mother's Occupation :\r\n                </h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"mother_occupation\"\r\n                  [(ngModel)]=\"familyProfileData.occupation_mother\" required>\r\n                  <option *ngFor=\"let item of Occupation\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Father Status:</h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"father_status\"\r\n                  [(ngModel)]=\"familyProfileData.father_status\" required>\r\n                  <option *ngFor=\"let item of Status\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Mother Status:</h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"mother_status\"\r\n                  [(ngModel)]=\"familyProfileData.mother_status\" required>\r\n                  <option *ngFor=\"let item of Status\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Sisters Married:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"married_daughters\"\r\n                    [(ngModel)]=\"familyProfileData.married_daughters\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Brothers Married:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"married_sons\"\r\n                    [(ngModel)]=\"familyProfileData.married_sons\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Sisters Unmarried:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"unmarried_daughters\"\r\n                    [(ngModel)]=\"familyProfileData.unmarried_daughters\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Brothers Unmarried:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"unmarried_sons\"\r\n                    [(ngModel)]=\"familyProfileData.unmarried_sons\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Family Income:</h6>\r\n                  <input type=\"text\" class=\"form-control\" name=\"family_income\"\r\n                    [(ngModel)]=\"familyProfileData.family_income\" required placeholder=\"in LPA\">\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Family Type:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"family_type\"\r\n                    [(ngModel)]=\"familyProfileData.family_type\" required>\r\n                    <option *ngFor=\"let item of FamilyType\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexFamily != 1\"\r\n                (click)=\"onSubmitFamily()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          <div class=\"infoRow\" style=\"margin-bottom:20px\">\r\n          </div>\r\n        </form>\r\n      </mat-tab>\r\n      <mat-tab>\r\n        <ng-template mat-tab-label>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab != 2\">\r\n            <img src=\"../../assets/preferencesN.svg\" alt=\"icon\" />\r\n          </button>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab == 2\"\r\n            style=\"background: #4adee4 !important;\">\r\n            <img src=\"../../assets/preferencesNW.svg\" alt=\"icon\" />\r\n          </button>\r\n          <a style=\"font-size:small\">{{ languageService.profileLang.preference }}</a>\r\n        </ng-template>\r\n        <form [formGroup]=\"preferencesForm\">\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\" *ngIf=\"editIndexPrefs != 0 \">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='english'\">Basic Details</p>\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='hindi'\">बेसिक डीटेल्स्</p>\r\n                <!-- <div class=\"circular3 mat-elevation-z12\" *ngIf=\"editIndexPrefs != 0\">\r\n                  <img (click)=\"openPreferenceDialog()\" width=\"100%\" src=\"../../../assets/editN.svg\"\r\n                    alt=\"editBasicDetails\" />\r\n                </div> -->\r\n                <img *ngIf=\"editIndexPrefs != 0\" (click)=\"setEditIndexPrefs(0)\" class=\"editPencil\"\r\n                  src=\"../../../assets/editN.svg\" alt=\"editBasicDetails\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\">{{languageService.profileLang.age}}</p>\r\n                  <p>{{preferenceProfileData.age_min}} to {{preferenceProfileData.age_max}} Yrs</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.height}}</p>\r\n                  <p>{{getHeight(preferenceProfileData.height_min)}} to\r\n                    {{getHeight(preferenceProfileData.height_max)}}</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.martialStatus}}</p>\r\n                  <p>{{preferenceProfileData.marital_status}}</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.foodChoice}}</p>\r\n                  <p>{{preferenceProfileData.food_choice}}</p>\r\n                </div>\r\n                <div class=\"columnar\">\r\n                  <p style=\"color:white!important\">Important Do not remove this text</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPrefs == 0\">\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Age Min: </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"age_min\" required>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Age Max : </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"age_max\" required>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Height Min : </h6>\r\n                  <select type=\"text\" class=\"form-control\" formControlName=\"height_min\">\r\n                    <option *ngFor=\"let item of Heights\" [value]=\"item\">{{item}}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Height Max : </h6>\r\n                  <select type=\"text\" class=\"form-control\" formControlName=\"height_max\">\r\n                    <option *ngFor=\"let item of Heights\" [value]=\"item\">{{item}}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Marital Status:</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"marital_status\">\r\n                  <option *ngFor=\"let item of MaritalStatus\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Food Choice:</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"food_choice\">\r\n                  <option *ngFor=\"let item of Foodpreferences\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                </select>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPrefs != 0\"\r\n                (click)=\"onSubmitPreferences()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\" *ngIf=\"editIndexPrefs != 1 \">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/educationN.svg\" />\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='english'\">Career & Occupation</p>\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='hindi'\">करियर & ऑक्यूपेशन</p>\r\n                <img *ngIf=\"editIndexPrefs != 1\" (click)=\"setEditIndexPrefs(1)\" class=\"editPencil\"\r\n                  src=\"../../../assets/editN.svg\" alt=\"editBasicDetails\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\" *ngIf=\"languageService.getCurrentLanguage()==='english'\">Annual Income</p>\r\n                  <p class=\"headings\" *ngIf=\"languageService.getCurrentLanguage()==='hindi'\">सालाना आय</p>\r\n                  <p>{{preferenceProfileData.income_min}} to {{preferenceProfileData.income_max}} LPA</p>\r\n                  <div *ngIf=\"personalProfileData.gender === 'Female'\">\r\n                    <p class=\"headings\">{{languageService.profileLang.occupation}}</p>\r\n                    <p>{{preferenceProfileData.occupation}}</p>\r\n                  </div>\r\n                  <div *ngIf=\"personalProfileData.gender === 'Male'\">\r\n                    <p class=\"headings\">{{languageService.profileLang.workingPref}}</p>\r\n                    <p>{{preferenceProfileData.working}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPrefs == 1\">\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Income Min(in LPA) : </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"income_min\" required>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Income Max(in LPA) : </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"income_max\" required>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-12\" *ngIf=\"personalProfileData.gender==='Female'\">\r\n                <h6>Occupation</h6>\r\n                <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\" formControlName=\"occupation\"\r\n                  [(ngModel)]=\"preferenceProfileData.occupation\" required>\r\n                  <mat-option *ngFor=\"let item of Occupation\" [value]=\"item\" required>\r\n                    {{ item}}\r\n                  </mat-option>\r\n                </mat-select>\r\n              </div>\r\n              <div class=\"col-12\" *ngIf=\"personalProfileData.gender==='Male'\">\r\n                <h6>Working</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"working\" required>\r\n                  <option *ngFor=\"let name of Working\" [value]=\"name\" required>\r\n                    {{ name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPrefs != 1\"\r\n                (click)=\"onSubmitPreferences()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\" *ngIf=\"editIndexPrefs != 2 \">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/horoscopeN.svg\" />\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='english'\">Religion & Caste</p>\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='hindi'\"> धर्म & जाती </p>\r\n                <img *ngIf=\"editIndexPrefs != 2\" (click)=\"setEditIndexPrefs(2)\" class=\"editPencil\"\r\n                  src=\"../../../assets/editN.svg\" alt=\"editBasicDetails\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\">{{ languageService.profileLang.religion}}\r\n                    {{ languageService.profileLang.preference}}</p>\r\n                  <p><a *ngFor=\"let rel of preferenceProfileData.religion\">{{rel}}, </a></p>\r\n                  <p class=\"headings\">{{ languageService.profileLang.castePref}}</p>\r\n                  <!-- <p>{{\r\n                    preferenceProfileData.caste\r\n                      ? preferenceProfileData.caste\r\n                      : \"Add Detail\"\r\n                  }}</p> -->\r\n                  <p><a *ngFor=\"let caste of castePreferences\">{{caste}}, </a></p>\r\n                  <p class=\"headings\">{{ languageService.profileLang.manglikPref}}</p>\r\n                  <p>{{\r\n                    preferenceProfileData.manglik\r\n                      ? preferenceProfileData.manglik\r\n                      : \"+Add Detail\"\r\n                  }}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPrefs == 2\">\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">{{languageService.profileLang.religion}}:</h6>\r\n                <mat-select style=\"color:black!important\" type=\"text\" class=\"form-control\" [multiple]=\"true\"\r\n                  formControlName=\"religion\" [(ngModel)]=\"preferenceProfileData.religion\" required>\r\n                  <mat-option *ngFor=\"let item of Religions\" [value]=\"item\" required>\r\n                    {{ item}}\r\n                  </mat-option>\r\n                </mat-select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Caste</h6>\r\n                <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\"\r\n                  (selectionChange)=\"casteSelectionChanged($event)\" [formControl]=\"searchCaste\" #multiSelect\r\n                  [(ngModel)]=\"castePreferences\">\r\n                  <mat-option>\r\n                    <ngx-mat-select-search noEntriesFoundLabel=\"No Castes Found\" placeholderLabel=\"Search Castes...\"\r\n                      [formControl]=\"searchCasteText\">\r\n                      <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n                    </ngx-mat-select-search>\r\n                  </mat-option>\r\n                  <mat-option *ngFor=\"let name of filteredCastesMulti | async\" [value]=\"name\" required>\r\n                    {{ name }}\r\n                  </mat-option>\r\n                </mat-select>\r\n              </div>\r\n              <div class=\"col-12\" style=\"margin-top: 10px;\">\r\n                <mat-checkbox [checked]=\"isAllCastePref\" (change)=\"checkAllCastePref($event)\">No Caste Bar\r\n                </mat-checkbox>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Manglik :</h6>\r\n                <select style=\"color:#4a5d6a\" type=\"text\" class=\"form-control\" formControlName=\"manglik_pref\"\r\n                  [(ngModel)]=\"preferenceProfileData.manglik\" required>\r\n                  <option *ngFor=\"let item of Mangalika\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                </select>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPrefs != 2\"\r\n                (click)=\"onSubmitPreferences()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <!-- <div class=\"tabContent\">\r\n            <a style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \">\r\n              {{ languageService.profileLang.age }}</a><br />\r\n            <div class=\"custom-slider\">\r\n              <ng5-slider [(value)]=\"preferenceProfileData.age_min\" [(highValue)]=\"preferenceProfileData.age_max\"\r\n                [options]=\"optionsAge\" (userChangeEnd)=\"setEditIndexPrefs(0)\"></ng5-slider>\r\n            </div>\r\n            <hr />\r\n            <a style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \">\r\n              {{ languageService.profileLang.height }}</a><br />\r\n            <div class=\"custom-slider\">\r\n              <ng5-slider [(value)]=\"preferenceProfileData.height_min\" [(highValue)]=\"preferenceProfileData.height_max\"\r\n                [options]=\"optionsHeight\" (userChangeEnd)=\"setEditIndexPrefs(0)\"></ng5-slider>\r\n            </div>\r\n            <hr />\r\n            <a *ngIf=\"languageService.getCurrentLanguage()==='english'\" style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \" alt=\"Income\">\r\n              Income</a>\r\n            <a *ngIf=\"languageService.getCurrentLanguage()==='hindi'\" style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \" alt=\"Income\">\r\n              आय</a><br />\r\n            <div class=\"custom-slider\">\r\n              <ng5-slider [(value)]=\"preferenceProfileData.income_min\" [(highValue)]=\"preferenceProfileData.income_max\"\r\n                [options]=\"optionsIncome\" (userChangeEnd)=\"setEditIndexPrefs(0)\"></ng5-slider>\r\n            </div>\r\n            <button style=\"position: absolute; top: 5px; right: 30px;\" mat-button [hidden]=\"editIndexPrefs != 0\"\r\n              (click)=\"onSubmitPreferences()\">\r\n              <img style=\"width:30px!important\" src=\"../../../assets/checked.svg\">\r\n            </button>\r\n            <hr>\r\n            <mat-accordion class=\"example-headers-align\" id=\"matAccordion\">\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 1\" (opened)=\"specialCase()\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important\r\n                    \">\r\n                    {{ languageService.profileLang.castePref }}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 1\">\r\n                  <div class=\"row\" style=\"width:100%!important;position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -20px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(1)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 1\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\" *ngFor=\"let caste of castePreferences\">\r\n                      <span style=\"\r\n                        color: rgb(112, 111, 111);\r\n                        margin-left: 5px;\r\n                        word-wrap: break-word!important;\r\n                      \">\r\n                        {{ caste }}\r\n                      </span>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 1\">\r\n                  <div class=\"row\" style=\"width:100%!important\">\r\n                    <div class=\"col-12\">\r\n                      <h6>Caste</h6>\r\n                      <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\"\r\n                        (selectionChange)=\"casteSelectionChanged($event)\" [formControl]=\"searchCaste\" #multiSelect\r\n                        [(ngModel)]=\"castePreferences\" required>\r\n                        <mat-option>\r\n                          <ngx-mat-select-search noEntriesFoundLabel=\"No Castes Found\"\r\n                            placeholderLabel=\"Search Castes...\" [formControl]=\"searchCasteText\"></ngx-mat-select-search>\r\n                        </mat-option>\r\n                        <mat-option *ngFor=\"let name of filteredCastesMulti | async\" [value]=\"name\" required>\r\n                          {{ name }}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </div>\r\n\r\n                    <div class=\"col-12\" style=\"margin-top: 10px;\">\r\n                      <mat-checkbox [checked]=\"isAllCastePref\" (change)=\"checkAllCastePref($event)\">No Caste Bar\r\n                      </mat-checkbox>\r\n                    </div>\r\n                  </div>\r\n                  <mat-action-row>\r\n                    <button class=\"mat-elevation-z5\" mat-button class=\"btn-success btn-small\"\r\n                      [hidden]=\"editIndexPrefs != 1\" (click)=\"onSubmitPreferences()\">\r\n                      SAVE\r\n                    </button>\r\n                  </mat-action-row>\r\n                </div>\r\n              </mat-expansion-panel>\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 2\" (opened)=\"setStepPreferences(2)\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;\r\n                    \">\r\n                    {{ languageService.profileLang.manglikPref }}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 2\">\r\n                  <div class=\"row\" style=\"position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(2)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 2\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\">\r\n                      <span style=\"margin-left: 5px;\">\r\n                        <span class=\"labelText\">{{ languageService.profileLang.manglikPref }}:</span>{{\r\n                          preferenceProfileData.manglik\r\n                            ? preferenceProfileData.manglik\r\n                            : \"Add Detail\"\r\n                        }}\r\n                      </span>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 2\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <h6 style=\"display: inline-block;\">Manglik :</h6>\r\n                      <select type=\"text\" class=\"form-control\" name=\"manglik\"\r\n                        [(ngModel)]=\"preferenceProfileData.manglik\" required>\r\n                        <option *ngFor=\"let item of Mangalika\" [value]=\"item\">{{\r\n                          item\r\n                        }}</option>\r\n                      </select>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                      <mat-action-row>\r\n                        <button class=\"mat-elevation-z5\" mat-button class=\"btn-success\" [hidden]=\"editIndexPrefs != 2\"\r\n                          (click)=\"onSubmitPreferences()\">\r\n                          SAVE\r\n                        </button>\r\n                      </mat-action-row>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n              </mat-expansion-panel>\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 3\" (opened)=\"setStepPreferences(3)\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;\r\n                    \">\r\n                    {{ languageService.profileLang.martialStatus }}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 3\">\r\n                  <div class=\"row\" style=\"position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(3)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 3\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\">\r\n                      <span style=\"margin-left: 5px;\">\r\n                        <span class=\"labelText\">{{ languageService.profileLang.martialStatus }}:</span>{{\r\n                          preferenceProfileData.marital_status\r\n                            ? preferenceProfileData.marital_status\r\n                            : \"Add Detail\"\r\n                        }}\r\n                      </span>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 3\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <h6 style=\"display: inline-block;\">{{languageService.profileLang.martialStatus}}:</h6>\r\n                      <select type=\"text\" class=\"form-control\" name=\"manglik\"\r\n                        [(ngModel)]=\"preferenceProfileData.marital_status\" required>\r\n                        <option [value]=\"preferenceProfileData.marital_status\">{{preferenceProfileData.marital_status}}\r\n                        </option>\r\n                        <option [value]=\"MaritalStatus[0]\">{{MaritalStatus[0]}}</option>\r\n                      </select>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                      <mat-action-row>\r\n                        <button class=\"mat-elevation-z5\" mat-button class=\"btn-success\" [hidden]=\"editIndexPrefs != 3\"\r\n                          (click)=\"onSubmitPreferences()\">\r\n                          SAVE\r\n                        </button>\r\n                      </mat-action-row>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n              </mat-expansion-panel>\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 4\" (opened)=\"setStepPreferences(4)\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;\r\n                    \">\r\n                    {{ languageService.profileLang.religion}}\r\n                    {{ languageService.profileLang.preference}}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 4\">\r\n                  <div class=\"row\" style=\"position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(4)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 4\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\">\r\n                      <span style=\"margin-left: 5px;\">\r\n                        <span class=\"labelText\">{{ languageService.profileLang.religion}}:</span>{{\r\n                          preferenceProfileData.religion\r\n                            ? preferenceProfileData.religion\r\n                            : \"Add Detail\"\r\n                        }}\r\n                      </span>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 4\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <h6 style=\"display: inline-block;\">{{languageService.profileLang.religion}}:</h6>\r\n                      <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\" name=\"religion\" #multiSelect\r\n                        [(ngModel)]=\"preferenceProfileData.religion\" required>\r\n                        <ngx-mat-select-search noEntriesFoundLabel=\"No Religion Found\"\r\n                          placeholderLabel=\"Search Religons...\"></ngx-mat-select-search> -->\r\n          <!-- <mat-option>\r\n                          \r\n                        </mat-option> \r\n                        <mat-option *ngFor=\"let item of Religions\" [value]=\"item\" required>\r\n                          {{ item}}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                      <mat-action-row>\r\n                        <button class=\"mat-elevation-z5\" mat-button class=\"btn-success\" [hidden]=\"editIndexPrefs != 4\"\r\n                          (click)=\"onSubmitPreferences()\">\r\n                          SAVE\r\n                        </button>\r\n                      </mat-action-row>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n              </mat-expansion-panel>\r\n\r\n            </mat-accordion>\r\n          </div> -->\r\n          <div class=\"infoRow\" style=\"margin-bottom:20px\">\r\n          </div>\r\n        </form>\r\n      </mat-tab>\r\n    </mat-tab-group>\r\n  </main>\r\n</div>";
+    __webpack_exports__["default"] = "<div class=\"mainDiv\">\r\n\r\n  <main *ngIf=\"personalProfileData\" class=\"fixed ht-full t-0 b-0 HC main special\">\r\n    <span class=\"back-drop\" style=\"position:fixed;top:0px;\"></span>\r\n    <div class=\"row parentTop\">\r\n      <div>\r\n        <img src=\"../../assets/left-arrow-key.svg\" class=\"backArrow\" (click)=\"backToChat()\" alt=\"BACK\" />\r\n      </div>\r\n      <div class=\"UploadInfo\" *ngIf=\"!itemService.getPhotoStatus()\" (click)=\"changeProfileImageNew()\">\r\n        <!-- <div class=\"UploadInfo\" *ngIf=\"true\" (click)=\"changeProfileImageNew()\"> -->\r\n        <div class=\"columnA\" id=\"carousel\">\r\n          <input style=\"margin: 10px 25%;display: none;\" #backfileNew type=\"file\" id=\"backfileNew\" accept='image/*'\r\n            (change)=\"chooseFileForUploadNew(backfileNew.files)\" />\r\n          <span style=\"position:relative;font-weight:200;\">\r\n            <p><b style=\"font-weight:600!important\">Upload</b> your photo and get a <b\r\n                style=\"font-weight:600!important\">Verification Badge</b></p>\r\n          </span>\r\n        </div>\r\n        <div class=\"columnA\">\r\n          <img src=\"../../../assets/sunburst.svg\" style=\"vertical-align: middle;width:110px;margin-top:2px\">\r\n        </div>\r\n      </div>\r\n      <div class=\"UpInfo\" *ngIf=\"itemService.getPhotoStatus()\">\r\n        <!-- <div class=\"UpInfo\" *ngIf=\"false\"> -->\r\n        <ngb-carousel id=\"carousel\" [showNavigationArrows]=\"true\" [showNavigationIndicators]=\"true\">\r\n          <ng-template ngbSlide *ngFor=\"let i of getImagesCount(); let index = index\">\r\n            <div class=\"picsum-img-wrapper\" style=\"text-align: center;\">\r\n              <input style=\"margin: 10px 25%; display: none;\" #backfile type=\"file\" id=\"backfile\" accept=\"image/*\"\r\n                (change)=\"previewBack(backfile.files, index + 1)\" />\r\n              <!-- <img (click)=\"changeProfileImage(index)\" id=\"imgProfile\" -->\r\n              <img id=\"imgProfile\"\r\n                style=\"width:100%!important; height:40vh; background-color: lightblue;border-radius:15px ;\"\r\n                (error)=\"onProfileLoadError(personalProfileData.gender, i)\" [src]=\"\r\n                  getProfilesPhoto(\r\n                    personalProfileData.carousel,\r\n                    personalProfileData.unapprove_carousel,\r\n                    personalProfileData.photo,\r\n                    personalProfileData.gender,\r\n                    i\r\n                  )\r\n                \" alt=\"slide 1\" />\r\n            </div>\r\n          </ng-template>\r\n        </ngb-carousel>\r\n        <!-- <div class=\"circular2\" style=\"padding: 10px !important;\" *ngIf=\"itemService.getPhotoStatus()\">\r\n          <img (click)=\"addProfileImage(getCarouselCount())\" style=\"width: 100%;\" src=\"../../../assets/editN.svg\"\r\n            alt=\"edit\" />\r\n        </div> -->\r\n        <div class=\"circular2\" style=\"padding: 10px !important;\" *ngIf=\"itemService.getPhotoStatus()\">\r\n          <img (click)=\"openPhotoUpload()\" style=\"width: 100%;\" src=\"../../../assets/editN.svg\" alt=\"edit\" />\r\n        </div>\r\n      </div>\r\n      <!-- <div class=\"circular\" *ngIf=\"itemService.getPhotoStatus()\">\r\n        <ngb-carousel id=\"carousel\" [showNavigationArrows]=\"true\" [showNavigationIndicators]=\"true\">\r\n          <ng-template ngbSlide *ngFor=\"let i of getImagesCount(); let index = index\">\r\n            <div class=\"picsum-img-wrapper\" style=\"text-align: center;\">\r\n              <input style=\"margin: 10px 25%; display: none;\" #backfile type=\"file\" id=\"backfile\" accept=\"image/*\"\r\n                (change)=\"previewBack(backfile.files, index + 1)\" />\r\n              <img (click)=\"changeProfileImage(index)\" id=\"imgProfile\"\r\n                style=\"width: 100%; height:35vh;background-color: lightblue;\"\r\n                (error)=\"onProfileLoadError(personalProfileData.gender, i)\" [src]=\"\r\n                  getProfilesPhoto(\r\n                    personalProfileData.carousel,\r\n                    personalProfileData.photo,\r\n                    personalProfileData.gender,\r\n                    i\r\n                  )\r\n                \" alt=\"slide 1\" />\r\n            </div>\r\n          </ng-template>\r\n        </ngb-carousel>\r\n      </div> -->\r\n      <!-- <div class=\"circular2\" style=\"padding: 10px !important;\" *ngIf=\"itemService.getPhotoStatus()\">\r\n        <img (click)=\"addProfileImage(getCarouselCount())\" style=\"width: 100%;\" src=\"../../../assets/editN.svg\"\r\n          alt=\"edit\" />\r\n      </div> -->\r\n      <div style=\"\r\n          position: relative;\r\n          color: white;\r\n          padding: 7px 7px;\r\n          width: 100%;\r\n          text-align: center;\r\n          z-index: 999;\r\n        \">\r\n        <span style=\"\r\n            font-weight: bold;\r\n            font-size: 17px;\r\n            text-transform: capitalize;\r\n          \">\r\n          {{ personalProfileData.name }},\r\n          {{ setAge(personalProfileData.birth_date)}}</span><br />\r\n        <a style=\"font-size:15px\">Profile Completion Percent : {{profileCompletionPercent}}%</a>\r\n      </div>\r\n    </div>\r\n    <mat-tab-group [(selectedIndex)]=\"selectedTab\" (selectedIndexChange)=\"changeSelectedTab($event)\"\r\n      id=\"myprofMatTabGroup\">\r\n      <mat-tab>\r\n        <ng-template mat-tab-label>\r\n          <span class=\"labelS mat-elevation-z7\" [matBadge]=\"getDetailsLeft('personal')\"\r\n            [matBadgeHidden]=\"getDetailsLeft('personal') == 0\"></span>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab && selectedTab != 0\"\r\n            style=\"padding: 14px !important;\">\r\n            <img src=\"../../assets/personalN.svg\" alt=\"icon\" />\r\n          </button>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"!selectedTab || selectedTab == 0\"\r\n            style=\"background: #4adee4 !important; padding: 14px !important;\">\r\n            <img src=\"../../assets/personalNW.svg\" alt=\"icon\" />\r\n          </button>\r\n          <a style=\"font-size:small\">{{languageService.profileLang.personal}}</a>\r\n        </ng-template>\r\n        <form [formGroup]=\"personalForm\">\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p>{{personalProfileData.name}}</p>\r\n                <img (click)=\"setEditIndex(0)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p>\r\n                    {{personalProfileData.religion ? personalProfileData.religion : familyProfileData.religion ? familyProfileData.religion : \"Add Religion\"}}\r\n                    |\r\n                    {{personalProfileData.caste ? personalProfileData.caste : familyProfileData.caste ? familyProfileData.caste : \"Add Caste\"}}\r\n                  </p>\r\n                  <p>{{getHeight(personalProfileData.height)}} |<a\r\n                      *ngIf=\"personalProfileData.weight&&personalProfileData.weight!='null'\">{{personalProfileData.weight}}\r\n                      Kg</a>\r\n                    <a *ngIf=\"!personalProfileData.weight||personalProfileData.weight=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(0)\">+Add\r\n                      Weight</a>\r\n                  </p>\r\n                  <p *ngIf=\"personalProfileData.family\"><a\r\n                      *ngIf=\"personalProfileData.family.locality&&personalProfileData.family.locality!='null'\">{{personalProfileData.family.locality}}</a>\r\n                    <a *ngIf=\"!personalProfileData.family.locality||personalProfileData.family.locality=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(0)\">+Add\r\n                      Locality</a></p>\r\n                  <p *ngIf=\"!personalProfileData.family\">\r\n                    {{familyProfileData.locality}}\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\">\r\n                  <p>{{setAge(personalProfileData.birth_date)}}Yrs | {{personalProfileData.birth_date}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.food_choice&&personalProfileData.food_choice!='null'\">{{personalProfileData.food_choice}}</a>\r\n                    <a *ngIf=\"!personalProfileData.food_choice||personalProfileData.food_choice=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(0)\">+Add Food Choice</a></p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.marital_status&&personalProfileData.marital_status!='null'\">{{personalProfileData.marital_status}}</a>\r\n                    <a *ngIf=\"!personalProfileData.marital_status||personalProfileData.marital_status=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(0)\">+Add\r\n                      Marital Status</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal==0\">\r\n              <div class=\"col-12\">\r\n                <h6>{{languageService.profileLang.name}}</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"name\" required />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Age : {{ setAge(personalProfileData.birth_date) }}</h6>\r\n              </div>\r\n              <label style=\"margin-left:15px;\">Birth Date:</label>\r\n              <div class=\"col-12\" style=\"\r\n                    display: flex;\r\n                    flex-direction: row;\r\n                    align-items: center;\r\n                    justify-content: center;\r\n                  \">\r\n                <select class=\" form-control\" formControlName=\"birth_date\" style=\"border: 1px solid black;\" required\r\n                  name=\"birth_date\">\r\n                  <option *ngFor=\"let option of date\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n\r\n                <select class=\" form-control\" formControlName=\"birth_month\"\r\n                  style=\"border: 1px solid black; margin-left: 10px;\" required name=\"birth_month\">\r\n                  <option *ngFor=\"let option of month\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n\r\n                <select class=\" form-control\" formControlName=\"birth_year\"\r\n                  style=\"border: 1px solid black; margin-left: 10px;\" required name=\"birth_year\">\r\n                  <option *ngFor=\"let option of years\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6>Weight:</h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"Weight\" required />\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6>Height:</h6>\r\n                  <select type=\"text\" class=\"form-control\" formControlName=\"Height\" required>\r\n                    <option *ngFor=\"let item of Heights\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-5\">\r\n                  <h6>Religion:</h6>\r\n                  <select class=\"form-control\" formControlName=\"Religion\" required>\r\n                    <option *ngFor=\"let option of Religions\" [value]=\"option\">\r\n                      {{ option }}\r\n                    </option>\r\n                  </select>\r\n                </div>\r\n\r\n                <div class=\"col-7\">\r\n                  <h6>Caste</h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"Castes\" required [matAutocomplete]=\"caste\" />\r\n                  <mat-autocomplete (optionSelected)=\"casteValidation($event.option.value)\" autoActiveFirstOption\r\n                    #caste=\"matAutocomplete\">\r\n                    <mat-option *ngFor=\"let name of casteo | async\" [value]=\"name\" required>\r\n                      {{ name }}\r\n                    </mat-option>\r\n                  </mat-autocomplete>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\" col-6\">\r\n                  <h6>Marital Status:</h6>\r\n                  <select class=\"form-control\" formControlName=\"MaritalStatus\" required>\r\n                    <option *ngFor=\"let item of MaritalStatus\" [value]=\"item\">{{ item }}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6>Food Choice:</h6>\r\n                  <select class=\"form-control\" formControlName=\"Food\" required>\r\n                    <option *ngFor=\"let item of Foodpreferences\" [value]=\"item\">{{ item }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n               <div class=\"col-12\" style=\"margin-bottom: 10px;\">\r\n                <h6>Locality:</h6>\r\n                <input type=\"text\" class=\"form-control\" \r\n                matValidateAddress \r\n                matGoogleMapsAutocomplete\r\n                #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (onAutocompleteSelected)=\"\r\n                onAutocompleteSelected($event, 'Locality')\"\r\n                (onLocationSelected)=\"onLocationSelected($event, 'Locality')\"\r\n                required formControlName=\"Locality\" />\r\n              </div> \r\n              <div class=\"col-12\" style=\"margin-bottom: 10px;\">\r\n                <h6>Locality:</h6>\r\n                <input type=\"text\" class=\"form-control\" id=\"Locality\" [autoCompleteOptions]=\"autoComplete\"\r\n                  matValidateAddress matGoogleMapsAutocomplete #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\"\r\n                  (change)=\"placeChangedLocality()\" formControlName=\"Locality\" />\r\n              </div>\r\n\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 0\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p>{{languageService.profileLang.aboutMe}}</p>\r\n                <img (click)=\"setEditIndex(1)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.about&&personalProfileData.about!='null'\">{{personalProfileData.about}}</a>\r\n                    <a *ngIf=\"!personalProfileData.about||personalProfileData.about=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(1)\">+Add About</a>\r\n                  </p>\r\n                  <p class=\"headings\">Profile Managed By</p>\r\n                  <p>{{familyProfileData.relation}}</p>\r\n                  <p class=\"headings\" *ngIf=\"personalProfileData.disability\">Special Case</p>\r\n                  <p>{{ personalProfileData.disabled_part}}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal == 1\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p>{{languageService.profileLang.aboutMe}}</p>\r\n              </div>\r\n              <h6>(max 300 words)</h6>\r\n              <textarea style=\"margin-bottom:10px\" cols=\"30\" rows=\"5\" class=\"form-control\" maxlength=\"300\"\r\n                type=\"textarea\" formControlName=\"About\" required></textarea>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 1\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/educationN.svg\" />\r\n                <p>{{languageService.profileLang.careerDetails}}</p>\r\n                <img (click)=\"setEditIndex(2)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p><a *ngIf=\"(personalProfileData.degree&&personalProfileData.degree!='null') ||\r\n                      (personalProfileData.education&&personalProfileData.education!='null')\">{{personalProfileData.degree ? \r\n                        personalProfileData.degree : personalProfileData.education}}</a>\r\n                    <a *ngIf=\"(!personalProfileData.degree||personalProfileData.degree=='null') &&\r\n                    (!personalProfileData.education || personalProfileData.education =='null')\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      Education</a>\r\n                    <br><a\r\n                      *ngIf=\"personalProfileData.college&&personalProfileData.college!='null'\">{{personalProfileData.college}}</a>\r\n                    <a *ngIf=\"!personalProfileData.college||personalProfileData.college=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      College</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.additional}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.additional_qualification&&personalProfileData.additional_qualification!='null'\">{{personalProfileData.additional_qualification}}</a>\r\n                    <a *ngIf=\"!personalProfileData.additional_qualification||personalProfileData.additional_qualification=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(2)\">+Add Additional\r\n                      Qualifications</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.occupation}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.occupation&& personalProfileData.occupation!='null'\">{{personalProfileData.occupation}}</a>\r\n                    <a *ngIf=\"!personalProfileData.occupation||personalProfileData.occupation=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      Occupation</a> </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.designation}}</p>\r\n                  <p><a *ngIf=\"personalProfileData.profession\"></a>{{personalProfileData.profession}}\r\n                    <a *ngIf=\"!personalProfileData.profession\" class=\"pink\" (click)=\"setEditIndex(2)\">+Add\r\n                      Profession</a> |\r\n                    <a *ngIf=\"personalProfileData.company&&personalProfileData.company!='null'\">{{ personalProfileData.company}}\r\n                    </a>\r\n                    <a *ngIf=\"!personalProfileData.company||personalProfileData.company=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(2)\">+Add\r\n                      Company</a> | <a\r\n                      *ngIf=\"personalProfileData.monthly_income && personalProfileData.monthly_income!='null'\">{{getIncome(personalProfileData.monthly_income)}}\r\n                      LPA</a>\r\n                    <a *ngIf=\"!personalProfileData.monthly_income|| personalProfileData.monthly_income=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(2)\">+Add Income</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.workingCity}}</p>\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.working_city&& personalProfileData.working_city!='null'\">{{personalProfileData.working_city}}</a>\r\n                    <a *ngIf=\"!personalProfileData.working_city || personalProfileData.working_city=='null'\"\r\n                      class=\"pink\" (click)=\"setEditIndex(2)\">+Add Working City</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal == 2\">\r\n              <div class=\"col-12\">\r\n                <h6>Education:</h6>\r\n                <select class=\"form-control\" formControlName=\"Degree\" required>\r\n                  <option *ngFor=\"let item of HigherEducation\" [value]=\"item\">{{ item }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>College:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"College\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Additional Qualifications:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"Additional\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Occupation:</h6>\r\n                <select #relation class=\"form-control\" formControlName=\"Occupation\" required>\r\n                  <option *ngFor=\"let option of Occupation\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Designation:</h6>\r\n                <select #relation class=\"form-control\" formControlName=\"Profession\">\r\n                  <option *ngFor=\"let option of designations\" [value]=\"option\">\r\n                    {{ option }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\" *ngIf=\"personalForm.value.Profession === 'Others'\">\r\n                <h6>Other Designation:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"OtherProfession\" name=\"OtherProfession\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Company:</h6>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"Company\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Annual Income In Lakhs:</h6>\r\n                <input type=\"text\" pattern=\"\\d*\" maxlength=\"3\" class=\"form-control\" formControlName=\"AnnualIncome\"\r\n                  required />\r\n              </div>\r\n              <div class=\"col-12\" style=\"margin-bottom: 10px;\">\r\n                <h6>Working City:</h6>\r\n                <input type=\"text\" #input class=\"form-control\" matValidateAddress formControlName=\"WorkingCity\"\r\n                  matGoogleMapsAutocomplete #matGoogleMapsAutocomplete3=\"matGoogleMapsAutocomplete\"\r\n                  (onAutocompleteSelected)=\"\r\n                    onAutocompleteSelected($event, 'Working')\r\n                  \" (onLocationSelected)=\"\r\n                    onLocationSelected($event, 'Working')\r\n                  \" required /> \r\n                <input type=\"text\" class=\"form-control\" id=\"WorkingCity\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChangedWorkingcity()\"\r\n                  formControlName=\"WorkingCity\" />\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 2\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/horoscopeN.svg\" />\r\n                <p>{{languageService.profileLang.horoscope}}</p>\r\n                <img (click)=\"setEditIndex(3)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p><a\r\n                      *ngIf=\"personalProfileData.manglik&&personalProfileData.manglik!='null'\">{{personalProfileData.manglik}}</a><a\r\n                      *ngIf=\"!personalProfileData.manglik||personalProfileData.manglik=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(3)\">+Add\r\n                      Manglik Status</a>\r\n                  </p>\r\n                  <p> <a\r\n                      *ngIf=\"personalProfileData.birth_time && personalProfileData.birth_time!='null'\">{{personalProfileData.birth_time}}</a>\r\n                    <a *ngIf=\"!personalProfileData.birth_time ||personalProfileData.birth_time=='null'\"\r\n                      class=\"pink\">+Add\r\n                      Birth Time</a> |\r\n                    {{personalProfileData.birth_date ? personalProfileData.birth_date : \"Add birth date\"}} |\r\n                    <a\r\n                      *ngIf=\"personalProfileData.birth_place&&personalProfileData.birth_place!='null'\">{{personalProfileData.birth_place}}</a>\r\n                    <a *ngIf=\"!personalProfileData.birth_place||personalProfileData.birth_place=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(3)\">+Add Birth Place</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal==3\">\r\n              <div class=\"col-12\">\r\n                <h6>Birth Place</h6>\r\n            <input type=\"text\" class=\"form-control\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete2=\"matGoogleMapsAutocomplete\" (onAutocompleteSelected)=\"\r\n                    onAutocompleteSelected($event, 'Birth')\r\n                  \" (onLocationSelected)=\"onLocationSelected($event, 'Birth')\" formControlName=\"BirthPlace\" /> \r\n                <input type=\"text\" class=\"form-control\" id=\"BirthPlace\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChangedBirthPlace()\" required\r\n                  formControlName=\"BirthPlace\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Manglik:</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"Manglik\" required>\r\n                  <option value=\"Manglik\">Manglik</option>\r\n                  <option value=\"Non-Manglik\">Non-Manglik</option>\r\n                  <option value=\"Anshik Manglik\">Anshik Manglik</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Time of Birth</h6>\r\n                <input class=\"form-control\" id=\"BirthTime\" type=\"time\" placeholder=\"Choose a time\"\r\n                  formControlName=\"BirthTime\" />\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 3\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/phoneNN.svg\" />\r\n                <p>{{languageService.profileLang.contact}}</p>\r\n                <img (click)=\"setEditIndex(4)\" class=\"editPencil\" src=\"../../../assets/editN.svg\" alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p *ngIf=\"personalProfileData.family\"><a\r\n                      *ngIf=\"personalProfileData.family.email&&personalProfileData.family.email!='null'\">{{personalProfileData.family.email}}</a>\r\n                    <a *ngIf=\"!personalProfileData.family.email||personalProfileData.family.email=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndex(4)\">+Add\r\n                      email</a></p>\r\n                  <p *ngIf=\"!personalProfileData.family\">\r\n                    {{familyProfileData.email}}\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.mobile}}</p>\r\n                  <p>{{\r\n                  familyProfileData.mobile\r\n                    ? familyProfileData.mobile\r\n                    : \"Add Detail\"\r\n                }}</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.whatsapp}}</p>\r\n                  <p><a *ngIf=\"familyProfileData.whats_app_no\">{{ familyProfileData.whats_app_no }}</a>\r\n                    <a *ngIf=\"!familyProfileData.whats_app_no\" class=\"pink\" (click)=\"setEditIndex(4)\">+Add Whatsapp</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPersonal==4\">\r\n              <div class=\"col-12\">\r\n                <h6>Email</h6>\r\n                <input type=\"email\" id=\"email\" class=\"form-control\" formControlName=\"email\" required />\r\n              </div>\r\n\r\n              <div class=\"col-12\">\r\n                <h6>Mobile number</h6>\r\n                <input style=\"display: inline;\" type=\"number\" id=\"phone\" class=\"form-control\" formControlName=\"phone\"\r\n                  required />\r\n              </div>\r\n\r\n              <div class=\"col-12\">\r\n                <h6>Whatsapp number</h6>\r\n                <input style=\"display: inline;\" type=\"number\" class=\"form-control\" formControlName=\"Whatsapp\" />\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPersonal != 4\"\r\n                (click)=\"onSubmitPersonal()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\" style=\"margin-bottom:20px\">\r\n          </div>\r\n        </form>\r\n      </mat-tab>\r\n      <mat-tab>\r\n        <ng-template mat-tab-label>\r\n          <span class=\"labelS mat-elevation-z7\" [matBadge]=\"getDetailsLeft('family')\"\r\n            [matBadgeHidden]=\"getDetailsLeft('family') == 0\"></span>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab != 1\">\r\n            <img src=\"../../assets/familyN.svg\" alt=\"icon\" />\r\n          </button>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab == 1\"\r\n            style=\"background: #4adee4 !important;\">\r\n            <img src=\"../../assets/familyNW.svg\" alt=\"icon\" />\r\n          </button>\r\n          <a style=\"font-size:small\">{{languageService.profileLang.family}}</a>\r\n        </ng-template>\r\n        <form (ngSubmit)=\"onSubmitFamily()\" #familyForm=\"ngForm\">\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/familyN.svg\" />\r\n                <p>{{languageService.profileLang.familyDetails}}</p>\r\n                <img (click)=\"setEditIndexFamily(1)\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                  alt=\"editaboutme\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\">{{languageService.profileLang.aboutFamily}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.about&&familyProfileData.about!='null'\">{{familyProfileData.about  }}</a>\r\n                    <a *ngIf=\"!familyProfileData.about||familyProfileData.about=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add About\r\n                      Family</a>\r\n                  </p>\r\n                  <!-- <p class=\"headings\">{{languageService.profileLang.Mother}}</p> -->\r\n                  <p class=\"headings\">Mother Is</p>\r\n                  <p *ngIf=\"familyProfileData.mother_status != 'Not Alive'\">\r\n                    <a *ngIf=\"familyProfileData.occupation_mother || familyProfileData.mother_status\">\r\n                      {{LifeStatus(familyProfileData.mother_status,familyProfileData.occupation_mother)}}</a>\r\n                    <a *ngIf=\"!familyProfileData.occupation_mother && !familyProfileData.mother_status\"\r\n                      (click)=\"setEditIndexFamily(1)\" class=\"pink\">+Add Mother's Occupation</a></p>\r\n                  <p *ngIf=\"familyProfileData.mother_status == 'Not Alive'\">Not Alive</p>\r\n                  <p class=\"headings\">Father Is</p>\r\n                  <p *ngIf=\"familyProfileData.father_status != 'Not Alive'\">\r\n                    <a *ngIf=\"familyProfileData.occupation || familyProfileData.father_status\">\r\n                      {{LifeStatus(familyProfileData.father_status,familyProfileData.occupation)}}</a> \r\n                    <a *ngIf=\"!familyProfileData.occupation && !familyProfileData.father_status\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add\r\n                      Father's Occupation</a></p>\r\n                  <p *ngIf=\"familyProfileData.father_status == 'Not Alive'\">Not Alive</p>\r\n                  <!-- <p class=\"headings\">Siblings</p> -->\r\n                  <p class=\"headings\">{{ languageService.profileLang.familyLivingIn}}</p>\r\n                  <p><a *ngIf=\"familyProfileData.city&&familyProfileData.city!='null'\">{{familyProfileData.city}}</a>\r\n                    <a *ngIf=\"!familyProfileData.city||familyProfileData.city=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add Family City</a>\r\n                  </p>\r\n                  <p class=\"headings\">{{languageService.profileLang.gotra}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.gotra && familyProfileData.gotra!='null'\">{{ familyProfileData.gotra}}</a>\r\n                    <a *ngIf=\"!familyProfileData.gotra || familyProfileData.gotra =='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add Gotra</a>\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\">\r\n                  <p style=\"color:white!important\">Important Do not remove</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/familyN.svg\" />\r\n                <!-- <p>{{languageService.profileLang.siblings}}</p> -->\r\n                Siblings\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\"headings\">{{languageService.profileLang.sisters}} : </p>\r\n                  <p>{{\r\n                    setMarriageSisters(\r\n                      familyProfileData.unmarried_daughters,\r\n                      familyProfileData.married_daughters\r\n                    )\r\n                  }}</p>\r\n                </div>\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\"headings\">{{languageService.profileLang.brothers}} : </p>\r\n                  <p>{{\r\n                    setMarriageBrothers(\r\n                      familyProfileData.unmarried_sons,\r\n                      familyProfileData.married_sons\r\n                    )\r\n                  }}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/familyN.svg\" />\r\n                <!-- <p>{{languageService.profileLang.siblings}}</p> -->\r\n                Lifestyle\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\" style=\"margin-bottom: 0px!important;\">\r\n                  <p class=\"headings\">{{ languageService.profileLang.familyType }}:</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.family_type&& familyProfileData.family_type!='null'\">{{familyProfileData.family_type}}</a>\r\n                    <a *ngIf=\"!familyProfileData.family_type|| familyProfileData.family_type=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add\r\n                      Family Type(Joint/nuclear)</a>\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\" style=\"margin-bottom: 0px!important;\">\r\n                  <p class=\" headings\">{{languageService.profileLang.familyIncome}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.family_income&&familyProfileData.family_income!='null'\">{{familyProfileData.family_income}}\r\n                      LPA</a>\r\n                    <a *ngIf=\"!familyProfileData.family_income||familyProfileData.family_income=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add Family Income</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\" style=\"margin-top: 0px!important;\">\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\" headings\">{{languageService.profileLang.houseType}}</p>\r\n                  <p><a\r\n                      *ngIf=\"familyProfileData.house_type&&familyProfileData.house_type!='null'\">{{familyProfileData.house_type}}</a>\r\n                    <a *ngIf=\"!familyProfileData.house_type||familyProfileData.house_type=='null'\" class=\"pink\"\r\n                      (click)=\"setEditIndexFamily(1)\">+Add\r\n                      House Type</a>\r\n                  </p>\r\n                </div>\r\n                <div class=\"columnar\" style=\"margin-top: 0px!important;\">\r\n                  <p class=\"headings\">Living With Parents?</p>\r\n                  <p>\r\n                    <a\r\n                      *ngIf=\"familyProfileData.livingWithParents && familyProfileData.livingWithParents !='null'\">{{familyProfileData.livingWithParents}}</a>\r\n                    <a *ngIf=\"!familyProfileData.livingWithParents||familyProfileData.livingWithParents == 'null'\"\r\n                      class=\"pink\" (click)=\"setEditIndexFamily(1)\">+Add Detail</a>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"column\" *ngIf=\"editIndexFamily == 1\">\r\n              <div class=\"col-12\">\r\n                <h6>Gotra:</h6>\r\n                <input type=\"text\" class=\"form-control\" name=\"gotra\" [(ngModel)]=\"familyProfileData.gotra\" required />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">House Type :</h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"house_type\" [(ngModel)]=\"familyProfileData.house_type\"\r\n                  required>\r\n                  <option *ngFor=\"let item of HouseType\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Family Living In:</h6>\r\n                <input type=\"text\" class=\"form-control\" name=\"city\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\"\r\n                  (onAutocompleteSelected)=\"onAutocompleteSelectedFamily($event)\"\r\n                  (onLocationSelected)=\"onLocationSelectedFamily($event)\" [(ngModel)]=\"familyProfileData.city\" />\r\n                <input id=\"familyLivingIn\" type=\"text\" class=\"form-control\" [autoCompleteOptions]=\"autoComplete\"\r\n                  name=\"city\" matValidateAddress matGoogleMapsAutocomplete\r\n                  #matGoogleMapsAutocomplete=\"matGoogleMapsAutocomplete\" (change)=\"placeChangedFamily()\"\r\n                  value=\"{{familyProfileData.city}}\" />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>About Family: (max 300 words)</h6>\r\n                <input class=\"form-control\" maxlength=\"300\" type=\"text\" name=\"about\"\r\n                  [(ngModel)]=\"familyProfileData.about\" required />\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">\r\n                  Father's Occupation :\r\n                </h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"father_occupation\"\r\n                  [(ngModel)]=\"familyProfileData.occupation\" required>\r\n                  <option *ngFor=\"let item of Occupation\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">\r\n                  Mother's Occupation :\r\n                </h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"mother_occupation\"\r\n                  [(ngModel)]=\"familyProfileData.occupation_mother\" required>\r\n                  <option *ngFor=\"let item of Occupation\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Father Status:</h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"father_status\"\r\n                  [(ngModel)]=\"familyProfileData.father_status\" required>\r\n                  <option *ngFor=\"let item of Status\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Mother Status:</h6>\r\n                <select type=\"text\" class=\"form-control\" name=\"mother_status\"\r\n                  [(ngModel)]=\"familyProfileData.mother_status\" required>\r\n                  <option *ngFor=\"let item of Status\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Sisters Married:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"married_daughters\"\r\n                    [(ngModel)]=\"familyProfileData.married_daughters\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Brothers Married:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"married_sons\"\r\n                    [(ngModel)]=\"familyProfileData.married_sons\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Sisters Unmarried:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"unmarried_daughters\"\r\n                    [(ngModel)]=\"familyProfileData.unmarried_daughters\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Brothers Unmarried:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"unmarried_sons\"\r\n                    [(ngModel)]=\"familyProfileData.unmarried_sons\" required>\r\n                    <option *ngFor=\"let item of Count\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Family Income:</h6>\r\n                  <input type=\"text\" class=\"form-control\" name=\"family_income\"\r\n                    [(ngModel)]=\"familyProfileData.family_income\" required placeholder=\"in LPA\">\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block;\">Family Type:</h6>\r\n                  <select type=\"text\" class=\"form-control\" name=\"family_type\"\r\n                    [(ngModel)]=\"familyProfileData.family_type\" required>\r\n                    <option *ngFor=\"let item of FamilyType\" [value]=\"item\">{{\r\n                      item\r\n                    }}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexFamily != 1\"\r\n                (click)=\"onSubmitFamily()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          <div class=\"infoRow\" style=\"margin-bottom:20px\">\r\n          </div>\r\n        </form>\r\n      </mat-tab>\r\n      <mat-tab>\r\n        <ng-template mat-tab-label>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab != 2\">\r\n            <img src=\"../../assets/preferencesN.svg\" alt=\"icon\" />\r\n          </button>\r\n          <button class=\"icon-circular mat-elevation-z7\" *ngIf=\"selectedTab == 2\"\r\n            style=\"background: #4adee4 !important;\">\r\n            <img src=\"../../assets/preferencesNW.svg\" alt=\"icon\" />\r\n          </button>\r\n          <a style=\"font-size:small\">{{ languageService.profileLang.preference }}</a>\r\n        </ng-template>\r\n        <form [formGroup]=\"preferencesForm\">\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\" *ngIf=\"editIndexPrefs != 0 \">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/personalN.svg\" />\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='english'\">Basic Details</p>\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='hindi'\">बेसिक डीटेल्स्</p>\r\n                <!-- <div class=\"circular3 mat-elevation-z12\" *ngIf=\"editIndexPrefs != 0\">\r\n                  <img (click)=\"openPreferenceDialog()\" width=\"100%\" src=\"../../../assets/editN.svg\"\r\n                    alt=\"editBasicDetails\" />\r\n                </div> -->\r\n                <img *ngIf=\"editIndexPrefs != 0\" (click)=\"setEditIndexPrefs(0)\" class=\"editPencil\"\r\n                  src=\"../../../assets/editN.svg\" alt=\"editBasicDetails\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\">{{languageService.profileLang.age}}</p>\r\n                  <p>{{preferenceProfileData.age_min}} to {{preferenceProfileData.age_max}} Yrs</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.height}}</p>\r\n                  <p>{{getHeight(preferenceProfileData.height_min)}} to\r\n                    {{getHeight(preferenceProfileData.height_max)}}</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.martialStatus}}</p>\r\n                  <p>{{preferenceProfileData.marital_status}}</p>\r\n                  <p class=\"headings\">{{languageService.profileLang.foodChoice}}</p>\r\n                  <p>{{preferenceProfileData.food_choice}}</p>\r\n                </div>\r\n                <div class=\"columnar\">\r\n                  <p style=\"color:white!important\">Important Do not remove this text</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPrefs == 0\">\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Age Min: </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"age_min\" required>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Age Max : </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"age_max\" required>\r\n                </div>\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Height Min : </h6>\r\n                  <select type=\"text\" class=\"form-control\" formControlName=\"height_min\">\r\n                    <option *ngFor=\"let item of Heights\" [value]=\"item\">{{item}}</option>\r\n                  </select>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Height Max : </h6>\r\n                  <select type=\"text\" class=\"form-control\" formControlName=\"height_max\">\r\n                    <option *ngFor=\"let item of Heights\" [value]=\"item\">{{item}}</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Marital Status:</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"marital_status\">\r\n                  <option *ngFor=\"let item of MaritalStatus\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Food Choice:</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"food_choice\">\r\n                  <option *ngFor=\"let item of Foodpreferences\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                </select>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPrefs != 0\"\r\n                (click)=\"onSubmitPreferences()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\" *ngIf=\"editIndexPrefs != 1 \">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/educationN.svg\" />\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='english'\">Career & Occupation</p>\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='hindi'\">करियर & ऑक्यूपेशन</p>\r\n                <img *ngIf=\"editIndexPrefs != 1\" (click)=\"setEditIndexPrefs(1)\" class=\"editPencil\"\r\n                  src=\"../../../assets/editN.svg\" alt=\"editBasicDetails\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\" *ngIf=\"languageService.getCurrentLanguage()==='english'\">Annual Income</p>\r\n                  <p class=\"headings\" *ngIf=\"languageService.getCurrentLanguage()==='hindi'\">सालाना आय</p>\r\n                  <p>{{preferenceProfileData.income_min}} to {{preferenceProfileData.income_max}} LPA</p>\r\n                  <div *ngIf=\"personalProfileData.gender === 'Female'\">\r\n                    <p class=\"headings\">{{languageService.profileLang.occupation}}</p>\r\n                    <p>{{preferenceProfileData.occupation}}</p>\r\n                  </div>\r\n                  <div *ngIf=\"personalProfileData.gender === 'Male'\">\r\n                    <p class=\"headings\">{{languageService.profileLang.workingPref}}</p>\r\n                    <p>{{preferenceProfileData.working}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPrefs == 1\">\r\n              <div class=\"row information\">\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Income Min(in LPA) : </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"income_min\" required>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <h6 style=\"display: inline-block\">Income Max(in LPA) : </h6>\r\n                  <input type=\"text\" class=\"form-control\" formControlName=\"income_max\" required>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-12\" *ngIf=\"personalProfileData.gender==='Female'\">\r\n                <h6>Occupation</h6>\r\n                <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\" formControlName=\"occupation\"\r\n                  [(ngModel)]=\"preferenceProfileData.occupation\" required>\r\n                  <mat-option *ngFor=\"let item of Occupation\" [value]=\"item\" required>\r\n                    {{ item}}\r\n                  </mat-option>\r\n                </mat-select>\r\n              </div>\r\n              <div class=\"col-12\" *ngIf=\"personalProfileData.gender==='Male'\">\r\n                <h6>Working</h6>\r\n                <select type=\"text\" class=\"form-control\" formControlName=\"working\" required>\r\n                  <option *ngFor=\"let name of Working\" [value]=\"name\" required>\r\n                    {{ name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPrefs != 1\"\r\n                (click)=\"onSubmitPreferences()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"infoRow\">\r\n            <div class=\"column\" *ngIf=\"editIndexPrefs != 2 \">\r\n              <div class=\"row title\">\r\n                <img class=\"accordion-image\" src=\"../../assets/horoscopeN.svg\" />\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='english'\">Religion & Caste</p>\r\n                <p *ngIf=\"languageService.getCurrentLanguage()==='hindi'\"> धर्म & जाती </p>\r\n                <img *ngIf=\"editIndexPrefs != 2\" (click)=\"setEditIndexPrefs(2)\" class=\"editPencil\"\r\n                  src=\"../../../assets/editN.svg\" alt=\"editBasicDetails\" />\r\n              </div>\r\n              <div class=\"row information\">\r\n                <div class=\"columnar\">\r\n                  <p class=\"headings\">{{ languageService.profileLang.religion}}\r\n                    {{ languageService.profileLang.preference}}</p>\r\n                  <p><a *ngFor=\"let rel of preferenceProfileData.religion\">{{rel}}, </a></p>\r\n                  <p class=\"headings\">{{ languageService.profileLang.castePref}}</p>\r\n                  <!-- <p>{{\r\n                    preferenceProfileData.caste\r\n                      ? preferenceProfileData.caste\r\n                      : \"Add Detail\"\r\n                  }}</p> -->\r\n                  <p><a *ngFor=\"let caste of castePreferences\">{{caste}}, </a></p>\r\n                  <p class=\"headings\">{{ languageService.profileLang.manglikPref}}</p>\r\n                  <p>{{\r\n                    preferenceProfileData.manglik\r\n                      ? preferenceProfileData.manglik\r\n                      : \"+Add Detail\"\r\n                  }}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"column\" *ngIf=\"editIndexPrefs == 2\">\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">{{languageService.profileLang.religion}}:</h6>\r\n                <mat-select style=\"color:black!important\" type=\"text\" class=\"form-control\" [multiple]=\"true\"\r\n                  formControlName=\"religion\" [(ngModel)]=\"preferenceProfileData.religion\" required>\r\n                  <mat-option *ngFor=\"let item of Religions\" [value]=\"item\" required>\r\n                    {{ item}}\r\n                  </mat-option>\r\n                </mat-select>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6>Caste</h6>\r\n                <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\"\r\n                  (selectionChange)=\"casteSelectionChanged($event)\" [formControl]=\"searchCaste\" #multiSelect\r\n                  [(ngModel)]=\"castePreferences\">\r\n                  <mat-option>\r\n                    <ngx-mat-select-search noEntriesFoundLabel=\"No Castes Found\" placeholderLabel=\"Search Castes...\"\r\n                      [formControl]=\"searchCasteText\">\r\n                      <mat-icon ngxMatSelectSearchClear>close</mat-icon>\r\n                    </ngx-mat-select-search>\r\n                  </mat-option>\r\n                  <mat-option *ngFor=\"let name of filteredCastesMulti | async\" [value]=\"name\" required>\r\n                    {{ name }}\r\n                  </mat-option>\r\n                </mat-select>\r\n              </div>\r\n              <div class=\"col-12\" style=\"margin-top: 10px;\">\r\n                <mat-checkbox [checked]=\"isAllCastePref\" (change)=\"checkAllCastePref($event)\">No Caste Bar\r\n                </mat-checkbox>\r\n              </div>\r\n              <div class=\"col-12\">\r\n                <h6 style=\"display: inline-block;\">Manglik :</h6>\r\n                <select style=\"color:#4a5d6a\" type=\"text\" class=\"form-control\" formControlName=\"manglik_pref\"\r\n                  [(ngModel)]=\"preferenceProfileData.manglik\" required>\r\n                  <option *ngFor=\"let item of Mangalika\" [value]=\"item\">{{\r\n                    item\r\n                  }}</option>\r\n                </select>\r\n              </div>\r\n              <button class=\"mat-elevation-z5 save-button btn-success\" mat-button [hidden]=\"editIndexPrefs != 2\"\r\n                (click)=\"onSubmitPreferences()\">\r\n                SAVE\r\n              </button>\r\n            </div> -->\r\n          </div>\r\n          <!-- <div class=\"tabContent\">\r\n            <a style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \">\r\n              {{ languageService.profileLang.age }}</a><br />\r\n            <div class=\"custom-slider\">\r\n              <ng5-slider [(value)]=\"preferenceProfileData.age_min\" [(highValue)]=\"preferenceProfileData.age_max\"\r\n                [options]=\"optionsAge\" (userChangeEnd)=\"setEditIndexPrefs(0)\"></ng5-slider>\r\n            </div>\r\n            <hr />\r\n            <a style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \">\r\n              {{ languageService.profileLang.height }}</a><br />\r\n            <div class=\"custom-slider\">\r\n              <ng5-slider [(value)]=\"preferenceProfileData.height_min\" [(highValue)]=\"preferenceProfileData.height_max\"\r\n                [options]=\"optionsHeight\" (userChangeEnd)=\"setEditIndexPrefs(0)\"></ng5-slider>\r\n            </div>\r\n            <hr />\r\n            <a *ngIf=\"languageService.getCurrentLanguage()==='english'\" style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \" alt=\"Income\">\r\n              Income</a>\r\n            <a *ngIf=\"languageService.getCurrentLanguage()==='hindi'\" style=\"\r\n                color: rgb(68, 67, 67);\r\n                font-size: large;\r\n                margin-left: 30px;\r\n                font-weight: 600;\r\n              \" alt=\"Income\">\r\n              आय</a><br />\r\n            <div class=\"custom-slider\">\r\n              <ng5-slider [(value)]=\"preferenceProfileData.income_min\" [(highValue)]=\"preferenceProfileData.income_max\"\r\n                [options]=\"optionsIncome\" (userChangeEnd)=\"setEditIndexPrefs(0)\"></ng5-slider>\r\n            </div>\r\n            <button style=\"position: absolute; top: 5px; right: 30px;\" mat-button [hidden]=\"editIndexPrefs != 0\"\r\n              (click)=\"onSubmitPreferences()\">\r\n              <img style=\"width:30px!important\" src=\"../../../assets/checked.svg\">\r\n            </button>\r\n            <hr>\r\n            <mat-accordion class=\"example-headers-align\" id=\"matAccordion\">\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 1\" (opened)=\"specialCase()\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important\r\n                    \">\r\n                    {{ languageService.profileLang.castePref }}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 1\">\r\n                  <div class=\"row\" style=\"width:100%!important;position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -20px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(1)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 1\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\" *ngFor=\"let caste of castePreferences\">\r\n                      <span style=\"\r\n                        color: rgb(112, 111, 111);\r\n                        margin-left: 5px;\r\n                        word-wrap: break-word!important;\r\n                      \">\r\n                        {{ caste }}\r\n                      </span>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 1\">\r\n                  <div class=\"row\" style=\"width:100%!important\">\r\n                    <div class=\"col-12\">\r\n                      <h6>Caste</h6>\r\n                      <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\"\r\n                        (selectionChange)=\"casteSelectionChanged($event)\" [formControl]=\"searchCaste\" #multiSelect\r\n                        [(ngModel)]=\"castePreferences\" required>\r\n                        <mat-option>\r\n                          <ngx-mat-select-search noEntriesFoundLabel=\"No Castes Found\"\r\n                            placeholderLabel=\"Search Castes...\" [formControl]=\"searchCasteText\"></ngx-mat-select-search>\r\n                        </mat-option>\r\n                        <mat-option *ngFor=\"let name of filteredCastesMulti | async\" [value]=\"name\" required>\r\n                          {{ name }}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </div>\r\n\r\n                    <div class=\"col-12\" style=\"margin-top: 10px;\">\r\n                      <mat-checkbox [checked]=\"isAllCastePref\" (change)=\"checkAllCastePref($event)\">No Caste Bar\r\n                      </mat-checkbox>\r\n                    </div>\r\n                  </div>\r\n                  <mat-action-row>\r\n                    <button class=\"mat-elevation-z5\" mat-button class=\"btn-success btn-small\"\r\n                      [hidden]=\"editIndexPrefs != 1\" (click)=\"onSubmitPreferences()\">\r\n                      SAVE\r\n                    </button>\r\n                  </mat-action-row>\r\n                </div>\r\n              </mat-expansion-panel>\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 2\" (opened)=\"setStepPreferences(2)\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;\r\n                    \">\r\n                    {{ languageService.profileLang.manglikPref }}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 2\">\r\n                  <div class=\"row\" style=\"position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(2)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 2\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\">\r\n                      <span style=\"margin-left: 5px;\">\r\n                        <span class=\"labelText\">{{ languageService.profileLang.manglikPref }}:</span>{{\r\n                          preferenceProfileData.manglik\r\n                            ? preferenceProfileData.manglik\r\n                            : \"Add Detail\"\r\n                        }}\r\n                      </span>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 2\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <h6 style=\"display: inline-block;\">Manglik :</h6>\r\n                      <select type=\"text\" class=\"form-control\" name=\"manglik\"\r\n                        [(ngModel)]=\"preferenceProfileData.manglik\" required>\r\n                        <option *ngFor=\"let item of Mangalika\" [value]=\"item\">{{\r\n                          item\r\n                        }}</option>\r\n                      </select>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                      <mat-action-row>\r\n                        <button class=\"mat-elevation-z5\" mat-button class=\"btn-success\" [hidden]=\"editIndexPrefs != 2\"\r\n                          (click)=\"onSubmitPreferences()\">\r\n                          SAVE\r\n                        </button>\r\n                      </mat-action-row>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n              </mat-expansion-panel>\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 3\" (opened)=\"setStepPreferences(3)\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;\r\n                    \">\r\n                    {{ languageService.profileLang.martialStatus }}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 3\">\r\n                  <div class=\"row\" style=\"position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(3)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 3\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\">\r\n                      <span style=\"margin-left: 5px;\">\r\n                        <span class=\"labelText\">{{ languageService.profileLang.martialStatus }}:</span>{{\r\n                          preferenceProfileData.marital_status\r\n                            ? preferenceProfileData.marital_status\r\n                            : \"Add Detail\"\r\n                        }}\r\n                      </span>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 3\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <h6 style=\"display: inline-block;\">{{languageService.profileLang.martialStatus}}:</h6>\r\n                      <select type=\"text\" class=\"form-control\" name=\"manglik\"\r\n                        [(ngModel)]=\"preferenceProfileData.marital_status\" required>\r\n                        <option [value]=\"preferenceProfileData.marital_status\">{{preferenceProfileData.marital_status}}\r\n                        </option>\r\n                        <option [value]=\"MaritalStatus[0]\">{{MaritalStatus[0]}}</option>\r\n                      </select>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                      <mat-action-row>\r\n                        <button class=\"mat-elevation-z5\" mat-button class=\"btn-success\" [hidden]=\"editIndexPrefs != 3\"\r\n                          (click)=\"onSubmitPreferences()\">\r\n                          SAVE\r\n                        </button>\r\n                      </mat-action-row>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n              </mat-expansion-panel>\r\n              <mat-expansion-panel [expanded]=\"stepPreferences === 4\" (opened)=\"setStepPreferences(4)\" hideToggle>\r\n                <mat-expansion-panel-header>\r\n                  <a style=\"\r\n                      color: rgb(68, 67, 67);\r\n                      font-size: large;\r\n                      margin-left: 12px;\r\n                      font-weight: 600;\r\n                      font-family: 'Gotham Rounded Book',Roboto, Helvetica Neue, sans-serif !important;\r\n                    \">\r\n                    {{ languageService.profileLang.religion}}\r\n                    {{ languageService.profileLang.preference}}</a>\r\n                </mat-expansion-panel-header>\r\n                <div *ngIf=\"editIndexPrefs != 4\">\r\n                  <div class=\"row\" style=\"position:relative\">\r\n                    <button\r\n                      style=\"background:transparent!important;position:absolute; right: -8px!important;top:10px; z-index:10!important\"\r\n                      (click)=\"setEditIndexPrefs(4)\" mat-button>\r\n                      <img *ngIf=\"editIndexPrefs != 4\" class=\"editPencil\" src=\"../../../assets/editN.svg\"\r\n                        alt=\"edit contact\" />\r\n                    </button>\r\n                    <div class=\"col-12\">\r\n                      <span style=\"margin-left: 5px;\">\r\n                        <span class=\"labelText\">{{ languageService.profileLang.religion}}:</span>{{\r\n                          preferenceProfileData.religion\r\n                            ? preferenceProfileData.religion\r\n                            : \"Add Detail\"\r\n                        }}\r\n                      </span>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"editIndexPrefs == 4\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <h6 style=\"display: inline-block;\">{{languageService.profileLang.religion}}:</h6>\r\n                      <mat-select type=\"text\" class=\"form-control\" [multiple]=\"true\" name=\"religion\" #multiSelect\r\n                        [(ngModel)]=\"preferenceProfileData.religion\" required>\r\n                        <ngx-mat-select-search noEntriesFoundLabel=\"No Religion Found\"\r\n                          placeholderLabel=\"Search Religons...\"></ngx-mat-select-search> -->\r\n          <!-- <mat-option>\r\n                          \r\n                        </mat-option> \r\n                        <mat-option *ngFor=\"let item of Religions\" [value]=\"item\" required>\r\n                          {{ item}}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                      <mat-action-row>\r\n                        <button class=\"mat-elevation-z5\" mat-button class=\"btn-success\" [hidden]=\"editIndexPrefs != 4\"\r\n                          (click)=\"onSubmitPreferences()\">\r\n                          SAVE\r\n                        </button>\r\n                      </mat-action-row>\r\n                    </div>\r\n                    <div class=\"col-12\" style=\"color:white!important\">\r\n                      <h6 style=\"display: inline-block;\">Random text</h6>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n              </mat-expansion-panel>\r\n\r\n            </mat-accordion>\r\n          </div> -->\r\n          <div class=\"infoRow\" style=\"margin-bottom:20px\">\r\n          </div>\r\n        </form>\r\n      </mat-tab>\r\n    </mat-tab-group>\r\n  </main>\r\n</div>";
     /***/
   },
 
@@ -2906,7 +2926,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           console.log('qwerty', event);
           var curState = this.search(event[0], 1);
           this.chatService.selected_states += curState.name;
-          this.chatService.selected_states_id += curState.id; // this.preferencesForm.patchValue({
+          this.chatService.selected_states_id.push(curState.id); // this.preferencesForm.patchValue({
           //   state: [curState, ...this.preferencesForm.value.state],
           // })
 
@@ -2960,7 +2980,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.remove(toppings, topping);
 
           if (what === 0) {
-            this.preferencesForm.value.state.setValue(toppings);
+            this.preferencesForm.controls.state.setValue(toppings);
+            console.log(this.preferencesForm.value.state, this.chatService.selected_states_id);
           } else {
             this.preferencesForm.value.city.setValue(toppings);
           } // To trigger change detection
@@ -2969,6 +2990,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "remove",
         value: function remove(array, toRemove) {
+          var index = array.indexOf(toRemove);
+
+          if (index !== -1) {
+            array.splice(index, 1);
+            this.chatService.selected_states_id.splice(index, 1);
+          }
+        }
+      }, {
+        key: "removeId",
+        value: function removeId(array, toRemove) {
           var index = array.indexOf(toRemove);
 
           if (index !== -1) {
@@ -3114,13 +3145,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var form = new FormData();
           form.append('id', this.userId);
-          form.append('is_lead', this.userIsLead);
+          form.append('is_lead', localStorage.getItem('is_lead'));
           this.http.post('https://partner.hansmatrimony.com/api/getRecommendedPreferences', form).subscribe(function (response) {
             if (response.count) {
               console.log(response);
               _this14.isWide = true;
 
-              if (_this14.countRecomended != -1) {
+              if (_this14.countRecomended !== -1) {
                 _this14.countProfiles = response.count;
                 _this14.countRecomended = response.count;
 
@@ -3141,7 +3172,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           console.log('getCountOfRishtey called');
           var form = new FormData();
           form.append('id', this.userId);
-          form.append('is_lead', this.userIsLead);
+          form.append('is_lead', localStorage.getItem('is_lead'));
           form.append('age_min', this.preferencesForm.value.age_min);
           form.append('age_max', this.preferencesForm.value.age_max);
           form.append('height_min', String(48 + this.Heights.indexOf(this.preferencesForm.value.height_min)));
@@ -3156,7 +3187,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           form.append('pref_country', this.chatService.selected_country ? this.chatService.selected_country.name : '');
           form.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
           form.append('pref_state', this.chatService.selected_states);
-          form.append('pref_state_id', this.chatService.selected_states_id);
+          form.append('pref_state_id', this.chatService.selected_states_id.join(','));
           form.append('pref_city', this.chatService.selected_cities);
           this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form).subscribe(function (response) {
             if (response.count) {
@@ -3623,21 +3654,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                 _this16.chatService.selected_cities = _this16.preferenceProfileData.pref_city ? _this16.preferenceProfileData.pref_city.join(',') : '';
                 _this16.chatService.selected_states = _this16.preferenceProfileData.pref_state ? _this16.preferenceProfileData.pref_state.join(',') : '';
-                setTimeout(function () {
-                  var _iterator5 = _createForOfIteratorHelper(_this16.preferenceProfileData.pref_state),
-                      _step5;
-
-                  try {
-                    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                      var item = _step5.value;
-                      _this16.chatService.selected_states_id += _this16.search(item, 1).id;
-                    }
-                  } catch (err) {
-                    _iterator5.e(err);
-                  } finally {
-                    _iterator5.f();
-                  }
-                }, 2000);
+                _this16.chatService.selected_states_id = _this16.preferenceProfileData.pref_state_id.split(',');
+                console.log('current state ids are', _this16.chatService.selected_states_id);
               }
 
               _this16.setCurrentPreferenceValue(null);
@@ -3675,7 +3693,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function onSubmitPreferences() {
           var _this17 = this;
 
-          // this.editIndexPrefs = -1;
+          console.log('pref_country', this.preferencesForm.value.country);
+          console.log('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
+          console.log('pref_state', this.preferencesForm.value.state);
+          console.log('pref_state_id', this.chatService.selected_states_id);
+          console.log('pref_city', this.preferencesForm.value.city); // this.editIndexPrefs = -1;
+
           console.log('preference Data to update');
           console.log(this.preferenceProfileData);
           console.log(this.preferenceProfileData.religion);
@@ -3719,6 +3742,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           newPrefForm.append('mother_tongue', this.preferenceProfileData.mother_tongue);
           newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
           newPrefForm.append('matchesCount', String(this.countProfiles));
+          newPrefForm.append('pref_country', this.preferencesForm.value.country);
+          newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
+          newPrefForm.append('pref_state', this.preferencesForm.value.state);
+          newPrefForm.append('pref_state_id', this.chatService.selected_states_id.join(','));
+          newPrefForm.append('pref_city', this.preferencesForm.value.city);
           this.http.post('https://partner.hansmatrimony.com/api/updatePreferencesDetails', newPrefForm).subscribe(function (data) {
             console.log(data);
             console.log('Preference Details updated successfully'); // this.changed();
@@ -5552,7 +5580,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _chat_drawer_choose_from_dialog_choose_from_dialog_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
     /*! ./chat-drawer/choose-from-dialog/choose-from-dialog.component */
-    "./src/app/chat/chat-drawer/choose-from-dialog/choose-from-dialog.component.ts"); //import { TodaysPaymentPopupComponent } from './today-profiles/todays-payment-popup/todays-payment-popup.component';
+    "./src/app/chat/chat-drawer/choose-from-dialog/choose-from-dialog.component.ts");
+    /* harmony import */
+
+
+    var _history_section_history_item_history_item_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
+    /*! ./history-section/history-item/history-item.component */
+    "./src/app/chat/history-section/history-item/history-item.component.ts"); //import { TodaysPaymentPopupComponent } from './today-profiles/todays-payment-popup/todays-payment-popup.component';
 
 
     var ChatModule = function ChatModule() {
@@ -5562,7 +5596,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     ChatModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _chat_routing_module__WEBPACK_IMPORTED_MODULE_3__["ChatRoutingModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__["NgbModule"], _angular_material_angular_material_module__WEBPACK_IMPORTED_MODULE_8__["AngularMaterialModule"], ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_24__["InfiniteScrollModule"], ng5_slider__WEBPACK_IMPORTED_MODULE_30__["Ng5SliderModule"], ngx_mat_intl_tel_input__WEBPACK_IMPORTED_MODULE_41__["NgxMatIntlTelInputModule"]],
       declarations: [_chat_component__WEBPACK_IMPORTED_MODULE_4__["ChatComponent"], _personalized_profiles_personalized_profiles_component__WEBPACK_IMPORTED_MODULE_5__["PersonalizedProfilesComponent"], _connection_error_connection_error_component__WEBPACK_IMPORTED_MODULE_6__["ConnectionErrorComponent"], _message_dialog_message_dialog_component__WEBPACK_IMPORTED_MODULE_9__["MessageDialogComponent"], _myprofile_edit_family_dialog_edit_family_dialog_component__WEBPACK_IMPORTED_MODULE_10__["EditFamilyDialogComponent"], _myprofile_edit_personal_dialog_edit_personal_dialog_component__WEBPACK_IMPORTED_MODULE_11__["EditPersonalDialogComponent"], _myprofile_edit_preference_dialog_edit_preference_dialog_component__WEBPACK_IMPORTED_MODULE_12__["EditPreferenceDialogComponent"], _today_profiles_today_profiles_component__WEBPACK_IMPORTED_MODULE_13__["TodayProfilesComponent"], _user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_14__["UserProfileComponent"], _history_profiles_history_profiles_component__WEBPACK_IMPORTED_MODULE_17__["HistoryProfilesComponent"], _history_profiles_history_profiles_dialog_history_profiles_dialog_component__WEBPACK_IMPORTED_MODULE_18__["HistoryProfilesDialogComponent"], _personalized_profiles_personalized_dialog_personalized_dialog_component__WEBPACK_IMPORTED_MODULE_19__["PersonalizedDialogComponent"], _today_profiles_today_message_today_message_component__WEBPACK_IMPORTED_MODULE_21__["TodayMessageComponent"], _history_profiles_personalized_message_dialog_personalized_message_dialog_component__WEBPACK_IMPORTED_MODULE_22__["PersonalizedMessageDialogComponent"], _app_download_dialog_app_download_dialog_component__WEBPACK_IMPORTED_MODULE_23__["AppDownloadDialogComponent"], // TodaysPaymentPopupComponent,
-      _rate_us_dialog_rate_us_dialog_component__WEBPACK_IMPORTED_MODULE_25__["RateUsDialogComponent"], _chat_drawer_chat_drawer_component__WEBPACK_IMPORTED_MODULE_26__["ChatDrawerComponent"], _discover_discover_component__WEBPACK_IMPORTED_MODULE_27__["DiscoverComponent"], _daily_welcome_popup_daily_welcome_popup_component__WEBPACK_IMPORTED_MODULE_28__["DailyWelcomePopupComponent"], _my_profile_new_my_profile_new_component__WEBPACK_IMPORTED_MODULE_29__["MyProfileNewComponent"], _getcallback_getcallback_component__WEBPACK_IMPORTED_MODULE_31__["GetcallbackComponent"], _getcallback_okdialog_okdialog_component__WEBPACK_IMPORTED_MODULE_32__["OkdialogComponent"], _my_profile_photo_upload_my_profile_photo_upload_component__WEBPACK_IMPORTED_MODULE_33__["MyProfilePhotoUploadComponent"], _customer_support_customer_support_component__WEBPACK_IMPORTED_MODULE_34__["CustomerSupportComponent"], _customer_support_okdialog_cs_okdialog_cs_component__WEBPACK_IMPORTED_MODULE_35__["OkdialogCsComponent"], _today_profiles_persistent_message_persistent_message_component__WEBPACK_IMPORTED_MODULE_36__["PersistentMessageComponent"], _today_profiles_tinder_ui_tinder_ui_component__WEBPACK_IMPORTED_MODULE_37__["TinderUiComponent"], _settings_settings_component__WEBPACK_IMPORTED_MODULE_39__["SettingsComponent"], _settings_r_u_sure_r_u_sure_component__WEBPACK_IMPORTED_MODULE_40__["RUSureComponent"], _history_section_history_section_component__WEBPACK_IMPORTED_MODULE_42__["HistorySectionComponent"], _my_profile_photo_upload_ask_delete_dialog_ask_delete_dialog_component__WEBPACK_IMPORTED_MODULE_43__["AskDeleteDialogComponent"], _chat_drawer_choose_from_dialog_choose_from_dialog_component__WEBPACK_IMPORTED_MODULE_44__["ChooseFromDialogComponent"]],
+      _rate_us_dialog_rate_us_dialog_component__WEBPACK_IMPORTED_MODULE_25__["RateUsDialogComponent"], _chat_drawer_chat_drawer_component__WEBPACK_IMPORTED_MODULE_26__["ChatDrawerComponent"], _discover_discover_component__WEBPACK_IMPORTED_MODULE_27__["DiscoverComponent"], _daily_welcome_popup_daily_welcome_popup_component__WEBPACK_IMPORTED_MODULE_28__["DailyWelcomePopupComponent"], _my_profile_new_my_profile_new_component__WEBPACK_IMPORTED_MODULE_29__["MyProfileNewComponent"], _getcallback_getcallback_component__WEBPACK_IMPORTED_MODULE_31__["GetcallbackComponent"], _getcallback_okdialog_okdialog_component__WEBPACK_IMPORTED_MODULE_32__["OkdialogComponent"], _my_profile_photo_upload_my_profile_photo_upload_component__WEBPACK_IMPORTED_MODULE_33__["MyProfilePhotoUploadComponent"], _customer_support_customer_support_component__WEBPACK_IMPORTED_MODULE_34__["CustomerSupportComponent"], _customer_support_okdialog_cs_okdialog_cs_component__WEBPACK_IMPORTED_MODULE_35__["OkdialogCsComponent"], _today_profiles_persistent_message_persistent_message_component__WEBPACK_IMPORTED_MODULE_36__["PersistentMessageComponent"], _today_profiles_tinder_ui_tinder_ui_component__WEBPACK_IMPORTED_MODULE_37__["TinderUiComponent"], _settings_settings_component__WEBPACK_IMPORTED_MODULE_39__["SettingsComponent"], _settings_r_u_sure_r_u_sure_component__WEBPACK_IMPORTED_MODULE_40__["RUSureComponent"], _history_section_history_section_component__WEBPACK_IMPORTED_MODULE_42__["HistorySectionComponent"], _my_profile_photo_upload_ask_delete_dialog_ask_delete_dialog_component__WEBPACK_IMPORTED_MODULE_43__["AskDeleteDialogComponent"], _chat_drawer_choose_from_dialog_choose_from_dialog_component__WEBPACK_IMPORTED_MODULE_44__["ChooseFromDialogComponent"], _history_section_history_item_history_item_component__WEBPACK_IMPORTED_MODULE_45__["HistoryItemComponent"]],
       entryComponents: [_message_dialog_message_dialog_component__WEBPACK_IMPORTED_MODULE_9__["MessageDialogComponent"], _myprofile_edit_family_dialog_edit_family_dialog_component__WEBPACK_IMPORTED_MODULE_10__["EditFamilyDialogComponent"], _myprofile_edit_personal_dialog_edit_personal_dialog_component__WEBPACK_IMPORTED_MODULE_11__["EditPersonalDialogComponent"], _myprofile_edit_preference_dialog_edit_preference_dialog_component__WEBPACK_IMPORTED_MODULE_12__["EditPreferenceDialogComponent"], _personalized_profiles_personalized_dialog_personalized_dialog_component__WEBPACK_IMPORTED_MODULE_19__["PersonalizedDialogComponent"], _history_profiles_personalized_message_dialog_personalized_message_dialog_component__WEBPACK_IMPORTED_MODULE_22__["PersonalizedMessageDialogComponent"], _app_download_dialog_app_download_dialog_component__WEBPACK_IMPORTED_MODULE_23__["AppDownloadDialogComponent"], _rate_us_dialog_rate_us_dialog_component__WEBPACK_IMPORTED_MODULE_25__["RateUsDialogComponent"], _chat_drawer_chat_drawer_component__WEBPACK_IMPORTED_MODULE_26__["ChatDrawerComponent"], _daily_welcome_popup_daily_welcome_popup_component__WEBPACK_IMPORTED_MODULE_28__["DailyWelcomePopupComponent"], _getcallback_okdialog_okdialog_component__WEBPACK_IMPORTED_MODULE_32__["OkdialogComponent"], _customer_support_okdialog_cs_okdialog_cs_component__WEBPACK_IMPORTED_MODULE_35__["OkdialogCsComponent"], _today_profiles_persistent_message_persistent_message_component__WEBPACK_IMPORTED_MODULE_36__["PersistentMessageComponent"], _settings_r_u_sure_r_u_sure_component__WEBPACK_IMPORTED_MODULE_40__["RUSureComponent"], _my_profile_photo_upload_ask_delete_dialog_ask_delete_dialog_component__WEBPACK_IMPORTED_MODULE_43__["AskDeleteDialogComponent"], _chat_drawer_choose_from_dialog_choose_from_dialog_component__WEBPACK_IMPORTED_MODULE_44__["ChooseFromDialogComponent"]],
       providers: [_find_open_history_profile_service__WEBPACK_IMPORTED_MODULE_15__["FindOpenHistoryProfileService"], _chat_service_service__WEBPACK_IMPORTED_MODULE_16__["ChatServiceService"], _myprofile_my_profile_service__WEBPACK_IMPORTED_MODULE_20__["MyProfileService"], ngx_device_detector__WEBPACK_IMPORTED_MODULE_38__["DeviceDetectorService"]]
     })], ChatModule);
@@ -6205,7 +6239,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (routeData && routeData.params && routeData.params.section) {
               _this29.section = routeData.params.section;
             }
-          }); // get discover data
+          });
+          this.authData = JSON.parse(localStorage.getItem('authData')); // get discover data
 
           this.getDiscoveryData(); // if stage is not null set it to null so that when we get back to chat section it opens todays profile only
           // back to chat from chat drawer options
@@ -6299,25 +6334,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else {
             this.carouselSize = [1];
             return this.carouselSize;
-          }
-        }
-      }, {
-        key: "setName",
-        value: function setName(value, type) {
-          if (type === 1) {
-            if (value != null) {
-              if (value.split(' ')) {
-                var _name = value.split(' ');
-
-                return _name[0];
-              } else {
-                return value;
-              }
-            } else {
-              return '';
-            }
-          } else {
-            return value;
           }
         }
       }, {
@@ -7235,6 +7251,68 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           } else {
             return '';
+          }
+        } // get data when current page data has been completely scrolled
+        // getScrollData() {
+        //   console.log('scrolled');
+        //   if (!this.scrollFlag) {
+        //     this.scrollFlag = true;
+        //     if (this.wholeData.next_page_url) {
+        //   this.smallSpinner = true;
+        //   const historyData = new FormData();
+        //   historyData.append('id', localStorage.getItem('id'));
+        //   if (this.type.match('contacted')) {
+        //     historyData.append('contacted', '1');
+        //   } else {
+        //     historyData.append('contacted', '0');
+        //   }
+        //   if (localStorage.getItem('is_lead')) {
+        //     historyData.append('is_lead', localStorage.getItem('is_lead'));
+        //   } else {
+        //     this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+        //         console.log(res);
+        //         historyData.append('is_lead', res.is_lead);
+        //         localStorage.setItem('is_lead', res.is_lead);
+        //       },
+        //       err => {
+        //         console.log(err);
+        //       });
+        //   }
+        //   // tslint:disable-next-line: max-line-length
+        //   this.http.post < any > ('https://partner.hansmatrimony.com/api/' + this.scrollLink + this.wholeData.next_page_url, historyData).subscribe(
+        //     (data: any) => {
+        //       console.log(data);
+        //       this.wholeData = data;
+        //       const newData = Object.values(data.data);
+        //       console.log(newData);
+        //       this.profile = this.profile.concat(newData);
+        //       console.log(this.profile);
+        //       this.scrollFlag = false;
+        //       this.smallSpinner = false;
+        //     },
+        //     (error: any) => {
+        //       this.spinner.hide();
+        //       this.ngxNotificationService.error('Something Went Wrong');
+        //       console.log(error);
+        //     }
+        //   );
+        //   }
+        // }
+        // }
+
+      }, {
+        key: "setName",
+        value: function setName(name) {
+          if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0' || this.authData.paid_status !== 'Paid')) {
+            var a = name.split(' ');
+
+            if (a[0] && a[1]) {
+              return a[0][0] + ' ' + a[1];
+            } else if (a[0]) {
+              return a[0][0];
+            }
+          } else {
+            return name;
           }
         }
       }]);
@@ -9105,8 +9183,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.type === 'interestReceived') {
             localStorage.setItem('stage', '2');
-          } else if (this.type === 'interestShown') {
+          } else if (this.type === 'interestShown' || this.type === 'rejected' || this.type === 'contacted') {
             localStorage.setItem('stage', '3');
+
+            switch (this.type) {
+              case 'rejected':
+                localStorage.setItem('selectedType', '2');
+                break;
+
+              case 'contacted':
+                localStorage.setItem('selectedType', '1');
+                break;
+
+              default:
+                break;
+            }
           }
 
           if (item) {
@@ -10185,6 +10276,228 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
+  "./src/app/chat/history-section/history-item/history-item.component.css":
+  /*!******************************************************************************!*\
+    !*** ./src/app/chat/history-section/history-item/history-item.component.css ***!
+    \******************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppChatHistorySectionHistoryItemHistoryItemComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".top-bar{\r\n    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);\r\n  }\r\n  .row {\r\n      margin: 0;\r\n  }\r\n  .btn-tabs{\r\n      background:#e7e7e7;\r\n      margin:1%;\r\n      width: 100%;\r\n      border-radius:6px;\r\n      color:#a3a2a2;\r\n      font-weight:bold;\r\n      line-height: 1.3;\r\n      padding: .375rem .75rem;\r\n  }\r\n  .btn-tabs-active{\r\n      background:#49b9e6;\r\n      margin:1%;\r\n      border-radius:6px;\r\n      color:white;\r\n      font-weight:bold;\r\n  }\r\n  .search-area{\r\n      width: 100%;\r\n      transition: all 2.5s ease-in-out;\r\n      padding:2.5%;\r\n      display:flex;\r\n      flex-direction:row;\r\n      align-items: center;\r\n      justify-content: center;\r\n  }\r\n  .custom{\r\n      background:#e7e7e7;\r\n      border:0px;\r\n      width:100%;\r\n      height:40px;\r\n      border-radius:6px;\r\n  }\r\n  .btn-row{\r\n      display: flex;\r\n      flex-flow: column;\r\n      width: 100%;\r\n      flex-direction: row;\r\n      justify-content: space-evenly;\r\n      overflow-x: scroll;\r\n      overflow-y: hidden;\r\n      -ms-overflow-style: none!important;  \r\n      scrollbar-width: none!important;\r\n  }\r\n  .btn-row::-webkit-scrollbar {\r\n      display: none!important;\r\n    }\r\n  .col{\r\n      padding: 0px;\r\n  }\r\n  .search-results{\r\n      display: flex;\r\n      flex-direction: row;\r\n      align-items: center;\r\n      justify-content: center;\r\n      background: white;\r\n      margin: 10px 10px;\r\n      border-radius: 5px;\r\n      box-shadow: 1px 1px 10px #737373;\r\n  \r\n  }\r\n  .profiles{\r\n      padding:2%;\r\n      width:100%;\r\n      display: flex;\r\n      flex-direction:row;\r\n      align-items: center;\r\n      justify-content: center;\r\n      /* border:1px solid rgba(46, 45, 45, 0.274); */\r\n      border-radius:4px;\r\n      background:white;\r\n      color:rgba(36, 34, 34, 0.856);\r\n  }\r\n  .profiles p{\r\n      margin:0px;\r\n  }\r\n  .circular{\r\n      border:2px solid rgba(92, 187, 231, 0.911);\r\n      color:rgba(35, 131, 221, 0.89);\r\n      border-radius: 50%;\r\n      width:75px;\r\n      height:75px;\r\n      display: flex;\r\n      flex-direction: column;\r\n      align-items: center;\r\n      justify-content: center;\r\n  }\r\n  .column{\r\n      display: flex;\r\n      flex-direction: column;\r\n      align-items: center;\r\n      justify-content: center;\r\n  }\r\n  .columnLast{\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: space-evenly;\r\n}\r\n  .setButtons{\r\n    width: 50px;\r\n     height: 50px;\r\n     display: flex;\r\n     flex-direction: column;\r\n     align-items: center;\r\n     justify-content: center;\r\n     margin-right: 10px;\r\n}\r\n  /* .row{\r\n      width:100%;\r\n      margin:auto;\r\n      -ms-overflow-style: none!important;  \r\n    scrollbar-width: none!important;  \r\n  }\r\n  .row::-webkit-scrollbar {\r\n      display: none!important;\r\n    } */\r\n  @media (max-width: 350px) {\r\n      .btn-row{\r\n      display: flex;\r\n      flex-flow: column;\r\n      width: 100%;\r\n      flex-direction: row;\r\n      justify-content: space-evenly;\r\n      overflow-x: scroll;\r\n      overflow-y: hidden;\r\n      -ms-overflow-style: none!important;  \r\n      scrollbar-width: none!important;\r\n      }\r\n      .btn-tabs{\r\n          background:#e7e7e7;\r\n          margin:1%;\r\n          border-radius:6px;\r\n          color:#a3a2a2;\r\n          font-weight:bold;\r\n          line-height: 1.3;\r\n          padding: 0rem .5rem;\r\n      }\r\n\r\n      .setButtons{\r\n        width: 40px;\r\n         height: 40px;\r\n         display: flex;\r\n         flex-direction: column;\r\n         align-items: center;\r\n         justify-content: center;\r\n    }\r\n    }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdC9oaXN0b3J5LXNlY3Rpb24vaGlzdG9yeS1pdGVtL2hpc3RvcnktaXRlbS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMERBQTBEO0VBQzVEO0VBQ0E7TUFDSSxTQUFTO0VBQ2I7RUFFQTtNQUNJLGtCQUFrQjtNQUNsQixTQUFTO01BQ1QsV0FBVztNQUNYLGlCQUFpQjtNQUNqQixhQUFhO01BQ2IsZ0JBQWdCO01BQ2hCLGdCQUFnQjtNQUNoQix1QkFBdUI7RUFDM0I7RUFDQTtNQUNJLGtCQUFrQjtNQUNsQixTQUFTO01BQ1QsaUJBQWlCO01BQ2pCLFdBQVc7TUFDWCxnQkFBZ0I7RUFDcEI7RUFDQTtNQUNJLFdBQVc7TUFFWCxnQ0FBZ0M7TUFDaEMsWUFBWTtNQUNaLFlBQVk7TUFDWixrQkFBa0I7TUFDbEIsbUJBQW1CO01BQ25CLHVCQUF1QjtFQUMzQjtFQUNBO01BQ0ksa0JBQWtCO01BQ2xCLFVBQVU7TUFDVixVQUFVO01BQ1YsV0FBVztNQUNYLGlCQUFpQjtFQUNyQjtFQUNBO01BQ0ksYUFBYTtNQUNiLGlCQUFpQjtNQUNqQixXQUFXO01BQ1gsbUJBQW1CO01BQ25CLDZCQUE2QjtNQUM3QixrQkFBa0I7TUFDbEIsa0JBQWtCO01BQ2xCLGtDQUFrQztNQUNsQywrQkFBK0I7RUFDbkM7RUFDQTtNQUNJLHVCQUF1QjtJQUN6QjtFQUNGO01BQ0ksWUFBWTtFQUNoQjtFQUNBO01BQ0ksYUFBYTtNQUNiLG1CQUFtQjtNQUNuQixtQkFBbUI7TUFDbkIsdUJBQXVCO01BQ3ZCLGlCQUFpQjtNQUNqQixpQkFBaUI7TUFDakIsa0JBQWtCO01BQ2xCLGdDQUFnQzs7RUFFcEM7RUFDQTtNQUNJLFVBQVU7TUFDVixVQUFVO01BQ1YsYUFBYTtNQUNiLGtCQUFrQjtNQUNsQixtQkFBbUI7TUFDbkIsdUJBQXVCO01BQ3ZCLDhDQUE4QztNQUM5QyxpQkFBaUI7TUFDakIsZ0JBQWdCO01BQ2hCLDZCQUE2QjtFQUNqQztFQUNBO01BQ0ksVUFBVTtFQUNkO0VBQ0E7TUFDSSwwQ0FBMEM7TUFDMUMsOEJBQThCO01BQzlCLGtCQUFrQjtNQUNsQixVQUFVO01BQ1YsV0FBVztNQUNYLGFBQWE7TUFDYixzQkFBc0I7TUFDdEIsbUJBQW1CO01BQ25CLHVCQUF1QjtFQUMzQjtFQUNBO01BQ0ksYUFBYTtNQUNiLHNCQUFzQjtNQUN0QixtQkFBbUI7TUFDbkIsdUJBQXVCO0VBQzNCO0VBRUE7SUFDRSxhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLG1CQUFtQjtJQUNuQiw2QkFBNkI7QUFDakM7RUFFRTtJQUNFLFdBQVc7S0FDVixZQUFZO0tBQ1osYUFBYTtLQUNiLHNCQUFzQjtLQUN0QixtQkFBbUI7S0FDbkIsdUJBQXVCO0tBQ3ZCLGtCQUFrQjtBQUN2QjtFQUVFOzs7Ozs7OztPQVFLO0VBRUg7TUFDRTtNQUNBLGFBQWE7TUFDYixpQkFBaUI7TUFDakIsV0FBVztNQUNYLG1CQUFtQjtNQUNuQiw2QkFBNkI7TUFDN0Isa0JBQWtCO01BQ2xCLGtCQUFrQjtNQUNsQixrQ0FBa0M7TUFDbEMsK0JBQStCO01BQy9CO01BQ0E7VUFDSSxrQkFBa0I7VUFDbEIsU0FBUztVQUNULGlCQUFpQjtVQUNqQixhQUFhO1VBQ2IsZ0JBQWdCO1VBQ2hCLGdCQUFnQjtVQUNoQixtQkFBbUI7TUFDdkI7O01BRUE7UUFDRSxXQUFXO1NBQ1YsWUFBWTtTQUNaLGFBQWE7U0FDYixzQkFBc0I7U0FDdEIsbUJBQW1CO1NBQ25CLHVCQUF1QjtJQUM1QjtJQUNBIiwiZmlsZSI6InNyYy9hcHAvY2hhdC9oaXN0b3J5LXNlY3Rpb24vaGlzdG9yeS1pdGVtL2hpc3RvcnktaXRlbS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRvcC1iYXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsICM0RkIwRTUsICM1NjZFRTgpO1xyXG4gIH1cclxuICAucm93IHtcclxuICAgICAgbWFyZ2luOiAwO1xyXG4gIH1cclxuICBcclxuICAuYnRuLXRhYnN7XHJcbiAgICAgIGJhY2tncm91bmQ6I2U3ZTdlNztcclxuICAgICAgbWFyZ2luOjElO1xyXG4gICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgYm9yZGVyLXJhZGl1czo2cHg7XHJcbiAgICAgIGNvbG9yOiNhM2EyYTI7XHJcbiAgICAgIGZvbnQtd2VpZ2h0OmJvbGQ7XHJcbiAgICAgIGxpbmUtaGVpZ2h0OiAxLjM7XHJcbiAgICAgIHBhZGRpbmc6IC4zNzVyZW0gLjc1cmVtO1xyXG4gIH1cclxuICAuYnRuLXRhYnMtYWN0aXZle1xyXG4gICAgICBiYWNrZ3JvdW5kOiM0OWI5ZTY7XHJcbiAgICAgIG1hcmdpbjoxJTtcclxuICAgICAgYm9yZGVyLXJhZGl1czo2cHg7XHJcbiAgICAgIGNvbG9yOndoaXRlO1xyXG4gICAgICBmb250LXdlaWdodDpib2xkO1xyXG4gIH1cclxuICAuc2VhcmNoLWFyZWF7XHJcbiAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAtd2Via2l0LXRyYW5zaXRpb246IGFsbCAyLjVzIGVhc2UtaW4tb3V0O1xyXG4gICAgICB0cmFuc2l0aW9uOiBhbGwgMi41cyBlYXNlLWluLW91dDtcclxuICAgICAgcGFkZGluZzoyLjUlO1xyXG4gICAgICBkaXNwbGF5OmZsZXg7XHJcbiAgICAgIGZsZXgtZGlyZWN0aW9uOnJvdztcclxuICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgfVxyXG4gIC5jdXN0b217XHJcbiAgICAgIGJhY2tncm91bmQ6I2U3ZTdlNztcclxuICAgICAgYm9yZGVyOjBweDtcclxuICAgICAgd2lkdGg6MTAwJTtcclxuICAgICAgaGVpZ2h0OjQwcHg7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6NnB4O1xyXG4gIH1cclxuICAuYnRuLXJvd3tcclxuICAgICAgZGlzcGxheTogZmxleDtcclxuICAgICAgZmxleC1mbG93OiBjb2x1bW47XHJcbiAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xyXG4gICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcclxuICAgICAgb3ZlcmZsb3cteDogc2Nyb2xsO1xyXG4gICAgICBvdmVyZmxvdy15OiBoaWRkZW47XHJcbiAgICAgIC1tcy1vdmVyZmxvdy1zdHlsZTogbm9uZSFpbXBvcnRhbnQ7ICBcclxuICAgICAgc2Nyb2xsYmFyLXdpZHRoOiBub25lIWltcG9ydGFudDtcclxuICB9XHJcbiAgLmJ0bi1yb3c6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcclxuICAgICAgZGlzcGxheTogbm9uZSFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgLmNvbHtcclxuICAgICAgcGFkZGluZzogMHB4O1xyXG4gIH1cclxuICAuc2VhcmNoLXJlc3VsdHN7XHJcbiAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gICAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICAgICAgbWFyZ2luOiAxMHB4IDEwcHg7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgICAgYm94LXNoYWRvdzogMXB4IDFweCAxMHB4ICM3MzczNzM7XHJcbiAgXHJcbiAgfVxyXG4gIC5wcm9maWxlc3tcclxuICAgICAgcGFkZGluZzoyJTtcclxuICAgICAgd2lkdGg6MTAwJTtcclxuICAgICAgZGlzcGxheTogZmxleDtcclxuICAgICAgZmxleC1kaXJlY3Rpb246cm93O1xyXG4gICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgICAgLyogYm9yZGVyOjFweCBzb2xpZCByZ2JhKDQ2LCA0NSwgNDUsIDAuMjc0KTsgKi9cclxuICAgICAgYm9yZGVyLXJhZGl1czo0cHg7XHJcbiAgICAgIGJhY2tncm91bmQ6d2hpdGU7XHJcbiAgICAgIGNvbG9yOnJnYmEoMzYsIDM0LCAzNCwgMC44NTYpO1xyXG4gIH1cclxuICAucHJvZmlsZXMgcHtcclxuICAgICAgbWFyZ2luOjBweDtcclxuICB9XHJcbiAgLmNpcmN1bGFye1xyXG4gICAgICBib3JkZXI6MnB4IHNvbGlkIHJnYmEoOTIsIDE4NywgMjMxLCAwLjkxMSk7XHJcbiAgICAgIGNvbG9yOnJnYmEoMzUsIDEzMSwgMjIxLCAwLjg5KTtcclxuICAgICAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gICAgICB3aWR0aDo3NXB4O1xyXG4gICAgICBoZWlnaHQ6NzVweDtcclxuICAgICAgZGlzcGxheTogZmxleDtcclxuICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgfVxyXG4gIC5jb2x1bW57XHJcbiAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIH1cclxuXHJcbiAgLmNvbHVtbkxhc3R7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcclxufVxyXG5cclxuICAuc2V0QnV0dG9uc3tcclxuICAgIHdpZHRoOiA1MHB4O1xyXG4gICAgIGhlaWdodDogNTBweDtcclxuICAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgICBtYXJnaW4tcmlnaHQ6IDEwcHg7XHJcbn1cclxuICBcclxuICAvKiAucm93e1xyXG4gICAgICB3aWR0aDoxMDAlO1xyXG4gICAgICBtYXJnaW46YXV0bztcclxuICAgICAgLW1zLW92ZXJmbG93LXN0eWxlOiBub25lIWltcG9ydGFudDsgIFxyXG4gICAgc2Nyb2xsYmFyLXdpZHRoOiBub25lIWltcG9ydGFudDsgIFxyXG4gIH1cclxuICAucm93Ojotd2Via2l0LXNjcm9sbGJhciB7XHJcbiAgICAgIGRpc3BsYXk6IG5vbmUhaW1wb3J0YW50O1xyXG4gICAgfSAqL1xyXG4gIFxyXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDM1MHB4KSB7XHJcbiAgICAgIC5idG4tcm93e1xyXG4gICAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgICBmbGV4LWZsb3c6IGNvbHVtbjtcclxuICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xyXG4gICAgICBvdmVyZmxvdy14OiBzY3JvbGw7XHJcbiAgICAgIG92ZXJmbG93LXk6IGhpZGRlbjtcclxuICAgICAgLW1zLW92ZXJmbG93LXN0eWxlOiBub25lIWltcG9ydGFudDsgIFxyXG4gICAgICBzY3JvbGxiYXItd2lkdGg6IG5vbmUhaW1wb3J0YW50O1xyXG4gICAgICB9XHJcbiAgICAgIC5idG4tdGFic3tcclxuICAgICAgICAgIGJhY2tncm91bmQ6I2U3ZTdlNztcclxuICAgICAgICAgIG1hcmdpbjoxJTtcclxuICAgICAgICAgIGJvcmRlci1yYWRpdXM6NnB4O1xyXG4gICAgICAgICAgY29sb3I6I2EzYTJhMjtcclxuICAgICAgICAgIGZvbnQtd2VpZ2h0OmJvbGQ7XHJcbiAgICAgICAgICBsaW5lLWhlaWdodDogMS4zO1xyXG4gICAgICAgICAgcGFkZGluZzogMHJlbSAuNXJlbTtcclxuICAgICAgfVxyXG5cclxuICAgICAgLnNldEJ1dHRvbnN7XHJcbiAgICAgICAgd2lkdGg6IDQwcHg7XHJcbiAgICAgICAgIGhlaWdodDogNDBweDtcclxuICAgICAgICAgZGlzcGxheTogZmxleDtcclxuICAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICB9XHJcbiAgICB9Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/chat/history-section/history-item/history-item.component.ts":
+  /*!*****************************************************************************!*\
+    !*** ./src/app/chat/history-section/history-item/history-item.component.ts ***!
+    \*****************************************************************************/
+
+  /*! exports provided: HistoryItemComponent */
+
+  /***/
+  function srcAppChatHistorySectionHistoryItemHistoryItemComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "HistoryItemComponent", function () {
+      return HistoryItemComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+    /* harmony import */
+
+
+    var src_app_analytics_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! src/app/analytics.service */
+    "./src/app/analytics.service.ts");
+    /* harmony import */
+
+
+    var src_app_find_open_history_profile_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! src/app/find-open-history-profile.service */
+    "./src/app/find-open-history-profile.service.ts");
+
+    var HistoryItemComponent = /*#__PURE__*/function () {
+      function HistoryItemComponent(itemService, http, analyticsService, router) {
+        _classCallCheck(this, HistoryItemComponent);
+
+        this.itemService = itemService;
+        this.http = http;
+        this.analyticsService = analyticsService;
+        this.router = router;
+        this.actionTaken = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"](); // tslint:disable-next-line: max-line-length
+
+        this.Heights = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"', // tslint:disable-next-line: max-line-length
+        '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"']; // tslint:disable-next-line: max-line-length
+
+        this.Heights1 = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
+      }
+
+      _createClass(HistoryItemComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }, {
+        key: "getColor",
+        value: function getColor(type) {
+          return type === 'REJECT' ? 'rgba(248, 73, 73, 0.849)' : type === 'SHORTLIST' ? 'rgba(22, 182, 22, 0.788)' : 'rgba(35, 131, 221, 0.89)';
+        }
+      }, {
+        key: "setName",
+        value: function setName(name) {
+          if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0' || this.authData.paid_status !== 'Paid')) {
+            var a = name.split(' ');
+
+            if (a[0] && a[1]) {
+              return a[0][0] + ' ' + a[1];
+            } else if (a[0]) {
+              return a[0][0];
+            }
+          } else {
+            return name;
+          }
+        }
+      }, {
+        key: "getHeight",
+        value: function getHeight(num) {
+          return this.Heights[this.Heights1.indexOf(num)];
+        }
+      }, {
+        key: "setPlaceholderImage",
+        value: function setPlaceholderImage() {
+          var gender = localStorage.getItem('gender');
+          var imageView = document.querySelector('#searchImage');
+
+          if (gender === 'Male') {
+            imageView.setAttribute('src', '../../assets/male_pic.png');
+          } else {
+            imageView.setAttribute('src', '../../assets/female_pic.png');
+          }
+        }
+      }, {
+        key: "getUserProfileData",
+        value: function getUserProfileData() {
+          var _this59 = this;
+
+          var myprofileData = new FormData();
+          myprofileData.append('id', String(this.listItem.id));
+          myprofileData.append('is_lead', String(this.listItem.is_lead));
+
+          if (this.listItem.type === 'CONTACT') {
+            myprofileData.append('contacted', '1');
+          } // tslint:disable-next-line: max-line-length
+
+
+          return this.http.post('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(7000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) {
+            throw new Error('Server Timeout ' + e);
+          })).subscribe(function (data) {
+            console.log(data); // section from which user is going
+
+            if (_this59.listItem.type === 'SHORTLIST') {
+              data.coming = 'interestShown';
+            } else if (_this59.listItem.type === 'REJECT') {
+              data.coming = 'rejected';
+            } else if (_this59.listItem.type === 'CONTACT') {
+              data.coming = 'contacted';
+            }
+
+            localStorage.setItem('open_profile', JSON.stringify(data)); // setting the index in local strorage to use in scrollIntoView later
+
+            localStorage.setItem('index', String(_this59.itemIndex));
+            localStorage.setItem('todaysPopupOpened', '0');
+            localStorage.setItem('stage', '4');
+
+            _this59.analyticsService.googleAnalytics("".concat(_this59.listItem.type, " Profile Visited From History Search")); // navigate to HISTORY PROFILE DIALOG COMPONENT
+
+
+            _this59.router.navigateByUrl('chat/open/open-profile');
+          }, function (error) {
+            console.log(error);
+          });
+        }
+      }, {
+        key: "sendAction",
+        value: function sendAction(answer) {
+          var obj = {
+            item: this.listItem,
+            index: this.itemIndex,
+            response: answer
+          };
+          this.actionTaken.emit(obj);
+        }
+      }]);
+
+      return HistoryItemComponent;
+    }();
+
+    HistoryItemComponent.ctorParameters = function () {
+      return [{
+        type: src_app_find_open_history_profile_service__WEBPACK_IMPORTED_MODULE_6__["FindOpenHistoryProfileService"]
+      }, {
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
+      }, {
+        type: src_app_analytics_service__WEBPACK_IMPORTED_MODULE_5__["AnalyticsService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }];
+    };
+
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], HistoryItemComponent.prototype, "listItem", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], HistoryItemComponent.prototype, "itemIndex", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], HistoryItemComponent.prototype, "authData", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"])()], HistoryItemComponent.prototype, "actionTaken", void 0);
+    HistoryItemComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+      selector: 'app-history-item',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./history-item.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/chat/history-section/history-item/history-item.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./history-item.component.css */
+      "./src/app/chat/history-section/history-item/history-item.component.css"))["default"]]
+    })], HistoryItemComponent);
+    /***/
+  },
+
+  /***/
   "./src/app/chat/history-section/history-section.component.css":
   /*!********************************************************************!*\
     !*** ./src/app/chat/history-section/history-section.component.css ***!
@@ -10200,7 +10513,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".top-bar{\r\n  background-image: linear-gradient(90deg, #4FB0E5, #566EE8);\r\n}\r\n.row {\r\n    margin: 0;\r\n}\r\n.btn-tabs{\r\n    background:#e7e7e7;\r\n    margin:1%;\r\n    width: 100%;\r\n    border-radius:6px;\r\n    color:#a3a2a2;\r\n    font-weight:bold;\r\n    line-height: 1.3;\r\n    padding: .375rem .75rem;\r\n}\r\n.btn-tabs-active{\r\n    background:#49b9e6;\r\n    margin:1%;\r\n    border-radius:6px;\r\n    color:white;\r\n    font-weight:bold;\r\n}\r\n.search-area{\r\n    width: 100%;\r\n    transition: all 2.5s ease-in-out;\r\n    padding:2.5%;\r\n    display:flex;\r\n    flex-direction:row;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n.custom{\r\n    background:#e7e7e7;\r\n    border:0px;\r\n    width:100%;\r\n    height:40px;\r\n    border-radius:6px;\r\n}\r\n.btn-row{\r\n    display: flex;\r\n    flex-flow: column;\r\n    width: 100%;\r\n    flex-direction: row;\r\n    justify-content: space-evenly;\r\n    overflow-x: scroll;\r\n    overflow-y: hidden;\r\n    -ms-overflow-style: none!important;  \r\n    scrollbar-width: none!important;\r\n}\r\n.btn-row::-webkit-scrollbar {\r\n    display: none!important;\r\n  }\r\n.col{\r\n    padding: 0px;\r\n}\r\n.search-results{\r\n    padding:2% 2% 15% 2%;\r\n\r\n}\r\n.profiles{\r\n    padding:2%;\r\n    width:100%;\r\n    display: flex;\r\n    flex-direction:row;\r\n    align-items: center;\r\n    justify-content: center;\r\n    /* border:1px solid rgba(46, 45, 45, 0.274); */\r\n    border-radius:4px;\r\n    background:white;\r\n    color:rgba(36, 34, 34, 0.856);\r\n}\r\n.profiles p{\r\n    margin:0px;\r\n}\r\n.circular{\r\n    border:2px solid rgba(92, 187, 231, 0.911);\r\n    color:rgba(35, 131, 221, 0.89);\r\n    border-radius: 50%;\r\n    width:75px;\r\n    height:75px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n.column{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n/* .row{\r\n    width:100%;\r\n    margin:auto;\r\n    -ms-overflow-style: none!important;  \r\n  scrollbar-width: none!important;  \r\n}\r\n.row::-webkit-scrollbar {\r\n    display: none!important;\r\n  } */\r\n@media (max-width: 350px) {\r\n    .btn-row{\r\n    display: flex;\r\n    flex-flow: column;\r\n    width: 100%;\r\n    flex-direction: row;\r\n    justify-content: space-evenly;\r\n    overflow-x: scroll;\r\n    overflow-y: hidden;\r\n    -ms-overflow-style: none!important;  \r\n    scrollbar-width: none!important;\r\n    }\r\n    .btn-tabs{\r\n        background:#e7e7e7;\r\n        margin:1%;\r\n        border-radius:6px;\r\n        color:#a3a2a2;\r\n        font-weight:bold;\r\n        line-height: 1.3;\r\n        padding: 0rem .5rem;\r\n    }\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdC9oaXN0b3J5LXNlY3Rpb24vaGlzdG9yeS1zZWN0aW9uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwREFBMEQ7QUFDNUQ7QUFDQTtJQUNJLFNBQVM7QUFDYjtBQUNBO0lBQ0ksa0JBQWtCO0lBQ2xCLFNBQVM7SUFDVCxXQUFXO0lBQ1gsaUJBQWlCO0lBQ2pCLGFBQWE7SUFDYixnQkFBZ0I7SUFDaEIsZ0JBQWdCO0lBQ2hCLHVCQUF1QjtBQUMzQjtBQUNBO0lBQ0ksa0JBQWtCO0lBQ2xCLFNBQVM7SUFDVCxpQkFBaUI7SUFDakIsV0FBVztJQUNYLGdCQUFnQjtBQUNwQjtBQUNBO0lBQ0ksV0FBVztJQUVYLGdDQUFnQztJQUNoQyxZQUFZO0lBQ1osWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsdUJBQXVCO0FBQzNCO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsVUFBVTtJQUNWLFVBQVU7SUFDVixXQUFXO0lBQ1gsaUJBQWlCO0FBQ3JCO0FBQ0E7SUFDSSxhQUFhO0lBQ2IsaUJBQWlCO0lBQ2pCLFdBQVc7SUFDWCxtQkFBbUI7SUFDbkIsNkJBQTZCO0lBQzdCLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsa0NBQWtDO0lBQ2xDLCtCQUErQjtBQUNuQztBQUNBO0lBQ0ksdUJBQXVCO0VBQ3pCO0FBQ0Y7SUFDSSxZQUFZO0FBQ2hCO0FBQ0E7SUFDSSxvQkFBb0I7O0FBRXhCO0FBQ0E7SUFDSSxVQUFVO0lBQ1YsVUFBVTtJQUNWLGFBQWE7SUFDYixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLHVCQUF1QjtJQUN2Qiw4Q0FBOEM7SUFDOUMsaUJBQWlCO0lBQ2pCLGdCQUFnQjtJQUNoQiw2QkFBNkI7QUFDakM7QUFDQTtJQUNJLFVBQVU7QUFDZDtBQUNBO0lBQ0ksMENBQTBDO0lBQzFDLDhCQUE4QjtJQUM5QixrQkFBa0I7SUFDbEIsVUFBVTtJQUNWLFdBQVc7SUFDWCxhQUFhO0lBQ2Isc0JBQXNCO0lBQ3RCLG1CQUFtQjtJQUNuQix1QkFBdUI7QUFDM0I7QUFDQTtJQUNJLGFBQWE7SUFDYixzQkFBc0I7SUFDdEIsbUJBQW1CO0lBQ25CLHVCQUF1QjtBQUMzQjtBQUVBOzs7Ozs7OztLQVFLO0FBRUg7SUFDRTtJQUNBLGFBQWE7SUFDYixpQkFBaUI7SUFDakIsV0FBVztJQUNYLG1CQUFtQjtJQUNuQiw2QkFBNkI7SUFDN0Isa0JBQWtCO0lBQ2xCLGtCQUFrQjtJQUNsQixrQ0FBa0M7SUFDbEMsK0JBQStCO0lBQy9CO0lBQ0E7UUFDSSxrQkFBa0I7UUFDbEIsU0FBUztRQUNULGlCQUFpQjtRQUNqQixhQUFhO1FBQ2IsZ0JBQWdCO1FBQ2hCLGdCQUFnQjtRQUNoQixtQkFBbUI7SUFDdkI7RUFDRiIsImZpbGUiOiJzcmMvYXBwL2NoYXQvaGlzdG9yeS1zZWN0aW9uL2hpc3Rvcnktc2VjdGlvbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRvcC1iYXJ7XHJcbiAgYmFja2dyb3VuZC1pbWFnZTogbGluZWFyLWdyYWRpZW50KDkwZGVnLCAjNEZCMEU1LCAjNTY2RUU4KTtcclxufVxyXG4ucm93IHtcclxuICAgIG1hcmdpbjogMDtcclxufVxyXG4uYnRuLXRhYnN7XHJcbiAgICBiYWNrZ3JvdW5kOiNlN2U3ZTc7XHJcbiAgICBtYXJnaW46MSU7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGJvcmRlci1yYWRpdXM6NnB4O1xyXG4gICAgY29sb3I6I2EzYTJhMjtcclxuICAgIGZvbnQtd2VpZ2h0OmJvbGQ7XHJcbiAgICBsaW5lLWhlaWdodDogMS4zO1xyXG4gICAgcGFkZGluZzogLjM3NXJlbSAuNzVyZW07XHJcbn1cclxuLmJ0bi10YWJzLWFjdGl2ZXtcclxuICAgIGJhY2tncm91bmQ6IzQ5YjllNjtcclxuICAgIG1hcmdpbjoxJTtcclxuICAgIGJvcmRlci1yYWRpdXM6NnB4O1xyXG4gICAgY29sb3I6d2hpdGU7XHJcbiAgICBmb250LXdlaWdodDpib2xkO1xyXG59XHJcbi5zZWFyY2gtYXJlYXtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiBhbGwgMi41cyBlYXNlLWluLW91dDtcclxuICAgIHRyYW5zaXRpb246IGFsbCAyLjVzIGVhc2UtaW4tb3V0O1xyXG4gICAgcGFkZGluZzoyLjUlO1xyXG4gICAgZGlzcGxheTpmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246cm93O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG59XHJcbi5jdXN0b217XHJcbiAgICBiYWNrZ3JvdW5kOiNlN2U3ZTc7XHJcbiAgICBib3JkZXI6MHB4O1xyXG4gICAgd2lkdGg6MTAwJTtcclxuICAgIGhlaWdodDo0MHB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czo2cHg7XHJcbn1cclxuLmJ0bi1yb3d7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1mbG93OiBjb2x1bW47XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcclxuICAgIG92ZXJmbG93LXg6IHNjcm9sbDtcclxuICAgIG92ZXJmbG93LXk6IGhpZGRlbjtcclxuICAgIC1tcy1vdmVyZmxvdy1zdHlsZTogbm9uZSFpbXBvcnRhbnQ7ICBcclxuICAgIHNjcm9sbGJhci13aWR0aDogbm9uZSFpbXBvcnRhbnQ7XHJcbn1cclxuLmJ0bi1yb3c6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcclxuICAgIGRpc3BsYXk6IG5vbmUhaW1wb3J0YW50O1xyXG4gIH1cclxuLmNvbHtcclxuICAgIHBhZGRpbmc6IDBweDtcclxufVxyXG4uc2VhcmNoLXJlc3VsdHN7XHJcbiAgICBwYWRkaW5nOjIlIDIlIDE1JSAyJTtcclxuXHJcbn1cclxuLnByb2ZpbGVze1xyXG4gICAgcGFkZGluZzoyJTtcclxuICAgIHdpZHRoOjEwMCU7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246cm93O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gICAgLyogYm9yZGVyOjFweCBzb2xpZCByZ2JhKDQ2LCA0NSwgNDUsIDAuMjc0KTsgKi9cclxuICAgIGJvcmRlci1yYWRpdXM6NHB4O1xyXG4gICAgYmFja2dyb3VuZDp3aGl0ZTtcclxuICAgIGNvbG9yOnJnYmEoMzYsIDM0LCAzNCwgMC44NTYpO1xyXG59XHJcbi5wcm9maWxlcyBwe1xyXG4gICAgbWFyZ2luOjBweDtcclxufVxyXG4uY2lyY3VsYXJ7XHJcbiAgICBib3JkZXI6MnB4IHNvbGlkIHJnYmEoOTIsIDE4NywgMjMxLCAwLjkxMSk7XHJcbiAgICBjb2xvcjpyZ2JhKDM1LCAxMzEsIDIyMSwgMC44OSk7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICB3aWR0aDo3NXB4O1xyXG4gICAgaGVpZ2h0Ojc1cHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxufVxyXG4uY29sdW1ue1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuXHJcbi8qIC5yb3d7XHJcbiAgICB3aWR0aDoxMDAlO1xyXG4gICAgbWFyZ2luOmF1dG87XHJcbiAgICAtbXMtb3ZlcmZsb3ctc3R5bGU6IG5vbmUhaW1wb3J0YW50OyAgXHJcbiAgc2Nyb2xsYmFyLXdpZHRoOiBub25lIWltcG9ydGFudDsgIFxyXG59XHJcbi5yb3c6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcclxuICAgIGRpc3BsYXk6IG5vbmUhaW1wb3J0YW50O1xyXG4gIH0gKi9cclxuXHJcbiAgQG1lZGlhIChtYXgtd2lkdGg6IDM1MHB4KSB7XHJcbiAgICAuYnRuLXJvd3tcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBmbGV4LWZsb3c6IGNvbHVtbjtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xyXG4gICAgb3ZlcmZsb3cteDogc2Nyb2xsO1xyXG4gICAgb3ZlcmZsb3cteTogaGlkZGVuO1xyXG4gICAgLW1zLW92ZXJmbG93LXN0eWxlOiBub25lIWltcG9ydGFudDsgIFxyXG4gICAgc2Nyb2xsYmFyLXdpZHRoOiBub25lIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5idG4tdGFic3tcclxuICAgICAgICBiYWNrZ3JvdW5kOiNlN2U3ZTc7XHJcbiAgICAgICAgbWFyZ2luOjElO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6NnB4O1xyXG4gICAgICAgIGNvbG9yOiNhM2EyYTI7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6Ym9sZDtcclxuICAgICAgICBsaW5lLWhlaWdodDogMS4zO1xyXG4gICAgICAgIHBhZGRpbmc6IDByZW0gLjVyZW07XHJcbiAgICB9XHJcbiAgfSJdfQ== */";
+    __webpack_exports__["default"] = ".top-bar{\r\n  background-image: linear-gradient(90deg, #4FB0E5, #566EE8);\r\n}\r\n.row {\r\n    margin: 0;\r\n}\r\n.btn-tabs{\r\n    background:#e7e7e7;\r\n    margin:1%;\r\n    width: 100%;\r\n    border-radius:6px;\r\n    color:#a3a2a2;\r\n    font-weight:bold;\r\n    line-height: 1.3;\r\n    padding: .375rem .75rem;\r\n}\r\n.btn-tabs-active{\r\n    background:#49b9e6;\r\n    margin:1%;\r\n    border-radius:6px;\r\n    color:white;\r\n    font-weight:bold;\r\n}\r\n.search-area{\r\n    width: 100%;\r\n    transition: all 2.5s ease-in-out;\r\n    padding:2.5%;\r\n    display:flex;\r\n    flex-direction:row;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n.custom{\r\n    background:#e7e7e7;\r\n    border:0px;\r\n    width:100%;\r\n    height:40px;\r\n    border-radius:6px;\r\n}\r\n.btn-row{\r\n    display: flex;\r\n    flex-flow: column;\r\n    width: 100%;\r\n    flex-direction: row;\r\n    justify-content: space-evenly;\r\n    overflow-x: scroll;\r\n    overflow-y: hidden;\r\n    -ms-overflow-style: none!important;  \r\n    scrollbar-width: none!important;\r\n    top: 70px;\r\n    right: 0;\r\n    left: 0;\r\n    z-index: 9999;\r\n}\r\n.btn-row::-webkit-scrollbar {\r\n    display: none!important;\r\n  }\r\n.col{\r\n    padding: 20px 0 0;\r\n}\r\n.search-results{\r\n    padding:2% 2% 15% 2%;\r\n\r\n}\r\n.profiles{\r\n    padding:2%;\r\n    width:100%;\r\n    display: flex;\r\n    flex-direction:row;\r\n    align-items: center;\r\n    justify-content: center;\r\n    /* border:1px solid rgba(46, 45, 45, 0.274); */\r\n    border-radius:4px;\r\n    background:white;\r\n    color:rgba(36, 34, 34, 0.856);\r\n}\r\n.profiles p{\r\n    margin:0px;\r\n}\r\n.circular{\r\n    border:2px solid rgba(92, 187, 231, 0.911);\r\n    color:rgba(35, 131, 221, 0.89);\r\n    border-radius: 50%;\r\n    width:75px;\r\n    height:75px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n.column{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n/* .row{\r\n    width:100%;\r\n    margin:auto;\r\n    -ms-overflow-style: none!important;  \r\n  scrollbar-width: none!important;  \r\n}\r\n.row::-webkit-scrollbar {\r\n    display: none!important;\r\n  } */\r\n@media (max-width: 350px) {\r\n    .btn-row{\r\n    display: flex;\r\n    flex-flow: column;\r\n    width: 100%;\r\n    flex-direction: row;\r\n    justify-content: space-evenly;\r\n    overflow-x: scroll;\r\n    overflow-y: hidden;\r\n    -ms-overflow-style: none!important;  \r\n    scrollbar-width: none!important;\r\n    }\r\n    .btn-tabs{\r\n        background:#e7e7e7;\r\n        margin:1%;\r\n        border-radius:6px;\r\n        color:#a3a2a2;\r\n        font-weight:bold;\r\n        line-height: 1.3;\r\n        padding: 0rem .5rem;\r\n    }\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdC9oaXN0b3J5LXNlY3Rpb24vaGlzdG9yeS1zZWN0aW9uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwREFBMEQ7QUFDNUQ7QUFDQTtJQUNJLFNBQVM7QUFDYjtBQUNBO0lBQ0ksa0JBQWtCO0lBQ2xCLFNBQVM7SUFDVCxXQUFXO0lBQ1gsaUJBQWlCO0lBQ2pCLGFBQWE7SUFDYixnQkFBZ0I7SUFDaEIsZ0JBQWdCO0lBQ2hCLHVCQUF1QjtBQUMzQjtBQUNBO0lBQ0ksa0JBQWtCO0lBQ2xCLFNBQVM7SUFDVCxpQkFBaUI7SUFDakIsV0FBVztJQUNYLGdCQUFnQjtBQUNwQjtBQUNBO0lBQ0ksV0FBVztJQUVYLGdDQUFnQztJQUNoQyxZQUFZO0lBQ1osWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsdUJBQXVCO0FBQzNCO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsVUFBVTtJQUNWLFVBQVU7SUFDVixXQUFXO0lBQ1gsaUJBQWlCO0FBQ3JCO0FBQ0E7SUFDSSxhQUFhO0lBQ2IsaUJBQWlCO0lBQ2pCLFdBQVc7SUFDWCxtQkFBbUI7SUFDbkIsNkJBQTZCO0lBQzdCLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsa0NBQWtDO0lBQ2xDLCtCQUErQjtJQUMvQixTQUFTO0lBQ1QsUUFBUTtJQUNSLE9BQU87SUFDUCxhQUFhO0FBQ2pCO0FBQ0E7SUFDSSx1QkFBdUI7RUFDekI7QUFDRjtJQUNJLGlCQUFpQjtBQUNyQjtBQUNBO0lBQ0ksb0JBQW9COztBQUV4QjtBQUNBO0lBQ0ksVUFBVTtJQUNWLFVBQVU7SUFDVixhQUFhO0lBQ2Isa0JBQWtCO0lBQ2xCLG1CQUFtQjtJQUNuQix1QkFBdUI7SUFDdkIsOENBQThDO0lBQzlDLGlCQUFpQjtJQUNqQixnQkFBZ0I7SUFDaEIsNkJBQTZCO0FBQ2pDO0FBQ0E7SUFDSSxVQUFVO0FBQ2Q7QUFDQTtJQUNJLDBDQUEwQztJQUMxQyw4QkFBOEI7SUFDOUIsa0JBQWtCO0lBQ2xCLFVBQVU7SUFDVixXQUFXO0lBQ1gsYUFBYTtJQUNiLHNCQUFzQjtJQUN0QixtQkFBbUI7SUFDbkIsdUJBQXVCO0FBQzNCO0FBQ0E7SUFDSSxhQUFhO0lBQ2Isc0JBQXNCO0lBQ3RCLG1CQUFtQjtJQUNuQix1QkFBdUI7QUFDM0I7QUFFQTs7Ozs7Ozs7S0FRSztBQUVIO0lBQ0U7SUFDQSxhQUFhO0lBQ2IsaUJBQWlCO0lBQ2pCLFdBQVc7SUFDWCxtQkFBbUI7SUFDbkIsNkJBQTZCO0lBQzdCLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsa0NBQWtDO0lBQ2xDLCtCQUErQjtJQUMvQjtJQUNBO1FBQ0ksa0JBQWtCO1FBQ2xCLFNBQVM7UUFDVCxpQkFBaUI7UUFDakIsYUFBYTtRQUNiLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIsbUJBQW1CO0lBQ3ZCO0VBQ0YiLCJmaWxlIjoic3JjL2FwcC9jaGF0L2hpc3Rvcnktc2VjdGlvbi9oaXN0b3J5LXNlY3Rpb24uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50b3AtYmFye1xyXG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCg5MGRlZywgIzRGQjBFNSwgIzU2NkVFOCk7XHJcbn1cclxuLnJvdyB7XHJcbiAgICBtYXJnaW46IDA7XHJcbn1cclxuLmJ0bi10YWJze1xyXG4gICAgYmFja2dyb3VuZDojZTdlN2U3O1xyXG4gICAgbWFyZ2luOjElO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBib3JkZXItcmFkaXVzOjZweDtcclxuICAgIGNvbG9yOiNhM2EyYTI7XHJcbiAgICBmb250LXdlaWdodDpib2xkO1xyXG4gICAgbGluZS1oZWlnaHQ6IDEuMztcclxuICAgIHBhZGRpbmc6IC4zNzVyZW0gLjc1cmVtO1xyXG59XHJcbi5idG4tdGFicy1hY3RpdmV7XHJcbiAgICBiYWNrZ3JvdW5kOiM0OWI5ZTY7XHJcbiAgICBtYXJnaW46MSU7XHJcbiAgICBib3JkZXItcmFkaXVzOjZweDtcclxuICAgIGNvbG9yOndoaXRlO1xyXG4gICAgZm9udC13ZWlnaHQ6Ym9sZDtcclxufVxyXG4uc2VhcmNoLWFyZWF7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogYWxsIDIuNXMgZWFzZS1pbi1vdXQ7XHJcbiAgICB0cmFuc2l0aW9uOiBhbGwgMi41cyBlYXNlLWluLW91dDtcclxuICAgIHBhZGRpbmc6Mi41JTtcclxuICAgIGRpc3BsYXk6ZmxleDtcclxuICAgIGZsZXgtZGlyZWN0aW9uOnJvdztcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxufVxyXG4uY3VzdG9te1xyXG4gICAgYmFja2dyb3VuZDojZTdlN2U3O1xyXG4gICAgYm9yZGVyOjBweDtcclxuICAgIHdpZHRoOjEwMCU7XHJcbiAgICBoZWlnaHQ6NDBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6NnB4O1xyXG59XHJcbi5idG4tcm93e1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGZsZXgtZmxvdzogY29sdW1uO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XHJcbiAgICBvdmVyZmxvdy14OiBzY3JvbGw7XHJcbiAgICBvdmVyZmxvdy15OiBoaWRkZW47XHJcbiAgICAtbXMtb3ZlcmZsb3ctc3R5bGU6IG5vbmUhaW1wb3J0YW50OyAgXHJcbiAgICBzY3JvbGxiYXItd2lkdGg6IG5vbmUhaW1wb3J0YW50O1xyXG4gICAgdG9wOiA3MHB4O1xyXG4gICAgcmlnaHQ6IDA7XHJcbiAgICBsZWZ0OiAwO1xyXG4gICAgei1pbmRleDogOTk5OTtcclxufVxyXG4uYnRuLXJvdzo6LXdlYmtpdC1zY3JvbGxiYXIge1xyXG4gICAgZGlzcGxheTogbm9uZSFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4uY29se1xyXG4gICAgcGFkZGluZzogMjBweCAwIDA7XHJcbn1cclxuLnNlYXJjaC1yZXN1bHRze1xyXG4gICAgcGFkZGluZzoyJSAyJSAxNSUgMiU7XHJcblxyXG59XHJcbi5wcm9maWxlc3tcclxuICAgIHBhZGRpbmc6MiU7XHJcbiAgICB3aWR0aDoxMDAlO1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGZsZXgtZGlyZWN0aW9uOnJvdztcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgIC8qIGJvcmRlcjoxcHggc29saWQgcmdiYSg0NiwgNDUsIDQ1LCAwLjI3NCk7ICovXHJcbiAgICBib3JkZXItcmFkaXVzOjRweDtcclxuICAgIGJhY2tncm91bmQ6d2hpdGU7XHJcbiAgICBjb2xvcjpyZ2JhKDM2LCAzNCwgMzQsIDAuODU2KTtcclxufVxyXG4ucHJvZmlsZXMgcHtcclxuICAgIG1hcmdpbjowcHg7XHJcbn1cclxuLmNpcmN1bGFye1xyXG4gICAgYm9yZGVyOjJweCBzb2xpZCByZ2JhKDkyLCAxODcsIDIzMSwgMC45MTEpO1xyXG4gICAgY29sb3I6cmdiYSgzNSwgMTMxLCAyMjEsIDAuODkpO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gICAgd2lkdGg6NzVweDtcclxuICAgIGhlaWdodDo3NXB4O1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuLmNvbHVtbntcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG59XHJcblxyXG4vKiAucm93e1xyXG4gICAgd2lkdGg6MTAwJTtcclxuICAgIG1hcmdpbjphdXRvO1xyXG4gICAgLW1zLW92ZXJmbG93LXN0eWxlOiBub25lIWltcG9ydGFudDsgIFxyXG4gIHNjcm9sbGJhci13aWR0aDogbm9uZSFpbXBvcnRhbnQ7ICBcclxufVxyXG4ucm93Ojotd2Via2l0LXNjcm9sbGJhciB7XHJcbiAgICBkaXNwbGF5OiBub25lIWltcG9ydGFudDtcclxuICB9ICovXHJcblxyXG4gIEBtZWRpYSAobWF4LXdpZHRoOiAzNTBweCkge1xyXG4gICAgLmJ0bi1yb3d7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1mbG93OiBjb2x1bW47XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcclxuICAgIG92ZXJmbG93LXg6IHNjcm9sbDtcclxuICAgIG92ZXJmbG93LXk6IGhpZGRlbjtcclxuICAgIC1tcy1vdmVyZmxvdy1zdHlsZTogbm9uZSFpbXBvcnRhbnQ7ICBcclxuICAgIHNjcm9sbGJhci13aWR0aDogbm9uZSFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuYnRuLXRhYnN7XHJcbiAgICAgICAgYmFja2dyb3VuZDojZTdlN2U3O1xyXG4gICAgICAgIG1hcmdpbjoxJTtcclxuICAgICAgICBib3JkZXItcmFkaXVzOjZweDtcclxuICAgICAgICBjb2xvcjojYTNhMmEyO1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OmJvbGQ7XHJcbiAgICAgICAgbGluZS1oZWlnaHQ6IDEuMztcclxuICAgICAgICBwYWRkaW5nOiAwcmVtIC41cmVtO1xyXG4gICAgfVxyXG4gIH0iXX0= */";
     /***/
   },
 
@@ -10256,42 +10569,54 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var ngx_kc_notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ngx-kc-notification */
+    "./node_modules/ngx-kc-notification/fesm2015/ngx-kc-notification.js");
+    /* harmony import */
+
+
+    var ngx_spinner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ngx-spinner */
+    "./node_modules/ngx-spinner/fesm2015/ngx-spinner.js");
+    /* harmony import */
+
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! rxjs */
     "./node_modules/rxjs/_esm2015/index.js");
     /* harmony import */
 
 
-    var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! rxjs/operators */
     "./node_modules/rxjs/_esm2015/operators/index.js");
     /* harmony import */
 
 
-    var src_app_analytics_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var src_app_analytics_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! src/app/analytics.service */
     "./src/app/analytics.service.ts");
     /* harmony import */
 
 
-    var src_app_find_open_history_profile_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var src_app_find_open_history_profile_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! src/app/find-open-history-profile.service */
     "./src/app/find-open-history-profile.service.ts");
     /* harmony import */
 
 
-    var src_app_language_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var src_app_language_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! src/app/language.service */
     "./src/app/language.service.ts");
     /* harmony import */
 
 
-    var _data_filtering_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _data_filtering_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ../data-filtering.service */
     "./src/app/chat/data-filtering.service.ts");
 
     var HistorySectionComponent = /*#__PURE__*/function () {
-      function HistorySectionComponent(itemService, languageService, http, analyticsService, dataFiltering, router) {
+      function HistorySectionComponent(itemService, languageService, http, analyticsService, dataFiltering, router, spinner, ngxNotificationService) {
         _classCallCheck(this, HistorySectionComponent);
 
         this.itemService = itemService;
@@ -10300,11 +10625,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.analyticsService = analyticsService;
         this.dataFiltering = dataFiltering;
         this.router = router;
+        this.spinner = spinner;
+        this.ngxNotificationService = ngxNotificationService;
+        this.historyContactSubject = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"]([]);
+        this.historyContactList$ = this.historyContactSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["shareReplay"])());
+        this.historyRejectSubject = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"]([]);
+        this.historyRejectList$ = this.historyRejectSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["shareReplay"])());
+        this.historyShortlistSubject = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"]([]);
+        this.historyShortlistList$ = this.historyShortlistSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["shareReplay"])());
         this.selectedTab = 0;
         this.tabType = 'interestShown';
         this.searchControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
-        this.searchActivated = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](false);
+        this.searchActivated = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"](false);
         this.searchActivated$ = this.searchActivated.asObservable();
+        this.profiles = [];
         this.Heights = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"', '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
         this.Heights1 = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'];
       }
@@ -10312,32 +10646,66 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(HistorySectionComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this59 = this;
+          var _this60 = this;
 
-          this.getHistoryData();
-          this.searchControl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["debounceTime"])(400)).subscribe(function (search) {
-            console.log(search);
-            _this59.profiles = _this59.dataFiltering.filterPosts(search.toLowerCase());
+          this.historyDataList$ = this.getHistoryData().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["shareReplay"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["tap"])(function (item) {
+            if (localStorage.getItem('selectedType')) {
+              _this60.selectedTab = Number(localStorage.getItem('selectedType'));
+            }
+
+            _this60.historyShortlistSubject.next(item.history.shortlist);
+
+            _this60.historyRejectSubject.next(item.history.reject);
+
+            _this60.historyContactSubject.next(item.history.contact);
+          }));
+          this.searchControl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["debounceTime"])(400)).subscribe(function (search) {
+            console.log(search); // this.profiles = this.dataFiltering.filterPosts((search as string).toLowerCase());
+
+            _this60.profiles = [];
+
+            _this60.historyDataList$.subscribe(function (data) {
+              console.log(data);
+
+              if (data && data.history.contact) {
+                _this60.profiles = _this60.profiles.concat(data.history.contact.filter(function (item) {
+                  return item.name.includes(search.toLowerCase());
+                }));
+              }
+
+              if (data && data.history.shortlist) {
+                _this60.profiles = _this60.profiles.concat(data.history.shortlist.filter(function (item) {
+                  return item.name.toLowerCase().includes(search.toLowerCase());
+                }));
+              }
+
+              if (data && data.history.reject) {
+                _this60.profiles = _this60.profiles.concat(data.history.reject.filter(function (item) {
+                  return item.name.includes(search.toLowerCase());
+                }));
+              }
+            });
           });
+          this.authData = JSON.parse(localStorage.getItem('authData'));
         }
       }, {
         key: "getHistoryData",
         value: function getHistoryData() {
-          var _this60 = this;
-
           var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('is_lead', localStorage.getItem('is_lead')).set('id', localStorage.getItem('id'));
-          this.http.get('https://partner.hansmatrimony.com/api/getHisotry', {
+          return this.http.get('https://partner.hansmatrimony.com/api/getHisotry', {
             params: params
-          }).subscribe(function (response) {
-            console.log('response of getHistory  api', response);
-            var allProfiles = [];
-            allProfiles = allProfiles.concat(response.history.contact);
-            allProfiles = allProfiles.concat(response.history.shortlist);
-            allProfiles = allProfiles.concat(response.history.reject);
-            console.log(allProfiles);
-
-            _this60.dataFiltering.setPostList(allProfiles);
-          });
+          }); // subscribe((response: any) => {
+          //   console.log('response of getHistory  api', response);
+          //   let allProfiles: any[] = [];
+          //   allProfiles = allProfiles.concat(response.history.contact);
+          //   allProfiles = allProfiles.concat(response.history.shortlist);
+          //   allProfiles = allProfiles.concat(response.history.reject);
+          //   console.log(allProfiles);
+          //   this.dataFiltering.setPostList(allProfiles);
+          //   if (localStorage.getItem('selectedType')) {
+          //     this.selectedTab = Number(localStorage.getItem('selectedType'));
+          //   }
+          // });
         }
       }, {
         key: "changeSelectedTab",
@@ -10404,23 +10772,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }, {
         key: "getUserProfileData",
-        value: function getUserProfileData(is_lead, id, type, index) {
+        value: function getUserProfileData(response, index) {
           var _this61 = this;
 
           var myprofileData = new FormData();
-          myprofileData.append('id', id);
-          myprofileData.append('is_lead', is_lead); // tslint:disable-next-line: max-line-length
+          myprofileData.append('id', response.id);
+          myprofileData.append('is_lead', response.is_lead);
 
-          return this.http.post('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["timeout"])(7000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(function (e) {
+          if (response.type === 'CONTACT') {
+            myprofileData.append('contacted', '1');
+          } // tslint:disable-next-line: max-line-length
+
+
+          return this.http.post('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["timeout"])(7000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
             throw new Error('Server Timeout ' + e);
           })).subscribe(function (data) {
             console.log(data); // section from which user is going
 
-            if (type === 'SHORTLIST') {
+            if (response.type === 'SHORTLIST') {
               data.coming = 'interestShown';
-            } else if (type === 'REJECT') {
+            } else if (response.type === 'REJECT') {
               data.coming = 'rejected';
-            } else if (type === 'CONTACT') {
+            } else if (response.type === 'CONTACT') {
               data.coming = 'contacted';
             }
 
@@ -10430,7 +10803,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             localStorage.setItem('todaysPopupOpened', '0');
             localStorage.setItem('stage', '4');
 
-            _this61.analyticsService.googleAnalytics("".concat(type, " Profile Visited From History Search")); // navigate to HISTORY PROFILE DIALOG COMPONENT
+            _this61.analyticsService.googleAnalytics("".concat(response.type, " Profile Visited From History Search")); // navigate to HISTORY PROFILE DIALOG COMPONENT
 
 
             _this61.router.navigateByUrl('chat/open/open-profile');
@@ -10449,6 +10822,137 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             imageView.setAttribute('src', '../../assets/female_pic.png');
           }
         }
+      }, {
+        key: "setName",
+        value: function setName(name) {
+          if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0' || this.authData.paid_status !== 'Paid')) {
+            var a = name.split(' ');
+
+            if (a[0] && a[1]) {
+              return a[0][0] + ' ' + a[1];
+            } else if (a[0]) {
+              return a[0][0];
+            }
+          } else {
+            return name;
+          }
+        }
+      }, {
+        key: "getCredits",
+        value: function getCredits() {
+          var _this62 = this;
+
+          var creditsData = new FormData();
+          creditsData.append('id', localStorage.getItem('id'));
+          creditsData.append('is_lead', localStorage.getItem('is_lead')); // tslint:disable-next-line: max-line-length
+
+          return this.http.post('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(function (data) {
+            var points = data.whatsapp_points;
+
+            _this62.itemService.setCredits(data.whatsapp_points);
+
+            console.log('credits', points);
+
+            _this62.spinner.hide();
+          }, function (error) {
+            _this62.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+
+            console.log(error);
+
+            _this62.spinner.hide();
+          });
+        }
+      }, {
+        key: "sendResponse",
+        value: function sendResponse(res) {
+          var _this63 = this;
+
+          console.log(res);
+
+          if (res.response !== 'YES') {
+            this.updateHistoryList(res.response, res.item);
+          } else {
+            if (res.item.type === 'CONTACT') {
+              this.call(res.item.mobile);
+              return;
+            }
+
+            if (res.response === 'YES') {
+              if (this.itemService.getPersonalized()) {
+                if (this.itemService.getCredits() != null && Number(this.itemService.getCredits()) > 0) {
+                  res.item.type = 'CONTACT';
+                  this.getUserProfileData(res.item, res.index);
+                } else {
+                  this.ngxNotificationService.error('You don\'t have enough credits');
+                  return;
+                }
+              } else {
+                if (this.itemService.getCredits() != null && Number(this.itemService.getCredits()) > 0) {
+                  res.item.type = 'CONTACT';
+                  this.getUserProfileData(res.item, res.index);
+                } else {
+                  this.itemService.openTodaysPopupAd();
+                  return;
+                }
+              }
+            }
+          }
+
+          var reAnswerData = new FormData();
+          reAnswerData.append('mobile', localStorage.getItem('mobile_number'));
+          reAnswerData.append('id', res.item.id);
+          reAnswerData.append('answer', res.response);
+          reAnswerData.append('is_lead', localStorage.getItem('is_lead')); // tslint:disable-next-line: max-line-length
+
+          return this.http.post('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(function (data) {
+            console.log(data); // update the count of all sections after response on any profile
+
+            if (data && data.count) {
+              _this63.itemService.saveCount(data.count);
+            }
+
+            _this63.analyticsService.googleAnalytics("Profile Reanswered ".concat(res.response, " From History"));
+
+            _this63.getCredits();
+          }, function (error) {
+            console.log(error);
+          });
+        }
+      }, {
+        key: "updateHistoryList",
+        value: function updateHistoryList(res, item) {
+          switch (res) {
+            case 'NO':
+              var value = this.historyShortlistSubject.getValue();
+              var value2 = this.historyRejectSubject.getValue();
+              this.historyShortlistSubject.next(value.filter(function (it) {
+                return it.id !== item.id;
+              }));
+              item.type = 'REJECT';
+              value2.unshift(item);
+              this.historyRejectSubject.next(value2);
+              break;
+
+            case 'SHORTLIST':
+              var rejectValue = this.historyRejectSubject.getValue();
+              var shortValue = this.historyShortlistSubject.getValue();
+              this.historyRejectSubject.next(rejectValue.filter(function (it) {
+                return it.id !== item.id;
+              }));
+              item.type = 'SHORTLIST';
+              shortValue.unshift(item);
+              this.historyShortlistSubject.next(shortValue);
+              break;
+
+            default:
+              break;
+          }
+        }
+      }, {
+        key: "call",
+        value: function call(mobile) {
+          window.open('tel:' + "".concat(mobile));
+        }
       }]);
 
       return HistorySectionComponent;
@@ -10456,17 +10960,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     HistorySectionComponent.ctorParameters = function () {
       return [{
-        type: src_app_find_open_history_profile_service__WEBPACK_IMPORTED_MODULE_8__["FindOpenHistoryProfileService"]
+        type: src_app_find_open_history_profile_service__WEBPACK_IMPORTED_MODULE_10__["FindOpenHistoryProfileService"]
       }, {
-        type: src_app_language_service__WEBPACK_IMPORTED_MODULE_9__["LanguageService"]
+        type: src_app_language_service__WEBPACK_IMPORTED_MODULE_11__["LanguageService"]
       }, {
         type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
       }, {
-        type: src_app_analytics_service__WEBPACK_IMPORTED_MODULE_7__["AnalyticsService"]
+        type: src_app_analytics_service__WEBPACK_IMPORTED_MODULE_9__["AnalyticsService"]
       }, {
-        type: _data_filtering_service__WEBPACK_IMPORTED_MODULE_10__["DataFilteringService"]
+        type: _data_filtering_service__WEBPACK_IMPORTED_MODULE_12__["DataFilteringService"]
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: ngx_spinner__WEBPACK_IMPORTED_MODULE_6__["NgxSpinnerService"]
+      }, {
+        type: ngx_kc_notification__WEBPACK_IMPORTED_MODULE_5__["NgxNotificationService"]
       }];
     };
 
@@ -10626,7 +11134,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var MyProfileNewComponent = /*#__PURE__*/function () {
       function MyProfileNewComponent(spinner, itemService, http, languageService, _formBuilder, ngxNotificationService, activatedRoute, router, snackbar, chatService, matDialog) {
-        var _this62 = this;
+        var _this64 = this;
 
         _classCallCheck(this, MyProfileNewComponent);
 
@@ -10725,11 +11233,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           translate: function translate(value, label) {
             switch (label) {
               case ng5_slider__WEBPACK_IMPORTED_MODULE_14__["LabelType"].Low:
-                return '' + _this62.Heights[_this62.Heights1.indexOf(String(value))];
+                return '' + _this64.Heights[_this64.Heights1.indexOf(String(value))];
               // return "" + this.Heights[value - 36];
 
               case ng5_slider__WEBPACK_IMPORTED_MODULE_14__["LabelType"].High:
-                return '' + _this62.Heights[_this62.Heights1.indexOf(String(value))];
+                return '' + _this64.Heights[_this64.Heights1.indexOf(String(value))];
               // return "" + this.Heights[value - 36];
 
               default:
@@ -10837,7 +11345,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(MyProfileNewComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this63 = this;
+          var _this65 = this;
 
           this.innerWidth = window.innerWidth;
           this.languageService.setProfileLanguage();
@@ -10854,8 +11362,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             if (routeData && routeData.params) {
               if (routeData.params.id && routeData.params.isLead) {
-                _this63.userId = routeData.params.id;
-                _this63.userIsLead = routeData.params.isLead;
+                _this65.userId = routeData.params.id;
+                _this65.userIsLead = routeData.params.isLead;
               }
             }
           });
@@ -10886,7 +11394,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setInitialValue",
         value: function setInitialValue() {
-          var _this64 = this;
+          var _this66 = this;
 
           this.filteredCastesMulti.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["takeUntil"])(this._onDestroy)).subscribe(function () {
             // setting the compareWith property to a comparison function
@@ -10894,7 +11402,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // the form control (i.e. _initializeSelection())
             // this needs to be done after the filteredBanks are loaded initially
             // and after the mat-option elements are available
-            _this64.multiSelect.compareWith = function (a, b) {
+            _this66.multiSelect.compareWith = function (a, b) {
               return a && b && a === b;
             };
           });
@@ -11090,7 +11598,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmitPersonal",
         value: function onSubmitPersonal() {
-          var _this65 = this;
+          var _this67 = this;
 
           this.editIndexPersonal = -1;
           this.errors = [];
@@ -11141,11 +11649,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', personalProfileDataForm).subscribe(function (data) {
               console.log(data);
 
-              _this65.getUserProfileData();
+              _this67.getUserProfileData();
             }, function (error) {
               console.log(error);
 
-              _this65.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+              _this67.ngxNotificationService.error('Something Went Wrong, Try Again Later');
             });
           } else {
             for (var control in this.personalForm.controls) {
@@ -11164,7 +11672,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmitFamily",
         value: function onSubmitFamily() {
-          var _this66 = this;
+          var _this68 = this;
 
           this.editIndexFamily = -1;
           console.log('family Data to update');
@@ -11192,19 +11700,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', newFamilyForm).subscribe(function (data) {
             console.log(data);
 
-            _this66.getUserProfileData();
+            _this68.getUserProfileData();
 
             console.log('Family Deatils Updated successfully');
           }, function (error) {
             console.log(error);
 
-            _this66.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+            _this68.ngxNotificationService.error('Something Went Wrong, Try Again Later');
           });
         }
       }, {
         key: "onSubmitPreferences",
         value: function onSubmitPreferences() {
-          var _this67 = this;
+          var _this69 = this;
 
           this.editIndexPrefs = -1;
           console.log('preference Data to update');
@@ -11244,11 +11752,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(data);
             console.log('Preference Details updated successfully');
 
-            _this67.getUserProfileData();
+            _this69.getUserProfileData();
           }, function (error) {
             console.log(error);
 
-            _this67.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+            _this69.ngxNotificationService.error('Something Went Wrong, Try Again Later');
           });
         }
       }, {
@@ -11397,7 +11905,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "previewBack",
         value: function previewBack(files, index) {
-          var _this68 = this;
+          var _this70 = this;
 
           console.log(index);
 
@@ -11416,9 +11924,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.readAsDataURL(files[0]);
 
             reader.onload = function (_event) {
-              _this68.BackimgURL = reader.result;
+              _this70.BackimgURL = reader.result;
 
-              _this68.uploadPhoto(_this68.backimagePath, index);
+              _this70.uploadPhoto(_this70.backimagePath, index);
             };
           }
         }
@@ -11460,12 +11968,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           // );
           // this.personalDetailsLeft += this.personalDetailsList.length;
 
-          var _iterator6 = _createForOfIteratorHelper(this.personalDetailsList),
-              _step6;
+          var _iterator5 = _createForOfIteratorHelper(this.personalDetailsList),
+              _step5;
 
           try {
-            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-              var v = _step6.value;
+            for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+              var v = _step5.value;
 
               if (this.personalProfileData.hasOwnProperty(v)) {
                 if (!this.personalProfileData[v] || this.personalProfileData[v] === "null") {
@@ -11476,19 +11984,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _iterator6.e(err);
+            _iterator5.e(err);
           } finally {
-            _iterator6.f();
+            _iterator5.f();
           }
 
           this.familyDetailsLeft = [];
 
-          var _iterator7 = _createForOfIteratorHelper(this.familyDetailsList),
-              _step7;
+          var _iterator6 = _createForOfIteratorHelper(this.familyDetailsList),
+              _step6;
 
           try {
-            for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-              var _v3 = _step7.value;
+            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+              var _v3 = _step6.value;
 
               if (this.familyProfileData.hasOwnProperty(_v3)) {
                 if (!this.familyProfileData[_v3] || this.familyProfileData[_v3] === "null") {
@@ -11511,26 +12019,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // this.familyDetailsLeft += this.familyDetailsList.length;
 
           } catch (err) {
-            _iterator7.e(err);
+            _iterator6.e(err);
           } finally {
-            _iterator7.f();
+            _iterator6.f();
           }
 
-          var _iterator8 = _createForOfIteratorHelper(this.personalDetailsLeft),
-              _step8;
+          var _iterator7 = _createForOfIteratorHelper(this.personalDetailsLeft),
+              _step7;
 
           try {
-            for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-              var _v4 = _step8.value;
+            for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+              var _v4 = _step7.value;
 
               if (this.familyProfileData.hasOwnProperty(_v4)) {
                 this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(_v4));
               }
             }
           } catch (err) {
-            _iterator8.e(err);
+            _iterator7.e(err);
           } finally {
-            _iterator8.f();
+            _iterator7.f();
           }
 
           console.log("look Here2");
@@ -11546,7 +12054,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getUserProfileData",
         value: function getUserProfileData() {
-          var _this69 = this;
+          var _this71 = this;
 
           if (this.userId || localStorage.getItem('id')) {
             this.spinner.show();
@@ -11556,51 +12064,51 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             myprofileData.append('is_lead', this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')); // tslint:disable-next-line: max-line-length
 
             return this.http.post('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["timeout"])(7000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["catchError"])(function (e) {
-              _this69.ngxNotificationService.error('Server Time Out, Try Again Later');
+              _this71.ngxNotificationService.error('Server Time Out, Try Again Later');
 
               throw new Error('Server Timeout ' + e);
             })).subscribe(function (data) {
               console.log(data);
-              _this69.personalProfileData = data.profile ? data.profile : null;
-              _this69.familyProfileData = data.family ? data.family : null;
-              _this69.preferenceProfileData = data.preferences ? data.preferences : null;
+              _this71.personalProfileData = data.profile ? data.profile : null;
+              _this71.familyProfileData = data.family ? data.family : null;
+              _this71.preferenceProfileData = data.preferences ? data.preferences : null;
 
-              _this69.spinner.hide();
+              _this71.spinner.hide();
 
-              if (_this69.getCarouselCount() > 0) {
+              if (_this71.getCarouselCount() > 0) {
                 console.log('Photo status set to true');
 
-                _this69.itemService.setPhotoStatus(true);
+                _this71.itemService.setPhotoStatus(true);
               }
 
-              if (_this69.preferenceProfileData.religion) {
-                _this69.preferenceProfileData.religion = _this69.preferenceProfileData.religion.split(",");
+              if (_this71.preferenceProfileData.religion) {
+                _this71.preferenceProfileData.religion = _this71.preferenceProfileData.religion.split(",");
               }
 
-              if (_this69.personalProfileData.gender === "Female") {
-                if (_this69.preferenceProfileData.occupation) _this69.preferenceProfileData.occupation = _this69.preferenceProfileData.occupation.split(",");else {
-                  _this69.preferenceProfileData.occupation = ['Doesn\'t Matter'];
+              if (_this71.personalProfileData.gender === "Female") {
+                if (_this71.preferenceProfileData.occupation) _this71.preferenceProfileData.occupation = _this71.preferenceProfileData.occupation.split(",");else {
+                  _this71.preferenceProfileData.occupation = ['Doesn\'t Matter'];
                 }
               }
 
-              localStorage.setItem('gender', _this69.personalProfileData.gender);
+              localStorage.setItem('gender', _this71.personalProfileData.gender);
 
-              _this69.specialCase(); //this.setCurrentProfileValue();
+              _this71.specialCase(); //this.setCurrentProfileValue();
               //this.setCurrentFamilyValues();
               //this.setCurrentPreferenceValue();
 
 
-              _this69.setProfileCalculations();
+              _this71.setProfileCalculations();
 
-              _this69.setProfileCompletion(); //this.getAllCaste();
+              _this71.setProfileCompletion(); //this.getAllCaste();
               //this.getAllCastePersonal();
 
             }, function (error) {
-              _this69.spinner.hide();
+              _this71.spinner.hide();
 
               console.log(error);
 
-              _this69.ngxNotificationService.error('Something Went Wrong');
+              _this71.ngxNotificationService.error('Something Went Wrong');
             });
           } else {
             this.ngxNotificationService.error('No user found');
@@ -11614,7 +12122,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "chooseFileForUploadNew",
         value: function chooseFileForUploadNew(files) {
-          var _this70 = this;
+          var _this72 = this;
 
           if (files.length === 0) {
             return;
@@ -11632,14 +12140,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.onload = function (_event) {
               // use backimgurl to set image
               // this.BackimgURL = reader.result;
-              _this70.uploadPhotoNew(files[0]);
+              _this72.uploadPhotoNew(files[0]);
             };
           }
         }
       }, {
         key: "uploadPhotoNew",
         value: function uploadPhotoNew(data) {
-          var _this71 = this;
+          var _this73 = this;
 
           this.spinner.show();
           var uploadData = new FormData();
@@ -11651,30 +12159,30 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log('photos', suc);
 
             if (suc.pic_upload_status === 'Y') {
-              _this71.spinner.hide();
+              _this73.spinner.hide();
 
               console.log('Image Upload successful');
 
-              _this71.ngxNotificationService.success('Photo Uploaded Succesfully!');
+              _this73.ngxNotificationService.success('Photo Uploaded Succesfully!');
 
-              _this71.itemService.setPhotoStatus(true);
+              _this73.itemService.setPhotoStatus(true);
             } else {
-              _this71.ngxNotificationService.error('Photo Upload Unsuccessful!');
+              _this73.ngxNotificationService.error('Photo Upload Unsuccessful!');
 
-              _this71.spinner.hide();
+              _this73.spinner.hide();
             }
           }, function (err) {
-            _this71.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
+            _this73.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
 
             console.log(err);
 
-            _this71.spinner.hide();
+            _this73.spinner.hide();
           });
         }
       }, {
         key: "uploadPhoto",
         value: function uploadPhoto(data, index) {
-          var _this72 = this;
+          var _this74 = this;
 
           this.spinner.show();
           var uploadData = new FormData();
@@ -11683,22 +12191,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           uploadData.append('image', data);
           uploadData.append('is_lead', localStorage.getItem('is_lead'));
           return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(function (suc) {
-            _this72.suc = suc;
+            _this74.suc = suc;
             console.log('photos', suc);
 
-            if (_this72.suc.pic_upload_status === 'Y') {
-              _this72.spinner.hide();
+            if (_this74.suc.pic_upload_status === 'Y') {
+              _this74.spinner.hide();
 
-              document.querySelectorAll('#imgProfile')[index - 1].setAttribute('src', _this72.BackimgURL);
+              document.querySelectorAll('#imgProfile')[index - 1].setAttribute('src', _this74.BackimgURL);
 
-              _this72.ngxNotificationService.success('Photo Uploaded Succesfully!');
+              _this74.ngxNotificationService.success('Photo Uploaded Succesfully!');
             } else {
-              _this72.spinner.hide();
+              _this74.spinner.hide();
 
-              _this72.ngxNotificationService.error('Photo Upload Unsuccesful!');
+              _this74.ngxNotificationService.error('Photo Upload Unsuccesful!');
             }
           }, function (err) {
-            _this72.ngxNotificationService.error('Photo could not be Uploaded!'); // console.log(err);
+            _this74.ngxNotificationService.error('Photo could not be Uploaded!'); // console.log(err);
 
 
             console.log(err);
@@ -11727,7 +12235,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getImagesCount",
         value: function getImagesCount() {
-          var _this73 = this;
+          var _this75 = this;
 
           if (!this.carouselSize) {
             this.carouselSize = [];
@@ -11740,7 +12248,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               if (carousel) {
                 Object.keys(carousel).forEach(function (element) {
-                  _this73.carouselSize.push(element);
+                  _this75.carouselSize.push(element);
                 });
               } // if (ucarousel) {
               //   Object.keys(ucarousel).forEach((element) => {
@@ -11834,7 +12342,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "downloadMyProfile",
         value: function downloadMyProfile() {
-          var _this74 = this;
+          var _this76 = this;
 
           var pdfData = new FormData();
           pdfData.append('id', localStorage.getItem('id'));
@@ -11847,9 +12355,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (data.status === 1) {
               var downloadLink = document.querySelectorAll('#downLink');
 
-              _this74.spinner.hide();
+              _this76.spinner.hide();
 
-              _this74.ngxNotificationService.info('Downloading your file');
+              _this76.ngxNotificationService.info('Downloading your file');
 
               if (data.url) {
                 window.open(data.url);
@@ -11858,7 +12366,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }, function (err) {
             console.log(err);
 
-            _this74.ngxNotificationService.error('Error Occured');
+            _this76.ngxNotificationService.error('Error Occured');
           });
         }
       }, {
@@ -11903,73 +12411,73 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAllCaste",
         value: function getAllCaste() {
-          var _this75 = this;
+          var _this77 = this;
 
           this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe(function (res) {
-            _this75.getcastes = res; // adittion of all to the list of castes
+            _this77.getcastes = res; // adittion of all to the list of castes
 
-            _this75.getcastes.push('All'); // set initial selection
+            _this77.getcastes.push('All'); // set initial selection
 
 
-            if (_this75.preferenceProfileData.caste && _this75.preferenceProfileData.caste !== 'null') {
+            if (_this77.preferenceProfileData.caste && _this77.preferenceProfileData.caste !== 'null') {
               var values = [];
 
-              _this75.preferenceProfileData.caste.split(',').forEach(function (element) {
+              _this77.preferenceProfileData.caste.split(',').forEach(function (element) {
                 console.log(element);
 
-                if (_this75.getcastes.indexOf(element)) {
-                  values.push(_this75.getcastes[_this75.getcastes.indexOf(element)]);
+                if (_this77.getcastes.indexOf(element)) {
+                  values.push(_this77.getcastes[_this77.getcastes.indexOf(element)]);
                 }
               }); //if all , check the check box for no caste bar
 
 
               if (values.includes('All')) {
-                _this75.isAllCastePref = true;
+                _this77.isAllCastePref = true;
               }
 
-              _this75.searchCaste.setValue(values);
+              _this77.searchCaste.setValue(values);
             } // load the initial bank list
 
 
-            _this75.filteredCastesMulti.next(_this75.getcastes.slice()); // listen for search field value changes
+            _this77.filteredCastesMulti.next(_this77.getcastes.slice()); // listen for search field value changes
 
 
-            _this75.searchCasteText.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["takeUntil"])(_this75._onDestroy)).subscribe(function () {
-              _this75.filterCasteMulti();
+            _this77.searchCasteText.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["takeUntil"])(_this77._onDestroy)).subscribe(function () {
+              _this77.filterCasteMulti();
             });
           });
         }
       }, {
         key: "setNullToNotMatter",
         value: function setNullToNotMatter() {
-          var _this76 = this;
+          var _this78 = this;
 
           setTimeout(function () {
-            if (_this76.preferenceProfileData) {
+            if (_this78.preferenceProfileData) {
               console.log('working');
 
-              if (!_this76.preferenceProfileData.manglik) {
-                _this76.preferenceProfileData.manglik = 'Doesn\'t Matter';
+              if (!_this78.preferenceProfileData.manglik) {
+                _this78.preferenceProfileData.manglik = 'Doesn\'t Matter';
               }
 
-              if (!_this76.preferenceProfileData.working) {
-                _this76.preferenceProfileData.working = 'Doesn\'t Matter';
+              if (!_this78.preferenceProfileData.working) {
+                _this78.preferenceProfileData.working = 'Doesn\'t Matter';
               }
 
-              if (!_this76.preferenceProfileData.marital_status) {
-                _this76.preferenceProfileData.marital_status = 'Doesn\'t Matter';
+              if (!_this78.preferenceProfileData.marital_status) {
+                _this78.preferenceProfileData.marital_status = 'Doesn\'t Matter';
               }
 
-              if (!_this76.preferenceProfileData.mother_tongue) {
-                _this76.preferenceProfileData.mother_tongue = 'Hindi';
+              if (!_this78.preferenceProfileData.mother_tongue) {
+                _this78.preferenceProfileData.mother_tongue = 'Hindi';
               }
 
-              if (!_this76.preferenceProfileData.food_choice) {
-                _this76.preferenceProfileData.food_choice = 'Doesn\'t Matter';
+              if (!_this78.preferenceProfileData.food_choice) {
+                _this78.preferenceProfileData.food_choice = 'Doesn\'t Matter';
               }
 
-              if (!_this76.preferenceProfileData.occupation) {
-                _this76.preferenceProfileData.occupation = 'Doesn\'t Matter';
+              if (!_this78.preferenceProfileData.occupation) {
+                _this78.preferenceProfileData.occupation = 'Doesn\'t Matter';
               }
             }
           }, 1000);
@@ -12062,22 +12570,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAllCastePersonal",
         value: function getAllCastePersonal() {
-          var _this77 = this;
+          var _this79 = this;
 
           this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe(function (res) {
-            _this77.getcastesPersonal = res;
+            _this79.getcastesPersonal = res;
           });
 
           if (this.personalForm.get('Castes').value && this.personalForm.get('Castes').value !== '') {
             this.casteo = this.personalForm.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["map"])(function (value) {
-              return _this77._Castefilter(value);
+              return _this79._Castefilter(value);
             }));
           } else {
             this.personalForm.patchValue({
               Castes: ''
             });
             this.casteo = this.personalForm.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_12__["map"])(function (value) {
-              return _this77._Castefilter(value);
+              return _this79._Castefilter(value);
             }));
           }
         }
@@ -12157,13 +12665,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedLocality",
         value: function placeChangedLocality() {
-          var _this78 = this;
+          var _this80 = this;
 
           var place = document.querySelector('#Locality');
           setTimeout(function () {
             console.log(place.value);
 
-            _this78.personalForm.patchValue({
+            _this80.personalForm.patchValue({
               Locality: place.value
             });
           }, 500);
@@ -12171,13 +12679,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedWorkingcity",
         value: function placeChangedWorkingcity() {
-          var _this79 = this;
+          var _this81 = this;
 
           var place = document.querySelector('#WorkingCity');
           setTimeout(function () {
             console.log(place.value);
 
-            _this79.personalForm.patchValue({
+            _this81.personalForm.patchValue({
               WorkingCity: place.value
             });
           }, 500);
@@ -12185,13 +12693,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedBirthPlace",
         value: function placeChangedBirthPlace() {
-          var _this80 = this;
+          var _this82 = this;
 
           var place = document.querySelector('#BirthPlace');
           setTimeout(function () {
             console.log(place.value);
 
-            _this80.personalForm.patchValue({
+            _this82.personalForm.patchValue({
               BirthPlace: place.value
             });
           }, 500);
@@ -12199,12 +12707,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedFamily",
         value: function placeChangedFamily() {
-          var _this81 = this;
+          var _this83 = this;
 
           var place = document.querySelector('#familyLivingIn');
           setTimeout(function () {
             console.log(place.value);
-            _this81.familyProfileData.city = place.value;
+            _this83.familyProfileData.city = place.value;
           }, 1000);
         }
       }, {
@@ -12249,7 +12757,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openPersonalDialog",
         value: function openPersonalDialog() {
-          var _this82 = this;
+          var _this84 = this;
 
           document.querySelector("#carousel").scrollIntoView();
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
@@ -12271,15 +12779,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           };
           var dialogRef = this.matDialog.open(_myprofile_edit_personal_dialog_edit_personal_dialog_component__WEBPACK_IMPORTED_MODULE_9__["EditPersonalDialogComponent"], dialogConfig);
           dialogRef.afterClosed().subscribe(function (data) {
-            _this82.editIndexPersonal = -1;
+            _this84.editIndexPersonal = -1;
 
-            _this82.getUserProfileData();
+            _this84.getUserProfileData();
           });
         }
       }, {
         key: "openFamilyDialog",
         value: function openFamilyDialog() {
-          var _this83 = this;
+          var _this85 = this;
 
           document.querySelector("#carousel").scrollIntoView();
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
@@ -12299,15 +12807,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           };
           var dialogRef = this.matDialog.open(_myprofile_edit_family_dialog_edit_family_dialog_component__WEBPACK_IMPORTED_MODULE_10__["EditFamilyDialogComponent"], dialogConfig);
           dialogRef.afterClosed().subscribe(function (data) {
-            _this83.editIndexFamily = -1;
+            _this85.editIndexFamily = -1;
 
-            _this83.getUserProfileData();
+            _this85.getUserProfileData();
           });
         }
       }, {
         key: "openPreferenceDialog",
         value: function openPreferenceDialog() {
-          var _this84 = this;
+          var _this86 = this;
 
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
 
@@ -12327,9 +12835,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           };
           var dialogRef = this.matDialog.open(_myprofile_edit_preference_dialog_edit_preference_dialog_component__WEBPACK_IMPORTED_MODULE_11__["EditPreferenceDialogComponent"], dialogConfig);
           dialogRef.afterClosed().subscribe(function (res) {
-            _this84.editIndexPrefs = -1;
+            _this86.editIndexPrefs = -1;
 
-            _this84.getUserProfileData();
+            _this86.getUserProfileData();
           });
         }
       }]);
@@ -12476,7 +12984,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deletePhoto",
         value: function deletePhoto() {
-          var _this85 = this;
+          var _this87 = this;
 
           if (this.data) {
             var formData = new FormData();
@@ -12487,14 +12995,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               console.log(response);
 
               if (response.status === 1) {
-                _this85.ngxNotification.success(response.message);
+                _this87.ngxNotification.success(response.message);
 
-                _this85.dialogRef.close(formData);
+                _this87.dialogRef.close(formData);
               } else {
-                _this85.ngxNotification.error('Something went wrong');
+                _this87.ngxNotification.error('Something went wrong');
               }
             }, function (err) {
-              _this85.ngxNotification.error('Something went wrong');
+              _this87.ngxNotification.error('Something went wrong');
             });
           } else {
             this.ngxNotification.error('No Image Found');
@@ -12670,15 +13178,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(MyProfilePhotoUploadComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this86 = this;
+          var _this88 = this;
 
           this.activatedRoute.paramMap.subscribe(function (routeData) {
             console.log(routeData);
 
             if (routeData && routeData.params) {
               if (routeData.params.id && routeData.params.isLead) {
-                _this86.userId = routeData.params.id;
-                _this86.userIsLead = routeData.params.isLead;
+                _this88.userId = routeData.params.id;
+                _this88.userIsLead = routeData.params.isLead;
               }
             }
           });
@@ -12693,7 +13201,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deletePhoto",
         value: function deletePhoto(index) {
-          var _this87 = this;
+          var _this89 = this;
 
           var currentImg = this.getProfilesPhotoName(this.personalProfileData.carousel, this.personalProfileData.unapprove_carousel, this.personalProfileData.photo, index);
 
@@ -12718,7 +13226,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             var dialogRef = this.dialog.open(_ask_delete_dialog_ask_delete_dialog_component__WEBPACK_IMPORTED_MODULE_10__["AskDeleteDialogComponent"], dialogConfig);
             dialogRef.afterClosed().subscribe(function (response) {
               if (response) {
-                _this87.getUserProfileData();
+                _this89.getUserProfileData();
               }
             });
           }
@@ -12813,7 +13321,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "previewBack",
         value: function previewBack(files, index) {
-          var _this88 = this;
+          var _this90 = this;
 
           console.log(index);
 
@@ -12832,16 +13340,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.readAsDataURL(files[0]);
 
             reader.onload = function (_event) {
-              _this88.BackimgURL = reader.result;
+              _this90.BackimgURL = reader.result;
 
-              _this88.uploadPhoto(_this88.backimagePath, index);
+              _this90.uploadPhoto(_this90.backimagePath, index);
             };
           }
         }
       }, {
         key: "uploadPhoto",
         value: function uploadPhoto(data, index) {
-          var _this89 = this;
+          var _this91 = this;
 
           this.spinner.show();
           var uploadData = new FormData();
@@ -12850,23 +13358,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           uploadData.append('image', data);
           uploadData.append('is_lead', localStorage.getItem('is_lead'));
           return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(function (suc) {
-            _this89.suc = suc;
+            _this91.suc = suc;
             console.log('photos', suc);
 
-            if (_this89.suc.pic_upload_status === 'Y') {
-              _this89.spinner.hide();
+            if (_this91.suc.pic_upload_status === 'Y') {
+              _this91.spinner.hide();
 
               console.log('photo upload successful');
-              document.querySelector('#imgProfile' + String(index)).setAttribute('src', _this89.suc.profile_pic_url);
+              document.querySelector('#imgProfile' + String(index)).setAttribute('src', _this91.suc.profile_pic_url);
 
-              _this89.ngxNotificationService.success('Photo Uploaded Succesfully!');
+              _this91.ngxNotificationService.success('Photo Uploaded Succesfully!');
             } else {
-              _this89.spinner.hide();
+              _this91.spinner.hide();
 
-              _this89.ngxNotificationService.error('Photo Upload Unsuccesful!');
+              _this91.ngxNotificationService.error('Photo Upload Unsuccesful!');
             }
           }, function (err) {
-            _this89.ngxNotificationService.error('Photo could not be Uploaded!'); // console.log(err);
+            _this91.ngxNotificationService.error('Photo could not be Uploaded!'); // console.log(err);
 
 
             console.log(err);
@@ -12875,7 +13383,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getUserProfileData",
         value: function getUserProfileData() {
-          var _this90 = this;
+          var _this92 = this;
 
           if (this.userId || localStorage.getItem('id')) {
             this.spinner.show();
@@ -12885,22 +13393,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             myprofileData.append('is_lead', this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')); // tslint:disable-next-line: max-line-length
 
             return this.http.post('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["timeout"])(7000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(function (e) {
-              _this90.ngxNotificationService.error('Server Time Out, Try Again Later');
+              _this92.ngxNotificationService.error('Server Time Out, Try Again Later');
 
               throw new Error('Server Timeout ' + e);
             })).subscribe(function (data) {
               console.log(data);
-              _this90.personalProfileData = data.profile ? data.profile : null;
+              _this92.personalProfileData = data.profile ? data.profile : null;
 
-              _this90.getCarouselCount();
+              _this92.getCarouselCount();
 
-              _this90.spinner.hide();
+              _this92.spinner.hide();
             }, function (error) {
-              _this90.spinner.hide();
+              _this92.spinner.hide();
 
               console.log(error);
 
-              _this90.ngxNotificationService.error('Something Went Wrong');
+              _this92.ngxNotificationService.error('Something Went Wrong');
             });
           } else {
             this.ngxNotificationService.error('No user found');
@@ -12909,7 +13417,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openPhotoUploadCrop",
         value: function openPhotoUploadCrop(index) {
-          var _this91 = this;
+          var _this93 = this;
 
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialogConfig"]();
           dialogConfig.hasBackdrop = true;
@@ -12934,25 +13442,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // this.uploadPhoto(data, 1);
             console.log('data recieved in the photo upload component', data);
 
-            _this91.uploadPhoto(data, index);
+            _this93.uploadPhoto(data, index);
           });
         } // upload facebook image by first downloading it and then uploading it
 
       }, {
         key: "getImage",
         value: function getImage(imageUrl, index) {
-          var _this92 = this;
+          var _this94 = this;
 
           this.getBase64ImageFromURL(imageUrl).subscribe(function (base64Data) {
-            _this92.base64TrimmedURL = base64Data;
+            _this94.base64TrimmedURL = base64Data;
 
-            _this92.createBlobImageFileAndShow(index);
+            _this94.createBlobImageFileAndShow(index);
           });
         }
       }, {
         key: "getBase64ImageFromURL",
         value: function getBase64ImageFromURL(url) {
-          var _this93 = this;
+          var _this95 = this;
 
           return new rxjs__WEBPACK_IMPORTED_MODULE_11__["Observable"](function (observer) {
             // create an image object
@@ -12963,7 +13471,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (!img.complete) {
               // This will call another method that will create image from url
               img.onload = function () {
-                observer.next(_this93.getBase64Image(img));
+                observer.next(_this95.getBase64Image(img));
                 observer.complete();
               };
 
@@ -12971,7 +13479,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 observer.error(err);
               };
             } else {
-              observer.next(_this93.getBase64Image(img));
+              observer.next(_this95.getBase64Image(img));
               observer.complete();
             }
           });
@@ -12994,73 +13502,73 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "createBlobImageFileAndShow",
         value: function createBlobImageFileAndShow(index) {
-          var _this94 = this;
+          var _this96 = this;
 
           this.dataURItoBlob(this.base64TrimmedURL).subscribe(function (blob) {
             var imageBlob = blob;
 
-            var imageName = _this94.generateName(); // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
+            var imageName = _this96.generateName(); // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
             // our carousel index basically starts from 1 and not 0
 
 
             switch (index) {
               case 1:
-                _this94.facebookImageFile = new File([imageBlob], imageName, {
+                _this96.facebookImageFile = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this94.generatedImage = window.URL.createObjectURL(_this94.facebookImageFile);
+                _this96.generatedImage = window.URL.createObjectURL(_this96.facebookImageFile);
                 setTimeout(function () {
-                  _this94.uploadPhoto(_this94.facebookImageFile, index);
+                  _this96.uploadPhoto(_this96.facebookImageFile, index);
                 }, 200);
                 break;
 
               case 2:
-                _this94.facebookImageFile2 = new File([imageBlob], imageName, {
+                _this96.facebookImageFile2 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this94.generatedImage = window.URL.createObjectURL(_this94.facebookImageFile2);
+                _this96.generatedImage = window.URL.createObjectURL(_this96.facebookImageFile2);
                 setTimeout(function () {
-                  _this94.uploadPhoto(_this94.facebookImageFile2, index);
+                  _this96.uploadPhoto(_this96.facebookImageFile2, index);
                 }, 200);
                 break;
 
               case 3:
-                _this94.facebookImageFile3 = new File([imageBlob], imageName, {
+                _this96.facebookImageFile3 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this94.generatedImage = window.URL.createObjectURL(_this94.facebookImageFile3);
+                _this96.generatedImage = window.URL.createObjectURL(_this96.facebookImageFile3);
                 setTimeout(function () {
-                  _this94.uploadPhoto(_this94.facebookImageFile3, index);
+                  _this96.uploadPhoto(_this96.facebookImageFile3, index);
                 }, 200);
                 break;
 
               case 4:
-                _this94.facebookImageFile4 = new File([imageBlob], imageName, {
+                _this96.facebookImageFile4 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this94.generatedImage = window.URL.createObjectURL(_this94.facebookImageFile4);
+                _this96.generatedImage = window.URL.createObjectURL(_this96.facebookImageFile4);
                 setTimeout(function () {
-                  _this94.uploadPhoto(_this94.facebookImageFile4, index);
+                  _this96.uploadPhoto(_this96.facebookImageFile4, index);
                 }, 200);
                 break;
 
               case 5:
-                _this94.facebookImageFile5 = new File([imageBlob], imageName, {
+                _this96.facebookImageFile5 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this94.generatedImage = window.URL.createObjectURL(_this94.facebookImageFile5);
+                _this96.generatedImage = window.URL.createObjectURL(_this96.facebookImageFile5);
                 setTimeout(function () {
-                  _this94.uploadPhoto(_this94.facebookImageFile5, index);
+                  _this96.uploadPhoto(_this96.facebookImageFile5, index);
                 }, 200);
                 break;
 
               case 6:
-                _this94.facebookImageFile6 = new File([imageBlob], imageName, {
+                _this96.facebookImageFile6 = new File([imageBlob], imageName, {
                   type: 'image/jpeg'
                 });
-                _this94.generatedImage = window.URL.createObjectURL(_this94.facebookImageFile6);
+                _this96.generatedImage = window.URL.createObjectURL(_this96.facebookImageFile6);
                 setTimeout(function () {
-                  _this94.uploadPhoto(_this94.facebookImageFile6, index);
+                  _this96.uploadPhoto(_this96.facebookImageFile6, index);
                 }, 200);
                 break;
 
@@ -13105,10 +13613,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "checKAndUploadFromFacebook",
         value: function checKAndUploadFromFacebook() {
-          var _this95 = this;
+          var _this97 = this;
 
           FB.getLoginStatus(function (response) {
-            _this95.statusChangeCallback(response); // Returns the login status.
+            _this97.statusChangeCallback(response); // Returns the login status.
 
           });
         } //  get facebook login status
@@ -13130,7 +13638,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getFbData",
         value: function getFbData() {
-          var _this96 = this;
+          var _this98 = this;
 
           console.log('Welcome!  Fetching your information.... '); // fetch user image
 
@@ -13142,14 +13650,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(response.data.url);
 
             if (response.data.url) {
-              _this96.fetchedFbProfilePic = {
+              _this98.fetchedFbProfilePic = {
                 url: response.data.url,
                 user_id: null,
                 access_token: null
               };
             }
 
-            _this96.getFacebookPics();
+            _this98.getFacebookPics();
           }); // fetch user data
 
           FB.api('/me', 'GET', {
@@ -13157,14 +13665,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }, function (response) {
             console.log(response);
 
-            _this96.spinner.hide();
+            _this98.spinner.hide();
           });
         } // get pics from facebook
 
       }, {
         key: "getFacebookPics",
         value: function getFacebookPics() {
-          var _this97 = this;
+          var _this99 = this;
 
           // fetch user photos
           window.FB.api('/me/albums', 'GET', {
@@ -13191,7 +13699,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                 console.log(picRes);
 
                                 if (picRes.data && picRes.data.url) {
-                                  _this97.setPhotosToEmptyFields(index, picRes.data.url);
+                                  _this99.setPhotosToEmptyFields(index, picRes.data.url);
                                 }
                               });
                             }
@@ -13205,7 +13713,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
               });
             } else {
-              _this97.ngxNotificationService.warning('No Facebook Picture Found');
+              _this99.ngxNotificationService.warning('No Facebook Picture Found');
             }
           });
         }
@@ -13363,18 +13871,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedFamily",
         value: function placeChangedFamily() {
-          var _this98 = this;
+          var _this100 = this;
 
           var place = document.querySelector('#familyLivingIn');
           setTimeout(function () {
             console.log(place.value);
-            _this98.familyData.city = place.value;
+            _this100.familyData.city = place.value;
           }, 500);
         }
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this99 = this;
+          var _this101 = this;
 
           console.log(this.familyForm);
           var familyDataForm = new FormData();
@@ -13402,7 +13910,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }, function (error) {
             console.log(error);
 
-            _this99.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+            _this101.ngxNotificationService.error('Something Went Wrong, Try Again Later');
           });
           this.dialogRef.close();
         }
@@ -13564,7 +14072,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.Heights1 = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84']; // tslint:disable-next-line: max-line-length
 
         this.HigherEducation = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA', 'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh', // tslint:disable-next-line: max-line-length
-        'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', 'Trade School', 'Other'];
+        'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', '12th', 'Trade School', 'Other'];
         this.Occupation = ['Private Job', 'Business/Self-Employed', 'Govt. Job', 'Doctor', 'Teacher', 'Not Working']; // tslint:disable-next-line: max-line-length
 
         this.date = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']; // tslint:disable-next-line: max-line-length
@@ -13747,13 +14255,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedLocality",
         value: function placeChangedLocality() {
-          var _this100 = this;
+          var _this102 = this;
 
           var place = document.querySelector('#Locality');
           setTimeout(function () {
             console.log(place.value);
 
-            _this100.personalForm.patchValue({
+            _this102.personalForm.patchValue({
               Locality: place.value
             });
           }, 500);
@@ -13761,13 +14269,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedWorkingcity",
         value: function placeChangedWorkingcity() {
-          var _this101 = this;
+          var _this103 = this;
 
           var place = document.querySelector('#WorkingCity');
           setTimeout(function () {
             console.log(place.value);
 
-            _this101.personalForm.patchValue({
+            _this103.personalForm.patchValue({
               WorkingCity: place.value
             });
           }, 500);
@@ -13775,13 +14283,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedBirthPlace",
         value: function placeChangedBirthPlace() {
-          var _this102 = this;
+          var _this104 = this;
 
           var place = document.querySelector('#BirthPlace');
           setTimeout(function () {
             console.log(place.value);
 
-            _this102.personalForm.patchValue({
+            _this104.personalForm.patchValue({
               BirthPlace: place.value
             });
           }, 500);
@@ -13789,7 +14297,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this103 = this;
+          var _this105 = this;
 
           this.errors = [];
 
@@ -13840,7 +14348,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }, function (error) {
               console.log(error);
 
-              _this103.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+              _this105.ngxNotificationService.error('Something Went Wrong, Try Again Later');
             });
             this.dialogRef.close();
           } else {
@@ -13985,22 +14493,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAllCaste",
         value: function getAllCaste() {
-          var _this104 = this;
+          var _this106 = this;
 
           this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe(function (res) {
-            _this104.getcastes = res;
+            _this106.getcastes = res;
           });
 
           if (this.personalForm.get('Castes').value && this.personalForm.get('Castes').value !== '') {
             this.casteo = this.personalForm.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (value) {
-              return _this104._Castefilter(value);
+              return _this106._Castefilter(value);
             }));
           } else {
             this.personalForm.patchValue({
               Castes: ''
             });
             this.casteo = this.personalForm.get('Castes').valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (value) {
-              return _this104._Castefilter(value);
+              return _this106._Castefilter(value);
             }));
           }
         }
@@ -14261,34 +14769,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setNullToNotMatter",
         value: function setNullToNotMatter() {
-          var _this105 = this;
+          var _this107 = this;
 
           setTimeout(function () {
-            if (_this105.preferenceData) {
+            if (_this107.preferenceData) {
               console.log('working');
 
-              if (!_this105.preferenceData.manglik) {
-                _this105.preferenceData.manglik = 'Doesn\'t Matter';
+              if (!_this107.preferenceData.manglik) {
+                _this107.preferenceData.manglik = 'Doesn\'t Matter';
               }
 
-              if (!_this105.preferenceData.working) {
-                _this105.preferenceData.working = 'Doesn\'t Matter';
+              if (!_this107.preferenceData.working) {
+                _this107.preferenceData.working = 'Doesn\'t Matter';
               }
 
-              if (!_this105.preferenceData.marital_status) {
-                _this105.preferenceData.marital_status = 'Doesn\'t Matter';
+              if (!_this107.preferenceData.marital_status) {
+                _this107.preferenceData.marital_status = 'Doesn\'t Matter';
               }
 
-              if (!_this105.preferenceData.mother_tongue) {
-                _this105.preferenceData.mother_tongue = 'Hindi';
+              if (!_this107.preferenceData.mother_tongue) {
+                _this107.preferenceData.mother_tongue = 'Hindi';
               }
 
-              if (!_this105.preferenceData.food_choice) {
-                _this105.preferenceData.food_choice = 'Doesn\'t Matter';
+              if (!_this107.preferenceData.food_choice) {
+                _this107.preferenceData.food_choice = 'Doesn\'t Matter';
               }
 
-              if (!_this105.preferenceData.occupation) {
-                _this105.preferenceData.occupation = 'Doesn\'t Matter';
+              if (!_this107.preferenceData.occupation) {
+                _this107.preferenceData.occupation = 'Doesn\'t Matter';
               }
             }
           }, 1000);
@@ -14296,7 +14804,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this106 = this;
+          var _this108 = this;
 
           console.log('marital_status', this.preferenceData.marital_status);
           if (Array.isArray(this.preferenceData.religion)) this.preferenceData.religion = this.preferenceData.religion.join(',');
@@ -14339,13 +14847,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.http.post('https://partner.hansmatrimony.com/api/updatePreferencesDetails', preferenceFormData).subscribe(function (data) {
               console.log(data);
 
-              _this106.dialogRef.close({
+              _this108.dialogRef.close({
                 success: 'success'
               });
             }, function (error) {
               console.log(error);
 
-              _this106.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+              _this108.ngxNotificationService.error('Something Went Wrong, Try Again Later');
             });
           } else {
             alert('enter all details');
@@ -14372,39 +14880,39 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAllCaste",
         value: function getAllCaste() {
-          var _this107 = this;
+          var _this109 = this;
 
           this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe(function (res) {
-            _this107.getcastes = res; // adittion of all to the list of castes
+            _this109.getcastes = res; // adittion of all to the list of castes
 
-            _this107.getcastes.push('All'); // set initial selection
+            _this109.getcastes.push('All'); // set initial selection
 
 
-            if (_this107.preferenceData.caste && _this107.preferenceData.caste !== 'null') {
+            if (_this109.preferenceData.caste && _this109.preferenceData.caste !== 'null') {
               var values = [];
 
-              _this107.preferenceData.caste.split(',').forEach(function (element) {
+              _this109.preferenceData.caste.split(',').forEach(function (element) {
                 console.log(element);
 
-                if (_this107.getcastes.indexOf(element)) {
-                  values.push(_this107.getcastes[_this107.getcastes.indexOf(element)]);
+                if (_this109.getcastes.indexOf(element)) {
+                  values.push(_this109.getcastes[_this109.getcastes.indexOf(element)]);
                 }
               }); // if all , check the check box for no caste bar
 
 
               if (values.includes('All')) {
-                _this107.isAllCastePref = true;
+                _this109.isAllCastePref = true;
               }
 
-              _this107.searchCaste.setValue(values);
+              _this109.searchCaste.setValue(values);
             } // load the initial bank list
 
 
-            _this107.filteredCastesMulti.next(_this107.getcastes.slice()); // listen for search field value changes
+            _this109.filteredCastesMulti.next(_this109.getcastes.slice()); // listen for search field value changes
 
 
-            _this107.searchCasteText.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["takeUntil"])(_this107._onDestroy)).subscribe(function () {
-              _this107.filterCasteMulti();
+            _this109.searchCasteText.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["takeUntil"])(_this109._onDestroy)).subscribe(function () {
+              _this109.filterCasteMulti();
             });
           });
         }
@@ -14426,7 +14934,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setInitialValue",
         value: function setInitialValue() {
-          var _this108 = this;
+          var _this110 = this;
 
           this.filteredCastesMulti.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["takeUntil"])(this._onDestroy)).subscribe(function () {
             // setting the compareWith property to a comparison function
@@ -14434,7 +14942,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // the form control (i.e. _initializeSelection())
             // this needs to be done after the filteredBanks are loaded initially
             // and after the mat-option elements are available
-            _this108.multiSelect.compareWith = function (a, b) {
+            _this110.multiSelect.compareWith = function (a, b) {
               return a && b && a === b;
             };
           });
@@ -14757,7 +15265,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCredits",
         value: function getCredits() {
-          var _this109 = this;
+          var _this111 = this;
 
           var creditsData = new FormData();
           creditsData.append('id', localStorage.getItem('id'));
@@ -14766,15 +15274,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return this.http.post('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(function (data) {
             var points = data.whatsapp_points;
 
-            _this109.itemService.setCredits(data.whatsapp_points);
+            _this111.itemService.setCredits(data.whatsapp_points);
 
             console.log('credits', points);
           }, function (error) {
-            _this109.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+            _this111.ngxNotificationService.error('We couldn\'t get your credits, trying again');
 
             console.log(error);
 
-            _this109.spinner.hide();
+            _this111.spinner.hide();
           });
         }
       }, {
@@ -14914,9 +15422,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (type === 1) {
             if (value != null) {
               if (value.split(' ')) {
-                var _name2 = value.split(' ');
+                var _name = value.split(' ');
 
-                return _name2[0];
+                return _name[0];
               } else {
                 return value;
               }
@@ -15176,9 +15684,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (type === 1) {
             if (value != null) {
               if (value.split(' ')) {
-                var _name3 = value.split(' ');
+                var _name2 = value.split(' ');
 
-                return _name3[0];
+                return _name2[0];
               } else {
                 return value;
               }
@@ -15305,7 +15813,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getData",
         value: function getData(id, answer, index) {
-          var _this110 = this;
+          var _this112 = this;
 
           this.panelOpenState = null;
           var reAnswerData = new FormData();
@@ -15317,15 +15825,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(data);
 
             if (data && data.status === 1) {
-              _this110.Analytics('Profile Answered From Personalized', 'Profile Answered From Personalized', answer);
+              _this112.Analytics('Profile Answered From Personalized', 'Profile Answered From Personalized', answer);
 
               console.log(answer);
 
-              _this110.getCredits();
+              _this112.getCredits();
 
-              _this110.updateProfileList(answer, index);
+              _this112.updateProfileList(answer, index);
             } else {
-              _this110.ngxNotificationService.error('Something went wrong');
+              _this112.ngxNotificationService.error('Something went wrong');
             }
           }, function (error) {
             console.log(error);
@@ -15335,17 +15843,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "addRemoveNewData",
         value: function addRemoveNewData(data) {
-          var _this111 = this;
+          var _this113 = this;
 
           // finding and adding the new element to the locally stored list
           data.forEach(function (element) {
-            var newProfiles = _this111.profile.find(function (item) {
+            var newProfiles = _this113.profile.find(function (item) {
               return item.identity_number === element.identity_number;
             });
 
             if (!newProfiles) {
               //  this.profile.push(element);
-              _this111.profile = [element].concat(_toConsumableArray(_this111.profile));
+              _this113.profile = [element].concat(_toConsumableArray(_this113.profile));
             }
           }); // finding and removing the old element from the locally stored list
 
@@ -15355,7 +15863,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             });
 
             if (!removeProfile) {
-              _this111.profile.splice(index, 1);
+              _this113.profile.splice(index, 1);
             }
           });
           console.log(this.profile);
@@ -15363,7 +15871,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openProfileDialog",
         value: function openProfileDialog(item, ind) {
-          var _this112 = this;
+          var _this114 = this;
 
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"]();
           dialogConfig.hasBackdrop = true;
@@ -15387,7 +15895,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var dialogRef = this.dialog.open(_personalized_dialog_personalized_dialog_component__WEBPACK_IMPORTED_MODULE_12__["PersonalizedDialogComponent"], dialogConfig);
           dialogRef.afterClosed().subscribe(function (data) {
             if (data) {
-              _this112.profileReAnswer(data.profile, data.ans, data.index);
+              _this114.profileReAnswer(data.profile, data.ans, data.index);
             }
           });
         }
@@ -15486,11 +15994,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "disableForAWhile",
         value: function disableForAWhile() {
-          var _this113 = this;
+          var _this115 = this;
 
           if (this.panelOpenState === null) {
             setTimeout(function () {
-              _this113.panelOpenState = -1;
+              _this115.panelOpenState = -1;
             }, 100);
             return true;
           } else {
@@ -15628,7 +16136,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCredits",
         value: function getCredits() {
-          var _this114 = this;
+          var _this116 = this;
 
           var creditsData = new FormData();
           creditsData.append('id', localStorage.getItem('id'));
@@ -15637,21 +16145,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return this.http.post('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(function (data) {
             var points = data.whatsapp_points;
 
-            _this114.itemService.setCredits(data.whatsapp_points);
+            _this116.itemService.setCredits(data.whatsapp_points);
 
             console.log('credits', points);
           }, function (error) {
-            _this114.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+            _this116.ngxNotificationService.error('We couldn\'t get your credits, trying again');
 
             console.log(error);
 
-            _this114.spinner.hide();
+            _this116.spinner.hide();
           });
         }
       }, {
         key: "openMessageDialog",
         value: function openMessageDialog(shareItem, reply) {
-          var _this115 = this;
+          var _this117 = this;
 
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"]();
           dialogConfig.hasBackdrop = true;
@@ -15669,7 +16177,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               var dialogRefYes = this.dialog.open(_message_dialog_message_dialog_component__WEBPACK_IMPORTED_MODULE_10__["MessageDialogComponent"], dialogConfig);
               dialogRefYes.afterClosed().subscribe(function (data) {
                 if (data && data.request) {
-                  _this115.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
+                  _this117.ngxNotificationService.success('Call Requested Successfully. Hans Matrimony Will Call You');
                 }
               });
               break;
@@ -15681,7 +16189,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getPersonalizedProfiles",
         value: function getPersonalizedProfiles() {
-          var _this116 = this;
+          var _this118 = this;
 
           if (!localStorage.getItem('premiumProf')) {
             this.spinner.show();
@@ -15697,49 +16205,49 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(data);
 
             if (data.status === 1) {
-              _this116.Analytics('personalized section', 'personalized section', 'personalized clicked');
+              _this118.Analytics('personalized section', 'personalized section', 'personalized clicked');
 
               if (!localStorage.getItem('premiumProf')) {
-                _this116.profile = JSON.parse(data.message);
+                _this118.profile = JSON.parse(data.message);
               } else {
-                _this116.addRemoveNewData(JSON.parse(data.message));
+                _this118.addRemoveNewData(JSON.parse(data.message));
               }
 
               localStorage.setItem('premiumProf', data.message);
-              console.log(_this116.profile);
+              console.log(_this118.profile);
 
-              _this116.spinner.hide();
+              _this118.spinner.hide();
             } else {
-              _this116.profile = null;
-              _this116.message = data.message;
+              _this118.profile = null;
+              _this118.message = data.message;
 
-              _this116.spinner.hide();
+              _this118.spinner.hide();
             } // if (this.profile.length < 1) {
             //   this.getNoDataText(link);
             // }
 
 
-            if (_this116.itemService.getItem()) {
-              var prof = _this116.itemService.getItem();
+            if (_this118.itemService.getItem()) {
+              var prof = _this118.itemService.getItem();
 
               if (prof.profile) {
-                _this116.panelOpenState = _this116.profile.findIndex(function (item) {
+                _this118.panelOpenState = _this118.profile.findIndex(function (item) {
                   return item.profile.name === prof.profile.name;
                 });
               } else {
-                _this116.panelOpenState = _this116.profile.findIndex(function (item) {
+                _this118.panelOpenState = _this118.profile.findIndex(function (item) {
                   return item.profile.name === prof.name;
                 });
               }
 
-              _this116.itemService.setItem(null);
+              _this118.itemService.setItem(null);
             }
           }, function (error) {
-            _this116.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+            _this118.ngxNotificationService.error('We couldn\'t get your credits, trying again');
 
             console.log(error);
 
-            _this116.spinner.hide();
+            _this118.spinner.hide();
           });
         }
       }]);
@@ -15934,7 +16442,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteProfile",
         value: function deleteProfile() {
-          var _this117 = this;
+          var _this119 = this;
 
           console.log(this.deleteForm.value.number, this.regNumber);
 
@@ -15944,17 +16452,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             formData.append('mobile', this.deleteForm.value.number);
             this.http.post('https://partner.hansmatrimony.com/api/deleteProfileAPI', formData).subscribe(function (response) {
               if (response.status === '1') {
-                _this117.ngxNotificationService.success('Profile Deleted Successfully!');
+                _this119.ngxNotificationService.success('Profile Deleted Successfully!');
 
-                _this117.logout();
+                _this119.logout();
               } else if (response.status === '0') {
-                _this117.ngxNotificationService.error('Some error occurred....Try after some time');
+                _this119.ngxNotificationService.error('Some error occurred....Try after some time');
 
-                _this117.backToChat();
+                _this119.backToChat();
               } else {
-                _this117.ngxNotificationService.error(response.message);
+                _this119.ngxNotificationService.error(response.message);
 
-                _this117.backToChat();
+                _this119.backToChat();
               }
             });
           } else {
@@ -16147,7 +16655,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCallback",
         value: function getCallback() {
-          var _this118 = this;
+          var _this120 = this;
 
           console.log(this.query);
           this.spinner.show();
@@ -16159,22 +16667,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             console.log(data);
 
             if (data.status === '1' || data.status === 1) {
-              _this118.analyticsEvent('Requested For A Callback From Chat Drawer'); // this.ngxNotificationService.success('We will get back to soon!!');
+              _this120.analyticsEvent('Requested For A Callback From Chat Drawer'); // this.ngxNotificationService.success('We will get back to soon!!');
 
 
-              _this118.spinner.hide(); //this.openOkDialog();
+              _this120.spinner.hide(); //this.openOkDialog();
 
             } else {
-              _this118.ngxNotificationService.error('Something Went Wrong, Please try again later');
+              _this120.ngxNotificationService.error('Something Went Wrong, Please try again later');
 
-              _this118.spinner.hide();
+              _this120.spinner.hide();
             }
           }, function (err) {
             console.log(err);
 
-            _this118.ngxNotificationService.error('Something Went Wrong, Please try again later');
+            _this120.ngxNotificationService.error('Something Went Wrong, Please try again later');
 
-            _this118.spinner.hide();
+            _this120.spinner.hide();
           });
         }
       }, {
@@ -16599,71 +17107,71 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "placeChangedLocality",
         value: function placeChangedLocality() {
-          var _this119 = this;
+          var _this121 = this;
 
           var place = document.querySelector('#Locality');
           setTimeout(function () {
             console.log(place.value);
 
-            _this119.personalForm.patchValue({
+            _this121.personalForm.patchValue({
               Locality: place.value
             });
 
-            _this119.analyticsEvent('Complete Profile Working City Changed');
+            _this121.analyticsEvent('Complete Profile Working City Changed');
           }, 500);
         }
       }, {
         key: "placeChangedWorkingcity",
         value: function placeChangedWorkingcity() {
-          var _this120 = this;
+          var _this122 = this;
 
           var place = document.querySelector('#WorkingCity');
           setTimeout(function () {
             console.log(place.value);
 
-            _this120.personalForm.patchValue({
+            _this122.personalForm.patchValue({
               WorkingCity: place.value
             });
 
-            _this120.analyticsEvent('Complete Profile Working City Changed');
+            _this122.analyticsEvent('Complete Profile Working City Changed');
           }, 500);
         }
       }, {
         key: "placeChangedFamilyCity",
         value: function placeChangedFamilyCity() {
-          var _this121 = this;
+          var _this123 = this;
 
           var place = document.querySelector('#FamliyCity');
           setTimeout(function () {
             console.log(place.value);
 
-            _this121.familyForm.patchValue({
+            _this123.familyForm.patchValue({
               family_city: place.value
             });
 
-            _this121.analyticsEvent('Complete Profile Family City Changed');
+            _this123.analyticsEvent('Complete Profile Family City Changed');
           }, 200);
         }
       }, {
         key: "placeChanged",
         value: function placeChanged() {
-          var _this122 = this;
+          var _this124 = this;
 
           var birthPlace = document.querySelector('#birthPlace');
           setTimeout(function () {
             console.log(birthPlace.value);
 
-            _this122.PageThree.patchValue({
+            _this124.PageThree.patchValue({
               BirthPlace: birthPlace.value
             });
 
-            _this122.analyticsEvent('Complete Profile Birth Place Changed');
+            _this124.analyticsEvent('Complete Profile Birth Place Changed');
           }, 200);
         }
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this123 = this;
+          var _this125 = this;
 
           if (this.personalProfileData && this.personalProfileData.gender === 'Male') {
             this.personalForm.controls.abroad.disable();
@@ -16731,11 +17239,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', personalDataForm).subscribe(function (data) {
               console.log('qwerty', data);
 
-              _this123.chatService.getUserProfileData();
+              _this125.chatService.getUserProfileData();
             }, function (error) {
               console.log(error);
 
-              _this123.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+              _this125.ngxNotificationService.error('Something Went Wrong, Try Again Later');
             });
             this.popupaction.emit({
               close: true
@@ -16745,7 +17253,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmitFamily",
         value: function onSubmitFamily() {
-          var _this124 = this;
+          var _this126 = this;
 
           this.errors = [];
           console.log(this.familyForm);
@@ -16783,11 +17291,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.http.post('https://partner.hansmatrimony.com/api/updateFamilyDetails', familyDataForm).subscribe(function (data) {
               console.log(data); // localStorage.setItem('profileCompPercent', '100');
 
-              _this124.chatService.getUserProfileData();
+              _this126.chatService.getUserProfileData();
             }, function (error) {
               console.log(error);
 
-              _this124.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+              _this126.ngxNotificationService.error('Something Went Wrong, Try Again Later');
             });
             this.popupaction.emit({
               close: true
@@ -16859,7 +17367,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "firstStep",
         value: function firstStep() {
-          var _this125 = this;
+          var _this127 = this;
 
           console.log(this.PageThree.value.BirthPlace);
 
@@ -16901,23 +17409,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               console.log('first', res);
 
               if (res.status === 1) {
-                _this125.ngxNotificationService.success('Details updated succesfully');
+                _this127.ngxNotificationService.success('Details updated succesfully');
 
                 if (localStorage.getItem('storedData')) {
                   localStorage.removeItem('storedData');
                 }
 
-                _this125.chatService.pageThreeFilled = true;
+                _this127.chatService.pageThreeFilled = true;
 
-                _this125.chatService.getUserProfileData();
+                _this127.chatService.getUserProfileData();
 
                 console.log('pageThreeFilled set to true');
 
-                _this125.popupaction.emit({
+                _this127.popupaction.emit({
                   close: true
                 });
               } else {
-                _this125.ngxNotificationService.error(res.message);
+                _this127.ngxNotificationService.error(res.message);
               }
             }, function (err) {
               console.log(err);
@@ -16989,7 +17497,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "uploadPhoto",
         value: function uploadPhoto(data, index) {
-          var _this126 = this;
+          var _this128 = this;
 
           var uploadData = new FormData();
           uploadData.append('id', localStorage.getItem('id'));
@@ -17002,19 +17510,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (suc.pic_upload_status === 'Y') {
               console.log('Image Upload successful');
 
-              _this126.ngxNotificationService.success('Photo Uploaded Succesfully!'); //this.itemService.setPhotoStatus(true);
+              _this128.ngxNotificationService.success('Photo Uploaded Succesfully!'); //this.itemService.setPhotoStatus(true);
 
 
-              _this126.imgURL = _this126.imageSrc = suc.profile_pic_url;
+              _this128.imgURL = _this128.imageSrc = suc.profile_pic_url;
 
-              _this126.chatService.imgSRC.next(suc.profile_pic_url);
+              _this128.chatService.imgSRC.next(suc.profile_pic_url);
 
               localStorage.setItem('profile_photo', suc.profile_pic_url);
             } else {
-              _this126.ngxNotificationService.error('Photo Upload Unsuccessful!');
+              _this128.ngxNotificationService.error('Photo Upload Unsuccessful!');
             }
           }, function (err) {
-            _this126.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
+            _this128.ngxNotificationService.error('Photo could not be Uploaded!Try after some time');
 
             console.log(err);
           });
@@ -17022,7 +17530,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openPhotoUploadCrop",
         value: function openPhotoUploadCrop(index) {
-          var _this127 = this;
+          var _this129 = this;
 
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatDialogConfig"]();
           dialogConfig.hasBackdrop = true;
@@ -17045,7 +17553,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             //this.uploadPhoto(data, 1);
             console.log('data recieved in the photo upload component', data);
 
-            _this127.uploadPhoto(data, index);
+            _this129.uploadPhoto(data, index);
           });
         }
       }]);
@@ -17207,13 +17715,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(TinderUiComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this128 = this;
+          var _this130 = this;
 
           this.chatService.authorized.subscribe(function (data) {
             if (data) {
-              _this128.userId = data.id;
-              _this128.userIsLead = data.isLead;
-              console.log(_this128.userId, _this128.userIsLead);
+              _this130.userId = data.id;
+              _this130.userIsLead = data.isLead;
+              console.log(_this130.userId, _this130.userIsLead);
             }
           });
           this.isMobile = this.deviceService.isMobile();
@@ -17234,7 +17742,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showTinderAnimation",
         value: function showTinderAnimation() {
-          var _this129 = this;
+          var _this131 = this;
 
           if (!localStorage.getItem('shownTinderAniamtion')) {
             localStorage.setItem('shownTinderAniamtion', '1');
@@ -17242,11 +17750,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             //this.heartVisible = true;
 
             setTimeout(function () {
-              _this129.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px,0px) rotate(0deg)'; // this.tinderCardsArray[0].nativeElement.classList.remove('rotateAnimation');
+              _this131.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px,0px) rotate(0deg)'; // this.tinderCardsArray[0].nativeElement.classList.remove('rotateAnimation');
 
-              _this129.heartVisible = false;
+              _this131.heartVisible = false;
               setTimeout(function () {
-                _this129.showOppAnima();
+                _this131.showOppAnima();
               }, 1000);
             }, 1500);
           }
@@ -17254,26 +17762,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showOppAnima",
         value: function showOppAnima() {
-          var _this130 = this;
+          var _this132 = this;
 
           this.tinderCardsArray[0].nativeElement.style.transform = 'translate(-200px,15px) rotate(-20deg)'; // this.tinderCardsArray[0].nativeElement.classList.add('oppositeRotate');
           //this.crossVisible = true;
 
           setTimeout(function () {
-            _this130.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px, 0px) rotate(0deg)'; // this.tinderCardsArray[0].nativeElement.classList.remove('oppositeRotate');
+            _this132.tinderCardsArray[0].nativeElement.style.transform = 'translate(0px, 0px) rotate(0deg)'; // this.tinderCardsArray[0].nativeElement.classList.remove('oppositeRotate');
 
-            _this130.crossVisible = false;
+            _this132.crossVisible = false;
           }, 1500);
         }
       }, {
         key: "ngAfterViewInit",
         value: function ngAfterViewInit() {
-          var _this131 = this;
+          var _this133 = this;
 
           this.moveOutWidth = document.documentElement.clientWidth * 0.5;
           this.tinderCardsArray = this.tinderCards.toArray();
           this.tinderCards.changes.subscribe(function () {
-            _this131.tinderCardsArray = _this131.tinderCards.toArray();
+            _this133.tinderCardsArray = _this133.tinderCards.toArray();
           });
 
           if (this.chatService.shortList.length > 0) {
@@ -17301,7 +17809,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           setTimeout(function () {
-            _this131.showTinderAnimation();
+            _this133.showTinderAnimation();
           }, 3000);
         }
       }, {
@@ -17354,11 +17862,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "persistentDialogOpeningLogic",
         value: function persistentDialogOpeningLogic(reply) {
-          var _this132 = this;
+          var _this134 = this;
 
           if (this.actionCount === -2 && this.router.url.match('first')) {
             setTimeout(function () {
-              _this132.chatService.opensidenavTrue();
+              _this134.chatService.opensidenavTrue();
             }, 1500);
           }
 
@@ -17387,15 +17895,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   // }
                 } else {
                   if (!localStorage.getItem('appInstalled') || localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') {
+                    var _iterator8 = _createForOfIteratorHelper(this.shortList),
+                        _step8;
+
+                    try {
+                      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                        var x = _step8.value;
+
+                        if (x.value === 1) {
+                          x.bool = true;
+                          break;
+                        }
+                      }
+                    } catch (err) {
+                      _iterator8.e(err);
+                    } finally {
+                      _iterator8.f();
+                    }
+                  }
+
+                  if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
                     var _iterator9 = _createForOfIteratorHelper(this.shortList),
                         _step9;
 
                     try {
                       for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                        var x = _step9.value;
+                        var _x = _step9.value;
 
-                        if (x.value === 1) {
-                          x.bool = true;
+                        if (_x.value === 2) {
+                          _x.bool = true;
                           break;
                         }
                       }
@@ -17405,37 +17933,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       _iterator9.f();
                     }
                   }
-
-                  if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-                    var _iterator10 = _createForOfIteratorHelper(this.shortList),
-                        _step10;
-
-                    try {
-                      for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-                        var _x = _step10.value;
-
-                        if (_x.value === 2) {
-                          _x.bool = true;
-                          break;
-                        }
-                      }
-                    } catch (err) {
-                      _iterator10.e(err);
-                    } finally {
-                      _iterator10.f();
-                    }
-                  }
                 }
 
                 console.log('Here is the short list array', this.shortList);
                 var v;
 
-                var _iterator11 = _createForOfIteratorHelper(this.shortList),
-                    _step11;
+                var _iterator10 = _createForOfIteratorHelper(this.shortList),
+                    _step10;
 
                 try {
-                  for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-                    v = _step11.value;
+                  for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                    v = _step10.value;
 
                     if (v.bool) {
                       this.showShortListPopup(v.value);
@@ -17443,9 +17951,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     }
                   }
                 } catch (err) {
-                  _iterator11.e(err);
+                  _iterator10.e(err);
                 } finally {
-                  _iterator11.f();
+                  _iterator10.f();
                 }
 
                 this.shortList.splice(this.shortList.indexOf(v), 1);
@@ -17470,7 +17978,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openPersistentDialog",
         value: function openPersistentDialog(message, submessage, button) {
-          var _this133 = this;
+          var _this135 = this;
 
           this.popupdata = {
             message: message,
@@ -17480,7 +17988,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             userIsLead: this.userIsLead
           };
           setTimeout(function () {
-            _this133.whatToShow = ['popup', 'profile'];
+            _this135.whatToShow = ['popup', 'profile'];
           }, 300);
         }
       }, {
@@ -17528,13 +18036,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "toggleChoiceIndicator",
         value: function toggleChoiceIndicator(cross, heart) {
-          var _this134 = this;
+          var _this136 = this;
 
           this.crossVisible = cross;
           this.heartVisible = heart;
           setTimeout(function () {
-            _this134.crossVisible = false;
-            _this134.heartVisible = false;
+            _this136.crossVisible = false;
+            _this136.heartVisible = false;
           }, 600);
         }
       }, {
@@ -18040,7 +18548,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this135 = this;
+          var _this137 = this;
 
           if (this.messageData.toLowerCase().includes('2')) {
             this.whatever = false;
@@ -18052,9 +18560,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.isMobile = this.deviceService.isMobile();
           this.chatService.authorized.subscribe(function (data) {
             if (data) {
-              _this135.userId = data.id;
-              _this135.userIsLead = data.isLead;
-              console.log(_this135.userId, _this135.userIsLead);
+              _this137.userId = data.id;
+              _this137.userIsLead = data.isLead;
+              console.log(_this137.userId, _this137.userIsLead);
             }
           });
 
@@ -18115,23 +18623,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setTimer",
         value: function setTimer() {
-          var _this136 = this;
+          var _this138 = this;
 
           console.log(this.seconds);
           var timer = setInterval(function () {
-            _this136.seconds = _this136.seconds - 1;
+            _this138.seconds = _this138.seconds - 1;
 
-            if (_this136.hour !== 0 && _this136.minutes !== 0 && _this136.seconds === -1) {
-              _this136.seconds = 60;
-              _this136.minutes = _this136.minutes - 1;
-            } else if (_this136.hour !== 0 && _this136.minutes === 0 && _this136.seconds === -1) {
-              _this136.seconds = 60;
-              _this136.minutes = 59;
-              _this136.hour -= 1;
-            } else if (_this136.hour === 0 && _this136.minutes !== 0 && _this136.seconds === -1) {
-              _this136.seconds = 60;
-              _this136.minutes -= 1;
-            } else if (_this136.hour === 0 && _this136.minutes === 0 && _this136.seconds === 0) {
+            if (_this138.hour !== 0 && _this138.minutes !== 0 && _this138.seconds === -1) {
+              _this138.seconds = 60;
+              _this138.minutes = _this138.minutes - 1;
+            } else if (_this138.hour !== 0 && _this138.minutes === 0 && _this138.seconds === -1) {
+              _this138.seconds = 60;
+              _this138.minutes = 59;
+              _this138.hour -= 1;
+            } else if (_this138.hour === 0 && _this138.minutes !== 0 && _this138.seconds === -1) {
+              _this138.seconds = 60;
+              _this138.minutes -= 1;
+            } else if (_this138.hour === 0 && _this138.minutes === 0 && _this138.seconds === 0) {
               clearInterval(timer);
             }
           }, 1000);
@@ -18404,7 +18912,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(TodayProfilesComponent, [{
         key: "ngAfterViewInit",
         value: function ngAfterViewInit() {
-          var _this137 = this;
+          var _this139 = this;
 
           this.section = document.querySelector('#today-main');
           this.chatService.shouldHitSendMessages$.subscribe(function (val) {
@@ -18413,14 +18921,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (val) {
               console.log('get data called  because shouldHitSendMessages emitted', val);
 
-              _this137.getData('SHOW');
+              _this139.getData('SHOW');
             }
           });
         }
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this138 = this;
+          var _this140 = this;
 
           if (this.router.url.includes('first')) {
             this.spinner.show('searchingSpinner');
@@ -18430,9 +18938,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           console.log(this.contactNumber);
           this.chatService.authorized.subscribe(function (data) {
             if (data) {
-              _this138.userId = data.id;
-              _this138.userIsLead = data.isLead;
-              console.log(_this138.userId, _this138.userIsLead);
+              _this140.userId = data.id;
+              _this140.userIsLead = data.isLead;
+              console.log(_this140.userId, _this140.userIsLead);
             }
           }); //getting and using the authData small tasks.
 
@@ -18441,39 +18949,39 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               console.log(data);
               localStorage.setItem('authData', JSON.stringify(data));
 
-              _this138.chatService.authDataUpdated.emit(true);
+              _this140.chatService.authDataUpdated.emit(true);
 
               var text = data.apiwha_autoreply;
               var id = data.id;
 
               if (data && data.get_status_count) {
-                _this138.itemService.saveCount(data.get_status_count);
+                _this140.itemService.saveCount(data.get_status_count);
               }
 
               if (data.hasPhoto === '1') {
-                _this138.itemService.setPhotoStatus(true);
+                _this140.itemService.setPhotoStatus(true);
               } // for personalized users
 
 
               if (data && data.is_premium && data.is_premium === '1') {
-                _this138.itemService.setIsPersonalized(true);
+                _this140.itemService.setIsPersonalized(true);
               } else {
-                _this138.itemService.setIsPersonalized(false);
+                _this140.itemService.setIsPersonalized(false);
               } // for is_lead
 
 
               if (data && data.is_lead != null) {
-                _this138.itemService.setIsLead(data.is_lead);
+                _this140.itemService.setIsLead(data.is_lead);
               } else {
-                _this138.itemService.setIsLead(1);
+                _this140.itemService.setIsLead(1);
               } // set profile image (circular in top bar)
 
 
               if (data) {
-                _this138.selfImage = data.photo;
-                _this138.selfName = data.name;
+                _this140.selfImage = data.photo;
+                _this140.selfName = data.name;
 
-                _this138.chatService.authorized.emit({
+                _this140.chatService.authorized.emit({
                   name: data.name ? data.name : '',
                   photo: data.photo ? data.photo : '',
                   id: data.id,
@@ -18484,26 +18992,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   localStorage.setItem('profile_photo', data.photo);
                 }
               } else {
-                _this138.selfImage = '../../assets/avatar.svg';
-                _this138.selfName = 'You';
+                _this140.selfImage = '../../assets/avatar.svg';
+                _this140.selfName = 'You';
               }
 
               console.log(text);
               console.log(id);
               localStorage.setItem('id', id);
-              _this138.paidStatus = data.paid_status;
-              console.log(_this138.paidStatus);
+              _this140.paidStatus = data.paid_status;
+              console.log(_this140.paidStatus);
 
               if (text.match('SHOW')) {
-                _this138.chatService.Analytics('login', 'login', 'logged In');
+                _this140.chatService.Analytics('login', 'login', 'logged In');
 
-                _this138.chatService.setLoginStatus(true);
+                _this140.chatService.setLoginStatus(true);
 
                 if (localStorage.getItem('todayProfile')) {
-                  _this138.setProfileLocally();
+                  _this140.setProfileLocally();
                 }
 
-                _this138.getNextMessageOrProfile('SHOW');
+                _this140.getNextMessageOrProfile('SHOW');
               }
             }, function (err) {
               console.log(err);
@@ -18512,40 +19020,40 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             setTimeout(function () {
               var data = JSON.parse(localStorage.getItem('authData'));
 
-              _this138.chatService.authDataUpdated.emit(true);
+              _this140.chatService.authDataUpdated.emit(true);
 
               console.log(data);
               var text = data.apiwha_autoreply;
               var id = data.id;
 
               if (data && data.get_status_count) {
-                _this138.itemService.saveCount(data.get_status_count);
+                _this140.itemService.saveCount(data.get_status_count);
               }
 
               if (data.hasPhoto === '1') {
-                _this138.itemService.setPhotoStatus(true);
+                _this140.itemService.setPhotoStatus(true);
               } // for personalized users
 
 
               if (data && data.is_premium && data.is_premium === '1') {
-                _this138.itemService.setIsPersonalized(true);
+                _this140.itemService.setIsPersonalized(true);
               } else {
-                _this138.itemService.setIsPersonalized(false);
+                _this140.itemService.setIsPersonalized(false);
               } // for is_lead
 
 
               if (data && data.is_lead != null) {
-                _this138.itemService.setIsLead(data.is_lead);
+                _this140.itemService.setIsLead(data.is_lead);
               } else {
-                _this138.itemService.setIsLead(1);
+                _this140.itemService.setIsLead(1);
               } // set profile image (circular in top bar)
 
 
               if (data) {
-                _this138.selfImage = data.photo;
-                _this138.selfName = data.name;
+                _this140.selfImage = data.photo;
+                _this140.selfName = data.name;
 
-                _this138.chatService.authorized.emit({
+                _this140.chatService.authorized.emit({
                   name: data.name ? data.name : '',
                   photo: data.photo ? data.photo : '',
                   id: data.id,
@@ -18556,8 +19064,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   localStorage.setItem('profile_photo', data.photo);
                 }
               } else {
-                _this138.selfImage = '../../assets/avatar.svg';
-                _this138.selfName = 'You';
+                _this140.selfImage = '../../assets/avatar.svg';
+                _this140.selfName = 'You';
               }
 
               console.log(text);
@@ -18567,19 +19075,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 localStorage.setItem('id', id);
               }
 
-              _this138.paidStatus = data.paid_status;
-              console.log(_this138.paidStatus);
+              _this140.paidStatus = data.paid_status;
+              console.log(_this140.paidStatus);
 
               if (text.match('SHOW')) {
-                _this138.chatService.Analytics('login', 'login', 'logged In');
+                _this140.chatService.Analytics('login', 'login', 'logged In');
 
-                _this138.chatService.setLoginStatus(true);
+                _this140.chatService.setLoginStatus(true);
 
                 if (localStorage.getItem('todayProfile')) {
-                  _this138.setProfileLocally();
+                  _this140.setProfileLocally();
                 }
 
-                _this138.getNextMessageOrProfile('SHOW');
+                _this140.getNextMessageOrProfile('SHOW');
               }
             }, 1000);
           } //just to set up which popup to show.....
@@ -18689,7 +19197,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "startActionAnimation",
         value: function startActionAnimation() {
-          var _this139 = this;
+          var _this141 = this;
 
           if (this.lastAction === 'SHOW') {
             return;
@@ -18697,7 +19205,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.showActionAnimation = true;
           setTimeout(function () {
-            _this139.showActionAnimation = false;
+            _this141.showActionAnimation = false;
           }, 10000);
         }
       }, {
@@ -18746,7 +19254,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "persistentDialogOpeningLogic",
         value: function persistentDialogOpeningLogic(shareItem, reply) {
-          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && reply.toLowerCase() === 'yes' && this.type === 'profile') {
+          if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && reply.toLowerCase() === 'yes' && this.type === 'profile' && this.itemService.isPersonalized) {
+            this.ngxNotificationService.warning('You have zero credits left for the week');
+          } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' && reply.toLowerCase() === 'yes' && this.type === 'profile') {
             this.itemService.openTodaysPopupAd();
           } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
             this.actionCount++;
@@ -18762,15 +19272,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (this.actionCount % 2 === 0) {
               if (reply.toLowerCase() === 'shortlist' && this.type === 'profile') {
                 if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+                  var _iterator11 = _createForOfIteratorHelper(this.shortList),
+                      _step11;
+
+                  try {
+                    for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+                      var x = _step11.value;
+
+                      if (x.value === 0) {
+                        x.bool = true;
+                        break;
+                      }
+                    }
+                  } catch (err) {
+                    _iterator11.e(err);
+                  } finally {
+                    _iterator11.f();
+                  }
+                }
+
+                if (!localStorage.getItem('appInstalled') || localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') {
                   var _iterator12 = _createForOfIteratorHelper(this.shortList),
                       _step12;
 
                   try {
                     for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-                      var x = _step12.value;
+                      var _x2 = _step12.value;
 
-                      if (x.value === 0) {
-                        x.bool = true;
+                      if (_x2.value === 1) {
+                        _x2.bool = true;
                         break;
                       }
                     }
@@ -18781,16 +19311,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
                 }
 
-                if (!localStorage.getItem('appInstalled') || localStorage.getItem('appInstalled') && localStorage.getItem('appInstalled') !== '1') {
+                if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
                   var _iterator13 = _createForOfIteratorHelper(this.shortList),
                       _step13;
 
                   try {
                     for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-                      var _x2 = _step13.value;
+                      var _x3 = _step13.value;
 
-                      if (_x2.value === 1) {
-                        _x2.bool = true;
+                      if (_x3.value === 2) {
+                        _x3.bool = true;
                         break;
                       }
                     }
@@ -18801,35 +19331,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
                 }
 
-                if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-                  var _iterator14 = _createForOfIteratorHelper(this.shortList),
-                      _step14;
-
-                  try {
-                    for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-                      var _x3 = _step14.value;
-
-                      if (_x3.value === 2) {
-                        _x3.bool = true;
-                        break;
-                      }
-                    }
-                  } catch (err) {
-                    _iterator14.e(err);
-                  } finally {
-                    _iterator14.f();
-                  }
-                }
-
                 console.log('Here is the short list array', this.shortList);
                 var v;
 
-                var _iterator15 = _createForOfIteratorHelper(this.shortList),
-                    _step15;
+                var _iterator14 = _createForOfIteratorHelper(this.shortList),
+                    _step14;
 
                 try {
-                  for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-                    v = _step15.value;
+                  for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+                    v = _step14.value;
 
                     if (v.bool) {
                       this.showShortListPopup(shareItem, v.value);
@@ -18837,9 +19347,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     }
                   }
                 } catch (err) {
-                  _iterator15.e(err);
+                  _iterator14.e(err);
                 } finally {
-                  _iterator15.f();
+                  _iterator14.f();
                 }
 
                 this.shortList.splice(this.shortList.indexOf(v), 1);
@@ -18847,15 +19357,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 console.log('here is the modified shortlist array', this.shortList);
               } else if (reply === 'NO' && this.type === 'profile') {
                 if (localStorage.getItem('profileCompPercent') && Number(localStorage.getItem('profileCompPercent')) < 100) {
+                  var _iterator15 = _createForOfIteratorHelper(this.rejectList),
+                      _step15;
+
+                  try {
+                    for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+                      var _x4 = _step15.value;
+
+                      if (_x4.value === 0) {
+                        _x4.bool = true;
+                        break;
+                      }
+                    }
+                  } catch (err) {
+                    _iterator15.e(err);
+                  } finally {
+                    _iterator15.f();
+                  }
+                }
+
+                if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
                   var _iterator16 = _createForOfIteratorHelper(this.rejectList),
                       _step16;
 
                   try {
                     for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-                      var _x4 = _step16.value;
+                      var _x5 = _step16.value;
 
-                      if (_x4.value === 0) {
-                        _x4.bool = true;
+                      if (_x5.value === 1) {
+                        _x5.bool = true;
                         break;
                       }
                     }
@@ -18866,36 +19396,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
                 }
 
-                if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
-                  var _iterator17 = _createForOfIteratorHelper(this.rejectList),
-                      _step17;
-
-                  try {
-                    for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
-                      var _x5 = _step17.value;
-
-                      if (_x5.value === 1) {
-                        _x5.bool = true;
-                        break;
-                      }
-                    }
-                  } catch (err) {
-                    _iterator17.e(err);
-                  } finally {
-                    _iterator17.f();
-                  }
-                }
-
                 console.log('Here is the reject list array', this.rejectList);
 
                 var _v6;
 
-                var _iterator18 = _createForOfIteratorHelper(this.rejectList),
-                    _step18;
+                var _iterator17 = _createForOfIteratorHelper(this.rejectList),
+                    _step17;
 
                 try {
-                  for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
-                    _v6 = _step18.value;
+                  for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+                    _v6 = _step17.value;
 
                     if (_v6.bool) {
                       this.rejectListPopup(shareItem, _v6.value);
@@ -18903,9 +19413,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     }
                   }
                 } catch (err) {
-                  _iterator18.e(err);
+                  _iterator17.e(err);
                 } finally {
-                  _iterator18.f();
+                  _iterator17.f();
                 }
 
                 this.rejectList.splice(this.rejectList.indexOf(_v6), 1);
@@ -18940,7 +19450,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getData",
         value: function getData(reply) {
-          var _this140 = this;
+          var _this142 = this;
 
           // shortlist count
           console.log(reply);
@@ -18962,83 +19472,83 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.chatRequest(reply).subscribe(function (data) {
             console.log(data);
 
-            _this140.analyticsEvent("Response ".concat(reply, " On Today's Special Profile")); // hide the searching spinner if visible
+            _this142.analyticsEvent("Response ".concat(reply, " On Today's Special Profile")); // hide the searching spinner if visible
             // only visible for first time users
 
 
-            _this140.spinner.hide('searchingSpinner');
+            _this142.spinner.hide('searchingSpinner');
 
             if (data && data.get_status_count) {
-              _this140.itemService.saveCount(data.get_status_count);
+              _this142.itemService.saveCount(data.get_status_count);
 
-              _this140.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
+              _this142.itemService.saveDailyCount(data.apiwha_autoreply.profiles_left);
             } // set language according to user choice
 
 
             if (data.apiwha_autoreply.language) {
-              console.log(_this140.languageService.languageChangedFromMainStatus, localStorage.getItem('language'), data.apiwha_autoreply.language.toLowerCase());
+              console.log(_this142.languageService.languageChangedFromMainStatus, localStorage.getItem('language'), data.apiwha_autoreply.language.toLowerCase());
 
-              if (_this140.languageService.languageChangedFromMainStatus && localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
-                _this140.languageService.setCurrentLanguage(localStorage.getItem('language'));
+              if (_this142.languageService.languageChangedFromMainStatus && localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
+                _this142.languageService.setCurrentLanguage(localStorage.getItem('language'));
 
-                _this140.languageService.languageChangedFromMainStatus = false;
-              } else if (!_this140.languageService.languageChangedFromMainStatus && localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
-                _this140.languageService.setCurrentLanguage(data.apiwha_autoreply.language.toLowerCase());
+                _this142.languageService.languageChangedFromMainStatus = false;
+              } else if (!_this142.languageService.languageChangedFromMainStatus && localStorage.getItem('language') !== data.apiwha_autoreply.language.toLowerCase()) {
+                _this142.languageService.setCurrentLanguage(data.apiwha_autoreply.language.toLowerCase());
               } else {
-                if (!_this140.languageService.profileLang.name) {
-                  _this140.languageService.setProfileLanguage();
+                if (!_this142.languageService.profileLang.name) {
+                  _this142.languageService.setProfileLanguage();
 
-                  _this140.languageService.languageChangedFromMainStatus = false;
+                  _this142.languageService.languageChangedFromMainStatus = false;
                 }
               }
             } else {
-              if (_this140.languageService.languageChangedFromMainStatus) {
-                _this140.languageService.setCurrentLanguage(localStorage.getItem('language'));
+              if (_this142.languageService.languageChangedFromMainStatus) {
+                _this142.languageService.setCurrentLanguage(localStorage.getItem('language'));
 
-                _this140.languageService.languageChangedFromMainStatus = false;
+                _this142.languageService.languageChangedFromMainStatus = false;
               } else {
-                if (!_this140.languageService.profileLang.name) {
-                  _this140.languageService.setProfileLanguage();
+                if (!_this142.languageService.profileLang.name) {
+                  _this142.languageService.setProfileLanguage();
                 }
               }
             } // if profile_created == 1 ...re hit auth api
 
 
             if (data.profile_created && data.profile_created === 1 && localStorage.getItem('is_lead') === '1') {
-              _this140.checkUrl().subscribe(function (data) {
+              _this142.checkUrl().subscribe(function (data) {
                 console.log(data);
                 localStorage.setItem('authData', JSON.stringify(data));
                 var text = data.apiwha_autoreply;
                 var id = data.id;
 
                 if (data && data.get_status_count) {
-                  _this140.itemService.saveCount(data.get_status_count);
+                  _this142.itemService.saveCount(data.get_status_count);
                 }
 
                 if (data.hasPhoto === '1') {
-                  _this140.itemService.setPhotoStatus(true);
+                  _this142.itemService.setPhotoStatus(true);
                 } // for personalized users
 
 
                 if (data && data.is_premium && data.is_premium === '1') {
-                  _this140.itemService.setIsPersonalized(true);
+                  _this142.itemService.setIsPersonalized(true);
                 } else {
-                  _this140.itemService.setIsPersonalized(false);
+                  _this142.itemService.setIsPersonalized(false);
                 } // for is_lead
 
 
                 if (data && data.is_lead != null) {
-                  _this140.itemService.setIsLead(data.is_lead);
+                  _this142.itemService.setIsLead(data.is_lead);
                 } else {
-                  _this140.itemService.setIsLead(1);
+                  _this142.itemService.setIsLead(1);
                 } // set profile image (circular in top bar)
 
 
                 if (data) {
-                  _this140.selfImage = data.photo;
-                  _this140.selfName = data.name;
+                  _this142.selfImage = data.photo;
+                  _this142.selfName = data.name;
 
-                  _this140.chatService.authorized.emit({
+                  _this142.chatService.authorized.emit({
                     name: data.name ? data.name : '',
                     photo: data.photo ? data.photo : '',
                     id: data.id,
@@ -19049,24 +19559,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     localStorage.setItem('profile_photo', data.photo);
                   }
                 } else {
-                  _this140.selfImage = '../../assets/avatar.svg';
-                  _this140.selfName = 'You';
+                  _this142.selfImage = '../../assets/avatar.svg';
+                  _this142.selfName = 'You';
                 }
 
                 console.log(text);
                 console.log(id);
                 localStorage.setItem('id', id);
-                _this140.paidStatus = data.paid_status;
-                console.log(_this140.paidStatus);
+                _this142.paidStatus = data.paid_status;
+                console.log(_this142.paidStatus);
 
                 if (text.match('SHOW')) {
-                  _this140.chatService.setLoginStatus(true);
+                  _this142.chatService.setLoginStatus(true);
 
                   if (localStorage.getItem('todayProfile')) {
-                    _this140.setProfileLocally();
+                    _this142.setProfileLocally();
                   }
 
-                  _this140.getNextMessageOrProfile('SHOW');
+                  _this142.getNextMessageOrProfile('SHOW');
                 }
               }, function (err) {
                 console.log(err);
@@ -19079,62 +19589,62 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
             if (data.type === 'profile') {
-              _this140.type = 'profile'; //stop user response animation
+              _this142.type = 'profile'; //stop user response animation
               // if (data.name === this.item.apiwha_autoreply.name) {
               //   this.profileIsLoadingSubject.next(null);
               // }
               // this is the MOST IMPORTANT PART from the perspective of setting the profiles and maipulation the dom after that
 
-              if (_this140.wasSetFromLocal && JSON.stringify(data) === JSON.stringify(_this140.item)) {
+              if (_this142.wasSetFromLocal && JSON.stringify(data) === JSON.stringify(_this142.item)) {
                 console.log('qwerty data set from local was same as that recieved in api; probably case of reload'); //case of reload
 
                 localStorage.setItem('todayProfile', JSON.stringify(data));
-              } else if (_this140.wasSetFromLocal && JSON.stringify(data) !== JSON.stringify(_this140.item)) {
+              } else if (_this142.wasSetFromLocal && JSON.stringify(data) !== JSON.stringify(_this142.item)) {
                 console.log('qwerty data set from local was NOT same as that recieved in api');
 
-                if (JSON.stringify(_this140.item.next_profile) === JSON.stringify(data.apiwha_autoreply)) {
-                  if (data.next_profile) _this140.profileItems.push(data.next_profile);
+                if (JSON.stringify(_this142.item.next_profile) === JSON.stringify(data.apiwha_autoreply)) {
+                  if (data.next_profile) _this142.profileItems.push(data.next_profile);
                 } else {
-                  _this140.profileItems = [];
+                  _this142.profileItems = [];
 
-                  _this140.profileItems.push(data.apiwha_autoreply);
+                  _this142.profileItems.push(data.apiwha_autoreply);
 
-                  if (data.next_profile) _this140.profileItems.push(data.next_profile);
+                  if (data.next_profile) _this142.profileItems.push(data.next_profile);
                 }
 
-                _this140.item = data;
+                _this142.item = data;
                 localStorage.setItem('todayProfile', JSON.stringify(data));
-              } else if (!_this140.wasSetFromLocal) {
+              } else if (!_this142.wasSetFromLocal) {
                 //case of logged in
                 console.log('qwerty data was NOT set from local ; case of logging in');
 
-                _this140.profileItems.push(data.apiwha_autoreply);
+                _this142.profileItems.push(data.apiwha_autoreply);
 
-                if (data.next_profile) _this140.profileItems.push(data.next_profile);
-                _this140.item = data;
+                if (data.next_profile) _this142.profileItems.push(data.next_profile);
+                _this142.item = data;
                 localStorage.setItem('todayProfile', JSON.stringify(data));
-                _this140.wasSetFromLocal = true;
+                _this142.wasSetFromLocal = true;
               } // data.first_time = 0 -> when user comes for the first time on a day
               // data.first_time = 1 -> it gets 1 once he has seen first profile
 
 
-              if (data.first_time === 0 && !_this140.router.url.match('first')) {
-                _this140.itemService.openWelcomeDialog(_this140.item.apiwha_autoreply.profiles_left);
+              if (data.first_time === 0 && !_this142.router.url.match('first')) {
+                _this142.itemService.openWelcomeDialog(_this142.item.apiwha_autoreply.profiles_left);
               } // if photo is null
 
 
-              if (_this140.item.photo === null) {
-                _this140.spinner.hide();
+              if (_this142.item.photo === null) {
+                _this142.spinner.hide();
               } // resets the buttons animation
 
 
-              _this140.resetAnimation(); // if first time seen profile
+              _this142.resetAnimation(); // if first time seen profile
 
 
-              if (_this140.router.url.match('first') && reply === 'SHOW') {
-                _this140.analyticsEvent('First Profile Shown To Newly Registered');
-              } else if (_this140.router.url.match('first')) {
-                _this140.analyticsEvent("Response ".concat(reply, " to first profile shown to newly registered"));
+              if (_this142.router.url.match('first') && reply === 'SHOW') {
+                _this142.analyticsEvent('First Profile Shown To Newly Registered');
+              } else if (_this142.router.url.match('first')) {
+                _this142.analyticsEvent("Response ".concat(reply, " to first profile shown to newly registered"));
 
                 window.fbq('track', 'FourPageRegistration', {
                   value: localStorage.getItem('id'),
@@ -19144,45 +19654,37 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   value: localStorage.getItem('id'),
                   content_name: localStorage.getItem('RegisterNumber')
                 });
-                window.fbq('track', 'CompleteRegistration', {
-                  value: localStorage.getItem('id'),
-                  content_name: localStorage.getItem('RegisterNumber')
-                });
-                window.fbq('track', '692972151223870', 'CompleteRegistration', {
-                  value: localStorage.getItem('id'),
-                  content_name: localStorage.getItem('RegisterNumber')
-                });
 
-                _this140.router.navigateByUrl('chat');
+                _this142.router.navigateByUrl('chat');
               } // show confetti gif for the gifted profile with mobile number.
 
 
               if (data && data.apiwha_autoreply.mobile !== 'Visible after Contact') {
-                _this140.showConfetti.next(true);
+                _this142.showConfetti.next(true);
 
                 setTimeout(function () {
-                  _this140.showConfetti.next(false);
+                  _this142.showConfetti.next(false);
 
-                  _this140.itemService.shownConfetti.emit(true);
+                  _this142.itemService.shownConfetti.emit(true);
                 }, 3000);
               }
             } else {
-              _this140.type = 'message';
-              _this140.profileItems = [];
+              _this142.type = 'message';
+              _this142.profileItems = [];
 
-              if (Number(localStorage.getItem('profileCompPercent')) < 90 && _this140.showIndex < 40) {
-                _this140.openPersistentDialogNew();
+              if (Number(localStorage.getItem('profileCompPercent')) < 90 && _this142.showIndex < 40) {
+                _this142.openPersistentDialogNew();
               }
 
-              _this140.itemMessage = data.apiwha_autoreply;
+              _this142.itemMessage = data.apiwha_autoreply;
               localStorage.setItem('todayProfile', '');
 
-              _this140.setMessageText(data.apiwha_autoreply);
+              _this142.setMessageText(data.apiwha_autoreply);
 
-              _this140.spinner.hide(); // stop user response animation
+              _this142.spinner.hide(); // stop user response animation
 
 
-              _this140.profileIsLoadingSubject.next(null); // if profiles for the day are over
+              _this142.profileIsLoadingSubject.next(null); // if profiles for the day are over
 
               /*
               rate us dialog to be shown when profiles are ended for the day.
@@ -19191,8 +19693,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               */
 
 
-              if (data.type === 'message' && data.buttons === 'History' && (data.get_status_count.TPL === 0 || data.get_status_count.TPL === '0') && data.is_rated === 0 && _this140.points > 0) {
-                _this140.itemService.openRateUsDialog();
+              if (data.type === 'message' && data.buttons === 'History' && (data.get_status_count.TPL === 0 || data.get_status_count.TPL === '0') && data.is_rated === 0 && _this142.points > 0) {
+                _this142.itemService.openRateUsDialog();
               } else if (data.type === 'message' && data.buttons === 'History' && (data.get_status_count.TPL === 0 || data.get_status_count.TPL === '0') && data.is_rated === 0) {// rate us for free users
                 // this.itemService.openRateUsDialog(true);
               }
@@ -19201,7 +19703,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             switch (reply) {
               case 'YES':
-                if (_this140.points > 0) {// this.ngxNotificationService.success('Profile Contacted Successfully');
+                if (_this142.points > 0) {// this.ngxNotificationService.success('Profile Contacted Successfully');
                 }
 
                 break;
@@ -19218,34 +19720,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 break;
             }
 
-            if (_this140.points > 0 && reply === 'YES') {
-              _this140.itemService.setItem(previousItem);
+            if (_this142.points > 0 && reply === 'YES') {
+              _this142.itemService.setItem(previousItem);
 
               localStorage.setItem('visibleAfter', 'true');
 
-              _this140.router.navigateByUrl("chat/open/open-profile/".concat(previousItem.apiwha_autoreply.id));
+              _this142.router.navigateByUrl("chat/open/open-profile/".concat(previousItem.apiwha_autoreply.id));
 
-              _this140.itemService.changeTab(1);
+              _this142.itemService.changeTab(1);
             }
 
-            _this140.spinner.hide();
+            _this142.spinner.hide();
 
-            _this140.getCredits();
+            _this142.getCredits();
           }, function (err) {
             console.log(err);
 
-            _this140.spinner.hide(); // hide the searching spinner if visible
+            _this142.spinner.hide(); // hide the searching spinner if visible
             // only visible for first time users
 
 
-            _this140.spinner.hide('searchingSpinner'); // stop user response animation
+            _this142.spinner.hide('searchingSpinner'); // stop user response animation
 
 
-            _this140.profileIsLoadingSubject.next(null);
+            _this142.profileIsLoadingSubject.next(null);
 
-            _this140.ngxNotificationService.error('Something Went Wrong');
+            _this142.ngxNotificationService.error('Something Went Wrong');
 
-            _this140.languageService.setProfileLanguage();
+            _this142.languageService.setProfileLanguage();
           });
         } // button 1-> Meri pasand, button-2 -> plan expired, button-3 -> no credits, button-4-> No Compatibilty
         // button-4 -> show more
@@ -19314,7 +19816,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "popupAction",
         value: function popupAction(event) {
-          var _this141 = this;
+          var _this143 = this;
 
           if (event.close) {
             this.showPopup = false;
@@ -19322,10 +19824,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           setTimeout(function () {
-            if (Number(localStorage.getItem('profileCompPercent')) < 90 && _this141.showIndex < 40) {
-              _this141.openPersistentDialogNew();
+            if (Number(localStorage.getItem('profileCompPercent')) < 90 && _this143.showIndex < 40) {
+              _this143.openPersistentDialogNew();
             } else {
-              _this141.showIndex = 10;
+              _this143.showIndex = 10;
             }
           }, 100);
         }
@@ -19346,7 +19848,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCredits",
         value: function getCredits() {
-          var _this142 = this;
+          var _this144 = this;
 
           var creditsData = new FormData();
           creditsData.append('id', localStorage.getItem('id'));
@@ -19361,35 +19863,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }, function (err) {
               console.log(err);
 
-              _this142.spinner.hide();
+              _this144.spinner.hide();
             });
           } // tslint:disable-next-line: max-line-length
 
 
           return this.http.post('https://partner.hansmatrimony.com/api/getWhatsappPoint', creditsData).subscribe(function (data) {
-            _this142.points = data.whatsapp_points;
+            _this144.points = data.whatsapp_points;
 
-            _this142.itemService.setCredits(_this142.points);
+            _this144.itemService.setCredits(_this144.points);
 
-            console.log('credits', _this142.points); // for exhausted profile status
+            console.log('credits', _this144.points); // for exhausted profile status
 
-            if (_this142.paidStatus === 'Paid' && _this142.points === 0) {
+            if (_this144.paidStatus === 'Paid' && _this144.points === 0) {
               console.log('this is a exhausted profile');
-              _this142.exhaustedStatus = true;
+              _this144.exhaustedStatus = true;
             } // update profile left count
 
 
-            if (_this142.item) {
-              data ? _this142.getProfilesLeft(_this142.item.profiles_left) : _this142.ngxNotificationService.error('Profiles Left Not Found');
+            if (_this144.item) {
+              data ? _this144.getProfilesLeft(_this144.item.profiles_left) : _this144.ngxNotificationService.error('Profiles Left Not Found');
             }
 
-            _this142.spinner.hide();
+            _this144.spinner.hide();
           }, function (error) {
-            _this142.ngxNotificationService.error('We couldn\'t get your credits, trying again');
+            _this144.ngxNotificationService.error('We couldn\'t get your credits, trying again');
 
             console.log(error);
 
-            _this142.spinner.hide();
+            _this144.spinner.hide();
           });
         } // on first image load complete
 
@@ -19461,7 +19963,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openMessageDialog",
         value: function openMessageDialog(shareItem, reply) {
-          var _this143 = this;
+          var _this145 = this;
 
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatDialogConfig"]();
           dialogConfig.hasBackdrop = true;
@@ -19491,9 +19993,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 console.log(data);
 
                 if (data && data.uploadStatus === 'Y') {
-                  _this143.ngxNotificationService.success('फोटो अपलोड करदी गयी है');
+                  _this145.ngxNotificationService.success('फोटो अपलोड करदी गयी है');
                 } else {
-                  _this143.ngxNotificationService.success('फोटो अपलोड नहीं हो पायी बाद मे दुबारा प्रयास करें');
+                  _this145.ngxNotificationService.success('फोटो अपलोड नहीं हो पायी बाद मे दुबारा प्रयास करें');
                 }
               });
               break;
@@ -19772,7 +20274,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(UserProfileComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this144 = this;
+          var _this146 = this;
 
           this.innerWidth = window.innerWidth;
           this.languageService.setProfileLanguage();
@@ -19789,8 +20291,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             if (routeData && routeData.params) {
               if (routeData.params.id && routeData.params.isLead) {
-                _this144.userId = routeData.params.id;
-                _this144.userIsLead = routeData.params.isLead;
+                _this146.userId = routeData.params.id;
+                _this146.userIsLead = routeData.params.isLead;
               }
             }
           });
@@ -19969,7 +20471,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openPersonalDialog",
         value: function openPersonalDialog(i, titleText) {
-          var _this145 = this;
+          var _this147 = this;
 
           document.querySelector('#carousel').scrollIntoView();
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogConfig"]();
@@ -19993,13 +20495,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           };
           var dialogRef = this.matDialog.open(_myprofile_edit_personal_dialog_edit_personal_dialog_component__WEBPACK_IMPORTED_MODULE_8__["EditPersonalDialogComponent"], dialogConfig);
           dialogRef.afterClosed().subscribe(function (data) {
-            _this145.getUserProfileData();
+            _this147.getUserProfileData();
           });
         }
       }, {
         key: "openFamilyDialog",
         value: function openFamilyDialog() {
-          var _this146 = this;
+          var _this148 = this;
 
           document.querySelector('#carousel').scrollIntoView();
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogConfig"]();
@@ -20020,13 +20522,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           };
           var dialogRef = this.matDialog.open(_myprofile_edit_family_dialog_edit_family_dialog_component__WEBPACK_IMPORTED_MODULE_9__["EditFamilyDialogComponent"], dialogConfig);
           dialogRef.afterClosed().subscribe(function (data) {
-            _this146.getUserProfileData();
+            _this148.getUserProfileData();
           });
         }
       }, {
         key: "openPreferenceDialog",
         value: function openPreferenceDialog() {
-          var _this147 = this;
+          var _this149 = this;
 
           var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogConfig"]();
 
@@ -20046,7 +20548,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           };
           var dialogRef = this.matDialog.open(_myprofile_edit_preference_dialog_edit_preference_dialog_component__WEBPACK_IMPORTED_MODULE_10__["EditPreferenceDialogComponent"], dialogConfig);
           dialogRef.afterClosed().subscribe(function (res) {
-            _this147.getUserProfileData(); // if (res) {
+            _this149.getUserProfileData(); // if (res) {
             //   this.preferenceChanged.emit(res);
             // }
 
@@ -20055,7 +20557,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "previewBack",
         value: function previewBack(files, index) {
-          var _this148 = this;
+          var _this150 = this;
 
           console.log(index);
 
@@ -20074,16 +20576,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             reader.readAsDataURL(files[0]);
 
             reader.onload = function (_event) {
-              _this148.BackimgURL = reader.result;
+              _this150.BackimgURL = reader.result;
 
-              _this148.uploadPhoto(_this148.backimagePath, index);
+              _this150.uploadPhoto(_this150.backimagePath, index);
             };
           }
         }
       }, {
         key: "getUserProfileData",
         value: function getUserProfileData() {
-          var _this149 = this;
+          var _this151 = this;
 
           if (this.userId || localStorage.getItem('id')) {
             this.spinner.show();
@@ -20093,22 +20595,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             myprofileData.append('is_lead', this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')); // tslint:disable-next-line: max-line-length
 
             return this.http.post('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["timeout"])(7000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["catchError"])(function (e) {
-              _this149.ngxNotificationService.error('Server Time Out, Try Again Later');
+              _this151.ngxNotificationService.error('Server Time Out, Try Again Later');
 
               throw new Error('Server Timeout ' + e);
             })).subscribe(function (data) {
               console.log(data);
-              _this149.personalProfileData = data.profile ? data.profile : null;
-              _this149.familyProfileData = data.family ? data.family : null;
-              _this149.preferenceProfileData = data.preferences ? data.preferences : null;
+              _this151.personalProfileData = data.profile ? data.profile : null;
+              _this151.familyProfileData = data.family ? data.family : null;
+              _this151.preferenceProfileData = data.preferences ? data.preferences : null;
 
-              _this149.spinner.hide();
+              _this151.spinner.hide();
             }, function (error) {
-              _this149.spinner.hide();
+              _this151.spinner.hide();
 
               console.log(error);
 
-              _this149.ngxNotificationService.error('Something Went Wrong');
+              _this151.ngxNotificationService.error('Something Went Wrong');
             });
           } else {
             this.ngxNotificationService.error('No user found');
@@ -20117,7 +20619,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "uploadPhoto",
         value: function uploadPhoto(data, index) {
-          var _this150 = this;
+          var _this152 = this;
 
           this.spinner.show();
           var uploadData = new FormData();
@@ -20126,22 +20628,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           uploadData.append('image', data);
           uploadData.append('is_lead', localStorage.getItem('is_lead'));
           return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(function (suc) {
-            _this150.suc = suc;
+            _this152.suc = suc;
             console.log('photos', suc);
 
-            if (_this150.suc.pic_upload_status === 'Y') {
-              _this150.spinner.hide();
+            if (_this152.suc.pic_upload_status === 'Y') {
+              _this152.spinner.hide();
 
-              document.querySelectorAll('#imgProfile')[index - 1].setAttribute('src', _this150.BackimgURL);
+              document.querySelectorAll('#imgProfile')[index - 1].setAttribute('src', _this152.BackimgURL);
 
-              _this150.ngxNotificationService.success('Photo Uploaded Succesfully!');
+              _this152.ngxNotificationService.success('Photo Uploaded Succesfully!');
             } else {
-              _this150.spinner.hide();
+              _this152.spinner.hide();
 
-              _this150.ngxNotificationService.error('Photo Upload Unsuccesful!');
+              _this152.ngxNotificationService.error('Photo Upload Unsuccesful!');
             }
           }, function (err) {
-            _this150.ngxNotificationService.error('Photo could not be Uploaded!'); // console.log(err);
+            _this152.ngxNotificationService.error('Photo could not be Uploaded!'); // console.log(err);
 
 
             console.log(err);
@@ -20170,7 +20672,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getImagesCount",
         value: function getImagesCount() {
-          var _this151 = this;
+          var _this153 = this;
 
           if (!this.carouselSize) {
             this.carouselSize = [];
@@ -20181,7 +20683,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               if (carousel) {
                 Object.keys(carousel).forEach(function (element) {
-                  _this151.carouselSize.push(element);
+                  _this153.carouselSize.push(element);
                 });
                 return this.carouselSize;
               }
@@ -20268,7 +20770,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "downloadMyProfile",
         value: function downloadMyProfile() {
-          var _this152 = this;
+          var _this154 = this;
 
           var pdfData = new FormData();
           pdfData.append('id', localStorage.getItem('id'));
@@ -20281,9 +20783,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (data.status === 1) {
               var downloadLink = document.querySelectorAll('#downLink');
 
-              _this152.spinner.hide();
+              _this154.spinner.hide();
 
-              _this152.ngxNotificationService.info('Downloading your file');
+              _this154.ngxNotificationService.info('Downloading your file');
 
               if (data.url) {
                 window.open(data.url);
@@ -20292,7 +20794,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }, function (err) {
             console.log(err);
 
-            _this152.ngxNotificationService.error('Error Occured');
+            _this154.ngxNotificationService.error('Error Occured');
           });
         }
       }, {
@@ -20441,11 +20943,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(InstallPromptService, [{
         key: "savePrompt",
         value: function savePrompt() {
-          var _this153 = this;
+          var _this155 = this;
 
           window.addEventListener('beforeinstallprompt', function (e) {
             e.preventDefault();
-            _this153.event = e;
+            _this155.event = e;
           });
         }
       }, {

@@ -304,9 +304,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     );
     this.fourPageService.formTwoGroup.subscribe(
       (formGroup) => {
-        console.log(formGroup);
         if (formGroup) {
-          console.log(formGroup);
           this.PageTwo = formGroup;
         }
       }
@@ -458,7 +456,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
                 break;
               }
             }
-            console.log(this.photos);
           }
         }, (error: any) => {
           console.log('error occurred occurred while fetchignthe photos');
@@ -495,6 +492,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     // this.PageOne.get('Relation').valueChanges.subscribe((value) => {
     //   this.setGender();
     // });
+
+    if (this.fourPageService.getUserThrough()) {
+      this.mainContainerId = 'sd';
+    }
+
   }
   generateRandomIndices(j) {
     this.photoIndices = [];
@@ -805,6 +807,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       this.ngxNotificationService.error('Enter A Valid Mobile Number');
       return;
     }
+    
+
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
       const date = this.PageOne.value.birth_date;
@@ -846,6 +850,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       firststepdata.append('caste', this.PageOne.value.Castes);
       firststepdata.append('disability', this.isDisable ? 'yes' : null);
       firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
+
+      if (localStorage.getItem('getListSource')) {
+        firststepdata.append('channel', localStorage.getItem('getListSource'));
+      } else {
+        firststepdata.append('channel', 'Web');
+      }
 
 
       this.lat ? firststepdata.append('lat', this.lat)
@@ -1154,7 +1164,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.userProfile.occupation = profileData.profile.occupation;
     this.userProfile.designation = profileData.profile.profession;
     this.userProfile.workingCity = profileData.profile.working_city;
-    
     this.userProfile.about = profileData.profile.about;
 
     this.userProfile.birthPlace = profileData.profile.birth_place;
@@ -1265,8 +1274,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.isDisable = event.checked;
   }
   checkAllCastePref(event) {
+    console.log(event.checked);
     this.isAllCastePref = event.checked;
   }
+
   // show register with popup
   openRegisterWith(selection) {
 

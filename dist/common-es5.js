@@ -89,7 +89,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.countOfRishtey = 0;
         this.selected_states = '';
         this.selected_cities = '';
-        this.selected_states_id = '';
+        this.selected_states_id = [];
         this.familyDetailsLeft = [];
         this.personalDetailsLeft = [];
         this.profileCompletionPercent = 0;

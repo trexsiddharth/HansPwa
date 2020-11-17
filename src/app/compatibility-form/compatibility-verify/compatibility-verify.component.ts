@@ -307,14 +307,15 @@ export class CompatibilityVerifyComponent implements OnInit {
     localStorage.setItem('id', '');
   }
   approveProfileApi() {
-    this.onSubmitPersonal();
     const approveData = new FormData();
     approveData.append('id', localStorage.getItem('getListId'));
-    approveData.append('auth_temp', localStorage.getItem('getListTempleId'));
     approveData.append('photo_score', this.fourPageService.getProfile().photoScore.toString());
     if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
     && this.fourPageService.getUserThrough()) {
       approveData.append('is_key', 'yes');
+      approveData.append('auth_temp', localStorage.getItem('getListTempleId'));
+    } else {
+      approveData.append('temple_id', localStorage.getItem('getListTempleId'));
     }
     approveData.append('is_approve', '1');
 

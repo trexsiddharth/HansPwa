@@ -84,6 +84,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   scrollFlag = false;
   title;
   section;
+  authData;
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
     private spinner: NgxSpinnerService,
@@ -106,6 +107,8 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
         }
       }
     );
+
+    this.authData = JSON.parse(localStorage.getItem('authData'));
 
     // get discover data
     this.getDiscoveryData();
@@ -188,22 +191,6 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     } else {
       this.carouselSize = [1];
       return this.carouselSize;
-    }
-  }
-  setName(value: string, type: any): string {
-    if (type === 1) {
-      if (value != null) {
-        if (value.split(' ')) {
-          const name = value.split(' ');
-          return name[0];
-        } else {
-          return value;
-        }
-      } else {
-        return '';
-      }
-    } else {
-      return value;
     }
   }
 
@@ -1125,6 +1112,20 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   //   }
   // }
   // }
+
+  setName(name: string): string {
+    if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0'
+    || this.authData.paid_status !== 'Paid')) {
+      let a = name.split(' ');
+      if (a[0] && a[1]) {
+        return a[0][0] + ' ' + a[1];
+      } else if (a[0]) {
+        return a[0][0];
+      }
+    } else {
+      return name;
+    }
+  }
 
 
 }

@@ -213,6 +213,20 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+
+    this.PageTwo = this.formBuilder.group({
+      // tslint:disable-next-line: max-line-length
+      Qualification: ['', Validators.compose([Validators.required])],
+      QualificationCtrl: [''],
+      Occupation: ['', Validators.compose([Validators.required])],
+      Designation: [''],
+      DesignationCtrl: [''],
+      OtherDesignation: [''],
+      AnnualIncome: ['', Validators.compose([Validators.required])],
+      Working: ['', Validators.compose([Validators.required])],
+      About: [''],
+      abroad: ['']
+    });
     // if user can pass through is true
     this.fourPageService.userThroughStatusUpdated.subscribe(
       (status: boolean) => {
@@ -446,6 +460,15 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
             this.updateFormTwoData(firststepdata);
           } else {
             this.chatService.formTwoCompleted.next(true);
+            (window as any).fbq('track', 'CompleteRegistration', {
+              value: localStorage.getItem('id'),
+              content_name: localStorage.getItem('RegisterNumber'),
+            });
+            (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
+              value: localStorage.getItem('id'),
+              content_name: localStorage.getItem('RegisterNumber'),
+            });
+            
             this.router.navigateByUrl('chat?first');
             this.analyticsEvent('Four Page Registration Page Two');
           }
@@ -704,6 +727,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       Working: userProfile.workingCity,
       About: this.setAgeIfNan(userProfile.about)
     });
+
+    if (userProfile.workingCity) {
+      this.workingCity = userProfile.workingCity;
+    }
   }
 
   setAgeIfNan(value: string) {
@@ -733,11 +760,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   // change PageTwo Form with no required fields
   setFormForGetUserThrough() {
     this.PageTwo = this.formBuilder.group({
-      // tslint:disable-next-line: max-line-length
       Qualification: [''],
       QualificationCtrl: [''],
       Occupation: [''],
       Designation: [''],
+      DesignationCtrl: [''],
       OtherDesignation: [''],
       AnnualIncome: ['', Validators.max(999)],
       Working: [''],
@@ -752,6 +779,19 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.filterEducationGroups();
       });
+
+          // listen for search field value changes
+    this.PageTwo.controls.DesignationCtrl.valueChanges
+    .pipe(takeUntil(this.onDestroy))
+    .subscribe(() => {
+      this.filterDesignation();
+    });
+
+    this.PageTwo.get('Working').valueChanges
+  .pipe(takeUntil(this.onDestroy))
+  .subscribe(() => {
+    this.workingCityFilter();
+  });
   }
 
 }
