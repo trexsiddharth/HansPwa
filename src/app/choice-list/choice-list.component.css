@@ -1,4 +1,4 @@
-/* button{
+button{
     width:79px;
     height:22px;
     border:none;
@@ -6,7 +6,7 @@
     border-radius:5px;
     color:white;
     font-size:10px;
-} */
+}
 hr.one{
     border:0.8px solid black;
 }
@@ -27,6 +27,9 @@ hr.two{
 }
 .choice-card{
     width:157px;
+}
+.mobileScreen{
+    margin-bottom:100px;
 }
 @media only screen and (min-width: 768px){
    .mobileScreen{

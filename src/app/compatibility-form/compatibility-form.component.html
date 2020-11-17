@@ -96,7 +96,7 @@
               <p *ngIf="fourPageService.getUserThrough()" class="impNote">
                 यहाँ पर कैंडिडेट यानि जिसके लिए रिश्ता देखा जा रहा है उसका नाम लिखे (लड़का या लड़की जो भी है )
               </p>
-              <div [class.col-12]="!Caste" [class.col-6]="Caste">
+              <div [class.col-12]="!Caste" [class.col-5]="Caste">
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label>Religion</mat-label>
                   <mat-select #relation formControlName="Religion" (selectionChange)="Religion($event)" required>
