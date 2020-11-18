@@ -1590,19 +1590,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       firstName: data.name.first ? data.name.first : '',
       lastName: data.name.last ? data.name.last : '',
       email: data.onlineIdentities.email ? data.onlineIdentities.email : '',
-      phone: data.phoneNumbers[0] ? data.phoneNumbers[0] : ''
+      phone: data.phoneNumbers[0] ? `+${data.phoneNumbers[0]}` : ''
     });
-
+    console.log(this.PageTwo.value);
     if (data.phoneNumbers && data.phoneNumbers[0]) {
-      alert(`+${data.phoneNumbers[0]}`);
-      this.PageOne.controls.phone.setValue(`+${data.phoneNumbers[0]}`);
       this.disabledPhoneNumber = data.phoneNumbers[0];
       setTimeout(() => {
         const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
         if (countryBtn) {
             countryBtn.disabled = true;
           }
-        
         this.PageOne.controls.phone.disable();
         }, 1000);
       this.mobileNumberChanged();
