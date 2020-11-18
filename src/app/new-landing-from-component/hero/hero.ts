@@ -48,6 +48,7 @@ export class Hero implements OnInit {
       if(this.name){
         this.itemService.compatibilityLookingFor = this.name;
       }
+      window.scroll(0,0);
       this.router.navigateByUrl('/fourReg');
     }
     groomToggle(){

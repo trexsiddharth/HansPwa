@@ -1437,6 +1437,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     FB.api('/me',
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location' }, (response) => {
+        if(response.first_name){
+          this.secondName=true;
+          this.formfirstName=response.first_name;
+          this.formlastName=response.last_name;
+        }
         console.log(response);
         this.spinner.hide();
         this.PageOne.patchValue({
@@ -1597,7 +1602,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   setTruecallerData(data) {
-    if(data.name.first && data.name.last){
+    if(data.name.first){
       this.secondName=true;
       this.formfirstName=data.name.first;
       this.formlastName=data.name.last;

@@ -2,6 +2,8 @@
 <div *ngIf="mobileScreen" >
   <a class="d-flex justify-content-center" (click)="scrollToTop()"><button *ngIf="auto" class="register-btn d-flex justify-content-center" >Register For Free</button></a>
 </div>
+  
+  <img *ngIf="this.PageOne.valid" class="lottieanimation" src="../../assets/lottieSpinAnimation.gif" alt="">
 <div class="d-flex">
   <img src="../../assets/hero/logoNew.svg" class="logo"  alt="">
 <mat-toolbar class="fixToolBar">
@@ -282,7 +284,6 @@
                 style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
                 <button *ngIf="!this.PageOne.valid" mat-raised-button type="button" id="viewButton" [disabled]="(disableNext$ | async)||showError"
                   class="btn" (click)="firstStep()">See Profiles</button>
-                  <img *ngIf="this.PageOne.valid" class="lottieanimation" src="../../assets/lottieSpinAnimation.gif" alt="">
               </div>
 
               <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
