@@ -1,6 +1,10 @@
+/* ::-webkit-scrollbar{
+  display:none;
+} */
 mat-sidenav-container{
     background-color:transparent;
     color:black;
+    
 }
 button{
   width:200px;

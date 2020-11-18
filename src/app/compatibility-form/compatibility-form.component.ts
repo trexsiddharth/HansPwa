@@ -78,6 +78,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   public secondName:boolean = false;
   public showHeight:boolean = false;
   public showCaste:boolean = false;
+  public showError:boolean = false;
   time = {
     hour: 13,
     minute: 30
@@ -185,9 +186,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
-      birth_date: ['01', Validators.compose([Validators.required])],
-      birth_month: ['January', Validators.compose([Validators.required])],
-      birth_year: ['1980', Validators.compose([Validators.required])],
+      birth_date: ['', Validators.compose([Validators.required])],
+      birth_month: ['', Validators.compose([Validators.required])],
+      birth_year: ['', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
       Weight: [''],
       MaritalStatus: ['', Validators.compose([Validators.required])],
@@ -250,12 +251,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     let form = document.querySelector('.form-position');
     let formPosition = form.getBoundingClientRect().top;
     let screenPosition = window.innerHeight;
-    console.log(position, screenPosition);
-    
-    if (position < screenPosition) {
-      this.auto = true;
-    } else if (formPosition < screenPosition + 500) {
-      this.auto = false;
+    if(position<screenPosition){
+      this.auto=true;
+    }
+    else if(formPosition<screenPosition+500){
+      this.auto=false;
     }
   }
     private resize(){
@@ -550,10 +550,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   // event on change of input field
-  inputFieldChanged(fieldName) {
+  showLastName(){
     this.secondName = true;
-    console.log(this.secondName);
-    
+  }
+  inputFieldChanged(fieldName) {
     this.generateRandomIndices(20);
     console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
     switch (fieldName) {
@@ -674,6 +674,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (!this.PageOne.valid) {
       return;
     }
+    this.showError=false;
     const button = document.querySelector<HTMLButtonElement>('#viewButton');
     button.click();
   }
@@ -784,6 +785,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
 
   firstStep() {
+    if(this.PageOne.invalid){
+      this.showError=true;
+    }
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
     this.nextClickedOne = true;
