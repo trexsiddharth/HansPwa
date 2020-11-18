@@ -14,6 +14,7 @@
   ::ng-deep .cdk-overlay-dark-backdrop {
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
   } */
+
   .uploadPhotoBtn{
     height:6vh!important;  
     width:100%;
@@ -27,6 +28,7 @@
     justify-content:center;
     font-size:1rem;
     color:white;
+    cursor: pointer;
   }
   main {
     border:1px solid #0000007a;
@@ -125,13 +127,12 @@
       main {
         border:1px solid #0000007a;
         position: relative;
-        height:79vh;
+        height:auto;
         z-index: 0;
         background: white;
         color:black;
         border-radius: 20px 20px 20px 20px;
         padding-bottom: 5px;
-        overflow:hidden;
       }
 }
   

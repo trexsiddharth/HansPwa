@@ -66,7 +66,8 @@
                     <mat-option value="Male">Male</mat-option>
                     <mat-option value="Female">Female</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <!-- <mat-error>*this field is required</mat-error> -->
+                  
                 </mat-form-field>
               </div>
 
@@ -78,7 +79,7 @@
                 <!-- <h6>Name</h6> -->
                 <mat-form-field class="full-width fieldFit"  appearance="standard">
                   <mat-label>First Name</mat-label>
-                  <input type="text" id="firstName" (click)="showLastName()" (change)="inputFieldChanged('firstName')" matInput
+                  <input type="text" [value]="formfirstName" id="firstName" (click)="showLastName()" (change)="inputFieldChanged('firstName')" matInput
                     formControlName="firstName" required>
                   <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
@@ -88,7 +89,7 @@
                 <!-- <h6>Last Name</h6> -->
                 <mat-form-field  class="full-width fieldFit" appearance="standard">
                   <mat-label>Last Name</mat-label>
-                  <input type="text" (change)="inputFieldChanged('lastName')" matInput formControlName="lastName" required name="lastName">
+                  <input type="text" [value]="formlastName" (change)="inputFieldChanged('lastName')" matInput formControlName="lastName" required name="lastName">
                   <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
                 </mat-form-field>
               </div>

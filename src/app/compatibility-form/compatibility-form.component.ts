@@ -70,6 +70,8 @@ export const _filter = (opt: string[], value: string): string[] => {
 
 
 export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+  public formfirstName: string='';
+  public formlastName: string='';
   public auto:boolean = false;
   public features:any;
   public mobileScreen:boolean;
@@ -787,6 +789,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   firstStep() {
     if(this.PageOne.invalid){
       this.showError=true;
+      console.log(this.showError);
+      
     }
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
@@ -1590,6 +1594,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   setTruecallerData(data) {
+    if(data.name.first && data.name.last){
+      this.secondName=true;
+      this.formfirstName=data.name.first;
+      this.formlastName=data.name.last;
+    }
     this.PageOne.patchValue({
       firstName: data.name.first ? data.name.first : '',
       lastName: data.name.last ? data.name.last : '',

@@ -7,6 +7,9 @@
   background-image: linear-gradient(180deg, #FFFFFF 0%, #DCF1FA 100%);
   overflow-x:hidden;
 }
+.showError{
+  border: 1px solid red;
+}
 .logo{
   width:186px;
   height:93px;
@@ -261,6 +264,9 @@ input.form-control.ng-invalid.ng-touched{
 select.classic.ng-invalid.ng-touched{
   border: 1px solid red;
 }
+/* ::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline {
+  background-color:red;
+} */
 ::ng-deep .mat-step-label{
   color: black !important;
 }
