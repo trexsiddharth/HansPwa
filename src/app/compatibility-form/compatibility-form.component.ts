@@ -1600,12 +1600,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       this.formlastName=data.name.last;
     }
     this.PageOne.patchValue({
-      firstName: data.name.first ? data.name.first : '',
+      firstName: data.name.first ? `${data.name.first} ${data.name.last ? data.name.last : ''}` : '',
       lastName: data.name.last ? data.name.last : '',
       email: data.onlineIdentities.email ? data.onlineIdentities.email : '',
       phone: data.phoneNumbers[0] ? `+${data.phoneNumbers[0]}` : ''
     });
-    console.log(this.PageTwo.value);
     if (data.phoneNumbers && data.phoneNumbers[0]) {
       this.disabledPhoneNumber = data.phoneNumbers[0];
       setTimeout(() => {
