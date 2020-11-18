@@ -70,6 +70,8 @@ export const _filter = (opt: string[], value: string): string[] => {
 
 
 export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+  public formfirstName = '';
+  public formlastName = '';
   public auto = false;
   public features: any;
   public mobileScreen: boolean;
@@ -191,9 +193,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
-      birth_date: ['', Validators.compose([Validators.required])],
-      birth_month: ['', Validators.compose([Validators.required])],
-      birth_year: ['', Validators.compose([Validators.required])],
+      birth_date: ['01', Validators.compose([Validators.required])],
+      birth_month: ['January', Validators.compose([Validators.required])],
+      birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
       Weight: [''],
       MaritalStatus: ['', Validators.compose([Validators.required])],
@@ -278,6 +280,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
     }
   async ngOnInit() {
+    window.scroll(0, 0);
     this.detectMobileScreen();
     window.addEventListener('scroll', this.scroll, true);
     if (localStorage.getItem('RegisterNumber')) {
@@ -682,7 +685,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     const button = document.querySelector<HTMLButtonElement>('#viewButton');
     button.click();
   }
-
+  scrollToTop() {
+   window.scroll(0, 0);
+  }
   openVerificationDialog(isLead: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
@@ -789,8 +794,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
 
   firstStep() {
-    if (this.PageOne.invalid) {
-      this.showError = true;
+    if(this.PageOne.invalid){
+      this.showError=true;
+      console.log(this.showError);
+
     }
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
@@ -1446,6 +1453,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     FB.api('/me',
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location' }, (response) => {
+        if (response.first_name) {
+          this.secondName = true;
+          this.formfirstName = response.first_name;
+          this.formlastName = response.last_name;
+        }
         console.log(response);
         this.spinner.hide();
         this.PageOne.patchValue({
@@ -1606,8 +1618,13 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   setTruecallerData(data) {
+    if (data.name.first) {
+      this.secondName = true;
+      this.formfirstName = data.name.first;
+      this.formlastName = data.name.last;
+    }
     this.PageOne.patchValue({
-      firstName: data.name.first ? `${data.name.first} ${data.name.last ? data.name.last : ''}` : '',
+      firstName: data.name.first ? data.name.first : '',
       lastName: data.name.last ? data.name.last : '',
       email: data.onlineIdentities.email ? data.onlineIdentities.email : '',
       phone: data.phoneNumbers[0] ? `+${data.phoneNumbers[0]}` : ''

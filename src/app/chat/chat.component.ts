@@ -135,7 +135,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     mother_tongue: '',
     temple_name: ''
   };
-
+  avatar='../../../assets/avatarNew.svg';
   loginStatus = true;
   profile: any;
   messageRecieved: string;
@@ -330,6 +330,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
         if (data.photo) {
           this.setProfileImage(data.photo);
         }
+        else{
+          this.setProfileImage(this.avatar);
+        }
       }
     );
 
@@ -472,12 +475,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setProfileImage(image) {
-    if (image) {
-      this.photo = image;
-    }
-    else {
-      this.photo = '../../assets/avatar.svg';
-    }
+    this.photo = image;
   }
 
   onImageLoadError() {

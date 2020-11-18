@@ -1,11 +1,12 @@
 <div class="compatiblity-form-holder">
-  <!-- toolbar  -->
 <div *ngIf="mobileScreen" >
-  <a class="d-flex justify-content-center" href="/fourReg/#register"><button [routerLink]="['/fourReg']" routerLinkActive="router-link-active" *ngIf="auto" class="register-btn d-flex justify-content-center" >Register For Free</button></a>
+  <a class="d-flex justify-content-center" (click)="scrollToTop()"><button *ngIf="auto" class="register-btn d-flex justify-content-center" >Register For Free</button></a>
 </div>
+  
+  <img *ngIf="this.PageOne.valid" class="lottieanimation" src="../../assets/lottieSpinAnimation.gif" alt="">
 <div class="d-flex">
   <img src="../../assets/hero/logoNew.svg" class="logo"  alt="">
-<mat-toolbar id="register" class="fixToolBar">
+<mat-toolbar class="fixToolBar">
   <mat-toolbar-row style="position:relative!important">
     <div class="mainDivToolbar" style="position:relative; ">
       <div style="
@@ -32,7 +33,7 @@
 <div class="d-flex justify-content-center">
   <h2>Register For Free in <span style="color:#24ADD8" >30 seconds!</span> </h2>
 </div>
-<main  class='pwaSize fixed t-0 b-0 w-full HC form-position' [id]="mainContainerId" style="margin-top:4%">
+<main autoscroll="true"  class='pwaSize fixed t-0 b-0 w-full HC form-position' [id]="mainContainerId" style="margin-top:4%">
   
   <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
     <div class="container customBackground"
@@ -47,14 +48,16 @@
 
               <div class="col-5">
                 <!-- <h6>Rishta For</h6> -->
-                <mat-form-field class="full-width fieldFit" appearance="standard">
+                <mat-form-field  class="full-width fieldFit" appearance="standard">
                   <mat-label>Create Profile For</mat-label>
                   <mat-select (selectionChange)="setGender()" #relation formControlName="Relation" required>
                     <mat-option *ngFor="let  option of createProfile" [value]="option">
                       {{option}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  
+                    <mat-error>*this field is required</mat-error>
+            
                 </mat-form-field>
               </div>
               <div class="col-1"></div>
@@ -66,7 +69,7 @@
                     <mat-option value="Male">Male</mat-option>
                     <mat-option value="Female">Female</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                    <mat-error>*this field is required</mat-error>                  
                 </mat-form-field>
               </div>
 
@@ -78,9 +81,9 @@
                 <!-- <h6>Name</h6> -->
                 <mat-form-field class="full-width fieldFit"  appearance="standard">
                   <mat-label>First Name</mat-label>
-                  <input type="text" id="firstName" (click)="showLastName()" (change)="inputFieldChanged('firstName')" matInput
+                  <input type="text" [value]="formfirstName" id="firstName" (click)="showLastName()" (change)="inputFieldChanged('firstName')" matInput
                     formControlName="firstName" required>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error>*this field is required</mat-error>
                 </mat-form-field>
               </div>
               <div *ngIf="secondName" class="col-1"></div>
@@ -88,8 +91,8 @@
                 <!-- <h6>Last Name</h6> -->
                 <mat-form-field  class="full-width fieldFit" appearance="standard">
                   <mat-label>Last Name</mat-label>
-                  <input type="text" (change)="inputFieldChanged('lastName')" matInput formControlName="lastName" required name="lastName">
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <input type="text" [value]="formlastName" (change)="inputFieldChanged('lastName')" matInput formControlName="lastName" required name="lastName">
+                  <mat-error>*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -104,7 +107,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error>*this field is required</mat-error>
                 </mat-form-field>
               </div>
               <div *ngIf="Caste" class="col-1"></div>
@@ -123,7 +126,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error >*this field is required</mat-error>
                 </mat-form-field>
                 
               </div>
@@ -150,7 +153,7 @@
                     [preferredCountries]="['in']" [enablePlaceholder]="true" [enableSearch]="true" name="phone"
                     type="tel" formControlName="phone" id="phone" (change)="mobileNumberChanged()" #phone required>
                   </ngx-mat-intl-tel-input> 
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error >*this field is required</mat-error>
                 </mat-form-field>
               </div>
               
@@ -179,7 +182,7 @@
                     <option *ngFor="let  option of date" [value]="option">
                       {{option}}
                     </option>
-                    <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                    <mat-error >*this field is required</mat-error>
                   </select>
                   
 
@@ -213,7 +216,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error >*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -226,7 +229,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error >*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -237,7 +240,7 @@
                   <input type="number" (change)="inputFieldChanged('Weight')" matInput formControlName="Weight" required
                     name="Weight">
                   <span matSuffix>Kg &nbsp;</span>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error >*this field is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-1"></div>
@@ -251,7 +254,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="PageOne.invalid && nextClickedOne">*this field is required</mat-error>
+                  <mat-error >*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -279,7 +282,7 @@
               <div class="col-xs-12 m-t-20"
               *ngIf="!fourPageService.getUserThrough()"
                 style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-                <button mat-raised-button type="button" id="viewButton" [disabled]="disableNext$ | async"
+                <button *ngIf="!this.PageOne.valid" mat-raised-button type="button" id="viewButton" [disabled]="(disableNext$ | async)||showError"
                   class="btn" (click)="firstStep()">See Profiles</button>
               </div>
 
@@ -333,7 +336,7 @@
 
   
 </main>
-<div id="us" class="whyus">
+<div class="whyus">
   <div class="why-us-header">
    <div class="d-flex justify-content-center">
        <div class="header">
@@ -427,5 +430,4 @@
 </div>
 <testimonials></testimonials>
 <app-choice-list></app-choice-list>
-
 </div>

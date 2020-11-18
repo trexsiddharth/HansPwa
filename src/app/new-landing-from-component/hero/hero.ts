@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { fade, landing } from '../animations.js';
 import * as AOS from 'aos';
@@ -48,7 +48,7 @@ export class Hero implements OnInit {
       if(this.name){
         this.itemService.compatibilityLookingFor = this.name;
       }
-      
+      window.scroll(0,0);
       this.router.navigateByUrl('/fourReg');
     }
     groomToggle(){
@@ -67,6 +67,7 @@ export class Hero implements OnInit {
       this.name=document.getElementById(id).innerHTML;
     }
     ngOnInit() {
+      window.scroll(0,0);
       AOS.init();
       this.mobileScreen();
       if (localStorage.getItem('gender')) {
