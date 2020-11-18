@@ -70,17 +70,22 @@ export const _filter = (opt: string[], value: string): string[] => {
 
 
 export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
-  public formfirstName: string='';
-  public formlastName: string='';
-  public auto:boolean = false;
-  public features:any;
-  public mobileScreen:boolean;
+  public formfirstName = '';
+  public formlastName = '';
+  public auto = false;
+  public features: any;
+  public mobileScreen: boolean;
   private innerWidth: number;
   private mobileBreakpoint = 768;
-  public secondName:boolean = false;
-  public showHeight:boolean = false;
-  public showCaste:boolean = false;
-  public showError:boolean = false;
+  public secondName = false;
+  public showHeight = false;
+  public showCaste = false;
+  public showError = false;
+
+  advt_c;
+  advt_pid;
+  advt_shortlink;
+
   time = {
     hour: 13,
     minute: 30
@@ -205,7 +210,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     autoplay: this.auto,
     center: true,
     // nav:true,
-    dots:true,
+    dots: true,
     // navText:["<p style= `background-color:black;`>h</p>","<p>b</p>"],
     autoWidth: true,
     // merge: true,
@@ -215,13 +220,13 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         items: 1,
       },
       600: {
-        items:1,
+        items: 1,
       },
       1000: {
         items: 3,
       }
     }
-  }
+  };
 
   ngOnDestroy(): void {
     // truecaller polling is active and user closes the page.
@@ -246,21 +251,20 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
   scroll = (event): void => {
     this.scrollAppear();
-  };
+  }
   scrollAppear() {
-    let whyUs = document.querySelector('.whyus');
-    let position = whyUs.getBoundingClientRect().top;
-    let form = document.querySelector('.form-position');
-    let formPosition = form.getBoundingClientRect().top;
-    let screenPosition = window.innerHeight;
-    if(position<screenPosition){
-      this.auto=true;
-    }
-    else if(formPosition<screenPosition+500){
-      this.auto=false;
+    const whyUs = document.querySelector('.whyus');
+    const position = whyUs.getBoundingClientRect().top;
+    const form = document.querySelector('.form-position');
+    const formPosition = form.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight;
+    if (position < screenPosition) {
+      this.auto = true;
+    } else if (formPosition < screenPosition + 500) {
+      this.auto = false;
     }
   }
-    private resize(){
+    private resize() {
         this.innerWidth = window.innerWidth;
         return this.innerWidth;
     }
@@ -273,10 +277,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       this.mobileScreen = false;
     }
         console.log(this.mobileScreen);
-    
+
     }
   async ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.detectMobileScreen();
     window.addEventListener('scroll', this.scroll, true);
     if (localStorage.getItem('RegisterNumber')) {
@@ -553,7 +557,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   // event on change of input field
-  showLastName(){
+  showLastName() {
     this.secondName = true;
   }
   inputFieldChanged(fieldName) {
@@ -608,7 +612,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       default:
         break;
     }
-    if(this.PageOne.value.birth_date && this.PageOne.value.birth_month && this.PageOne.value.birth_year){
+    if (this.PageOne.value.birth_date && this.PageOne.value.birth_month && this.PageOne.value.birth_year) {
       this.showHeight = true;
       console.log(this.showHeight);
     }
@@ -677,12 +681,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (!this.PageOne.valid) {
       return;
     }
-    this.showError=false;
+    this.showError = false;
     const button = document.querySelector<HTMLButtonElement>('#viewButton');
     button.click();
   }
-  scrollToTop(){
-   window.scroll(0,0);
+  scrollToTop() {
+   window.scroll(0, 0);
   }
   openVerificationDialog(isLead: string) {
     const dialogConfig = new MatDialogConfig();
@@ -793,7 +797,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if(this.PageOne.invalid){
       this.showError=true;
       console.log(this.showError);
-      
+
     }
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
@@ -823,7 +827,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       this.ngxNotificationService.error('Enter A Valid Mobile Number');
       return;
     }
-    
+
 
     console.log(this.PageOne.value);
     if (this.PageOne.valid) {
@@ -871,6 +875,18 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         firststepdata.append('channel', localStorage.getItem('getListSource'));
       } else {
         firststepdata.append('channel', 'Web');
+      }
+
+      if (this.advt_shortlink) {
+        firststepdata.append('shortlink', this.advt_shortlink );
+      }
+
+      if (this.advt_pid) {
+        firststepdata.append('pid', this.advt_pid );
+      }
+
+      if (this.advt_c) {
+        firststepdata.append('c', this.advt_c );
       }
 
 
@@ -1292,10 +1308,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   checkAllCastePref(event) {
     console.log(event.checked);
     this.isAllCastePref = event.checked;
-    if(event.checked){
-      this.showCaste=true;
-    }else{
-      this.showCaste=false;
+    if (event.checked) {
+      this.showCaste = true;
+    } else {
+      this.showCaste = false;
     }
   }
 
@@ -1437,10 +1453,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     FB.api('/me',
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location' }, (response) => {
-        if(response.first_name){
-          this.secondName=true;
-          this.formfirstName=response.first_name;
-          this.formlastName=response.last_name;
+        if (response.first_name) {
+          this.secondName = true;
+          this.formfirstName = response.first_name;
+          this.formlastName = response.last_name;
         }
         console.log(response);
         this.spinner.hide();
@@ -1602,10 +1618,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   setTruecallerData(data) {
-    if(data.name.first){
-      this.secondName=true;
-      this.formfirstName=data.name.first;
-      this.formlastName=data.name.last;
+    if (data.name.first) {
+      this.secondName = true;
+      this.formfirstName = data.name.first;
+      this.formlastName = data.name.last;
     }
     this.PageOne.patchValue({
       firstName: data.name.first ? data.name.first : '',
@@ -1637,6 +1653,19 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
   getUtmQueriesFromUrl() {
     console.log(this.route.snapshot);
+
+    if (this.route.snapshot.queryParams) {
+        console.log(this.route.snapshot.queryParams);
+        if (this.route.snapshot.queryParams.shortlink) {
+          this.advt_shortlink = this.route.snapshot.queryParams.shortlink;
+        }
+        if (this.route.snapshot.queryParams.pid) {
+          this.advt_shortlink = this.route.snapshot.queryParams.pid;
+        }
+        if (this.route.snapshot.queryParams.c) {
+          this.advt_shortlink = this.route.snapshot.queryParams.c;
+        }
+      }
   }
 
 
