@@ -264,20 +264,19 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     }
     private detectMobileScreen() {
         window.onload = this.resize;
-      window.onresize = this.resize;
-    if (this.resize() < this.mobileBreakpoint) {
-      this.mobileScreen=true
+        window.onresize = this.resize;
+        if (this.resize() < this.mobileBreakpoint) {
+      this.mobileScreen = true;
     } else {
-      this.mobileScreen=false
+      this.mobileScreen = false;
     }
-    console.log(this.mobileScreen);
+        console.log(this.mobileScreen);
     
     }
   async ngOnInit() {
     this.detectMobileScreen();
     window.addEventListener('scroll', this.scroll, true);
     if (localStorage.getItem('RegisterNumber')) {
-
       this.PageOne.controls.phone.setValue(localStorage.getItem('RegisterNumber'));
       this.disabledPhoneNumber = localStorage.getItem('RegisterNumber');
 
@@ -1595,9 +1594,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     });
 
     if (data.phoneNumbers && data.phoneNumbers[0]) {
-
+      alert(`+${data.phoneNumbers[0]}`);
+      this.PageOne.controls.phone.setValue(`+${data.phoneNumbers[0]}`);
       this.disabledPhoneNumber = data.phoneNumbers[0];
-      this.PageOne.controls.phone.setValue('+' + data.phoneNumbers[0]);
       setTimeout(() => {
         const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
         if (countryBtn) {
