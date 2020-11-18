@@ -250,18 +250,17 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     let form = document.querySelector('.form-position');
     let formPosition = form.getBoundingClientRect().top;
     let screenPosition = window.innerHeight;
-    console.log(position,screenPosition);
+    console.log(position, screenPosition);
     
-    if(position<screenPosition){
-      this.auto=true;
-    }
-    else if(formPosition<screenPosition+500){
-      this.auto=false;
+    if (position < screenPosition) {
+      this.auto = true;
+    } else if (formPosition < screenPosition + 500) {
+      this.auto = false;
     }
   }
     private resize(){
         this.innerWidth = window.innerWidth;
-        return this.innerWidth
+        return this.innerWidth;
     }
     private detectMobileScreen() {
         window.onload = this.resize;
@@ -1598,7 +1597,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (data.phoneNumbers && data.phoneNumbers[0]) {
 
       this.disabledPhoneNumber = data.phoneNumbers[0];
-      this.PageOne.controls.phone.setValue(data.phoneNumbers[0]);
+      this.PageOne.controls.phone.setValue('+' + data.phoneNumbers[0]);
       setTimeout(() => {
         const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
         if (countryBtn) {
