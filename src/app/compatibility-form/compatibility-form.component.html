@@ -280,8 +280,9 @@
               <div class="col-xs-12 m-t-20"
               *ngIf="!fourPageService.getUserThrough()"
                 style="margin-top: 20px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
-                <button mat-raised-button type="button" id="viewButton" [disabled]="(disableNext$ | async)||showError"
+                <button *ngIf="!this.PageOne.valid" mat-raised-button type="button" id="viewButton" [disabled]="(disableNext$ | async)||showError"
                   class="btn" (click)="firstStep()">See Profiles</button>
+                  <img *ngIf="this.PageOne.valid" class="lottieanimation" src="../../assets/lottieSpinAnimation.gif" alt="">
               </div>
 
               <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
@@ -334,7 +335,7 @@
 
   
 </main>
-<div id="us" class="whyus">
+<div class="whyus">
   <div class="why-us-header">
    <div class="d-flex justify-content-center">
        <div class="header">
@@ -428,5 +429,4 @@
 </div>
 <testimonials></testimonials>
 <app-choice-list></app-choice-list>
-
 </div>

@@ -66,6 +66,7 @@ export class Hero implements OnInit {
       this.name=document.getElementById(id).innerHTML;
     }
     ngOnInit() {
+      window.scroll(0,0);
       AOS.init();
       this.mobileScreen();
       if (localStorage.getItem('gender')) {

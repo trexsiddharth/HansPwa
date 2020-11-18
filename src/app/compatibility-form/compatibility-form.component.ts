@@ -276,6 +276,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     
     }
   async ngOnInit() {
+    window.scroll(0,0);
     this.detectMobileScreen();
     window.addEventListener('scroll', this.scroll, true);
     if (localStorage.getItem('RegisterNumber')) {

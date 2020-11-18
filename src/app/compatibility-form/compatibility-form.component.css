@@ -3,6 +3,10 @@
   background-color: #ffffff;
   overflow-x:hidden;
 }
+.lottieanimation{
+  height:50px;
+  width:50px;
+}
 .compatibility-form-holder{
   background-image: linear-gradient(180deg, #FFFFFF 0%, #DCF1FA 100%);
   overflow-x:hidden;
