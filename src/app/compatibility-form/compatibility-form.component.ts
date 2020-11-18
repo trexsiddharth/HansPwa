@@ -673,14 +673,16 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   private goToNextPage() {
-    // if (!this.PageOne.valid) {
-    //   return;
-    // }
-    // this.showError=false;
-    // const button = document.querySelector<HTMLButtonElement>('#viewButton');
-    // button.click();
+    if (!this.PageOne.valid) {
+      return;
+    }
+    this.showError=false;
+    const button = document.querySelector<HTMLButtonElement>('#viewButton');
+    button.click();
   }
-
+  scrollToTop(){
+   window.scroll(0,0);
+  }
   openVerificationDialog(isLead: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;

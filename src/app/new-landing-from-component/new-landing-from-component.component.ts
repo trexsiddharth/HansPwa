@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-new-landing-from-component',
   templateUrl: './new-landing-from-component.component.html',
@@ -16,6 +16,12 @@ export class NewLandingFromComponentComponent implements OnInit {
     this.navbar();
     this.detectMobileScreen();
     this.mobile();
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+  });
   }
   onSubmit() {
     this.router.navigateByUrl('/kundaliMatching');
