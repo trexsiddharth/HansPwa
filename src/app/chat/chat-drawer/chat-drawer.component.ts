@@ -269,13 +269,14 @@ export class ChatDrawerComponent implements OnInit {
     const params = new HttpParams().set('country_id', countryId).set('state_id', stateId);
     this.http.get('https://partner.hansmatrimony.com/api/getCity', { params }).subscribe((response: any) => {
       console.log(response);
-      if (this.allCities.length === 0) {
-        this.allCities = response;
-        this.citiesSubject.next(response);
-      } else {
+      if (this.allCities ) {
         this.allCities.concat(response);
         this.citiesSubject.next(this.allCities);
+      } else {
+        this.allCities = response;
+        this.citiesSubject.next(response);
       }
+
       console.log(this.allCities);
 
       this.searchCityText.valueChanges.pipe(
@@ -380,7 +381,7 @@ export class ChatDrawerComponent implements OnInit {
         }
       }
     );
-    
+
 
     // this.disableSave.next(true);
     // user authorized
@@ -420,7 +421,7 @@ export class ChatDrawerComponent implements OnInit {
     console.log('changed');
     this.disableSave.next(true);
   }
-  
+
   ngAfterViewInit() {
     // set already selected language in toggle
     setTimeout(() => {
@@ -881,9 +882,9 @@ export class ChatDrawerComponent implements OnInit {
               this.preferenceProfileData ? this.preferenceProfileData.pref_state_id : '');
               this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
               this.chatService.selected_states = this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
-                
 
-              
+
+
               this.chatService.selected_states_id = this.preferenceProfileData.pref_state_id.split(',');
 
               console.log('current state ids are', this.chatService.selected_states_id );
