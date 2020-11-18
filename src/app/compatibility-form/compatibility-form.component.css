@@ -8,7 +8,7 @@
   overflow-x:hidden;
 }
 .showError{
-  border: 1px solid red;
+  margin-top:5px;
 }
 .logo{
   width:186px;
@@ -264,9 +264,7 @@ input.form-control.ng-invalid.ng-touched{
 select.classic.ng-invalid.ng-touched{
   border: 1px solid red;
 }
-/* ::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline {
-  background-color:red;
-} */
+
 ::ng-deep .mat-step-label{
   color: black !important;
 }

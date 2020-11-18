@@ -188,9 +188,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
-      birth_date: ['', Validators.compose([Validators.required])],
-      birth_month: ['', Validators.compose([Validators.required])],
-      birth_year: ['', Validators.compose([Validators.required])],
+      birth_date: ['01', Validators.compose([Validators.required])],
+      birth_month: ['January', Validators.compose([Validators.required])],
+      birth_year: ['1980', Validators.compose([Validators.required])],
       Height: ['', Validators.compose([Validators.required])],
       Weight: [''],
       MaritalStatus: ['', Validators.compose([Validators.required])],
@@ -673,12 +673,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   private goToNextPage() {
-    if (!this.PageOne.valid) {
-      return;
-    }
-    this.showError=false;
-    const button = document.querySelector<HTMLButtonElement>('#viewButton');
-    button.click();
+    // if (!this.PageOne.valid) {
+    //   return;
+    // }
+    // this.showError=false;
+    // const button = document.querySelector<HTMLButtonElement>('#viewButton');
+    // button.click();
   }
 
   openVerificationDialog(isLead: string) {
