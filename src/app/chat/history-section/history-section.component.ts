@@ -26,7 +26,6 @@ export class HistorySectionComponent implements OnInit {
               private spinner: NgxSpinnerService,
               private ngxNotificationService: NgxNotificationService) { }
 
-  historyDataList$: Observable<HistoryTable>;
   historyContactSubject = new BehaviorSubject<HistoryData[]>([]);
   historyContactList$: Observable<HistoryData[]> = this.historyContactSubject.asObservable().pipe(shareReplay());
   historyRejectSubject = new BehaviorSubject<HistoryData[]>([]);
@@ -42,6 +41,7 @@ export class HistorySectionComponent implements OnInit {
   searchActivated$: Observable<boolean> = this.searchActivated.asObservable();
   profiles: HistoryData[] = [];
   authData;
+  historyDataList$: Observable<HistoryTable>;
 
   Heights: string[] = ['4\'0"', '4\'1"', '4\'2"', '4\'3"', '4\'4"', '4\'5"', '4\'6"', '4\'7"', '4\'8"', '4\'9"', '4\'10"', '4\'11"', '5\'0"',
     '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"',
@@ -50,19 +50,21 @@ export class HistorySectionComponent implements OnInit {
     '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', ];
 
   ngOnInit() {
-   this.historyDataList$ =  this.getHistoryData().pipe(
-     shareReplay(),
-     tap(item => {
-      if (localStorage.getItem('selectedType')) {
-        this.selectedTab = Number(localStorage.getItem('selectedType'));
-      }
-      this.historyShortlistSubject.next(item.history.shortlist);
-      this.historyRejectSubject.next(item.history.reject);
-      this.historyContactSubject.next(item.history.contact);
-     })
-   );
 
-   this.searchControl.valueChanges.pipe(debounceTime(400)).subscribe((search: string) => {
+    this.historyDataList$ = this.itemService.getHistoryAllDataList().pipe(
+      shareReplay(),
+      tap(item => {
+             if (localStorage.getItem('selectedType')) {
+               this.selectedTab = Number(localStorage.getItem('selectedType'));
+             }
+            //  this.itemService.setHistoryAllDataList(item);
+             this.historyShortlistSubject.next(item.history.shortlist);
+             this.historyRejectSubject.next(item.history.reject);
+             this.historyContactSubject.next(item.history.contact);
+            })
+    );
+
+    this.searchControl.valueChanges.pipe(debounceTime(400)).subscribe((search: string) => {
       console.log(search);
       // this.profiles = this.dataFiltering.filterPosts((search as string).toLowerCase());
       this.profiles = [];
@@ -82,28 +84,13 @@ export class HistorySectionComponent implements OnInit {
         }
       );
     });
-   this.authData = JSON.parse(localStorage.getItem('authData'));
+    this.authData = JSON.parse(localStorage.getItem('authData'));
   }
 
-  getHistoryData(): Observable<HistoryTable> {
-    const params = new HttpParams().set('is_lead', localStorage.getItem('is_lead')).set('id', localStorage.getItem('id'));
-    return this.http.get<HistoryTable>('https://partner.hansmatrimony.com/api/getHisotry', { params });
-
-    // subscribe((response: any) => {
-    //   console.log('response of getHistory  api', response);
-    //   let allProfiles: any[] = [];
-    //   allProfiles = allProfiles.concat(response.history.contact);
-    //   allProfiles = allProfiles.concat(response.history.shortlist);
-    //   allProfiles = allProfiles.concat(response.history.reject);
-    //   console.log(allProfiles);
-    //   this.dataFiltering.setPostList(allProfiles);
-
-    //   if (localStorage.getItem('selectedType')) {
-    //     this.selectedTab = Number(localStorage.getItem('selectedType'));
-    //   }
-    // });
-
-  }
+  // getHistoryData(): Observable<HistoryTable> {
+  //   const params = new HttpParams().set('is_lead', localStorage.getItem('is_lead')).set('id', localStorage.getItem('id'));
+  //   return this.http.get<HistoryTable>('https://partner.hansmatrimony.com/api/getHisotry', { params });
+  // }
   changeSelectedTab(event: any) {
     console.log(event);
     this.currentTab = event;

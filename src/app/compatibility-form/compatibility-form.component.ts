@@ -210,7 +210,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   
   }
   async ngOnInit() {
-    
 
     if (localStorage.getItem('RegisterNumber')) {
 
@@ -275,6 +274,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         }
       }
     );
+
+      // get utm queries from url
+    this.getUtmQueriesFromUrl();
 
     // for skippable
     this.route.url.subscribe(
@@ -1519,6 +1521,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (data.phoneNumbers && data.phoneNumbers[0]) {
 
       this.disabledPhoneNumber = data.phoneNumbers[0];
+      this.PageOne.controls.phone.setValue(data.phoneNumbers[0]);
       setTimeout(() => {
         const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
         if (countryBtn) {
@@ -1540,6 +1543,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
   }
 
+  getUtmQueriesFromUrl() {
+    console.log(this.route.snapshot);
+  }
 
 
 }

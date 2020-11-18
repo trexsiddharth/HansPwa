@@ -1,0 +1,41 @@
+<div class="historyProfile">
+    <img class="historyImage" #profilePic
+        [src]="getProfilePhoto(listItem,listItem.profile.photo,listItem.profile.gender)"
+        (click)="openProfileDialog(listItem,itemIndex)" (error)="onLoadProfileError(listItem.profile.gender,profilePic)"
+        alt="profile picture">
+
+    <div style="position: absolute;top: -15px;
+right: -20px;" *ngIf="listItem.family == null">
+        <button mat-fab id="premiumProfIcon">
+            <img width="30px" src="../../../assets/king.svg" alt="premium profile">
+        </button>
+    </div>
+
+    <div class="historyDetails">
+        <span>
+            {{itemName}} | {{setAge(listItem.profile.birth_date)}}
+        </span><br>
+        <span>
+            {{listItem.profile.working_city ? listItem.profile.working_city : listItem.family ? listItem.family.city : ''}}
+            | {{setHeight(listItem.profile.height)}}
+            | {{listItem.family ? listItem.family.religion : listItem.profile.religion}},
+            {{listItem.family ? listItem.family.caste : listItem.profile.caste}} | {{listItem.profile.occupation}}
+            | {{setIncome(listItem.profile.monthly_income)}} LPA
+        </span>
+    </div>
+
+    <div class="historyButtons">
+
+        <button mat-raised-button class="btn" (click)="sendAction()" style="background-color: #58D1FD;
+    margin-top: 20px;
+    padding: 20px;
+     border-radius: 10px;">
+            <img *ngIf="listItem.family != null" width="20px" src="../../../assets/phone_white.svg"
+                alt="contact profile">
+            <img *ngIf="listItem.family == null" width="27px" src="../../../assets/message.svg"
+                alt="message profile">
+        </button>
+
+
+    </div>
+</div>

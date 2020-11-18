@@ -12,6 +12,11 @@ import { MessageDialogComponent } from './chat/message-dialog/message-dialog.com
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { Router } from '@angular/router';
 import { DailyWelcomePopupComponent } from './chat/daily-welcome-popup/daily-welcome-popup.component';
+import { BehaviorSubject, concat, forkJoin, merge, Observable } from 'rxjs';
+import { HistoryData, HistoryTable } from './Model/HistoryTable';
+import { catchError, combineAll, concatMap, map, retry, shareReplay, timeout } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { ProfileTable } from './Model/Profile';
 
 @Injectable({
   providedIn: 'root'
@@ -31,17 +36,76 @@ export class FindOpenHistoryProfileService {
 
   shownConfetti = new EventEmitter();
 
-  popupOpen: boolean = false;
+  popupOpen = false;
 
   tutorialIndex = -1;
 
   compatibilityLookingFor = '';
   compatibilityGender = '';
+
+  //see more section
+
+
+  // history search section
+  private historyAllDataListSubject: BehaviorSubject<HistoryTable> = new BehaviorSubject<HistoryTable>(null);
+  private historyAllDataList$: Observable<HistoryTable>;
+
   constructor(
     private dialog: MatDialog,
     private breakPointObserver: BreakpointObserver,
     private router: Router,
+    private http: HttpClient,
     private ngxNotificationService: NgxNotificationService) {
+  }
+
+  getSeeMoreData(): any {
+    return forkJoin(this.getDiscoveryData(), this.getPersonalizedProfiles(), );
+  }
+
+  getDiscoveryData(): Observable<ProfileTable[]> {
+    const formData = new FormData();
+    formData.append('id', localStorage.getItem('id'));
+    formData.append('is_lead', localStorage.getItem('is_lead'));
+
+    return this.http.post<ProfileTable[]>('https://partner.hansmatrimony.com/api/getDiscoveryProfiles', formData).pipe(
+      timeout(7000), retry(3), catchError(
+        err => {
+          this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+          throw new Error('Server TimeOut: ' + err);
+        }
+      )
+    );
+  }
+
+  getPersonalizedProfiles(): Observable<ProfileTable[]> {
+    const creditsData = new FormData();
+    creditsData.append('TEXT', 'SHOW');
+    creditsData.append('mobile', localStorage.getItem('mobile_number'));
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>('https://partner.hansmatrimony.com/api/premiumProNew',
+      creditsData).pipe(
+        timeout(12000), retry(2),
+        map(res => (res.message as ProfileTable[])),
+         catchError(e => {
+          this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
+        throw new Error('Server Timeout ' + e);
+      }));
+  }
+
+
+  getHistoryData(): Observable<HistoryTable> {
+    const params = new HttpParams().set('is_lead', localStorage.getItem('is_lead')).set('id', localStorage.getItem('id'));
+    return this.http.get<HistoryTable>('https://partner.hansmatrimony.com/api/getHisotry', { params });
+  }
+
+  setHistoryAllDataList(table: HistoryTable) {
+    if (table) {
+      this.historyAllDataListSubject.next(table);
+    }
+  }
+
+  getHistoryAllDataList(): Observable<HistoryTable> {
+      return this.historyAllDataList$ = this.getHistoryData().pipe(shareReplay());
   }
 
   setItem(item: any) {
@@ -64,8 +128,8 @@ export class FindOpenHistoryProfileService {
     }
   }
   setTutorialIndex() {
-    //console.log(this.tutorialIndex);
-    if (localStorage.getItem("tutorialIndex")) {
+    // console.log(this.tutorialIndex);
+    if (localStorage.getItem('tutorialIndex')) {
       // var temp = Number(localStorage.getItem("tutorialIndex"));
       // if (temp == -1)
       //   return;
@@ -75,18 +139,17 @@ export class FindOpenHistoryProfileService {
       //   temp++;
       // localStorage.setItem("tutorialIndex", String(temp));
       localStorage.setItem('tutorialIndex', '-1');
-    }
-    else {
+    } else {
       localStorage.setItem('tutorialIndex', '0');
     }
   }
   getTutorialIndex() {
-    let temp = Number(localStorage.getItem("tutorialIndex"));
+    const temp = Number(localStorage.getItem('tutorialIndex'));
     this.tutorialIndex = temp;
     return this.tutorialIndex;
   }
   getCredits() {
-    let credits = localStorage.getItem('credits');
+    const credits = localStorage.getItem('credits');
     return credits;
   }
   setIsPersonalized(status: boolean) {
@@ -95,55 +158,51 @@ export class FindOpenHistoryProfileService {
   // for showing the badge on phone and the chat drawer
   setDiscoverClicked(status: boolean) {
     if (status) {
-      localStorage.setItem("discoverClicked", "1");
-    }
-    else {
-      localStorage.setItem("discoverClicked", "0");
+      localStorage.setItem('discoverClicked', '1');
+    } else {
+      localStorage.setItem('discoverClicked', '0');
     }
   }
   getDiscoverClicked() {
-    let temp = localStorage.getItem("discoverClicked");
-    if (temp == "1") return true;
-    else return false;
+    const temp = localStorage.getItem('discoverClicked');
+    if (temp == '1') { return true; }
+    else { return false; }
   }
   setdrawerBadgeClicked(status: boolean) {
     if (status) {
-      localStorage.setItem("drawerBadgeClicked", "1");
-    }
-    else {
-      localStorage.setItem("drawerBadgeClicked", "0");
+      localStorage.setItem('drawerBadgeClicked', '1');
+    } else {
+      localStorage.setItem('drawerBadgeClicked', '0');
     }
   }
   setcontactedPhoneClicked(status: boolean) {
     if (status) {
-      localStorage.setItem("contactedPhoneClicked", "1");
-    }
-    else {
-      localStorage.setItem("contactedPhoneClicked", "0");
+      localStorage.setItem('contactedPhoneClicked', '1');
+    } else {
+      localStorage.setItem('contactedPhoneClicked', '0');
     }
   }
   setChangePrefsClicked(status: boolean) {
     if (status) {
-      localStorage.setItem("changePrefsClicked", "1");
-    }
-    else {
-      localStorage.setItem("changePrefsClicked", "0");
+      localStorage.setItem('changePrefsClicked', '1');
+    } else {
+      localStorage.setItem('changePrefsClicked', '0');
     }
   }
   getChangePrefsClicked() {
-    let temp = localStorage.getItem("changePrefsClicked");
-    if (temp == "1") return true
-    else return false;
+    const temp = localStorage.getItem('changePrefsClicked');
+    if (temp == '1') { return true }
+    else { return false; }
   }
   getdrawerBadgeClicked() {
-    let temp = localStorage.getItem("drawerBadgeClicked");
-    if (temp == "1") return true
-    else return false;
+    const temp = localStorage.getItem('drawerBadgeClicked');
+    if (temp == '1') { return true }
+    else { return false; }
   }
   getcontactedPhoneClicked() {
-    let temp = localStorage.getItem("contactedPhoneClicked");
-    if (temp == "1") return true
-    else return false;
+    const temp = localStorage.getItem('contactedPhoneClicked');
+    if (temp == '1') { return true }
+    else { return false; }
   }
 
   getPersonalized() {
@@ -159,23 +218,25 @@ export class FindOpenHistoryProfileService {
   setScroll(pagename: string, scrollPosition: number) {
     switch (pagename) {
       case 'todaysSpecial': localStorage.setItem('todaysSpecialScrollPos', String(scrollPosition));
-        break;
+                            break;
       case 'discover': localStorage.setItem('discoverScrollPos', String(scrollPosition));
-        break;
+                       break;
       case 'yourLikes': localStorage.setItem('yourLikesScrollPos', String(scrollPosition));
-        break;
+                        break;
     }
   }
   setPhotoStatus(status: boolean) {
-    if (status) localStorage.setItem("has_photo", '1');
-    else localStorage.setItem("has_photo", "0");
+    if (status) { localStorage.setItem("has_photo", '1'); }
+    else { localStorage.setItem("has_photo", "0"); }
     this.hasPhoto = status;
   }
   getPhotoStatus() {
-    if (localStorage.getItem("has_photo") === '1')
+    if (localStorage.getItem('has_photo') === '1') {
       this.hasPhoto = true;
-    else
+    }
+    else {
       this.hasPhoto = false;
+    }
     return this.hasPhoto;
   }
 
@@ -243,31 +304,31 @@ export class FindOpenHistoryProfileService {
       : localStorage.getItem('language') === 'hindi' ? 'आज के रिश्ते' : 'Today\'s Profiles';
   }
   getContactedCount() {
-    let count = JSON.parse(localStorage.getItem('count'));
+    const count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
       'कॉंटैक्टेड(' + count.contactedCount + ')'
       : 'Contacted(' + count.contactedCount + ')';
   }
   getShortlistedCount() {
-    let count = JSON.parse(localStorage.getItem('count'));
+    const count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
       'मेरी पसंद(' + count.shortlistCount + ')'
       : 'Shortlisted(' + count.shortlistCount + ')';
   }
   getYourLikesCount() {
-    let count = JSON.parse(localStorage.getItem('count'));
+    const count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
       'मेरी पसंद(' + count.shortlistCount + ')'
       : 'Your Likes(' + count.shortlistCount + ')';
   }
   getShortedCount() {
-    let count = JSON.parse(localStorage.getItem('count'));
+    const count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
       'मै किसे पसंद हूँ? ( ' + count.shortedCount + ' )'
       : 'Liked Me? ( ' + count.shortedCount + ' )';
   }
   getRejectedCount() {
-    let count = JSON.parse(localStorage.getItem('count'));
+    const count = JSON.parse(localStorage.getItem('count'));
     return localStorage.getItem('language') === 'hindi' ?
       'रीजेकटेड(' + count.rejectedCount + ')'
       : 'Rejected(' + count.rejectedCount + ')';
@@ -312,7 +373,7 @@ export class FindOpenHistoryProfileService {
     );
     const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
   }
-  //new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
+  // new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
   openTodaysPopupAd() {
     if (this.popupOpen) {
       this.popupOpen = false;

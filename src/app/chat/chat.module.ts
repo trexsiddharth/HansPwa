@@ -45,6 +45,7 @@ import { AskDeleteDialogComponent } from './my-profile-photo-upload/ask-delete-d
 import { ChooseFromDialogComponent } from './chat-drawer/choose-from-dialog/choose-from-dialog.component';
 import { ChooseForComponent } from '../compatibility-form/choose-for/choose-for.component';
 import { HistoryItemComponent } from './history-section/history-item/history-item.component';
+import { ProfileItemComponent } from './profile-item/profile-item.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -89,7 +90,8 @@ import { HistoryItemComponent } from './history-section/history-item/history-ite
     HistorySectionComponent,
     AskDeleteDialogComponent,
     ChooseFromDialogComponent,
-    HistoryItemComponent
+    HistoryItemComponent,
+    ProfileItemComponent
   ],
   entryComponents: [
     MessageDialogComponent,
