@@ -1600,7 +1600,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       this.formlastName=data.name.last;
     }
     this.PageOne.patchValue({
-      firstName: data.name.first ? `${data.name.first} ${data.name.last ? data.name.last : ''}` : '',
+      firstName: data.name.first ? data.name.first : '',
       lastName: data.name.last ? data.name.last : '',
       email: data.onlineIdentities.email ? data.onlineIdentities.email : '',
       phone: data.phoneNumbers[0] ? `+${data.phoneNumbers[0]}` : ''
