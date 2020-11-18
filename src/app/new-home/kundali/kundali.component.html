@@ -78,7 +78,9 @@
                         </div>
                         <div class="col">
                             <h6>Birth Date</h6>
-                            <div class="special">
+                            <div class="container">
+                                <div class="row"></div>
+                            </div>
                                 <select class="form-control classic" formControlName="GirlBirthDate">
                                     <option *ngFor="let item of date" [value]="item">
                                         {{item}}
@@ -94,7 +96,7 @@
                                         {{item}}
                                     </option>
                                 </select>
-                            </div>
+                            
                         </div>
                         <div class="col">
                             <h6>Birth Time</h6>

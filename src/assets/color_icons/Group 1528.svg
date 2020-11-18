@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
   <defs>
     <style>
@@ -15,3 +16,22 @@
     <path id="envelope" class="cls-2" d="M14.75,4H4.25A2.25,2.25,0,0,0,2,6.25v7.5A2.25,2.25,0,0,0,4.25,16h10.5A2.25,2.25,0,0,0,17,13.75V6.25A2.25,2.25,0,0,0,14.75,4Zm-.307,1.5-4.41,4.41a.75.75,0,0,1-1.065,0L4.557,5.5ZM15.5,13.75a.75.75,0,0,1-.75.75H4.25a.75.75,0,0,1-.75-.75V6.558l4.41,4.41a2.25,2.25,0,0,0,3.18,0l4.41-4.41Z" transform="translate(964 4828)"/>
   </g>
 </svg>
+=======
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #00a8ff;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Group_1528" data-name="Group 1528" transform="translate(-960 -4824)">
+    <circle id="Ellipse_21" data-name="Ellipse 21" class="cls-1" cx="13.5" cy="13.5" r="13.5" transform="translate(960 4824)"/>
+    <path id="envelope" class="cls-2" d="M14.75,4H4.25A2.25,2.25,0,0,0,2,6.25v7.5A2.25,2.25,0,0,0,4.25,16h10.5A2.25,2.25,0,0,0,17,13.75V6.25A2.25,2.25,0,0,0,14.75,4Zm-.307,1.5-4.41,4.41a.75.75,0,0,1-1.065,0L4.557,5.5ZM15.5,13.75a.75.75,0,0,1-.75.75H4.25a.75.75,0,0,1-.75-.75V6.558l4.41,4.41a2.25,2.25,0,0,0,3.18,0l4.41-4.41Z" transform="translate(964 4828)"/>
+  </g>
+</svg>
+>>>>>>> c55b7395c6c84ad9dcadda87d8b4a1bdebf3e600

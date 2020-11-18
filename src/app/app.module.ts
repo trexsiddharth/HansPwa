@@ -41,6 +41,29 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { PhotoUploadCropComponent } from './photo-upload-crop/photo-upload-crop.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { KundaliComponent } from './new-home/kundali/kundali.component';
+import { NewLandingFromComponentComponent } from './new-landing-from-component/new-landing-from-component.component';
+import { Hero } from './new-landing-from-component/hero/hero';
+import { Features } from './new-landing-from-component/features/features.component';
+import { NewApp } from './new-landing-from-component/newApp/new-app.component';
+import { OfflineCenters } from './new-landing-from-component/offlineCenters/offline-centers.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { Kundali } from './new-landing-from-component/freeKundaliMatching/kundali.component';
+import { AppFooter } from './new-landing-from-component/footer/footer';
+import { MatchMakers } from './new-landing-from-component/matchmakers/matchmakers.component';
+import { Testimonials } from './new-landing-from-component/testimonials/testimonials.component';
+import { TestimonialCards } from './new-landing-from-component/testimonials/testimonial-cards/testimonial-cards.component';
+import { HowItWorks } from './new-landing-from-component/howItWorks/how-it-works.component';
+import { CustomBg } from './new-landing-from-component/custom-bg/custom-bg';
+import { NavBar } from './new-landing-from-component/hero/navBar/navBar';
+import { BengaliMatrimonyComponent } from './bengali-matrimony/bengali-matrimony.component';
+import { NewFooter } from './new-landing-from-component/new-footer/new-footer';
+import { HinduMatrimonyComponent } from './hindu-matrimony/hindumatrimony.component';
+import { SikhMatrimonyComponent } from './sikh-matrimony/sikhmatrimony.component';
+import { ChristianMatrimonyComponent } from './christian-matrimony/christianmatrimony.component';
+import { BuddhistMatrimonyComponent } from './buddhist-matrimony/buddhistmatrimony.component';
+import { JainMatrimonyComponent } from './jain-matrimony/jainmatrimony.component';
+import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.component';
+import { SidebarModule } from 'ng-sidebar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,10 +83,32 @@ import { KundaliComponent } from './new-home/kundali/kundali.component';
     TodaysPaymentPopupComponent,
     PhotoUploadCropComponent,
     KundaliComponent,
+    NewLandingFromComponentComponent,
+    Hero,
+    Features,
+    NewApp,
+    OfflineCenters,
+    Kundali,
+    AppFooter,
+    MatchMakers,
+    Testimonials,
+    TestimonialCards,
+    HowItWorks,
+    CustomBg,
+    NavBar,
+    BengaliMatrimonyComponent,
+    NewFooter,
+    HinduMatrimonyComponent,
+    SikhMatrimonyComponent,
+    ChristianMatrimonyComponent,
+    BuddhistMatrimonyComponent,
+    JainMatrimonyComponent,
+    MuslimMatrimonyComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SlickCarouselModule,
     AngularMaterialModule,
     NgxNotificationModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
@@ -74,7 +119,8 @@ import { KundaliComponent } from './new-home/kundali/kundali.component';
     Ng5SliderModule,
     NgbModule,
     ImageCropperModule,
-    CarouselModule
+    CarouselModule,
+    SidebarModule.forRoot()
   ],
   providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
   bootstrap: [AppComponent],

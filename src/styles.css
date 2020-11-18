@@ -2,7 +2,12 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import 'assets/scss/modules/_fonts.scss';
 
-
+::-webkit-scrollbar{
+  display:none;
+}
+html {
+  scroll-behavior: smooth;
+}
 html, body { height: 100%; }
 body {
     margin: 0; font-family: 'Gotham Rounded Book',Roboto, "Helvetica Neue", sans-serif !important; 
@@ -488,9 +493,6 @@ div.mat-select-search-inner input.mat-input-element {
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
 }
 #fourRegMobile .country-selector {
-  opacity: 1 !important;
-}
-#mainMobile .country-selector {
   opacity: 1 !important;
 }
 @media screen and (max-width: 576px) {

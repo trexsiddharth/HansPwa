@@ -7,6 +7,14 @@ import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.compo
 import { NewHomeComponent } from './new-home/new-home.component';
 import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
 import { KundaliComponent } from './new-home/kundali/kundali.component';
+import { NewLandingFromComponentComponent } from './new-landing-from-component/new-landing-from-component.component';
+import { BengaliMatrimonyComponent } from './bengali-matrimony/bengali-matrimony.component';
+import { HinduMatrimonyComponent } from './hindu-matrimony/hindumatrimony.component';
+import { SikhMatrimonyComponent } from './sikh-matrimony/sikhmatrimony.component';
+import { ChristianMatrimonyComponent } from './christian-matrimony/christianmatrimony.component';
+import { BuddhistMatrimonyComponent } from './buddhist-matrimony/buddhistmatrimony.component';
+import { JainMatrimonyComponent } from './jain-matrimony/jainmatrimony.component';
+import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.component';
 
 
 const routes: Routes = [
@@ -40,7 +48,35 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '',
-    pathMatch: 'full', component: NewHomeComponent
+    pathMatch: 'full', component: NewLandingFromComponentComponent
+  },
+  {
+    path: 'bengali-matrimony',
+    component: BengaliMatrimonyComponent
+  },
+  {
+    path: 'sikh-matrimony',
+    component: SikhMatrimonyComponent
+  },
+  {
+    path: 'hindu-matrimony',
+    component: HinduMatrimonyComponent
+  },
+  {
+    path: 'christian-matrimony',
+    component: ChristianMatrimonyComponent
+  },
+  {
+    path: 'buddhist-matrimony',
+    component: BuddhistMatrimonyComponent
+  },
+  {
+    path: 'jain-matrimony',
+    component: JainMatrimonyComponent
+  },
+  {
+    path: 'muslim-matrimony',
+    component: MuslimMatrimonyComponent
   },
   { path: 'home', redirectTo: '' },
   { path: 'viewCentres', component: ViewCentresComponent },

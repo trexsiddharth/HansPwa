@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+.hero{
+    font-family:'Poppins';
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-bottom:20px;
+    height:100%;
+    width:100%;
+}
+.mobileScreen{
+    width: 100%;
+    height: 100%;
+}
+.drp-btn{
+    padding-right:20px;
+}
+.illustration{
+    margin-top:-20px;
+    object-fit: contain;
+}
+.button-holder{
+    background-color:lightgray;
+    border-radius:10px;
+}
+.btn{
+    background-color:lightgray;
+}
+button:hover{
+    color:black;
+    box-shadow:10px 10px 10px 2px lightgrey;
+}
+/* button{
+    background-color:#EBF7FC;
+} */
+.dr-bt{
+    background-color:lightgray;
+    border-radius:10px;
+    /* z-index:100; */
+}
+#t img:hover{
+    animation: wobble 2s 1;
+}
+#vectors img{
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    -ms-transition: -ms-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
+#vectors img:hover{
+    transform: rotate(360deg) scale(1.5);
+    -ms-transform: rotate(360deg) scale(1.5);
+    -webkit-transform: rotate(360deg) scale(1.5);
+}
+@keyframes wobble {
+    25% {
+      transform: scale(1.5);
+    }
+    50% {
+      transform: scale(1.25);
+    }
+    75% {
+      transform: scale(2);
+    }
+    100% {
+      transform:scale(1.75);
+    }
+  }
+.owl-next{
+    color:black;
+}
+.mobile-screen-center{
+    text-align: center;
+}
+.logo-holder{
+    margin-left:20px;
+}
+span{
+    font-family:'Poppins';
+}
+button{
+    outline:none;
+    border:none;
+    border-radius:10px;
+}
+.logo{
+    width:8.05vw;
+    height:auto;
+}
+.logo-text{
+    width:8.4vw;
+    height:auto;
+}
+.googleplay{
+    width:140px;
+    height:54px;
+    cursor:pointer;
+}
+li{
+    margin-right:40px;
+    font-weight:600;
+    list-style:none;
+}
+.groom-btn{
+    width:200px;
+    height:40px;
+    border:none;
+    background-color:#24ADD8;
+    border-radius:10px;
+    color:white;
+}
+.bride-btn{
+    width:200px;
+    height:40px;
+    border:none;
+    background-color:lightgray;
+    border-radius:10px;
+    color:black;
+}
+.myself-btn{
+    width:130px;
+    height:40px;
+    border:none;
+    background-color:#24ADD8;
+    border-radius:10px;
+    color:white;
+}
+.down{
+    border:none;
+    border-radius:5px;
+    width:40px;
+    background-color:lightgray;
+}
+.register-btn{
+    width:250px;
+    height:50px;
+    border:none;
+    margin-top:20px;
+    background-color:#24ADD8;
+    border-radius:10px;
+    color:white;
+}
+@media only screen and (min-width:1100px){
+    .stripes{
+        position:absolute;
+        left:4.5%;
+        top:120px;
+    }
+    .stripes2{
+        position:absolute;
+        left:40%;
+        top:500px;
+    }
+    .stripes3{
+        position:absolute;
+        left:50%;
+        top:100px;
+    }
+    .vector-bottom{
+        position:absolute;
+        top:500px;
+        width: 100px;
+        height:100px;
+    }
+}
+@media only screen and (min-width:768px){
+    .illustration{
+        width:100%;
+    }
+    .content {
+        position: absolute;
+        left: 35%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    .logo-holder{
+        margin-left:60px;
+    }
+}
+@media only screen and (max-width:767px){
+    .stripes{
+        position:absolute;
+        width:50px;
+        height:50px;
+        left:0%;
+        top:27%;
+    }
+    .stripes2{
+        position:absolute;
+        width:50px;
+        height:50px;
+        right:0%;
+        top:10%;
+    }
+    .stripes3{
+        display:none;
+    }
+    .vector-bottom{
+       display:none;
+    }
+    button:hover{
+        color:black;
+        box-shadow:10px 10px 10px 2px lightgrey;
+    }
+    .illustration{
+        width:80%;
+        height:auto;
+    }
+    #paragraph{
+        margin-left:20px;
+    }
+    .groom-btn{
+        width:100px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .bride-btn{
+        width:100px;
+        height:35px;
+        border:none;
+        background-color:lightgray;
+        border-radius:10px;
+        color:black;
+    }
+    .myself-btn{
+        width:100px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .register-btn{
+        width:200px;
+        height:35px;
+        border:none;
+        margin-top:20px;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .btn-holder{
+        background-color:lightgray;
+        border-radius:10px;
+    }
+    .stripes{
+        position:absolute;
+        width:50px;
+        height:50px;
+        left:0%;
+        top:27%;
+    }
+    .stripes2{
+        position:absolute;
+        width:50px;
+        height:50px;
+        right:0%;
+        top:10%;
+    }
+    .stripes3{
+        display:none;
+    }
+    .vector-bottom{
+        position:absolute;
+        bottom: 30%;
+        width: 40px;
+        height:40px;
+    }
+    .content {
+        justify-content:center;
+        margin-top:30px;
+    }
+    .logo{
+        width:20vw;
+        height:auto;
+    }
+    .logo-text{
+        width:20vw;
+        height:auto;
+    }
+    h2{
+        font-size:20px;
+    }
+}
+@media only screen and (max-width:380px){
+    .groom-btn{
+        width:75px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .bride-btn{
+        width:75px;
+        height:35px;
+        border:none;
+        background-color:lightgray;
+        border-radius:10px;
+        color:black;
+    }
+    .myself-btn{
+        width:75px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .register-btn{
+        width:200px;
+        height:35px;
+        border:none;
+        margin-top:20px;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .btn-holder{
+        background-color:lightgray;
+        border-radius:10px;
+    }
+}
+@media only screen and (max-width:330px){
+    button{
+        font-size:10px;
+    }
+    .groom-btn{
+        width:50px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .bride-btn{
+        width:50px;
+        height:35px;
+        border:none;
+        background-color:lightgray;
+        border-radius:10px;
+        color:black;
+    }
+    .myself-btn{
+        width:50px;
+        height:35px;
+        border:none;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .register-btn{
+        width:200px;
+        height:35px;
+        border:none;
+        margin-top:20px;
+        background-color:#24ADD8;
+        border-radius:10px;
+        color:white;
+    }
+    .btn-holder{
+        background-color:lightgray;
+        border-radius:10px;
+    }
+}

@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+.app-footer{
+    font-family:'Poppins', sans-serif;
+    margin-top:5.2vw;
+    overflow-x:hidden;
+}
+.imgbox{
+    z-index:-1;
+}
+h4{
+    font-family:'Poppins', sans-serif;
+}
+.texts{
+    text-align: center;
+    padding-top:150px;
+}
+.icons{
+    height:1.5625vw;
+}
+.googleplay{
+    width:16.25vw;
+    height:6.3vw;
+    cursor: pointer;
+}
+li{
+    font-size:1.2vw;
+}
+ul{
+    list-style: none;
+    padding-left:0;
+}
+h1{
+    font-weight:bolder;
+    color:black;
+    font-size:3.5vw;
+    font-family:'Poppins', sans-serif;
+    background-image:url('../../../assets/sparkles/sparkles.svg');
+    background-size: cover;
+}
+h2{
+    font-family:'Poppins', sans-serif;
+}
+h4{
+    font-weight:600;
+    font-size:1.5vw;
+}
+.footer-bottom{
+    background-image: url('../../../assets/footer/footer.jpg');
+    z-index:100;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top:60px;
+    margin-top:40px;
+    color: white;
+    height:auto;
+}
+.footer-add{
+    width:100%;
+    height:100px;
+    background-color: #24ADD8;
+}
+.footer-body{
+   
+}
+.imgbox{
+    z-index:-100;
+}
+p{
+    font-size:1.2vw;
+}
+@media only screen and (max-width: 575px){
+    .links{
+        display:none;
+    }
+    .app-footer{
+        font-family:'Poppins', sans-serif;
+    }
+    h1{
+        font-weight:bolder;
+        color:black;
+        font-size:5.5vw;
+    }
+    h2{
+        font-weight:400;
+        font-size:4vw;
+    }
+    h4{
+        font-weight:600;
+        font-size:4vw;
+    }
+    li{
+        font-size:2.5vw;
+    }
+    p{
+        font-size:2vw;
+    }
+    .googleplay{
+        width:40vw;
+        height:15vw;
+    }
+    .icons{
+        height:3vw;
+        padding:0px 5px;
+    }
+    .blended-col{
+        position:relative;
+        left:100px;
+    }
+    .blended-col-right{
+        position:relative;
+        right:100px;
+    }
+    .imgbox img{
+        width:225px;
+        height:225px;
+    }
+}
+@media only screen and (min-width:576px){
+    h2{
+        font-weight:400;
+        font-size:3vw;
+    }
+    h1{
+        font-weight:600;
+        
+        font-size:5vw;
+    }
+    .googleplay{
+        width:28vw;
+        height:10vw;
+    }
+    h4{
+        font-weight:600;
+        font-size:2.2vw;
+    }
+    li{
+        font-size:1.7vw;
+    }
+    p{
+        font-size:1.6vw;
+    }
+    .blended-col{
+        position:relative;
+        left:180px;
+    }
+    .blended-col-right{
+        position:relative;
+        right:200px;
+    }
+    .imgbox img{
+        width:400px;
+        height:400px;
+    }
+}
+@media only screen and (min-width: 768px){
+    .links{
+        display:flex;
+    }
+    h1{
+        font-weight:bolder;
+        color:black;
+        font-size:3.5vw;
+    }
+    h4{
+        font-weight:600;
+        font-size:1.5vw;
+    }
+    .blended-col{
+        position:relative;
+        left:180px;
+    }
+    .blended-col-right{
+        position:relative;
+        right:200px;
+    }
+    .imgbox img{
+        width:500px;
+        height:500px;
+    }
+    .googleplay{
+        width:22vw;
+        height:8vw;
+    }
+   
+}
+@media only screen and (min-width: 992px){
+    h1{
+        font-weight:bolder;
+        color:black;
+        font-size:3.5vw;
+    }
+    h4{
+        font-weight:600;
+        font-size:1.5vw;
+    }
+    .blended-col{
+        position:relative;
+        left:180px;
+    }
+    .blended-col-right{
+        position:relative;
+        right:200px;
+    }
+    .imgbox img{
+        width:600px;
+        height:600px;
+    }
+    .googleplay{
+        width:22vw;
+        height:8vw;
+    }
+}
+@media only screen and (min-width: 1200px){
+    h1{
+        font-weight:bolder;
+        color:black;
+        font-size:2.5vw;
+    }
+    h2{
+        font-size:2vw;
+        font-weight:400;
+    }
+    h4{
+        font-weight:600;
+        font-size:1.5vw;
+    }
+    li{
+        font-size:1vw;
+    }
+    p{
+        font-size:1vw;
+    }
+    .googleplay{
+        width:16vw;
+        height:6vw;
+    }
+}
+@media only screen and (min-width: 1601px){
+    h1{
+        font-weight:bolder;
+        color:black;
+        font-size:3.5vw;
+    }
+    h4{
+        font-weight:600;
+        font-size:1.5vw;
+    }
+    .blended-col{
+        position:relative;
+        left:0px;
+    }
+    .blended-col-right{
+        position:relative;
+        right:0px;
+    }
+    .imgbox img{
+        width:600px;
+        height:600px;
+    }
+    .googleplay{
+        width:22vw;
+        height:8vw;
+    }
+}

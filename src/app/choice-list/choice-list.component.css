@@ -1,0 +1,56 @@
+button{
+    width:79px;
+    height:22px;
+    border:none;
+    outline:none;
+    border-radius:5px;
+    color:white;
+    font-size:10px;
+}
+h1{
+    font-weight:bolder;
+    background-image:url('../../assets/sparkles/sparkles.svg');
+    background-size: cover;
+}
+hr.one{
+    border:0.8px solid black;
+}
+hr.two{
+    border:0.8px solid lightgray;
+    margin-left:5px;
+    margin-top:-15px;
+}
+.btn-holder{
+    display: flex;
+}
+.view{
+    background-color:#4EB7E6;
+    margin-right:5px;
+}
+.contact{
+    background-color:#77BF64;
+}
+.choice-card{
+    width:157px;
+}
+.mobileScreen{
+    margin-bottom:100px;
+}
+@media only screen and (min-width: 768px){
+   .mobileScreen{
+       display: none;
+   }
+}
+@media only screen and (max-width: 767px){
+    h1{
+        font-size:24px;
+    }
+    .desktop{
+        display:none;
+    }
+    .screen-row{
+        display:flex;
+        justify-content: space-evenly;
+        margin-bottom:20px;
+    }
+}

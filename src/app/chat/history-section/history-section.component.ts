@@ -124,7 +124,6 @@ export class HistorySectionComponent implements OnInit {
         case 2:
           this.analyticsService.googleAnalytics('History Reject Visited');
           break;
-
       default:
         break;
     }

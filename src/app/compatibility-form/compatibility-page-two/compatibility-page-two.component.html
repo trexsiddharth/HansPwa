@@ -1,12 +1,13 @@
 <form [formGroup]="PageTwo">
-  <div class="row" style="padding-left: 20px;padding-right: 20px;" [ngStyle]="{'padding-top': fourPageService.getUserThrough() ? '40px' : '0px'}">
+  <div class="row" [ngStyle]="{'padding-top': fourPageService.getUserThrough() ? '40px' : '0px'}">
     <!-- <button class="btn" matStepperPrevious *ngIf="!fourPageService.getUserThrough()">
       <img src="../../assets/backN.svg" class="backArrow" alt="BACK">
       <p style="margin:auto 0 auto 5px">Back</p>
     </button> -->
-    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
+    <div [ngClass]="{'col-12': !showOccupation , 'col-6': showOccupation}" 
+    >
       <!-- <h6>Qualification</h6> -->
-      <mat-form-field class="full-width fieldFit" appearance="standard">
+      <mat-form-field style="margin-bottom: 25px;" class="full-width fieldFit" appearance="standard">
         <mat-label>Qualification</mat-label>
         <mat-select (selectionChange)="changedQualification()" matInput formControlName="Qualification">
           <mat-option>
@@ -25,7 +26,7 @@
       </mat-form-field>
     </div>
 
-    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
+    <div *ngIf="showOccupation" [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
       <!-- <h6>Occupation</h6> -->
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Occupation</mat-label>
@@ -72,9 +73,10 @@
       जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |
     </p>
 
-    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
+    <div [ngClass]="{'col-12': !showWorkingCity , 'col-6': showWorkingCity}" 
+    [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }">
       <!-- <h6>Yearly Income In Lakhs</h6> -->
-      <mat-form-field class="full-width fieldFit" appearance="standard">
+      <mat-form-field style="margin-bottom: 25px;" *ngIf="showYearlyIncome" class="full-width fieldFit" appearance="standard">
         <mat-label>Yearly Income In Lakhs</mat-label>
         <mat-select formControlName="AnnualIncome" (selectionChange)="incomeChanged($event)">
           <mat-option *ngFor="let item of incomeCategories" [value]="item">
@@ -103,11 +105,10 @@
       </mat-form-field>
     </div> -->
 
-    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
+    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="PageTwo.value.Occupation !== 'Not Working' && showWorkingCity">
       <mat-form-field class="full-width fieldFit" appearance="standard">
-        <mat-label>Working City</mat-label>
-      <input type="text" matInput formControlName="Working"
-       id="workingCity" (change)="placeChanged()" [matAutocomplete]="Working">
+        <mat-label>Current City</mat-label>
+      <input type="text" matInput id="workingCity" (change)="placeChanged()" formControlName="Working" [matAutocomplete]="Working">
       <mat-autocomplete (optionSelected)='workingCityChanged($event.option.value)' autoActiveFirstOption
         #Working="matAutocomplete">
         <mat-option *ngFor="let cities of workingCities | async" [value]="cities" required>

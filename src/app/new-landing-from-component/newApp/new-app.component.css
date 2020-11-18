@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+div,h2,h3,h5{
+    font-family:'Poppins', sans-serif;
+}
+.new-app{
+    margin-top:80px;
+}
+h2{
+    font-weight:bolder;
+    font-size:3.3vw;
+}
+h5{
+    font-weight:400;
+    font-size:2.7vw;
+}
+hr.one{
+    border:0.8px solid black;
+}
+hr.two{
+    border:0.8px solid lightgray;
+    margin-left:5px;
+    margin-top:-15px;
+}
+.googleplay{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 576px){
+    .new-app-illustration{
+        height:45vw;
+        width:45vw;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+    .googleplay{
+        height:13vw;
+        width:35vw;
+        margin-left:-1.4vw; 
+        margin-bottom:10px;
+    }
+    h2{
+        font-weight:700;
+        font-size:4.5vw;
+    }
+    h5{
+        font-weight:400;
+        font-size:4vw;
+    }
+}
+@media only screen and (min-width: 768px){
+    .new-app-illustration{
+        height:35vw;
+        width:35vw;
+    }
+    .googleplay{
+        height:10vw;
+        width:25vw;
+        margin-left:-1.4vw; 
+    }
+    h2{
+        font-weight:bolder;
+        font-size:2.5vw;
+    }
+    h5{
+        font-weight:400;
+        font-size:2vw;
+    }
+}
+@media only screen and (min-width: 992px){
+    .new-app-illustration{
+        height:35vw;
+        width:35vw;
+    }
+    .googleplay{
+        height:10vw;
+        width:25vw;
+        margin-left:-1.4vw; 
+    }
+    h2{
+        font-weight:bolder;
+        font-size:2.5vw;
+    }
+    h5{
+        font-weight:400;
+        font-size:2vw;
+    }
+}
+@media only screen and (min-width: 1200px){
+    img{
+        height:6.3vw;
+        width:16.25vw;
+        margin-left:-1.4vw; 
+    }
+    .new-app-illustration{
+        height:26vw;
+        width:26vw;
+    }
+    h2{
+        font-weight:bolder;
+        font-size:2.2vw;
+    }
+    h5{
+        font-weight:400;
+        font-size:1.5vw;
+    }
+    .googleplay{
+        height:8vw;
+        width:20vw;
+        margin-left:-1.4vw; 
+    }
+}

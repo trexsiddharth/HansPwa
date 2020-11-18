@@ -115,7 +115,7 @@ export class FindOpenHistoryProfileService {
   setCredits(credits: any) {
     this.credits = credits;
     localStorage.setItem('credits', credits);
-    if (this.credits < 1 && !this.isPersonalized) {
+    if (this.credits < 1) {
       this.creditsUpdated.emit(true);
     }
     console.log(this.credits);

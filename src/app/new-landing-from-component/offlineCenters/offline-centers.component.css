@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+h1{
+    font-weight:bolder;
+    margin-bottom:60px;
+    font-family:'Poppins', sans-serif;
+    background-image:url('../../../assets/sparkles/sparkles.svg');
+    background-size: cover;
+}
+.match-makers{
+    overflow-x:hidden;
+    /* background-image:url('../../../assets/offlineCenters/bg.jpg'); */
+    background-size:cover;
+}
+.prev{
+  
+}
+.owl-next{
+    background-color:transparent;
+    width:30px;
+}
+button{
+    border:none;
+    font-family:'Poppins', sans-serif;
+    padding:10px;
+    border-radius:10px;
+    margin-top:20px;
+}
+.slide{
+    padding:20px;
+}
+.featureCard2{
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 0px;
+    object-fit: cover;
+}
+.feature2Img{
+    width: 80%;
+    height: 80%;
+}
+.temple-card{
+    /* height:45vh; */
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    /* width:100%; */
+}
+
+.center{
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    transform: scale(1.15);
+    z-index:3000;
+    border:1px solid black;
+}
+p{
+    text-align:center;
+    margin-top:20px;
+}
+@media only screen and (max-width: 575px){
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
+    .featureCard2{
+        width: 80%;
+        height: auto;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 0px;
+        object-fit: cover;
+    }
+    h1{
+        font-weight:600;
+        margin-bottom:60px;
+        margin-top:20px;
+        font-size:5.5vw;
+    }
+    p{
+        font-size:4vw; 
+    }
+    .slick-center {
+        -webkit-transform: scale(1.15);
+        -moz-transform: scale(1.15);
+        transform: scale(1.15);
+    }
+    .match-makers{
+        font-family:'Poppins', sans-serif;
+        margin-top:6.25vw;
+        margin-left:0px;
+        margin-right:0px;
+     }
+}
+@media only screen and (min-width: 576px){
+    .match-makers{
+   font-family:'Poppins', sans-serif;
+   margin-top:10vw;
+   margin-left:0px;
+   margin-right:0px;
+}
+    h1{
+        font-weight:600;
+        margin-bottom:60px;
+        font-size:4.5vw;
+    }
+    p{
+        font-size:1.8vw; 
+    }
+    .slide{
+        padding:20px;
+        -webkit-transform: scale(1.25);
+        -moz-transform: scale(1.25);
+        transform: scale(1.25);
+    }
+    .slick-center {
+        -webkit-transform: scale(0.95);
+        -moz-transform: scale(0.95);
+        transform: scale(0.95);
+    }
+    
+}
+@media only screen and (min-width: 768px){
+    h1{
+        font-weight:600;
+        margin-bottom:20px;
+        font-size:4.5vw;
+        margin-top:20px;
+    }
+    p{
+        font-size:2vw; 
+    }
+    .slick-center {
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        transform: scale(0.75);
+    }
+    .match-makers{
+        font-family:'Poppins', sans-serif;
+        margin-top:6.25vw;
+        margin-left:0px;
+        margin-right:0px;
+     }
+   
+}
+@media only screen and (min-width: 992px){
+    h1{
+        font-weight:600;
+        margin-bottom:20px;
+        font-size:4vw;
+        margin-top:20px;
+    }
+    p{
+        font-size:2vw; 
+    }
+    .slick-center {
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        transform: scale(0.75);
+    }
+    .match-makers{
+        font-family:'Poppins', sans-serif;
+        margin-top:6.25vw;
+        margin-left:0px;
+        margin-right:0px;
+     }
+}
+@media only screen and (min-width: 1200px){
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
+   h1{
+       font-size:2.5vw;
+       margin-bottom:60px;
+   }
+   p{
+    font-size:1.5vw; 
+}
+.slide{
+    padding:20px;
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    transform: scale(1.15);
+}
+.slick-center {
+    -webkit-transform: scale(0.85);
+    -moz-transform: scale(0.85);
+    transform: scale(0.85);
+}
+.match-makers{
+    font-family:'Poppins', sans-serif;
+    margin-top:2vw;
+    margin-left:0px;
+    margin-right:0px;
+ }
+}

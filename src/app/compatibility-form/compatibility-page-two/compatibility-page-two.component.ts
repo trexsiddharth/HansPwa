@@ -55,7 +55,9 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   @ViewChild('otpModal', { static: false }) private otpModal: any;
-
+  showOccupation: boolean = false;
+  showYearlyIncome: boolean = false;
+  showWorkingCity: boolean = false;
   PageTwo: FormGroup;
   errors: string[] = [];
   authMobileNumberStatus = false;
@@ -181,6 +183,19 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
               public fourPageService: FourPageService,
               private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService,
               public chatService: ChatServiceService) {
+    this.PageTwo = this.formBuilder.group({
+      // tslint:disable-next-line: max-line-length
+      Qualification: ['', Validators.compose([Validators.required])],
+      QualificationCtrl: [''],
+      Occupation: ['', Validators.compose([Validators.required])],
+      Designation: [''],
+      DesignationCtrl: [''],
+      OtherDesignation: [''],
+      AnnualIncome: ['', Validators.compose([Validators.required])],
+      Working: ['', Validators.compose([Validators.required])],
+      About: [''],
+      abroad: ['']
+    });
 
     fourPageService.pageOneUpdated.subscribe(
       status => {
@@ -198,6 +213,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+
     this.PageTwo = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
       Qualification: ['', Validators.compose([Validators.required])],
@@ -211,13 +227,12 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       About: [''],
       abroad: ['']
     });
-
     // if user can pass through is true
     this.fourPageService.userThroughStatusUpdated.subscribe(
       (status: boolean) => {
         if (status) {
           if (this.PageTwo) {
-            console.log('user get through', status);
+            console.log('user get through', status, this.PageTwo);
             this.fourPageService.formTwoGroup.emit(this.PageTwo);
           }
         }
@@ -255,13 +270,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         this.filterDesignation();
       });
 
-    this.PageTwo.get('Working').valueChanges
-    .pipe(takeUntil(this.onDestroy))
-    .subscribe(() => {
-      this.workingCityFilter();
-    });
-
-
 
     // if user can get through and profile data has been retrieved
     this.fourPageService.getListData.subscribe(
@@ -275,6 +283,12 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.PageTwo.get('Working').valueChanges
+    .pipe(takeUntil(this.onDestroy))
+    .subscribe(() => {
+      this.workingCityFilter();
+    });
   }
 
   private workingCityFilter() {
@@ -523,6 +537,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   changedQualification() {
+    this.showOccupation=!this.showOccupation;
     console.log('changed Qualification');
     this.analyticsEvent('Four Page Registration Page Two Qualification Changed');
     if (this.PageTwo.valid) {
@@ -533,6 +548,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   changedOccupation() {
     console.log('changed Occupation');
+    if(this.PageTwo.value.Occupation!='Not Working')
+    {this.showYearlyIncome=!this.showYearlyIncome}
+    else if(this.PageTwo.value.Occupation=='Not Working')
+    {this.showWorkingCity=!this.showWorkingCity;this.showYearlyIncome=false;}
     this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
 
     switch (this.PageTwo.value.Occupation) {
@@ -603,6 +622,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   incomeChanged(val) {
     console.log('changed yearly income');
+    this.showWorkingCity=!this.showWorkingCity;
     console.log(this.PageTwo.value.AnnualIncome);
     this.analyticsEvent('Four Page Registration Page Two Annual Income Changed');
     if (this.PageTwo.valid) {

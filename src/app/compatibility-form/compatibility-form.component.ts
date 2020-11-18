@@ -41,6 +41,7 @@ import { RegisterWithComponent } from './register-with/register-with.component';
 import { ChooseForComponent } from './choose-for/choose-for.component';
 import { element } from 'protractor';
 import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
 declare var FB: any;
@@ -69,7 +70,14 @@ export const _filter = (opt: string[], value: string): string[] => {
 
 
 export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
-
+  public auto:boolean = false;
+  public features:any;
+  public mobileScreen:boolean;
+  private innerWidth: number;
+  private mobileBreakpoint = 768;
+  public secondName:boolean = false;
+  public showHeight:boolean = false;
+  public showCaste:boolean = false;
   time = {
     hour: 13,
     minute: 30
@@ -189,6 +197,28 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       disabledPart: ['']
     });
   }
+  customOptions: OwlOptions = {
+    loop: true,
+    autoplay: this.auto,
+    center: true,
+    // nav:true,
+    dots:true,
+    // navText:["<p style= `background-color:black;`>h</p>","<p>b</p>"],
+    autoWidth: true,
+    // merge: true,
+    // mergeFit: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items:1,
+      },
+      1000: {
+        items: 3,
+      }
+    }
+  }
 
   ngOnDestroy(): void {
     // truecaller polling is active and user closes the page.
@@ -207,10 +237,46 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
   }
   ngAfterViewChecked() {
-  
+    if (this.fourPageService.getUserThrough()) {
+      this.mainContainerId = 'sd';
+    }
   }
+  scroll = (event): void => {
+    this.scrollAppear();
+  };
+  scrollAppear() {
+    let whyUs = document.querySelector('.whyus');
+    let position = whyUs.getBoundingClientRect().top;
+    let form = document.querySelector('.form-position');
+    let formPosition = form.getBoundingClientRect().top;
+    let screenPosition = window.innerHeight;
+    console.log(position,screenPosition);
+    
+    if(position<screenPosition){
+      this.auto=true;
+    }
+    else if(formPosition<screenPosition+500){
+      this.auto=false;
+    }
+  }
+    private resize(){
+        this.innerWidth = window.innerWidth;
+        return this.innerWidth
+    }
+    private detectMobileScreen() {
+        window.onload = this.resize;
+      window.onresize = this.resize;
+    if (this.resize() < this.mobileBreakpoint) {
+      this.mobileScreen=true
+    } else {
+      this.mobileScreen=false
+    }
+    console.log(this.mobileScreen);
+    
+    }
   async ngOnInit() {
-
+    this.detectMobileScreen();
+    window.addEventListener('scroll', this.scroll, true);
     if (localStorage.getItem('RegisterNumber')) {
 
       this.PageOne.controls.phone.setValue(localStorage.getItem('RegisterNumber'));
@@ -487,6 +553,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
   // event on change of input field
   inputFieldChanged(fieldName) {
+    this.secondName = true;
+    console.log(this.secondName);
+    
     this.generateRandomIndices(20);
     console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
     switch (fieldName) {
@@ -537,6 +606,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
       default:
         break;
+    }
+    if(this.PageOne.value.birth_date && this.PageOne.value.birth_month && this.PageOne.value.birth_year){
+      this.showHeight = true;
+      console.log(this.showHeight);
     }
     // if profile completed go to next page
     this.goToNextPage();
@@ -600,11 +673,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   private goToNextPage() {
-    // if (!this.PageOne.valid) {
-    //   return;
-    // }
-    // const button = document.querySelector<HTMLButtonElement>('#viewButton');
-    // button.click();
+    if (!this.PageOne.valid) {
+      return;
+    }
+    const button = document.querySelector<HTMLButtonElement>('#viewButton');
+    button.click();
   }
 
   openVerificationDialog(isLead: string) {
@@ -809,7 +882,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       console.log('marital_status', this.PageOne.value.MaritalStatus);
       console.log('religion', this.PageOne.value.Religion);
       console.log('caste', this.PageOne.value.Castes);
-      
 
 
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
@@ -1211,6 +1283,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   checkAllCastePref(event) {
     console.log(event.checked);
     this.isAllCastePref = event.checked;
+    if(event.checked){
+      this.showCaste=true;
+    }else{
+      this.showCaste=false;
+    }
   }
 
   // show register with popup

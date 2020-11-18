@@ -1,0 +1,139 @@
+.logo{
+    width:5vw;
+    height:auto;
+}
+.logo-text{
+    width:10vw;
+    height:auto;
+    margin-left:10px;
+}
+.logo-holder{
+    margin-left:25px;
+    margin-top:5px;
+}
+.line1 {
+  width: 30px;
+  height: 3px;
+  background: black;
+  margin: 5px;
+}
+
+nav {
+    margin-top:25px;
+    height: 10vh;
+    /* background: #5b78c7; */
+    z-index: 2;
+  }
+  .googleplay{
+    width:140px;
+    height:54px;
+    cursor:pointer;
+}
+  .nav-links {
+    display: flex;
+    list-style: none;
+    width: 50%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: auto;
+  }
+  
+  .nav-links li a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .landing {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .landing h1 {
+    margin: 100px;
+    font-size: 50px;
+    color: #ae5fce;
+  }
+  
+  @media screen and (max-width: 768px) {
+    
+    .logo-holder{
+      position: absolute;
+     
+      top: 33%;
+    
+    }
+    .logo{
+        width:15vw;
+        height:auto;
+    }
+    .logo-text{
+        width:30vw;
+        height:auto;
+        margin-left:5px;
+    }
+    .line {
+      width: 30px;
+      height: 3px;
+      background: black;
+      margin: 5px;
+    }
+    nav {
+      position: relative;
+    }
+  
+    .hamburger {
+      position: absolute;
+      cursor: pointer;
+      right: 5%;
+      top: 50%;
+      transform: translate(-5%, -50%);
+      z-index: 2;
+    }
+  
+    .nav-links {
+      position: fixed;
+      background: white;
+      height: 100%;
+      width: 100%;
+      padding-top:60px;
+      flex-direction: column;
+      clip-path: circle(0px at 90% -10%);
+      -webkit-clip-path: circle(0px at 90% -10%);
+      transition: all 1s ease-out;
+      pointer-events: none;
+      z-index:-100;
+    }
+    .nav-links.open {
+      clip-path: circle(1000px at 90% -10%);
+      -webkit-clip-path: circle(1000px at 90% -10%);
+      pointer-events: all;
+      z-index:-100;
+    }
+    .landing {
+      flex-direction: column;
+    }
+    /* .nav-links li {
+      opacity: 0;
+    } */
+    .nav-links li a {
+      font-size: 20px;
+      text-align:center;
+    }
+    .nav-links li:nth-child(1) {
+      transition: all 0.5s ease 0.2s;
+    }
+    .nav-links li:nth-child(2) {
+      transition: all 0.5s ease 0.4s;
+    }
+    .nav-links li:nth-child(3) {
+      transition: all 0.5s ease 0.6s;
+    }
+    li.fade {
+      opacity: 1;
+    }
+  }
+  

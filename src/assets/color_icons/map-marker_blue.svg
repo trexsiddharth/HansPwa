@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.6" height="22" viewBox="0 0 17.6 22">
   <defs>
     <style>
@@ -12,3 +13,19 @@
   </defs>
   <path id="map-marker_blue" class="cls-1" d="M12.8,2A8.8,8.8,0,0,0,4,10.8c0,5.94,7.755,12.65,8.085,12.936a1.1,1.1,0,0,0,1.43,0c.385-.286,8.085-7,8.085-12.936A8.8,8.8,0,0,0,12.8,2Zm0,19.415c-2.343-2.2-6.6-6.941-6.6-10.615a6.6,6.6,0,1,1,13.2,0C19.4,14.474,15.143,19.226,12.8,21.415ZM12.8,6.4a4.4,4.4,0,1,0,4.4,4.4A4.4,4.4,0,0,0,12.8,6.4Zm0,6.6A2.2,2.2,0,1,1,15,10.8,2.2,2.2,0,0,1,12.8,13Z" transform="translate(-4 -2)"/>
 </svg>
+=======
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.6" height="22" viewBox="0 0 17.6 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#64e5ff"/>
+      <stop offset="1" stop-color="#00a8ff"/>
+    </linearGradient>
+  </defs>
+  <path id="map-marker_blue" class="cls-1" d="M12.8,2A8.8,8.8,0,0,0,4,10.8c0,5.94,7.755,12.65,8.085,12.936a1.1,1.1,0,0,0,1.43,0c.385-.286,8.085-7,8.085-12.936A8.8,8.8,0,0,0,12.8,2Zm0,19.415c-2.343-2.2-6.6-6.941-6.6-10.615a6.6,6.6,0,1,1,13.2,0C19.4,14.474,15.143,19.226,12.8,21.415ZM12.8,6.4a4.4,4.4,0,1,0,4.4,4.4A4.4,4.4,0,0,0,12.8,6.4Zm0,6.6A2.2,2.2,0,1,1,15,10.8,2.2,2.2,0,0,1,12.8,13Z" transform="translate(-4 -2)"/>
+</svg>
+>>>>>>> c55b7395c6c84ad9dcadda87d8b4a1bdebf3e600

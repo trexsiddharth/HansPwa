@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+.whyus{
+    margin-top:100px;
+    width:100%;
+}
+.sparkles{
+    height:16px;
+    width:11px;
+}
+#y{
+    width:200px;
+    height:200px;
+}
+/* .feature-card-container:hover .feature-card-holder{
+    filter:blur(20px);
+    transform:scale(0.9);
+    opacity:0.5;
+} */
+.feature-card-container .feature-card-holder:hover{
+    filter:blur(0px);
+    transform:scale(1.1);
+    opacity:1;
+}
+.feature-card-container .feature-card-holder{
+    border-radius:10px;
+    padding:10px;
+    transition:0.5s;
+}
+.header{
+    background-image:url('../../../assets/sparkles/sparkles.svg');
+    background-size: cover;
+}
+@keyframes border{
+      25% {
+        box-shadow:2.5px 2.5px 2.5px 2.5px lightgray;
+        border-radius:10px;
+        padding:10px;
+      }
+      50% {
+        box-shadow:5px 5px 5px 5px lightgray;
+        border-radius:10px;
+        padding:10px;
+      }
+      75% {
+        box-shadow:7.5px 7.5px 7.5px 7.5px lightgray;
+        border-radius:10px;
+        padding:10px;
+      }
+      100% {
+        box-shadow:10px 10px 10px 10px lightgray;
+        border-radius:10px;
+        padding:10px;
+      }
+}
+.sparkle1{
+    position:absolute;
+    left:42%;
+    top:143%;
+}
+.sparkle2{
+    position:absolute;
+    left:49%;
+    top:131%;
+}
+.sparkle3{
+    position:absolute;
+    left:60%;
+    top:131%;
+}
+.sparkle4{
+    position:absolute;
+    left:59%;
+    top:137%;
+}
+div,.row,.col{
+    margin:0;
+    top:0;
+    padding:0;
+}
+.slide{
+    background-color:transparent; 
+}
+.carousel-div{
+    margin-top:40px;
+}
+.featureCard2{
+    width: 80%;
+    height: auto;
+    overflow: hidden;
+    padding: 0px;
+    object-fit: cover;
+    background-color:transparent;
+    border:none;
+    box-shadow:none;
+}
+.feature2Img{
+    width: 80%;
+    height: 80%;
+}
+.feture2Img:hover{
+    animation:big 3s 1;
+}
+@keyframes big{
+    25% {
+        transform: scale(1.5);
+      }
+      50% {
+        transform: scale(1.25);
+      }
+      75% {
+        transform: scale(2);
+      }
+      100% {
+        transform:scale(1.75);
+      }
+}
+.temple-card{
+    /* height:45vh; */
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    /* width:100%; */
+}
+
+.feature-card-container{
+
+}
+.feature-card-holder{
+    
+}
+
+
+.wrapper-text p{
+    opacity: 0;
+}
+.wrapper-text{
+    opacity: 0;
+    animation:ani2 1s ease-out forwards;
+}
+.wrapper-text p{
+    animation:ani2 0.75s ease-out 3s forwards;
+}
+.container{
+    margin-top:50px;
+}
+@media only screen and (max-width: 575px){
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
+    img{
+        width:200px;
+        height:200px;
+    }
+    p{
+        margin-top:20px;
+        font-weight:500;
+        text-align:center;
+        font-size:15px;
+        font-family:'Poppins', sans-serif;
+    }
+    h1{
+        font-size:24px;
+    }
+}
+@media only screen and (min-width: 576px){
+    hr.one{
+        border:0.8px solid black;
+    }
+    hr.two{
+        border:0.8px solid lightgray;
+        margin-left:5px;
+        margin-top:-15px;
+    }
+    img{
+        width:250px;
+        height:250px;
+    }
+    p{
+        margin-top:20px;
+        font-weight:500;
+        text-align:center;
+        font-size:15px;
+        font-family:'Poppins', sans-serif;
+    }
+}
+@media only screen and (min-width: 768px){
+    img{
+        width:200px;
+        height:200px;
+    }
+    p{
+        margin-top:20px;
+        font-weight:500;
+        text-align:center;
+        font-size:15px;
+        font-family:'Poppins', sans-serif;
+    }
+}
+@media only screen and (min-width: 992px){
+    img{
+        width:300px;
+        height:300px;
+    }
+    p{
+        margin-top:20px;
+        font-weight:500;
+        text-align:center;
+        font-size:15px;
+        font-family:'Poppins', sans-serif;
+    }
+}
+@media only screen and (min-width: 1200px){
+    img{
+        width:370px;
+        height:370px;
+    }
+    p{
+        margin-top:20px;
+        text-align:center;
+        font-weight:500;
+    }
+}

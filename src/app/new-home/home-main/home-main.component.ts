@@ -80,15 +80,6 @@ export class HomeMainComponent implements OnInit {
       For: [null],
     })
   }
-  goToCompatibility() {
-    if (this.optionsForm.value.Looking) {
-      this.itemService.compatibilityGender = this.optionsForm.value.Looking === 'Groom' ? 'Female' : 'Male';
-    }
-    if (this.optionsForm.value.For) {
-      this.itemService.compatibilityLookingFor = this.optionsForm.value.For;
-    }
-    this.router.navigateByUrl('/fourReg');
-  }
   ngOnInit() {
     if (localStorage.getItem('gender')) {
 
@@ -106,6 +97,15 @@ export class HomeMainComponent implements OnInit {
         })
       }
     }
+  }
+  goToCompatibility() {
+    if (this.optionsForm.value.Looking) {
+      this.itemService.compatibilityGender = this.optionsForm.value.Looking === 'Groom' ? 'Female' : 'Male';
+    }
+    if (this.optionsForm.value.For) {
+      this.itemService.compatibilityLookingFor = this.optionsForm.value.For;
+    }
+    this.router.navigateByUrl('/fourReg');
   }
   placeChanged(str: string) {
     const city: HTMLInputElement = document.querySelector('#' + str);
