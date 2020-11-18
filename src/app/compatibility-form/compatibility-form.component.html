@@ -2,8 +2,13 @@
 <div *ngIf="mobileScreen" >
   <a class="d-flex justify-content-center" (click)="scrollToTop()"><button *ngIf="auto" class="register-btn d-flex justify-content-center" >Register For Free</button></a>
 </div>
+  <div class="lottieanimation" *ngIf="this.PageOne.valid">
+    <div class="d-flex justify-content-center">
+      <img  src="../../assets/lottieSpinAnimation.gif" alt="">
+    </div>
+    <p style="text-align: center;font-weight: bolder;">Creating your account, Please wait</p>
+  </div>
   
-  <img *ngIf="this.PageOne.valid" class="lottieanimation" src="../../assets/lottieSpinAnimation.gif" alt="">
 <div class="d-flex">
   <img src="../../assets/hero/logoNew.svg" class="logo"  alt="">
 <mat-toolbar class="fixToolBar">
@@ -33,7 +38,7 @@
 <div class="d-flex justify-content-center">
   <h2>Register For Free in <span style="color:#24ADD8" >30 seconds!</span> </h2>
 </div>
-<main autoscroll="true"  class='pwaSize fixed t-0 b-0 w-full HC form-position' [id]="mainContainerId" style="margin-top:4%">
+<main [class.main-blur]="this.PageOne.valid" autoscroll="true"  class='pwaSize fixed t-0 b-0 w-full HC form-position' [id]="mainContainerId" style="margin-top:4%">
   
   <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
     <div class="container customBackground"
