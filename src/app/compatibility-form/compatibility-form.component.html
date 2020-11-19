@@ -2,13 +2,12 @@
 <div *ngIf="mobileScreen" >
   <a class="d-flex justify-content-center" (click)="scrollToTop()"><button *ngIf="auto" class="register-btn d-flex justify-content-center" >Register For Free</button></a>
 </div>
-  <div class="lottieanimation" *ngIf="this.PageOne.valid">
+  <div class="lottieanimation" *ngIf="this.PageOne.valid" >
     <div class="d-flex justify-content-center">
-      <img  src="../../assets/lottieSpinAnimation.gif" alt="">
+      <img style="background:none;" src="../../assets/lottieSpinAnimation.gif" alt="">
     </div>
     <p style="text-align: center;font-weight: bolder;">Creating your account, Please wait</p>
   </div>
-  
 <div class="d-flex">
   <img src="../../assets/hero/logoNew.svg" class="logo"  alt="">
 <mat-toolbar class="fixToolBar">
