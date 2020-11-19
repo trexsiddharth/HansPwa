@@ -1,0 +1,37 @@
+<<<<<<< HEAD
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3b5998;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Group_1343" data-name="Group 1343" transform="translate(-184 -6110)">
+    <rect id="Rectangle_26" data-name="Rectangle 26" class="cls-1" width="50" height="50" rx="4" transform="translate(184 6110)"/>
+    <path id="facebook-f" class="cls-2" d="M19.375,6.98h2.82V2.21A39.166,39.166,0,0,0,18.085,2c-4.08,0-6.87,2.49-6.87,7.05v3.93H6.61v5.34h4.6V32h5.52V18.32h4.59l.69-5.34h-5.28v-3.4C16.735,8,17.155,6.98,19.375,6.98Z" transform="translate(194.39 6118)"/>
+  </g>
+</svg>
+=======
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3b5998;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Group_1343" data-name="Group 1343" transform="translate(-184 -6110)">
+    <rect id="Rectangle_26" data-name="Rectangle 26" class="cls-1" width="50" height="50" rx="4" transform="translate(184 6110)"/>
+    <path id="facebook-f" class="cls-2" d="M19.375,6.98h2.82V2.21A39.166,39.166,0,0,0,18.085,2c-4.08,0-6.87,2.49-6.87,7.05v3.93H6.61v5.34h4.6V32h5.52V18.32h4.59l.69-5.34h-5.28v-3.4C16.735,8,17.155,6.98,19.375,6.98Z" transform="translate(194.39 6118)"/>
+  </g>
+</svg>
+>>>>>>> c55b7395c6c84ad9dcadda87d8b4a1bdebf3e600

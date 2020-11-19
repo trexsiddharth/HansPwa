@@ -1,0 +1,31 @@
+<<<<<<< HEAD
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.001" height="22" viewBox="0 0 22.001 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#64e5ff"/>
+      <stop offset="1" stop-color="#00a8ff"/>
+    </linearGradient>
+  </defs>
+  <path id="ruler" class="cls-1" d="M22.807,7.1,17.146,1.393a1.011,1.011,0,0,0-1.423,0L1.393,15.672a1.009,1.009,0,0,0,0,1.423L7.1,22.807a1.011,1.011,0,0,0,1.423,0l2.856-2.856h0l8.568-8.568h0l2.856-2.856A1.009,1.009,0,0,0,22.807,7.1ZM19.235,9.244l-.717-.717A1.01,1.01,0,1,0,17.1,9.961l.717.717L16.379,12.1,14.239,9.961a1.009,1.009,0,0,0-1.423,1.423l2.139,2.139-1.433,1.433-.706-.717a1.013,1.013,0,0,0-1.433,1.433l.717.706-1.423,1.433-2.15-2.139A1.006,1.006,0,1,0,7.1,17.1l2.139,2.139L7.821,20.668,3.532,16.379,16.379,3.532l4.289,4.289Z" transform="translate(-1.099 -1.1)"/>
+</svg>
+=======
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.001" height="22" viewBox="0 0 22.001 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#64e5ff"/>
+      <stop offset="1" stop-color="#00a8ff"/>
+    </linearGradient>
+  </defs>
+  <path id="ruler" class="cls-1" d="M22.807,7.1,17.146,1.393a1.011,1.011,0,0,0-1.423,0L1.393,15.672a1.009,1.009,0,0,0,0,1.423L7.1,22.807a1.011,1.011,0,0,0,1.423,0l2.856-2.856h0l8.568-8.568h0l2.856-2.856A1.009,1.009,0,0,0,22.807,7.1ZM19.235,9.244l-.717-.717A1.01,1.01,0,1,0,17.1,9.961l.717.717L16.379,12.1,14.239,9.961a1.009,1.009,0,0,0-1.423,1.423l2.139,2.139-1.433,1.433-.706-.717a1.013,1.013,0,0,0-1.433,1.433l.717.706-1.423,1.433-2.15-2.139A1.006,1.006,0,1,0,7.1,17.1l2.139,2.139L7.821,20.668,3.532,16.379,16.379,3.532l4.289,4.289Z" transform="translate(-1.099 -1.1)"/>
+</svg>
+>>>>>>> c55b7395c6c84ad9dcadda87d8b4a1bdebf3e600
