@@ -7,12 +7,20 @@ import { Router,NavigationEnd } from '@angular/router';
 })
 export class NewLandingFromComponentComponent implements OnInit {
   public opened: boolean=false;
+  public loggedIn: boolean=false;
   public mobileScreen:boolean=false;
   private innerWidth: number;
   private mobileBreakpoint = 768;
   constructor(public router: Router) { }
 
   ngOnInit() {
+    console.log(localStorage.getItem('mobile_number'));
+    
+    if(localStorage.getItem('mobile_number')){
+      this.loggedIn=true;
+      console.log(this.loggedIn);
+      
+    }
     this.navbar();
     this.detectMobileScreen();
     this.mobile();
@@ -31,6 +39,10 @@ export class NewLandingFromComponentComponent implements OnInit {
   }
   goToCompatibility(){
     this.router.navigateByUrl('/fourReg');
+  }
+  logOut(){
+    localStorage.removeItem('mobile_number');
+    window.location.reload();
   }
   navbar(){
     const hamburger = document.querySelector(".hamburger");

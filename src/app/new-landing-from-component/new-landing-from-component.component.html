@@ -21,15 +21,22 @@
                 <li>
                     <a [routerLink]="['/subscription']" routerLinkActive="router-link-active" href="">Subscription</a>
                 </li>
-                <li>
-                  <a [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="">Login</a>
+                <li *ngIf="!loggedIn">
+                  <a  [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="">Login</a>
                 </li>
+                <li *ngIf="loggedIn">
+                  <a [routerLink]="['/chat']" routerLinkActive="router-link-active" href="">See Profiles</a>
+                </li>
+                
                 <li>
                     <a href=""><img style="margin-left:-10px;" (click)="downloadApp()" class="googleplay" src="../../assets/newAppIllustrations/googleplay.jpg" alt=""></a>
                 </li>
-                <li>
-                    <a href=""><button (click)="goToCompatibility()" >Register For Free</button></a>
+                <li *ngIf="!loggedIn" >
+                    <a href=""><button class="register-btn" (click)="goToCompatibility()" >Register For Free</button></a>
                 </li>
+                <li *ngIf="loggedIn" >
+                  <a style="cursor:pointer" (click)="logOut()">LogOut</a>
+              </li>
             </div>
           </div>
       </ul>
@@ -42,14 +49,24 @@
               <div class="line"></div>
             </div>
             <div class="d-flex">
-                <div class="logo-holder">
+                <div class="d-flex">
+                  <div class="logo-holder">
                     <img class="logo img-fluid" src="../../../assets/hero/logoOld.png" alt="hansmatrimony-logo">
                     <img class="logo-text"  src="../../../assets/hero/text.svg" alt="hansmatrimony-logo-text">
+                 </div>
+                 
+                  <button class="login-btn" *ngIf="mobileScreen" [routerLink]="['/phone-number']" routerLinkActive="router-link-active" >Login</button>
                 </div>
+                
                 <ul class="nav-links">
                     <li><a [routerLink]="['/subscription']" routerLinkActive="router-link-active" href="#">Subscription</a></li>
                     <li><a mdbPageScroll href="#kundali">Kundali Matching</a></li>
-                    <li><a [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="login">Login</a></li>
+                    <li *ngIf="!loggedIn">
+                      <a  [routerLink]="['/phone-number']" routerLinkActive="router-link-active" href="">Login</a>
+                    </li>
+                    <li *ngIf="loggedIn">
+                      <a [routerLink]="['/chat']" routerLinkActive="router-link-active" href="">See Profiles</a>
+                    </li>
                     <li><a href="#">
                       <img (click)="downloadApp()" class="googleplay" src="../../../assets/newAppIllustrations/googleplay.jpg" alt="hansmatrimony-app-download-button">
                     </a>

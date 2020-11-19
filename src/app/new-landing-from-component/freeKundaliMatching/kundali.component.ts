@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
 import { NewHomeService } from 'src/app/new-home/new-home.service';
+import {Boy} from './boy';
 @Component({
     selector: 'kundali',
     templateUrl: './kundali.component.html',
@@ -13,6 +14,9 @@ import { NewHomeService } from 'src/app/new-home/new-home.service';
 })
 
 export class Kundali implements OnInit {
+  boyDetails = new Boy('','','','','','');
+  public error:boolean = false;
+  public boyValid:boolean = false;
   public appear:boolean;
   mobileScreen:boolean;
   private innerWidth: number;
@@ -61,8 +65,9 @@ export class Kundali implements OnInit {
       Looking: [null],
       For: [null],
     })
+    
   }
-  ngOnInit() {
+  ngOnInit() {    
     window.addEventListener('scroll', this.scroll, true);
     this.detectMobileScreen();
     if (localStorage.getItem('gender')) {
@@ -114,6 +119,15 @@ export class Kundali implements OnInit {
         });
       }
     }, 500);
+  }
+  submitBoy(){
+    if(this.boyDetails.name && this.boyDetails.date && this.boyDetails.month && this.boyDetails.year &&
+      this.boyDetails.time && this.boyDetails.place){
+      this.boyValid=true;
+      this.error=false;
+    }else{
+      this.error=true;
+    }
   }
   detailsFilled() {
     if (this.currentGender === "Girl's")

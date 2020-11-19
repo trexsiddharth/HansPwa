@@ -19,7 +19,7 @@ import { start } from 'repl';
   styleUrls: ['./history-profiles-dialog.component.css']
 })
 export class HistoryProfilesDialogComponent implements OnInit {
-  confirmCall=JSON.parse(localStorage.getItem('preventCall'));
+  confirmCall:boolean=false;
   carouselSize;
   // Height
   // tslint:disable-next-line: max-line-length
@@ -97,8 +97,9 @@ export class HistoryProfilesDialogComponent implements OnInit {
   }
 
   profileReAnswer(item: any, answer: string) {
-    this.confirmCall=true;
-    localStorage.setItem('preventCall',JSON.stringify(this.confirmCall))
+    // this.confirmCall=true;
+    // this.item.profileChecked = this.confirmCall
+    // console.log(this.item);
     // if main kisse pasand hu and credits are zero...on Shortlist  response show offer 2
     if (this.type === 'interestReceived' && this.itemService.getCredits().toString() === '0'
       && answer === 'SHORTLIST') {

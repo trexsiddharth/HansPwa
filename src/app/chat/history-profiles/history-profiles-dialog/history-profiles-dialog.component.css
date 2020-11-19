@@ -73,6 +73,15 @@ main{
      justify-content: center;
      
 }
+.reqButton{
+    border:none;
+    outline: none;
+    border-radius:10px;
+    background-color:#58D1FD;
+    color:white;
+    padding:10px;
+    margin-bottom:10px;
+}
 
 .setButtonsCenter{
     width: 70px;

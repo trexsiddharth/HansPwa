@@ -89,7 +89,7 @@ border-top-right-radius: 20px;
         <!-- // buttons -->
 
         <div id="answerButtons">
-            <div class="t-c" *ngIf="(type !== 'contacted' || type === 'discover') && !confirmCall" style="margin-top: 10px;">
+            <div class="t-c" *ngIf="(type !== 'contacted' || type === 'discover') && !this.item.profileChecked" style="margin-top: 10px;">
                 <button (click)="profileReAnswer(item,'YES')" class="setButtons" mat-fab style="color: green;
             background: #58D1FD;" aria-label="Example icon-button with a heart icon">
                     <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
@@ -99,9 +99,9 @@ border-top-right-radius: 20px;
                 {{languageService.profileLang.contact}}
             </span> -->
             </div>
-            <div class="t-c" *ngIf="confirmCall">
-                <Button class="btn btn-primary"> Already Requested </Button>
-            </div>
+            <!-- <div class="t-c" *ngIf="this.item.profileChecked">
+                <button class="reqButton"> Already Requested </button>
+            </div> -->
 
             <div class="t-c" *ngIf="type === 'contacted' && item.family" style="margin-top: 10px;">
                 <button (click)="call()" class="setButtons" mat-fab style="color: green;

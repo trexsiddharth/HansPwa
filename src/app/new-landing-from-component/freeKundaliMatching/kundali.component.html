@@ -15,9 +15,10 @@
             <div [class.appear]="appear" class="col-md-5 kundali-form">
                 <div class="mainBack" style="z-index:-1!important">
                     <div class="d-flex justify-content-center">
-                      <form [formGroup]="kundaliForm">
+                      <form #form="ngForm" [formGroup]="kundaliForm">
                             <div class="d-flex justify-content-center">
                               <h3>Enter {{currentGender}} Details</h3>
+                              <!-- {{boyDetails | json}} -->
                         </div>
                         <br>
                         <div class="rowM">
@@ -31,7 +32,7 @@
                                     </div> -->
                                     <div class="col">
                                         <h6>Name</h6>
-                                        <input class="form-control" formControlName="BoyName" type="text">
+                                        <input [(ngModel)]="boyDetails.name" class="form-control" formControlName="BoyName" type="text" required>
                                     </div>
                                     <br>
                                     <div class="col">
@@ -40,52 +41,51 @@
                                           <div class="container">
                                             <div class="row">
                                               <div class="col-4">
-                                                <select class="form-control classic" formControlName="BoyBirthDate">
-                                                  <option *ngFor="let item of date" [value]="item">
+                                                <select [(ngModel)]="boyDetails.date" class="form-control classic" formControlName="BoyBirthDate">
+                                                  <option  *ngFor="let item of date" [value]="item">
                                                       {{item}}
                                                   </option>
                                               </select>
                                               </div>
                                               <div class="col-4">
-                                                <select class="form-control classic" formControlName="BoyBirthMonth">
+                                                <select [(ngModel)]="boyDetails.month" class="form-control classic" formControlName="BoyBirthMonth">
                                                   <option *ngFor="let item of month" [value]="item">
                                                       {{item}}
                                                   </option>
                                               </select>
                                               </div>
                                               <div class="col-4">
-                                                <select class="form-control classic" formControlName="BoyBirthYear">
+                                                <select [(ngModel)]="boyDetails.year" class="form-control classic" formControlName="BoyBirthYear">
                                                   <option *ngFor="let item of years" [value]="item">
                                                       {{item}}
                                                   </option>
                                               </select>
-                                              
                                               </div>
                                             </div>
                                           </div>
-                                            
-                                            
-                                            
-                                        
                                     </div>
                                     <br>
                                     <div class="col">
                                         <h6>Birth Time</h6>
-                                        <input min="00:00:00" max="24:59:59" type="time" class="form-control"
+                                        <input [(ngModel)]="boyDetails.time" min="00:00:00" max="24:59:59" type="time" class="form-control"
                                             formControlName="BoyBirthTime">
                                     </div>
                                     <br>
                                     <div class="col">
                                         <h6>Birth Place</h6>
-                                        <input class="form-control" type="text" id="BoyBirthPlace"
+                                        <input [(ngModel)]="boyDetails.place" class="form-control" type="text" id="BoyBirthPlace"
                                             [autoCompleteOptions]="autoComplete" matValidateAddress matGoogleMapsAutocomplete
                                             #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
                                             (change)="placeChanged('BoyBirthPlace')" formControlName="BoyBirthPlace">
                                     </div>
                                     <br>
                                     <div class="d-flex justify-content-center">
+                                        <button *ngIf="!boyValid" (click)="submitBoy()" >Submit</button>
                                       <button mat-raised-button type="button" id="viewButton" class="btn" (click)="detailsFilled()"
-                                        *ngIf="!(BoyDetailsFilled$ | async)">Enter Girls Details</button>
+                                        *ngIf="(!(BoyDetailsFilled$ | async))&& boyValid">Enter Girls Details</button>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <p *ngIf="error" style="color:red;margin-top:10px;">You Need to Fill out all the fields First!</p>
                                     </div>
                                 </div>
                             </div>
