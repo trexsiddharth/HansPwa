@@ -591,6 +591,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         this.analyticsEvent('Four Page Registration Page One Birth Date Changed');
         break;
       case 'birth_month':
+        this.setDateAccordingToMonth(this.PageOne.value.birth_month);
         this.analyticsEvent('Four Page Registration Page One Birth Month Changed');
         break;
       case 'birth_year':
@@ -618,6 +619,20 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     }
     // if profile completed go to next page
     this.goToNextPage();
+  }
+
+  setDateAccordingToMonth(month: string) {
+    if (month === 'Feburary') {
+      this.date.splice(this.date.indexOf('30'), 1);
+      this.date.splice(this.date.indexOf('31'), 1);
+    } else {
+      if (!this.date.includes('30')) {
+        this.date.push('30');
+      }
+      if (!this.date.includes('31')) {
+        this.date.push('31');
+      }
+    }
   }
 
 
@@ -1250,6 +1265,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
     });
+  
+    this.setDateAccordingToMonth(this.getMonthString(this.userProfile.dob.toString().split('-')[1]));
   }
   setMobileNumber(number: string) {
     console.log('qwerty', number);

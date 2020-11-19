@@ -610,6 +610,7 @@ export class ChatDrawerComponent implements OnInit {
     if (event.checked) {
       this.isAllCastePref = true;
       this.searchCaste.setValue(['All']);
+      this.disableSave.next(true);
     } else {
       this.isAllCastePref = false;
       this.searchCaste.setValue(['']);

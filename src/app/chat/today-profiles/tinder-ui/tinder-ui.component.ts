@@ -153,7 +153,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   showShortListPopup(i: number) {
     console.log(i);
     if (i == 0) {
-      this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + this.setName(this.profileName) + '!', 'Complete Profile');
+      this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + this.setName(this.profileName,0) + '!', 'Complete Profile');
       return;
     }
     // if (i == 1 && this.isMobile) {
@@ -606,8 +606,10 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
-  setName(name: string): string {
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+  setName(name: string, isFreeProf: number): string {
+    if (this.itemService.getCredits() != null
+    && this.itemService.getCredits().toString() === '0'
+     && isFreeProf !== 1) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
