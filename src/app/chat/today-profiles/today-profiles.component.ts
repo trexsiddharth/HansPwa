@@ -677,7 +677,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           }
 
           // show confetti gif for the gifted profile with mobile number.
-          if (data && data.apiwha_autoreply.mobile !== 'Visible after Contact') {
+          if (data && data.apiwha_autoreply.mobile !== 'Visible after Contact'
+          && data.apiwha_autoreply.is_free_profile === 1 ) {
             this.showConfetti.next(true);
             setTimeout(() => {
               this.showConfetti.next(false);

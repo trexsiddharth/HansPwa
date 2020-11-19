@@ -253,6 +253,7 @@ export class FindOpenHistoryProfileService {
     this.profileCount.shortlistCount = count.SL;
     this.profileCount.shortedCount = count.S;
     this.profileCount.rejectedCount = count.R;
+    this.profileCount.viewersCount = count.VPL;
 
     localStorage.setItem('count', JSON.stringify(this.profileCount));
   }
@@ -266,7 +267,11 @@ export class FindOpenHistoryProfileService {
   }
   getShortedNumber() {
     if (this.profileCount.shortedCount) {
-      return this.profileCount.shortedCount;
+      if (this.profileCount.viewersCount) {
+        return Number(this.profileCount.shortedCount) + Number(this.profileCount.viewersCount);
+      } else {
+        return this.profileCount.shortedCount;
+      }
     } else {
       return '0';
     }
