@@ -263,7 +263,7 @@ main{
   background-size: cover;
 }
 .main-blur{
-  filter:blur(5px);
+  /* filter:blur(5px); */
 }
 .mat-stepper-horizontal{
   background-color: white !important;
