@@ -41,7 +41,7 @@ export class NewLandingFromComponentComponent implements OnInit {
     this.router.navigateByUrl('/fourReg');
   }
   logOut(){
-    localStorage.removeItem('mobile_number');
+    localStorage.clear();
     window.location.reload();
   }
   navbar(){

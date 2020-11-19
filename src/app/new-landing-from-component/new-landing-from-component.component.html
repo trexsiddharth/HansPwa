@@ -55,7 +55,8 @@
                     <img class="logo-text"  src="../../../assets/hero/text.svg" alt="hansmatrimony-logo-text">
                  </div>
                  
-                  <button class="login-btn" *ngIf="mobileScreen" [routerLink]="['/phone-number']" routerLinkActive="router-link-active" >Login</button>
+                  <button class="login-btn" *ngIf="mobileScreen && !loggedIn " [routerLink]="['/phone-number']" routerLinkActive="router-link-active" >Login</button>
+                  <button class="see-profiles" *ngIf="mobileScreen && loggedIn " [routerLink]="['/chat']" routerLinkActive="router-link-active" >See Profiles</button>
                 </div>
                 
                 <ul class="nav-links">
@@ -71,6 +72,10 @@
                       <img (click)="downloadApp()" class="googleplay" src="../../../assets/newAppIllustrations/googleplay.jpg" alt="hansmatrimony-app-download-button">
                     </a>
                     </li>
+                    <li *ngIf="loggedIn && mobileScreen" >
+                      <a style="cursor:pointer" (click)="logOut()">LogOut</a>
+                    </li>
+
                     
                     <li>
                       <div  (click)="opened=!opened" class="hamburger1">

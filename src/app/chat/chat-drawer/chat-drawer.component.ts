@@ -426,9 +426,9 @@ export class ChatDrawerComponent implements OnInit {
     // set already selected language in toggle
     setTimeout(() => {
       if (localStorage.getItem('language') === 'hindi') {
-        this.langCheck = false;
-      } else {
         this.langCheck = true;
+      } else {
+        this.langCheck = false;
       }
     }, 2000);
     // this.changed();
@@ -1074,11 +1074,11 @@ getAllCaste() {
 langChanged(event) {
     console.log(event.checked);
     if (event.checked) {
-      localStorage.setItem('language', 'english');
-      this.languageService.setCurrentLanguage('english');
-    } else {
       localStorage.setItem('language', 'hindi');
       this.languageService.setCurrentLanguage('hindi');
+    } else {
+      localStorage.setItem('language', 'english');
+      this.languageService.setCurrentLanguage('english');
     }
   }
 analyticsEvent(event) {
