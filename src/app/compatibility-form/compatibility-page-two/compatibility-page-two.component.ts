@@ -199,6 +199,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
     fourPageService.pageOneUpdated.subscribe(
       status => {
+        console.log('Event Emitted For Page Two', status);
         if (status) {
             this.setAbout();
             this.firstStep();
@@ -491,7 +492,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.errors.push(control);
         }
       }
-      // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+      this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
     }
   }
 

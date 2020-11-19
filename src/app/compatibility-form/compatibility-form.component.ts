@@ -749,7 +749,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   getAllCaste() {
     return new Promise((res, rej) => {
 
-      this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
+      this.http.get('https://partner.hansmatrimony.com/api/getAllCaste')
+      .pipe(timeout(5000), retry(2), catchError(e => {
+        throw new Error('Server Timeout, Unable to fetch castes ' + e);
+      }))
+      .subscribe((res: any) => {
         this.getcastes = [...res, 'All'];
         this.fourPageService.setAllCastes(this.getcastes);
         if (this.getcastes) {
@@ -809,11 +813,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
 
   firstStep() {
-    if(this.PageOne.invalid){
-      this.showError=true;
-      console.log(this.showError);
 
-    }
+ 
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
     this.nextClickedOne = true;
@@ -977,6 +978,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         });
       }
     } else {
+
+      this.showError = true;
+      console.log(this.showError);
+
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
         console.log(control);
