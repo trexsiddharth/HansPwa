@@ -1575,19 +1575,19 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
   callTruecaller() {
     // tslint:disable-next-line: max-line-length
-    const randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
-    this.startTruecallerPolling(randomNumber);
-    (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
+    // const randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
+    // this.startTruecallerPolling(randomNumber);
+    // (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      if (document.hasFocus()) {
-        // Truecaller app not present on the device and you redirect the user
-        // to your alternate verification page
-      } else {
-        // testing position above
-      }
-    }, 600);
+    //   if (document.hasFocus()) {
+    //     // Truecaller app not present on the device and you redirect the user
+    //     // to your alternate verification page
+    //   } else {
+    //     // testing position above
+    //   }
+    // }, 600);
   }
 
   getUserFromTrueCaller(requestId): Observable<any> {

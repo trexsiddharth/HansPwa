@@ -116,9 +116,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     })
   }
   ngOnInit() {
-    if (this.router.url.includes('first')) {
-      this.spinner.show('searchingSpinner');
-    }
+    // if (this.router.url.includes('first')) {
+    //   this.spinner.show('searchingSpinner');
+    // }
     this.contactNumber = this.chatService.getContactNumber();
     console.log(this.contactNumber);
     this.chatService.authorized.subscribe(

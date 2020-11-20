@@ -385,12 +385,18 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   firstStep() {
+
     this.nextClickedTwo = true;
     this.errors = [];
     console.log(this.PageTwo.value.Working);
     let incomeCalc;
 
     if (this.PageTwo.valid) {
+
+      if (!this.fourPageService.getUserThrough()) {
+        this.spinner.show('searchingSpinner');
+      }
+
       if (this.PageTwo.value.AnnualIncome === '100+') {
         incomeCalc = 100;
       } else if (this.PageTwo.value.AnnualIncome) {
@@ -476,11 +482,13 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         } else {
           this.fourPageService.formCompleted.emit(false);
           this.spinner.hide();
+          this.spinner.hide('searchingSpinner');
           this.ngxNotificationService.error(res.message);
         }
       }, err => {
         this.fourPageService.formCompleted.emit(false);
         this.spinner.hide();
+        this.spinner.hide('searchingSpinner');
         this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
         console.log(err);
       });
