@@ -819,8 +819,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
 
   firstStep() {
-
- 
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
     this.nextClickedOne = true;
