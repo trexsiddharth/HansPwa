@@ -308,6 +308,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       (complete: boolean) => {
         if (complete === true) {
           this.formTwo = true;
+          if (!this.fourPageService.getUserThrough()) {
+            this.goToNextPage();
+          }
         }
       }
     );
@@ -333,6 +336,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         }
       }
     );
+
 
     // for team user we will make page non linear from page two...because page one details are compulsory
     this.fourPageService.makeLinear.subscribe(
