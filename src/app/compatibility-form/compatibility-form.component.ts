@@ -254,13 +254,14 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
   scrollAppear() {
     const whyUs = document.querySelector('.whyus');
-    const position = whyUs.getBoundingClientRect().top;
+
+    const position = whyUs ? whyUs.getBoundingClientRect().top : null;
     const form = document.querySelector('.form-position');
-    const formPosition = form.getBoundingClientRect().top;
+    const formPosition = form ? form.getBoundingClientRect().top : null;
     const screenPosition = window.innerHeight;
-    if (position < screenPosition) {
+    if (position && position < screenPosition) {
       this.auto = true;
-    } else if (formPosition < screenPosition + 500) {
+    } else if (formPosition && formPosition < screenPosition + 500) {
       this.auto = false;
     }
   }
@@ -611,7 +612,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         this.analyticsEvent('Four Page Registration Page One Marital Status Changed');
         break;
       case 'Castes':
-        this.goToNextPage();
         this.analyticsEvent('Four Page Registration Page One Caste Changed');
         break;
 
@@ -698,6 +698,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   private goToNextPage() {
+    console.log('is form valid', this.PageOne.valid);
     if (!this.PageOne.valid) {
       return;
     }
