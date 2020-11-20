@@ -221,7 +221,7 @@
         <div *ngFor="let item of profile;let i = index">
             <div class="historyProfile" [id]="i">
                 <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}" #profilePic
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized() && i!=0}" #profilePic
                     [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
                     (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
                     alt="profile picture">
@@ -234,7 +234,7 @@
 
                 <div class="historyDetails">
                     <p *ngIf="type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()" style="display: flex!important;
+                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized() && i!=0" style="display: flex!important;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
@@ -670,7 +670,7 @@
         <div *ngFor="let item of (profileViewersList$ | async);let i = index">
             <div class="historyProfile" [id]="i">
                 <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized()}" #profilePic
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized() && i!=0 }" #profilePic
                     [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
                     (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
                     alt="profile picture">
@@ -683,7 +683,7 @@
 
                 <div class="historyDetails">
                     <p *ngIf="type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized()" style="display: flex!important;
+                null && itemService.getCredits().toString() == '0' && !itemService.getPersonalized() && i!=0" style="display: flex!important;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
