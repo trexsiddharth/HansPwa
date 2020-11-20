@@ -611,6 +611,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         this.analyticsEvent('Four Page Registration Page One Marital Status Changed');
         break;
       case 'Castes':
+        this.goToNextPage();
         this.analyticsEvent('Four Page Registration Page One Caste Changed');
         break;
 
