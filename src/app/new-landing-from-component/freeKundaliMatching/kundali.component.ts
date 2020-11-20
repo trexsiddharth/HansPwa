@@ -93,8 +93,12 @@ export class Kundali implements OnInit {
   scrollAppear(){
      let left = document.querySelector('.kundali-text');
      let right = document.querySelector('.kundali-form');
-     let leftPosition = left.getBoundingClientRect().top;
-     let rightPosition = right.getBoundingClientRect().top;
+     let leftPosition;
+     let rightPosition;
+     if(left && right){
+      leftPosition  = left.getBoundingClientRect().top;
+      rightPosition = right.getBoundingClientRect().top;
+     }
      let screenPosition = window.innerHeight;
      
      if(rightPosition<=screenPosition){

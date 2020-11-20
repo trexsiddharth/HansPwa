@@ -48,15 +48,26 @@ export class HowItWorks implements OnInit {
        let right1 = document.querySelector('.right1');
        let right2 = document.querySelector('.right2');
        let right3 = document.querySelector('.right3');
-       let leftPosition = left.getBoundingClientRect().top;
-       let leftPosition1 = left1.getBoundingClientRect().top;
-       let leftPosition2 = left2.getBoundingClientRect().top;
-       let leftPosition3 = left3.getBoundingClientRect().top;
-       let bnPosition = bn.getBoundingClientRect().top;
-       let rightPosition = right.getBoundingClientRect().top;
-       let rightPosition1 = right1.getBoundingClientRect().top;
-       let rightPosition2 = right2.getBoundingClientRect().top;
-       let rightPosition3 = right3.getBoundingClientRect().top;
+       let leftPosition;
+       let leftPosition1;
+       let leftPosition2;
+       let leftPosition3;
+       let bnPosition;
+       let rightPosition;
+       let rightPosition1;
+       let rightPosition2;
+       let rightPosition3;
+      if(left && left1 && left2 && left3 && bn && right && right1 && right2 && right3){
+        leftPosition = left.getBoundingClientRect().top;
+        leftPosition1 = left1.getBoundingClientRect().top;
+        leftPosition2 = left2.getBoundingClientRect().top;
+        leftPosition3 = left3.getBoundingClientRect().top;
+        bnPosition = bn.getBoundingClientRect().top;
+        rightPosition = right.getBoundingClientRect().top;
+        rightPosition1 = right1.getBoundingClientRect().top;
+        rightPosition2 = right2.getBoundingClientRect().top;
+        rightPosition3 = right3.getBoundingClientRect().top;
+      }
        let screenPosition = window.innerHeight;
        if(bnPosition<screenPosition){
         //  left.classList.add('.left-appear')
