@@ -55,9 +55,9 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   @ViewChild('otpModal', { static: false }) private otpModal: any;
-  showOccupation: boolean = false;
-  showYearlyIncome: boolean = false;
-  showWorkingCity: boolean = false;
+  showOccupation = false;
+  showYearlyIncome = false;
+  showWorkingCity = false;
   PageTwo: FormGroup;
   errors: string[] = [];
   authMobileNumberStatus = false;
@@ -475,7 +475,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
               value: localStorage.getItem('id'),
               content_name: localStorage.getItem('RegisterNumber'),
             });
-            
+
             this.router.navigateByUrl('chat?first');
             this.analyticsEvent('Four Page Registration Page Two');
           }
@@ -546,7 +546,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   changedQualification() {
-    this.showOccupation=true;
+    this.showOccupation = true;
     console.log('changed Qualification');
     this.analyticsEvent('Four Page Registration Page Two Qualification Changed');
     if (this.PageTwo.valid) {
@@ -557,10 +557,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   changedOccupation() {
     console.log('changed Occupation');
-    if(this.PageTwo.value.Occupation!='Not Working')
-    {this.showYearlyIncome=true;}
-    else if(this.PageTwo.value.Occupation=='Not Working')
-    {this.showWorkingCity=false;this.showYearlyIncome=false;}
+    if (this.PageTwo.value.Occupation !== 'Not Working') {this.showYearlyIncome = true;
+     this.showWorkingCity = true;
+    } else if (this.PageTwo.value.Occupation === 'Not Working') {this.showWorkingCity = false; this.showYearlyIncome = false; }
     this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
 
     switch (this.PageTwo.value.Occupation) {
@@ -631,7 +630,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   incomeChanged(val) {
     console.log('changed yearly income');
-    this.showWorkingCity=true;
+    this.showWorkingCity = true;
     console.log(this.PageTwo.value.AnnualIncome);
     this.analyticsEvent('Four Page Registration Page Two Annual Income Changed');
     if (this.PageTwo.valid) {
