@@ -187,6 +187,7 @@ export class Kundali implements OnInit {
               this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('ul').join('tr');
               this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('li').join('td');
               this.homeService.kundaliForm = this.kundaliForm;
+              this.homeService.kundaliFormValues = this.kundaliForm.value;
               console.log(this.homeService.HTMLResponse);
               this.router.navigateByUrl('/kundaliMatching');
             }

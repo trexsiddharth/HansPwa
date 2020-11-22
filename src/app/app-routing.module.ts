@@ -6,7 +6,7 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
 import { CustomCheckoutComponent } from './custom-checkout/custom-checkout.component';
 import { NewHomeComponent } from './new-home/new-home.component';
 import { HansPreloadingStrategyService } from './hans-preloading-strategy.service';
-import { KundaliComponent } from './new-home/kundali/kundali.component';
+import { KundaliTwoComponent } from './new-home/kundali/kundali.component';
 import { NewLandingFromComponentComponent } from './new-landing-from-component/new-landing-from-component.component';
 import { BengaliMatrimonyComponent } from './bengali-matrimony/bengali-matrimony.component';
 import { HinduMatrimonyComponent } from './hindu-matrimony/hindumatrimony.component';
@@ -83,7 +83,7 @@ const routes: Routes = [
   { path: 'phone-number', component: PhoneNumberScreenComponent },
   { path: 'termsCondition', component: TermsAndConditionsComponent },
   { path: 'checkout', component: CustomCheckoutComponent },
-  { path: 'kundaliMatching', component: KundaliComponent },
+  { path: 'kundaliMatching', component: KundaliTwoComponent },
   {
     path: 'picUpload', loadChildren: () => import('./photo-upload/photo-upload.module')
       .then(m => m.PhotoUploadModule)

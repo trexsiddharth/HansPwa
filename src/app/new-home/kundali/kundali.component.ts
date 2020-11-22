@@ -11,7 +11,7 @@ import { NewHomeService } from '../new-home.service';
   styleUrls: ['./kundali.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class KundaliComponent implements OnInit {
+export class KundaliTwoComponent implements OnInit {
   kundaliForm: FormGroup;
   autoComplete = {
     strictBounds: false,
