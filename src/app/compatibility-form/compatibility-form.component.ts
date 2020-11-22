@@ -824,6 +824,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
     this.nextClickedOne = true;
+    
+    if (!this.fourPageService.getUserThrough()) {
+      this.fourPageService.seeProfilesBtnClicked.emit(true);
+    }
 
     if (this.alreadyExists) {
       console.log(this.alreadyExists);
@@ -837,9 +841,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log('month', this.month.indexOf(this.PageOne.value.birth_month) + 1);
     console.log('year', this.PageOne.value.birth_year);
 
-    const phoneNumber = this.PageOne.value.phone ? this.PageOne.value.phone : this.disabledPhoneNumber ? this.disabledPhoneNumber : null;
 
-    if (phoneNumber != null) {
+    console.log(this.PageOne.value);
+    if (this.PageOne.valid) {
+      const phoneNumber = this.PageOne.value.phone ? this.PageOne.value.phone : this.disabledPhoneNumber ? this.disabledPhoneNumber : null;
+
+      if (phoneNumber != null) {
       if (phoneNumber.toString().length < 10 ||
       phoneNumber.toString().length > 14) {
       console.log(this.PageOne.value.phone);
@@ -851,9 +858,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       return;
     }
 
-
-    console.log(this.PageOne.value);
-    if (this.PageOne.valid) {
       const date = this.PageOne.value.birth_date;
       const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
       const year = this.PageOne.value.birth_year;
@@ -967,8 +971,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
                 this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
               }, 200);
             }
-
-            this.fourPageService.updateFormOneData(firststepdata);
+            if (!this.fourPageService.getUserThrough()) {
+              this.fourPageService.pageOneUpdated.emit(true);
+            } else {
+              this.fourPageService.updateFormOneData(firststepdata);
+            }
             this.analyticsEvent('Four Page Registration Page One');
 
           } else {
@@ -988,6 +995,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
       this.showError = true;
       console.log(this.showError);
+
+      if (!this.showHeight) {
+        this.showHeight = true;
+      }
 
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
