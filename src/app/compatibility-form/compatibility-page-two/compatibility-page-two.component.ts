@@ -497,6 +497,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: forin
       for (const control in this.PageTwo.controls) {
         if (this.PageTwo.controls[control].invalid) {
+          this.PageTwo.controls[control].markAsTouched();
           this.errors.push(control);
         }
       }

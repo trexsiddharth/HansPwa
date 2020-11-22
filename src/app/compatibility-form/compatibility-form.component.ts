@@ -184,23 +184,23 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      firstName: ['', Validators.compose([Validators.required])],
-      lastName: [''],
+      firstName: [null, Validators.compose([Validators.required])],
+      lastName: [null],
       // phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
       // , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])],
       phone: ['132'
         , Validators.compose([Validators.required])],
       email: [''],
-      Relation: ['', Validators.compose([Validators.required])],
-      gender: ['', Validators.compose([Validators.required])],
+      Relation: [null, Validators.compose([Validators.required])],
+      gender: [null, Validators.compose([Validators.required])],
       birth_date: ['01', Validators.compose([Validators.required])],
       birth_month: ['January', Validators.compose([Validators.required])],
       birth_year: ['1980', Validators.compose([Validators.required])],
-      Height: ['', Validators.compose([Validators.required])],
-      Weight: [''],
-      MaritalStatus: ['', Validators.compose([Validators.required])],
-      Religion: ['', Validators.compose([Validators.required])],
-      Castes: ['', Validators.compose([Validators.required])],
+      Height: [null, Validators.compose([Validators.required])],
+      Weight: [null],
+      MaritalStatus: [null, Validators.compose([Validators.required])],
+      Religion: [null, Validators.compose([Validators.required])],
+      Castes: [null, Validators.compose([Validators.required])],
       CasteCtrl: (null),
       disabledPart: ['']
     });
@@ -675,7 +675,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             this.goToNextPage();
           } else {
             this.disableNextSubject.next(false);
-            localStorage.setItem('RegisterNumber', number);
+            this.alreadyExists = false;
+            // localStorage.setItem('RegisterNumber', number);
             // signifies that new user has entered his mobile number.
             this.analyticsEvent('Four Page Registration Page Zero');
             console.log('New User');
@@ -798,8 +799,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
       this.PageOne = this._formBuilder.group({
         // tslint:disable-next-line: max-line-length
-        firstName: [''],
-        lastName: [''],
+        firstName: ['', Validators.compose([Validators.required])],
+        lastName: ['', Validators.compose([Validators.required])],
         phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
         email: [''],
         Relation: ['', Validators.compose([Validators.required])],
@@ -823,6 +824,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log(this.PageOne.value);
     this.analyticsEvent('Page One Clicked');
     this.nextClickedOne = true;
+
     if (this.alreadyExists) {
       console.log(this.alreadyExists);
       this.openVerificationDialog(this.authData.is_lead);
@@ -989,13 +991,14 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
-        console.log(control);
-        if (!this.PageOne.controls[control].valid) {
+        if (this.PageOne.controls[control].invalid) {
+          this.PageOne.controls[control].markAsTouched();
+          console.log(control);
           this.errors.push(control);
         }
       }
       if (this.errors[0]) {
-        // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
         this.analyticsEvent(`Page One Error ${this.errors[0]}`);
       }
     }

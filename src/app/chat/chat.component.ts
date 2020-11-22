@@ -611,7 +611,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       );
     } else {
-      this.ngxNotificationService.error('No user found');
+      // this.ngxNotificationService.error('No user found');
       this.logout();
     }
   }

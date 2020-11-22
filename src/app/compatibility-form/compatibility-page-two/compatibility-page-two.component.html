@@ -22,7 +22,7 @@
             </mat-option>
           </mat-optgroup>
         </mat-select>
-        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
+        <mat-error>*this field is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -35,7 +35,7 @@
             {{option}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="PageTwo.invalid && nextClickedTwo">*this field is required</mat-error>
+        <mat-error >*this field is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -115,6 +115,7 @@
           {{cities}}
         </mat-option>
       </mat-autocomplete>
+      <mat-error>*this field is required</mat-error>
     </mat-form-field>
     </div>
 
