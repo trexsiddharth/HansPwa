@@ -14,6 +14,7 @@ export class NewHomeService {
   points = -1;
   HTMLResponse: any;
   kundaliForm: FormGroup;
+  kundaliFormValues: any;
   getLoginStatus() {
     if (localStorage.getItem('mobile_number') && localStorage.getItem('mobile_number') !== '') {
       this.loggedInNumber = localStorage.getItem('mobile_number');

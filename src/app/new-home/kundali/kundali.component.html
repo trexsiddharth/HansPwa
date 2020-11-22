@@ -117,7 +117,36 @@
             </div>
         </form>
     </div>
-    <div class="mainBack" *ngIf="(gotRes$ | async)" style="margin-bottom:3rem">
+    <div class="row"  *ngIf="(gotRes$ | async)">
+        <table>
+            <tr style="background: transparent!important;">
+                <th> </th>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Birth Time</th>
+                <th>Birth Place</th>
+            </tr>
+            <tr>
+                <td>Boy</td>
+                <td>{{kundaliForm.value.BoyName}}</td>
+                <td>{{kundaliForm.value.BoyBirthDate}}/
+                    {{kundaliForm.value.BoyBirthMonth}}/
+                    {{kundaliForm.value.BoyBirthYear}}</td>
+                <td>{{kundaliForm.value.BoyBirthTime}}</td>
+                <td>{{kundaliForm.value.BoyBirthPlace}}</td>
+            </tr>
+            <tr>
+                <td>Girl</td>
+                <td>{{kundaliForm.value.GirlName}}</td>
+                <td>{{kundaliForm.value.GirlBirthDate}}/
+                    {{kundaliForm.value.GirlBirthMonth}}/
+                    {{kundaliForm.value.GirlBirthYear}}</td>
+                <td>{{kundaliForm.value.GirlBirthTime}}</td>
+                <td>{{kundaliForm.value.GirlBirthPlace}}</td>
+            </tr>
+        </table>
+    </div>
+    <!-- <div class="mainBack" *ngIf="(gotRes$ | async)" style="margin-bottom:3rem">
         <h5 class="text-shadow" style="color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">Details of Boy and Girl
         </h5>
         <div class="rowO">
@@ -190,5 +219,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </main>

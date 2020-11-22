@@ -40,7 +40,7 @@ import { TodaysPaymentPopupComponent } from './todays-payment-popup/todays-payme
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PhotoUploadCropComponent } from './photo-upload-crop/photo-upload-crop.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { KundaliComponent } from './new-home/kundali/kundali.component';
+import { KundaliTwoComponent } from './new-home/kundali/kundali.component';
 import { NewLandingFromComponentComponent } from './new-landing-from-component/new-landing-from-component.component';
 import { Hero } from './new-landing-from-component/hero/hero';
 import { Features } from './new-landing-from-component/features/features.component';
@@ -82,7 +82,7 @@ import { SidebarModule } from 'ng-sidebar';
     VerifyOtpComponent,
     TodaysPaymentPopupComponent,
     PhotoUploadCropComponent,
-    KundaliComponent,
+    KundaliTwoComponent,
     NewLandingFromComponentComponent,
     Hero,
     Features,
