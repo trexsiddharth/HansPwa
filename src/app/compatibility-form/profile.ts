@@ -83,5 +83,6 @@ export class Profile {
     todaysSpecial;
     discover;
     likesYou;
-    yourLikes
+    yourLikes;
+    history;
 }

@@ -579,6 +579,6 @@ export class FindOpenHistoryProfileService {
     dialogConfig.data = {
       dailyQuota: dailyCount
     };
-    const dialogRef = this.dialog.open(DailyWelcomePopupComponent, dialogConfig);
+    // const dialogRef = this.dialog.open(DailyWelcomePopupComponent, dialogConfig);
   }
 }
