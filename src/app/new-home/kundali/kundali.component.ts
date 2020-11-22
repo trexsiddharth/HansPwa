@@ -44,6 +44,7 @@ export class KundaliComponent implements OnInit {
   showContinueBtn$: Observable<boolean> = this.showContinueBtn.asObservable();
   ngOnInit() {
     if (this.homeService.points != -1) {
+      // console.log( this.homeService.points);
       this.HTMLResponse = this.homeService.HTMLResponse;
       this.points = this.homeService.points;
       this.kundaliForm = this.homeService.kundaliForm;

@@ -183,11 +183,11 @@ export class Kundali implements OnInit {
             console.log(response);
             if (response.point) {
               this.homeService.points = response.point;
-              this.homeService.HTMLResponse = response.full;
-              this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('ul').join('tr');
-              this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('li').join('td');
-              this.homeService.kundaliForm = this.kundaliForm;
-              console.log(this.homeService.HTMLResponse);
+              // this.homeService.HTMLResponse = response.full;
+              // this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('ul').join('tr');
+              // this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('li').join('td');
+              // this.homeService.kundaliForm = this.kundaliForm;
+              // console.log(this.homeService.HTMLResponse);
               this.router.navigateByUrl('/kundaliMatching');
             }
           });

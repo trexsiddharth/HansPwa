@@ -51,7 +51,10 @@ export class Features implements OnInit {
     };
     scrollAppear(){
       let whyUs = document.querySelector('.whyus');
-      let position = whyUs.getBoundingClientRect().top;
+      let position;
+      if(whyUs){
+        position = whyUs.getBoundingClientRect().top;
+      }
       let screenPosition = window.innerHeight;
       if(position<screenPosition){
         this.auto=true;
