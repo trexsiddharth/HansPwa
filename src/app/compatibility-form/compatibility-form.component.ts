@@ -1342,7 +1342,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       this.showCaste = false;
       this.PageOne.controls.Castes.setValue(null);
     }
-    this.goToNextPage();
+    if (!this.fourPageService.getUserThrough()) {
+      this.goToNextPage();
+    }
   }
 
   // show register with popup
