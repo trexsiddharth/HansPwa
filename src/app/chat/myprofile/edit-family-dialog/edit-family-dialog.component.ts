@@ -58,7 +58,7 @@ export class EditFamilyDialogComponent implements OnInit {
     familyDataForm.append('family_type', this.familyForm.value.family_type);
     familyDataForm.append('house_type', this.familyForm.value.house_type);
     familyDataForm.append('about', this.familyData.about);
-    familyDataForm.append('occupation_father', this.familyForm.value.father_occupation);
+    familyDataForm.append('occupation', this.familyForm.value.father_occupation);
     familyDataForm.append('occupation_mother', this.familyForm.value.mother_occupation);
     familyDataForm.append('father_status', this.familyForm.value.father_occupation === 'Not Alive' ? 'Not Alive' : 'Alive');
     familyDataForm.append('mother_status', this.familyForm.value.mother_occupation === 'Not Alive' ? 'Not Alive' : 'Alive');

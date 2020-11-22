@@ -620,4 +620,15 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
       return name;
     }
   }
+
+  checkIfNullOrNa(value: any): boolean {
+    if (!value) {
+      return false;
+    } else if (value === 'NA' || value === 'na' || value === 'NaN' ||
+     value === 'Nan' || value === 'nan' || value === 'N.A') {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

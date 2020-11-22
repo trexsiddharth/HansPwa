@@ -702,6 +702,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (!this.PageOne.valid) {
       return;
     }
+    this.disableNextSubject.next(false);
     this.showError = false;
     const button = document.querySelector<HTMLButtonElement>('#viewButton');
     button.click();
@@ -1274,7 +1275,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
     });
-  
+
     this.setDateAccordingToMonth(this.getMonthString(this.userProfile.dob.toString().split('-')[1]));
   }
   setMobileNumber(number: string) {
@@ -1336,9 +1337,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.isAllCastePref = event.checked;
     if (event.checked) {
       this.showCaste = true;
+      this.PageOne.controls.Castes.setValue('All');
     } else {
       this.showCaste = false;
+      this.PageOne.controls.Castes.setValue(null);
     }
+    this.goToNextPage();
   }
 
   // show register with popup
