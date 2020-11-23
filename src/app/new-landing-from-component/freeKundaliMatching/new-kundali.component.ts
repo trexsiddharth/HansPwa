@@ -8,9 +8,9 @@ import { LanguageService } from 'src/app/language.service';
 import { NewHomeService } from 'src/app/new-home/new-home.service';
 import {Boy} from './boy';
 @Component({
-    selector: 'kundali',
-    templateUrl: './kundali.component.html',
-    styleUrls: ['./kundali.component.css']
+    selector: 'new-kundali',
+    templateUrl: './new-kundali.component.html',
+    styleUrls: ['./new-kundali.component.css']
 })
 
 export class Kundali implements OnInit {
@@ -183,20 +183,12 @@ export class Kundali implements OnInit {
             console.log(response);
             if (response.point) {
               this.homeService.points = response.point;
-<<<<<<< HEAD
-              // this.homeService.HTMLResponse = response.full;
-              // this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('ul').join('tr');
-              // this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('li').join('td');
-              // this.homeService.kundaliForm = this.kundaliForm;
-              // console.log(this.homeService.HTMLResponse);
-=======
               this.homeService.HTMLResponse = response.full;
               this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('ul').join('tr');
               this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('li').join('td');
               this.homeService.kundaliForm = this.kundaliForm;
               this.homeService.kundaliFormValues = this.kundaliForm.value;
               console.log(this.homeService.HTMLResponse);
->>>>>>> 990cc0c582bf6cc3c24edb1cde6647e26e26de48
               this.router.navigateByUrl('/kundaliMatching');
             }
           });

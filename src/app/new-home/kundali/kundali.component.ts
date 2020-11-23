@@ -44,7 +44,6 @@ export class KundaliTwoComponent implements OnInit {
   showContinueBtn$: Observable<boolean> = this.showContinueBtn.asObservable();
   ngOnInit() {
     if (this.homeService.points != -1) {
-      // console.log( this.homeService.points);
       this.HTMLResponse = this.homeService.HTMLResponse;
       this.points = this.homeService.points;
       this.kundaliForm = this.homeService.kundaliForm;
@@ -52,7 +51,9 @@ export class KundaliTwoComponent implements OnInit {
       this.showContinueBtn.next(false);
       setTimeout(() => {
         let ele = document.getElementById('pointsDiv');
-        ele.scrollIntoView({ behavior: 'smooth' });
+        if(ele){
+          ele.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 500);
     }
     this.kundaliForm.valueChanges.subscribe(() => {
@@ -119,6 +120,7 @@ export class KundaliTwoComponent implements OnInit {
         if (response.point) {
           this.points = response.point;
           this.HTMLResponse = response.full;
+          console.log(this.homeService.HTMLResponse);
           this.HTMLResponse = this.HTMLResponse.split('ul').join('tr');
           this.HTMLResponse = this.HTMLResponse.split('li').join('td');
           console.log(this.HTMLResponse);

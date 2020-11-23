@@ -117,7 +117,7 @@
             </div>
         </form>
     </div>
-    <div class="row"  *ngIf="(gotRes$ | async)">
+    <!-- <div class="kundali-table"  *ngIf="(gotRes$ | async)">
         <table>
             <tr style="background: transparent!important;">
                 <th> </th>
@@ -145,8 +145,89 @@
                 <td>{{kundaliForm.value.GirlBirthPlace}}</td>
             </tr>
         </table>
-    </div>
-    <!-- <div class="mainBack" *ngIf="(gotRes$ | async)" style="margin-bottom:3rem">
+    </div> -->
+
+      
+    <!-- FIGURING OUT WTH IS WRONG  -->
+<!-- 
+    <div>
+        <h5>Details of Boy and Girl
+        </h5>
+        <div >
+            <table>
+                <tr >
+                    <th> </th>
+                    <th>Name</th>
+                    <th>Birth Date</th>
+                    <th>Birth Time</th>
+                    <th>Birth Place</th>
+                </tr>
+                <tr>
+                    <td>Boy</td>
+                    <td>{{kundaliForm.value.BoyName}}</td>
+                    <td>{{kundaliForm.value.BoyBirthDate}}/
+                        {{kundaliForm.value.BoyBirthMonth}}/
+                        {{kundaliForm.value.BoyBirthYear}}</td>
+                    <td>{{kundaliForm.value.BoyBirthTime}}</td>
+                    <td>{{kundaliForm.value.BoyBirthPlace}}</td>
+                </tr>
+                <tr>
+                    <td>Girl</td>
+                    <td>{{kundaliForm.value.GirlName}}</td>
+                    <td>{{kundaliForm.value.GirlBirthDate}}/
+                        {{kundaliForm.value.GirlBirthMonth}}/
+                        {{kundaliForm.value.GirlBirthYear}}</td>
+                    <td>{{kundaliForm.value.GirlBirthTime}}</td>
+                    <td>{{kundaliForm.value.GirlBirthPlace}}</td>
+                </tr>
+            </table>
+        </div>
+        <h5 >
+            Guna Milan
+        </h5>
+        <div >
+            <table>
+                <thead>
+                    <tr >
+                        <th>Guna</th>
+                        <th>Boy</th>
+                        <th>Girl</th>
+                        <th>Points Obtained</th>
+                        <th>Maximum Points</th>
+                    </tr>
+                </thead>
+                <tbody [innerHTML]="homeService.HTMLResponse" >
+                </tbody>
+            </table>
+        </div>
+        <div >
+            <div >
+                <h5 >
+                    Horoscope Matching results
+                </h5>
+                <div >
+                    <ul>
+                        <li>
+                            Ashtkoot Matching between Boy and Girl is&nbsp;<strong>{{homeService.points}} / 36</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div >
+                <h5 >
+                    Obtained Points
+                </h5>
+                <div >
+                    <p><a >{{points}}</a><a
+                            >/36</a></p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- FIGURING END -->
+
+    <div class="mainBack" *ngIf="(gotRes$ | async)" style="margin-bottom:3rem">
         <h5 class="text-shadow" style="color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">Details of Boy and Girl
         </h5>
         <div class="rowO">
@@ -192,7 +273,9 @@
                         <th>Maximum Points</th>
                     </tr>
                 </thead>
-                <tbody [innerHTML]="transformYourHtml(HTMLResponse)">
+                <tbody *ngIf="homeService.HTMLResponse" [innerHTML]="homeService.HTMLResponse" >
+                </tbody>
+                <tbody *ngIf="!homeService.HTMLResponse" [innerHTML]="transformYourHtml(HTMLResponse)" >
                 </tbody>
             </table>
         </div>
@@ -219,5 +302,5 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </main>
