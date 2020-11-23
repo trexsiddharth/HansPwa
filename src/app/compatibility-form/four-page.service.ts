@@ -16,6 +16,7 @@ export class FourPageService {
   getListData = new EventEmitter<boolean>();
   makeLinear = new EventEmitter<boolean>();
   pageOneUpdated = new EventEmitter<boolean>();
+  seeProfilesBtnClicked = new EventEmitter<boolean>();
   profile = new Profile();
   userThroughGetList = false;
   // will be used to notify user can pass through or not to all the sections

@@ -197,6 +197,15 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       abroad: ['']
     });
 
+
+
+    fourPageService.seeProfilesBtnClicked.subscribe(
+      status => {
+        if (status) {
+            this.firstStep();
+        }
+      }
+    );
     fourPageService.pageOneUpdated.subscribe(
       status => {
         console.log('Event Emitted For Page Two', status);
@@ -497,6 +506,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: forin
       for (const control in this.PageTwo.controls) {
         if (this.PageTwo.controls[control].invalid) {
+          this.PageTwo.controls[control].markAsTouched();
           this.errors.push(control);
         }
       }

@@ -47,7 +47,7 @@
       <div class="w-full" style="margin-left:auto;margin-right:auto">
 
         <mat-step [stepControl]="PageOne">
-          <form [formGroup]="PageOne" style="padding-bottom: 100px;">
+          <form [formGroup]="PageOne" #formOne style="padding-bottom: 100px;">
             <!-- label name if required -->
             <!-- <ng-template matStepLabel>Page I</ng-template> -->
             <div class="row" style="margin-top: 8%!important;">
@@ -88,7 +88,7 @@
                 <mat-form-field class="full-width fieldFit"  appearance="standard">
                   <mat-label>First Name</mat-label>
                   <input type="text" [value]="formfirstName" id="firstName" (click)="showLastName()" (change)="inputFieldChanged('firstName')" matInput
-                    formControlName="firstName" required>
+                    formControlName="firstName">
                   <mat-error>*this field is required</mat-error>
                 </mat-form-field>
               </div>
@@ -98,7 +98,7 @@
                 <mat-form-field  class="full-width fieldFit" appearance="standard">
                   <mat-label>Last Name</mat-label>
                   <input type="text" [value]="formlastName" (change)="inputFieldChanged('lastName')" matInput formControlName="lastName" required name="lastName">
-                  <mat-error>*this field is required</mat-error>
+                  <mat-error >*this field is required</mat-error>
                 </mat-form-field>
               </div>
 
