@@ -207,8 +207,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
             if (this.PageTwo.invalid) {
               if (!this.workingCity) {
                 this.PageTwo.controls.Working.setValue(null);
-                this.ngxNotificationService.error('Select Valid Current City');
-                return;
               }
               for (const control in this.PageTwo.controls) {
                 if (this.PageTwo.controls[control].invalid) {
@@ -216,7 +214,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
                   this.errors.push(control);
                 }
               }
-              this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+              // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
             } else {
               console.log('Page Two Form is Valid', this.PageTwo);
               this.sharePageTwo.emit(this.PageTwo);
@@ -562,7 +560,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         this.PageTwo.controls.Working.setValue(null);
         this.ngxNotificationService.error('Select Valid Working City');
       }
+      if (!this.fourPageService.getUserThrough()) {
+        this.goToNextPage();
+      }
     }, 500);
+
   }
 
   workingCityChanged(value) {
@@ -755,6 +757,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       About: `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.OtherDesignation} ${aboutObject.working}.`
     });
 
+    if (!this.fourPageService.getUserThrough()) {
+      this.goToNextPage();
+    }
   }
   setFormOneData(userProfile: Profile) {
     this.workplace = userProfile.workingCity ? userProfile.workingCity : '';
@@ -832,6 +837,14 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   .subscribe(() => {
     this.workingCityFilter();
   });
+  }
+
+  private goToNextPage() {
+    console.log('is form valid', this.PageTwo.valid);
+    if (!this.PageTwo.valid) {
+      return;
+    }
+    this.sharePageTwo.emit(this.PageTwo);
   }
 
 }

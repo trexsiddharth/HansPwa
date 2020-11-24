@@ -1767,6 +1767,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log('got page two form', value);
     if (value) {
       this.sharedPageTwoForm = value;
+      this.goToNextPage();
     }
   }
 
