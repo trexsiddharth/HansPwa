@@ -202,7 +202,15 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     fourPageService.seeProfilesBtnClicked.subscribe(
       status => {
         if (status) {
-            this.firstStep();
+            if (this.PageTwo.invalid) {
+              for (const control in this.PageTwo.controls) {
+                if (this.PageTwo.controls[control].invalid) {
+                  this.PageTwo.controls[control].markAsTouched();
+                  this.errors.push(control);
+                }
+              }
+              this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+            }
         }
       }
     );
@@ -402,10 +410,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
     if (this.PageTwo.valid) {
 
-      if (!this.fourPageService.getUserThrough()) {
-        this.spinner.show('searchingSpinner');
-      }
-
       if (this.PageTwo.value.AnnualIncome === '100+') {
         incomeCalc = 100;
       } else if (this.PageTwo.value.AnnualIncome) {
@@ -415,8 +419,12 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
       if (!this.workingCity) {
         this.PageTwo.controls.Working.setValue(null);
-        this.ngxNotificationService.error('Select Valid Working City');
+        this.ngxNotificationService.error('Select Valid Current City');
         return;
+      }
+
+      if (!this.fourPageService.getUserThrough()) {
+        this.spinner.show('searchingSpinner');
       }
 
       const firststepdata = new FormData();
@@ -492,7 +500,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.fourPageService.formCompleted.emit(false);
           this.spinner.hide();
           this.spinner.hide('searchingSpinner');
-          this.ngxNotificationService.error(res.message);
+          // this.ngxNotificationService.error(res.message);
         }
       }, err => {
         this.fourPageService.formCompleted.emit(false);
