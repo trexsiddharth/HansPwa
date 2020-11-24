@@ -32,7 +32,7 @@ import {
 import { FourPageService } from '../four-page.service';
 import { Profile } from '../profile';
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
-import { map, shareReplay, startWith, takeUntil } from 'rxjs/operators';
+import { debounceTime, map, shareReplay, startWith, takeUntil } from 'rxjs/operators';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -313,7 +313,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     );
 
     this.PageTwo.get('Working').valueChanges
-    .pipe(takeUntil(this.onDestroy))
+    .pipe(
+      debounceTime(400),
+      takeUntil(this.onDestroy))
     .subscribe(() => {
       this.workingCityFilter();
     });
@@ -833,7 +835,8 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     });
 
     this.PageTwo.get('Working').valueChanges
-  .pipe(takeUntil(this.onDestroy))
+  .pipe(debounceTime(400),
+    takeUntil(this.onDestroy))
   .subscribe(() => {
     this.workingCityFilter();
   });
