@@ -5,6 +5,8 @@ import {
   OnDestroy,
   AfterViewInit,
   AfterViewChecked,
+  Input,
+  EventEmitter,
 } from '@angular/core';
 
 import {
@@ -167,6 +169,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   // disable btn if user is already registered
   disableNextSubject = new BehaviorSubject<boolean>(false);
   disableNext$ = this.disableNextSubject.asObservable();
+  sharedPageTwoForm: FormGroup;
+
 
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -935,6 +939,38 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       console.log('religion', this.PageOne.value.Religion);
       console.log('caste', this.PageOne.value.Castes);
 
+      if (!this.fourPageService.getUserThrough() ) {
+        if (this.sharedPageTwoForm) {
+        
+        let incomeCalc;
+
+        if (this.PageTwo.value.AnnualIncome === '100+') {
+          incomeCalc = 100;
+        } else if (this.PageTwo.value.AnnualIncome) {
+          const a = this.PageTwo.value.AnnualIncome.split('-');
+          incomeCalc = String((Number(a[0]) + Number(a[1])) / 2);
+        }
+  
+        if (!this.fourPageService.getUserThrough()) {
+          this.spinner.show('searchingSpinner');
+        }
+        firststepdata.append('degree', this.sharedPageTwoForm.value.Qualification);
+        firststepdata.append('occupation', this.sharedPageTwoForm.value.Occupation);
+      // if designation equals others set profession equals value of OtherDesignation only if OtherDesignation is not empty.
+        firststepdata.append('profession', this.sharedPageTwoForm.value.Designation !== 'Others'
+        ? this.sharedPageTwoForm.value.Designation : this.sharedPageTwoForm.value.OtherDesignation ?
+          this.sharedPageTwoForm.value.OtherDesignation : this.sharedPageTwoForm.value.Designation);
+
+        firststepdata.append('annual_income', incomeCalc);
+
+        firststepdata.append('working_city', this.sharedPageTwoForm.value.Working);
+        firststepdata.append('about', this.sharedPageTwoForm.value.About);
+        firststepdata.append('abroad', this.sharedPageTwoForm.value.abroad);
+      } else {
+        return;
+      }
+      }
+
 
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
         if (this.isLeadIsZero) {
@@ -972,7 +1008,18 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
               }, 200);
             }
             if (!this.fourPageService.getUserThrough()) {
-              this.fourPageService.pageOneUpdated.emit(true);
+              (window as any).fbq('track', 'CompleteRegistration', {
+              value: localStorage.getItem('id'),
+              content_name: localStorage.getItem('RegisterNumber'),
+            });
+              (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
+              value: localStorage.getItem('id'),
+              content_name: localStorage.getItem('RegisterNumber'),
+            });
+
+              this.router.navigateByUrl('chat?first');
+              this.analyticsEvent('Four Page Registration Page Two');
+
             } else {
               this.fourPageService.updateFormOneData(firststepdata);
             }
@@ -1003,13 +1050,15 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
         if (this.PageOne.controls[control].invalid) {
-          this.PageOne.controls[control].markAsTouched();
+          if (!this.fourPageService.getUserThrough()) {
+            this.PageOne.controls[control].markAsTouched();
+          }
           console.log(control);
           this.errors.push(control);
         }
       }
       if (this.errors[0]) {
-        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+        // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
         this.analyticsEvent(`Page One Error ${this.errors[0]}`);
       }
     }
@@ -1712,6 +1761,13 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           this.advt_shortlink = this.route.snapshot.queryParams.c;
         }
       }
+  }
+
+  getPageTwoForm(value: FormGroup) {
+    console.log('got page two form', value);
+    if (value) {
+      this.sharedPageTwoForm = value;
+    }
   }
 
 

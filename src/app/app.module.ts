@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { NgxNotificationModule } from 'ngx-kc-notification';
 
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
@@ -64,6 +64,9 @@ import { BuddhistMatrimonyComponent } from './buddhist-matrimony/buddhistmatrimo
 import { JainMatrimonyComponent } from './jain-matrimony/jainmatrimony.component';
 import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.component';
 import { SidebarModule } from 'ng-sidebar';
+import { UnderstandErrorHandler } from './chat/helper/UnderstandErrorHandler';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,9 +123,13 @@ import { SidebarModule } from 'ng-sidebar';
     NgbModule,
     ImageCropperModule,
     CarouselModule,
-    SidebarModule.forRoot()
+    SidebarModule.forRoot(),
   ],
-  providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService],
+  providers: [SubscriptionserviceService, NewHomeService, HansPreloadingStrategyService,
+    {
+      provide: ErrorHandler,
+      useClass: UnderstandErrorHandler,
+    }],
   bootstrap: [AppComponent],
   // tslint:disable-next-line: max-line-length
   entryComponents: [TiktokAdsFormComponent,

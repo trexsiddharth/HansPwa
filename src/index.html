@@ -90,14 +90,14 @@
     </script>
 
     <!-- // tikok pixel -->
-    <script>
+    <!-- <script>
       (function () {
         var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
         ta.src = document.location.protocol + '//' + 'static.bytedance.com/pixel/sdk.js?sdkid=BNKH8DC0M0F93BI73F8G';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ta, s);
       })();
-    </script>
+    </script> -->
 
     <link rel="icon" type="image/x-icon" href="assets/favicon_logo.png">
     <link rel="manifest" crossorigin="use-credentials" href="manifest.webmanifest">
@@ -167,6 +167,15 @@
     <div id="fb-root"></div>
     <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script> -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://cdn.understand.io/understand-js/v1/bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+      Understand.init({
+          env: 'production', // define environment (production, staging, ...)
+          token : '4a63f020-16fb-44d2-9710-5be516b96d1d' // set the input token from your Understand.io channel
+      })
+      .catchErrors();
+      </script>
+
   </body>
 
 </html>

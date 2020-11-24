@@ -6,6 +6,7 @@ import {
   ElementRef,
   Output,
   EventEmitter,
+  Input,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -55,6 +56,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   @ViewChild('otpModal', { static: false }) private otpModal: any;
+  @Output() sharePageTwo = new EventEmitter();
   showOccupation = false;
   showYearlyIncome = false;
   showWorkingCity = false;
@@ -203,6 +205,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       status => {
         if (status) {
             if (this.PageTwo.invalid) {
+              if (!this.workingCity) {
+                this.PageTwo.controls.Working.setValue(null);
+                this.ngxNotificationService.error('Select Valid Current City');
+                return;
+              }
               for (const control in this.PageTwo.controls) {
                 if (this.PageTwo.controls[control].invalid) {
                   this.PageTwo.controls[control].markAsTouched();
@@ -210,6 +217,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
                 }
               }
               this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+            } else {
+              console.log('Page Two Form is Valid', this.PageTwo);
+              this.sharePageTwo.emit(this.PageTwo);
             }
         }
       }
@@ -219,7 +229,9 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
         console.log('Event Emitted For Page Two', status);
         if (status) {
             this.setAbout();
+            if (this.fourPageService.getUserThrough()) {
             this.firstStep();
+            }
         }
       }
     );
@@ -514,11 +526,13 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: forin
       for (const control in this.PageTwo.controls) {
         if (this.PageTwo.controls[control].invalid) {
-          this.PageTwo.controls[control].markAsTouched();
+          if (!this.fourPageService.getUserThrough()) {
+            this.PageTwo.controls[control].markAsTouched();
+          }
           this.errors.push(control);
         }
       }
-      this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+      // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
     }
   }
 
@@ -576,7 +590,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   changedOccupation() {
     console.log('changed Occupation');
     if (this.PageTwo.value.Occupation !== 'Not Working') {this.showYearlyIncome = true;
-     this.showWorkingCity = true;
+                                                          this.showWorkingCity = true;
     } else if (this.PageTwo.value.Occupation === 'Not Working') {this.showWorkingCity = false; this.showYearlyIncome = false; }
     this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
 

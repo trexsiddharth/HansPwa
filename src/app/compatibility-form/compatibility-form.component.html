@@ -164,7 +164,9 @@
               </div>
               
 
-              <app-compatibility-page-two *ngIf="!fourPageService.getUserThrough()"></app-compatibility-page-two>
+              <app-compatibility-page-two *ngIf="!fourPageService.getUserThrough()"
+              (sharePageTwo)="getPageTwoForm($event)"
+              ></app-compatibility-page-two>
 
               <div class="col-md-12" *ngIf="fourPageService.getUserThrough()">
                 <!-- <h6>Email<code style="color: rgba(0,0,0,.6);">(optional)</code></h6> -->

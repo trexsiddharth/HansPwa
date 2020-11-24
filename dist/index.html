@@ -90,14 +90,14 @@
     </script>
 
     <!-- // tikok pixel -->
-    <script>
+    <!-- <script>
       (function () {
         var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
         ta.src = document.location.protocol + '//' + 'static.bytedance.com/pixel/sdk.js?sdkid=BNKH8DC0M0F93BI73F8G';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ta, s);
       })();
-    </script>
+    </script> -->
 
     <link rel="icon" type="image/x-icon" href="assets/favicon_logo.png">
     <link rel="manifest" crossorigin="use-credentials" href="manifest.webmanifest">
@@ -167,6 +167,15 @@
     <div id="fb-root"></div>
     <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script> -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-  <script src="runtime-es2015.87cddcf460d6cb87212c.js" type="module"></script><script src="runtime-es5.87cddcf460d6cb87212c.js" nomodule defer></script><script src="polyfills-es5.7cfbe60d591e0b8ad282.js" nomodule defer></script><script src="polyfills-es2015.34906a5f002ccde5c8ac.js" type="module"></script><script src="scripts.e9d123e29c679f57c43d.js" defer></script><script src="main-es2015.e9c82cbb23fb1fad95a1.js" type="module"></script><script src="main-es5.e9c82cbb23fb1fad95a1.js" nomodule defer></script></body>
+    <script src="https://cdn.understand.io/understand-js/v1/bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+      Understand.init({
+          env: 'production', // define environment (production, staging, ...)
+          token : '4a63f020-16fb-44d2-9710-5be516b96d1d' // set the input token from your Understand.io channel
+      })
+      .catchErrors();
+      </script>
+
+  <script src="runtime-es2015.96434070d64121579e5f.js" type="module"></script><script src="runtime-es5.96434070d64121579e5f.js" nomodule defer></script><script src="polyfills-es5.7cfbe60d591e0b8ad282.js" nomodule defer></script><script src="polyfills-es2015.34906a5f002ccde5c8ac.js" type="module"></script><script src="scripts.e9d123e29c679f57c43d.js" defer></script><script src="main-es2015.66b52cffe12bdedf178b.js" type="module"></script><script src="main-es5.66b52cffe12bdedf178b.js" nomodule defer></script></body>
 
 </html>
