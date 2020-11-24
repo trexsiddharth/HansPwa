@@ -431,7 +431,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
       if (!this.workingCity) {
         this.PageTwo.controls.Working.setValue(null);
-        this.ngxNotificationService.error('Select Valid Current City');
+        // this.ngxNotificationService.error('Select Valid Current City');
         return;
       }
 

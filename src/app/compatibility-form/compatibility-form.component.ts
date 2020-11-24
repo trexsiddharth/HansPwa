@@ -1207,7 +1207,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.goToNextPage();
   }
   getProfile() {
-    this.spinner.show();
+    // this.spinner.show();
     const leadId = localStorage.getItem('getListLeadId');
     const id = localStorage.getItem('getListId');
     console.log(id, leadId);
