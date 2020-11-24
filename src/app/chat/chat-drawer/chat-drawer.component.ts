@@ -7,7 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
-import { timeout, retry, catchError, takeUntil, shareReplay, map, startWith } from 'rxjs/operators';
+import { timeout, retry, catchError, takeUntil, shareReplay, map, startWith, delay, debounceTime } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, observable, Observable, ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
@@ -395,7 +395,7 @@ export class ChatDrawerComponent implements OnInit {
           this.userpic = data.photo;
           this.userId = data.id;
           this.userIsLead = data.isLead;
-          this.getUserProfileData();
+          // this.getUserProfileData();
         }
       }
     );
@@ -439,7 +439,10 @@ export class ChatDrawerComponent implements OnInit {
     this._onDestroy.complete();
   }
   subscribetochanges() {
-    this.preferencesForm.valueChanges.subscribe(() => {
+    this.preferencesForm.valueChanges.pipe(
+      debounceTime(400)
+    )
+    .subscribe(() => {
       if (this.firstTime) {
         this.firstTime = false;
       } else if (this.preferencesForm.value.income_max <= this.preferencesForm.value.income_min) {
@@ -583,6 +586,7 @@ export class ChatDrawerComponent implements OnInit {
   setEditIndexPrefs() {
     // this.prefsRef.toggle();
     // document.querySelector('#sidenav').toggle();
+    this.getUserProfileData();
     this.itemService.setChangePrefsClicked(true);
   }
   specialCase() {
@@ -766,7 +770,7 @@ export class ChatDrawerComponent implements OnInit {
     Object.entries(this.familyProfileData).forEach(
       ([key, value]) => {
         if (familyDetailsP3.includes(key)) {
-          if (!value || value == 'null' || value === '') {
+          if (!value || value === 'null' || value === '') {
             famDet += 1;
           } else {
             storingObj[key] = value;
@@ -898,7 +902,8 @@ export class ChatDrawerComponent implements OnInit {
             this.setProfileCompletion();
             this.checkPageThreeDetails();
             if (this.countRecomended == -1) {
-              setTimeout(() => { this.getCountOfRishtey(); this.getRecomendedFilters(); }, 2000);
+              setTimeout(() => { this.getCountOfRishtey();
+                                 this.getRecomendedFilters(); }, 2000);
             }
           },
           (error: any) => {
