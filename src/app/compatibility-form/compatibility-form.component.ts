@@ -590,7 +590,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         break;
     }
     // if profile completed go to next page
-    this.goToNextPage();
+    setTimeout(() => {
+      this.goToNextPage();
+    }, 200);
   }
   // event on change of select field
   selectFieldChange(fieldName) {
@@ -709,6 +711,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     }
     this.disableNextSubject.next(false);
     this.showError = false;
+
     const button = document.querySelector<HTMLButtonElement>('#viewButton');
     button.click();
   }
