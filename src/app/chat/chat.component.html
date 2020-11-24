@@ -64,7 +64,7 @@
             </span>
             <!-- {{itemService.getDailyCount()}} -->
             <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
-              style="font-size:small">{{languageService.profileLang.todaysSpecial}}</a>
+              style="font-size:10px">{{languageService.profileLang.todaysSpecial}}</a>
             <a
               *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.todaysSpecial}}</a>
           </ng-template>
@@ -123,7 +123,7 @@
                 *ngIf="selectedTab === 1">
             </div>
             <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
-              style="font-size:small; position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
+              style="font-size:10px; position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
             <a *ngIf="languageService.getCurrentLanguage() === 'english'"
               style="position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
           </ng-template>
@@ -148,10 +148,9 @@
                 *ngIf="selectedTab === 2 ">
             </span>
             <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
-              style="font-size:0.775rem">{{languageService.profileLang.likesYou}}</a>
+              style="font-size:9px;">{{languageService.profileLang.likesYou}}</a>
             <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.likesYou}}</a>
           </ng-template>
-
           <ng-template matTabContent>
             <div>
               <div class=' w-full ht-full'>
@@ -176,7 +175,9 @@
               style="font-size:small">{{languageService.profileLang.yourLikes}}</a>
             <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.yourLikes}}</a> -->
             <!-- {{itemService.getShortlistedCount()}} -->
-            <a style="font-size:small">History</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+              style="font-size:10px;">{{languageService.profileLang.history}}</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.history}}</a>
           </ng-template>
           <ng-template matTabContent>
             <div>

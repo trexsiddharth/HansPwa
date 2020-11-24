@@ -8,9 +8,9 @@ import { LanguageService } from 'src/app/language.service';
 import { NewHomeService } from 'src/app/new-home/new-home.service';
 import {Boy} from './boy';
 @Component({
-    selector: 'kundali',
-    templateUrl: './kundali.component.html',
-    styleUrls: ['./kundali.component.css']
+    selector: 'new-kundali',
+    templateUrl: './new-kundali.component.html',
+    styleUrls: ['./new-kundali.component.css']
 })
 
 export class Kundali implements OnInit {

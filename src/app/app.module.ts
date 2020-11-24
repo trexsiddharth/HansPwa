@@ -47,7 +47,7 @@ import { Features } from './new-landing-from-component/features/features.compone
 import { NewApp } from './new-landing-from-component/newApp/new-app.component';
 import { OfflineCenters } from './new-landing-from-component/offlineCenters/offline-centers.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { Kundali } from './new-landing-from-component/freeKundaliMatching/kundali.component';
+import { Kundali } from './new-landing-from-component/freeKundaliMatching/new-kundali.component';
 import { AppFooter } from './new-landing-from-component/footer/footer';
 import { MatchMakers } from './new-landing-from-component/matchmakers/matchmakers.component';
 import { Testimonials } from './new-landing-from-component/testimonials/testimonials.component';

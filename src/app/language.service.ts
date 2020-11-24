@@ -158,10 +158,10 @@ export class LanguageService {
           this.profileLang.workingPref = 'वर्किंग प्रेफरेंस';
           this.profileLang.desc = 'डिस्क्रिप्शन';
           this.profileLang.todaysSpecial = 'आज के रिश्ते';
-          this.profileLang.discover = 'और रिश्ते देखे';
-          this.profileLang.likesYou = 'आपको पसंद करते';
+          this.profileLang.discover = 'और देखें';
+          this.profileLang.likesYou = 'मुझे पसंद किय़ा';
           this.profileLang.yourLikes = 'आपकी पसंद';
-
+          this.profileLang.history = 'पुराने रिश्ते';
           // credits
           this.profileLang.credits = 'बचे हुए कॉन्टेक्ट्स:';
 
@@ -258,6 +258,7 @@ export class LanguageService {
           this.profileLang.discover = 'See More';
           this.profileLang.likesYou = 'Liked Me';
           this.profileLang.yourLikes = 'My Likes';
+          this.profileLang.history = 'History';
 
           // credits
           this.profileLang.credits = 'Contacts Left: ';

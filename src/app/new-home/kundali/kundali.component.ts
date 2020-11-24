@@ -51,7 +51,9 @@ export class KundaliTwoComponent implements OnInit {
       this.showContinueBtn.next(false);
       setTimeout(() => {
         let ele = document.getElementById('pointsDiv');
-        ele.scrollIntoView({ behavior: 'smooth' });
+        if(ele){
+          ele.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 500);
     }
     this.kundaliForm.valueChanges.subscribe(() => {
@@ -118,6 +120,7 @@ export class KundaliTwoComponent implements OnInit {
         if (response.point) {
           this.points = response.point;
           this.HTMLResponse = response.full;
+          console.log(this.homeService.HTMLResponse);
           this.HTMLResponse = this.HTMLResponse.split('ul').join('tr');
           this.HTMLResponse = this.HTMLResponse.split('li').join('td');
           console.log(this.HTMLResponse);
