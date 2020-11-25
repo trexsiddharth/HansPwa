@@ -205,7 +205,7 @@ export class FindOpenHistoryProfileService {
   }
 
   getPersonalized() {
-    return  this.authData ? this.authData.is_premium ? this.authData.is_premium  : this.isPersonalized : this.isPersonalized;
+    return  this.authData ? this.authData.is_premium === '1' ? true  : false : this.isPersonalized;
   }
   setIsLead(status) {
     this.is_lead = status;

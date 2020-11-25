@@ -32,7 +32,7 @@
         </div>
 
         <div class="menuIcon" (click)="sidenav.toggle()">
-          <img id="myProfImage" (click)="itemService.setTutorialIndex()" (error)="onImageLoadError()" [src]="photo"
+          <img id="myProfImage" (click)="itemService.setTutorialIndex()" [src]="photo" (error)="onImageLoadError()" 
             alt="profile pic" (click)="itemService.setdrawerBadgeClicked(true)">
           <div class="smallMenuImage">
             <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"

@@ -481,7 +481,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onImageLoadError() {
     console.log('error occured while loading profile image, Setting default image');
-    this.photo = '../../assets/avatar.svg';
+    this.photo = '../../../assets/logo_192.png';
   }
 
   setTabNames(tab: any) {
