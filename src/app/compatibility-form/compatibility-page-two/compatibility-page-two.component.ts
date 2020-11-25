@@ -424,9 +424,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
 
       if (this.PageTwo.value.AnnualIncome === '100+') {
         incomeCalc = 100;
-      } else if (this.PageTwo.value.AnnualIncome) {
+      } else if (this.PageTwo.value.AnnualIncome && this.PageTwo.value.AnnualIncome !== '0') {
         const a = this.PageTwo.value.AnnualIncome.split('-');
         incomeCalc = String((Number(a[0]) + Number(a[1])) / 2);
+      } else {
+        incomeCalc = '0';
       }
 
       if (!this.workingCity) {
@@ -593,18 +595,21 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   changedOccupation() {
     console.log('changed Occupation');
-    if (this.PageTwo.value.Occupation !== 'Not Working') {this.showYearlyIncome = true;
-                                                          this.showWorkingCity = true;
-    } else if (this.PageTwo.value.Occupation === 'Not Working') {this.showWorkingCity = false; this.showYearlyIncome = false; }
+    this.showWorkingCity = true;
+    if (this.PageTwo.value.Occupation !== 'Not Working') {
+      this.showYearlyIncome = true;
+    } else if (this.PageTwo.value.Occupation === 'Not Working') {
+      this.PageTwo.controls.AnnualIncome.setValue(0);
+      this.showYearlyIncome = false; 
+    }
     this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
 
     switch (this.PageTwo.value.Occupation) {
       case 'Not Working':
         this.PageTwo.patchValue({
           Designation: this.PageTwo.value.Occupation,
-          Working: 'na'
         });
-        this.workplace = 'na';
+        // this.workplace = 'na';
         break;
       case 'Business/Self-Employed':
         this.PageTwo.patchValue({
@@ -641,9 +646,8 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       case 'Not Working':
         this.PageTwo.patchValue({
           Designation: this.PageTwo.value.Occupation,
-          Working: 'na'
         });
-        this.workplace = 'na';
+        // this.workplace = 'na';
         break;
       case 'Business/Self-Employed':
         this.PageTwo.patchValue({

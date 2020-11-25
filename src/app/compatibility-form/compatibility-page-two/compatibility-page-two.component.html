@@ -105,7 +105,7 @@
       </mat-form-field>
     </div> -->
 
-    <div [ngClass]="{'col-12': fourPageService.getUserThrough() , 'col-6': !fourPageService.getUserThrough() }" *ngIf="PageTwo.value.Occupation !== 'Not Working' && showWorkingCity">
+    <div [ngClass]="{'col-12': fourPageService.getUserThrough() || PageTwo.value.Occupation === 'Not Working'  , 'col-6': !fourPageService.getUserThrough() }" *ngIf="showWorkingCity">
       <mat-form-field class="full-width fieldFit" appearance="standard">
         <mat-label>Current City</mat-label>
       <input type="text" matInput id="workingCity" (change)="placeChanged()" formControlName="Working" [matAutocomplete]="Working">
