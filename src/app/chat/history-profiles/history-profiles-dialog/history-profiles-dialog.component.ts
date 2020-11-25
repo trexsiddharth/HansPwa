@@ -112,7 +112,10 @@ export class HistoryProfilesDialogComponent implements OnInit {
       this.itemService.getPhotoStatus() === false &&
       answer === 'SHORTLIST') {
       this.itemService.openMessageDialog(item, answer);
-    } else if (this.itemService.getPersonalized() === false &&
+    }  else if (this.itemService.getPersonalized() &&
+    answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' ) {
+    this.ngxNotificationService.warning('You don\'t have enough credits');
+  } else if (this.itemService.getPersonalized() === false &&
       answer === 'YES' && !item.family) {
       this.itemService.openMessageDialog(item, 'contacted');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
@@ -431,7 +434,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
   //  }
 
   setName(name: string): string {
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+    && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];

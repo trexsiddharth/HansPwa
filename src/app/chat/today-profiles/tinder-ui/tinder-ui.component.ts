@@ -609,7 +609,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
   setName(name: string, isFreeProf: number): string {
     if (this.itemService.getCredits() != null
     && this.itemService.getCredits().toString() === '0'
-     && isFreeProf !== 1) {
+     && isFreeProf !== 1 && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];

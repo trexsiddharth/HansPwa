@@ -276,7 +276,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
   reponseToNormal(item, answer, index) {
 
-    if (this.itemService.getPersonalized() === true &&
+    if (this.itemService.getPersonalized() &&
       answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
       this.ngxNotificationService.warning('You don\'t have enough credits ');
       return;
@@ -495,7 +495,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
 
   setName(name: string): string {
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+    && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
@@ -864,7 +865,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       this.getData(item, answer, index);
       return;
     }
-    if (this.itemService.getPersonalized() === true &&
+    if (this.itemService.getPersonalized() &&
       answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
       this.ngxNotificationService.warning('You don\'t have enough credits ');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&

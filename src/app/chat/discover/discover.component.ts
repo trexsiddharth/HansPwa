@@ -208,7 +208,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   setName(name: string): string {
     if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0'
-    || this.authData.paid_status !== 'Paid')) {
+    || this.authData.paid_status !== 'Paid') && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
@@ -222,7 +222,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   profileReAnswer(data: any) {
 
-    if (this.itemService.getPersonalized() === true
+    if (this.itemService.getPersonalized()
      && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
       this.ngxNotificationService.warning('You don\'t have enough credits ');
     } else if (this.itemService.getPersonalized() === false &&

@@ -49,6 +49,7 @@ export class FindOpenHistoryProfileService {
   // history search section
   private historyAllDataListSubject: BehaviorSubject<HistoryTable> = new BehaviorSubject<HistoryTable>(null);
   private historyAllDataList$: Observable<HistoryTable>;
+  private authData;
 
   constructor(
     private dialog: MatDialog,
@@ -56,6 +57,8 @@ export class FindOpenHistoryProfileService {
     private router: Router,
     private http: HttpClient,
     private ngxNotificationService: NgxNotificationService) {
+
+      this.authData = JSON.parse(localStorage.getItem('authData'));
   }
 
   getSeeMoreData(): any {
@@ -165,8 +168,7 @@ export class FindOpenHistoryProfileService {
   }
   getDiscoverClicked() {
     const temp = localStorage.getItem('discoverClicked');
-    if (temp == '1') { return true; }
-    else { return false; }
+    if (temp == '1') { return true; } else { return false; }
   }
   setdrawerBadgeClicked(status: boolean) {
     if (status) {
@@ -191,22 +193,19 @@ export class FindOpenHistoryProfileService {
   }
   getChangePrefsClicked() {
     const temp = localStorage.getItem('changePrefsClicked');
-    if (temp == '1') { return true }
-    else { return false; }
+    if (temp === '1') { return true; } else { return false; }
   }
   getdrawerBadgeClicked() {
     const temp = localStorage.getItem('drawerBadgeClicked');
-    if (temp == '1') { return true }
-    else { return false; }
+    if (temp === '1') { return true; } else { return false; }
   }
   getcontactedPhoneClicked() {
     const temp = localStorage.getItem('contactedPhoneClicked');
-    if (temp == '1') { return true }
-    else { return false; }
+    if (temp === '1') { return true; } else { return false; }
   }
 
   getPersonalized() {
-    return this.isPersonalized;
+    return  this.authData ? this.authData.is_premium ? this.authData.is_premium  : this.isPersonalized : this.isPersonalized;
   }
   setIsLead(status) {
     this.is_lead = status;
@@ -226,15 +225,13 @@ export class FindOpenHistoryProfileService {
     }
   }
   setPhotoStatus(status: boolean) {
-    if (status) { localStorage.setItem("has_photo", '1'); }
-    else { localStorage.setItem("has_photo", "0"); }
+    if (status) { localStorage.setItem("has_photo", '1'); } else { localStorage.setItem("has_photo", "0"); }
     this.hasPhoto = status;
   }
   getPhotoStatus() {
     if (localStorage.getItem('has_photo') === '1') {
       this.hasPhoto = true;
-    }
-    else {
+    } else {
       this.hasPhoto = false;
     }
     return this.hasPhoto;
