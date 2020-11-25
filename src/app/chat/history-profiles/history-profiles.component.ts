@@ -551,7 +551,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
   openProfileDialog(item: any, ind: any) {
     // setting the index in local strorage to use in scrollIntoView later
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() == '0' && this.type === 'interestReceived') {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' 
+    && this.type === 'interestReceived' && !this.itemService.getPersonalized()) {
       return;
     }
     localStorage.setItem('index', String(ind));
