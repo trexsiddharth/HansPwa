@@ -689,8 +689,9 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         } else {
           this.type = 'message';
           this.profileItems = [];
-          if (Number(localStorage.getItem('profileCompPercent')) < 90 && this.showIndex < 40) {
-            this.openPersistentDialogNew();
+          if (localStorage.getItem('profileCompPercent') &&
+          Number(localStorage.getItem('profileCompPercent')) < 90 && this.showIndex < 40) {
+            this.openPersistentDialogNew(); //
           }
           this.itemMessage = data.apiwha_autoreply;
           localStorage.setItem('todayProfile', '');
@@ -715,7 +716,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           && (data.get_status_count.TPL === 0 || data.get_status_count.TPL === '0')
           && data.is_rated === 0) {
               // rate us for free users
-            // this.itemService.openRateUsDialog(true);
+            this.itemService.openRateUsDialog(true);
           }
         }
         //completely useless lines of code

@@ -178,7 +178,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.actionCount === -2 && this.router.url.match('first')) {
       setTimeout(() => {
         this.chatService.opensidenavTrue();
-      }, 1500)
+      }, 1500);
     }
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes') {
