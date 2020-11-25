@@ -949,9 +949,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
         if (this.PageTwo.value.AnnualIncome === '100+') {
           incomeCalc = 100;
-        } else if (this.PageTwo.value.AnnualIncome) {
+        } else if (this.PageTwo.value.AnnualIncome && this.PageTwo.value.AnnualIncome !== '0') {
           const a = this.PageTwo.value.AnnualIncome.split('-');
           incomeCalc = String((Number(a[0]) + Number(a[1])) / 2);
+        } else {
+          incomeCalc = '0';
         }
   
         if (!this.fourPageService.getUserThrough()) {
