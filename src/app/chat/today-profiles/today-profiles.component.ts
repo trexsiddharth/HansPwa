@@ -137,6 +137,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         data => {
           console.log(data);
           localStorage.setItem('authData', JSON.stringify(data));
+          const totalIncome = Number(data.user_income) + Number(data.family_income);
+          if (totalIncome < 4) {
+            localStorage.setItem('low income', 'true');
+          }
           this.chatService.authDataUpdated.emit(true);
           const text: string = data.apiwha_autoreply;
           const id = data.id;
@@ -195,6 +199,10 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     } else {
       setTimeout(() => {
         const data = JSON.parse(localStorage.getItem('authData'));
+        const totalIncome = Number(data.user_income) + Number(data.family_income);
+        if (totalIncome < 4) {
+          localStorage.setItem('low income', 'true');
+        }
         this.chatService.authDataUpdated.emit(true);
         console.log(data);
         const text: string = data.apiwha_autoreply;

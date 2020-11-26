@@ -57,7 +57,18 @@ section{
     height: 100vh;
     display: block;
     position: relative;
-
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
+    animation: fadeInUp 1.5s 1;
+}
+.noProfileMainSection{
+    margin-top: 0px!important;
+    background-size: contain;
+    width:100vw;
+    height: 100vh;
+    display: block;
+    padding-top: 50px;
+    position: relative;
+    background-image: linear-gradient(90deg, #4FB0E5, #566EE8);
     animation: fadeInUp 1.5s 1;
 }
 .noProfile{

@@ -119,8 +119,10 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   );
 
   selectedTab = 0;
+  authData;
 
   async ngOnInit() {
+    this.authData = JSON.parse(localStorage.getItem('authData'));
     if (true) {
       this.subscriptionservice.loadRazorPayScript();
       const headers = new HttpHeaders({
@@ -130,7 +132,16 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         this.plans = res;
         for (let i = 0; i < this.plans.length; i++) {
           if (this.plans[i].plan_type === 'Self Service Plan') {
-            this.plansOnline.push(this.plans[i]);
+            if (this.authData) {
+              const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
+              if (totalIncome < 4) {
+                this.plansOnline.push(this.plans[i]);
+              } else {
+                if (this.plans[i].category_name !== 'Low income') {
+                  this.plansOnline.push(this.plans[i]);
+                }
+              }
+            }
             if (!localStorage.getItem('showRemarrigePlan')) {
                this.plansOnline =  (this.plansOnline as []).filter((item: any) => !(item.plan_name as string).includes('Re-Marriage'));
             }

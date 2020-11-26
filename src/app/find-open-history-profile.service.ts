@@ -91,7 +91,7 @@ export class FindOpenHistoryProfileService {
         map(res => (res.message as ProfileTable[])),
          catchError(e => {
           this.ngxNotificationService.error('Something Went Wrong, Try Again Later');
-        throw new Error('Server Timeout ' + e);
+          throw new Error('Server Timeout ' + e);
       }));
   }
 
@@ -376,7 +376,7 @@ export class FindOpenHistoryProfileService {
     const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
   }
   // new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
-  openTodaysPopupAd() {
+  async openTodaysPopupAd() {
     if (this.popupOpen) {
       this.popupOpen = false;
       return;

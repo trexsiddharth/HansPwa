@@ -43,6 +43,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   ];
   showNavigationArrows = false;
   showNavigationIndicators = false;
+  authData;
   constructor(
     public dialogRef: MatDialogRef<TodaysPaymentPopupComponent>, @Inject(MAT_DIALOG_DATA) data,
     public languageService: LanguageService,
@@ -52,8 +53,10 @@ export class TodaysPaymentPopupComponent implements OnInit {
     private ngxNotificationService: NgxNotificationService) {
     this.data = data;
   }
-  ngOnInit() {
+  async ngOnInit() {
     this.subscriptionservice.loadRazorPayScript();
+    this.authData = await this.getAuthDataFirst();
+    console.log(this.authData);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -61,20 +64,33 @@ export class TodaysPaymentPopupComponent implements OnInit {
       .subscribe(
         (res: any) => {
           if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') == '1') {
-            for (let a of res) {
+            for (const a of res) {
               if (a.plan_type === 'Self Service Plan') {
                 this.plans.push(a);
               }
             }
-          }
-          else {
-            for (let a of res) {
-              if (a.plan_type === 'Self Service Plan' && a.plan_name != "Re-Marriage") {
-                this.plans.push(a);
+          } else {
+            if (this.authData) {
+              const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
+              if (totalIncome < 4) {
+                for (const a of res) {
+                  if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage') {
+                    this.plans.push(a);
+                  }
+                }
+            } else {
+              for (const a of res) {
+                if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' && a.category_name !== 'Low income' ) {
+                  this.plans.push(a);
+                }
               }
             }
+            } else {
+              this.ngxNotificationService.warning('Auth Data not found');
+            }
+
           }
-          //this.plans = res;
+          // this.plans = res;
           console.log(this.plans);
         },
         (err: any) => {
@@ -89,11 +105,11 @@ export class TodaysPaymentPopupComponent implements OnInit {
       this.plan = this.data.plan;
       this.price = this.data.price;
       this.credits = this.data.credits;
-      //this.chooseMethod = this.data.chooseMethod;
+      // this.chooseMethod = this.data.chooseMethod;
       this.selectedContainer = this.data.selectedContainer;
       localStorage.setItem('selected_plan', 'plan ' + String(this.data.selectedContainer));
       console.log('plan ' + String(this.data.selectedContainer) + ' is selected');
-      this.chooseMethod = this.data.chooseMethod;// is set to true.
+      this.chooseMethod = this.data.chooseMethod; // is set to true.
       this.getPaytmOrderId();
       this.subscriptionViewed();
     }
@@ -110,6 +126,12 @@ export class TodaysPaymentPopupComponent implements OnInit {
     localStorage.removeItem('oId');
     localStorage.removeItem('selected_plan');
     this.dialogRef.close();
+  }
+
+  getAuthDataFirst(): Promise<any> {
+    return new Promise<any>((res) => {
+      res(JSON.parse(localStorage.getItem('authData')));
+    });
   }
 
   getCredits() {
@@ -209,12 +231,12 @@ export class TodaysPaymentPopupComponent implements OnInit {
     return this.plans[index].amount - (this.plans[index].amount * this.plans[index].discount / 100);
   }
   setContent(index: number) {
-    let content = this.plans[index].content.split('\n');
+    const content = this.plans[index].content.split('\n');
     return content;
   }
   container(index: number) {
     this.price = this.setAmount(index);
-    this.credits = this.plans[index].content.split(" ")[0];
+    this.credits = this.plans[index].content.split(' ')[0];
     this.selectedContainer = index;
     localStorage.setItem('selected_plan', 'plan ' + String(index));
     this.chooseMethod = true;
