@@ -1760,10 +1760,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           this.advt_shortlink = this.route.snapshot.queryParams.shortlink;
         }
         if (this.route.snapshot.queryParams.pid) {
-          this.advt_shortlink = this.route.snapshot.queryParams.pid;
+          this.advt_pid = this.route.snapshot.queryParams.pid;
         }
         if (this.route.snapshot.queryParams.c) {
-          this.advt_shortlink = this.route.snapshot.queryParams.c;
+          this.advt_c = this.route.snapshot.queryParams.c;
         }
       }
   }
