@@ -74,8 +74,12 @@ export class TodaysPaymentPopupComponent implements OnInit {
               const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
               if (totalIncome < 4) {
                 for (const a of res) {
-                  if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage') {
-                    this.plans.push(a);
+                  if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' ) {
+                    if (a.plan_name === 'Basic' && a.category_name !== 'Normal') {
+                      this.plans.push(a);
+                    } else if (a.plan_name !== 'Basic' && a.category_name === 'Normal') {
+                      this.plans.push(a);
+                    }
                   }
                 }
             } else {

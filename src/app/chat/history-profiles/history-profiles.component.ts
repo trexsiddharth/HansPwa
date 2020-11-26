@@ -135,7 +135,11 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
             if (this.authData) {
               const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
               if (totalIncome < 4) {
-                this.plansOnline.push(this.plans[i]);
+                if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal') {
+                  this.plansOnline.push(this.plans[i]);
+                } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal') {
+                  this.plansOnline.push(this.plans[i]);
+                }
               } else {
                 if (this.plans[i].category_name !== 'Low income') {
                   this.plansOnline.push(this.plans[i]);

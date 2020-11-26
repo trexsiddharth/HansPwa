@@ -79,7 +79,7 @@ export class SubscriptionComponent implements OnInit {
       this.plans = res;
       if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') === '1') {
         for (let i = 0; i < this.plans.length; i++) {
-          if (this.plans[i].plan_type === "Self Service Plan") {
+          if (this.plans[i].plan_type === 'Self Service Plan') {
             this.plansOnline.push(this.plans[i]);
           }
           else {
@@ -90,9 +90,9 @@ export class SubscriptionComponent implements OnInit {
       else {
         if (!localStorage.getItem('low income') && localStorage.getItem('low income') !== 'true') {
           for (let i = 0; i < this.plans.length; i++) {
-            if (this.plans[i].plan_name != "Re-Marriage" &&
+            if (this.plans[i].plan_name != 'Re-Marriage' &&
              this.plans[i].plan_name != 'Re-Marriage Deluxe' &&  this.plans[i].category_name !== 'Low income' ) {
-              if (this.plans[i].plan_type === "Self Service Plan") {
+              if (this.plans[i].plan_type === 'Self Service Plan') {
                 this.plansOnline.push(this.plans[i]);
               } else {
                 this.plansPersonlised.push(this.plans[i]);
@@ -101,9 +101,13 @@ export class SubscriptionComponent implements OnInit {
           }
         } else {
           for (let i = 0; i < this.plans.length; i++) {
-            if (this.plans[i].plan_name != "Re-Marriage" && this.plans[i].plan_name != 'Re-Marriage Deluxe' ) {
-              if (this.plans[i].plan_type === "Self Service Plan") {
-                this.plansOnline.push(this.plans[i]);
+            if (this.plans[i].plan_name !== 'Re-Marriage' && this.plans[i].plan_name !== 'Re-Marriage Deluxe' ) {
+              if (this.plans[i].plan_type === 'Self Service Plan') {
+                if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal' ) {
+                  this.plansOnline.push(this.plans[i]);
+                } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal'  ) {
+                  this.plansOnline.push(this.plans[i]);
+                }
               }
               else {
                 this.plansPersonlised.push(this.plans[i]);
