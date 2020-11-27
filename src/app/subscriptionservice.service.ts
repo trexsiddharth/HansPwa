@@ -238,6 +238,7 @@ captureStandardPayment(response, amount, points) {
   let formData = new FormData();
   formData.append('mobile', localStorage.getItem('mobile_number'));
   formData.append('payment_id', response.razorpay_payment_id);
+  formData.append('plan_id', localStorage.getItem('selected_plan_id'));
   formData.append('amount', amount);
   formData.append('id', localStorage.getItem('id'));
   formData.append('is_lead', localStorage.getItem('is_lead'));
@@ -285,6 +286,7 @@ facebookAnalytics(event, amount) {
   formData.append('orderId', localStorage.getItem('oId'));
   formData.append('is_lead', localStorage.getItem('is_lead'));
   formData.append('mobile', localStorage.getItem('mobile_number'));
+  formData.append('plan_id', localStorage.getItem('selected_plan_id'));
   // set credits according to the plan number
   formData.append('whatsapp_point', localStorage.getItem('selected_plan') ?
   localStorage.getItem('selected_plan') === 'plan 1' ?

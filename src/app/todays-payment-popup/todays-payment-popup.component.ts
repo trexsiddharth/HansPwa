@@ -243,6 +243,8 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.credits = this.plans[index].content.split(' ')[0];
     this.selectedContainer = index;
     localStorage.setItem('selected_plan', 'plan ' + String(index));
+    localStorage.setItem('selected_plan_id', this.plans[index].id);
+
     this.chooseMethod = true;
     this.getPaytmOrderId();
     this.subscriptionViewed();
