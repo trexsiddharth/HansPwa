@@ -46,6 +46,7 @@ import {
 } from '../chat-service.service';
 import { LanguageService } from '../language.service';
 import { SubscriptionserviceService } from '../subscriptionservice.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -209,6 +210,18 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    console.log('Back button pressed');
+    // if (this.router.url.match('/chat')) {
+      
+    //   if (!window.confirm('you\'re about to leave this page')) {
+        
+    //   }
+    // }
+
+  }
+
   ngOnInit() {
     if (localStorage.getItem('profile_photo')) {
       console.log('hamburger photo set');
@@ -347,7 +360,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
     if (!localStorage.getItem('todaysPopupOpened') || (localStorage.getItem('todaysPopupOpened') && localStorage.getItem('todaysPopupOpened') !== '0')) {
-      this.openTodaysPopupHere();
+      // this.openTodaysPopupHere(); 
     }
     else {
       localStorage.setItem('todaysPopupOpened', '1');

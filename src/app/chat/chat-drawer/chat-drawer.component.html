@@ -109,7 +109,7 @@
     </main>
   </mat-sidenav-content>
   <mat-sidenav #sidenavPrefs id="sidenavPrefs" class="drawerSettings" mode="over" position="start" #sidenav>
-    <main class="mainContainer" *ngIf="preferenceProfileData && authData">
+    <main class="mainContainer" >
       <!-- <mat-expansion-panel id="prefs" [expanded]="false" (opened)="specialCase()" hideToggle>
       <mat-expansion-panel-header class="rowMore">
         <img src="../../../assets/tabs-icons/family.svg" class="iconImage">
@@ -277,14 +277,7 @@
                 }}</option>
                   </select>
                 </div>
-                <!-- <div class="col-5">
-                  <h6 style="display: inline-block;">Food Choice:</h6>
-                  <select type="text" class="form-control" formControlName="food_choice">
-                    <option *ngFor="let item of Foodpreferences" [value]="item">{{
-                  item
-                }}</option>
-                  </select>
-                </div> -->
+ 
                 <div class="col-5" *ngIf="preferenceProfileData && preferenceProfileData.manglik">
                   <h6 style="display: inline-block;">Manglik :</h6>
                   <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
@@ -308,67 +301,9 @@
                   <p style="color:red!important;font-size: 10px;">*Income Max cannot be less than Income Min</p>
                 </div>
               </div>
-              <div class="row information">
-                <!-- <div class="col-5" *ngIf="gender==='Female'">
-                  <h6>Occupation</h6>
-                  <mat-select type="text" class="form-control" [multiple]="true" formControlName="occupation"
-                    [(ngModel)]="preferenceProfileData.occupation" required>
-                    <mat-option *ngFor="let item of Occupation" [value]="item" required>
-                      {{ item}}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-5" *ngIf="gender==='Male'">
-                  <h6>Working</h6>
-                  <select type="text" class="form-control" formControlName="working" required>
-                    <option *ngFor="let name of Working" [value]="name" required>
-                      {{ name }}
-                    </option>
-                  </select>
-                </div> -->
 
-              </div>
-              <!-- <div class="row information">
-            <div class="col-10">
-              <h6 style="display: inline-block;">{{languageService.profileLang.religion}}:</h6>
-              <mat-select style="color:black!important" type="text" class="form-control" [multiple]="true"
-                formControlName="religion" [(ngModel)]="preferenceProfileData.religion" required>
-                <mat-option *ngFor="let item of Religions" [value]="item" required>
-                  {{ item}}
-                </mat-option>
-              </mat-select>
-            </div>
-          </div> -->
-              <!-- <div class="row information">
-                <h6 class="col-10">Working City:</h6><br>
-                <div class="col-3" style="padding:4px!important;">
-                  <select type="text" class="form-control text-sm" (change)="selected('country')"
-                    formControlName="country" required name="country" aria-placeholder="country">
-                    <option value="" disabled selected hidden>Country...</option>
-                    <option *ngFor="let  option of countries | async" [value]="option">
-                      {{option}}
-                    </option>
-                  </select>
-                </div>
-                <div class="col-3" style="padding:4px!important;">
-                  <select type="text" class="form-control text-sm" (change)="selected('state')" formControlName="state"
-                    required name="state">
-                    <option value="" disabled selected hidden>State...</option>
-                    <option *ngFor="let  option of state | async" [value]="option">
-                      {{option}}
-                    </option>
-                  </select>
-                </div>
-                <div class="col-3" style="padding:4px!important;">
-                  <select type="text" class="form-control text-sm" (change)="selected('city')" formControlName="city"
-                    required name="city">
-                    <option value="" disabled selected hidden>City...</option>
-                    <option *ngFor="let  option of cities| async" [value]="option">
-                      {{option}}
-                    </option>
-                  </select>
-                </div>
-              </div> -->
+           
+ 
               <div class="row information">
                 <div class="col-12">
                   <h6>Country:</h6>
@@ -525,37 +460,9 @@
                   </mat-checkbox>
                 </div>
               </div>
-              <!-- <div style="text-align: center; width: 100%;">
-            <button type="submit" class="btn" mat-raised-button style="background-color: #34b7f1;
-                              color: white;
-                              width:100%;
-                              padding: 5px 40px;
-                              margin-top:10px;
-                              margin-bottom:10px;
-                              font-size: 1rem;
-                              font-weight: bold;
-                              " (click)="onSubmitPreferences()">SAVE</button>
-          </div> -->
-              <!-- <button class="mat-elevation-z5 btn-success" mat-button [hidden]="editIndexPrefs != 0"
-            (click)="onSubmitPreferences()">
-            SAVE
-          </button> -->
+
             </div>
           </div>
-
-          <!-- <div style="text-align:center;color:#4a5d6a">or</div> -->
-          <!-- <div class="topText" style="width: 100%;justify-content: center;">
-            <button class="btn" mat-raised-button style="background-color: #54585a34;
-                          color: rgba(70, 68, 68, 0.527)!important;
-                          width:90%;
-                          /* padding: 5px 40px; */
-                          margin-top:2px;
-                          margin-bottom:2px;
-                          font-size: 0.75rem;
-                          font-weight: bold;box-shadow: -12px -12px 14px 0 rgba(255, 255, 255, 1),
-12px 12px 14px rgba(0, 0, 0, 0.2);
-                          " (click)="onSubmitPreferences()">Proceed With Selected Filters</button>
-          </div> -->
         </form>
       </div>
       <!-- </mat-expansion-panel> -->
