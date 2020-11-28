@@ -9,7 +9,7 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { timeout, retry, catchError, takeUntil, shareReplay, map, startWith, delay, debounceTime } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { BehaviorSubject, observable, Observable, ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, concat, observable, Observable, ReplaySubject, Subject } from 'rxjs';
 import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { ChooseFromDialogComponent } from './choose-from-dialog/choose-from-dialog.component';
 
@@ -350,8 +350,6 @@ export class ChatDrawerComponent implements OnInit {
 
     this.innerWidth = window.innerWidth;
 
-
-
     this.preferencesForm = this._formBuilder.group({
       food_choice: [''],
       age_min: [''],
@@ -515,7 +513,8 @@ export class ChatDrawerComponent implements OnInit {
     form.append('pref_state_id', this.chatService.selected_states_id.join(','));
     form.append('pref_city', this.chatService.selected_cities);
 
-    this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form).subscribe((response: any) => {
+    this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form)
+    .subscribe((response: any) => {
       if (response.count) {
         this.countProfiles = response.count;
         this.chatService.countOfRishtey = response.count;

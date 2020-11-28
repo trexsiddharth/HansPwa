@@ -188,6 +188,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   lockdownCount = 0;
 
 
+
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -544,19 +545,6 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     document.getElementById('footerVisibility').style.display = 'none';
   }
 
-  changeToHistory() {
-    if (this.currentContact) {
-      (window as any).ga('send', 'event', 'history', 'history clicked', {
-        hitCallback: () => {
-          console.log('Tracking history successful');
-        }
-      });
-      this.history = 'history';
-
-      console.log(localStorage.getItem('id'));
-      this.scrollHorizontal(this.currentTab);
-    }
-  }
   changeToPersonalized() {
     if (this.currentContact) {
       (window as any).ga('send', 'event', 'personalized section', 'personalized clicked', {
@@ -673,8 +661,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   changeSelectedTab(event: any) {
-    console.log(event);
+    console.log(event); 
     this.currentTab = event;
+    this.chatServivce.changeCurrentTab(event);
 
     switch (event) {
       case 0:
@@ -689,17 +678,14 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
         this.tabType = 'discover';
         this.analyticsEvent('Discover Section Visited');
         this.itemService.setDiscoverClicked(true);
-        this.changeToHistory();
         break;
       case 2:
         this.analyticsEvent('Likes You Section Visited');
         this.tabType = 'interestReceived';
-        this.changeToHistory();
         break;
       case 3:
         this.analyticsEvent('Liked By Me Section Visited');
         this.tabType = 'interestShown';
-        this.changeToHistory();
         break;
       default:
         break;

@@ -27,6 +27,8 @@ export class ChatServiceService {
     isLead
   }>();
 
+  currentTab = 0;
+
   constructor(public http: HttpClient,
     public itemService: FindOpenHistoryProfileService) { }
 
@@ -81,6 +83,17 @@ export class ChatServiceService {
   getLoginStatus() {
     return this.loginStatus;
   }
+
+  changeCurrentTab(tab: number) {
+    if (tab && tab > -1) {
+      this.currentTab = tab;
+    }
+
+  }
+
+ get activeTab(): number {
+  return this.currentTab;
+ }
 
   setCredits(credits: string) {
     this.credits = credits;

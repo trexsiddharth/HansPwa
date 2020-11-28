@@ -9,11 +9,17 @@
             <div class="column" style="flex: 2;justify-content: end;
             align-items: end;padding:2%;color: black;"
             (click)="getUserProfileData()">
-                <p style="font-size:1rem;font-weight:bold;text-transform: capitalize;">{{setName(listItem.name)}}</p>
-                <p style="font-size:0.8rem;">{{getHeight(listItem.height)}}&nbsp;|&nbsp;{{listItem.age}}Yrs</p>
-                <p style="font-size:0.8rem;">{{listItem.religion}}&nbsp;|&nbsp;{{listItem.caste}}</p>
-                <p style="font-size:0.8rem;">{{listItem.working_city}}&nbsp;|&nbsp;{{listItem.monthly_income}}LPA</p>
-                <p style="border-radius: 5px;" [ngStyle]="{'background-color':getColor(listItem.type)}"
+                <p style="font-size:1rem;
+                margin-bottom: 5px;
+                font-weight:bold;text-transform: capitalize;">{{setName(listItem.name)}}</p>
+                <p style="font-size:0.8rem;
+                margin-bottom: 3px;">{{getHeight(listItem.height)}}&nbsp;|&nbsp;{{listItem.age}}Yrs</p>
+                <p style="font-size:0.8rem;
+                margin-bottom: 3px;">{{listItem.religion}}&nbsp;|&nbsp;{{listItem.caste}}</p>
+                <p style="font-size:0.8rem;
+                margin-bottom: 3px">{{listItem.working_city}}&nbsp;|&nbsp;{{listItem.monthly_income}}LPA</p>
+                <p style="border-radius: 5px;
+                margin-bottom: 5px" [ngStyle]="{'background-color':getColor(listItem.type)}"
                     (click)="getUserProfileData()">
                     <a
                         style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{listItem.type}}ED</a>
