@@ -371,21 +371,21 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   showShortListPopup(shareItem, i: number) {
     console.log(i);
-    if (i == 0) {
+    if (i === 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
     }
-    if (i == 1) {
+    if (i === 1) {
       this.openPersistentDialog('Liked ' + shareItem.name + '?', 'Get notified easily if ' + shareItem.name + ' likes you back!', 'Install App Now');
     }
-    if (i == 2) {
+    if (i === 2) {
       this.openPersistentDialog('Prime Membership', 'Become a paid member to contact ' + shareItem.name + '.', 'Get Membership');
     }
   }
   rejectListPopup(shareItem, i: number) {
-    if (i == 0) {
+    if (i === 0) {
       this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get better matches.', 'Complete Profile');
     }
-    if (i == 1) {
+    if (i === 1) {
       this.openPersistentDialog('Didn\'t Like ' + shareItem.name + '?', 'Become a paid member and get better matches', 'Choose Plan');
     }
   }
@@ -655,7 +655,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           // data.first_time = 0 -> when user comes for the first time on a day
           // data.first_time = 1 -> it gets 1 once he has seen first profile
           if (data.first_time === 0 && !this.router.url.match('first')) {
-            this.itemService.openWelcomeDialog(this.item.apiwha_autoreply.profiles_left);
+            // this.itemService.openWelcomeDialog(this.item.apiwha_autoreply.profiles_left);
           }
 
           // if photo is null

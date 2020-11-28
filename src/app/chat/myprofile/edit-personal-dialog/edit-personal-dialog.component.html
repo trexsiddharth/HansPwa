@@ -135,7 +135,7 @@
         <div class="row information">
           <div class="col-6">
             <h6>Occupation:</h6>
-            <select #relation class="form-control" formControlName="Occupation" required>
+            <select #relation class="form-control" formControlName="Occupation" >
               <option *ngFor="let  option of Occupation" [value]="option">
                 {{option}}
               </option>
@@ -164,7 +164,7 @@
 
           <div class="col-6">
             <h6>Annual Income In Lakhs:</h6>
-            <input type="number" class="form-control" formControlName="AnnualIncome" required>
+            <input type="number" class="form-control" formControlName="AnnualIncome" >
           </div>
         </div>
       </div>

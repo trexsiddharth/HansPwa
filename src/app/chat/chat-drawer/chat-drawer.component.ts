@@ -396,6 +396,7 @@ export class ChatDrawerComponent implements OnInit {
           this.userId = data.id;
           this.userIsLead = data.isLead;
           // this.getUserProfileData();
+          this.getProfileAndCalculate();
         }
       }
     );
@@ -785,6 +786,60 @@ export class ChatDrawerComponent implements OnInit {
       localStorage.removeItem('storedData');
     }
   }
+  getProfileAndCalculate() {
+    if (this.userId || localStorage.getItem('id')) {
+      this.spinner.show();
+      const myprofileData = new FormData();
+      myprofileData.append(
+        'id',
+        this.userId ? this.userId : localStorage.getItem('id')
+      );
+      myprofileData.append('contacted', '1');
+      myprofileData.append(
+        'is_lead',
+        this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
+      );
+      myprofileData.append('show_country', '1');
+      // tslint:disable-next-line: max-line-length
+      return this.http
+        .post<any>(
+          'https://partner.hansmatrimony.com/api/getProfile',
+          myprofileData
+        )
+        .pipe(
+          timeout(7000),
+          retry(2),
+          catchError((e) => {
+            this.ngxNotificationService.error(
+              'Server Time Out, Try Again Later'
+            );
+            throw new Error('Server Timeout ' + e);
+          })
+        )
+        .subscribe(
+          (data: any) => {
+            if (data) {
+              this.preferenceProfileData = data.preferences ? data.preferences : null;
+              this.personalProfileData = data.profile ? data.profile : null;
+              this.familyProfileData = data.family ? data.family : null;
+              this.spinner.hide();
+              this.setProfileCalculations();
+              this.setProfileCompletion();
+              this.checkPageThreeDetails();
+            }
+
+          },
+          (error: any) => {
+            this.spinner.hide();
+            console.log(error);
+            this.ngxNotificationService.error('Something Went Wrong');
+          }
+        );
+    } else {
+      this.ngxNotificationService.error('No user found');
+    }
+  }
+
   getUserProfileData() {
     if (this.userId || localStorage.getItem('id')) {
       this.spinner.show();

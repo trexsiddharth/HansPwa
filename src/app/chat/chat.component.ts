@@ -213,12 +213,12 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     console.log('Back button pressed');
-    // if (this.router.url.match('/chat')) {
+    if (this.router.url.match('/chat')) {
       
-    //   if (!window.confirm('you\'re about to leave this page')) {
-        
-    //   }
-    // }
+      if (!window.confirm('you\'re about to leave this page')) {
+        window.history.forward();
+      }
+    }
 
   }
 

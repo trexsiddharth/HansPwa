@@ -59,14 +59,7 @@
         [(selectedIndex)]="selectedTab" (selectedIndexChange)="changeSelectedTab($event)">
         <!-- // contacted -->
         <mat-tab id="contacted">
-            <!-- <ng-template mat-tab-label>
-                <img width="30px" src="../../assets/thumbs-up-blue.svg" alt="icon">
-                {{itemService.getContactedCount()}}
-            </ng-template> -->
             <ng-template matTabContent>
-                <!-- <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                    {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                </button> -->
                 <div class='col'>
                     <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
                     <div  *ngFor="let item of (historyShortlistList$|async);let i = index">
@@ -81,21 +74,7 @@
         </mat-tab>
         <!-- // liked by me -->
         <mat-tab id="melike">
-            <!-- <ng-template mat-tab-label>
-                <p class="labelSetting">
-                    <img class="tabImage" src="../../assets/tabs-icons/heart-like-white.svg" alt="icon"
-                        *ngIf="selectedTab !== 1">
-                    <img class="tabImage" src="../../assets/tabs-icons/heart.svg" alt="icon" *ngIf="selectedTab === 1 ">
-                    <span class="tabCount">
-                        {{itemService.getShortlistNumber()}}
-                    </span>
-                </p>
-                <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
-                    style="font-size:small">{{languageService.profileLang.yourLikes}}</a>
-                <a
-                    *ngIf="languageService.getCurrentLanguage() === 'english'">{{languageService.profileLang.yourLikes}}</a> -->
-            <!-- {{itemService.getShortlistedCount()}} -->
-            <!-- </ng-template> -->
+
             <ng-template matTabContent>
                 <div>
                     <div class='col'>
@@ -112,14 +91,8 @@
         </mat-tab>
         <!-- // rejected-->
         <mat-tab id="rejected">
-            <!-- <ng-template mat-tab-label>
-                {{itemService.getRejectedCount()}}
-            </ng-template> -->
             <ng-template matTabContent>
                 <div>
-                    <!-- <button (click)="goToSubs()" id="creditButton" mat-raised-button>
-                        {{languageService.profileLang.credits}}: {{itemService.getCredits()}}
-                    </button> -->
                     <div class='col'>
                         <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
                         <div *ngFor="let item of (historyRejectList$|async);let i = index">
