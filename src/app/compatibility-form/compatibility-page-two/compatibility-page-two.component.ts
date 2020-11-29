@@ -199,12 +199,11 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       abroad: ['']
     });
 
-
-
     fourPageService.seeProfilesBtnClicked.subscribe(
       status => {
         if (status) {
-            if (this.PageTwo.invalid) {
+          console.log('seeProfilesBtnClicked');
+          if (this.PageTwo.invalid) {
               if (!this.workingCity) {
                 this.PageTwo.controls.Working.setValue(null);
               }
@@ -215,9 +214,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
                 }
               }
               // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
-            } else {
-              console.log('Page Two Form is Valid', this.PageTwo);
-              this.sharePageTwo.emit(this.PageTwo);
             }
         }
       }
@@ -240,7 +236,6 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
 
     this.PageTwo = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
@@ -600,7 +595,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       this.showYearlyIncome = true;
     } else if (this.PageTwo.value.Occupation === 'Not Working') {
       this.PageTwo.controls.AnnualIncome.setValue(0);
-      this.showYearlyIncome = false; 
+      this.showYearlyIncome = false;
     }
     this.analyticsEvent('Four Page Registration Page Two Occupation Changed');
 
@@ -762,6 +757,8 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: max-line-length
       About: `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.OtherDesignation} ${aboutObject.working}.`
     });
+
+    console.log('Setting About', this.PageTwo.value.About);
 
     if (!this.fourPageService.getUserThrough()) {
       this.goToNextPage();

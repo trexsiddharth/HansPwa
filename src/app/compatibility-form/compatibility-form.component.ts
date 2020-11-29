@@ -833,7 +833,23 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.nextClickedOne = true;
     
     if (!this.fourPageService.getUserThrough()) {
-      this.fourPageService.seeProfilesBtnClicked.emit(true);
+      const date = this.PageOne.value.birth_date;
+      const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
+      const year = this.PageOne.value.birth_year;
+
+      this.fourPageService.profile.name = `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
+        this.PageOne.value.lastName : ''}`;
+      this.fourPageService.profile.gender = this.PageOne.value.gender;
+      this.fourPageService.profile.dob = date + '-' + month + '-' + year;
+      this.fourPageService.profile.martialStatus = this.PageOne.value.MaritalStatus;
+      this.fourPageService.profile.religion = this.PageOne.value.Religion;
+      this.fourPageService.profile.caste = this.PageOne.value.Castes;
+      console.log(this.fourPageService.profile);
+      if (this.PageOne.valid) {
+        this.fourPageService.pageOneUpdated.emit(true);
+      } else {
+        this.fourPageService.seeProfilesBtnClicked.emit(true);
+      }
     }
 
     if (this.alreadyExists) {
