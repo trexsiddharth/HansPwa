@@ -108,7 +108,9 @@
       </ng-container>
     </main>
   </mat-sidenav-content>
-  <mat-sidenav #sidenavPrefs id="sidenavPrefs" class="drawerSettings" mode="over" position="start" #sidenav>
+  <mat-sidenav #sidenavPrefs id="sidenavPrefs" 
+  (openedChange)="drawerPosition($event)"
+  class="drawerSettings" mode="over" position="start" #sidenav>
     <main class="mainContainer" >
 
       <div>

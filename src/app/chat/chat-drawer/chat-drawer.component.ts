@@ -375,7 +375,6 @@ export class ChatDrawerComponent implements OnInit {
       }
     );
 
-
     // this.disableSave.next(true);
     // user authorized
     this.disableSave$ = this.disableSave.asObservable().pipe(
@@ -451,6 +450,14 @@ export class ChatDrawerComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
+  }
+
+   // determines the current position of the drawer
+   drawerPosition(event) {
+    console.log(event);
+    if (event) {
+      this.getUserProfileData();
+    }
   }
 
   openUserProfile() {
@@ -579,7 +586,6 @@ export class ChatDrawerComponent implements OnInit {
   }
 
   setEditIndexPrefs() {
-    this.getUserProfileData();
     this.itemService.setChangePrefsClicked(true);
   }
   specialCase() {
@@ -819,7 +825,7 @@ export class ChatDrawerComponent implements OnInit {
               this.allCountries = data.country;
             }
 
-            if (this.preferenceProfileData) {
+            if (this.preferenceProfileData && this.sidenav.opened) {
 
 
               if (this.preferenceProfileData.pref_state) {
@@ -865,15 +871,15 @@ export class ChatDrawerComponent implements OnInit {
               console.log('current state ids are', this.chatService.selected_states_id );
 
           }
-            this.setCurrentPreferenceValue(null);
-            this.specialCase();
-            this.getAllCaste();
-            this.setProfileCalculations();
-            this.setProfileCompletion();
-            this.checkPageThreeDetails();
-            if (this.countRecomended === -1) {
+
+            if (this.sidenav.opened) {
+              this.setCurrentPreferenceValue(null);
+              this.specialCase();
+              this.getAllCaste();
+              if (this.countRecomended === -1) {
               setTimeout(() => { this.getCountOfRishtey();
                                  this.getRecomendedFilters(); }, 2000);
+            }
             }
           },
           (error: any) => {
