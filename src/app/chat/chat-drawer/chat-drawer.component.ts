@@ -391,8 +391,7 @@ export class ChatDrawerComponent implements OnInit {
           this.userId = data.id;
           localStorage.setItem('id', data.id);
           this.userIsLead = data.isLead;
-          // this.getUserProfileData();
-          this.getProfileAndCalculate();
+          this.getUserProfileData();
         }
       }
     );
@@ -781,31 +780,6 @@ export class ChatDrawerComponent implements OnInit {
       localStorage.removeItem('storedData');
     }
   }
-  getProfileAndCalculate() {
-      this.spinner.show();
-      this.chatService.getUserProfile().pipe(
-        shareReplay()
-      )
-        .subscribe(
-          (data: any) => {
-            if (data) {
-              this.preferenceProfileData = data.preferences ? data.preferences : null;
-              this.personalProfileData = data.profile ? data.profile : null;
-              this.familyProfileData = data.family ? data.family : null;
-              this.spinner.hide();
-              this.setProfileCalculations();
-              this.setProfileCompletion();
-              this.checkPageThreeDetails();
-            }
-
-          },
-          (error: any) => {
-            this.spinner.hide();
-            console.log(error);
-            this.ngxNotificationService.error('Something Went Wrong');
-          }
-        );
-  }
 
   getUserProfileData(updateData: boolean = false) {
       this.spinner.show();
@@ -821,6 +795,10 @@ export class ChatDrawerComponent implements OnInit {
             this.chatService.setProfileData(this.personalProfileData, this.familyProfileData);
             if (data && data.profile) {
               this.gender = data.profile.gender;
+
+              this.setProfileCalculations();
+              this.setProfileCompletion();
+              this.checkPageThreeDetails();
             }
             // if (this.preferenceProfileData && this.preferenceProfileData.religion) {
             //   this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');

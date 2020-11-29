@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { timeout, retry, catchError, tap, shareReplay } from 'rxjs/operators';
 import { FindOpenHistoryProfileService } from './find-open-history-profile.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ProfileData, ProfileTable } from './Model/Profile';
+import { ProfileTable } from './Model/Profile';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { StateTable } from './Model/StateTable';
 
