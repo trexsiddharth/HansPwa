@@ -1374,12 +1374,14 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log(detailsLeft);
   }
   setProfileCompletion() {
-    this.profileCompletionPercent = Math.ceil(((this.totalDetails - this.personalDetailsLeft.length - this.familyDetailsLeft.length) * 100) / (this.totalDetails));
+    if (localStorage.getItem('profileCompPercent')) {
+      this.profileCompletionPercent = Number(localStorage.getItem('profileCompPercent'));
+    }
   }
 
-  getUserProfileData() {
+  getUserProfileData(updateData: boolean = false) {
       this.spinner.show();
-      this.chatService.getUserProfile()
+      this.chatService.getUserProfile(updateData)
         .subscribe(
           (data: any) => {
             console.log(data);
@@ -1960,7 +1962,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     dialogRef.afterClosed().subscribe((data) => {
       this.editIndexPersonal = -1;
-      this.getUserProfileData();
+      this.getUserProfileData(true);
     });
   }
 
@@ -1985,7 +1987,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     dialogRef.afterClosed().subscribe((data) => {
       this.editIndexFamily = -1;
-      this.getUserProfileData();
+      this.getUserProfileData(true);
     });
   }
 
@@ -2010,7 +2012,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     dialogRef.afterClosed().subscribe((res) => {
       this.editIndexPrefs = -1;
-      this.getUserProfileData();
+      this.getUserProfileData(true);
     });
   }
 }

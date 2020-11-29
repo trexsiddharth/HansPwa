@@ -10,6 +10,14 @@ import { NgxNotificationService } from 'ngx-kc-notification';
   providedIn: 'root'
 })
 export class ChatServiceService {
+
+  constructor(public http: HttpClient,
+              public itemService: FindOpenHistoryProfileService,
+              private ngxNotificationService: NgxNotificationService) { }
+
+ get activeTab(): number {
+  return this.currentTab;
+ }
   authDataUpdated = new EventEmitter<boolean>();
   profileItem;
   contactNumber;
@@ -31,10 +39,6 @@ export class ChatServiceService {
 
   currentTab = 0;
 
-  constructor(public http: HttpClient,
-              public itemService: FindOpenHistoryProfileService,
-              private ngxNotificationService: NgxNotificationService) { }
-
   shouldHitSendMessages = new BehaviorSubject<boolean>(false);
   shouldHitSendMessages$: Observable<boolean> = this.shouldHitSendMessages.asObservable();
 
@@ -53,6 +57,12 @@ export class ChatServiceService {
   selected_states: string = '';
   selected_cities: string = '';
   selected_states_id: string[] = [];
+  familyDetailsLeft: any[] = [];
+  personalDetailsLeft: any[] = [];
+  profileCompletionPercent: number = 0;
+  personalDetailsList = [];
+  familyDetailsList = [];
+  totalDetails = 0;
   setProfileData(a: any, b: any) {
     this.personalProfileData = a;
     this.familyProfileData = b;
@@ -97,22 +107,12 @@ export class ChatServiceService {
 
   }
 
- get activeTab(): number {
-  return this.currentTab;
- }
-
   setCredits(credits: string) {
     this.credits = credits;
   }
   getCredits() {
     return this.credits;
   }
-  familyDetailsLeft: any[] = [];
-  personalDetailsLeft: any[] = [];
-  profileCompletionPercent: number = 0;
-  personalDetailsList = [];
-  familyDetailsList = [];
-  totalDetails = 0;
   setProfileCalculations() {
     this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',
       'additional_qualification', 'caste', 'religion',
@@ -222,8 +222,8 @@ export class ChatServiceService {
   }
 
   // getProfile Observable
-  getUserProfile(showCountry: boolean = false): Observable<ProfileTable> {
-    if (this.userProfileSubject.getValue()) {
+  getUserProfile( updateProfile: boolean = false): Observable<ProfileTable> {
+    if (this.userProfileSubject.getValue() && !updateProfile) {
       console.log('cached user profile', this.userProfileSubject.getValue());
       return this.userProfile$;
     }
@@ -235,9 +235,7 @@ export class ChatServiceService {
     myprofileData.append(
       'is_lead', localStorage.getItem('is_lead')
     );
-    if (showCountry) {
-      myprofileData.append('show_country', '1');
-    }
+    myprofileData.append('show_country', '1');
     return this.http
       .post<ProfileTable>(
         'https://partner.hansmatrimony.com/api/getProfile',

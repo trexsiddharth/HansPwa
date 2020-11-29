@@ -584,8 +584,6 @@ export class ChatDrawerComponent implements OnInit {
   }
 
   setEditIndexPrefs() {
-    // this.prefsRef.toggle();
-    // document.querySelector('#sidenav').toggle();
     this.getUserProfileData();
     this.itemService.setChangePrefsClicked(true);
   }
@@ -811,9 +809,9 @@ export class ChatDrawerComponent implements OnInit {
         );
   }
 
-  getUserProfileData() {
+  getUserProfileData(updateData: boolean = false) {
       this.spinner.show();
-      this.chatService.getUserProfile(true)
+      this.chatService.getUserProfile(updateData)
         .subscribe(
           (data: any) => {
             console.log(data.preferences);
@@ -826,9 +824,9 @@ export class ChatDrawerComponent implements OnInit {
             if (data && data.profile) {
               this.gender = data.profile.gender;
             }
-            if (this.preferenceProfileData && this.preferenceProfileData.religion) {
-              this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
-            }
+            // if (this.preferenceProfileData && this.preferenceProfileData.religion) {
+            //   this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
+            // }
 
             if (this.gender === 'Female') {
               if (this.preferenceProfileData.occupation) {
@@ -925,9 +923,9 @@ onSubmitPreferences() {
   console.log('preference Data to update');
   console.log(this.preferenceProfileData);
   console.log(this.preferenceProfileData.religion);
-  if (Array.isArray(this.preferenceProfileData.religion)) {
-      this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
-    }
+  // if (Array.isArray(this.preferenceProfileData.religion)) {
+  //     this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
+  //   }
 
   this.preferenceProfileData.caste = this.castePreferences.join(',');
 
@@ -1000,7 +998,7 @@ onSubmitPreferences() {
           console.log('Preference Details updated successfully');
           // this.changed();
           this.sidenav.close();
-          this.getUserProfileData();
+          this.getUserProfileData(true);
           this.chatService.setShouldHitSendMessagesToTrue();
 
           // added here cause save btn keeps enabling due to valuesChanges observer applied to the form. -> subscribetochanges()
