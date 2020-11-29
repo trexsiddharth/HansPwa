@@ -240,9 +240,7 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
   countrySelected(value) {
-    this.chatService.selected_country = this.search(value, 0);
-    const params = new HttpParams().set('country_id', this.chatService.selected_country ? this.chatService.selected_country.id : null);
-    this.http.get('https://partner.hansmatrimony.com/api/getState', { params }).subscribe((response: any) => {
+    this.chatService.getStates(this.search(value, 0)).subscribe((response: any) => {
       console.log(response);
       this.allStates = response;
       this.statesSubject.next(response);
@@ -869,7 +867,7 @@ export class ChatDrawerComponent implements OnInit {
                 if ((this.preferenceProfileData.pref_city as string).includes(',')) {
                 this.preferenceProfileData.pref_city = (this.preferenceProfileData.pref_city as string).split(',');
                 } else {
-                  this.preferenceProfileData.pref_city = [this.preferenceProfileData.pref_city];
+                  this.preferenceProfileData.pref_city = [...this.preferenceProfileData.pref_city];
                 }
                 console.log('pref_cities', this.preferenceProfileData.pref_city);
               }
@@ -883,9 +881,8 @@ export class ChatDrawerComponent implements OnInit {
               this.getCitiesFromState(this.preferenceProfileData ? this.preferenceProfileData.pref_country_id : '',
               this.preferenceProfileData ? this.preferenceProfileData.pref_state_id : '');
               this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
-              this.chatService.selected_states = this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
-
-
+              this.chatService.selected_states =
+               this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
 
               this.chatService.selected_states_id = this.preferenceProfileData.pref_state_id.split(',');
 
@@ -898,7 +895,7 @@ export class ChatDrawerComponent implements OnInit {
             this.setProfileCalculations();
             this.setProfileCompletion();
             this.checkPageThreeDetails();
-            if (this.countRecomended == -1) {
+            if (this.countRecomended === -1) {
               setTimeout(() => { this.getCountOfRishtey();
                                  this.getRecomendedFilters(); }, 2000);
             }
@@ -1016,8 +1013,7 @@ onSubmitPreferences() {
       );
   }
 getAllCaste() {
-    this.http
-      .get('https://partner.hansmatrimony.com/api/getAllCaste')
+    this.chatService.allCastes
       .subscribe((res: any) => {
         this.getcastes = res;
         // adittion of all to the list of castes

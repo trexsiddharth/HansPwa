@@ -1391,6 +1391,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               ? data.preferences
               : null;
             this.spinner.hide();
+            this.setProfileCompletion();
             if (this.getCarouselCount() > 0) {
               console.log('Photo status set to true');
               this.itemService.setPhotoStatus(true);
@@ -1409,7 +1410,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             localStorage.setItem('gender', this.personalProfileData.gender);
             this.specialCase();
             this.setProfileCalculations();
-            this.setProfileCompletion();
+
 
           },
           (error: any) => {

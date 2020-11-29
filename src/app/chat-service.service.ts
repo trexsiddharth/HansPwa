@@ -1,10 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { timeout, retry, catchError, tap, shareReplay } from 'rxjs/operators';
 import { FindOpenHistoryProfileService } from './find-open-history-profile.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ProfileData, ProfileTable } from './Model/Profile';
 import { NgxNotificationService } from 'ngx-kc-notification';
+import { StateTable } from './Model/StateTable';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class ChatServiceService {
   personalProfileData: any;
   familyProfileData: any;
   preferenceProfileData: any;
-  pageThreeFilled: boolean = true;
+  pageThreeFilled = true;
   authorized = new EventEmitter<{
     name,
     photo,
@@ -49,17 +50,25 @@ export class ChatServiceService {
   imgSRC$: Observable<string> = this.imgSRC.asObservable();
   formTwoCompleted = new BehaviorSubject<boolean>(false);
   countOfRishtey = 0;
-
+  // for user profile
   private userProfileSubject = new BehaviorSubject<ProfileTable>(null);
   private userProfile$: Observable<ProfileTable> = this.userProfileSubject.asObservable().pipe(shareReplay());
 
+  // for all caste
+  private allCastesSubject = new BehaviorSubject<string[]>(null);
+  private allCastes$: Observable<string[]> = this.allCastesSubject.asObservable().pipe(shareReplay());
+
+  //get states according to country
+  private allStatesSubject = new BehaviorSubject<StateTable[]>(null);
+  private allStates$: Observable<StateTable[]> = this.allStatesSubject.asObservable().pipe(shareReplay());
+
   selected_country: any;
-  selected_states: string = '';
-  selected_cities: string = '';
+  selected_states = '';
+  selected_cities = '';
   selected_states_id: string[] = [];
   familyDetailsLeft: any[] = [];
   personalDetailsLeft: any[] = [];
-  profileCompletionPercent: number = 0;
+  profileCompletionPercent = 0;
   personalDetailsList = [];
   familyDetailsList = [];
   totalDetails = 0;
@@ -89,7 +98,7 @@ export class ChatServiceService {
     });
     // gtag app + web
     (window as any).gtag('event', category, {
-      'action': action
+      action: action
     });
 
   }
@@ -113,6 +122,45 @@ export class ChatServiceService {
   getCredits() {
     return this.credits;
   }
+
+  get allCastes(): Observable<string[]> {
+    if (this.allCastesSubject.getValue()) {
+      return this.allCastes$;
+    }
+    return this.http.get<string[]>('https://partner.hansmatrimony.com/api/getAllCaste').pipe(
+      tap((data: string[]) => {
+          this.allCastesSubject.next(data);
+      }));
+  }
+
+  getStates(value): Observable<StateTable[]> {
+    if (this.allStatesSubject.getValue() && value === this.selected_country) {
+      console.log('cached states');
+      return this.allStates$;
+    }
+    this.selected_country = value;
+    const params = new HttpParams().set('country_id', this.selected_country ? this.selected_country.id : null);
+    return this.http.get<StateTable[]>('https://partner.hansmatrimony.com/api/getState', { params }).pipe(
+      tap((data: StateTable[]) => {
+        this.allStatesSubject.next(data);
+      })
+    );
+ }
+
+//  getCities(value): Observable<StateTable[]> {
+//   if (this.allStatesSubject.getValue() && value === this.selected_country) {
+//     console.log('cached states');
+//     return this.allStates$;
+//   }
+//   this.selected_country = value;
+//   const params = new HttpParams().set('country_id', this.selected_country).set('state_id', stateId);
+//   return this.http.get('https://partner.hansmatrimony.com/api/getCity', { params }).pipe(
+//     tap((data: StateTable[]) => {
+//       this.allStatesSubject.next(data);
+//     })
+//   );
+// }
+
   setProfileCalculations() {
     this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',
       'additional_qualification', 'caste', 'religion',
@@ -125,25 +173,23 @@ export class ChatServiceService {
     this.totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
     this.personalDetailsLeft = [];
     this.familyDetailsLeft = [];
-    for (let v of this.personalDetailsList) {
+    for (const v of this.personalDetailsList) {
       if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] === "null") {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] === 'null') {
           this.personalDetailsLeft.push(v);
         }
-      }
-      else this.personalDetailsLeft.push(v);
+      } else { this.personalDetailsLeft.push(v); }
     }
-    for (let v of this.familyDetailsList) {
+    for (const v of this.familyDetailsList) {
       if (this.familyProfileData.hasOwnProperty(v)) {
-        if (!this.familyProfileData[v] || this.familyProfileData[v] === "null") {
+        if (!this.familyProfileData[v] || this.familyProfileData[v] === 'null') {
           this.familyDetailsLeft.push(v);
         }
-      }
-      else {
+      } else {
         this.familyDetailsLeft.push(v);
       }
     }
-    for (let v of this.personalDetailsLeft) {
+    for (const v of this.personalDetailsLeft) {
       if (this.familyProfileData.hasOwnProperty(v)) {
         this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
       }
@@ -186,7 +232,7 @@ export class ChatServiceService {
             this.personalProfileData = data.profile ? data.profile : null;
             this.familyProfileData = data.family ? data.family : null;
 
-            //setting profile data in chat service for use in popups.
+            // setting profile data in chat service for use in popups.
             this.setProfileData(this.personalProfileData, this.familyProfileData);
             this.setProfileCalculations();
             this.setProfileCompletion();
