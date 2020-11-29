@@ -825,7 +825,7 @@ export class ChatDrawerComponent implements OnInit {
               this.allCountries = data.country;
             }
 
-            if (this.preferenceProfileData && this.sidenav.opened) {
+            if (this.preferenceProfileData && this.sidenav.opened) { // these functions are needed when change preference side nav is opened
 
 
               if (this.preferenceProfileData.pref_state) {
@@ -871,9 +871,9 @@ export class ChatDrawerComponent implements OnInit {
               console.log('current state ids are', this.chatService.selected_states_id );
 
           }
+            this.setCurrentPreferenceValue(null);
 
-            if (this.sidenav.opened) {
-              this.setCurrentPreferenceValue(null);
+            if (this.sidenav.opened) { // these functions are need when change preference side nav is opened
               this.specialCase();
               this.getAllCaste();
               if (this.countRecomended === -1) {
