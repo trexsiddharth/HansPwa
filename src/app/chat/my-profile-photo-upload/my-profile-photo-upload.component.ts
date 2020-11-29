@@ -9,6 +9,7 @@ import { PhotoUploadCropComponent } from 'src/app/photo-upload-crop/photo-upload
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AskDeleteDialogComponent } from './ask-delete-dialog/ask-delete-dialog.component';
 import { Observable, Observer } from 'rxjs';
+import { ChatServiceService } from 'src/app/chat-service.service';
 
 declare var FB: any;
 @Component({
@@ -22,6 +23,7 @@ export class MyProfilePhotoUploadComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               public spinner: NgxSpinnerService,
               public http: HttpClient,
+              private chatService: ChatServiceService,
               public ngxNotificationService: NgxNotificationService,
               public breakPointObserver: BreakpointObserver,
               private dialog: MatDialog) { }
@@ -94,7 +96,7 @@ export class MyProfilePhotoUploadComponent implements OnInit {
       dialogRef.afterClosed().subscribe(
         (response: any) => {
             if (response) {
-              this.getUserProfileData();
+              this.getUserProfileData(true);
             }
         }
       );
@@ -251,30 +253,9 @@ export class MyProfilePhotoUploadComponent implements OnInit {
         }
       );
   }
-  getUserProfileData() {
-    if (this.userId || localStorage.getItem('id')) {
+  getUserProfileData(updateData: boolean = false) {
       this.spinner.show();
-      const myprofileData = new FormData();
-      myprofileData.append(
-        'id',
-        this.userId ? this.userId : localStorage.getItem('id')
-      );
-      myprofileData.append('contacted', '1');
-      myprofileData.append(
-        'is_lead',
-        this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
-      );
-      // tslint:disable-next-line: max-line-length
-      return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(
-        timeout(7000),
-        retry(2),
-        catchError((e) => {
-          this.ngxNotificationService.error(
-            'Server Time Out, Try Again Later'
-          );
-          throw new Error('Server Timeout ' + e);
-        })
-      )
+      this.chatService.getUserProfile(updateData)
         .subscribe(
           (data: any) => {
             console.log(data);
@@ -288,9 +269,6 @@ export class MyProfilePhotoUploadComponent implements OnInit {
             this.ngxNotificationService.error('Something Went Wrong');
           }
         );
-    } else {
-      this.ngxNotificationService.error('No user found');
-    }
   }
   openPhotoUploadCrop(index: number) {
     const dialogConfig = new MatDialogConfig();
