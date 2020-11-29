@@ -214,7 +214,7 @@
               <!-- <div class="col-md-12 matSelect"
                 *ngIf="PageOne.value.Relation == 'Myself' || PageOne.value.Relation == 'Other' || fourPageService.getUserThrough()"> -->
 
-              <div class="col-5" *ngIf="!fourPageService.getUserThrough() && showHeight">
+              <div class="col-5" *ngIf="fourPageService.getUserThrough() || showHeight">
                 <!-- <h6>Height</h6> -->
                 <mat-form-field class="full-width fieldFit" appearance="standard">
                   <mat-label>Height</mat-label>

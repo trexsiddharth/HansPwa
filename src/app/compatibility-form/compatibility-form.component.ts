@@ -500,6 +500,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
     if (this.fourPageService.getUserThrough()) {
       this.openMessageDialog();
+      this.showLastName();
     }
 
     console.log(this.isLinear);

@@ -850,7 +850,11 @@ export class ChatDrawerComponent implements OnInit {
                 if ((this.preferenceProfileData.pref_city as string).includes(',')) {
                 this.preferenceProfileData.pref_city = (this.preferenceProfileData.pref_city as string).split(',');
                 } else {
-                  this.preferenceProfileData.pref_city = [...this.preferenceProfileData.pref_city];
+                  if (Array.isArray(this.preferenceProfileData.pref_city)) {
+                    this.preferenceProfileData.pref_city = [...this.preferenceProfileData.pref_city];
+                  } else {
+                    this.preferenceProfileData.pref_city = [this.preferenceProfileData.pref_city];
+                  }
                 }
                 console.log('pref_cities', this.preferenceProfileData.pref_city);
               }
