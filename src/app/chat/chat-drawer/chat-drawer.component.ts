@@ -435,7 +435,7 @@ export class ChatDrawerComponent implements OnInit {
     this.preferencesForm.valueChanges.pipe(
       debounceTime(400)
     )
-    .subscribe(() => {
+    .subscribe((change) => {
       if (this.firstTime) {
         this.firstTime = false;
       } else if (this.preferencesForm.value.income_max <= this.preferencesForm.value.income_min) {
@@ -443,8 +443,10 @@ export class ChatDrawerComponent implements OnInit {
       } else {
         this.disableSave.next(true);
       }
+      if (this.sidenav.opened) {
       this.getCountOfRishtey();
-      console.log('value change event triggered');
+      }
+      console.log('value change event triggered', change);
     });
   }
   @HostListener('window:resize', ['$event'])
@@ -494,7 +496,6 @@ export class ChatDrawerComponent implements OnInit {
     });
   }
   getCountOfRishtey() {
-    console.log('getCountOfRishtey called');
     const form = new FormData();
     form.append('id', this.userId);
     form.append('is_lead', localStorage.getItem('is_lead'));
@@ -509,13 +510,13 @@ export class ChatDrawerComponent implements OnInit {
     form.append('food_choice', this.preferencesForm.value.food_choice);
     form.append('manglik', this.preferencesForm.value.manglik_pref);
     form.append('marital_status', this.preferencesForm.value.marital_status);
-    form.append('pref_country', this.chatService.selected_country ? this.chatService.selected_country.name : '');
-    form.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
+    form.append('pref_country', this.preferencesForm.value.country);
+    form.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country : '');
     form.append('pref_state', this.chatService.selected_states);
     form.append('pref_state_id', this.chatService.selected_states_id.join(','));
     form.append('pref_city', this.chatService.selected_cities);
-
-    this.http.post('https://partner.hansmatrimony.com/api/getCountOfRishtey', form)
+    console.log('getCountOfRishtey called', this.preferencesForm.value);
+    this.chatService.getCountOfRishtey(form, this.preferencesForm.value)
     .subscribe((response: any) => {
       if (response.count) {
         this.countProfiles = response.count;

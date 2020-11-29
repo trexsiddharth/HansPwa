@@ -4,6 +4,7 @@ import { timeout, retry, catchError, tap, shareReplay } from 'rxjs/operators';
 import { FindOpenHistoryProfileService } from './find-open-history-profile.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ProfileTable } from './Model/Profile';
+import { RishteyCountTable } from './Model/RishteyCountTable';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { StateTable } from './Model/StateTable';
 
@@ -58,13 +59,18 @@ export class ChatServiceService {
   private allCastesSubject = new BehaviorSubject<string[]>(null);
   private allCastes$: Observable<string[]> = this.allCastesSubject.asObservable().pipe(shareReplay());
 
-  //get states according to country
+  // get states according to country
   private allStatesSubject = new BehaviorSubject<StateTable[]>(null);
   private allStates$: Observable<StateTable[]> = this.allStatesSubject.asObservable().pipe(shareReplay());
 
   // get cities on the basis of country and states
   private allCitiesSubject = new BehaviorSubject<string[]>(null);
   private allCities$: Observable<string[]> = this.allCitiesSubject.asObservable().pipe(shareReplay());
+
+   // get count of rishtas
+   private countOfRishtas: string;
+   private countOfRishtasSubject = new BehaviorSubject<RishteyCountTable>(null);
+   private countOfRishtas$: Observable<RishteyCountTable> = this.countOfRishtasSubject.asObservable().pipe(shareReplay());
 
   selected_country: any;
   selected_states = '';
@@ -163,6 +169,19 @@ export class ChatServiceService {
   return this.http.get<string[]>('https://partner.hansmatrimony.com/api/getCity', { params }).pipe(
     tap((data: string[]) => {
       this.allCitiesSubject.next(data);
+    })
+  );
+}
+
+getCountOfRishtey(formValues: FormData, values: any): Observable<RishteyCountTable> {
+  if (this.countOfRishtasSubject.getValue() && this.countOfRishtas === JSON.stringify(values) ) {
+    console.log('cached count of rishtey' , this.countOfRishtas === JSON.stringify(values));
+    return this.countOfRishtas$;
+  }
+  this.countOfRishtas = JSON.stringify(values);
+  return this.http.post<RishteyCountTable>('https://partner.hansmatrimony.com/api/getCountOfRishtey', formValues).pipe(
+    tap((data: RishteyCountTable) => {
+      this.countOfRishtasSubject.next(data);
     })
   );
 }
