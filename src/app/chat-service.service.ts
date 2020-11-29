@@ -62,6 +62,10 @@ export class ChatServiceService {
   private allStatesSubject = new BehaviorSubject<StateTable[]>(null);
   private allStates$: Observable<StateTable[]> = this.allStatesSubject.asObservable().pipe(shareReplay());
 
+  // get cities on the basis of country and states
+  private allCitiesSubject = new BehaviorSubject<string[]>(null);
+  private allCities$: Observable<string[]> = this.allCitiesSubject.asObservable().pipe(shareReplay());
+
   selected_country: any;
   selected_states = '';
   selected_cities = '';
@@ -134,7 +138,7 @@ export class ChatServiceService {
   }
 
   getStates(value): Observable<StateTable[]> {
-    if (this.allStatesSubject.getValue() && value === this.selected_country) {
+    if (this.allStatesSubject.getValue() || value === this.selected_country) {
       console.log('cached states');
       return this.allStates$;
     }
@@ -147,19 +151,21 @@ export class ChatServiceService {
     );
  }
 
-//  getCities(value): Observable<StateTable[]> {
-//   if (this.allStatesSubject.getValue() && value === this.selected_country) {
-//     console.log('cached states');
-//     return this.allStates$;
-//   }
-//   this.selected_country = value;
-//   const params = new HttpParams().set('country_id', this.selected_country).set('state_id', stateId);
-//   return this.http.get('https://partner.hansmatrimony.com/api/getCity', { params }).pipe(
-//     tap((data: StateTable[]) => {
-//       this.allStatesSubject.next(data);
-//     })
-//   );
-// }
+ getCities(countryValue, stateValue): Observable<string[]> {
+  if (this.allCitiesSubject.getValue() || countryValue === this.selected_country
+  && stateValue === this.selected_states) {
+    console.log('cached states');
+    return this.allCities$;
+  }
+  this.selected_country = countryValue;
+  this.selected_states = stateValue;
+  const params = new HttpParams().set('country_id', this.selected_country).set('state_id', stateValue);
+  return this.http.get<string[]>('https://partner.hansmatrimony.com/api/getCity', { params }).pipe(
+    tap((data: string[]) => {
+      this.allCitiesSubject.next(data);
+    })
+  );
+}
 
   setProfileCalculations() {
     this.personalDetailsList = ['name', 'birth_date', 'birth_time', 'birth_place', 'college',

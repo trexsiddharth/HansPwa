@@ -263,8 +263,7 @@ export class ChatDrawerComponent implements OnInit {
   }
 
   getCitiesFromState(countryId: any, stateId: any) {
-    const params = new HttpParams().set('country_id', countryId).set('state_id', stateId);
-    this.http.get('https://partner.hansmatrimony.com/api/getCity', { params }).subscribe((response: any) => {
+    this.chatService.getCities(countryId, stateId).subscribe((response: any) => {
       console.log(response);
       if (this.allCities ) {
         this.allCities.concat(response);
@@ -294,10 +293,9 @@ export class ChatDrawerComponent implements OnInit {
     // this.preferencesForm.patchValue({
     //   state: [curState, ...this.preferencesForm.value.state],
     // })
-    const params = new HttpParams().set('country_id', this.chatService.selected_country.id).set('state_id', curState.id);
-    this.http.get('https://partner.hansmatrimony.com/api/getCity', { params }).subscribe((response: any) => {
+    this.chatService.getCities(this.chatService.selected_country, curState.id).subscribe((response: any) => {
       console.log(response);
-      if (this.allCities.length == 0) {
+      if (this.allCities.length === 0) {
         this.allCities = response;
       } else {
         this.allCities = this.allCities.concat(response);
@@ -958,7 +956,7 @@ onSubmitPreferences() {
   newPrefForm.append('matchesCount', String(this.countProfiles));
 
   newPrefForm.append('pref_country', this.preferencesForm.value.country);
-  newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
+  newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country : '');
   newPrefForm.append('pref_state', this.preferencesForm.value.state);
   newPrefForm.append('pref_state_id', this.chatService.selected_states_id.join(','));
   newPrefForm.append('pref_city', this.preferencesForm.value.city);
