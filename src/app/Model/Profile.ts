@@ -2,6 +2,7 @@ export interface ProfileTable {
 profile: ProfileData;
 family: FamilyData;
 preferences: PreferenceData;
+country: string[];
 }
 
 export interface ProfileData {

@@ -1,8 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { timeout, retry, catchError } from 'rxjs/operators';
+import { timeout, retry, catchError, tap, shareReplay } from 'rxjs/operators';
 import { FindOpenHistoryProfileService } from './find-open-history-profile.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ProfileData, ProfileTable } from './Model/Profile';
+import { NgxNotificationService } from 'ngx-kc-notification';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,8 @@ export class ChatServiceService {
   currentTab = 0;
 
   constructor(public http: HttpClient,
-    public itemService: FindOpenHistoryProfileService) { }
+              public itemService: FindOpenHistoryProfileService,
+              private ngxNotificationService: NgxNotificationService) { }
 
   shouldHitSendMessages = new BehaviorSubject<boolean>(false);
   shouldHitSendMessages$: Observable<boolean> = this.shouldHitSendMessages.asObservable();
@@ -42,6 +45,9 @@ export class ChatServiceService {
   imgSRC$: Observable<string> = this.imgSRC.asObservable();
   formTwoCompleted = new BehaviorSubject<boolean>(false);
   countOfRishtey = 0;
+
+  private userProfileSubject = new BehaviorSubject<ProfileTable>(null);
+  private userProfile$: Observable<ProfileTable> = this.userProfileSubject.asObservable().pipe(shareReplay());
 
   selected_country: any;
   selected_states: string = '';
@@ -207,5 +213,48 @@ export class ChatServiceService {
   }
   opensidenavFalse() {
     this.opensidenav.next(false);
+  }
+
+  setUserProfile(data: ProfileTable) {
+    if (data) {
+      this.userProfileSubject.next(data);
+    }
+  }
+
+  // getProfile Observable
+  getUserProfile(showCountry: boolean = false): Observable<ProfileTable> {
+    if (this.userProfileSubject.getValue()) {
+      console.log('cached user profile', this.userProfileSubject.getValue());
+      return this.userProfile$;
+    }
+    const myprofileData = new FormData();
+    myprofileData.append(
+      'id', localStorage.getItem('id')
+    );
+    myprofileData.append('contacted', '1');
+    myprofileData.append(
+      'is_lead', localStorage.getItem('is_lead')
+    );
+    if (showCountry) {
+      myprofileData.append('show_country', '1');
+    }
+    return this.http
+      .post<ProfileTable>(
+        'https://partner.hansmatrimony.com/api/getProfile',
+        myprofileData
+      )
+      .pipe(
+        timeout(7000),
+        retry(2),
+        catchError((e) => {
+          this.ngxNotificationService.error(
+            'Server Time Out, Try Again Later'
+          );
+          throw new Error('Server Timeout ' + e);
+        }
+        ), tap((data) => {
+          this.userProfileSubject.next(data);
+        })
+      );
   }
 }

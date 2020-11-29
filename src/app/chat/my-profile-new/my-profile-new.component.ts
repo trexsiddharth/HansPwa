@@ -18,20 +18,20 @@ import {
   MatSnackBar,
   MatDialogConfig,
   MatDialog,
-} from "@angular/material";
-import { NgxNotificationService } from "ngx-kc-notification";
-import { HttpClient } from "@angular/common/http";
-import { NgxSpinnerService } from "ngx-spinner";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FindOpenHistoryProfileService } from "src/app/find-open-history-profile.service";
-import { EditPersonalDialogComponent } from "../myprofile/edit-personal-dialog/edit-personal-dialog.component";
-import { EditFamilyDialogComponent } from "../myprofile/edit-family-dialog/edit-family-dialog.component";
-import { EditPreferenceDialogComponent } from "../myprofile/edit-preference-dialog/edit-preference-dialog.component";
-import { timeout, retry, catchError, startWith, map } from "rxjs/operators";
-import { LanguageService } from "src/app/language.service";
-import { Options, LabelType } from "ng5-slider";
-import { forkJoin, ReplaySubject, Subject, Observable } from "rxjs";
-import { take, takeUntil } from "rxjs/operators";
+} from '@angular/material';
+import { NgxNotificationService } from 'ngx-kc-notification';
+import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
+import { EditPersonalDialogComponent } from '../myprofile/edit-personal-dialog/edit-personal-dialog.component';
+import { EditFamilyDialogComponent } from '../myprofile/edit-family-dialog/edit-family-dialog.component';
+import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
+import { timeout, retry, catchError, startWith, map } from 'rxjs/operators';
+import { LanguageService } from 'src/app/language.service';
+import { Options, LabelType } from 'ng5-slider';
+import { forkJoin, ReplaySubject, Subject, Observable } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 import { ChatServiceService } from 'src/app/chat-service.service';
 
 @Component({
@@ -40,6 +40,96 @@ import { ChatServiceService } from 'src/app/chat-service.service';
   styleUrls: ['./my-profile-new.component.css'],
 })
 export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  constructor(
+    private spinner: NgxSpinnerService,
+    public itemService: FindOpenHistoryProfileService,
+    private http: HttpClient,
+    public languageService: LanguageService,
+    private _formBuilder: FormBuilder,
+    private ngxNotificationService: NgxNotificationService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    public snackbar: MatSnackBar,
+    public chatService: ChatServiceService,
+    public matDialog: MatDialog
+  ) {
+    this.personalForm = this._formBuilder.group({
+      name: [''],
+      phone: [
+        '',
+        Validators.compose([
+          Validators.max(9999999999999),
+          Validators.pattern('(91)?[6-9][0-9]{9}'),
+        ]),
+      ],
+      Whatsapp: [
+        '',
+        Validators.compose([
+          Validators.max(9999999999999),
+          Validators.pattern('(91)?[6-9][0-9]{9}'),
+        ]),
+      ],
+      email: [''],
+      birth_date: ['01'],
+      birth_month: ['January'],
+      birth_year: ['1980'],
+      BirthPlace: [''],
+      BirthTime: [''],
+      Height: [''],
+      Weight: [''],
+      MaritalStatus: [''],
+      AnnualIncome: ['', Validators.compose([Validators.max(999)])],
+      Religion: [''],
+      Manglik: [''],
+      Food: [''],
+      Degree: [''],
+      Profession: [''],
+      OtherProfession: '',
+      College: [''],
+      Additional: [''],
+      Occupation: [''],
+      Company: [''],
+      Castes: [''],
+      WorkingCity: [''],
+      Locality: [''],
+      About: ['', Validators.compose([Validators.maxLength(300)])],
+    });
+    this.preferencesForm = this._formBuilder.group({
+      food_choice: [''],
+      age_min: [''],
+      age_max: [''],
+      income_min: [''],
+      income_max: [''],
+      caste_pref: [''],
+      manglik_pref: [''],
+      occupation: [''],
+      religion: [''],
+      height_min: [''],
+      height_max: [''],
+      marital_status: [''],
+      working: [''],
+    });
+    this.familyForm1 = this._formBuilder.group({
+      identity_number: [''],
+      id: [''],
+      temple_id: [''],
+      family_type: [''],
+      house_type: [''],
+      about: [''],
+      occupation_father: [''],
+      occupation_mother: [''],
+      father_status: [''],
+      mother_status: [''],
+      married_sons: [''],
+      unmarried_sons: [''],
+      married_daughters: [''],
+      unmarried_daughters: [''],
+      gotra: [''],
+      family_income: [''],
+      city: [''],
+    });
+  }
   innerWidth: any;
   public message: string;
   backimagePath;
@@ -351,169 +441,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   Count: any[] = ['None', 0, 1, 2, 3, 4, 5, 6, 7, 8];
   HouseType: string[] = ['Owned', 'Rented', 'Leased'];
 
-  constructor(
-    private spinner: NgxSpinnerService,
-    public itemService: FindOpenHistoryProfileService,
-    private http: HttpClient,
-    public languageService: LanguageService,
-    private _formBuilder: FormBuilder,
-    private ngxNotificationService: NgxNotificationService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    public snackbar: MatSnackBar,
-    public chatService: ChatServiceService,
-    public matDialog: MatDialog
-  ) {
-    this.personalForm = this._formBuilder.group({
-      name: [''],
-      phone: [
-        '',
-        Validators.compose([
-          Validators.max(9999999999999),
-          Validators.pattern('(91)?[6-9][0-9]{9}'),
-        ]),
-      ],
-      Whatsapp: [
-        '',
-        Validators.compose([
-          Validators.max(9999999999999),
-          Validators.pattern('(91)?[6-9][0-9]{9}'),
-        ]),
-      ],
-      email: [''],
-      birth_date: ['01'],
-      birth_month: ['January'],
-      birth_year: ['1980'],
-      BirthPlace: [''],
-      BirthTime: [''],
-      Height: [''],
-      Weight: [''],
-      MaritalStatus: [''],
-      AnnualIncome: ['', Validators.compose([Validators.max(999)])],
-      Religion: [''],
-      Manglik: [''],
-      Food: [''],
-      Degree: [''],
-      Profession: [''],
-      OtherProfession: '',
-      College: [''],
-      Additional: [''],
-      Occupation: [''],
-      Company: [''],
-      Castes: [''],
-      WorkingCity: [''],
-      Locality: [''],
-      About: ['', Validators.compose([Validators.maxLength(300)])],
-    });
-    this.preferencesForm = this._formBuilder.group({
-      food_choice: [''],
-      age_min: [''],
-      age_max: [''],
-      income_min: [''],
-      income_max: [''],
-      caste_pref: [''],
-      manglik_pref: [''],
-      occupation: [''],
-      religion: [''],
-      height_min: [''],
-      height_max: [''],
-      marital_status: [''],
-      working: [''],
-    });
-    this.familyForm1 = this._formBuilder.group({
-      identity_number: [''],
-      id: [''],
-      temple_id: [''],
-      family_type: [''],
-      house_type: [''],
-      about: [''],
-      occupation_father: [''],
-      occupation_mother: [''],
-      father_status: [''],
-      mother_status: [''],
-      married_sons: [''],
-      unmarried_sons: [''],
-      married_daughters: [''],
-      unmarried_daughters: [''],
-      gotra: [''],
-      family_income: [''],
-      city: [''],
-    });
-  }
-  ngOnInit() {
-    this.innerWidth = window.innerWidth;
-    this.languageService.setProfileLanguage();
-    this.currentLanguage = localStorage.getItem('language');
-    // set already selected language in toggle
-    if (localStorage.getItem('language') === 'hindi') {
-      this.langCheck = false;
-    } else {
-      this.langCheck = true;
-    }
-
-    this.activatedRoute.paramMap.subscribe((routeData: any) => {
-      console.log(routeData);
-      if (routeData && routeData.params) {
-        if (routeData.params.id && routeData.params.isLead) {
-          this.userId = routeData.params.id;
-          this.userIsLead = routeData.params.isLead;
-        }
-      }
-    });
-    this.getUserProfileData();
-  }
-  ngAfterViewInit() {
-    this.setInitialValue();
-    // to update the values to doesnt matter if null
-    this.setNullToNotMatter();
-  }
-  ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
-
-    // Here the results are saved even if the user does not press the save button
-    // const Req1 = this.onSubmitPreferences();
-    // const Req2 = this.onSubmitPersonal();
-    // const Req3 = this.onSubmitFamily();
-    // forkJoin([Req1, Req2, Req3]).subscribe((results) => {
-    //   console.log("Here is the result of Fork Join");
-    //   console.log(results);
-    // });
-  }
-  protected setInitialValue() {
-    this.filteredCastesMulti
-      .pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
-        this.multiSelect.compareWith = (a: string, b: string) =>
-          a && b && a === b;
-      });
-  }
-  openPhotoUpload() {
-    this.router.navigateByUrl(`chat/my-profile-photo-upload/${this.userId}/${this.userIsLead}`);
-  }
-
-  setStepPersonal(index: number) {
-    this.stepPersonal = index;
-  }
-  setStepFamily(index: number) {
-    this.stepFamily = index;
-  }
-  setStepPreferences(index: number) {
-    this.stepPreferences = index;
-  }
-
   castePreferences: string[] = [];
-  specialCase() {
-    if (this.preferenceProfileData.caste)
-      this.castePreferences = this.preferenceProfileData.caste.split(',');
-    console.log(this.preferenceProfileData.caste);
-  }
-  changeSelectedTab(event: any) { }
   optionsFamilyIncome: Options = {
     floor: 0,
     ceil: 100,
@@ -582,13 +510,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     },
   };
-  showValue() {
-    console.log(
-      'this is value of heights of preferenceProfileData' +
-      String(this.preferenceProfileData.height_min) +
-      String(this.preferenceProfileData.height_max)
-    );
-  }
 
   personalForm: FormGroup;
   //familyForm: NgForm;
@@ -603,6 +524,93 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   panelOpenState = true;
   blockExpansion = 0;
+  familyDetailsLeft: any[] = [];
+  personalDetailsLeft: any[] = [];
+  profileCompletionPercent: number = 0;
+  personalDetailsList = [];
+  familyDetailsList = [];
+  totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
+  prevEventLength: number = 0;
+  ngOnInit() {
+    this.innerWidth = window.innerWidth;
+    this.languageService.setProfileLanguage();
+    this.currentLanguage = localStorage.getItem('language');
+    // set already selected language in toggle
+    if (localStorage.getItem('language') === 'hindi') {
+      this.langCheck = false;
+    } else {
+      this.langCheck = true;
+    }
+
+    this.activatedRoute.paramMap.subscribe((routeData: any) => {
+      console.log(routeData);
+      if (routeData && routeData.params) {
+        if (routeData.params.id && routeData.params.isLead) {
+          this.userId = routeData.params.id;
+          this.userIsLead = routeData.params.isLead;
+        }
+      }
+    });
+    this.getUserProfileData();
+  }
+  ngAfterViewInit() {
+    this.setInitialValue();
+    // to update the values to doesnt matter if null
+    this.setNullToNotMatter();
+  }
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+
+    // Here the results are saved even if the user does not press the save button
+    // const Req1 = this.onSubmitPreferences();
+    // const Req2 = this.onSubmitPersonal();
+    // const Req3 = this.onSubmitFamily();
+    // forkJoin([Req1, Req2, Req3]).subscribe((results) => {
+    //   console.log("Here is the result of Fork Join");
+    //   console.log(results);
+    // });
+  }
+  protected setInitialValue() {
+    this.filteredCastesMulti
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredBanks are loaded initially
+        // and after the mat-option elements are available
+        this.multiSelect.compareWith = (a: string, b: string) =>
+          a && b && a === b;
+      });
+  }
+  openPhotoUpload() {
+    this.router.navigateByUrl(`chat/my-profile-photo-upload/${this.userId}/${this.userIsLead}`);
+  }
+
+  setStepPersonal(index: number) {
+    this.stepPersonal = index;
+  }
+  setStepFamily(index: number) {
+    this.stepFamily = index;
+  }
+  setStepPreferences(index: number) {
+    this.stepPreferences = index;
+  }
+  specialCase() {
+    if (this.preferenceProfileData.caste) {
+      this.castePreferences = this.preferenceProfileData.caste.split(',');
+    }
+    console.log(this.preferenceProfileData.caste);
+  }
+  changeSelectedTab(event: any) { }
+  showValue() {
+    console.log(
+      'this is value of heights of preferenceProfileData' +
+      String(this.preferenceProfileData.height_min) +
+      String(this.preferenceProfileData.height_max)
+    );
+  }
 
   // isExpansionDisabled(): string {
   //   if (this.blockExpansion) {
@@ -1049,13 +1057,15 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('preference Data to update');
     console.log(this.preferenceProfileData);
     console.log(this.preferenceProfileData.religion);
-    if (Array.isArray(this.preferenceProfileData.religion))
+    if (Array.isArray(this.preferenceProfileData.religion)) {
       this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
+    }
 
     this.preferenceProfileData.caste = this.castePreferences.join(',');
 
-    if (this.personalProfileData.gender === "Female" && Array.isArray(this.preferenceProfileData.occupation))
+    if (this.personalProfileData.gender === 'Female' && Array.isArray(this.preferenceProfileData.occupation)) {
       this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
+    }
 
     const newPrefForm = new FormData();
     newPrefForm.append(
@@ -1283,12 +1293,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       };
     }
   }
-  familyDetailsLeft: any[] = [];
-  personalDetailsLeft: any[] = [];
-  profileCompletionPercent: number = 0;
-  personalDetailsList = [];
-  familyDetailsList = [];
-  totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
   getDetailsLeft(a: string) {
     switch (a) {
       case 'personal': return this.personalDetailsLeft.length;
@@ -1308,7 +1312,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       'family_type', 'family_income', 'city', 'house_type', 'livingWithParents'];
     this.totalDetails = this.personalDetailsList.length + this.familyDetailsList.length;
     let detailsLeft = [];
-    console.log("look Here1");
+    console.log('look Here1');
     console.log(this.personalDetailsLeft);
     console.log(this.familyDetailsLeft);
     console.log(this.personalDetailsList);
@@ -1328,7 +1332,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     // this.personalDetailsLeft += this.personalDetailsList.length;
     for (let v of this.personalDetailsList) {
       if (this.personalProfileData.hasOwnProperty(v)) {
-        if (!this.personalProfileData[v] || this.personalProfileData[v] === "null") {
+        if (!this.personalProfileData[v] || this.personalProfileData[v] === 'null') {
           this.personalDetailsLeft.push(v);
         }
       }
@@ -1339,7 +1343,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.familyDetailsLeft = [];
     for (let v of this.familyDetailsList) {
       if (this.familyProfileData.hasOwnProperty(v)) {
-        if (!this.familyProfileData[v] || this.familyProfileData[v] === "null") {
+        if (!this.familyProfileData[v] || this.familyProfileData[v] === 'null') {
           this.familyDetailsLeft.push(v);
         }
       }
@@ -1364,7 +1368,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
       }
     }
-    console.log("look Here2");
+    console.log('look Here2');
     console.log(this.personalDetailsLeft);
     console.log(this.familyDetailsLeft);
     console.log(detailsLeft);
@@ -1374,34 +1378,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getUserProfileData() {
-    if (this.userId || localStorage.getItem('id')) {
       this.spinner.show();
-      const myprofileData = new FormData();
-      myprofileData.append(
-        'id',
-        this.userId ? this.userId : localStorage.getItem('id')
-      );
-      myprofileData.append('contacted', '1');
-      myprofileData.append(
-        'is_lead',
-        this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
-      );
-      // tslint:disable-next-line: max-line-length
-      return this.http
-        .post<any>(
-          'https://partner.hansmatrimony.com/api/getProfile',
-          myprofileData
-        )
-        .pipe(
-          timeout(7000),
-          retry(2),
-          catchError((e) => {
-            this.ngxNotificationService.error(
-              'Server Time Out, Try Again Later'
-            );
-            throw new Error('Server Timeout ' + e);
-          })
-        )
+      this.chatService.getUserProfile()
         .subscribe(
           (data: any) => {
             console.log(data);
@@ -1416,25 +1394,20 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               this.itemService.setPhotoStatus(true);
             }
             if (this.preferenceProfileData.religion) {
-              this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(",");
+              this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
             }
             
-            if (this.personalProfileData.gender === "Female") {
-              if (this.preferenceProfileData.occupation)
-                this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(",");
-              else {
+            if (this.personalProfileData.gender === 'Female') {
+              if (this.preferenceProfileData.occupation) {
+                this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
+              } else {
                 this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
               }
             }
             localStorage.setItem('gender', this.personalProfileData.gender);
             this.specialCase();
-            //this.setCurrentProfileValue();
-            //this.setCurrentFamilyValues();
-            //this.setCurrentPreferenceValue();
             this.setProfileCalculations();
             this.setProfileCompletion();
-            //this.getAllCaste();
-            //this.getAllCastePersonal();
 
           },
           (error: any) => {
@@ -1443,9 +1416,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
             this.ngxNotificationService.error('Something Went Wrong');
           }
         );
-    } else {
-      this.ngxNotificationService.error('No user found');
-    }
   }
   changeProfileImageNew() {
     document.querySelector<HTMLInputElement>('#backfileNew').click();
@@ -1811,7 +1781,6 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       this.searchCaste.setValue(['']);
     }
   }
-  prevEventLength: number = 0;
   casteSelectionChanged(event) {
     console.log(event);
     if (event.value.length > this.prevEventLength) {
@@ -1969,15 +1938,15 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   openPersonalDialog() {
-    document.querySelector("#carousel").scrollIntoView();
+    document.querySelector('#carousel').scrollIntoView();
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.minWidth = "40vw";
-      dialogConfig.maxWidth = "40vw";
+      dialogConfig.minWidth = '40vw';
+      dialogConfig.maxWidth = '40vw';
     } else {
-      dialogConfig.minWidth = "100%";
+      dialogConfig.minWidth = '100%';
     }
-    dialogConfig.minHeight = "100vh";
+    dialogConfig.minHeight = '100vh';
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
@@ -1996,15 +1965,15 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   openFamilyDialog() {
-    document.querySelector("#carousel").scrollIntoView();
+    document.querySelector('#carousel').scrollIntoView();
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.minWidth = "40vw";
-      dialogConfig.maxWidth = "40vw";
+      dialogConfig.minWidth = '40vw';
+      dialogConfig.maxWidth = '40vw';
     } else {
-      dialogConfig.minWidth = "100%";
+      dialogConfig.minWidth = '100%';
     }
-    dialogConfig.minHeight = "100vh";
+    dialogConfig.minHeight = '100vh';
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
@@ -2023,12 +1992,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   openPreferenceDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
-      dialogConfig.minWidth = "40vw";
-      dialogConfig.maxWidth = "40vw";
+      dialogConfig.minWidth = '40vw';
+      dialogConfig.maxWidth = '40vw';
     } else {
-      dialogConfig.minWidth = "100%";
+      dialogConfig.minWidth = '100%';
     }
-    dialogConfig.minHeight = "100vh";
+    dialogConfig.minHeight = '100vh';
     dialogConfig.disableClose = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {

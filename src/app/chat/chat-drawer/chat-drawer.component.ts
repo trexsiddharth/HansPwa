@@ -10,7 +10,6 @@ import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile
 import { timeout, retry, catchError, takeUntil, shareReplay, map, startWith, delay, debounceTime } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, concat, observable, Observable, ReplaySubject, Subject } from 'rxjs';
-import { EditPreferenceDialogComponent } from '../myprofile/edit-preference-dialog/edit-preference-dialog.component';
 import { ChooseFromDialogComponent } from './choose-from-dialog/choose-from-dialog.component';
 
 @Component({
@@ -392,6 +391,7 @@ export class ChatDrawerComponent implements OnInit {
           this.username = data.name;
           this.userpic = data.photo;
           this.userId = data.id;
+          localStorage.setItem('id', data.id);
           this.userIsLead = data.isLead;
           // this.getUserProfileData();
           this.getProfileAndCalculate();
@@ -786,35 +786,10 @@ export class ChatDrawerComponent implements OnInit {
     }
   }
   getProfileAndCalculate() {
-    if (this.userId || localStorage.getItem('id')) {
       this.spinner.show();
-      const myprofileData = new FormData();
-      myprofileData.append(
-        'id',
-        this.userId ? this.userId : localStorage.getItem('id')
-      );
-      myprofileData.append('contacted', '1');
-      myprofileData.append(
-        'is_lead',
-        this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
-      );
-      myprofileData.append('show_country', '1');
-      // tslint:disable-next-line: max-line-length
-      return this.http
-        .post<any>(
-          'https://partner.hansmatrimony.com/api/getProfile',
-          myprofileData
-        )
-        .pipe(
-          timeout(7000),
-          retry(2),
-          catchError((e) => {
-            this.ngxNotificationService.error(
-              'Server Time Out, Try Again Later'
-            );
-            throw new Error('Server Timeout ' + e);
-          })
-        )
+      this.chatService.getUserProfile().pipe(
+        shareReplay()
+      )
         .subscribe(
           (data: any) => {
             if (data) {
@@ -834,41 +809,11 @@ export class ChatDrawerComponent implements OnInit {
             this.ngxNotificationService.error('Something Went Wrong');
           }
         );
-    } else {
-      this.ngxNotificationService.error('No user found');
-    }
   }
 
   getUserProfileData() {
-    if (this.userId || localStorage.getItem('id')) {
       this.spinner.show();
-      const myprofileData = new FormData();
-      myprofileData.append(
-        'id',
-        this.userId ? this.userId : localStorage.getItem('id')
-      );
-      myprofileData.append('contacted', '1');
-      myprofileData.append(
-        'is_lead',
-        this.userIsLead ? this.userIsLead : localStorage.getItem('is_lead')
-      );
-      myprofileData.append('show_country', '1');
-      // tslint:disable-next-line: max-line-length
-      return this.http
-        .post<any>(
-          'https://partner.hansmatrimony.com/api/getProfile',
-          myprofileData
-        )
-        .pipe(
-          timeout(7000),
-          retry(2),
-          catchError((e) => {
-            this.ngxNotificationService.error(
-              'Server Time Out, Try Again Later'
-            );
-            throw new Error('Server Timeout ' + e);
-          })
-        )
+      this.chatService.getUserProfile(true)
         .subscribe(
           (data: any) => {
             console.log(data.preferences);
@@ -966,10 +911,8 @@ export class ChatDrawerComponent implements OnInit {
             this.ngxNotificationService.error('Something Went Wrong');
           }
         );
-    } else {
-      this.ngxNotificationService.error('No user found');
     }
-  }
+
 onSubmitPreferences() {
 
   console.log('pref_country', this.preferencesForm.value.country);
