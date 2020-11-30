@@ -434,7 +434,9 @@ export class HistoryProfilesDialogComponent implements OnInit {
   //  }
 
   setName(name: string): string {
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+    if (this.itemService.getCredits() != null &&
+      !this.item.family.mobile
+     && this.itemService.getCredits().toString() === '0'
     && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {

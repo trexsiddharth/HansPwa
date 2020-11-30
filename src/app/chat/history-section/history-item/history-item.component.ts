@@ -39,7 +39,9 @@ export class HistoryItemComponent implements OnInit {
 
   setName(name: string): string {
     if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0'
-    || this.authData.paid_status !== 'Paid') && !this.itemService.getPersonalized()) {
+    || this.authData.paid_status !== 'Paid')
+    && this.listItem.type !== 'CONTACT'
+    && !this.itemService.getPersonalized()) {
       const a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
