@@ -38,6 +38,7 @@ export class SubscriptionComponent implements OnInit {
   currentOnlineStatus;
   currentPersonalizedStatus;
   isActive = 'online';
+  authData;
 
   plan = 0;
   benefit;
@@ -68,6 +69,9 @@ export class SubscriptionComponent implements OnInit {
     }
     else {
       this.isActive = 'online';
+    }
+    if (localStorage.getItem('authData')) {
+      this.authData = JSON.parse(localStorage.getItem('authData'));
     }
     this.subscriptionService.loadRazorPayScript();
     this.innerWidth = window.innerWidth;
@@ -103,7 +107,8 @@ export class SubscriptionComponent implements OnInit {
           for (let i = 0; i < this.plans.length; i++) {
             if (this.plans[i].plan_name !== 'Re-Marriage' && this.plans[i].plan_name !== 'Re-Marriage Deluxe' ) {
               if (this.plans[i].plan_type === 'Self Service Plan') {
-                if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal' ) {
+                if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal'
+                && (this.authData && this.authData.gender === 'Male') ) {
                   this.plansOnline.push(this.plans[i]);
                 } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal'  ) {
                   this.plansOnline.push(this.plans[i]);
