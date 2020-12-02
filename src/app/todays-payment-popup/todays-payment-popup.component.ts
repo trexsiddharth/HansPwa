@@ -70,29 +70,35 @@ export class TodaysPaymentPopupComponent implements OnInit {
               }
             }
           } else {
-            if (this.authData) {
-              const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
-              if (totalIncome < 4) {
-                for (const a of res) {
-                  if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' ) {
-                    if (a.plan_name === 'Basic' && a.category_name !== 'Normal'
-                    && (this.authData && this.authData.gender === 'Male')) {
-                      this.plans.push(a);
-                    } else if (a.plan_name !== 'Basic' && a.category_name === 'Normal') {
-                      this.plans.push(a);
-                    }
-                  }
-                }
-            } else {
+            // if (this.authData) {
+            //   const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
+            //   if (totalIncome < 4) {
+            //     for (const a of res) {
+            //       if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' ) {
+            //         if (a.plan_name === 'Basic' && a.category_name !== 'Normal'
+            //         && (this.authData && this.authData.gender === 'Male')) {
+            //           this.plans.push(a);
+            //         } else if (a.plan_name !== 'Basic' && a.category_name === 'Normal') {
+            //           this.plans.push(a);
+            //         }
+            //       }
+            //     }
+            // } else {
+            //   for (const a of res) {
+            //     if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' && a.category_name !== 'Low income' ) {
+            //       this.plans.push(a);
+            //     }
+            //   }
+            // }
+            // } else {
+            //   this.ngxNotificationService.warning('Auth Data not found');
+            // }
+
               for (const a of res) {
                 if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' && a.category_name !== 'Low income' ) {
                   this.plans.push(a);
                 }
               }
-            }
-            } else {
-              this.ngxNotificationService.warning('Auth Data not found');
-            }
 
           }
           // this.plans = res;

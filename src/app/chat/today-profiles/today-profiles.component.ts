@@ -139,7 +139,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           localStorage.setItem('authData', JSON.stringify(data));
           const totalIncome = Number(data.user_income) + Number(data.family_income);
           if (totalIncome < 4) {
-            localStorage.setItem('low income', 'true');
+            // localStorage.setItem('low income', 'true');
           }
           this.chatService.authDataUpdated.emit(true);
           const text: string = data.apiwha_autoreply;
@@ -201,7 +201,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         const data = JSON.parse(localStorage.getItem('authData'));
         const totalIncome = Number(data.user_income) + Number(data.family_income);
         if (totalIncome < 4) {
-          localStorage.setItem('low income', 'true');
+          // localStorage.setItem('low income', 'true');
         }
         this.chatService.authDataUpdated.emit(true);
         console.log(data);
