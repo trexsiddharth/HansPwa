@@ -296,7 +296,8 @@ getCountOfRishtey(formValues: FormData, values: any): Observable<RishteyCountTab
   getUserProfile( updateProfile: boolean = false): Observable<ProfileTable> {
     if (this.userProfileSubject.getValue() && !updateProfile) {
       console.log('cached user profile', this.userProfileSubject.getValue());
-      return this.userProfile$;
+
+      return this.userProfileSubject;
     }
     const myprofileData = new FormData();
     myprofileData.append(
@@ -322,6 +323,7 @@ getCountOfRishtey(formValues: FormData, values: any): Observable<RishteyCountTab
           throw new Error('Server Timeout ' + e);
         }
         ), tap((data) => {
+          console.log('User Data Updated');
           this.userProfileSubject.next(data);
         })
       );

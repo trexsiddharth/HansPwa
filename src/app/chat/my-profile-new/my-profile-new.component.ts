@@ -33,6 +33,7 @@ import { Options, LabelType } from 'ng5-slider';
 import { forkJoin, ReplaySubject, Subject, Observable } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { ChatServiceService } from 'src/app/chat-service.service';
+import { AuthTable } from 'src/app/Model/AuthTable';
 
 @Component({
   selector: 'app-my-profile-new',
@@ -514,6 +515,8 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   personalForm: FormGroup;
   //familyForm: NgForm;
   familyForm1: FormGroup;
+
+  authData: AuthTable;
 
   familyForm: NgForm;
   preferencesForm: FormGroup;
@@ -1296,9 +1299,9 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   getDetailsLeft(a: string) {
     switch (a) {
       case 'personal': return this.personalDetailsLeft.length;
-        break;
+                       break;
       case 'family': return this.familyDetailsLeft.length;
-        break;
+                     break;
     }
   }
   setProfileCalculations() {
@@ -1392,9 +1395,15 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
               : null;
             this.spinner.hide();
             this.setProfileCompletion();
-            if (this.getCarouselCount() > 0) {
+            if (this.getImagesCount() > 0 || data.profile.photo) {
               console.log('Photo status set to true');
               this.itemService.setPhotoStatus(true);
+            } else {
+              this.itemService.setPhotoStatus(false);
+              this.authData = this.itemService.getAuthData;
+              this.authData.hasPhoto = '0';
+              this.authData.photo = null;
+              this.itemService.updateAuthData(this.authData);
             }
             if (this.preferenceProfileData.religion) {
               this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
@@ -1452,8 +1461,17 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe((suc: any) => {
       console.log('photos', suc);
       if (suc.pic_upload_status === 'Y') {
+        this.authData = this.itemService.getAuthData;
+        if (this.authData) {
+          this.authData.hasPhoto = '1';
+          this.authData.photo = suc.profile_pic_url;
+          this.itemService.updateAuthData(this.authData);
+          this.getUserProfileData(true);
+        }
+
         this.spinner.hide();
         console.log('Image Upload successful');
+        
         this.ngxNotificationService.success('Photo Uploaded Succesfully!');
         this.itemService.setPhotoStatus(true);
       } else {
@@ -1519,10 +1537,10 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getImagesCount() {
+    let num = this.personalProfileData.carousel;
+    let unum = this.personalProfileData.unapprove_carousel;
     if (!this.carouselSize) {
       this.carouselSize = [];
-      let num = this.personalProfileData.carousel;
-      let unum = this.personalProfileData.unapprove_carousel;
       if ((num !== '[]' && num && num !== 'null') || (unum !== '[]' && unum && unum !== 'null')) {
         const carousel: object = JSON.parse(num);
         const ucarousel: object = JSON.parse(unum);
@@ -1540,15 +1558,20 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         return this.carouselSize;
       }
       else {
-        this.carouselSize = [1];
-        return this.carouselSize;
+        if (this.personalProfileData.photo) {
+          this.carouselSize = [1];
+          return this.carouselSize;
+        } else {
+          this.itemService.setPhotoStatus(false);
+          return;
+        }
       }
     } else {
       return this.carouselSize;
     }
   }
 
-  getCarouselCount(): number {
+    getCarouselCount(): number {
     let num = this.personalProfileData.carousel;
     if (num !== '[]' && num && num !== 'null') {
       const carousel: object = JSON.parse(num);
@@ -1562,12 +1585,12 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  changeProfileImage(index: string) {
+    changeProfileImage(index: string) {
     const i = Number(index) + 1;
     console.log('current index is ' + i);
     document.querySelectorAll('#backfile')[index].click();
   }
-  addProfileImage(index: number) {
+    addProfileImage(index: number) {
     const i = index + 1;
     console.log('current index is ' + i);
     this.carouselSize.push(i);
@@ -1576,7 +1599,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 1000);
   }
 
-  getIncome(value: number) {
+    getIncome(value: number) {
     if (value != null) {
       if (value.toString().length >= 6) {
         return String(Number(value) / 100000);
@@ -1589,24 +1612,24 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       return '';
     }
   }
-  logout() {
+    logout() {
     let lang = localStorage.getItem('language');
     localStorage.clear();
     localStorage.setItem('language', lang);
     this.router.navigateByUrl('/home');
   }
-  backToChat() {
+    backToChat() {
     // this.backToProfiles.emit('chatbot');
     this.router.navigateByUrl('/chat');
   }
-  setLocality(locality, city) {
+    setLocality(locality, city) {
     if (locality && locality !== '') {
       return locality;
     } else {
       return city;
     }
   }
-  downloadMyProfile() {
+    downloadMyProfile() {
     const pdfData = new FormData();
     pdfData.append('id', localStorage.getItem('id'));
     pdfData.append('profile_to_send_id', localStorage.getItem('id'));
@@ -1635,11 +1658,11 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       );
   }
-  getQualification(degree, education) {
+    getQualification(degree, education) {
     return education != null && education !== '' ? education : degree;
   }
 
-  setMarriageBrothers(value1: any, value2: any) {
+    setMarriageBrothers(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return (
@@ -1657,7 +1680,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  setMarriageSisters(value1: any, value2: any) {
+    setMarriageSisters(value1: any, value2: any) {
     if (value1 != null && value1 !== '' && value1 !== 0) {
       if (value2 != null && value2 !== '' && value2 !== 0) {
         return (
@@ -1674,7 +1697,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
   }
-  getAllCaste() {
+    getAllCaste() {
     this.http
       .get('https://partner.hansmatrimony.com/api/getAllCaste')
       .subscribe((res: any) => {
@@ -1712,7 +1735,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
           });
       });
   }
-  setNullToNotMatter() {
+    setNullToNotMatter() {
     setTimeout(() => {
       if (this.preferenceProfileData) {
         console.log('working');
