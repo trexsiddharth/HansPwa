@@ -1,4 +1,3 @@
-
 <main [ngClass]="{'mainBack': section}">
     <mat-toolbar class="toolBar" *ngIf="section">
         <div style="display: flex;
@@ -19,28 +18,25 @@
         </button>
     </mat-toolbar>
 
-  <div *ngIf="type && type == 'interestReceived'" class="text-center">
-    <button class="btn btn-tabs" 
-    (click)="setSelectedIndex(0)"
-    [ngClass]="{'btn-tabs-active':selectedTab === 0}">
-    Liked Me
-</button>
+    <div *ngIf="type && type == 'interestReceived'" class="text-center">
+        <button class="btn btn-tabs" (click)="setSelectedIndex(0)" [ngClass]="{'btn-tabs-active':selectedTab === 0}">
+            {{languageService.likedMe.likedMe}}
+        </button>
 
-<button  class="btn btn-tabs" 
-(click)="setSelectedIndex(1)"
-[ngClass]="{'btn-tabs-active':selectedTab === 1}">
-    Viewed me
-</button>
-  </div>
+        <button class="btn btn-tabs" (click)="setSelectedIndex(1)" [ngClass]="{'btn-tabs-active':selectedTab === 1}">
+            {{languageService.likedMe.viewedMe}}
+        </button>
+    </div>
 
 
-    <section *ngIf="profile.length > 0 && selectedTab == 0" [ngClass]="{'ht-full': section, 'paddingToSection' : section}" infiniteScroll
-        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="getScrollData()">
+    <section *ngIf="profile.length > 0 && selectedTab == 0"
+        [ngClass]="{'ht-full': section, 'paddingToSection' : section}" infiniteScroll [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="getScrollData()">
         <div *ngFor="let item of profile;let i = index">
             <div class="historyProfile" [id]="i">
                 <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized() && i!=0}" #profilePic
-                    [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized() && i!=0}"
+                    #profilePic [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
                     (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
                     alt="profile picture">
                 <div style="position: absolute;top: -15px;
@@ -67,20 +63,21 @@
                         who
                         likes you</p>
 
-                        <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
-                        null && itemService.getCredits().toString() != '0') || i == 0 || itemService.getPersonalized() || type == 'contacted' || type == 'rejected' || type == 'interestShown'">  
-                    <span>
-                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
-                    </span><br>
-                    <span>
-                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}
-                        | {{setHeight(item.profile.height)}}
-                        | {{item.family ? item.family.religion : item.profile.religion}},
-                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
-                        | {{setIncome(item.profile.monthly_income)}} LPA
-                    </span>
+                    <div
+                        *ngIf="(type==='interestReceived' && itemService.getCredits() != 
+                        null && itemService.getCredits().toString() != '0') || i == 0 || itemService.getPersonalized() || type == 'contacted' || type == 'rejected' || type == 'interestShown'">
+                        <span>
+                            {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
+                        </span><br>
+                        <span>
+                            {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}
+                            | {{setHeight(item.profile.height)}}
+                            | {{item.family ? item.family.religion : item.profile.religion}},
+                            {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
+                            | {{setIncome(item.profile.monthly_income)}} LPA
+                        </span>
 
-                </div>
+                    </div>
                 </div>
 
                 <div class="historyButtons">
@@ -112,10 +109,9 @@
                     <button mat-raised-button class="btn" (click)="profileReAnswer(item,'YES',i)" style="background-color: #58D1FD;
                     margin-top: 20px;
                     padding: 20px;
-                     border-radius: 10px;"
-                            *ngIf="type !== 'contacted'">
-                            <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
-                        </button>
+                     border-radius: 10px;" *ngIf="type !== 'contacted'">
+                        <img width="20px" src="../../../assets/phone_white.svg" alt="contact profile">
+                    </button>
 
                     <button mat-raised-button class="btn" (click)="call(i)" style="background-color: #58D1FD;
                 margin-top: 20px;
@@ -206,7 +202,8 @@
         </div>
     </main>
     <!-- <main class="noProfileMain" *ngIf="true"> -->
-    <main [ngClass]="{'noProfileMainSection': section, 'noProfileMain' : !section}" *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()">
+    <main [ngClass]="{'noProfileMainSection': section, 'noProfileMain' : !section}"
+        *ngIf="itemService.getPhotoStatus() && isNotPaid() && !itemService.getPersonalized()">
         <!-- <div style="position: relative;display: block;margin: 30% auto;">
      <p class="text-center">
          <img width="80px" src="../../../assets/new icons/sad-face.svg" alt="no data">
@@ -217,14 +214,18 @@
     </div>  -->
         <div style="position: relative;display: block;margin: 2%;margin-bottom:10px">
             <p class="text-center noProfile" style="margin-bottom:0.4rem">
-                <a *ngIf="selectedTab == 0 && type == 'interestShown'" style="font-size:1.1rem">You have not liked anyone so far. Become our prime member to boost you profile
+                <a *ngIf="selectedTab == 0 && type == 'interestShown'" style="font-size:1.1rem">You have not liked
+                    anyone so far. Become our prime member to boost you profile
                     visibility and</a><br>
-                <a *ngIf="selectedTab == 0 && type == 'contacted'" style="font-size:1.1rem">You have not contacted anyone so far. Become our prime member to boost you profile
+                <a *ngIf="selectedTab == 0 && type == 'contacted'" style="font-size:1.1rem">You have not contacted
+                    anyone so far. Become our prime member to boost you profile
                     visibility and</a><br>
-                <a *ngIf="selectedTab == 0 && type == 'interestReceived'" style="font-size:1.1rem">You have no likes so far. Become our prime member to boost you profile
+                <a *ngIf="selectedTab == 0 && type == 'interestReceived'" style="font-size:1.1rem">You have no likes so
+                    far. Become our prime member to boost you profile
                     visibility and</a><br>
-                    <a *ngIf="selectedTab == 1" style="font-size:1.1rem">You have no viewers so far. Become our prime member to boost you profile
-                        visibility and</a><br>
+                <a *ngIf="selectedTab == 1" style="font-size:1.1rem">You have no viewers so far. Become our prime member
+                    to boost you profile
+                    visibility and</a><br>
                 Get <strong>Likes </strong>from <strong> 50,000+ Verified Profiles.</strong>
             </p>
             <p class="text-center">
@@ -482,14 +483,14 @@
 </div>
 
 <div *ngIf="(profileViewersList$ | async) && (profileViewersList$ | async).length > 0 && selectedTab == 1">
-   
-    <section [ngClass]="{'ht-full': section, 'paddingToSection' : section}" infiniteScroll
-        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="getScrollData()">
+
+    <section [ngClass]="{'ht-full': section, 'paddingToSection' : section}" infiniteScroll [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="getScrollData()">
         <div *ngFor="let item of (profileViewersList$ | async);let i = index">
             <div class="historyProfile" [id]="i">
                 <img [ngClass]="{'historyImage':true,'blurEffect':type==='interestReceived'&&itemService.getCredits() != 
-                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized() && i!=0 }" #profilePic
-                    [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
+                null && itemService.getCredits().toString() == '0'&& !itemService.getPersonalized() && i!=0 }"
+                    #profilePic [src]="getProfilePhoto(item,item.profile.photo,item.profile.gender)"
                     (click)="openProfileDialog(item,i)" (error)="onLoadProfileError(item.profile.gender,profilePic)"
                     alt="profile picture">
                 <div style="position: absolute;top: -15px;
@@ -515,20 +516,21 @@
                         Upgrade to see
                         who
                         viewed your profile</p>
-                        <div *ngIf="(type==='interestReceived' && itemService.getCredits() != 
+                    <div
+                        *ngIf="(type==='interestReceived' && itemService.getCredits() != 
                         null && itemService.getCredits().toString() != '0') || i == 0 || itemService.getPersonalized() || type == 'contacted' || type == 'rejected' || type == 'interestShown'">
-                    <span>
-                        {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
-                    </span><br>
-                    <span>
-                        {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}
-                        | {{setHeight(item.profile.height)}}
-                        | {{item.family ? item.family.religion : item.profile.religion}},
-                        {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
-                        | {{setIncome(item.profile.monthly_income)}} LPA
-                    </span>
+                        <span>
+                            {{setName(item.profile.name)}} | {{setAge(item.profile.birth_date)}}
+                        </span><br>
+                        <span>
+                            {{item.profile.working_city ?  item.profile.working_city : item.family ? item.family.city : ''}}
+                            | {{setHeight(item.profile.height)}}
+                            | {{item.family ? item.family.religion : item.profile.religion}},
+                            {{item.family ? item.family.caste : item.profile.caste}} | {{item.profile.occupation}}
+                            | {{setIncome(item.profile.monthly_income)}} LPA
+                        </span>
 
-                </div>
+                    </div>
                 </div>
 
                 <div class="historyButtons">
@@ -563,4 +565,3 @@
     </section>
 
 </div>
-

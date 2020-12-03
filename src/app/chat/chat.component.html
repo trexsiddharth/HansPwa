@@ -1,6 +1,5 @@
 <mat-sidenav-container class="bg-white" style="width: 100vw; position:fixed;overflow: hidden;">
-  <mat-sidenav
-   id="sidenav" (openedChange)="drawerPosition($event)" class="drawerSettings" mode="over" position="start"
+  <mat-sidenav id="sidenav" (openedChange)="drawerPosition($event)" class="drawerSettings" mode="over" position="start"
     #sidenav>
     <app-chat-drawer [drawerReference]="sidenav"></app-chat-drawer>
   </mat-sidenav>
@@ -32,7 +31,7 @@
         </div>
 
         <div class="menuIcon" (click)="sidenav.toggle()">
-          <img id="myProfImage" (click)="itemService.setTutorialIndex()" [src]="photo" (error)="onImageLoadError()" 
+          <img id="myProfImage" (click)="itemService.setTutorialIndex()" [src]="photo" (error)="onImageLoadError()"
             alt="profile pic" (click)="itemService.setdrawerBadgeClicked(true)">
           <div class="smallMenuImage">
             <span class="labelS mat-elevation-z7" [matBadge]="'!'" matBadgeSize="small"

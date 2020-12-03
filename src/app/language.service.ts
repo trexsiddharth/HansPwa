@@ -54,6 +54,11 @@ export class LanguageService {
     changeNumber: ''
   };
 
+  likedMe = {
+    likedMe: '',
+    viewedMe: ''
+  }
+
   constructor(private http: HttpClient,
     private ngxNotificationService: NgxNotificationService) {
   }
@@ -165,6 +170,9 @@ export class LanguageService {
           // credits
           this.profileLang.credits = 'बचे हुए कॉन्टेक्ट्स:';
 
+          //Liked Me
+          this.likedMe.likedMe = 'मुझे पसंद किय़ा';
+          this.likedMe.viewedMe = 'मुझे देखा किय़ा';
           break;
 
         case 'english':
@@ -259,6 +267,10 @@ export class LanguageService {
           this.profileLang.likesYou = 'Liked Me';
           this.profileLang.yourLikes = 'My Likes';
           this.profileLang.history = 'History';
+
+          //liked Me
+          this.likedMe.likedMe = 'Liked Me';
+          this.likedMe.viewedMe = 'Viewed Me';
 
           // credits
           this.profileLang.credits = 'Contacts Left: ';
