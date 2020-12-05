@@ -65,6 +65,7 @@ import { JainMatrimonyComponent } from './jain-matrimony/jainmatrimony.component
 import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.component';
 import { SidebarModule } from 'ng-sidebar';
 import { UnderstandErrorHandler } from './chat/helper/UnderstandErrorHandler';
+import { PaymentPopupComponent } from './payment-popup/payment-popup.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { UnderstandErrorHandler } from './chat/helper/UnderstandErrorHandler';
     ChristianMatrimonyComponent,
     BuddhistMatrimonyComponent,
     JainMatrimonyComponent,
-    MuslimMatrimonyComponent
+    MuslimMatrimonyComponent,
+    PaymentPopupComponent
   ],
   imports: [
     BrowserModule,

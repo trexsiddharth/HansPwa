@@ -36,10 +36,10 @@ ngOnInit() {
           console.log(response);
           if (response.status === 1) {
             this.ngxNotification.success(response.message);
-            this.dialogRef.close(formData);
           } else {
-            this.ngxNotification.error('Something went wrong');
+            this.ngxNotification.error('Unable to delete');
           }
+          this.dialogRef.close(formData);
       },
       err => {
         this.ngxNotification.error('Something went wrong');

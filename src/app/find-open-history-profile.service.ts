@@ -17,6 +17,7 @@ import { HistoryData, HistoryTable } from './Model/HistoryTable';
 import { catchError, combineAll, concatMap, map, retry, shareReplay, timeout } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProfileTable } from './Model/Profile';
+import { AuthTable } from './Model/AuthTable';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,6 @@ export class FindOpenHistoryProfileService {
   compatibilityLookingFor = '';
   compatibilityGender = '';
 
-  //see more section
-
 
   // history search section
   private historyAllDataListSubject: BehaviorSubject<HistoryTable> = new BehaviorSubject<HistoryTable>(null);
@@ -57,8 +56,21 @@ export class FindOpenHistoryProfileService {
     private router: Router,
     private http: HttpClient,
     private ngxNotificationService: NgxNotificationService) {
+  }
 
-      this.authData = JSON.parse(localStorage.getItem('authData'));
+  get getAuthData(): AuthTable {
+    this.authData = JSON.parse(localStorage.getItem('authData'));
+    if (!this.authData) {
+      return;
+    }
+    return this.authData;
+  }
+
+  updateAuthData(update: AuthTable) {
+    this.authData = update;
+    if (this.authData) {
+      localStorage.setItem('authData', JSON.stringify(this.authData));
+    }
   }
 
   getSeeMoreData(): any {
