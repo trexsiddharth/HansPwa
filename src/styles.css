@@ -274,9 +274,6 @@ body {
   
   /* border-radius: 20px 20px 0px 0px!important; */
 }
-.mat-tab-body-content {
-  overflow: hidden !important;
-}
 #myprofMatTabGroup.mat-tab-body{
   background:transparent!important;
   overflow-y: hidden!important;
