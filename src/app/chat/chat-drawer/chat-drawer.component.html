@@ -55,7 +55,7 @@
       <span *ngIf="languageService.getCurrentLanguage()==='hindi'">जो आपको पसंद करते है</span>
     </button> -->
 
-    <!-- // rejected profiles  -->
+        <!-- // rejected profiles  -->
 
         <!-- <button class="rowMore" (click)="openHistoryProfiles('rejected')">
           <img src="../../../assets/tabs-icons/x.svg" class="iconImage">
@@ -108,10 +108,9 @@
       </ng-container>
     </main>
   </mat-sidenav-content>
-  <mat-sidenav #sidenavPrefs id="sidenavPrefs" 
-  (openedChange)="drawerPosition($event)"
-  class="drawerSettings" mode="over" position="start" #sidenav>
-    <main class="mainContainer" >
+  <mat-sidenav #sidenavPrefs id="sidenavPrefs" (openedChange)="drawerPosition($event)" class="drawerSettings"
+    mode="over" position="start" #sidenav>
+    <main class="mainContainer">
 
       <div>
         <div class="row toolBar" style="width: 100%!important;margin:0px 0px">
@@ -271,7 +270,7 @@
                 }}</option>
                   </select>
                 </div>
- 
+
                 <div class="col-5" *ngIf="preferenceProfileData && preferenceProfileData.manglik">
                   <h6 style="display: inline-block;">Manglik :</h6>
                   <select style="color:#4a5d6a" type="text" class="form-control" formControlName="manglik_pref"
@@ -296,12 +295,13 @@
                 </div>
               </div>
 
-           
- 
+
+
               <div class="row information">
                 <div class="col-12">
                   <h6>Country:</h6>
-                  <input type="text" id="countryId" (click)="countryClicked()" class="form-control" formControlName="country" [matAutocomplete]="country">
+                  <input type="text" id="countryId" (click)="countryClicked()" class="form-control"
+                    formControlName="country" [matAutocomplete]="country">
                   <mat-autocomplete (optionSelected)='countrySelected($event.option.value)' autoActiveFirstOption
                     #country="matAutocomplete">
                     <mat-option *ngFor="let country of countries | async" [value]="country.name" required>
@@ -315,7 +315,8 @@
               <div class="row information" *ngIf="preferencesForm.value.country && authData.paid_status != 'Paid'">
                 <div class="col-12">
                   <h6 style="display: inline-block">State:</h6>
-                  <input type="text" id="statesFreeId" (click)="countryClicked()" class="form-control" formControlName="states_free" >
+                  <input type="text" id="statesFreeId" (click)="countryClicked()" class="form-control"
+                    formControlName="states_free">
                 </div>
               </div>
 
@@ -323,8 +324,9 @@
               <div class="row information" *ngIf="preferencesForm.value.country && authData.paid_status == 'Paid'">
                 <div class="col-12">
                   <h6>State:</h6>
-                  <mat-select id="stateId" formControlName="state" type="text" (click)="stateClicked()" class="form-control" [multiple]="true"
-                    (selectionChange)="stateSelectionChanged($event.value)"  #multiSelect>
+                  <mat-select id="stateId" formControlName="state" type="text" (click)="stateClicked()"
+                    class="form-control" [multiple]="true" (selectionChange)="stateSelectionChanged($event.value)"
+                    #multiSelect>
                     <mat-option>
                       <ngx-mat-select-search noEntriesFoundLabel="No States Found" placeholderLabel="Search States..."
                         [formControl]="searchStateText">
@@ -354,7 +356,8 @@
               <div class="row information" *ngIf="preferencesForm.value.country && authData.paid_status != 'Paid'">
                 <div class="col-12">
                   <h6 style="display: inline-block">City:</h6>
-                  <input type="text" id="citiesFreeId" (click)="countryClicked()" class="form-control" formControlName="cities_free" >
+                  <input type="text" id="citiesFreeId" (click)="countryClicked()" class="form-control"
+                    formControlName="cities_free">
                 </div>
               </div>
 
@@ -365,8 +368,8 @@
                   <mat-select id="cityId" type="text" (click)="cityClicked()" class="form-control" [multiple]="true"
                     (selectionChange)="citySelectionChanged($event.value)" formControlName="city" #multiSelect>
                     <mat-option>
-                      <ngx-mat-select-search id="citySearch" noEntriesFoundLabel="No cities Found" placeholderLabel="Search cities..."
-                        [formControl]="searchCityText">
+                      <ngx-mat-select-search id="citySearch" noEntriesFoundLabel="No cities Found"
+                        placeholderLabel="Search cities..." [formControl]="searchCityText">
                         <mat-icon ngxMatSelectSearchClear>close</mat-icon>
                       </ngx-mat-select-search>
                     </mat-option>
@@ -376,12 +379,10 @@
                   </mat-select>
                 </div>
               </div>
-              <div class="row information"
-               style="display: block;margin-bottom: 40px;"
-               *ngIf="preferencesForm.value.state && authData.paid_status == 'Paid'">
-                <div id="cityStyle" 
-                [ngStyle]="{'height': preferencesForm.value.city.length > 5 ? '100px' : 'auto'}"
-                style="overflow: hidden;padding: 0px 20px;">
+              <div class="row information" style="display: block;margin-bottom: 40px;"
+                *ngIf="preferencesForm.value.state && authData.paid_status == 'Paid'">
+                <div id="cityStyle" [ngStyle]="{'height': preferencesForm.value.city.length > 5 ? '100px' : 'auto'}"
+                  style="overflow: hidden;padding: 0px 20px;">
                   <mat-select-trigger>
                     <mat-chip-list>
                       <mat-chip *ngFor="let city of preferencesForm.value.city;" [removable]="true"
@@ -392,17 +393,20 @@
                     </mat-chip-list>
                   </mat-select-trigger>
                 </div>
-                <button class="btn" 
-                *ngIf="preferencesForm.value.city.length > 5"
-                style="float: right;
+                <button class="btn" *ngIf="preferencesForm.value.city.length > 5" style="
+                  margin-top: 10px;
+                  margin-left: 50px;" (click)="clearAllCity()">
+                  <code id="clearCityBtn">
+                    Clear All
+                    </code>
+                </button>
+                <button class="btn" *ngIf="preferencesForm.value.city.length > 5" style="float: right;
                 margin-top: 10px;
-                margin-right: 50px;" 
-                (click)="showMoreCity()"
-                >
-                <code id="cityStyleBtn">
+                margin-right: 50px;" (click)="showMoreCity()">
+                  <code id="cityStyleBtn">
                   See More ->
                 </code>
-              </button>
+                </button>
               </div>
               <div class="row information">
                 <div class="col-12">
@@ -423,9 +427,8 @@
                 </div>
               </div>
               <div class="row" style="display: block;margin-bottom: 20px;">
-                <div id="casteStyle" 
-                [ngStyle]="{'height': castePreferences.length > 5 ? '100px' : 'auto'}"
-                style="overflow: hidden;padding: 0px 20px;">
+                <div id="casteStyle" [ngStyle]="{'height': castePreferences.length > 5 ? '100px' : 'auto'}"
+                  style="overflow: hidden;padding: 0px 20px;">
                   <mat-select-trigger>
                     <mat-chip-list>
                       <mat-chip *ngFor="let caste of castePreferences" [removable]="true"
@@ -436,17 +439,13 @@
                     </mat-chip-list>
                   </mat-select-trigger>
                 </div>
-                <button class="btn" 
-                *ngIf="castePreferences.length > 5"
-                style="float: right;
+                <button class="btn" *ngIf="castePreferences.length > 5" style="float: right;
                 margin-top: 10px;
-                margin-right: 50px;" 
-                (click)="showMoreCaste()"
-                >
-                <code id="casteStyleBtn">
+                margin-right: 50px;" (click)="showMoreCaste()">
+                  <code id="casteStyleBtn">
                   See More ->
                 </code>
-              </button>
+                </button>
               </div>
               <div class="row information">
                 <div class="col-12" style="margin-top: 10px;">

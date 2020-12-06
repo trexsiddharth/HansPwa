@@ -14,7 +14,7 @@
 </mat-toolbar>
 
 <main id="historyMain" class="ht-full" *ngIf="item">
-
+    <button class="btn" (click)="getItem()">print item</button>
     <div id="profileImageDiv">
         <ngb-carousel>
             <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index">
@@ -89,7 +89,8 @@ border-top-right-radius: 20px;
         <!-- // buttons -->
 
         <div id="answerButtons">
-            <div class="t-c" *ngIf="(type !== 'contacted' || type === 'discover') && !this.item.profileChecked" style="margin-top: 10px;">
+            <div class="t-c" *ngIf="(type !== 'contacted' || type === 'discover') && !this.item.profileChecked"
+                style="margin-top: 10px;">
                 <button (click)="profileReAnswer(item,'YES')" class="setButtons" mat-fab style="color: green;
             background: #58D1FD;" aria-label="Example icon-button with a heart icon">
                     <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
@@ -128,7 +129,8 @@ border-top-right-radius: 20px;
             </div>
 
 
-            <div class="t-c blur" *ngIf="type !== 'rejected' && type !== 'interestReceived' && type !== 'contacted' && type !== 'discover'"
+            <div class="t-c blur"
+                *ngIf="type !== 'rejected' && type !== 'interestReceived' && type !== 'contacted' && type !== 'discover'"
                 style="margin-top: 10px;">
                 <button (click)="profileReAnswer(item,'NO')" class="setButtons" mat-fab style="color: grey;
             background: #C8C8C8;">
@@ -205,11 +207,10 @@ border-top-right-radius: 20px;
             <div class="row field" id="visibleAfter" [ngClass]="{'contactShown': type === 'contacted'}">
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
-                    <span
-                        class="title">
+                    <span class="title">
                         {{getPhoneNumbers()}}
                     </span>
-                     
+
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
@@ -255,8 +256,7 @@ border-top-right-radius: 20px;
 
             <div class="row field" *ngIf="item.profile.marital_status === 'Divorcee'">
                 <div class="col-6">
-                    <img class="titleImage" src="../../../../assets/birthplace.svg"
-                        alt="marital status">
+                    <img class="titleImage" src="../../../../assets/birthplace.svg" alt="marital status">
                     <span class="title">{{item.profile.children}}</span>
                 </div>
             </div>

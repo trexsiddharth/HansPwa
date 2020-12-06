@@ -19,7 +19,7 @@ import { start } from 'repl';
   styleUrls: ['./history-profiles-dialog.component.css']
 })
 export class HistoryProfilesDialogComponent implements OnInit {
-  confirmCall:boolean=false;
+  confirmCall: boolean = false;
   carouselSize;
   // Height
   // tslint:disable-next-line: max-line-length
@@ -33,16 +33,16 @@ export class HistoryProfilesDialogComponent implements OnInit {
   title;
   personalizedUser = false;
   constructor(private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              public notification: NotificationsService,
-              public itemService: FindOpenHistoryProfileService,
-              public languageService: LanguageService,
-              private browserLocation: Location,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private breakPointObserver: BreakpointObserver,
-              private dialog: MatDialog
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService,
+    public notification: NotificationsService,
+    public itemService: FindOpenHistoryProfileService,
+    public languageService: LanguageService,
+    private browserLocation: Location,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private breakPointObserver: BreakpointObserver,
+    private dialog: MatDialog
   ) {
   }
 
@@ -112,10 +112,10 @@ export class HistoryProfilesDialogComponent implements OnInit {
       this.itemService.getPhotoStatus() === false &&
       answer === 'SHORTLIST') {
       this.itemService.openMessageDialog(item, answer);
-    }  else if (this.itemService.getPersonalized() &&
-    answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' ) {
-    this.ngxNotificationService.warning('You don\'t have enough credits');
-  } else if (this.itemService.getPersonalized() === false &&
+    } else if (this.itemService.getPersonalized() &&
+      answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+      this.ngxNotificationService.warning('You don\'t have enough credits');
+    } else if (this.itemService.getPersonalized() === false &&
       answer === 'YES' && !item.family) {
       this.itemService.openMessageDialog(item, 'contacted');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
@@ -372,7 +372,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
   }
 
-  onLoadProfileError(gender: string,index) {
+  onLoadProfileError(gender: string, index) {
     const image = document.querySelectorAll('#profilePic')[index];
     if (gender === 'Male') {
       image.setAttribute('src', '../../assets/male_pic.png');
@@ -436,8 +436,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
   setName(name: string): string {
     if (this.itemService.getCredits() != null &&
       !this.item.family.mobile
-     && this.itemService.getCredits().toString() === '0'
-    && !this.itemService.getPersonalized()) {
+      && this.itemService.getCredits().toString() === '0'
+      && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
@@ -557,13 +557,13 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
   }
 
-   getPhoneNumbers(): string {
+  getPhoneNumbers(): string {
     if (this.item == null) {
       return 'Visible After Contact';
     }
 
     if (this.item.family && this.item.family.mobile) {
-        return `${this.item.family.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
+      return `${this.item.family.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
     } else if (this.item.profile && this.item.profile.mobile) {
       return `${this.item.profile.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
     } else {
@@ -571,5 +571,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
 
   }
-
+  getItem() {
+    console.log(this.item)
+  }
 }
