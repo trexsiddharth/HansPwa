@@ -571,7 +571,19 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
 
   }
-  getItem() {
-    console.log(this.item)
+  isDisplay(i, j) {
+
+    // console.log('profession' in this.item['profile'])
+    if (i in this.item
+      && j in this.item[i]
+      && this.item[i][j]
+      && this.item[i][j] !== null
+      && this.item[i][j].toString().toLowerCase() !== 'na'
+      && this.item[i][j].toString().toLowerCase() !== 'n/a'
+      && this.item[i][j].toString().toLowerCase() !== 'null'
+    ) {
+      return true;
+    }
+    return false;
   }
 }
