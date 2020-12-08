@@ -1159,6 +1159,10 @@ export class ChatDrawerComponent implements OnInit {
     this.preferencesForm.value.city = []
     this.citiesSubject.next([])
   }
+  clearAllCaste() {
+    // console.log(this.castePreferences)
+    this.castePreferences = [];
+  }
 
   showMoreCaste() {
     const casteStyle: any = document.querySelector('#casteStyle');

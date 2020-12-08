@@ -439,6 +439,13 @@
                     </mat-chip-list>
                   </mat-select-trigger>
                 </div>
+                <button class="btn" *ngIf="castePreferences.length > 5" style="
+                  margin-top: 10px;
+                  margin-right: 50px;" (click)="clearAllCaste()">
+                  <code id="casteStyleBtn">
+                    Clear All
+                  </code>
+                </button>
                 <button class="btn" *ngIf="castePreferences.length > 5" style="float: right;
                 margin-top: 10px;
                 margin-right: 50px;" (click)="showMoreCaste()">
