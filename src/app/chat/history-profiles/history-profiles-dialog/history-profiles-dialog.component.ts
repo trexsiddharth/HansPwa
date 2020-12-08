@@ -19,7 +19,7 @@ import { start } from 'repl';
   styleUrls: ['./history-profiles-dialog.component.css']
 })
 export class HistoryProfilesDialogComponent implements OnInit {
-  confirmCall:boolean=false;
+  confirmCall: boolean = false;
   carouselSize;
   // Height
   // tslint:disable-next-line: max-line-length

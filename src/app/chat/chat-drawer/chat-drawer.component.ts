@@ -266,7 +266,8 @@ export class ChatDrawerComponent implements OnInit {
     this.chatService.getCities(countryId, stateId).subscribe((response: any) => {
       console.log(response);
       if (this.allCities ) {
-        this.allCities.concat(response);
+        console.log('current cities', this.allCities);
+        this.allCities = this.allCities.concat(response);
         this.citiesSubject.next(this.allCities);
       } else {
         this.allCities = response;
