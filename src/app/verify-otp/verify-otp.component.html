@@ -17,26 +17,26 @@
         <div class="formSetting">
             <p>
                 <mat-form-field class="otpField" appearance="standard">
-                    <input id="verify1" (keyup)="changePlaces(1)" type="number" min="0" max="9" matInput
-                        formControlName="otp1">
+                    <input id="verify1" (keypress)="checkInput($event,1)" (keyup)="changePlaces(1)" type="number"
+                        min="0" max="9" matInput formControlName="otp1">
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field class="otpField" appearance="standard">
-                    <input id="verify2" (keyup)="changePlaces(2)" type="number" min="0" max="9" matInput
-                        formControlName="otp2">
+                    <input id="verify2" (keypress)="checkInput($event,2)" (keyup)="changePlaces(2)" type="number"
+                        min="0" max="9" matInput formControlName="otp2">
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field class="otpField" appearance="standard">
-                    <input id="verify3" (keyup)="changePlaces(3)" type="number" min="0" max="9" matInput
-                        formControlName="otp3">
+                    <input id="verify3" (keypress)="checkInput($event,3)" (keyup)="changePlaces(3)" type="number"
+                        min="0" max="9" matInput formControlName="otp3">
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field class="otpField" appearance="standard">
-                    <input id="verify4" (keyup)="changePlaces(4)" type="number" min="0" max="9" matInput
-                        formControlName="otp4">
+                    <input id="verify4" (keypress)="checkInput($event,4)" (keyup)="changePlaces(4)" type="number"
+                        min="0" max="9" matInput formControlName="otp4">
                 </mat-form-field>
             </p>
         </div>

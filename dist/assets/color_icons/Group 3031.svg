@@ -1,0 +1,45 @@
+<<<<<<< HEAD
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#64e5ff"/>
+      <stop offset="1" stop-color="#00a8ff"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_3031" data-name="Group 3031" transform="translate(-559 -2088)">
+    <path id="Path_9775" data-name="Path 9775" class="cls-1" d="M25,0A25,25,0,1,1,0,25,25,25,0,0,1,25,0Z" transform="translate(559 2088)"/>
+    <path id="chat-bubble-user" class="cls-2" d="M22.3,17.5a5.4,5.4,0,0,0,1.183-3.333,5.483,5.483,0,0,0-10.967,0A5.4,5.4,0,0,0,13.7,17.5a8.333,8.333,0,0,0-3.333,3.85,1.667,1.667,0,1,0,3.067,1.3A5,5,0,0,1,18,19.617h0a5,5,0,0,1,4.583,3.033,1.667,1.667,0,0,0,1.533,1.017,1.817,1.817,0,0,0,.65-.133,1.667,1.667,0,0,0,.883-2.183A8.333,8.333,0,0,0,22.3,17.5ZM18,16.283h0a2.15,2.15,0,1,1,2.15-2.133A2.15,2.15,0,0,1,18,16.283ZM28,2H8A5,5,0,0,0,3,7V25.333a5,5,0,0,0,5,5h4.317l4.5,4.517a1.679,1.679,0,0,0,2.267.083l5.367-4.6H28a5,5,0,0,0,5-5V7A5,5,0,0,0,28,2Zm1.667,23.333A1.667,1.667,0,0,1,28,27H23.833a1.667,1.667,0,0,0-1.083.4l-4.667,4-3.9-3.917A1.667,1.667,0,0,0,13,27H8a1.667,1.667,0,0,1-1.667-1.667V7A1.667,1.667,0,0,1,8,5.333H28A1.667,1.667,0,0,1,29.667,7Z" transform="translate(566 2095)"/>
+  </g>
+</svg>
+=======
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#64e5ff"/>
+      <stop offset="1" stop-color="#00a8ff"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_3031" data-name="Group 3031" transform="translate(-559 -2088)">
+    <path id="Path_9775" data-name="Path 9775" class="cls-1" d="M25,0A25,25,0,1,1,0,25,25,25,0,0,1,25,0Z" transform="translate(559 2088)"/>
+    <path id="chat-bubble-user" class="cls-2" d="M22.3,17.5a5.4,5.4,0,0,0,1.183-3.333,5.483,5.483,0,0,0-10.967,0A5.4,5.4,0,0,0,13.7,17.5a8.333,8.333,0,0,0-3.333,3.85,1.667,1.667,0,1,0,3.067,1.3A5,5,0,0,1,18,19.617h0a5,5,0,0,1,4.583,3.033,1.667,1.667,0,0,0,1.533,1.017,1.817,1.817,0,0,0,.65-.133,1.667,1.667,0,0,0,.883-2.183A8.333,8.333,0,0,0,22.3,17.5ZM18,16.283h0a2.15,2.15,0,1,1,2.15-2.133A2.15,2.15,0,0,1,18,16.283ZM28,2H8A5,5,0,0,0,3,7V25.333a5,5,0,0,0,5,5h4.317l4.5,4.517a1.679,1.679,0,0,0,2.267.083l5.367-4.6H28a5,5,0,0,0,5-5V7A5,5,0,0,0,28,2Zm1.667,23.333A1.667,1.667,0,0,1,28,27H23.833a1.667,1.667,0,0,0-1.083.4l-4.667,4-3.9-3.917A1.667,1.667,0,0,0,13,27H8a1.667,1.667,0,0,1-1.667-1.667V7A1.667,1.667,0,0,1,8,5.333H28A1.667,1.667,0,0,1,29.667,7Z" transform="translate(566 2095)"/>
+  </g>
+</svg>
+>>>>>>> c55b7395c6c84ad9dcadda87d8b4a1bdebf3e600

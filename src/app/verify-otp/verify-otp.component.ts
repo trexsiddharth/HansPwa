@@ -35,11 +35,13 @@ export class VerifyOtpComponent implements OnInit {
 
     this.sendOtp();
   }
-
+  checkInput(event, type) {
+    this.otpForm.controls[`otp${type}`].setValue('');
+  }
   changePlaces(event) {
     const element = document.querySelector(`#verify${event + 1}`) as HTMLInputElement; // get the sibling element
     const otp = this.otpForm.value[`otp${event}`]
-    console.log(event, this.otpForm, otp);
+    console.log(event, this.otpForm);
     if (element == null) { // check if its null
       const button = document.querySelector('.verifyBtn') as HTMLButtonElement;
       button.focus();

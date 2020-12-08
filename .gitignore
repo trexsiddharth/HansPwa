@@ -46,6 +46,4 @@ testem.log
 Thumbs.db
 
 # Local Netlify folder
-.netlify 
-
-/dist
+.netlify
