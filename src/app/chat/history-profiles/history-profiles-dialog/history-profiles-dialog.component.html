@@ -35,7 +35,7 @@
                         {{setName(toTitleCase(item.profile.name))}}
                     </span><br>
                     <span style="font-size: 14px;">
-                        {{item.family ? item.family.religion : item.profile.family}}
+                        {{item.family ? item.family.religion : item.profile.religion}}
                         {{item.family ? item.family.religion ? '|' : '' : item.profile.religion ? '|' : ''}}
                         {{item.family ? item.family.caste : item.profile.caste}}
                     </span><br>
@@ -224,7 +224,7 @@ border-top-right-radius: 20px;
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/Religion.svg" alt="caste">
                     <span class="title">
-                        {{item.family ? item.family.religion : item.profile.family}}
+                        {{item.family ? item.family.religion : item.profile.religion}}
                         {{item.family ? item.family.religion ? '|' : '' : item.profile.religion ? '|' : ''}}
                         {{item.family ? item.family.caste : item.profile.caste}}
                     </span>

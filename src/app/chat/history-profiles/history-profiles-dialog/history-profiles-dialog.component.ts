@@ -67,8 +67,9 @@ export class HistoryProfilesDialogComponent implements OnInit {
                 if (this.profile) {
                   this.item = JSON.parse(this.profile);
                   console.log(this.item);
-                  this.title = `${this.setName(this.toTitleCase(this.item.profile.name))}'s Profile`;
-
+                  if (this.item && this.item.profile && this.item.profile.name) {
+                    this.title = `${this.setName(this.toTitleCase(this.item.profile.name))}'s Profile`;
+                  }
                   // section from which user is coming
                   this.type = this.item.coming;
                 }
@@ -434,22 +435,38 @@ export class HistoryProfilesDialogComponent implements OnInit {
   //  }
 
   setName(name: string): string {
+    console.log('Name', name);
+    if (name) {
     if (this.itemService.getCredits() != null &&
-      !this.item.family.mobile
+    (this.item.family &&
+      !this.item.family.mobile)
      && this.itemService.getCredits().toString() === '0'
     && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
-        return a[0][0] + ' ' + a[1];
+        if (a[0][0]) {
+          return a[0][0] + ' ' + a[1];
+        } else {
+         return a[0] && a[1];
+        }
       } else if (a[0]) {
-        return a[0][0];
+        if (a[0][0]) {
+          return a[0][0];
+        } else {
+          return a[0];
+        }
       }
     } else {
+      console.log('returning name', name);
       return name;
     }
+  } else {
+    return '';
+  }
   }
 
   setAge(birthDate: string) {
+    console.log('birth date', birthDate);
     if (birthDate != null) {
       return String(Math.floor((Date.now() - new Date(birthDate).getTime()) / (1000 * 60 * 60 * 24 * 365))) + ' Yrs';
     } else {
