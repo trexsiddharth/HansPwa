@@ -390,6 +390,8 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
   persistentDialogOpeningLogic(shareItem, reply: string) {
+    this.openPersistentDialog('Complete Your Profile', 'Complete your profile and get liked by ' + shareItem.name + '!', 'Complete Profile');
+
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
       reply.toLowerCase() === 'yes' && this.type === 'profile' && this.itemService.isPersonalized) {
       this.ngxNotificationService.warning('You have zero credits left for the week' );

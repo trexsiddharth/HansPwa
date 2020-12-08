@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 // import { Matpopupaction, MAT_DIALOG_DATA } from '@angular/material';
-import { EditPersonalDialogComponent } from '../../myprofile/edit-personal-dialog/edit-personal-dialog.component';
 import { Router } from '@angular/router';
 import { ChatServiceService } from 'src/app/chat-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -527,10 +526,9 @@ export class PersistentMessageComponent implements OnInit {
   firstStep() {
     console.log(this.PageThree.value.BirthPlace);
     if (this.PageThree.valid) {
-      if (this.PageThree.value.FamilyIncome === "100+") {
+      if (this.PageThree.value.FamilyIncome === '100+') {
         this.PageThree.value.FamilyIncome = 100;
-      }
-      else {
+      } else {
         const a = this.PageThree.value.FamilyIncome.split('-');
         this.PageThree.patchValue({
           FamilyIncome: String((Number(a[0]) + Number(a[1])) / 2)
@@ -609,24 +607,7 @@ export class PersistentMessageComponent implements OnInit {
   changeProfileImage() {
     document.querySelector<HTMLInputElement>('#backfile').click();
   }
-  // chooseFileForUpload(files) {
-  //   if (files.length === 0) {
-  //     return;
-  //   } else {
-  //     const mimeType = files[0].type;
-  //     if (mimeType.match(/image\/*/) == null) {
-  //       alert('Only images are supported.');
-  //       return;
-  //     }
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(files[0]);
-  //     reader.onload = (_event) => {
-  //       // use backimgurl to set image
-  //       // this.BackimgURL = reader.result;
-  //       this.uploadPhoto(files[0]);
-  //     };
-  //   }
-  // }
+
   uploadPhoto(data, index) {
     const uploadData = new FormData();
     uploadData.append('id', localStorage.getItem('id'));

@@ -275,8 +275,8 @@ export class FindOpenHistoryProfileService {
 
   }
   getShortedNumber() {
-    if (this.profileCount.shortedCount) {
-      if (this.profileCount.viewersCount) {
+    if (this.profileCount.shortedCount != null) {
+      if (this.profileCount.viewersCount != null) {
         return Number(this.profileCount.shortedCount) + Number(this.profileCount.viewersCount);
       } else {
         return this.profileCount.shortedCount;

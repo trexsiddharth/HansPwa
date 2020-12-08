@@ -11,6 +11,8 @@ import { GetcallbackComponent } from './getcallback/getcallback.component';
 import { MyProfilePhotoUploadComponent } from './my-profile-photo-upload/my-profile-photo-upload.component';
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
 import { SettingsComponent } from './settings/settings.component';
+import { PersistentMessageComponent } from './today-profiles/persistent-message/persistent-message.component';
+import { CompletionFormsComponent } from './today-profiles/completion-forms/completion-forms.component';
 
 
 const routes: Routes = [
@@ -69,6 +71,10 @@ const routes: Routes = [
     path: 'discover/:section',
     component: DiscoverComponent
   },
+  {
+    path: 'complete/complete',
+    component: CompletionFormsComponent
+  }
 ];
 
 @NgModule({

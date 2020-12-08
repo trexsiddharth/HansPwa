@@ -46,6 +46,7 @@ import { ChooseFromDialogComponent } from './chat-drawer/choose-from-dialog/choo
 import { ChooseForComponent } from '../compatibility-form/choose-for/choose-for.component';
 import { HistoryItemComponent } from './history-section/history-item/history-item.component';
 import { ProfileItemComponent } from './profile-item/profile-item.component';
+import { CompletionFormsComponent } from './today-profiles/completion-forms/completion-forms.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -91,7 +92,8 @@ import { ProfileItemComponent } from './profile-item/profile-item.component';
     AskDeleteDialogComponent,
     ChooseFromDialogComponent,
     HistoryItemComponent,
-    ProfileItemComponent
+    ProfileItemComponent,
+    CompletionFormsComponent
   ],
   entryComponents: [
     MessageDialogComponent,
