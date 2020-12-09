@@ -14,7 +14,6 @@
 </mat-toolbar>
 
 <main id="historyMain" class="ht-full" *ngIf="item">
-
     <div id="profileImageDiv">
         <ngb-carousel>
             <ng-template ngbSlide *ngFor="let i of getImagesCount(item.profile.carousel); let index = index">
@@ -89,7 +88,8 @@ border-top-right-radius: 20px;
         <!-- // buttons -->
 
         <div id="answerButtons">
-            <div class="t-c" *ngIf="(type !== 'contacted' || type === 'discover') && !this.item.profileChecked" style="margin-top: 10px;">
+            <div class="t-c" *ngIf="(type !== 'contacted' || type === 'discover') && !this.item.profileChecked"
+                style="margin-top: 10px;">
                 <button (click)="profileReAnswer(item,'YES')" class="setButtons" mat-fab style="color: green;
             background: #58D1FD;" aria-label="Example icon-button with a heart icon">
                     <img class="buttonImage animateButtonImage" src="../../../assets/phone_white.svg"
@@ -128,7 +128,8 @@ border-top-right-radius: 20px;
             </div>
 
 
-            <div class="t-c blur" *ngIf="type !== 'rejected' && type !== 'interestReceived' && type !== 'contacted' && type !== 'discover'"
+            <div class="t-c blur"
+                *ngIf="type !== 'rejected' && type !== 'interestReceived' && type !== 'contacted' && type !== 'discover'"
                 style="margin-top: 10px;">
                 <button (click)="profileReAnswer(item,'NO')" class="setButtons" mat-fab style="color: grey;
             background: #C8C8C8;">
@@ -205,11 +206,10 @@ border-top-right-radius: 20px;
             <div class="row field" id="visibleAfter" [ngClass]="{'contactShown': type === 'contacted'}">
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
-                    <span
-                        class="title">
+                    <span class="title">
                         {{getPhoneNumbers()}}
                     </span>
-                     
+
                 </div>
                 <div class="col-6">
                     <img class="titleImage" src="../../../assets/new icons/location-dark.svg" alt="location">
@@ -229,7 +229,7 @@ border-top-right-radius: 20px;
                         {{item.family ? item.family.caste : item.profile.caste}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','marital_status')">
                     <img class="titleImage" src="../../../assets/new icons/Marital Status.svg" alt="marital status">
                     <span class="title">
                         {{item.profile.marital_status}}
@@ -239,13 +239,13 @@ border-top-right-radius: 20px;
 
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','food_choice')">
                     <img class="titleImage" src="../../../assets/new icons/Food Choice.svg" alt="food choice">
                     <span class="title">
                         {{item.profile.food_choice}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','weight')">
                     <img class="titleImage" src="../../../assets/new icons/Weight.svg" alt="weight">
                     <span class="title">
                         {{item.profile.weight}} Kg
@@ -254,9 +254,8 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field" *ngIf="item.profile.marital_status === 'Divorcee'">
-                <div class="col-6">
-                    <img class="titleImage" src="../../../../assets/birthplace.svg"
-                        alt="marital status">
+                <div class="col-6" *ngIf="isDisplay('profile','children')">
+                    <img class="titleImage" src="../../../../assets/birthplace.svg" alt="marital status">
                     <span class="title">{{item.profile.children}}</span>
                 </div>
             </div>
@@ -277,13 +276,13 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','occupation')">
                     <img class="titleImage" src="../../../assets/new icons/Occupation.svg" alt="occupation">
                     <span class="title">
                         {{item.profile.occupation}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','profession')">
                     <img class="titleImage" src="../../../assets/new icons/Designation.svg" alt="designation">
                     <span class="title">
                         {{item.profile.profession}}
@@ -292,28 +291,29 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','monthly_income')">
                     <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
                     <span class="title">
                         {{setIncome(item.profile.monthly_income)}} Lakh per year
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6"
+                    *ngIf="isDisplay('profile','degree') || isDisplay('profile','education') || isDisplay('profile','ugdeg')">
                     <img class="titleImage" src="../../../assets/new icons/Graduation.svg" alt="education">
                     <span class="title">
                         {{item.family ? item.profile.degree ? item.profile.degree : item.profile.education  : item.profile.ugdeg}}
                     </span>
                 </div>
             </div>
-
+            <!--  i don't know what is the condition to display the data -->
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','college')">
                     <img class="titleImage" src="../../../assets/new icons/Schooling.svg" alt="college">
                     <span class="title">
                         {{toTitleCase(item.family ? item.profile.college : item.profile.ugcol)}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','working_city')">
                     <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="working">
                     <span class="title">
                         {{item.profile.working_city}}
@@ -335,11 +335,11 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','birth_date')">
                     <img class="titleImage" src="../../../assets/new icons/DOB.svg" alt="birth date">
                     <span class="title">{{item.profile.birth_date | date}}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','birth_time')">
                     <img class="titleImage" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
                     <span class="title">
                         {{item.profile.birth_time}}
@@ -348,13 +348,13 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','birth_place')">
                     <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="birth place">
                     <span class="title">
                         {{item.profile.birth_place}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('profile','manglik')">
                     <img class="titleImage" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
                     <span class="title">
                         {{item.profile.manglik}}
@@ -378,14 +378,15 @@ border-top-right-radius: 20px;
 
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6"
+                    *ngIf="isDisplay('family','unmarried_daughter') && isDisplay('family','married_daughter')">
                     <img class="titleImage" src="../../../assets/new icons/Sister.svg" alt="Sisters">
                     <span class="title">
                         {{setMarriageSisters(item.family ? item.family.unmarried_daughters : item.profile.unmarried_daughter
                         ,item.family ? item.family.married_daughters : item.profile.married_daughter)}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','unmarried_sons') && isDisplay('family','married_sons')">
                     <img class="titleImage" src="../../../assets/new icons/Brother.svg" alt="Brothers">
                     <span class="title">
                         {{setMarriageBrothers(  item.family ? item.family.unmarried_sons : item.profile.unmarried_sons
@@ -395,14 +396,15 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6"
+                    *ngIf="isDisplay('family','mother_occupation') && isDisplay('family','occupation_mother')">
                     <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
                     <span class="title">
                         {{LifeStatus(item.family ? item.family.mother_status : item.profile.mother_status
                         ,item.family ? item.family.occupation_mother : item.profile.mother_occupation, 'Mother')}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','father_status') && isDisplay('family','occupation')">
                     <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
                     <span class="title">
                         {{LifeStatus(item.family ? item.family.father_status : item.profile.father_status
@@ -413,13 +415,13 @@ border-top-right-radius: 20px;
 
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','gotra')">
                     <img class="titleImage" src="../../../../assets/new icons/swastika.svg" alt="Gotra">
                     <span class="title">
                         {{item.family ? item.family.gotra : item.profile.gotra}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','family_type')">
                     <img class="titleImage" src="../../../assets/new icons/Family Type.svg" alt="Father Type">
                     <span class="title">
                         {{item.family ? item.family.family_type : item.profile.family_type}}
@@ -428,13 +430,13 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','city')">
                     <img class="titleImage" src="../../../assets/new icons/familyIn.svg" alt="Family Living In">
                     <span class="title">
                         {{item.family ? item.family.city : item.profile.city}}
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','house_type')">
                     <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">
                     <span class="title">
                         {{item.family ? item.family.house_type : setHouseType(item.profile.house)}}
@@ -443,7 +445,7 @@ border-top-right-radius: 20px;
             </div>
 
             <div class="row field">
-                <div class="col-6">
+                <div class="col-6" *ngIf="isDisplay('family','family_income')">
                     <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
                     <span
                         class="title">{{item.family ? setIncome(item.family.family_income) : setIncome(item.profile.family_income)}}

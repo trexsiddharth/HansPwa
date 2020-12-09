@@ -69,18 +69,18 @@ import { shareReplay } from 'rxjs/operators';
 export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              private dialog: MatDialog,
-              public notification: NotificationsService,
-              public itemService: FindOpenHistoryProfileService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private browserLocation: Location,
-              private analyticsService: AnalyticsService,
-              private chatService: ChatServiceService,
-              public languageService: LanguageService,
-              private breakPointObserver: BreakpointObserver,
-              private subscriptionservice: SubscriptionserviceService) { }
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog,
+    public notification: NotificationsService,
+    public itemService: FindOpenHistoryProfileService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private browserLocation: Location,
+    private analyticsService: AnalyticsService,
+    private chatService: ChatServiceService,
+    public languageService: LanguageService,
+    private breakPointObserver: BreakpointObserver,
+    private subscriptionservice: SubscriptionserviceService) { }
 
 
   profile: any[] = [];
@@ -132,26 +132,23 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         this.plans = res;
         for (let i = 0; i < this.plans.length; i++) {
           if (this.plans[i].plan_type === 'Self Service Plan') {
-            // if (this.authData) {
-            //   const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
-            //   if (totalIncome < 4) {
-            //     if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal'
-            //     && (this.authData && this.authData.gender === 'Male')) {
-            //       this.plansOnline.push(this.plans[i]);
-            //     } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal') {
-            //       this.plansOnline.push(this.plans[i]);
-            //     }
-            //   } else {
-            //     if (this.plans[i].category_name !== 'Low income') {
-            //       this.plansOnline.push(this.plans[i]);
-            //     }
-            //   }
-            // }
-            if (this.plans[i].category_name !== 'Low income') {
-              this.plansOnline.push(this.plans[i]);
+            if (this.authData) {
+              const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
+              if (totalIncome < 4) {
+                if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal'
+                  && (this.authData && this.authData.gender === 'Male')) {
+                  this.plansOnline.push(this.plans[i]);
+                } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal') {
+                  this.plansOnline.push(this.plans[i]);
+                }
+              } else {
+                if (this.plans[i].category_name !== 'Low income') {
+                  this.plansOnline.push(this.plans[i]);
+                }
+              }
             }
             if (!localStorage.getItem('showRemarrigePlan')) {
-               this.plansOnline =  (this.plansOnline as []).filter((item: any) => !(item.plan_name as string).includes('Re-Marriage'));
+              this.plansOnline = (this.plansOnline as []).filter((item: any) => !(item.plan_name as string).includes('Re-Marriage'));
             }
           }
         }
@@ -283,10 +280,10 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     formData.append('is_lead', localStorage.getItem('is_lead'));
     this.http.post('https://partner.hansmatrimony.com/api/showViewedProfile', formData).subscribe(
       (response: any) => {
-          console.log(response);
-          if (response) {
-            this.profileViewersList.next(response);
-          }
+        console.log(response);
+        if (response) {
+          this.profileViewersList.next(response);
+        }
       },
       err => {
         this.ngxNotificationService.error('Something Went Wrong');
@@ -353,34 +350,34 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     );
   }
 
-    // update the list after response
-    updateViewerList(index, answer) {
-      let list = [];
-      this.profileViewersList$.subscribe(response => list = response ? response : [] );
-      switch (answer) {
-        case 'YES':
-          if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
-            // this.slideAndOpenProfile(this.profile[index], 1);
-            localStorage.setItem('stage', '1');
-            this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
-            list.splice(index, 1);
-            this.profileViewersList.next(list);
-            // this.itemService.changeTab(1);
-          } else {
-            this.ngxNotificationService.error('You Dont have Enough Credits', '',
-              null, {
-              duration: 4000,
-              closeButton: true
-            });
-          }
-          break;
-
-        default:
+  // update the list after response
+  updateViewerList(index, answer) {
+    let list = [];
+    this.profileViewersList$.subscribe(response => list = response ? response : []);
+    switch (answer) {
+      case 'YES':
+        if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
+          // this.slideAndOpenProfile(this.profile[index], 1);
+          localStorage.setItem('stage', '1');
+          this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
           list.splice(index, 1);
           this.profileViewersList.next(list);
-          break;
-      }
+          // this.itemService.changeTab(1);
+        } else {
+          this.ngxNotificationService.error('You Dont have Enough Credits', '',
+            null, {
+            duration: 4000,
+            closeButton: true
+          });
+        }
+        break;
+
+      default:
+        list.splice(index, 1);
+        this.profileViewersList.next(list);
+        break;
     }
+  }
   goBack() {
     this.browserLocation.back();
     // console.log("sonorvnerun")
@@ -515,7 +512,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
 
   setName(name: string): string {
     if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
-    && !this.itemService.getPersonalized()) {
+      && !this.itemService.getPersonalized()) {
       let a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
@@ -570,8 +567,8 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
   }
   openProfileDialog(item: any, ind: any) {
     // setting the index in local strorage to use in scrollIntoView later
-    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' 
-    && this.type === 'interestReceived' && !this.itemService.getPersonalized()) {
+    if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
+      && this.type === 'interestReceived' && !this.itemService.getPersonalized()) {
       return;
     }
     localStorage.setItem('index', String(ind));
@@ -590,10 +587,10 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           localStorage.setItem('selectedType', '2');
           break;
 
-          case 'contacted':
-            localStorage.setItem('selectedType', '1');
-            break;
-      
+        case 'contacted':
+          localStorage.setItem('selectedType', '1');
+          break;
+
         default:
           break;
       }
@@ -1345,6 +1342,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
     );
   }
-
+  getViewedProfile() {
+    // console.log(this.profileViewersList)
+    return this.profileViewersList.value.length > 0 ? this.profileViewersList.value.length : null;
+  }
+  getLikedProfile() {
+    return this.profile.length > 0 ? this.profile.length : null
+  }
 }
 

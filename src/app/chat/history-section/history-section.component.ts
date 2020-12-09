@@ -18,13 +18,13 @@ import { DataFilteringService } from '../data-filtering.service';
 })
 export class HistorySectionComponent implements OnInit {
   constructor(public itemService: FindOpenHistoryProfileService,
-              public languageService: LanguageService,
-              private http: HttpClient,
-              private analyticsService: AnalyticsService,
-              public dataFiltering: DataFilteringService,
-              public router: Router,
-              private spinner: NgxSpinnerService,
-              private ngxNotificationService: NgxNotificationService) { }
+    public languageService: LanguageService,
+    private http: HttpClient,
+    private analyticsService: AnalyticsService,
+    public dataFiltering: DataFilteringService,
+    public router: Router,
+    private spinner: NgxSpinnerService,
+    private ngxNotificationService: NgxNotificationService) { }
 
   historyContactSubject = new BehaviorSubject<HistoryData[]>([]);
   historyContactList$: Observable<HistoryData[]> = this.historyContactSubject.asObservable().pipe(shareReplay());
@@ -47,21 +47,21 @@ export class HistorySectionComponent implements OnInit {
     '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"', '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"', '6\'1"', '6\'2"', '6\'3"', '6\'4"', '6\'5"',
     '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70',
-    '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', ];
+    '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84',];
 
   ngOnInit() {
 
     this.historyDataList$ = this.itemService.getHistoryAllDataList().pipe(
       shareReplay(),
       tap(item => {
-             if (localStorage.getItem('selectedType')) {
-               this.selectedTab = Number(localStorage.getItem('selectedType'));
-             }
-            //  this.itemService.setHistoryAllDataList(item);
-             this.historyShortlistSubject.next(item.history.shortlist);
-             this.historyRejectSubject.next(item.history.reject);
-             this.historyContactSubject.next(item.history.contact);
-            })
+        if (localStorage.getItem('selectedType')) {
+          this.selectedTab = Number(localStorage.getItem('selectedType'));
+        }
+        //  this.itemService.setHistoryAllDataList(item);
+        this.historyShortlistSubject.next(item.history.shortlist);
+        this.historyRejectSubject.next(item.history.reject);
+        this.historyContactSubject.next(item.history.contact);
+      })
     );
 
     this.searchControl.valueChanges.pipe(debounceTime(400)).subscribe((search: string) => {
@@ -117,13 +117,13 @@ export class HistorySectionComponent implements OnInit {
         this.analyticsService.googleAnalytics('History Shortlist Visited');
         break;
 
-        case 1:
+      case 1:
         this.analyticsService.googleAnalytics('History Contact Visited');
         break;
 
-        case 2:
-          this.analyticsService.googleAnalytics('History Reject Visited');
-          break;
+      case 2:
+        this.analyticsService.googleAnalytics('History Reject Visited');
+        break;
       default:
         break;
     }
@@ -135,6 +135,12 @@ export class HistorySectionComponent implements OnInit {
   }
   getColor(type: string) {
     return type === 'REJECT' ? 'rgba(248, 73, 73, 0.849)' : type === 'SHORTLIST' ? 'rgba(22, 182, 22, 0.788)' : 'rgba(35, 131, 221, 0.89)';
+  }
+  getProfileType(index: string) {
+    if (index != '0' && !index) {
+      return;
+    }
+    return this.profiles[index].type === 'SHORTLIST' ? 'LIKED' : `${this.profiles[index].type}ED`;
   }
   getHeight(num: number) {
     return this.Heights[this.Heights1.indexOf(String(num))];
@@ -165,7 +171,7 @@ export class HistorySectionComponent implements OnInit {
           // section from which user is going
           if (response.type === 'SHORTLIST') { data.coming = 'interestShown'; } else if (response.type === 'REJECT') { data.coming = 'rejected'; } else if (response.type === 'CONTACT') { data.coming = 'contacted'; }
           localStorage.setItem('open_profile', JSON.stringify(data));
-           // setting the index in local strorage to use in scrollIntoView later
+          // setting the index in local strorage to use in scrollIntoView later
 
           localStorage.setItem('index', String(index));
           localStorage.setItem('todaysPopupOpened', '0');
@@ -193,7 +199,7 @@ export class HistorySectionComponent implements OnInit {
 
   setName(name: string): string {
     if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0'
-    || this.authData.paid_status !== 'Paid')) {
+      || this.authData.paid_status !== 'Paid')) {
       const a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
@@ -227,7 +233,7 @@ export class HistorySectionComponent implements OnInit {
 
   sendResponse(res: any) {
     console.log(res);
-    
+
 
     if (res.response !== 'YES') {
       this.updateHistoryList(res.response, res.item);
@@ -239,16 +245,16 @@ export class HistorySectionComponent implements OnInit {
       if (res.response === 'YES') {
         if (this.itemService.getPersonalized()) {
           if (this.itemService.getCredits() != null
-        && Number(this.itemService.getCredits()) > 0) {
-          res.item.type = 'CONTACT';
-          this.getUserProfileData(res.item, res.index);
-        } else {
-          this.ngxNotificationService.error('You don\'t have enough credits');
-          return;
-        }
+            && Number(this.itemService.getCredits()) > 0) {
+            res.item.type = 'CONTACT';
+            this.getUserProfileData(res.item, res.index);
+          } else {
+            this.ngxNotificationService.error('You don\'t have enough credits');
+            return;
+          }
         } else {
           if (this.itemService.getCredits() != null
-          && Number(this.itemService.getCredits()) > 0) {
+            && Number(this.itemService.getCredits()) > 0) {
             res.item.type = 'CONTACT';
             this.getUserProfileData(res.item, res.index);
           } else {
@@ -266,52 +272,52 @@ export class HistorySectionComponent implements OnInit {
     reAnswerData.append('answer', res.response);
     reAnswerData.append('is_lead', localStorage.getItem('is_lead'));
 
-      // tslint:disable-next-line: max-line-length
+    // tslint:disable-next-line: max-line-length
     return this.http.post<any>('https://partner.hansmatrimony.com/api/reply', reAnswerData).subscribe(
-        (data: any) => {
-          console.log(data);
-          // update the count of all sections after response on any profile
-          if (data && data.count) {
-            this.itemService.saveCount(data.count);
-          }
-          this.analyticsService.googleAnalytics(`Profile Reanswered ${res.response} From History`);
-          this.getCredits();
-        }, (error: any) => {
-          console.log(error);
-        });
+      (data: any) => {
+        console.log(data);
+        // update the count of all sections after response on any profile
+        if (data && data.count) {
+          this.itemService.saveCount(data.count);
+        }
+        this.analyticsService.googleAnalytics(`Profile Reanswered ${res.response} From History`);
+        this.getCredits();
+      }, (error: any) => {
+        console.log(error);
+      });
   }
 
-   updateHistoryList(res: string, item: HistoryData) {
+  updateHistoryList(res: string, item: HistoryData) {
     switch (res) {
 
-        case 'NO':
-          const value = this.historyShortlistSubject.getValue();
-          const value2 = this.historyRejectSubject.getValue();
-          this.historyShortlistSubject.next(value.filter(
-            it => it.id !== item.id
-          ));
-          item.type = 'REJECT';
-          value2.unshift(item);
-          this.historyRejectSubject.next(value2);
-          break;
+      case 'NO':
+        const value = this.historyShortlistSubject.getValue();
+        const value2 = this.historyRejectSubject.getValue();
+        this.historyShortlistSubject.next(value.filter(
+          it => it.id !== item.id
+        ));
+        item.type = 'REJECT';
+        value2.unshift(item);
+        this.historyRejectSubject.next(value2);
+        break;
 
-        case 'SHORTLIST':
-          const rejectValue = this.historyRejectSubject.getValue();
-          const shortValue = this.historyShortlistSubject.getValue();
-          this.historyRejectSubject.next(rejectValue.filter(
-            it => it.id !== item.id
-          ));
-          item.type = 'SHORTLIST';
-          shortValue.unshift(item);
-          this.historyShortlistSubject.next(shortValue);
-          break;
+      case 'SHORTLIST':
+        const rejectValue = this.historyRejectSubject.getValue();
+        const shortValue = this.historyShortlistSubject.getValue();
+        this.historyRejectSubject.next(rejectValue.filter(
+          it => it.id !== item.id
+        ));
+        item.type = 'SHORTLIST';
+        shortValue.unshift(item);
+        this.historyShortlistSubject.next(shortValue);
+        break;
 
       default:
         break;
-          }
-        }
+    }
+  }
 
-        call(mobile: string) {
-          window.open('tel:' + `${mobile}`);
-        }
-      }
+  call(mobile: string) {
+    window.open('tel:' + `${mobile}`);
+  }
+}

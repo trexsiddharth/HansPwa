@@ -4,48 +4,53 @@
         <img (click)="cross_click()" style="width: 30px;" src="../../../assets/cancelred.svg" alt="cancel">
     </div>
 
-<h3 class="heading t-c">
-    {{languageService.verificationLang.verifyMobile}}
-</h3>
+    <h3 class="heading t-c">
+        {{languageService.verificationLang.verifyMobile}}
+    </h3>
 
-<p class="subHeading t-c">
-    {{languageService.verificationLang.otpSent}} {{data.mobile}} {{languageService.getCurrentLanguage() === 'hindi' ? 'पर' : ''}}
-</p>
+    <p class="subHeading t-c">
+        {{languageService.verificationLang.otpSent}} {{data.mobile}}
+        {{languageService.getCurrentLanguage() === 'hindi' ? 'पर' : ''}}
+    </p>
 
     <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
-           <div class="formSetting">
-                    <p>
-                        <mat-form-field class="otpField" appearance="standard">
-                            <input id="verify1" (keyup)="changePlaces(1)"  type="number"  matInput formControlName="otp1">
-                        </mat-form-field>
-                </p>
-                    <p >
-                        <mat-form-field class="otpField" appearance="standard">
-                            <input id="verify2" (keyup)="changePlaces(2)"  type="number"  matInput formControlName="otp2">
-                        </mat-form-field>
-                </p>        
-                <p>
-                    <mat-form-field class="otpField" appearance="standard">
-                        <input id="verify3" (keyup)="changePlaces(3)"   type="number"  matInput formControlName="otp3">
-                    </mat-form-field>
-            </p>            
+        <div class="formSetting">
             <p>
-                <mat-form-field  class="otpField" appearance="standard">
-                    <input id="verify4" (keyup)="changePlaces(4)"  type="number"  matInput formControlName="otp4">
+                <mat-form-field class="otpField" appearance="standard">
+                    <input id="verify1" (keypress)="checkInput($event,1)" (keyup)="changePlaces(1)" type="number"
+                        min="0" max="9" matInput formControlName="otp1">
                 </mat-form-field>
             </p>
-           </div>
+            <p>
+                <mat-form-field class="otpField" appearance="standard">
+                    <input id="verify2" (keypress)="checkInput($event,2)" (keyup)="changePlaces(2)" type="number"
+                        min="0" max="9" matInput formControlName="otp2">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="otpField" appearance="standard">
+                    <input id="verify3" (keypress)="checkInput($event,3)" (keyup)="changePlaces(3)" type="number"
+                        min="0" max="9" matInput formControlName="otp3">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="otpField" appearance="standard">
+                    <input id="verify4" (keypress)="checkInput($event,4)" (keyup)="changePlaces(4)" type="number"
+                        min="0" max="9" matInput formControlName="otp4">
+                </mat-form-field>
+            </p>
+        </div>
 
-           <button class="resendBtnDisabled" *ngIf="showTimer" [disabled]="showTimer">
+        <button class="resendBtnDisabled" *ngIf="showTimer" [disabled]="showTimer">
             {{languageService.verificationLang.resendOtp}} <span id="secs">{{seconds}}s</span>
         </button>
-           <button class="resendBtn" (click)="sendOtp()" *ngIf="!showTimer">
+        <button class="resendBtn" (click)="sendOtp()" *ngIf="!showTimer">
             {{languageService.verificationLang.resendOtp}}
         </button>
-            
-            <button mat-raised-button class="verifyBtn" type="submit">
-                {{languageService.verificationLang.verify}}
-            </button>
+
+        <button mat-raised-button class="verifyBtn" type="submit">
+            {{languageService.verificationLang.verify}}
+        </button>
     </form>
 
     <button id="changeNumber" class="t-c" (click)="changeNumber()">

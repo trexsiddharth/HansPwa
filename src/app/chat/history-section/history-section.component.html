@@ -27,7 +27,8 @@
             </button>
             <button class="btn btn-tabs" [ngClass]="{'btn-tabs-active':selectedTab === 2}"
                 (click)="setSelectedIndex(2)">
-                <img width="22px" src="../../../assets/closewhite.svg" alt="rejected">{{itemService.getCountOnlyRejected()}}
+                <img width="22px" src="../../../assets/closewhite.svg"
+                    alt="rejected">{{itemService.getCountOnlyRejected()}}
             </button>
         </div>
     </div>
@@ -35,8 +36,7 @@
         <div class="profiles" *ngFor="let profile of profiles;let i = index">
             <div class="column" style="width:20%" (click)="getUserProfileData(profile,i)">
                 <img id="searchImage" class="circular" src="{{profile.photo}}"
-                (error)='setPlaceholderImage(i, profile.gender)'
-                 alt="photo" origin="anonymous">
+                    (error)='setPlaceholderImage(i, profile.gender)' alt="photo" origin="anonymous">
             </div>
             <div class="column" style="width:55%;justify-content: end;
             align-items: end;padding:2%" (click)="getUserProfileData(profile,i)">
@@ -47,11 +47,11 @@
                 <p style="border-radius: 5px;" [ngStyle]="{'background-color':getColor(profile.type)}"
                     (click)="getUserProfileData(profile,i)">
                     <a
-                        style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{profile.type}}ED</a>
+                        style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{getProfileType(i)}}</a>
+                    <!-- <a style="font-size:0.7rem;font-weight:bold;color:aliceblue;padding:2px 12px 2px 12px">{{profile.type}}ED</a> -->
                 </p>
             </div>
-            <div class="column" style="width:20%; border-radius: 5px;"
-                (click)="getUserProfileData(profile,i)">
+            <div class="column" style="width:20%; border-radius: 5px;" (click)="getUserProfileData(profile,i)">
             </div>
         </div>
     </div>
@@ -62,13 +62,10 @@
             <ng-template matTabContent>
                 <div class='col'>
                     <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
-                    <div  *ngFor="let item of (historyShortlistList$|async);let i = index">
-                        <app-history-item [listItem]="item"
-                        [itemIndex]="i"
-                         [authData]="authData"
-                         (actionTaken)="sendResponse($event)"
-                         ></app-history-item>
-                        </div>
+                    <div *ngFor="let item of (historyShortlistList$|async);let i = index">
+                        <app-history-item [listItem]="item" [itemIndex]="i" [authData]="authData"
+                            (actionTaken)="sendResponse($event)"></app-history-item>
+                    </div>
                 </div>
             </ng-template>
         </mat-tab>
@@ -80,10 +77,8 @@
                     <div class='col'>
                         <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
                         <div *ngFor="let item of (historyContactList$|async);let i = index">
-                        <app-history-item [listItem]="item"
-                        [itemIndex]="i"
-                         [authData]="authData"
-                         (actionTaken)="sendResponse($event)"></app-history-item>
+                            <app-history-item [listItem]="item" [itemIndex]="i" [authData]="authData"
+                                (actionTaken)="sendResponse($event)"></app-history-item>
                         </div>
                     </div>
                 </div>
@@ -96,11 +91,9 @@
                     <div class='col'>
                         <!-- <app-history-profiles [type]="tabType"></app-history-profiles> -->
                         <div *ngFor="let item of (historyRejectList$|async);let i = index">
-                            <app-history-item [listItem]="item" 
-                            [itemIndex]="i"
-                            [authData]="authData"
-                            (actionTaken)="sendResponse($event)"></app-history-item>
-                            </div>
+                            <app-history-item [listItem]="item" [itemIndex]="i" [authData]="authData"
+                                (actionTaken)="sendResponse($event)"></app-history-item>
+                        </div>
                     </div>
                 </div>
             </ng-template>

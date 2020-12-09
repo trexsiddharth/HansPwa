@@ -27,7 +27,7 @@
                 <div class="column">
                     <div class="details">
                         <div class="col">
-                            <p style="font-size:1.3rem;margin:2% 0 1% 0"> Enter Boy's Details</p>
+                            <p style="font-size:1.3rem;margin:2% 0 1% 0; text-align: center;"> Enter Boy's Details</p>
                         </div>
                         <div class="col">
                             <h6>Name</h6>
@@ -70,7 +70,8 @@
                 <div class="column">
                     <div class="details">
                         <div class="col">
-                            <p style="font-size:1.3rem;margin:2% 0 1% 0"> Enter Girls's Details</p>
+                            <p style="font-size:1.3rem;margin:2% 0 1% 0; text-align: center;"> Enter Girls's Details
+                            </p>
                         </div>
                         <div class="col">
                             <h6>Name</h6>
@@ -78,9 +79,7 @@
                         </div>
                         <div class="col">
                             <h6>Birth Date</h6>
-                            <div class="container">
-                                <div class="row"></div>
-                            </div>
+                            <div class="special">
                                 <select class="form-control classic" formControlName="GirlBirthDate">
                                     <option *ngFor="let item of date" [value]="item">
                                         {{item}}
@@ -96,7 +95,7 @@
                                         {{item}}
                                     </option>
                                 </select>
-                            
+                            </div>
                         </div>
                         <div class="col">
                             <h6>Birth Time</h6>
@@ -147,9 +146,9 @@
         </table>
     </div> -->
 
-      
+
     <!-- FIGURING OUT WTH IS WRONG  -->
-<!-- 
+    <!-- 
     <div>
         <h5>Details of Boy and Girl
         </h5>
@@ -273,15 +272,15 @@
                         <th>Maximum Points</th>
                     </tr>
                 </thead>
-                <tbody *ngIf="homeService.HTMLResponse" [innerHTML]="homeService.HTMLResponse" >
+                <tbody *ngIf="homeService.HTMLResponse" [innerHTML]="homeService.HTMLResponse">
                 </tbody>
-                <tbody *ngIf="!homeService.HTMLResponse" [innerHTML]="transformYourHtml(HTMLResponse)" >
+                <tbody *ngIf="!homeService.HTMLResponse" [innerHTML]="transformYourHtml(HTMLResponse)">
                 </tbody>
             </table>
         </div>
-        <div class="row" style="background:transparent!important;width:90vw">
+        <div class="row mb-3" style="background:transparent!important;width:90vw;margin-top:30px;">
             <div class="" style="width:68%">
-                <h5 class="text-shadow" style="margin-top:30px;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
+                <h5 class="text-shadow" style="margin: 0 2% 7px 2%;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
                     Horoscope Matching results
                 </h5>
                 <div class="card">
@@ -293,7 +292,7 @@
                 </div>
             </div>
             <div id="pointsDiv" style="width:30%">
-                <h5 class="text-shadow" style="margin-top:30px;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
+                <h5 class="text-shadow" style="margin: 0 2% 7px 2%;color:rgba(18, 110, 196, 0.877);font-size:1.3rem;">
                     Obtained Points
                 </h5>
                 <div class="card">
