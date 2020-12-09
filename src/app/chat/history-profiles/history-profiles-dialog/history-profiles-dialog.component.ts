@@ -33,16 +33,16 @@ export class HistoryProfilesDialogComponent implements OnInit {
   title;
   personalizedUser = false;
   constructor(private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              public notification: NotificationsService,
-              public itemService: FindOpenHistoryProfileService,
-              public languageService: LanguageService,
-              private browserLocation: Location,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private breakPointObserver: BreakpointObserver,
-              private dialog: MatDialog
+    private ngxNotificationService: NgxNotificationService,
+    private spinner: NgxSpinnerService,
+    public notification: NotificationsService,
+    public itemService: FindOpenHistoryProfileService,
+    public languageService: LanguageService,
+    private browserLocation: Location,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private breakPointObserver: BreakpointObserver,
+    private dialog: MatDialog
   ) {
   }
 
@@ -113,10 +113,10 @@ export class HistoryProfilesDialogComponent implements OnInit {
       this.itemService.getPhotoStatus() === false &&
       answer === 'SHORTLIST') {
       this.itemService.openMessageDialog(item, answer);
-    }  else if (this.itemService.getPersonalized() &&
-    answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' ) {
-    this.ngxNotificationService.warning('You don\'t have enough credits');
-  } else if (this.itemService.getPersonalized() === false &&
+    } else if (this.itemService.getPersonalized() &&
+      answer === 'YES' && this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0') {
+      this.ngxNotificationService.warning('You don\'t have enough credits');
+    } else if (this.itemService.getPersonalized() === false &&
       answer === 'YES' && !item.family) {
       this.itemService.openMessageDialog(item, 'contacted');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
@@ -373,7 +373,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
   }
 
-  onLoadProfileError(gender: string,index) {
+  onLoadProfileError(gender: string, index) {
     const image = document.querySelectorAll('#profilePic')[index];
     if (gender === 'Male') {
       image.setAttribute('src', '../../assets/male_pic.png');
@@ -437,32 +437,31 @@ export class HistoryProfilesDialogComponent implements OnInit {
   setName(name: string): string {
     console.log('Name', name);
     if (name) {
-    if (this.itemService.getCredits() != null &&
-    (this.item.family &&
-      !this.item.family.mobile)
-     && this.itemService.getCredits().toString() === '0'
-    && !this.itemService.getPersonalized()) {
-      let a = name.split(' ');
-      if (a[0] && a[1]) {
-        if (a[0][0]) {
-          return a[0][0] + ' ' + a[1];
-        } else {
-         return a[0] && a[1];
+      if (this.itemService.getCredits() != null
+        && (this.item.family && !this.item.family.mobile)
+        && this.itemService.getCredits().toString() === '0'
+        && !this.itemService.getPersonalized()) {
+        let a = name.split(' ');
+        if (a[0] && a[1]) {
+          if (a[0][0]) {
+            return a[0][0] + ' ' + a[1];
+          } else {
+            return a[0] && a[1];
+          }
+        } else if (a[0]) {
+          if (a[0][0]) {
+            return a[0][0];
+          } else {
+            return a[0];
+          }
         }
-      } else if (a[0]) {
-        if (a[0][0]) {
-          return a[0][0];
-        } else {
-          return a[0];
-        }
+      } else {
+        console.log('returning name', name);
+        return name;
       }
     } else {
-      console.log('returning name', name);
-      return name;
+      return '';
     }
-  } else {
-    return '';
-  }
   }
 
   setAge(birthDate: string) {
@@ -574,13 +573,13 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
   }
 
-   getPhoneNumbers(): string {
+  getPhoneNumbers(): string {
     if (this.item == null) {
       return 'Visible After Contact';
     }
 
     if (this.item.family && this.item.family.mobile) {
-        return `${this.item.family.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
+      return `${this.item.family.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
     } else if (this.item.profile && this.item.profile.mobile) {
       return `${this.item.profile.mobile}${this.item.profile.whatsapp ? ',\n' + this.item.profile.whatsapp : ''}`;
     } else {
@@ -588,5 +587,19 @@ export class HistoryProfilesDialogComponent implements OnInit {
     }
 
   }
-
+  isDisplay(i, j) {
+    // check the value which has n/a, na, undefined, null, empty and object key
+    if (i in this.item
+      && j in this.item[i]
+      && this.item[i][j]
+      && this.item[i][j] !== null
+      && this.item[i][j].toString().toLowerCase() !== 'na'
+      && this.item[i][j].toString().toLowerCase() !== 'n/a'
+      && this.item[i][j].toString().toLowerCase() !== 'null'
+      && this.item[i][j].toString().toLowerCase() !== 'undefined'
+    ) {
+      return true;
+    }
+    return false;
+  }
 }

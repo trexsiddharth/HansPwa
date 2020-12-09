@@ -19,16 +19,16 @@ import { ChooseFromDialogComponent } from './choose-from-dialog/choose-from-dial
 })
 export class ChatDrawerComponent implements OnInit {
   constructor(public languageService: LanguageService,
-              private chatService: ChatServiceService,
-              private spinner: NgxSpinnerService,
-              private http: HttpClient,
-              private ngxNotificationService: NgxNotificationService,
-              public router: Router,
-              private _formBuilder: FormBuilder,
-              public itemService: FindOpenHistoryProfileService,
-              public activatedRoute: ActivatedRoute,
-              public snackbar: MatSnackBar,
-              public matDialog: MatDialog,
+    private chatService: ChatServiceService,
+    private spinner: NgxSpinnerService,
+    private http: HttpClient,
+    private ngxNotificationService: NgxNotificationService,
+    public router: Router,
+    private _formBuilder: FormBuilder,
+    public itemService: FindOpenHistoryProfileService,
+    public activatedRoute: ActivatedRoute,
+    public snackbar: MatSnackBar,
+    public matDialog: MatDialog,
   ) {
   }
 
@@ -223,7 +223,7 @@ export class ChatDrawerComponent implements OnInit {
       if (what === 0) {
         return this.allCountries.filter(option => option.name.toLowerCase().includes(filterValue));
       } else {
-        const states =  this.allStates.filter(option => option.name.toLowerCase().includes(filterValue));
+        const states = this.allStates.filter(option => option.name.toLowerCase().includes(filterValue));
         this.statesSubject.next(states);
       }
     } else {
@@ -249,8 +249,8 @@ export class ChatDrawerComponent implements OnInit {
         takeUntil(this._onDestroy),
       ).subscribe(
         change => {
-              console.log(change);
-              this._CountryOrStatefilter(change, 1);
+          console.log(change);
+          this._CountryOrStatefilter(change, 1);
         }
       );
       if (!this.preferencesForm.value.state) {
@@ -265,7 +265,7 @@ export class ChatDrawerComponent implements OnInit {
   getCitiesFromState(countryId: any, stateId: any) {
     this.chatService.getCities(countryId, stateId).subscribe((response: any) => {
       console.log(response);
-      if (this.allCities ) {
+      if (this.allCities) {
         console.log('current cities', this.allCities);
         this.allCities = this.allCities.concat(response);
         this.citiesSubject.next(this.allCities);
@@ -280,8 +280,8 @@ export class ChatDrawerComponent implements OnInit {
         takeUntil(this._onDestroy),
       ).subscribe(
         change => {
-              console.log(change);
-              this._Cityfilter(change);
+          console.log(change);
+          this._Cityfilter(change);
         }
       );
     });
@@ -436,27 +436,27 @@ export class ChatDrawerComponent implements OnInit {
     this.preferencesForm.valueChanges.pipe(
       debounceTime(400)
     )
-    .subscribe((change) => {
-      if (this.firstTime) {
-        this.firstTime = false;
-      } else if (this.preferencesForm.value.income_max <= this.preferencesForm.value.income_min) {
-        this.disableSave.next(false);
-      } else {
-        this.disableSave.next(true);
-      }
-      if (this.sidenav.opened) {
-      this.getCountOfRishtey();
-      }
-      console.log('value change event triggered', change);
-    });
+      .subscribe((change) => {
+        if (this.firstTime) {
+          this.firstTime = false;
+        } else if (this.preferencesForm.value.income_max <= this.preferencesForm.value.income_min) {
+          this.disableSave.next(false);
+        } else {
+          this.disableSave.next(true);
+        }
+        if (this.sidenav.opened) {
+          this.getCountOfRishtey();
+        }
+        console.log('value change event triggered', change);
+      });
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
   }
 
-   // determines the current position of the drawer
-   drawerPosition(event) {
+  // determines the current position of the drawer
+  drawerPosition(event) {
     console.log(event);
     if (event) {
       this.getUserProfileData();
@@ -518,18 +518,18 @@ export class ChatDrawerComponent implements OnInit {
     form.append('pref_city', this.chatService.selected_cities);
     console.log('getCountOfRishtey called', this.preferencesForm.value);
     this.chatService.getCountOfRishtey(form, this.preferencesForm.value)
-    .subscribe((response: any) => {
-      if (response.count) {
-        this.countProfiles = response.count;
-        this.chatService.countOfRishtey = response.count;
-        if (response.count < 5) {
-          this.isWide = false;
-          // this.disableSave.next(true);
-        } else { this.isWide = true; }
-      }
-    }, (err: any) => {
-      console.log('Getting count failed');
-    });
+      .subscribe((response: any) => {
+        if (response.count) {
+          this.countProfiles = response.count;
+          this.chatService.countOfRishtey = response.count;
+          if (response.count < 5) {
+            this.isWide = false;
+            // this.disableSave.next(true);
+          } else { this.isWide = true; }
+        }
+      }, (err: any) => {
+        console.log('Getting count failed');
+      });
   }
   getContactedCount() {
     if (localStorage.getItem('count')) {
@@ -729,12 +729,12 @@ export class ChatDrawerComponent implements OnInit {
     }
 
     if (this.personalDetailsLeft) {
-    for (const v of this.personalDetailsLeft) {
-      if (this.familyProfileData && this.familyProfileData.hasOwnProperty(v)) {
-        this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
+      for (const v of this.personalDetailsLeft) {
+        if (this.familyProfileData && this.familyProfileData.hasOwnProperty(v)) {
+          this.personalDetailsLeft.splice(this.personalDetailsLeft.indexOf(v));
+        }
       }
     }
-   }
 
     console.log('look Here2');
     console.log(this.personalDetailsLeft);
@@ -757,27 +757,27 @@ export class ChatDrawerComponent implements OnInit {
     if (this.personalProfileData && this.familyProfileData) {
 
 
-    Object.entries(this.personalProfileData).forEach(
-      ([key, value]) => {
-        if (personalDetilsP3.includes(key)) {
-          if ((!value) || value === 'null' || value === '') {
-            perDet += 1;
-          } else {
-            storingObj[key] = value;
+      Object.entries(this.personalProfileData).forEach(
+        ([key, value]) => {
+          if (personalDetilsP3.includes(key)) {
+            if ((!value) || value === 'null' || value === '') {
+              perDet += 1;
+            } else {
+              storingObj[key] = value;
+            }
           }
         }
-      }
-    );
-    Object.entries(this.familyProfileData).forEach(
-      ([key, value]) => {
-        if (familyDetailsP3.includes(key)) {
-          if (!value || value === 'null' || value === '') {
-            famDet += 1;
-          } else {
-            storingObj[key] = value;
+      );
+      Object.entries(this.familyProfileData).forEach(
+        ([key, value]) => {
+          if (familyDetailsP3.includes(key)) {
+            if (!value || value === 'null' || value === '') {
+              famDet += 1;
+            } else {
+              storingObj[key] = value;
+            }
           }
-        }
-      });
+        });
     }
     console.log('Checking third page details', perDet + famDet);
     if (perDet + famDet >= 2) {
@@ -788,151 +788,153 @@ export class ChatDrawerComponent implements OnInit {
   }
 
   getUserProfileData(updateData: boolean = false) {
-      this.spinner.show();
-      this.chatService.getUserProfile(updateData)
-        .subscribe(
-          (data: any) => {
-            console.log(data.preferences);
-            this.preferenceProfileData = data.preferences ? data.preferences : null;
-            this.personalProfileData = data.profile ? data.profile : null;
-            this.familyProfileData = data.family ? data.family : null;
-            this.spinner.hide();
-            // setting profile data in chat service for use in popups.
-            this.chatService.setProfileData(this.personalProfileData, this.familyProfileData);
-            if (data && data.profile) {
-              this.gender = data.profile.gender;
+    this.spinner.show();
+    this.chatService.getUserProfile(updateData)
+      .subscribe(
+        (data: any) => {
+          console.log(data.preferences);
+          this.preferenceProfileData = data.preferences ? data.preferences : null;
+          this.personalProfileData = data.profile ? data.profile : null;
+          this.familyProfileData = data.family ? data.family : null;
+          this.spinner.hide();
+          // setting profile data in chat service for use in popups.
+          this.chatService.setProfileData(this.personalProfileData, this.familyProfileData);
+          if (data && data.profile) {
+            this.gender = data.profile.gender;
 
-              this.setProfileCalculations();
-              this.setProfileCompletion();
-              this.checkPageThreeDetails();
+            this.setProfileCalculations();
+            this.setProfileCompletion();
+            this.checkPageThreeDetails();
+          }
+          // if (this.preferenceProfileData && this.preferenceProfileData.religion) {
+          //   this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
+          // }
+
+          if (this.gender === 'Female') {
+            if (this.preferenceProfileData.occupation) {
+              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
+            } else {
+              this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
             }
-            // if (this.preferenceProfileData && this.preferenceProfileData.religion) {
-            //   this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
-            // }
+          }
+          if (data.profile && data.profile.photo) {
+            console.log(data.profile.photo);
+            this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
+            this.itemService.setPhotoStatus(true);
+          }
 
-            if (this.gender === 'Female') {
-              if (this.preferenceProfileData.occupation) {
-                this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
-              } else {
-                this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
+          if (data.country) {
+            this.allCountries = data.country;
+          }
+
+          if (this.preferenceProfileData && this.sidenav.opened) { // these functions are needed when change preference side nav is opened
+
+
+            if (this.preferenceProfileData.pref_state) {
+              if (this.authData.paid_status !== 'Paid') {
+                this.preferencesForm.controls.states_free.setValue(this.preferenceProfileData.pref_state);
               }
-            }
-            if (data.profile && data.profile.photo) {
-              console.log(data.profile.photo);
-              this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
-              this.itemService.setPhotoStatus(true);
-            }
 
-            if (data.country) {
-              this.allCountries = data.country;
-            }
-
-            if (this.preferenceProfileData && this.sidenav.opened) { // these functions are needed when change preference side nav is opened
-
-
-              if (this.preferenceProfileData.pref_state) {
-                if (this.authData.paid_status !== 'Paid') {
-                  this.preferencesForm.controls.states_free.setValue(this.preferenceProfileData.pref_state);
-                }
-
-                if ((this.preferenceProfileData.pref_state as string).includes(',')) {
+              if ((this.preferenceProfileData.pref_state as string).includes(',')) {
                 this.preferenceProfileData.pref_state = (this.preferenceProfileData.pref_state as string).split(',');
-                } else {
-                  this.preferenceProfileData.pref_state = [this.preferenceProfileData.pref_state];
-                }
-                console.log('pref_states', this.preferenceProfileData.pref_state);
+              } else {
+                this.preferenceProfileData.pref_state = [this.preferenceProfileData.pref_state];
+              }
+              console.log('pref_states', this.preferenceProfileData.pref_state);
+            }
+
+            if (this.preferenceProfileData.pref_city) {
+              if (this.authData.paid_status !== 'Paid') {
+                this.preferencesForm.controls.cities_free.setValue(this.preferenceProfileData.pref_city);
               }
 
-              if (this.preferenceProfileData.pref_city) {
-                if (this.authData.paid_status !== 'Paid') {
-                  this.preferencesForm.controls.cities_free.setValue(this.preferenceProfileData.pref_city);
-                }
-
-                if ((this.preferenceProfileData.pref_city as string).includes(',')) {
+              if ((this.preferenceProfileData.pref_city as string).includes(',')) {
                 this.preferenceProfileData.pref_city = (this.preferenceProfileData.pref_city as string).split(',');
+              } else {
+                if (Array.isArray(this.preferenceProfileData.pref_city)) {
+                  this.preferenceProfileData.pref_city = [...this.preferenceProfileData.pref_city];
                 } else {
-                  if (Array.isArray(this.preferenceProfileData.pref_city)) {
-                    this.preferenceProfileData.pref_city = [...this.preferenceProfileData.pref_city];
-                  } else {
-                    this.preferenceProfileData.pref_city = [this.preferenceProfileData.pref_city];
-                  }
+                  this.preferenceProfileData.pref_city = [this.preferenceProfileData.pref_city];
                 }
-                console.log('pref_cities', this.preferenceProfileData.pref_city);
               }
+              console.log('pref_cities', this.preferenceProfileData.pref_city);
+            }
 
-              if (this.preferenceProfileData && this.personalProfileData.marital_status !== 'Never Married') {
+            if (this.preferenceProfileData && this.personalProfileData.marital_status !== 'Never Married') {
               localStorage.setItem('showRemarrigePlan', '1');
             }
-              this.allStates = this.preferenceProfileData ? this.preferenceProfileData.pref_state : '';
-              this.allCities = this.preferenceProfileData ? this.preferenceProfileData.pref_city : '';
-              this.countrySelected(this.preferenceProfileData ? this.preferenceProfileData.pref_country : '');
-              this.getCitiesFromState(this.preferenceProfileData ? this.preferenceProfileData.pref_country_id : '',
+            this.allStates = this.preferenceProfileData ? this.preferenceProfileData.pref_state : '';
+            this.allCities = this.preferenceProfileData ? this.preferenceProfileData.pref_city : '';
+            this.countrySelected(this.preferenceProfileData ? this.preferenceProfileData.pref_country : '');
+            this.getCitiesFromState(this.preferenceProfileData ? this.preferenceProfileData.pref_country_id : '',
               this.preferenceProfileData ? this.preferenceProfileData.pref_state_id : '');
-              this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
-              this.chatService.selected_states =
-               this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
+            this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
+            this.chatService.selected_states =
+              this.preferenceProfileData.pref_state ? this.preferenceProfileData.pref_state.join(',') : '';
 
-              this.chatService.selected_states_id = this.preferenceProfileData.pref_state_id.split(',');
+            this.chatService.selected_states_id = this.preferenceProfileData.pref_state_id.split(',');
 
-              console.log('current state ids are', this.chatService.selected_states_id );
+            console.log('current state ids are', this.chatService.selected_states_id);
 
           }
-            this.setCurrentPreferenceValue(null);
+          this.setCurrentPreferenceValue(null);
 
-            if (this.sidenav.opened) { // these functions are need when change preference side nav is opened
-              this.specialCase();
-              this.getAllCaste();
-              if (this.countRecomended === -1) {
-              setTimeout(() => { this.getCountOfRishtey();
-                                 this.getRecomendedFilters(); }, 2000);
+          if (this.sidenav.opened) { // these functions are need when change preference side nav is opened
+            this.specialCase();
+            this.getAllCaste();
+            if (this.countRecomended === -1) {
+              setTimeout(() => {
+                this.getCountOfRishtey();
+                this.getRecomendedFilters();
+              }, 2000);
             }
-            }
-          },
-          (error: any) => {
-            this.spinner.hide();
-            console.log(error);
-            this.ngxNotificationService.error('Something Went Wrong');
           }
-        );
-    }
+        },
+        (error: any) => {
+          this.spinner.hide();
+          console.log(error);
+          this.ngxNotificationService.error('Something Went Wrong');
+        }
+      );
+  }
 
-onSubmitPreferences() {
+  onSubmitPreferences() {
 
-  console.log('pref_country', this.preferencesForm.value.country);
-  console.log('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
-  console.log('pref_state', this.preferencesForm.value.state);
-  console.log('pref_state_id', this.chatService.selected_states_id);
-  console.log('pref_city', this.preferencesForm.value.city);
+    console.log('pref_country', this.preferencesForm.value.country);
+    console.log('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
+    console.log('pref_state', this.preferencesForm.value.state);
+    console.log('pref_state_id', this.chatService.selected_states_id);
+    console.log('pref_city', this.preferencesForm.value.city);
 
     // this.editIndexPrefs = -1;
-  console.log('preference Data to update');
-  console.log(this.preferenceProfileData);
-  console.log(this.preferenceProfileData.religion);
-  // if (Array.isArray(this.preferenceProfileData.religion)) {
-  //     this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
-  //   }
+    console.log('preference Data to update');
+    console.log(this.preferenceProfileData);
+    console.log(this.preferenceProfileData.religion);
+    // if (Array.isArray(this.preferenceProfileData.religion)) {
+    //     this.preferenceProfileData.religion = this.preferenceProfileData.religion.join(',');
+    //   }
 
-  this.preferenceProfileData.caste = this.castePreferences.join(',');
+    this.preferenceProfileData.caste = this.castePreferences.join(',');
 
-  if (this.gender === 'Female' && Array.isArray(this.preferenceProfileData.occupation)) {
+    if (this.gender === 'Female' && Array.isArray(this.preferenceProfileData.occupation)) {
       this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.join(',');
     }
 
-  this.disableSave.next(false);
-  const newPrefForm = new FormData();
-  newPrefForm.append(
+    this.disableSave.next(false);
+    const newPrefForm = new FormData();
+    newPrefForm.append(
       'identity_number',
       this.preferenceProfileData.identity_number
     );
-  newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
-  newPrefForm.append('id', this.preferenceProfileData.id);
-  newPrefForm.append('caste', this.preferenceProfileData.caste);
-  newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
-  newPrefForm.append(
+    newPrefForm.append('temple_id', this.preferenceProfileData.temple_id);
+    newPrefForm.append('id', this.preferenceProfileData.id);
+    newPrefForm.append('caste', this.preferenceProfileData.caste);
+    newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
+    newPrefForm.append(
       'marital_status', this.preferencesForm.value.marital_status ?
       this.preferencesForm.value.marital_status : this.preferenceProfileData.marital_status
     );
-  if (this.gender === 'Male') {
+    if (this.gender === 'Male') {
       newPrefForm.append('working', this.preferencesForm.value.working
         ? this.preferencesForm.value.working : this.preferenceProfileData.working);
       newPrefForm.append('occupation', 'na');
@@ -941,38 +943,38 @@ onSubmitPreferences() {
         ? this.preferencesForm.value.occupation : this.preferenceProfileData.occupation);
       newPrefForm.append('working', 'na');
     }
-  newPrefForm.append('religion', this.preferenceProfileData.religion);
-  newPrefForm.append('food_choice', this.preferencesForm.value.food_choice ?
+    newPrefForm.append('religion', this.preferenceProfileData.religion);
+    newPrefForm.append('food_choice', this.preferencesForm.value.food_choice ?
       this.preferencesForm.value.food_choice : this.preferenceProfileData.food_choice);
 
-  newPrefForm.append('description', this.preferenceProfileData.description);
-  newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
+    newPrefForm.append('description', this.preferenceProfileData.description);
+    newPrefForm.append('income_min', this.preferencesForm.value.income_min ?
       this.preferencesForm.value.income_min : this.preferenceProfileData.income_min);
-  newPrefForm.append('income_max', this.preferencesForm.value.income_max ?
+    newPrefForm.append('income_max', this.preferencesForm.value.income_max ?
       this.preferencesForm.value.income_max : this.preferenceProfileData.income_max);
-  newPrefForm.append('height_min', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
+    newPrefForm.append('height_min', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
       ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_min)]
       : this.preferenceProfileData.height_min);
-  newPrefForm.append('height_max', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
+    newPrefForm.append('height_max', this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
       ? this.Heights1[this.Heights.indexOf(this.preferencesForm.value.height_max)]
       : this.preferenceProfileData.height_max);
-  newPrefForm.append('age_min', this.preferencesForm.value.age_min ?
+    newPrefForm.append('age_min', this.preferencesForm.value.age_min ?
       this.preferencesForm.value.age_min : this.preferenceProfileData.age_min);
-  newPrefForm.append('age_max', this.preferencesForm.value.age_max ?
+    newPrefForm.append('age_max', this.preferencesForm.value.age_max ?
       this.preferencesForm.value.age_max : this.preferenceProfileData.age_max);
-  newPrefForm.append(
+    newPrefForm.append(
       'mother_tongue',
       this.preferenceProfileData.mother_tongue
     );
-  newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
-  newPrefForm.append('matchesCount', String(this.countProfiles));
+    newPrefForm.append('is_lead', localStorage.getItem('is_lead'));
+    newPrefForm.append('matchesCount', String(this.countProfiles));
 
-  newPrefForm.append('pref_country', this.preferencesForm.value.country);
-  newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country : '');
-  newPrefForm.append('pref_state', this.preferencesForm.value.state);
-  newPrefForm.append('pref_state_id', this.chatService.selected_states_id.join(','));
-  newPrefForm.append('pref_city', this.preferencesForm.value.city);
-  this.http
+    newPrefForm.append('pref_country', this.preferencesForm.value.country);
+    newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country : '');
+    newPrefForm.append('pref_state', this.preferencesForm.value.state);
+    newPrefForm.append('pref_state_id', this.chatService.selected_states_id.join(','));
+    newPrefForm.append('pref_city', this.preferencesForm.value.city);
+    this.http
       .post(
         'https://partner.hansmatrimony.com/api/updatePreferencesDetails',
         newPrefForm
@@ -1000,7 +1002,7 @@ onSubmitPreferences() {
         }
       );
   }
-getAllCaste() {
+  getAllCaste() {
     this.chatService.allCastes
       .subscribe((res: any) => {
         this.getcastes = res;
@@ -1055,7 +1057,7 @@ getAllCaste() {
       this.getcastes.filter((bank) => bank.toLowerCase().indexOf(search) > -1)
     );
   }
-langChanged(event) {
+  langChanged(event) {
     console.log(event.checked);
     if (event.checked) {
       localStorage.setItem('language', 'hindi');
@@ -1065,7 +1067,7 @@ langChanged(event) {
       this.languageService.setCurrentLanguage('english');
     }
   }
-analyticsEvent(event) {
+  analyticsEvent(event) {
     (window as any).ga('send', 'event', event, '', {
       hitCallback: () => {
 
@@ -1083,7 +1085,7 @@ analyticsEvent(event) {
     });
 
   }
-countryClicked() {
+  countryClicked() {
     console.log('Country Clicked');
     if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#countryId');
@@ -1097,7 +1099,7 @@ countryClicked() {
     }
   }
 
-stateClicked() {
+  stateClicked() {
     console.log('State Clicked');
     if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#stateId');
@@ -1107,7 +1109,7 @@ stateClicked() {
     }
   }
 
-cityClicked() {
+  cityClicked() {
     console.log('City Clicked');
     if (this.authData.paid_status !== 'Paid') {
       const countryId: HTMLInputElement = document.querySelector('#cityId');
@@ -1116,7 +1118,7 @@ cityClicked() {
       return;
     }
   }
-openChooseFromAnyWhereDialog() {
+  openChooseFromAnyWhereDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.innerWidth >= 1024) {
       dialogConfig.minWidth = '30vw';
@@ -1136,13 +1138,13 @@ openChooseFromAnyWhereDialog() {
       this.getUserProfileData();
     });
   }
-openSubscriptionOffer() {
+  openSubscriptionOffer() {
     this.analyticsEvent('User Clicked Subscription Offer From Chat Drawer');
     // this.itemService.openTodaysPopupAd();
     this.router.navigateByUrl(`/subscription`);
   }
 
-showMoreCity() {
+  showMoreCity() {
     const cityStyle: any = document.querySelector('#cityStyle');
     const cityStyleBtn: any = document.querySelector('#cityStyleBtn');
     if (cityStyleBtn.textContent.includes('See More')) {
@@ -1154,7 +1156,16 @@ showMoreCity() {
     }
   }
 
-showMoreCaste() {
+  clearAllCity() {
+    this.preferencesForm.value.city = []
+    this.citiesSubject.next([])
+  }
+  clearAllCaste() {
+    // console.log(this.castePreferences)
+    this.castePreferences = [];
+  }
+
+  showMoreCaste() {
     const casteStyle: any = document.querySelector('#casteStyle');
     const casteStyleBtn: any = document.querySelector('#casteStyleBtn');
     if (casteStyleBtn.textContent.includes('See More')) {

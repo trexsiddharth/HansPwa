@@ -6,19 +6,19 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { FindOpenHistoryProfileService } from 'src/app/find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
 import { NewHomeService } from 'src/app/new-home/new-home.service';
-import {Boy} from './boy';
+import { Boy } from './boy';
 @Component({
-    selector: 'new-kundali',
-    templateUrl: './new-kundali.component.html',
-    styleUrls: ['./new-kundali.component.css']
+  selector: 'new-kundali',
+  templateUrl: './new-kundali.component.html',
+  styleUrls: ['./new-kundali.component.css']
 })
 
 export class Kundali implements OnInit {
-  boyDetails = new Boy('','','','','','');
-  public error:boolean = false;
-  public boyValid:boolean = false;
-  public appear:boolean;
-  mobileScreen:boolean;
+  boyDetails = new Boy('', '', '', '', '', '');
+  public error: boolean = false;
+  public boyValid: boolean = false;
+  public appear: boolean;
+  mobileScreen: boolean;
   private innerWidth: number;
   private mobileBreakpoint = 600;
   autoComplete = {
@@ -37,9 +37,9 @@ export class Kundali implements OnInit {
     '2001', '2002'
   ];
   currentGender = "Boy's"
-  BoyDetailsFilled = new BehaviorSubject <boolean>(false);
-  BoyDetailsFilled$: Observable <boolean> = this.BoyDetailsFilled.asObservable();
-  kundaliForm: FormGroup ;
+  BoyDetailsFilled = new BehaviorSubject<boolean>(false);
+  BoyDetailsFilled$: Observable<boolean> = this.BoyDetailsFilled.asObservable();
+  kundaliForm: FormGroup;
   optionsForm: FormGroup;
   constructor(public homeService: NewHomeService,
     public languageService: LanguageService,
@@ -65,9 +65,9 @@ export class Kundali implements OnInit {
       Looking: [null],
       For: [null],
     })
-    
+
   }
-  ngOnInit() {    
+  ngOnInit() {
     window.addEventListener('scroll', this.scroll, true);
     this.detectMobileScreen();
     if (localStorage.getItem('gender')) {
@@ -90,24 +90,24 @@ export class Kundali implements OnInit {
   scroll = (event): void => {
     this.scrollAppear();
   };
-  scrollAppear(){
-     let left = document.querySelector('.kundali-text');
-     let right = document.querySelector('.kundali-form');
-     let leftPosition;
-     let rightPosition;
-     if(left && right){
-      leftPosition  = left.getBoundingClientRect().top;
+  scrollAppear() {
+    let left = document.querySelector('.kundali-text');
+    let right = document.querySelector('.kundali-form');
+    let leftPosition;
+    let rightPosition;
+    if (left && right) {
+      leftPosition = left.getBoundingClientRect().top;
       rightPosition = right.getBoundingClientRect().top;
-     }
-     let screenPosition = window.innerHeight;
-     
-     if(rightPosition<=screenPosition){
-        this.appear=true;
-     
-     }else if(rightPosition>screenPosition){
-        this.appear=false;
-     }
     }
+    let screenPosition = window.innerHeight;
+
+    if (rightPosition <= screenPosition) {
+      this.appear = true;
+
+    } else if (rightPosition > screenPosition) {
+      this.appear = false;
+    }
+  }
   placeChanged(str: string) {
     const city: HTMLInputElement = document.querySelector('#' + str);
     setTimeout(() => {
@@ -124,21 +124,28 @@ export class Kundali implements OnInit {
       }
     }, 500);
   }
-  submitBoy(){
-    if(this.boyDetails.name && this.boyDetails.date && this.boyDetails.month && this.boyDetails.year &&
-      this.boyDetails.time && this.boyDetails.place){
-      this.boyValid=true;
-      this.error=false;
-    }else{
-      this.error=true;
+  submitBoy() {
+    if (this.boyDetails.name && this.boyDetails.date && this.boyDetails.month && this.boyDetails.year &&
+      this.boyDetails.time && this.boyDetails.place) {
+      this.boyValid = true;
+      this.error = false;
+    } else {
+      this.error = true;
     }
   }
   detailsFilled() {
-    if (this.currentGender === "Girl's")
-      this.currentGender = "Boy's"
-    else
-      this.currentGender = "Girl's"
-    this.BoyDetailsFilled.next(!this.BoyDetailsFilled.value);
+    if (this.boyDetails.name && this.boyDetails.date && this.boyDetails.month && this.boyDetails.year &&
+      this.boyDetails.time && this.boyDetails.place) {
+      this.boyValid = true;
+      this.error = false;
+      if (this.currentGender === "Girl's")
+        this.currentGender = "Boy's"
+      else
+        this.currentGender = "Girl's"
+      this.BoyDetailsFilled.next(!this.BoyDetailsFilled.value);
+    } else {
+      this.error = true;
+    }
   }
   selected(str: string) {
     if (str === 'looking') {
@@ -164,50 +171,52 @@ export class Kundali implements OnInit {
       }
     }
   }
-    onSubmit() {
-        console.log(this.kundaliForm.value);
-        if (this.kundaliForm.valid) {
-          let tosend = new FormData();
-          let boyDate = this.kundaliForm.get('BoyBirthDate').value + this.kundaliForm.get('BoyBirthMonth').value + this.kundaliForm.get('BoyBirthYear').value;
-          let girlDate = this.kundaliForm.get('GirlBirthDate').value + this.kundaliForm.get('GirlBirthMonth').value + this.kundaliForm.get('GirlBirthYear').value;
-          tosend.append('boy_birth_date', boyDate);
-          tosend.append('boy_birth_time', this.kundaliForm.value.BoyBirthTime);
-          tosend.append('boy_birth_place', this.kundaliForm.value.BoyBirthPlace);
-          tosend.append('girl_birth_date', girlDate);
-          tosend.append('girl_birth_time', this.kundaliForm.value.GirlBirthTime);
-          tosend.append('girl_birth_place', this.kundaliForm.value.GirlBirthPlace);
-          tosend.append('boy_name', this.kundaliForm.value.BoyName);
-          tosend.append('girl_name', this.kundaliForm.value.GirlName);
-    
-          this.http.post('https://partner.hansmatrimony.com/api/getKundali', tosend).subscribe((response: any) => {
-            console.log(response);
-            if (response.point) {
-              this.homeService.points = response.point;
-              this.homeService.HTMLResponse = response.full;
-              this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('ul').join('tr');
-              this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('li').join('td');
-              this.homeService.kundaliForm = this.kundaliForm;
-              this.homeService.kundaliFormValues = this.kundaliForm.value;
-              console.log(this.homeService.HTMLResponse);
-              this.router.navigateByUrl('/kundaliMatching');
-            }
-          });
+  onSubmit() {
+    console.log(this.kundaliForm.value);
+
+    if (this.kundaliForm.valid) {
+      let tosend = new FormData();
+      let boyDate = this.kundaliForm.get('BoyBirthDate').value + this.kundaliForm.get('BoyBirthMonth').value + this.kundaliForm.get('BoyBirthYear').value;
+      let girlDate = this.kundaliForm.get('GirlBirthDate').value + this.kundaliForm.get('GirlBirthMonth').value + this.kundaliForm.get('GirlBirthYear').value;
+      tosend.append('boy_birth_date', boyDate);
+      tosend.append('boy_birth_time', this.kundaliForm.value.BoyBirthTime);
+      tosend.append('boy_birth_place', this.kundaliForm.value.BoyBirthPlace);
+      tosend.append('girl_birth_date', girlDate);
+      tosend.append('girl_birth_time', this.kundaliForm.value.GirlBirthTime);
+      tosend.append('girl_birth_place', this.kundaliForm.value.GirlBirthPlace);
+      tosend.append('boy_name', this.kundaliForm.value.BoyName);
+      tosend.append('girl_name', this.kundaliForm.value.GirlName);
+
+      this.http.post('https://partner.hansmatrimony.com/api/getKundali', tosend).subscribe((response: any) => {
+        console.log(response);
+        if (response.point) {
+          this.homeService.points = response.point;
+          this.homeService.HTMLResponse = response.full;
+          this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('ul').join('tr');
+          this.homeService.HTMLResponse = this.homeService.HTMLResponse.split('li').join('td');
+          this.homeService.kundaliForm = this.kundaliForm;
+          this.homeService.kundaliFormValues = this.kundaliForm.value;
+          console.log(this.homeService.HTMLResponse);
+          this.router.navigateByUrl('/kundaliMatching');
         }
-        else {
-          console.log('form invalid');
-        }
-      }
-      private resize(){
-        this.innerWidth = window.innerWidth;
-        return this.innerWidth
+      });
     }
-    private detectMobileScreen() {
-        window.onload = this.resize;
-      window.onresize = this.resize;
+    else {
+      console.log('form invalid');
+      this.error = true;
+    }
+  }
+  private resize() {
+    this.innerWidth = window.innerWidth;
+    return this.innerWidth
+  }
+  private detectMobileScreen() {
+    window.onload = this.resize;
+    window.onresize = this.resize;
     if (this.resize() < this.mobileBreakpoint) {
-      this.mobileScreen=true
+      this.mobileScreen = true
     } else {
-      this.mobileScreen=false
+      this.mobileScreen = false
     }
   }
 }

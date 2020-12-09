@@ -23,12 +23,12 @@ export class HistoryItemComponent implements OnInit {
     '6\'6"', '6\'7"', '6\'8"', '6\'9"', '6\'10"', '6\'11"', '7\'0"'];
   // tslint:disable-next-line: max-line-length
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70',
-    '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', ];
+    '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84',];
   constructor(public itemService: FindOpenHistoryProfileService,
-              private http: HttpClient,
-              private analyticsService: AnalyticsService,
-              private router: Router
-              ) { }
+    private http: HttpClient,
+    private analyticsService: AnalyticsService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -36,12 +36,18 @@ export class HistoryItemComponent implements OnInit {
   getColor(type: string) {
     return type === 'REJECT' ? 'rgba(248, 73, 73, 0.849)' : type === 'SHORTLIST' ? 'rgba(22, 182, 22, 0.788)' : 'rgba(35, 131, 221, 0.89)';
   }
+  getProfileType() {
+    if (!this.listItem.type) {
+      return;
+    }
+    return this.listItem.type === 'SHORTLIST' ? 'LIKED' : `${this.listItem.type}ED`;
+  }
 
   setName(name: string): string {
     if (this.itemService.getCredits() != null && (this.itemService.getCredits().toString() === '0'
-    || this.authData.paid_status !== 'Paid')
-    && this.listItem.type !== 'CONTACT'
-    && !this.itemService.getPersonalized()) {
+      || this.authData.paid_status !== 'Paid')
+      && this.listItem.type !== 'CONTACT'
+      && !this.itemService.getPersonalized()) {
       const a = name.split(' ');
       if (a[0] && a[1]) {
         return a[0][0] + ' ' + a[1];
@@ -90,18 +96,15 @@ export class HistoryItemComponent implements OnInit {
         (data: any) => {
           console.log(data);
           // section from which user is going
-          if (this.listItem.type === 'SHORTLIST')
-          {
+          if (this.listItem.type === 'SHORTLIST') {
             data.coming = 'interestShown';
-           } else if (this.listItem.type === 'REJECT')
-          {
+          } else if (this.listItem.type === 'REJECT') {
             data.coming = 'rejected';
-           } else if (this.listItem.type === 'CONTACT')
-            {
-              data.coming = 'contacted';
-             }
+          } else if (this.listItem.type === 'CONTACT') {
+            data.coming = 'contacted';
+          }
           localStorage.setItem('open_profile', JSON.stringify(data));
-           // setting the index in local strorage to use in scrollIntoView later
+          // setting the index in local strorage to use in scrollIntoView later
 
           localStorage.setItem('index', String(this.itemIndex));
           localStorage.setItem('todaysPopupOpened', '0');
