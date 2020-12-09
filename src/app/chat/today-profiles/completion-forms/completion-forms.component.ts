@@ -14,7 +14,6 @@ export class CompletionFormsComponent implements OnInit {
   constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {
-
     
     this.completeForm = this.formBuilder.group({
       BirthPlace: [''],
@@ -40,7 +39,6 @@ export class CompletionFormsComponent implements OnInit {
       family_type: [''],
       FamilyAbout: [''],
     });
-      
       
   }
   personalToggle() {
