@@ -1,0 +1,40 @@
+.completeFormContainer {
+    display: block;
+    position: relative;
+    background-color: #eeeeee;
+    padding: 10% 10px 20%;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.circularImg{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+}
+.button-holder{
+    display: block;
+    position: relative;
+    margin: 15px auto;
+    background-color:lightgray;
+    border-radius:10px;
+}
+
+.blue-btn{
+    width:200px;
+    height:40px;
+    border:none;
+    background-color:#24ADD8;
+    border-radius:10px;
+    color:white;
+    transition: all 0.3s ease-in-out;
+}
+.grey-btn{
+    width:200px;
+    height:40px;
+    border:none;
+    background-color:lightgray;
+    border-radius:10px;
+    color:#707070;
+    transition: all 0.3s ease-in-out;
+}
