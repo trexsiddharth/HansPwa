@@ -294,7 +294,7 @@ export class ChatDrawerComponent implements OnInit {
     // this.preferencesForm.patchValue({
     //   state: [curState, ...this.preferencesForm.value.state],
     // })
-    this.chatService.getCities(this.chatService.selected_country, curState.id).subscribe((response: any) => {
+    this.chatService.getCities(this.chatService.selected_country, this.chatService.selected_states_id).subscribe((response: any) => {
       console.log(response);
       if (this.allCities.length === 0) {
         this.allCities = response
