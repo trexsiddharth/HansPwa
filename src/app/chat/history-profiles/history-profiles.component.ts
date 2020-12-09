@@ -128,7 +128,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });
-      this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers }).subscribe((res: any) => {
+      this.http.get(`https://partner.hansmatrimony.com/api/getWebsitePlanById?id=${localStorage.getItem('id')}&is_lead=${localStorage.getItem('is_lead')}`, { headers }).subscribe((res: any) => {
         this.plans = res;
         for (let i = 0; i < this.plans.length; i++) {
           if (this.plans[i].plan_type === 'Self Service Plan') {
