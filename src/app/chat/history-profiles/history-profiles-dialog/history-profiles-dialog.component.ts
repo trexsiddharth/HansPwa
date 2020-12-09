@@ -572,8 +572,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
 
   }
   isDisplay(i, j) {
-
-    // console.log('profession' in this.item['profile'])
+    // check the value which has n/a, na, undefined, null, empty and object key
     if (i in this.item
       && j in this.item[i]
       && this.item[i][j]
@@ -581,6 +580,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
       && this.item[i][j].toString().toLowerCase() !== 'na'
       && this.item[i][j].toString().toLowerCase() !== 'n/a'
       && this.item[i][j].toString().toLowerCase() !== 'null'
+      && this.item[i][j].toString().toLowerCase() !== 'undefined'
     ) {
       return true;
     }

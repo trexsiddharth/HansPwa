@@ -264,7 +264,7 @@ export class LanguageService {
           this.profileLang.desc = 'Description';
           this.profileLang.todaysSpecial = 'Today\'s Special';
           this.profileLang.discover = 'See More';
-          this.profileLang.likesYou = 'Liked Me';
+          this.profileLang.likesYou = 'Interested';
           this.profileLang.yourLikes = 'My Likes';
           this.profileLang.history = 'History';
 

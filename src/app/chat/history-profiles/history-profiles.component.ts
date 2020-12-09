@@ -1342,6 +1342,12 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       }
     );
   }
-
+  getViewedProfile() {
+    // console.log(this.profileViewersList)
+    return this.profileViewersList.value.length > 0 ? this.profileViewersList.value.length : null;
+  }
+  getLikedProfile() {
+    return this.profile.length > 0 ? this.profile.length : null
+  }
 }
 

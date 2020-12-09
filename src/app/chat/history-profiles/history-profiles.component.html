@@ -20,11 +20,11 @@
 
     <div *ngIf="type && type == 'interestReceived'" class="text-center">
         <button class="btn btn-tabs" (click)="setSelectedIndex(0)" [ngClass]="{'btn-tabs-active':selectedTab === 0}">
-            {{languageService.likedMe.likedMe}}
+            {{languageService.likedMe.likedMe}} <span class="pl-2">{{getLikedProfile()}}</span>
         </button>
 
         <button class="btn btn-tabs" (click)="setSelectedIndex(1)" [ngClass]="{'btn-tabs-active':selectedTab === 1}">
-            {{languageService.likedMe.viewedMe}}
+            {{languageService.likedMe.viewedMe}}<span class="pl-2">{{getViewedProfile()}}</span>
         </button>
     </div>
 
