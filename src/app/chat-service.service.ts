@@ -148,6 +148,7 @@ export class ChatServiceService {
       console.log('cached states');
       return this.allStates$;
     }
+    console.log('new states date');
     this.selected_country = value;
     const params = new HttpParams().set('country_id', this.selected_country ? this.selected_country.id : null);
     return this.http.get<StateTable[]>('https://partner.hansmatrimony.com/api/getState', { params }).pipe(

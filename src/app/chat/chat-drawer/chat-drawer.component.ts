@@ -812,19 +812,6 @@ export class ChatDrawerComponent implements OnInit {
           //   this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
           // }
 
-          if (this.gender === 'Female') {
-            if (this.preferenceProfileData.occupation) {
-              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
-            } else {
-              this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
-            }
-          }
-          if (data.profile && data.profile.photo) {
-            console.log(data.profile.photo);
-            this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
-            this.itemService.setPhotoStatus(true);
-          }
-
           if (data.country) {
             this.allCountries = data.country;
           }
@@ -879,6 +866,7 @@ export class ChatDrawerComponent implements OnInit {
             console.log('current state ids are', this.chatService.selected_states_id);
 
           }
+
           this.setCurrentPreferenceValue(null);
 
           if (this.sidenav.opened) { // these functions are need when change preference side nav is opened
@@ -890,6 +878,19 @@ export class ChatDrawerComponent implements OnInit {
                 this.getRecomendedFilters();
               }, 2000);
             }
+          }
+
+          if (this.gender === 'Female') {
+            if (this.preferenceProfileData.occupation) {
+              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
+            } else {
+              this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
+            }
+          }
+          if (data.profile && data.profile.photo) {
+            console.log(data.profile.photo);
+            this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
+            this.itemService.setPhotoStatus(true);
           }
         },
         (error: any) => {
