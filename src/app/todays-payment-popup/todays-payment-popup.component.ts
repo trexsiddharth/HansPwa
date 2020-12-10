@@ -94,11 +94,11 @@ export class TodaysPaymentPopupComponent implements OnInit {
             //   this.ngxNotificationService.warning('Auth Data not found');
             // }
 
-              for (const a of res) {
-                if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' && a.category_name !== 'Low income' ) {
-                  this.plans.push(a);
-                }
+            for (const a of res) {
+              if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' && a.category_name !== 'Low income') {
+                this.plans.push(a);
               }
+            }
 
           }
           // this.plans = res;

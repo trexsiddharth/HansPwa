@@ -618,7 +618,9 @@ export class ChatDrawerComponent implements OnInit {
       this.disableSave.next(true);
     } else {
       this.isAllCastePref = false;
-      this.searchCaste.setValue(['']);
+      // array should empty not empty string.
+      // because empty string still a value showen  in selected tags
+      this.searchCaste.setValue([]);
     }
   }
   casteSelectionChanged(event) {
