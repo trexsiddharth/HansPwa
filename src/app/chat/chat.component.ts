@@ -224,6 +224,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    
     if (localStorage.getItem('profile_photo')) {
       console.log('hamburger photo set');
       this.photo = localStorage.getItem('profile_photo');

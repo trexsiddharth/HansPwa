@@ -79,7 +79,7 @@ export class SubscriptionComponent implements OnInit {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.get('https://partner.hansmatrimony.com/api/getWebsitePlan', { headers }).subscribe((res: any) => {
+    this.http.get(`https://partner.hansmatrimony.com/api/getWebsitePlanById?id=${localStorage.getItem('id')}&is_lead=${localStorage.getItem('is_lead')}`, { headers }).subscribe((res: any) => {
       this.plans = res;
       if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') === '1') {
         for (let i = 0; i < this.plans.length; i++) {

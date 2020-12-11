@@ -1,1 +1,152 @@
-<p>completion-forms works!</p>
+<!-- <div class="completeFormContainer">
+
+    <img class="circularImg" width="100px" src="../../../../assets/logo_144.png" alt="logo">
+
+    <div class="d-flex button-holder col-9" style="padding: 0;">
+        <button (click)="personalToggle()" class="btn" [ngClass]="{'blue-btn': personalActive, 'grey-btn': !personalActive}">Personal</button>
+        <button (click)="familyToggle()" class="btn" [ngClass]="{'blue-btn': !personalActive, 'grey-btn': personalActive}">Family</button>
+    </div>
+
+    <form [formGroup]="completeForm" id="specialForm" *ngIf="personalActive">
+        <div class="row" style="padding:9px 9px 0;margin: 0px 0px 0px -15px;">
+            <div class="col-6 pr-2">
+                    <input type="text" class="form-control"
+                    placeholder="Birth Place" 
+                    matValidateAddress id="birthPlace"
+                        [autoCompleteOptions]="autoComplete" (change)="placeChanged()"
+                        matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                        formControlName="BirthPlace">
+            </div>
+            <div class="col-6 pr-0 pl-2" >
+                    <input class="form-control" id="BirthTime" (change)="changed('bTime')" type="time"
+                        placeholder="Birth Time" formControlName="BirthTime">
+            </div>
+            <div class="col-6 mt-15 pr-2">
+                    <mat-select placeholder="Food Choice" class="form-control" 
+                    (selectionChange)="changed('food')" formControlName="FoodChoice">
+                        <mat-option value="Vegetarian">Vegetarian</mat-option>
+                        <mat-option value="Non-Vegetarian">Non-Vegetarian</mat-option>
+                    </mat-select>
+            </div>
+            <div class="col-6  mt-15 pr-0 pl-2" >
+                    <mat-select placeholder="Manglik Status" class="form-control" (selectionChange)="changed('manglik')" formControlName="Mangalik">
+                        <mat-option value="Manglik">Manglik</mat-option>
+                        <mat-option value="Non-Manglik">Non-Manglik</mat-option>
+                        <mat-option value="Anshik Manglik">Anshik Manglik</mat-option>
+                        <mat-option value="Anshik Manglik">Don't Know</mat-option>
+                    </mat-select>
+            </div>
+            <div class="col-6 mt-15 pr-2">
+                <input class="form-control" placeholder="College" type="text" formControlName="College">
+        </div>
+        <div class="col-6 mt-15 pr-0 pl-2">
+                <input class="form-control" placeholder="Additional Qualification" (change)="changed('additional')" type="text" formControlName="Additional">
+        </div>
+        <div class="col-6 mt-15 pr-2">
+                <mat-select class="form-control" placeholder="Designation" (selectionChange)="changed('designation')" formControlName="Profession" >
+                    <mat-option *ngFor="let  option of designations" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
+        </div>
+        <div class="col-6 mt-15 pr-0 pl-2">
+                <input class="form-control" placeholder="Company" (change)="changed('company')" type="text" formControlName="Company">
+        </div>
+        <div class="col-12 mt-15" *ngIf="completeForm.value.Profession === 'Others'">
+                <input class="form-control" placeholder="Other Designation" type="text" formControlName="OtherProfession"
+                    name="OtherProfession">
+        </div>
+    
+        <div class="col-12 mt-15 pr-0">
+                <input class="form-control" placeholder="Weight(in Kg)" (change)="changed('Weight')" type="text" formControlName="Weight">
+        </div>
+        <div class="col-12 mt-15 pr-0">
+                <input class="form-control" placeholder="Email" (change)="changed('Email')" type="text" formControlName="Email">
+        </div>
+           
+            <div class="col-12 mt-15 pr-0">
+                  <mat-label>About</mat-label>
+                  <textarea rows="3" type="text" placeholder="About" class="form-control" 
+                  formControlName="About" name="About">
+                                          </textarea>
+              </div>
+        </div>
+    </form>
+
+    
+    <form [formGroup]="completeForm" id="specialForm" *ngIf="!personalActive">
+        <div class="row" style="padding:9px 9px 0;margin: 0px 0px 0px -15px;">
+                    <div class="col-6 pr-2">
+                            <mat-select class="form-control" placeholder="Family Type" (selectionChange)="changed('Family Type')" formControlName="family_type">
+                                <mat-option value="Nuclear">Nuclear</mat-option>
+                                <mat-option value="Joint">Joint</mat-option>
+                            </mat-select>
+                    </div>
+                    <div class="col-6 pr-0">
+                            <mat-select class="form-control" placeholder="House Type" (selectionChange)="changed('House Type')" formControlName="house_type">
+                                <mat-option value="Owned">Owned</mat-option>
+                                <mat-option value="Rented">Rented</mat-option>
+                                <mat-option value="Leased">Leased</mat-option>
+                            </mat-select>
+                    </div>
+                    <div class="col-6 mt-15 pr-2">
+                            <mat-select class="form-control"
+                            placeholder="Father's Status"
+                             formControlName="FatherStatus" (selectionChange)="changed('fstatus')">
+                                <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                    </div>
+                    <div class="col-6 mt-15 pr-0">
+                            <mat-select class="form-control" 
+                            placeholder="Mother's Status"
+                             formControlName="MotherStatus" (selectionChange)="changed('mstatus')">
+                                <mat-option *ngFor="let  option of Occupation" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-select>
+                    </div>
+                    <div class="col-6 mt-15 pr-2">
+                            <mat-select class="form-control" placeholder="Living With Parents" (selectionChange)="changed('Living With')" formControlName="livingWithParents">
+                                <mat-option value="Yes">Yes</mat-option>
+                                <mat-option value="No">No</mat-option>
+                            </mat-select>
+                    </div>
+                    <div class="col-6 mt-15 pr-0">
+                            <input class="form-control" placeholder="Family Living In" 
+                            (change)="changed('Family Living In')" type="text" id="FamliyCity"
+                                [autoCompleteOptions]="autoComplete" matValidateAddress
+                                matGoogleMapsAutocomplete
+                                #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
+                                (change)="placeChangedFamilyCity()" formControlName="family_city"
+                                />
+                    </div>
+                    <div class="col-12 mt-15 pr-0">
+                            <mat-select class="form-control"
+                            placeholder="Family's Annual Income in LPA"
+                             name="FamilyIncome" formControlName="FamilyIncome"
+                                (selectionChange)="changed('Fincome')">
+                                <mat-option *ngFor="let item of incomeCategories" [value]="item">
+                                    {{setValue(item)}}
+                                </mat-option>
+                            </mat-select>
+                    </div>
+                    <div class="col-12 mt-15 pr-0">
+                            <input (change)="changed('Gotra')" placeholder="Gotra" class="form-control" type="text" formControlName="gotra">
+                    </div>
+                
+
+                    <div class="col-12 mt-15 pr-0">
+                        <mat-label>About Family</mat-label>
+                        <textarea rows="3" type="text" class="form-control" 
+                        formControlName="FamilyAbout" (change)="changed('About Family')" name="FamilyAbout">
+                                                </textarea>
+                    </div>
+               
+            
+        </div>
+    </form>
+
+
+</div> -->

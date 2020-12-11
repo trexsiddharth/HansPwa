@@ -241,7 +241,7 @@ export class ChatDrawerComponent implements OnInit {
   }
   countrySelected(value) {
     this.chatService.getStates(this.search(value, 0)).subscribe((response: any) => {
-      console.log(response);
+      console.log(response, this.search(value, 0) );
       this.allStates = response;
       this.statesSubject.next(response);
 
@@ -263,7 +263,7 @@ export class ChatDrawerComponent implements OnInit {
   }
 
   getCitiesFromState(countryId: any, stateId: any) {
-    this.chatService.getCities(countryId, stateId).subscribe((response: any) => {
+    this.chatService.getCities(this.search(countryId,0), stateId).subscribe((response: any) => {
       console.log(response);
       if (this.allCities) {
         console.log('current cities', this.allCities);
@@ -294,12 +294,14 @@ export class ChatDrawerComponent implements OnInit {
     // this.preferencesForm.patchValue({
     //   state: [curState, ...this.preferencesForm.value.state],
     // })
-    this.chatService.getCities(this.chatService.selected_country, curState.id).subscribe((response: any) => {
+    this.chatService.getCities(this.chatService.selected_country, this.chatService.selected_states_id).subscribe((response: any) => {
       console.log(response);
       if (this.allCities.length === 0) {
-        this.allCities = response;
+        this.allCities = response
+        this.citiesSubject.next(response);
       } else {
         this.allCities = this.allCities.concat(response);
+        this.citiesSubject.next(this.allCities);
       }
       console.log(this.allCities);
     });
@@ -812,19 +814,6 @@ export class ChatDrawerComponent implements OnInit {
           //   this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
           // }
 
-          if (this.gender === 'Female') {
-            if (this.preferenceProfileData.occupation) {
-              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
-            } else {
-              this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
-            }
-          }
-          if (data.profile && data.profile.photo) {
-            console.log(data.profile.photo);
-            this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
-            this.itemService.setPhotoStatus(true);
-          }
-
           if (data.country) {
             this.allCountries = data.country;
           }
@@ -868,7 +857,7 @@ export class ChatDrawerComponent implements OnInit {
             this.allStates = this.preferenceProfileData ? this.preferenceProfileData.pref_state : '';
             this.allCities = this.preferenceProfileData ? this.preferenceProfileData.pref_city : '';
             this.countrySelected(this.preferenceProfileData ? this.preferenceProfileData.pref_country : '');
-            this.getCitiesFromState(this.preferenceProfileData ? this.preferenceProfileData.pref_country_id : '',
+            this.getCitiesFromState(this.preferenceProfileData ? this.preferenceProfileData.pref_country : '',
               this.preferenceProfileData ? this.preferenceProfileData.pref_state_id : '');
             this.chatService.selected_cities = this.preferenceProfileData.pref_city ? this.preferenceProfileData.pref_city.join(',') : '';
             this.chatService.selected_states =
@@ -879,6 +868,7 @@ export class ChatDrawerComponent implements OnInit {
             console.log('current state ids are', this.chatService.selected_states_id);
 
           }
+
           this.setCurrentPreferenceValue(null);
 
           if (this.sidenav.opened) { // these functions are need when change preference side nav is opened
@@ -890,6 +880,19 @@ export class ChatDrawerComponent implements OnInit {
                 this.getRecomendedFilters();
               }, 2000);
             }
+          }
+
+          if (this.gender === 'Female') {
+            if (this.preferenceProfileData.occupation) {
+              this.preferenceProfileData.occupation = this.preferenceProfileData.occupation.split(',');
+            } else {
+              this.preferenceProfileData.occupation = ['Doesn\'t Matter'];
+            }
+          }
+          if (data.profile && data.profile.photo) {
+            console.log(data.profile.photo);
+            this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
+            this.itemService.setPhotoStatus(true);
           }
         },
         (error: any) => {
@@ -972,7 +975,7 @@ export class ChatDrawerComponent implements OnInit {
     newPrefForm.append('matchesCount', String(this.countProfiles));
 
     newPrefForm.append('pref_country', this.preferencesForm.value.country);
-    newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country : '');
+    newPrefForm.append('pref_country_id', this.chatService.selected_country ? this.chatService.selected_country.id : '');
     newPrefForm.append('pref_state', this.preferencesForm.value.state);
     newPrefForm.append('pref_state_id', this.chatService.selected_states_id.join(','));
     newPrefForm.append('pref_city', this.preferencesForm.value.city);

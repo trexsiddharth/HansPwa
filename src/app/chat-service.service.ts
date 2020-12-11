@@ -144,10 +144,11 @@ export class ChatServiceService {
   }
 
   getStates(value): Observable<StateTable[]> {
-    if (this.allStatesSubject.getValue() || value === this.selected_country) {
+    if (value === this.selected_country) {
       console.log('cached states');
       return this.allStates$;
     }
+    console.log('new states data');
     this.selected_country = value;
     const params = new HttpParams().set('country_id', this.selected_country ? this.selected_country.id : null);
     return this.http.get<StateTable[]>('https://partner.hansmatrimony.com/api/getState', { params }).pipe(
@@ -158,14 +159,14 @@ export class ChatServiceService {
  }
 
  getCities(countryValue, stateValue): Observable<string[]> {
-  if (this.allCitiesSubject.getValue() || countryValue === this.selected_country
+  if (countryValue.id === this.selected_country.id
   && stateValue === this.selected_states) {
     console.log('cached states');
     return this.allCities$;
   }
   this.selected_country = countryValue;
   this.selected_states = stateValue;
-  const params = new HttpParams().set('country_id', this.selected_country).set('state_id', stateValue);
+  const params = new HttpParams().set('country_id', this.selected_country.id).set('state_id', stateValue);
   return this.http.get<string[]>('https://partner.hansmatrimony.com/api/getCity', { params }).pipe(
     tap((data: string[]) => {
       this.allCitiesSubject.next(data);
