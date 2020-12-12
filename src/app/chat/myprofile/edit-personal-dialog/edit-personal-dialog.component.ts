@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { startWith, map, shareReplay, debounceTime, takeUntil } from 'rxjs/operators';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { LanguageService } from 'src/app/language.service';
 
@@ -13,7 +13,7 @@ import { LanguageService } from 'src/app/language.service';
   templateUrl: './edit-personal-dialog.component.html',
   styleUrls: ['./edit-personal-dialog.component.css']
 })
-export class EditPersonalDialogComponent implements OnInit {
+export class EditPersonalDialogComponent implements OnInit, OnDestroy {
   data: any;
   personalData: any;
   familyData: any;
@@ -22,6 +22,8 @@ export class EditPersonalDialogComponent implements OnInit {
   personalDialogData: FormGroup;
   currentCity: any;
   locality;
+  workingCity;
+  birthPlace;
   locationFamily;
   locationWorking;
   locationBirth;
@@ -43,7 +45,7 @@ export class EditPersonalDialogComponent implements OnInit {
   HigherEducation: string[] = ['B.E\/B.Tech', 'B.Pharma', 'M.E\/M.Tech', 'M.Pharma', 'M.S. Engineering', 'B.Arch', 'M.Arch', 'B.Des', 'M.Des', 'MCA\/PGDCA', 'BCA', 'B.IT', 'B.Com', 'CA', 'CS', 'ICWA', 'M.Com', 'CFA',
     'MBA\/PGDM', 'BBA', 'BHM', 'MBBS', 'M.D.', 'BAMS', 'BHMS', 'BDS', 'M.S. (Medicine)', 'MVSc.', 'BvSc.', 'MDS', 'BPT', 'MPT', 'DM', 'MCh',
     // tslint:disable-next-line: max-line-length
-    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School','12th', 'Trade School', 'Other'];
+    'BL\/LLB', 'ML\/LLM', 'B.A', 'B.Sc.', 'M.A.', 'M.Sc.', 'B.Ed', 'M.Ed', 'MSW', 'BFA', 'MFA', 'BJMC', 'MJMC', 'Ph.D', 'M.Phil', 'Diploma', 'High School', '12th', 'Trade School', 'Other'];
 
 
 
@@ -110,12 +112,17 @@ export class EditPersonalDialogComponent implements OnInit {
     'Legal',
     'Public Relations',
     'Others'];
+  /** Subject that emits when the component has been destroyed. */
+  protected onDestroy = new Subject<void>();
+  CitySubject = new BehaviorSubject<string[]>([]);
+  Cities: Observable<any[]> = this.CitySubject.asObservable().pipe(shareReplay());
+
   constructor(private http: HttpClient,
-              public languageService: LanguageService,
-              public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) data,
-              private _formBuilder: FormBuilder,
-              private ngxNotificationService: NgxNotificationService
+    public languageService: LanguageService,
+    public dialogRef: MatDialogRef<EditPersonalDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) data,
+    private _formBuilder: FormBuilder,
+    private ngxNotificationService: NgxNotificationService
   ) {
     this.data = data;
 
@@ -145,10 +152,15 @@ export class EditPersonalDialogComponent implements OnInit {
       Occupation: [''],
       Company: [''],
       Castes: [''],
-      WorkingCity: [''],
-      Locality: [''],
-      About: ['', Validators.compose([Validators.maxLength(300)])]
+      WorkingCity: ['', Validators.compose([Validators.required])],
+      Locality: ['', Validators.compose([Validators.required])],
+      About: ['', Validators.compose([Validators.maxLength(300)])],
     });
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy.next();
+    this.onDestroy.complete();
   }
 
   ngOnInit() {
@@ -163,6 +175,61 @@ export class EditPersonalDialogComponent implements OnInit {
     if (this.personalData && this.familyData) {
       this.setCurrentValue();
     }
+    this.personalForm.get('Locality').valueChanges
+      .pipe(
+        debounceTime(400),
+        takeUntil(this.onDestroy))
+      .subscribe(() => {
+        this.CityFilter('Locality');
+      });
+    this.personalForm.get('WorkingCity').valueChanges
+      .pipe(
+        debounceTime(400),
+        takeUntil(this.onDestroy))
+      .subscribe(() => {
+        this.CityFilter('WorkingCity');
+      });
+    this.personalForm.get('BirthPlace').valueChanges
+      .pipe(
+        debounceTime(400),
+        takeUntil(this.onDestroy))
+      .subscribe(() => {
+        this.CityFilter('BirthPlace');
+      });
+  }
+  private CityFilter(key) {
+    // console.log(this.personalForm.value[key]);
+    if (this.personalForm.value[key]) {
+      this.http.get<string[]>(`https://partner.hansmatrimony.com/api/getCities?search_city=${this.personalForm.value[key]}`)
+        .subscribe(
+          (response: string[]) => {
+            console.log(response);
+            this.CitySubject.next(response);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+    }
+  }
+  placeChanged(key) {
+    setTimeout(() => {
+      if (!this[key[0].toLowerCase() + key.slice(1)]) {
+        this.personalForm.controls[key].setValue(null);
+        this.ngxNotificationService.error('Select Valid Working City');
+      }
+
+    }, 500);
+  }
+  CityChanged(key, value) {
+    console.log('selected working city', value, key);
+    this[key] = value;
+    // this.setAbout();
+    // this.analyticsEvent('Four Page Registration Page Two Working City Changed');
+    // if (this.PageTwo.valid) {
+    //   this.fourPageService.formCompleted.emit(true);
+    //   this.fourPageService.formTwoGroup.emit(this.PageTwo);
+    // }
   }
   setAge(dob: string) {
     if (dob != null) {
@@ -241,6 +308,9 @@ export class EditPersonalDialogComponent implements OnInit {
   }
   onSubmit() {
     this.errors = [];
+    if (!this.workingCity && !this.locality && !this.birthPlace) {
+      return;
+    }
     if (this.personalForm.valid) {
       const date = this.personalForm.value.birth_date;
       const month = this.month.indexOf(this.personalForm.value.birth_month) + 1;
