@@ -359,6 +359,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       }, 100);
     }
 
+    // check for verification on payment completion
+    this.verifyAndCapturePaytmPayment()
+
     // as soon as the credits are updated we will show lockdown offer to the free user
     // lockdown offer will not be shown to first time coming user
     if (!localStorage.getItem('todaysPopupOpened') || (localStorage.getItem('todaysPopupOpened') && localStorage.getItem('todaysPopupOpened') !== '0')) {
@@ -399,17 +402,40 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  async verifyAndCapturePaytmPayment() {
+     if (this.router.url.includes('verifyPayment')) {
+            this.spinner.show();
+            await this.subscriptionService.getTransactionStatus().then(
+              response => {
+                if (response === 1) {
+                  this.checkUrl(localStorage.getItem('mobile_number')).subscribe(res => {
+                    console.log(res);
+                    localStorage.setItem('authData', JSON.stringify(res));
+                    localStorage.setItem('id', res.id);
+                    this.itemService.setIsLead(res.is_lead);
+                    this.getCredits();
+                  },
+                    err => {
+                      console.log(err);
+                      this.spinner.hide();
+                    });
+                }
+              }
+            );
+          }
+  }
+
 
   openTodaysPopupHere() {
     this.itemService.creditsUpdated.subscribe(
       async data => {
         if (data) {
           this.lockdownCount++;
-          if (!this.router.url.match('first') && !this.router.url.match('verifyPayment') && 
+          if (!this.router.url.match('first') && !this.router.url.includes('verifyPayment') && 
           this.lockdownCount === 1) {
             // show payment popup every time user open the app
             this.itemService.openTodaysPopupAd();
-          } else if (this.router.url.match('verifyPayment')) {
+          } else if (this.router.url.includes('verifyPayment')) {
             this.spinner.show();
             await this.subscriptionService.getTransactionStatus().then(
               response => {
