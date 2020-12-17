@@ -812,6 +812,10 @@ export class ChatDrawerComponent implements OnInit {
           //   this.preferenceProfileData.religion = this.preferenceProfileData.religion.split(',');
           // }
 
+          if (this.preferenceProfileData && this.personalProfileData.marital_status !== 'Never Married') {
+            localStorage.setItem('showRemarrigePlan', '1');
+          }
+
           if (data.country) {
             this.allCountries = data.country;
           }
@@ -847,10 +851,6 @@ export class ChatDrawerComponent implements OnInit {
                 }
               }
               console.log('pref_cities', this.preferenceProfileData.pref_city);
-            }
-
-            if (this.preferenceProfileData && this.personalProfileData.marital_status !== 'Never Married') {
-              localStorage.setItem('showRemarrigePlan', '1');
             }
             this.allStates = this.preferenceProfileData ? this.preferenceProfileData.pref_state : '';
             this.allCities = this.preferenceProfileData ? this.preferenceProfileData.pref_city : '';
