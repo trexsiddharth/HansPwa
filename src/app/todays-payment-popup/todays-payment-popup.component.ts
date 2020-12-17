@@ -95,7 +95,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
             // }
 
               for (const a of res) {
-                if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage' && a.category_name !== 'Low income' ) {
+                if (a.plan_type === 'Self Service Plan' && a.plan_name !== 'Re-Marriage') {
                   this.plans.push(a);
                 }
               }

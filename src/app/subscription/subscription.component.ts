@@ -95,7 +95,7 @@ export class SubscriptionComponent implements OnInit {
         if (!localStorage.getItem('low income') && localStorage.getItem('low income') !== 'true') {
           for (let i = 0; i < this.plans.length; i++) {
             if (this.plans[i].plan_name != 'Re-Marriage' &&
-             this.plans[i].plan_name != 'Re-Marriage Deluxe' &&  this.plans[i].category_name !== 'Low income' ) {
+             this.plans[i].plan_name != 'Re-Marriage Deluxe' ) {
               if (this.plans[i].plan_type === 'Self Service Plan') {
                 this.plansOnline.push(this.plans[i]);
               } else {
@@ -120,21 +120,7 @@ export class SubscriptionComponent implements OnInit {
             }
           }
         }
-        
-        // for (let a of res) {
-        //   if (a.plan_type === 'Self Service Plan' && a.plan_name != "Re-Marriage") {
-        //     this.plans.push(a);
-        //   }
-        // }
       }
-      // for (let i = 0; i < this.plans.length; i++) {
-      //   if (this.plans[i].plan_type === "Self Service Plan") {
-      //     this.plansOnline.push(this.plans[i]);
-      //   }
-      //   else {
-      //     this.plansPersonlised.push(this.plans[i]);
-      //   }
-      // }
       console.log(this.plansOnline);
       console.log(this.plansPersonlised);
       this.spinner.hide();
