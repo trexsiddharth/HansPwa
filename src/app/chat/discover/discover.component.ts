@@ -16,7 +16,8 @@ import {
 } from 'ngx-spinner';
 import {
   Observable,
-  from
+  from,
+  BehaviorSubject
 } from 'rxjs';
 import {
   NotificationsService
@@ -35,8 +36,6 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { Location } from '@angular/common';
 import {  combineAll, shareReplay, tap } from 'rxjs/operators';
-import { ChatServiceService } from 'src/app/chat-service.service';
-import { LanguageService } from 'src/app/language.service';
 import { ProfileTable } from 'src/app/Model/Profile';
 
 
@@ -83,8 +82,8 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   title;
   section;
   authData;
-
-  seeMore$: Observable<ProfileTable[]>;
+  seeMoreSubject: BehaviorSubject<ProfileTable[]> = new BehaviorSubject<ProfileTable[]>([]);
+  seeMore$: Observable<ProfileTable[]> = this.seeMoreSubject.asObservable().pipe(shareReplay())
 
   constructor(private http: HttpClient, private ngxNotificationService: NgxNotificationService,
               private spinner: NgxSpinnerService,
@@ -97,12 +96,16 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // get discover data
-    this.seeMore$ = this.itemService.getSeeMoreData().pipe(
+    this.itemService.getSeeMoreData().pipe(
       shareReplay(),
       tap(items => {
           console.log('combined observables', items);
       })
-    );
+    ).subscribe(
+      (data: ProfileTable[]) => {
+          this.seeMoreSubject.next(data)
+      }
+    )
 
     // url for the particular section of history
     this.activatedRoute.paramMap.subscribe(
@@ -115,7 +118,6 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     );
 
     this.authData = JSON.parse(localStorage.getItem('authData'));
-
     // if stage is not null set it to null so that when we get back to chat section it opens todays profile only
     // back to chat from chat drawer options
     if (localStorage.getItem('stage')) {
@@ -339,9 +341,10 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   updateProfileList(index) {
     if (this.itemService.getCredits() && this.itemService.getCredits() !== '0') {
       // this.slideAndOpenProfile(this.profile[index], 1);
+      console.log("current data value", this.seeMoreSubject.getValue())
       localStorage.setItem('stage', '1');
-      this.router.navigateByUrl(`chat/open/open-profile/${this.profile[index].profile.id}`);
-      this.profile.splice(index, 1);
+      this.router.navigateByUrl(`chat/open/open-profile/${this.seeMoreSubject.getValue()[index].profile.id}`);
+      this.seeMoreSubject.getValue().splice(index, 1);
       // this.itemService.changeTab(1);
     } else {
       this.ngxNotificationService.error('You Dont have Enough Credits', '',
