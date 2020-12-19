@@ -117,13 +117,13 @@ export class MyProfilePhotoUploadComponent implements OnInit {
         const carouselUnapproved: any = JSON.parse(numUnapprove);
         if (carouselUnapproved[index]) {
           return (
-            'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+            'https://d2v6etlhrhtken.cloudfront.net/uploads/' +
             carouselUnapproved[index]
           );
         } else {
           if (carousel[index]) {
             return (
-              'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+              'https://d2v6etlhrhtken.cloudfront.net/uploads/' +
               carousel[index]
             );
           } else {
@@ -133,7 +133,7 @@ export class MyProfilePhotoUploadComponent implements OnInit {
       } else {
         if (carousel[index]) {
           return (
-            'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+            'https://d2v6etlhrhtken.cloudfront.net/uploads/' +
             carousel[index]
           );
         } else {
@@ -142,7 +142,7 @@ export class MyProfilePhotoUploadComponent implements OnInit {
         }
       }
     } else if (num2) {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
+      return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + num2;
     } else {
       return '../../../assets/plus.svg';
 

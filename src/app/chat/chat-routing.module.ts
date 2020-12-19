@@ -71,10 +71,10 @@ const routes: Routes = [
     path: 'discover/:section',
     component: DiscoverComponent
   },
-  // {
-  //   path: 'complete/complete',
-  //   component: CompletionFormsComponent
-  // }
+  {
+    path: 'complete/complete',
+    component: CompletionFormsComponent
+  }
 ];
 
 @NgModule({

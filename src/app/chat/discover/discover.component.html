@@ -17,13 +17,11 @@
     <section [ngClass]="{'ht-full': section,
      'paddingToSection' : section}">
         <div *ngFor="let item of seeMore$|async;let i = index">
-            <div *ngFor="let it of item;let ind = index">
                 <app-profile-item 
-                [itemName]="setName(it.profile.name)"
-                [listItem]="it" [authData]="authData"
-                [itemIndex]="ind" (actionTaken)="profileReAnswer($event)"></app-profile-item>
+                [itemName]="setName(item.profile.name)"
+                [listItem]="item" [authData]="authData"
+                [itemIndex]="i" (actionTaken)="profileReAnswer($event)"></app-profile-item>
                 <hr>
-            </div>
         </div>
 
         <mat-spinner *ngIf="smallSpinner" style="margin: 0px auto;" [diameter]="30"></mat-spinner>

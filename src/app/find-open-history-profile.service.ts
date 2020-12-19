@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { DailyWelcomePopupComponent } from './chat/daily-welcome-popup/daily-welcome-popup.component';
 import { BehaviorSubject, concat, forkJoin, merge, Observable } from 'rxjs';
 import { HistoryData, HistoryTable } from './Model/HistoryTable';
-import { catchError, combineAll, concatMap, map, retry, shareReplay, timeout } from 'rxjs/operators';
+import { catchError, combineAll, concatMap, filter, map, mapTo, retry, shareReplay, timeout } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProfileTable } from './Model/Profile';
 import { AuthTable } from './Model/AuthTable';
@@ -73,8 +73,10 @@ export class FindOpenHistoryProfileService {
     }
   }
 
-  getSeeMoreData(): any {
-    return forkJoin(this.getDiscoveryData(), this.getPersonalizedProfiles(), );
+  getSeeMoreData(): Observable<any> {
+    return forkJoin(this.getDiscoveryData(), this.getPersonalizedProfiles()).pipe(
+      map((t1) => t1[0].concat(t1[1]) )
+    );
   }
 
   getDiscoveryData(): Observable<ProfileTable[]> {
@@ -83,6 +85,7 @@ export class FindOpenHistoryProfileService {
     formData.append('is_lead', localStorage.getItem('is_lead'));
 
     return this.http.post<ProfileTable[]>('https://partner.hansmatrimony.com/api/getDiscoveryProfiles', formData).pipe(
+      map((items: ProfileTable[]) => items),
       timeout(7000), retry(3), catchError(
         err => {
           this.ngxNotificationService.error('Something Went Wrong, Try Again Later');

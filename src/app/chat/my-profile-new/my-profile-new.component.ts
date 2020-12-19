@@ -1183,13 +1183,13 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         //console.log(carouselUnapproved);
         if (carouselUnapproved[index]) {
           return (
-            'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+            'https://d2v6etlhrhtken.cloudfront.net/uploads/' +
             carouselUnapproved[index]
           );
         } else {
           if (carousel[index]) {
             return (
-              'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+              'https://d2v6etlhrhtken.cloudfront.net/uploads/' +
               carousel[index]
             );
           } else {
@@ -1199,7 +1199,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
       } else {
         if (carousel[index]) {
           return (
-            'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' +
+            'https://d2v6etlhrhtken.cloudfront.net/uploads/' +
             carousel[index]
           );
         } else {
@@ -1207,7 +1207,7 @@ export class MyProfileNewComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
     } else if (num2) {
-      return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num2;
+      return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + num2;
     } else {
       if (gen === 'Male') {
         return '../../assets/male_pic.png';

@@ -132,21 +132,23 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         this.plans = res;
         for (let i = 0; i < this.plans.length; i++) {
           if (this.plans[i].plan_type === 'Self Service Plan') {
-            if (this.authData) {
-              const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
-              if (totalIncome < 4) {
-                if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal'
-                  && (this.authData && this.authData.gender === 'Male')) {
-                  this.plansOnline.push(this.plans[i]);
-                } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal') {
-                  this.plansOnline.push(this.plans[i]);
-                }
-              } else {
-                if (this.plans[i].category_name !== 'Low income') {
-                  this.plansOnline.push(this.plans[i]);
-                }
-              }
-            }
+                    this.plansOnline.push(this.plans[i]);
+
+            // if (this.authData) {
+            //   const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
+            //   if (totalIncome < 4) {
+            //     if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal'
+            //       && (this.authData && this.authData.gender === 'Male')) {
+            //       this.plansOnline.push(this.plans[i]);
+            //     } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal') {
+            //       this.plansOnline.push(this.plans[i]);
+            //     }
+            //   } else {
+            //     if (this.plans[i].category_name !== 'Low income') {
+            //       this.plansOnline.push(this.plans[i]);
+            //     }
+            //   }
+            // }
             if (!localStorage.getItem('showRemarrigePlan')) {
               this.plansOnline = (this.plansOnline as []).filter((item: any) => !(item.plan_name as string).includes('Re-Marriage'));
             }
@@ -452,7 +454,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           return '../../assets/female_pic.png';
         }
       } else {
-        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + num;
       }
     } else {
       const carousel: object = JSON.parse(item.profile.carousel);
@@ -480,7 +482,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           return '../../assets/female_pic.png';
         }
       } else {
-        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + photo;
       }
     } else {
       const carousel: object = JSON.parse(carous);
@@ -489,7 +491,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       if (carousel[keys[index]].toString().match('jeevansathi')) {
         return carousel[keys[index]];
       } else {
-        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + carousel[keys[index]];
       }
     }
   }
