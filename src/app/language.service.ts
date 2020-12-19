@@ -172,7 +172,7 @@ export class LanguageService {
 
           //Liked Me
           this.likedMe.likedMe = 'मुझे पसंद किय़ा';
-          this.likedMe.viewedMe = 'मुझे देखा किय़ा';
+          this.likedMe.viewedMe = 'मुझे देखा गया';
           break;
 
         case 'english':
