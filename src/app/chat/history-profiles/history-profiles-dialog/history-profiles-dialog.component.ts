@@ -393,7 +393,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
           return '../../assets/female_pic.png';
         }
       } else {
-        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + photo;
       }
     } else {
       const carousel: object = JSON.parse(carous);
@@ -402,7 +402,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
       if (carousel[keys[index]] && carousel[keys[index]].toString().match('jeevansathi')) {
         return carousel[keys[index]];
       } else if (carousel[keys[index]]) {
-        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + carousel[keys[index]];
       } else {
         if (gen === 'Male') {
           return '../../assets/male_pic.png';
@@ -486,7 +486,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
-      this.setModal('https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]]);
+      this.setModal('https://d2v6etlhrhtken.cloudfront.net/uploads/' + carousel[keys[index]]);
     } else if (src && src !== '') {
       this.setModal(src);
     }

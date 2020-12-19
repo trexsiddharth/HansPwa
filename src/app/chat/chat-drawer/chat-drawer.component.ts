@@ -889,7 +889,7 @@ export class ChatDrawerComponent implements OnInit {
           }
           if (data.profile && data.profile.photo) {
             console.log(data.profile.photo);
-            this.userpic = 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + String(data.profile.photo);
+            this.userpic = 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + String(data.profile.photo);
             this.itemService.setPhotoStatus(true);
           }
         },

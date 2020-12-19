@@ -141,7 +141,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
           return '../../assets/female_pic.png';
         }
       } else {
-        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + num;
       }
     } else {
       const carousel: object = JSON.parse(item.profile.carousel);

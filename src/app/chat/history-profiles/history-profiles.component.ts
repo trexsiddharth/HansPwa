@@ -454,7 +454,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           return '../../assets/female_pic.png';
         }
       } else {
-        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + num;
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + num;
       }
     } else {
       const carousel: object = JSON.parse(item.profile.carousel);
@@ -482,7 +482,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
           return '../../assets/female_pic.png';
         }
       } else {
-        return 'https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + photo;
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + photo;
       }
     } else {
       const carousel: object = JSON.parse(carous);
@@ -491,7 +491,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       if (carousel[keys[index]].toString().match('jeevansathi')) {
         return carousel[keys[index]];
       } else {
-        return 'http://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]];
+        return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + carousel[keys[index]];
       }
     }
   }

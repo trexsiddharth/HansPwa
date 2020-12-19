@@ -905,7 +905,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       const carousel: object = JSON.parse(carous);
       const keys = Object.keys(carousel);
       // console.log(carousel[index]);
-      this.setModal('https://hansmatrimony.s3.ap-south-1.amazonaws.com/uploads/' + carousel[keys[index]]);
+      this.setModal('https://d2v6etlhrhtken.cloudfront.net/uploads/' + carousel[keys[index]]);
     } else if (src && src !== '') {
       this.setModal(src);
     }
