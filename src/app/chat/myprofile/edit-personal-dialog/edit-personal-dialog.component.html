@@ -53,11 +53,25 @@
             </select>
           </div>
         </div> -->
-        <div class="col-12">
+        <!-- <div class="col-12">
           <h6>Locality:</h6>
           <input type="text" class="form-control" id="Locality" [autoCompleteOptions]="autoComplete" matValidateAddress
             matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete"
             (change)="placeChangedLocality()" formControlName="Locality" />
+        </div> -->
+        <div class='col-12'>
+          <mat-form-field class="full-width fieldFit" appearance="standard">
+            <mat-label>Locality:</mat-label>
+            <input type="text" matInput id="Locality" (change)="placeChanged('Locality')" formControlName="Locality"
+              [matAutocomplete]="Locality">
+            <mat-autocomplete (optionSelected)='CityChanged("locality",$event.option.value)' autoActiveFirstOption
+              #Locality="matAutocomplete">
+              <mat-option *ngFor="let cities of Cities | async" [value]="cities" required>
+                {{cities}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error>*this field is required</mat-error>
+          </mat-form-field>
         </div>
         <div class="row information" style="width: 100%!important;margin: 5px 5px">
           <div class="col-6">
@@ -126,16 +140,30 @@
           <h6>Additional Qualifications:</h6>
           <input type="text" class="form-control" formControlName="Additional">
         </div>
-        <div class="col-12">
+        <!-- <div class="col-12">
           <h6>Working City:</h6>
           <input type="text" class="form-control" id="WorkingCity" matValidateAddress matGoogleMapsAutocomplete
             #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedWorkingcity()"
             formControlName="WorkingCity" />
+        </div> -->
+        <div class='col-12'>
+          <mat-form-field class="full-width fieldFit" appearance="standard">
+            <mat-label>Working City:</mat-label>
+            <input type="text" matInput id="WorkingCity" (change)="placeChanged('WorkingCity')"
+              formControlName="WorkingCity" [matAutocomplete]="WorkingCity">
+            <mat-autocomplete (optionSelected)='CityChanged("workingCity",$event.option.value)' autoActiveFirstOption
+              #WorkingCity="matAutocomplete">
+              <mat-option *ngFor="let cities of Cities | async" [value]="cities" required>
+                {{cities}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error>*this field is required</mat-error>
+          </mat-form-field>
         </div>
         <div class="row information">
           <div class="col-6">
             <h6>Occupation:</h6>
-            <select #relation class="form-control" formControlName="Occupation" >
+            <select #relation class="form-control" formControlName="Occupation">
               <option *ngFor="let  option of Occupation" [value]="option">
                 {{option}}
               </option>
@@ -164,7 +192,7 @@
 
           <div class="col-6">
             <h6>Annual Income In Lakhs:</h6>
-            <input type="number" class="form-control" formControlName="AnnualIncome" >
+            <input type="number" class="form-control" formControlName="AnnualIncome">
           </div>
         </div>
       </div>
@@ -178,11 +206,25 @@
             <option value="Anshik Manglik">Anshik Manglik</option>
           </select>
         </div>
-        <div class="col-12">
+        <!-- <div class="col-12">
           <h6>Birth Place</h6>
           <input type="text" class="form-control" id="BirthPlace" matValidateAddress matGoogleMapsAutocomplete
             #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChangedBirthPlace()" required
             formControlName="BirthPlace" />
+        </div> -->
+        <div class='col-12'>
+          <mat-form-field class="full-width fieldFit" appearance="standard">
+            <mat-label>Birth Place:</mat-label>
+            <input type="text" matInput id="BirthPlace" (change)="placeChanged('BirthPlace')"
+              formControlName="BirthPlace" [matAutocomplete]="BirthPlace">
+            <mat-autocomplete (optionSelected)='CityChanged("birthPlace",$event.option.value)' autoActiveFirstOption
+              #BirthPlace="matAutocomplete">
+              <mat-option *ngFor="let cities of Cities | async" [value]="cities" required>
+                {{cities}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error>*this field is required</mat-error>
+          </mat-form-field>
         </div>
         <div class="col-12">
           <h6>Time of Birth</h6>

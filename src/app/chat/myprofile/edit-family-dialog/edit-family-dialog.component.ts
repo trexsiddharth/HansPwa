@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { LanguageService } from 'src/app/language.service';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { startWith, map, shareReplay, debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-family-dialog',
@@ -21,12 +23,17 @@ export class EditFamilyDialogComponent implements OnInit {
   @ViewChild('familyForm', { static: false }) familyForm: NgForm;
   city;
   cityLocation;
-
+  familyLivingIn;
+  timer;
   autoComplete = {
     strictBounds: false,
     type: 'geocode',
     fields: ['name']
   };
+
+  /** Subject that emits when the component has been destroyed. */
+  CitySubject = new BehaviorSubject<string[]>([]);
+  Cities: Observable<any[]> = this.CitySubject.asObservable().pipe(shareReplay());
 
   constructor(private http: HttpClient,
     public languageService: LanguageService,
@@ -38,11 +45,50 @@ export class EditFamilyDialogComponent implements OnInit {
   ngOnInit() {
     this.familyData = this.data.familyDetails;
   }
+  private CityFilter(value) {
+    if (value) {
+      this.http.get<string[]>(`https://partner.hansmatrimony.com/api/getCities?search_city=${value}`)
+        .subscribe(
+          (response: string[]) => {
+            console.log(response);
+            this.CitySubject.next(response);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+    }
+  }
+  placeChanged(key) {
+    setTimeout(() => {
+      if (!this[key]) {
+        this.familyData.city = null;
+        this.ngxNotificationService.error('Select Valid Family Lived City');
+      }
+
+    }, 500);
+  }
+  onChange(key, event) {
+    console.log(this, event)
+    this.familyData.city = event;
+    if (this[key]) {
+      this[key] = null
+    }
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.CityFilter(event)
+    }, 400)
+  }
+  CityChanged(key, value) {
+    console.log('selected living city', value, key);
+    this[key] = value;
+  }
   goBack() {
     this.dialogRef.close();
   }
   placeChangedFamily() {
     const place: HTMLInputElement = document.querySelector('#familyLivingIn');
+    console.log(this)
     setTimeout(() => {
       console.log(place.value);
       this.familyData.city = place.value;
@@ -50,7 +96,10 @@ export class EditFamilyDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.familyForm);
+    console.log(this.familyForm, this.familyLivingIn);
+    if (!this.familyLivingIn) {
+      return;
+    }
     const familyDataForm = new FormData();
     familyDataForm.append('identity_number', this.familyData.identity_number);
     familyDataForm.append('id', this.familyData.id);

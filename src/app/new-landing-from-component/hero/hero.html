@@ -1,121 +1,138 @@
 <div @fade class="hero">
-    
+
     <div id="vectors">
-    <img src="../../../assets/hero/VectorBottom.svg" alt="hansmatrimony-vector-1" class="vector-bottom">
-    <img src="../../../assets/hero/stripes.svg" alt="hansmatrimony-vector-2" class="stripes">
-    <img id="o" src="../../../assets/hero/stripes2.svg" alt="hansmatrimony-vector-3" class="stripes2">
-    <!-- <img id="t" src="../../../assets/hero/stripes3.svg" alt="hansmatrimony-vector-4" class="stripes3"> -->
+        <img src="../../../assets/hero/VectorBottom.svg" alt="hansmatrimony-vector-1" class="vector-bottom">
+        <img src="../../../assets/hero/stripes.svg" alt="hansmatrimony-vector-2" class="stripes">
+        <img id="o" src="../../../assets/hero/stripes2.svg" alt="hansmatrimony-vector-3" class="stripes2">
+        <!-- <img id="t" src="../../../assets/hero/stripes3.svg" alt="hansmatrimony-vector-4" class="stripes3"> -->
     </div>
-          <div class="container">
-              <div class="row">
-                  <div *ngIf="!smallScreen" class="col-6">
-                    <div class="content">
-                        <h2>Introducing <span style="font-weight:bold">cultured</span> families, <span style="font-weight:bold">verified</span> from <br> <span style="font-weight:bold">50+ Temples</span>
-                        </h2>
-                        
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p>Searching a</p>
-                                    <div class="d-flex button-holder">
-                                        <button (click)="groomToggle()" class="btn" [class.groom-btn]="groom" [class.bride-btn]="bride" >Groom</button>
-                                        <button (click)="brideToggle()" class="btn" [class.groom-btn]="bride" [class.bride-btn]="groom">Bride</button>
-                                    </div>
-                                 </div>
-                                <div class="col-6">
-                                    <p>For</p>
-                                    <div class="d-flex">
-                                       <div class="dr-bt">
+    <div class="container">
+        <div class="row">
+            <div *ngIf="!smallScreen" class="col-6">
+                <div class="content">
+                    <h2>Introducing <span style="font-weight:bold">cultured</span> families, <span
+                            style="font-weight:bold">verified</span> from <br> <span style="font-weight:bold">50+
+                            Temples</span>
+                    </h2>
+
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Searching a</p>
+                                <div class="d-flex button-holder">
+                                    <button (click)="groomToggle()" class="btn" [class.groom-btn]="groom"
+                                        [class.bride-btn]="bride">Groom</button>
+                                    <button (click)="brideToggle()" class="btn" [class.groom-btn]="bride"
+                                        [class.bride-btn]="groom">Bride</button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <p>For</p>
+                                <div class="d-flex">
+                                    <div class="dr-bt">
                                         <button type="button" class="myself-btn">{{name}}</button>
-                                        <div class="btn-group dropup" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                                        <div class="btn-group dropup" ngbDropdown role="group"
+                                            aria-label="Button group with nested dropdown">
                                             <button class="down" ngbDropdownToggle></button>
                                             <div class="dropdown-menu" ngbDropdownMenu>
-                                            <button #myself (click)="mySelf(myself.id)" id="myself" ngbDropdownItem>Myself</button>
-                                            <button *ngIf="groom" #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
-                                            <button *ngIf="bride" #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
-                                            <button  *ngIf="bride" #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
-                                            <button *ngIf="groom" #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
-                                            <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
+                                                <button #myself (click)="mySelf(myself.id)" id="myself"
+                                                    ngbDropdownItem>Myself</button>
+                                                <button *ngIf="groom" #daughter (click)="mySelf(daughter.id)"
+                                                    id="daughter" ngbDropdownItem>Daughter</button>
+                                                <button *ngIf="bride" #son (click)="mySelf(son.id)" id="Son"
+                                                    ngbDropdownItem>Son</button>
+                                                <button *ngIf="bride" #brother (click)="mySelf(brother.id)" id="brother"
+                                                    ngbDropdownItem>Brother</button>
+                                                <button *ngIf="groom" #sister (click)="mySelf(sister.id)" id="sister"
+                                                    ngbDropdownItem>Sister</button>
+                                                <button #other (click)="mySelf(other.id)" id="other"
+                                                    ngbDropdownItem>Other</button>
                                             </div>
                                         </div>
-                                       </div>
+                                    </div>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <button 
-                            (click)="goToCompatibility()"
-                            routerLinkActive="router-link-active"
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button (click)="goToCompatibility()" routerLinkActive="router-link-active"
                             class="register-btn">Register For Free</button>
-                        </div>
                     </div>
-                  </div>
-                  <div *ngIf="!smallScreen" class="col-md-6">
-                      <img class="illustration" src="../../../assets/hero/illsvg.png" alt="hansmatrimony-Illustration-big">
-                  </div>
-                </div> 
                 </div>
-                  <div class="mobileScreen" >
-                    <div *ngIf="smallScreen" >
-                        <div class="d-flex justify-content-center">
-                            <img class="illustration" src="../../../assets/hero/illsvg.png" alt="hansmatrimony-Illustration-big">
-                        </div>
-                    </div>
-                      <div *ngIf="smallScreen">
-                        <div>
-                            <div class="d-flex justify-content-center">
-                                <h2>Introducing <span style="font-weight:bold">cultured</span> families, <span style="font-weight:bold"> <br>  verified</span> from <span style="font-weight:bold">50+ Temples</span>
-                                </h2>
+            </div>
+            <div *ngIf="!smallScreen" class="col-md-6">
+                <img class="illustration" src="../../../assets/hero/illsvg.png" alt="hansmatrimony-Illustration-big">
+            </div>
+        </div>
+    </div>
+    <div class="mobileScreen">
+        <div *ngIf="smallScreen">
+            <div class="d-flex justify-content-center">
+                <img class="illustration" src="../../../assets/hero/illsvg.png" alt="hansmatrimony-Illustration-big">
+            </div>
+        </div>
+        <div *ngIf="smallScreen">
+            <div>
+                <div class="d-flex justify-content-center">
+                    <h2>Introducing <span style="font-weight:bold">cultured</span> families, <span
+                            style="font-weight:bold"> <br> verified</span> from <span style="font-weight:bold">50+
+                            Temples</span>
+                    </h2>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-5">
+                                <p>Searching a</p>
+                                <div class="d-flex btn-holder">
+                                    <button (click)="groomToggle()" class="btn" [class.groom-btn]="groom">Groom</button>
+                                    <button (click)="brideToggle()" class="btn" [class.groom-btn]="bride">Bride</button>
+                                </div>
                             </div>
-                            <hr>
-                            <div class="d-flex justify-content-center">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-5">
-                                            <p>Searching a</p>
-                                            <div class="d-flex btn-holder">
-                                                <button (click)="groomToggle()" class="btn" [class.groom-btn]="groom">Groom</button>
-                                                <button (click)="brideToggle()" class="btn" [class.groom-btn]="bride">Bride</button>
+                            <div class="col-6">
+
+                                <p id="paragraph">For</p>
+
+                                <div class="d-flex justify-content-center">
+
+                                    <div class="dr-bt">
+                                        <button type="button" class="myself-btn">{{name}}</button>
+                                        <div class="btn-group" placement="top" ngbDropdown role="group"
+                                            aria-label="Button group with nested dropdown">
+                                            <button class="down" ngbDropdownToggle></button>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <button #myself (click)="mySelf(myself.id)" id="myself"
+                                                    ngbDropdownItem>Myself</button>
+                                                <button #daughter (click)="mySelf(daughter.id)" id="daughter"
+                                                    ngbDropdownItem>Daughter</button>
+                                                <button #son (click)="mySelf(son.id)" id="Son"
+                                                    ngbDropdownItem>Son</button>
+                                                <button #brother (click)="mySelf(brother.id)" id="brother"
+                                                    ngbDropdownItem>Brother</button>
+                                                <button #sister (click)="mySelf(sister.id)" id="sister"
+                                                    ngbDropdownItem>Sister</button>
+                                                <button #other (click)="mySelf(other.id)" id="other"
+                                                    ngbDropdownItem>Other</button>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            
-                                                <p id="paragraph" >For</p>
-                                                                                  
-                                            <div class="d-flex justify-content-center">
-                                                
-                                                <div class="dr-bt">
-                                                    <button type="button" class="myself-btn">{{name}}</button>
-                                                        <div class="btn-group" placement="top" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-                                                            <button class="down" ngbDropdownToggle></button>
-                                                            <div  class="dropdown-menu" ngbDropdownMenu>
-                                                            <button #myself (click)="mySelf(myself.id)" id="myself" ngbDropdownItem>Myself</button>
-                                                            <button #daughter (click)="mySelf(daughter.id)" id="daughter" ngbDropdownItem>Daughter</button>
-                                                            <button #son (click)="mySelf(son.id)" id="Son" ngbDropdownItem>Son</button>
-                                                            <button #brother (click)="mySelf(brother.id)" id="brother" ngbDropdownItem>Brother</button>
-                                                            <button #sister (click)="mySelf(sister.id)" id="sister" ngbDropdownItem>Sister</button>
-                                                            <button #other (click)="mySelf(other.id)" id="other" ngbDropdownItem>Other</button>
-                                                            </div>
-                                                        </div>
-                                                </div>
-        
-                                            </div>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button (click)="goToCompatibility()"
-                                    routerLinkActive="router-link-active" 
-                                    class="register-btn">Register For Free</button>
+
                                 </div>
                             </div>
-                            </div>
-                      </div>
-                  </div>
-                  </div>
-         
-     
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button (click)="goToCompatibility()" routerLinkActive="router-link-active"
+                                class="register-btn">Register For Free</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

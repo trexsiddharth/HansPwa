@@ -20,13 +20,13 @@ declare var FB: any;
 export class MyProfilePhotoUploadComponent implements OnInit {
 
   constructor(public router: Router,
-              private activatedRoute: ActivatedRoute,
-              public spinner: NgxSpinnerService,
-              public http: HttpClient,
-              private chatService: ChatServiceService,
-              public ngxNotificationService: NgxNotificationService,
-              public breakPointObserver: BreakpointObserver,
-              private dialog: MatDialog) { }
+    private activatedRoute: ActivatedRoute,
+    public spinner: NgxSpinnerService,
+    public http: HttpClient,
+    private chatService: ChatServiceService,
+    public ngxNotificationService: NgxNotificationService,
+    public breakPointObserver: BreakpointObserver,
+    private dialog: MatDialog) { }
   public message: string;
   userId: any;
   userIsLead: any;
@@ -37,16 +37,16 @@ export class MyProfilePhotoUploadComponent implements OnInit {
   backimagePath;
   private fetchedFbProfilePic = null;
 
-    // for uploading facebook foto
-    base64TrimmedURL: string;
-    base64DefaultURL: string;
-    generatedImage: string;
-    facebookImageFile: File;
-    facebookImageFile2: File;
-    facebookImageFile3: File;
-    facebookImageFile4: File;
-    facebookImageFile5: File;
-    facebookImageFile6: File;
+  // for uploading facebook foto
+  base64TrimmedURL: string;
+  base64DefaultURL: string;
+  generatedImage: string;
+  facebookImageFile: File;
+  facebookImageFile2: File;
+  facebookImageFile3: File;
+  facebookImageFile4: File;
+  facebookImageFile5: File;
+  facebookImageFile6: File;
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((routeData: any) => {
@@ -66,11 +66,11 @@ export class MyProfilePhotoUploadComponent implements OnInit {
   }
 
   deletePhoto(index: number) {
-      const currentImg = this.getProfilesPhotoName(this.personalProfileData.carousel,
-        this.personalProfileData.unapprove_carousel,
-        this.personalProfileData.photo, index);
+    const currentImg = this.getProfilesPhotoName(this.personalProfileData.carousel,
+      this.personalProfileData.unapprove_carousel,
+      this.personalProfileData.photo, index);
 
-      if (currentImg) {
+    if (currentImg) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.hasBackdrop = true;
       this.breakPointObserver.observe([
@@ -95,12 +95,12 @@ export class MyProfilePhotoUploadComponent implements OnInit {
       const dialogRef = this.dialog.open(AskDeleteDialogComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(
         (response: any) => {
-            if (response) {
-              this.getUserProfileData(true);
-            }
+          if (response) {
+            this.getUserProfileData(true);
+          }
         }
       );
-        }
+    }
   }
 
   getProfilesPhoto(
@@ -254,21 +254,21 @@ export class MyProfilePhotoUploadComponent implements OnInit {
       );
   }
   getUserProfileData(updateData: boolean = false) {
-      this.spinner.show();
-      this.chatService.getUserProfile(updateData)
-        .subscribe(
-          (data: any) => {
-            console.log(data);
-            this.personalProfileData = data.profile ? data.profile : null;
-            this.getCarouselCount();
-            this.spinner.hide();
-          },
-          (error: any) => {
-            this.spinner.hide();
-            console.log(error);
-            this.ngxNotificationService.error('Something Went Wrong');
-          }
-        );
+    this.spinner.show();
+    this.chatService.getUserProfile(updateData)
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          this.personalProfileData = data.profile ? data.profile : null;
+          this.getCarouselCount();
+          this.spinner.hide();
+        },
+        (error: any) => {
+          this.spinner.hide();
+          console.log(error);
+          this.ngxNotificationService.error('Something Went Wrong');
+        }
+      );
   }
   openPhotoUploadCrop(index: number) {
     const dialogConfig = new MatDialogConfig();
@@ -301,143 +301,143 @@ export class MyProfilePhotoUploadComponent implements OnInit {
     });
   }
 
-    // upload facebook image by first downloading it and then uploading it
-    getImage(imageUrl: string, index) {
-      this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
-        this.base64TrimmedURL = base64Data;
-        this.createBlobImageFileAndShow(index);
-      });
-    }
-  
-    getBase64ImageFromURL(url: string): Observable<string> {
-      return new Observable((observer: Observer<string>) => {
-        // create an image object
-        const img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.src = url;
-        if (!img.complete) {
-          // This will call another method that will create image from url
-          img.onload = () => {
-            observer.next(this.getBase64Image(img));
-            observer.complete();
-          };
-          img.onerror = err => {
-            observer.error(err);
-          };
-        } else {
+  // upload facebook image by first downloading it and then uploading it
+  getImage(imageUrl: string, index) {
+    this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
+      this.base64TrimmedURL = base64Data;
+      this.createBlobImageFileAndShow(index);
+    });
+  }
+
+  getBase64ImageFromURL(url: string): Observable<string> {
+    return new Observable((observer: Observer<string>) => {
+      // create an image object
+      const img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.src = url;
+      if (!img.complete) {
+        // This will call another method that will create image from url
+        img.onload = () => {
           observer.next(this.getBase64Image(img));
           observer.complete();
-        }
-      });
-    }
-  
-    getBase64Image(img: HTMLImageElement): string {
-      // We create a HTML canvas object that will create a 2d image
-      let canvas: HTMLCanvasElement = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-      // This will draw image
-      ctx.drawImage(img, 0, 0);
-      // Convert the drawn image to Data URL
-      const dataURL: string = canvas.toDataURL('image/png');
-      this.base64DefaultURL = dataURL;
-      return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
-    }
-    createBlobImageFileAndShow(index): void {
-      this.dataURItoBlob(this.base64TrimmedURL).subscribe((blob: Blob) => {
-        const imageBlob: Blob = blob;
-        const imageName: string = this.generateName();
-  
-        // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
-        // our carousel index basically starts from 1 and not 0
-        switch (index) {
-          case 1:
-            this.facebookImageFile = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile);
-            setTimeout(() => {
-              this.uploadPhoto(this.facebookImageFile, index);
-            }, 200);
-            break;
-          case 2:
-            this.facebookImageFile2 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile2);
-            setTimeout(() => {
-              this.uploadPhoto(this.facebookImageFile2, index);
-            }, 200);
-            break;
-          case 3:
-            this.facebookImageFile3 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile3);
-            setTimeout(() => {
-              this.uploadPhoto(this.facebookImageFile3, index);
-            }, 200);
-            break;
-          case 4:
-            this.facebookImageFile4 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile4);
-            setTimeout(() => {
-              this.uploadPhoto(this.facebookImageFile4, index);
-            }, 200);
-            break;
-          case 5:
-            this.facebookImageFile5 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile5);
-            setTimeout(() => {
-              this.uploadPhoto(this.facebookImageFile5, index);
-            }, 200);
-            break;
-          case 6:
-            this.facebookImageFile6 = new File([imageBlob], imageName, {
-              type: 'image/jpeg'
-            });
-            this.generatedImage = window.URL.createObjectURL(this.facebookImageFile6);
-            setTimeout(() => {
-              this.uploadPhoto(this.facebookImageFile6, index);
-            }, 200);
-            break;
-  
-          default:
-            break;
-        }
-      });
-    }
-    dataURItoBlob(dataURI: string): Observable<Blob> {
-      return new Observable((observer: Observer<Blob>) => {
-        const byteString: string = window.atob(dataURI);
-        const arrayBuffer: ArrayBuffer = new ArrayBuffer(byteString.length);
-        const int8Array: Uint8Array = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) {
-          int8Array[i] = byteString.charCodeAt(i);
-        }
-        const blob = new Blob([int8Array], { type: 'image/jpeg' });
-        observer.next(blob);
+        };
+        img.onerror = err => {
+          observer.error(err);
+        };
+      } else {
+        observer.next(this.getBase64Image(img));
         observer.complete();
-      });
-    }
-    generateName(): string {
-      const date: number = new Date().valueOf();
-      let text = '';
-      const possibleText =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      for (let i = 0; i < 5; i++) {
-        text += possibleText.charAt(
-          Math.floor(Math.random() * possibleText.length)
-        );
       }
-      // Replace extension according to your media type like this
-      return date + '.' + text + '.jpeg';
+    });
+  }
+
+  getBase64Image(img: HTMLImageElement): string {
+    // We create a HTML canvas object that will create a 2d image
+    let canvas: HTMLCanvasElement = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+    // This will draw image
+    ctx.drawImage(img, 0, 0);
+    // Convert the drawn image to Data URL
+    const dataURL: string = canvas.toDataURL('image/png');
+    this.base64DefaultURL = dataURL;
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+  }
+  createBlobImageFileAndShow(index): void {
+    this.dataURItoBlob(this.base64TrimmedURL).subscribe((blob: Blob) => {
+      const imageBlob: Blob = blob;
+      const imageName: string = this.generateName();
+
+      // setting and uploading facebook pics..cant be made dynamic cause blob take certain time to create file path
+      // our carousel index basically starts from 1 and not 0
+      switch (index) {
+        case 1:
+          this.facebookImageFile = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile, index);
+          }, 200);
+          break;
+        case 2:
+          this.facebookImageFile2 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile2);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile2, index);
+          }, 200);
+          break;
+        case 3:
+          this.facebookImageFile3 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile3);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile3, index);
+          }, 200);
+          break;
+        case 4:
+          this.facebookImageFile4 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile4);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile4, index);
+          }, 200);
+          break;
+        case 5:
+          this.facebookImageFile5 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile5);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile5, index);
+          }, 200);
+          break;
+        case 6:
+          this.facebookImageFile6 = new File([imageBlob], imageName, {
+            type: 'image/jpeg'
+          });
+          this.generatedImage = window.URL.createObjectURL(this.facebookImageFile6);
+          setTimeout(() => {
+            this.uploadPhoto(this.facebookImageFile6, index);
+          }, 200);
+          break;
+
+        default:
+          break;
+      }
+    });
+  }
+  dataURItoBlob(dataURI: string): Observable<Blob> {
+    return new Observable((observer: Observer<Blob>) => {
+      const byteString: string = window.atob(dataURI);
+      const arrayBuffer: ArrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array: Uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: 'image/jpeg' });
+      observer.next(blob);
+      observer.complete();
+    });
+  }
+  generateName(): string {
+    const date: number = new Date().valueOf();
+    let text = '';
+    const possibleText =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 5; i++) {
+      text += possibleText.charAt(
+        Math.floor(Math.random() * possibleText.length)
+      );
     }
+    // Replace extension according to your media type like this
+    return date + '.' + text + '.jpeg';
+  }
 
 
   checKAndUploadFromFacebook() {
@@ -447,8 +447,8 @@ export class MyProfilePhotoUploadComponent implements OnInit {
     });
   }
 
-   //  get facebook login status
-   statusChangeCallback(value) {
+  //  get facebook login status
+  statusChangeCallback(value) {
     console.log(`value is ${value.status}`);
 
     if (value.status !== 'connected') {
@@ -542,6 +542,6 @@ export class MyProfilePhotoUploadComponent implements OnInit {
 
     if (!currentImg) {
       this.getImage(url, index);
-      }
+    }
   }
 }
