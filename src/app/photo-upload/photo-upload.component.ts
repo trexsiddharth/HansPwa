@@ -64,6 +64,7 @@ export class PhotoUploadComponent implements OnInit {
 
 
 
+
   FamilyOptions: Observable < string[] > ;
   constructor(public dialog: MatDialog,
               private route: ActivatedRoute,
@@ -79,6 +80,17 @@ export class PhotoUploadComponent implements OnInit {
         if (route) {
         if (route.params.mobile) {
             localStorage.setItem('mobile_number', route.params.mobile);
+            this.checkUrl(route.params.mobile).subscribe(
+              (data: any) => {
+                if(data.registered == 1) {
+                  localStorage.setItem('authData', JSON.stringify(data))
+                  this.id = data.id;
+                  this.isLead = data.is_lead;
+                } else {
+                  this.router.navigateByUrl('fourReg')
+                }
+              }
+            )
           }
         if (route.params.id) {
           this.id = route.params.id;
@@ -240,6 +252,16 @@ export class PhotoUploadComponent implements OnInit {
   gtag_report_conversion() {
     (window as any).gtag('event', 'conversion', { send_to: 'AW-682592773/Zon_CJGftrgBEIWUvsUC'});
     return false;
+  }
+
+  checkUrl(mobile: string): Observable<any> {
+    if (localStorage.getItem('fcm_app')) {
+      // tslint:disable-next-line: max-line-length
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', { params: { ['phone_number']: mobile } });
+    } else {
+      // tslint:disable-next-line: max-line-length
+      return this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', { params: { ['phone_number']: mobile} });
+    }
   }
 }
 
