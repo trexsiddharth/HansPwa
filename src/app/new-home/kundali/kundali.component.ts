@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NewHomeService } from '../new-home.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-kundali',
@@ -24,7 +25,8 @@ export class KundaliTwoComponent implements OnInit {
   HTMLResponse: any;
   constructor(private form_builder: FormBuilder, private http: HttpClient,
     private sanitizer: DomSanitizer,
-    public homeService: NewHomeService) {
+    public homeService: NewHomeService,
+    private route: ActivatedRoute) {
     this.kundaliForm = this.form_builder.group({
       BoyBirthDate: ['', Validators.required],
       BoyBirthMonth: ['', Validators.required],
@@ -56,6 +58,32 @@ export class KundaliTwoComponent implements OnInit {
         }
       }, 500);
     }
+
+    this.route.paramMap.subscribe(
+      (param: any) => {
+        if (param == null) {
+          return
+        }
+        this.kundaliForm.setValue({
+          BoyBirthDate: param.params.bDate.split('-')[2],
+          BoyBirthMonth: param.params.bDate.split('-')[1],
+          BoyBirthYear: param.params.bDate.split('-')[0],
+          GirlBirthDate: param.params.gDate.split('-')[2],
+          GirlBirthMonth: param.params.gDate.split('-')[1],
+          GirlBirthYear: param.params.gDate.split('-')[0],
+          BoyBirthTime: param.params.bTime,
+          GirlBirthTime: param.params.gTime,
+          BoyBirthPlace: param.params.bPlace,
+          GirlBirthPlace: param.params.gPlace,
+          BoyName: param.params.bName,
+          GirlName: param.params.gName,
+        })
+        
+        document.querySelector<HTMLButtonElement>('#viewButton').click();
+      }
+    )
+
+
     this.kundaliForm.valueChanges.subscribe(() => {
       this.showContinueBtn.next(true);
     })
@@ -131,7 +159,7 @@ export class KundaliTwoComponent implements OnInit {
           }, 1000);
         }
       });
-    }
+    } 
     else {
       console.log('form invalid');
     }

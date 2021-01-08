@@ -84,6 +84,7 @@ const routes: Routes = [
   { path: 'termsCondition', component: TermsAndConditionsComponent },
   { path: 'checkout', component: CustomCheckoutComponent },
   { path: 'kundaliMatching', component: KundaliTwoComponent },
+  { path: 'kundaliMatching/:bName/:bDate/:bPlace/:bTime/:gName/:gDate/:gPlace/:gTime', component: KundaliTwoComponent },
   {
     path: 'picUpload', loadChildren: () => import('./photo-upload/photo-upload.module')
       .then(m => m.PhotoUploadModule)
