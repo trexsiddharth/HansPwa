@@ -66,10 +66,10 @@ export class KundaliTwoComponent implements OnInit {
         }
         this.kundaliForm.setValue({
           BoyBirthDate: param.params.bDate.split('-')[2],
-          BoyBirthMonth: param.params.bDate.split('-')[1],
+          BoyBirthMonth: this.month[Number(param.params.bDate.split('-')[1]) - 1],
           BoyBirthYear: param.params.bDate.split('-')[0],
           GirlBirthDate: param.params.gDate.split('-')[2],
-          GirlBirthMonth: param.params.gDate.split('-')[1],
+          GirlBirthMonth: this.month[Number(param.params.gDate.split('-')[1]) - 1],
           GirlBirthYear: param.params.gDate.split('-')[0],
           BoyBirthTime: param.params.bTime,
           GirlBirthTime: param.params.gTime,
