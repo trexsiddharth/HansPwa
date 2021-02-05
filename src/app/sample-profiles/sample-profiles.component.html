@@ -1,0 +1,49 @@
+<ng-container>
+    <main>
+        <section class="topSection">
+            <div class="centerImages">
+                <div class="centerIt">
+                    <div class="image1"></div>
+                    <div class="image2"></div>
+                    <div class="image3"></div>
+                </div>
+                <div>
+                    <h3 class="hansTag">
+                        <b>Hans Matrimony</b>
+                    </h3>
+                </div>
+            </div>
+            <div class="bottomText">
+                    <p class="bottomText1">
+                        <b>Suggested Profiles</b>
+                    </p>
+                   <p class="bottomText2">
+                       Here are some profiles that you might like
+                   </p>
+            </div>
+        </section>
+        <section>
+            <div *ngFor="let item of profilesList$|async">
+                <div class="item-section">
+                    <app-profile-item [profile]="item"></app-profile-item>
+                </div>
+            </div>
+        </section>
+
+        <div>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+    
+              <!-- The Close Button -->
+              <a id="closeModal">&times;</a>
+    
+              <!-- Modal Content (The Image) -->
+              <img class="modal-content" id="img01">
+    
+              <!-- Modal Caption (Image Text) -->
+              <h4 id="caption"></h4>
+            </div>
+    
+          </div>
+    </main>
+</ng-container>

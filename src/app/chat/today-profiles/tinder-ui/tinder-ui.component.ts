@@ -2,8 +2,6 @@ import { Component, Input, ViewChildren, QueryList, ElementRef, Renderer2, Outpu
 import { ApiwhaAutoreply } from './../profile-today-model';
 import { FindOpenHistoryProfileService } from '../../../find-open-history-profile.service';
 import { LanguageService } from 'src/app/language.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { ChatServiceService } from 'src/app/chat-service.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
@@ -482,7 +480,7 @@ export class TinderUiComponent implements OnInit, AfterViewInit, OnDestroy {
     modal.style.display = 'block';
     modal.style.zIndex = '9999999999';
     modalImg.setAttribute('src', image);
-    captionText.innerHTML = name;
+    // captionText.innerHTML = name;
     // Get the <span> element that closes the modal
     const span = document.getElementById('closeModal');
     // When the user clicks on <span> (x), close the modal

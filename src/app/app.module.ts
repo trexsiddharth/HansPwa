@@ -66,6 +66,8 @@ import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.com
 import { SidebarModule } from 'ng-sidebar';
 import { UnderstandErrorHandler } from './chat/helper/UnderstandErrorHandler';
 import { PaymentPopupComponent } from './payment-popup/payment-popup.component';
+import { SampleProfilesComponent } from './sample-profiles/sample-profiles.component';
+import { ProfileItemComponent } from './sample-profiles/profile-item/profile-item.component';
 
 
 @NgModule({
@@ -108,7 +110,9 @@ import { PaymentPopupComponent } from './payment-popup/payment-popup.component';
     BuddhistMatrimonyComponent,
     JainMatrimonyComponent,
     MuslimMatrimonyComponent,
-    PaymentPopupComponent
+    PaymentPopupComponent,
+    SampleProfilesComponent,
+    ProfileItemComponent
   ],
   imports: [
     BrowserModule,

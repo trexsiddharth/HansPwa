@@ -1,0 +1,314 @@
+<div class="tinder">
+    <div>
+        <div #tinderCard class="tinder--card">
+            <main id="mainTinderUI" *ngIf="card">
+                <div id="profileImageDiv">
+                    <div>
+                        <ngb-carousel style="outline: none;">
+                            <ng-template ngbSlide *ngFor="let i of getImagesCount(); let index = index">
+                                <img id="profilePic" class="img-fluid"
+                                    (click)="openImageModal(card.profile.carousel,card.profile.photo,card.profile.name,index)"
+                                    [src]="getProfilePhoto(card.profile.photo,card.profile.carousel,card.profile.gender,index)"
+                                    (load)="onLoadingImage(index)" (error)="onErrorProfilePhoto(card.profile.gender, index)"
+                                    alt={{card.profile.name}}>
+                            </ng-template>
+                        </ngb-carousel>
+
+                        <div id="imageAudio" *ngIf="card.profile.audio_profile || card.profile.unapprove_audio_profile">
+                            <img 
+                            id="audioImg"
+                            width="59px"
+                            height="59px" src="../../../assets/new icons/play_button.png" 
+                            (click)="playAudio()"
+                            alt="play">
+                            <span class="audioText"><b>Introduction</b></span>
+                        </div>
+                     
+                        <div id="imageContent">
+                            <div class="full-width">
+                                <div style="width: 80%;">
+                                    <span style="font-weight: bold;font-size: 18px;">
+                                        {{setName(toTitleCase(card.profile.name))}}
+                                    </span><br>
+                                    <span style="font-size: 14px;">{{card.profile.religion}} {{card.profile.religion ? '|' : ''}}
+                                        {{card.profile.caste}}
+                                    </span><br>
+                                    <span style="font-size: 14px;">
+                                        {{card.profile.working_city ? card.profile.working_city + " |" : ""}}
+                                        {{setHeight(card.profile.height)}}
+                                    </span> <br>
+                                    <span style="font-size: 14px;">
+                                        {{setIncome(card.profile.monthly_income)}} Lakh per year
+                                    </span>
+                                    <br>
+                                </div>
+                                </div>
+                                <div style="position: absolute;
+                                top: -10px;
+                                right: 10px;
+                                border-radius: 10px;
+                                padding: 0px 10px;
+                                background-color: #FE39C7;">{{setAge(card.profile.birth_date)}}
+                            </div>
+                                <div style="position: absolute;
+                          top: 25px;right: 25px;">
+                                    <img width="20px" src="../../../assets/tabs-icons/shield.svg"
+                                        alt="verified profile"> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="content" style="
+                position: relative;
+                margin: -120px 10px 0px;
+                border-top-right-radius: 20px;
+                  border-top-left-radius: 20px;
+                  padding: 0px 10px 100px;
+                  background-color: white;
+                  overflow-y: auto;
+                  box-shadow: 1px 1px 5px #9ADCF0, -1px -1px 5px #9ADCF0;">
+                    <div class="row field">
+                        <div class="col-6">
+                            <img class="titleImage" src="../../../assets/tabs-icons/shield.svg" alt="verified at">
+                            <span class="title">{{languageService.profileLang.verifiedAt}}</span>
+                        </div>
+                        <div class="col-6">
+                            <span
+                                class="title">{{card.profile.facebook ? setVerifiedAt(card.profile.facebook) : 'Hans Matrimony Office'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row field">
+                        <div class="col-6">
+                            <img class="titleImage" src="../../../assets/tabs-icons/personal.svg" alt="managedBy">
+                            <span class="title">
+                                {{languageService.profileLang.managedBy}}
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <span class="title">
+                                {{card.family.relation ? card.family.relation : card.profile.gender == 'Male' ? 'Mother' : 'Father' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div id="aboutSection">
+                        <u class="titleHeading">
+                            {{languageService.profileLang.about}}
+                        </u>
+                        <p class="title" style="margin-left:0px">
+                            <span
+                                style="color: #4A5D6A;font-weight: bold;font-family: sans-serif;">{{languageService.profileLang.hello}},</span>
+                            {{card.profile.about ? card.profile.about.length < 30 ? toTitleCase(setAbout(card)) : toTitleCase(card.profile.about) : toTitleCase(setAbout(card))}}
+                        </p>
+                    </div>
+                    <div id="personalSection">
+                        <div style="display: flex;
+                        justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.personalizedDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+                        <div class="row field" id="contactedSection">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/call-dark.svg" alt="mobile">
+                                <span class="title">Visible After Contact</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/location-dark.svg"
+                                    alt="location">
+                                <span
+                                    class="title">{{card.family.locality ? card.family.locality : card.family.city ? card.family.city : ''}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Religion.svg" alt="caste">
+                                <span class="title">{{card.profile.religion}} {{card.profile.religion ? '|' : ''}} {{card.profile.caste}}
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Marital Status.svg"
+                                    alt="marital status">
+                                <span class="title">{{card.profile.marital_status}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Food Choice.svg"
+                                    alt="food choice">
+                                <span class="title">{{card.profile.food_choice}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Weight.svg" alt="weight">
+                                <span class="title">{{card.profile.weight}} Kg</span>
+                            </div>
+                        </div>
+
+                        <div class="row field" *ngIf="card.profile.marital_status === 'Divorcee'">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../../assets/birthplace.svg"
+                                    alt="marital status">
+                                <span class="title">{{card.profile.children}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="careerSection">
+                        <div style="display: flex;
+                        justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.careerDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Occupation.svg" alt="occupation">
+                                <span class="title">{{card.profile.occupation}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Designation.svg"
+                                    alt="designation">
+                                <span class="title">{{card.profile.profession}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Income - Aaye.svg" alt="income">
+                                <span class="title">{{setIncome(card.profile.monthly_income)}} Lakh per year</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Graduation.svg" alt="education">
+                                <span class="title">{{card.profile.degree ? card.profile.degree : card.profile.education}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Schooling.svg" alt="college">
+                                <span class="title">{{toTitleCase(card.profile.college)}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="working">
+                                <span class="title">{{card.profile.working_city}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="horoscopeSection">
+                        <div style="display: flex;justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.horoscopeDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/DOB.svg" alt="birth date">
+                                <span class="title">{{card.profile.birth_date | date}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Birth Time.svg" alt="birth time">
+                                <span class="title">{{card.profile.birth_time}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/workingCity.svg"
+                                    alt="birth place">
+                                <span class="title">{{card.profile.birth_place}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Mangalik.svg" alt="manglik">
+                                <span class="title">{{setManglik(card.profile.manglik)}}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div id="familySection">
+                        <div style="display: flex;justify-content: space-between;">
+                            <span class="titleHeading">
+                                <u>
+                                    {{languageService.profileLang.familyDetails}}
+                                </u>
+                            </span>
+                        </div>
+
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Sister.svg" alt="Sisters">
+                                <span
+                                    class="title">{{setMarriageSisters(card.family.unmarried_daughters,card.family.married_daughters)}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Brother.svg" alt="Brothers">
+                                <span
+                                    class="title">{{setMarriageBrothers( card.family.unmarried_sons,card.family.married_sons)}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Mother.svg" alt="Mother">
+                                <span
+                                    class="title">{{LifeStatus(card.family.mother_status,card.family.occupation_mother, 'Mother')}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Father.svg" alt="Father">
+                                <span class="title">{{LifeStatus(card.family.father_status,card.family.occupation, 'Father')}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/swastika.svg" alt="Gotra">
+                                <span class="title">{{card.family.gotra}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/Family Type.svg"
+                                    alt="Father Type">
+                                <span class="title">{{familyType(card)}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/familyIn.svg"
+                                    alt="Family Living In">
+                                <span
+                                    class="title">{{card.family.city ? card.family.city : card.family.locality ? card.family.locality : ''}}</span>
+                            </div>
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/new icons/House Type.svg" alt="House Type">
+                                <span class="title">{{houseStatus(card)}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row field">
+                            <div class="col-6">
+                                <img class="titleImage" src="../../../assets/moneybag.svg" alt="Family Income">
+                                <span class="title">{{setIncome(card.family.family_income)}} Lakh per year</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</div>

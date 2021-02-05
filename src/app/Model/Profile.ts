@@ -18,6 +18,8 @@ export interface ProfileData {
   photo_score: number;
   profiles_sent: number;
   facebook?: any;
+  audio_profile: string;
+  unapprove_audio_profile: string;
   aadhar: string;
   birth_place: string;
   birth_time: string;

@@ -15,6 +15,7 @@ import { ChristianMatrimonyComponent } from './christian-matrimony/christianmatr
 import { BuddhistMatrimonyComponent } from './buddhist-matrimony/buddhistmatrimony.component';
 import { JainMatrimonyComponent } from './jain-matrimony/jainmatrimony.component';
 import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.component';
+import { SampleProfilesComponent } from './sample-profiles/sample-profiles.component';
 
 
 const routes: Routes = [
@@ -85,6 +86,10 @@ const routes: Routes = [
   { path: 'checkout', component: CustomCheckoutComponent },
   { path: 'kundaliMatching', component: KundaliTwoComponent },
   { path: 'kundaliMatching/:bName/:bDate/:bPlace/:bTime/:gName/:gDate/:gPlace/:gTime', component: KundaliTwoComponent },
+  {
+    path: 'samples/:ids',
+    component: SampleProfilesComponent
+  },
   {
     path: 'picUpload', loadChildren: () => import('./photo-upload/photo-upload.module')
       .then(m => m.PhotoUploadModule)
