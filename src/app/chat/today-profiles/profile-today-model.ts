@@ -124,4 +124,7 @@ export class ApiwhaAutoreply {
     profiles_left: number = 0;
     credits: string = '';
     language: string = '';
+    audio_profile: string = '';
+    unapprove_audio_profile: string = '';
+
 }

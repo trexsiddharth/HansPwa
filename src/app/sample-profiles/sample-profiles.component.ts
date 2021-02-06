@@ -5,6 +5,7 @@ import { NgxNotificationService } from 'ngx-kc-notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, Subject } from 'rxjs';
 import { timeout, retry, catchError } from 'rxjs/operators';
+import { ApiwhaAutoreply } from '../chat/today-profiles/profile-today-model';
 import { LanguageService } from '../language.service';
 import { ProfileTable } from '../Model/Profile';
 
@@ -16,9 +17,9 @@ import { ProfileTable } from '../Model/Profile';
 export class SampleProfilesComponent implements OnInit {
 
   private idsList: string[] = [];
-  private profileList: ProfileTable[] = [];
-  private profileListSubject = new Subject<ProfileTable[]>();
-  profilesList$: Observable<ProfileTable[]> = this.profileListSubject.asObservable();
+  private profileList: ApiwhaAutoreply[] = [];
+  private profileListSubject = new Subject<ApiwhaAutoreply[]>();
+  profilesList$: Observable<ApiwhaAutoreply[]> = this.profileListSubject.asObservable();
 
   constructor(private route: ActivatedRoute,
               private spinner: NgxSpinnerService,
@@ -34,28 +35,16 @@ export class SampleProfilesComponent implements OnInit {
         if (map.params.ids) {
           console.log((map.params.ids as string).split(','));
           this.idsList = (map.params.ids as string).split(',');
-          this.idsList.forEach(
-            (profileId: string) => {
-              this.getUserProfileData(profileId, '0');
-            }
-          );
+          this.getUserProfileData();
           }
       });
   }
 
-  getUserProfileData(id: string, isLead: string) {
-      const myprofileData = new FormData();
-      myprofileData.append(
-        'id', id
-      );
-      myprofileData.append('contacted', '1');
-      myprofileData.append(
-        'is_lead', isLead
-      );
+  getUserProfileData() {
       this.http
-        .post<ProfileTable>(
-          'https://partner.hansmatrimony.com/api/getProfile',
-          myprofileData
+        .get(
+          'https://partner.hansmatrimony.com/api/leads/sendSample',
+          {params: {id: this.idsList.join(',')}}
         )
         .pipe(
           timeout(7000),
@@ -69,10 +58,14 @@ export class SampleProfilesComponent implements OnInit {
           )
         )
       .subscribe(
-        (data: any) => {
-          console.log(data);
-          this.profileList.push(data);
-          this.profileListSubject.next(this.profileList);
+        (result: any) => {
+          console.log(result);
+          if (result.status === 1) {
+            this.profileList = result.data;
+            this.profileListSubject.next(this.profileList);
+          } else {
+            this.ngxNotificationService.error('No Data Found');
+          }
         },
         (error: any) => {
           this.spinner.hide();

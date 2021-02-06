@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ProfileTable } from 'src/app/Model/Profile';
 import { BehaviorSubject } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
+import { ApiwhaAutoreply } from 'src/app/chat/today-profiles/profile-today-model';
 
 @Component({
   selector: 'app-profile-item',
@@ -15,7 +16,7 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class ProfileItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input('profile') card: ProfileTable;
+  @Input('profile') card: ApiwhaAutoreply;
 
   @ViewChildren('tinderCard') tinderCards: QueryList<ElementRef>;
   tinderCardsArray: Array<ElementRef>;
@@ -86,12 +87,12 @@ export class ProfileItemComponent implements OnInit, AfterViewInit, OnDestroy {
       return '';
     }
   }
-  setIncome(value: number): string {
+  setIncome(value: string): string {
     if (value != null) {
       if (Number(value) > 1000) {
         return String((Number(value) / 100000));
       } else {
-        return value.toString();
+        return value;
       }
 
     } else {
@@ -99,7 +100,7 @@ export class ProfileItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   familyType(item) {
-    if (item.family.family_type && item.family.family_type.toLowerCase().indexOf('nuclear') !== -1) {
+    if (item.family_type && item.family_type.toLowerCase().indexOf('nuclear') !== -1) {
       return 'Nuclear Family';
     } else {
       return 'Joint Family';
@@ -147,8 +148,8 @@ export class ProfileItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   getImagesCount() {
-    if (this.card && this.card.profile.carousel !== '[]' && this.card.profile.carousel && this.card.profile.carousel !== 'null') {
-      const carouselObject: object = JSON.parse(this.card.profile.carousel);
+    if (this.card && this.card.carousel !== '[]' && this.card.carousel && this.card.carousel !== 'null') {
+      const carouselObject: object = JSON.parse(this.card.carousel);
       if (carouselObject) {
         const size = Object.keys(carouselObject).length;
         const arr: any[] = [];
@@ -254,7 +255,7 @@ export class ProfileItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   houseStatus(item) {
-    if (item.family.house_type && item.family.house_type.toLowerCase().indexOf('own') !== -1) {
+    if (item.house_type && item.house_type.toLowerCase().indexOf('own') !== -1) {
       return 'Own House';
     } else {
       return 'Rented House';
@@ -271,29 +272,29 @@ export class ProfileItemComponent implements OnInit, AfterViewInit, OnDestroy {
   setAbout(item) {
     if (item) {
       const aboutObject = {
-        dob: item.profile.birth_date ? `I am ${this.setAge(item.profile.birth_date)} old ` : '',
-        caste: item.profile.caste ?
-          item.caste !== 'All' ? item.profile.caste : '' : '',
-        manglik: item.profile.manglik ? item.profile.manglik : '',
-        gender: item.profile.gender ? item.profile.gender === 'Male' ? 'man' : 'woman' : '',
-        locality: item.profile.locality ? item.profile.locality === 'Visible after Contact' ?
-          '' : ` residing in ${item.profile.locality}` : '',
-        qualification: item.profile.education ?
-          `. I've completed my ${item.profile.education}` : item.profile.degree ?
-            `. I've completed my ${item.profile.degree}` : '',
-        occupation: item.profile.occupation ?
-          item.profile.occupation === 'Business/Self-Employed' ?
-            ' and Self-Employed' : item.profile.occupation === 'Not Working' ? 'currently not working'
-              : item.profile.occupation === 'Doctor' ||
-                item.profile.occupation === 'Teacher'
-                ? ` currently working as ${item.profile.occupation}` :
-                ` currently working in ${item.profile.occupation}` : '',
-        working: item.profile.working_city ? item.profile.working_city !== 'Not Working'
-          ? item.profile.working_city !== 'na' ? `in ${item.profile.working_city}` : '' : '' : '',
-        designation: item.profile.profession ?
-          item.profile.occupation !== 'Not Working' ?
-            item.profile.profession !== 'n/a' ? item.profile.profession !== 'na' ?
-              ` as ${item.profile.profession}` : '' : '' : '' : '',
+        dob: item.birth_date ? `I am ${this.setAge(item.birth_date)} old ` : '',
+        caste: item.caste ?
+          item.caste !== 'All' ? item.caste : '' : '',
+        manglik: item.manglik ? item.manglik : '',
+        gender: item.gender ? item.gender === 'Male' ? 'man' : 'woman' : '',
+        locality: item.locality ? item.locality === 'Visible after Contact' ?
+          '' : ` residing in ${item.locality}` : '',
+        qualification: item.education ?
+          `. I've completed my ${item.education}` : item.degree ?
+            `. I've completed my ${item.degree}` : '',
+        occupation: item.occupation ?
+          item.occupation === 'Business/Self-Employed' ?
+            ' and Self-Employed' : item.occupation === 'Not Working' ? 'currently not working'
+              : item.occupation === 'Doctor' ||
+                item.occupation === 'Teacher'
+                ? ` currently working as ${item.occupation}` :
+                ` currently working in ${item.occupation}` : '',
+        working: item.working_city ? item.working_city !== 'Not Working'
+          ? item.working_city !== 'na' ? `in ${item.working_city}` : '' : '' : '',
+        designation: item.profession ?
+          item.occupation !== 'Not Working' ?
+            item.profession !== 'n/a' ? item.profession !== 'na' ?
+              ` as ${item.profession}` : '' : '' : '' : '',
       };
       // tslint:disable-next-line: max-line-length
       return `${aboutObject.dob} ${aboutObject.caste} ${aboutObject.manglik} ${aboutObject.gender} ${aboutObject.locality} ${aboutObject.qualification} ${aboutObject.occupation} ${aboutObject.designation} ${aboutObject.working}.`;
@@ -311,11 +312,11 @@ export class ProfileItemComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   playAudio() {
-    if (this.card && (this.card.profile.audio_profile || this.card.profile.unapprove_audio_profile)) {
+    if (this.card && (this.card.audio_profile || this.card.unapprove_audio_profile)) {
       if (!this.isAudioPlayingSubject.getValue()) {
         this.audio = new Audio();
         // tslint:disable-next-line: max-line-length
-        this.audio.src = `https://s3.ap-south-1.amazonaws.com/hansmatrimony/audioProfile/${this.card.profile.audio_profile ? this.card.profile.audio_profile : this.card.profile.unapprove_audio_profile}`;
+        this.audio.src = `https://s3.ap-south-1.amazonaws.com/hansmatrimony/audioProfile/${this.card.audio_profile ? this.card.audio_profile : this.card.unapprove_audio_profile}`;
         this.audio.load();
         this.audio.play();
         this.isAudioPlayingSubject.next(true);
