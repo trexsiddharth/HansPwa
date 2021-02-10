@@ -68,6 +68,7 @@ import { UnderstandErrorHandler } from './chat/helper/UnderstandErrorHandler';
 import { PaymentPopupComponent } from './payment-popup/payment-popup.component';
 import { SampleProfilesComponent } from './sample-profiles/sample-profiles.component';
 import { ProfileItemComponent } from './sample-profiles/profile-item/profile-item.component';
+import { TempleItemComponent } from './sample-profiles/temple-item/temple-item.component';
 
 
 @NgModule({
@@ -112,7 +113,8 @@ import { ProfileItemComponent } from './sample-profiles/profile-item/profile-ite
     MuslimMatrimonyComponent,
     PaymentPopupComponent,
     SampleProfilesComponent,
-    ProfileItemComponent
+    ProfileItemComponent,
+    TempleItemComponent
   ],
   imports: [
     BrowserModule,

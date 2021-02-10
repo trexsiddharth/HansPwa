@@ -47,8 +47,8 @@ export class SampleProfilesComponent implements OnInit {
           {params: {id: this.idsList.join(',')}}
         )
         .pipe(
-          timeout(7000),
-          retry(2),
+          timeout(5000),
+          retry(1),
           catchError((e) => {
             this.ngxNotificationService.error(
               'Server Time Out, Try Again Later'
