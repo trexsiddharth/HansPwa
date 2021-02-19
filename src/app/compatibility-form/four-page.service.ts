@@ -28,6 +28,8 @@ export class FourPageService {
   facebookHomeTownUpdated = new EventEmitter<string>();
   facebookLocationUpdated = new EventEmitter<string>();
 
+  private fullPage = false;
+
   showApproveBtn = false;
   constructor() { }
 
@@ -37,6 +39,14 @@ export class FourPageService {
   }
   getSkippable() {
     return this.skippable;
+  }
+
+  setFullPageStatus(status: boolean) {
+      this.fullPage = status;
+  }
+
+  getFullPageStatus(): boolean {
+      return this.fullPage;
   }
 
   setUserThrough(status) {

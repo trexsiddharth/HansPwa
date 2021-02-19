@@ -1,0 +1,136 @@
+<form [formGroup]="PageTwo">
+  <div class="row">
+
+    <div class="col-md-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Qualification</mat-label>
+        <mat-select (selectionChange)="changedQualification()" matInput formControlName="Qualification">
+          <mat-option>
+            <ngx-mat-select-search noEntriesFoundLabel="No Qualification Found"
+              placeholderLabel="Search Qualification..." formControlName="QualificationCtrl">
+              <mat-icon ngxMatSelectSearchClear>close</mat-icon>
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-optgroup *ngFor="let group of filteredEducationGroups | async" [label]="group.group">
+            <mat-option *ngFor="let name of group.names" [value]="name">
+              {{name}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+
+        <mat-label>Occupation</mat-label>
+        <mat-select #relation formControlName="Occupation" (selectionChange)="changedOccupation()">
+          <mat-option *ngFor="let  option of Occupation" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-12" *ngIf="fourPageService.getUserThrough()">
+
+      <mat-form-field class="full-width fieldFit" appearance="standard"
+        *ngIf="PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working' ">
+
+        <mat-label>Designation</mat-label>
+        <mat-select #relation formControlName="Designation" (selectionChange)="changedDesignation()">
+          <mat-option>
+            <ngx-mat-select-search noEntriesFoundLabel="No Designation Found" placeholderLabel="Search Designation..."
+              formControlName="DesignationCtrl">
+              <mat-icon ngxMatSelectSearchClear>close</mat-icon>
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let  option of filteredDesignations | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+
+      <mat-form-field class="full-width fieldFit"
+        *ngIf="PageTwo.value.Designation === 'Others' && PageTwo.value.Occupation != 'Teacher' && PageTwo.value.Occupation != 'Doctor' && PageTwo.value.Occupation != 'Not Working'"
+        appearance="standard">
+        <mat-label>Other Designation</mat-label>
+        <input type="text" (change)="changedDesignation()" matInput formControlName="OtherDesignation"
+          name="Designation">
+      </mat-form-field>
+    </div>
+
+    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+      जैसे की मैनेजर , ओनर , क्लर्क , सॉफ्टवेयर इंजीनियर |
+    </p>
+
+    <div class="col-12">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Yearly Income In Lakhs</mat-label>
+        <mat-select formControlName="AnnualIncome" (selectionChange)="incomeChanged($event)">
+          <mat-option *ngFor="let item of incomeCategories" [value]="item">
+            {{setValue(item)}}
+          </mat-option>
+        </mat-select>
+        <!-- <input type="number" (change)="incomeChanged()" matInput formControlName="AnnualIncome" name="AnnualIncome">
+                          <span matSuffix>Lakh Per Year &nbsp;</span> -->
+        <mat-error class="full-width" style="margin-bottom: 10px;" *ngIf="PageTwo.get('AnnualIncome').invalid"> eg. 8
+          <span style="margin-left: 80%;">LPA &nbsp;</span></mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+      अगर लड़का /लड़की की सालाना इनकम 10 लाख है तोह यहाँ सिर्फ 10 भरे ।
+    </p>
+
+    <div class="col-md-12" *ngIf="PageTwo.value.Occupation !== 'Not Working'">
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Working City</mat-label>
+        <input type="text" matInput id="workingCity" [autoCompleteOptions]="autoComplete" matValidateAddress
+          matGoogleMapsAutocomplete #matGoogleMapsAutocomplete="matGoogleMapsAutocomplete" (change)="placeChanged()"
+          formControlName="Working">
+      </mat-form-field>
+
+    </div>
+
+
+    <div class="col-md-12" *ngIf="fourPageService.profile.gender === 'Female'">
+
+      <mat-form-field class="full-width fieldFit" appearance="standard">
+        <mat-label>Wish to go abroad?</mat-label>
+        <mat-select formControlName="abroad" (selectionChange)="changedAbroad()">
+          <mat-option value="Yes">Yes</mat-option>
+          <mat-option value="No">No</mat-option>
+        </mat-select>
+
+      </mat-form-field>
+
+    </div>
+
+    <div class="col-md-12">
+      <mat-form-field class="full-width" style="margin-top: 25px;" appearance="outline">
+        <mat-label>About<code style="color: rgba(0,0,0,.6);">(optional)</code></mat-label>
+        <textarea rows="5" type="text" matInput formControlName="About" name="About">
+                                </textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 m-t-20"
+      style="margin-top: 10px;margin-left:auto;margin-right:auto;text-align:center;margin-bottom: 20px;">
+      <button mat-raised-button type="button" id="skipBtn" matStepperNext class="btn" (click)="skip()"
+        *ngIf="fourPageService.getSkippable()">Skip</button>
+      <button type="button" id="viewButton" mat-raised-button matStepperNext class="btn"
+        (click)="firstStep()">Next</button>
+    </div>
+    <!-- <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">
+                      Great! Thanks for letting us know about yourself.
+                    </p> -->
+    <p *ngIf="fourPageService.getUserThrough()" class="impNote">
+      डिटेल्स भरने के बाद इस बटन पर जरूर क्लिक करे |
+    </p>
+  </div>
+</form>

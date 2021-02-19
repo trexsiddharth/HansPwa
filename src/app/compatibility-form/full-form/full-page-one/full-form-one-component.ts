@@ -3,10 +3,6 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  AfterViewInit,
-  AfterViewChecked,
-  Input,
-  EventEmitter,
 } from '@angular/core';
 
 import {
@@ -25,28 +21,21 @@ import {
 
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NotificationsService } from '../notifications.service';
-import { Profile } from './profile';
+import { NotificationsService } from '../../../notifications.service';
+import { Profile } from '../../profile';
 
 import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/';
-import { Observable, timer, Subject, of, ReplaySubject, BehaviorSubject } from 'rxjs';
+import { Observable, timer, Subject, of, ReplaySubject } from 'rxjs';
 import { startWith, map, timeout, retry, catchError, switchMap, share, takeUntil } from 'rxjs/operators';
-import { FourPageService } from './four-page.service';
-import { FormsMessageDialogComponent } from './forms-message-dialog/forms-message-dialog.component';
-import { LanguageService } from '../language.service';
+import { FourPageService } from '../../four-page.service';
+import { FormsMessageDialogComponent } from '../../forms-message-dialog/forms-message-dialog.component';
+import { LanguageService } from '../../../language.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
-import { RegisterWithComponent } from './register-with/register-with.component';
-import { ChooseForComponent } from './choose-for/choose-for.component';
-import { element } from 'protractor';
-import { FindOpenHistoryProfileService } from '../find-open-history-profile.service';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-
-
-declare var FB: any;
+import { VerifyOtpComponent } from '../../../verify-otp/verify-otp.component';
+import { RegisterWithComponent } from '../../register-with/register-with.component';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -63,30 +52,14 @@ export const _filter = (opt: string[], value: string): string[] => {
   return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
 };
 
-
 @Component({
-  selector: 'app-compatibility-form',
-  templateUrl: './compatibility-form.component.html',
-  styleUrls: ['./compatibility-form.component.css']
+  selector: 'app-full-form-one',
+  templateUrl: './full-form-one-component.html',
+  styleUrls: ['./full-form-one-component.css']
 })
 
 
-export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
-  public formfirstName = '';
-  public formlastName = '';
-  public auto = false;
-  public features: any;
-  public mobileScreen: boolean;
-  private innerWidth: number;
-  private mobileBreakpoint = 768;
-  public secondName = false;
-  public showHeight = false;
-  public showCaste = false;
-  public showError = false;
-
-  advt_c;
-  advt_pid;
-  advt_shortlink;
+export class FullFormOneComponent implements OnInit, OnDestroy {
 
   time = {
     hour: 13,
@@ -98,13 +71,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   PageOne: FormGroup;
   PageTwo: FormGroup;
 
-
   // birth date
   birthDate: any;
   currentAge: number;
   birthdayValid;
   startDate = new Date(1985, 0, 1);
-  nextClickedOne = false;
+
   // Religion and Caste
   Religions: string[] = ['Hindu', 'Muslim', 'Sikh', 'Christian', 'Buddhist', 'Jain', 'Parsi', 'Jewish', 'Bahai'];
   casteo: Observable<string[]>;
@@ -113,10 +85,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   AllCastes = false;
   profileData;
   isLeadIsZero = false;
-  photos = [];
-  photoIndices = [];
-  photosMale = [];
-  photosFemale = [];
+
   // Height
   // tslint:disable-next-line: max-line-length
   Heights: string[] = ['4 feet', '4 feet 1 inches', '4 feet 2 inches', '4 feet 3 inches', '4 feet 4 inches', '4 feet 5 inches', '4 feet 6 inches', '4 feet 7 inches', '4 feet 8 inches', '4 feet 9 inches', '4 feet 10 inches', '4 feet 11 inches', '5 feet', '5 feet 1 inches', '5 feet 2 inches', '5 feet 3 inches', '5 feet 4 inches', '5 feet 5 inches', '5 feet 6 inches', '5 feet 7 inches', '5 feet 8 inches', '5 feet 9 inches', '5 feet 10 inches', '5 feet 11 inches', '6 feet', '6 feet 1 inches', '6 feet 2 inches', '6 feet 3 inches', '6 feet 4 inches', '6 feet 5 inches', '6 feet 6 inches', '6 feet 7 inches', '6 feet 8 inches', '6 feet 9 inches', '6 feet 10 inches', '6 feet 11 inches', '7 feet'];
@@ -147,15 +116,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   isDisable = false;
   isAllCastePref = false;
 
-
   // stop true caller polling
   stopPolling = new Subject();
   pollingCount = 0;
   hideMobileNumber = false;
-  mainContainerId = 'compatibilityStepper';
+
   authData;
-  truecallerExists = false;
-  disabledPhoneNumber;
   private fetchedFbProfilePic = null;
 
   private alreadyExists = false;
@@ -166,13 +132,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   /** Subject that emits when the component has been destroyed. */
   protected onDestroy = new Subject<void>();
 
-  // disable btn if user is already registered
-  disableNextSubject = new BehaviorSubject<boolean>(false);
-  disableNext$ = this.disableNextSubject.asObservable();
-  sharedPageTwoForm: FormGroup;
 
-
-  incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
               private router: Router,
@@ -183,54 +143,29 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
               public languageService: LanguageService,
               private route: ActivatedRoute,
               private ngxNotificationService: NgxNotificationService,
-              private spinner: NgxSpinnerService,
-              private itemService: FindOpenHistoryProfileService) {
+              private spinner: NgxSpinnerService) {
 
     this.PageOne = this._formBuilder.group({
       // tslint:disable-next-line: max-line-length
-      firstName: [null, Validators.compose([Validators.required])],
-      lastName: [null],
-      // phone: [localStorage.getItem('RegisterNumber') ? localStorage.getItem('RegisterNumber') : ''
-      // , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9,11}')])],
-      phone: ['132'
-        , Validators.compose([Validators.required])],
+      firstName: ['', Validators.compose([Validators.required])],
+      lastName: [''],
+      phone: [localStorage.getItem('RegisterNumber')
+        , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
       email: [''],
-      Relation: [null, Validators.compose([Validators.required])],
-      gender: [null, Validators.compose([Validators.required])],
+      Relation: ['', Validators.compose([Validators.required])],
+      gender: ['', Validators.compose([Validators.required])],
       birth_date: ['01', Validators.compose([Validators.required])],
       birth_month: ['January', Validators.compose([Validators.required])],
       birth_year: ['1980', Validators.compose([Validators.required])],
-      Height: [null, Validators.compose([Validators.required])],
-      Weight: [null],
-      MaritalStatus: [null, Validators.compose([Validators.required])],
-      Religion: [null, Validators.compose([Validators.required])],
-      Castes: [null, Validators.compose([Validators.required])],
+      Height: ['', Validators.compose([Validators.required])],
+      Weight: [''],
+      MaritalStatus: ['', Validators.compose([Validators.required])],
+      Religion: ['', Validators.compose([Validators.required])],
+      Castes: ['', Validators.compose([Validators.required])],
       CasteCtrl: (null),
       disabledPart: ['']
     });
   }
-  customOptions: OwlOptions = {
-    loop: true,
-    autoplay: this.auto,
-    center: true,
-    // nav:true,
-    dots: true,
-    // navText:["<p style= `background-color:black;`>h</p>","<p>b</p>"],
-    autoWidth: true,
-    // merge: true,
-    // mergeFit: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      600: {
-        items: 1,
-      },
-      1000: {
-        items: 3,
-      }
-    }
-  };
 
   ngOnDestroy(): void {
     // truecaller polling is active and user closes the page.
@@ -239,83 +174,30 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.onDestroy.next();
     this.onDestroy.complete();
   }
-  ngAfterViewInit() {
-  }
 
-  ngAfterViewChecked() {
-    if (this.fourPageService.getUserThrough()) {
-      this.mainContainerId = 'sd';
-    }
-  }
-  scroll = (event): void => {
-    this.scrollAppear();
-  }
-  scrollAppear() {
-    const whyUs = document.querySelector('.whyus');
-
-    const position = whyUs ? whyUs.getBoundingClientRect().top : null;
-    const form = document.querySelector('.form-position');
-    const formPosition = form ? form.getBoundingClientRect().top : null;
-    const screenPosition = window.innerHeight;
-    if (position && position < screenPosition) {
-      this.auto = true;
-    } else if (formPosition && formPosition < screenPosition + 500) {
-      this.auto = false;
-    }
-  }
-    private resize() {
-        this.innerWidth = window.innerWidth;
-        return this.innerWidth;
-    }
-    private detectMobileScreen() {
-        window.onload = this.resize;
-        window.onresize = this.resize;
-        if (this.resize() < this.mobileBreakpoint) {
-      this.mobileScreen = true;
-    } else {
-      this.mobileScreen = false;
-    }
-        console.log(this.mobileScreen);
-
-    }
   async ngOnInit() {
-    window.scroll(0, 0);
-    this.detectMobileScreen();
-    window.addEventListener('scroll', this.scroll, true);
     if (localStorage.getItem('RegisterNumber')) {
-      this.PageOne.controls.phone.setValue(localStorage.getItem('RegisterNumber'));
-      this.disabledPhoneNumber = localStorage.getItem('RegisterNumber');
-
-      setTimeout(() => {
-        const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
-        if (countryBtn) {
-            countryBtn.disabled = true;
-          }
-        this.PageOne.controls.phone.disable();
-        }, 1000);
-
-      // this.hideMobileNumber = true;
+      this.PageOne.patchValue({
+        phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
+      });
+      this.hideMobileNumber = true;
       console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
     }
-
-
     localStorage.clear();
     this.languageService.setRegisterLang();
-
 
     this.fourPageService.formCompleted.subscribe(
       (complete: boolean) => {
         if (complete === true) {
           this.formTwo = true;
-          if (!this.fourPageService.getUserThrough()) {
-            this.goToNextPage();
-          }
         }
       }
     );
     this.fourPageService.formTwoGroup.subscribe(
       (formGroup) => {
+        console.log(formGroup);
         if (formGroup) {
+          console.log(formGroup);
           this.PageTwo = formGroup;
         }
       }
@@ -336,7 +218,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       }
     );
 
-
     // for team user we will make page non linear from page two...because page one details are compulsory
     this.fourPageService.makeLinear.subscribe(
       (makeLinear: boolean) => {
@@ -349,20 +230,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       }
     );
 
-      // get utm queries from url
-    this.getUtmQueriesFromUrl();
-
     // for skippable
     this.route.url.subscribe(
       link => {
-        console.log(link);
         if (link && link[0] && link[0].path) {
           console.log(link[0].path);
-          if (link[0].path === 'fullPage') {
-            this.fourPageService.setFullPageStatus(true);
-          } else if (link[0].path === 'skip') {
-            this.fourPageService.setSkippable(true);
-          }
+          this.fourPageService.setSkippable(true);
         }
       }
     );
@@ -378,7 +251,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             localStorage.setItem('getListId', route.params.id);
           } else if (route.params.mobile) {
             this.PageOne.patchValue({
-              phone: this.setMobileNumber(route.params.mobile)
+              phone: route.params.mobile
             });
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListMobile', route.params.mobile);
@@ -399,18 +272,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListTempleId', route.params.templeId);
           }
-          if (route.params.fourthParam) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('fourthParam', route.params.fourthParam);
-          }
-          if (route.params.fifthParam) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('fifthParam', route.params.fifthParam);
-          }
-          if (route.params.redParam) {
-            localStorage.setItem('redParam', route.params.redParam);
-            this.fourPageService.showApproveBtn = true;
-          }
           if (route.params.enqDate) {
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('enqDate', route.params.enqDate);
@@ -419,68 +280,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListSource', route.params.source);
           }
-          if (route.params.extra) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('extra', route.params.extra);
-          }
           if (route.params.id) {
-            setTimeout(() => { this.getProfile(); }, 3000);
+            this.getProfile();
           }
         }
-
-        if (this.router.url.match('code=')) {
-          this.PageOne.patchValue({
-            Relation: 'Myself',
-          });
-          const codeIndex = this.router.url.indexOf('code=');
-          const code = this.router.url.substring(codeIndex + 5);
-          console.log(code);
-          this.getFacebookAccessToken(code);
-        } else {
-          if (this.itemService.compatibilityGender) {
-            this.PageOne.patchValue({
-              gender: this.itemService.compatibilityGender,
-            });
-          }
-          if (this.itemService.compatibilityLookingFor) {
-            this.PageOne.patchValue({
-              Relation: this.itemService.compatibilityLookingFor,
-            });
-            this.setGender();
-          } else if (!this.fourPageService.getUserThrough() && !this.fourPageService.getFullPageStatus()) {
-            this.openChooseFor();
-          }
-        }
-
-        this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Male`).subscribe((response: any) => {
-          if (response.photos) {
-            this.photosMale = response.photos;
-            for (const v of response.photos) {
-              this.photos.push(v);
-              if (this.photos.length >= 10) {
-                break;
-              }
-            }
-          }
-        }, (error: any) => {
-          console.log('error occurred occurred while fetching the photos');
-        });
-        this.http.get(`https://partner.hansmatrimony.com/api/getPhotos?gender=Female`).subscribe((response: any) => {
-          if (response.photos) {
-            this.photosFemale = [];
-            this.photosFemale = response.photos;
-            for (const v of response.photos) {
-              this.photos.push(v);
-              if (this.photos.length >= 20) {
-                break;
-              }
-            }
-          }
-        }, (error: any) => {
-          console.log('error occurred occurred while fetchignthe photos');
-        });
-        // console.log(this.photosFemale, this.photosMale, this.photos);
-
 
         // when user comes from app to webview four page reg
         if (route.params.appMobile) {
@@ -490,6 +293,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         }
       }
     );
+
     this.spinner.hide();
     localStorage.setItem('id', '');
     localStorage.setItem('gender', '');
@@ -498,48 +302,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
     if (this.fourPageService.getUserThrough()) {
       this.openMessageDialog();
-      this.showLastName();
     }
 
     console.log(this.isLinear);
 
-    this.generateRandomIndices(20);
-    this.PageOne.get('gender').valueChanges.subscribe(value => {
-      console.log('here is the gender value being set', value);
-      this.photos = value === 'Male' ? this.photosFemale : this.photosMale;
-      this.generateRandomIndices(20);
-    });
-    // this.PageOne.get('Relation').valueChanges.subscribe((value) => {
-    //   this.setGender();
-    // });
-
-    if (this.fourPageService.getUserThrough()) {
-      this.mainContainerId = 'sd';
-    }
-
-  }
-  generateRandomIndices(j) {
-    this.photoIndices = [];
-    while (this.photoIndices.length < 5) {
-      const newNum = Math.floor(Math.random() * (j - 0));
-      if (!this.photoIndices.includes(newNum)) {
-        this.photoIndices.push(newNum);
-      }
-    }
-  }
-  getFacebookAccessToken(code) {
-    this.http.get<any>(`https://partner.hansmatrimony.com/api/getAccessToken?redirect_uri=https://hansmatrimony.com/fourReg&code=${code}`)
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          const profile = JSON.parse(response.profile);
-          this.getFbDataThroughToken(profile.data.user_id, response.access_token);
-        },
-        err => {
-          console.log(err);
-          this.router.navigateByUrl('fourReg');
-        }
-      );
   }
 
   protected filterCastes() {
@@ -565,11 +331,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   // event on change of input field
-  showLastName() {
-    this.secondName = true;
-  }
   inputFieldChanged(fieldName) {
-    this.generateRandomIndices(20);
     console.log(`${fieldName} changed`, this.PageOne.value[fieldName]);
     switch (fieldName) {
       case 'email':
@@ -588,10 +350,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       default:
         break;
     }
-    // if profile completed go to next page
-    setTimeout(() => {
-      this.goToNextPage();
-    }, 200);
   }
   // event on change of select field
   selectFieldChange(fieldName) {
@@ -601,7 +359,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         this.analyticsEvent('Four Page Registration Page One Birth Date Changed');
         break;
       case 'birth_month':
-        this.setDateAccordingToMonth(this.PageOne.value.birth_month);
         this.analyticsEvent('Four Page Registration Page One Birth Month Changed');
         break;
       case 'birth_year':
@@ -623,26 +380,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       default:
         break;
     }
-    if (this.PageOne.value.birth_date && this.PageOne.value.birth_month && this.PageOne.value.birth_year) {
-      this.showHeight = true;
-      console.log(this.showHeight);
-    }
-    // if profile completed go to next page
-    this.goToNextPage();
-  }
-
-  setDateAccordingToMonth(month: string) {
-    if (month === 'Feburary') {
-      this.date.splice(this.date.indexOf('30'), 1);
-      this.date.splice(this.date.indexOf('31'), 1);
-    } else {
-      if (!this.date.includes('30')) {
-        this.date.push('30');
-      }
-      if (!this.date.includes('31')) {
-        this.date.push('31');
-      }
-    }
   }
 
 
@@ -659,8 +396,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           this.authData = res;
           if (res.registered === 1) {
             this.ngxNotificationService.success('Already Registered');
-            this.disableNextSubject.next(true);
-            if (this.pollingCount > 0 && this.truecallerExists) {
+            if (this.pollingCount > 0) {
               localStorage.setItem('authData', JSON.stringify(res));
               localStorage.setItem('mobile_number', this.PageOne.value.phone);
               localStorage.setItem('is_lead', res.is_lead);
@@ -672,16 +408,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             }
             this.spinner.show();
           } else if (res.registered === 2) {
-            this.disableNextSubject.next(false);
             localStorage.setItem('RegisterNumber', number);
             this.ngxNotificationService.info('Please complete the form and update');
             this.analyticsEvent('Four Page Registration Page One Mobile Number Changed');
-            // if profile completed go to next page
-            this.goToNextPage();
           } else {
-            this.disableNextSubject.next(false);
-            this.alreadyExists = false;
-            // localStorage.setItem('RegisterNumber', number);
+            localStorage.setItem('RegisterNumber', number);
             // signifies that new user has entered his mobile number.
             this.analyticsEvent('Four Page Registration Page Zero');
             console.log('New User');
@@ -691,8 +422,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             (window as any).gtag('config', 'G-1ES443XD0F', {
               user_id: number
             });
-            // if profile completed go to next page
-            this.goToNextPage();
           }
         }
         this.spinner.hide();
@@ -703,20 +432,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     }
   }
 
-  private goToNextPage() {
-    console.log('is form valid', this.PageOne.valid);
-    if (!this.PageOne.valid) {
-      return;
-    }
-    this.disableNextSubject.next(false);
-    this.showError = false;
-
-    const button = document.querySelector<HTMLButtonElement>('#viewButton');
-    button.click();
-  }
-  scrollToTop() {
-   window.scroll(0, 0);
-  }
   openVerificationDialog(isLead: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
@@ -763,16 +478,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   getAllCaste() {
     return new Promise((res, rej) => {
 
-      this.http.get('https://partner.hansmatrimony.com/api/getAllCaste')
-      .pipe(timeout(5000), retry(2), catchError(e => {
-        throw new Error('Server Timeout, Unable to fetch castes ' + e);
-      }))
-      .subscribe((res: any) => {
+      this.http.get('https://partner.hansmatrimony.com/api/getAllCaste').subscribe((res: any) => {
         this.getcastes = [...res, 'All'];
         this.fourPageService.setAllCastes(this.getcastes);
         if (this.getcastes) {
           // load the initial caste list
-          this.filteredCastes.next((this.getcastes as string[]).slice(0, this.getcastes.length));
+          this.filteredCastes.next((this.getcastes as string[]).slice(0, 100));
 
           // listen for search field value changes
           this.PageOne.controls.CasteCtrl.valueChanges
@@ -805,8 +516,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
       this.PageOne = this._formBuilder.group({
         // tslint:disable-next-line: max-line-length
-        firstName: ['', Validators.compose([Validators.required])],
-        lastName: ['', Validators.compose([Validators.required])],
+        firstName: [''],
+        lastName: [''],
         phone: ['', Validators.compose([Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
         email: [''],
         Relation: ['', Validators.compose([Validators.required])],
@@ -827,35 +538,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
 
   firstStep() {
-    console.log(this.PageOne.value);
-    this.analyticsEvent('Page One Clicked');
-    this.nextClickedOne = true;
-    
-    if (!this.fourPageService.getUserThrough()) {
-      const date = this.PageOne.value.birth_date;
-      const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
-      const year = this.PageOne.value.birth_year;
 
-      this.fourPageService.profile.name = `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
-        this.PageOne.value.lastName : ''}`;
-      this.fourPageService.profile.gender = this.PageOne.value.gender;
-      this.fourPageService.profile.dob = date + '-' + month + '-' + year;
-      this.fourPageService.profile.martialStatus = this.PageOne.value.MaritalStatus;
-      this.fourPageService.profile.religion = this.PageOne.value.Religion;
-      this.fourPageService.profile.caste = this.PageOne.value.Castes;
-      console.log(this.fourPageService.profile);
-      if (this.PageOne.valid) {
-        this.fourPageService.pageOneUpdated.emit(true);
-      } else {
-        this.fourPageService.seeProfilesBtnClicked.emit(true);
-      }
-    }
-
-    if (this.alreadyExists) {
-      console.log(this.alreadyExists);
+    if (this.alreadyExists === true) {
       this.openVerificationDialog(this.authData.is_lead);
       return;
     }
+
 
     console.log(this.PageOne.value.email);
     this.errors = [];
@@ -864,28 +552,23 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log('year', this.PageOne.value.birth_year);
 
 
-    console.log(this.PageOne.value);
-    if (this.PageOne.valid) {
-      const phoneNumber = this.PageOne.value.phone ? this.PageOne.value.phone : this.disabledPhoneNumber ? this.disabledPhoneNumber : null;
-
-      if (phoneNumber != null) {
-      if (phoneNumber.toString().length < 10 ||
-      phoneNumber.toString().length > 14) {
+    if (this.PageOne.value.phone &&
+      this.PageOne.value.phone.toString().length < 10 ||
+      this.PageOne.value.phone.toString().length > 13
+      || this.PageOne.value.phone.invalid) {
       console.log(this.PageOne.value.phone);
       this.ngxNotificationService.error('Enter A Valid Mobile Number');
       return;
     }
-    } else {
-      this.ngxNotificationService.error('Enter A Valid Mobile Number');
-      return;
-    }
 
+    console.log(this.PageOne.value);
+    if (this.PageOne.valid) {
       const date = this.PageOne.value.birth_date;
       const month = this.month.indexOf(this.PageOne.value.birth_month) + 1;
       const year = this.PageOne.value.birth_year;
       console.log(date + '-' + month + '-' + year);
       const firststepdata = new FormData();
-      firststepdata.append('mobile', phoneNumber);
+      firststepdata.append('mobile', this.PageOne.value.phone);
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') !== '1') {
         firststepdata.append('id', localStorage.getItem('getListId'));
         firststepdata.append('identity_number', this.profileData.profile.identity_number);
@@ -907,7 +590,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         firststepdata.append('relation', this.PageOne.value.Relation);
       }
       firststepdata.append('gender', this.PageOne.value.gender);
-      
       firststepdata.append('height', this.Heights1[this.PageOne.value.Height]);
 
       if (this.PageOne.value.Weight) {
@@ -920,24 +602,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       firststepdata.append('caste', this.PageOne.value.Castes);
       firststepdata.append('disability', this.isDisable ? 'yes' : null);
       firststepdata.append('disabled_part', this.PageOne.value.disabledPart);
-
-      if (localStorage.getItem('getListSource')) {
-        firststepdata.append('channel', localStorage.getItem('getListSource'));
-      } else {
-        firststepdata.append('channel', 'Web');
-      }
-
-      if (this.advt_shortlink) {
-        firststepdata.append('shortlink', this.advt_shortlink );
-      }
-
-      if (this.advt_pid) {
-        firststepdata.append('pid', this.advt_pid );
-      }
-
-      if (this.advt_c) {
-        firststepdata.append('c', this.advt_c );
-      }
 
 
       this.lat ? firststepdata.append('lat', this.lat)
@@ -958,51 +622,14 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       console.log('religion', this.PageOne.value.Religion);
       console.log('caste', this.PageOne.value.Castes);
 
-      if (!this.fourPageService.getUserThrough() ) {
-        if (this.sharedPageTwoForm) {
-        
-        let incomeCalc;
-
-        if (this.PageTwo.value.AnnualIncome === '100+') {
-          incomeCalc = 100;
-        } else if (this.PageTwo.value.AnnualIncome && this.PageTwo.value.AnnualIncome !== '0') {
-          const a = this.PageTwo.value.AnnualIncome.split('-');
-          incomeCalc = String((Number(a[0]) + Number(a[1])) / 2);
-        } else {
-          incomeCalc = '0';
-        }
-  
-        if (!this.fourPageService.getUserThrough()) {
-          this.spinner.show('searchingSpinner');
-        }
-        firststepdata.append('degree', this.sharedPageTwoForm.value.Qualification);
-        firststepdata.append('occupation', this.sharedPageTwoForm.value.Occupation);
-      // if designation equals others set profession equals value of OtherDesignation only if OtherDesignation is not empty.
-        firststepdata.append('profession', this.sharedPageTwoForm.value.Designation !== 'Others'
-        ? this.sharedPageTwoForm.value.Designation : this.sharedPageTwoForm.value.OtherDesignation ?
-          this.sharedPageTwoForm.value.OtherDesignation : this.sharedPageTwoForm.value.Designation);
-
-        firststepdata.append('annual_income', incomeCalc);
-
-        firststepdata.append('working_city', this.sharedPageTwoForm.value.Working);
-        firststepdata.append('about', this.sharedPageTwoForm.value.About);
-        firststepdata.append('abroad', this.sharedPageTwoForm.value.abroad);
-      } else {
-        return;
-      }
-      }
-
 
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
-        if (this.isLeadIsZero) {
-          firststepdata.append('is_lead', '0');
-        }
+
         // tslint:disable-next-line: max-line-length
         return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(
           (res: any) => {
             console.log('first', res);
             this.spinner.hide();
-            this.fourPageService.updateFormOneData(firststepdata);
           }, err => {
             this.spinner.hide();
             this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
@@ -1017,70 +644,38 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             this.spinner.hide();
             localStorage.setItem('id', res.id);
             localStorage.setItem('gender', this.PageOne.value.gender);
-            localStorage.setItem('mobile_number', phoneNumber);
-            // if (res.isAssignToOnline) {
-            //   localStorage.setItem('isAssignToOnline', res.isAssignToOnline);
-            //   this.fourPageService.showApproveBtn = true;
-            // }
+            localStorage.setItem('mobile_number', this.PageOne.value.phone);
+
             // if facebook profile pic is fetched
             if (this.fetchedFbProfilePic) {
               setTimeout(() => {
                 this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
               }, 200);
             }
-            if (!this.fourPageService.getUserThrough()) {
-              (window as any).fbq('track', 'CompleteRegistration', {
-              value: localStorage.getItem('id'),
-              content_name: localStorage.getItem('RegisterNumber'),
-            });
-              (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
-              value: localStorage.getItem('id'),
-              content_name: localStorage.getItem('RegisterNumber'),
-            });
 
-              this.router.navigateByUrl('chat?first');
-              this.analyticsEvent('Four Page Registration Page Two');
-
-            } else {
-              this.fourPageService.updateFormOneData(firststepdata);
-            }
+            this.fourPageService.updateFormOneData(firststepdata);
             this.analyticsEvent('Four Page Registration Page One');
 
           } else {
             this.spinner.hide();
-            // this.ngxNotificationService.error(res.message);
-            // update basic api status 0
-            this.analyticsEvent(`Page One Error Status 0`);
+            this.ngxNotificationService.error(res.message);
           }
         }, err => {
           this.spinner.hide();
-          // this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+          this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
           console.log(err);
-          this.analyticsEvent(`Page One Backend Error`);
         });
       }
     } else {
-
-      this.showError = true;
-      console.log(this.showError);
-
-      if (!this.showHeight) {
-        this.showHeight = true;
-      }
-
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
-        if (this.PageOne.controls[control].invalid) {
-          if (!this.fourPageService.getUserThrough()) {
-            this.PageOne.controls[control].markAsTouched();
-          }
-          console.log(control);
+        console.log(control);
+        if (!this.PageOne.controls[control].valid) {
           this.errors.push(control);
         }
       }
       if (this.errors[0]) {
-        // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
-        this.analyticsEvent(`Page One Error ${this.errors[0]}`);
+        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
       }
     }
   }
@@ -1115,6 +710,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     }
 
   }
+
+
+
 
   onDate(event): void {
     console.log(event);
@@ -1153,7 +751,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   addSlashes() {
     console.log('sv');
     const newInput = document.getElementById('birthDate');
-    newInput.addEventListener('keydown', function(e) {
+    newInput.addEventListener('keydown', function (e) {
       if (e.which !== 8) {
         const numChars = (e.target as HTMLInputElement).value.length;
         if (numChars === 2 || numChars === 5) {
@@ -1180,15 +778,13 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         Castes: 'All'
       });
     }
-    // if profile completed go to next page
-    this.goToNextPage();
   }
 
   setGender() {
     console.log(this.PageOne.value.Relation);
     this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
     this.analyticsEvent('Four Page Registration Page One Gender Changed');
-    this.openRegisterWith(this.PageOne.value.Relation);
+    // this.openRegisterWith(this.PageOne.value.Relation);
     switch (this.PageOne.value.Relation) {
       case 'Brother':
         this.PageOne.patchValue(
@@ -1221,11 +817,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       default:
         break;
     }
-    // if profile completed go to next page
-    this.goToNextPage();
   }
+
+
   getProfile() {
-    // this.spinner.show();
+    this.spinner.show();
     const leadId = localStorage.getItem('getListLeadId');
     const id = localStorage.getItem('getListId');
     console.log(id, leadId);
@@ -1269,12 +865,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
       localStorage.setItem('getListTempleId', profileData.profile.temple_id);
     }
-    console.log('look here', profileData.family.father_status, profileData.family.mother_status);
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
-
-    localStorage.setItem('getListIdentity', profileData.profile.identity_number);
-    localStorage.setItem('getListTemple', profileData.profile.temple_id);
 
     localStorage.setItem('getListMobile', profileData.family.mobile ? profileData.family.mobile : '');
 
@@ -1293,12 +885,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.userProfile.height = profileData.profile.height;
     this.userProfile.weight = profileData.profile.weight;
     this.userProfile.martialStatus = profileData.profile.marital_status;
-    this.userProfile.annualIncome = this.setIncomeVals(profileData.profile.monthly_income);
+    this.userProfile.annualIncome = profileData.profile.monthly_income;
     if (profileData.family.religion) {
       this.Caste = true;
     }
     this.userProfile.religion = profileData.family.religion;
-    this.userProfile.caste = profileData.caste ? profileData.caste : profileData.family.caste;
+    this.userProfile.caste = profileData.family.caste;
     this.userProfile.manglik = profileData.profile.manglik;
     this.userProfile.locality = profileData.family.locality;
     this.userProfile.qualification = profileData.profile.degree;
@@ -1306,47 +898,32 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.userProfile.designation = profileData.profile.profession;
     this.userProfile.workingCity = profileData.profile.working_city;
     this.userProfile.about = profileData.profile.about;
-
     this.userProfile.birthPlace = profileData.profile.birth_place;
     this.userProfile.birthTime = profileData.profile.birth_time;
     this.userProfile.gotra = profileData.family.gotra;
     this.userProfile.foodChoice = profileData.profile.food_choice;
     this.userProfile.fatherStatus = profileData.family.father_status;
     this.userProfile.motherStatus = profileData.family.mother_status;
-    this.userProfile.familyIncome = this.setIncomeVals(profileData.family.family_income);
+    this.userProfile.familyIncome = profileData.family.family_income;
     this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
     this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
     this.userProfile.image3 = this.getProfilePhoto(profileData.profile.carousel, '2');
     this.userProfile.company = profileData.profile.company;
     this.userProfile.college = profileData.profile.college;
     this.userProfile.family = profileData.family;
-    this.userProfile.photoScore = profileData.profile.photo_score;
+
     console.log(this.userProfile);
     this.fourPageService.setProfile(this.userProfile);
     this.fourPageService.getListData.emit(true);
     this.setFormOneData();
   }
-  setIncomeVals(income: number) {
-    for (const v of this.incomeCategories) {
-      const vals = v.split('-');
-      if (income >= Number(vals[0]) && income <= Number(vals[1])) {
-        console.log('look here', v);
-        return v;
-      }
-    }
-    if (income === 100) {
-      return '100+';
-    } else {
-      return '0-2.5';
-    }
 
-  }
   setFormOneData() {
     this.PageOne.patchValue({
       firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
       lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] ?
         this.userProfile.name.split(' ')[1] : '' : '',
-      phone: this.setMobileNumber(this.userProfile.mobile),
+      phone: this.userProfile.mobile,
       email: this.userProfile.email,
       Relation: this.userProfile.relation,
       gender: this.userProfile.gender,
@@ -1359,17 +936,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       Religion: this.userProfile.religion,
       Castes: this.userProfile.caste,
     });
-
-    this.setDateAccordingToMonth(this.getMonthString(this.userProfile.dob.toString().split('-')[1]));
-  }
-  setMobileNumber(number: string) {
-    console.log('qwerty', number);
-    if (number[0] != '+') {
-      console.log('+91' + number);
-      return '+91' + number;
-    } else {
-      return number;
-    }
   }
   getMonthString(month: string) {
     switch (month) {
@@ -1419,68 +985,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   checkAllCastePref(event) {
     console.log(event.checked);
     this.isAllCastePref = event.checked;
-    if (event.checked) {
-      this.showCaste = true;
-      this.PageOne.controls.Castes.setValue('All');
-    } else {
-      this.showCaste = false;
-      this.PageOne.controls.Castes.setValue(null);
-    }
-    if (!this.fourPageService.getUserThrough()) {
-      this.goToNextPage();
-    }
   }
 
   // show register with popup
   openRegisterWith(selection) {
-
-    if (selection !== 'Myself') {
-      this.callTruecaller();
-    } else {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.hasBackdrop = true;
-      this.breakPointObserver.observe([
-        '(min-width: 1024px)'
-      ]).subscribe(
-        result => {
-          if (result.matches) {
-            console.log('screen is greater than  1024px');
-            dialogConfig.minWidth = '40vw';
-            dialogConfig.maxHeight = '80vh';
-            dialogConfig.disableClose = true;
-          } else {
-            console.log('screen is less than  1024px');
-            dialogConfig.minWidth = '95vw';
-            dialogConfig.maxHeight = '80vh';
-            dialogConfig.disableClose = true;
-          }
-        }
-      );
-      dialogConfig.data = {
-        value: selection
-      };
-      dialogConfig.id = 'registerWith';
-      const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
-      dialogRef.afterClosed().subscribe(
-        (response) => {
-          console.log(response);
-          if (response) {
-            if (response.chose === 'facebook') {
-              this.analyticsEvent('Registered Through Facebook');
-              FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
-                this.statusChangeCallback(response);        // Returns the login status.
-
-              });
-            } else if (response.chose === 'truecaller') {
-              this.analyticsEvent('Registered Through True Caller');
-              this.callTruecaller();
-            }
-          }
-        }
-      );
-    }
-  }
-  openChooseFor() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.hasBackdrop = true;
     this.breakPointObserver.observe([
@@ -1500,16 +1008,23 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         }
       }
     );
-    dialogConfig.id = 'registerWith';
-    const dialogRef = this.dialog.open(ChooseForComponent, dialogConfig);
+    dialogConfig.data = {
+      value: selection
+    };
+    const dialogRef = this.dialog.open(RegisterWithComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (response) => {
         console.log(response);
         if (response) {
-          this.PageOne.patchValue({
-            Relation: response.relation,
-          });
-          this.setGender();
+          if (response.chose === 'facebook') {
+            this.analyticsEvent('Registered Through Facebook');
+            (window as any).FB.getLoginStatus((response) => {   // Called after the JS SDK has been initialized.
+              this.statusChangeCallback(response);        // Returns the login status.
+            });
+          } else if (response.chose === 'truecaller') {
+            this.analyticsEvent('Registered Through True Caller');
+            this.callTruecaller();
+          }
         }
       }
     );
@@ -1517,33 +1032,19 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
 
   //  get facebook login status
   statusChangeCallback(value) {
-    console.log(`value is ${value.status}`);
-
-    // if (value.status === 'connected') {
-    //   localStorage.setItem('fb_token', value.authResponse.accessToken);
-    //   this.getFbData();
-    // }
-
-    if (value.status !== 'connected') {
-      // tslint:disable-next-line: max-line-length
-      window.location.href = `https://www.facebook.com/v8.0/dialog/oauth?client_id=449447648971731&redirect_uri=https://hansmatrimony.com/fourReg&scope=email,public_profile,user_photos,user_gender,user_birthday,user_hometown,user_location`;
-    } else {
-      // FB.login((response) => {
-      //   alert(`response is ${response}`);
-      //   if (response.authResponse) {
-      //     console.log('Welcome!  Fetching your information.... ');
-      //     this.getFbData();
-      //   } else {
-      //     console.log('User cancelled login or did not fully authorize.');
-      //   }
-      // }, {
-      //   scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location',
-      //   enable_profile_selector: true,
-      //   auth_type: 'rerequest',
-      //   return_scopes: true
-      // });
+    console.log(value);
+    if (value.status === 'connected') {
       localStorage.setItem('fb_token', value.authResponse.accessToken);
       this.getFbData();
+    } else {
+      (window as any).FB.login((response) => {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          this.getFbData();
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location' });
     }
   }
 
@@ -1552,77 +1053,19 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log('Welcome!  Fetching your information.... ');
 
     // fetch user image
-    FB.api('/me/picture',
+    (window as any).FB.api('/me/picture',
       'GET',
       { height: '600', width: '400', redirect: 'false' }, (response) => {
         console.log(response.data.url);
         if (response.data.url) {
-          this.fetchedFbProfilePic = {
-            url: response.data.url,
-            user_id: null,
-            access_token: null
-          };
+          this.fetchedFbProfilePic = response.data.url;
         }
       });
 
     // fetch user data
-    FB.api('/me',
+    (window as any).FB.api('/me',
       'GET',
       { fields: 'email, address, first_name, gender, last_name, birthday, hometown,location' }, (response) => {
-        if (response.first_name) {
-          this.secondName = true;
-          this.formfirstName = response.first_name;
-          this.formlastName = response.last_name;
-        }
-        console.log(response);
-        this.spinner.hide();
-        this.PageOne.patchValue({
-          firstName: response.first_name ? response.first_name : '',
-          lastName: response.last_name ? response.last_name : '',
-          email: response.email ? response.email : '',
-          gender: response.gender ? this.toTitleCase(response.gender) : '',
-          birth_date: response.birthday ? response.birthday.split('/')[1] : '',
-          birth_month: response.birthday ? this.getMonthString(response.birthday.split('/')[0]) : '',
-          birth_year: response.birthday ? response.birthday.split('/')[2] : ''
-        });
-        // set home town in birth place
-        if (response.hometown && response.hometown.name) {
-          this.fourPageService.facebookHomeTownUpdated.emit(response.hometown.name);
-        }
-        // set home town in birth place
-        if (response.location && response.location.name) {
-          this.fourPageService.facebookLocationUpdated.emit(response.location.name);
-        }
-        // to solve the overlapping issue for new user
-        (document.querySelector('#firstName') as HTMLInputElement).focus();
-      });
-  }
-  getFbDataThroughToken(userId, token) {
-
-    console.log('Welcome!  Fetching your information.... ');
-
-    // // fetch user image
-    FB.api(`/${userId}/picture`,
-      'GET',
-      { height: '600', width: '400', redirect: 'false' }, (response) => {
-        console.log(response.data.url);
-        if (response.data.url) {
-          this.fetchedFbProfilePic = {
-            url: response.data.url,
-            user_id: userId,
-            access_token: token
-          };
-        }
-      });
-
-    // fetch user data
-
-    FB.api(`/${userId}`,
-      'GET',
-      {
-        fields: 'email, address, first_name, gender, last_name, birthday, hometown,location',
-        access_token: token
-      }, (response) => {
         console.log(response);
         this.spinner.hide();
         this.PageOne.patchValue({
@@ -1660,28 +1103,52 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     }
   }
 
-  // show truecaller on clicking mobile field if user has selected to sign up with facebook
-  showTruecallerIfFacebook() {
-    if (this.fetchedFbProfilePic) {
-      this.callTruecaller();
-    }
-  }
-
   callTruecaller() {
     // tslint:disable-next-line: max-line-length
-    // const randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
-    // this.startTruecallerPolling(randomNumber);
-    // (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
+    const randomNumber = Math.floor(Math.random() * 100000000) + 1000000;
+    (window as any).location = `truecallersdk://truesdk/web_verify?requestNonce=${randomNumber}&partnerKey=0Jsfr258a371a13bd4fbf905228721f9fa2c2&partnerName=Hans Matrimony&lang=en&title=Login&skipOption=USE ANOTHER MOBILE NUMBER`;
 
-    // setTimeout(() => {
+    setTimeout(() => {
 
-    //   if (document.hasFocus()) {
-    //     // Truecaller app not present on the device and you redirect the user
-    //     // to your alternate verification page
-    //   } else {
-    //     // testing position above
-    //   }
-    // }, 600);
+      if (document.hasFocus()) {
+        // Truecaller app not present on the device and you redirect the user
+        // to your alternate verification page
+      } else {
+        this.getUserFromTrueCaller(randomNumber).pipe(
+          catchError(e => {
+            throw new Error('True Caller Not Responding');
+          })
+        )
+          .subscribe(
+            (response) => {
+              this.pollingCount++;
+              console.log(response);
+              if (this.pollingCount < 10) {
+                if (response.status === 1) {
+                  const data = JSON.parse(response.data);
+                  if (data) {
+                    this.setTruecallerData(data);
+                  }
+                  this.stopPolling.next();
+                } else if (response.status !== 0) {
+                  this.ngxNotificationService.error('True Caller Not Responding');
+                  this.stopPolling.next();
+                }
+              } else {
+                this.stopPolling.next();
+              }
+            },
+            err => {
+              this.ngxNotificationService.error('True Caller Not Responding');
+              console.log(err);
+              this.stopPolling.next();
+            }
+          );
+        // Truecaller app present on the device and the profile overlay opens
+        // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
+        // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
+      }
+    }, 600);
   }
 
   getUserFromTrueCaller(requestId): Observable<any> {
@@ -1693,103 +1160,22 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     );
   }
 
-  // start true caller polling
-  startTruecallerPolling(randomNumber) {
-    this.getUserFromTrueCaller(randomNumber).pipe(
-      catchError(e => {
-        throw new Error('True Caller Not Responding');
-      })
-    )
-      .subscribe(
-        (response) => {
-          this.pollingCount++;
-          console.log(response);
-          if (this.pollingCount < 10) {
-            if (response.status === 1) {
-              this.truecallerExists = true;
-              const data = JSON.parse(response.data);
-              if (data) {
-                this.setTruecallerData(data);
-              }
-              this.stopPolling.next();
-            } else if (response.status !== 0) {
-              this.ngxNotificationService.error('True Caller Not Responding');
-              this.stopPolling.next();
-              this.truecallerExists = false;
-            }
-          } else {
-            this.stopPolling.next();
-            this.truecallerExists = false;
-          }
-        },
-        err => {
-          this.ngxNotificationService.error('True Caller Not Responding');
-          console.log(err);
-          this.stopPolling.next();
-        }
-      );
-    // Truecaller app present on the device and the profile overlay opens
-    // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
-    // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
-  }
-
   setTruecallerData(data) {
-    if (data.name.first) {
-      this.secondName = true;
-      this.formfirstName = data.name.first;
-      this.formlastName = data.name.last;
-    }
     this.PageOne.patchValue({
-      firstName: data.name.first ? data.name.first : '',
-      lastName: data.name.last ? data.name.last : '',
-      email: data.onlineIdentities.email ? data.onlineIdentities.email : '',
-      phone: data.phoneNumbers[0] ? `+${data.phoneNumbers[0]}` : ''
+      firstName: data.name.first,
+      lastName: data.name.last,
+      email: data.onlineIdentities.email,
+      phone: data.phoneNumbers[0]
     });
+
     if (data.phoneNumbers && data.phoneNumbers[0]) {
-      this.disabledPhoneNumber = data.phoneNumbers[0];
-      setTimeout(() => {
-        const countryBtn = (document.querySelector('ngx-mat-intl-tel-input button') as HTMLInputElement);
-        if (countryBtn) {
-            countryBtn.disabled = true;
-          }
-        this.PageOne.controls.phone.disable();
-        }, 1000);
+      this.hideMobileNumber = true;
       this.mobileNumberChanged();
     } else {
       this.hideMobileNumber = false;
     }
 
-    this.fetchedFbProfilePic = {
-      url: data.avatarUrl,
-      user_id: null,
-      access_token: null
-    };
-    this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
-  }
-
-  getUtmQueriesFromUrl() {
-    console.log(this.route.snapshot);
-
-    if (this.route.snapshot.queryParams) {
-        console.log(this.route.snapshot.queryParams);
-        if (this.route.snapshot.queryParams.shortlink) {
-          this.advt_shortlink = this.route.snapshot.queryParams.shortlink;
-        }
-        if (this.route.snapshot.queryParams.pid) {
-          this.advt_pid = this.route.snapshot.queryParams.pid;
-        }
-        if (this.route.snapshot.queryParams.c) {
-          this.advt_c = this.route.snapshot.queryParams.c;
-        }
-      }
-  }
-
-  getPageTwoForm(value: FormGroup) {
-    console.log('got page two form', value);
-    if (value) {
-      this.sharedPageTwoForm = value;
-      this.goToNextPage();
-    }
+    this.fourPageService.facebookProfilePicUploaded.emit(data.avatarUrl);
   }
 
 

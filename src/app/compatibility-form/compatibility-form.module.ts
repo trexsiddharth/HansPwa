@@ -18,6 +18,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Testimonials } from './testimonials/testimonials.component';
 import { ChoiceListComponent } from '../choice-list/choice-list.component';
 import { TestimonialCards } from './testimonials/testimonial-cards/testimonial-cards.component';
+import { FullFormOneComponent } from './full-form/full-page-one/full-form-one-component';
+import { FullFormTwoComponent } from './full-form/full-page-two/full-form-two-component';
+import { FullFormThreeComponent } from './full-form/full-page-three/full-form-three-component';
+import { FullFormPhotoComponent } from './full-form/full-page-photo/full-form-photo-component';
 @NgModule({
   declarations: [
     CompatibilityFormComponent,
@@ -27,6 +31,10 @@ import { TestimonialCards } from './testimonials/testimonial-cards/testimonial-c
     CompatibilityPageFiveComponent,
     FormsMessageDialogComponent,
     CompatibilityVerifyComponent,
+    FullFormOneComponent,
+    FullFormTwoComponent,
+    FullFormThreeComponent,
+    FullFormPhotoComponent,
     ThankYouComponent,
     RegisterWithComponent,
     ChooseForComponent,
