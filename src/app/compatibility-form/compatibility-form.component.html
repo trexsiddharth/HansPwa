@@ -1,11 +1,11 @@
 
-<app-full-form-one></app-full-form-one>
+<app-full-form-one *ngIf="fourPageService.getFullPageStatus()"></app-full-form-one>
 <div class="compatiblity-form-holder" *ngIf="!fourPageService.getFullPageStatus()">
 <div *ngIf="mobileScreen" >
   <a class="d-flex justify-content-center" (click)="scrollToTop()"><button *ngIf="auto" class="register-btn d-flex justify-content-center" >Register For Free</button></a>
 </div>
   
-<div class="d-flex">
+<div class="d-flex"> 
   <img src="../../assets/hero/logoNew.svg" class="logo"  alt="">
 <mat-toolbar class="fixToolBar">
   <mat-toolbar-row style="position:relative!important">
