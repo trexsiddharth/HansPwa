@@ -419,7 +419,7 @@ export class FullFormPhotoComponent implements OnInit {
 
   checkForPhoto() {
     if (this.showPlansOnFirstClick) {
-      this.itemService.openTodaysPopupAd();
+      this.itemService.openTodaysPopupAd(true);
       this.showPlansOnFirstClick = false;
     } else {
     if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
@@ -469,7 +469,7 @@ export class FullFormPhotoComponent implements OnInit {
 
   skip(type) {
     if (this.showPlansOnFirstClick) {
-      this.itemService.openTodaysPopupAd();
+      this.itemService.openTodaysPopupAd(true);
       this.showPlansOnFirstClick = false;
     } else {
     this.fourPageService.form4Completed.emit(true);

@@ -240,7 +240,7 @@ export class FindOpenHistoryProfileService {
     }
   }
   setPhotoStatus(status: boolean) {
-    if (status) { localStorage.setItem("has_photo", '1'); } else { localStorage.setItem("has_photo", "0"); }
+    if (status) { localStorage.setItem('has_photo', '1'); } else { localStorage.setItem('has_photo', '0'); }
     this.hasPhoto = status;
   }
   getPhotoStatus() {
@@ -391,7 +391,7 @@ export class FindOpenHistoryProfileService {
     const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
   }
   // new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
-  async openTodaysPopupAd() {
+  async openTodaysPopupAd(sendToChat = false) {
     if (this.popupOpen) {
       this.popupOpen = false;
       return;
@@ -418,6 +418,24 @@ export class FindOpenHistoryProfileService {
     );
     dialogConfig.id = 'todaysPopup';
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+    (response: any) => {
+      /*
+      * if user is coming from full page form,
+      * once he clicks on the close button in the dialog we send the user to chat screen
+      * so that they dont have to click on go button twice on the last page of the
+      * registration form.
+      */
+      if (sendToChat) {
+        if (response) {
+          if (response.status === 'closed') {
+            this.router.navigateByUrl('chat?first');
+          }
+        }
+      }
+    }
+  );
 
   }
 

@@ -136,7 +136,7 @@ export class TodaysPaymentPopupComponent implements OnInit {
   closeDialog() {
     localStorage.removeItem('oId');
     localStorage.removeItem('selected_plan');
-    this.dialogRef.close();
+    this.dialogRef.close({status: 'closed'});
   }
 
   getAuthDataFirst(): Promise<any> {
