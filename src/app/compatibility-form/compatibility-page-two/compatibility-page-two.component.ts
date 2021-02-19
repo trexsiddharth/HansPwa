@@ -58,7 +58,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   @ViewChild('otpModal', { static: false }) private otpModal: any;
   @Output() sharePageTwo = new EventEmitter();
   showOccupation = false;
-  showYearlyIncome = false;
+  showYearlyIncome = true;
   showWorkingCity = false;
   PageTwo: FormGroup;
   errors: string[] = [];
