@@ -59,7 +59,7 @@ export class NewLandingFromComponentComponent implements OnInit {
 mobile(){
     const navLinks = document.querySelector(".nav-links");
     const links = document.querySelectorAll(".nav-links li");
-  if(this.mobileScreen){
+    if(this.mobileScreen){
     navLinks.addEventListener("click", () => {
       navLinks.classList.toggle("open");
       links.forEach(link => {
@@ -74,14 +74,30 @@ private resize(){
 }
 private detectMobileScreen() {
   window.onload = this.resize;
-window.onresize = this.resize;
-if (this.resize() < this.mobileBreakpoint) {
-this.mobileScreen=true
+  window.onresize = this.resize;
+  if (this.resize() < this.mobileBreakpoint) {
+this.mobileScreen = true;
 } else {
-this.mobileScreen=false
+this.mobileScreen = false;
 }
-console.log(this.mobileScreen);
+  console.log(this.mobileScreen);
 
+}
+
+facebookAnalytics() {
+  (window as any).fbq('track', 'Contact', {
+    value: localStorage.getItem('id'),
+    content_name: localStorage.getItem('mobile_number'),
+  });
+  (window as any).fbq('track', '692972151223870', 'Contact', {
+    value: localStorage.getItem('id'),
+    content_name: localStorage.getItem('mobiler_number'),
+  });
+}
+
+sendWhatsAppLink() {
+  this.facebookAnalytics();
+  window.open('http://wa.me/919873116709?text=We%20are%20interested%20in%20Registering%20with%20Hans%20Matrimony');
 }
 
 }
