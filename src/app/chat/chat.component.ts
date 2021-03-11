@@ -303,7 +303,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.router.url.match('mobile=')) {
-      this.currentUrl = this.router.url.substring(13);
+      this.currentUrl = this.router.url.substring(13).replace('%2B', '+').replace('%20', '+');
       localStorage.setItem('mobile_number', this.currentUrl);
       console.log(this.currentUrl);
     }
