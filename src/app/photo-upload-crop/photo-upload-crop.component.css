@@ -13,3 +13,7 @@
     color:white;
     border:0px!important;
   }
+  #croppedImg{
+    width: 15rem;
+    height: 17rem;
+  }

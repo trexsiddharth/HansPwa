@@ -17,14 +17,14 @@
     <div class="row" style="margin-top: 2%;">
         <div class="text-center col-md-8">
             <h5 *ngIf="(croppedImage$ | async)">Image Preview</h5>
-            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
-                [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="3 / 4"
+                [resizeToWidth]="400" format="jpg" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
                 (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
             </image-cropper>
         </div>
         <div class="text-center col-md-4" *ngIf="(croppedImage$ | async)">
             <h5> Cropped Image Preview</h5>
-            <img [src]="croppedImage$ | async" />
+            <img id="croppedImg" [src]="croppedImage$ | async" />
 
         </div>
     </div>
