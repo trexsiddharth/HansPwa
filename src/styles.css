@@ -149,6 +149,12 @@ body {
 .mt-15{
   margin-top: 15px;
 }
+.mt-20{
+  margin-top: 20px;
+}
+.mt-50{
+  margin-top: 10px;
+}
 .mat-input-element:disabled{
   color: #737373;
 }

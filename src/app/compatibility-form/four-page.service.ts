@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Profile } from './profile';
 import { FormGroup } from '@angular/forms';
+import { FranchiseRegistrationTable } from '../Model/FranchiseRegistrationTable';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class FourPageService {
   form3Completed = new EventEmitter<boolean>();
   // page four form event
   form4Completed = new EventEmitter<boolean>();
+  form5Completed = new EventEmitter<boolean>();
   getListData = new EventEmitter<boolean>();
   makeLinear = new EventEmitter<boolean>();
   pageOneUpdated = new EventEmitter<boolean>();
@@ -31,6 +33,8 @@ export class FourPageService {
   private fullPage = false;
 
   showApproveBtn = false;
+
+  private franchiseRegistration: FranchiseRegistrationTable = new FranchiseRegistrationTable();
   constructor() { }
 
 
@@ -80,8 +84,22 @@ export class FourPageService {
     return this.profile;
   }
 
+  saveFranchiseData(id: string, mobile: string , planId: string , amount: string) {
+    if (!id && !mobile && !planId && !amount) { return; }
+    this.franchiseRegistration.franchise_id = id;
+    this.franchiseRegistration.registration_mobile = mobile;
+    this.franchiseRegistration.plan_id = planId;
+    this.franchiseRegistration.registration_amount = amount;
+    console.log(this.franchiseData);
+  }
+
+  get franchiseData(): FranchiseRegistrationTable {
+    return this.franchiseRegistration;
+  }
+
   updateFormOneData(userData: FormData) {
     console.log(userData);
+    
     this.profile.name = userData.get('name') ?
       userData.get('name').toString() : '';
     this.profile.mobile = userData.get('mobile') ?

@@ -254,7 +254,11 @@ captureStandardPayment(response, amount, points) {
            '2800' : localStorage.getItem('selected_plan') === 'plan 2' ?
             '5500' : localStorage.getItem('selected_plan') === 'plan 3' ? '8500' : '2800' : '2800'}`);
           this.facebookAnalytics('Subscribe', amount);
-          this.route.navigateByUrl('chat?razorVerifyPayment');
+          if (localStorage.getItem('franchiseRegistration')) {
+            this.route.navigateByUrl(`chat?mobile=${localStorage.getItem('RegisterNumber')}`);
+          } else {
+            this.route.navigateByUrl('chat?razorVerifyPayment');
+          }
         } else {
           this.ngxNotificationService.error('Something went wrong. Please try again later.');
         }

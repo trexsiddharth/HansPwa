@@ -109,6 +109,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   formTwo = false;
   formThree = false;
   formFour = false;
+  formFive = false;
   userProfile: Profile = new Profile();
   isLinear = true;
   lat;
@@ -132,6 +133,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   /** Subject that emits when the component has been destroyed. */
   protected onDestroy = new Subject<void>();
 
+  userFromFranchise = false;
 
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
@@ -176,13 +178,6 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    if (localStorage.getItem('RegisterNumber')) {
-      this.PageOne.patchValue({
-        phone: localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length)
-      });
-      this.hideMobileNumber = true;
-      console.log(localStorage.getItem('RegisterNumber').substr(3, localStorage.getItem('RegisterNumber').length));
-    }
     localStorage.clear();
     this.languageService.setRegisterLang();
 
@@ -217,25 +212,11 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
         }
       }
     );
-
-    // for team user we will make page non linear from page two...because page one details are compulsory
-    this.fourPageService.makeLinear.subscribe(
-      (makeLinear: boolean) => {
-        console.log(makeLinear);
-        if (makeLinear === true) {
-          this.isLinear = false;
-          this.fourPageService.setUserThrough(true);
-          console.log(this.isLinear);
-        }
-      }
-    );
-
-    // for skippable
-    this.route.url.subscribe(
-      link => {
-        if (link && link[0] && link[0].path) {
-          console.log(link[0].path);
-          this.fourPageService.setSkippable(true);
+    this.fourPageService.form4Completed.subscribe(
+      (complete: boolean) => {
+        if (complete === true) {
+          this.formFive = true;
+          console.log('formFive', this.formFive);
         }
       }
     );
@@ -246,42 +227,17 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       async (route: any) => {
         console.log(route.params);
         if (route) {
-          if (route.params.id) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListId', route.params.id);
-          } else if (route.params.mobile) {
-            this.PageOne.patchValue({
-              phone: route.params.mobile
-            });
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListMobile', route.params.mobile);
-          } else {
-            this.fourPageService.setUserThrough(false);
-            localStorage.setItem('getListId', '');
-            localStorage.setItem('getListMobile', '');
-          }
-          if (route.params.leadId) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListLeadId', route.params.leadId);
-            this.isLeadIsZero = route.params.leadId === '0' ? true : false;
-          } else {
-            this.fourPageService.setUserThrough(false);
-            localStorage.setItem('getListLeadId', '');
-          }
-          if (route.params.templeId) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListTempleId', route.params.templeId);
-          }
-          if (route.params.enqDate) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('enqDate', route.params.enqDate);
-          }
-          if (route.params.source) {
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListSource', route.params.source);
-          }
-          if (route.params.id) {
-            this.getProfile();
+          if (route.params.franchise_id 
+            && route.params.mobile 
+            && route.params.plan_id
+            && route.params.amount) {
+              this.userFromFranchise =  true;
+              localStorage.setItem('franchiseRegistration', 'true');
+              this.PageOne.controls.phone.setValue(route.params.mobile);
+              localStorage.setItem('RegisterNumber', route.params.mobile);
+              this.fourPageService.saveFranchiseData(route.params.franchise_id, route.params.mobile , 
+                route.params.plan_id
+                ,route.params.amount);
           }
         }
 
@@ -751,7 +707,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   addSlashes() {
     console.log('sv');
     const newInput = document.getElementById('birthDate');
-    newInput.addEventListener('keydown', function (e) {
+    newInput.addEventListener('keydown', function(e) {
       if (e.which !== 8) {
         const numChars = (e.target as HTMLInputElement).value.length;
         if (numChars === 2 || numChars === 5) {

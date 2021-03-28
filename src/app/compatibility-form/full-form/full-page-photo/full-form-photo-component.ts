@@ -418,32 +418,36 @@ export class FullFormPhotoComponent implements OnInit {
   }
 
   checkForPhoto() {
-    if (this.showPlansOnFirstClick) {
-      this.itemService.openTodaysPopupAd(true);
-      this.showPlansOnFirstClick = false;
-    } else {
-    if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
-      this.fourPageService.profile.photoScore = this.photoScore;
-      const userProfile = this.fourPageService.profile;
-      console.log(userProfile);
-      if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
-        return this.ngxNotificationService.error('Select Image 1');
-      } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
-        return this.ngxNotificationService.error('Select Image 2');
-      } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
-        return this.ngxNotificationService.error('Select Image 3');
-      } else if (userProfile.photoScore < 1) {
-        return this.ngxNotificationService.error('Give a score');
-      } else if (!localStorage.getItem('getListId') || !localStorage.getItem('getListMobile')) {
-        console.log(this.fourPageService.getProfile().mobile);
-        localStorage.setItem('mobile_number', this.fourPageService.getProfile().mobile);
+    if (!this.fourPageService.franchiseData) {
+      if (this.showPlansOnFirstClick) {
+        this.itemService.openTodaysPopupAd(true);
+        this.showPlansOnFirstClick = false;
       } else {
-        this.skip(1);
+      if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
+        this.fourPageService.profile.photoScore = this.photoScore;
+        const userProfile = this.fourPageService.profile;
+        console.log(userProfile);
+        if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
+          return this.ngxNotificationService.error('Select Image 1');
+        } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
+          return this.ngxNotificationService.error('Select Image 2');
+        } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
+          return this.ngxNotificationService.error('Select Image 3');
+        } else if (userProfile.photoScore < 1) {
+          return this.ngxNotificationService.error('Give a score');
+        } else if (!localStorage.getItem('getListId') || !localStorage.getItem('getListMobile')) {
+          console.log(this.fourPageService.getProfile().mobile);
+          localStorage.setItem('mobile_number', this.fourPageService.getProfile().mobile);
+        } else {
+          this.skip(1);
+        }
+      } else {
+        this.skip(0);
       }
+    }
     } else {
       this.skip(0);
     }
-  }
   }
 
   analyticsEvent(event) {
@@ -468,46 +472,50 @@ export class FullFormPhotoComponent implements OnInit {
   }
 
   skip(type) {
-    if (this.showPlansOnFirstClick) {
-      this.itemService.openTodaysPopupAd(true);
-      this.showPlansOnFirstClick = false;
-    } else {
-    this.fourPageService.form4Completed.emit(true);
-    (window as any).fbq('track', 'FourPageRegistration', {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('RegisterNumber'),
-    });
-    (window as any).fbq('track', '692972151223870', 'FourPageRegistration', {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('RegisterNumber'),
-    });
-
-    (window as any).fbq('track', 'CompleteRegistration', {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('RegisterNumber'),
-    });
-    (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
-      value: localStorage.getItem('id'),
-      content_name: localStorage.getItem('RegisterNumber'),
-    });
-
-    this.gtag_report_conversion();
-
-
-    // 0 -> got to chat  1-> got to fifth page
-    // if type is 0 and  getListLeadId === 0 send to hot leads
-    if (type === 0 && !this.fourPageService.getUserThrough()) {
-      this.router.navigateByUrl('chat?first');
-    } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
-      window.open('https://partner.hansmatrimony.com/hot-leads');
+    if (!this.fourPageService.franchiseData) {
+      if (this.showPlansOnFirstClick) {
+        this.itemService.openTodaysPopupAd(true);
+        this.showPlansOnFirstClick = false;
+      } else {
+      this.fourPageService.form4Completed.emit(true);
+      (window as any).fbq('track', 'FourPageRegistration', {
+        value: localStorage.getItem('id'),
+        content_name: localStorage.getItem('RegisterNumber'),
+      });
+      (window as any).fbq('track', '692972151223870', 'FourPageRegistration', {
+        value: localStorage.getItem('id'),
+        content_name: localStorage.getItem('RegisterNumber'),
+      });
+  
+      (window as any).fbq('track', 'CompleteRegistration', {
+        value: localStorage.getItem('id'),
+        content_name: localStorage.getItem('RegisterNumber'),
+      });
+      (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
+        value: localStorage.getItem('id'),
+        content_name: localStorage.getItem('RegisterNumber'),
+      });
+  
+      this.gtag_report_conversion();
+  
+  
+      // 0 -> got to chat  1-> got to fifth page
+      // if type is 0 and  getListLeadId === 0 send to hot leads
+      if (type === 0 && !this.fourPageService.getUserThrough()) {
+        this.router.navigateByUrl('chat?first');
+      } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
+        window.open('https://partner.hansmatrimony.com/hot-leads');
+      }
+  
+      if (type === 0) {
+        this.analyticsEvent('User Skipped Photo Upload');
+      } else {
+        this.analyticsEvent('Four Page Registration Page Four');
+      }
     }
-
-    if (type === 0) {
-      this.analyticsEvent('User Skipped Photo Upload');
     } else {
-      this.analyticsEvent('Four Page Registration Page Four');
+      this.fourPageService.form4Completed.emit(true);
     }
-  }
   }
 
   gtag_report_conversion() {

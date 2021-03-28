@@ -22,6 +22,8 @@ import { FullFormOneComponent } from './full-form/full-page-one/full-form-one-co
 import { FullFormTwoComponent } from './full-form/full-page-two/full-form-two-component';
 import { FullFormThreeComponent } from './full-form/full-page-three/full-form-three-component';
 import { FullFormPhotoComponent } from './full-form/full-page-photo/full-form-photo-component';
+import { FullPageFiveComponent } from './full-form/full-page-five/full-page-five.component';
+import { FullFormPaymentPageComponent } from './full-form/full-form-payment-page/full-form-payment-page.component';
 @NgModule({
   declarations: [
     CompatibilityFormComponent,
@@ -35,12 +37,14 @@ import { FullFormPhotoComponent } from './full-form/full-page-photo/full-form-ph
     FullFormTwoComponent,
     FullFormThreeComponent,
     FullFormPhotoComponent,
+    FullPageFiveComponent,
     ThankYouComponent,
     RegisterWithComponent,
     ChooseForComponent,
     Testimonials,
     ChoiceListComponent,
-    TestimonialCards
+    TestimonialCards,
+    FullFormPaymentPageComponent
   ],
   imports: [
     CommonModule,
