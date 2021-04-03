@@ -216,7 +216,12 @@ export class FullPageFiveComponent implements OnInit {
           (data: any) => {
             console.log(data);
             if (data.updatePerosnalDetails_status === 'Y') {
-              this.fourPageService.form5Completed.emit(true);
+              if (localStorage.getItem('franchiseRegistration') === 'true'
+              && localStorage.getItem('franchiseType') === 'free') {
+                this.router.navigateByUrl(`chat?mobile=${localStorage.getItem('mobile_number')}`);
+              } else {
+                this.fourPageService.form5Completed.emit(true);
+              }
             } else {
               this.ngxNotificationService.error(
                 'Something Went Wrong, Try Again Later'

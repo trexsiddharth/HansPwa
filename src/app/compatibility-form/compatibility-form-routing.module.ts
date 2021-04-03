@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'skip', component: CompatibilityFormComponent },
   { path: 'fullPage', component: FullFormOneComponent },
   { path: 'fullPage/franchise/:franchise_id/:mobile/:plan_id/:amount', component: FullFormOneComponent },
+  { path: 'fullPage/franchise/:type', component: FullFormOneComponent },
   { path: ':id/:leadId/:templeId', component: CompatibilityFormComponent },
   { path: ':id/:leadId/:templeId/:redParam', component: CompatibilityFormComponent },
   { path: ':id/:leadId/:templeId/:fourthParam/:fifthParam', component: CompatibilityFormComponent },

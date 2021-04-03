@@ -250,7 +250,7 @@
                   <app-full-form-photo></app-full-form-photo>
                 </mat-step>
                 <!-- // will show page five only when user is coming from franchise app for registration-->
-                <mat-step *ngIf="userFromFranchise" [completed]="formFive">
+                <mat-step *ngIf="userFromFranchise || freeUserFromFranchise" [completed]="formFive">
                   <app-full-page-five></app-full-page-five>
                 </mat-step>
                 <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->

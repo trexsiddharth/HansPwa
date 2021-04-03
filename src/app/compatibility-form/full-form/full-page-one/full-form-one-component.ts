@@ -134,6 +134,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   protected onDestroy = new Subject<void>();
 
   userFromFranchise = false;
+  freeUserFromFranchise = false;
 
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
@@ -238,7 +239,13 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
               this.fourPageService.saveFranchiseData(route.params.franchise_id, route.params.mobile , 
                 route.params.plan_id
                 ,route.params.amount);
+          } else if (route.params.type === 'free' ) { // for franchise free registration
+            this.freeUserFromFranchise = true;
+            localStorage.setItem('franchiseRegistration', 'true');
+            localStorage.setItem('franchiseType', 'free');
           }
+
+          
         }
 
         // when user comes from app to webview four page reg
