@@ -72,10 +72,27 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
     await this.getAssignToList();
     if (localStorage.getItem('getListTempleId') && localStorage.getItem('enqDate')) {
+
+      const assignToName = this.allTemples.find(
+        element => {
+          return element.temple_id === localStorage.getItem('getListTempleId');
+        }
+      );
+      if (assignToName) {
+        if (assignToName.role === 0) {
+          this.templeChecked = true;
+        } else if (assignToName.role === 5) {
+          this.moderatorChecked = true;
+        }
+      }
+
       this.pageFive.patchValue({
-        enq_date: localStorage.getItem('enqDate'),
-        source: localStorage.getItem('getListSource')
+        assign_to: assignToName ? assignToName.name : '',
+        source: localStorage.getItem('getListSource'),
+        enq_date: localStorage.getItem('enqDate')
       });
+
+      console.log(this.pageFive.value);
     } else if (localStorage.getItem('getListTempleId') && localStorage.getItem('getListId')) {
       this.getLeadData().subscribe(
         value => {

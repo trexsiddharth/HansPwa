@@ -19,6 +19,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersistentMessageComponent } from './persistent-message/persistent-message.component'
 import { SelectionModel } from '@angular/cdk/collections';
 import 'rxjs/add/operator/scan';
+import { AppDownloadDialogComponent } from '../app-download-dialog/app-download-dialog.component';
 @Component({
   selector: 'app-today-profiles',
   templateUrl: './today-profiles.component.html',
@@ -909,6 +910,33 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
     } else if (src && src !== '') {
       this.setModal(src);
     }
+  }
+
+   // download the app pop up
+   openDownloadAppDialog(profile) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = true;
+    this.breakPointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(
+      result => {
+        if (result.matches) {
+          console.log('screen is greater than  1024px');
+          dialogConfig.maxWidth = '30vw';
+          dialogConfig.minHeight = '80vh';
+          dialogConfig.disableClose = false;
+        } else {
+          console.log('screen is less than  1024px');
+          dialogConfig.minWidth = '90vw';
+          dialogConfig.maxHeight = '80vh';
+          dialogConfig.disableClose = true;
+        }
+      }
+    );
+    dialogConfig.data = {
+      data: profile
+    };
+    const dialogRef = this.dialog.open(AppDownloadDialogComponent, dialogConfig);
   }
 
   setModal(image) {

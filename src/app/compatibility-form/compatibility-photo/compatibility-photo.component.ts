@@ -206,12 +206,6 @@ export class CompatibilityPhotoComponent implements OnInit {
           case 1:
             this.imgURL = this.suc.profile_pic_url;
             this.fourPageService.profile.image1 = this.suc.profile_pic_url;
-            if (!this.frontfile && this.fourPageService.getUserThrough()) {
-              this.uploadPhoto(data, 2);
-            }
-            if (!this.BackimgURL && this.fourPageService.getUserThrough()) {
-              this.uploadPhoto(data, 3);
-            }
             this.analyticsEvent('Image One Uploaded on Four Page Registration Page Four');
             break;
 

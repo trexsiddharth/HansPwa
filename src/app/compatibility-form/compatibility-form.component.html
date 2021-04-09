@@ -223,19 +223,6 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-5" *ngIf="fourPageService.getUserThrough() && showHeight">
-                <mat-form-field class="full-width fieldFit" appearance="standard">
-                  <mat-label>Height</mat-label>
-                  <mat-select matNativeControl (selectionChange)="selectFieldChange('Height')" #height
-                    formControlName="Height" required name="Height">
-                    <mat-option *ngFor="let option of Heights;let i = index" [value]="i">
-                      {{option}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error >*this field is required</mat-error>
-                </mat-form-field>
-              </div>
-
               <div class="col-5" *ngIf="fourPageService.getUserThrough()">
                 <!-- <h6>Weight</h6> -->
                 <mat-form-field class="full-width fieldFit" appearance="standard">

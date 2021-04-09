@@ -377,11 +377,12 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListId', route.params.id);
           } else if (route.params.mobile) {
+            this.fourPageService.setUserThrough(true);
+            localStorage.setItem('getListMobile', route.params.mobile);
+            
             this.PageOne.patchValue({
               phone: this.setMobileNumber(route.params.mobile)
             });
-            this.fourPageService.setUserThrough(true);
-            localStorage.setItem('getListMobile', route.params.mobile);
           } else {
             this.fourPageService.setUserThrough(false);
             localStorage.setItem('getListId', '');
@@ -711,8 +712,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     this.disableNextSubject.next(false);
     this.showError = false;
 
-    const button = document.querySelector<HTMLButtonElement>('#viewButton');
-    button.click();
+// only for registering user we will send him to new page automatically, not for tellecallers
+    if (!this.fourPageService.getUserThrough()) {
+      const button = document.querySelector<HTMLButtonElement>('#viewButton');
+      button.click();
+    }
   }
   scrollToTop() {
    window.scroll(0, 0);
