@@ -239,10 +239,12 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
               this.fourPageService.saveFranchiseData(route.params.franchise_id, route.params.mobile , 
                 route.params.plan_id
                 ,route.params.amount);
-          } else if (route.params.type === 'free' ) { // for franchise free registration
+          } else if (route.params.type === 'free' &&
+          route.params.franchise_id ) { // for franchise free registration
             this.freeUserFromFranchise = true;
             localStorage.setItem('franchiseRegistration', 'true');
             localStorage.setItem('franchiseType', 'free');
+            localStorage.setItem('franchiseId', route.params.franchise_id);
           }
 
           

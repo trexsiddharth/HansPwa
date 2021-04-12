@@ -190,7 +190,13 @@ export class FullPageFiveComponent implements OnInit {
       personalProfileDataForm.append('id', id);
       personalProfileDataForm.append('is_lead', leadId);
 
-      personalProfileDataForm.append('franchise_id', this.fourPageService.franchiseData.franchise_id);
+      if (localStorage.getItem('franchiseType') && localStorage.getItem('franchiseType') === 'free' &&
+      localStorage.getItem('franchiseId')) {
+        personalProfileDataForm.append('franchise_id', localStorage.getItem('franchiseId'));
+      } else {
+        personalProfileDataForm.append('franchise_id', this.fourPageService.franchiseData.
+        franchise_id);
+      }
 
       personalProfileDataForm.append(
         'college', this.verifyForm.value.college);
