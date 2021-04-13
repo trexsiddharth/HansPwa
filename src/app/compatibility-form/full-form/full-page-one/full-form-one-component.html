@@ -97,12 +97,16 @@
                   </mat-checkbox>
                 </div>
 
-                <div class="col-md-12" 
-                *ngIf="!hideMobileNumber">
-                    <mat-form-field  class="full-width fieldFit" appearance="standard">
-                        <mat-label >Mobile number</mat-label>
-                        <input style="display: inline;" type="number" id="phone" matInput formControlName="phone" (change)="mobileNumberChanged()" required name="phone">
-                    </mat-form-field>
+                <div class="col-md-12 " id="fourRegMobile">
+                  <mat-form-field  class="full-width fieldFit"
+                   appearance="standard">
+  
+                    <ngx-mat-intl-tel-input  
+                      [preferredCountries]="['in']" [enablePlaceholder]="true" [enableSearch]="true" name="phone"
+                      type="tel" formControlName="phone" id="phone" (change)="mobileNumberChanged()" #phone required>
+                    </ngx-mat-intl-tel-input> 
+                    <mat-error >*this field is required</mat-error>
+                  </mat-form-field>
                 </div>
 
                 <div class="col-md-12">

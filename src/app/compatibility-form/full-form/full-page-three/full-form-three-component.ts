@@ -27,6 +27,7 @@ import {
 } from '@angular/material/';
 import { FourPageService } from '../../four-page.service';
 import { Profile } from '../../profile';
+import { Observable } from 'rxjs';
 export interface StateGroup {
   letter: string;
   names: string[];
@@ -192,7 +193,7 @@ export class FullFormThreeComponent implements OnInit {
 
 
       // tslint:disable-next-line: max-line-length
-      return this.http.post('https://partner.hansmatrimony.com/api/formThreeProfile', firststepdata).subscribe((res: any) => {
+      return this.completeRegistration(firststepdata).subscribe((res: any) => {
         console.log('first', res);
 
         if (res.status === 1) {
@@ -218,6 +219,15 @@ export class FullFormThreeComponent implements OnInit {
     }
 
   }
+
+  private completeRegistration(firststepdata: FormData): Observable<any> {
+    if (!localStorage.getItem('franchiseRegistration')) {
+      return this.http.post('https://partner.hansmatrimony.com/api/formThreeProfile', firststepdata);
+    } else {
+      return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateThirdPageDetails', firststepdata);
+    }
+  }
+
   setValue(item: string) {
     let vals = item.split('-');
     if (vals[0] == "100+")

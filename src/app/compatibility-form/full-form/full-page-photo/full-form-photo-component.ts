@@ -188,7 +188,7 @@ export class FullFormPhotoComponent implements OnInit {
     uploadData.append('image', data);
     uploadData.append('is_lead', '1');
 
-    return this.http.post('https://partner.hansmatrimony.com/api/' + 'uploadProfilePicture', uploadData).subscribe(suc => {
+    return this.completeRegistration(uploadData).subscribe(suc => {
       this.suc = suc;
       if (this.suc.pic_upload_status === 'Y') {
         console.log('photos', suc);
@@ -240,6 +240,14 @@ export class FullFormPhotoComponent implements OnInit {
       this.ngxNotificationService.error('Photo could not be Uploaded!');
       console.log(err);
     });
+  }
+
+  private completeRegistration(firststepdata: FormData): Observable<any> {
+    if (!localStorage.getItem('franchiseRegistration')) {
+      return this.http.post('https://partner.hansmatrimony.com/api/uploadProfilePicture', firststepdata);
+    } else {
+      return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateFourthPageDetails', firststepdata);
+    }
   }
 
 // upload facebook image by first downloading it and then uploading it

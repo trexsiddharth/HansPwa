@@ -153,7 +153,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
       phone: [localStorage.getItem('RegisterNumber')
-        , Validators.compose([Validators.required, Validators.max(9999999999999), Validators.pattern('(0/91)?[6-9][0-9]{9}')])],
+        , Validators.compose([Validators.required])],
       email: [''],
       Relation: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
@@ -228,17 +228,18 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       async (route: any) => {
         console.log(route.params);
         if (route) {
-          if (route.params.franchise_id 
-            && route.params.mobile 
+          if (route.params.franchise_id
+            && route.params.mobile
             && route.params.plan_id
             && route.params.amount) {
               this.userFromFranchise =  true;
               localStorage.setItem('franchiseRegistration', 'true');
               this.PageOne.controls.phone.setValue(route.params.mobile);
               localStorage.setItem('RegisterNumber', route.params.mobile);
-              this.fourPageService.saveFranchiseData(route.params.franchise_id, route.params.mobile , 
+              localStorage.setItem('franchiseId', route.params.franchise_id);
+              this.fourPageService.saveFranchiseData(route.params.franchise_id, route.params.mobile ,
                 route.params.plan_id
-                ,route.params.amount);
+                , route.params.amount);
           } else if (route.params.type === 'free' &&
           route.params.franchise_id ) { // for franchise free registration
             this.freeUserFromFranchise = true;
@@ -247,7 +248,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
             localStorage.setItem('franchiseId', route.params.franchise_id);
           }
 
-          
+
         }
 
         // when user comes from app to webview four page reg
@@ -350,10 +351,8 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
 
   // 0 -> new User/not registered, 1-> Registered , 2-> Partially Registered User
   mobileNumberChanged() {
-    if (localStorage.getItem('getListId') === null || localStorage.getItem('getListId') === '') {
       const number = this.PageOne.value.phone;
-      console.log(number);
-      console.log(this.authMobileNumberStatus);
+      console.log(number, this.PageOne.controls.phone.invalid);
       // tslint:disable-next-line: max-line-length
       this.http.get<any>(' https://partner.hansmatrimony.com/api/auth', { params: { ['phone_number']: number, ['fcm_id']: this.notification.getCurrentToken() } }).subscribe(res => {
         console.log(res);
@@ -394,7 +393,6 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
         this.spinner.hide();
         console.log(err);
       });
-    }
   }
 
   openVerificationDialog(isLead: string) {
@@ -545,6 +543,14 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       firststepdata.append('name', `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
         this.PageOne.value.lastName : ''}`);
       firststepdata.append('email', this.PageOne.value.email);
+        
+      /**
+       * when user is being registered through a franchisee
+       */
+      if (localStorage.getItem('franchiseRegistration')) {
+        firststepdata.append('franchise_id', localStorage.getItem('franchiseId'));
+      }
+      
 
       // son -> mother and daughter -> father rest -> same
       if (this.PageOne.value.Relation === 'Son') {
@@ -587,22 +593,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       console.log('religion', this.PageOne.value.Religion);
       console.log('caste', this.PageOne.value.Castes);
 
-
-      if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') === '0') {
-
-        // tslint:disable-next-line: max-line-length
-        return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata).subscribe(
-          (res: any) => {
-            console.log('first', res);
-            this.spinner.hide();
-          }, err => {
-            this.spinner.hide();
-            this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
-            console.log(err);
-          });
-      } else {
-        // tslint:disable-next-line: max-line-length
-        return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata).subscribe((res: any) => {
+      return this.completeRegistration(firststepdata).subscribe((res: any) => {
           console.log('first', res);
 
           if (res.status === 1) {
@@ -630,7 +621,6 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
           this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
           console.log(err);
         });
-      }
     } else {
       // tslint:disable-next-line: forin
       for (const control in this.PageOne.controls) {
@@ -642,6 +632,14 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       if (this.errors[0]) {
         this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
       }
+    }
+  }
+
+  private completeRegistration(firststepdata: FormData): Observable<any> {
+    if (!localStorage.getItem('franchiseRegistration')) {
+      return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata);
+    } else {
+      return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateFirstPageDetails', firststepdata);
     }
   }
 

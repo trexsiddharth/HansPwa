@@ -27,7 +27,7 @@ import {
 } from '@angular/material/';
 import { FourPageService } from '../../four-page.service';
 import { Profile } from '../../profile';
-import { ReplaySubject, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 export interface StateGroup {
   letter: string;
@@ -375,7 +375,7 @@ export class FullFormTwoComponent implements OnInit, OnDestroy {
 
 
       // tslint:disable-next-line: max-line-length
-      return this.http.post('https://partner.hansmatrimony.com/api/formTwoProfile', firststepdata).subscribe((res: any) => {
+      return this.completeRegistration(firststepdata).subscribe((res: any) => {
         console.log('first', res);
 
         if (res.status === 1) {
@@ -405,6 +405,14 @@ export class FullFormTwoComponent implements OnInit, OnDestroy {
         }
       }
       this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+    }
+  }
+
+  private completeRegistration(firststepdata: FormData): Observable<any> {
+    if (!localStorage.getItem('franchiseRegistration')) {
+      return this.http.post('https://partner.hansmatrimony.com/api/formTwoProfile', firststepdata);
+    } else {
+      return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateSecondPageDetails', firststepdata);
     }
   }
 
