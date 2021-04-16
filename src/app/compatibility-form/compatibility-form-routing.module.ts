@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'fullPage', component: FullFormOneComponent },
   { path: 'fullPage/franchise/:franchise_id/:mobile/:plan_id/:amount', component: FullFormOneComponent },
   { path: 'fullPage/franchise/:type/:franchise_id', component: FullFormOneComponent },
+  { path: 'fullPage/franchise/:type/:franchise_id/:clientId', component: FullFormOneComponent },
   { path: ':id/:leadId/:templeId', component: CompatibilityFormComponent },
   { path: ':id/:leadId/:templeId/:redParam', component: CompatibilityFormComponent },
   { path: ':id/:leadId/:templeId/:fourthParam/:fifthParam', component: CompatibilityFormComponent },
