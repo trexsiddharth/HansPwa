@@ -42,6 +42,7 @@ export class Profile {
     managedBy;
     familyType;
     houseType;
+    photo: string;
     image1: string;
     image2: string;
     image3: string;

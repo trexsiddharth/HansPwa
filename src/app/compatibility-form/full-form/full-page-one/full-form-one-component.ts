@@ -241,14 +241,20 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
                 route.params.plan_id
                 , route.params.amount);
           } else if (route.params.type === 'free' &&
+          route.params.franchise_id && route.params.clientId) {
+            this.freeUserFromFranchise = true;
+            localStorage.setItem('franchiseRegistration', 'true');
+            localStorage.setItem('franchiseType', 'free');
+            localStorage.setItem('franchiseId', route.params.franchise_id);
+            localStorage.setItem('id', route.params.clientId);
+            this.getProfile(route.params.clientId);
+          } else if (route.params.type === 'free' &&
           route.params.franchise_id ) { // for franchise free registration
             this.freeUserFromFranchise = true;
             localStorage.setItem('franchiseRegistration', 'true');
             localStorage.setItem('franchiseType', 'free');
             localStorage.setItem('franchiseId', route.params.franchise_id);
           }
-
-
         }
 
         // when user comes from app to webview four page reg
@@ -783,10 +789,10 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   }
 
 
-  getProfile() {
+  getProfile(clientId: string) {
     this.spinner.show();
-    const leadId = localStorage.getItem('getListLeadId');
-    const id = localStorage.getItem('getListId');
+    const leadId = '0';
+    const id = clientId;
     console.log(id, leadId);
     const myprofileData = new FormData();
     myprofileData.append('id', id);
@@ -800,9 +806,8 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       (data: any) => {
         console.log(data);
         this.profileData = data;
-        if (this.fourPageService.userThroughGetList) {
-          this.setProfileValues(data);
-        }
+        this.setProfileValues(data);
+
         this.spinner.hide();
       },
       (error: any) => {
@@ -825,13 +830,8 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   // #IMPORTANT
   // setting getProfiles to our variables so that we can also update these values and check in the last page
   setProfileValues(profileData) {
-    if (!localStorage.getItem('getListId') && !localStorage.getItem('getListMobile')) {
-      localStorage.setItem('getListTempleId', profileData.profile.temple_id);
-    }
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
-
-    localStorage.setItem('getListMobile', profileData.family.mobile ? profileData.family.mobile : '');
 
     this.userProfile.email = profileData.family.email;
 
@@ -868,6 +868,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
     this.userProfile.fatherStatus = profileData.family.father_status;
     this.userProfile.motherStatus = profileData.family.mother_status;
     this.userProfile.familyIncome = profileData.family.family_income;
+    this.userProfile.photo = profileData.profile.photo;
     this.userProfile.image1 = this.getProfilePhoto(profileData.profile.carousel, '0');
     this.userProfile.image2 = this.getProfilePhoto(profileData.profile.carousel, '1');
     this.userProfile.image3 = this.getProfilePhoto(profileData.profile.carousel, '2');
@@ -877,7 +878,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
 
     console.log(this.userProfile);
     this.fourPageService.setProfile(this.userProfile);
-    this.fourPageService.getListData.emit(true);
+    this.fourPageService.getListData.emit(true); // tells all sections to update the values
     this.setFormOneData();
   }
 
@@ -886,7 +887,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
       lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] ?
         this.userProfile.name.split(' ')[1] : '' : '',
-      phone: this.userProfile.mobile,
+      phone: this.setMobileNumber(this.userProfile.mobile),
       email: this.userProfile.email,
       Relation: this.userProfile.relation,
       gender: this.userProfile.gender,
@@ -928,6 +929,16 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
         return 'December';
       default:
         break;
+    }
+  }
+
+  setMobileNumber(number: string) {
+    console.log('qwerty', number);
+    if (number[0] != '+') {
+      console.log('+91' + number);
+      return '+91' + number;
+    } else {
+      return number;
     }
   }
 

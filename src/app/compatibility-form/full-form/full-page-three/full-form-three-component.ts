@@ -96,9 +96,7 @@ export class FullFormThreeComponent implements OnInit {
   ngOnInit() {
     this.fourPageService.getListData.subscribe(
       () => {
-        if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
           this.setFormThreeData(this.fourPageService.getProfile());
-        }
       }
     );
     // set home town in birth place from facebook

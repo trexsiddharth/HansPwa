@@ -391,9 +391,7 @@ export class FullFormPhotoComponent implements OnInit {
   ngOnInit() {
     this.fourPageService.getListData.subscribe(
       () => {
-        if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
           this.setPhotoData(this.fourPageService.getProfile());
-        }
       }
     );
     // set current profile picture from facebook
@@ -410,9 +408,17 @@ export class FullFormPhotoComponent implements OnInit {
   }
   setPhotoData(userProfile: Profile) {
     console.log(userProfile);
-    this.imgURL = userProfile.image1 ? userProfile.image1 : '';
+    this.imgURL = userProfile.image1 ? userProfile.image1 : userProfile.photo ? this.setPhoto(userProfile.photo) : '' ;
     this.frontfile = userProfile.image2 ? userProfile.image2 : '';
     this.BackimgURL = userProfile.image3 ? userProfile.image3 : '';
+  }
+
+   setPhoto(photo: string) {
+      if (photo.includes('https')) {
+        return photo;
+      } else {
+        return `https://d2v6etlhrhtken.cloudfront.net/uploads/${photo}`;
+      }
   }
 
   photoScoreChanged(event) {

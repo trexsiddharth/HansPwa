@@ -249,13 +249,14 @@ export class FullFormTwoComponent implements OnInit, OnDestroy {
     // if user can get through and profile data has been retrieved
     this.fourPageService.getListData.subscribe(
       () => {
-        if (localStorage.getItem('getListId') && localStorage.getItem('getListLeadId')) {
-          console.log(this.fourPageService.getProfile());
-          this.setFormForGetUserThrough();
-          if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
-            this.fourPageService.makeLinear.emit(true);
-          }
-        }
+        this.setFormForGetUserThrough();
+        // if (localStorage.getItem('franchiseRegistration') && localStorage.getItem('id') ) {
+        //   console.log(this.fourPageService.getProfile());
+          
+        //   if (localStorage.getItem('getListId') || localStorage.getItem('getListMobile')) {
+        //     this.fourPageService.makeLinear.emit(true);
+        //   }
+        // }
       }
     );
   }
