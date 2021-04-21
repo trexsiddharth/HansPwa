@@ -1349,7 +1349,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
     return this.profileViewersList.value.length > 0 ? this.profileViewersList.value.length : null;
   }
   getLikedProfile() {
-    return this.profile.length > 0 ? this.profile.length : null
+    return this.itemService.getCountOnlyShorted();
   }
 }
 
