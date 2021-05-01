@@ -931,7 +931,7 @@ export class ChatDrawerComponent implements OnInit {
       'identity_number',
       this.preferenceProfileData.identity_number
     );
-    newPrefForm.append('temple_id', localStorage.getItem('is_lead'));
+    newPrefForm.append('temple_id', this.personalProfileData.temple_id);
     newPrefForm.append('id', localStorage.getItem('id'));
     newPrefForm.append('caste', this.preferenceProfileData.caste);
     newPrefForm.append('manglik', this.preferencesForm.value.manglik_pref ? this.preferencesForm.value.manglik_pref : this.preferenceProfileData.manglik);
