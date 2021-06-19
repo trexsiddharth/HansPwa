@@ -327,7 +327,7 @@ export class CompatibilityVerifyComponent implements OnInit {
             if (localStorage.getItem('redParam') === '0') {
               window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
             } else if (localStorage.getItem('redParam') === 'pending_profile') {
-              window.open('https://partner.hansmatrimony.com/profile_approval/getFreeUserProfile', '_top', null, true);
+              // window.open('https://partner.hansmatrimony.com/profile_approval/getFreeUserProfile', '_top', null, true);
             } else {
               window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
             }
@@ -390,8 +390,8 @@ export class CompatibilityVerifyComponent implements OnInit {
           //   window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
           // }
           
-          this.fourPageService.showApproveBtn = false;
-          this.clearHistory();
+          // this.fourPageService.showApproveBtn = false;
+          // this.clearHistory();
         } else {
           if (data.message) {
             this.ngxNotificationService.error(data.message);

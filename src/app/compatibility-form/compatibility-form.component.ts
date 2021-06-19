@@ -87,6 +87,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   advt_c;
   advt_pid;
   advt_shortlink;
+  advt_ad_no;
 
   time = {
     hour: 13,
@@ -945,6 +946,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         firststepdata.append('c', this.advt_c );
       }
 
+      if (this.advt_ad_no) {
+        firststepdata.append('ad_no', this.advt_ad_no );
+      }
+
 
       this.lat ? firststepdata.append('lat', this.lat)
         : firststepdata.append('lat', '');
@@ -1786,6 +1791,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         }
         if (this.route.snapshot.queryParams.c) {
           this.advt_c = this.route.snapshot.queryParams.c;
+        }
+        if (this.route.snapshot.queryParams.ad_no) {
+          this.advt_ad_no = this.route.snapshot.queryParams.ad_no;
         }
       }
   }
