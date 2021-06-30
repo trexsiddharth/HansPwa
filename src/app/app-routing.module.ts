@@ -16,6 +16,7 @@ import { BuddhistMatrimonyComponent } from './buddhist-matrimony/buddhistmatrimo
 import { JainMatrimonyComponent } from './jain-matrimony/jainmatrimony.component';
 import { MuslimMatrimonyComponent } from './muslim-matrimony/muslimmatrimony.component';
 import { SampleProfilesComponent } from './sample-profiles/sample-profiles.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 const routes: Routes = [
@@ -89,6 +90,10 @@ const routes: Routes = [
   {
     path: 'samples/:ids',
     component: SampleProfilesComponent
+  },
+  {
+    path: 'privacy',
+    component: PrivacyPolicyComponent
   },
   {
     path: 'picUpload', loadChildren: () => import('./photo-upload/photo-upload.module')

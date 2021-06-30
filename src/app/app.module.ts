@@ -69,6 +69,7 @@ import { PaymentPopupComponent } from './payment-popup/payment-popup.component';
 import { SampleProfilesComponent } from './sample-profiles/sample-profiles.component';
 import { ProfileItemComponent } from './sample-profiles/profile-item/profile-item.component';
 import { TempleItemComponent } from './sample-profiles/temple-item/temple-item.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { TempleItemComponent } from './sample-profiles/temple-item/temple-item.c
     PaymentPopupComponent,
     SampleProfilesComponent,
     ProfileItemComponent,
-    TempleItemComponent
+    TempleItemComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
