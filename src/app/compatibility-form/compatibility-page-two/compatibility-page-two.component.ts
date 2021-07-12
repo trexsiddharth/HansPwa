@@ -714,7 +714,10 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   }
   setAge(dob: string) {
     if (dob != null) {
-      return (Math.floor((Date.now() - new Date(dob.split('-').reverse().join('-')).getTime()) / (1000 * 60 * 60 * 24 * 365)));
+      let dobArray = dob.split('-').reverse();
+      let splitDate = `${dobArray[1]}/${dobArray[0]}/${dobArray[2]} 16:00:00`; // mm--dd-yyyy
+      let userDate = new Date(splitDate);
+      return (Math.floor((Date.now() - userDate.getTime()) / (1000 * 60 * 60 * 24 * 365)));
     } else {
       return null;
     }
@@ -765,6 +768,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     }
   }
   setFormOneData(userProfile: Profile) {
+    console.log(userProfile);
     this.workplace = userProfile.workingCity ? userProfile.workingCity : '';
     this.PageTwo.patchValue({
       Qualification: userProfile.qualification ? this.getQualification(userProfile.qualification) : '',
