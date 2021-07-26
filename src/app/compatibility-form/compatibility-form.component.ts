@@ -1290,7 +1290,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     localStorage.setItem('getListMobile', profileData.family.mobile ? profileData.family.mobile : '');
 
     this.userProfile.email = profileData.family.email;
-
+    
     if (profileData.family.relation === 'Mother') {
       this.userProfile.relation = 'Son';
     } else if (profileData.family.relation === 'Father') {
@@ -1298,6 +1298,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     } else {
       this.userProfile.relation = profileData.family.relation;
     }
+    
 
     this.userProfile.gender = profileData.profile.gender;
     this.userProfile.dob = profileData.profile.birth_date;
@@ -1358,9 +1359,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       firstName: this.userProfile.name ? this.userProfile.name.split(' ')[0] : '',
       lastName: this.userProfile.name ? this.userProfile.name.split(' ')[1] ?
         this.userProfile.name.split(' ')[1] : '' : '',
-      phone: this.setMobileNumber(this.userProfile.mobile),
+      phone: this.setMobileNumber(this.userProfile.mobile ? this.userProfile.mobile : ''),
       email: this.userProfile.email,
-      Relation: this.userProfile.relation,
+      Relation: this.userProfile.relation[0].toLocaleUpperCase() + this.userProfile.relation.substr(1),
       gender: this.userProfile.gender,
       birth_date: this.userProfile.dob ? this.userProfile.dob.toString().split('-')[2] : '',
       birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1]) : '',
