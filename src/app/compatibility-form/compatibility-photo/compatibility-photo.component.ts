@@ -424,19 +424,23 @@ export class CompatibilityPhotoComponent implements OnInit {
   }
 
   checkForPhoto() {
-    if (this.fourPageService.getUserThrough() && localStorage.getItem('getListLeadId') !== '0') {
-      this.fourPageService.profile.photoScore = this.photoScore;
-      const userProfile = this.fourPageService.profile;
-      console.log(userProfile);
-      if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
-        return this.ngxNotificationService.error('Select Image 1');
-      } else if (userProfile.photoScore < 1) {
-        return this.ngxNotificationService.error('Give a score');
-      } else if (!localStorage.getItem('getListId') || !localStorage.getItem('getListMobile')) {
-        console.log(this.fourPageService.getProfile().mobile);
-        localStorage.setItem('mobile_number', this.fourPageService.getProfile().mobile);
+    if (this.fourPageService.getUserThrough()) {
+      if (localStorage.getItem('getListLeadId') !== '0') {
+        this.fourPageService.profile.photoScore = this.photoScore;
+        const userProfile = this.fourPageService.profile;
+        console.log(userProfile);
+        if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
+          return this.ngxNotificationService.error('Select Image 1');
+        } else if (userProfile.photoScore < 1) {
+          return this.ngxNotificationService.error('Give a score');
+        } else if (!localStorage.getItem('getListId') || !localStorage.getItem('getListMobile')) {
+          console.log(this.fourPageService.getProfile().mobile);
+          localStorage.setItem('mobile_number', this.fourPageService.getProfile().mobile);
+        } else {
+          this.skip(1);
+        }
       } else {
-        this.skip(1);
+        this.validate(this.fourPageService.profile);
       }
     } else {
       this.skip(0);
@@ -445,7 +449,7 @@ export class CompatibilityPhotoComponent implements OnInit {
     //   return this.ngxNotificationService.error('Select Image 2');
     // } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
     //   return this.ngxNotificationService.error('Select Image 3');
-    // } 
+    // }
   }
 
   analyticsEvent(event) {
@@ -479,14 +483,13 @@ export class CompatibilityPhotoComponent implements OnInit {
     // if type is 0 and  getListLeadId === 0 send to hot leads
     if (type === 0 && !this.fourPageService.getUserThrough()) {
       this.router.navigateByUrl('chat?first');
+      if (type === 0) {
+        this.analyticsEvent('User Skipped Photo Upload');
+      } else {
+        this.analyticsEvent('Four Page Registration Page Four');
+      }
     } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
       window.open('https://partner.hansmatrimony.com/hot-leads');
-    }
-
-    if (type === 0) {
-      this.analyticsEvent('User Skipped Photo Upload');
-    } else {
-      this.analyticsEvent('Four Page Registration Page Four');
     }
   }
 
@@ -660,6 +663,177 @@ export class CompatibilityPhotoComponent implements OnInit {
         }, { scope: 'email, public_profile, user_photos, user_gender,user_birthday, user_hometown, user_location' });
       }       // Returns the login status.
     });
+  }
+
+  validate(userProfile: Profile) {
+    console.log(userProfile);
+    if (userProfile.name === null || userProfile.name === '') {
+      return this.ngxNotificationService.error('Enter Name');
+    } else if (userProfile.mobile === null || userProfile.mobile === '') {
+      return this.ngxNotificationService.error('Enter Mobile Number');
+    } else if (userProfile.relation === null || userProfile.relation === '') {
+      return this.ngxNotificationService.error('Select Relation');
+    } else if (userProfile.gender === null || userProfile.gender === '') {
+      return this.ngxNotificationService.error('Select Gender');
+    } else if (userProfile.dob === null || userProfile.dob === '') {
+      return this.ngxNotificationService.error('Enter D.O.B');
+    } else if (userProfile.height === null || userProfile.height === '') {
+      return this.ngxNotificationService.error('Select Height');
+    } else if (userProfile.weight === null || userProfile.weight === '') {
+      return this.ngxNotificationService.error('Enter Weight');
+    } else if (userProfile.martialStatus === null || userProfile.martialStatus === '') {
+      return this.ngxNotificationService.error('Select Marital Status');
+    } else if (userProfile.annualIncome === null || userProfile.annualIncome === '') {
+      return this.ngxNotificationService.error('Enter Annual Income');
+    } else if (userProfile.religion === null || userProfile.religion === '') {
+      return this.ngxNotificationService.error('Select Religion');
+    } else if (userProfile.caste === null || userProfile.caste === '') {
+      return this.ngxNotificationService.error('Select Caste');
+    } else if (userProfile.qualification === null || userProfile.qualification === '') {
+      return this.ngxNotificationService.error('Select Qualification');
+    } else if (userProfile.occupation === null || userProfile.occupation === '') {
+      return this.ngxNotificationService.error('Select Occupation');
+    } else if (userProfile.designation === null || userProfile.designation === '') {
+      return this.ngxNotificationService.error('Enter Designation');
+    } else if (userProfile.occupation !== 'Not Working' && userProfile.workingCity === null || userProfile.workingCity === '') {
+      return this.ngxNotificationService.error('Enter Working City');
+    } else if (userProfile.manglik === null || userProfile.manglik === '') {
+      return this.ngxNotificationService.error('Select Manglik Status');
+    } else if (userProfile.locality === null || userProfile.locality === '') {
+      return this.ngxNotificationService.error('Enter Locality');
+    } else if (userProfile.about === null || userProfile.about === '') {
+      return this.ngxNotificationService.error('Enter About');
+    } else if (userProfile.birthPlace === null || userProfile.birthPlace === '') {
+      return this.ngxNotificationService.error('Enter Birth Place');
+    } else if (userProfile.foodChoice === null || userProfile.foodChoice === '') {
+      return this.ngxNotificationService.error('Select Food Choice');
+    } else if (userProfile.fatherStatus === null || userProfile.fatherStatus === '') {
+      return this.ngxNotificationService.error('Select Father Status');
+    } else if (userProfile.motherStatus === null || userProfile.motherStatus === '') {
+      return this.ngxNotificationService.error('Select Mother Status');
+    } else if (userProfile.familyIncome === null || userProfile.familyIncome === '') {
+      return this.ngxNotificationService.error('Enter Family Income');
+    } else if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
+      return this.ngxNotificationService.error('Select Image 1');
+    } else if (userProfile.fatherStatus !== 'Not Alive' && userProfile.fatherStatus !== 'Not Working' &&
+      userProfile.family.occupation === null || userProfile.family.occupation === '') {
+      return this.ngxNotificationService.error('Select Father Occupation');
+    } else if (userProfile.motherStatus !== 'Not Alive' && userProfile.motherStatus !== 'Not Working' &&
+      userProfile.family.occupation_mother === null || userProfile.family.occupation_mother === '') {
+      return this.ngxNotificationService.error('Select Mother Occupation');
+    } else if (userProfile.family.married_daughters == null) {
+      return this.ngxNotificationService.error('Select Married Sisters');
+    } else if (userProfile.family.unmarried_daughters == null) {
+      return this.ngxNotificationService.error('Select Un Married Sisters');
+    } else if (userProfile.family.married_sons == null) {
+      return this.ngxNotificationService.error('Select Married Brothers');
+    } else if (userProfile.family.unmarried_sons == null) {
+      return this.ngxNotificationService.error('Select Un Married Brothers');
+    } else if (userProfile.photoScore < 1) {
+      return this.ngxNotificationService.error('Give a score');
+    } else {
+      this.approveProfileApi();
+    }
+  }
+
+  approveProfileApi() {
+    const approveData = new FormData();
+    approveData.append('id', localStorage.getItem('getListId'));
+    approveData.append('photo_score', this.fourPageService.getProfile().photoScore.toString());
+    if (localStorage.getItem('redParam') && localStorage.getItem('redParam') === 'pending_profile'
+    && this.fourPageService.getUserThrough()) {
+      approveData.append('is_key', 'yes');
+      approveData.append('auth_temp', localStorage.getItem('getListTempleId'));
+    } else {
+      approveData.append('temple_id', localStorage.getItem('getListTempleId'));
+    }
+    approveData.append('is_approve', '1');
+
+    this.http.post('https://partner.hansmatrimony.com/api/ApproveProfile', approveData).subscribe(
+      (data: any) => {
+        console.log(data);
+        if (data.status === '1') {
+          if (localStorage.getItem('redParam')) {
+            if (localStorage.getItem('redParam') === '0') {
+              window.open('https://partner.hansmatrimony.com/home', '_top', null, true);
+            } else if (localStorage.getItem('redParam') === 'pending_profile') {
+              window.open('https://partner.hansmatrimony.com/profile_approval/getFreeUserProfile', '_top', null, true);
+            } else {
+              window.open('https://partner.hansmatrimony.com/find', '_top', null, true);
+            }
+          } else if (localStorage.getItem('fourthParam')) {
+            if (localStorage.getItem('fifthParam') === '1') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval', '_top', null, true);
+              } else {
+                window.open('https://partner.hansmatrimony.com/admin_volgh/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            } else if (localStorage.getItem('fifthParam') === '2') {
+              window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=' + localStorage.getItem('fourthParam') +
+                '&temple_id=' + localStorage.getItem('getListTempleId'), '_top', null, true);
+            } else if (localStorage.getItem('fifthParam') === '3') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+              } else {
+                window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            } else if (localStorage.getItem('fifthParam') === '4') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+              } else {
+                window.open('https://partner.hansmatrimony.com/hot-leads?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+
+            } else if (localStorage.getItem('fifthParam') === '5') {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/subscriptionSeens', '_top', null, true);
+              } else {
+                window.open('https://partner.hansmatrimony.com/subscriptionSeens?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            } else {
+              if (localStorage.getItem('fourthParam') === '0') {
+                window.open('https://partner.hansmatrimony.com/pendingApproval', '_top', null, true);
+              } else {
+                window.open('https://partner.hansmatrimony.com/pendingApproval?page=' + localStorage.getItem('fourthParam'), '_top', null, true);
+              }
+            }
+          } else if (localStorage.getItem('extra')) {
+            if (localStorage.getItem('extra') === '2') {
+              window.open('https://partner.hansmatrimony.com/redirectRequestLeadsView?request_type=1&temple_id=' +
+                localStorage.getItem('getListTempleId'), '_top', null, true);
+            } else if (localStorage.getItem('extra') === '3') {
+              window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+            } else if (localStorage.getItem('extra') === '4') {
+              window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+            }
+          } else {
+            if (localStorage.getItem('getListMobile')) { // mode 3
+              window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+            } else if (localStorage.getItem('getListId')) { // mode 2
+              window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+            }
+          }
+          // this is old logic , not changing this
+          // if (localStorage.getItem('getListMobile')) { // mode 3
+          //   window.open('https://partner.hansmatrimony.com/hot-leads', '_top', null, true);
+          // } else if (localStorage.getItem('getListId')) { // mode 2
+          //   window.open('https://partner.hansmatrimony.com/leads', '_top', null, true);
+          // }
+          
+          // this.fourPageService.showApproveBtn = false;
+          // this.clearHistory();
+        } else {
+          if (data.message) {
+            this.ngxNotificationService.error(data.message);
+          } else {
+            this.ngxNotificationService.error('Not Approved');
+          }
+        }
+      }, err => {
+        console.log(err);
+        this.ngxNotificationService.error(err.message, 'Not Approved');
+      }
+    );
   }
 }
 
