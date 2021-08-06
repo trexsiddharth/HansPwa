@@ -168,9 +168,9 @@ export class FullFormTwoComponent implements OnInit, OnDestroy {
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
 
   constructor(private http: HttpClient, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router,
-    public notification: NotificationsService,
-    public fourPageService: FourPageService,
-    private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
+              public notification: NotificationsService,
+              public fourPageService: FourPageService,
+              private ngxNotificationService: NgxNotificationService, private spinner: NgxSpinnerService) {
     this.PageTwo = this.formBuilder.group({
       // tslint:disable-next-line: max-line-length
       Qualification: ['', Validators.compose([Validators.required])],
@@ -374,24 +374,43 @@ export class FullFormTwoComponent implements OnInit, OnDestroy {
       firststepdata.append('about', this.PageTwo.value.About);
       firststepdata.append('abroad', this.PageTwo.value.abroad);
 
+      if (localStorage.getItem('editMode')) {
+        firststepdata.append('id', localStorage.getItem('id'));
+        firststepdata.append('identity_number', this.fourPageService.profile.identity_number);
+        firststepdata.append('temple_id', this.fourPageService.profile.temple_id);
+      }
+
 
       // tslint:disable-next-line: max-line-length
       return this.completeRegistration(firststepdata).subscribe((res: any) => {
         console.log('first', res);
+        if (localStorage.getItem('editMode')) {
+          if (res.updatePerosnalDetails_status === 'Y') {
+            this.spinner.hide();
 
-        if (res.status === 1) {
-          this.spinner.hide();
-          if (this.fourPageService.getUserThrough()) {
             this.updateFormTwoData(firststepdata);
+            // this.ngxNotificationService.success('Registered Successfully');
           } else {
-            this.analyticsEvent('Four Page Registration Page Two');
+            this.fourPageService.formCompleted.emit(false);
+            this.spinner.hide();
+            this.ngxNotificationService.error(res.message);
           }
-          // this.ngxNotificationService.success('Registered Successfully');
         } else {
-          this.fourPageService.formCompleted.emit(false);
-          this.spinner.hide();
-          this.ngxNotificationService.error(res.message);
+          if (res.status === 1) {
+            this.spinner.hide();
+            if (this.fourPageService.getUserThrough()) {
+              this.updateFormTwoData(firststepdata);
+            } else {
+              this.analyticsEvent('Four Page Registration Page Two');
+            }
+            // this.ngxNotificationService.success('Registered Successfully');
+          } else {
+            this.fourPageService.formCompleted.emit(false);
+            this.spinner.hide();
+            this.ngxNotificationService.error(res.message);
+          }
         }
+        
       }, err => {
         this.fourPageService.formCompleted.emit(false);
         this.spinner.hide();
@@ -410,10 +429,14 @@ export class FullFormTwoComponent implements OnInit, OnDestroy {
   }
 
   private completeRegistration(firststepdata: FormData): Observable<any> {
-    if (!localStorage.getItem('franchiseRegistration')) {
-      return this.http.post('https://partner.hansmatrimony.com/api/formTwoProfile', firststepdata);
+    if (!localStorage.getItem('editMode')) {
+      if (!localStorage.getItem('franchiseRegistration')) {
+        return this.http.post('https://partner.hansmatrimony.com/api/formTwoProfile', firststepdata);
+      } else {
+        return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateSecondPageDetails', firststepdata);
+      }
     } else {
-      return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateSecondPageDetails', firststepdata);
+      return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata);
     }
   }
 

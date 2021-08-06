@@ -135,6 +135,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
 
   userFromFranchise = false;
   freeUserFromFranchise = false;
+  editMode = false;
 
   constructor(private http: HttpClient, public dialog: MatDialog,
               private _formBuilder: FormBuilder,
@@ -254,6 +255,11 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
             localStorage.setItem('franchiseRegistration', 'true');
             localStorage.setItem('franchiseType', 'free');
             localStorage.setItem('franchiseId', route.params.franchise_id);
+          } else if (route.params.clientId) {
+            localStorage.setItem('id', route.params.clientId);
+            localStorage.setItem('editMode', 'true');
+            this.editMode = true;
+            this.getProfile(route.params.clientId);
           }
         }
 
@@ -267,7 +273,6 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
     );
 
     this.spinner.hide();
-    localStorage.setItem('id', '');
     localStorage.setItem('gender', '');
     localStorage.setItem('mobile_number', '');
     localStorage.setItem('selectedCaste', '');
@@ -543,6 +548,11 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
         firststepdata.append('identity_number', this.profileData.profile.identity_number);
         firststepdata.append('temple_id', this.profileData.profile.temple_id);
         firststepdata.append('birth_date', year + '-' + month + '-' + date);
+      } else if (localStorage.getItem('editMode')) {
+        firststepdata.append('id', localStorage.getItem('id'));
+        firststepdata.append('identity_number', this.profileData.profile.identity_number);
+        firststepdata.append('temple_id', this.profileData.profile.temple_id);
+        firststepdata.append('birth_date', year + '-' + month + '-' + date);
       } else {
         firststepdata.append('birth_date', date + '-' + month + '-' + year);
       }
@@ -602,25 +612,46 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
       return this.completeRegistration(firststepdata).subscribe((res: any) => {
           console.log('first', res);
 
-          if (res.status === 1) {
-            this.spinner.hide();
-            localStorage.setItem('id', res.id);
-            localStorage.setItem('gender', this.PageOne.value.gender);
-            localStorage.setItem('mobile_number', this.PageOne.value.phone);
-
-            // if facebook profile pic is fetched
-            if (this.fetchedFbProfilePic) {
-              setTimeout(() => {
-                this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
-              }, 200);
+          if (this.editMode) {
+            if (res.updatePerosnalDetails_status === 'Y') {
+              this.spinner.hide();
+              localStorage.setItem('gender', this.PageOne.value.gender);
+              localStorage.setItem('mobile_number', this.PageOne.value.phone);
+  
+              // if facebook profile pic is fetched
+              if (this.fetchedFbProfilePic) {
+                setTimeout(() => {
+                  this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
+                }, 200);
+              }
+  
+              this.fourPageService.updateFormOneData(firststepdata);
+  
+            } else {
+              this.spinner.hide();
+              this.ngxNotificationService.error(res.message);
             }
-
-            this.fourPageService.updateFormOneData(firststepdata);
-            this.analyticsEvent('Four Page Registration Page One');
-
           } else {
-            this.spinner.hide();
-            this.ngxNotificationService.error(res.message);
+            if (res.status === 1) {
+              this.spinner.hide();
+              localStorage.setItem('id', res.id);
+              localStorage.setItem('gender', this.PageOne.value.gender);
+              localStorage.setItem('mobile_number', this.PageOne.value.phone);
+  
+              // if facebook profile pic is fetched
+              if (this.fetchedFbProfilePic) {
+                setTimeout(() => {
+                  this.fourPageService.facebookProfilePicUploaded.emit(this.fetchedFbProfilePic);
+                }, 200);
+              }
+  
+              this.fourPageService.updateFormOneData(firststepdata);
+              this.analyticsEvent('Four Page Registration Page One');
+  
+            } else {
+              this.spinner.hide();
+              this.ngxNotificationService.error(res.message);
+            }
           }
         }, err => {
           this.spinner.hide();
@@ -642,10 +673,14 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   }
 
   private completeRegistration(firststepdata: FormData): Observable<any> {
-    if (!localStorage.getItem('franchiseRegistration')) {
-      return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata);
+    if (!localStorage.getItem('editMode')) {
+      if (!localStorage.getItem('franchiseRegistration')) {
+        return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata);
+      } else {
+        return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateFirstPageDetails', firststepdata);
+      }
     } else {
-      return this.http.post('https://partner.hansmatrimony.com/api/franchiseupdateFirstPageDetails', firststepdata);
+      return this.http.post('https://partner.hansmatrimony.com/api/updatePersonalDetails', firststepdata);
     }
   }
 
@@ -832,6 +867,9 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   setProfileValues(profileData) {
     this.userProfile.name = profileData.profile.name;
     this.userProfile.mobile = profileData.family.mobile;
+
+    this.userProfile.identity_number = profileData.profile.identity_number;
+    this.userProfile.temple_id = profileData.profile.temple_id;
 
     this.userProfile.email = profileData.family.email;
 

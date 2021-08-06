@@ -86,4 +86,6 @@ export class Profile {
     likesYou;
     yourLikes;
     history;
+    identity_number;
+    temple_id;
 }

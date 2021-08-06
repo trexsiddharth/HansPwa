@@ -186,7 +186,11 @@ export class FullFormPhotoComponent implements OnInit {
     uploadData.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
     uploadData.append('index', index);
     uploadData.append('image', data);
-    uploadData.append('is_lead', '1');
+    if (!localStorage.getItem('editMode')) {
+      uploadData.append('is_lead', '1');
+    } else {
+      uploadData.append('is_lead', '0');
+    }
 
     return this.completeRegistration(uploadData).subscribe(suc => {
       this.suc = suc;
@@ -486,50 +490,55 @@ export class FullFormPhotoComponent implements OnInit {
   }
 
   skip(type) {
-    if (!this.fourPageService.franchiseData) {
-      if (this.showPlansOnFirstClick) {
-        this.itemService.openTodaysPopupAd(true);
-        this.showPlansOnFirstClick = false;
-      } else {
-      this.fourPageService.form4Completed.emit(true);
-      (window as any).fbq('track', 'FourPageRegistration', {
-        value: localStorage.getItem('id'),
-        content_name: localStorage.getItem('RegisterNumber'),
-      });
-      (window as any).fbq('track', '692972151223870', 'FourPageRegistration', {
-        value: localStorage.getItem('id'),
-        content_name: localStorage.getItem('RegisterNumber'),
-      });
-  
-      (window as any).fbq('track', 'CompleteRegistration', {
-        value: localStorage.getItem('id'),
-        content_name: localStorage.getItem('RegisterNumber'),
-      });
-      (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
-        value: localStorage.getItem('id'),
-        content_name: localStorage.getItem('RegisterNumber'),
-      });
-  
-      this.gtag_report_conversion();
-  
-  
-      // 0 -> got to chat  1-> got to fifth page
-      // if type is 0 and  getListLeadId === 0 send to hot leads
-      if (type === 0 && !this.fourPageService.getUserThrough()) {
-        this.router.navigateByUrl('chat?first');
-      } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
-        window.open('https://partner.hansmatrimony.com/hot-leads');
+    if (!localStorage.getItem('editMode')) {
+      if (!this.fourPageService.franchiseData) {
+        if (this.showPlansOnFirstClick) {
+          this.itemService.openTodaysPopupAd(true);
+          this.showPlansOnFirstClick = false;
+        } else {
+        this.fourPageService.form4Completed.emit(true);
+        (window as any).fbq('track', 'FourPageRegistration', {
+          value: localStorage.getItem('id'),
+          content_name: localStorage.getItem('RegisterNumber'),
+        });
+        (window as any).fbq('track', '692972151223870', 'FourPageRegistration', {
+          value: localStorage.getItem('id'),
+          content_name: localStorage.getItem('RegisterNumber'),
+        });
+    
+        (window as any).fbq('track', 'CompleteRegistration', {
+          value: localStorage.getItem('id'),
+          content_name: localStorage.getItem('RegisterNumber'),
+        });
+        (window as any).fbq('track', '692972151223870', 'CompleteRegistration', {
+          value: localStorage.getItem('id'),
+          content_name: localStorage.getItem('RegisterNumber'),
+        });
+    
+        this.gtag_report_conversion();
+    
+    
+        // 0 -> got to chat  1-> got to fifth page
+        // if type is 0 and  getListLeadId === 0 send to hot leads
+        if (type === 0 && !this.fourPageService.getUserThrough()) {
+          this.router.navigateByUrl('chat?first');
+        } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
+          window.open('https://partner.hansmatrimony.com/hot-leads');
+        }
+    
+        if (type === 0) {
+          this.analyticsEvent('User Skipped Photo Upload');
+        } else {
+          this.analyticsEvent('Four Page Registration Page Four');
+        }
       }
-  
-      if (type === 0) {
-        this.analyticsEvent('User Skipped Photo Upload');
       } else {
-        this.analyticsEvent('Four Page Registration Page Four');
+        this.fourPageService.form4Completed.emit(true);
       }
-    }
     } else {
-      this.fourPageService.form4Completed.emit(true);
+      this.router.navigateByUrl('chat');
     }
+
   }
 
   gtag_report_conversion() {
