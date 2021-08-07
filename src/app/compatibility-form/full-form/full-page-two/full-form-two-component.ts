@@ -359,6 +359,11 @@ export class FullFormTwoComponent implements OnInit, OnDestroy {
       }
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
+      
+      if (localStorage.getItem('isLead')) {
+        firststepdata.append('is_lead', localStorage.getItem('isLead'));
+      }
+
       firststepdata.append('mobile', localStorage.getItem('mobile_number')
         ? localStorage.getItem('mobile_number') : localStorage.getItem('getListMobile'));
       firststepdata.append('degree', this.PageTwo.value.Qualification);

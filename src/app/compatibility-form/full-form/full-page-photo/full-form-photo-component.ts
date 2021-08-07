@@ -186,10 +186,14 @@ export class FullFormPhotoComponent implements OnInit {
     uploadData.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
     uploadData.append('index', index);
     uploadData.append('image', data);
-    if (!localStorage.getItem('editMode')) {
-      uploadData.append('is_lead', '1');
+    if (localStorage.getItem('isLead')) {
+      uploadData.append('is_lead', localStorage.getItem('isLead'));
     } else {
-      uploadData.append('is_lead', '0');
+      if (!localStorage.getItem('editMode')) {
+        uploadData.append('is_lead', '1');
+      } else {
+        uploadData.append('is_lead', '0');
+      }
     }
 
     return this.completeRegistration(uploadData).subscribe(suc => {
@@ -536,7 +540,8 @@ export class FullFormPhotoComponent implements OnInit {
         this.fourPageService.form4Completed.emit(true);
       }
     } else {
-      this.router.navigateByUrl('chat');
+      // this.router.navigateByUrl('chat');
+      this.openPlaystore();
     }
 
   }
@@ -643,6 +648,10 @@ export class FullFormPhotoComponent implements OnInit {
     }       // Returns the login status.
   });
  }
+
+ openPlaystore() {
+  window.open('https://play.google.com/store/apps/details?id=com.twango.me');
+}
 }
 
 

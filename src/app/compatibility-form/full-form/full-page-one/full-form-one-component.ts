@@ -255,7 +255,13 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
             localStorage.setItem('franchiseRegistration', 'true');
             localStorage.setItem('franchiseType', 'free');
             localStorage.setItem('franchiseId', route.params.franchise_id);
-          } else if (route.params.clientId) {
+          } else if (route.params.clientId && route.params.isLead) {
+            localStorage.setItem('id', route.params.clientId);
+            localStorage.setItem('isLead', route.params.isLead);
+            localStorage.setItem('editMode', 'true');
+            this.editMode = true;
+            this.getProfile(route.params.clientId,route.params.isLead);
+          } else if (route.params.clientId ) {
             localStorage.setItem('id', route.params.clientId);
             localStorage.setItem('editMode', 'true');
             this.editMode = true;
@@ -550,6 +556,9 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
         firststepdata.append('birth_date', year + '-' + month + '-' + date);
       } else if (localStorage.getItem('editMode')) {
         firststepdata.append('id', localStorage.getItem('id'));
+        if (localStorage.getItem('isLead')) {
+          firststepdata.append('is_lead', localStorage.getItem('isLead'));
+        }
         firststepdata.append('identity_number', this.profileData.profile.identity_number);
         firststepdata.append('temple_id', this.profileData.profile.temple_id);
         firststepdata.append('birth_date', year + '-' + month + '-' + date);
@@ -824,7 +833,7 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   }
 
 
-  getProfile(clientId: string) {
+  getProfile(clientId: string, isLead: string = null) {
     this.spinner.show();
     const leadId = '0';
     const id = clientId;
@@ -832,7 +841,12 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
     const myprofileData = new FormData();
     myprofileData.append('id', id);
     myprofileData.append('contacted', '1');
-    myprofileData.append('is_lead', leadId);
+    if (isLead) {
+      myprofileData.append('is_lead', isLead);
+    } else {
+      myprofileData.append('is_lead', leadId);
+    }
+    
 
     // tslint:disable-next-line: max-line-length
     return this.http.post<any>('https://partner.hansmatrimony.com/api/getProfile', myprofileData).pipe(timeout(7000), retry(2), catchError(e => {

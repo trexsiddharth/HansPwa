@@ -168,6 +168,11 @@ export class FullFormThreeComponent implements OnInit {
       }
       const firststepdata = new FormData();
       firststepdata.append('id', localStorage.getItem('id') ? localStorage.getItem('id') : localStorage.getItem('getListId'));
+      
+      if (localStorage.getItem('isLead')) {
+        firststepdata.append('is_lead', localStorage.getItem('isLead'));
+      }
+
       firststepdata.append('birth_place', this.PageThree.value.BirthPlace);
 
       if (this.PageThree.value.BirthTime) {
