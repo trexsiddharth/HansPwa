@@ -159,6 +159,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   authData;
   truecallerExists = false;
   disabledPhoneNumber;
+  profileForDoubleApproval = false;
   private fetchedFbProfilePic = null;
 
   private alreadyExists = false;
@@ -413,6 +414,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           }
           if (route.params.redParam) {
             localStorage.setItem('redParam', route.params.redParam);
+            if (route.params.redParam === 'pending_profile') {
+              this.profileForDoubleApproval = true;
+            }
             this.fourPageService.showApproveBtn = true;
           }
           if (route.params.enqDate) {

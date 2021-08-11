@@ -66,6 +66,7 @@ export class CompatibilityPhotoComponent implements OnInit {
   public message: string;
   photoScore = 0;
   clickedFacebook = false;
+  profileForDoubleApproval = false;
 
   FamilyOptions: Observable<string[]>;
 
@@ -400,10 +401,16 @@ export class CompatibilityPhotoComponent implements OnInit {
         }
       }
     );
+    
   }
   ngAfterViewInit() {
+
     setTimeout(() => {
       this.photoScore = this.fourPageService.profile.photoScore;
+      
+      if (localStorage.getItem('redParam') === 'pending_profile') {
+        this.profileForDoubleApproval = true;
+      }
     }, 2000);
   }
   setPhotoData(userProfile: Profile) {

@@ -78,10 +78,10 @@
     <button *ngIf="!imgURL" class="btn btn-blue" mat-raised-button style="background-color: grey;" id="photoBtn"
       matStepperNext (click)="skip(0)">Go Without Photo</button>
 
-    <button *ngIf="imgURL && !fourPageService.getUserThrough()" type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;"
+    <button *ngIf="imgURL && !profileForDoubleApproval" type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;"
       mat-raised-button color="warn" id="photoBtn" matStepperNext (click)="checkForPhoto()">Go</button>
 
-      <button *ngIf="imgURL && fourPageService.getUserThrough()" type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;"
+      <button *ngIf="imgURL && fourPageService.getUserThrough() && profileForDoubleApproval" type="button" class="btn btn-blue" style="font-weight: bold;font-size: 1.2em;"
       mat-raised-button color="warn" id="photoBtn" matStepperNext (click)="checkForPhoto()">Approve</button>
   </div>
   <p *ngIf="!fourPageService.getUserThrough()" class="impNoteMain">

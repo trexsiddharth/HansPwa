@@ -309,9 +309,9 @@
           <app-compatibility-photo [hidden]="!fourPageService.getUserThrough()"></app-compatibility-photo>
         </mat-step>
         <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
-        <!-- <mat-step *ngIf="fourPageService.getUserThrough()">
+        <mat-step *ngIf="fourPageService.getUserThrough() && !profileForDoubleApproval">
           <app-compatibility-verify></app-compatibility-verify>
-        </mat-step> -->
+        </mat-step>
         <!-- // will show page five only to hans team when LeadId is 1 and not 0 -->
         <mat-step *ngIf="fourPageService.getUserThrough() && !fourPageService.showApproveBtn">
           <!-- <ng-template matStepLabel>
