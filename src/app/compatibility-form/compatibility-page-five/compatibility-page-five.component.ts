@@ -405,10 +405,10 @@ export class CompatibilityPageFiveComponent implements OnInit {
       return this.ngxNotificationService.error('Enter Family Income');
     } else if (!userProfile.image1 || userProfile.image1 === null || userProfile.image1 === '') {
       return this.ngxNotificationService.error('Select Image 1');
-    } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
-      return this.ngxNotificationService.error('Select Image 2');
-    } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
-      return this.ngxNotificationService.error('Select Image 3');
+    // } else if (!userProfile.image2 || userProfile.image2 === null || userProfile.image2 === '') {
+    //   return this.ngxNotificationService.error('Select Image 2');
+    // } else if (!userProfile.image3 || userProfile.image3 === null || userProfile.image3 === '') {
+    //   return this.ngxNotificationService.error('Select Image 3');
     } else if (!userProfile.college || userProfile.college === '') {
       return this.ngxNotificationService.error('Enter College Name');
     } else if (!userProfile.company || userProfile.company === '') {

@@ -1365,7 +1365,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         this.userProfile.name.split(' ')[1] : '' : '',
       phone: this.setMobileNumber(this.userProfile.mobile ? this.userProfile.mobile : ''),
       email: this.userProfile.email,
-      Relation: this.userProfile.relation[0].toLocaleUpperCase() + this.userProfile.relation.substr(1),
+      Relation: this.userProfile.relation ? this.userProfile.relation[0].toLocaleUpperCase() + this.userProfile.relation.substr(1) : '',
       gender: this.userProfile.gender,
       birth_date: this.userProfile.dob ? this.userProfile.dob.toString().split('-')[2] : '',
       birth_month: this.userProfile.dob ? this.getMonthString(this.userProfile.dob.toString().split('-')[1]) : '',
