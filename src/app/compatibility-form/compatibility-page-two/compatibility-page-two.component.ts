@@ -562,6 +562,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       if (!this.fourPageService.getUserThrough()) {
         this.goToNextPage();
       }
+      console.log("working", this.PageTwo.controls.Working);
     }, 500);
 
   }
