@@ -1070,6 +1070,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         }, err => {
           this.spinner.hide();
           // this.ngxNotificationService.success('SomeThing Went Wrong,Please try again AfterSome time!');
+          this.ngxNotificationService.error('Details not saved');
           console.log(err);
           this.analyticsEvent(`Page One Backend Error`);
         });
@@ -1094,7 +1095,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         }
       }
       if (this.errors[0]) {
-        // this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
+        this.ngxNotificationService.error('Fill the ' + this.errors[0] + ' detail');
         this.analyticsEvent(`Page One Error ${this.errors[0]}`);
       }
     }

@@ -509,6 +509,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
           this.fourPageService.formCompleted.emit(false);
           this.spinner.hide();
           this.spinner.hide('searchingSpinner');
+          this.ngxNotificationService.error('Details not saved');
           // this.ngxNotificationService.error(res.message);
         }
       }, err => {
