@@ -905,6 +905,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       } else {
         firststepdata.append('birth_date', date + '-' + month + '-' + year);
       }
+      this.birthDate = year + '-' + month + '-' + date;
+
       firststepdata.append('name', `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
         this.PageOne.value.lastName : ''}`);
       firststepdata.append('email', this.PageOne.value.email);
@@ -1057,6 +1059,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
               this.analyticsEvent('Four Page Registration Page Two');
 
             } else {
+              firststepdata.set('birth_date', this.birthDate);
               this.fourPageService.updateFormOneData(firststepdata);
             }
             this.analyticsEvent('Four Page Registration Page One');

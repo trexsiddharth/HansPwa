@@ -59,7 +59,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
   @Output() sharePageTwo = new EventEmitter();
   showOccupation = false;
   showYearlyIncome = true;
-  showWorkingCity = false;
+  showWorkingCity = true;
   PageTwo: FormGroup;
   errors: string[] = [];
   authMobileNumberStatus = false;
@@ -718,6 +718,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
     if (dob != null) {
       let dobArray = dob.split('-').reverse();
       let splitDate = `${dobArray[1]}/${dobArray[0]}/${dobArray[2]} 16:00:00`; // mm--dd-yyyy
+      console.log('splitDate', splitDate);
       let userDate = new Date(splitDate);
       return (Math.floor((Date.now() - userDate.getTime()) / (1000 * 60 * 60 * 24 * 365)));
     } else {
