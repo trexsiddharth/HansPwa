@@ -1,6 +1,6 @@
 <ng-container>
     <main>
-        <section class="topSection">
+        <section class="topSection" *ngIf="!dontShowHeaderAndFooter">
             <div class="centerImages">
                 <div class="centerIt">
                     <div class="image1"></div>
@@ -30,7 +30,7 @@
             </div>
         </section>
 
-        <section class="templeSection">
+        <section class="templeSection" *ngIf="!dontShowHeaderAndFooter">
             <h5 class="hansCentresTag">
                 <b>HANS MATRIMONY CENTRES</b>
             </h5>

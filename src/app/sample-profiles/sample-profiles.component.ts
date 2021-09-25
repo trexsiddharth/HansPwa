@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxNotificationService } from 'ngx-kc-notification';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { timeout, retry, catchError } from 'rxjs/operators';
 import { ApiwhaAutoreply } from '../chat/today-profiles/profile-today-model';
 import { LanguageService } from '../language.service';
@@ -16,6 +16,7 @@ import { ProfileTable } from '../Model/Profile';
 })
 export class SampleProfilesComponent implements OnInit {
 
+  dontShowHeaderAndFooter = false;
   private idsList: string[] = [];
   private profileList: ApiwhaAutoreply[] = [];
   private profileListSubject = new Subject<ApiwhaAutoreply[]>();
@@ -30,6 +31,10 @@ export class SampleProfilesComponent implements OnInit {
   ngOnInit() {
     localStorage.setItem('language', 'english');
     this.languageService.setProfileLanguage();
+    console.log(this.route.snapshot.url[0].path);
+    if (this.route.snapshot.url[0].path === 'shareProfiles') {
+      this.dontShowHeaderAndFooter = true;
+    }
     this.route.paramMap.subscribe(
       (map: any) => {
         if (map.params.ids) {

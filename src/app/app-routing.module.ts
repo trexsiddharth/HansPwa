@@ -92,6 +92,10 @@ const routes: Routes = [
     component: SampleProfilesComponent
   },
   {
+    path: 'shareProfiles/:ids',
+    component: SampleProfilesComponent
+  },
+  {
     path: 'privacy',
     component: PrivacyPolicyComponent
   },
