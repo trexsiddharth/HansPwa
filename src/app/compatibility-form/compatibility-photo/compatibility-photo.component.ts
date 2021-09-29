@@ -728,14 +728,6 @@ export class CompatibilityPhotoComponent implements OnInit {
     } else if (userProfile.motherStatus !== 'Not Alive' && userProfile.motherStatus !== 'Not Working' &&
       userProfile.family.occupation_mother === null || userProfile.family.occupation_mother === '') {
       return this.ngxNotificationService.error('Select Mother Occupation');
-    } else if (userProfile.family.married_daughters == null) {
-      return this.ngxNotificationService.error('Select Married Sisters');
-    } else if (userProfile.family.unmarried_daughters == null) {
-      return this.ngxNotificationService.error('Select Un Married Sisters');
-    } else if (userProfile.family.married_sons == null) {
-      return this.ngxNotificationService.error('Select Married Brothers');
-    } else if (userProfile.family.unmarried_sons == null) {
-      return this.ngxNotificationService.error('Select Un Married Brothers');
     } else if (userProfile.photoScore < 1) {
       return this.ngxNotificationService.error('Give a score');
     } else {
