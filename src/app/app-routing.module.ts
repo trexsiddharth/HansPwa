@@ -92,7 +92,7 @@ const routes: Routes = [
     component: SampleProfilesComponent
   },
   {
-    path: 'shareProfiles/:ids',
+    path: 's/:ids',
     component: SampleProfilesComponent
   },
   {
