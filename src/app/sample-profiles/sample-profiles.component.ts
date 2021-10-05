@@ -32,7 +32,7 @@ export class SampleProfilesComponent implements OnInit {
     localStorage.setItem('language', 'english');
     this.languageService.setProfileLanguage();
     console.log(this.route.snapshot.url[0].path);
-    if (this.route.snapshot.url[0].path === 'shareProfiles') {
+    if (this.route.snapshot.url[0].path === 's') {
       this.dontShowHeaderAndFooter = true;
     }
     this.route.paramMap.subscribe(
