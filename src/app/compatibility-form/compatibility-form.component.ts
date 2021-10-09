@@ -905,6 +905,11 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       } else {
         firststepdata.append('birth_date', date + '-' + month + '-' + year);
       }
+
+      if (localStorage.getItem('getListTempleId')) {
+        firststepdata.append('temple_id', localStorage.getItem('getListTempleId'));
+      }
+
       this.birthDate = year + '-' + month + '-' + date;
 
       firststepdata.append('name', `${this.PageOne.value.firstName} ${this.PageOne.value.lastName ?
