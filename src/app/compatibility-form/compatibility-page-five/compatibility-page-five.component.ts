@@ -111,7 +111,7 @@ export class CompatibilityPageFiveComponent implements OnInit {
 
             const assignToName = this.allTemples.find(
               element => {
-                return element.temple_id === value.data.assign_to;
+                return element.temple_id === value.data.assign_by;
               }
             );
             if (assignToName) {
