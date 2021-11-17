@@ -911,6 +911,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         firststepdata.append('birth_date', year + '-' + month + '-' + date);
       } else {
         firststepdata.append('birth_date', date + '-' + month + '-' + year);
+
+        if (this.temple_id) {
+          firststepdata.append('temple_id', this.temple_id);
+        }
       }
 
 
@@ -983,6 +987,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       console.log('marital_status', this.PageOne.value.MaritalStatus);
       console.log('religion', this.PageOne.value.Religion);
       console.log('caste', this.PageOne.value.Castes);
+      
 
       if (!this.fourPageService.getUserThrough() ) {
         if (this.sharedPageTwoForm) {
@@ -1036,9 +1041,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           });
       } else {
         // tslint:disable-next-line: max-line-length
-        return this.temple_id ? this.http.post(`https://partner.hansmatrimony.com/api/updateBasic?temple_id=${this.temple_id}`, firststepdata)
-        : this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata)
-        .subscribe((res: any) => {
+        return  this.http.post(`https://partner.hansmatrimony.com/api/updateBasic${this.temple_id ? '?temple_id=' + this.temple_id : ''}`, firststepdata).subscribe((res: any) => {
           console.log('first', res);
 
           if (res.status === 1) {
