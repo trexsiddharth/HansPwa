@@ -175,6 +175,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
   disableNext$ = this.disableNextSubject.asObservable();
   sharedPageTwoForm: FormGroup;
 
+  private temple_id;
 
   incomeCategories = ['0-2.5', '2.5-5', '5-7.5', '7.5-10', '10-15', '15-20', '20-25', '25-35', '35-50', '50-70', '70-100', '100+'];
   constructor(private http: HttpClient, public dialog: MatDialog,
@@ -403,6 +404,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           if (route.params.templeId) {
             this.fourPageService.setUserThrough(true);
             localStorage.setItem('getListTempleId', route.params.templeId);
+            this.temple_id = route.params.templeId;
           }
           if (route.params.fourthParam) {
             this.fourPageService.setUserThrough(true);
@@ -897,6 +899,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       console.log(date + '-' + month + '-' + year);
       const firststepdata = new FormData();
       firststepdata.append('mobile', phoneNumber);
+
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') !== '1') {
         firststepdata.append('id', localStorage.getItem('getListId'));
         firststepdata.append('identity_number', this.profileData.profile.identity_number);
@@ -906,8 +909,8 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         firststepdata.append('birth_date', date + '-' + month + '-' + year);
       }
 
-      if (localStorage.getItem('getListTempleId')) {
-        firststepdata.append('temple_id', localStorage.getItem('getListTempleId'));
+      if (this.temple_id) {
+        firststepdata.append('temple_id', this.temple_id);
       }
 
       this.birthDate = year + '-' + month + '-' + date;
