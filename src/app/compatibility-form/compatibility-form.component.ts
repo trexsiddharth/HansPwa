@@ -900,6 +900,10 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
       const firststepdata = new FormData();
       firststepdata.append('mobile', phoneNumber);
 
+      if (this.temple_id) {
+        firststepdata.append('temple_id', this.temple_id);
+      }
+
       if (localStorage.getItem('getListLeadId') && localStorage.getItem('getListLeadId') !== '1') {
         firststepdata.append('id', localStorage.getItem('getListId'));
         firststepdata.append('identity_number', this.profileData.profile.identity_number);
@@ -909,10 +913,6 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
         firststepdata.append('birth_date', date + '-' + month + '-' + year);
       }
 
-      localStorage.setItem('temple_id', 'added');
-      if (this.temple_id) {
-        firststepdata.append('temple_id', this.temple_id);
-      }
 
       this.birthDate = year + '-' + month + '-' + date;
 
@@ -1036,7 +1036,9 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
           });
       } else {
         // tslint:disable-next-line: max-line-length
-        return this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata).subscribe((res: any) => {
+        return this.temple_id ? this.http.post(`https://partner.hansmatrimony.com/api/updateBasic?temple_id=${this.temple_id}`, firststepdata)
+        : this.http.post('https://partner.hansmatrimony.com/api/updateBasic', firststepdata)
+        .subscribe((res: any) => {
           console.log('first', res);
 
           if (res.status === 1) {
