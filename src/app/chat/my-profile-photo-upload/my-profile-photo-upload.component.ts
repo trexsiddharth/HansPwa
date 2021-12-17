@@ -69,7 +69,6 @@ export class MyProfilePhotoUploadComponent implements OnInit {
     const currentImg = this.getProfilesPhotoName(this.personalProfileData.carousel,
       this.personalProfileData.unapprove_carousel,
       this.personalProfileData.photo, index);
-
     if (currentImg) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.hasBackdrop = true;
@@ -100,6 +99,8 @@ export class MyProfilePhotoUploadComponent implements OnInit {
           }
         }
       );
+    } else {
+        alert('This image can\'t be deleted');
     }
   }
 
@@ -141,7 +142,7 @@ export class MyProfilePhotoUploadComponent implements OnInit {
 
         }
       }
-    } else if (num2) {
+    } else if (num2 && index === 1) {
       return 'https://d2v6etlhrhtken.cloudfront.net/uploads/' + num2;
     } else {
       return '../../../assets/plus.svg';
@@ -184,7 +185,16 @@ export class MyProfilePhotoUploadComponent implements OnInit {
         }
       }
     } else {
-      return null;
+      if (numUnapprove !== '[]' && numUnapprove && numUnapprove !== 'null') {
+        const carouselUnapproved: any = JSON.parse(numUnapprove);
+        if (carouselUnapproved[index]) {
+          return (
+            carouselUnapproved[index]
+          );
+        } else {
+          return null;
+        }
+      }
     }
   }
   getCarouselCount() {

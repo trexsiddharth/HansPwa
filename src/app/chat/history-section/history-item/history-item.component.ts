@@ -24,10 +24,12 @@ export class HistoryItemComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
   Heights1: string[] = ['48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70',
     '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84',];
+
+  userGender = localStorage.getItem('gender');
   constructor(public itemService: FindOpenHistoryProfileService,
-    private http: HttpClient,
-    private analyticsService: AnalyticsService,
-    private router: Router
+              private http: HttpClient,
+              private analyticsService: AnalyticsService,
+              private router: Router
   ) { }
 
   ngOnInit() {
@@ -62,13 +64,31 @@ export class HistoryItemComponent implements OnInit {
   getHeight(num: string) {
     return this.Heights[this.Heights1.indexOf(num)];
   }
-  setPlaceholderImage() {
+  
+  getProfilePhoto(photo: string): string {
+    if (photo === null || photo === "" 
+    || photo.includes('No') || photo.includes('null') ) {
+        if (this.userGender) {
+          return '../../assets/male_pic.png';
+        } else {
+          return '../../assets/female_pic.png';
+        }
+      } else {
+        return photo;
+      }
+  }
+
+  setPlaceholderImage(e) {
     const gender = localStorage.getItem('gender');
-    const imageView: any = document.querySelector('#searchImage');
-    if (gender === 'Male') {
-      imageView.setAttribute('src', '../../assets/male_pic.png');
-    } else {
-      imageView.setAttribute('src', '../../assets/female_pic.png');
+    const imageView: HTMLImageElement = document.querySelector('#searchImage');
+    console.log('error in image', imageView.src);
+    if (imageView.src === null || imageView.src === "" 
+    || imageView.src.includes('No') || imageView.src.includes('null') ) {
+      if (gender === 'Male') {
+        imageView.setAttribute('src', '../../assets/male_pic.png');
+      } else {
+        imageView.setAttribute('src', '../../assets/female_pic.png');
+      }
     }
   }
 

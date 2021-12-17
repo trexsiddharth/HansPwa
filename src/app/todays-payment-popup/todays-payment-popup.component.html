@@ -10,20 +10,11 @@
       <img (click)="closeDialog()" style="width: 30px; margin: 5px 2px 0px 0px;" src="../../../assets/clear.svg"
         alt="cancel" />
     </div>
-    <!-- <div id="bannerDiv">
-      <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="false">
-        <ng-template ngbSlide *ngFor="let image of images">
-          <div class="picsum-img-wrapper" style="border:0px!important">
-            <img [src]="images" alt="Offers" style="height: 25vh; width: 100%;" />
-          </div>
-        </ng-template>
-      </ngb-carousel>
-    </div> -->
     <div class="mt-5">
       <p class="payment-title m-0">100% Satisfaction Guarantee</p>
     </div>
   </div>
-  <div class="planArea" *ngIf="!chooseMethod" style="overflow: hidden;">
+  <div class="planArea" *ngIf="!chooseMethod" >
     <div *ngFor="let item of plans; let i = index">
       <div class="planrow text-dark"
         style="background-color: #00c2cb; border-radius: 18px 0px 0px 0px; margin-top: 3%;">

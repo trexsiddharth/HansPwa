@@ -163,7 +163,7 @@ export class LanguageService {
           this.profileLang.workingPref = 'वर्किंग प्रेफरेंस';
           this.profileLang.desc = 'डिस्क्रिप्शन';
           this.profileLang.todaysSpecial = 'आज के रिश्ते';
-          this.profileLang.discover = 'और देखें';
+          this.profileLang.discover = 'प्रोफाइल';
           this.profileLang.likesYou = 'मुझे पसंद किय़ा';
           this.profileLang.yourLikes = 'आपकी पसंद';
           this.profileLang.history = 'पुराने रिश्ते';
@@ -263,7 +263,7 @@ export class LanguageService {
           this.profileLang.workingPref = 'Working preference';
           this.profileLang.desc = 'Description';
           this.profileLang.todaysSpecial = 'Today\'s Special';
-          this.profileLang.discover = 'See More';
+          this.profileLang.discover = 'Profiles';
           this.profileLang.likesYou = 'Interested';
           this.profileLang.yourLikes = 'My Likes';
           this.profileLang.history = 'History';

@@ -1,7 +1,10 @@
 <div class="search-results" *ngIf="listItem">
     <div class="column" style="flex-grow: 1">
-        <img id="searchImage" class="circular" (click)="getUserProfileData()" src="{{listItem.photo}}"
-            (error)='setPlaceholderImage()' alt="photo" origin="anonymous">
+        <img id="searchImage" class="circular" (click)="getUserProfileData()" 
+        [src]="getProfilePhoto(listItem.photo)"
+        (error)='setPlaceholderImage($event)'
+        alt="photo"
+        origin="anonymous">
     </div>
     <div class="column" style="flex: 2;justify-content: end;
             align-items: end;padding:2%;color: black;" (click)="getUserProfileData()">

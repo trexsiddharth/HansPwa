@@ -133,22 +133,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
         for (let i = 0; i < this.plans.length; i++) {
           if (this.plans[i].plan_type === 'Self Service Plan') {
                     this.plansOnline.push(this.plans[i]);
-
-            // if (this.authData) {
-            //   const totalIncome = Number(this.authData.user_income) + Number(this.authData.family_income);
-            //   if (totalIncome < 4) {
-            //     if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal'
-            //       && (this.authData && this.authData.gender === 'Male')) {
-            //       this.plansOnline.push(this.plans[i]);
-            //     } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal') {
-            //       this.plansOnline.push(this.plans[i]);
-            //     }
-            //   } else {
-            //     if (this.plans[i].category_name !== 'Low income') {
-            //       this.plansOnline.push(this.plans[i]);
-            //     }
-            //   }
-            // }
+                    
             if (!localStorage.getItem('showRemarrigePlan')) {
               this.plansOnline = (this.plansOnline as []).filter((item: any) => !(item.plan_name as string).includes('Re-Marriage'));
             }

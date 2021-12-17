@@ -11,11 +11,10 @@
 
     <div class="mainBack">
 
-
       <div style="position: absolute;
-    top: 0px;
-    width: 100vw;
-    height: 100px">
+        top: 0px;
+        width: 100vw;
+        height: 100px">
 
         <div class="circular2 mat-elevation-z12" style="
           font-size: 14px;
@@ -51,15 +50,42 @@
       <mat-tab-group id="mainLabels" class="matGroup" [(selectedIndex)]="selectedTab"
         (selectedIndexChange)="changeSelectedTab($event)">
 
+         <!-- // discover-->
+         <mat-tab id="discover">
+          <ng-template mat-tab-label>
+            <div class="labelSetting">
+              <span style="position:absolute;right:-5px;top:-5px" class="labelS mat-elevation-z7" [matBadge]="'!'"
+                matBadgeSize="small" [matBadgeHidden]="itemService.getDiscoverClicked()"></span>
+              <img class="tabImage" style="width:55px" src="../../assets/people.png" alt="icon"
+                *ngIf="selectedTab && selectedTab !== 0">
+              <img class="tabImage" style="width:55px" src="../../assets/peopleBlue.png" alt="icon"
+                *ngIf="!selectedTab || selectedTab === 0">
+            </div>
+            <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
+              style="font-size:10px; position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
+            <a *ngIf="languageService.getCurrentLanguage() === 'english'"
+              style="position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
+          </ng-template>
+
+          <ng-template matTabContent>
+            <div>
+              <div class='w-full ht-full'>
+                <app-discover></app-discover>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+
+
         <mat-tab id="today" data-wow-duration="3000ms" data-wow-delay="0ms" style="z-index: 99999999999999;">
 
           <ng-template mat-tab-label>
             <span class="labelSetting" [matBadge]="itemService.getDailyNumber()"
               [matBadgeHidden]="itemService.getDailyNumber() < '1'">
               <img class="tabImage" src="../../assets/tabs-icons/calender-white.svg" alt="icon"
-                *ngIf="selectedTab && selectedTab != 0">
+                *ngIf="selectedTab != 1">
               <img class="tabImage" src="../../assets/tabs-icons/calendar.svg" alt="icon"
-                *ngIf="!selectedTab || selectedTab == 0 ">
+                *ngIf="selectedTab == 1 ">
             </span>
             <!-- {{itemService.getDailyCount()}} -->
             <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
@@ -110,31 +136,6 @@
            </ng-template>
            </mat-tab> -->
 
-        <!-- // discover-->
-        <mat-tab id="discover">
-          <ng-template mat-tab-label>
-            <div class="labelSetting">
-              <span style="position:absolute;right:-5px;top:-5px" class="labelS mat-elevation-z7" [matBadge]="'!'"
-                matBadgeSize="small" [matBadgeHidden]="itemService.getDiscoverClicked()"></span>
-              <img class="tabImage" style="width:55px" src="../../assets/people.png" alt="icon"
-                *ngIf="selectedTab !== 1">
-              <img class="tabImage" style="width:55px" src="../../assets/peopleBlue.png" alt="icon"
-                *ngIf="selectedTab === 1">
-            </div>
-            <a *ngIf="languageService.getCurrentLanguage() === 'hindi'"
-              style="font-size:10px; position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
-            <a *ngIf="languageService.getCurrentLanguage() === 'english'"
-              style="position:relative;top:-8px">{{languageService.profileLang.discover}}</a>
-          </ng-template>
-
-          <ng-template matTabContent>
-            <div>
-              <div class='w-full ht-full'>
-                <app-discover></app-discover>
-              </div>
-            </div>
-          </ng-template>
-        </mat-tab>
 
         <!-- // liked me  -->
         <mat-tab id="likeme">

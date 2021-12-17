@@ -79,7 +79,9 @@ export class SubscriptionComponent implements OnInit {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.get(`https://partner.hansmatrimony.com/api/getWebsitePlanById?id=${localStorage.getItem('id')}&is_lead=${localStorage.getItem('is_lead')}`, { headers }).subscribe((res: any) => {
+    this.http.get(
+      `https://partner.hansmatrimony.com/api/getWebsitePlanById?id=${localStorage.getItem('id')}
+      &is_lead=${localStorage.getItem('is_lead')}`, { headers }).subscribe((res: any) => {
       this.plans = res;
       if (localStorage.getItem('showRemarrigePlan') && localStorage.getItem('showRemarrigePlan') === '1') {
         for (let i = 0; i < this.plans.length; i++) {
@@ -95,7 +97,7 @@ export class SubscriptionComponent implements OnInit {
         if (!localStorage.getItem('low income') && localStorage.getItem('low income') !== 'true') {
           for (let i = 0; i < this.plans.length; i++) {
             if (this.plans[i].plan_name != 'Re-Marriage' &&
-             this.plans[i].plan_name != 'Re-Marriage Deluxe' ) {
+              this.plans[i].plan_name != 'Re-Marriage Deluxe') {
               if (this.plans[i].plan_type === 'Self Service Plan') {
                 this.plansOnline.push(this.plans[i]);
               } else {
@@ -105,12 +107,12 @@ export class SubscriptionComponent implements OnInit {
           }
         } else {
           for (let i = 0; i < this.plans.length; i++) {
-            if (this.plans[i].plan_name !== 'Re-Marriage' && this.plans[i].plan_name !== 'Re-Marriage Deluxe' ) {
+            if (this.plans[i].plan_name !== 'Re-Marriage' && this.plans[i].plan_name !== 'Re-Marriage Deluxe') {
               if (this.plans[i].plan_type === 'Self Service Plan') {
                 if (this.plans[i].plan_name === 'Basic' && this.plans[i].category_name !== 'Normal'
-                && (this.authData && this.authData.gender === 'Male') ) {
+                  && (this.authData && this.authData.gender === 'Male')) {
                   this.plansOnline.push(this.plans[i]);
-                } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal'  ) {
+                } else if (this.plans[i].plan_name !== 'Basic' && this.plans[i].category_name === 'Normal') {
                   this.plansOnline.push(this.plans[i]);
                 }
               }
