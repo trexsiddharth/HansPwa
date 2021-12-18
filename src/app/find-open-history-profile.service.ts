@@ -82,7 +82,7 @@ export class FindOpenHistoryProfileService {
   getDiscoveryData(): Observable<ProfileTable[]> {
     const formData = new FormData();
     formData.append('id', localStorage.getItem('id'));
-    formData.append('is_lead', localStorage.getItem('is_lead'));
+    formData.append('is_lead', localStorage.getItem('is_lead') ? localStorage.getItem('is_lead') : '1');
 
     return this.http.post<ProfileTable[]>('https://partner.hansmatrimony.com/api/getDiscoveryProfiles', formData).pipe(
       map((items: ProfileTable[]) => items),

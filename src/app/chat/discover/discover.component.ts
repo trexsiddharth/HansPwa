@@ -37,6 +37,7 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { Location } from '@angular/common';
 import {  combineAll, shareReplay, tap } from 'rxjs/operators';
 import { ProfileTable } from 'src/app/Model/Profile';
+import { ChatServiceService } from 'src/app/chat-service.service';
 
 
 
@@ -92,20 +93,42 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
               public itemService: FindOpenHistoryProfileService,
               private activatedRoute: ActivatedRoute,
               private browserLocation: Location,
-              private router: Router) { }
+              private router: Router,
+              private chatService: ChatServiceService) { }
 
   ngOnInit() {
-    // get discover data
-    this.itemService.getSeeMoreData().pipe(
-      shareReplay(),
-      tap(items => {
-          console.log('combined observables', items);
-      })
-    ).subscribe(
-      (data: ProfileTable[]) => {
-          this.seeMoreSubject.next(data)
-      }
-    )
+    // get discover data only when auth is present.
+    if (!localStorage.getItem('authData')) {
+      this.chatService.authDataUpdated.subscribe(
+        (response: boolean) => {
+              if (response) {
+                console.log('bby default not present');
+                this.itemService.getSeeMoreData().pipe(
+                  shareReplay(),
+                  tap(items => {
+                      console.log('combined observables', items);
+                  })
+                ).subscribe(
+                  (data: ProfileTable[]) => {
+                      this.seeMoreSubject.next(data)
+                  }
+                );
+              }
+        }
+      );
+    } else {
+      console.log('bby default present');
+      this.itemService.getSeeMoreData().pipe(
+        shareReplay(),
+        tap(items => {
+            console.log('combined observables', items);
+        })
+      ).subscribe(
+        (data: ProfileTable[]) => {
+            this.seeMoreSubject.next(data)
+        }
+      );
+    }
 
     // url for the particular section of history
     this.activatedRoute.paramMap.subscribe(

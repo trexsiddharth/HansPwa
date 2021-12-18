@@ -458,7 +458,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
             });
             this.setGender();
           } else if (!this.fourPageService.getUserThrough() && !this.fourPageService.getFullPageStatus()) {
-            this.openChooseFor();
+            // this.openChooseFor();
           }
         }
 
@@ -1221,7 +1221,7 @@ export class CompatibilityFormComponent implements OnInit, OnDestroy, AfterViewI
     console.log(this.PageOne.value.Relation);
     this.analyticsEvent('Four Page Registration Page One Looking Rista For Changed');
     this.analyticsEvent('Four Page Registration Page One Gender Changed');
-    this.openRegisterWith(this.PageOne.value.Relation);
+    // this.openRegisterWith(this.PageOne.value.Relation);
     switch (this.PageOne.value.Relation) {
       case 'Brother':
         this.PageOne.patchValue(
