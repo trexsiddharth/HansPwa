@@ -301,18 +301,20 @@ border-top-right-radius: 20px;
                         {{item.family ? item.profile.degree ? item.profile.degree : item.profile.education  : item.profile.ugdeg}}
                     </span>
                 </div>
-                <div class="col-6 mt-3" *ngIf="isDisplay('family','college')">
+                <div class="col-6 mt-3" *ngIf="isDisplay('profile','college')">
                     <img class="titleImage" src="../../../assets/new icons/Schooling.svg" alt="college">
                     <span class="title">
-                        {{toTitleCase(item.family ? item.profile.college : item.profile.ugcol)}}
+                        {{item.family ? item.profile.college : item.profile.ugcol}}
                     </span>
                 </div>
+
                 <div class="col-6 mt-3" *ngIf="isDisplay('profile','working_city')">
                     <img class="titleImage" src="../../../assets/new icons/workingCity.svg" alt="working">
                     <span class="title">
                         {{item.profile.working_city}}
                     </span>
                 </div>
+
             </div>
         </div>
 
@@ -367,7 +369,7 @@ border-top-right-radius: 20px;
 
             <div class="row field m-0">
                 <div class="col-6 mt-3"
-                    *ngIf="isDisplay('family','unmarried_daughter') && isDisplay('family','married_daughter')">
+                    *ngIf="isDisplay('family','unmarried_daughters') && isDisplay('family','married_daughters')">
                     <img class="titleImage" src="../../../assets/new icons/Sister.svg" alt="Sisters">
                     <span class="title">
                         {{setMarriageSisters(item.family ? item.family.unmarried_daughters : item.profile.unmarried_daughter

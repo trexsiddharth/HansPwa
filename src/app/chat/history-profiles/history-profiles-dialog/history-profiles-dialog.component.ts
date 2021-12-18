@@ -72,6 +72,12 @@ export class HistoryProfilesDialogComponent implements OnInit {
                   }
                   // section from which user is coming
                   this.type = this.item.coming;
+                  
+                  if (!this.item.family) {
+                    console.log('seting up family');
+                    this.setupFamilyDetails();
+                  }
+
                 }
               }
             }, 1000);
@@ -83,6 +89,38 @@ export class HistoryProfilesDialogComponent implements OnInit {
 
   }
 
+  // unmarried_daughter
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is unmarried_sons
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is mother_occupation
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is father_status
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is gotra
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is family_type
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is city
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is house_type
+  // history-profiles-dialog.component.ts:611 crashed for i is family & j is family_income
+
+  setupFamilyDetails() {
+    const family = {
+      unmarried_daughters: this.item.profile.unmarried_daughter,
+      married_daughters: this.item.profile.married_daughter,
+      married_sons: this.item.profile.married_sons,
+      unmarried_sons: this.item.profile.unmarried_sons,
+      occupation_mother : this.item.profile.mother_occupation,
+      mother_status : this.item.profile.mother_status,
+      occupation_father : this.item.profile.father_occupation,
+      father_status : this.item.profile.father_status,
+      gotra : this.item.profile.gotra,
+      family_type: this.item.profile.family_type,
+      house_type: this.item.profile.house_type,
+      family_income: this.item.profile.family_income,
+      city: this.item.profile.city
+    };
+
+    this.item.family = family;
+
+    console.log(this.item);
+
+  }
   checkUser() {
     if (localStorage.getItem('authData')) {
       const authData = JSON.parse(localStorage.getItem('authData'));
@@ -435,7 +473,6 @@ export class HistoryProfilesDialogComponent implements OnInit {
   //  }
 
   setName(name: string): string {
-    console.log('Name', name);
     if (name) {
       if (this.itemService.getCredits() != null
         && (this.item.family && !this.item.family.mobile)
@@ -456,7 +493,6 @@ export class HistoryProfilesDialogComponent implements OnInit {
           }
         }
       } else {
-        console.log('returning name', name);
         return name;
       }
     } else {
@@ -588,7 +624,8 @@ export class HistoryProfilesDialogComponent implements OnInit {
 
   }
   isDisplay(i, j) {
-    // check the value which has n/a, na, undefined, null, empty and object key
+    try {
+      // check the value which has n/a, na, undefined, null, empty and object key
     if (i in this.item
       && j in this.item[i]
       && this.item[i][j]
@@ -598,8 +635,14 @@ export class HistoryProfilesDialogComponent implements OnInit {
       && this.item[i][j].toString().toLowerCase() !== 'null'
       && this.item[i][j].toString().toLowerCase() !== 'undefined'
     ) {
+      console.log(`returning for ${this.item[i][j]} where i is ${i} & j is ${j}`)
       return true;
+    } else {
+      return false;
     }
-    return false;
-  }
+  } catch (error) {
+    console.log(`crashed for i is ${i} & j is ${j}`);
+      return false;
+    }
+}
 }
