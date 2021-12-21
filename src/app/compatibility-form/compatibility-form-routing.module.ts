@@ -8,7 +8,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 const routes: Routes = [
   {
     path: '',
-    component: CompatibilityFormComponent
+    component: FullFormOneComponent
   },
   {
     path: 'compatibility-verify',

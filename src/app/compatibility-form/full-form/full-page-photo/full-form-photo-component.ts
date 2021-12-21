@@ -79,7 +79,7 @@ export class FullFormPhotoComponent implements OnInit {
   facebookImageFile5: File;
   facebookImageFile6: File;
 
-  showPlansOnFirstClick = true;
+  showPlansOnFirstClick = false;
 
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient,
               public fourPageService: FourPageService,
@@ -231,6 +231,7 @@ export class FullFormPhotoComponent implements OnInit {
             this.fourPageService.profile.image3 = this.suc.profile_pic_url;
             this.analyticsEvent('Image Three Uploaded on Four Page Registration Page Four');
             if (this.fourPageService.profile.photoScore > 1) {
+              console.log('photo page', this.fourPageService.getUserThrough());
               this.fourPageService.form4Completed.emit(true);
             }
             break;
@@ -433,6 +434,7 @@ export class FullFormPhotoComponent implements OnInit {
     console.log(event);
     this.fourPageService.profile.photoScore = event;
     if (event && event > 1) {
+      console.log('photo page', this.fourPageService.getUserThrough());
       this.fourPageService.form4Completed.emit(true);
     } else {
       this.fourPageService.form4Completed.emit(false);
@@ -495,11 +497,12 @@ export class FullFormPhotoComponent implements OnInit {
 
   skip(type) {
     if (!localStorage.getItem('editMode')) {
-      if (!this.fourPageService.franchiseData) {
+      if (!this.fourPageService.franchiseData.franchise_id) {
         if (this.showPlansOnFirstClick) {
           this.itemService.openTodaysPopupAd(true);
           this.showPlansOnFirstClick = false;
         } else {
+        console.log('photo page', type, this.fourPageService.getUserThrough());
         this.fourPageService.form4Completed.emit(true);
         (window as any).fbq('track', 'FourPageRegistration', {
           value: localStorage.getItem('id'),
@@ -524,6 +527,7 @@ export class FullFormPhotoComponent implements OnInit {
     
         // 0 -> got to chat  1-> got to fifth page
         // if type is 0 and  getListLeadId === 0 send to hot leads
+        console.log('photo page', type, this.fourPageService.getUserThrough());
         if (type === 0 && !this.fourPageService.getUserThrough()) {
           this.router.navigateByUrl('chat?first');
         } else if (type === 0 && localStorage.getItem('getListLeadId') !== '1') {
@@ -537,6 +541,7 @@ export class FullFormPhotoComponent implements OnInit {
         }
       }
       } else {
+        console.log('photo page', type, this.fourPageService.getUserThrough());
         this.fourPageService.form4Completed.emit(true);
       }
     } else {
