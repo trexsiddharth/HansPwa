@@ -141,6 +141,6 @@ export class TodayMessageComponent implements OnInit, OnDestroy {
   }
 
   goToDiscover() {
-    this.itemService.changeTab(1);
+    this.itemService.changeTab(0);
   }
 }

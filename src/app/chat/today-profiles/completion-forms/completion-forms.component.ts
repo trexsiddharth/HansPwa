@@ -62,7 +62,6 @@ export class CompletionFormsComponent implements OnInit {
       family_type: [''],
       FamilyAbout: [''],
     });
-      
   }
   personalToggle() {
     this.personalActive = true; // true is when personal is active

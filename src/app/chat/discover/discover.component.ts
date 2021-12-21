@@ -38,6 +38,7 @@ import { Location } from '@angular/common';
 import {  combineAll, shareReplay, tap } from 'rxjs/operators';
 import { ProfileTable } from 'src/app/Model/Profile';
 import { ChatServiceService } from 'src/app/chat-service.service';
+import { AnalyticsService } from 'src/app/analytics.service';
 
 
 
@@ -94,7 +95,8 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
               private activatedRoute: ActivatedRoute,
               private browserLocation: Location,
               private router: Router,
-              private chatService: ChatServiceService) { }
+              private chatService: ChatServiceService,
+              private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     // get discover data only when auth is present.
@@ -110,7 +112,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
                   })
                 ).subscribe(
                   (data: ProfileTable[]) => {
-                      this.seeMoreSubject.next(data)
+                      this.seeMoreSubject.next(data);
                   }
                 );
               }
@@ -256,11 +258,13 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     } else if (this.itemService.getPersonalized() === true &&
        !data.item.family) {
       this.reponseToPremium(data.item, 'CONTACTED', data.index);
+      this.analyticsService.googleAnalytics('Response in Profiles Section');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
       && this.itemService.getPersonalized() === false) {
-      this.itemService.openTodaysPopupAd();
+      this.itemService.openTodaysPopupAd(undefined,'Profiles');
     } else {
       this.reponseToNormal(data.item, 'YES', data.index);
+      this.analyticsService.googleAnalytics('Response in Profiles Section');
     }
   }
 

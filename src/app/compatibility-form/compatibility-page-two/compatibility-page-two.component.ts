@@ -354,7 +354,7 @@ export class CompatibilityPageTwoComponent implements OnInit, OnDestroy {
       this.filteredEducationGroups.next(educationGroupsCopy);
       return;
     } else {
-      search = search.toLowerCase();
+      search = search.toLowerCase().replace(/\./g, '');
     }
     // filter the banks
     this.filteredEducationGroups.next(

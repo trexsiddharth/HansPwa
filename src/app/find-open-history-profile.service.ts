@@ -391,7 +391,7 @@ export class FindOpenHistoryProfileService {
     const dialogRef = this.dialog.open(LockdownOffComponent, dialogConfig);
   }
   // new function added to load todays offer ad on ngViewInit() instead of lockdownoffer
-  async openTodaysPopupAd(sendToChat = false) {
+  async openTodaysPopupAd(sendToChat = false, fromSection = '') {
     if (this.popupOpen) {
       this.popupOpen = false;
       return;
@@ -417,6 +417,12 @@ export class FindOpenHistoryProfileService {
       }
     );
     dialogConfig.id = 'todaysPopup';
+    if (fromSection) {
+      console.log('popup from section', fromSection);
+      dialogConfig.data = {
+        open_from : fromSection
+      };
+    }
     const dialogRef = this.dialog.open(TodaysPaymentPopupComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(

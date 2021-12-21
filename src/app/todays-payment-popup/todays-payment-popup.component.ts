@@ -190,6 +190,12 @@ export class TodaysPaymentPopupComponent implements OnInit {
       this.analyticsService.googleAnalytics(
         'RazorPay Payement Gateway Opened For ' + this.price
       );
+      this.analyticsService.googleAnalytics(
+        'Payment Gateway Initiated');
+
+      this.analyticsService.googleAnalytics(
+          `Payment Gateway Initiated From ${this.data.open_from}`);
+
 
     } else {
       this.ngxNotificationService.error('Something Went Wrong');
@@ -295,6 +301,12 @@ export class TodaysPaymentPopupComponent implements OnInit {
     this.analyticsService.googleAnalytics(
       'Paytm Payement Gateway Opened For ' + this.price
     );
+    this.analyticsService.googleAnalytics(
+      'Payment Gateway Initiated');
+
+    this.analyticsService.googleAnalytics(
+        `Payment Gateway Initiated From ${this.data.open_from}`);
+
     const form = document.getElementById('pay');
     // tslint:disable-next-line: max-line-length
     // staging/ testing url

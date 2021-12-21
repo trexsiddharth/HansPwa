@@ -42,14 +42,14 @@
         </div>
 
         <button class="resendBtnDisabled" *ngIf="showTimer" [disabled]="showTimer">
-            {{languageService.verificationLang.resendOtp}} <span id="secs">{{seconds}}s</span>
+            {{languageService.verificationLang.resendOtp ? languageService.verificationLang.resendOtp : "Resend Otp"}} <span id="secs">{{seconds}}s</span>
         </button>
         <button class="resendBtn" (click)="sendOtp()" *ngIf="!showTimer">
-            {{languageService.verificationLang.resendOtp}}
+            {{languageService.verificationLang.resendOtp ? languageService.verificationLang.resendOtp : "Resend Otp"}}
         </button>
 
         <button mat-raised-button class="verifyBtn" type="submit">
-            {{languageService.verificationLang.verify}}
+            {{languageService.verificationLang.verify ?  languageService.verificationLang.verify : "Verify"}}
         </button>
     </form>
 

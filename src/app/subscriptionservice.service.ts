@@ -120,6 +120,7 @@ export class SubscriptionserviceService {
           if (plan === 0) {
             this.captureStandardPayment(response, amt, points);
           } else {
+            this.analyticsEvent('Payment Captured');
             alert('Payment Successfull \n' + ' We will get back to you shortly \n' + 'Your Payment ID: ' + response.razorpay_payment_id);
             this.analyticsEvent(`RazorPay Payment Completed For ${localStorage.getItem('selected_plan') ?
             localStorage.getItem('selected_plan') === 'plan 1' ?
@@ -248,6 +249,7 @@ captureStandardPayment(response, amount, points) {
     (data: any) => {
         console.log(data);
         if (data.status === 1) {
+          this.analyticsEvent('Payment Captured');
           alert('Payment Successful, Credits has been added to your account.');
           this.analyticsEvent(`RazorPay Payment Completed For ${localStorage.getItem('selected_plan') ?
           localStorage.getItem('selected_plan') === 'plan 1' ?
@@ -305,6 +307,7 @@ facebookAnalytics(event, amount) {
         localStorage.removeItem('oId');
         localStorage.removeItem('selected_plan');
         if (data.status === 1) {
+          this.analyticsEvent('Payment Captured');
           alert('Payment Successful, Credits has been added to your account.');
 
           // set amount according to the plan number

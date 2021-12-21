@@ -258,7 +258,7 @@ export class HistorySectionComponent implements OnInit {
             res.item.type = 'CONTACT';
             this.getUserProfileData(res.item, res.index);
           } else {
-            this.itemService.openTodaysPopupAd();
+            this.itemService.openTodaysPopupAd(undefined, 'History');
             return;
           }
         }

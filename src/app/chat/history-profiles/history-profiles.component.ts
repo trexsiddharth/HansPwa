@@ -285,7 +285,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       return;
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
       && answer === 'YES' && !this.popupOpened) {
-      this.itemService.openTodaysPopupAd();
+      this.itemService.openTodaysPopupAd(undefined, this.selectedTab === 0 ? 'LikedMe' : 'ViewedMe');
       return;
     }
 
@@ -881,7 +881,7 @@ export class HistoryProfilesComponent implements OnInit, AfterViewInit {
       this.itemService.openMessageDialog(item, 'contacted');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
       && answer === 'YES' && !this.popupOpened) {
-      this.itemService.openTodaysPopupAd();
+      this.itemService.openTodaysPopupAd(undefined, this.selectedTab === 0 ? 'LikedMe' : 'ViewedMe');
     } else {
       this.getData(item, answer, index);
     }

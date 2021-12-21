@@ -142,7 +142,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           if (totalIncome < 4) {
             // localStorage.setItem('low income', 'true');
           }
-          this.chatService.authDataUpdated.emit(true);
           const text: string = data.apiwha_autoreply;
           const id = data.id;
           if (data && data.get_status_count) {
@@ -183,6 +182,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
           console.log(text);
           console.log(id);
           localStorage.setItem('id', id);
+          this.chatService.authDataUpdated.emit(true);
           this.paidStatus = data.paid_status;
           console.log(this.paidStatus);
           if (text.match('SHOW')) {
@@ -204,7 +204,6 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         if (totalIncome < 4) {
           // localStorage.setItem('low income', 'true');
         }
-        this.chatService.authDataUpdated.emit(true);
         console.log(data);
         const text: string = data.apiwha_autoreply;
         const id = data.id;
@@ -248,6 +247,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
         if (id) {
           localStorage.setItem('id', id);
         }
+        this.chatService.authDataUpdated.emit(true);
         this.paidStatus = data.paid_status;
         console.log(this.paidStatus);
         if (text.match('SHOW')) {
@@ -398,7 +398,7 @@ export class TodayProfilesComponent implements OnInit, AfterViewInit, OnDestroy 
       this.ngxNotificationService.warning('You have zero credits left for the week' );
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0' &&
     reply.toLowerCase() === 'yes' && this.type === 'profile') {
-    this.itemService.openTodaysPopupAd();
+    this.itemService.openTodaysPopupAd(undefined,'TodaysProfile');
   } else if (reply === 'NO' || reply.toLowerCase() === 'shortlist') {
       this.actionCount++;
       console.log('action count', this.actionCount)

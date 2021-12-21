@@ -434,7 +434,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
           if (!this.router.url.match('first') && !this.router.url.includes('verifyPayment') && 
           this.lockdownCount === 1) {
             // show payment popup every time user open the app
-            this.itemService.openTodaysPopupAd();
+            this.itemService.openTodaysPopupAd(undefined, 'chat');
           } else if (this.router.url.includes('verifyPayment')) {
             this.spinner.show();
             await this.subscriptionService.getTransactionStatus().then(

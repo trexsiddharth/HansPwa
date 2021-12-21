@@ -159,7 +159,7 @@ export class HistoryProfilesDialogComponent implements OnInit {
       this.itemService.openMessageDialog(item, 'contacted');
     } else if (this.itemService.getCredits() != null && this.itemService.getCredits().toString() === '0'
       && answer === 'YES') {
-      this.itemService.openTodaysPopupAd();
+      this.itemService.openTodaysPopupAd(undefined, this.type);
     } else {
       this.reponseToNormal(item, answer);
     }
