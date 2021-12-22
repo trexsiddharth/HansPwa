@@ -258,7 +258,10 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
             }
           }
           else if (data.params.first) {
-            console.log('first param found')
+            console.log('first param found');
+            // if (this.router.url.match('first') && reply === 'SHOW') {
+            //   this.analyticsEvent('First Profile Shown To Newly Registered');
+            // } 
           }
         }
       }
