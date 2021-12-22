@@ -502,7 +502,7 @@ export class FullFormPhotoComponent implements OnInit {
           this.itemService.openTodaysPopupAd(true);
           this.showPlansOnFirstClick = false;
         } else {
-        console.log('photo page', type, this.fourPageService.getUserThrough());
+        this.analyticsEvent('Four Page Registration Page Four');
         this.fourPageService.form4Completed.emit(true);
         (window as any).fbq('track', 'FourPageRegistration', {
           value: localStorage.getItem('id'),
@@ -536,9 +536,7 @@ export class FullFormPhotoComponent implements OnInit {
     
         if (type === 0) {
           this.analyticsEvent('User Skipped Photo Upload');
-        } else {
-          this.analyticsEvent('Four Page Registration Page Four');
-        }
+        } 
       }
       } else {
         console.log('photo page', type, this.fourPageService.getUserThrough());
