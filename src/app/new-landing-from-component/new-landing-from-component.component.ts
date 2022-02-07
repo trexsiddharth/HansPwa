@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,NavigationEnd } from '@angular/router';
+
+var chrome;
+
 @Component({
   selector: 'app-new-landing-from-component',
   templateUrl: './new-landing-from-component.component.html',
   styleUrls: ['./new-landing-from-component.component.css']
 })
+
 export class NewLandingFromComponentComponent implements OnInit {
   public opened: boolean=false;
   public loggedIn: boolean=false;
@@ -14,7 +18,11 @@ export class NewLandingFromComponentComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
-    
+      chrome.runtime.sendMessage("llnpojelkpehejceohlnfgnhdchgaahh", {key: "eazybe_user_mobile"},
+      (response) => {
+          console.log("send message requested", response);
+      });
+
     console.log(localStorage.getItem('mobile_number'));
     
     if(localStorage.getItem('mobile_number')){
