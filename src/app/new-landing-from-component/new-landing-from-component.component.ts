@@ -14,6 +14,7 @@ export class NewLandingFromComponentComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
+    
     console.log(localStorage.getItem('mobile_number'));
     
     if(localStorage.getItem('mobile_number')){

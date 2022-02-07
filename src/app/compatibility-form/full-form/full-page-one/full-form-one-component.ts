@@ -706,8 +706,8 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
   analyticsEvent(event) {
     if (!this.fourPageService.getUserThrough()) {
       (window as any).ga('send', 'event', event, '', {
-        hitCallback: () => {
-
+        hitCallback: (e) => {
+          console.log('analytics', e);
           console.log('Tracking ' + event + ' successful');
 
         }
@@ -716,7 +716,8 @@ export class FullFormOneComponent implements OnInit, OnDestroy {
 
       // gtag app + web
       (window as any).gtag('event', event, {
-        event_callback: () => {
+        event_callback: (e) => {
+          console.log('analytics', e);
           console.log('Tracking gtag ' + event + ' successful');
         }
       });
