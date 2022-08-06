@@ -18,10 +18,7 @@ export class NewLandingFromComponentComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
-      chrome.runtime.sendMessage("llnpojelkpehejceohlnfgnhdchgaahh", {key: "eazybe_user_mobile"},
-      (response) => {
-          console.log("send message requested", response);
-      });
+    
 
     console.log(localStorage.getItem('mobile_number'));
     
@@ -106,7 +103,7 @@ facebookAnalytics() {
 
 sendWhatsAppLink() {
   this.facebookAnalytics();
-  window.open('http://wa.me/919873116709?text=We%20are%20interested%20in%20Registering%20with%20Hans%20Matrimony');
+  window.open('http://wa.me/918368090821?text=We%20are%20interested%20in%20Registering%20with%20Hans%20Matrimony');
 }
 
 }
