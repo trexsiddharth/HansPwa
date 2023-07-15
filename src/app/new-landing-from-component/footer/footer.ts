@@ -19,4 +19,17 @@ export class AppFooter implements OnInit {
     openBlog() {
         window.open('https://hansmatrimony.com/blog/?ngsw-bypass=true');
       }
+
+      openFacebook() {
+        window.open('https://www.facebook.com/HansMatrimony/', '_blank');
+      }
+      openInstagram() {
+        window.open('https://www.instagram.com/hansmatrimony/', '_blank');
+      }
+      openTwitter() {
+        window.open('https://twitter.com/HansMatrimony', '_blank');
+      }
+      openLinkedIn() {
+        window.open('https://www.linkedin.com/company/hansmatrimony/', '_blank');
+      }
 }
